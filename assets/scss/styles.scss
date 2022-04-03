@@ -1,0 +1,22 @@
+//General
+html {
+  font-size: 62.5% !important;
+}
+
+body {
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+//topbar
+.topbar {
+  background-color: $green;
+  padding: .5rem 2rem;
+  color: $white;
+
+  .icon {
+    font-size: 2rem;
+  }
+}
