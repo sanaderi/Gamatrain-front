@@ -1,15 +1,15 @@
 <template>
-  <!--   Start: poular-hashtags    -->
-  <div class="poular-hashtags">
-    <div class="main-container d-flex justify-center flex-wrap">
+  <!--   Start: poular hashtags    -->
+  <div class="popular-hashtags">
+    <div class="main-container d-flex justify-center align-center flex-wrap py-5">
       <span>پر بازدیدها: </span>
       <div id="popularHashtags" class="d-flex">
-        <nuxt-link class="mx-2">#آزمون های فروردین</nuxt-link>
-        <nuxt-link class="mx-2">#آزمون های فروردین</nuxt-link>
+        <nuxt-link to="" class="ma-2 popular-hashtags-item">#آزمون های فروردین</nuxt-link>
+        <nuxt-link to="" class="ma-2 popular-hashtags-item">#آزمون های فروردین</nuxt-link>
       </div>
     </div>
   </div>
-  <!--   Start: navbar    -->
+  <!--   Start: poular hashtags    -->
 </template>
 <script>
 
