@@ -4,83 +4,15 @@
       <div class="banner"></div>
     </section>
     <section class="search-sec box">
-      <form @submit.prevent="submit">
-        <v-row class="align-center">
-          <v-col md="2" cols="12">
-            <p class="mb-2">مقطع</p>
-            <v-autocomplete
-              v-model="values"
-              :items="items"
-              dense
-              chips
-              small-chips
-              solo
-            ></v-autocomplete>
-          </v-col>
-          <v-col md="2" cols="12">
-            <p class="mb-2">پایه</p>
-            <v-autocomplete
-              v-model="values"
-              :items="items"
-              dense
-              chips
-              small-chips
-              solo
-            ></v-autocomplete>
-          </v-col>
-          <v-col md="2" cols="12">
-            <p class="mb-2">کتاب درسی</p>
-            <v-autocomplete
-              v-model="values"
-              :items="items"
-              dense
-              chips
-              small-chips
-              solo
-            ></v-autocomplete>
-          </v-col>
-          <v-col md="2" cols="12" class="d-flex justify-end">
-            <v-btn depressed class="search-btn">
-              جستجو
-            </v-btn>
-          </v-col>
-        </v-row>
-      </form>
+      <search :items="items" :values1="values1" :values2="values2" :values3="values3" :value="value"></search>
     </section>
     <section class="gradesList">
       <v-row>
-        <v-col md="4" sm="2" cols="12">
-          <template>
-            <v-card
-              class="mx-auto"
-            >
-              <v-card-title class="d-block">
-                <h2 class="text-h4">
-                  کلاس اول
-                </h2>
-                <p class="text-h6">فارسی، نگارش، ریاضی</p>
-              </v-card-title>
-              <v-divider></v-divider>
-              <v-card-text>
-                <div class="d-flex justify-space-between">
-                  <div>
-                    <span>نمونه سوال</span>
-                  </div>
-                  <div>
-                    <span>1355</span>
-                  </div>
-                </div>
-              </v-card-text>
-
-              <v-divider class="mx-4"></v-divider>
-              <v-card-text>
-                <div>
-                  <span>بروزرسانی: </span>
-                  <span>14 فروردین</span>
-                </div>
-              </v-card-text>
-            </v-card>
-          </template>
+        <v-col
+          v-for="(grade, index) in gradeList" :key="index"
+           md="3"  cols="12"
+        >
+          <garde-card :grade="grade" :index="index+1"></garde-card>
         </v-col>
       </v-row>
     </section>
@@ -88,11 +20,111 @@
 </template>
 
 <script>
+import GardeCard from "./index/garde-card";
+import Search from "./index/search";
+
 export default {
+  components: {
+    Search,
+    GardeCard
+  },
   data: () => ({
     items: ['همه', 'دبستان', 'متوسطه'],
-    values: ['همه'],
+    values1: ['همه'],
+    values2: ['همه'],
+    values3: ['همه'],
     value: null,
+    gradeList: [
+      {
+        title: 'کلاس اول',
+        description: 'فارسی، نگارش، ریاضی، علوم تجربی',
+        cat: [
+          { title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+      {
+        title: 'کلاس دوم',
+        description: 'فارسی، نگارش، ریاضی، علوم تجربی',
+        cat: [
+          { title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+      {
+        title: 'کلاس سوم',
+        description: 'فارسی، نگارش، ریاضی، علوم تجربی',
+        cat: [
+          { title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+      {
+        title: 'کلاس چهارم',
+        description: 'فارسی، نگارش، ریاضی، علوم تجربی',
+        cat: [
+          { title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+    ],
   }),
+
 }
 </script>

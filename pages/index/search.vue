@@ -45,11 +45,18 @@
 
 <script>
 export default {
+  props: {
+    items: Array,
+    values1: Array,
+    values2: Array,
+    values3: Array,
+    value: String
+  },
   data() {
     return {
-      items: ['همه', 'دبستان', 'متوسطه'],
-      values: ['همه'],
-      value: null,
+      // items: ['همه', 'دبستان', 'متوسطه'],
+      // values: ['همه'],
+      // value: null,
     }
   }
 }
