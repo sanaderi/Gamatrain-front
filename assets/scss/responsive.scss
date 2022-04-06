@@ -1,0 +1,40 @@
+@media screen and (max-width: 900px) {
+  .category {
+    .v-list-item {
+      padding: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .main-header {
+    .logo-holder {
+      height: 5.5rem;
+
+      .logo {
+        width: 16.8rem;
+        height: 5.5rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .main-header {
+    .logo-holder {
+      height: 4.4rem;
+
+      .logo {
+        width: 12rem;
+        height: 4.4rem;
+      }
+    }
+  }
+
+  .popular-hashtags {
+    .popular-hashtags-item {
+      font-size: 1.1rem;
+    }
+  }
+}
+
