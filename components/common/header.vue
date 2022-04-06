@@ -2,8 +2,8 @@
   <div>
     <header class="main-header">
       <topbar></topbar>
-      <!--   Start: navbar    -->
-      <div class="main-container">
+      <!--   Start: navbar   main-container -->
+      <v-container class="">
         <div class="d-flex align-center justify-space-between py-sm-3 py-1">
           <div class="navbar-items">
             <v-navigation-drawer v-model="sidebar" app class="hidden-md-and-up" right>
@@ -19,7 +19,7 @@
                 </v-list-item>
               </v-list>
             </v-navigation-drawer>
-            <v-app-bar>
+            <v-app-bar class="desktop-nav">
               <span class="hidden-md-and-up">
                 <v-app-bar-nav-icon @click="sidebar = !sidebar">
                 </v-app-bar-nav-icon>
@@ -41,7 +41,7 @@
             <nuxt-link class="logo" to=""></nuxt-link>
           </div>
         </div>
-      </div>
+      </v-container>
       <!--   End: navbar   -->
     </header>
   </div>
