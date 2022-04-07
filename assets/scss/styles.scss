@@ -15,12 +15,12 @@ html {
     margin: 0 !important;
   }
 
-  h1,h2,h3,h4,h5,h6 {
+  h1, h2, h3, h4, h5, h6 {
     margin: 0;
   }
 
   .v-list--dense .v-list-item .v-list-item__title {
-    font-size: 1.4rem;
+    font-size: $fontsize2;
     line-height: 2rem;
   }
 
@@ -32,12 +32,20 @@ html {
   }
 
   .v-btn.v-size--default {
-    font-size: 1.4rem;
+    font-size: $fontsize2;
     letter-spacing: unset;
   }
 
   .v-text-field--outlined fieldset {
-    border: 1px solid rgba(34,36,38,.15);
+    border: 1px solid rgba(34, 36, 38, .15);
+  }
+
+  .v-card__text {
+    //font-size: $fontsize2;
+  }
+
+  .v-list-item {
+    min-height: unset;
   }
 }
 
@@ -50,19 +58,19 @@ body {
   font-size: 14px;
 }
 
-.main-container {
-  width: 90%;
-  margin: 0 auto;
-}
+//.main-container {
+//  width: 800%;
+//  margin: 0 auto;
+//}
 
 .box {
   position: relative;
   background: #fff;
-  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, .15);
   margin: 1rem 0;
   padding: 1em 1em;
   border-radius: .28571429rem;
-  border: 1px solid rgba(34,36,38,.15);
+  border: 1px solid rgba(34, 36, 38, .15);
 }
 
 //header
@@ -76,7 +84,7 @@ body {
     padding: .7rem 0;
 
     .icon {
-      font-size: 2rem;
+      font-size: $fontsize4;
     }
 
     a:hover {
@@ -102,13 +110,13 @@ body {
           .v-icon--left {
             margin-right: -.4rem;
             margin-left: .2rem;
-            font-size: 2rem;
+            font-size: $fontsize4;
             width: unset;
             height: unset;
           }
 
           &.v-size--default {
-            font-size: 1.4rem;
+            font-size: $fontsize2;
             padding: 0 .8rem;
           }
         }
@@ -116,6 +124,13 @@ body {
         .v-btn--is-elevated {
           box-shadow: none;
         }
+      }
+    }
+
+    .desktop-nav {
+      .v-toolbar__content {
+        padding-right: 0;
+        padding-left: 0;
       }
     }
   }
@@ -142,59 +157,61 @@ body {
 
 // category
 .category {
-  .v-icon.v-icon.icon {
-    font-size: 4.5rem;
+  .icon {
+    &:before {
+      font-size: 4.5rem;
+    }
   }
 
   .v-list-item__title {
-    font-size: 1.4rem;
+    font-size: $fontsize2;
     white-space: break-spaces;
   }
 
   .test {
-    .v-icon,
+    .icon,
     .v-list-item__title {
       color: $blue1;
     }
   }
 
   .content {
-    .v-icon,
+    .icon,
     .v-list-item__title {
       color: $green3;
     }
   }
 
   .faq {
-    .v-icon,
+    .icon,
     .v-list-item__title {
       color: $orange1;
     }
   }
 
   .exam {
-    .v-icon,
+    .icon,
     .v-list-item__title {
       color: $blue2;
     }
   }
 
   .textbook {
-    .v-icon,
+    .icon,
     .v-list-item__title {
       color: $orange2;
     }
   }
 
   .school {
-    .v-icon,
+    .icon,
     .v-list-item__title {
       color: $brown1;
     }
   }
 
   .tutor {
-    .v-icon,
+    .icon,
     .v-list-item__title {
       color: $purple;
     }
@@ -218,19 +235,19 @@ body {
 
 // grade-card
 .grade-card {
-  box-shadow: 0 1px 3px 0 #d4d4d5,0 0 0 1px #d4d4d5 !important;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
 
   .v-list-item {
     min-height: unset;
   }
 
   .v-icon.v-icon {
-    font-size: 2rem;
+    font-size: $fontsize4;
   }
 
   .type,
   .stat {
-    font-size: 1.4rem;
+    font-size: $fontsize2;
   }
 
   .stat {
@@ -238,11 +255,12 @@ body {
   }
 
   .footer-card {
-    font-size: 1.4rem;
+    font-size: $fontsize2;
   }
 
   &.grade-card1 {
     border: .2rem solid $green4 !important;
+
     .grade-title1 {
       color: $green4
     }
@@ -250,6 +268,7 @@ body {
 
   &.grade-card2 {
     border: .2rem solid $red1 !important;
+
     .grade-title1 {
       color: $red1
     }
@@ -257,6 +276,7 @@ body {
 
   &.grade-card3 {
     border: .2rem solid $blue4 !important;
+
     .grade-title1 {
       color: $blue4
     }
@@ -264,8 +284,52 @@ body {
 
   &.grade-card4 {
     border: .2rem solid $violet1 !important;
+
     .grade-title1 {
       color: $violet1
     }
   }
 }
+
+// feature-card
+.site-feature {
+  .v-sheet.v-card:not(.v-sheet--outlined).feature-card {
+    background-color: $gray2;
+    box-shadow: none;
+
+    .feature-title {
+      font-size: 1.8rem;
+    }
+
+    .theme--light.v-list {
+      background-color: $gray2;
+    }
+
+    .feature-detail {
+      font-size: $fontsize1;
+      color: rgba(0, 0, 0, .6) !important;
+    }
+
+  }
+}
+
+// footer feed card
+.footer-feed-card {
+  .v-subheader.feed-header {
+    font-size: $fontsize3;
+    font-weight: 700;
+    color: $black
+  }
+  .v-list-item .v-list-item__title.feed-title{
+    font-size: $fontsize2;
+    font-weight: 700;
+    line-height: 1.7;
+    color: $blue5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
+    .v-list-item__subtitle.feed-subtitle{
+      font-size: 1.4rem;
+    }
+  }

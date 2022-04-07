@@ -1,6 +1,6 @@
 <template>
   <div class="topbar">
-    <div class="main-container d-flex align-center justify-space-between">
+    <v-container class=" d-flex align-center justify-space-between">
       <div class="d-flex align-center">
         <nuxt-link to="" class="d-flex align-center">
           <span class="mdi mdi-account-multiple-plus icon"></span>
@@ -25,7 +25,7 @@
           <span class="mdi mdi-help"></span>
         </nuxt-link>
       </div>
-    </div>
+    </v-container>
   </div>
 </template>
 
