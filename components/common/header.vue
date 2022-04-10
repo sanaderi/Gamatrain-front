@@ -37,8 +37,21 @@
               </v-toolbar-items>
             </v-app-bar>
           </div>
-          <div class="logo-holder">
-            <nuxt-link class="logo" to=""></nuxt-link>
+          <div class="d-flex align-center">
+            <div class="d-flex align-center ml-3 px-2 header-search">
+              <v-text-field
+                class="py-1 my-0"
+                placeholder="جستجو کنید..."
+              >
+              </v-text-field>
+              <v-btn class="pl-0 btn-transparent">
+                <v-icon class="search-icon">mdi-magnify </v-icon>
+              </v-btn>
+
+            </div>
+            <div class="logo-holder">
+              <nuxt-link class="logo" to=""></nuxt-link>
+            </div>
           </div>
         </div>
       </v-container>

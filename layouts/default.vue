@@ -4,12 +4,10 @@
     <popular-hashtags />
     <category />
     <div>
-      <v-container>
-        <Nuxt />
-      </v-container>
+       <Nuxt />
     </div>
-    <v-footer>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+    <v-footer padless class="mt-2">
+      <footer1 />
     </v-footer>
   </v-app>
 </template>
@@ -18,11 +16,14 @@
 import header1 from '../components/common/header.vue';
 import popularHashtags from '../components/common/popular-hashtags'
 import category from '../components/common/category'
+import footer1 from '../components/common/footer'
+
 export default {
   components: {
     header1,
     popularHashtags,
-    category
+    category,
+    footer1
   },
   data () {
     return {

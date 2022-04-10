@@ -21,7 +21,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/css/icons.css',
+    '@/assets/css/gama6/styles.css',
     '@/assets/scss/app.scss'
   ],
 
@@ -37,7 +37,7 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
+    ['@nuxtjs/vuetify', { rtl: true }],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

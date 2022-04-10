@@ -4,7 +4,10 @@
     class="mx-auto grade-card"
   >
     <v-card-title class="d-block">
-      <h2 :class="'grade-title'+ index" class="mb-2">{{ grade.title }}</h2>
+      <h2 :class="'grade-title'+ index" class="mb-2">
+        {{ grade.title }}
+         <span :class="'label-tag label-tag'+ index">{{index}}</span>
+      </h2>
       <p class="">{{ grade.description }}</p>
     </v-card-title>
     <v-divider class="mx-4"></v-divider>

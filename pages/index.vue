@@ -1,110 +1,146 @@
 <template>
   <div class="home-page-content">
-    <section class="search-sec box">
-      <search :items="items" :value="value" :values1="values1" :values2="values2" :values3="values3"></search>
-    </section>
+    <!--  Start: search  -->
+    <v-container>
+      <section class="search-sec box">
+        <search :items="items" :value="value" :values1="values1" :values2="values2" :values3="values3"></search>
+      </section>
+    </v-container>
+    <!--  End: search  -->
+
     <!--  Start: Grades list  -->
-    <section class="grades-list">
-      <v-row>
-        <v-col
-          v-for="(grade, index) in gradeList" :key="index"
-          cols="12" md="3"
-        >
-          <v-card
-            :class="'mx-auto grade-card grade-card'+ (index+1) "
+    <v-container>
+      <section class="grades-list">
+        <v-row>
+          <v-col
+            v-for="(grade, index) in gradeList" :key="index"
+            cols="12" md="3"
           >
-            <v-card-title class="d-block">
-              <h2 :class="'grade-title'+ index" class="mb-2">{{ grade.title }}</h2>
-              <p class="">{{ grade.description }}</p>
-            </v-card-title>
-            <v-divider class="mx-4"></v-divider>
-            <v-card-text>
-              <v-list>
-                <v-list-item
-                  v-for="item in grade.cat"
-                  :key="item.title"
-                  class="pa-0"
-                >
+            <v-card
+              :class="'mx-auto grade-card grade-card'+ (index+1) "
+            >
+              <v-card-title class="d-block">
+                <h2 :class="'grade-title'+ index" class="mb-2">
+<!--                  <span :class="'label-tag label-tag'+ index">{{index}}</span>-->
+
+                  {{ grade.title }}
+                </h2>
+                <p class="">{{ grade.description }}</p>
+              </v-card-title>
+              <v-divider class="mx-4"></v-divider>
+              <v-card-text>
+                <v-list>
+                  <v-list-item
+                    v-for="item in grade.cat"
+                    :key="item.title"
+                    class="pa-0"
+                  >
                   <span v-if="(item.title) === 'نمونه سوال'">
                     <i class="icon-test"></i>
                   </span>
-                  <span v-else-if="(item.title) === 'فایل آموزشی'">
+                    <span v-else-if="(item.title) === 'فایل آموزشی'">
                     <i class="icon-azmoon"></i>
                     </span>
-                  <v-icon v-else-if="(item.title) === 'پرسش و پاسخ'">
-                    mdi-clipboard-edit-outline
-                  </v-icon>
-                  <v-icon v-else-if="(item.title) === 'آزمون آنلاین'">
-                    mdi-clipboard-edit-outline
-                  </v-icon>
-                  <v-list-item-content class="py-1 right">
-                    <v-list-item-title class="text-right type" v-text="item.title"></v-list-item-title>
-                  </v-list-item-content>
-                  <v-list-item-content class="py-1 left">
-                    <v-list-item-title class="text-left stat" v-text="item.stat"></v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-card-text>
-            <v-divider></v-divider>
-            <v-card-text>
-              <div class="footer-card card-footer">
-                <span>بروزرسانی: </span>
-                <span>{{ grade.update }}</span>
-              </div>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </section>
-    <!--  End: Grade list  -->
-
-    <!--  Start: Site feature  -->
-    <section class="site-feature box">
-      <v-row>
-        <v-col
-          v-for="(feature, index) in siteFeatureList" :key="index"
-          cols="12" md="3"
-        >
-          <nuxt-link to="">
-            <v-card
-              class="'mx-auto feature-card"
-            >
-              <v-card-title class="d-block text-center mb-2 feature-title-holder">
-                <span class="d-block icong-school">
-                </span>
-                <span class="feature-title">{{ feature.title }}</span>
-              </v-card-title>
-              <v-card-text>
-                <v-list>
-                  <v-list-item v-for="details in feature.details" :key="index"
-                  class="mb-2 feature-detail"
-                  >
-                    - {{ details }}
+                    <v-icon v-else-if="(item.title) === 'پرسش و پاسخ'">
+                      mdi-clipboard-edit-outline
+                    </v-icon>
+                    <v-icon v-else-if="(item.title) === 'آزمون آنلاین'">
+                      mdi-clipboard-edit-outline
+                    </v-icon>
+                    <v-list-item-content class="py-1 right">
+                      <v-list-item-title class="text-right type" v-text="item.title"></v-list-item-title>
+                    </v-list-item-content>
+                    <v-list-item-content class="py-1 left">
+                      <v-list-item-title class="text-left stat" v-text="item.stat"></v-list-item-title>
+                    </v-list-item-content>
                   </v-list-item>
                 </v-list>
               </v-card-text>
+              <v-divider></v-divider>
+              <v-card-text>
+                <div class="footer-card card-footer">
+                  <span>بروزرسانی: </span>
+                  <span>{{ grade.update }}</span>
+                </div>
+              </v-card-text>
             </v-card>
-          </nuxt-link>
-        </v-col>
-      </v-row>
-    </section>
+          </v-col>
+        </v-row>
+      </section>
+    </v-container>
+    <!--  End: Grade list  -->
+
+    <!--  Start: Site feature  -->
+    <v-container>
+      <section class="site-feature box">
+        <v-row>
+          <v-col
+            v-for="(feature, index) in siteFeatureList" :key="index"
+            cols="12" md="3"
+          >
+            <nuxt-link to="">
+              <v-card
+                class="'mx-auto feature-card"
+              >
+                <v-card-title class="d-block text-center feature-title-holder">
+                <span :class="'d-block icon icong-' + feature.icon">
+                </span>
+                  <span class="feature-title">{{ feature.title }}</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-list>
+                    <v-list-item v-for="details in feature.details" :key="index"
+                                 class="mb-2 feature-detail"
+                    >
+                      - {{ details }}
+                    </v-list-item>
+                  </v-list>
+                </v-card-text>
+              </v-card>
+            </nuxt-link>
+          </v-col>
+        </v-row>
+      </section>
+    </v-container>
     <!--  End: Site feature  -->
+
+    <!--  Start: feed box  -->
+    <v-container>
+      <section class="feed-box">
+        <v-row>
+          <v-col v-for="(feed, index) in footerFeedList" :key="index"
+                 cols="12" md="4">
+            <footer-feed-box :feed="feed"></footer-feed-box>
+          </v-col>
+        </v-row>
+      </section>
+    </v-container>
+    <!--  Start: Site feature  -->
+
+    <!--  Start: Main stats  -->
+    <section class="stat-sec my-8 pa-8">
+      <v-container>
+        <div class="d-flex justify-center align-center flex-wrap stat-holder">
+          <div v-for="(item, index) in statList" :key="index"
+               class="d-flex flex-column justify-center align-center mx-5 px-3 stat-item">
+            <span class="stat-value">{{ item.value }} +</span>
+            <span class="stat-label">{{ item.label }}</span>
+          </div>
+        </div>
+      </v-container>
+    </section>
+    <!--  End: Main stats  -->
+
+    <!--  Start: Last views  -->
+    <section class="last-view-sec">
+      <v-container>
+        <last-views></last-views>
+      </v-container>
+    </section>
+    <!--  End: Last views   -->
 
     <!--  Start: Main stats  -->
     <!--  End: Main stats  -->
-
-    <!--  Start: footer feed box  -->
-    <section class="footer-feed-box">
-      <v-row>
-        <v-col v-for="(feed, index) in footerFeedList" :key="index"
-               cols="12" md="4">
-          <footer-feed-box :feed="feed"></footer-feed-box>
-        </v-col>
-      </v-row>
-    </section>
-    <!--  Start: Site feature  -->
-
   </div>
 </template>
 
@@ -112,12 +148,16 @@
 import GardeCard from "./index/garde-card";
 import Search from "./index/search";
 import FooterFeedBox from "../components/common/footer-feed-box";
+import LastViews from "../components/common/last-views";
+// import Slider from "../components/common/slider";
 
 export default {
   components: {
+    LastViews,
     FooterFeedBox,
     Search,
-    GardeCard
+    GardeCard,
+    // Slider
   },
   data: () => ({
     items: ['همه', 'دبستان', 'متوسطه'],
@@ -222,6 +262,7 @@ export default {
     siteFeatureList: [
       {
         title: 'مدرسه یاب',
+        icon: 'school',
         details: [
           'لیست مدارس کشور با قابلیت فیلتر و جستجو',
           'دسترسی به اطلاعات ارتباطی، امکانات و سطح آموزشی مدارس',
@@ -231,6 +272,7 @@ export default {
       },
       {
         title: 'معلم خصوصی',
+        icon: 'teacher',
         details: [
           'جستجوی بهترین معلم خصوصی در نزدیکی شما',
           'گفتگوی دانش آموز و معلم',
@@ -240,6 +282,7 @@ export default {
       },
       {
         title: 'اخبار آموزشی',
+        icon: 'news',
         details: [
           'پوشش کامل اخبار آموزشی استان های کشور',
           'امکان فیلتر اخبار بر اساس استان مورد نظر',
@@ -249,6 +292,7 @@ export default {
       },
       {
         title: 'درسنامه اموزشی',
+        icon: 'blog',
         details: [
           'متن کامل کتاب های درسی از دبستان تا دبیرستان',
           'راهنمای کامل تمرین ها، خود آزمایی ها، کار برگه ها و فعالیت های کتاب',
@@ -258,8 +302,9 @@ export default {
     ],
     footerFeedList: [
       {
-       header: 'آخرین فایل های آموزشی',
-       contentItemList: [
+        class: 'learning',
+        header: 'آخرین فایل های آموزشی',
+        contentItemList: [
           {
             avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
             title: 'پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای',
@@ -287,8 +332,9 @@ export default {
         ],
       },
       {
-       header: 'آخرین پرسش ها',
-       contentItemList: [
+        class: 'question',
+        header: 'آخرین پرسش ها',
+        contentItemList: [
           {
             avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
             title: 'پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ',
@@ -316,8 +362,8 @@ export default {
         ],
       },
       {
-       header: ' آخرین اخبار',
-       contentItemList: [
+        header: ' آخرین اخبار',
+        contentItemList: [
           {
             avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
             title: 'پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ',
@@ -345,8 +391,16 @@ export default {
         ],
       },
     ],
-
+    statList: [
+      {label: 'مدرسه', value: '130,000'},
+      {label: 'دبیر', value: '300,000'},
+      {label: 'دانش آموز', value: '1,500,000'},
+      {label: 'نمونه سوال', value: '50,000'},
+      {label: 'پاورپوینت', value: '30,000'},
+      {label: 'آزمون آنلاین', value: '5,000'},
+    ],
   }),
+
 
 }
 </script>

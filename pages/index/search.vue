@@ -34,7 +34,7 @@
           small-chips
         ></v-autocomplete>
       </v-col>
-      <v-col class="d-flex justify-end" cols="12" md="3">
+      <v-col class="d-flex justify-md-center justify-end" cols="12" md="3">
         <v-btn class="search-btn" depressed>
           جستجو
         </v-btn>
@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       // items: ['همه', 'دبستان', 'متوسطه'],
-      // values: ['همه'],
+      values: ['همه'],
       // value: null,
     }
   }
