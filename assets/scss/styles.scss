@@ -2,9 +2,24 @@
 html {
   font-size: 62.5% !important;
 }
+body {
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: IRANSans, sans-serif;
+  font-size: 14px;
 
 .v-application {
   font-family: IRANSans, sans-serif !important;
+
+  .w-100 {
+    width: 100%;
+  }
+
+  .h-100 {
+    height: 100%;
+  }
 
   a {
     color: unset;
@@ -47,16 +62,16 @@ html {
   .v-list-item {
     min-height: unset;
   }
-}
+//}
 
-body {
-  direction: rtl;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: IRANSans, sans-serif;
-  font-size: 14px;
-}
+//body {
+//  direction: rtl;
+//  margin: 0;
+//  padding: 0;
+//  box-sizing: border-box;
+//  font-family: IRANSans, sans-serif;
+//  font-size: 14px;
+//}
 
 //.main-container {
 //  width: 80%;
@@ -150,7 +165,7 @@ body {
 
   //header-search
   .header-search {
-    border: .1rem solid rgba(34,36,38,.15);
+    border: .1rem solid rgba(34, 36, 38, .15);
     border-radius: .3rem;
     background: #fff;
     color: rgba(0, 0, 0, .8);
@@ -283,6 +298,7 @@ body {
   .v-input__control {
     display: none;
   }
+
   .theme--light.search-btn {
     background-color: $blue3;
     color: $white;
@@ -295,26 +311,36 @@ body {
 // grade-card
 .grade-card {
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
+  position: relative;
+
+  .grade-title {
+    margin-right: 4.5rem;
+  }
 
   .label-tag {
     color: #fff;
-    position: relative;
-    right: -2.5rem;
-    top: -.2rem;
-    margin: -.2rem 1.7rem 0 1.2rem;
-    padding: .69rem 1.8rem;
+    position: absolute;
+    width: 4.5rem;
+    height: 2.5rem;
+    right: -1rem;
+    top: 1.32rem;
+    border-radius: .3rem;
+    //margin: -.2rem 1.7rem 0 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:before {
       position: absolute;
       -webkit-transform: translateY(-50%) translateX(50%) rotate(-45deg);
       transform: translateY(-50%) translateX(50%) rotate(-45deg);
       top: 50%;
-      right: 100%;
+      right: 99%;
       content: '';
       background-color: inherit;
       background-image: none;
-      width: 2.64rem;
-      height: 2.64rem;
+      width: 1.7rem;
+      height: 1.7rem;
       -webkit-transition: none;
       transition: none;
     }
@@ -323,15 +349,30 @@ body {
       position: absolute;
       content: '';
       top: 50%;
-      left: -.25em;
-      margin-top: -.25em;
-      background-color: #fff !important;
+      left: 0;
+      transform: translateY(-50%);
       width: .6rem;
       height: .6rem;
-      box-shadow: 0 -.1rem .1rem 0 rgba(0,0,0,.3);
+      background-color: #fff !important;
+      box-shadow: 0 -.1rem .1rem 0 rgba(0, 0, 0, .3);
       border-radius: 500rem;
     }
   }
+
+  .more-content {
+    color: $blue9 !important;
+  }
+
+  .total-content {
+    color: rgba(0,0,0,.68);
+  }
+
+  .content{
+    &:hover {
+      color: $blue6;
+    }
+  }
+
   .v-list-item {
     min-height: unset;
   }
@@ -359,15 +400,20 @@ body {
     .grade-title1 {
       color: $green4;
     }
+
+    .label-tag1 {
+      background-color: $green4;
+    }
   }
 
   &.grade-card2 {
     border: .2rem solid $red1 !important;
 
-    .grade-title1 {
+    .grade-title2 {
       color: $red1;
     }
-    .label-tag1 {
+
+    .label-tag2 {
       background-color: $red1;
     }
   }
@@ -378,6 +424,10 @@ body {
     .grade-title1 {
       color: $blue4
     }
+
+    .label-tag3 {
+      background-color: $blue4;
+    }
   }
 
   &.grade-card4 {
@@ -385,6 +435,90 @@ body {
 
     .grade-title1 {
       color: $violet1
+    }
+    .label-tag4 {
+      background-color: $violet1;
+    }
+  }
+  &.grade-card5 {
+    border: .2rem solid $green8 !important;
+
+    .grade-title5 {
+      color: $green8
+    }
+    .label-tag5 {
+      background-color: $green8;
+    }
+  }
+
+  &.grade-card6 {
+    border: .2rem solid $orange5 !important;
+
+    .grade-title6 {
+      color: $orange5
+    }
+    .label-tag6 {
+      background-color: $orange5;
+    }
+  }
+  &.grade-card7 {
+    border: .2rem solid $green6 !important;
+
+    .grade-title7 {
+      color: $green6
+    }
+    .label-tag7 {
+      background-color: $green6;
+    }
+  }
+  &.grade-card8 {
+    border: .2rem solid $yellow1 !important;
+
+    .grade-title8 {
+      color: $yellow1
+    }
+    .label-tag8 {
+      background-color: $yellow1;
+    }
+  }
+  &.grade-card9 {
+    border: .2rem solid $violet2 !important;
+
+    .grade-title9 {
+      color: $violet2
+    }
+    .label-tag9 {
+      background-color: $violet2;
+    }
+  }
+  &.grade-card10 {
+    border: .2rem solid $red2 !important;
+
+    .grade-title10 {
+      color: $red2
+    }
+    .label-tag10 {
+      background-color: $red2;
+    }
+  }
+  &.grade-card11 {
+    border: .2rem solid $blue8 !important;
+
+    .grade-title11 {
+      color: $blue8
+    }
+    .label-tag11 {
+      background-color: $blue8;
+    }
+  }
+  &.grade-card12 {
+    border: .2rem solid $green7 !important;
+
+    .grade-title12 {
+      color: $green7
+    }
+    .label-tag12 {
+      background-color: $green7;
     }
   }
 }
@@ -402,12 +536,15 @@ body {
       &.icong-school {
         color: $brown1;
       }
+
       &.icong-teacher {
         color: $purple;
       }
+
       &.icong-news {
         color: $green5;
       }
+
       &.icong-blog {
         color: $orange2;
       }
@@ -436,7 +573,19 @@ body {
   .v-subheader.feed-header {
     font-size: $fontsize3;
     font-weight: 700;
-    color: $black
+    color: $black;
+
+    .icon {
+      font-size: 2.5rem
+    }
+  }
+
+  .iconlearning {
+    color: $green5;
+  }
+
+  .iconquestion {
+    color: $orange2;
   }
 
   .v-list-item .v-list-item__title.feed-title {
@@ -550,7 +699,41 @@ body {
         font-size: 2rem !important;
       }
     }
-
-
   }
 }
+
+// Detail
+.test-details-content {
+  .detail {
+    .detail-image {
+      width: 13rem !important;
+      height: 18rem;
+      margin: 0 0 0 1rem;
+    }
+    .detail-title {
+      font-size: 1.8rem;
+    }
+
+    .detail-rate {
+      color: rgba(0,0,0,.15)
+    }
+
+    .detail-preview-image {
+      width: 100%;
+      height: auto;
+    }
+
+    .label {
+      background: $gray3;
+      border-radius: .3rem;
+      padding: .3rem .9rem;
+
+
+    }
+  }
+
+}
+
+
+//  close body and v-application
+}}

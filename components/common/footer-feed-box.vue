@@ -6,20 +6,21 @@
         <v-subheader
           v-if="feed.header"
           :key="feed.header"
-          v-text="feed.header"
-          class="feed-header"
-        ></v-subheader>
+          class="d-flex align-center feed-header"
+        >
+          <span :class="'d-flex align-center me-2 icon icong-' + feed.icon + ' icon' + feed.class"></span>
+          {{feed.header}}
+        </v-subheader>
 
 
           <v-list-item
             v-for="(item, index) in feed.contentItemList" :key="index"
           >
-            <nuxt-link to="" class="d-flex w-100">
+            <nuxt-link to="" class="d-flex flex-wrap w-100">
             <v-list-item-avatar class="ma-0 ms-1">
               <v-img :src="item.avatar"></v-img>
             </v-list-item-avatar>
-
-            <v-list-item-content>
+            <v-list-item-content class="pt-0 pr-1">
               <v-list-item-title class="mb-1 feed-title">{{item.title}}</v-list-item-title>
               <v-list-item-subtitle class="feed-subtitle">
                 <span>توسط </span>

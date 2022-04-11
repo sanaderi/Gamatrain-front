@@ -1,16 +1,21 @@
 <template>
   <div class="home-page-content">
     <!--  Start: search  -->
-    <v-container>
-      <section class="search-sec box">
-        <search :items="items" :value="value" :values1="values1" :values2="values2" :values3="values3"></search>
+      <section class="search-sec ">
+        <v-container>
+          <div class="box">
+            <search :items1="items1" :items2="items2" :items3="items3"
+                    :values1="values1" :value1="value1"
+                    :values2="values2" :value2="value2"
+                    :values3="values3" :value3="value2"></search>
+          </div>
+        </v-container>
       </section>
-    </v-container>
     <!--  End: search  -->
 
     <!--  Start: Grades list  -->
-    <v-container>
       <section class="grades-list">
+        <v-container>
         <v-row>
           <v-col
             v-for="(grade, index) in gradeList" :key="index"
@@ -20,33 +25,43 @@
               :class="'mx-auto grade-card grade-card'+ (index+1) "
             >
               <v-card-title class="d-block">
-                <h2 :class="'grade-title'+ index" class="mb-2">
-<!--                  <span :class="'label-tag label-tag'+ index">{{index}}</span>-->
-
+                <h2 :class="'grade-title grade-title'+ (index+1)" class="mb-2">
+                  <span :class="'label-tag label-tag'+ (index+1)">{{ (index + 1) }}</span>
                   {{ grade.title }}
                 </h2>
-                <p class="">{{ grade.description }}</p>
+                <p class="d-inline-block">
+                  <nuxt-link
+                    v-for="(item, index) in grade.summeryContent" :key="index"
+                    :to="item.to"
+                    class="content"
+                  >
+                    {{item.content}}،
+                  </nuxt-link> ...
+                </p>
+                <v-btn class="btn-transparent more-content" @click="grade.showMore=!grade.showMore">بیشتر</v-btn>
+                <p v-if="grade.showMore" class="total-content">
+                  <nuxt-link
+                    v-for="(item, index) in grade.totalContent" :key="index"
+                    :to="item.to"
+                    class="content"
+                    >
+                    {{item.content}}،
+                  </nuxt-link>
+                </p>
               </v-card-title>
               <v-divider class="mx-4"></v-divider>
               <v-card-text>
                 <v-list>
+                  <nuxt-link to="grade.link">
                   <v-list-item
                     v-for="item in grade.cat"
                     :key="item.title"
                     class="pa-0"
                   >
-                  <span v-if="(item.title) === 'نمونه سوال'">
-                    <i class="icon-test"></i>
-                  </span>
-                    <span v-else-if="(item.title) === 'فایل آموزشی'">
-                    <i class="icon-azmoon"></i>
-                    </span>
-                    <v-icon v-else-if="(item.title) === 'پرسش و پاسخ'">
-                      mdi-clipboard-edit-outline
-                    </v-icon>
-                    <v-icon v-else-if="(item.title) === 'آزمون آنلاین'">
-                      mdi-clipboard-edit-outline
-                    </v-icon>
+                    <v-icon v-if="(item.title) === 'نمونه سوال'" class="ml-1 icon icong-test"></v-icon>
+                    <v-icon v-else-if="(item.title) === 'فایل آموزشی'" class="ml-1 icon icong-learnfiles"></v-icon>
+                    <v-icon v-else-if="(item.title) === 'پرسش و پاسخ'" class="ml-1 icon icong-qa"></v-icon>
+                    <v-icon v-else-if="(item.title) === 'آزمون آنلاین'" class="ml-1 icon icong-azmoon"></v-icon>
                     <v-list-item-content class="py-1 right">
                       <v-list-item-title class="text-right type" v-text="item.title"></v-list-item-title>
                     </v-list-item-content>
@@ -54,6 +69,7 @@
                       <v-list-item-title class="text-left stat" v-text="item.stat"></v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
+                  </nuxt-link>
                 </v-list>
               </v-card-text>
               <v-divider></v-divider>
@@ -66,13 +82,14 @@
             </v-card>
           </v-col>
         </v-row>
+        </v-container>
       </section>
-    </v-container>
     <!--  End: Grade list  -->
 
     <!--  Start: Site feature  -->
-    <v-container>
-      <section class="site-feature box">
+      <section class="site-feature">
+        <v-container>
+          <div class="box">
         <v-row>
           <v-col
             v-for="(feature, index) in siteFeatureList" :key="index"
@@ -89,10 +106,10 @@
                 </v-card-title>
                 <v-card-text>
                   <v-list>
-                    <v-list-item v-for="details in feature.details" :key="index"
+                    <v-list-item v-for="detail in feature.details" :key="index"
                                  class="mb-2 feature-detail"
                     >
-                      - {{ details }}
+                      - {{ detail }}
                     </v-list-item>
                   </v-list>
                 </v-card-text>
@@ -100,21 +117,22 @@
             </nuxt-link>
           </v-col>
         </v-row>
+          </div>
+        </v-container>
       </section>
-    </v-container>
     <!--  End: Site feature  -->
 
     <!--  Start: feed box  -->
-    <v-container>
       <section class="feed-box">
+        <v-container>
         <v-row>
           <v-col v-for="(feed, index) in footerFeedList" :key="index"
                  cols="12" md="4">
             <footer-feed-box :feed="feed"></footer-feed-box>
           </v-col>
         </v-row>
+        </v-container>
       </section>
-    </v-container>
     <!--  Start: Site feature  -->
 
     <!--  Start: Main stats  -->
@@ -139,8 +157,6 @@
     </section>
     <!--  End: Last views   -->
 
-    <!--  Start: Main stats  -->
-    <!--  End: Main stats  -->
   </div>
 </template>
 
@@ -149,7 +165,6 @@ import GardeCard from "./index/garde-card";
 import Search from "./index/search";
 import FooterFeedBox from "../components/common/footer-feed-box";
 import LastViews from "../components/common/last-views";
-// import Slider from "../components/common/slider";
 
 export default {
   components: {
@@ -160,15 +175,36 @@ export default {
     // Slider
   },
   data: () => ({
-    items: ['همه', 'دبستان', 'متوسطه'],
+    items1: ['همه', 'دبستان', 'متوسطه'],
+    items2: ['همه', 'دبستان', 'متوسطه'],
+    items3: ['همه', 'دبستان', 'متوسطه'],
     values1: ['همه'],
     values2: ['همه'],
     values3: ['همه'],
-    value: null,
+    value1: null,
+    value2: null,
+    value3: null,
     gradeList: [
       {
         title: 'کلاس اول',
-        description: 'فارسی، نگارش، ریاضی، علوم تجربی',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
+        link: '',
         cat: [
           {
             title: 'نمونه سوال',
@@ -191,7 +227,23 @@ export default {
       },
       {
         title: 'کلاس دوم',
-        description: 'فارسی، نگارش، ریاضی، علوم تجربی',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
         cat: [
           {
             title: 'نمونه سوال',
@@ -214,7 +266,23 @@ export default {
       },
       {
         title: 'کلاس سوم',
-        description: 'فارسی، نگارش، ریاضی، علوم تجربی',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
         cat: [
           {
             title: 'نمونه سوال',
@@ -237,7 +305,337 @@ export default {
       },
       {
         title: 'کلاس چهارم',
-        description: 'فارسی، نگارش، ریاضی، علوم تجربی',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
+        cat: [
+          {
+            title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+      {
+        title: 'کلاس پنجم',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
+        link: '',
+        cat: [
+          {
+            title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+      {
+        title: 'کلاس ششم',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
+        cat: [
+          {
+            title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+      {
+        title: 'کلاس هفتم',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
+        cat: [
+          {
+            title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+      {
+        title: 'کلاس هشتم',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
+        cat: [
+          {
+            title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+      {
+        title: 'کلاس نهم',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
+        link: '',
+        cat: [
+          {
+            title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+      {
+        title: 'کلاس دهم',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
+        cat: [
+          {
+            title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+      {
+        title: 'کلاس یازدهم',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
+        cat: [
+          {
+            title: 'نمونه سوال',
+            stat: '1355'
+          },
+          {
+            title: 'فایل آموزشی',
+            stat: '1211'
+          },
+          {
+            title: 'پرسش و پاسخ',
+            stat: '68'
+          },
+          {
+            title: 'آزمون آنلاین',
+            stat: '22'
+          },
+        ],
+        update: '14 فروردین'
+      },
+      {
+        title: 'کلاس دوازدهم',
+        summeryContent: [
+          {content: 'فارسی', to: ''},
+          {content: 'نگارش', to: ''},
+          {content: 'ریاضی', to: ''},
+          {content: 'علوم تجربی', to: ''},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: 'پیام های آسمانی', to: ''},
+          {content: 'قرآن', to: ''},
+          {content: 'عربی', to: ''},
+          {content: 'هنر', to: ''},
+          {content: 'مشاوره', to: ''},
+          {content: 'زبان', to: ''},
+          {content: 'فناوری', to: ''},
+          {content: 'فرهنگ', to: ''},
+        ],
         cat: [
           {
             title: 'نمونه سوال',
@@ -304,6 +702,7 @@ export default {
       {
         class: 'learning',
         header: 'آخرین فایل های آموزشی',
+        icon: 'learnfiles',
         contentItemList: [
           {
             avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
@@ -334,6 +733,7 @@ export default {
       {
         class: 'question',
         header: 'آخرین پرسش ها',
+        icon: 'qa',
         contentItemList: [
           {
             avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
@@ -362,7 +762,9 @@ export default {
         ],
       },
       {
+        class: 'news',
         header: ' آخرین اخبار',
+        icon: 'news',
         contentItemList: [
           {
             avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
@@ -400,7 +802,6 @@ export default {
       {label: 'آزمون آنلاین', value: '5,000'},
     ],
   }),
-
 
 }
 </script>
