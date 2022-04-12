@@ -1,6 +1,6 @@
 <template>
   <!--   Start: category  main-container  -->
-  <v-container class="d-md-block d-none ">
+  <v-container class="d-md-block d-none py-0">
     <div class="d-flex justify-space-between align-center category box">
       <nuxt-link v-for="(item, i) in items"
                  :key="i"
@@ -9,7 +9,7 @@
                  to=""
       >
         <v-list-item>
-          <v-list-item-icon class="me-0">
+          <v-list-item-icon class="ma-0 ml-2">
             <span :class="'icon icong-' + item.icon"></span>
           </v-list-item-icon>
           <v-list-item-content>

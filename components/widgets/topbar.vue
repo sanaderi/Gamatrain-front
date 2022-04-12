@@ -12,7 +12,7 @@
         </nuxt-link>
       </div>
       <div class="d-flex align-center">
-        <nuxt-link to="" class="d-flex align-center">
+        <nuxt-link to="" class="d-flex align-center me-4">
           <span class="mdi mdi-phone icon"></span>
         </nuxt-link>
         <nuxt-link to="" class="d-flex align-center me-4">
