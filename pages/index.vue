@@ -38,7 +38,7 @@
                     {{item.content}}،
                   </nuxt-link> ...
                 </p>
-                <v-btn class="btn-transparent more-content" @click="grade.showMore=!grade.showMore">بیشتر</v-btn>
+                <span class="btn-transparent more-content pointer" @click="grade.showMore=!grade.showMore">بیشتر</span>
                 <p v-if="grade.showMore" class="total-content">
                   <nuxt-link
                     v-for="(item, index) in grade.totalContent" :key="index"
