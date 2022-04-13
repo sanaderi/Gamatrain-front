@@ -2,8 +2,8 @@
   <div class="test-details-content">
     <!--  Start: breadcrumb  -->
     <section>
-      <v-container>
-        <div>
+      <v-container class="py-0">
+        <div class="box mt-0 py-0">
           <breadcrumb :breads="breads"/>
         </div>
       </v-container>
@@ -12,7 +12,7 @@
 
     <!--  Start: detail  -->
     <section>
-      <v-container>
+      <v-container class="py-0">
         <div class="detail box">
           <v-row>
             <v-col cols="12" md="9">
@@ -164,30 +164,176 @@
     <!--  Start: Course Card  -->
     <section>
       <v-container>
-        <div class="d-flex justify-space-between course-card box">
+        <div class="d-flex justify-space-between align-center course-card box">
           <div class="right">
             <div class="d-flex">
-              <img :src="require(`~/assets/images/teacher1.png`)" alt="" class="ml-1 rounded-circle avatar-img" />
+              <nuxt-link to="">
+                <img :src="require(`~/assets/images/teacher1.png`)" alt="" class=" rounded-circle avatar-img"/>
+              </nuxt-link>
               <div class="description">
-                <h2 class="course-title"></h2>
+                <div>
+                  <nuxt-link to="">
+                    <h2 class="course-title">پاورپوینت دوره کامل آموزشی، تاریخ (3) دوازدهم دوره دوم متوسطه- نظری</h2>
+                  </nuxt-link>
+                </div>
+                <div>
+                  <nuxt-link to="" class="teacher">
+                    <i class="fa-solid fa-user icon"></i>
+                    <span> مدرس: شمسی شعبانی</span>
+                  </nuxt-link>
+                </div>
+                <div>
+                  <p class="duration">
+                    <i class="fa-solid fa-clock icon"></i>
+                    <span>مدت دوره: 942 اسلاید (13 فایل) </span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
           <div class="d-none d-sm-block left">
-vb
+            <nuxt-link to="" class="d-flex justify-center align-center rounded-circle goto">
+              <i class="fa-solid fa-arrow-left icon"></i>
+            </nuxt-link>
           </div>
 
         </div>
       </v-container>
     </section>
     <!--  End: Course Card  -->
+
+    <!--  Start:  Azmoon test album card   -->
+    <section>
+      <v-container>
+        <div class="d-flex justify-space-between align-center album-card box">
+          <div class="right">
+            <div class="d-flex">
+              <nuxt-link to="">
+                <img :src="require(`~/assets/images/poster1.jpg`)" alt="" class="poster-img"/>
+              </nuxt-link>
+              <div class="description">
+                <div>
+                  <nuxt-link to="">
+                    <h2 class="course-title">آلبوم بانک تست های آزمون آنلاین، تاریخ (3) دوازدهم دوره دوم متوسطه- نظری</h2>
+                  </nuxt-link>
+                </div>
+                <div class="num">
+                    <i class="fa-solid fa-list-ol icon"></i>
+                    <span>تعداد تست: 1399</span>
+                </div>
+                <div class="level">
+                    <i class="fa-solid fa-superscript icon"></i>
+                    <span>سطح سختی: آسان، متوسط و دشوار  </span>
+                </div>
+                <div class="d-flex align-center justify-center suggestion">
+                    <span class="d-inline-flex align-center icong-teacher ml-1"></span>
+                  <span> مخصوص معلمان</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-none d-sm-block left">
+            <nuxt-link to="" class="d-flex justify-center align-center rounded-circle goto">
+              <i class="fa-solid fa-arrow-left icon"></i>
+            </nuxt-link>
+          </div>
+
+        </div>
+      </v-container>
+    </section>
+    <!--  End:  Azmoon test album card   -->
+
+    <!--  Start:  relatedBox  -->
+    <section class="related-sec">
+      <div class="">
+        <v-container>
+          <div class="box">
+            <div class="sample-test-holder">
+              <div class="sample-test-title">
+                <nuxt-link to="" class="d-flex align-center ">
+                  <span class="d-flex align-center icong-test ml-2 icon"></span>
+                  <h3>نمونه سوالات مرتبط</h3>
+                </nuxt-link>
+              </div>
+              <div class="sample-test-slider-holder">
+                <v-sheet
+                  class="mx-auto sample-test-slider"
+                >
+                  <v-slide-group
+                    v-model="model"
+                    active-class="success"
+                    class="pa-4"
+                    show-arrows
+                  >
+                    <v-slide-item
+                      v-for="(test,index) in sampleTestList"
+                      :key="index"
+                      v-slot="{ active, toggle }"
+                      class="mx-4"
+                      :class="[(test.type === 'azmoon') ? 'azmoon' : '']"
+                    >
+                      <div class="sample-test-item">
+                        <nuxt-link class=" " to="">
+                          <div class="position-relative sample-test-image-holder">
+                            <p  v-if="(test.type === 'azmoon')" class="label offlabel">آزمون آنلاین</p>
+                            <img :alt=test.description :src="require(`~/assets/images/${test.img}`)" class="sample-test-image" />
+                            <p class="font-weight-bold label page-label">
+                              {{test.pages}}
+                              <span v-if="(test.type === 'azmoon')"> تست</span>
+                              <span v-else> صفحه</span>
+                            </p>
+                          </div>
+                          <div class="sample-test-description">
+                            <p class="font-weight-bold description-title">{{ test.description }}</p>
+                            <div class="d-flex align-center">
+                              <img :src="require(`~/assets/images/${test.ownerImg}`)" class="ml-2 owner-image" alt="">
+                              <span class="owner-name"> {{ test.owner }} </span>
+                            </div>
+                          </div>
+                        </nuxt-link>
+                      </div>
+
+                    </v-slide-item>
+                  </v-slide-group>
+                </v-sheet>
+              </div>
+            </div>
+          </div>
+        </v-container>
+      </div>
+      <div>
+        <v-container>
+          <v-row>
+            <v-col v-for="(related, index) in relatedList" :key="index"
+                   cols="12" md="6">
+              <RelatedCardBox :related="related"></RelatedCardBox>
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
+    </section>
+    <!--  End: relatedBox   -->
+ <!--  Start:  Last view  -->
+    <section class="last-view-sec">
+      <v-container>
+        <Last-views></Last-views>
+      </v-container>
+    </section>
+    <!--  End: Last view   -->
+
   </div>
 </template>
 <script>
 import Breadcrumb from "../../components/widgets/breadcrumb";
+import LastViews from "@/components/common/last-views";
+import RelatedCardBox from "./components/related-card-box"
 
 export default {
-  components: {Breadcrumb},
+  components: {
+    Breadcrumb,
+    LastViews,
+    RelatedCardBox
+  },
   data: () => ({
     breads: [
       {
@@ -223,7 +369,154 @@ export default {
       rate: 5,
       previewImage: 'test1.png',
       labels: ['تاریخ(3)', 'دوازدهم', 'دوره دوم متوسطه', 'ادبیات', 'کرمانشاه', 'ناحیه2', 'شهدای پروین', 'فروردین', '1399',]
-    }
+    },
+    model: null,
+    sampleTestList: [
+      {
+        type: 'azmoon',
+        img: 'test2.png',
+        description: 'مجموعه تست‌های دوره کتاب تاریخ دوازدهم | درس 1 تا 12',
+        pages: '222',
+        owner: 'تیم مدیریت گاما',
+        ownerImg: 'gamaadmin.png',
+      },
+      {
+        type: 'azmoon',
+        img: 'test2.png',
+        description: 'مجموعه تست‌های دوره کتاب تاریخ دوازدهم | درس 1 تا 12',
+        pages: '222',
+        owner: 'تیم مدیریت گاما',
+        ownerImg: 'gamaadmin.png',
+      },
+      {
+        type: 'azmoon',
+        img: 'test2.png',
+        description: 'مجموعه تست‌های دوره کتاب تاریخ دوازدهم | درس 1 تا 12',
+        pages: '222',
+        owner: 'تیم مدیریت گاما',
+        ownerImg: 'gamaadmin.png',
+      },
+      {
+        type: '',
+        img: 'test2.png',
+        description: 'مجموعه تست‌های دوره کتاب تاریخ دوازدهم | درس 1 تا 12',
+        pages: '222',
+        owner: 'مهران زنگنه',
+        ownerImg: 'teacher2.png',
+      },
+      {
+        type: '',
+        img: 'test2.png',
+        description: 'مجموعه تست‌های دوره کتاب تاریخ دوازدهم | درس 1 تا 12',
+        pages: '222',
+        owner: 'تیم مدیریت گاما',
+        ownerImg: 'gamaadmin.png',
+      },
+      {
+        type: '',
+        img: 'test2.png',
+        description: 'مجموعه تست‌های دوره کتاب تاریخ دوازدهم | درس 1 تا 12',
+        pages: '222',
+        owner: 'تیم مدیریت گاما',
+        ownerImg: 'gamaadmin.png',
+      },
+      {
+        type: '',
+        img: 'test2.png',
+        description: 'مجموعه تست‌های دوره کتاب تاریخ دوازدهم | درس 1 تا 12',
+        pages: '222',
+        owner: 'تیم مدیریت گاما',
+        ownerImg: 'gamaadmin.png',
+      },
+      {
+        type: '',
+        img: 'test2.png',
+        description: 'مجموعه تست‌های دوره کتاب تاریخ دوازدهم | درس 1 تا 12',
+        pages: '222',
+        owner: 'تیم مدیریت گاما',
+        ownerImg: 'gamaadmin.png',
+      },
+    ],
+    relatedList: [
+      {
+        class: 'learning',
+        header: 'محتواهای آموزشی مرتبط',
+        icon: 'learnfiles',
+        description: ' فایل های پاورپوینت، ویدئو، صوتی، متنی و ...',
+        contentItemList: [
+          {
+            title: 'تدریس آنلاین صفحه 53 تا 58 عربی (3) انسانی دوازدهم | درس 4: نِظامُ الطَّبيعَةِ ',
+            link: ''
+          },
+          {
+            title: 'جزوه و نمونه سوالات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
+            link: ''
+          },
+          {
+            title: 'تدریس آنلاین صفحه 1 تا 8 عربی (3) انسانی دوازدهم | درس 1: ترجمه ِ ',
+            link: ''
+          },
+        ],
+      },
+      {
+        class: 'question',
+        header: 'پرسش و پاسخ های مرتبط',
+        icon: 'qa',
+        description: '   سوال کنید یا به سوالات دیگران پاسخ دهید ...',
+        contentItemList: [
+          {
+            title: 'تدریس آنلاین صفحه 53 تا 58 عربی (3) انسانی دوازدهم | درس 4: نِظامُ الطَّبيعَةِ ',
+            link: ''
+          },
+          {
+            title: 'جزوه و نمونه سوالات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
+            link: ''
+          },
+          {
+            title: 'تدریس آنلاین صفحه 1 تا 8 عربی (3) انسانی دوازدهم | درس 1: ترجمه ِ ',
+            link: ''
+          },
+        ],
+      },
+      {
+        class: 'blog',
+        header: 'درسنامه های مرتبط',
+        icon: 'blog',
+        contentItemList: [
+          {
+            title: 'تدریس آنلاین صفحه 53 تا 58 عربی (3) انسانی دوازدهم | درس 4: نِظامُ الطَّبيعَةِ ',
+            link: ''
+          },
+          {
+            title: 'جزوه و نمونه سوالات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
+            link: ''
+          },
+          {
+            title: 'تدریس آنلاین صفحه 1 تا 8 عربی (3) انسانی دوازدهم | درس 1: ترجمه ِ ',
+            link: ''
+          },
+        ],
+      },
+      {
+        class: 'azmoon',
+        header: 'آزمون های آنلاین مرتبط',
+        icon: 'azmoon',
+        contentItemList: [
+          {
+            title: 'تدریس آنلاین صفحه 53 تا 58 عربی (3) انسانی دوازدهم | درس 4: نِظامُ الطَّبيعَةِ ',
+            link: ''
+          },
+          {
+            title: 'جزوه و نمونه سوالات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
+            link: ''
+          },
+          {
+            title: 'تدریس آنلاین صفحه 1 تا 8 عربی (3) انسانی دوازدهم | درس 1: ترجمه ِ ',
+            link: ''
+          },
+        ],
+      },
+    ],
   }),
 }
 </script>

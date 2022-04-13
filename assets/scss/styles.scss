@@ -26,6 +26,10 @@ body {
     a {
       color: unset;
       text-decoration: none;
+
+      &:hover {
+        color: $blue6;
+      }
     }
 
     p {
@@ -914,14 +918,275 @@ body {
         .avatar-img {
           width: 8rem;
           height: 8rem;
+          box-shadow: 0 0 21px #87777c;
+          margin-left: 1.6rem
+        }
+        .icon {
+          font-size: 1.2rem;
         }
         .course-title {
           color: $pink;
+          font-size: 1.4rem;
+          margin-bottom: .8rem;
+        }
+        .teacher {
+          display: inline-block;
+          //margin-bottom: .5rem;
+        }
+        .goto {
+          width: 50px;
+          height: 50px;
+          color: $gray4;
+          background: $gray7 none;
+          box-shadow: 0 1px 4px #696975;
+
+          .icon {
+            font-size: 1.5rem;
+          }
+
+          &:hover .icon {
+            color: rgba(0,0,0,.8);
+          }
+        }
+      }
+
+      .album-card {
+        .poster-img {
+          width: 8rem;
+          height: 10.6rem;
+          box-shadow: 0 0 21px #87777c;
+          border-radius: .7rem;
+          margin-left: 1.6rem
+        }
+
+        .icon {
+          font-size: 1.2rem;
+        }
+        .course-title {
+          color: $pink;
+          font-size: 1.4rem;
+          margin-bottom: .8rem;
+        }
+        .teacher {
+          display: inline-block;
+          //margin-bottom: .5rem;
+        }
+
+        .suggestion {
+          width: 15rem;
+          margin: .8rem .5rem 0 0;
+          padding: .5rem 1rem;
+          color: #efeded;
+          background: $purple;
+          border-radius: .9rem;
+          text-align: center;
+        }
+
+        .goto {
+          width: 50px;
+          height: 50px;
+          color: $gray4;
+          background: $gray7 none;
+          box-shadow: 0 1px 4px #696975;
+
+          .icon {
+            font-size: 1.5rem;
+          }
+
+          &:hover .icon {
+            color: rgba(0,0,0,.8);
+          }
         }
       }
     }
 
 
+    //sample test Slider
+    .sample-test-holder {
+      .sample-test-title {
+        font-size: 1.8rem;
+      }
+      &:hover,
+      .icon {
+        color: $blue6;
+      }
+      .icon {
+        font-size: 2.5rem;
+      }
+      .sample-test-slider {
+        position: relative;
+        .sample-test-item {
+          width: 23rem;
+          height: 41rem;
+
+          .sample-test-image-holder {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 33rem;
+            border: .2rem solid rgba(56,152,224,.6);
+            border-radius: .5rem;
+
+            .sample-test-image {
+              width: 100%;
+              max-width: 100%;
+              //height: 33rem;
+              //border: .2rem solid rgba(56,152,224,.6);
+              //border-radius: .5rem;
+            }
+
+            .label {
+              position: absolute;
+              z-index: 1000;
+              padding: .5rem .8rem;
+              font-size: 1.2rem;
+              border-radius: .3rem;
+            }
+
+            .offlabel {
+              left: 50%;
+              top: 0;
+              transform: translateX(-50%);
+              background-color: $blue2;
+              color: $white;
+            }
+
+            .page-label {
+              left: 50%;
+              bottom: 0;
+              transform: translateX(-50%);
+              background-color: $gray6;
+              color: rgba(0,0,0,.6);
+            }
+          }
+
+          &.azmoon {
+            .sample-test-image-holder {
+              border: .2rem solid rgba(63, 81, 181, .8)
+            }
+          }
+
+          .sample-test-description {
+            .description-title {
+              white-space: normal;
+              font-size: 1.2rem;
+            }
+            .owner-image {
+              width: 3rem;
+              height: 3rem;
+              border-radius: 50%;
+            }
+            .owner-name {
+              font-size: 1.1rem;
+            }
+          }
+        }
+      }
+    }
+
+    //related-card
+    .related-card {
+      &.learning {
+        box-shadow: 0 0 0 1px #d4d4d5,0 2px 0 0 #21ba45,0 1px 3px 0 #d4d4d5;
+      }
+
+      &.question {
+        box-shadow: 0 0 0 1px #d4d4d5,0 2px 0 0 #f2711c,0 1px 3px 0 #d4d4d5;
+      }
+
+      &.blog {
+        box-shadow: 0 0 0 1px #d4d4d5,0 2px 0 0 #2185d0,0 1px 3px 0 #d4d4d5;
+      }
+
+      &.azmoon {
+        box-shadow: 0 0 0 1px #d4d4d5,0 2px 0 0 #6435c9,0 1px 3px 0 #d4d4d5;
+      }
+
+      .iconlearning {
+        color: $green5;
+      }
+
+      .iconquestion {
+        color: $orange2
+      }
+
+      .iconblog {
+        color: $green5;
+      }
+
+      .iconazmoon {
+        color: $violet3
+      }
+
+
+      .related-header {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #000000;
+
+        .icon {
+          font-size: 2.5rem;
+        }
+      }
+
+      .related-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        line-height: 1.7;
+        color: #4183c4;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .related-content {
+        padding: 0 .4rem .7rem 0;
+      }
+
+      .related-card-footer {
+        height: 4.5rem;
+
+        .extra-case {
+          &:hover .footer-text {
+            color: $blue6;
+          }
+        }
+
+
+
+
+        .add-file {
+          .theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
+            color: $white
+          }
+          font-size: 1.2rem;
+          font-weight: 700;
+          padding: .6rem 1.8rem;
+          border-radius: .3rem;
+          margin-left: 1.6rem;
+          .icon {
+
+          }
+        }
+
+        .footer-text.theme--light.v-icon {
+          color: rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      &.learning {
+        .add-file {
+          background-color: #21ba45;
+        }
+      }
+
+      &.question {
+        .add-file {
+          background-color: $orange6 ;
+        }
+      }
+    }
     //  close body and v-application
   }
 }
+
