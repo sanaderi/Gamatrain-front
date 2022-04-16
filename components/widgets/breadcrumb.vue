@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <v-breadcrumbs :items="breads">
       <template v-slot:divider>
         <v-icon>mdi-chevron-left</v-icon>
