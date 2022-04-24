@@ -4,14 +4,20 @@
       <topbar></topbar>
       <!--   Start: navbar   main-container -->
       <v-container class="">
-        <div class="d-flex align-center justify-space-between py-sm-3 py-1">
+        <div class="d-flex align-center justify-space-between">
           <div class="navbar-items">
-            <v-navigation-drawer v-model="sidebar" app class="hidden-md-and-up" right>
+            <v-navigation-drawer
+              v-model="sidebar"
+              app
+              class="hidden-md-and-up"
+              right
+            >
               <v-list>
                 <v-list-item
                   v-for="item in menuItems"
                   :key="item.title"
-                  :to="item.path">
+                  :to="item.path"
+                >
                   <v-list-item-action>
                     <v-icon>{{ item.icon }}</v-icon>
                   </v-list-item-action>
@@ -31,23 +37,30 @@
                   :key="item.title"
                   :to="item.path"
                 >
-                  <v-icon dark left>{{ item.icon }}</v-icon>
-                  {{ item.title }}
+                    <v-icon dark left>{{ item.icon }}</v-icon>
+                    {{ item.title }}
+                 
                 </v-btn>
               </v-toolbar-items>
             </v-app-bar>
           </div>
-          <div class="d-flex align-center">
+          <div
+            class="
+              d-flex
+              align-center
+              justify-space-between
+              logo-search-content
+            "
+          >
             <div class="d-flex align-center ml-3 px-2 header-search">
               <v-text-field
-                class="py-1 my-0"
+                class="py-1 my-0 search-field"
                 placeholder="جستجو کنید..."
               >
               </v-text-field>
               <v-btn class="pl-0 btn-transparent">
                 <v-icon class="search-icon">mdi-magnify </v-icon>
               </v-btn>
-
             </div>
             <div class="logo-holder">
               <nuxt-link class="logo" to=""></nuxt-link>
@@ -60,25 +73,25 @@
   </div>
 </template>
 <script>
-import topbar from '../widgets/topbar'
+import topbar from "../widgets/topbar";
 
 export default {
   components: {
-    topbar
+    topbar,
   },
   data() {
     return {
       sidebar: false,
       menuItems: [
-        {title: 'خانه', path: './home', icon: 'mdi-home'},
-        {title: 'آشنایی', path: '', icon: 'mdi-chevron-down'},
-        {title: 'المپیادها', path: '', icon: 'mdi-chevron-down'},
-        {title: 'نمونه و تیزهوشان', path: '', icon: 'mdi-chevron-down'},
-        {title: 'کتابهای درسی', path: '', icon: 'mdi-chevron-down'},
-        {title: 'پیشنهاد ویژه', path: '', icon: 'mdi-chevron-down'},
-        {title: 'تدریس آنلاین', path: '', icon: 'mdi-monitor'},
-      ]
-    }
-  }
-}
+        { title: "خانه", path: "./home", icon: "mdi-home" },
+        { title: "آشنایی", path: "", icon: "mdi-chevron-down" },
+        { title: "المپیادها", path: "", icon: "mdi-chevron-down" },
+        { title: "نمونه و تیزهوشان", path: "", icon: "mdi-chevron-down" },
+        { title: "کتابهای درسی", path: "", icon: "mdi-chevron-down" },
+        { title: "پیشنهاد ویژه", path: "", icon: "mdi-chevron-down" },
+        { title: "تدریس آنلاین", path: "", icon: "mdi-monitor" },
+      ],
+    };
+  },
+};
 </script>

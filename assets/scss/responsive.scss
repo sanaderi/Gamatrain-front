@@ -19,18 +19,28 @@ body {
     @media (min-width: 1904px) {
       .container {
         max-width: 80%;
+        width: 80%;
       }
     }
 
     @media screen and (max-width: 1600px) {
       .container {
         max-width: 90%;
+        width: 90%;
       }
     }
 
     @media (max-width: 1380px) {
       .container {
         max-width: 98%;
+        width: 98%;
+      }
+    }
+
+    @media (min-width: 960px) {
+      .col-md-3 {
+        flex: 1 0 23%;
+        max-width: 25%;
       }
     }
 
@@ -43,6 +53,9 @@ body {
     }
 
     @media screen and (max-width: 810px) {
+      .container {
+        padding: 0;
+      }
       .main-header {
         .logo-holder {
           height: 5.5rem;
@@ -53,14 +66,24 @@ body {
           }
         }
       }
+      // grade search
+      .search-sec {
+        .search-item {
+          padding: 0.6rem;
+        }
+      }
 
+      //grade card
+      .grade-card {
+        margin: 4px;
+      }
       .test-details-content {
         .detail {
           &.box {
             box-shadow: none;
             margin: 0;
             padding: 0;
-            border-radius: .3rem;
+            border-radius: 0.3rem;
             border: 0;
           }
           .detail-image {
@@ -72,8 +95,8 @@ body {
             .label {
               display: inline-block;
               font-size: 1rem;
-              padding: .2rem .7rem;
-              margin-top: .5rem
+              padding: 0.2rem 0.7rem;
+              margin-top: 0.5rem;
             }
           }
         }
@@ -87,7 +110,7 @@ body {
             .word-download,
             .pdf-download {
               width: 100%;
-              margin: .3rem 0;
+              margin: 0.3rem 0;
             }
           }
 
@@ -95,15 +118,20 @@ body {
           .preview-text {
             padding: 1rem 0;
           }
-
         }
       }
-
     }
 
     @media screen and (max-width: 480px) {
+      .topbar-items {
+        padding: 1rem !important;
+      }
+      .logo-search-content {
+        padding: 1rem !important;
+      }
       .container {
         max-width: 100%;
+        width: 100%;
       }
       .main-header {
         .logo-holder {
@@ -115,13 +143,68 @@ body {
           }
         }
       }
+      .search-field {
+        font-size: 1rem;
+      }
 
       .popular-hashtags {
         .popular-hashtags-item {
           font-size: 1.1rem;
         }
       }
+      .grade-list {
+        padding: 1.5rem;
+      }
+      // Grade card
+      .grades-list {
+        .grade-card {
+          margin: 4px 0 !important;
+        }
+      }
+      .grade-list-lessons {
+        font-size: 14px;
+      }
+      .grade-divider {
+        display: none;
+      }
+      .grade-items {
+        display: flex;
+        justify-content: space-around;
+      }
+      .grade__item {
+        display: flex;
+        flex-direction: column;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        border: none;
+        width: 23%;
+        justify-content: center !important;
+        padding: 1rem !important;
+      }
+      .grade__item-title {
+        display: flex;
+        flex-direction: column;
+        color: #000000;
+      }
 
+      .grade-item__text {
+        font-size: 1.2rem !important;
+        text-align: center !important;
+      }
+
+      // .grade-card__update {
+      //   display: none;
+      // }
+      .stat {
+        color: #000000 !important;
+      }
+      .stat:hover {
+        color: #1e70bf !important;
+      }
+      .feature-item {
+        padding: 0 4rem !important;
+        margin: 1rem 0 !important;
+      }
       .test-details-content {
         .detail {
           .suggest-related-link {
@@ -136,7 +219,5 @@ body {
         }
       }
     }
-
-
   }
 }

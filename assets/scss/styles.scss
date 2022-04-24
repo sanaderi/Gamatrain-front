@@ -10,10 +10,10 @@ body {
   box-sizing: border-box;
   font-family: IRANSans, sans-serif;
   font-size: 14px;
-  transition: .5s ease-in-out;
+  transition: 0.5s ease-in-out;
 
   .v-application {
-    font-family: IRANSans, sans-serif ;
+    font-family: IRANSans, sans-serif;
 
     .w-100 {
       width: 100%;
@@ -33,10 +33,15 @@ body {
     }
 
     p {
-      margin: 0 ;
+      margin: 0;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       margin: 0;
     }
 
@@ -58,11 +63,12 @@ body {
     }
 
     .v-text-field--outlined fieldset {
-      border: 1px solid rgba(34, 36, 38, .15);
+      border: 1px solid rgba(34, 36, 38, 0.15);
     }
 
     .v-card__text {
       //font-size: $fontsize2;
+      // display: flex;
     }
 
     .v-list-item {
@@ -90,23 +96,23 @@ body {
     //}
 
     .container {
-      max-width: 80% ;
+      max-width: 80%;
     }
 
     .box {
       position: relative;
       background: #fff;
-      box-shadow: 0 1px 2px 0 rgba(34, 36, 38, .15);
+      box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
       margin: 1rem 0;
       padding: 1rem 1rem;
-      border-radius: .3rem;
-      border: 1px solid rgba(34, 36, 38, .15);
+      border-radius: 0.3rem;
+      border: 1px solid rgba(34, 36, 38, 0.15);
     }
 
     .footer-text {
-      color: rgba(0, 0, 0, .4)
+      color: rgba(0, 0, 0, 0.4);
     }
-
+   
     .btn-transparent {
       background-color: transparent !important;
       box-shadow: none !important;
@@ -120,17 +126,15 @@ body {
       .topbar {
         background-color: $green;
         color: $white;
-        padding: .7rem 0;
 
         .icon {
-          font-size: $fontsize4;
+          font-size: $fontsize2;
         }
 
         a:hover {
           color: $green2;
         }
       }
-
 
       //navbar
       .navbar-items {
@@ -147,8 +151,8 @@ body {
               background-color: $white;
 
               .v-icon--left {
-                margin-right: -.4rem;
-                margin-left: .2rem;
+                margin-right: -0.4rem;
+                margin-left: 0.2rem;
                 font-size: $fontsize4;
                 width: unset;
                 height: unset;
@@ -156,7 +160,8 @@ body {
 
               &.v-size--default {
                 font-size: $fontsize2;
-                padding: 0 .8rem;
+                padding: 0 0.8rem;
+                margin-left: 2rem;
               }
             }
 
@@ -176,11 +181,12 @@ body {
 
       //header-search
       .header-search {
-        border: .1rem solid rgba(34, 36, 38, .15);
-        border-radius: .3rem;
+        border: 0.1rem solid rgba(34, 36, 38, 0.15);
+        border-radius: 0.3rem;
         background: #fff;
-        color: rgba(0, 0, 0, .8);
+        color: rgba(0, 0, 0, 0.8);
         box-shadow: none;
+        width: 45%;
 
         .v-text-field > .v-input__control > .v-input__slot::before {
           border: 0;
@@ -300,14 +306,19 @@ body {
     }
 
     //search
-    .serch-sec {
-      .search-item {
-        width: 16%;
-        max-width: 16%;
+    .search-sec {
+      .grade-search {
+        .v-input__control {
+          .v-text-field__details {
+            display: none;
+          }
+        }
       }
 
-      .v-input__control {
-        display: none;
+      .search-item {
+        //width: 16%;
+        //max-width: 16%;
+        padding: 12px;
       }
 
       .theme--light.search-btn {
@@ -318,11 +329,16 @@ body {
       }
     }
 
-
     // grade-card
     .grade-card {
       box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
       position: relative;
+      margin: 10px;
+
+      &.col-md-3 {
+        //flex: 1 0 20%;
+        //max-width: 20%;
+      }
 
       .grade-title {
         margin-right: 4.5rem;
@@ -336,7 +352,7 @@ body {
         height: 2.5rem;
         right: -1rem;
         top: 1.32rem;
-        border-radius: .3rem;
+        border-radius: 0.3rem;
         //margin: -.2rem 1.7rem 0 1.2rem;
         display: flex;
         justify-content: center;
@@ -348,7 +364,7 @@ body {
           transform: translateY(-50%) translateX(50%) rotate(-45deg);
           top: 50%;
           right: 99%;
-          content: '';
+          content: "";
           background-color: inherit;
           background-image: none;
           width: 1.7rem;
@@ -359,14 +375,14 @@ body {
 
         &:after {
           position: absolute;
-          content: '';
+          content: "";
           top: 50%;
           left: 0;
           transform: translateY(-50%);
-          width: .6rem;
-          height: .6rem;
+          width: 0.6rem;
+          height: 0.6rem;
           background-color: #fff !important;
-          box-shadow: 0 -.1rem .1rem 0 rgba(0, 0, 0, .3);
+          box-shadow: 0 -0.1rem 0.1rem 0 rgba(0, 0, 0, 0.3);
           border-radius: 500rem;
         }
       }
@@ -376,7 +392,7 @@ body {
       }
 
       .total-content {
-        color: rgba(0, 0, 0, .68);
+        color: rgba(0, 0, 0, 0.68);
       }
 
       .content {
@@ -407,7 +423,7 @@ body {
       }
 
       &.grade-card1 {
-        border: .2rem solid $green4 !important;
+        border: 0.2rem solid $green4 !important;
 
         .grade-title1 {
           color: $green4;
@@ -419,7 +435,7 @@ body {
       }
 
       &.grade-card2 {
-        border: .2rem solid $red1 !important;
+        border: 0.2rem solid $red1 !important;
 
         .grade-title2 {
           color: $red1;
@@ -431,10 +447,10 @@ body {
       }
 
       &.grade-card3 {
-        border: .2rem solid $blue4 !important;
+        border: 0.2rem solid $blue4 !important;
 
         .grade-title1 {
-          color: $blue4
+          color: $blue4;
         }
 
         .label-tag3 {
@@ -443,10 +459,10 @@ body {
       }
 
       &.grade-card4 {
-        border: .2rem solid $violet1 !important;
+        border: 0.2rem solid $violet1 !important;
 
         .grade-title1 {
-          color: $violet1
+          color: $violet1;
         }
 
         .label-tag4 {
@@ -455,10 +471,10 @@ body {
       }
 
       &.grade-card5 {
-        border: .2rem solid $green8 !important;
+        border: 0.2rem solid $green8 !important;
 
         .grade-title5 {
-          color: $green8
+          color: $green8;
         }
 
         .label-tag5 {
@@ -467,10 +483,10 @@ body {
       }
 
       &.grade-card6 {
-        border: .2rem solid $orange5 !important;
+        border: 0.2rem solid $orange5 !important;
 
         .grade-title6 {
-          color: $orange5
+          color: $orange5;
         }
 
         .label-tag6 {
@@ -479,10 +495,10 @@ body {
       }
 
       &.grade-card7 {
-        border: .2rem solid $green6 !important;
+        border: 0.2rem solid $green6 !important;
 
         .grade-title7 {
-          color: $green6
+          color: $green6;
         }
 
         .label-tag7 {
@@ -491,10 +507,10 @@ body {
       }
 
       &.grade-card8 {
-        border: .2rem solid $yellow1 !important;
+        border: 0.2rem solid $yellow1 !important;
 
         .grade-title8 {
-          color: $yellow1
+          color: $yellow1;
         }
 
         .label-tag8 {
@@ -503,10 +519,10 @@ body {
       }
 
       &.grade-card9 {
-        border: .2rem solid $violet2 !important;
+        border: 0.2rem solid $violet2 !important;
 
         .grade-title9 {
-          color: $violet2
+          color: $violet2;
         }
 
         .label-tag9 {
@@ -515,10 +531,10 @@ body {
       }
 
       &.grade-card10 {
-        border: .2rem solid $red2 !important;
+        border: 0.2rem solid $red2 !important;
 
         .grade-title10 {
-          color: $red2
+          color: $red2;
         }
 
         .label-tag10 {
@@ -527,10 +543,10 @@ body {
       }
 
       &.grade-card11 {
-        border: .2rem solid $blue8 !important;
+        border: 0.2rem solid $blue8 !important;
 
         .grade-title11 {
-          color: $blue8
+          color: $blue8;
         }
 
         .label-tag11 {
@@ -539,10 +555,10 @@ body {
       }
 
       &.grade-card12 {
-        border: .2rem solid $green7 !important;
+        border: 0.2rem solid $green7 !important;
 
         .grade-title12 {
-          color: $green7
+          color: $green7;
         }
 
         .label-tag12 {
@@ -590,9 +606,8 @@ body {
         .feature-detail {
           font-size: $fontsize1;
           line-height: 1.6rem;
-          color: rgba(0, 0, 0, .6) !important;
+          color: rgba(0, 0, 0, 0.6) !important;
         }
-
       }
     }
 
@@ -604,7 +619,7 @@ body {
         color: $black;
 
         .icon {
-          font-size: 2.5rem
+          font-size: 2.5rem;
         }
       }
 
@@ -635,7 +650,7 @@ body {
 
         .footer-text {
           &.theme--light.v-icon {
-            color: rgba(0, 0, 0, .4)
+            color: rgba(0, 0, 0, 0.4);
           }
         }
 
@@ -668,6 +683,8 @@ body {
       background: $gray3;
 
       .stat-item {
+        margin-left: 19px !important;
+
         .stat-value {
           font-size: 4.2rem;
         }
@@ -675,7 +692,6 @@ body {
         .stat-label {
           font-weight: 700;
         }
-
       }
     }
 
@@ -708,15 +724,14 @@ body {
     // Footer
     .theme--light.v-footer {
       background-color: $white !important;
-      border-top: .1rem solid #e3e3e3 !important;
-      border-bottom: .5rem solid $orange4 !important;
-
+      border-top: 0.1rem solid #e3e3e3 !important;
+      border-bottom: 0.5rem solid $orange4 !important;
     }
 
     .footer-holder {
       .footer-item {
-        padding: .3rem 0;
-        margin: .7rem 0;
+        padding: 0.3rem 0;
+        margin: 0.7rem 0;
 
         .footer-item-link {
           &:hover .footer-item-title {
@@ -745,11 +760,12 @@ body {
 
         .detail-rate {
           font-size: 1.7rem;
-          color: rgba(0, 0, 0, .15);
+          color: rgba(0, 0, 0, 0.15);
 
           &.active {
             color: $yellow2;
-            text-shadow: 0 -1px 0 #ddc507, -1px 0 0 #ddc507, 0 1px 0 #ddc507, 1px 0 0 #ddc507 !important;
+            text-shadow: 0 -1px 0 #ddc507, -1px 0 0 #ddc507, 0 1px 0 #ddc507,
+              1px 0 0 #ddc507 !important;
           }
         }
 
@@ -766,9 +782,9 @@ body {
             font-size: 1.2rem;
             color: $gray4;
             background: $gray3;
-            border-radius: .3rem;
-            padding: .3rem .9rem;
-            margin-top: .5rem
+            border-radius: 0.3rem;
+            padding: 0.3rem 0.9rem;
+            margin-top: 0.5rem;
           }
         }
 
@@ -787,33 +803,33 @@ body {
         }
 
         .download-links {
-            margin-bottom: 3rem;
+          margin-bottom: 3rem;
           .price {
             position: relative;
             &:after {
               position: absolute;
-              content: '';
+              content: "";
               width: 1rem;
               height: 1rem;
-              background-color: #FFFFFF;
+              background-color: #ffffff;
               top: 50%;
-              left: -.6rem;
+              left: -0.6rem;
               transform: translateY(-50%) rotate(45deg);
             }
           }
 
           .pdf-download {
             color: $red3;
-            border: .1rem solid $red3;
-            border-radius: .3rem;
-            margin: 0 .5rem;
+            border: 0.1rem solid $red3;
+            border-radius: 0.3rem;
+            margin: 0 0.5rem;
 
             .price {
-              border-left: .1rem solid $red3;
+              border-left: 0.1rem solid $red3;
 
               &:after {
-                border-left: .1rem solid $red3;
-                border-bottom: .1rem solid $red3;
+                border-left: 0.1rem solid $red3;
+                border-bottom: 0.1rem solid $red3;
               }
             }
 
@@ -825,16 +841,16 @@ body {
 
           .word-download {
             color: $blue3;
-            border: .1rem solid $blue3;
-            border-radius: .3rem;
-            margin: 0 .5rem;
+            border: 0.1rem solid $blue3;
+            border-radius: 0.3rem;
+            margin: 0 0.5rem;
 
             .price {
-              border-left: .1rem solid $blue3;
+              border-left: 0.1rem solid $blue3;
 
               &:after {
-                border-left: .1rem solid $blue3;
-                border-bottom: .1rem solid $blue3;
+                border-left: 0.1rem solid $blue3;
+                border-bottom: 0.1rem solid $blue3;
               }
             }
           }
@@ -879,7 +895,7 @@ body {
 
         .extra-info {
           color: $gray7;
-          border-top: .1rem solid rgba(34,36,38,.15);
+          border-top: 0.1rem solid rgba(34, 36, 38, 0.15);
           padding-top: 1rem;
 
           .icon {
@@ -906,8 +922,8 @@ body {
             }
             .modal-error {
               &:hover {
-              color: $blue6;
-              cursor: pointer;
+                color: $blue6;
+                cursor: pointer;
               }
             }
           }
@@ -919,7 +935,7 @@ body {
           width: 8rem;
           height: 8rem;
           box-shadow: 0 0 21px #87777c;
-          margin-left: 1.6rem
+          margin-left: 1.6rem;
         }
         .icon {
           font-size: 1.2rem;
@@ -927,7 +943,7 @@ body {
         .course-title {
           color: $pink;
           font-size: 1.4rem;
-          margin-bottom: .8rem;
+          margin-bottom: 0.8rem;
         }
         .teacher {
           display: inline-block;
@@ -945,7 +961,7 @@ body {
           }
 
           &:hover .icon {
-            color: rgba(0,0,0,.8);
+            color: rgba(0, 0, 0, 0.8);
           }
         }
       }
@@ -955,8 +971,8 @@ body {
           width: 8rem;
           height: 10.6rem;
           box-shadow: 0 0 21px #87777c;
-          border-radius: .7rem;
-          margin-left: 1.6rem
+          border-radius: 0.7rem;
+          margin-left: 1.6rem;
         }
 
         .icon {
@@ -965,7 +981,7 @@ body {
         .course-title {
           color: $pink;
           font-size: 1.4rem;
-          margin-bottom: .8rem;
+          margin-bottom: 0.8rem;
         }
         .teacher {
           display: inline-block;
@@ -974,11 +990,11 @@ body {
 
         .suggestion {
           width: 15rem;
-          margin: .8rem .5rem 0 0;
-          padding: .5rem 1rem;
+          margin: 0.8rem 0.5rem 0 0;
+          padding: 0.5rem 1rem;
           color: #efeded;
           background: $purple;
-          border-radius: .9rem;
+          border-radius: 0.9rem;
           text-align: center;
         }
 
@@ -994,12 +1010,11 @@ body {
           }
 
           &:hover .icon {
-            color: rgba(0,0,0,.8);
+            color: rgba(0, 0, 0, 0.8);
           }
         }
       }
     }
-
 
     //sample test Slider
     .sample-test-holder {
@@ -1024,8 +1039,8 @@ body {
             width: 100%;
             max-width: 100%;
             height: 33rem;
-            border: .2rem solid rgba(56,152,224,.6);
-            border-radius: .5rem;
+            border: 0.2rem solid rgba(56, 152, 224, 0.6);
+            border-radius: 0.5rem;
 
             .sample-test-image {
               width: 100%;
@@ -1038,9 +1053,9 @@ body {
             .label {
               position: absolute;
               z-index: 1000;
-              padding: .5rem .8rem;
+              padding: 0.5rem 0.8rem;
               font-size: 1.2rem;
-              border-radius: .3rem;
+              border-radius: 0.3rem;
             }
 
             .offlabel {
@@ -1056,13 +1071,13 @@ body {
               bottom: 0;
               transform: translateX(-50%);
               background-color: $gray6;
-              color: rgba(0,0,0,.6);
+              color: rgba(0, 0, 0, 0.6);
             }
           }
 
           &.azmoon {
             .sample-test-image-holder {
-              border: .2rem solid rgba(63, 81, 181, .8)
+              border: 0.2rem solid rgba(63, 81, 181, 0.8);
             }
           }
 
@@ -1087,19 +1102,19 @@ body {
     //related-card
     .related-card {
       &.learning {
-        box-shadow: 0 0 0 1px #d4d4d5,0 2px 0 0 #21ba45,0 1px 3px 0 #d4d4d5;
+        box-shadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 #21ba45, 0 1px 3px 0 #d4d4d5;
       }
 
       &.question {
-        box-shadow: 0 0 0 1px #d4d4d5,0 2px 0 0 #f2711c,0 1px 3px 0 #d4d4d5;
+        box-shadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 #f2711c, 0 1px 3px 0 #d4d4d5;
       }
 
       &.blog {
-        box-shadow: 0 0 0 1px #d4d4d5,0 2px 0 0 #2185d0,0 1px 3px 0 #d4d4d5;
+        box-shadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 #2185d0, 0 1px 3px 0 #d4d4d5;
       }
 
       &.azmoon {
-        box-shadow: 0 0 0 1px #d4d4d5,0 2px 0 0 #6435c9,0 1px 3px 0 #d4d4d5;
+        box-shadow: 0 0 0 1px #d4d4d5, 0 2px 0 0 #6435c9, 0 1px 3px 0 #d4d4d5;
       }
 
       .iconlearning {
@@ -1107,7 +1122,7 @@ body {
       }
 
       .iconquestion {
-        color: $orange2
+        color: $orange2;
       }
 
       .iconblog {
@@ -1115,9 +1130,8 @@ body {
       }
 
       .iconazmoon {
-        color: $violet3
+        color: $violet3;
       }
-
 
       .related-header {
         font-size: 1.8rem;
@@ -1140,7 +1154,7 @@ body {
       }
 
       .related-content {
-        padding: 0 .4rem .7rem 0;
+        padding: 0 0.4rem 0.7rem 0;
       }
 
       .related-card-footer {
@@ -1152,20 +1166,16 @@ body {
           }
         }
 
-
-
-
         .add-file {
           .theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled) {
-            color: $white
+            color: $white;
           }
           font-size: 1.2rem;
           font-weight: 700;
-          padding: .6rem 1.8rem;
-          border-radius: .3rem;
+          padding: 0.6rem 1.8rem;
+          border-radius: 0.3rem;
           margin-left: 1.6rem;
           .icon {
-
           }
         }
 
@@ -1182,11 +1192,10 @@ body {
 
       &.question {
         .add-file {
-          background-color: $orange6 ;
+          background-color: $orange6;
         }
       }
     }
     //  close body and v-application
   }
 }
-
