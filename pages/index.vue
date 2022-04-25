@@ -1,7 +1,7 @@
 <template>
   <div class="home-page-content">
     <!--  Start: search grade  -->
-    <section class="d-none d-sm-block search-sec">
+    <section class="d-none d-sm-block search-sec ">
       <v-container>
         <div class="box search-container">
           <search
@@ -137,6 +137,7 @@
               :key="index"
               cols="12"
               md="3"
+              sm="3"
               class="feature-item"
             >
               <nuxt-link to="">
@@ -176,6 +177,7 @@
             :key="index"
             cols="12"
             md="4"
+            sm="4"
           >
             <footer-feed-box :feed="feed"></footer-feed-box>
           </v-col>
@@ -185,7 +187,7 @@
     <!--  Start: Site feature  -->
 
     <!--  Start: Main stats  -->
-    <section class="stat-sec my-8 pa-8">
+    <section class="stat-sec my-8">
       <v-container>
         <div class="d-flex justify-center align-center flex-wrap stat-holder">
           <div

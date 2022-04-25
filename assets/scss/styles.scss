@@ -112,7 +112,7 @@ body {
     .footer-text {
       color: rgba(0, 0, 0, 0.4);
     }
-   
+
     .btn-transparent {
       background-color: transparent !important;
       box-shadow: none !important;
@@ -177,42 +177,55 @@ body {
             padding-left: 0;
           }
         }
+
+        .mobile-search {
+          display: none;
+        }
       }
 
       //header-search
+      .main-search-icon::after {
+        display: none !important;
+      }
+      .main-search-icon::before {
+        display: none !important;
+      }
       .header-search {
-        border: 0.1rem solid rgba(34, 36, 38, 0.15);
-        border-radius: 0.3rem;
-        background: #fff;
-        color: rgba(0, 0, 0, 0.8);
-        box-shadow: none;
-        width: 45%;
+        &.desktop-search {
+          border: 0.1rem solid rgba(34, 36, 38, 0.15);
+          border-radius: 0.3rem;
+          background: #fff;
+          color: rgba(0, 0, 0, 0.8);
+          box-shadow: none;
+          width: 45%;
+          display: flex;
+          align-items: center;
 
-        .v-text-field > .v-input__control > .v-input__slot::before {
-          border: 0;
-        }
+          .v-text-field > .v-input__control > .v-input__slot::before {
+            border: 0;
+          }
 
-        .v-input__slot {
-          margin-bottom: 0;
-        }
+          .v-input__slot {
+            margin-bottom: 0;
+          }
 
-        .v-text-field__details {
-          display: none;
-        }
+          .v-text-field__details {
+            display: none;
+          }
 
-        .theme--light.v-btn:hover::before {
-          opacity: 0;
-        }
+          .theme--light.v-btn:hover::before {
+            opacity: 0;
+          }
 
-        .v-btn__content {
-          justify-content: end;
+          .v-btn__content {
+            justify-content: end;
 
-          .search-icon {
-            color: $green !important;
+            .search-icon {
+              color: $green !important;
+            }
           }
         }
       }
-
       //header logo
       .logo-holder {
         height: 6.8rem;
@@ -333,7 +346,8 @@ body {
     .grade-card {
       box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
       position: relative;
-      margin: 10px;
+      margin: 10px 10px;
+      max-width: 48%;
 
       &.col-md-3 {
         //flex: 1 0 20%;
@@ -683,7 +697,7 @@ body {
       background: $gray3;
 
       .stat-item {
-        margin-left: 19px !important;
+        margin-left: 19px;
 
         .stat-value {
           font-size: 4.2rem;
