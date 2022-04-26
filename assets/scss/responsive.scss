@@ -58,11 +58,11 @@ body {
       .container {
         padding: 0;
       }
-      .stat-item  {
+      .stat-item {
         margin-bottom: 2rem;
       }
-      .search-item-button  {
-        margin-bottom:20px !important;
+      .search-item-button {
+        margin-bottom: 20px !important;
       }
 
       // mobile-search-modal
@@ -180,10 +180,9 @@ body {
         margin: 10px 5px !important;
         max-width: 47% !important;
       }
-
-      //
       .test-details-content {
         .detail {
+          padding: 3rem !important;
           &.box {
             box-shadow: none;
             margin: 0;
@@ -191,9 +190,33 @@ body {
             border-radius: 0.3rem;
             border: 0;
           }
+          .rate {
+            position: absolute;
+            right: 2%;
+            top: 8%;
+          }
+          .detail-title {
+            font-size: 1.3rem;
+          }
+          .detail-rate {
+            font-size: 1.2rem !important;
+          }
           .detail-image {
             width: 6rem !important;
             height: 7rem;
+          }
+          .main-content-footer {
+            font-size: 11px;
+          }
+          .modal-error {
+            font-size: 11px !important;
+          }
+
+          .extra-info-right {
+            width: 69% !important;
+          }
+          .extra-info-left {
+            width: 27% !important;
           }
 
           .label-holder {
@@ -206,10 +229,11 @@ body {
           }
         }
       }
-
-      //
-      .footer-logo-section {
-        padding-right: 3rem;
+      .last-view-title {
+        padding: 1rem;
+      }
+      .footer-items {
+        padding: 3rem !important;
       }
     }
 
@@ -217,6 +241,7 @@ body {
       .test-details-content {
         .detail {
           .download-links {
+            padding: 4rem;
             .word-download,
             .pdf-download {
               width: 100%;
@@ -330,17 +355,32 @@ body {
         padding: 0 4rem !important;
         margin: 1rem 0 !important;
       }
+      .suggestion {
+        display: none !important;
+      }
       .test-details-content {
         .detail {
           .suggest-related-link {
             display: none !important;
           }
         }
+        .remove-res {
+          display: none;
+        }
         .course-card {
+          padding: 7rem 1rem;
+          margin: 0;
           .avatar-img {
             width: 6.5rem;
             height: 6.5rem;
           }
+        }
+        .album-card {
+          padding: 7rem 1rem;
+          margin: 0;
+        }
+        .related-box {
+          margin: 0;
         }
       }
     }

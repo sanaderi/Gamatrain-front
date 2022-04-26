@@ -2,7 +2,7 @@
   <v-container class="py-2">
     <div class="footer-holder">
       <v-row>
-        <v-col cols="12" md="4" sm="6" class="footer-logo-section">
+        <v-col cols="12" md="4" sm="6" class="footer-items">
           <v-list class="py-0">
             <v-list-item class="footer-item">
               <nuxt-link to="" class="d-flex align-center footer-item-link">
