@@ -1,9 +1,10 @@
 <template>
-  <form @submit.prevent="submit">
-    <v-row class="align-center">
-      <v-col cols="12" md="3">
-        <p class="mb-2">مقطع</p>
+  <form @submit.prevent="submit" >
+    <v-row class="mx-0 align-center search-container">
+      <v-col cols="12" md="2" sm="12" class="search-item">
+        <p class="mb-2 font-weight-bold">مقطع</p>
         <v-autocomplete
+          class="grade-search"
           v-model="values1"
           :items="items1"
           chips
@@ -12,9 +13,10 @@
           small-chips
         ></v-autocomplete>
       </v-col>
-      <v-col cols="12" md="3">
-        <p class="mb-2">پایه</p>
+      <v-col cols="12" md="2" sm="12" class="search-item">
+        <p class="mb-2 font-weight-bold">پایه</p>
         <v-autocomplete
+          class="grade-search"
           v-model="values2"
           :items="items2"
           chips
@@ -23,9 +25,10 @@
           small-chips
         ></v-autocomplete>
       </v-col>
-      <v-col cols="12" md="3">
-        <p class="mb-2">کتاب درسی</p>
+      <v-col cols="12" md="2" sm="12" class="search-item">
+        <p class="mb-2 font-weight-bold">کتاب درسی</p>
         <v-autocomplete
+          class="grade-search"
           v-model="values3"
           :items="items3"
           chips
@@ -34,7 +37,7 @@
           small-chips
         ></v-autocomplete>
       </v-col>
-      <v-col class="d-flex justify-md-center justify-end" cols="12" md="3">
+      <v-col class="d-flex justify-md-center justify-end pb-0  search-item-button" cols="12" md="3" sm="12" >
         <v-btn class="search-btn" depressed>
           جستجو
         </v-btn>

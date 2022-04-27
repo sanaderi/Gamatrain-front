@@ -3,7 +3,7 @@
     <!--  Start: breadcrumb  -->
     <section>
       <v-container class="py-0">
-        <div class="box mt-0 py-0">
+        <div class="box mt-0 py-0 header-path">
           <breadcrumb :breads="breads"/>
         </div>
       </v-container>
@@ -129,30 +129,29 @@
             </v-col>
           </v-row>
           <!-- bottom extra info-->
-          <div class="d-block d-md-flex justify-space-between flex-wrap extra-info">
-            <div class="d-flex align-center flex-wrap right">
+          <div class="d-block d-md-flex d-flex justify-space-between flex-wrap extra-info">
+            <div class="d-flex align-center flex-wrap right extra-info-right">
               <nuxt-link class="d-flex align-center owner ml-3" to="">
                 <img :src="require(`~/assets/images/teacher1.png`)" alt="" class="ml-1 owner-img">
-                <span class="">شمسی شعبانی</span>
+                <span class="main-content-footer">شمسی شعبانی</span>
               </nuxt-link>
               <div class="d-flex align-center ml-3">
                 <i class="fa-solid fa-folder ml-1 icon"></i>
-                <span>نوع آزمون : سوالات تستی</span>
+                <span class="main-content-footer"><span class="remove-res">نوع آزمون : </span>سوالات تستی</span>
               </div>
               <div class="d-flex align-center ml-3">
-                <span class="d-flex align-center ml-1 mdi mdi-eye "></span>
                 <i class="fa-solid fa-eye ml-1 icon"></i>
-                <span> بازدید : 1767 </span>
+                <span class="main-content-footer"><span class="remove-res"> بازدید :</span> 1895</span>
               </div>
               <div class="d-flex align-center ml-3 update">
-                <i class="fa-solid fa-calendar-days ml-1 icon"></i>
-                <span> بروزرسانی شده در 1400/12/16 </span>
+                <i class="fa-solid fa-calendar-days ml-1 icon remove-res"></i>
+                <span class="main-content-footer remove-res"> بروزرسانی شده در 1400/12/16 </span>
               </div>
             </div>
-            <div class="d-flex align-center justify-end left">
+            <div class="d-flex align-center justify-end left  extra-info-left">
               <div class="d-flex align-center justify-end report-error">
                 <i class="fa-solid fa-bullhorn ml-1 icon"></i>
-                <span class="modal-error">گزارش خرابی فایل </span>
+                <span class="modal-error main-content-footer">گزارش خرابی فایل </span>
               </div>
             </div>
           </div>
@@ -247,7 +246,7 @@
     <section class="related-sec">
       <div class="">
         <v-container>
-          <div class="box">
+          <div class="box related-box">
             <div class="sample-test-holder">
               <div class="sample-test-title">
                 <nuxt-link to="" class="d-flex align-center ">
