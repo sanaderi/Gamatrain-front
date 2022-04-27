@@ -1,5 +1,10 @@
 <template>
   <div class="home-page-content">
+    <section class="banner-sec">
+      <v-container>
+      <div class="hidden-md-and-down banner"></div>
+      </v-container>
+    </section>
     <!--  Start: search grade  -->
     <section class="d-none d-sm-block search-sec ">
       <v-container>
@@ -36,9 +41,7 @@
             <!--            >-->
             <v-card-title class="d-block pa-0 pb-2">
               <h2 :class="'grade-title grade-title' + (index + 1)" class="mb-2">
-                <span :class="'label-tag label-tag' + (index + 1)">{{
-                  index + 1
-                }}</span>
+                <span :class="'label-tag label-tag' + (index + 1)">{{ index + 1 }}</span>
                 {{ grade.title }}
               </h2>
               <p class="d-inline-block">
@@ -110,7 +113,7 @@
                   <div class="text-left stat" v-text="item.stat"></div>
                 </div>
               </nuxt-link>
-              
+
             </v-card-text>
             <v-divider class="grade-divider"></v-divider>
             <v-card-text class="pt-3 pb-2 px-0 grade-card__update">
