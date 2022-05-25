@@ -1,12 +1,21 @@
 <template>
   <div class="home-page-content">
     <section class="banner-sec">
-      <v-container>
-      <div class="hidden-md-and-down banner"></div>
-      </v-container>
+        <v-carousel>
+          <v-carousel-item
+            v-for="(item, i) in items"
+            contain
+            :key="i"
+            :src="require('@/assets/images/' + item.src)"
+            reverse-transition="fade-transition"
+            transition="fade-transition"
+            class="banner"
+          ></v-carousel-item>
+        </v-carousel>
     </section>
+    <Category />
     <!--  Start: search grade  -->
-    <section class="d-none d-sm-block search-sec ">
+    <section class="d-none d-sm-block search-sec">
       <v-container>
         <div class="box search-container">
           <search
@@ -41,7 +50,9 @@
             <!--            >-->
             <v-card-title class="d-block pa-0 pb-2">
               <h2 :class="'grade-title grade-title' + (index + 1)" class="mb-2">
-                <span :class="'label-tag label-tag' + (index + 1)">{{ index + 1 }}</span>
+                <span :class="'label-tag label-tag' + (index + 1)">{{
+                  index + 1
+                }}</span>
                 {{ grade.title }}
               </h2>
               <p class="d-inline-block">
@@ -113,13 +124,12 @@
                   <div class="text-left stat" v-text="item.stat"></div>
                 </div>
               </nuxt-link>
-
             </v-card-text>
             <v-divider class="grade-divider"></v-divider>
             <v-card-text class="pt-3 pb-2 px-0 grade-card__update">
-              <div class="d-flex align-center footer-card card-footer">
+              <div class="d-flex align-center footer-card card-footer justify-end mt-2">
                 <span class="fa-solid fa-calendar-days ml-2"></span>
-                <span class="ml-1">بروزرسانی: </span>
+                <span class="ml-1">آخرین بروزرسانی: </span>
                 <span>{{ grade.update }}</span>
               </div>
             </v-card-text>
@@ -131,7 +141,7 @@
     <!--  End: Grade list  -->
 
     <!--  Start: Site feature  -->
-    <section class="site-feature">
+    <!-- <section class="site-feature">
       <v-container>
         <div class="box">
           <v-row>
@@ -154,7 +164,7 @@
                   <v-card-text>
                     <v-list>
                       <v-list-item
-                        v-for="detail in feature.details"
+                        v-for="(detail,index) in feature.details"
                         :key="index"
                         class="mb-2 feature-detail"
                       >
@@ -168,7 +178,7 @@
           </v-row>
         </div>
       </v-container>
-    </section>
+    </section> -->
     <!--  End: Site feature  -->
 
     <!--  Start: feed box  -->
@@ -215,11 +225,11 @@
     <!--  End: Main stats  -->
 
     <!--  Start: Last views  -->
-    <section class="last-view-sec">
+    <!-- <section class="last-view-sec">
       <v-container>
         <last-views></last-views>
       </v-container>
-    </section>
+    </section> -->
     <!--  End: Last views   -->
   </div>
 </template>
@@ -229,6 +239,7 @@ import GardeCard from "./index/garde-card";
 import Search from "./index/search";
 import FooterFeedBox from "../components/common/footer-feed-box";
 import LastViews from "../components/common/last-views";
+import Category from "~/components/common/category.vue";
 
 export default {
   components: {
@@ -236,9 +247,23 @@ export default {
     FooterFeedBox,
     Search,
     GardeCard,
-    // Slider
+    Category,
   },
   data: () => ({
+    items: [
+      {
+        src: "slider.png",
+      },
+      {
+        src: "slider.png",
+      },
+      {
+        src: "slider.png",
+      },
+      {
+        src: "slider.png",
+      },
+    ],
     items1: ["همه", "دبستان", "متوسطه"],
     items2: ["همه", "دبستان", "متوسطه"],
     items3: ["همه", "دبستان", "متوسطه"],
@@ -769,27 +794,27 @@ export default {
         icon: "learnfiles",
         contentItemList: [
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای",
-            name: "توسط علی رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط رضا رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ",
-            name: "توسط مهدی رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط اکبر رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
         ],
@@ -800,27 +825,27 @@ export default {
         icon: "qa",
         contentItemList: [
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ",
-            name: "توسط علی رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط رضا رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ",
-            name: "توسط مهدی رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط اکبر رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
         ],
@@ -831,27 +856,27 @@ export default {
         icon: "news",
         contentItemList: [
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ",
-            name: "توسط علی رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط رضا رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ",
-            name: "توسط مهدی رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط اکبر رجبی",
+            avatar: "dexter-morse2.png",
+            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
         ],

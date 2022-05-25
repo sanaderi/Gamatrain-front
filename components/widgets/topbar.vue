@@ -1,29 +1,47 @@
 <template>
   <div class="topbar">
-    <v-container class=" d-flex align-center justify-space-between topbar-items">
+    <v-container class="d-flex align-center justify-space-between topbar-items">
       <div class="d-flex align-center">
-        <nuxt-link to="" class="d-flex align-center">
-          <i class="fa-solid fa-user-plus icon"></i>
-          <span class="mr-1">ثبت نام</span>
+        <nuxt-link to="">
+          <v-avatar size="32">
+            <img :src="require('@/assets/images/' + avatar)" alt="John" />
+          </v-avatar>
         </nuxt-link>
-        <nuxt-link to="" class="d-flex align-center mr-4">
-          <i class="fa-solid fa-right-to-bracket icon"></i>
-          <span class="mr-1">ورود</span>
+
+        <nuxt-link to="" class="d-flex align-center mr-3 ml-5">
+          <i class="fa-regular fa-bell fa-xl topbar-bell"></i>
         </nuxt-link>
+        <!--  Start:  Search and logo in header  -->
+        <div
+          class="
+            d-flex
+            align-center
+            justify-space-between
+            logo-search-content
+            mx-5
+          "
+        >
+          <div class="px-2 header-search desktop-search">
+            <v-btn class="px-0 btn-transparent search-btn-icon ml-2">
+              <v-icon class="search-icon">mdi-magnify</v-icon>
+            </v-btn>
+            <v-divider vertical></v-divider>
+            <v-text-field
+              class="py-1 my-0 search-field main-search-icon mr-2"
+              placeholder="جستجو..."
+            >
+            </v-text-field>
+          </div>
+        </div>
+        <!--  End:  Search and logo in header  -->
       </div>
-      <div class="d-flex align-center">
-        <nuxt-link to="" class="d-flex align-center me-4">
-          <i class="fa-solid fa-phone icon"></i>
-        </nuxt-link>
-        <nuxt-link to="" class="d-flex align-center me-sm-4 me-0">
-          <i class="fa-solid fa-gavel"></i>
-        </nuxt-link>
-        <nuxt-link to="" class="d-none d-sm-flex align-center me-4">
-          <i class="fa-solid fa-info"></i>
-        </nuxt-link>
-        <nuxt-link to="" class="d-none d-sm-flex align-center">
-          <i class="fa-solid fa-question"></i>
-        </nuxt-link>
+      <v-spacer></v-spacer>
+      <div>
+        <v-img
+          class="logo"
+          :src="require('@/assets/images/' + logo)"
+          max-width="150"
+        ></v-img>
       </div>
     </v-container>
   </div>
@@ -31,15 +49,17 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
+      logo: "mainlogo4.png",
+      avatar: "dexter-morse.png",
       items: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-        { title: 'Photos', icon: 'mdi-image' },
-        { title: 'About', icon: 'mdi-help-box' },
+        { title: "Dashboard", icon: "mdi-view-dashboard" },
+        { title: "Photos", icon: "mdi-image" },
+        { title: "About", icon: "mdi-help-box" },
       ],
       right: null,
-    }
+    };
   },
-}
+};
 </script>

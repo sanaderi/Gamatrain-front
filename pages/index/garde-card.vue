@@ -4,13 +4,13 @@
     class="mx-auto grade-card"
   >
     <v-card-title class="d-block">
-      <h2 :class="'grade-title'+ index" class="mb-2">
+      <h2 :class="'grade-title'+ index">
         {{ grade.title }}
          <span :class="'label-tag label-tag'+ index">{{index}}</span>
       </h2>
       <p class="">{{ grade.description }}</p>
     </v-card-title>
-    <v-divider class="mx-4"></v-divider>
+    <v-divider class="mx-4 grade-divider"></v-divider>
     <v-card-text>
       <v-list>
         <v-list-item
@@ -30,10 +30,10 @@
         </v-list-item>
       </v-list>
     </v-card-text>
-    <v-divider></v-divider>
+    <v-divider class="grade-divider"></v-divider>
     <v-card-text>
       <div class="footer-card card-footer">
-        <span>بروزرسانی: </span>
+        <span>آخرین بروزرسانی: </span>
         <span>{{ grade.update }}</span>
       </div>
     </v-card-text>
