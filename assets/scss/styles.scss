@@ -104,16 +104,16 @@ body {
     }
 
     &.v-application--is-rtl .v-window__prev {
-      right: 5% !important;
+      right: 6% !important;
     }
     &.v-application--is-rtl .v-window__next {
-      left: 87%;
+      left: 85%;
     }
     .v-carousel__controls {
       background: none !important;
       width: 12% !important;
-      bottom: 12% !important;
-      right: 3% !important;
+      bottom: 7% !important;
+      right: 4.5% !important;
     }
     .v-carousel__controls__item {
       margin: 0 0 !important;
@@ -457,13 +457,10 @@ body {
     }
 
     // Home page
-    .banner {
-      height: 1rem !important;
-    }
 
     .v-window__prev,
     .v-window__next {
-      top: 70% !important;
+      top: 74% !important;
     }
 
     //search
@@ -813,6 +810,36 @@ body {
     }
 
     // footer feed card
+    .responsive-feed {
+      box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    }
+    .third-feed-box {
+      box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+      .feed-box-item {
+        margin-bottom: 0.7rem;
+      }
+      .feed-more {
+        font-size: 1.2rem;
+        color: $blue4;
+      }
+      .feed-date,
+      .feed-title,
+      .feed-name {
+        color: $gray4;
+      }
+      height: 72.5rem;
+      .feed-header {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: $gray45;
+        border-bottom: 3px solid $blue11;
+        width: 50%;
+        margin: 1.5rem 0;
+        padding: 0.7rem 1rem;
+      }
+    }
     .feed-card {
       .v-subheader.feed-header {
         font-size: $fontsize25;
@@ -877,14 +904,13 @@ body {
           color: $green4;
           font-size: $fontsize0;
         }
-        
+
         .add-file {
           .v-list-item {
             width: 4rem;
             height: 4rem;
             background: $green4;
             border-radius: 10px;
-            
           }
           .theme--light i {
             color: $white !important;
@@ -938,17 +964,28 @@ body {
 
     // stat-sec
     .stat-sec {
-      background: $gray3;
+      background: $white;
+      border-top: 1px solid $border;
+      border-bottom: 1px solid $border;
 
       .stat-item {
         margin-left: 19px;
 
         .stat-value {
-          font-size: 4.2rem;
+          font-size: 2.4rem;
+          font-weight: 400;
         }
 
         .stat-label {
-          font-weight: 700;
+          font-weight: 400;
+          font-size: 2rem;
+        }
+        .stat-icon {
+          width: 4.2rem;
+          height: 4.2rem;
+          border-radius: 1.2rem;
+          background-color: $green11;
+          color: $white;
         }
       }
     }
@@ -983,15 +1020,46 @@ body {
     .theme--light.v-footer {
       background-color: $white !important;
       border-top: 0.1rem solid #e3e3e3 !important;
-      border-bottom: 0.5rem solid $orange4 !important;
+      // border-bottom: 0.5rem solid $orange4 !important;
+    }
+    .footer-bar {
+      background-color: $footer-bar;
+      margin-top: 4rem;
+      .footer-bar-item {
+        border: 1px solid $border;
+        font-size: 2.2rem;
+        font-weight: 400;
+        color: $gray4;
+        height: 9rem;
+      }
     }
 
+    .enamad {
+      width: 20%;
+    }
     .footer-holder {
+      .footer-social-icon {
+        width: 16% !important;
+      }
       .footer-item {
         padding: 0.3rem 0;
         margin: 0.7rem 0;
-
+        font-size: 1.4rem;
+        color: $gray4;
+        .about-footer {
+          font-size: $fontsize4;
+          font-weight: 400;
+          color: $gray4;
+        }
+        .about-footer-para {
+          font-size: 1.4rem;
+          font-weight: 400;
+          color: $gray4;
+        }
         .footer-item-link {
+          .footer-item-title {
+            color: $gray4;
+          }
           &:hover .footer-item-title {
             color: $blue6;
           }

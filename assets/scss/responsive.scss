@@ -341,7 +341,10 @@ body {
       .grade-card {
         max-width: 100% !important;
       }
-
+      .feed-p-res {
+        font-size: 12px;
+        color: $gray4;
+      }
       // .grade-card__update {
       //   display: none;
       // }
@@ -382,6 +385,9 @@ body {
         .related-box {
           margin: 0;
         }
+      }
+      .footer-bar-item {
+        font-size: 1.4rem !important;
       }
     }
   }

@@ -1,17 +1,17 @@
 <template>
   <div class="home-page-content">
     <section class="banner-sec">
-        <v-carousel>
-          <v-carousel-item
-            v-for="(item, i) in items"
-            contain
-            :key="i"
-            :src="require('@/assets/images/' + item.src)"
-            reverse-transition="fade-transition"
-            transition="fade-transition"
-            class="banner"
-          ></v-carousel-item>
-        </v-carousel>
+      <v-carousel class="index-banner">
+        <v-carousel-item
+          v-for="(item, i) in items"
+          cover
+          :key="i"
+          :src="require('@/assets/images/' + item.src)"
+          reverse-transition="fade-transition"
+          transition="fade-transition"
+          class="banner"
+        ></v-carousel-item>
+      </v-carousel>
     </section>
     <Category />
     <!--  Start: search grade  -->
@@ -127,7 +127,16 @@
             </v-card-text>
             <v-divider class="grade-divider"></v-divider>
             <v-card-text class="pt-3 pb-2 px-0 grade-card__update">
-              <div class="d-flex align-center footer-card card-footer justify-end mt-2">
+              <div
+                class="
+                  d-flex
+                  align-center
+                  footer-card
+                  card-footer
+                  justify-end
+                  mt-2
+                "
+              >
                 <span class="fa-solid fa-calendar-days ml-2"></span>
                 <span class="ml-1">آخرین بروزرسانی: </span>
                 <span>{{ grade.update }}</span>
@@ -194,15 +203,79 @@
           >
             <footer-feed-box :feed="feed"></footer-feed-box>
           </v-col>
+          <v-col cols="12" md="4" sm="4" class="third-feed-box mt-3 pa-0">
+            <div class="feed-header">
+              <img
+                :src="require('@/assets/images/' + thirdFeedBoxIcon)"
+                alt=""
+                class="mx-2"
+                width="28"
+              />
+              آخرین اخبار
+            </div>
+
+            <div class="d-flex flex-column pa-3">
+              <div
+                class="feed-box-item d-flex"
+                v-for="feed in thirdFeedBox"
+                :key="feed"
+              >
+                <div class="feedBoxImg">
+                  <img :src="require('@/assets/images/' + feed.img)" alt="" />
+                </div>
+                <div
+                  class="
+                    feed-content
+                    pa-3
+                    d-flex
+                    flex-column
+                    justify-space-between
+                  "
+                >
+                  <p>
+                    {{ feed.para }}
+                  </p>
+                  <div class="d-flex justify-space-between">
+                    <div class="feed-title">
+                      <i class="fa-solid fa-grip-vertical ml-2"></i>
+                      {{ feed.title }}
+                    </div>
+                    <div class="feed-date">
+                      <i class="fa-solid fa-calendar-days ml-2"></i>
+                      {{ feed.date }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <v-divider></v-divider>
+            </div>
+            <div class="feed-footer d-flex align-center pa-3">
+              <nuxt-link to="" class="pb-0 feed-more mr-4"
+                >موارد بیشتر</nuxt-link
+              >
+            </div>
+          </v-col>
         </v-row>
       </v-container>
     </section>
-    <!--  Start: Site feature  -->
+    <!--  End: Feed box  -->
+    <!-- Start: Feedtabs respons -->
+<FeedTab/>
+
+    <!-- End: Feedtabs respons -->
 
     <!--  Start: Main stats  -->
     <section class="stat-sec my-8">
       <v-container>
-        <div class="d-flex justify-center align-center flex-wrap stat-holder">
+        <div
+          class="
+            d-flex
+            justify-space-between
+            align-center
+            flex-wrap
+            stat-holder
+          "
+        >
           <div
             v-for="(item, index) in statList"
             :key="index"
@@ -216,8 +289,11 @@
               stat-item
             "
           >
-            <span class="stat-value">{{ item.value }} +</span>
+            <span class="stat-icon d-flex align-center justify-center">
+              <i :class="'fa solid ' + item.icon"> </i>
+            </span>
             <span class="stat-label">{{ item.label }}</span>
+            <span class="stat-value">{{ item.value }} +</span>
           </div>
         </div>
       </v-container>
@@ -240,6 +316,7 @@ import Search from "./index/search";
 import FooterFeedBox from "../components/common/footer-feed-box";
 import LastViews from "../components/common/last-views";
 import Category from "~/components/common/category.vue";
+import FeedTab from "../components/common/feedTab.vue";
 
 export default {
   components: {
@@ -248,8 +325,43 @@ export default {
     Search,
     GardeCard,
     Category,
-  },
+    FeedTab
+},
   data: () => ({
+    thirdFeedBoxIcon: "News.png",
+    thirdFeedBox: [
+      {
+        img: "laptop.png",
+        para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
+        title: "اموزشی",
+        date: "27 فروردین",
+      },
+      {
+        img: "laptop.png",
+        para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
+        title: "اموزشی",
+        date: "27 فروردین",
+      },
+      {
+        img: "laptop.png",
+        para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
+        title: "اموزشی",
+        date: "27 فروردین",
+      },
+      {
+        img: "laptop.png",
+        para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
+        title: "اموزشی",
+        date: "27 فروردین",
+      },
+      {
+        img: "laptop.png",
+        para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
+        title: "اموزشی",
+        date: "27 فروردین",
+      },
+    ],
+
     items: [
       {
         src: "slider.png",
@@ -795,25 +907,29 @@ export default {
         contentItemList: [
           {
             avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
             name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
             name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
             name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
             name: "علیرضا داوودی",
             date: "16 فروردین",
           },
@@ -826,69 +942,78 @@ export default {
         contentItemList: [
           {
             avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
             name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
             name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
             name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
             name: "علیرضا داوودی",
             date: "16 فروردین",
           },
         ],
       },
-      {
-        class: "news",
-        header: " آخرین اخبار",
-        icon: "news",
-        contentItemList: [
-          {
-            avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
-            name: "علیرضا داوودی",
-            date: "16 فروردین",
-          },
-          {
-            avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-            name: "علیرضا داوودی",
-            date: "16 فروردین",
-          },
-          {
-            avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
-            name: "علیرضا داوودی",
-            date: "16 فروردین",
-          },
-          {
-            avatar: "dexter-morse2.png",
-            title: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
-            name: "علیرضا داوودی",
-            date: "16 فروردین",
-          },
-        ],
-      },
+      // {
+      //   class: "news",
+      //   header: " آخرین اخبار",
+      //   icon: "news",
+      //   contentItemList: [
+      //     {
+      //       avatar: "dexter-morse2.png",
+      //       title:
+      //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+      //       name: "علیرضا داوودی",
+      //       date: "16 فروردین",
+      //     },
+      //     {
+      //       avatar: "dexter-morse2.png",
+      //       title:
+      //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+      //       name: "علیرضا داوودی",
+      //       date: "16 فروردین",
+      //     },
+      //     {
+      //       avatar: "dexter-morse2.png",
+      //       title:
+      //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+      //       name: "علیرضا داوودی",
+      //       date: "16 فروردین",
+      //     },
+      //     {
+      //       avatar: "dexter-morse2.png",
+      //       title:
+      //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+      //       name: "علیرضا داوودی",
+      //       date: "16 فروردین",
+      //     },
+      //   ],
+      // },
     ],
+
     statList: [
-      { label: "مدرسه", value: "130,000" },
-      { label: "دبیر", value: "300,000" },
-      { label: "دانش آموز", value: "1,500,000" },
-      { label: "نمونه سوال", value: "50,000" },
-      { label: "پاورپوینت", value: "30,000" },
-      { label: "آزمون آنلاین", value: "5,000" },
+      { label: "مدرسه", value: "130,000", icon: "fa-graduation-cap" },
+      { label: "دبیر", value: "300,000", icon: "fa-graduation-cap" },
+      { label: "دانش آموز", value: "1,500,000", icon: "fa-graduation-cap" },
+      { label: "نمونه سوال", value: "50,000", icon: "fa-graduation-cap" },
+      { label: "پاورپوینت", value: "30,000", icon: "fa-graduation-cap" },
+      { label: "آزمون آنلاین", value: "5,000", icon: "fa-graduation-cap" },
     ],
   }),
 };
