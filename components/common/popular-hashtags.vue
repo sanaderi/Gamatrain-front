@@ -1,6 +1,6 @@
 <template>
   <!--   Start: poular hashtags  main-container  -->
-  <div class="popular-hashtags">
+  <div class="popular-hashtags d-sm-block d-none ">
     <v-container class="d-flex justify-center align-center flex-wrap hashtag">
       <span>پربازدیدترین ها: </span>
       <div id="popularHashtags" class="d-flex justify-space-evenly popular-hashtag  rounded-pill align-center mr-2">

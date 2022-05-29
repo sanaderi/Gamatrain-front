@@ -36,22 +36,26 @@
               </span>
               <v-spacer></v-spacer>
               <v-toolbar-items class="hidden-md-and-down">
-                  <v-btn
-                    v-for="item in menuItems"
-                    :key="item.title"
-                    :to="item.path"
-                  >
-                    <span :class="'ml-1 fa-solid ' + item.icon"></span>
-<!--                    <v-icon dark left>{{ item.icon }}</v-icon>-->
-                    {{ item.title }}
-
-                  </v-btn>
+                <v-btn
+                  v-for="item in menuItems"
+                  :key="item.title"
+                  :to="item.path"
+                >
+                  <span :class="'ml-1 fa-solid ' + item.icon"></span>
+                  <!--                    <v-icon dark left>{{ item.icon }}</v-icon>-->
+                  {{ item.title }}
+                </v-btn>
               </v-toolbar-items>
             </v-app-bar>
+            <nuxt-link to="" class="d-flex align-center mr-3 ml-5">
+              <i
+                class="fa-regular fa-bell fa-xl topbar-bell d-none d-sm-block"
+              ></i>
+            </nuxt-link>
             <div class="mobile-search">
-<!--              <v-btn class="pa-0 btn-transparent" @click="showSearchBox">-->
-<!--                <span class="fa-solid fa-magnifying-glass search-icon"></span>-->
-<!--              </v-btn>-->
+              <!--              <v-btn class="pa-0 btn-transparent" @click="showSearchBox">-->
+              <!--                <span class="fa-solid fa-magnifying-glass search-icon"></span>-->
+              <!--              </v-btn>-->
               <template>
                 <v-row justify="center">
                   <v-dialog
@@ -66,7 +70,9 @@
                         v-on="on"
                         class="pa-0 btn-transparent"
                       >
-                        <span class="fa-solid fa-magnifying-glass search-icon"></span>
+                        <span
+                          class="fa-solid fa-magnifying-glass search-icon"
+                        ></span>
                       </v-btn>
                     </template>
                     <v-card class="mobile-card-dialog-search">
@@ -80,7 +86,14 @@
                       </v-btn>
                       <div class="ml-3 px-2 search-box">
                         <v-text-field
-                          class="py-1 my-0 search-field d-flex align-sm-center align-center search-icon-placeholder"
+                          class="
+                            py-1
+                            my-0
+                            search-field
+                            d-flex
+                            align-sm-center align-center
+                            search-icon-placeholder
+                          "
                           placeholder="جستجو کنید..."
                         >
                         </v-text-field>
@@ -90,54 +103,90 @@
                       </div>
                       <!--   category    -->
                       <section class="category-sec">
-                        <nuxt-link to="" class="d-flex align-center test-cat mb-5">
+                        <nuxt-link
+                          to=""
+                          class="d-flex align-center test-cat mb-5"
+                        >
                           <div>
-                            <span class="icong-test icon ml-5 d-flex align-center"></span>
+                            <span
+                              class="icong-test icon ml-5 d-flex align-center"
+                            ></span>
                           </div>
                           <div class="responsive-search-item">
                             <p>نمونه سوال</p>
                             <p>50,000 +</p>
                           </div>
                         </nuxt-link>
-                        <nuxt-link to="" class="d-flex align-center learnfile-cat mb-5">
+                        <nuxt-link
+                          to=""
+                          class="d-flex align-center learnfile-cat mb-5"
+                        >
                           <div>
-                            <span class="icong-learnfiles icon ml-5 d-flex align-center"></span>
+                            <span
+                              class="
+                                icong-learnfiles
+                                icon
+                                ml-5
+                                d-flex
+                                align-center
+                              "
+                            ></span>
                           </div>
                           <div class="responsive-search-item">
                             <p>محتوای آموزشی</p>
                             <p>30,000 +</p>
                           </div>
                         </nuxt-link>
-                        <nuxt-link to="" class="d-flex align-center qa-cat mb-5">
+                        <nuxt-link
+                          to=""
+                          class="d-flex align-center qa-cat mb-5"
+                        >
                           <div>
-                            <span class="icong-qa icon ml-5 d-flex align-center"></span>
+                            <span
+                              class="icong-qa icon ml-5 d-flex align-center"
+                            ></span>
                           </div>
                           <div class="responsive-search-item">
                             <p>پرسش و پاسخ</p>
                             <p>20,000 +</p>
                           </div>
                         </nuxt-link>
-                        <nuxt-link to="" class="d-flex align-center azmoon-cat mb-5">
+                        <nuxt-link
+                          to=""
+                          class="d-flex align-center azmoon-cat mb-5"
+                        >
                           <div>
-                            <span class="icong-azmoon icon ml-5 d-flex align-center"></span>
+                            <span
+                              class="icong-azmoon icon ml-5 d-flex align-center"
+                            ></span>
                           </div>
                           <div class="responsive-search-item">
                             <p>آزمون آنلاین</p>
                             <p>5,000 +</p>
                           </div>
                         </nuxt-link>
-                        <nuxt-link to="" class="d-flex align-center blog-cat mb-5">
+                        <nuxt-link
+                          to=""
+                          class="d-flex align-center blog-cat mb-5"
+                        >
                           <div>
-                            <span class="icong-blog icon ml-5 d-flex align-center"></span>
+                            <span
+                              class="icong-blog icon ml-5 d-flex align-center"
+                            ></span>
                           </div>
                           <div class="responsive-search-item">
                             <p>درستانه آموزشی</p>
                             <p>1,500 +</p>
                           </div>
                         </nuxt-link>
-                        <nuxt-link to="" class="d-flex align-center school-cat mb-5">
+                        <nuxt-link
+                          to=""
+                          class="d-flex align-center school-cat mb-5"
+                        >
                           <div>
-                            <span class="icong-school icon ml-5 d-flex align-center"></span>
+                            <span
+                              class="icong-school icon ml-5 d-flex align-center"
+                            ></span>
                           </div>
                           <div class="responsive-search-item">
                             <p>مدرسه یاب</p>
@@ -151,7 +200,14 @@
               </template>
             </div>
           </div>
-          <div class=" d-flex align-center justify-space-between logo-search-content">
+          <div
+            class="
+              d-flex
+              align-center
+              justify-space-between
+              logo-search-content
+            "
+          >
             <div class="ml-3 px-2 header-search desktop-search">
               <v-text-field
                 class="py-1 my-0 search-field main-search-icon"
@@ -184,25 +240,25 @@ export default {
       sidebar: false,
       dialog: false,
       items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' },
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me" },
+        { title: "Click Me 2" },
       ],
       menuItems: [
         {
           title: "خانه",
           path: "./home",
-          icon: "fa-house-chimney"
+          icon: "fa-house-chimney",
         },
         {
           title: "آشنایی",
           path: "",
           icon: "fa-caret-down",
           subMenuList: [
-            {title:'قوانین و مقررات', path: ''},
-            {title:'پرسش های متداول', path: ''},
-            {title:'راهنمای عضویت', path: ''},
+            { title: "قوانین و مقررات", path: "" },
+            { title: "پرسش های متداول", path: "" },
+            { title: "راهنمای عضویت", path: "" },
           ],
         },
         {
@@ -210,9 +266,9 @@ export default {
           path: "",
           icon: "fa-caret-down",
           subMenuList: [
-            {title:'المپیاد ریاضی', path: ''},
-            {title:'المپیاد فیزیک', path: ''},
-            {title:'المپیاد شیمی', path: ''},
+            { title: "المپیاد ریاضی", path: "" },
+            { title: "المپیاد فیزیک", path: "" },
+            { title: "المپیاد شیمی", path: "" },
           ],
         },
         {
@@ -240,8 +296,8 @@ export default {
   },
   methods: {
     showSearchBox() {
-      this.searchBox = true
-    }
-  }
+      this.searchBox = true;
+    },
+  },
 };
 </script>

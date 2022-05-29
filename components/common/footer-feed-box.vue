@@ -64,7 +64,7 @@
           class="add-file"
         >
           <v-list-item class="d-flex justify-center">
-            <i class="fa-solid fa-plus"></i>
+            <i class="fa-solid fa-plus "></i>
           </v-list-item>
         </nuxt-link>
       </div>

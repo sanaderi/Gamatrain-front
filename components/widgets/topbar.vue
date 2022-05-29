@@ -8,8 +8,8 @@
           </v-avatar>
         </nuxt-link>
 
-        <nuxt-link to="" class="d-flex align-center mr-3 ml-5">
-          <i class="fa-regular fa-bell fa-xl topbar-bell"></i>
+        <nuxt-link to="" class="d-flex align-center mr-3 ml-5 ">
+          <i class="fa-regular fa-bell fa-xl topbar-bell d-none d-sm-block"></i>
         </nuxt-link>
         <!--  Start:  Search and logo in header  -->
         <div

@@ -330,6 +330,20 @@ body {
 
     // category
     .category {
+      .category-more {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        background: $cat-icon;
+      }
+      .cat-more-icon {
+        color: $gray25;
+        font-size: 4rem;
+      }
+      .cat-more-p {
+        font-size: 0.9rem;
+        color: $gray45;
+      }
       border: none;
       box-shadow: none;
       .icon {
@@ -344,6 +358,9 @@ body {
       }
 
       .test {
+        max-width: 33%;
+        display: flex;
+        justify-content: center;
         .icon,
         .v-list-item__title {
           color: $category-test;
@@ -360,6 +377,9 @@ body {
       }
 
       .content {
+        max-width: 33%;
+        display: flex;
+        justify-content: center;
         .icon,
         .v-list-item__title {
           color: $category-content;
@@ -376,6 +396,9 @@ body {
       }
 
       .faq {
+        max-width: 33%;
+        display: flex;
+        justify-content: center;
         .icon,
         .v-list-item__title {
           color: $category-faq;
@@ -392,6 +415,9 @@ body {
       }
 
       .exam {
+        max-width: 33%;
+        display: flex;
+        justify-content: center;
         .icon,
         .v-list-item__title {
           color: $category-azmoon;
@@ -408,6 +434,9 @@ body {
       }
 
       .textbook {
+        max-width: 33%;
+        display: flex;
+        justify-content: center;
         .icon,
         .v-list-item__title {
           color: $category-textbook;
@@ -424,6 +453,9 @@ body {
       }
 
       .school {
+        max-width: 33%;
+        display: flex;
+        justify-content: center;
         .icon,
         .v-list-item__title {
           color: $category-school;
@@ -440,6 +472,9 @@ body {
       }
 
       .tutor {
+        max-width: 33%;
+        display: flex;
+        justify-content: center;
         .icon,
         .v-list-item__title {
           color: $category-tutor;
@@ -495,6 +530,55 @@ body {
     }
 
     // grade-card
+    .grade__item1 {
+      background: $grade__item1 !important;
+    }
+    .grade__item2 {
+      background: $grade__item2 !important;
+    }
+    .grade__item3 {
+      background: $grade__item3 !important;
+    }
+    .grade__item4 {
+      background: $grade__item4 !important;
+    }
+    .grade__item5 {
+      background: $grade__item5 !important;
+    }
+    .grade__item6 {
+      background: $grade__item6 !important;
+    }
+    .grade__item7 {
+      background: $grade__item7 !important;
+    }
+    .grade__item8 {
+      background: $grade__item8 !important;
+    }
+    .grade__item9 {
+      background: $grade__item9 !important;
+    }
+    .grade__item10 {
+      background: $grade__item10 !important;
+    }
+    .grade__item11 {
+      background: $grade__item11 !important;
+    }
+    .grade__item12 {
+      background: $grade__item12 !important;
+    }
+    .res-update p {
+      font-size: 1.2rem;
+      color: $gray8;
+      letter-spacing: 1px;
+    }
+    .showmore {
+      width: 100%;
+    }
+    .showless-span,
+    .showmore-span {
+      font-size: 1.2rem;
+      color: $gray4;
+    }
     .grade-card {
       padding: 20px !important;
       box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
@@ -810,9 +894,53 @@ body {
     }
 
     // footer feed card
-    .responsive-feed {
+    .feed-card {
       box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+      border-radius: 4px;
+    }
+    .feed-tab-title {
+      color: $gray45;
+      font-size: 1.2rem;
+    }
+    .feed-name,
+    .date {
+      font-size: 1rem !important;
+    }
+
+    .add-file-tab {
+      width: 4rem;
+      height: 4rem;
+      background: $green4;
+      border-radius: 10px;
+    }
+    .add-ask-tab {
+      width: 4rem;
+      height: 4rem;
+      background: $orange5;
+      border-radius: 10px;
+    }
+    .add-file-icon {
+      color: $white;
+      font-size: 1.4rem;
+    }
+    .add-ask-icon {
+      font-size: 1.4rem;
+      color: $white;
+    }
+    .feed-file-more {
+      font-size: 1.4rem;
+      color: $green4;
+    }
+    .feed-ask-more {
+      font-size: 1.4rem;
+      color: $orange5;
+    }
+    .feed-icon {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 1.2rem;
+      background-color: #000000;
     }
     .third-feed-box {
       box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
@@ -829,6 +957,7 @@ body {
       .feed-name {
         color: $gray4;
       }
+
       height: 72.5rem;
       .feed-header {
         font-size: 1.5rem;
