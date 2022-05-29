@@ -1,8 +1,6 @@
 <template>
   <v-app>
     <header1 />
-    <popular-hashtags />
-    <category />
     <div>
        <Nuxt />
     </div>

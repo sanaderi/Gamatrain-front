@@ -1,7 +1,37 @@
 <template>
   <div class="home-page-content">
+    <v-divider></v-divider>
+    <div
+      class="d-flex align-center justify-space-between logo-search-content mx-5 d-flex d-sm-none"
+    >
+      <div class="px-2 header-search mobile-res-search my-4">
+        <v-btn class="px-0 btn-transparent search-btn-icon ml-2">
+          <v-icon class="search-icon">mdi-magnify</v-icon>
+        </v-btn>
+        <v-divider vertical></v-divider>
+        <v-text-field
+          class="py-1 my-0 search-field main-search-icon mr-2"
+          placeholder="جستجو..."
+        >
+        </v-text-field>
+      </div>
+    </div>
+    <section class="banner-sec">
+      <v-carousel class="index-banner">
+        <v-carousel-item
+          v-for="(item, i) in items"
+          cover
+          :key="i"
+          :src="require('@/assets/images/' + item.src)"
+          reverse-transition="fade-transition"
+          transition="fade-transition"
+          class="banner"
+        ></v-carousel-item>
+      </v-carousel>
+    </section>
+    <Category />
     <!--  Start: search grade  -->
-    <section class="d-none d-sm-block search-sec ">
+    <section class="d-none d-sm-block search-sec">
       <v-container>
         <div class="box search-container">
           <search
@@ -19,9 +49,8 @@
       </v-container>
     </section>
     <!--  End: search  -->
-
-    <!--  Start: Grades list  -->
-    <section class="grades-list">
+    <!-- Start:grade list desktop -->
+    <section class="grades-list d-sm-flex d-none">
       <v-container>
         <v-row class="justify-space-between mx-0 grade-list">
           <v-card
@@ -35,12 +64,21 @@
             <!--              class="mx-auto"-->
             <!--            >-->
             <v-card-title class="d-block pa-0 pb-2">
-              <h2 :class="'grade-title grade-title' + (index + 1)" class="mb-2">
-                <span :class="'label-tag label-tag' + (index + 1)">{{
-                  index + 1
-                }}</span>
-                {{ grade.title }}
-              </h2>
+              <div class="d-flex justify-space-between align-item">
+                <h2
+                  :class="'grade-title grade-title' + (index + 1)"
+                  class="mb-2"
+                >
+                  <span :class="'label-tag label-tag' + (index + 1)">{{
+                    index + 1
+                  }}</span>
+                  {{ grade.title }}
+                </h2>
+                <v-text class="d-flex align-center res-update d-sm-none">
+                  <i class="fa-solid fa-calendar-days mx-3"></i>
+                  <p>27فروردین</p>
+                </v-text>
+              </div>
               <p class="d-inline-block">
                 <nuxt-link
                   v-for="(item, index) in grade.summeryContent"
@@ -110,13 +148,31 @@
                   <div class="text-left stat" v-text="item.stat"></div>
                 </div>
               </nuxt-link>
-              
             </v-card-text>
             <v-divider class="grade-divider"></v-divider>
-            <v-card-text class="pt-3 pb-2 px-0 grade-card__update">
-              <div class="d-flex align-center footer-card card-footer">
+            <v-card-text
+              class="
+                pt-3
+                pb-2
+                px-0
+                grade-card__update
+                d-sm-flex d-none
+                justify-end
+              "
+            >
+              <div
+                class="
+                  d-flex
+                  align-center
+                  footer-card
+                  card-footer
+                  justify-end
+                  mt-2
+                  x
+                "
+              >
                 <span class="fa-solid fa-calendar-days ml-2"></span>
-                <span class="ml-1">بروزرسانی: </span>
+                <span class="ml-1">آخرین بروزرسانی: </span>
                 <span>{{ grade.update }}</span>
               </div>
             </v-card-text>
@@ -125,10 +181,275 @@
         </v-row>
       </v-container>
     </section>
+    <!--  Start: Grades list mobile -->
+    <section class="grades-list d-sm-none d-flex">
+      <v-container>
+        <v-row class="justify-space-between mx-0 grade-list" v-if="showLess">
+          <v-card
+            v-for="(grade, index) in gradeList.slice(0, 3)"
+            :key="index"
+            :class="
+              'col-md-3 col-sm-6 col-12 grade-card grade-card' + (index + 1)
+            "
+          >
+            <!--            <v-card-->
+            <!--              class="mx-auto"-->
+            <!--            >-->
+            <v-card-title class="d-block pa-0 pb-2">
+              <div class="d-flex justify-space-between align-item">
+                <h2
+                  :class="'grade-title grade-title' + (index + 1)"
+                  class="mb-2"
+                >
+                  <span :class="'label-tag label-tag' + (index + 1)">{{
+                    index + 1
+                  }}</span>
+                  {{ grade.title }}
+                </h2>
+                <v-text class="d-flex align-center res-update d-sm-none">
+                  <i class="fa-solid fa-calendar-days mx-3"></i>
+                  <p>27فروردین</p>
+                </v-text>
+              </div>
+              <p class="d-inline-block">
+                <nuxt-link
+                  v-for="(item, index) in grade.summeryContent"
+                  :key="index"
+                  :to="item.to"
+                  class="content grade-list-lessons"
+                >
+                  {{ item.content }}،
+                </nuxt-link>
+                ...
+              </p>
+              <span
+                class="btn-transparent more-content pointer"
+                @click="grade.showMore = !grade.showMore"
+                >بیشتر</span
+              >
+              <p v-if="grade.showMore" class="total-content">
+                <nuxt-link
+                  v-for="(item, index) in grade.totalContent"
+                  :key="index"
+                  :to="item.to"
+                  class="content"
+                >
+                  {{ item.content }}،
+                </nuxt-link>
+              </p>
+            </v-card-title>
+            <v-divider class="my-5"></v-divider>
+
+            <v-card-text class="pa-0 grade-items mb-3">
+              <nuxt-link
+                to="grade.link"
+                v-for="item in grade.cat"
+                :key="item.title"
+                :class="
+                  'd-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item' +
+                  (index + 1)
+                "
+              >
+                <div class="py-0 d-flex align-center right grade__item-title">
+                  <v-icon
+                    v-if="item.title === 'نمونه سوال'"
+                    class="ml-1 icon icong-test"
+                  ></v-icon>
+                  <v-icon
+                    v-else-if="item.title === 'فایل آموزشی'"
+                    class="ml-1 icon icong-learnfiles"
+                  ></v-icon>
+                  <v-icon
+                    v-else-if="item.title === 'پرسش و پاسخ'"
+                    class="ml-1 icon icong-qa"
+                  ></v-icon>
+                  <v-icon
+                    v-else-if="item.title === 'آزمون آنلاین'"
+                    class="ml-1 icon icong-azmoon"
+                  ></v-icon>
+                  <span
+                    class="text-center type my-2 grade-item__text"
+                    v-text="item.title"
+                  ></span>
+                </div>
+                <div class="py-1 left">
+                  <div class="text-left stat" v-text="item.stat"></div>
+                </div>
+              </nuxt-link>
+            </v-card-text>
+            <v-divider class="grade-divider"></v-divider>
+            <v-card-text
+              class="
+                pt-3
+                pb-2
+                px-0
+                grade-card__update
+                d-sm-flex d-none
+                justify-end
+              "
+            >
+              <div
+                class="
+                  d-flex
+                  align-center
+                  footer-card
+                  card-footer
+                  justify-end
+                  mt-2
+                  x
+                "
+              >
+                <span class="fa-solid fa-calendar-days ml-2"></span>
+                <span class="ml-1">آخرین بروزرسانی: </span>
+                <span>{{ grade.update }}</span>
+              </div>
+            </v-card-text>
+
+            <!--            </v-card>-->
+          </v-card>
+        </v-row>
+        <v-row v-else class="justify-space-between mx-0 grade-list">
+          <v-card
+            v-for="(grade, index) in gradeList"
+            :key="index"
+            :class="
+              'col-md-3 col-sm-6 col-12 grade-card grade-card' + (index + 1)
+            "
+          >
+            <!--            <v-card-->
+            <!--              class="mx-auto"-->
+            <!--            >-->
+            <v-card-title class="d-block pa-0 pb-2">
+              <div class="d-flex justify-space-between align-item">
+                <h2
+                  :class="'grade-title grade-title' + (index + 1)"
+                  class="mb-2"
+                >
+                  <span :class="'label-tag label-tag' + (index + 1)">{{
+                    index + 1
+                  }}</span>
+                  {{ grade.title }}
+                </h2>
+                <v-text class="d-flex align-center res-update d-sm-none">
+                  <i class="fa-solid fa-calendar-days mx-3"></i>
+                  <p>27فروردین</p>
+                </v-text>
+              </div>
+              <p class="d-inline-block">
+                <nuxt-link
+                  v-for="(item, index) in grade.summeryContent"
+                  :key="index"
+                  :to="item.to"
+                  class="content grade-list-lessons"
+                >
+                  {{ item.content }}،
+                </nuxt-link>
+                ...
+              </p>
+              <span
+                class="btn-transparent more-content pointer"
+                @click="grade.showMore = !grade.showMore"
+                >بیشتر</span
+              >
+              <p v-if="grade.showMore" class="total-content">
+                <nuxt-link
+                  v-for="(item, index) in grade.totalContent"
+                  :key="index"
+                  :to="item.to"
+                  class="content"
+                >
+                  {{ item.content }}،
+                </nuxt-link>
+              </p>
+            </v-card-title>
+            <v-divider class="my-5"></v-divider>
+
+            <v-card-text class="pa-0 grade-items mb-3">
+              <nuxt-link
+                to="grade.link"
+                v-for="item in grade.cat"
+                :key="item.title"
+                :class="
+                  'd-flex align-center justify-space-between  pa-0 pb-0 grade__item grade__item' +
+                  (index + 1)
+                "
+              >
+                <div class="py-0 d-flex align-center right grade__item-title">
+                  <v-icon
+                    v-if="item.title === 'نمونه سوال'"
+                    class="ml-1 icon icong-test"
+                  ></v-icon>
+                  <v-icon
+                    v-else-if="item.title === 'فایل آموزشی'"
+                    class="ml-1 icon icong-learnfiles"
+                  ></v-icon>
+                  <v-icon
+                    v-else-if="item.title === 'پرسش و پاسخ'"
+                    class="ml-1 icon icong-qa"
+                  ></v-icon>
+                  <v-icon
+                    v-else-if="item.title === 'آزمون آنلاین'"
+                    class="ml-1 icon icong-azmoon"
+                  ></v-icon>
+                  <span
+                    class="text-center type my-2 grade-item__text"
+                    v-text="item.title"
+                  ></span>
+                </div>
+                <div class="py-1 left">
+                  <div class="text-left stat" v-text="item.stat"></div>
+                </div>
+              </nuxt-link>
+            </v-card-text>
+            <v-divider class="grade-divider"></v-divider>
+            <v-card-text
+              class="
+                pt-3
+                pb-2
+                px-0
+                grade-card__update
+                d-sm-flex d-none
+                justify-end
+              "
+            >
+              <div
+                class="
+                  d-flex
+                  align-center
+                  footer-card
+                  card-footer
+                  justify-end
+                  mt-2
+                  x
+                "
+              >
+                <span class="fa-solid fa-calendar-days ml-2"></span>
+                <span class="ml-1">آخرین بروزرسانی: </span>
+                <span>{{ grade.update }}</span>
+              </div>
+            </v-card-text>
+
+            <!--            </v-card>-->
+          </v-card>
+        </v-row>
+        <button
+          class="showmore d-flex justify-center mt-4 mb-12"
+          @click="showLess = !showLess"
+        >
+          <span v-if="showLess" class="showmore-span">
+            مشاهده بیشتر
+            <i class="fa-solid fa-chevron-down mx-2"></i>
+          </span>
+          <span v-else class="showless-span">
+            مشاهده کمتر<i class="fa-solid fa-chevron-up mx-2"></i>
+          </span>
+        </button>
+      </v-container>
+    </section>
     <!--  End: Grade list  -->
 
     <!--  Start: Site feature  -->
-    <section class="site-feature">
+    <!-- <section class="site-feature">
       <v-container>
         <div class="box">
           <v-row>
@@ -151,7 +472,7 @@
                   <v-card-text>
                     <v-list>
                       <v-list-item
-                        v-for="detail in feature.details"
+                        v-for="(detail,index) in feature.details"
                         :key="index"
                         class="mb-2 feature-detail"
                       >
@@ -165,11 +486,11 @@
           </v-row>
         </div>
       </v-container>
-    </section>
+    </section> -->
     <!--  End: Site feature  -->
 
     <!--  Start: feed box  -->
-    <section class="feed-box">
+    <section class="feed-box d-none d-sm-flex">
       <v-container>
         <v-row>
           <v-col
@@ -181,15 +502,79 @@
           >
             <footer-feed-box :feed="feed"></footer-feed-box>
           </v-col>
+          <v-col cols="12" md="4" sm="4" class="third-feed-box mt-3 pa-0">
+            <div class="feed-header">
+              <img
+                :src="require('@/assets/images/' + thirdFeedBoxIcon)"
+                alt=""
+                class="mx-2"
+                width="28"
+              />
+              آخرین اخبار
+            </div>
+
+            <div class="d-flex flex-column pa-3">
+              <div
+                class="feed-box-item d-flex"
+                v-for="feed in thirdFeedBox"
+                :key="feed"
+              >
+                <div class="feedBoxImg">
+                  <img :src="require('@/assets/images/' + feed.img)" alt="" />
+                </div>
+                <div
+                  class="
+                    feed-content
+                    pa-3
+                    d-flex
+                    flex-column
+                    justify-space-between
+                  "
+                >
+                  <p>
+                    {{ feed.para }}
+                  </p>
+                  <div class="d-flex justify-space-between">
+                    <div class="feed-title">
+                      <i class="fa-solid fa-grip-vertical ml-2"></i>
+                      {{ feed.title }}
+                    </div>
+                    <div class="feed-date">
+                      <i class="fa-solid fa-calendar-days ml-2"></i>
+                      {{ feed.date }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <v-divider></v-divider>
+            </div>
+            <div class="feed-footer d-flex align-center pa-3">
+              <nuxt-link to="" class="pb-0 feed-more mr-4"
+                >موارد بیشتر</nuxt-link
+              >
+            </div>
+          </v-col>
         </v-row>
       </v-container>
     </section>
-    <!--  Start: Site feature  -->
+    <!--  End: Feed box  -->
+    <!-- Start: Feedtabs respons -->
+    <FeedTab />
+
+    <!-- End: Feedtabs respons -->
 
     <!--  Start: Main stats  -->
     <section class="stat-sec my-8">
       <v-container>
-        <div class="d-flex justify-center align-center flex-wrap stat-holder">
+        <div
+          class="
+            d-flex
+            justify-space-between
+            align-center
+            flex-wrap
+            stat-holder
+          "
+        >
           <div
             v-for="(item, index) in statList"
             :key="index"
@@ -203,8 +588,11 @@
               stat-item
             "
           >
-            <span class="stat-value">{{ item.value }} +</span>
+            <span class="stat-icon d-flex align-center justify-center">
+              <i :class="'fa solid ' + item.icon"> </i>
+            </span>
             <span class="stat-label">{{ item.label }}</span>
+            <span class="stat-value">{{ item.value }} +</span>
           </div>
         </div>
       </v-container>
@@ -212,11 +600,11 @@
     <!--  End: Main stats  -->
 
     <!--  Start: Last views  -->
-    <section class="last-view-sec">
+    <!-- <section class="last-view-sec">
       <v-container>
         <last-views></last-views>
       </v-container>
-    </section>
+    </section> -->
     <!--  End: Last views   -->
   </div>
 </template>
@@ -226,6 +614,8 @@ import GardeCard from "./index/garde-card";
 import Search from "./index/search";
 import FooterFeedBox from "../components/common/footer-feed-box";
 import LastViews from "../components/common/last-views";
+import Category from "~/components/common/category.vue";
+import FeedTab from "../components/common/feedTab.vue";
 
 export default {
   components: {
@@ -233,9 +623,60 @@ export default {
     FooterFeedBox,
     Search,
     GardeCard,
-    // Slider
+    Category,
+    FeedTab,
   },
   data: () => ({
+    less: true,
+    showLess: true,
+    thirdFeedBoxIcon: "News.png",
+    thirdFeedBox: [
+      {
+        img: "laptop.png",
+        para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
+        title: "اموزشی",
+        date: "27 فروردین",
+      },
+      {
+        img: "laptop.png",
+        para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
+        title: "اموزشی",
+        date: "27 فروردین",
+      },
+      {
+        img: "laptop.png",
+        para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
+        title: "اموزشی",
+        date: "27 فروردین",
+      },
+      {
+        img: "laptop.png",
+        para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
+        title: "اموزشی",
+        date: "27 فروردین",
+      },
+      {
+        img: "laptop.png",
+        para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
+        title: "اموزشی",
+        date: "27 فروردین",
+      },
+    ],
+
+    items: [
+      {
+        src: "slider.png",
+      },
+      {
+        src: "slider.png",
+      },
+      {
+        src: "slider.png",
+      },
+      {
+        src: "slider.png",
+      },
+    ],
     items1: ["همه", "دبستان", "متوسطه"],
     items2: ["همه", "دبستان", "متوسطه"],
     items3: ["همه", "دبستان", "متوسطه"],
@@ -766,27 +1207,31 @@ export default {
         icon: "learnfiles",
         contentItemList: [
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای",
-            name: "توسط علی رجبی",
+            avatar: "dexter-morse2.png",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط رضا رجبی",
+            avatar: "dexter-morse2.png",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ",
-            name: "توسط مهدی رجبی",
+            avatar: "dexter-morse2.png",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط اکبر رجبی",
+            avatar: "dexter-morse2.png",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
         ],
@@ -797,70 +1242,79 @@ export default {
         icon: "qa",
         contentItemList: [
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ",
-            name: "توسط علی رجبی",
+            avatar: "dexter-morse2.png",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط رضا رجبی",
+            avatar: "dexter-morse2.png",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ",
-            name: "توسط مهدی رجبی",
+            avatar: "dexter-morse2.png",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
           {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط اکبر رجبی",
+            avatar: "dexter-morse2.png",
+            title:
+              "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+            name: "علیرضا داوودی",
             date: "16 فروردین",
           },
         ],
       },
-      {
-        class: "news",
-        header: " آخرین اخبار",
-        icon: "news",
-        contentItemList: [
-          {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ",
-            name: "توسط علی رجبی",
-            date: "16 فروردین",
-          },
-          {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط رضا رجبی",
-            date: "16 فروردین",
-          },
-          {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-            title: "پاورپوینت تدریس ریاضی اول دبستان | تم 20: آموزش عددهای ",
-            name: "توسط مهدی رجبی",
-            date: "16 فروردین",
-          },
-          {
-            avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-            title: "لقمه آموزشی فیزیک دوازدهم | انواع واپاشی هسته‌ای و ",
-            name: "توسط اکبر رجبی",
-            date: "16 فروردین",
-          },
-        ],
-      },
+      // {
+      //   class: "news",
+      //   header: " آخرین اخبار",
+      //   icon: "news",
+      //   contentItemList: [
+      //     {
+      //       avatar: "dexter-morse2.png",
+      //       title:
+      //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+      //       name: "علیرضا داوودی",
+      //       date: "16 فروردین",
+      //     },
+      //     {
+      //       avatar: "dexter-morse2.png",
+      //       title:
+      //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+      //       name: "علیرضا داوودی",
+      //       date: "16 فروردین",
+      //     },
+      //     {
+      //       avatar: "dexter-morse2.png",
+      //       title:
+      //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+      //       name: "علیرضا داوودی",
+      //       date: "16 فروردین",
+      //     },
+      //     {
+      //       avatar: "dexter-morse2.png",
+      //       title:
+      //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
+      //       name: "علیرضا داوودی",
+      //       date: "16 فروردین",
+      //     },
+      //   ],
+      // },
     ],
+
     statList: [
-      { label: "مدرسه", value: "130,000" },
-      { label: "دبیر", value: "300,000" },
-      { label: "دانش آموز", value: "1,500,000" },
-      { label: "نمونه سوال", value: "50,000" },
-      { label: "پاورپوینت", value: "30,000" },
-      { label: "آزمون آنلاین", value: "5,000" },
+      { label: "مدرسه", value: "130,000", icon: "fa-graduation-cap" },
+      { label: "دبیر", value: "300,000", icon: "fa-graduation-cap" },
+      { label: "دانش آموز", value: "1,500,000", icon: "fa-graduation-cap" },
+      { label: "نمونه سوال", value: "50,000", icon: "fa-graduation-cap" },
+      { label: "پاورپوینت", value: "30,000", icon: "fa-graduation-cap" },
+      { label: "آزمون آنلاین", value: "5,000", icon: "fa-graduation-cap" },
     ],
   }),
 };
