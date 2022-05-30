@@ -67,6 +67,9 @@ body {
       background-image: none;
     }
 
+    .theme--light.v-text-field > .v-input__control > .v-input__slot::before {
+      display: none;
+    }
     .v-btn.v-size--default {
       font-size: $fontsize2;
       letter-spacing: unset;
@@ -236,7 +239,32 @@ body {
             padding-left: 0;
           }
         }
-
+        .main-sidebar {
+          padding: 1rem;
+        }
+        .sidemenu-profile {
+          height: 13rem;
+          .wallet {
+            color: $gray4;
+          }
+          .wallet-balance {
+            color: $gray4;
+          }
+          .profile-name {
+            color: $gray45;
+            font-size: 1.8rem;
+            font-weight: 400;
+          }
+        }
+        .sidemenu-item {
+          color: $gray4 !important;
+        }
+        .logout-item {
+          color: $gray45;
+        }
+        .side-icon {
+          color: $gray4;
+        }
         .mobile-search {
           display: none;
         }
@@ -258,7 +286,9 @@ body {
       }
       .search-btn-icon {
         min-width: 0 !important;
+        margin: 0;
       }
+
       .header-search {
         &.desktop-search {
           border: 0.1rem solid rgba(34, 36, 38, 0.15);
@@ -270,10 +300,6 @@ body {
           display: flex;
           align-items: center;
           height: 3.5rem;
-
-          .v-text-field > .v-input__control > .v-input__slot::before {
-            border: 0;
-          }
 
           .v-input__slot {
             margin-bottom: 0;

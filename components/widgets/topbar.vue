@@ -1,10 +1,10 @@
 <template>
-  <div class="topbar">
+  <div class="topbar d-none d-sm-block">
     <v-container class="d-flex align-center justify-space-between topbar-items">
       <div class="d-flex align-center">
         <nuxt-link to="">
           <v-avatar size="32">
-            <img :src="require('@/assets/images/' + avatar)" alt="John" />
+            <img :src="require('@/assets/images/' + avatar)" alt="John"  />
           </v-avatar>
         </nuxt-link>
 
@@ -22,7 +22,7 @@
           "
         >
           <div class="px-2 header-search desktop-search">
-            <v-btn class="px-0 btn-transparent search-btn-icon ml-2">
+            <v-btn class="px-0 btn-transparent search-btn-icon">
               <v-icon class="search-icon">mdi-magnify</v-icon>
             </v-btn>
             <v-divider vertical></v-divider>

@@ -47,11 +47,7 @@
                 </v-btn>
               </v-toolbar-items>
             </v-app-bar>
-            <nuxt-link to="" class="d-flex align-center mr-3 ml-5">
-              <i
-                class="fa-regular fa-bell fa-xl topbar-bell d-none d-sm-block"
-              ></i>
-            </nuxt-link>
+
             <div class="mobile-search">
               <!--              <v-btn class="pa-0 btn-transparent" @click="showSearchBox">-->
               <!--                <span class="fa-solid fa-magnifying-glass search-icon"></span>-->
@@ -200,6 +196,7 @@
               </template>
             </div>
           </div>
+
           <div
             class="
               d-flex
