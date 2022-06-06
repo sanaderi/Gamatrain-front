@@ -74,7 +74,7 @@
             <!--            >-->
             <v-card-title class="d-block pa-0 pb-2">
               <div class="d-flex justify-space-between align-item">
-                <h2
+                <nuxt-link to=""
                   :class="'grade-title grade-title' + (index + 1)"
                   class="mb-2"
                 >
@@ -82,7 +82,7 @@
                     index + 1
                   }}</span>
                   {{ grade.title }}
-                </h2>
+                </nuxt-link>
                 <v-text class="d-flex align-center res-update d-sm-none">
                   <i class="fa-solid fa-calendar-days mx-3"></i>
                   <p>27فروردین</p>
@@ -499,7 +499,7 @@
     <!--  End: Site feature  -->
 
     <!--  Start: feed box  -->
-    <section class="feed-box d-none d-sm-flex">
+    <section class="feed-box d-none d-md-flex">
       <v-container>
         <v-row>
           <v-col
@@ -573,7 +573,8 @@
     <!-- End: Feedtabs respons -->
 
     <!--  Start: Main stats  -->
-    <section class="stat-sec my-8">
+    <!-- <section class="stat-sec my-8">
+
       <v-container>
         <div
           class="
@@ -582,8 +583,9 @@
             align-center
             flex-wrap
             stat-holder
+            mt-5
           "
-        >
+         >
           <div
             v-for="(item, index) in statList"
             :key="index"
@@ -605,8 +607,9 @@
           </div>
         </div>
       </v-container>
-    </section>
-    <!--  End: Main stats  -->
+    </section> -->
+   <Slider/>
+   <!--  End: Main stats  -->
 
     <!--  Start: Last views  -->
     <!-- <section class="last-view-sec">
@@ -616,6 +619,7 @@
     </section> -->
     <!--  End: Last views   -->
   </div>
+  
 </template>
 
 <script>
@@ -625,6 +629,7 @@ import FooterFeedBox from "../components/common/footer-feed-box";
 import LastViews from "../components/common/last-views";
 import Category from "~/components/common/category.vue";
 import FeedTab from "../components/common/feedTab.vue";
+import Slider from "../components/common/slider.vue"
 
 export default {
   components: {
@@ -634,7 +639,8 @@ export default {
     GardeCard,
     Category,
     FeedTab,
-  },
+    Slider,
+},
   data: () => ({
     less: true,
     showLess: true,
@@ -714,6 +720,7 @@ export default {
           { content: "زبان", to: "" },
           { content: "فناوری", to: "" },
           { content: "فرهنگ", to: "" },
+          
         ],
         link: "",
         cat: [
@@ -746,6 +753,30 @@ export default {
         ],
         showMore: false,
         totalContent: [
+          { content: "پیام های آسمانی", to: "" },
+          { content: "قرآن", to: "" },
+          { content: "عربی", to: "" },
+          { content: "هنر", to: "" },
+          { content: "مشاوره", to: "" },
+          { content: "زبان", to: "" },
+          { content: "فناوری", to: "" },
+          { content: "فرهنگ", to: "" },
+          { content: "پیام های آسمانی", to: "" },
+          { content: "قرآن", to: "" },
+          { content: "عربی", to: "" },
+          { content: "هنر", to: "" },
+          { content: "مشاوره", to: "" },
+          { content: "زبان", to: "" },
+          { content: "فناوری", to: "" },
+          { content: "فرهنگ", to: "" },
+          { content: "پیام های آسمانی", to: "" },
+          { content: "قرآن", to: "" },
+          { content: "عربی", to: "" },
+          { content: "هنر", to: "" },
+          { content: "مشاوره", to: "" },
+          { content: "زبان", to: "" },
+          { content: "فناوری", to: "" },
+          { content: "فرهنگ", to: "" },
           { content: "پیام های آسمانی", to: "" },
           { content: "قرآن", to: "" },
           { content: "عربی", to: "" },
