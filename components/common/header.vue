@@ -20,7 +20,7 @@
                     sidemenu-profile
                     d-flex
                     flex-column
-                    justify-space-between
+                    justify-space-around
                     mb-5
                   "
                 >
@@ -42,7 +42,7 @@
                         <p class="mx-3 wallet-balance">{{ walletBalance }}</p>
                       </div>
                       <nuxt-link to="">
-                        <v-icon>mdi-arrow-left-thick</v-icon>
+                        <i class="fa-solid fa-angle-left ml-4 profile-wallet-arrow"></i>
                       </nuxt-link>
                     </div>
                   </div>
@@ -54,11 +54,15 @@
                   :key="side"
                   class="my-8"
                 >
-                  <v-list-item v-if="!item.subMenuList" :to="item.link">
-                    <!--                    <v-list-item-icon>-->
-                    <!--                      <v-icon class="">{{ item.icon }}</v-icon>-->
-                    <!--                    </v-list-item-icon>-->
-                    <v-list-item-title v-text="item.title" />
+                  <v-list-item
+                    v-if="!item.subMenuList"
+                    :to="item.link"
+                    class="menuu"
+                  >
+                    <!-- <v-list-item-icon>
+                                         <v-icon class="">{{ item.icon }}</v-icon>
+                                       </v-list-item-icon> -->
+                    <v-list-item-title v-text="item.title" class="menu-title" />
                   </v-list-item>
 
                   <v-list-group
@@ -352,7 +356,7 @@ export default {
         {
           title: "آشنایی",
           link: "",
-          icon: "fa-chevron-left",
+          icon: "mdi-chevron-left",
           subMenuList: [
             { title: "قوانین و مقررات", link: "" },
             { title: "پرسش های متداول", link: "" },

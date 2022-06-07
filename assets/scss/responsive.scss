@@ -58,8 +58,12 @@ body {
       .container {
         padding: 0;
       }
+      .feed-tab {
+        margin-top: 2rem;
+      }
       .stat-item {
         margin-bottom: 2rem;
+      
       }
       .search-item-button {
         margin-bottom: 20px !important;
@@ -135,7 +139,7 @@ body {
             color: $brown1;
           }
         }
-       
+
         .search-box .v-text-field > .v-input__control > .v-input__slot {
           margin-bottom: 0 !important;
           padding: 0.3rem;
@@ -277,12 +281,13 @@ body {
       }
       .stat-item {
         padding: 0 !important;
-        margin-right: 30px !important;
-        margin-left: 30px !important;
+        margin-right: 0 !important;
+        margin-left: 4rem !important;
         margin-bottom: 2rem;
       }
       .stat-sec {
         padding: 1rem 0 !important;
+        border: none;
       }
       .topbar-items {
         padding: 1rem !important;
@@ -295,15 +300,15 @@ body {
         width: 100%;
       }
       .mobile-res-search {
-          width: 100% !important;
-          border: 1px solid gray;
-          background: $cat-icon;
-          display: flex !important;
-          border: 1px solid $border;
-          align-items: center;
-          border-radius: 4px;
-          height: 4rem;
-        }
+        width: 100% !important;
+        border: 1px solid gray;
+        background: $cat-icon;
+        display: flex !important;
+        border: 1px solid $border;
+        align-items: center;
+        border-radius: 4px;
+        height: 4rem;
+      }
       .main-header {
         .logo-holder {
           height: 4.4rem;
@@ -313,7 +318,6 @@ body {
             height: 4.4rem;
           }
         }
-        
       }
       .search-field {
         font-size: 1rem;
@@ -414,6 +418,7 @@ body {
       }
       .footer-bar-item {
         font-size: 1.4rem !important;
+        height: 6rem !important;
       }
     }
   }

@@ -1,9 +1,11 @@
 <template v-slot:extension>
-  <div class="d-sm-none d-flex flex-column">
+  <div class="d-md-none d-flex flex-column feed-tab">
     <v-tabs v-model="tabs" centered>
       <v-tabs-slider color="green"></v-tabs-slider>
+      
       <v-tab v-for="item in items" :key="item" class="feed-tab-title">
-        {{ item }}
+      <img :src="require('@/assets/images/' + item.icon)" alt="" class="mx-1" width="20" height="20">
+        {{ item.title }}
       </v-tab>
     </v-tabs>
     <v-tabs-items v-model="tabs" class="feed-card ma-4">
@@ -408,10 +410,23 @@ export default {
   data() {
     return {
       tabs: null,
-      items: ["فایل های آموزشی", "پرسش ها", "اخبار"],
+      items:[
+        {
+          icon:"file.png",
+          title:"فایل های آموزشی"
+        },
+         {
+           icon:"ask.png",
+          title:"پرسش ها"
+        },
+         {
+           icon:"News.png",
+          title:"اخبار"
+        },
+      ],
+      // items: ["فایل های آموزشی", "پرسش ها", "اخبار"],
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      icons: ["file.png", "ask.png", "News.png"],
-      avatar: "dexter-morse.png",
+      avatar: "dexter-morse2.png",
     };
   },
 };

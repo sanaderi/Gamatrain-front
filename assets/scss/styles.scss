@@ -1,6 +1,7 @@
 //General
 html {
   font-size: 62.5% !important;
+  overflow: initial !important;
 }
 
 body {
@@ -92,12 +93,6 @@ body {
       height: 40px !important;
       width: 40px !important;
     }
-
-    .v-card__text {
-      //font-size: $fontsize2;
-      // display: flex;
-    }
-
     .v-list-item {
       min-height: unset;
     }
@@ -115,7 +110,7 @@ body {
     .v-carousel__controls {
       background: none !important;
       width: 12% !important;
-      bottom: 7% !important;
+      bottom: 1% !important;
       right: 4.5% !important;
     }
     .v-carousel__controls__item {
@@ -124,22 +119,6 @@ body {
     .v-btn.v-btn--has-bg.search-btn {
       background-color: $search !important;
     }
-
-    //}
-
-    //body {
-    //  direction: rtl;
-    //  margin: 0;
-    //  padding: 0;
-    //  box-sizing: border-box;
-    //  font-family: IRANSans, sans-serif;
-    //  font-size: 14px;
-    //}
-
-    //.main-container {
-    //  width: 80%;
-    //  margin: 0 auto;
-    //}
 
     .container {
       max-width: 80%;
@@ -200,6 +179,15 @@ body {
 
       //navbar
       .navbar-items {
+        .v-list-group--active
+          > .v-list-group__header
+          > .v-list-group__header__append-icon
+          .v-icon {
+          transform: rotate(-90deg);
+        }
+        .mdi-chevron-down::before {
+          transform: rotate(90deg);
+        }
         .theme--light.v-app-bar.v-toolbar.v-sheet {
           background-color: $white;
         }
@@ -246,6 +234,9 @@ body {
           height: 13rem;
           .wallet {
             color: $gray4;
+          }
+          .profile-wallet-arrow {
+            color: $gray9;
           }
           .wallet-balance {
             color: $gray4;
@@ -335,6 +326,13 @@ body {
         }
       }
     }
+    // Banner
+    .index-banner {
+      height: 40rem !important;
+    }
+    .banner .v-image {
+      height: 40rem !important;
+    }
 
     // popular-hashtags
     .popular-hashtags {
@@ -367,14 +365,14 @@ body {
         font-size: 4rem;
       }
       .cat-more-p {
-        font-size: 0.9rem;
-        color: $gray45;
+        font-size: 0.95rem;
+        color: $gray9;
       }
       border: none;
       box-shadow: none;
       .icon {
         &:before {
-          font-size: 4.5rem;
+          font-size: 3.5rem;
         }
       }
 
@@ -521,7 +519,7 @@ body {
 
     .v-window__prev,
     .v-window__next {
-      top: 74% !important;
+      top: 75% !important;
     }
 
     //search
@@ -600,6 +598,49 @@ body {
     .showmore {
       width: 100%;
     }
+    .showmore-btn {
+      background-color: transparent !important;
+      box-shadow: none;
+      position: absolute;
+      left: 0;
+      bottom: 20%;
+    }
+    .showmore-btn1 {
+      color: $green4;
+    }
+    .showmore-btn2 {
+      color: $red1;
+    }
+    .showmore-btn3 {
+      color: $blue4;
+    }
+    .showmore-btn4 {
+      color: $violet1;
+    }
+    .showmore-btn5 {
+      color: $green8;
+    }
+    .showmore-btn6 {
+      color: $orange5;
+    }
+    .showmore-btn7 {
+      color: $green6;
+    }
+    .showmore-btn8 {
+      color: $yellow1;
+    }
+    .showmore-btn9 {
+      color: $violet2;
+    }
+     .showmore-btn10 {
+      color:  $green4;
+    }
+     .showmore-btn11 {
+      color:  $blue8;
+    }
+     .showmore-btn12 {
+      color:  $blue10;
+    }
     .showless-span,
     .showmore-span {
       font-size: 1.2rem;
@@ -611,21 +652,17 @@ body {
       position: relative;
       margin: 10px 10px;
       max-width: 48%;
+      min-height: 32rem;
       .grade-divider {
         border-color: rgba(0, 0, 0, 0.05) !important;
       }
       .theme--light.v-divider {
         border-color: rgba(0, 0, 0, 0.05) !important;
       }
-
-      &.col-md-3 {
-        //flex: 1 0 20%;
-        //max-width: 20%;
-      }
-
       .grade-title {
         margin-right: 4.5rem;
         margin-bottom: 20px !important;
+        font-size: 1.6rem;
       }
 
       .label-tag {
@@ -1118,32 +1155,37 @@ body {
     }
 
     // stat-sec
-    .stat-sec {
-      background: $white;
-      border-top: 1px solid $border;
-      border-bottom: 1px solid $border;
 
-      .stat-item {
-        margin-left: 19px;
+    .stat-sec .v-icon.v-icon {
+      visibility: hidden;
+    }
 
-        .stat-value {
-          font-size: 2.4rem;
-          font-weight: 400;
-        }
+    .stat-item {
+      margin-left: 5rem !important;
+      margin-right: 5rem;
 
-        .stat-label {
-          font-weight: 400;
-          font-size: 2rem;
-        }
-        .stat-icon {
-          width: 4.2rem;
-          height: 4.2rem;
-          border-radius: 1.2rem;
-          background-color: $green11;
-          color: $white;
-        }
+      .stat-value {
+        font-size: 2.4rem;
+        font-weight: 400;
+      }
+
+      .stat-label {
+        font-weight: 400;
+        font-size: 2rem;
+      }
+      .stat-icon {
+        width: 4.2rem;
+        height: 4.2rem;
+        border-radius: 1.2rem;
+        background-color: $green11;
+        color: $white;
       }
     }
+    // .stat-sec {
+    //   background: $white;
+    //   border-top: 1px solid $border;
+    //   border-bottom: 1px solid $border;
+    // }
 
     //last view Slider
     .last-view-holder {
@@ -1175,7 +1217,6 @@ body {
     .theme--light.v-footer {
       background-color: $white !important;
       border-top: 0.1rem solid #e3e3e3 !important;
-      // border-bottom: 0.5rem solid $orange4 !important;
     }
     .footer-bar {
       background-color: $footer-bar;
@@ -1204,7 +1245,7 @@ body {
         .about-footer {
           font-size: $fontsize4;
           font-weight: 400;
-          color: $gray4;
+          color: $gray45;
         }
         .about-footer-para {
           font-size: 1.4rem;
@@ -1526,9 +1567,6 @@ body {
             .sample-test-image {
               width: 100%;
               max-width: 100%;
-              //height: 33rem;
-              //border: .2rem solid rgba(56,152,224,.6);
-              //border-radius: .5rem;
             }
 
             .label {
@@ -1677,6 +1715,7 @@ body {
         }
       }
     }
+
     //  close body and v-application
   }
 }

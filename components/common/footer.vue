@@ -16,13 +16,16 @@
             </nuxt-link>
           </v-list-item>
           <div class="footer-social-icon d-md-flex d-none flex align-center">
-            <img
+            <nuxt-link to="" class="d-flex align-center">
+              <img
               :src="require('@/assets/images/' + item.img)"
               alt=""
               v-for="item in images"
               :key="item"
               class="px-2"
             />
+            </nuxt-link>
+            
           </div>
         </div>
         <v-row>

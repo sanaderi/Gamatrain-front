@@ -29,14 +29,17 @@
               class="feed-subtitle d-flex justify-space-between"
             >
               <div class="d-flex align-center">
-                <v-list-item-avatar class="ma-0 ms-1 ml-3">
-                  <v-img
-                    :src="require('@/assets/images/' + item.avatar)"
-                  ></v-img>
+                <v-list-item-avatar class="ma-0 ms-1 ml-3 avatar-parent">
+                    <v-img
+                      :src="require('@/assets/images/' + item.avatar)"
+                    ></v-img>
                 </v-list-item-avatar>
                 <b>{{ item.name }}</b>
               </div>
-              <span class="d-flex align-center"> {{ item.date }} </span>
+              <div class="d-flex align-center">
+                <i class="fa-solid fa-calendar-days mx-3"></i>
+                <span class="d-flex align-center"> {{ item.date }} </span>
+              </div>
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-divider></v-divider>
@@ -64,7 +67,7 @@
           class="add-file"
         >
           <v-list-item class="d-flex justify-center">
-            <i class="fa-solid fa-plus "></i>
+            <i class="fa-solid fa-plus"></i>
           </v-list-item>
         </nuxt-link>
       </div>
@@ -82,3 +85,10 @@ export default {
   },
 };
 </script>
+<style>
+
+.avatar-parent {
+
+  border-radius: 0.8rem;
+}
+</style>
