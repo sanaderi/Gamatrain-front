@@ -1,21 +1,30 @@
 <template>
   <div class="home-page-content">
     <v-divider></v-divider>
+    <!-- Start:mobile header -->
     <div
-      class="d-flex align-center justify-space-between logo-search-content mx-5 d-flex d-sm-none"
-    >
-      <div class="px-2 header-search mobile-res-search my-4">
-        <v-btn class="px-0 btn-transparent search-btn-icon ml-2">
+      class="
+        d-flex
+        align-center
+        justify-space-between
+        logo-search-content
+        mx-5
+        d-flex d-sm-none
+      "
+     >
+      <div class="pl-2 header-search mobile-res-search my-4">
+        <v-btn class="px-0 btn-transparent search-btn-icon ">
           <v-icon class="search-icon">mdi-magnify</v-icon>
         </v-btn>
         <v-divider vertical></v-divider>
         <v-text-field
-          class="py-1 my-0 search-field main-search-icon mr-2"
+          class="py-1 my-0 search-field main-search-icon mr-2 mt-4"
           placeholder="جستجو..."
         >
         </v-text-field>
       </div>
     </div>
+    <!-- End: mobile header -->
     <section class="banner-sec">
       <v-carousel class="index-banner">
         <v-carousel-item
