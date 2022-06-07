@@ -1,11 +1,10 @@
 //General
 html {
   font-size: 62.5% !important;
-  overflow: initial  !important;  
+  overflow: initial !important;
 }
 
 body {
-  
   direction: rtl;
   margin: 0;
   padding: 0;
@@ -121,7 +120,6 @@ body {
       background-color: $search !important;
     }
 
-
     .container {
       max-width: 80%;
     }
@@ -181,7 +179,10 @@ body {
 
       //navbar
       .navbar-items {
-        .v-list-group--active > .v-list-group__header > .v-list-group__header__append-icon .v-icon {
+        .v-list-group--active
+          > .v-list-group__header
+          > .v-list-group__header__append-icon
+          .v-icon {
           transform: rotate(-90deg);
         }
         .mdi-chevron-down::before {
@@ -233,6 +234,9 @@ body {
           height: 13rem;
           .wallet {
             color: $gray4;
+          }
+          .profile-wallet-arrow {
+            color: $gray9;
           }
           .wallet-balance {
             color: $gray4;
@@ -361,8 +365,8 @@ body {
         font-size: 4rem;
       }
       .cat-more-p {
-        font-size: 0.9rem;
-        color: $gray45;
+        font-size: 0.95rem;
+        color: $gray9;
       }
       border: none;
       box-shadow: none;
@@ -594,6 +598,49 @@ body {
     .showmore {
       width: 100%;
     }
+    .showmore-btn {
+      background-color: transparent !important;
+      box-shadow: none;
+      position: absolute;
+      left: 0;
+      bottom: 20%;
+    }
+    .showmore-btn1 {
+      color: $green4;
+    }
+    .showmore-btn2 {
+      color: $red1;
+    }
+    .showmore-btn3 {
+      color: $blue4;
+    }
+    .showmore-btn4 {
+      color: $violet1;
+    }
+    .showmore-btn5 {
+      color: $green8;
+    }
+    .showmore-btn6 {
+      color: $orange5;
+    }
+    .showmore-btn7 {
+      color: $green6;
+    }
+    .showmore-btn8 {
+      color: $yellow1;
+    }
+    .showmore-btn9 {
+      color: $violet2;
+    }
+     .showmore-btn10 {
+      color:  $green4;
+    }
+     .showmore-btn11 {
+      color:  $blue8;
+    }
+     .showmore-btn12 {
+      color:  $blue10;
+    }
     .showless-span,
     .showmore-span {
       font-size: 1.2rem;
@@ -605,6 +652,7 @@ body {
       position: relative;
       margin: 10px 10px;
       max-width: 48%;
+      min-height: 32rem;
       .grade-divider {
         border-color: rgba(0, 0, 0, 0.05) !important;
       }
@@ -1107,34 +1155,32 @@ body {
     }
 
     // stat-sec
-     
-    
-     .stat-sec .v-icon.v-icon{
-       visibility: hidden;
-     }
-    
+
+    .stat-sec .v-icon.v-icon {
+      visibility: hidden;
+    }
+
     .stat-item {
-        margin-left: 5rem !important;
-        margin-right: 5rem;
+      margin-left: 5rem !important;
+      margin-right: 5rem;
 
-        .stat-value {
-          font-size: 2.4rem;
-          font-weight: 400;
-        }
-
-        .stat-label {
-          font-weight: 400;
-          font-size: 2rem;
-        }
-        .stat-icon {
-          width: 4.2rem;
-          height: 4.2rem;
-          border-radius: 1.2rem;
-          background-color: $green11;
-          color: $white;
-        }
-        
+      .stat-value {
+        font-size: 2.4rem;
+        font-weight: 400;
       }
+
+      .stat-label {
+        font-weight: 400;
+        font-size: 2rem;
+      }
+      .stat-icon {
+        width: 4.2rem;
+        height: 4.2rem;
+        border-radius: 1.2rem;
+        background-color: $green11;
+        color: $white;
+      }
+    }
     // .stat-sec {
     //   background: $white;
     //   border-top: 1px solid $border;
@@ -1669,7 +1715,7 @@ body {
         }
       }
     }
-    
+
     //  close body and v-application
   }
 }

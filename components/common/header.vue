@@ -20,7 +20,7 @@
                     sidemenu-profile
                     d-flex
                     flex-column
-                    justify-space-between
+                    justify-space-around
                     mb-5
                   "
                 >
@@ -42,7 +42,7 @@
                         <p class="mx-3 wallet-balance">{{ walletBalance }}</p>
                       </div>
                       <nuxt-link to="">
-                        <i class="fa-solid fa-angle-left ml-4"></i>
+                        <i class="fa-solid fa-angle-left ml-4 profile-wallet-arrow"></i>
                       </nuxt-link>
                     </div>
                   </div>

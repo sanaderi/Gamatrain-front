@@ -3,7 +3,6 @@
   <v-sheet
     class="mx-auto"
     max-width="1400"
-    
   >
     <v-slide-group
       multiple
