@@ -40,7 +40,7 @@
     </section>
     <Category />
     <!--  Start: search grade  -->
-    <section class="d-none d-sm-block search-sec">
+    <section class="d-none d-sm-block search-sec mb-8">
       <v-container>
         <div class="box search-container">
           <search
@@ -61,7 +61,7 @@
     <!-- Start:grade list desktop -->
     <section class="grades-list d-sm-flex d-none">
       <v-container>
-        <v-row class="justify-space-between mx-0 grade-list">
+        <v-row class="justify-space-between mx-0 grade-list ">
           <v-col
             v-for="(grade, index) in gradeList"
             :key="index"

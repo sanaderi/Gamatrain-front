@@ -1,5 +1,5 @@
 <template>
-  <v-sheet class="mx-auto" max-width="1400">
+  <v-sheet class="mx-auto status my-12" max-width="100%">
     <v-slide-group multiple show-arrows class="stat-sec">
       <v-slide-item v-for="n in 8" :key="n">
         <div

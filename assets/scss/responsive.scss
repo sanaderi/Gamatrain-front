@@ -281,13 +281,18 @@ body {
       .stat-item {
         padding: 0 !important;
         margin-right: 0 !important;
-        margin-left: 4rem !important;
+        margin-left: 6rem !important;
         margin-bottom: 2rem;
       }
       .stat-sec {
         padding: 1rem 0 !important;
         border: none;
       }
+       .status {
+         border: none;
+               filter: none;
+
+       }
       .topbar-items {
         padding: 1rem !important;
       }

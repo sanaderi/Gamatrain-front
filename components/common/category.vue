@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--   Start: category  main-container Desktop -->
-    <v-container class="d-sm-flex d-none py-0">
+    <v-container class="d-sm-flex d-none py-0 mt-6">
       <v-row class="justify-center align-center category box">
         <v-col
           v-for="(item, category) in items"
@@ -57,7 +57,7 @@
             v-show="!showMore"
           >
             <nuxt-link to="">
-              <div class="category-more d-flex justify-center align-center">
+              <div class="category-more d-flex justify-center align-center ml-7">
                 <i class="fa-solid fa-ellipsis cat-more-icon"></i>
               </div>
               <p class="mb-0 mr-1 cat-more-p">بیشتر</p>
@@ -92,7 +92,7 @@
               v-show="showMore"
             >
               <nuxt-link to="">
-                <div class="category-more d-flex justify-center align-center mr-7">
+                <div class="category-more d-flex justify-center align-center mr-8">
                   <i class="fa-solid fa-ellipsis cat-more-icon"></i>
                 </div>
                 <p class="mb-0 mr-8 cat-more-p">کمتر</p>

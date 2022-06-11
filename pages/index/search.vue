@@ -45,7 +45,7 @@
         sm="12"
         
       >
-        <v-btn class="search-btn" depressed> جستجو </v-btn>
+        <v-btn large class="search-btn" depressed> جستجو </v-btn>
       </v-col>
     </v-row>
   </form>
