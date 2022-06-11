@@ -1,10 +1,10 @@
 //General
 html {
   font-size: 62.5% !important;
-  overflow: initial !important;
 }
 
 body {
+  overflow: initial !important;
   direction: rtl;
   margin: 0;
   padding: 0;
@@ -12,9 +12,15 @@ body {
   font-family: IRANSans, sans-serif;
   font-size: 14px;
   transition: 0.5s ease-in-out;
+
   .dropdown-items {
     border-radius: 5px;
   }
+  .dropdown-items1,
+  .dropdown-items7 {
+    display: none;
+  }
+
   .dropdown-item {
     margin: 2rem 0 !important;
   }
@@ -22,6 +28,9 @@ body {
     font-family: IRANSans, sans-serif;
     .v-carousel__controls__item {
       color: $gray4 !important;
+    }
+    .v-text-field--outlined fieldset {
+      border: none !important;
     }
     .v-carousel__controls__item .v-icon {
       opacity: 1 !important;
@@ -105,13 +114,13 @@ body {
       right: 6% !important;
     }
     &.v-application--is-rtl .v-window__next {
-      left: 85%;
+      left: 86%;
     }
     .v-carousel__controls {
       background: none !important;
       width: 12% !important;
       bottom: 1% !important;
-      right: 4.5% !important;
+      right: 4% !important;
     }
     .v-carousel__controls__item {
       margin: 0 0 !important;
@@ -264,7 +273,7 @@ body {
       //header-search
 
       .main-search-icon::placeholder {
-        color: black !important;
+        color: $gray4 !important;
       }
       .main-search-icon::after {
         display: none !important;
@@ -272,12 +281,20 @@ body {
       .main-search-icon::before {
         display: none !important;
       }
+      .main-search-icon .theme--light.v-input input,
+      .theme--light.v-input textarea {
+        color: $gray4;
+      }
+
       .logo-search-content {
         width: 40rem;
       }
       .search-btn-icon {
         min-width: 0 !important;
         margin: 0;
+      }
+      .search-btn-icon span {
+        border-left: 1px solid $border;
       }
 
       .header-search {
@@ -354,12 +371,14 @@ body {
 
     // category
     .category {
+
       .category-more {
         width: 6rem;
         height: 6rem;
         border-radius: 50%;
-        background: $cat-icon;
+        background: $gray10;
       }
+
       .cat-more-icon {
         color: $gray25;
         font-size: 4rem;
@@ -527,8 +546,15 @@ body {
       .search-container {
         padding: 2rem;
         box-shadow: none;
+        border-radius: 0.4rem;
       }
       .grade-search {
+        background: $gray10;
+        border: 1px solid $border;
+        .v-input__control > .v-input__slot {
+          margin-bottom: 0;
+          min-height: 5rem;
+        }
         .v-text-field > .v-input__control > .v-input__slot {
           background: blue !important;
         }
@@ -632,26 +658,29 @@ body {
     .showmore-btn9 {
       color: $violet2;
     }
-     .showmore-btn10 {
-      color:  $green4;
+    .showmore-btn10 {
+      color: $green4;
     }
-     .showmore-btn11 {
-      color:  $blue8;
+    .showmore-btn11 {
+      color: $blue8;
     }
-     .showmore-btn12 {
-      color:  $blue10;
+    .showmore-btn12 {
+      color: $blue10;
     }
     .showless-span,
     .showmore-span {
       font-size: 1.2rem;
       color: $gray4;
     }
+    .grade-card-body {
+      padding: 0;
+    }
     .grade-card {
       padding: 20px !important;
       box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
       position: relative;
       margin: 10px 10px;
-      max-width: 48%;
+      max-width: 100%;
       min-height: 32rem;
       .grade-divider {
         border-color: rgba(0, 0, 0, 0.05) !important;
@@ -1179,6 +1208,10 @@ body {
         border-radius: 1.2rem;
         background-color: $green11;
         color: $white;
+        .icon-g {
+          height: 2.5rem;
+          font-size: 2.5rem;
+        }
       }
     }
     // .stat-sec {

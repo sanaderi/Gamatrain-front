@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="py-2">
+    <v-container >
       <div class="footer-holder mb-8">
         <div class="footer-head d-flex justify-space-between align-center">
           <v-list-item class="footer-item">

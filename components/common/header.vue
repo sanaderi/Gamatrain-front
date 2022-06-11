@@ -149,7 +149,7 @@
                       </nuxt-link>
                     </v-btn>
                   </template>
-                  <v-list class="dropdown-items">
+                  <v-list :class="'dropdown-items dropdown-items'+ (side + 1)">
                     <v-list-item
                       v-for="(subMenuItem, side) in item.subMenuList"
                       :key="side"
@@ -464,11 +464,7 @@ export default {
           title: "تدریس آنلاین",
           link: "",
           icon: "fa-tv",
-          // subMenuList: [
-          //   { title: "آزمون ورودی پایه چهارم", link: "" },
-          //   { title: "آزمون ورودی پایه پنجم", link: "" },
-          //   { title: "آزمون ورودی پایه ششم", link: "" },
-          // ],
+         
         },
       ],
       selectedItem: 1,
