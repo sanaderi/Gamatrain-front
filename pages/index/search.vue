@@ -39,7 +39,7 @@
         ></v-autocomplete>
       </v-col>
       <v-col
-        class="d-flex justify-md-center justify-end  search-item-button mr-15"
+        class="d-flex justify-md-center justify-end  search-item-button mr-10"
         cols="12"
         md="1"
         sm="12"

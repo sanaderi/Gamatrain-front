@@ -57,7 +57,7 @@
             v-show="!showMore"
           >
             <nuxt-link to="">
-              <div class="category-more d-flex justify-center align-center ml-7">
+              <div class="category-more d-flex justify-center align-center ">
                 <i class="fa-solid fa-ellipsis cat-more-icon"></i>
               </div>
               <p class="mb-0 mr-1 cat-more-p">بیشتر</p>

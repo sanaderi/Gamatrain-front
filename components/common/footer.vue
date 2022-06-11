@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container >
+    <v-container>
       <div class="footer-holder mb-8">
         <div class="footer-head d-flex justify-space-between align-center">
           <v-list-item class="footer-item">
@@ -18,18 +18,17 @@
           <div class="footer-social-icon d-md-flex d-none flex align-center">
             <nuxt-link to="" class="d-flex align-center">
               <img
-              :src="require('@/assets/images/' + item.img)"
-              alt=""
-              v-for="item in images"
-              :key="item"
-              class="px-2"
-            />
+                :src="require('@/assets/images/' + item.img)"
+                alt=""
+                v-for="item in images"
+                :key="item"
+                class="px-2"
+              />
             </nuxt-link>
-            
           </div>
         </div>
         <v-row>
-          <v-col cols="12" md="3" sm="6" class="footer-items ml-10">
+          <v-col cols="12" md="4" sm="6" class="footer-items ml-10">
             <v-list class="py-0">
               <v-list-item class="footer-item">
                 <p class="about-footer footer-titles mt-3">درباره ما</p>
@@ -76,7 +75,7 @@
               </v-list-item>
             </v-list>
           </v-col>
-          <v-col class="d-block footer-holder__links" md="3" sm="6">
+          <v-col class="d-block footer-holder__links" md="2" sm="6">
             <v-list class="py-0">
               <v-list-item class="footer-item">
                 <v-list-item class="footer-item">
@@ -105,7 +104,16 @@
               </v-list-item>
             </v-list>
           </v-col>
-          <c-col md="6" sm="3"></c-col>
+          <c-col md="6" sm="3" class="d-none d-md-block">
+            <div class="d-flex align-center mt-15">
+              <button>
+                <img :src="require('@/assets/images/' + enamad)" alt="" />
+              </button>
+              <button>
+                <img :src="require('@/assets/images/' + secondEnamad)" alt="" />
+              </button>
+            </div>
+          </c-col>
         </v-row>
       </div>
       <div
@@ -130,7 +138,11 @@
       </div>
       <div class="d-flex d-sm-none justify-center my-5">
         <div class="enamad d-flex" v-for="enamad in enamads" :key="enamad">
-          <img :src="require('@/assets/images/' + enamad.img)" alt=""  width="64"/>
+          <img
+            :src="require('@/assets/images/' + enamad.img)"
+            alt=""
+            width="64"
+          />
         </div>
       </div>
     </v-container>
@@ -180,6 +192,8 @@
 export default {
   data: () => ({
     links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
+    enamad: "enamad.png",
+    secondEnamad: "enamad2.png",
     enamads: [
       {
         img: "enamad.png",

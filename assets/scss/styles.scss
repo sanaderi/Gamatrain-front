@@ -547,10 +547,14 @@ body {
 
     //search
     .search-sec {
+      .box {
+        border: 1px solid rgba(0, 0, 0, 0.12);
+      }
       .search-container {
         padding: 2rem;
         box-shadow: none;
         border-radius: 0.4rem;
+        width: 99%;
       }
       .search-container .search-container p {
         margin: 2rem;
@@ -625,6 +629,10 @@ body {
     .grade__item12 {
       background: $grade__item12 !important;
     }
+    .grade-list-lessons {
+      font-size: 12px;
+      font-weight: 400;
+    }
     .res-update p {
       font-size: 1.2rem;
       color: $gray8;
@@ -688,7 +696,8 @@ body {
       padding: 20px !important;
       box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
       position: relative;
-      margin: 10px 10px;
+      margin-left: 1.5rem;
+      margin-bottom: 3rem;
       max-width: 100%;
       min-height: 32rem;
       border-radius: 0.4rem !important;
@@ -702,6 +711,10 @@ body {
         margin-right: 4.5rem;
         margin-bottom: 20px !important;
         font-size: 1.6rem;
+      }
+      .grade__item-title .type {
+        font-size: 1.2rem;
+        color: $gray45;
       }
 
       .label-tag {
@@ -749,6 +762,8 @@ body {
 
       .more-content {
         color: $blue9 !important;
+        font-size: 1.2rem;
+        font-weight: 400;
       }
 
       .total-content {
@@ -756,6 +771,7 @@ body {
       }
 
       .content {
+        margin-left: 3px;
         &:hover {
           color: $blue6;
         }
@@ -771,7 +787,8 @@ body {
 
       .type,
       .stat {
-        font-size: $fontsize2;
+        font-size: $fontsize0;
+        font-weight: 400;
       }
 
       .stat {
@@ -780,6 +797,14 @@ body {
 
       .footer-card {
         font-size: $fontsize0;
+        .footer-card-calendar {
+          color: $gray8;
+        }
+        .last-update {
+          font-size: 1.2rem;
+          font-weight: 400;
+          color: $gray8;
+        }
       }
 
       &.grade-card1 {
@@ -1000,6 +1025,7 @@ body {
       box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
         rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
       border-radius: 4px;
+      border: 1px solid $border;
     }
     .feed-tab-title {
       color: $gray45;
@@ -1045,8 +1071,12 @@ body {
       background-color: #000000;
     }
     .third-feed-box {
+      max-width: 30.5%;
+      margin-right: 1rem;
       box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
         rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+      border: 1px solid $border;
+
       .feed-box-item {
         margin-bottom: 0.7rem;
       }
@@ -1054,6 +1084,7 @@ body {
         font-size: 1.2rem;
         color: $blue4;
       }
+
       .feed-date,
       .feed-title,
       .feed-name {
@@ -1076,7 +1107,7 @@ body {
         font-size: $fontsize25;
         font-weight: 700;
         color: $gray45;
-        width: 55%;
+        width: 56%;
 
         .icon {
           font-size: 2.5rem;
@@ -1093,9 +1124,9 @@ body {
 
       .v-list-item p.feed-title {
         font-size: $fontsize2;
-        font-weight: 700;
+        font-weight: 400;
         line-height: 2 !important;
-        color: $gray4;
+        color: $gray11;
         overflow: hidden;
         text-overflow: ellipsis;
       }
@@ -1104,7 +1135,8 @@ body {
       }
 
       .v-list-item__subtitle.feed-subtitle {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
+        font-weight: 400;
       }
 
       .feed-card-footer {
@@ -1213,11 +1245,13 @@ body {
       .stat-value {
         font-size: 2.4rem;
         font-weight: 400;
+        color: $gray4;
       }
 
       .stat-label {
         font-weight: 400;
         font-size: 2rem;
+        color: $gray4;
       }
       .stat-icon {
         width: 4.2rem;
@@ -1286,6 +1320,7 @@ body {
     .footer-holder {
       .footer-social-icon {
         width: 16% !important;
+        margin-left: 6rem;
       }
       .footer-item {
         padding: 0.3rem 0;
