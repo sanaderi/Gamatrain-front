@@ -26,7 +26,7 @@
     </div>
     <!-- End: mobile header -->
     <section class="banner-sec">
-      <v-carousel class="index-banner">
+      <v-carousel class="index-banner" >
         <v-carousel-item
           v-for="(item, i) in items"
           cover
@@ -204,7 +204,7 @@
         <v-row
           class="justify-space-between mx-0 grade-list"
           v-if="showLess"
-        
+
         >
           <v-card
             v-for="(grade, index) in gradeList.slice(0, 3)"
