@@ -24,6 +24,10 @@ body {
   .dropdown-item {
     margin: 2rem 0 !important;
   }
+
+  .v-item-active::before {
+    color: transparent;
+  }
   .v-application {
     font-family: IRANSans, sans-serif;
     .v-carousel__controls__item {
@@ -35,6 +39,33 @@ body {
     .v-carousel__controls__item .v-icon {
       opacity: 1 !important;
     }
+     .v-btn--active .v-icon {
+      color: transparent;
+      display: block;
+      width: 25px;
+      height: 15px;
+      background: white;
+      border-radius: 7px;
+    }
+    .v-btn--active::before {
+      opacity: 0;
+    }
+    .theme--dark.v-btn--active:hover::before, .theme--dark.v-btn--active::before {
+      opacity: 0;
+    }
+    .v-btn:hover::before {
+      opacity: 0;
+    }
+    .v-ripple__container {
+      display: none !important;
+    }
+    //  .v-carousel__controls .v-item-group .v-btn::before {
+    //   background-color: unset !important;
+    //  }
+    //  .v-carousel__controls__item:focus {
+    //   color: white !important;
+    //  }
+
     .w-100 {
       width: 100%;
     }
@@ -70,7 +101,7 @@ body {
       line-height: 2rem;
     }
 
-    .theme--light.v-btn.v-btn--has-bg.search-btn {
+    .theme--light.v-btn.v-btn--has-bg .search-btn {
       background-color: $blue3;
       color: $white;
       text-shadow: none;
@@ -80,6 +111,9 @@ body {
 
     .theme--light.v-text-field > .v-input__control > .v-input__slot::before {
       display: none;
+    }
+    .v-text-field > .v-input__control > .v-input__slot::after {
+      width: 0 !important;
     }
     .v-btn.v-size--default {
       font-size: $fontsize2;
@@ -112,10 +146,10 @@ body {
     }
 
     &.v-application--is-rtl .v-window__prev {
-      right: 6% !important;
+      right: 5.5% !important;
     }
     &.v-application--is-rtl .v-window__next {
-      left: 86%;
+      left: 85.5%;
     }
     .v-carousel__controls {
       background: none !important;
@@ -1804,3 +1838,41 @@ body {
     //  close body and v-application
   }
 }
+// Start : Lesson page
+.lesson-section {
+  background-color: $gray12;
+  border-radius: 0.8rem;
+  padding: 4rem 5rem !important;
+  margin-bottom: 4rem;
+  .lesson-details {
+    border-left: 1px solid $hashtag;
+  }
+  .last-update,.visit,.error-report {
+    font-size: $fontsize2;
+    font-weight: 400;
+    line-height: 2.4rem;
+    color: $gray11;
+  }
+  .lesson-title {
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: $gray45;
+  }
+  .lesson-subtitle {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: $gray11;
+  }
+}
+.cards {
+  .card {
+    outline: 1px solid $green11;
+  }
+  .card-details {
+    width: 95%;
+    .more-link {
+      color: $green12;
+    }
+  }
+}
+// End: Lesson page

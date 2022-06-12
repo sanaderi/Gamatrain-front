@@ -28,7 +28,7 @@
               <i :class="' icon-g icon icong-' + item.icon"> </i>
             </span>
             <span class="stat-label">{{ item.label }}</span>
-            <span class="stat-value">{{ item.value }} +</span>
+            <span class="stat-value" :id="'stat'+ index+1">{{ item.value }} +</span>
           </div>
         </div>
       </v-slide-item>
@@ -48,5 +48,16 @@ export default {
       { label: "دانش آموز", value: "1,500,000", icon: "student" },
     ],
   }),
+  mounted() {
+  let counts=setInterval(updated);
+        let upto=1000;
+        function updated(){
+            var count= document.getElementsById("stat-value");
+            count.innerHTML=--upto;
+            if(upto === 0) {
+                clearInterval(counts);
+            }
+        }
+  },
 };
 </script>

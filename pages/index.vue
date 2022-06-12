@@ -76,7 +76,7 @@
                   v-for="(item, index) in grade.totalContent"
                   :key="index"
                   :to="item.to"
-                  class="content "
+                  class="content"
                 >
                   {{ item.content }}،
                 </nuxt-link>
@@ -191,7 +191,13 @@
                       x
                     "
                   >
-                    <span class="fa-solid fa-calendar-days footer-card-calendar ml-2"></span>
+                    <span
+                      class="
+                        fa-solid fa-calendar-days
+                        footer-card-calendar
+                        ml-2
+                      "
+                    ></span>
                     <span class="ml-1 last-update">آخرین بروزرسانی: </span>
                     <span class="last-update">{{ grade.update }}</span>
                   </div>
@@ -388,7 +394,7 @@
                     </h2>
                     <v-text class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
-                      <p>27فروردین</p>
+                      <p>27 فروردین</p>
                     </v-text>
                   </div>
                   <p class="d-inline-block">
@@ -669,6 +675,7 @@
       </v-container>
     </section> -->
     <!--  End: Last views   -->
+    <!-- <Scroll /> -->
   </div>
 </template>
 
@@ -680,6 +687,7 @@ import LastViews from "../components/common/last-views";
 import Category from "~/components/common/category.vue";
 import FeedTab from "../components/common/feedTab.vue";
 import Slider from "../components/common/slider.vue";
+import Scroll from "~/components/common/scroll.vue";
 
 export default {
   components: {
@@ -690,11 +698,13 @@ export default {
     Category,
     FeedTab,
     Slider,
+    Scroll,
   },
   data: () => ({
     less: true,
     showLess: true,
     thirdFeedBoxIcon: "News.png",
+    
     thirdFeedBox: [
       {
         img: "laptop.png",
@@ -875,7 +885,7 @@ export default {
         ],
         showMore: false,
         totalContent: [
-           { content: "فارسی", to: "" },
+          { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
           { content: "ریاضی", to: "" },
           { content: "علوم تجربی", to: "" },
@@ -931,7 +941,7 @@ export default {
         ],
         showMore: false,
         totalContent: [
-        { content: "فارسی", to: "" },
+          { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
           { content: "ریاضی", to: "" },
           { content: "علوم تجربی", to: "" },
@@ -987,7 +997,7 @@ export default {
         ],
         showMore: false,
         totalContent: [
-           { content: "فارسی", to: "" },
+          { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
           { content: "ریاضی", to: "" },
           { content: "علوم تجربی", to: "" },
@@ -1212,7 +1222,7 @@ export default {
         ],
         showMore: false,
         totalContent: [
-           { content: "فارسی", to: "" },
+          { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
           { content: "ریاضی", to: "" },
           { content: "علوم تجربی", to: "" },
@@ -1269,7 +1279,7 @@ export default {
         ],
         showMore: false,
         totalContent: [
-           { content: "فارسی", to: "" },
+          { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
           { content: "ریاضی", to: "" },
           { content: "علوم تجربی", to: "" },
@@ -1381,10 +1391,6 @@ export default {
         ],
         showMore: false,
         totalContent: [
-           { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
           { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
           { content: "ریاضی", to: "" },
@@ -1405,7 +1411,11 @@ export default {
           { content: "نگارش", to: "" },
           { content: "ریاضی", to: "" },
           { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" }, 
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         cat: [
           {
