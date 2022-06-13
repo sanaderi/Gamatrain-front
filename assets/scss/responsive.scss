@@ -446,6 +446,66 @@ body {
         font-size: 1.4rem !important;
         height: 6rem !important;
       }
+      // Start : Lesson page
+      .lesson-section {
+        padding: 0 !important;
+        .lesson-details {
+          order: 2;
+          padding: 2rem;
+          .last-update,.visit,.error-report {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: $gray11;
+          }
+        }
+        .lessons-title {
+          order: 1;
+          border-bottom: 1px solid $border1;
+          padding: 2rem;
+          .lesson-content {
+            text-align: right !important;
+            .lesson-title {
+              font-size: 1.6rem;
+              font-size: 500;
+            }
+            .lesson-subtitle {
+              font-size: 1.4rem;
+            }
+          }
+        }
+      }
+      .cards {
+        border-bottom: none;
+        .card-image img {
+          width: 9rem;
+          height: 9rem;
+        }
+        .card-body {
+          box-shadow: none !important;
+          border: none;
+        }
+        .card {
+            border-radius: 0.8rem !important;
+            .card-title {
+              font-size: 1.2rem;
+              color: $gray45;
+              font-weight: 400;
+              letter-spacing: 0.06px;
+            }
+            .video-teacher,.durition,.test-number,.levels {
+              font-size: 1rem;
+              font-weight: 400;
+              color: $gray4;
+              letter-spacing: 0.16px;
+            }
+          }
+          .book {
+            
+          }
+         
+         
+      }
+      // End : Lesson page
     }
   }
 }
