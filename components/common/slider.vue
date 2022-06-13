@@ -1,63 +1,97 @@
 <template>
-  <v-sheet class="mx-auto status my-12" max-width="100%">
-    <v-slide-group multiple show-arrows class="stat-sec">
-      <v-slide-item v-for="n in 8" :key="n">
-        <div
-          class="
-            d-flex
-            justify-space-between
-            align-center
-            flex-wrap
-            stat-holder
-            mt-5
-          "
-        >
-          <div
-            v-for="(item, index) in statList"
-            :key="index"
-            class="
+  <div ref="slider">
+    <v-sheet class="mx-auto status my-12" max-width="100%">
+      <v-slide-group multiple show-arrows class="stat-sec">
+        <v-slide-item v-for="n in 8" :key="n">
+          <div class="
               d-flex
-              flex-column
-              justify-center
+              justify-space-between
               align-center
-              px-3
-              stat-item
-            "
-          >
-            <span class="stat-icon d-flex align-center justify-center">
-              <i :class="' icon-g icon icong-' + item.icon"> </i>
-            </span>
-            <span class="stat-label">{{ item.label }}</span>
-            <span class="stat-value" :id="'stat'+ index+1">{{ item.value }} +</span>
+              flex-wrap
+              stat-holder
+              mt-5
+            ">
+            <div v-for="(item, index) in statList" :key="index" class="
+                d-flex
+                flex-column
+                justify-center
+                align-center
+                px-3
+                stat-item
+              ">
+              <span class="stat-icon d-flex align-center justify-center">
+                <i :class="' icon-g icon icong-' + item.icon"> </i>
+              </span>
+              <span class="stat-label">{{ item.label }}</span>
+              <span class="stat-value" :id="'stat' + index + 1">{{ item.counter }} +</span>
+            </div>
           </div>
-        </div>
-      </v-slide-item>
-    </v-slide-group>
-  </v-sheet>
+        </v-slide-item>
+      </v-slide-group>
+    </v-sheet>
+  </div>
 </template>
 
 <script>
 export default {
   data: () => ({
     statList: [
-      { label: "مدرسه", value: "130,000", icon: "school" },
-      { label: "دبیر", value: "300,000", icon: "teacher" },
-      { label: "دانش آموز", value: "1,500,000", icon: "student" },
-      { label: "مدرسه", value: "130,000", icon: "school" },
-      { label: "دبیر", value: "300,000", icon: "teacher" },
-      { label: "دانش آموز", value: "1,500,000", icon: "student" },
+      { label: "مدرسه", value: 130000, counter: 0, icon: "school" },
+      { label: "دبیر", value: 300000, counter: 0, icon: "teacher" },
+      { label: "دانش آموز", value: 1500000, counter: 0, icon: "student" },
+      { label: "مدرسه", value: 130000, counter: 0, icon: "school" },
+      { label: "دبیر", value: 300000, counter: 0, icon: "teacher" },
+      { label: "دانش آموز", value: 1500000, counter: 0, icon: "student" },
     ],
+    countsInterval: null,
+    countsIntervalCompleted: 0,
+    bottomOfElement: false
   }),
+  watch: {
+    bottomOfElement: function(val) {
+      this.countsInterval = setInterval(this.updated);
+    }
+  },
   mounted() {
-  let counts=setInterval(updated);
-        let upto=1000;
-        function updated(){
-            var count= document.getElementsById("stat-value");
-            count.innerHTML=--upto;
-            if(upto === 0) {
-                clearInterval(counts);
-            }
+    this.scroll();
+  },
+  methods: {
+    updated() {
+      for (let i in this.statList) {
+        let item = this.statList[i];
+        if (item.value >= item.counter) {
+          item.counter = item.counter + 1000;
+          item.counter = item.counter > item.value ? item.value : item.counter;
+        } else {
+          this.countsIntervalCompleted++;
         }
+      }
+
+      if (this.countsIntervalCompleted === this.statList.length) {
+        clearInterval(this.countsInterval);
+      }
+    },
+    getOffsetOfElement(el) {
+      let _x = 0;
+      let _y = 0;
+      while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+        _x += el.offsetLeft - el.scrollLeft;
+        _y += el.offsetTop - el.scrollTop;
+        el = el.offsetParent;
+      }
+      return { top: _y, left: _x };
+    },
+    scroll() {
+      window.onscroll = () => {
+        let offset = this.getOffsetOfElement(this.$refs.slider);
+        let spaceSize = 0;
+        let bottomOfElement = (window.innerHeight + window.scrollY) >= (offset.top + this.$refs.slider.clientHeight - spaceSize);
+
+        if (bottomOfElement) {
+          this.bottomOfElement = true
+        }
+      }
+    },
   },
 };
 </script>
