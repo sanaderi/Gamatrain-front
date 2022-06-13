@@ -34,7 +34,7 @@
                       :src="require('@/assets/images/' + item.avatar)"
                     ></v-img>
                 </v-list-item-avatar>
-                <b>{{ item.name }}</b>
+                <p>{{ item.name }}</p>
               </div>
               <div class="d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>

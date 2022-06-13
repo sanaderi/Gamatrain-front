@@ -143,13 +143,13 @@
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn v-bind="attrs" v-on="on">
-                      <nuxt-link :to="item.link" class="headermenu-item">
-                        <span :class="'ml-1 fa-solid ' + item.icon"></span>
+                      <nuxt-link :to="item.link" class="headermenu-item">                        
                         {{ item.title }}
+                        <span :class="'ml-1 fa-solid ' + item.icon"></span>
                       </nuxt-link>
                     </v-btn>
                   </template>
-                  <v-list class="dropdown-items">
+                  <v-list :class="'dropdown-items dropdown-items'+ (side + 1)">
                     <v-list-item
                       v-for="(subMenuItem, side) in item.subMenuList"
                       :key="side"
@@ -413,7 +413,7 @@ export default {
         {
           title: "آشنایی",
           link: "",
-          icon: "fa-caret-down",
+          icon: "fa-angle-down",
           subMenuList: [
             { title: "قوانین و مقررات", link: "" },
             { title: "پرسش های متداول", link: "" },
@@ -423,7 +423,7 @@ export default {
         {
           title: "المپیادها",
           link: "",
-          icon: "fa-caret-down",
+          icon: "fa-angle-down",
           subMenuList: [
             { title: "المپیاد ریاضی", link: "" },
             { title: "المپیاد فیزیک", link: "" },
@@ -433,7 +433,7 @@ export default {
         {
           title: "نمونه و تیزهوشان",
           link: "",
-          icon: "fa-caret-down",
+          icon: "fa-angle-down",
           subMenuList: [
             { title: "آزمون ورودی پایه چهارم", link: "" },
             { title: "آزمون ورودی پایه پنجم", link: "" },
@@ -443,7 +443,7 @@ export default {
         {
           title: "کتاب های درسی",
           link: "",
-          icon: "fa-caret-down",
+          icon: "fa-angle-down",
           subMenuList: [
             { title: "دوره دبستان", link: "" },
             { title: "دوره اول متوسطه", link: "" },
@@ -453,23 +453,19 @@ export default {
         {
           title: "پیشنهاد ویژه",
           link: "",
-          icon: "fa-caret-down",
+          icon: "fa-angle-down",
           subMenuList: [
             { title: "امتحانات هماهنگ نهم", link: "" },
             { title: "امتحانات هماهنگ ششم", link: "" },
             { title: "امتحانات هماهنگ دوازدهم", link: "" },
           ],
         },
-        {
-          title: "تدریس آنلاین",
-          link: "",
-          icon: "fa-tv",
-          // subMenuList: [
-          //   { title: "آزمون ورودی پایه چهارم", link: "" },
-          //   { title: "آزمون ورودی پایه پنجم", link: "" },
-          //   { title: "آزمون ورودی پایه ششم", link: "" },
-          // ],
-        },
+        // {
+        //   title: "تدریس آنلاین",
+        //   link: "",
+        //   icon: "fa-tv",
+         
+        // },
       ],
       selectedItem: 1,
       socialList: [

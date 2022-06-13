@@ -1,19 +1,8 @@
 <template>
-
-  <v-sheet
-    class="mx-auto"
-    max-width="1400"
-  >
-    <v-slide-group
-      multiple
-      show-arrows
-      class="stat-sec"
-    >
-      <v-slide-item
-        v-for="n in 8"
-        :key="n"
-      >
-       <div
+  <v-sheet class="mx-auto status my-12" max-width="100%">
+    <v-slide-group multiple show-arrows class="stat-sec">
+      <v-slide-item v-for="n in 8" :key="n">
+        <div
           class="
             d-flex
             justify-space-between
@@ -22,7 +11,7 @@
             stat-holder
             mt-5
           "
-         >
+        >
           <div
             v-for="(item, index) in statList"
             :key="index"
@@ -36,7 +25,7 @@
             "
           >
             <span class="stat-icon d-flex align-center justify-center">
-              <i :class="'fa solid ' + item.icon"> </i>
+              <i :class="' icon-g icon icong-' + item.icon"> </i>
             </span>
             <span class="stat-label">{{ item.label }}</span>
             <span class="stat-value">{{ item.value }} +</span>
@@ -48,16 +37,16 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-     statList: [
-      { label: "مدرسه", value: "130,000", icon: "fa-graduation-cap" },
-      { label: "دبیر", value: "300,000", icon: "fa-graduation-cap" },
-      { label: "دانش آموز", value: "1,500,000", icon: "fa-graduation-cap" },
-      { label: "نمونه سوال", value: "50,000", icon: "fa-graduation-cap" },
-      { label: "پاورپوینت", value: "30,000", icon: "fa-graduation-cap" },
-      { label: "آزمون آنلاین", value: "5,000", icon: "fa-graduation-cap" },
+export default {
+  data: () => ({
+    statList: [
+      { label: "مدرسه", value: "130,000", icon: "school" },
+      { label: "دبیر", value: "300,000", icon: "teacher" },
+      { label: "دانش آموز", value: "1,500,000", icon: "student" },
+      { label: "مدرسه", value: "130,000", icon: "school" },
+      { label: "دبیر", value: "300,000", icon: "teacher" },
+      { label: "دانش آموز", value: "1,500,000", icon: "student" },
     ],
-    }),
-  }
+  }),
+};
 </script>

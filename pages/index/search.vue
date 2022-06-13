@@ -39,12 +39,13 @@
         ></v-autocomplete>
       </v-col>
       <v-col
-        class="d-flex justify-md-center justify-end  search-item-button"
+        class="d-flex justify-md-center justify-end  search-item-button mr-10"
         cols="12"
-        md="2"
+        md="1"
         sm="12"
+        
       >
-        <v-btn class="search-btn" depressed> جستجو </v-btn>
+        <v-btn large class="search-btn" depressed> جستجو </v-btn>
       </v-col>
     </v-row>
   </form>

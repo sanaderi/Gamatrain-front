@@ -23,9 +23,8 @@
         >
           <div class="px-2 header-search desktop-search">
             <v-btn class="px-0 btn-transparent search-btn-icon">
-              <v-icon class="search-icon">mdi-magnify</v-icon>
+              <v-icon class="search-icon ml-3">mdi-magnify</v-icon>
             </v-btn>
-            <v-divider vertical></v-divider>
             <v-text-field
               class="py-1 my-0 search-field main-search-icon mr-2"
               placeholder="جستجو..."
