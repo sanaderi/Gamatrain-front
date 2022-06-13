@@ -23,6 +23,17 @@ body {
         max-width: 80%;
         width: 80%;
       }
+      .v-carousel__controls {
+        right: 1% !important;
+      }
+      .v-window__container {
+        .v-window__prev {
+          right: 4% !important;
+        }
+        .v-window__next {
+          left: 89.5%;
+        }
+      }
     }
 
     @media screen and (max-width: 1600px) {
