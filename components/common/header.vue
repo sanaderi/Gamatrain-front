@@ -10,17 +10,59 @@
             <v-navigation-drawer
               v-model="sidebar"
               app
-              class="hidden-md-and-up"
+              class="hidden-md-and-up main-sidebar"
               right
             >
               <!-- Start:  Menu items -->
               <v-list nav dense>
-                <div v-for="(item, index) in menuItems" :key="index">
-                  <v-list-item v-if="!item.subMenuList" :to="item.link">
-                    <!--                    <v-list-item-icon>-->
-                    <!--                      <v-icon class="">{{ item.icon }}</v-icon>-->
-                    <!--                    </v-list-item-icon>-->
-                    <v-list-item-title v-text="item.title" />
+                <div
+                  class="
+                    sidemenu-profile
+                    d-flex
+                    flex-column
+                    justify-space-around
+                    mb-5
+                  "
+                >
+                  <nuxt-link to="">
+                    <v-avatar size="40">
+                      <img
+                        :src="require('@/assets/images/' + avatar)"
+                        alt="John"
+                      />
+                    </v-avatar>
+                  </nuxt-link>
+                  <div class="profile-info">
+                    <p class="profile-name">حبیب الله حق شناس</p>
+                    <div
+                      class="profile-wallet d-flex justify-space-between mr-2"
+                    >
+                      <div class="d-flex">
+                        <p class="wallet">{{ wallet }}</p>
+                        <p class="mx-3 wallet-balance">{{ walletBalance }}</p>
+                      </div>
+                      <nuxt-link to="">
+                        <i class="fa-solid fa-angle-left ml-4 profile-wallet-arrow"></i>
+                      </nuxt-link>
+                    </div>
+                  </div>
+                </div>
+                <v-divider></v-divider>
+
+                <div
+                  v-for="(item, side) in sidemenuItems"
+                  :key="side"
+                  class="my-8"
+                >
+                  <v-list-item
+                    v-if="!item.subMenuList"
+                    :to="item.link"
+                    class="menuu"
+                  >
+                    <!-- <v-list-item-icon>
+                                         <v-icon class="">{{ item.icon }}</v-icon>
+                                       </v-list-item-icon> -->
+                    <v-list-item-title v-text="item.title" class="menu-title" />
                   </v-list-item>
 
                   <v-list-group
@@ -30,11 +72,13 @@
                     :value="false"
                   >
                     <template v-slot:activator>
-                      <v-list-item-title>{{ item.title }}</v-list-item-title>
+                      <v-list-item-title class="sidemenu-item">{{
+                        item.title
+                      }}</v-list-item-title>
                     </template>
 
                     <v-list-item
-                      v-for="(subMenuItem, index) in item.subMenuList"
+                      v-for="(subMenuItem, side) in item.subMenuList"
                       :to="subMenuItem.path"
                       :key="subMenuItem.title"
                     >
@@ -44,6 +88,18 @@
                       </nuxt-link>
                     </v-list-item>
                   </v-list-group>
+                </div>
+                <v-divider></v-divider>
+                <div class="logout d-flex align-center my-4">
+                  <nuxt-link to="">
+                    <v-icon>mdi-logout</v-icon>
+                  </nuxt-link>
+
+                  <nuxt-link to=""
+                    ><p class="logout-item mx-2">
+                      خروج از حساب کاربری
+                    </p></nuxt-link
+                  >
                 </div>
               </v-list>
               <!-- End:  Menu items -->
@@ -55,9 +111,11 @@
                     v-for="(socialItem, i) in socialList"
                     :key="i"
                     :href="socialItem.link"
-                    class="d-flex justify-center align-center px-4"
+                    class="d-flex justify-center align-center px-3"
                   >
-                    <span :class="'fa-brands ' + socialItem.icon"></span>
+                    <span
+                      :class="' side-icon fa-2xl fa-brands ' + socialItem.icon"
+                    ></span>
                   </a>
                 </v-list-item-group>
               </v-list>
@@ -77,24 +135,24 @@
               <!--  show menu in desktop -->
               <v-toolbar-items class="hidden-md-and-down">
                 <v-menu
-                  v-for="(item, index) in menuItems"
-                  :key="index"
+                  v-for="(item, side) in menuItems"
+                  :key="side"
                   open-on-hover
                   bottom
                   offset-y
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn v-bind="attrs" v-on="on">
-                      <nuxt-link :to="item.link" class="headermenu-item">
-                        <span :class="'ml-1 fa-solid ' + item.icon"></span>
+                      <nuxt-link :to="item.link" class="headermenu-item">                        
                         {{ item.title }}
+                        <span :class="'ml-1 fa-solid ' + item.icon"></span>
                       </nuxt-link>
                     </v-btn>
                   </template>
-                  <v-list class="dropdown-items">
+                  <v-list :class="'dropdown-items dropdown-items'+ (side + 1)">
                     <v-list-item
-                      v-for="(subMenuItem, index) in item.subMenuList"
-                      :key="index"
+                      v-for="(subMenuItem, side) in item.subMenuList"
+                      :key="side"
                       class="dropdown-item"
                     >
                       <nuxt-link :to="subMenuItem.link">
@@ -258,7 +316,19 @@
             </div>
             <!--  End: show Search in mobile  -->
           </div>
-          <PopularHashtags/>
+          <div class="header-logo d-block d-sm-none">
+            <v-img
+              class="logo"
+              :src="require('@/assets/images/' + logo)"
+              max-width="100"
+            ></v-img>
+          </div>
+          <div class="header-bell d-block d-sm-none">
+            <nuxt-link to="">
+              <i class="fa-regular fa-bell fa-2xl ml-4"></i>
+            </nuxt-link>
+          </div>
+          <PopularHashtags />
         </div>
       </v-container>
       <!--   End: navbar   -->
@@ -272,22 +342,21 @@ import PopularHashtags from "./popular-hashtags.vue";
 export default {
   components: {
     topbar,
-    PopularHashtags
-},
+    PopularHashtags,
+  },
   data() {
     return {
       sidebar: false,
       dialog: false,
-      menuItems: [
-        {
-          title: "خانه",
-          link: "./",
-          icon: "fa-house-chimney",
-        },
+      logo: "mainlogo4.png",
+      avatar: "dexter-morse.png",
+      wallet: "کیف پول:",
+      walletBalance: "2000 تومان",
+      sidemenuItems: [
         {
           title: "آشنایی",
           link: "",
-          icon: "fa-caret-down",
+          icon: "mdi-chevron-left",
           subMenuList: [
             { title: "قوانین و مقررات", link: "" },
             { title: "پرسش های متداول", link: "" },
@@ -297,7 +366,7 @@ export default {
         {
           title: "المپیادها",
           link: "",
-          icon: "fa-caret-down",
+          icon: "fa-chevron-left",
           subMenuList: [
             { title: "المپیاد ریاضی", link: "" },
             { title: "المپیاد فیزیک", link: "" },
@@ -307,7 +376,7 @@ export default {
         {
           title: "نمونه و تیزهوشان",
           link: "",
-          icon: "fa-caret-down",
+          icon: "fa-chevron-left",
           subMenuList: [
             { title: "آزمون ورودی پایه چهارم", link: "" },
             { title: "آزمون ورودی پایه پنجم", link: "" },
@@ -315,9 +384,9 @@ export default {
           ],
         },
         {
-          title: "کتابهای درسی",
+          title: "کتب درسی",
           link: "",
-          icon: "fa-caret-down",
+          icon: "fa-chevron-left",
           subMenuList: [
             { title: "دوره دبستان", link: "" },
             { title: "دوره اول متوسطه", link: "" },
@@ -334,22 +403,76 @@ export default {
             { title: "امتحانات هماهنگ دوازدهم", link: "" },
           ],
         },
+      ],
+      menuItems: [
         {
-          title: "تدریس آنلاین",
+          title: "خانه",
+          link: "./",
+          icon: "fa-house-chimney",
+        },
+        {
+          title: "آشنایی",
           link: "",
-          icon: "fa-tv",
+          icon: "fa-angle-down",
+          subMenuList: [
+            { title: "قوانین و مقررات", link: "" },
+            { title: "پرسش های متداول", link: "" },
+            { title: "راهنمای عضویت", link: "" },
+          ],
+        },
+        {
+          title: "المپیادها",
+          link: "",
+          icon: "fa-angle-down",
+          subMenuList: [
+            { title: "المپیاد ریاضی", link: "" },
+            { title: "المپیاد فیزیک", link: "" },
+            { title: "المپیاد شیمی", link: "" },
+          ],
+        },
+        {
+          title: "نمونه و تیزهوشان",
+          link: "",
+          icon: "fa-angle-down",
           subMenuList: [
             { title: "آزمون ورودی پایه چهارم", link: "" },
             { title: "آزمون ورودی پایه پنجم", link: "" },
             { title: "آزمون ورودی پایه ششم", link: "" },
           ],
         },
+        {
+          title: "کتاب های درسی",
+          link: "",
+          icon: "fa-angle-down",
+          subMenuList: [
+            { title: "دوره دبستان", link: "" },
+            { title: "دوره اول متوسطه", link: "" },
+            { title: "دوره دوم متوسطه", link: "" },
+          ],
+        },
+        {
+          title: "پیشنهاد ویژه",
+          link: "",
+          icon: "fa-angle-down",
+          subMenuList: [
+            { title: "امتحانات هماهنگ نهم", link: "" },
+            { title: "امتحانات هماهنگ ششم", link: "" },
+            { title: "امتحانات هماهنگ دوازدهم", link: "" },
+          ],
+        },
+        // {
+        //   title: "تدریس آنلاین",
+        //   link: "",
+        //   icon: "fa-tv",
+         
+        // },
       ],
       selectedItem: 1,
       socialList: [
         { link: "telegram", icon: "fa-telegram" },
-        { link: "twitter", icon: "fa-twitter-square" },
+        { link: "twitter", icon: "fa-twitter" },
         { link: "instagram", icon: "fa-instagram" },
+        { link: "Youtube", icon: "fa-youtube" },
       ],
     };
   },

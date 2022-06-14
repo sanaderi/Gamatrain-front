@@ -1,21 +1,30 @@
 <template>
   <div class="home-page-content">
     <v-divider></v-divider>
+    <!-- Start:mobile header -->
     <div
-      class="d-flex align-center justify-space-between logo-search-content mx-5 d-flex d-sm-none"
+      class="
+        d-flex
+        align-center
+        justify-space-between
+        logo-search-content
+        mx-5
+        d-flex d-sm-none
+      "
     >
-      <div class="px-2 header-search mobile-res-search my-4">
-        <v-btn class="px-0 btn-transparent search-btn-icon ml-2">
+      <div class="pl-2 header-search mobile-res-search my-4">
+        <v-btn class="px-0 btn-transparent search-btn-icon">
           <v-icon class="search-icon">mdi-magnify</v-icon>
         </v-btn>
         <v-divider vertical></v-divider>
         <v-text-field
-          class="py-1 my-0 search-field main-search-icon mr-2"
+          class="py-1 my-0 search-field main-search-icon mr-2 mt-4"
           placeholder="جستجو..."
         >
         </v-text-field>
       </div>
     </div>
+    <!-- End: mobile header -->
     <section class="banner-sec">
       <v-carousel class="index-banner">
         <v-carousel-item
@@ -31,7 +40,7 @@
     </section>
     <Category />
     <!--  Start: search grade  -->
-    <section class="d-none d-sm-block search-sec">
+    <section class="d-none d-sm-block search-sec mb-8">
       <v-container>
         <div class="box search-container">
           <search
@@ -53,49 +62,16 @@
     <section class="grades-list d-sm-flex d-none">
       <v-container>
         <v-row class="justify-space-between mx-0 grade-list">
-          <v-card
+          <v-col
             v-for="(grade, index) in gradeList"
             :key="index"
-            :class="
-              'col-md-3 col-sm-6 col-12 grade-card grade-card' + (index + 1)
-            "
+            cols="12"
+            md="3"
+            sm="6"
+            class="grade-card-body"
           >
-            <!--            <v-card-->
-            <!--              class="mx-auto"-->
-            <!--            >-->
-            <v-card-title class="d-block pa-0 pb-2">
-              <div class="d-flex justify-space-between align-item">
-                <h2
-                  :class="'grade-title grade-title' + (index + 1)"
-                  class="mb-2"
-                >
-                  <span :class="'label-tag label-tag' + (index + 1)">{{
-                    index + 1
-                  }}</span>
-                  {{ grade.title }}
-                </h2>
-                <v-text class="d-flex align-center res-update d-sm-none">
-                  <i class="fa-solid fa-calendar-days mx-3"></i>
-                  <p>27فروردین</p>
-                </v-text>
-              </div>
-              <p class="d-inline-block">
-                <nuxt-link
-                  v-for="(item, index) in grade.summeryContent"
-                  :key="index"
-                  :to="item.to"
-                  class="content grade-list-lessons"
-                >
-                  {{ item.content }}،
-                </nuxt-link>
-                ...
-              </p>
-              <span
-                class="btn-transparent more-content pointer"
-                @click="grade.showMore = !grade.showMore"
-                >بیشتر</span
-              >
-              <p v-if="grade.showMore" class="total-content">
+            <v-card :class="'grade-card grade-card' + (index + 1)">
+              <p v-if="grade.showMore" class="total-content position-relative">
                 <nuxt-link
                   v-for="(item, index) in grade.totalContent"
                   :key="index"
@@ -104,80 +80,132 @@
                 >
                   {{ item.content }}،
                 </nuxt-link>
+                <v-btn
+                  @click="grade.showMore = !grade.showMore"
+                  :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
+                  >بازگشت</v-btn
+                >
               </p>
-            </v-card-title>
-            <v-divider class="my-5"></v-divider>
-
-            <v-card-text class="pa-0 grade-items mb-3">
-              <nuxt-link
-                to="grade.link"
-                v-for="item in grade.cat"
-                :key="item.title"
-                class="
-                  d-flex
-                  align-center
-                  justify-space-between
-                  pa-0
-                  pb-0
-                  grade__item
-                "
-              >
-                <div class="py-0 d-flex align-center right grade__item-title">
-                  <v-icon
-                    v-if="item.title === 'نمونه سوال'"
-                    class="ml-1 icon icong-test"
-                  ></v-icon>
-                  <v-icon
-                    v-else-if="item.title === 'فایل آموزشی'"
-                    class="ml-1 icon icong-learnfiles"
-                  ></v-icon>
-                  <v-icon
-                    v-else-if="item.title === 'پرسش و پاسخ'"
-                    class="ml-1 icon icong-qa"
-                  ></v-icon>
-                  <v-icon
-                    v-else-if="item.title === 'آزمون آنلاین'"
-                    class="ml-1 icon icong-azmoon"
-                  ></v-icon>
+              <div v-if="!grade.showMore">
+                <!--            <v-card-->
+                <!--              class="mx-auto"-->
+                <!--            >-->
+                <v-card-title class="d-block pa-0 pb-2">
+                  <div class="d-flex justify-space-between align-item">
+                    <nuxt-link
+                      to=""
+                      :class="'grade-title grade-title' + (index + 1)"
+                      class="mb-2"
+                    >
+                      <span :class="'label-tag label-tag' + (index + 1)">{{
+                        index + 1
+                      }}</span>
+                      {{ grade.title }}
+                    </nuxt-link>
+                    <v-text class="d-flex align-center res-update d-sm-none">
+                      <i class="fa-solid fa-calendar-days mx-3"></i>
+                      <p>27فروردین</p>
+                    </v-text>
+                  </div>
+                  <p class="d-inline-block">
+                    <nuxt-link
+                      v-for="(item, index) in grade.summeryContent"
+                      :key="index"
+                      :to="item.to"
+                      class="content grade-list-lessons"
+                    >
+                      {{ item.content }}،
+                    </nuxt-link>
+                    ...
+                  </p>
                   <span
-                    class="text-center type my-2 grade-item__text"
-                    v-text="item.title"
-                  ></span>
-                </div>
-                <div class="py-1 left">
-                  <div class="text-left stat" v-text="item.stat"></div>
-                </div>
-              </nuxt-link>
-            </v-card-text>
-            <v-divider class="grade-divider"></v-divider>
-            <v-card-text
-              class="
-                pt-3
-                pb-2
-                px-0
-                grade-card__update
-                d-sm-flex d-none
-                justify-end
-              "
-            >
-              <div
-                class="
-                  d-flex
-                  align-center
-                  footer-card
-                  card-footer
-                  justify-end
-                  mt-2
-                  x
-                "
-              >
-                <span class="fa-solid fa-calendar-days ml-2"></span>
-                <span class="ml-1">آخرین بروزرسانی: </span>
-                <span>{{ grade.update }}</span>
+                    class="btn-transparent more-content pointer"
+                    @click="grade.showMore = !grade.showMore"
+                    >بیشتر</span
+                  >
+                </v-card-title>
+                <v-divider class="my-5"></v-divider>
+
+                <v-card-text class="pa-0 grade-items mb-3">
+                  <nuxt-link
+                    to="grade.link"
+                    v-for="item in grade.cat"
+                    :key="item.title"
+                    class="
+                      d-flex
+                      align-center
+                      justify-space-between
+                      pa-0
+                      pb-0
+                      grade__item
+                    "
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
+                      <v-icon
+                        v-if="item.title === 'نمونه سوال'"
+                        class="ml-4 icon icong-test"
+                      ></v-icon>
+                      <v-icon
+                        v-else-if="item.title === 'فایل آموزشی'"
+                        class="ml-4 icon icong-learnfiles"
+                      ></v-icon>
+                      <v-icon
+                        v-else-if="item.title === 'پرسش و پاسخ'"
+                        class="ml-4 icon icong-qa"
+                      ></v-icon>
+                      <v-icon
+                        v-else-if="item.title === 'آزمون آنلاین'"
+                        class="ml-4 icon icong-azmoon"
+                      ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                        v-text="item.title"
+                      ></span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat" v-text="item.stat"></div>
+                    </div>
+                  </nuxt-link>
+                </v-card-text>
+                <v-divider class="grade-divider"></v-divider>
+                <v-card-text
+                  class="
+                    pt-3
+                    pb-2
+                    px-0
+                    grade-card__update
+                    d-sm-flex d-none
+                    justify-end
+                  "
+                >
+                  <div
+                    class="
+                      d-flex
+                      align-center
+                      footer-card
+                      card-footer
+                      justify-end
+                      mt-2
+                      x
+                    "
+                  >
+                    <span
+                      class="
+                        fa-solid fa-calendar-days
+                        footer-card-calendar
+                        ml-2
+                      "
+                    ></span>
+                    <span class="ml-1 last-update">آخرین بروزرسانی: </span>
+                    <span class="last-update">{{ grade.update }}</span>
+                  </div>
+                </v-card-text>
               </div>
-            </v-card-text>
-            <!--            </v-card>-->
-          </v-card>
+              <!--            </v-card>-->
+            </v-card>
+          </v-col>
         </v-row>
       </v-container>
     </section>
@@ -185,173 +213,159 @@
     <section class="grades-list d-sm-none d-flex">
       <v-container>
         <v-row class="justify-space-between mx-0 grade-list" v-if="showLess">
-          <v-card
+          <v-col
+            cols="12"
+            md="3"
+            sm="6"
             v-for="(grade, index) in gradeList.slice(0, 3)"
             :key="index"
-            :class="
-              'col-md-3 col-sm-6 col-12 grade-card grade-card' + (index + 1)
-            "
+            class="grade-card-body"
           >
-            <!--            <v-card-->
-            <!--              class="mx-auto"-->
-            <!--            >-->
-            <v-card-title class="d-block pa-0 pb-2">
-              <div class="d-flex justify-space-between align-item">
-                <h2
-                  :class="'grade-title grade-title' + (index + 1)"
-                  class="mb-2"
-                >
-                  <span :class="'label-tag label-tag' + (index + 1)">{{
-                    index + 1
-                  }}</span>
-                  {{ grade.title }}
-                </h2>
-                <v-text class="d-flex align-center res-update d-sm-none">
-                  <i class="fa-solid fa-calendar-days mx-3"></i>
-                  <p>27فروردین</p>
-                </v-text>
-              </div>
-              <p class="d-inline-block">
-                <nuxt-link
-                  v-for="(item, index) in grade.summeryContent"
-                  :key="index"
-                  :to="item.to"
-                  class="content grade-list-lessons"
-                >
-                  {{ item.content }}،
-                </nuxt-link>
-                ...
-              </p>
-              <span
-                class="btn-transparent more-content pointer"
-                @click="grade.showMore = !grade.showMore"
-                >بیشتر</span
-              >
-              <p v-if="grade.showMore" class="total-content">
+            <v-card :class="' grade-card grade-card' + (index + 1)">
+              <p v-if="grade.showMore" class="total-content position-relative">
                 <nuxt-link
                   v-for="(item, index) in grade.totalContent"
                   :key="index"
                   :to="item.to"
-                  class="content"
+                  class="content ml-1"
                 >
                   {{ item.content }}،
                 </nuxt-link>
+                <v-btn
+                  @click="grade.showMore = !grade.showMore"
+                  :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
+                  >بازگشت</v-btn
+                >
               </p>
-            </v-card-title>
-            <v-divider class="my-5"></v-divider>
-
-            <v-card-text class="pa-0 grade-items mb-3">
-              <nuxt-link
-                to="grade.link"
-                v-for="item in grade.cat"
-                :key="item.title"
-                :class="
-                  'd-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item' +
-                  (index + 1)
-                "
-              >
-                <div class="py-0 d-flex align-center right grade__item-title">
-                  <v-icon
-                    v-if="item.title === 'نمونه سوال'"
-                    class="ml-1 icon icong-test"
-                  ></v-icon>
-                  <v-icon
-                    v-else-if="item.title === 'فایل آموزشی'"
-                    class="ml-1 icon icong-learnfiles"
-                  ></v-icon>
-                  <v-icon
-                    v-else-if="item.title === 'پرسش و پاسخ'"
-                    class="ml-1 icon icong-qa"
-                  ></v-icon>
-                  <v-icon
-                    v-else-if="item.title === 'آزمون آنلاین'"
-                    class="ml-1 icon icong-azmoon"
-                  ></v-icon>
+              <div v-if="!grade.showMore">
+                <v-card-title class="d-block pa-0 pb-2">
+                  <div class="d-flex justify-space-between align-item">
+                    <h2
+                      :class="'grade-title grade-title' + (index + 1)"
+                      class="mb-2"
+                    >
+                      <span :class="'label-tag label-tag' + (index + 1)">{{
+                        index + 1
+                      }}</span>
+                      {{ grade.title }}
+                    </h2>
+                    <v-text class="d-flex align-center res-update d-sm-none">
+                      <i class="fa-solid fa-calendar-days mx-3"></i>
+                      <p>27 فروردین</p>
+                    </v-text>
+                  </div>
+                  <p class="d-inline-block">
+                    <nuxt-link
+                      v-for="(item, index) in grade.summeryContent"
+                      :key="index"
+                      :to="item.to"
+                      class="content grade-list-lessons"
+                    >
+                      {{ item.content }}،
+                    </nuxt-link>
+                    ...
+                  </p>
                   <span
-                    class="text-center type my-2 grade-item__text"
-                    v-text="item.title"
-                  ></span>
-                </div>
-                <div class="py-1 left">
-                  <div class="text-left stat" v-text="item.stat"></div>
-                </div>
-              </nuxt-link>
-            </v-card-text>
-            <v-divider class="grade-divider"></v-divider>
-            <v-card-text
-              class="
-                pt-3
-                pb-2
-                px-0
-                grade-card__update
-                d-sm-flex d-none
-                justify-end
-              "
-            >
-              <div
-                class="
-                  d-flex
-                  align-center
-                  footer-card
-                  card-footer
-                  justify-end
-                  mt-2
-                  x
-                "
-              >
-                <span class="fa-solid fa-calendar-days ml-2"></span>
-                <span class="ml-1">آخرین بروزرسانی: </span>
-                <span>{{ grade.update }}</span>
-              </div>
-            </v-card-text>
+                    class="btn-transparent more-content pointer"
+                    @click="grade.showMore = !grade.showMore"
+                    >بیشتر</span
+                  >
+                  <p v-if="grade.showMore" class="total-content">
+                    <nuxt-link
+                      v-for="(item, index) in grade.totalContent"
+                      :key="index"
+                      :to="item.to"
+                      class="content"
+                    >
+                      {{ item.content }}،
+                    </nuxt-link>
+                  </p>
+                </v-card-title>
+                <v-divider class="my-5"></v-divider>
 
-            <!--            </v-card>-->
-          </v-card>
+                <v-card-text class="pa-0 grade-items mb-3">
+                  <nuxt-link
+                    to="grade.link"
+                    v-for="item in grade.cat"
+                    :key="item.title"
+                    :class="
+                      'd-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item' +
+                      (index + 1)
+                    "
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
+                      <v-icon
+                        v-if="item.title === 'نمونه سوال'"
+                        class="ml-1 icon icong-test"
+                      ></v-icon>
+                      <v-icon
+                        v-else-if="item.title === 'فایل آموزشی'"
+                        class="ml-1 icon icong-learnfiles"
+                      ></v-icon>
+                      <v-icon
+                        v-else-if="item.title === 'پرسش و پاسخ'"
+                        class="ml-1 icon icong-qa"
+                      ></v-icon>
+                      <v-icon
+                        v-else-if="item.title === 'آزمون آنلاین'"
+                        class="ml-1 icon icong-azmoon"
+                      ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                        v-text="item.title"
+                      ></span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat" v-text="item.stat"></div>
+                    </div>
+                  </nuxt-link>
+                </v-card-text>
+                <v-divider class="grade-divider"></v-divider>
+                <v-card-text
+                  class="
+                    pt-3
+                    pb-2
+                    px-0
+                    grade-card__update
+                    d-sm-flex d-none
+                    justify-end
+                  "
+                >
+                  <div
+                    class="
+                      d-flex
+                      align-center
+                      footer-card
+                      card-footer
+                      justify-end
+                      mt-2
+                      x
+                    "
+                  >
+                    <span class="fa-solid fa-calendar-days ml-2"></span>
+                    <span class="ml-1">آخرین بروزرسانی: </span>
+                    <span>{{ grade.update }}</span>
+                  </div>
+                </v-card-text>
+
+                <!--</v-card>-->
+              </div>
+            </v-card>
+          </v-col>
         </v-row>
         <v-row v-else class="justify-space-between mx-0 grade-list">
-          <v-card
+          <v-col
             v-for="(grade, index) in gradeList"
             :key="index"
-            :class="
-              'col-md-3 col-sm-6 col-12 grade-card grade-card' + (index + 1)
-            "
+            cols="12"
+            md="3"
+            sm="6"
+            class="grade-card-body"
           >
-            <!--            <v-card-->
-            <!--              class="mx-auto"-->
-            <!--            >-->
-            <v-card-title class="d-block pa-0 pb-2">
-              <div class="d-flex justify-space-between align-item">
-                <h2
-                  :class="'grade-title grade-title' + (index + 1)"
-                  class="mb-2"
-                >
-                  <span :class="'label-tag label-tag' + (index + 1)">{{
-                    index + 1
-                  }}</span>
-                  {{ grade.title }}
-                </h2>
-                <v-text class="d-flex align-center res-update d-sm-none">
-                  <i class="fa-solid fa-calendar-days mx-3"></i>
-                  <p>27فروردین</p>
-                </v-text>
-              </div>
-              <p class="d-inline-block">
-                <nuxt-link
-                  v-for="(item, index) in grade.summeryContent"
-                  :key="index"
-                  :to="item.to"
-                  class="content grade-list-lessons"
-                >
-                  {{ item.content }}،
-                </nuxt-link>
-                ...
-              </p>
-              <span
-                class="btn-transparent more-content pointer"
-                @click="grade.showMore = !grade.showMore"
-                >بیشتر</span
-              >
-              <p v-if="grade.showMore" class="total-content">
+            <v-card :class="' grade-card grade-card' + (index + 1)">
+              <p v-if="grade.showMore" class="total-content position-relative">
                 <nuxt-link
                   v-for="(item, index) in grade.totalContent"
                   :key="index"
@@ -360,77 +374,129 @@
                 >
                   {{ item.content }}،
                 </nuxt-link>
+                <v-btn
+                  @click="grade.showMore = !grade.showMore"
+                  :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
+                  >بازگشت</v-btn
+                >
               </p>
-            </v-card-title>
-            <v-divider class="my-5"></v-divider>
-
-            <v-card-text class="pa-0 grade-items mb-3">
-              <nuxt-link
-                to="grade.link"
-                v-for="item in grade.cat"
-                :key="item.title"
-                :class="
-                  'd-flex align-center justify-space-between  pa-0 pb-0 grade__item grade__item' +
-                  (index + 1)
-                "
-              >
-                <div class="py-0 d-flex align-center right grade__item-title">
-                  <v-icon
-                    v-if="item.title === 'نمونه سوال'"
-                    class="ml-1 icon icong-test"
-                  ></v-icon>
-                  <v-icon
-                    v-else-if="item.title === 'فایل آموزشی'"
-                    class="ml-1 icon icong-learnfiles"
-                  ></v-icon>
-                  <v-icon
-                    v-else-if="item.title === 'پرسش و پاسخ'"
-                    class="ml-1 icon icong-qa"
-                  ></v-icon>
-                  <v-icon
-                    v-else-if="item.title === 'آزمون آنلاین'"
-                    class="ml-1 icon icong-azmoon"
-                  ></v-icon>
+              <div v-if="!grade.showMore">
+                <v-card-title class="d-block pa-0 pb-2">
+                  <div class="d-flex justify-space-between align-item">
+                    <h2
+                      :class="'grade-title grade-title' + (index + 1)"
+                      class="mb-2"
+                    >
+                      <span :class="'label-tag label-tag' + (index + 1)">{{
+                        index + 1
+                      }}</span>
+                      {{ grade.title }}
+                    </h2>
+                    <v-text class="d-flex align-center res-update d-sm-none">
+                      <i class="fa-solid fa-calendar-days mx-3"></i>
+                      <p>27 فروردین</p>
+                    </v-text>
+                  </div>
+                  <p class="d-inline-block">
+                    <nuxt-link
+                      v-for="(item, index) in grade.summeryContent"
+                      :key="index"
+                      :to="item.to"
+                      class="content grade-list-lessons"
+                    >
+                      {{ item.content }}،
+                    </nuxt-link>
+                    ...
+                  </p>
                   <span
-                    class="text-center type my-2 grade-item__text"
-                    v-text="item.title"
-                  ></span>
-                </div>
-                <div class="py-1 left">
-                  <div class="text-left stat" v-text="item.stat"></div>
-                </div>
-              </nuxt-link>
-            </v-card-text>
-            <v-divider class="grade-divider"></v-divider>
-            <v-card-text
-              class="
-                pt-3
-                pb-2
-                px-0
-                grade-card__update
-                d-sm-flex d-none
-                justify-end
-              "
-            >
-              <div
-                class="
-                  d-flex
-                  align-center
-                  footer-card
-                  card-footer
-                  justify-end
-                  mt-2
-                  x
-                "
-              >
-                <span class="fa-solid fa-calendar-days ml-2"></span>
-                <span class="ml-1">آخرین بروزرسانی: </span>
-                <span>{{ grade.update }}</span>
-              </div>
-            </v-card-text>
+                    class="btn-transparent more-content pointer"
+                    @click="grade.showMore = !grade.showMore"
+                    >بیشتر</span
+                  >
+                  <p v-if="grade.showMore" class="total-content">
+                    <nuxt-link
+                      v-for="(item, index) in grade.totalContent"
+                      :key="index"
+                      :to="item.to"
+                      class="content"
+                    >
+                      {{ item.content }}،
+                    </nuxt-link>
+                  </p>
+                </v-card-title>
+                <v-divider class="my-5"></v-divider>
 
-            <!--            </v-card>-->
-          </v-card>
+                <v-card-text class="pa-0 grade-items mb-3">
+                  <nuxt-link
+                    to="grade.link"
+                    v-for="item in grade.cat"
+                    :key="item.title"
+                    :class="
+                      'd-flex align-center justify-space-between  pa-0 pb-0 grade__item grade__item' +
+                      (index + 1)
+                    "
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
+                      <v-icon
+                        v-if="item.title === 'نمونه سوال'"
+                        class="ml-1 icon icong-test"
+                      ></v-icon>
+                      <v-icon
+                        v-else-if="item.title === 'فایل آموزشی'"
+                        class="ml-1 icon icong-learnfiles"
+                      ></v-icon>
+                      <v-icon
+                        v-else-if="item.title === 'پرسش و پاسخ'"
+                        class="ml-1 icon icong-qa"
+                      ></v-icon>
+                      <v-icon
+                        v-else-if="item.title === 'آزمون آنلاین'"
+                        class="ml-1 icon icong-azmoon"
+                      ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                        v-text="item.title"
+                      ></span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat" v-text="item.stat"></div>
+                    </div>
+                  </nuxt-link>
+                </v-card-text>
+                <v-divider class="grade-divider"></v-divider>
+                <v-card-text
+                  class="
+                    pt-3
+                    pb-2
+                    px-0
+                    grade-card__update
+                    d-sm-flex d-none
+                    justify-end
+                  "
+                >
+                  <div
+                    class="
+                      d-flex
+                      align-center
+                      footer-card
+                      card-footer
+                      justify-end
+                      mt-2
+                      x
+                    "
+                  >
+                    <span class="fa-solid fa-calendar-days ml-2"></span>
+                    <span class="ml-1">آخرین بروزرسانی: </span>
+                    <span>{{ grade.update }}</span>
+                  </div>
+                </v-card-text>
+
+                <!--            </v-card>-->
+              </div>
+            </v-card>
+          </v-col>
         </v-row>
         <button
           class="showmore d-flex justify-center mt-4 mb-12"
@@ -490,7 +556,7 @@
     <!--  End: Site feature  -->
 
     <!--  Start: feed box  -->
-    <section class="feed-box d-none d-sm-flex">
+    <section class="feed-box d-none d-md-flex">
       <v-container>
         <v-row>
           <v-col
@@ -564,7 +630,8 @@
     <!-- End: Feedtabs respons -->
 
     <!--  Start: Main stats  -->
-    <section class="stat-sec my-8">
+    <!-- <section class="stat-sec my-8">
+
       <v-container>
         <div
           class="
@@ -573,8 +640,9 @@
             align-center
             flex-wrap
             stat-holder
+            mt-5
           "
-        >
+         >
           <div
             v-for="(item, index) in statList"
             :key="index"
@@ -596,7 +664,8 @@
           </div>
         </div>
       </v-container>
-    </section>
+    </section> -->
+    <Slider />
     <!--  End: Main stats  -->
 
     <!--  Start: Last views  -->
@@ -606,6 +675,7 @@
       </v-container>
     </section> -->
     <!--  End: Last views   -->
+    <!-- <Scroll /> -->
   </div>
 </template>
 
@@ -616,6 +686,8 @@ import FooterFeedBox from "../components/common/footer-feed-box";
 import LastViews from "../components/common/last-views";
 import Category from "~/components/common/category.vue";
 import FeedTab from "../components/common/feedTab.vue";
+import Slider from "../components/common/slider.vue";
+import Scroll from "~/components/common/scroll.vue";
 
 export default {
   components: {
@@ -625,11 +697,14 @@ export default {
     GardeCard,
     Category,
     FeedTab,
+    Slider,
+    Scroll,
   },
   data: () => ({
     less: true,
     showLess: true,
     thirdFeedBoxIcon: "News.png",
+    
     thirdFeedBox: [
       {
         img: "laptop.png",
@@ -697,14 +772,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         link: "",
         cat: [
@@ -737,14 +829,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         cat: [
           {
@@ -776,14 +885,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         cat: [
           {
@@ -815,14 +941,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         cat: [
           {
@@ -854,14 +997,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         link: "",
         cat: [
@@ -894,14 +1054,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         cat: [
           {
@@ -933,14 +1110,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         cat: [
           {
@@ -972,14 +1166,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         cat: [
           {
@@ -1011,14 +1222,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         link: "",
         cat: [
@@ -1051,14 +1279,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         cat: [
           {
@@ -1090,14 +1335,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         cat: [
           {
@@ -1129,14 +1391,31 @@ export default {
         ],
         showMore: false,
         totalContent: [
-          { content: "پیام های آسمانی", to: "" },
-          { content: "قرآن", to: "" },
-          { content: "عربی", to: "" },
-          { content: "هنر", to: "" },
-          { content: "مشاوره", to: "" },
-          { content: "زبان", to: "" },
-          { content: "فناوری", to: "" },
-          { content: "فرهنگ", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
         ],
         cat: [
           {

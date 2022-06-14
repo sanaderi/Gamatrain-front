@@ -23,6 +23,17 @@ body {
         max-width: 80%;
         width: 80%;
       }
+      .v-carousel__controls {
+        right: 1% !important;
+      }
+      .v-window__container {
+        .v-window__prev {
+          right: 4% !important;
+        }
+        .v-window__next {
+          left: 89.5%;
+        }
+      }
     }
 
     @media screen and (max-width: 1600px) {
@@ -40,10 +51,6 @@ body {
     }
 
     @media (min-width: 960px) {
-      .col-md-3 {
-        flex: 1 0 23%;
-        max-width: 25%;
-      }
     }
 
     @media screen and (max-width: 900px) {
@@ -58,11 +65,20 @@ body {
       .container {
         padding: 0;
       }
+      .feed-tab {
+        margin-top: 2rem;
+      }
+      .status {
+        margin: 25px 0 !important;
+      }
       .stat-item {
         margin-bottom: 2rem;
       }
       .search-item-button {
         margin-bottom: 20px !important;
+      }
+      .theme--light.v-input input {
+        font-size: 1.2rem !important;
       }
       // Banner
       .index-banner {
@@ -132,7 +148,7 @@ body {
             color: $brown1;
           }
         }
-       
+
         .search-box .v-text-field > .v-input__control > .v-input__slot {
           margin-bottom: 0 !important;
           padding: 0.3rem;
@@ -190,6 +206,7 @@ body {
       .grade-card {
         margin: 10px 5px !important;
         max-width: 47% !important;
+        min-height: 26rem;
       }
       .test-details-content {
         .detail {
@@ -244,7 +261,7 @@ body {
         padding: 1rem;
       }
       .footer-items {
-        padding: 3rem !important;
+        padding: 0 1rem !important;
       }
     }
 
@@ -269,17 +286,25 @@ body {
     }
 
     @media screen and (max-width: 480px) {
+      .row {
+        margin: 0;
+      }
       .stat-value {
-        font-size: 2rem !important;
+        font-size: 2.4rem !important;
       }
       .stat-item {
         padding: 0 !important;
-        margin-right: 30px !important;
-        margin-left: 30px !important;
+        margin-right: 0 !important;
+        margin-left: 4rem !important;
         margin-bottom: 2rem;
       }
       .stat-sec {
         padding: 1rem 0 !important;
+        border: none;
+      }
+      .status {
+        border: none;
+        filter: none;
       }
       .topbar-items {
         padding: 1rem !important;
@@ -292,15 +317,15 @@ body {
         width: 100%;
       }
       .mobile-res-search {
-          width: 100% !important;
-          border: 1px solid gray;
-          background: $cat-icon;
-          display: flex !important;
-          border: 1px solid $border;
-          align-items: center;
-          border-radius: 4px;
-          height: 4rem;
-        }
+        width: 100% !important;
+        border: 1px solid gray;
+        background: $gray10;
+        display: flex !important;
+        border: 1px solid $border;
+        align-items: center;
+        border-radius: 4px;
+        height: 4rem;
+      }
       .main-header {
         .logo-holder {
           height: 4.4rem;
@@ -310,7 +335,6 @@ body {
             height: 4.4rem;
           }
         }
-        
       }
       .search-field {
         font-size: 1rem;
@@ -367,6 +391,7 @@ body {
       .feed-p-res {
         font-size: 12px;
         color: $gray4;
+        line-height: 2rem;
       }
       // .grade-card__update {
       //   display: none;
@@ -409,9 +434,78 @@ body {
           margin: 0;
         }
       }
+      .footer-items {
+        .about-footer-para {
+          font-size: 1.2rem !important;
+        }
+        .about-footer {
+          font-size: 1.4rem !important;
+        }
+      }
       .footer-bar-item {
         font-size: 1.4rem !important;
+        height: 6rem !important;
       }
+      // Start : Lesson page
+      .lesson-section {
+        padding: 0 !important;
+        .lesson-details {
+          order: 2;
+          padding: 2rem;
+          .last-update,.visit,.error-report {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: $gray11;
+          }
+        }
+        .lessons-title {
+          order: 1;
+          border-bottom: 1px solid $border1;
+          padding: 2rem;
+          .lesson-content {
+            text-align: right !important;
+            .lesson-title {
+              font-size: 1.6rem;
+              font-size: 500;
+            }
+            .lesson-subtitle {
+              font-size: 1.4rem;
+            }
+          }
+        }
+      }
+      .cards {
+        border-bottom: none;
+        .card-image img {
+          width: 9rem;
+          height: 9rem;
+        }
+        .card-body {
+          box-shadow: none !important;
+          border: none;
+        }
+        .card {
+            border-radius: 0.8rem !important;
+            .card-title {
+              font-size: 1.2rem;
+              color: $gray45;
+              font-weight: 400;
+              letter-spacing: 0.06px;
+            }
+            .video-teacher,.durition,.test-number,.levels {
+              font-size: 1rem;
+              font-weight: 400;
+              color: $gray4;
+              letter-spacing: 0.16px;
+            }
+          }
+          .book {
+            
+          }
+         
+         
+      }
+      // End : Lesson page
     }
   }
 }
