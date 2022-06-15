@@ -1,14 +1,14 @@
 <template>
   <div>
     <!--  Start: search grade  -->
-    <section class="d-block d-md-none search-sec mb-8">
+    <!-- <section class="d-block d-md-none search-sec mb-8">
       <v-container>
         <div class="box search-container">
           <search :items1="items1" :items2="items2" :items3="items3" :values1="values1" :value1="value1"
             :values2="values2" :value2="value2" :values3="values3" :value3="value2"></search>
         </div>
       </v-container>
-    </section>
+    </section> -->
     <!--  End: search  -->
     <!-- Start : Category -->
     <category />
@@ -138,14 +138,23 @@
         <v-row>
           <v-col md="4">
             <div class="cataloge pa-6 d-none d-md-block">
-              <p class="cataloge-title">
+              <p class="cataloge-title d-flex align-center">
+                <i class="fa-solid fa-book-bookmark cataloge-icon ml-2"></i>
                 {{ book.catalogeTitle }}
               </p>
+              <div class="cataloge-content">
+                <!-- <v-timeline>
+                  <v-timeline-item>timeline item</v-timeline-item>
+                  <v-timeline-item>timeline item</v-timeline-item>
+                  <v-timeline-item>timeline item</v-timeline-item>
+                </v-timeline> -->
+                <timeLine />
+              </div>
             </div>
           </v-col>
           <v-col cols="12" md="8" class="pa-0 pa-md-3">
             <div class="book-contents pa-3 pa-md-6">
-              <div class="book-content" v-for="item in bookContent" :key="item">
+              <div class="book-content" v-for="(item, bookContent) in bookContent" :key="bookContent">
                 <p class="book-title mb-3">{{ item.bookTitle }}</p>
                 <p class="bookText">{{ item.bookText }}</p>
                 <div class="book-pictures d-flex flex-column align-center my-10 my-md-6">
@@ -167,7 +176,7 @@
     <!-- End: Book -->
     <!-- Start : Sample Test -->
     <section class="sample">
-      <v-container>
+      <v-container class="pb-16">
         <div class="d-flex flex-column align-center my-6">
           <div class="sample-titles d-flex align-center ">
             <i class="icon icong-test title-icon d-flex algn-center"></i>
@@ -190,7 +199,7 @@
                     <div class="sbook-footer d-flex justify-space-between align-center mt-4">
                       <div class="d-flex align-center">
                         <img :src="require('@/assets/images/' + bookSample.samplefooterImg)" alt="">
-                        <p class="sfooter-name mx-2">{{bookSample.sfooterName}}</p>
+                        <p class="sfooter-name mx-2">{{ bookSample.sfooterName }}</p>
                       </div>
                       <nuxt-link to="" class="mb-0 sfooter-link">بیشتر</nuxt-link>
                     </div>
@@ -203,14 +212,151 @@
       </v-container>
     </section>
     <!-- End : Sample test -->
+    <!-- Start: Feed -->
+    <section class="feed">
+      <v-container>
+        <v-row>
+          <v-col md="6" class="last-files pa-4">
+            <div class="lastfile-content d-flex flex-column">
+              <div class="lastfile-titles d-flex align-center pb-4 mb-5">
+                <span class="icon icong-learnfiles lastfile-icon-title"></span>
+                <p class="mb-0 mx-2 lastfile-title">آخرین فایل های آموزشی</p>
+              </div>
+              <div class="video-slider">
+                <v-carousel class="video-slide" height="34rem" width="100px">
+                  <v-carousel-item v-for="(item, video) in items" cover :key="video.value"
+                    :src="require('@/assets/images/' + item.src)" reverse-transition="fade-transition"
+                    transition="fade-transition" class="video"></v-carousel-item>
+                  <div class="filter"></div>
+                  <v-rating v-model="rating" background-color="orange lighten-3" color="orange" medium class="rating">
+                  </v-rating>
+                </v-carousel>
+                <!-- <div class="filter"></div> -->
+              </div>
+              <div class="date-name d-flex align-center justify-space-between my-5">
+                <div class="d-flex align-center">
+                  <img :src="require('@/assets/images/' + lastFile.img)" alt="">
+                  <p class="mr-2">{{ lastFile.name }}</p>
+                </div>
+                <div class="d-flex align-center">
+                  <i class="fa-solid fa-calendar-days"></i>
+                  <p class="mr-2">{{ lastFile.date }}</p>
+                </div>
+                <p> اعداد اسلاید ها : {{ lastFile.number }}</p>
+              </div>
+              <p class="lastFile-text">
+                {{ lastFile.lastFileText }}
+              </p>
+              <div class="date-name d-flex align-center justify-space-between my-5">
+                <p>محتوا : {{ lastFile.content }}</p>
+                <p> بودجه بندی : {{ lastFile.budget }}</p>
+              </div>
+            </div>
+          </v-col>
+          <v-col md="6" class="related-ask-test py-0 d-flex flex-column">
+            <div class="ask-card mb-6 pa-4">
+              <div class="ask-title d-flex align-center mb-4">
+                <span :class="'icon icong-' + askCard.icon" class="ask-icon d-flex align-center"></span>
+                <div class="ask-title-texts d-flex flex-column mr-3">
+                  <div class="asktitle">پرسش و پاسخ های مرتبط</div>
+                  <div class="asksubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
+
+                </div>
+              </div>
+              <div class="ask-texts d-flex" v-for="(item, ask) in askTexts " :key="ask.value">
+                <p class="my-4 ask-text">
+                  {{ item.askText }}
+                </p>
+              </div>
+              <v-divider class="mt-4"></v-divider>
+              <div class="ask-footer mt-4">
+                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال فایل</v-btn>
+                <nuxt-link to="" class="askcard-footer-link mr-6">
+                  موارد بیشتر
+                </nuxt-link>
+              </div>
+            </div>
+            <div class="test-card  pa-4">
+              <div class="test-title d-flex align-center mb-4">
+                <span :class="'icon icong-' + testCard.icon" class="test-icon d-flex align-center"></span>
+                <div class="test-title-texts d-flex flex-column mr-3">
+                  <div class="testtitle">پرسش و پاسخ های مرتبط</div>
+                  <div class="testsubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
+                </div>
+              </div>
+              <div class="test-texts d-flex" v-for="(item, test) in testTexts " :key="test.value">
+                <p class="my-4 test-text">
+                  {{ item.testText }}
+                </p>
+              </div>
+              <v-divider class="mt-4"></v-divider>
+              <div class="test-footer mt-4">
+                <nuxt-link to="" class="testcard-footer-link">
+                  موارد بیشتر
+                </nuxt-link>
+              </div>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </section>
+    <!-- End: Feed -->
   </div>
 </template>
 <script>
 import category from "~/components/common/category.vue";
+import timeLine from "~/components/common/timeline.vue";
 export default {
-  components: { category },
+  components: { category, timeLine},
   data() {
     return {
+      lastFile: {
+        img: "dexter-morse2.png",
+        name: "علیرضا داودی",
+        date: "27 فروردین",
+        number: "27",
+        lastFileText: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت ......",
+        content: "آموزش سطح تیزهوشان (pptx)",
+        budget: "صفحه ۱ تا صفحه ۱۶۸"
+      },
+      askCard: {
+        icon: "qa",
+      },
+      askTexts: [
+        {
+          askText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن + حل تمرین (1 و 2) درس 11"
+        },
+        {
+          askText: " فیلم ریاضی هفتم | فصل 2: عددهای صحیح (جلسه چهارم: حل نمونه)"
+        },
+        {
+          askText: " پاورپوینت مطالعات اجتماعی هفتم | درس 12: حفاظت از زیستگاه‌های ایران"
+        },
+      ],
+      testCard: {
+        icon: "azmoon"
+      },
+      testTexts: [
+        {
+          testText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن + حل تمرین (1 و 2) درس 11"
+        },
+        {
+          testText: " فیلم ریاضی هفتم | فصل 2: عددهای صحیح (جلسه چهارم: حل نمونه)"
+        },
+        {
+          testText: " پاورپوینت مطالعات اجتماعی هفتم | درس 12: حفاظت از زیستگاه‌های ایران"
+        },
+      ],
+      rating: 4,
+      items1: ["همه", "دبستان", "متوسطه"],
+      items2: ["همه", "دبستان", "متوسطه"],
+      items3: ["همه", "دبستان", "متوسطه"],
+      values1: ["همه"],
+      values2: ["همه"],
+      values3: ["همه"],
+      value1: null,
+      value2: null,
+      value3: null,
       lastUpdate: "27 فروردین",
       visit: "15383",
       lesson: {
@@ -252,10 +398,59 @@ export default {
       bookSample: {
         sampleImg: "booksample.png",
         sampleText: "آزمون تستی فصل 2تا 8 ریاضی هفتم دبیرستان اسوه اصفهن",
-        samplefooterImg:"dexter-morse3.png",
-        sfooterName:"علیرضا داودی"
-      }
+        samplefooterImg: "dexter-morse3.png",
+        sfooterName: "علیرضا داودی"
+      },
+      items: [
+        {
+          src: "vid.png",
+        },
+        {
+          src: "vid.png",
+        },
+        {
+          src: "vid.png",
+        },
+        {
+          src: "vid.png",
+        },
+        {
+          src: "vid.png",
+        },
+        {
+          src: "vid.png",
+        },
+        {
+          src: "vid.png",
+        },
+        {
+          src: "vid.png",
+        },
+      ],
+      events: [],
+      input: null,
+      nonce: 0,
     };
+
+  },
+  computed: {
+    timeline() {
+      return this.events.slice().reverse()
+    },
+  },
+  methods: {
+    comment() {
+      const time = (new Date()).toTimeString()
+      this.events.push({
+        id: this.nonce++,
+        text: this.input,
+        time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
+          return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
+        }),
+      })
+
+      this.input = null
+    },
   },
 };
 </script>

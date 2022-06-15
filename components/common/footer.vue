@@ -18,17 +18,17 @@
           <div class="footer-social-icon d-md-flex d-none flex align-center">
             <nuxt-link to="" class="d-flex align-center">
               <img
-                :src="require('@/assets/images/' + item.img)"
+                :src="require('@/assets/images/' + image.img)"
                 alt=""
-                v-for="item in images"
-                :key="item"
+                v-for="(image,img) in images"
+                :key="img"
                 class="px-2"
               />
             </nuxt-link>
           </div>
         </div>
         <v-row>
-          <v-col cols="12" md="4" sm="6" class="footer-items ml-10">
+          <v-col cols="12" md="4" sm="6" class="footer-items">
             <v-list class="py-0">
               <v-list-item class="footer-item">
                 <p class="about-footer footer-titles mt-3">درباره ما</p>
@@ -104,7 +104,7 @@
               </v-list-item>
             </v-list>
           </v-col>
-          <c-col md="6" sm="3" class="d-none d-md-block">
+          <v-col md="2" sm="3" class="d-none d-md-block">
             <div class="d-flex align-center mt-15">
               <button>
                 <img :src="require('@/assets/images/' + enamad)" alt="" />
@@ -113,7 +113,7 @@
                 <img :src="require('@/assets/images/' + secondEnamad)" alt="" />
               </button>
             </div>
-          </c-col>
+          </v-col>
         </v-row>
       </div>
       <div
@@ -130,16 +130,16 @@
           <img
             :src="require('@/assets/images/' + item.img)"
             alt=""
-            v-for="item in images"
-            :key="item"
+            v-for="(item,bama) in images"
+            :key="bama.img"
             class="px-2"
           />
         </div>
       </div>
       <div class="d-flex d-sm-none justify-center my-5">
-        <div class="enamad d-flex" v-for="enamad in enamads" :key="enamad">
+        <div class="enamad d-flex" v-for="(item,enamad) in enamads" :key="enamad">
           <img
-            :src="require('@/assets/images/' + enamad.img)"
+            :src="require('@/assets/images/' + item.img)"
             alt=""
             width="64"
           />

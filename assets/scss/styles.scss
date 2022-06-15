@@ -30,6 +30,13 @@ body {
     color: transparent;
   }
 
+  .banner-sec .v-carousel__controls {
+    background: none !important;
+    width: 12% !important;
+    bottom: 1% !important;
+    right: 4% !important;
+  }
+
   .v-application {
     font-family: IRANSans, sans-serif;
 
@@ -170,12 +177,7 @@ body {
       left: 85.5%;
     }
 
-    .v-carousel__controls {
-      background: none !important;
-      width: 12% !important;
-      bottom: 1% !important;
-      right: 4% !important;
-    }
+
 
     .v-carousel__controls__item {
       margin: 0 0 !important;
@@ -1510,7 +1512,7 @@ body {
     .footer-holder {
       .footer-social-icon {
         width: 16% !important;
-        margin-left: 6rem;
+        margin-left: 9rem;
       }
 
       .footer-item {
@@ -2100,9 +2102,45 @@ body {
     background-color: $gray12;
     border-radius: 0.8rem;
 
+    .cataloge-icon {
+      color: $green;
+    }
+
     .cataloge-title {
       color: $gray45;
+      font-size: 2rem;
     }
+
+    // .v-timeline-item__divider .v-timeline-item__dot {
+    //   background: $green;
+
+    //   .v-timeline-item__inner-dot {
+    //     background-color: $green  !important;
+    //     border-color: $green;
+    //   }
+    // }
+
+  //   .v-timeline::before {
+  //     top: 80px;
+  //     height: calc(100% - 120px)
+  // }
+  .timeline {
+    position: relative;
+  }
+  .timeline-number {
+    position: absolute;
+    right: -25%;
+    top: 40%;
+    z-index: 5;
+  }
+    .v-timeline-item__body a:hover {
+      color: $green;
+    }
+
+    .v-timeline-item__body a:focus {
+      color: $green;
+    }
+
   }
 
   .book-contents {
@@ -2217,6 +2255,184 @@ body {
       }
     }
 
+  }
+}
+
+.feed {
+  .container {
+    padding: 5rem 1rem;
+  }
+
+  .last-files {
+    border: 1px solid $border;
+    box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.1), 0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-radius: 0.4rem;
+
+    .date-name {
+      width: 70%;
+    }
+
+    .lastFile-text {
+      color: $gray8;
+    }
+
+    .date-name p {
+      font-size: 1.2rem;
+      color: $gray8;
+    }
+
+    .lastfile-titles {
+      border-bottom: 3px solid $category-content ;
+      width: 40%;
+      margin-right: -2.7%;
+      padding-right: 3%;
+      font-size: 1.6rem;
+      font-weight: 500;
+
+      .lastfile-icon-title {
+        font-size: 4rem;
+        height: 4rem;
+        color: $category-content;
+      }
+
+      .lastfile-title {
+        font-size: 1.6rem !important;
+        font-weight: 500;
+      }
+    }
+
+    .video-slider {
+      position: relative;
+
+      .filter {
+        content: " ";
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.31);
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .video-slide {
+      border-radius: 0.4rem;
+      position: relative;
+
+
+
+      .rating {
+        position: absolute;
+        bottom: 4%;
+        right: 2%;
+
+        .v-icon {
+          padding: 0;
+        }
+      }
+
+      .v-window__prev {
+        display: none;
+      }
+
+      .v-window__next {
+        display: none;
+      }
+
+      .v-carousel__controls {
+        background: none !important;
+        width: 32% !important;
+        bottom: -1% !important;
+        left: -1% !important;
+        position: absolute !important;
+
+        .v-btn--active .v-icon {
+          width: 18px;
+          height: 10px;
+        }
+
+        .v-carousel__controls__item .v-btn__content .v-icon {
+          font-size: 1rem !important;
+        }
+
+        .v-btn--icon.v-size--small {
+          width: 15px;
+        }
+      }
+    }
+  }
+
+  .ask-card,
+  .test-card {
+    border: 1px solid $border;
+    box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.1), 0px 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-radius: 0.6rem;
+  }
+
+  .ask-card {
+    .ask-icon {
+      font-size: 4rem;
+      color: $category-faq;
+    }
+
+    .asktitle {
+      font-size: 2rem;
+      color: $gray45;
+    }
+
+    .asksubtitle {
+      font-size: 1.2rem;
+      color: $gray4;
+    }
+
+    .ask-text {
+      font-size: 1.4rem;
+      color: $gray11;
+      letter-spacing: 0.08px;
+
+    }
+
+    .askcard-footer-btn {
+      background-color: $green  !important;
+      color: $white;
+    }
+
+    .askcard-footer-link {
+      color: $green;
+    }
+  }
+
+  .test-card {
+    .test-icon {
+      font-size: 4rem;
+      color: $category-faq;
+    }
+
+    .testtitle {
+      font-size: 2rem;
+      color: $gray45;
+    }
+
+    .testsubtitle {
+      font-size: 1.2rem;
+      color: $gray4;
+    }
+
+    .test-text {
+      font-size: 1.4rem;
+      color: $gray11;
+      letter-spacing: 0.08px;
+
+    }
+
+    .testcard-footer-btn {
+      background-color: $green  !important;
+      color: $white;
+    }
+
+    .testcard-footer-link {
+      color: $green;
+    }
   }
 }
 

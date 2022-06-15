@@ -80,7 +80,7 @@
                     <v-list-item
                       v-for="(subMenuItem, side) in item.subMenuList"
                       :to="subMenuItem.path"
-                      :key="subMenuItem.title"
+                      :key="side.title"
                     >
                       <nuxt-link :to="subMenuItem.link">
                         <span class="fa-solid fa-angles-left ms-2"></span>
@@ -126,14 +126,14 @@
             <!-- Start: App bar in top page for menu list -->
             <v-app-bar class="desktop-nav">
               <!--   hamburgers-icon in mobile-->
-              <span class="hidden-md-and-up">
+              <span class="d-block d-md-none">
                 <v-btn class="pa-0 btn-transparent" @click="sidebar = !sidebar">
                   <span class="fa-solid fa-bars hamburgers-icon"></span>
                 </v-btn>
               </span>
               <v-spacer></v-spacer>
               <!--  show menu in desktop -->
-              <v-toolbar-items class="hidden-md-and-down">
+              <v-toolbar-items class="d-none d-md-block">
                 <v-menu
                   v-for="(item, side) in menuItems"
                   :key="side"

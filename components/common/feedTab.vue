@@ -3,7 +3,7 @@
     <v-tabs v-model="tabs" centered>
       <v-tabs-slider color="green"></v-tabs-slider>
       
-      <v-tab v-for="item in items" :key="item" class="feed-tab-title">
+      <v-tab v-for="(item, index) in items" :key="index" class="feed-tab-title">
       <img :src="require('@/assets/images/' + item.icon)" alt="" class="mx-1" width="20" height="20">
         {{ item.title }}
       </v-tab>

@@ -17,21 +17,29 @@
 body {
   overflow-y: scroll;
   overflow-x: hidden;
+ 
   .v-application {
     @media (min-width: 1904px) {
       .container {
         max-width: 80%;
         width: 80%;
       }
-      .v-carousel__controls {
+
+      .feed.v-carousel__controls {
+        left: 1% !important;
+      }
+
+      .banner-sec.v-carousel__controls {
         right: 1% !important;
       }
+
       .v-window__container {
         .v-window__prev {
-          right: 4% !important;
+          right: 7.5% !important;
         }
+
         .v-window__next {
-          left: 89.5%;
+          left: 86.5%;
         }
       }
     }
@@ -50,8 +58,7 @@ body {
       }
     }
 
-    @media (min-width: 960px) {
-    }
+    @media (min-width: 960px) {}
 
     @media screen and (max-width: 900px) {
       .category {
@@ -65,28 +72,36 @@ body {
       .container {
         padding: 0;
       }
+
       .feed-tab {
         margin-top: 2rem;
       }
+
       .status {
         margin: 25px 0 !important;
       }
+
       .stat-item {
         margin-bottom: 2rem;
       }
+
       .search-item-button {
         margin-bottom: 20px !important;
       }
+
       .theme--light.v-input input {
         font-size: 1.2rem !important;
       }
+
       // Banner
       .index-banner {
         height: 30vh !important;
       }
+
       .v-carousel__controls {
         width: 33% !important;
       }
+
       .v-window__prev,
       .v-window__next {
         display: none !important;
@@ -117,9 +132,10 @@ body {
           }
 
           .search-icon {
-            color: $green !important;
+            color: $green  !important;
           }
         }
+
         .search-icon-placeholder {
           font-size: 1.5rem;
         }
@@ -132,31 +148,38 @@ body {
           .test-cat {
             color: $blue1;
           }
+
           .learnfile-cat {
             color: $green3;
           }
+
           .qa-cat {
             color: $orange1;
           }
+
           .azmoon-cat {
             color: $blue2;
           }
+
           .blog-cat {
             color: $orange2;
           }
+
           .school-cat {
             color: $brown1;
           }
         }
 
-        .search-box .v-text-field > .v-input__control > .v-input__slot {
+        .search-box .v-text-field>.v-input__control>.v-input__slot {
           margin-bottom: 0 !important;
           padding: 0.3rem;
         }
+
         .responsive-search-item p {
           font-size: 1.5rem !important;
         }
       }
+
       .category {
         .v-list-item__title {
           font-size: 0.9rem;
@@ -173,15 +196,18 @@ body {
             height: 5.5rem;
           }
         }
+
         .header-search {
           &.desktop-search {
             display: none;
           }
         }
+
         .navbar-items {
           .hamburgers-icon {
             font-size: 2.5rem;
           }
+
           .mobile-search {
             display: none;
 
@@ -191,10 +217,12 @@ body {
           }
         }
       }
+
       //top bar
       .topbar-items {
         padding: 1rem !important;
       }
+
       // grade search
       .search-sec {
         .search-item {
@@ -208,9 +236,11 @@ body {
         max-width: 47% !important;
         min-height: 26rem;
       }
+
       .test-details-content {
         .detail {
           padding: 3rem !important;
+
           &.box {
             box-shadow: none;
             margin: 0;
@@ -218,24 +248,30 @@ body {
             border-radius: 0.3rem;
             border: 0;
           }
+
           .rate {
             position: absolute;
             right: 2%;
             top: 8%;
           }
+
           .detail-title {
             font-size: 1.3rem;
           }
+
           .detail-rate {
             font-size: 1.2rem !important;
           }
+
           .detail-image {
             width: 6rem !important;
             height: 7rem;
           }
+
           .main-content-footer {
             font-size: 11px;
           }
+
           .modal-error {
             font-size: 11px !important;
           }
@@ -243,6 +279,7 @@ body {
           .extra-info-right {
             width: 69% !important;
           }
+
           .extra-info-left {
             width: 27% !important;
           }
@@ -257,9 +294,11 @@ body {
           }
         }
       }
+
       .last-view-title {
         padding: 1rem;
       }
+
       .footer-items {
         padding: 0 1rem !important;
       }
@@ -270,6 +309,7 @@ body {
         .detail {
           .download-links {
             padding: 4rem;
+
             .word-download,
             .pdf-download {
               width: 100%;
@@ -289,33 +329,41 @@ body {
       .row {
         margin: 0;
       }
+
       .stat-value {
         font-size: 2.4rem !important;
       }
+
       .stat-item {
         padding: 0 !important;
         margin-right: 0 !important;
         margin-left: 4rem !important;
         margin-bottom: 2rem;
       }
+
       .stat-sec {
         padding: 1rem 0 !important;
         border: none;
       }
+
       .status {
         border: none;
         filter: none;
       }
+
       .topbar-items {
         padding: 1rem !important;
       }
+
       .logo-search-content {
         padding: 1rem !important;
       }
+
       .container {
         max-width: 100%;
         width: 100%;
       }
+
       .mobile-res-search {
         width: 100% !important;
         border: 1px solid gray;
@@ -326,6 +374,7 @@ body {
         border-radius: 4px;
         height: 4rem;
       }
+
       .main-header {
         .logo-holder {
           height: 4.4rem;
@@ -336,6 +385,7 @@ body {
           }
         }
       }
+
       .search-field {
         font-size: 1rem;
       }
@@ -345,9 +395,11 @@ body {
           font-size: 1.1rem;
         }
       }
+
       .grade-list {
         padding: 1.5rem;
       }
+
       // Grade card
       .grades-list {
         .grade-card {
@@ -355,16 +407,20 @@ body {
           box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
         }
       }
+
       .grade-list-lessons {
         font-size: 14px;
       }
+
       .grade-divider {
         display: none;
       }
+
       .grade-items {
         display: flex;
         justify-content: space-around;
       }
+
       .grade__item {
         display: flex;
         flex-direction: column;
@@ -375,6 +431,7 @@ body {
         justify-content: center !important;
         padding: 1rem !important;
       }
+
       .grade__item-title {
         display: flex;
         flex-direction: column;
@@ -385,126 +442,163 @@ body {
         font-size: 1.2rem !important;
         text-align: center !important;
       }
+
       .grade-card {
         max-width: 100% !important;
       }
+
       .feed-p-res {
         font-size: 12px;
         color: $gray4;
         line-height: 2rem;
       }
+
       // .grade-card__update {
       //   display: none;
       // }
       .stat {
         color: #000000 !important;
       }
+
       .stat:hover {
         color: #1e70bf !important;
       }
+
       .feature-item {
         padding: 0 4rem !important;
         margin: 1rem 0 !important;
       }
+
       .suggestion {
         display: none !important;
       }
+
       .test-details-content {
         .detail {
           .suggest-related-link {
             display: none !important;
           }
         }
+
         .remove-res {
           display: none;
         }
+
         .course-card {
           padding: 7rem 1rem;
           margin: 0;
+
           .avatar-img {
             width: 6.5rem;
             height: 6.5rem;
           }
         }
+
         .album-card {
           padding: 7rem 1rem;
           margin: 0;
         }
+
         .related-box {
           margin: 0;
         }
       }
+
       .footer-items {
         .about-footer-para {
           font-size: 1.2rem !important;
         }
+
         .about-footer {
           font-size: 1.4rem !important;
         }
       }
+
       .footer-bar-item {
         font-size: 1.4rem !important;
         height: 6rem !important;
       }
+
       // Start : Lesson page
       .lesson-section {
         padding: 0 !important;
+
         .lesson-details {
           order: 2;
           padding: 2rem;
-          .last-update,.visit,.error-report {
+
+          .last-update,
+          .visit,
+          .error-report {
             font-size: 1.2rem;
             font-weight: 400;
             color: $gray11;
           }
         }
+
         .lessons-title {
           order: 1;
           border-bottom: 1px solid $border1;
           padding: 2rem;
+
           .lesson-content {
             text-align: right !important;
+
             .lesson-title {
               font-size: 1.6rem;
               font-size: 500;
             }
+
             .lesson-subtitle {
               font-size: 1.4rem;
             }
           }
         }
       }
+
       .cards {
         border-bottom: none;
+
         .card-image img {
           width: 9rem;
           height: 9rem;
         }
+
         .card-body {
           box-shadow: none !important;
           border: none;
         }
+
         .card {
-            border-radius: 0.8rem !important;
-            .card-title {
-              font-size: 1.2rem;
-              color: $gray45;
-              font-weight: 400;
-              letter-spacing: 0.06px;
-            }
-            .video-teacher,.durition,.test-number,.levels {
-              font-size: 1rem;
-              font-weight: 400;
-              color: $gray4;
-              letter-spacing: 0.16px;
-            }
+          border-radius: 0.8rem !important;
+
+          .card-title {
+            font-size: 1.2rem;
+            color: $gray45;
+            font-weight: 400;
+            letter-spacing: 0.06px;
           }
-          .book {
-            
+
+          .video-teacher,
+          .durition,
+          .test-number,
+          .levels {
+            font-size: 1rem;
+            font-weight: 400;
+            color: $gray4;
+            letter-spacing: 0.16px;
           }
-         
-         
+        }
+
+        .book {
+          // .bookText {
+          //   font-size: ;
+          // }
+        }
+
+
       }
+
       // End : Lesson page
     }
   }
