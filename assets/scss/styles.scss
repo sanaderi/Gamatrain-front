@@ -1838,6 +1838,7 @@ body {
 
     //sample test Slider
     .sample-test-holder {
+
       .sample-test-title {
         font-size: 1.8rem;
       }
@@ -2120,19 +2121,21 @@ body {
     //   }
     // }
 
-  //   .v-timeline::before {
-  //     top: 80px;
-  //     height: calc(100% - 120px)
-  // }
-  .timeline {
-    position: relative;
-  }
-  .timeline-number {
-    position: absolute;
-    right: -25%;
-    top: 40%;
-    z-index: 5;
-  }
+    //   .v-timeline::before {
+    //     top: 80px;
+    //     height: calc(100% - 120px)
+    // }
+    .timeline {
+      position: relative;
+    }
+
+    .timeline-number {
+      position: absolute;
+      right: -25%;
+      top: 40%;
+      z-index: 5;
+    }
+
     .v-timeline-item__body a:hover {
       color: $green;
     }
@@ -2175,6 +2178,21 @@ body {
         color: $gray4;
       }
     }
+
+    .responsive-buttons {
+      position: absolute;
+      top: -2%;
+      left: 2%;
+    }
+
+    .responsive-button {
+      background: $green  !important;
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 500;
+      border-radius: 1.8rem;
+      box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
@@ -2197,6 +2215,10 @@ body {
       font-weight: 400;
       color: $gray4;
     }
+  }
+
+  .sample-width {
+    max-width: 1450px;
   }
 
   .sample-slider {
@@ -2283,7 +2305,7 @@ body {
 
     .lastfile-titles {
       border-bottom: 3px solid $category-content ;
-      width: 40%;
+      width: 42%;
       margin-right: -2.7%;
       padding-right: 3%;
       font-size: 1.6rem;
@@ -2299,10 +2321,22 @@ body {
         font-size: 1.6rem !important;
         font-weight: 500;
       }
+
+      // .owl-carousel .item-video {
+      //   height: 300px !important;
+      // }
+
     }
 
     .video-slider {
       position: relative;
+
+      .owl-carousel {
+        .video-carousel {
+          border-radius: 0.4rem !important;
+        }
+      }
+
 
       .filter {
         content: " ";
@@ -2392,6 +2426,11 @@ body {
 
     }
 
+    .ask-text-icon {
+      color: $green;
+    }
+
+
     .askcard-footer-btn {
       background-color: $green  !important;
       color: $white;
@@ -2423,6 +2462,10 @@ body {
       color: $gray11;
       letter-spacing: 0.08px;
 
+    }
+
+    .test-text-icon {
+      color: $green;
     }
 
     .testcard-footer-btn {

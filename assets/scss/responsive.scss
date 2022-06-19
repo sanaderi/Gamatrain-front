@@ -17,7 +17,7 @@
 body {
   overflow-y: scroll;
   overflow-x: hidden;
- 
+
   .v-application {
     @media (min-width: 1904px) {
       .container {
@@ -522,6 +522,7 @@ body {
       // Start : Lesson page
       .lesson-section {
         padding: 0 !important;
+        border-radius: 0 !important;
 
         .lesson-details {
           order: 2;
@@ -545,7 +546,7 @@ body {
             text-align: right !important;
 
             .lesson-title {
-              font-size: 1.6rem;
+              font-size: 1.6rem !important;
               font-size: 500;
             }
 
@@ -558,16 +559,25 @@ body {
 
       .cards {
         border-bottom: none;
+        padding: 0;
+        margin: 0;
 
         .card-image img {
-          width: 9rem;
-          height: 9rem;
+          width: 11rem;
+          height: 11rem;
         }
 
         .card-body {
           box-shadow: none !important;
           border: none;
+          padding-top: 1.2rem !important;
+          padding-bottom: 0 !important;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+
         }
+
+
 
         .card {
           border-radius: 0.8rem !important;
@@ -577,6 +587,13 @@ body {
             color: $gray45;
             font-weight: 400;
             letter-spacing: 0.06px;
+            margin-bottom: 1rem;
+          }
+
+          .video-teacher,
+          .test-number {
+            margin-bottom: 1rem;
+
           }
 
           .video-teacher,
@@ -589,14 +606,63 @@ body {
             letter-spacing: 0.16px;
           }
         }
+      }
 
-        .book {
-          // .bookText {
-          //   font-size: ;
-          // }
+      .book {
+        .container {
+          margin-bottom: 4rem !important;
         }
 
+        .book-contents {
+          position: relative;
+          border-radius: 0;
+          padding: 30px 12px !important;
+        }
+      }
 
+      .sample {
+        .sample-titles {
+          margin-bottom: 0rem;
+          margin-top: 3rem;
+        }
+
+        .sample-slider {
+          .sample-width {
+            max-width: 376px !important;
+          }
+        }
+
+      }
+
+      .feed {
+        .lastfile-titles {
+          width: 75%;
+        }
+
+        .video-slide {
+          height: 28rem !important;
+
+          .rating {
+            bottom: 21%;
+          }
+
+          .v-carousel__controls {
+            width: 45% !important;
+
+            .v-btn--icon.v-size--small {
+              width: 15px;
+            }
+          }
+
+        }
+
+        .related-ask-test {
+          padding: 0;
+        }
+
+        .date-name {
+          width: 100%;
+        }
       }
 
       // End : Lesson page

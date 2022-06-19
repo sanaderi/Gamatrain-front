@@ -1,16 +1,10 @@
 <template >
     <v-container style="max-width: 600px;" class="timeline">
         <v-timeline dense clipped>
-            <v-slide-x-transition group>
-                <v-timeline-item v-for="event in timeline" :key="event.id" class="mb-4" color="pink" small>
-
-                </v-timeline-item>
-            </v-slide-x-transition>
-
 
             <v-timeline-item class="mb-4" :color="item.color" icon-color="grey lighten-3" medium fill-dot
                 v-for="item in timeLines" :key="item.value">           
-                    <span class="headline font-weight-bold timeline-number" v-text="item.year"></span>
+                    <span class="headline font-weight-bold timeline-number" v-text="item.number"></span>
                 <v-row>
                     <v-col cols="12">
                         <p class="category-book-titles " id="title"> {{ item.title }}</p>
@@ -40,21 +34,21 @@ export default {
         return {
             timeLines: [
                 {
-                    year: '1',
+                    number: '1',
                     color: "teal",
                     title: "تنظیم عصبی",
                     link1: " گفتار 1 :یاخته های بافت عصبی",
                     link2: "گفتار 2 : ساختار دستگاه عصبی"
                 },
                 {
-                    year: '2',
+                    number: '2',
                     color: "grey lighten-3",
                     title: "پاسخ گیاهان به محرک ها",
                     link1: " گفتار 1 :یاخته های بافت عصبی",
                     link2: "گفتار 2 : ساختار دستگاه عصبی"
                 },
                 {
-                    year: '3',
+                    number: '3',
                     color: "grey lighten-3",
                     title: "حواس",
                     link1: " گفتار 1 :یاخته های بافت عصبی",
