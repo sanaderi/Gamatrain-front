@@ -2150,6 +2150,47 @@ body {
     background-color: $gray12;
     border-radius: 0.8rem;
 
+    .sidebar-nav {
+      height: 100vh;
+      top: 0px;
+      transform: translateX(0%);
+      width: 256px;
+      position: fixed;
+
+      .sidebar-timeline-title {
+        color: $gray45;
+      }
+
+      .sTimeline-icon {
+        color: $green  !important;
+        font-size: 3rem;
+      }
+
+      .v-timeline::before {
+        right: calc(20px - 1px) !important;
+      }
+
+      .timeline-number {
+        position: absolute;
+        right: -44%;
+        top: 44%;
+        z-index: 3;
+      }
+
+      .timeline-content-body {
+        position: relative;
+        top: 38%;
+        right: -40px;
+      }
+
+      .v-timeline-item__divider {
+        min-width: 4rem !important;
+        right: -20%;
+      }
+    }
+
+
+
     .book-title {
       color: $brown2;
       font-size: 2.2rem;
@@ -2258,6 +2299,15 @@ body {
       background-color: $white;
       box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
 
+      .sample-img {
+        position: relative;
+        .sample-test-number {
+          position: absolute;
+          right: 3%;
+          bottom: 3%;
+        }
+      }
+
       .sample-image {
         width: 277px !important;
         height: 299px !important;
@@ -2331,10 +2381,23 @@ body {
     .video-slider {
       position: relative;
 
+      .video-carousel-mobile {
+        height: 27.5rem !important;
+        width: 35rem !important;
+      }
+
+      .video-carousel-desktop {
+        height: 30rem;
+      }
+
       .owl-carousel {
+        display: block !important;
+
         .video-carousel {
           border-radius: 0.4rem !important;
         }
+
+
       }
 
 

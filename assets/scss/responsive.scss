@@ -25,6 +25,15 @@ body {
         width: 80%;
       }
 
+      .video-carousel {
+        width: 700px;
+      }
+
+      .timeline-number {
+        right: -22% !important;
+      }
+
+
       .feed.v-carousel__controls {
         left: 1% !important;
       }
@@ -627,9 +636,16 @@ body {
         }
 
         .sample-slider {
+          .v-slide-group__prev {
+            display: none;
+          }
+          .v-slide-group__next {
+            display: none;
+          }
           .sample-width {
             max-width: 376px !important;
           }
+          
         }
 
       }

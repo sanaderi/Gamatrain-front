@@ -143,26 +143,61 @@
                 {{ book.catalogeTitle }}
               </p>
               <div class="cataloge-content">
-                <!-- <v-timeline>
-                  <v-timeline-item>timeline item</v-timeline-item>
-                  <v-timeline-item>timeline item</v-timeline-item>
-                  <v-timeline-item>timeline item</v-timeline-item>
-                </v-timeline> -->
                 <timeLine />
               </div>
             </div>
           </v-col>
           <v-col cols="12" md="8" class="pa-0 pa-md-3">
             <div class="book-contents pa-3 pa-md-6">
+              <!-- <v-navigation-drawer left app v-model="side" class="d-block d-md-none">
+                ffefef
+              </v-navigation-drawer> -->
               <div class="responsive-buttons d-flex align-center d-block d-md-none">
-                <v-btn x-large class="d-flex justify-center responsive-button ml-4">
+                <v-btn x-large class="d-flex justify-center responsive-button ml-4" @click.stop="drawer = !drawer">
                   <i class="fa-solid fa-receipt "></i>
                 </v-btn>
-                <v-btn x-large class="responsive-button">
+                <v-btn x-large class="responsive-button" @click.stop="drawer = !drawer">
                   <i class="fa-solid fa-receipt ml-6"></i>
                   فهرست
                 </v-btn>
               </div>
+              <v-navigation-drawer v-model="drawer" class="sidebar-nav pa-5" width="320">
+                <div class="sidebar-timeline-title d-flex align-center ma-2">
+                  <i class="fa-solid fa-book-bookmark sTimeline-icon ml-3"></i>
+                  <p>{{ sidebartimelinetitle }}</p>
+                </div>
+                <div class="timeline">
+                  <v-timeline dense clipped>
+
+                    <v-timeline-item class="mb-4" :color="item.color" icon-color="grey lighten-3" medium fill-dot
+                      v-for="item in timeLines" :key="item.value">
+                      <span class="headline font-weight-bold timeline-number" v-text="item.number"></span>
+                      <v-row class="timeline-content-body">
+                        <v-col cols="12">
+                          <p class="category-book-titles " id="title"> {{ item.title }}</p>
+                        </v-col>
+                        <v-col cols="12">
+                          <nuxt-link to="" id="lesson-name1">
+                            <i class="fa-regular fa-window-minimize ml-2"></i>
+                            {{ item.link1 }}
+                          </nuxt-link>
+                        </v-col>
+                        <v-col cols="12">
+                          <nuxt-link to="" id="lesson-name2">
+                            <i class="fa-regular fa-window-minimize ml-2"></i>
+                            {{ item.link2 }}
+                          </nuxt-link>
+                        </v-col>
+                      </v-row>
+                    </v-timeline-item>
+
+                  </v-timeline>
+                </div>
+
+
+
+              </v-navigation-drawer>
+
               <div class="book-content" v-for="(item, bookContent) in bookContent" :key="bookContent">
                 <p class="book-title mb-3">{{ item.bookTitle }}</p>
                 <p class="bookText">{{ item.bookText }}</p>
@@ -202,6 +237,9 @@
                   <div class="book-sample pa-4 mx-2">
                     <div class="sample-img">
                       <img :src="require('@/assets/images/' + bookSample.sampleImg)" alt="" class="sample-image">
+                      <span class="sample-test-number">
+                        <p>{{testNumber}}</p>
+                      </span>
                     </div>
                     <div class="sample-text">
                       <p>{{ bookSample.sampleText }}</p>
@@ -234,20 +272,20 @@
                 <p class="mb-0 mx-2 lastfile-title">آخرین فایل های آموزشی</p>
               </div>
               <div class="video-slider">
-                <!-- <v-carousel class="video-slide" height="34rem" width="100px">
-                  <v-carousel-item v-for="(item, video) in items" cover :key="video.value"
-                    :src="require('@/assets/images/' + item.src)" reverse-transition="fade-transition"
-                    transition="fade-transition" class="video"></v-carousel-item>
-                  <div class="filter"></div>
-                  <v-rating v-model="rating" background-color="orange lighten-3" color="orange" medium class="rating">
-                  </v-rating>
-                </v-carousel> -->
                 <div class="owl-carousel owl-theme">
                   <div class="item-video" v-for="item in videos" :key="item.value">
-                    <video :src="require('@/assets/video/' + item.vid)" controls width="700">
+                    <video :src="require('@/assets/video/' + item.vid)" controls width="575" class="video-carousel">
                     </video>
                   </div>
                 </div>
+                <!-- <v-slide-group multiple center-active>
+                  <v-slide-item v-for="item in videos" :key="item.value">
+                    <div class="item-video">
+                      <video :src="require('@/assets/video/' + item.vid)" controls  class="video-carousel-desktop">
+                      </video>
+                    </div>
+                  </v-slide-item>
+                </v-slide-group> -->
                 <!-- <div class="filter"></div> -->
               </div>
               <div class="date-name d-flex align-center justify-space-between my-5">
@@ -273,28 +311,27 @@
           <!-- End : Descktop LastFile-->
 
           <!-- Start : Mobile lastFIle -->
-          <v-col md="6" class="last-files pa-4 d-block d-md-none mb-6 mb-md-0">
+          <v-col cols="12" md="6" class="last-files pa-4 d-block d-md-none mb-6 mb-md-0">
             <div class="lastfile-content d-flex flex-column">
               <div class="lastfile-titles d-flex align-center pb-4 mb-5">
                 <span class="icon icong-learnfiles lastfile-icon-title"></span>
                 <p class="mb-0 mx-2 lastfile-title">آخرین فایل های آموزشی</p>
               </div>
               <div class="video-slider">
-                <!-- <v-carousel class="video-slide" height="34rem" width="100px">
-                  <v-carousel-item v-for="(item, video) in items" cover :key="video.value"
-                    :src="require('@/assets/images/' + item.src)" reverse-transition="fade-transition"
-                    transition="fade-transition" class="video"></v-carousel-item>
-                  <div class="filter"></div>
-                  <v-rating v-model="rating" background-color="orange lighten-3" color="orange" medium class="rating">
-                  </v-rating>
-                </v-carousel> -->
                 <div class="owl-carousel owl-theme">
                   <div class="item-video" v-for="item in videos" :key="item.value">
-                    <video :src="require('@/assets/video/' + item.vid)" controls width="370" class="video-carousel"
-                      poster="placeholder.png">
+                    <video :src="require('@/assets/video/' + item.vid)" controls width="350" class="video-carousel">
                     </video>
                   </div>
                 </div>
+                <!-- <v-slide-group multiple center-active>
+                  <v-slide-item v-for="item in videos" :key="item.value">
+                    <div class="item-video">
+                      <video :src="require('@/assets/video/' + item.vid)" controls  class="video-carousel-mobile">
+                      </video>
+                    </div>
+                  </v-slide-item>
+                </v-slide-group> -->
                 <!-- <div class="filter"></div> -->
               </div>
               <p class="lastFile-text my-5">
@@ -315,7 +352,7 @@
           <!-- End : Mobile lastFIle -->
 
 
-          <v-col md="6" class="related-ask-test py-0 d-flex flex-column">
+          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column">
             <!-- Start : Desktop askCard -->
             <div class="ask-card mb-6 pa-4 d-none d-md-block">
               <div class="ask-title d-flex align-center mb-5">
@@ -431,9 +468,40 @@ export default {
   components: { category, timeLine, },
   data() {
     return {
+      drawer: false,
+      // model: null,
+      sidebartimelinetitle: "  زیست شناسی (2)",
+      testNumber:"20 تست",
+      timeLines: [
+        {
+          number: '1',
+          color: "teal",
+          title: "تنظیم عصبی",
+          link1: " گفتار 1 :یاخته های بافت عصبی",
+          link2: "گفتار 2 : ساختار دستگاه عصبی"
+        },
+        {
+          number: '2',
+          color: "grey lighten-3",
+          title: "پاسخ گیاهان به محرک ها",
+          link1: " گفتار 1 :یاخته های بافت عصبی",
+          link2: "گفتار 2 : ساختار دستگاه عصبی"
+        },
+        {
+          number: '3',
+          color: "grey lighten-3",
+          title: "حواس",
+          link1: " گفتار 1 :یاخته های بافت عصبی",
+          link2: "گفتار 2 : ساختار دستگاه عصبی"
+        },
+      ],
+      items: [
+        { title: 'Home', icon: 'mdi-view-dashboard' },
+        { title: 'About', icon: 'mdi-forum' },
+      ],
       videos: [
         {
-          pic: "vid.png",
+
           vid: "video.mp4"
         },
         {
@@ -547,32 +615,6 @@ export default {
         samplefooterImg: "dexter-morse3.png",
         sfooterName: "علیرضا داودی"
       },
-      items: [
-        {
-          src: "vid.png",
-        },
-        {
-          src: "vid.png",
-        },
-        {
-          src: "vid.png",
-        },
-        {
-          src: "vid.png",
-        },
-        {
-          src: "vid.png",
-        },
-        {
-          src: "vid.png",
-        },
-        {
-          src: "vid.png",
-        },
-        {
-          src: "vid.png",
-        },
-      ],
       events: [],
       input: null,
       nonce: 0,
