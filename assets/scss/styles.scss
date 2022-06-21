@@ -2111,6 +2111,13 @@ body {
       color: $gray45;
       font-size: 2rem;
     }
+    .v-timeline--dense:not(.v-timeline--reverse)::before {
+      right: -9%;
+    }
+    .v-timeline-item__divider {
+      min-width: 4rem;
+      right: -45%;
+    }
 
     // .v-timeline-item__divider .v-timeline-item__dot {
     //   background: $green;
@@ -2125,16 +2132,40 @@ body {
     //     top: 80px;
     //     height: calc(100% - 120px)
     // }
+
+    //.v-timeline-item__dot,
+    //.v-timeline-item__inner-dot {
+    //  display: none !important;
+    //}
+
     .timeline {
       position: relative;
+      .category-book-titles {
+        &.active {
+          color: $green;
+        }
+      }
     }
 
-    .timeline-number {
-      position: absolute;
-      right: -25%;
-      top: 40%;
-      z-index: 5;
-    }
+    //.timeline-number {
+    //  position: absolute;
+    //  right: -28% !important;
+    //  top: 33%;
+    //  z-index: 5;
+    //  width: 38px;
+    //  height: 38px;
+    //  background: lightgray;
+    //  border-radius: 50%;
+    //  display: flex;
+    //  justify-content: center;
+    //  align-items: center;
+    //
+    //  &.active {
+    //    background: #008b8b;
+    //    color: #FFFFFF;
+    //  }
+    //}
+
 
     .v-timeline-item__body a:hover {
       color: $green;
@@ -2170,12 +2201,12 @@ body {
         right: calc(20px - 1px) !important;
       }
 
-      .timeline-number {
-        position: absolute;
-        right: -44%;
-        top: 44%;
-        z-index: 3;
-      }
+      //.timeline-number {
+      //  position: absolute;
+      //  right: -44%;
+      //  top: 41%;
+      //  z-index: 3;
+      //}
 
       .timeline-content-body {
         position: relative;
@@ -2186,6 +2217,19 @@ body {
       .v-timeline-item__divider {
         min-width: 4rem !important;
         right: -20%;
+      }
+      .lesson-name-timeline:focus {
+        color: $green !important;
+      }
+      .lesson-name-timeline:hover {
+        color: $green !important;
+      }
+      .lesson-name-timeline {
+        font-size: 1.2rem;
+
+        .lesson-name-dash {
+          font-size: 0.8rem;
+        }
       }
     }
 
@@ -2301,10 +2345,16 @@ body {
 
       .sample-img {
         position: relative;
+
         .sample-test-number {
           position: absolute;
-          right: 3%;
-          bottom: 3%;
+          right: 7%;
+          bottom: 6%;
+          color: $white;
+          font-weight: 500;
+          background-color: $gray4;
+          padding: 0.6rem 2rem;
+          border-radius: 0.6rem;
         }
       }
 
@@ -2319,6 +2369,7 @@ body {
 
       .sfooter-link {
         color: $green;
+        font-size: 1rem;
       }
 
       .sfooter-name {
@@ -2543,3 +2594,30 @@ body {
 }
 
 // End: Lesson page
+.book {
+  .cataloge {
+    .timeline-number {
+      position: absolute;
+      right: -28% !important;
+      top: 33%;
+      z-index: 5;
+      width: 38px;
+      height: 38px;
+      background: lightgray;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.book .cataloge .timeline-number.active {
+  background: #008b8b;
+  color: #FFFFFF;
+}
+
+.v-timeline-item__dot,
+.v-timeline-item__inner-dot {
+  display: none !important;
+}
