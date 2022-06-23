@@ -113,9 +113,9 @@ export default {
     showMore: false,
     items: [
       { class: "exam", text: "آزمون آنلاین", icon: "azmoon" },
-      { class: "test", text: "نمونه سوال", icon: "test" },
+      { class: "test", text: "Sample Exam", icon: "test" },
       { class: "content", text: "محتوای آموزشی", icon: "learnfiles" },
-      { class: "faq", text: "پرسش و پاسخ", icon: "qa" },
+      { class: "faq", text: "Q & A", icon: "qa" },
       { class: "textbook ", text: "درسنامه آموزشی", icon: "blog" },
       { class: "school", text: "مدرسه یاب", icon: "school" },
       { class: "tutor", text: "معلم خصوصی", icon: "teacher" },

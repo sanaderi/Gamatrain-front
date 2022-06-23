@@ -251,7 +251,7 @@
               <div class="sample-test-title">
                 <nuxt-link to="" class="d-flex align-center ">
                   <span class="d-flex align-center icong-test ml-2 icon"></span>
-                  <h3>نمونه سوالات مرتبط</h3>
+                  <h3>Sample Examات مرتبط</h3>
                 </nuxt-link>
               </div>
               <div class="sample-test-slider-holder">
@@ -336,7 +336,7 @@ export default {
   data: () => ({
     breads: [
       {
-        text: 'نمونه سوال',
+        text: 'Sample Exam',
         disabled: false,
         href: 'breadcrumbs_dashboard',
       },
@@ -448,7 +448,7 @@ export default {
             link: ''
           },
           {
-            title: 'جزوه و نمونه سوالات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
+            title: 'جزوه و Sample Examات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
             link: ''
           },
           {
@@ -459,7 +459,7 @@ export default {
       },
       {
         class: 'question',
-        header: 'پرسش و پاسخ های مرتبط',
+        header: 'Q & A های مرتبط',
         icon: 'qa',
         description: '   سوال کنید یا به سوالات دیگران پاسخ دهید ...',
         contentItemList: [
@@ -468,7 +468,7 @@ export default {
             link: ''
           },
           {
-            title: 'جزوه و نمونه سوالات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
+            title: 'جزوه و Sample Examات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
             link: ''
           },
           {
@@ -487,7 +487,7 @@ export default {
             link: ''
           },
           {
-            title: 'جزوه و نمونه سوالات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
+            title: 'جزوه و Sample Examات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
             link: ''
           },
           {
@@ -506,7 +506,7 @@ export default {
             link: ''
           },
           {
-            title: 'جزوه و نمونه سوالات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
+            title: 'جزوه و Sample Examات تشریحی و تستی درس 7 فلسفه دوازدهم | عقل در فلسفه (1) ِ ',
             link: ''
           },
           {

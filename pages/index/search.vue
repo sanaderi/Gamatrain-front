@@ -43,9 +43,9 @@
         cols="12"
         md="1"
         sm="12"
-        
+
       >
-        <v-btn large class="search-btn" depressed> جستجو </v-btn>
+        <v-btn large class="search-btn" depressed> Search </v-btn>
       </v-col>
     </v-row>
   </form>

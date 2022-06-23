@@ -19,7 +19,7 @@
         <v-divider vertical></v-divider>
         <v-text-field
           class="py-1 my-0 search-field main-search-icon mr-2 mt-4"
-          placeholder="جستجو..."
+          placeholder="Search ..."
         >
         </v-text-field>
       </div>
@@ -28,9 +28,9 @@
     <section class="banner-sec">
       <v-carousel class="index-banner">
         <v-carousel-item
-          v-for="(item, i) in items"
+          v-for="(item, index) in items"
           cover
-          :key="i"
+          :key="'banner' + index"
           :src="require('@/assets/images/' + item.src)"
           reverse-transition="fade-transition"
           transition="fade-transition"
@@ -64,7 +64,7 @@
         <v-row class="justify-space-between mx-0 grade-list">
           <v-col
             v-for="(grade, index) in gradeList"
-            :key="index"
+            :key="'DgradeList' + index"
             cols="12"
             md="3"
             sm="6"
@@ -73,8 +73,8 @@
             <v-card :class="'grade-card grade-card' + (index + 1)">
               <p v-if="grade.showMore" class="total-content position-relative">
                 <nuxt-link
-                  v-for="(item, index) in grade.totalContent"
-                  :key="index"
+                  v-for="(item, more) in grade.totalContent"
+                  :key="more.value"
                   :to="item.to"
                   class="content"
                 >
@@ -102,15 +102,15 @@
                       }}</span>
                       {{ grade.title }}
                     </nuxt-link>
-                    <v-text class="d-flex align-center res-update d-sm-none">
+                    <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
                       <p>27فروردین</p>
-                    </v-text>
+                    </div>
                   </div>
                   <p class="d-inline-block">
                     <nuxt-link
-                      v-for="(item, index) in grade.summeryContent"
-                      :key="index"
+                      v-for="(item, summery) in grade.summeryContent"
+                      :key="summery.value"
                       :to="item.to"
                       class="content grade-list-lessons"
                     >
@@ -129,8 +129,8 @@
                 <v-card-text class="pa-0 grade-items mb-3">
                   <nuxt-link
                     to="grade.link"
-                    v-for="item in grade.cat"
-                    :key="item.title"
+                    v-for="(item,idxkey) in grade.cat"
+                    :key="idxkey.title"
                     class="
                       d-flex
                       align-center
@@ -144,15 +144,15 @@
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'نمونه سوال'"
+                        v-if="item.title === 'Sample Exam'"
                         class="ml-4 icon icong-test"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'فایل آموزشی'"
+                        v-else-if="item.title === 'Training Content'"
                         class="ml-4 icon icong-learnfiles"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'پرسش و پاسخ'"
+                        v-else-if="item.title === 'Q & A'"
                         class="ml-4 icon icong-qa"
                       ></v-icon>
                       <v-icon
@@ -218,14 +218,14 @@
             md="3"
             sm="6"
             v-for="(grade, index) in gradeList.slice(0, 3)"
-            :key="index"
+            :key="index.value"
             class="grade-card-body"
           >
             <v-card :class="' grade-card grade-card' + (index + 1)">
               <p v-if="grade.showMore" class="total-content position-relative">
                 <nuxt-link
-                  v-for="(item, index) in grade.totalContent"
-                  :key="index"
+                  v-for="(item, gradeCard) in grade.totalContent"
+                  :key="gradeCard.value"
                   :to="item.to"
                   class="content ml-1"
                 >
@@ -249,15 +249,15 @@
                       }}</span>
                       {{ grade.title }}
                     </h2>
-                    <v-text class="d-flex align-center res-update d-sm-none">
+                    <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
                       <p>27 فروردین</p>
-                    </v-text>
+                    </div>
                   </div>
                   <p class="d-inline-block">
                     <nuxt-link
-                      v-for="(item, index) in grade.summeryContent"
-                      :key="index"
+                      v-for="(item, summeryContent) in grade.summeryContent"
+                      :key="summeryContent.value"
                       :to="item.to"
                       class="content grade-list-lessons"
                     >
@@ -272,8 +272,8 @@
                   >
                   <p v-if="grade.showMore" class="total-content">
                     <nuxt-link
-                      v-for="(item, index) in grade.totalContent"
-                      :key="index"
+                      v-for="(item, totalContent) in grade.totalContent"
+                      :key="totalContent.value"
                       :to="item.to"
                       class="content"
                     >
@@ -297,15 +297,15 @@
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'نمونه سوال'"
+                        v-if="item.title === 'Sample Exam'"
                         class="ml-1 icon icong-test"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'فایل آموزشی'"
+                        v-else-if="item.title === 'Training Content'"
                         class="ml-1 icon icong-learnfiles"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'پرسش و پاسخ'"
+                        v-else-if="item.title === 'Q & A'"
                         class="ml-1 icon icong-qa"
                       ></v-icon>
                       <v-icon
@@ -358,7 +358,7 @@
         <v-row v-else class="justify-space-between mx-0 grade-list">
           <v-col
             v-for="(grade, index) in gradeList"
-            :key="index"
+            :key="index.value"
             cols="12"
             md="3"
             sm="6"
@@ -367,8 +367,8 @@
             <v-card :class="' grade-card grade-card' + (index + 1)">
               <p v-if="grade.showMore" class="total-content position-relative">
                 <nuxt-link
-                  v-for="(item, index) in grade.totalContent"
-                  :key="index"
+                  v-for="(item, mTotalContent) in grade.totalContent"
+                  :key="mTotalContent.value"
                   :to="item.to"
                   class="content"
                 >
@@ -392,15 +392,15 @@
                       }}</span>
                       {{ grade.title }}
                     </h2>
-                    <v-text class="d-flex align-center res-update d-sm-none">
+                    <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
                       <p>27 فروردین</p>
-                    </v-text>
+                    </div>
                   </div>
                   <p class="d-inline-block">
                     <nuxt-link
-                      v-for="(item, index) in grade.summeryContent"
-                      :key="index"
+                      v-for="(item, mSummeryContent) in grade.summeryContent"
+                      :key="mSummeryContent.value"
                       :to="item.to"
                       class="content grade-list-lessons"
                     >
@@ -415,8 +415,8 @@
                   >
                   <p v-if="grade.showMore" class="total-content">
                     <nuxt-link
-                      v-for="(item, index) in grade.totalContent"
-                      :key="index"
+                      v-for="(item, tContent) in grade.totalContent"
+                      :key="tContent.value"
                       :to="item.to"
                       class="content"
                     >
@@ -440,15 +440,15 @@
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'نمونه سوال'"
+                        v-if="item.title === 'Sample Exam'"
                         class="ml-1 icon icong-test"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'فایل آموزشی'"
+                        v-else-if="item.title === 'Training Content'"
                         class="ml-1 icon icong-learnfiles"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'پرسش و پاسخ'"
+                        v-else-if="item.title === 'Q & A'"
                         class="ml-1 icon icong-qa"
                       ></v-icon>
                       <v-icon
@@ -513,55 +513,13 @@
       </v-container>
     </section>
     <!--  End: Grade list  -->
-
-    <!--  Start: Site feature  -->
-    <!-- <section class="site-feature">
-      <v-container>
-        <div class="box">
-          <v-row>
-            <v-col
-              v-for="(feature, index) in siteFeatureList"
-              :key="index"
-              cols="12"
-              md="3"
-              sm="3"
-              class="feature-item"
-            >
-              <nuxt-link to="">
-                <v-card class="'mx-auto feature-card">
-                  <v-card-title
-                    class="d-block text-center feature-title-holder"
-                  >
-                    <span :class="'d-block icon icong-' + feature.icon"> </span>
-                    <span class="feature-title">{{ feature.title }}</span>
-                  </v-card-title>
-                  <v-card-text>
-                    <v-list>
-                      <v-list-item
-                        v-for="(detail,index) in feature.details"
-                        :key="index"
-                        class="mb-2 feature-detail"
-                      >
-                        - {{ detail }}
-                      </v-list-item>
-                    </v-list>
-                  </v-card-text>
-                </v-card>
-              </nuxt-link>
-            </v-col>
-          </v-row>
-        </div>
-      </v-container>
-    </section> -->
-    <!--  End: Site feature  -->
-
     <!--  Start: feed box  -->
     <section class="feed-box d-none d-md-flex">
       <v-container>
         <v-row>
           <v-col
-            v-for="(feed, index) in footerFeedList"
-            :key="index"
+            v-for="(feed, feedBox) in footerFeedList"
+            :key="feedBox.value"
             cols="12"
             md="4"
             sm="4"
@@ -583,7 +541,7 @@
               <div
                 class="feed-box-item d-flex"
                 v-for="feed in thirdFeedBox"
-                :key="feed"
+                :key="feed.value"
               >
                 <div class="feedBoxImg">
                   <img :src="require('@/assets/images/' + feed.img)" alt="" />
@@ -675,7 +633,7 @@
       </v-container>
     </section> -->
     <!--  End: Last views   -->
-    <!-- <Scroll /> -->
+    <Scroll />
   </div>
 </template>
 
@@ -704,7 +662,7 @@ export default {
     less: true,
     showLess: true,
     thirdFeedBoxIcon: "News.png",
-    
+
     thirdFeedBox: [
       {
         img: "laptop.png",
@@ -801,15 +759,15 @@ export default {
         link: "",
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -857,15 +815,15 @@ export default {
         ],
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -913,15 +871,15 @@ export default {
         ],
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -969,15 +927,15 @@ export default {
         ],
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -1026,15 +984,15 @@ export default {
         link: "",
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -1082,15 +1040,15 @@ export default {
         ],
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -1138,15 +1096,15 @@ export default {
         ],
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -1194,15 +1152,15 @@ export default {
         ],
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -1251,15 +1209,15 @@ export default {
         link: "",
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -1307,15 +1265,15 @@ export default {
         ],
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -1363,15 +1321,15 @@ export default {
         ],
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -1419,15 +1377,15 @@ export default {
         ],
         cat: [
           {
-            title: "نمونه سوال",
+            title: "Sample Exam",
             stat: "1355",
           },
           {
-            title: "فایل آموزشی",
+            title: "Training Content",
             stat: "1211",
           },
           {
-            title: "پرسش و پاسخ",
+            title: "Q & A",
             stat: "68",
           },
           {
@@ -1591,7 +1549,7 @@ export default {
       { label: "مدرسه", value: "130,000", icon: "fa-graduation-cap" },
       { label: "دبیر", value: "300,000", icon: "fa-graduation-cap" },
       { label: "دانش آموز", value: "1,500,000", icon: "fa-graduation-cap" },
-      { label: "نمونه سوال", value: "50,000", icon: "fa-graduation-cap" },
+      { label: "Sample Exam", value: "50,000", icon: "fa-graduation-cap" },
       { label: "پاورپوینت", value: "30,000", icon: "fa-graduation-cap" },
       { label: "آزمون آنلاین", value: "5,000", icon: "fa-graduation-cap" },
     ],

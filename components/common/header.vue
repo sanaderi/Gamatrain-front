@@ -80,7 +80,7 @@
                     <v-list-item
                       v-for="(subMenuItem, side) in item.subMenuList"
                       :to="subMenuItem.path"
-                      :key="subMenuItem.title"
+                      :key="side.title"
                     >
                       <nuxt-link :to="subMenuItem.link">
                         <span class="fa-solid fa-angles-left ms-2"></span>
@@ -126,14 +126,14 @@
             <!-- Start: App bar in top page for menu list -->
             <v-app-bar class="desktop-nav">
               <!--   hamburgers-icon in mobile-->
-              <span class="hidden-md-and-up">
+              <span class="d-block d-md-none">
                 <v-btn class="pa-0 btn-transparent" @click="sidebar = !sidebar">
                   <span class="fa-solid fa-bars hamburgers-icon"></span>
                 </v-btn>
               </span>
               <v-spacer></v-spacer>
               <!--  show menu in desktop -->
-              <v-toolbar-items class="hidden-md-and-down">
+              <v-toolbar-items class="d-none d-md-block">
                 <v-menu
                   v-for="(item, side) in menuItems"
                   :key="side"
@@ -143,9 +143,10 @@
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn v-bind="attrs" v-on="on">
-                      <nuxt-link :to="item.link" class="headermenu-item">                        
+                      <nuxt-link :to="item.link" class="headermenu-item">
+                        <span v-show="item.title=='Home'" class="fa-solid fa-house-chimney mx-1"/>
                         {{ item.title }}
-                        <span :class="'ml-1 fa-solid ' + item.icon"></span>
+                        <span :class="'mr-1 fa-solid ' + item.icon"></span>
                       </nuxt-link>
                     </v-btn>
                   </template>
@@ -156,7 +157,6 @@
                       class="dropdown-item"
                     >
                       <nuxt-link :to="subMenuItem.link">
-                        <span class="fa-solid fa-angles-left ms-2"></span>
                         {{ subMenuItem.title }}
                       </nuxt-link>
                     </v-list-item>
@@ -209,7 +209,7 @@
                             align-sm-center align-center
                             search-icon-placeholder
                           "
-                          placeholder="جستجو کنید..."
+                          placeholder="Search..."
                         >
                         </v-text-field>
                         <v-btn class="pl-0 btn-transparent d-flex justify-end">
@@ -228,7 +228,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>نمونه سوال</p>
+                            <p>Sample Exam</p>
                             <p>50,000 +</p>
                           </div>
                         </nuxt-link>
@@ -262,7 +262,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>پرسش و پاسخ</p>
+                            <p>Q & A</p>
                             <p>20,000 +</p>
                           </div>
                         </nuxt-link>
@@ -406,32 +406,32 @@ export default {
       ],
       menuItems: [
         {
-          title: "خانه",
+          title: "Home",
           link: "./",
-          icon: "fa-house-chimney",
+          icon: "",
         },
         {
-          title: "آشنایی",
+          title: "Announcement",
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            { title: "قوانین و مقررات", link: "" },
-            { title: "پرسش های متداول", link: "" },
-            { title: "راهنمای عضویت", link: "" },
+            { title: "Terms and Conditions", link: "" },
+            { title: "Privacy Policy", link: "" },
+            { title: "FAQs", link: "" },
           ],
         },
         {
-          title: "المپیادها",
+          title: "Olympiad",
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            { title: "المپیاد ریاضی", link: "" },
-            { title: "المپیاد فیزیک", link: "" },
-            { title: "المپیاد شیمی", link: "" },
+            { title: "International Mathematical Olympiad (IMO)", link: "" },
+            { title: "International Physics Olympiad (IPhO)", link: "" },
+            { title: "International Chemistry Olympiad (IChO)", link: "" },
           ],
         },
         {
-          title: "نمونه و تیزهوشان",
+          title: "High-level",
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
@@ -441,7 +441,7 @@ export default {
           ],
         },
         {
-          title: "کتاب های درسی",
+          title: "Books",
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
@@ -451,7 +451,7 @@ export default {
           ],
         },
         {
-          title: "پیشنهاد ویژه",
+          title: "Suggestions",
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
@@ -464,7 +464,7 @@ export default {
         //   title: "تدریس آنلاین",
         //   link: "",
         //   icon: "fa-tv",
-         
+
         // },
       ],
       selectedItem: 1,

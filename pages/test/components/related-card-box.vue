@@ -14,7 +14,7 @@
 
 
       <v-list-item
-        v-for="(item, index) in related.contentItemList" :key="index"
+        v-for="(item, contentItem) in related.contentItemList" :key="contentItem"
       >
         <nuxt-link to="" class="d-flex flex-wrap w-100">
           <v-list-item-content class="related-content">
