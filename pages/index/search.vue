@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submit">
     <v-row class="mx-0 align-center search-container">
-      <p>جستجوی پیشرفته</p>
+      <p>Advanced search</p>
       <v-col cols="12" md="3" sm="12" class="search-item">
         <v-autocomplete
           class="grade-search"
@@ -11,7 +11,7 @@
           dense
           outlined
           small-chips
-          label="مقطع"
+          label="Grade level"
         ></v-autocomplete>
       </v-col>
       <v-col cols="12" md="3" sm="12" class="search-item">
@@ -23,7 +23,7 @@
           dense
           outlined
           small-chips
-          label="پایه"
+          label="Grade"
         ></v-autocomplete>
       </v-col>
       <v-col cols="12" md="3" sm="12" class="search-item">
@@ -35,7 +35,7 @@
           dense
           outlined
           small-chips
-          label="کتاب درسی"
+          label="Course"
         ></v-autocomplete>
       </v-col>
       <v-col
@@ -66,8 +66,8 @@ export default {
   },
   data() {
     return {
-      // items: ['همه', 'دبستان', 'متوسطه'],
-      values: ["همه"],
+      // items: ['All', 'دبستان', 'متوسطه'],
+      values: ["All"],
       // value: null,
     };
   },

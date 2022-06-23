@@ -31,7 +31,7 @@
           <v-col cols="12" md="4" sm="6" class="footer-items">
             <v-list class="py-0">
               <v-list-item class="footer-item">
-                <p class="about-footer footer-titles mt-3">درباره ما</p>
+                <p class="about-footer footer-titles mt-3">About me</p>
               </v-list-item>
 
               <v-list-item class="footer-item">
@@ -49,28 +49,28 @@
             <v-list class="py-0">
               <v-list-item class="footer-item">
                 <v-list-item class="footer-item">
-                  <p class="about-footer footer-titles">خدمات مشتری</p>
+                  <p class="about-footer footer-titles">Services</p>
                 </v-list-item>
               </v-list-item>
 
               <v-list-item class="footer-item">
                 <nuxt-link to="" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">قوانین و مقررات </span>
+                  <span class="mr-2 footer-item-title">Terms and Conditions </span>
                 </nuxt-link>
               </v-list-item>
               <v-list-item class="footer-item">
                 <nuxt-link to="" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">پرسش های متداول</span>
+                  <span class="mr-2 footer-item-title">FAQ's</span>
                 </nuxt-link>
               </v-list-item>
               <v-list-item class="footer-item">
                 <nuxt-link to="" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">قوانین و مقررات </span>
+                  <span class="mr-2 footer-item-title">Terms and Conditions </span>
                 </nuxt-link>
               </v-list-item>
               <v-list-item class="footer-item">
                 <nuxt-link to="" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">پرسش های متداول</span>
+                  <span class="mr-2 footer-item-title">FAQ's</span>
                 </nuxt-link>
               </v-list-item>
             </v-list>
@@ -79,27 +79,27 @@
             <v-list class="py-0">
               <v-list-item class="footer-item">
                 <v-list-item class="footer-item">
-                  <p class="about-footer footer-titles">راهنمای سایت</p>
+                  <p class="about-footer footer-titles">Help</p>
                 </v-list-item>
               </v-list-item>
               <v-list-item class="footer-item">
                 <nuxt-link to="" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">قوانین و مقررات </span>
+                  <span class="mr-2 footer-item-title">Terms and Conditions </span>
                 </nuxt-link>
               </v-list-item>
               <v-list-item class="footer-item">
                 <nuxt-link to="" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">پرسش های متداول</span>
+                  <span class="mr-2 footer-item-title">FAQ's</span>
                 </nuxt-link>
               </v-list-item>
               <v-list-item class="footer-item">
                 <nuxt-link to="" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">قوانین و مقررات </span>
+                  <span class="mr-2 footer-item-title">Terms and Conditions </span>
                 </nuxt-link>
               </v-list-item>
               <v-list-item class="footer-item">
                 <nuxt-link to="" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">پرسش های متداول</span>
+                  <span class="mr-2 footer-item-title">FAQ's</span>
                 </nuxt-link>
               </v-list-item>
             </v-list>
@@ -152,37 +152,37 @@
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >معلم خصوصی</v-col
+          >Teacher</v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >معلم خصوصی</v-col
+          >Teacher</v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >معلم خصوصی</v-col
+          >Teacher</v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >معلم خصوصی</v-col
+          >Teacher</v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >معلم خصوصی</v-col
+          >Teacher</v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >معلم خصوصی</v-col
+          >Teacher</v-col
         >
       </v-row>
     </div>

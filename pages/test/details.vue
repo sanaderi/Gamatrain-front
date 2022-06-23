@@ -110,7 +110,7 @@
               </div>
               <!--   fileCopyRight  -->
               <div class="d-none d-md-block text-center file-copy-right">
-                <p class="">باز نشر محتواها در فضای مجازی، ممنوع است.</p>
+                <p class="">باز نشر 1st Gradeها در فضای مجازی، ممنوع است.</p>
               </div>
             </v-col>
             <v-col md="3">
@@ -213,7 +213,7 @@
               <div class="description">
                 <div>
                   <nuxt-link to="">
-                    <h2 class="course-title">آلبوم بانک تست های آزمون آنلاین، تاریخ (3) دوازدهم دوره دوم متوسطه- نظری</h2>
+                    <h2 class="course-title">آلبوم بانک تست های Online Exam، تاریخ (3) دوازدهم دوره دوم متوسطه- نظری</h2>
                   </nuxt-link>
                 </div>
                 <div class="num">
@@ -274,7 +274,7 @@
                       <div class="sample-test-item">
                         <nuxt-link class=" " to="">
                           <div class="position-relative sample-test-image-holder">
-                            <p  v-if="(test.type === 'azmoon')" class="label offlabel">آزمون آنلاین</p>
+                            <p  v-if="(test.type === 'azmoon')" class="label offlabel">Online Exam</p>
                             <img :alt=test.description :src="require(`~/assets/images/${test.img}`)" class="sample-test-image" />
                             <p class="font-weight-bold label page-label">
                               {{test.pages}}

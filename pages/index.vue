@@ -156,7 +156,7 @@
                         class="ml-4 icon icong-qa"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'آزمون آنلاین'"
+                        v-else-if="item.title === 'Online Exam'"
                         class="ml-4 icon icong-azmoon"
                       ></v-icon>
                       <span
@@ -309,7 +309,7 @@
                         class="ml-1 icon icong-qa"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'آزمون آنلاین'"
+                        v-else-if="item.title === 'Online Exam'"
                         class="ml-1 icon icong-azmoon"
                       ></v-icon>
                       <span
@@ -452,7 +452,7 @@
                         class="ml-1 icon icong-qa"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'آزمون آنلاین'"
+                        v-else-if="item.title === 'Online Exam'"
                         class="ml-1 icon icong-azmoon"
                       ></v-icon>
                       <span
@@ -534,7 +534,7 @@
                 class="mx-2"
                 width="28"
               />
-              آخرین اخبار
+              Latest News
             </div>
 
             <div class="d-flex flex-column pa-3">
@@ -574,7 +574,7 @@
             </div>
             <div class="feed-footer d-flex align-center pa-3">
               <nuxt-link to="" class="pb-0 feed-more mr-4"
-                >موارد بیشتر</nuxt-link
+                >More</nuxt-link
               >
             </div>
           </v-col>
@@ -710,18 +710,18 @@ export default {
         src: "slider.png",
       },
     ],
-    items1: ["همه", "دبستان", "متوسطه"],
-    items2: ["همه", "دبستان", "متوسطه"],
-    items3: ["همه", "دبستان", "متوسطه"],
-    values1: ["همه"],
-    values2: ["همه"],
-    values3: ["همه"],
+    items1: ["All", "دبستان", "متوسطه"],
+    items2: ["All", "دبستان", "متوسطه"],
+    items3: ["All", "دبستان", "متوسطه"],
+    values1: ["All"],
+    values2: ["All"],
+    values3: ["All"],
     value1: null,
     value2: null,
     value3: null,
     gradeList: [
       {
-        title: "کلاس اول",
+        title: "1st Grade",
         summeryContent: [
           { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
@@ -771,14 +771,14 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
         update: "14 فروردین",
       },
       {
-        title: "کلاس دوم",
+        title: "2st Grade",
         summeryContent: [
           { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
@@ -827,7 +827,7 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
@@ -883,7 +883,7 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
@@ -939,7 +939,7 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
@@ -996,7 +996,7 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
@@ -1052,7 +1052,7 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
@@ -1108,7 +1108,7 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
@@ -1164,7 +1164,7 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
@@ -1221,7 +1221,7 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
@@ -1277,7 +1277,7 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
@@ -1333,7 +1333,7 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
@@ -1389,7 +1389,7 @@ export default {
             stat: "68",
           },
           {
-            title: "آزمون آنلاین",
+            title: "Online Exam",
             stat: "22",
           },
         ],
@@ -1398,23 +1398,23 @@ export default {
     ],
     siteFeatureList: [
       {
-        title: "مدرسه یاب",
+        title: "School finder",
         icon: "school",
         details: [
           "لیست مدارس کشور با قابلیت فیلتر و جستجو",
           "دسترسی به اطلاعات ارتباطی، امکانات و سطح آموزشی مدارس",
-          "ویرایش اطلاعات مدرسه ها و سیستم نظر سنجی",
-          "مشاهده نشانی مدرسه روی نقشه",
+          "ویرایش اطلاعات School ها و سیستم نظر سنجی",
+          "مشاهده نشانی School روی نقشه",
         ],
       },
       {
-        title: "معلم خصوصی",
+        title: "Teacher",
         icon: "teacher",
         details: [
-          "جستجوی بهترین معلم خصوصی در نزدیکی شما",
-          "گفتگوی دانش آموز و معلم",
+          "جستجوی بهترین Teacher در نزدیکی شما",
+          "گفتگوی Student و معلم",
           "پرداخت آنلاین یا اعتباری مبلغ حق التدریس",
-          "برگزاری حضوری کلاس در خانه دانش آموز",
+          "برگزاری حضوری کلاس در خانه Student",
         ],
       },
       {
@@ -1431,114 +1431,114 @@ export default {
         title: "درسنامه اموزشی",
         icon: "blog",
         details: [
-          "متن کامل کتاب های درسی از دبستان تا دبیرستان",
+          "متن کامل کتاب های درسی از دبستان تا teacherستان",
           "راهنمای کامل تمرین ها، خود آزمایی ها، کار برگه ها و فعالیت های کتاب",
-          "ثبت درسنامه، نکات آموزشی، جزوه های آموزشی توسط دبیران",
+          "ثبت درسنامه، نکات آموزشی، جزوه های آموزشی توسط teacherان",
         ],
       },
     ],
     footerFeedList: [
       {
         class: "learning",
-        header: "آخرین فایل های آموزشی",
+        header: "Latest Training Content",
         icon: "learnfiles",
         contentItemList: [
           {
             avatar: "dexter-morse2.png",
             title:
               "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-            name: "علیرضا داوودی",
+            name: "Arian Etemadi",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
             title:
               "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
-            name: "علیرضا داوودی",
+            name: "Arian Etemadi",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
             title:
               "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-            name: "علیرضا داوودی",
+            name: "Arian Etemadi",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
             title:
               "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
-            name: "علیرضا داوودی",
+            name: "Arian Etemadi",
             date: "16 فروردین",
           },
         ],
       },
       {
         class: "question",
-        header: "آخرین پرسش ها",
+        header: "Latest Q&A",
         icon: "qa",
         contentItemList: [
           {
             avatar: "dexter-morse2.png",
             title:
               "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
-            name: "علیرضا داوودی",
+            name: "Arian Etemadi",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
             title:
               "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-            name: "علیرضا داوودی",
+            name: "Arian Etemadi",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
             title:
               "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
-            name: "علیرضا داوودی",
+            name: "Arian Etemadi",
             date: "16 فروردین",
           },
           {
             avatar: "dexter-morse2.png",
             title:
               "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-            name: "علیرضا داوودی",
+            name: "Arian Etemadi",
             date: "16 فروردین",
           },
         ],
       },
       // {
       //   class: "news",
-      //   header: " آخرین اخبار",
+      //   header: " Latest News",
       //   icon: "news",
       //   contentItemList: [
       //     {
       //       avatar: "dexter-morse2.png",
       //       title:
       //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
-      //       name: "علیرضا داوودی",
+      //       name: "Arian Etemadi",
       //       date: "16 فروردین",
       //     },
       //     {
       //       avatar: "dexter-morse2.png",
       //       title:
       //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
-      //       name: "علیرضا داوودی",
+      //       name: "Arian Etemadi",
       //       date: "16 فروردین",
       //     },
       //     {
       //       avatar: "dexter-morse2.png",
       //       title:
       //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
-      //       name: "علیرضا داوودی",
+      //       name: "Arian Etemadi",
       //       date: "16 فروردین",
       //     },
       //     {
       //       avatar: "dexter-morse2.png",
       //       title:
       //         "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. ",
-      //       name: "علیرضا داوودی",
+      //       name: "Arian Etemadi",
       //       date: "16 فروردین",
       //     },
       //   ],
@@ -1546,12 +1546,12 @@ export default {
     ],
 
     statList: [
-      { label: "مدرسه", value: "130,000", icon: "fa-graduation-cap" },
-      { label: "دبیر", value: "300,000", icon: "fa-graduation-cap" },
-      { label: "دانش آموز", value: "1,500,000", icon: "fa-graduation-cap" },
+      { label: "School", value: "130,000", icon: "fa-graduation-cap" },
+      { label: "Teacher", value: "300,000", icon: "fa-graduation-cap" },
+      { label: "Student", value: "1,500,000", icon: "fa-graduation-cap" },
       { label: "Sample Exam", value: "50,000", icon: "fa-graduation-cap" },
       { label: "پاورپوینت", value: "30,000", icon: "fa-graduation-cap" },
-      { label: "آزمون آنلاین", value: "5,000", icon: "fa-graduation-cap" },
+      { label: "Online Exam", value: "5,000", icon: "fa-graduation-cap" },
     ],
   }),
 };

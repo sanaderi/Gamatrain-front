@@ -129,7 +129,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>محتوای آموزشی</p>
+                            <p>Training content</p>
                             <p>30,000 +</p>
                           </div>
                         </nuxt-link>
@@ -157,7 +157,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>آزمون آنلاین</p>
+                            <p>Online Exam</p>
                             <p>5,000 +</p>
                           </div>
                         </nuxt-link>
@@ -185,7 +185,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>مدرسه یاب</p>
+                            <p>School finder</p>
                             <p>130,000 +</p>
                           </div>
                         </nuxt-link>
@@ -252,8 +252,8 @@ export default {
           path: "",
           icon: "fa-caret-down",
           subMenuList: [
-            { title: "قوانین و مقررات", path: "" },
-            { title: "پرسش های متداول", path: "" },
+            { title: "Terms and Conditions", path: "" },
+            { title: "FAQ's", path: "" },
             { title: "راهنمای عضویت", path: "" },
           ],
         },

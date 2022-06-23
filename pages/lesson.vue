@@ -258,7 +258,7 @@
             <div class="lastfile-content d-flex flex-column">
               <div class="lastfile-titles d-flex align-center pb-4 mb-5">
                 <span class="icon icong-learnfiles lastfile-icon-title"></span>
-                <p class="mb-0 mx-2 lastfile-title">آخرین فایل های آموزشی</p>
+                <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
                 <div class="owl-carousel owl-theme">
@@ -304,7 +304,7 @@
             <div class="lastfile-content d-flex flex-column">
               <div class="lastfile-titles d-flex align-center pb-4 mb-5">
                 <span class="icon icong-learnfiles lastfile-icon-title"></span>
-                <p class="mb-0 mx-2 lastfile-title">آخرین فایل های آموزشی</p>
+                <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
                 <div class="owl-carousel owl-theme">
@@ -362,7 +362,7 @@
               <div class="ask-footer my-4 ">
                 <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال فایل</v-btn>
                 <nuxt-link to="" class="askcard-footer-link mr-6">
-                  موارد بیشتر
+                  More
                 </nuxt-link>
               </div>
             </div>
@@ -387,7 +387,7 @@
               <div class="ask-footer mt-4">
                 <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال فایل</v-btn>
                 <nuxt-link to="" class="askcard-footer-link mr-6">
-                  موارد بیشتر
+                  More
                 </nuxt-link>
               </div>
             </div>
@@ -410,7 +410,7 @@
               <v-divider class="mt-4"></v-divider>
               <div class="test-footer my-4">
                 <nuxt-link to="" class="testcard-footer-link">
-                  موارد بیشتر
+                  More
                 </nuxt-link>
               </div>
             </div>
@@ -434,7 +434,7 @@
               <v-divider class="mt-4"></v-divider>
               <div class="test-footer mt-4">
                 <nuxt-link to="" class="testcard-footer-link">
-                  موارد بیشتر
+                  More
                 </nuxt-link>
               </div>
             </div>
@@ -557,19 +557,19 @@ export default {
         },
       ],
       rating: 4,
-      items1: ["همه", "دبستان", "متوسطه"],
-      items2: ["همه", "دبستان", "متوسطه"],
-      items3: ["همه", "دبستان", "متوسطه"],
-      values1: ["همه"],
-      values2: ["همه"],
-      values3: ["همه"],
+      items1: ["All", "دبستان", "متوسطه"],
+      items2: ["All", "دبستان", "متوسطه"],
+      items3: ["All", "دبستان", "متوسطه"],
+      values1: ["All"],
+      values2: ["All"],
+      values3: ["All"],
       value1: null,
       value2: null,
       value3: null,
       lastUpdate: "27 فروردین",
       visit: "15383",
       lesson: {
-        lessonTitle: "درسنامه آموزشی زیست شناسی (2) کلاس یازدهم رشته تجربی",
+        lessonTitle: "Tutorial زیست شناسی (2) کلاس یازدهم رشته تجربی",
         lessonSub: "فصل اول- گفتار 2: ساختار دستگاه عصبی با پاسخ",
       },
       card: {
@@ -577,7 +577,7 @@ export default {
         img2: "book.png",
         videoTitle: "ویدیو دوره کامل آموزشی، ریاضی هفتم دوره اول متوسطه",
         bookTitle:
-          "آلبوم بانک تست های آزمون آنلاین، ریاضی هفتم دوره اول متوسطه",
+          "آلبوم بانک تست های Online Exam، ریاضی هفتم دوره اول متوسطه",
         testNumber: "2717",
         videoTeacher: "علیرضا داودی",
         durition: " 8 ساعت (26 فایل)",
@@ -606,7 +606,7 @@ export default {
       model: null,
       bookSample: {
         sampleImg: "booksample.png",
-        sampleText: "آزمون تستی فصل 2تا 8 ریاضی هفتم دبیرستان اسوه اصفهن",
+        sampleText: "آزمون تستی فصل 2تا 8 ریاضی هفتم teacherستان اسوه اصفهن",
         samplefooterImg: "dexter-morse3.png",
         sfooterName: "علیرضا داودی"
       },

@@ -112,13 +112,13 @@ export default {
     selectedItem: 1,
     showMore: false,
     items: [
-      { class: "exam", text: "آزمون آنلاین", icon: "azmoon" },
+      { class: "exam", text: "Online Exam", icon: "azmoon" },
       { class: "test", text: "Sample Exam", icon: "test" },
-      { class: "content", text: "محتوای آموزشی", icon: "learnfiles" },
+      { class: "content", text: "Training content", icon: "learnfiles" },
       { class: "faq", text: "Q & A", icon: "qa" },
-      { class: "textbook ", text: "درسنامه آموزشی", icon: "blog" },
-      { class: "school", text: "مدرسه یاب", icon: "school" },
-      { class: "tutor", text: "معلم خصوصی", icon: "teacher" },
+      { class: "textbook ", text: "Tutorial", icon: "blog" },
+      { class: "school", text: "School finder", icon: "school" },
+      { class: "tutor", text: "Teacher", icon: "teacher" },
     ],
   }),
 };

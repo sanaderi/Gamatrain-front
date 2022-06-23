@@ -27,7 +27,7 @@
         <nuxt-link to="latest" >
           <v-list-item class="extra-case">
             <i class="fa-solid fa-list ml-1 icon footer-text"></i>
-            <span class="footer-text">موارد بیشتر</span>
+            <span class="footer-text">More</span>
           </v-list-item>
         </nuxt-link>
         <nuxt-link v-if="(related.class == 'learning') || (related.class == 'question')" to="" class="add-file">

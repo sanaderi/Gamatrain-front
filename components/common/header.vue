@@ -248,7 +248,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>محتوای آموزشی</p>
+                            <p>Training content</p>
                             <p>30,000 +</p>
                           </div>
                         </nuxt-link>
@@ -276,7 +276,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>آزمون آنلاین</p>
+                            <p>Online Exam</p>
                             <p>5,000 +</p>
                           </div>
                         </nuxt-link>
@@ -290,7 +290,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>درسنانه آموزشی</p>
+                            <p>Training content</p>
                             <p>1,500 +</p>
                           </div>
                         </nuxt-link>
@@ -304,7 +304,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>مدرسه یاب</p>
+                            <p>School finder</p>
                             <p>130,000 +</p>
                           </div>
                         </nuxt-link>
@@ -358,8 +358,8 @@ export default {
           link: "",
           icon: "mdi-chevron-left",
           subMenuList: [
-            { title: "قوانین و مقررات", link: "" },
-            { title: "پرسش های متداول", link: "" },
+            { title: "Terms and Conditions", link: "" },
+            { title: "FAQ's", link: "" },
             { title: "راهنمای عضویت", link: "" },
           ],
         },
