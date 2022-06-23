@@ -136,10 +136,11 @@
     <section class="book">
       <v-container class="pa-0 mb-16">
         <v-row>
-          <v-col md="4">
+          <v-col md="3">
             <div class="cataloge pa-6 d-none d-md-block">
               <p class="cataloge-title d-flex align-center">
-                <i class="fa-solid fa-book-bookmark cataloge-icon ml-2"></i>
+                <img :src="require('@/assets/images/' + bookmark)" alt="" class="ml-2">
+
                 {{ book.catalogeTitle }}
               </p>
               <div class="cataloge-content">
@@ -147,7 +148,7 @@
               </div>
             </div>
           </v-col>
-          <v-col cols="12" md="8" class="pa-0 pa-md-3">
+          <v-col cols="12" md="9" class="pa-0 pa-md-3">
             <div class="book-contents pa-3 pa-md-6">
               <!-- <v-navigation-drawer left app v-model="side" class="d-block d-md-none">
                 ffefef
@@ -163,41 +164,29 @@
               </div>
               <v-navigation-drawer v-model="drawer" class="sidebar-nav pa-5" width="320">
                 <div class="sidebar-timeline-title d-flex align-center ma-2">
-                  <i class="fa-solid fa-book-bookmark sTimeline-icon ml-3"></i>
+                  <img :src="require('@/assets/images/' + bookmark)" alt="" class="ml-2">
                   <p>{{ sidebartimelinetitle }}</p>
                 </div>
                 <div class="timeline">
                   <v-timeline dense clipped>
-
                     <v-timeline-item class="mb-4" :color="item.color" icon-color="grey lighten-3" medium fill-dot
                       v-for="item in timeLines" :key="item.value">
                       <span class="headline font-weight-bold timeline-number" v-text="item.number"></span>
                       <v-row class="timeline-content-body">
-                        <v-col cols="12">
-                          <p class="category-book-titles " id="title"> {{ item.title }}</p>
+                        <v-col cols="12 pa-2">
+                          <p class="category-book-titles active" id="lessonTitle"> {{ item.title }}</p>
                         </v-col>
-                        <v-col cols="12">
-                          <nuxt-link to="" id="lesson-name1">
-                            <i class="fa-regular fa-window-minimize ml-2"></i>
-                            {{ item.link1 }}
-                          </nuxt-link>
-                        </v-col>
-                        <v-col cols="12">
-                          <nuxt-link to="" id="lesson-name2">
-                            <i class="fa-regular fa-window-minimize ml-2"></i>
-                            {{ item.link2 }}
+                        <v-col cols="12 pa-2" v-for="item in lessons" :key="item.value">
+                          <nuxt-link to="" id="lessonName" class="lesson-name-timeline">
+                            <i class="fa-regular fa-window-minimize ml-1 lesson-name-dash"></i>
+                            {{ item.lesson }}
                           </nuxt-link>
                         </v-col>
                       </v-row>
                     </v-timeline-item>
-
                   </v-timeline>
                 </div>
-
-
-
               </v-navigation-drawer>
-
               <div class="book-content" v-for="(item, bookContent) in bookContent" :key="bookContent">
                 <p class="book-title mb-3">{{ item.bookTitle }}</p>
                 <p class="bookText">{{ item.bookText }}</p>
@@ -238,7 +227,7 @@
                     <div class="sample-img">
                       <img :src="require('@/assets/images/' + bookSample.sampleImg)" alt="" class="sample-image">
                       <span class="sample-test-number">
-                        <p>{{testNumber}}</p>
+                        <p>{{ testNumber }}</p>
                       </span>
                     </div>
                     <div class="sample-text">
@@ -468,53 +457,59 @@ export default {
   components: { category, timeLine, },
   data() {
     return {
+      bookmark: "bookmark.png",
       drawer: false,
       // model: null,
       sidebartimelinetitle: "  زیست شناسی (2)",
-      testNumber:"20 تست",
+      testNumber: "20 تست",
+      lessons: [
+        {
+          lesson: "گفتار 1 :یاخته های بافت عصبی"
+        },
+        {
+          lesson: "گفتار 2 : ساختار دستگاه عصبی"
+        }
+      ],
       timeLines: [
         {
           number: '1',
           color: "teal",
           title: "تنظیم عصبی",
-          link1: " گفتار 1 :یاخته های بافت عصبی",
-          link2: "گفتار 2 : ساختار دستگاه عصبی"
+
         },
         {
           number: '2',
           color: "grey lighten-3",
           title: "پاسخ گیاهان به محرک ها",
-          link1: " گفتار 1 :یاخته های بافت عصبی",
-          link2: "گفتار 2 : ساختار دستگاه عصبی"
+
+
         },
         {
           number: '3',
           color: "grey lighten-3",
           title: "حواس",
-          link1: " گفتار 1 :یاخته های بافت عصبی",
-          link2: "گفتار 2 : ساختار دستگاه عصبی"
+
+
         },
+
       ],
-      items: [
-        { title: 'Home', icon: 'mdi-view-dashboard' },
-        { title: 'About', icon: 'mdi-forum' },
-      ],
+
       videos: [
         {
 
           vid: "video.mp4"
         },
         {
-          vid: "video.mp4"
+          vid: "video1.mp4"
         },
         {
-          vid: "video.mp4"
+          vid: "video2.mp4"
         },
         {
-          vid: "video.mp4"
+          vid: "video3.mp4"
         },
         {
-          vid: "video.mp4"
+          vid: "video2.mp4"
         },
       ],
       lastFile: {
@@ -627,7 +622,8 @@ export default {
     },
   },
   mounted() {
-    generateSlider()
+    generateSlider(),
+      this.color()
   },
   methods: {
     comment() {
@@ -642,6 +638,10 @@ export default {
 
       this.input = null
     },
+    color() {
+
+    }
   },
+
 };
 </script>

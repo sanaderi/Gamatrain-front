@@ -1,79 +1,88 @@
-<template >
-    <v-container style="max-width: 600px;" class="timeline">
-        <v-timeline dense clipped>
+<template>
+  <v-container class="timeline" style="max-width: 600px;">
+    <v-timeline clipped dense>
 
-            <v-timeline-item class="mb-4" :color="item.color" icon-color="grey lighten-3" medium fill-dot
-                v-for="item in timeLines" :key="item.value">           
-                    <span class="headline font-weight-bold timeline-number" v-text="item.number"></span>
-                <v-row>
-                    <v-col cols="12">
-                        <p class="category-book-titles " id="title"> {{ item.title }}</p>
-                    </v-col>
-                    <v-col cols="12">
+      <v-timeline-item v-for="(item, index) in timeLines"
+                       :key="index" :color="item.color"
+                       class="mb-4" fill-dot
+                       icon-color="grey lighten-3"
+                       medium
+      >
+        <span :id="'number' + index" class="headline font-weight-bold timeline-number"
+              v-text="item.number">
+        </span>
+        <v-row>
+          <v-col cols="12">
+            <p :id="'title' + index"
+               class="category-book-titles "
+            > {{ item.title }}</p>
+          </v-col>
+          <v-col
+            v-for="lesson in item.lessons"
+            cols="12"
+            @click="activeTitle(index)">
+            <nuxt-link id="lesson-name" to="">
+              <i class="fa-regular fa-window-minimize ml-2"></i>
+              {{ lesson.lesson }}
+            </nuxt-link>
+          </v-col>
+        </v-row>
+      </v-timeline-item>
 
-                        <nuxt-link to="" id="lesson-name1">
-                            <i class="fa-regular fa-window-minimize ml-2"></i>
-                            {{ item.link1 }}
-                        </nuxt-link>
-                    </v-col>
-                    <v-col cols="12">
-                        <nuxt-link to="" id="lesson-name2">
-                            <i class="fa-regular fa-window-minimize ml-2"></i>
-                            {{ item.link2 }}
-                        </nuxt-link>
-                    </v-col>
-                </v-row>
-            </v-timeline-item>
-
-        </v-timeline>
-    </v-container>
+    </v-timeline>
+  </v-container>
 </template>
 <script>
 export default {
-    data() {
-        return {
-            timeLines: [
-                {
-                    number: '1',
-                    color: "teal",
-                    title: "تنظیم عصبی",
-                    link1: " گفتار 1 :یاخته های بافت عصبی",
-                    link2: "گفتار 2 : ساختار دستگاه عصبی"
-                },
-                {
-                    number: '2',
-                    color: "grey lighten-3",
-                    title: "پاسخ گیاهان به محرک ها",
-                    link1: " گفتار 1 :یاخته های بافت عصبی",
-                    link2: "گفتار 2 : ساختار دستگاه عصبی"
-                },
-                {
-                    number: '3',
-                    color: "grey lighten-3",
-                    title: "حواس",
-                    link1: " گفتار 1 :یاخته های بافت عصبی",
-                    link2: "گفتار 2 : ساختار دستگاه عصبی"
-                },
-            ],
-        
+  data() {
+    return {
+      timeLines: [
+        {
+          number: '1',
+          color: "teal",
+          title: "تنظیم عصبی",
+          lessons: [
+            {lesson: " گفتار 1 :یاخته های بافت عصبی"},
+            {lesson: "گفتار 2 : ساختار دستگاه عصبی"}
+          ]
+        },
+        {
+          number: '2',
+          color: "grey lighten-3",
+          title: "پاسخ گیاهان به محرک ها",
+          lessons: [
+            {lesson: " گفتار 1 :یاخته های بافت عصبی"},
+            {lesson: "گفتار 2 : ساختار دستگاه عصبی"}
+          ]
+        },
+        {
+          number: '3',
+          color: "grey lighten-3",
+          title: "حواس",
+          lessons: [
+            {lesson: " گفتار 1 :یاخته های بافت عصبی"},
+            {lesson: "گفتار 2 : ساختار دستگاه عصبی"}
+          ]
+        },
+      ],
+    }
+  },
+  methods: {
+    activeTitle(value) {
+      const allTitle = document.querySelectorAll('.category-book-titles')
+      const allNumber = document.querySelectorAll('.timeline-number')
 
-        }
-    },
-    mounted() {
-        this.changeColor()
-    },
-    methods: {
-        changeColor() {
-            let title = document.getElementById("title")
-            let lesson = document.getElementById("lesson-name1")
-            let secondLesson = document.getElementById("lesson-name2")
-            lesson.addEventListener("click", function () {
-                title.style.color = "#008B8B"
-            })
-            secondLesson.addEventListener("click", function () {
-                title.style.color = "#008B8B"
-            })
-        }
-    },
+      for (let i = 0; i < allTitle.length; i++) {
+        allTitle[i].classList.remove("active")
+        allNumber[i].classList.remove("active")
+      }
+
+      let title = document.getElementById('title' + value)
+      let number = document.getElementById('number' + value)
+
+      title.classList.add("active")
+      number.classList.add("active")
+    }
+  },
 }
 </script>
