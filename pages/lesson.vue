@@ -150,9 +150,6 @@
           </v-col>
           <v-col cols="12" md="9" class="pa-0 pa-md-3">
             <div class="book-contents pa-3 pa-md-6">
-              <!-- <v-navigation-drawer left app v-model="side" class="d-block d-md-none">
-                ffefef
-              </v-navigation-drawer> -->
               <div class="responsive-buttons d-flex align-center d-block d-md-none">
                 <v-btn x-large class="d-flex justify-center responsive-button ml-4" @click.stop="drawer = !drawer">
                   <i class="fa-solid fa-receipt "></i>
@@ -167,23 +164,26 @@
                   <img :src="require('@/assets/images/' + bookmark)" alt="" class="ml-2">
                   <p>{{ sidebartimelinetitle }}</p>
                 </div>
-                <div class="timeline">
-                  <v-timeline dense clipped>
-                    <v-timeline-item class="mb-4" :color="item.color" icon-color="grey lighten-3" medium fill-dot
-                      v-for="item in timeLines" :key="item.value">
-                      <span class="headline font-weight-bold timeline-number" v-text="item.number"></span>
-                      <v-row class="timeline-content-body">
-                        <v-col cols="12 pa-2">
-                          <p class="category-book-titles active" id="lessonTitle"> {{ item.title }}</p>
+                <div class="timeline" style="max-width: 600px;">
+                  <v-timeline clipped dense>
+                    <v-timeline-item v-for="(item, index) in timeLines" :key="index" :color="item.color" class="mb-4"
+                      fill-dot icon-color="grey lighten-3" medium>
+                      <span :id="'res-number' + index" class="headline font-weight-bold timeline-number"
+                        v-text="item.number">
+                      </span>
+                      <v-row>
+                        <v-col cols="12">
+                          <p :id="'res-title' + index" class="category-book-titles "> {{ item.title }}</p>
                         </v-col>
-                        <v-col cols="12 pa-2" v-for="item in lessons" :key="item.value">
-                          <nuxt-link to="" id="lessonName" class="lesson-name-timeline">
-                            <i class="fa-regular fa-window-minimize ml-1 lesson-name-dash"></i>
-                            {{ item.lesson }}
+                        <v-col v-for="lesson in item.lessons" cols="12" @click="activeTitle(index)">
+                          <nuxt-link id="lesson-name" to="">
+                            <i class="fa-regular fa-window-minimize ml-2"></i>
+                            {{ lesson.lesson }}
                           </nuxt-link>
                         </v-col>
                       </v-row>
                     </v-timeline-item>
+
                   </v-timeline>
                 </div>
               </v-navigation-drawer>
@@ -457,42 +457,71 @@ export default {
   components: { category, timeLine, },
   data() {
     return {
-      bookmark: "bookmark.png",
-      drawer: false,
-      // model: null,
-      sidebartimelinetitle: "  زیست شناسی (2)",
-      testNumber: "20 تست",
-      lessons: [
-        {
-          lesson: "گفتار 1 :یاخته های بافت عصبی"
-        },
-        {
-          lesson: "گفتار 2 : ساختار دستگاه عصبی"
-        }
-      ],
       timeLines: [
         {
           number: '1',
           color: "teal",
           title: "تنظیم عصبی",
-
+          lessons: [
+            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
+            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
+          ]
         },
         {
           number: '2',
           color: "grey lighten-3",
           title: "پاسخ گیاهان به محرک ها",
-
-
+          lessons: [
+            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
+            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
+          ]
         },
         {
           number: '3',
           color: "grey lighten-3",
           title: "حواس",
-
-
+          lessons: [
+            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
+            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
+          ]
         },
-
       ],
+      bookmark: "bookmark.png",
+      drawer: false,
+      // model: null,
+      sidebartimelinetitle: "  زیست شناسی (2)",
+      testNumber: "20 تست",
+      // lessons: [
+      //   {
+      //     lesson: "گفتار 1 :یاخته های بافت عصبی"
+      //   },
+      //   {
+      //     lesson: "گفتار 2 : ساختار دستگاه عصبی"
+      //   }
+      // ],
+      // timeLines: [
+      //   {
+      //     number: '1',
+      //     color: "teal",
+      //     title: "تنظیم عصبی",
+
+      //   },
+      //   {
+      //     number: '2',
+      //     color: "grey lighten-3",
+      //     title: "پاسخ گیاهان به محرک ها",
+
+
+      //   },
+      //   {
+      //     number: '3',
+      //     color: "grey lighten-3",
+      //     title: "حواس",
+
+
+      //   },
+
+
 
       videos: [
         {
@@ -500,16 +529,16 @@ export default {
           vid: "video.mp4"
         },
         {
-          vid: "video1.mp4"
+          vid: "video.mp4"
         },
         {
-          vid: "video2.mp4"
+          vid: "video.mp4"
         },
         {
-          vid: "video3.mp4"
+          vid: "video.mp4"
         },
         {
-          vid: "video2.mp4"
+          vid: "video.mp4"
         },
       ],
       lastFile: {
@@ -637,6 +666,21 @@ export default {
       })
 
       this.input = null
+    },
+    activeTitle(value) {
+      const allTitle = document.querySelectorAll('.category-book-titles')
+      const allNumber = document.querySelectorAll('.timeline-number')
+
+      for (let i = 0; i < allTitle.length; i++) {
+        allTitle[i].classList.remove("active")
+        allNumber[i].classList.remove("active")
+      }
+
+      let title = document.getElementById('res-title' + value)
+      let number = document.getElementById('res-number' + value)
+
+      title.classList.add("active")
+      number.classList.add("active")
     },
     color() {
 
