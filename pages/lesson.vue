@@ -1,14 +1,14 @@
 <template>
   <div>
     <!--  Start: search grade  -->
-    <section class="d-block d-md-none search-sec mb-8">
+    <!-- <section class="d-block d-md-none search-sec mb-8">
       <v-container>
         <div class="box search-container">
           <search :items1="items1" :items2="items2" :items3="items3" :values1="values1" :value1="value1"
             :values2="values2" :value2="value2" :values3="values3" :value3="value2"></search>
         </div>
       </v-container>
-    </section>
+    </section> -->
     <!--  End: search  -->
     <!-- Start : Category -->
     <category />
@@ -74,7 +74,7 @@
     <section class="cards">
       <v-container class="pa-0">
         <v-row>
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="6" class="pb-0">
             <v-card elevation="2" outlined class="pa-3 card-body">
               <v-row class="card">
                 <v-col cols="4" md="3">
@@ -136,16 +136,58 @@
     <section class="book">
       <v-container class="pa-0 mb-16">
         <v-row>
-          <v-col md="4">
+          <v-col md="3">
             <div class="cataloge pa-6 d-none d-md-block">
-              <p class="cataloge-title">
+              <p class="cataloge-title d-flex align-center">
+                <img :src="require('@/assets/images/' + bookmark)" alt="" class="ml-2">
+
                 {{ book.catalogeTitle }}
               </p>
+              <div class="cataloge-content">
+                <timeLine />
+              </div>
             </div>
           </v-col>
-          <v-col cols="12" md="8" class="pa-0 pa-md-3">
+          <v-col cols="12" md="9" class="pa-0 pa-md-3">
             <div class="book-contents pa-3 pa-md-6">
-              <div class="book-content" v-for="item in bookContent" :key="item">
+              <div class="responsive-buttons d-flex align-center d-block d-md-none">
+                <v-btn x-large class="d-flex justify-center responsive-button ml-4" @click.stop="drawer = !drawer">
+                  <i class="fa-solid fa-receipt "></i>
+                </v-btn>
+                <v-btn x-large class="responsive-button" @click.stop="drawer = !drawer">
+                  <i class="fa-solid fa-receipt ml-6"></i>
+                  فهرست
+                </v-btn>
+              </div>
+              <v-navigation-drawer v-model="drawer" class="sidebar-nav pa-5" width="320">
+                <div class="sidebar-timeline-title d-flex align-center ma-2">
+                  <img :src="require('@/assets/images/' + bookmark)" alt="" class="ml-2">
+                  <p>{{ sidebartimelinetitle }}</p>
+                </div>
+                <div class="timeline" style="max-width: 600px;">
+                  <v-timeline clipped dense>
+                    <v-timeline-item v-for="(item, index) in timeLines" :key="index" :color="item.color" class="mb-4"
+                      fill-dot icon-color="grey lighten-3" medium>
+                      <span :id="'res-number' + index" class="headline font-weight-bold timeline-number"
+                        v-text="item.number">
+                      </span>
+                      <v-row>
+                        <v-col cols="12">
+                          <p :id="'res-title' + index" class="category-book-titles "> {{ item.title }}</p>
+                        </v-col>
+                        <v-col v-for="lesson in item.lessons" cols="12" @click="activeTitle(index)">
+                          <nuxt-link id="lesson-name" to="">
+                            <i class="fa-regular fa-window-minimize ml-2"></i>
+                            {{ lesson.lesson }}
+                          </nuxt-link>
+                        </v-col>
+                      </v-row>
+                    </v-timeline-item>
+
+                  </v-timeline>
+                </div>
+              </v-navigation-drawer>
+              <div class="book-content" v-for="(item, bookContent) in bookContent" :key="bookContent">
                 <p class="book-title mb-3">{{ item.bookTitle }}</p>
                 <p class="bookText">{{ item.bookText }}</p>
                 <div class="book-pictures d-flex flex-column align-center my-10 my-md-6">
@@ -154,6 +196,7 @@
                     <p>{{ item.picSub }}</p>
                   </span>
                 </div>
+
               </div>
               <div class="learn-more pa-6">
                 <p class="learnmore-title mb-6"> بیشتر بدانید</p>
@@ -167,7 +210,7 @@
     <!-- End: Book -->
     <!-- Start : Sample Test -->
     <section class="sample">
-      <v-container>
+      <v-container class="pb-md-16 pb-5">
         <div class="d-flex flex-column align-center my-6">
           <div class="sample-titles d-flex align-center ">
             <i class="icon icong-test title-icon d-flex algn-center"></i>
@@ -177,12 +220,15 @@
             </div>
           </div>
           <div class="sample-slider mt-10">
-            <v-sheet class="mx-auto" max-width="1450">
+            <v-sheet class="mx-auto sample-width">
               <v-slide-group multiple show-arrows>
-                <v-slide-item v-for="n in 20" :key="n">
+                <v-slide-item v-for="n in 7" :key="n">
                   <div class="book-sample pa-4 mx-2">
                     <div class="sample-img">
                       <img :src="require('@/assets/images/' + bookSample.sampleImg)" alt="" class="sample-image">
+                      <span class="sample-test-number">
+                        <p>{{ testNumber }}</p>
+                      </span>
                     </div>
                     <div class="sample-text">
                       <p>{{ bookSample.sampleText }}</p>
@@ -190,9 +236,9 @@
                     <div class="sbook-footer d-flex justify-space-between align-center mt-4">
                       <div class="d-flex align-center">
                         <img :src="require('@/assets/images/' + bookSample.samplefooterImg)" alt="">
-                        <p class="sfooter-name mx-2">{{bookSample.sfooterName}}</p>
+                        <p class="sfooter-name mx-2">{{ bookSample.sfooterName }}</p>
                       </div>
-                      <nuxt-link to="" class="mb-0 sfooter-link">بیشتر</nuxt-link>
+                      <nuxt-link to="" class="mb-0 sfooter-link">آزمون انلاین</nuxt-link>
                     </div>
                   </div>
                 </v-slide-item>
@@ -203,14 +249,352 @@
       </v-container>
     </section>
     <!-- End : Sample test -->
+    <!-- Start: Feed -->
+    <section class="feed">
+      <v-container class="pa-4 pa-md-12 pt-10">
+        <v-row>
+          <!-- Start : Descktop LastFile-->
+          <v-col md="6" class="last-files pa-4 d-none d-md-block">
+            <div class="lastfile-content d-flex flex-column">
+              <div class="lastfile-titles d-flex align-center pb-4 mb-5">
+                <span class="icon icong-learnfiles lastfile-icon-title"></span>
+                <p class="mb-0 mx-2 lastfile-title">آخرین فایل های آموزشی</p>
+              </div>
+              <div class="video-slider">
+                <div class="owl-carousel owl-theme">
+                  <div class="item-video" v-for="item in videos" :key="item.value">
+                    <video :src="require('@/assets/video/' + item.vid)" controls width="575" class="video-carousel">
+                    </video>
+                  </div>
+                </div>
+                <!-- <v-slide-group multiple center-active>
+                  <v-slide-item v-for="item in videos" :key="item.value">
+                    <div class="item-video">
+                      <video :src="require('@/assets/video/' + item.vid)" controls  class="video-carousel-desktop">
+                      </video>
+                    </div>
+                  </v-slide-item>
+                </v-slide-group> -->
+                <!-- <div class="filter"></div> -->
+              </div>
+              <div class="date-name d-flex align-center justify-space-between my-5">
+                <div class="d-flex align-center">
+                  <img :src="require('@/assets/images/' + lastFile.img)" alt="">
+                  <p class="mr-2">{{ lastFile.name }}</p>
+                </div>
+                <div class="d-flex align-center">
+                  <i class="fa-solid fa-calendar-days"></i>
+                  <p class="mr-2">{{ lastFile.date }}</p>
+                </div>
+                <p> اعداد اسلاید ها : {{ lastFile.number }}</p>
+              </div>
+              <p class="lastFile-text">
+                {{ lastFile.lastFileText }}
+              </p>
+              <div class="date-name d-flex align-center justify-space-between my-5">
+                <p>محتوا : {{ lastFile.content }}</p>
+                <p> بودجه بندی : {{ lastFile.budget }}</p>
+              </div>
+            </div>
+          </v-col>
+          <!-- End : Descktop LastFile-->
+
+          <!-- Start : Mobile lastFIle -->
+          <v-col cols="12" md="6" class="last-files pa-4 d-block d-md-none mb-6 mb-md-0">
+            <div class="lastfile-content d-flex flex-column">
+              <div class="lastfile-titles d-flex align-center pb-4 mb-5">
+                <span class="icon icong-learnfiles lastfile-icon-title"></span>
+                <p class="mb-0 mx-2 lastfile-title">آخرین فایل های آموزشی</p>
+              </div>
+              <div class="video-slider">
+                <div class="owl-carousel owl-theme">
+                  <div class="item-video" v-for="item in videos" :key="item.value">
+                    <video :src="require('@/assets/video/' + item.vid)" controls width="350" class="video-carousel">
+                    </video>
+                  </div>
+                </div>
+                <!-- <v-slide-group multiple center-active>
+                  <v-slide-item v-for="item in videos" :key="item.value">
+                    <div class="item-video">
+                      <video :src="require('@/assets/video/' + item.vid)" controls  class="video-carousel-mobile">
+                      </video>
+                    </div>
+                  </v-slide-item>
+                </v-slide-group> -->
+                <!-- <div class="filter"></div> -->
+              </div>
+              <p class="lastFile-text my-5">
+                {{ lastFile.responsiveText }}
+              </p>
+              <div class="date-name d-flex align-center justify-space-between ">
+                <div class="d-flex align-center">
+                  <img :src="require('@/assets/images/' + lastFile.img)" alt="">
+                  <p class="mr-2">{{ lastFile.name }}</p>
+                </div>
+                <div class="d-flex align-center">
+                  <i class="fa-solid fa-calendar-days"></i>
+                  <p class="mr-2">{{ lastFile.date }}</p>
+                </div>
+              </div>
+            </div>
+          </v-col>
+          <!-- End : Mobile lastFIle -->
+
+
+          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column">
+            <!-- Start : Desktop askCard -->
+            <div class="ask-card mb-6 pa-4 d-none d-md-block">
+              <div class="ask-title d-flex align-center mb-5">
+                <span :class="'icon icong-' + askCard.icon" class="ask-icon d-flex align-center"></span>
+                <div class="ask-title-texts d-flex flex-column mr-3">
+                  <div class="asktitle">پرسش و پاسخ های مرتبط</div>
+                  <div class="asksubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
+
+                </div>
+              </div>
+              <div class="ask-texts d-flex" v-for="(item, ask) in askTexts " :key="ask.value">
+                <p class="my-5 ask-text">
+                  <i class="fa-solid fa-link ask-text-icon ml-2"></i>
+                  {{ item.askText }}
+                </p>
+              </div>
+              <v-divider class="mt-4"></v-divider>
+              <div class="ask-footer my-4 ">
+                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال فایل</v-btn>
+                <nuxt-link to="" class="askcard-footer-link mr-6">
+                  موارد بیشتر
+                </nuxt-link>
+              </div>
+            </div>
+            <!-- End:Desktop askCard -->
+            <!-- Start : Mobile askCard -->
+            <div class="ask-card mb-6 pa-4  d-block d-md-none">
+              <div class="ask-title d-flex align-center mb-4">
+                <span :class="'icon icong-' + askCard.icon" class="ask-icon d-flex align-center"></span>
+                <div class="ask-title-texts d-flex flex-column mr-3">
+                  <div class="asktitle">پرسش و پاسخ های مرتبط</div>
+                  <div class="asksubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
+
+                </div>
+              </div>
+              <div class="ask-texts d-flex" v-for="(item, ask) in askTexts " :key="ask.value">
+                <p class="my-4 ask-text">
+                  <i class="fa-solid fa-link ask-text-icon ml-2"></i>
+                  {{ item.responsiveText }}
+                </p>
+              </div>
+              <v-divider class="mt-4"></v-divider>
+              <div class="ask-footer mt-4">
+                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال فایل</v-btn>
+                <nuxt-link to="" class="askcard-footer-link mr-6">
+                  موارد بیشتر
+                </nuxt-link>
+              </div>
+            </div>
+            <!-- End:Mobile askCard -->
+            <!-- Start : Desktop testCard -->
+            <div class="test-card  pa-4 d-none d-md-block">
+              <div class="test-title d-flex align-center mb-5">
+                <span :class="'icon icong-' + testCard.icon" class="test-icon d-flex align-center"></span>
+                <div class="test-title-texts d-flex flex-column mr-3">
+                  <div class="testtitle">پرسش و پاسخ های مرتبط</div>
+                  <div class="testsubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
+                </div>
+              </div>
+              <div class="test-texts d-flex" v-for="(item, test) in testTexts " :key="test.value">
+                <p class="my-5 test-text">
+                  <i class="fa-solid fa-link test-text-icon ml-2"></i>
+                  {{ item.testText }}
+                </p>
+              </div>
+              <v-divider class="mt-4"></v-divider>
+              <div class="test-footer my-4">
+                <nuxt-link to="" class="testcard-footer-link">
+                  موارد بیشتر
+                </nuxt-link>
+              </div>
+            </div>
+            <!-- end: Desktop Testcard -->
+
+            <!-- Start : Mobile testCard -->
+            <div class="test-card  pa-4 d-block d-md-none">
+              <div class="test-title d-flex align-center mb-4">
+                <span :class="'icon icong-' + testCard.icon" class="test-icon d-flex align-center"></span>
+                <div class="test-title-texts d-flex flex-column mr-3">
+                  <div class="testtitle">پرسش و پاسخ های مرتبط</div>
+                  <div class="testsubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
+                </div>
+              </div>
+              <div class="test-texts d-flex" v-for="(item, test) in testTexts " :key="test.value">
+                <p class="my-4 test-text">
+                  <i class="fa-solid fa-link test-text-icon ml-2"></i>
+                  {{ item.responsiveText }}
+                </p>
+              </div>
+              <v-divider class="mt-4"></v-divider>
+              <div class="test-footer mt-4">
+                <nuxt-link to="" class="testcard-footer-link">
+                  موارد بیشتر
+                </nuxt-link>
+              </div>
+            </div>
+            <!-- end: Mobile testcard -->
+          </v-col>
+
+        </v-row>
+      </v-container>
+    </section>
+    <!-- End: Feed -->
+
+    <!-- Sidebar -->
+
   </div>
 </template>
 <script>
 import category from "~/components/common/category.vue";
+import timeLine from "~/components/common/timeline.vue";
 export default {
-  components: { category },
+  components: { category, timeLine, },
   data() {
     return {
+      timeLines: [
+        {
+          number: '1',
+          color: "teal",
+          title: "تنظیم عصبی",
+          lessons: [
+            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
+            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
+          ]
+        },
+        {
+          number: '2',
+          color: "grey lighten-3",
+          title: "پاسخ گیاهان به محرک ها",
+          lessons: [
+            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
+            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
+          ]
+        },
+        {
+          number: '3',
+          color: "grey lighten-3",
+          title: "حواس",
+          lessons: [
+            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
+            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
+          ]
+        },
+      ],
+      bookmark: "bookmark.png",
+      drawer: false,
+      // model: null,
+      sidebartimelinetitle: "  زیست شناسی (2)",
+      testNumber: "20 تست",
+      // lessons: [
+      //   {
+      //     lesson: "گفتار 1 :یاخته های بافت عصبی"
+      //   },
+      //   {
+      //     lesson: "گفتار 2 : ساختار دستگاه عصبی"
+      //   }
+      // ],
+      // timeLines: [
+      //   {
+      //     number: '1',
+      //     color: "teal",
+      //     title: "تنظیم عصبی",
+
+      //   },
+      //   {
+      //     number: '2',
+      //     color: "grey lighten-3",
+      //     title: "پاسخ گیاهان به محرک ها",
+
+
+      //   },
+      //   {
+      //     number: '3',
+      //     color: "grey lighten-3",
+      //     title: "حواس",
+
+
+      //   },
+
+
+
+      videos: [
+        {
+
+          vid: "video.mp4"
+        },
+        {
+          vid: "video.mp4"
+        },
+        {
+          vid: "video.mp4"
+        },
+        {
+          vid: "video.mp4"
+        },
+        {
+          vid: "video.mp4"
+        },
+      ],
+      lastFile: {
+        img: "dexter-morse2.png",
+        name: "علیرضا داودی",
+        date: "27 فروردین",
+        number: "27",
+        responsiveText: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک ......",
+        lastFileText: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت ......",
+        content: "آموزش سطح تیزهوشان (pptx)",
+        budget: "صفحه ۱ تا صفحه ۱۶۸"
+      },
+      askCard: {
+        icon: "qa",
+      },
+      askTexts: [
+        {
+          responsiveText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن ...",
+          askText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن + حل تمرین (1 و 2) درس 11"
+        },
+        {
+          responsiveText: "فیلم ریاضی هفتم | فصل 2: عددهای صحیح ...",
+          askText: " فیلم ریاضی هفتم | فصل 2: عددهای صحیح (جلسه چهارم: حل نمونه)"
+        },
+        {
+          responsiveText: "پاورپوینت مطالعات اجتماعی هفتم | درس12: ...",
+          askText: " پاورپوینت مطالعات اجتماعی هفتم | درس 12: حفاظت از زیستگاه‌های ایران"
+        },
+      ],
+      testCard: {
+        icon: "azmoon"
+      },
+      testTexts: [
+        {
+          responsiveText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن ...",
+          testText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن + حل تمرین (1 و 2) درس 11"
+        },
+        {
+          responsiveText: "فیلم ریاضی هفتم | فصل 2: عددهای صحیح ...",
+          testText: " فیلم ریاضی هفتم | فصل 2: عددهای صحیح (جلسه چهارم: حل نمونه)"
+        },
+        {
+          responsiveText: "پاورپوینت مطالعات اجتماعی هفتم | درس12: ...",
+          testText: " پاورپوینت مطالعات اجتماعی هفتم | درس 12: حفاظت از زیستگاه‌های ایران"
+        },
+      ],
+      rating: 4,
+      items1: ["همه", "دبستان", "متوسطه"],
+      items2: ["همه", "دبستان", "متوسطه"],
+      items3: ["همه", "دبستان", "متوسطه"],
+      values1: ["همه"],
+      values2: ["همه"],
+      values3: ["همه"],
+      value1: null,
+      value2: null,
+      value3: null,
       lastUpdate: "27 فروردین",
       visit: "15383",
       lesson: {
@@ -252,10 +636,56 @@ export default {
       bookSample: {
         sampleImg: "booksample.png",
         sampleText: "آزمون تستی فصل 2تا 8 ریاضی هفتم دبیرستان اسوه اصفهن",
-        samplefooterImg:"dexter-morse3.png",
-        sfooterName:"علیرضا داودی"
-      }
+        samplefooterImg: "dexter-morse3.png",
+        sfooterName: "علیرضا داودی"
+      },
+      events: [],
+      input: null,
+      nonce: 0,
     };
+
   },
+  computed: {
+    timeline() {
+      return this.events.slice().reverse()
+    },
+  },
+  mounted() {
+    generateSlider(),
+      this.color()
+  },
+  methods: {
+    comment() {
+      const time = (new Date()).toTimeString()
+      this.events.push({
+        id: this.nonce++,
+        text: this.input,
+        time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
+          return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
+        }),
+      })
+
+      this.input = null
+    },
+    activeTitle(value) {
+      const allTitle = document.querySelectorAll('.category-book-titles')
+      const allNumber = document.querySelectorAll('.timeline-number')
+
+      for (let i = 0; i < allTitle.length; i++) {
+        allTitle[i].classList.remove("active")
+        allNumber[i].classList.remove("active")
+      }
+
+      let title = document.getElementById('res-title' + value)
+      let number = document.getElementById('res-number' + value)
+
+      title.classList.add("active")
+      number.classList.add("active")
+    },
+    color() {
+
+    }
+  },
+
 };
 </script>

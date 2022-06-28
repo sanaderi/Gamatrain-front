@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+
   head: {
     titleTemplate: "%s - Gama-Ui",
     title: "Gama-Ui",
@@ -14,9 +15,18 @@ export default {
       {name: "format-detection", content: "telephone=no"},
     ],
     link: [
-      {rel: "icon", type: "image/x-icon", href: "/favicon.ico"},
-      {rel: "stylesheet", href: "/assets/css/fontawesome.min.css"},
-      {rel: "stylesheet", href: "/assets/css/all.min.css"},
+      { rel: "stylesheet", href: "/assets/css/fontawesome.min.css" },
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "stylesheet", href: "/assets/css/all.min.css" },
+      { rel: "stylesheet", href: "/assets/css/owl.carousel.min.css" },
+      { rel: "stylesheet", href: "/assets/css/owl.theme.default.css" },
+
+    ],
+    script: [
+      { src: './assets/js/jquery.js', body: true },
+      { src: './assets/js/owl.carousel.min.js', body: true },
+      { src: '/assets/js/main.js', body: true },
+
     ],
   },
 
@@ -37,8 +47,9 @@ export default {
     ["@nuxtjs/vuetify", {rtl: true}],
   ],
 
+
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['nuxt-material-design-icons'],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -57,6 +68,7 @@ export default {
         },
       },
     },
+
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

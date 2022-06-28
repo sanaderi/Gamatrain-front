@@ -3,7 +3,6 @@
     <v-list>
       <v-subheader
         v-if="feed.header"
-        :key="feed.header"
         class="d-flex align-center feed-header"
       >
         <span
