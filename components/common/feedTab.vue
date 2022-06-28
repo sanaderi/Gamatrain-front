@@ -31,7 +31,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -53,7 +53,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -75,7 +75,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -97,7 +97,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -119,7 +119,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -169,7 +169,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -191,7 +191,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -213,7 +213,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -235,7 +235,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -257,7 +257,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -307,7 +307,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -329,7 +329,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -351,7 +351,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -373,7 +373,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -395,7 +395,7 @@
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -413,7 +413,7 @@ export default {
       items:[
         {
           icon:"file.png",
-          title:"فایل های آموزشی"
+          title:"File های آموزشی"
         },
          {
            icon:"ask.png",
@@ -424,7 +424,7 @@ export default {
           title:"اخبار"
         },
       ],
-      // items: ["فایل های آموزشی", "پرسش ها", "اخبار"],
+      // items: ["File های آموزشی", "پرسش ها", "اخبار"],
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       avatar: "dexter-morse2.png",
     };

@@ -121,7 +121,7 @@
                   <span
                     class="btn-transparent more-content pointer"
                     @click="grade.showMore = !grade.showMore"
-                    >بیشتر</span
+                    >more</span
                   >
                 </v-card-title>
                 <v-divider class="my-5"></v-divider>
@@ -251,7 +251,7 @@
                     </h2>
                     <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
-                      <p>27 فروردین</p>
+                      <p>27 Jun</p>
                     </div>
                   </div>
                   <p class="d-inline-block">
@@ -268,7 +268,7 @@
                   <span
                     class="btn-transparent more-content pointer"
                     @click="grade.showMore = !grade.showMore"
-                    >بیشتر</span
+                    >more</span
                   >
                   <p v-if="grade.showMore" class="total-content">
                     <nuxt-link
@@ -394,7 +394,7 @@
                     </h2>
                     <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
-                      <p>27 فروردین</p>
+                      <p>27 Jun</p>
                     </div>
                   </div>
                   <p class="d-inline-block">
@@ -411,7 +411,7 @@
                   <span
                     class="btn-transparent more-content pointer"
                     @click="grade.showMore = !grade.showMore"
-                    >بیشتر</span
+                    >more</span
                   >
                   <p v-if="grade.showMore" class="total-content">
                     <nuxt-link
@@ -503,7 +503,7 @@
           @click="showLess = !showLess"
         >
           <span v-if="showLess" class="showmore-span">
-            مشاهده بیشتر
+            مشاهده more
             <i class="fa-solid fa-chevron-down mx-2"></i>
           </span>
           <span v-else class="showless-span">
@@ -668,31 +668,31 @@ export default {
         img: "laptop.png",
         para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
         title: "اموزشی",
-        date: "27 فروردین",
+        date: "27 Jun",
       },
       {
         img: "laptop.png",
         para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
         title: "اموزشی",
-        date: "27 فروردین",
+        date: "27 Jun",
       },
       {
         img: "laptop.png",
         para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
         title: "اموزشی",
-        date: "27 فروردین",
+        date: "27 Jun",
       },
       {
         img: "laptop.png",
         para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
         title: "اموزشی",
-        date: "27 فروردین",
+        date: "27 Jun",
       },
       {
         img: "laptop.png",
         para: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده ......",
         title: "اموزشی",
-        date: "27 فروردین",
+        date: "27 Jun",
       },
     ],
 

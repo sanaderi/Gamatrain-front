@@ -40,28 +40,28 @@ export default {
         {
           number: '1',
           color: "teal",
-          title: "تنظیم عصبی",
+          title: "Nervous regulation",
           lessons: [
-            {lesson: " گفتار 1 :یاخته های بافت عصبی"},
-            {lesson: "گفتار 2 : ساختار دستگاه عصبی"}
+            {lesson: " Speech 1 :Nerve tissue cells"},
+            {lesson: "Speech 2 : Nervous system structure"}
           ]
         },
         {
           number: '2',
           color: "grey lighten-3",
-          title: "پاسخ گیاهان به محرک ها",
+          title: "Plants respond to stimuli",
           lessons: [
-            {lesson: " گفتار 1 :یاخته های بافت عصبی"},
-            {lesson: "گفتار 2 : ساختار دستگاه عصبی"}
+            {lesson: " Speech 1 :Nerve tissue cells"},
+            {lesson: "Speech 2 : Nervous system structure"}
           ]
         },
         {
           number: '3',
           color: "grey lighten-3",
-          title: "حواس",
+          title: "The senses",
           lessons: [
-            {lesson: " گفتار 1 :یاخته های بافت عصبی"},
-            {lesson: "گفتار 2 : ساختار دستگاه عصبی"}
+            {lesson: " Speech 1 :Nerve tissue cells"},
+            {lesson: "Speech 2 : Nervous system structure"}
           ]
         },
       ],

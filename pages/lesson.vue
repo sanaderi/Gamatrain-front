@@ -22,14 +22,14 @@
           <v-col md="3" cols="12" class="lesson-details">
             <div class="d-flex flex-column details-content">
               <div class="last-update mb-3">
-                <i class="fa-solid fa-calendar-days ml-2"></i>اخرین بروزرسانی :
+                <i class="fa-solid fa-calendar-days ml-2"></i>Last update :
                 {{ lastUpdate }}
               </div>
               <div class="visit mb-3">
-                <i class="fa-solid fa-eye ml-2"></i>بازدید:{{ visit }}
+                <i class="fa-solid fa-eye ml-2"></i>Viewed:{{ visit }}
               </div>
               <div class="error-report">
-                <i class="fa-solid fa-circle-exclamation ml-2"></i>گزارش خرابی
+                <i class="fa-solid fa-circle-exclamation ml-2"></i>Crash report
               </div>
             </div>
           </v-col>
@@ -56,7 +56,7 @@
                 <i class="fa-solid fa-eye ml-2"></i>{{ visit }}
               </div>
               <div class="error-report">
-                <i class="fa-solid fa-circle-exclamation ml-2"></i>گزارش خرابی
+                <i class="fa-solid fa-circle-exclamation ml-2"></i>Crash report
               </div>
             </div>
           </v-col>
@@ -90,10 +90,10 @@
                     </p>
                     <div class="d-flex justify-space-between">
                       <p class="durition">
-                        <i class="fa-regular fa-clock ml-2"></i>مدت زمان :
+                        <i class="fa-regular fa-clock ml-2"></i>Time:
                         {{ card.durition }}
                       </p>
-                      <nuxt-link to="" class="more-link d-none d-md-block">بیشتر</nuxt-link>
+                      <nuxt-link to="" class="more-link d-none d-md-block">more</nuxt-link>
                     </div>
                   </div>
                 </v-col>
@@ -112,16 +112,16 @@
                   <div class="d-flex flex-column card-details">
                     <p class="card-title">{{ card.bookTitle }}</p>
                     <p class="test-number">
-                      <i class="fa-solid fa-grip-lines ml-2"></i>تعداد تست :{{
+                      <i class="fa-solid fa-grip-lines ml-2"></i>Number of tests: {{
                           card.testNumber
                       }}
                     </p>
                     <div class="d-flex justify-space-between">
                       <p class="levels">
-                        <i class="fa-solid fa-arrow-trend-up ml-2"></i>سطح سختی
+                        <i class="fa-solid fa-arrow-trend-up ml-2"></i>Difficulty
                         :{{ card.easy }} {{ card.medium }} {{ card.hard }}
                       </p>
-                      <nuxt-link to="" class="more-link d-none d-md-block">بیشتر</nuxt-link>
+                      <nuxt-link to="" class="more-link d-none d-md-block">more</nuxt-link>
                     </div>
                   </div>
                 </v-col>
@@ -199,7 +199,7 @@
 
               </div>
               <div class="learn-more pa-6">
-                <p class="learnmore-title mb-6"> بیشتر بدانید</p>
+                <p class="learnmore-title mb-6"> more بدانید</p>
                 <p class="learnmore-text">{{ book.learnmoreText }}</p>
               </div>
             </div>
@@ -360,7 +360,7 @@
               </div>
               <v-divider class="mt-4"></v-divider>
               <div class="ask-footer my-4 ">
-                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال فایل</v-btn>
+                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال File</v-btn>
                 <nuxt-link to="" class="askcard-footer-link mr-6">
                   More
                 </nuxt-link>
@@ -385,7 +385,7 @@
               </div>
               <v-divider class="mt-4"></v-divider>
               <div class="ask-footer mt-4">
-                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال فایل</v-btn>
+                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال File</v-btn>
                 <nuxt-link to="" class="askcard-footer-link mr-6">
                   More
                 </nuxt-link>
@@ -461,62 +461,62 @@ export default {
         {
           number: '1',
           color: "teal",
-          title: "تنظیم عصبی",
+          title: "Nervous regulation",
           lessons: [
-            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
-            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
+            { lesson: " Speech 1 :Nerve tissue cells" },
+            { lesson: "Speech 2 : Nervous system structure" }
           ]
         },
         {
           number: '2',
           color: "grey lighten-3",
-          title: "پاسخ گیاهان به محرک ها",
+          title: "Plants respond to stimuli",
           lessons: [
-            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
-            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
+            { lesson: " Speech 1 :Nerve tissue cells" },
+            { lesson: "Speech 2 : Nervous system structure" }
           ]
         },
         {
           number: '3',
           color: "grey lighten-3",
-          title: "حواس",
+          title: "The senses",
           lessons: [
-            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
-            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
+            { lesson: " Speech 1 :Nerve tissue cells" },
+            { lesson: "Speech 2 : Nervous system structure" }
           ]
         },
       ],
       bookmark: "bookmark.png",
       drawer: false,
       // model: null,
-      sidebartimelinetitle: "  زیست شناسی (2)",
+      sidebartimelinetitle: "Biology",
       testNumber: "20 تست",
       // lessons: [
       //   {
-      //     lesson: "گفتار 1 :یاخته های بافت عصبی"
+      //     lesson: "Speech 1 :Nerve tissue cells"
       //   },
       //   {
-      //     lesson: "گفتار 2 : ساختار دستگاه عصبی"
+      //     lesson: "Speech 2 : Nervous system structure"
       //   }
       // ],
       // timeLines: [
       //   {
       //     number: '1',
       //     color: "teal",
-      //     title: "تنظیم عصبی",
+      //     title: "Nervous regulation",
 
       //   },
       //   {
       //     number: '2',
       //     color: "grey lighten-3",
-      //     title: "پاسخ گیاهان به محرک ها",
+      //     title: "Plants respond to stimuli",
 
 
       //   },
       //   {
       //     number: '3',
       //     color: "grey lighten-3",
-      //     title: "حواس",
+      //     title: "The senses",
 
 
       //   },
@@ -543,8 +543,8 @@ export default {
       ],
       lastFile: {
         img: "dexter-morse2.png",
-        name: "علیرضا داودی",
-        date: "27 فروردین",
+        name: "Arian Etemdi",
+        date: "27 Jun",
         number: "27",
         responsiveText: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک ......",
         lastFileText: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت ......",
@@ -595,27 +595,27 @@ export default {
       value1: null,
       value2: null,
       value3: null,
-      lastUpdate: "27 فروردین",
+      lastUpdate: "27 Jun",
       visit: "15383",
       lesson: {
-        lessonTitle: "Tutorial زیست شناسی (2) کلاس یازدهم رشته تجربی",
-        lessonSub: "فصل اول- گفتار 2: ساختار دستگاه عصبی با پاسخ",
+        lessonTitle: "Tutorial Biology (2) Eleventh grade of experimental discipline",
+        lessonSub: "First Chapter- Speech 2: Nervous system structure With the answer",
       },
       card: {
         img: "dexter-morse1.png",
         img2: "book.png",
-        videoTitle: "ویدیو دوره کامل آموزشی، ریاضی هفتم دوره اول متوسطه",
+        videoTitle: "Video of the complete educational course, the seventh mathematics of the first year of high school",
         bookTitle:
           "آلبوم بانک تست های Online Exam، ریاضی هفتم دوره اول متوسطه",
         testNumber: "2717",
-        videoTeacher: "علیرضا داودی",
-        durition: " 8 ساعت (26 فایل)",
-        easy: "آسان",
-        medium: "متوسط",
-        hard: "دشوار",
+        videoTeacher: "Arian Etemdi",
+        durition: " 8 Hour (26 File)",
+        easy: "Easy",
+        medium: "Medium",
+        hard: "Difficult",
       },
       book: {
-        catalogeTitle: "زیست شناسی (2)",
+        catalogeTitle: "Biology (2)",
         learnmoreText: "التهاب پرده‌های مننژ، مننژیت نام دارد و از علامت‌های آن سر درد، تب و خشکی گردن است. مننژیت در اثر عفونت‌های ویروسی یا باکتریایی ایجاد می‌شود."
 
       },
@@ -637,7 +637,7 @@ export default {
         sampleImg: "booksample.png",
         sampleText: "آزمون تستی فصل 2تا 8 ریاضی هفتم teacherستان اسوه اصفهن",
         samplefooterImg: "dexter-morse3.png",
-        sfooterName: "علیرضا داودی"
+        sfooterName: "Arian Etemdi"
       },
       events: [],
       input: null,

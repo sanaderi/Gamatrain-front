@@ -70,7 +70,7 @@
                 </div>
                 <div class="font-weight-bold answer">
                   <span class="mdi mdi-checkbox-marked icon"></span>
-                  <span> پاسخنامه کلیدی در پایان فایل آزمون قرار دارد. </span>
+                  <span> پاسخنامه کلیدی در پایان File آزمون قرار دارد. </span>
                 </div>
               </div>
               <!--  Download links   -->
@@ -79,14 +79,14 @@
                   <span class="d-inline-flex h-100 px-5 py-2 price">4290 تومان</span>
                   <span class="d-inline-flex align-center px-5 py-2">
                         <v-icon class="mdi mdi-file-pdf-box pdf-icon"></v-icon>
-                        <span>دانلود فایل PDF</span>
+                        <span>دانلود File PDF</span>
                       </span>
                 </nuxt-link>
                 <nuxt-link class="d-flex align-cente word-download" to="">
                   <span class="d-inline-flex h-100 px-5 py-2 price">7010 تومان</span>
                   <span class="d-inline-flex align-center px-5 py-2">
                       <span class="mdi mdi-file-word word-icon"></span>
-                      <span>دانلود فایل WORD</span>
+                      <span>دانلود File WORD</span>
                   </span>
                 </nuxt-link>
               </div>
@@ -118,8 +118,8 @@
                 <img :alt=detail.title :src="require(`~/assets/images/${detail.previewImage}`)"
                      class="detail-preview-image"/>
                 <div class="description-preview-holder">
-                  <p class="text-center preview-text"> پیش نمایش صفحه اول فایل </p>
-                  <p class="text-center font-weight-bold pdf-page-numbers"> تعداد صفحات فایل : 17 </p>
+                  <p class="text-center preview-text"> پیش نمایش صفحه اول File </p>
+                  <p class="text-center font-weight-bold pdf-page-numbers"> تعداد صفحات File : 17 </p>
                 </div>
                 <!--   fileCopyRight  -->
                 <div class="d-block d-md-none mt-7 text-center file-copy-right">
@@ -141,7 +141,7 @@
               </div>
               <div class="d-flex align-center ml-3">
                 <i class="fa-solid fa-eye ml-1 icon"></i>
-                <span class="main-content-footer"><span class="remove-res"> بازدید :</span> 1895</span>
+                <span class="main-content-footer"><span class="remove-res"> Viewed :</span> 1895</span>
               </div>
               <div class="d-flex align-center ml-3 update">
                 <i class="fa-solid fa-calendar-days ml-1 icon remove-res"></i>
@@ -151,7 +151,7 @@
             <div class="d-flex align-center justify-end left  extra-info-left">
               <div class="d-flex align-center justify-end report-error">
                 <i class="fa-solid fa-bullhorn ml-1 icon"></i>
-                <span class="modal-error main-content-footer">گزارش خرابی فایل </span>
+                <span class="modal-error main-content-footer">Crash report File </span>
               </div>
             </div>
           </div>
@@ -184,7 +184,7 @@
                 <div>
                   <p class="duration">
                     <i class="fa-solid fa-clock icon"></i>
-                    <span>مدت دوره: 942 اسلاید (13 فایل) </span>
+                    <span>مدت دوره: 942 اسلاید (13 File) </span>
                   </p>
                 </div>
               </div>
@@ -218,11 +218,11 @@
                 </div>
                 <div class="num">
                     <i class="fa-solid fa-list-ol icon"></i>
-                    <span>تعداد تست: 1399</span>
+                    <span>Number of tests: 1399</span>
                 </div>
                 <div class="level">
                     <i class="fa-solid fa-superscript icon"></i>
-                    <span>سطح سختی: آسان، متوسط و دشوار  </span>
+                    <span>Difficulty: Easy، متوسط و دشوار  </span>
                 </div>
                 <div class="d-flex align-center justify-center suggestion">
                     <span class="d-inline-flex align-center icong-teacher ml-1"></span>
@@ -441,7 +441,7 @@ export default {
         class: 'learning',
         header: 'محتواهای آموزشی مرتبط',
         icon: 'learnfiles',
-        description: ' فایل های پاورپوینت، ویدئو، صوتی، متنی و ...',
+        description: ' File های پاورپوینت، ویدئو، صوتی، متنی و ...',
         contentItemList: [
           {
             title: 'تدریس آنلاین صفحه 53 تا 58 عربی (3) انسانی دوازدهم | درس 4: نِظامُ الطَّبيعَةِ ',

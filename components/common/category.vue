@@ -60,7 +60,7 @@
               <div class="category-more d-flex justify-center align-center ">
                 <i class="fa-solid fa-ellipsis cat-more-icon"></i>
               </div>
-              <p class="mb-0 mr-1 cat-more-p">بیشتر</p>
+              <p class="mb-0 mr-1 cat-more-p">more</p>
             </nuxt-link>
           </button>
         </v-col>
