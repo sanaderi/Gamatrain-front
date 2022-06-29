@@ -1,15 +1,5 @@
 <template>
   <div>
-    <!--  Start: search grade  -->
-    <!-- <section class="d-block d-md-none search-sec mb-8">
-      <v-container>
-        <div class="box search-container">
-          <search :items1="items1" :items2="items2" :items3="items3" :values1="values1" :value1="value1"
-            :values2="values2" :value2="value2" :values3="values3" :value3="value2"></search>
-        </div>
-      </v-container>
-    </section> -->
-    <!--  End: search  -->
     <!-- Start : Category -->
     <category />
     <!-- End:Category -->
@@ -164,28 +154,66 @@
                   <img :src="require('@/assets/images/' + bookmark)" alt="" class="ml-2">
                   <p>{{ sidebartimelinetitle }}</p>
                 </div>
-                <div class="timeline" style="max-width: 600px;">
-                  <v-timeline clipped dense>
-                    <v-timeline-item v-for="(item, index) in timeLines" :key="index" :color="item.color" class="mb-4"
-                      fill-dot icon-color="grey lighten-3" medium>
-                      <span :id="'res-number' + index" class="headline font-weight-bold timeline-number"
-                        v-text="item.number">
-                      </span>
-                      <v-row>
-                        <v-col cols="12">
-                          <p :id="'res-title' + index" class="category-book-titles "> {{ item.title }}</p>
-                        </v-col>
-                        <v-col v-for="lesson in item.lessons" cols="12" @click="activeTitle(index)">
-                          <nuxt-link id="lesson-name" to="">
-                            <i class="fa-regular fa-window-minimize ml-2"></i>
-                            {{ lesson.lesson }}
-                          </nuxt-link>
-                        </v-col>
-                      </v-row>
-                    </v-timeline-item>
+                <v-stepper v-model="e6" vertical class="stepper">
+                  <v-stepper-step :complete="e6 > 1" step="1" @click="e6 = 1" color="#008B8B">
+                    Select an app
 
-                  </v-timeline>
-                </div>
+                  </v-stepper-step>
+                  <v-stepper-content step="1">
+                    <v-row>
+                      <v-col cols="12" v-for="item in timelines" :key="item.value">
+                        <nuxt-link id="lesson-name" to="" class="stepper-item">
+                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          {{ item.lessonName }}
+                        </nuxt-link>
+                      </v-col>
+                    </v-row>
+                  </v-stepper-content>
+
+                  <v-stepper-step :complete="e6 > 2" step="2" @click="e6 = 2" color="#008B8B">
+                    Configure analytics for this app
+                  </v-stepper-step>
+
+                  <v-stepper-content step="2">
+                    <v-row>
+                      <v-col cols="12" v-for="item in timelines" :key="item.value">
+                        <nuxt-link id="lesson-name" to="" class="stepper-item">
+                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          {{ item.lessonName }}
+                        </nuxt-link>
+                      </v-col>
+                    </v-row>
+                  </v-stepper-content>
+
+                  <v-stepper-step :complete="e6 > 3" step="3" @click="e6 = 3" color="#008B8B">
+                    Select an ad format and name ad unit
+                  </v-stepper-step>
+
+                  <v-stepper-content step="3">
+                    <v-row>
+                      <v-col cols="12" v-for="item in timelines" :key="item.value">
+                        <nuxt-link id="lesson-name" to="" class="stepper-item">
+                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          {{ item.lessonName }}
+                        </nuxt-link>
+                      </v-col>
+                    </v-row>
+                  </v-stepper-content>
+
+                  <v-stepper-step step="4" @click="e6 = 4" color="#008B8B">
+                    View setup instructions
+                  </v-stepper-step>
+                  <v-stepper-content step="4">
+                    <v-row>
+                      <v-col cols="12" v-for="item in timelines" :key="item.value">
+                        <nuxt-link id="lesson-name" to="" class="stepper-item">
+                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          {{ item.lessonName }}
+                        </nuxt-link>
+                      </v-col>
+                    </v-row>
+                  </v-stepper-content>
+                </v-stepper>
               </v-navigation-drawer>
               <div class="book-content" v-for="(item, bookContent) in bookContent" :key="bookContent">
                 <p class="book-title mb-3">{{ item.bookTitle }}</p>
@@ -457,72 +485,20 @@ export default {
   components: { category, timeLine, },
   data() {
     return {
-      timeLines: [
+      e6: 1,
+      timelines: [
         {
-          number: '1',
-          color: "teal",
-          title: "Nervous regulation",
-          lessons: [
-            { lesson: " Speech 1 :Nerve tissue cells" },
-            { lesson: "Speech 2 : Nervous system structure" }
-          ]
+          lessonName: " Speech 1 :Nerve tissue cells",
         },
         {
-          number: '2',
-          color: "grey lighten-3",
-          title: "Plants respond to stimuli",
-          lessons: [
-            { lesson: " Speech 1 :Nerve tissue cells" },
-            { lesson: "Speech 2 : Nervous system structure" }
-          ]
-        },
-        {
-          number: '3',
-          color: "grey lighten-3",
-          title: "The senses",
-          lessons: [
-            { lesson: " Speech 1 :Nerve tissue cells" },
-            { lesson: "Speech 2 : Nervous system structure" }
-          ]
-        },
+          lessonName: "Speech 2 : Nervous system structure",
+        }
       ],
       bookmark: "bookmark.png",
       drawer: false,
       // model: null,
       sidebartimelinetitle: "Biology",
       testNumber: "20 تست",
-      // lessons: [
-      //   {
-      //     lesson: "Speech 1 :Nerve tissue cells"
-      //   },
-      //   {
-      //     lesson: "Speech 2 : Nervous system structure"
-      //   }
-      // ],
-      // timeLines: [
-      //   {
-      //     number: '1',
-      //     color: "teal",
-      //     title: "Nervous regulation",
-
-      //   },
-      //   {
-      //     number: '2',
-      //     color: "grey lighten-3",
-      //     title: "Plants respond to stimuli",
-
-
-      //   },
-      //   {
-      //     number: '3',
-      //     color: "grey lighten-3",
-      //     title: "The senses",
-
-
-      //   },
-
-
-
       videos: [
         {
 
@@ -667,21 +643,7 @@ export default {
 
       this.input = null
     },
-    activeTitle(value) {
-      const allTitle = document.querySelectorAll('.category-book-titles')
-      const allNumber = document.querySelectorAll('.timeline-number')
-
-      for (let i = 0; i < allTitle.length; i++) {
-        allTitle[i].classList.remove("active")
-        allNumber[i].classList.remove("active")
-      }
-
-      let title = document.getElementById('res-title' + value)
-      let number = document.getElementById('res-number' + value)
-
-      title.classList.add("active")
-      number.classList.add("active")
-    },
+   
     color() {
 
     }
