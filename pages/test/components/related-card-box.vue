@@ -27,13 +27,13 @@
         <nuxt-link to="latest" >
           <v-list-item class="extra-case">
             <i class="fa-solid fa-list ml-1 icon footer-text"></i>
-            <span class="footer-text">موارد بیشتر</span>
+            <span class="footer-text">More</span>
           </v-list-item>
         </nuxt-link>
         <nuxt-link v-if="(related.class == 'learning') || (related.class == 'question')" to="" class="add-file">
           <v-list-item class="pa-0">
             <i class="fa-solid fa-plus ml-1 icon"></i>
-            <span v-if="(related.class == 'learning')">ارسال فایل</span>
+            <span v-if="(related.class == 'learning')">ارسال File</span>
             <span v-else-if="(related.class == 'question')">ارسال پرسش</span>
           </v-list-item>
         </nuxt-link>

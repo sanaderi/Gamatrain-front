@@ -5,11 +5,11 @@ html {
 
 body {
   overflow: initial !important;
-  direction: rtl;
+  //direction: rtl;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: IRANSans, sans-serif;
+  font-family: sans-serif;
   font-size: 14px;
   transition: 0.5s ease-in-out;
 
@@ -38,7 +38,7 @@ body {
   }
 
   .v-application {
-    font-family: IRANSans, sans-serif;
+    font-family: sans-serif;
 
     .v-carousel__controls__item {
       color: $gray4  !important;
@@ -853,7 +853,7 @@ body {
       }
 
       .grade-title {
-        margin-right: 4.5rem;
+        margin-left: 4.5rem;
         margin-bottom: 20px !important;
         font-size: 1.6rem;
       }
@@ -869,9 +869,9 @@ body {
         position: absolute;
         width: 5.5rem;
         height: 3.6rem;
-        right: 0;
+        left: 0;
         top: 1.4rem;
-        border-radius: 1rem 0 0 1rem;
+        border-radius: 0 1rem 1rem 0;
         //margin: -.2rem 1.7rem 0 1.2rem;
         display: flex;
         justify-content: center;
@@ -2112,62 +2112,33 @@ body {
       font-size: 2rem;
     }
 
-    .v-timeline--dense:not(.v-timeline--reverse)::before {
-      right: -9%;
-    }
+    .stepper {
+      .stepper-item:hover {
+        color: $green;
+      }
 
-    .v-timeline-item__divider {
-      min-width: 4rem;
-      right: -45%;
-    }
-
-    .timeline {
-      position: relative;
-      width: 82%;
-
-      .category-book-titles {
-        &.active {
-          color: $green;
-        }
+      .stepper-item:focus {
+        color: $green;
       }
     }
 
-    .timeline-number {
-      position: absolute;
-      right: -41% !important;
-      top: 33%;
-      z-index: 5;
-      width: 38px;
-      height: 38px;
-      background: lightgray;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .v-sheet.v-stepper:not(.v-sheet--outlined) {
+      box-shadow: none;
+      background: $gray12;
     }
 
-    .timeline-number.active {
-      background: #008b8b;
-      color: #FFFFFF;
+    .theme--light.v-stepper .v-stepper__step:not(.v-stepper__step--active):not(.v-stepper__step--complete):not(.v-stepper__step--error) .v-stepper__step__step {
+      background: rgba(196, 196, 196, 0.2);
+      color: $gray4;
     }
 
-    .v-timeline-item__dot,
-    .v-timeline-item__inner-dot {
-      display: none !important;
-    }
+    .v-stepper__step__step {
+      height: 35px;
+      width: 35px;
+      font-size: 1.5rem;
+      margin-left: -0.5rem !important;
 
-    .v-timeline-item__body {
-      max-width: 100%;
     }
-
-    .v-timeline-item__body a:hover {
-      color: $green;
-    }
-
-    .v-timeline-item__body a:focus {
-      color: $green;
-    }
-
   }
 
   .book-contents {
@@ -2185,86 +2156,34 @@ body {
         color: $gray45;
       }
 
-      .sTimeline-icon {
-        color: $green  !important;
-        font-size: 3rem;
-      }
-
-      .v-timeline::before {
-        right: calc(20px - 1px) !important;
-      }
-
-      .timeline-content-body {
-        position: relative;
-        top: 38%;
-        right: -40px;
-      }
-
-      .v-timeline-item__divider {
-        min-width: 4rem !important;
-        right: -20%;
-      }
-
-      .lesson-name-timeline:focus {
-        color: $green  !important;
-      }
-
-      .lesson-name-timeline:hover {
-        color: $green  !important;
-      }
-
-      .v-timeline-item__body {
-        max-width: 100%;
-      }
-
-      .v-timeline-item__body a:hover {
-        color: $green;
-      }
-
-      .v-timeline-item__body a:focus {
-        color: $green;
-      }
-
-      .lesson-name-timeline {
-        font-size: 1.2rem;
-
-        .lesson-name-dash {
-          font-size: 0.8rem;
+      .stepper {
+        .stepper-item:hover {
+          color: $green;
         }
-      }
 
-      .category-book-titles {
-        &.active {
+        .stepper-item:focus {
           color: $green;
         }
       }
 
-      .timeline-number {
-        position: absolute;
-        right: -16% !important;
-        top: 33%;
-        z-index: 5;
-        width: 38px;
-        height: 38px;
-        background: lightgray;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      .v-sheet.v-stepper:not(.v-sheet--outlined) {
+        box-shadow: none;
+        background: none;
       }
 
-      .timeline-number.active {
-        background: #008b8b;
-        color: #FFFFFF;
+      .theme--light.v-stepper .v-stepper__step:not(.v-stepper__step--active):not(.v-stepper__step--complete):not(.v-stepper__step--error) .v-stepper__step__step {
+        background: rgba(196, 196, 196, 0.2);
+        color: $gray4;
       }
 
-      .v-timeline-item__dot,
-      .v-timeline-item__inner-dot {
-        display: none !important;
+      .v-stepper__step__step {
+        height: 35px;
+        width: 35px;
+        font-size: 1.5rem;
+        margin-left: -0.5rem !important;
+
       }
     }
-
-
 
     .book-title {
       color: $brown2;
@@ -2625,3 +2544,146 @@ body {
 }
 
 // End: Lesson page
+
+// Start : sample-q
+.sample-q {
+
+  .sample-q-content {
+    .sample-q-breadcrumb {
+      color: $gray4;
+      background-color: $gray12;
+      border-radius: 1.2rem;
+    }
+
+    .sample-q-bar {
+      padding: 0.5rem;
+      color: $gray4;
+      background-color: $gray12;
+      border-radius: 1.2rem;
+
+      .app-bar {
+        border-radius: 1rem !important;
+
+        .v-badge {
+          .nav-link1 {
+            padding: 0.5rem;
+            border: 1px solid $border;
+            background: rgba(1, 87, 155, 0.02);
+            border-radius: 1.4rem;
+            display: flex;
+            align-items: center;
+          }
+
+          .nav-link1 span {
+            font-size: 3rem;
+            padding-left: 1rem;
+          }
+
+          .nav-link {
+            color: $gray4  !important;
+          }
+        }
+
+        .v-badge--bordered {
+          .v-badge__wrapper {
+            .v-badge__badge {
+              bottom: calc(100% - 0) !important;
+              left: calc(100% - 15px) !important;
+            }
+
+          }
+
+          .v-badge__badge::after {
+            border-style: none !important;
+          }
+        }
+      }
+    }
+
+    .sample-q-items {
+      margin: 3rem 0;
+
+      .sample-q-item {
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 1.2rem;
+
+        .sample-item-content {
+          min-height: 100%;
+          .item-content-title {
+            font-size: 24px;
+            color: $gray45;
+          }
+          .item-content-subtitle {
+            color: $gray4;
+          }
+          .item-content-tags {
+            .item-content-tag {
+              padding: 0.5rem 0.8rem;
+              margin:0 0.5rem;
+              border-radius: 1.6rem;
+              background: rgba(33, 33, 33, 0.08);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .sample-filter {
+    background-color: $gray12;
+    padding: 2rem;
+    border-radius: 1.2rem;
+
+    .v-expansion-panels {
+      .filter-divider {
+        flex: 1 1 100% !important;
+      }
+
+      .v-expansion-panel {
+        border-radius: 0.4rem;
+        margin: 1rem 0;
+
+        .filter-title {
+          font-size: 16px;
+          color: $gray45;
+        }
+      }
+
+      .v-expansion-panel::before {
+        box-shadow: none;
+      }
+
+      .v-expansion-panel:not(:first-child)::after {
+        border-top: none;
+      }
+    }
+
+    .filter-switchs {
+      .v-input {
+        .v-input__slot {
+          .v-input--switch__track {
+            width: 40px;
+            height: 20px;
+          }
+
+          .v-input--switch__thumb {
+            width: 25px;
+            height: 25px;
+          }
+
+          .v-input--selection-controls__ripple {
+            left: -12px;
+            top: calc(50% - 22px);
+          }
+        }
+      }
+
+      .switch-title {
+        font-size: 1.6rem;
+        color: $gray11;
+      }
+    }
+  }
+}
+
+// End: Sample-q

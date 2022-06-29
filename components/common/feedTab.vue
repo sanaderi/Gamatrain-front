@@ -2,7 +2,7 @@
   <div class="d-md-none d-flex flex-column feed-tab">
     <v-tabs v-model="tabs" centered>
       <v-tabs-slider color="green"></v-tabs-slider>
-      
+
       <v-tab v-for="(item, index) in items" :key="index" class="feed-tab-title">
       <img :src="require('@/assets/images/' + item.icon)" alt="" class="mx-1" width="20" height="20">
         {{ item.title }}
@@ -27,11 +27,11 @@
                   />
                 </span>
 
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -49,11 +49,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -71,11 +71,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -93,11 +93,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -115,11 +115,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -135,7 +135,7 @@
               "
             >
               <nuxt-link to="" class="pb-0 feed-file-more mr-4"
-                >موارد بیشتر</nuxt-link
+                >More</nuxt-link
               >
               <nuxt-link
                 to=""
@@ -165,11 +165,11 @@
                   />
                 </span>
 
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -187,11 +187,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -209,11 +209,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -231,11 +231,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -253,11 +253,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -273,7 +273,7 @@
               "
             >
               <nuxt-link to="" class="pb-0 feed-ask-more mr-4"
-                >موارد بیشتر</nuxt-link
+                >More</nuxt-link
               >
               <nuxt-link
                 to=""
@@ -303,11 +303,11 @@
                   />
                 </span>
 
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -325,11 +325,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -347,11 +347,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -369,11 +369,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -391,11 +391,11 @@
                     width="128"
                   />
                 </span>
-                <div class="feed-name mx-3">علیرضا داوودی</div>
+                <div class="feed-name mx-3">Arian Etemadi</div>
               </div>
               <div class="date d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 فروردین</p>
+                <p>27 Jun</p>
               </div>
             </div>
             <v-divider></v-divider>
@@ -413,7 +413,7 @@ export default {
       items:[
         {
           icon:"file.png",
-          title:"فایل های آموزشی"
+          title:"File های آموزشی"
         },
          {
            icon:"ask.png",
@@ -424,7 +424,7 @@ export default {
           title:"اخبار"
         },
       ],
-      // items: ["فایل های آموزشی", "پرسش ها", "اخبار"],
+      // items: ["File های آموزشی", "پرسش ها", "اخبار"],
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       avatar: "dexter-morse2.png",
     };
