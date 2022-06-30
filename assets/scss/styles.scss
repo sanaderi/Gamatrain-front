@@ -374,7 +374,7 @@ body {
       }
 
       .search-btn-icon span {
-        border-left: 1px solid $border;
+        border-right: 1px solid $border;
       }
 
       .header-search {
@@ -427,11 +427,11 @@ body {
 
     // Banner
     .index-banner {
-      height: 40rem !important;
+      height: 28rem !important;
     }
 
     .banner .v-image {
-      height: 40rem !important;
+      height: 28rem !important;
     }
 
     // popular-hashtags
@@ -648,7 +648,7 @@ body {
 
     .v-window__prev,
     .v-window__next {
-      top: 75% !important;
+      top: 50% !important;
     }
 
     //search
@@ -658,7 +658,7 @@ body {
       }
 
       .search-container {
-        padding: 2rem;
+        padding: 1rem;
         box-shadow: none;
         border-radius: 0.4rem;
         width: 99%;
