@@ -90,7 +90,7 @@
                             align-sm-center align-center
                             search-icon-placeholder
                           "
-                          placeholder="جستجو کنید..."
+                          placeholder="Search..."
                         >
                         </v-text-field>
                         <v-btn class="pl-0 btn-transparent d-flex justify-end">
@@ -109,7 +109,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>نمونه سوال</p>
+                            <p>Sample Exam</p>
                             <p>50,000 +</p>
                           </div>
                         </nuxt-link>
@@ -129,7 +129,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>محتوای آموزشی</p>
+                            <p>Training content</p>
                             <p>30,000 +</p>
                           </div>
                         </nuxt-link>
@@ -143,7 +143,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>پرسش و پاسخ</p>
+                            <p>Q & A</p>
                             <p>20,000 +</p>
                           </div>
                         </nuxt-link>
@@ -157,7 +157,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>آزمون آنلاین</p>
+                            <p>Online Exam</p>
                             <p>5,000 +</p>
                           </div>
                         </nuxt-link>
@@ -185,7 +185,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>مدرسه یاب</p>
+                            <p>School finder</p>
                             <p>130,000 +</p>
                           </div>
                         </nuxt-link>
@@ -205,15 +205,14 @@
               logo-search-content
             "
           >
-            <div class="ml-3 px-2 header-search desktop-search">
+            <div class="mr-3 px-2 header-search desktop-search">
+
               <v-text-field
                 class="py-1 my-0 search-field main-search-icon"
-                placeholder="جستجو کنید..."
+                placeholder="Search..."
               >
               </v-text-field>
-              <v-btn class="pl-0 btn-transparent">
-                <v-icon class="search-icon">mdi-magnify</v-icon>
-              </v-btn>
+
             </div>
             <div class="logo-holder">
               <nuxt-link class="logo" to=""></nuxt-link>
@@ -244,7 +243,7 @@ export default {
       ],
       menuItems: [
         {
-          title: "خانه",
+          title: "Home",
           path: "./home",
           icon: "fa-house-chimney",
         },
@@ -253,13 +252,13 @@ export default {
           path: "",
           icon: "fa-caret-down",
           subMenuList: [
-            { title: "قوانین و مقررات", path: "" },
-            { title: "پرسش های متداول", path: "" },
+            { title: "Terms and Conditions", path: "" },
+            { title: "FAQ's", path: "" },
             { title: "راهنمای عضویت", path: "" },
           ],
         },
         {
-          title: "المپیادها",
+          title: "Olympiad",
           path: "",
           icon: "fa-caret-down",
           subMenuList: [
@@ -269,17 +268,17 @@ export default {
           ],
         },
         {
-          title: "نمونه و تیزهوشان",
+          title: "High-level",
           path: "",
           icon: "fa-caret-down",
         },
         {
-          title: "کتابهای درسی",
+          title: "Books",
           path: "",
           icon: "fa-caret-down",
         },
         {
-          title: "پیشنهاد ویژه",
+          title: "Suggestions",
           path: "",
           icon: "fa-caret-down",
         },

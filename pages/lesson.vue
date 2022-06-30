@@ -1,15 +1,5 @@
 <template>
   <div>
-    <!--  Start: search grade  -->
-    <!-- <section class="d-block d-md-none search-sec mb-8">
-      <v-container>
-        <div class="box search-container">
-          <search :items1="items1" :items2="items2" :items3="items3" :values1="values1" :value1="value1"
-            :values2="values2" :value2="value2" :values3="values3" :value3="value2"></search>
-        </div>
-      </v-container>
-    </section> -->
-    <!--  End: search  -->
     <!-- Start : Category -->
     <category />
     <!-- End:Category -->
@@ -22,14 +12,14 @@
           <v-col md="3" cols="12" class="lesson-details">
             <div class="d-flex flex-column details-content">
               <div class="last-update mb-3">
-                <i class="fa-solid fa-calendar-days ml-2"></i>اخرین بروزرسانی :
+                <i class="fa-solid fa-calendar-days ml-2"></i>Last update :
                 {{ lastUpdate }}
               </div>
               <div class="visit mb-3">
-                <i class="fa-solid fa-eye ml-2"></i>بازدید:{{ visit }}
+                <i class="fa-solid fa-eye ml-2"></i>Viewed:{{ visit }}
               </div>
               <div class="error-report">
-                <i class="fa-solid fa-circle-exclamation ml-2"></i>گزارش خرابی
+                <i class="fa-solid fa-circle-exclamation ml-2"></i>Crash report
               </div>
             </div>
           </v-col>
@@ -56,7 +46,7 @@
                 <i class="fa-solid fa-eye ml-2"></i>{{ visit }}
               </div>
               <div class="error-report">
-                <i class="fa-solid fa-circle-exclamation ml-2"></i>گزارش خرابی
+                <i class="fa-solid fa-circle-exclamation ml-2"></i>Crash report
               </div>
             </div>
           </v-col>
@@ -90,10 +80,10 @@
                     </p>
                     <div class="d-flex justify-space-between">
                       <p class="durition">
-                        <i class="fa-regular fa-clock ml-2"></i>مدت زمان :
+                        <i class="fa-regular fa-clock ml-2"></i>Time:
                         {{ card.durition }}
                       </p>
-                      <nuxt-link to="" class="more-link d-none d-md-block">بیشتر</nuxt-link>
+                      <nuxt-link to="" class="more-link d-none d-md-block">more</nuxt-link>
                     </div>
                   </div>
                 </v-col>
@@ -112,16 +102,16 @@
                   <div class="d-flex flex-column card-details">
                     <p class="card-title">{{ card.bookTitle }}</p>
                     <p class="test-number">
-                      <i class="fa-solid fa-grip-lines ml-2"></i>تعداد تست :{{
+                      <i class="fa-solid fa-grip-lines ml-2"></i>Number of tests: {{
                           card.testNumber
                       }}
                     </p>
                     <div class="d-flex justify-space-between">
                       <p class="levels">
-                        <i class="fa-solid fa-arrow-trend-up ml-2"></i>سطح سختی
+                        <i class="fa-solid fa-arrow-trend-up ml-2"></i>Difficulty
                         :{{ card.easy }} {{ card.medium }} {{ card.hard }}
                       </p>
-                      <nuxt-link to="" class="more-link d-none d-md-block">بیشتر</nuxt-link>
+                      <nuxt-link to="" class="more-link d-none d-md-block">more</nuxt-link>
                     </div>
                   </div>
                 </v-col>
@@ -164,28 +154,66 @@
                   <img :src="require('@/assets/images/' + bookmark)" alt="" class="ml-2">
                   <p>{{ sidebartimelinetitle }}</p>
                 </div>
-                <div class="timeline" style="max-width: 600px;">
-                  <v-timeline clipped dense>
-                    <v-timeline-item v-for="(item, index) in timeLines" :key="index" :color="item.color" class="mb-4"
-                      fill-dot icon-color="grey lighten-3" medium>
-                      <span :id="'res-number' + index" class="headline font-weight-bold timeline-number"
-                        v-text="item.number">
-                      </span>
-                      <v-row>
-                        <v-col cols="12">
-                          <p :id="'res-title' + index" class="category-book-titles "> {{ item.title }}</p>
-                        </v-col>
-                        <v-col v-for="lesson in item.lessons" cols="12" @click="activeTitle(index)">
-                          <nuxt-link id="lesson-name" to="">
-                            <i class="fa-regular fa-window-minimize ml-2"></i>
-                            {{ lesson.lesson }}
-                          </nuxt-link>
-                        </v-col>
-                      </v-row>
-                    </v-timeline-item>
+                <v-stepper v-model="e6" vertical class="stepper">
+                  <v-stepper-step :complete="e6 > 1" step="1" @click="e6 = 1" color="#008B8B">
+                    Select an app
 
-                  </v-timeline>
-                </div>
+                  </v-stepper-step>
+                  <v-stepper-content step="1">
+                    <v-row>
+                      <v-col cols="12" v-for="item in timelines" :key="item.value">
+                        <nuxt-link id="lesson-name" to="" class="stepper-item">
+                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          {{ item.lessonName }}
+                        </nuxt-link>
+                      </v-col>
+                    </v-row>
+                  </v-stepper-content>
+
+                  <v-stepper-step :complete="e6 > 2" step="2" @click="e6 = 2" color="#008B8B">
+                    Configure analytics for this app
+                  </v-stepper-step>
+
+                  <v-stepper-content step="2">
+                    <v-row>
+                      <v-col cols="12" v-for="item in timelines" :key="item.value">
+                        <nuxt-link id="lesson-name" to="" class="stepper-item">
+                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          {{ item.lessonName }}
+                        </nuxt-link>
+                      </v-col>
+                    </v-row>
+                  </v-stepper-content>
+
+                  <v-stepper-step :complete="e6 > 3" step="3" @click="e6 = 3" color="#008B8B">
+                    Select an ad format and name ad unit
+                  </v-stepper-step>
+
+                  <v-stepper-content step="3">
+                    <v-row>
+                      <v-col cols="12" v-for="item in timelines" :key="item.value">
+                        <nuxt-link id="lesson-name" to="" class="stepper-item">
+                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          {{ item.lessonName }}
+                        </nuxt-link>
+                      </v-col>
+                    </v-row>
+                  </v-stepper-content>
+
+                  <v-stepper-step step="4" @click="e6 = 4" color="#008B8B">
+                    View setup instructions
+                  </v-stepper-step>
+                  <v-stepper-content step="4">
+                    <v-row>
+                      <v-col cols="12" v-for="item in timelines" :key="item.value">
+                        <nuxt-link id="lesson-name" to="" class="stepper-item">
+                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          {{ item.lessonName }}
+                        </nuxt-link>
+                      </v-col>
+                    </v-row>
+                  </v-stepper-content>
+                </v-stepper>
               </v-navigation-drawer>
               <div class="book-content" v-for="(item, bookContent) in bookContent" :key="bookContent">
                 <p class="book-title mb-3">{{ item.bookTitle }}</p>
@@ -199,7 +227,7 @@
 
               </div>
               <div class="learn-more pa-6">
-                <p class="learnmore-title mb-6"> بیشتر بدانید</p>
+                <p class="learnmore-title mb-6"> more بدانید</p>
                 <p class="learnmore-text">{{ book.learnmoreText }}</p>
               </div>
             </div>
@@ -215,8 +243,8 @@
           <div class="sample-titles d-flex align-center ">
             <i class="icon icong-test title-icon d-flex algn-center"></i>
             <div class="sample-title mx-3">
-              <p class="s-title">نمونه سوالات مرتبط</p>
-              <p class="s-subtitle">از نمونه سوالات دیگردیدن فرمایید ...</p>
+              <p class="s-title">Sample Examات مرتبط</p>
+              <p class="s-subtitle">از Sample Examات دیگردیدن فرمایید ...</p>
             </div>
           </div>
           <div class="sample-slider mt-10">
@@ -258,7 +286,7 @@
             <div class="lastfile-content d-flex flex-column">
               <div class="lastfile-titles d-flex align-center pb-4 mb-5">
                 <span class="icon icong-learnfiles lastfile-icon-title"></span>
-                <p class="mb-0 mx-2 lastfile-title">آخرین فایل های آموزشی</p>
+                <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
                 <div class="owl-carousel owl-theme">
@@ -304,7 +332,7 @@
             <div class="lastfile-content d-flex flex-column">
               <div class="lastfile-titles d-flex align-center pb-4 mb-5">
                 <span class="icon icong-learnfiles lastfile-icon-title"></span>
-                <p class="mb-0 mx-2 lastfile-title">آخرین فایل های آموزشی</p>
+                <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
                 <div class="owl-carousel owl-theme">
@@ -347,7 +375,7 @@
               <div class="ask-title d-flex align-center mb-5">
                 <span :class="'icon icong-' + askCard.icon" class="ask-icon d-flex align-center"></span>
                 <div class="ask-title-texts d-flex flex-column mr-3">
-                  <div class="asktitle">پرسش و پاسخ های مرتبط</div>
+                  <div class="asktitle">Q & A های مرتبط</div>
                   <div class="asksubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
 
                 </div>
@@ -360,9 +388,9 @@
               </div>
               <v-divider class="mt-4"></v-divider>
               <div class="ask-footer my-4 ">
-                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال فایل</v-btn>
+                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال File</v-btn>
                 <nuxt-link to="" class="askcard-footer-link mr-6">
-                  موارد بیشتر
+                  More
                 </nuxt-link>
               </div>
             </div>
@@ -372,7 +400,7 @@
               <div class="ask-title d-flex align-center mb-4">
                 <span :class="'icon icong-' + askCard.icon" class="ask-icon d-flex align-center"></span>
                 <div class="ask-title-texts d-flex flex-column mr-3">
-                  <div class="asktitle">پرسش و پاسخ های مرتبط</div>
+                  <div class="asktitle">Q & A های مرتبط</div>
                   <div class="asksubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
 
                 </div>
@@ -385,9 +413,9 @@
               </div>
               <v-divider class="mt-4"></v-divider>
               <div class="ask-footer mt-4">
-                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال فایل</v-btn>
+                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال File</v-btn>
                 <nuxt-link to="" class="askcard-footer-link mr-6">
-                  موارد بیشتر
+                  More
                 </nuxt-link>
               </div>
             </div>
@@ -397,7 +425,7 @@
               <div class="test-title d-flex align-center mb-5">
                 <span :class="'icon icong-' + testCard.icon" class="test-icon d-flex align-center"></span>
                 <div class="test-title-texts d-flex flex-column mr-3">
-                  <div class="testtitle">پرسش و پاسخ های مرتبط</div>
+                  <div class="testtitle">Q & A های مرتبط</div>
                   <div class="testsubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
                 </div>
               </div>
@@ -410,7 +438,7 @@
               <v-divider class="mt-4"></v-divider>
               <div class="test-footer my-4">
                 <nuxt-link to="" class="testcard-footer-link">
-                  موارد بیشتر
+                  More
                 </nuxt-link>
               </div>
             </div>
@@ -421,7 +449,7 @@
               <div class="test-title d-flex align-center mb-4">
                 <span :class="'icon icong-' + testCard.icon" class="test-icon d-flex align-center"></span>
                 <div class="test-title-texts d-flex flex-column mr-3">
-                  <div class="testtitle">پرسش و پاسخ های مرتبط</div>
+                  <div class="testtitle">Q & A های مرتبط</div>
                   <div class="testsubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
                 </div>
               </div>
@@ -434,7 +462,7 @@
               <v-divider class="mt-4"></v-divider>
               <div class="test-footer mt-4">
                 <nuxt-link to="" class="testcard-footer-link">
-                  موارد بیشتر
+                  More
                 </nuxt-link>
               </div>
             </div>
@@ -457,72 +485,20 @@ export default {
   components: { category, timeLine, },
   data() {
     return {
-      timeLines: [
+      e6: 1,
+      timelines: [
         {
-          number: '1',
-          color: "teal",
-          title: "تنظیم عصبی",
-          lessons: [
-            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
-            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
-          ]
+          lessonName: " Speech 1 :Nerve tissue cells",
         },
         {
-          number: '2',
-          color: "grey lighten-3",
-          title: "پاسخ گیاهان به محرک ها",
-          lessons: [
-            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
-            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
-          ]
-        },
-        {
-          number: '3',
-          color: "grey lighten-3",
-          title: "حواس",
-          lessons: [
-            { lesson: " گفتار 1 :یاخته های بافت عصبی" },
-            { lesson: "گفتار 2 : ساختار دستگاه عصبی" }
-          ]
-        },
+          lessonName: "Speech 2 : Nervous system structure",
+        }
       ],
       bookmark: "bookmark.png",
       drawer: false,
       // model: null,
-      sidebartimelinetitle: "  زیست شناسی (2)",
+      sidebartimelinetitle: "Biology",
       testNumber: "20 تست",
-      // lessons: [
-      //   {
-      //     lesson: "گفتار 1 :یاخته های بافت عصبی"
-      //   },
-      //   {
-      //     lesson: "گفتار 2 : ساختار دستگاه عصبی"
-      //   }
-      // ],
-      // timeLines: [
-      //   {
-      //     number: '1',
-      //     color: "teal",
-      //     title: "تنظیم عصبی",
-
-      //   },
-      //   {
-      //     number: '2',
-      //     color: "grey lighten-3",
-      //     title: "پاسخ گیاهان به محرک ها",
-
-
-      //   },
-      //   {
-      //     number: '3',
-      //     color: "grey lighten-3",
-      //     title: "حواس",
-
-
-      //   },
-
-
-
       videos: [
         {
 
@@ -543,8 +519,8 @@ export default {
       ],
       lastFile: {
         img: "dexter-morse2.png",
-        name: "علیرضا داودی",
-        date: "27 فروردین",
+        name: "Arian Etemdi",
+        date: "27 Jun",
         number: "27",
         responsiveText: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک ......",
         lastFileText: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت ......",
@@ -586,36 +562,36 @@ export default {
         },
       ],
       rating: 4,
-      items1: ["همه", "دبستان", "متوسطه"],
-      items2: ["همه", "دبستان", "متوسطه"],
-      items3: ["همه", "دبستان", "متوسطه"],
-      values1: ["همه"],
-      values2: ["همه"],
-      values3: ["همه"],
+      items1: ["All", "دبستان", "متوسطه"],
+      items2: ["All", "دبستان", "متوسطه"],
+      items3: ["All", "دبستان", "متوسطه"],
+      values1: ["All"],
+      values2: ["All"],
+      values3: ["All"],
       value1: null,
       value2: null,
       value3: null,
-      lastUpdate: "27 فروردین",
+      lastUpdate: "27 Jun",
       visit: "15383",
       lesson: {
-        lessonTitle: "درسنامه آموزشی زیست شناسی (2) کلاس یازدهم رشته تجربی",
-        lessonSub: "فصل اول- گفتار 2: ساختار دستگاه عصبی با پاسخ",
+        lessonTitle: "Tutorial Biology (2) Eleventh grade of experimental discipline",
+        lessonSub: "First Chapter- Speech 2: Nervous system structure With the answer",
       },
       card: {
         img: "dexter-morse1.png",
         img2: "book.png",
-        videoTitle: "ویدیو دوره کامل آموزشی، ریاضی هفتم دوره اول متوسطه",
+        videoTitle: "Video of the complete educational course, the seventh mathematics of the first year of high school",
         bookTitle:
-          "آلبوم بانک تست های آزمون آنلاین، ریاضی هفتم دوره اول متوسطه",
+          "آلبوم بانک تست های Online Exam، ریاضی هفتم دوره اول متوسطه",
         testNumber: "2717",
-        videoTeacher: "علیرضا داودی",
-        durition: " 8 ساعت (26 فایل)",
-        easy: "آسان",
-        medium: "متوسط",
-        hard: "دشوار",
+        videoTeacher: "Arian Etemdi",
+        durition: " 8 Hour (26 File)",
+        easy: "Easy",
+        medium: "Medium",
+        hard: "Difficult",
       },
       book: {
-        catalogeTitle: "زیست شناسی (2)",
+        catalogeTitle: "Biology (2)",
         learnmoreText: "التهاب پرده‌های مننژ، مننژیت نام دارد و از علامت‌های آن سر درد، تب و خشکی گردن است. مننژیت در اثر عفونت‌های ویروسی یا باکتریایی ایجاد می‌شود."
 
       },
@@ -635,9 +611,9 @@ export default {
       model: null,
       bookSample: {
         sampleImg: "booksample.png",
-        sampleText: "آزمون تستی فصل 2تا 8 ریاضی هفتم دبیرستان اسوه اصفهن",
+        sampleText: "آزمون تستی فصل 2تا 8 ریاضی هفتم teacherستان اسوه اصفهن",
         samplefooterImg: "dexter-morse3.png",
-        sfooterName: "علیرضا داودی"
+        sfooterName: "Arian Etemdi"
       },
       events: [],
       input: null,
@@ -667,21 +643,7 @@ export default {
 
       this.input = null
     },
-    activeTitle(value) {
-      const allTitle = document.querySelectorAll('.category-book-titles')
-      const allNumber = document.querySelectorAll('.timeline-number')
-
-      for (let i = 0; i < allTitle.length; i++) {
-        allTitle[i].classList.remove("active")
-        allNumber[i].classList.remove("active")
-      }
-
-      let title = document.getElementById('res-title' + value)
-      let number = document.getElementById('res-number' + value)
-
-      title.classList.add("active")
-      number.classList.add("active")
-    },
+   
     color() {
 
     }

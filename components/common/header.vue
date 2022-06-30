@@ -143,9 +143,10 @@
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn v-bind="attrs" v-on="on">
-                      <nuxt-link :to="item.link" class="headermenu-item">                        
+                      <nuxt-link :to="item.link" class="headermenu-item">
+                        <span v-show="item.title=='Home'" class="fa-solid fa-house-chimney mx-1"/>
                         {{ item.title }}
-                        <span :class="'ml-1 fa-solid ' + item.icon"></span>
+                        <span :class="'mr-1 fa-solid ' + item.icon"></span>
                       </nuxt-link>
                     </v-btn>
                   </template>
@@ -156,7 +157,6 @@
                       class="dropdown-item"
                     >
                       <nuxt-link :to="subMenuItem.link">
-                        <span class="fa-solid fa-angles-left ms-2"></span>
                         {{ subMenuItem.title }}
                       </nuxt-link>
                     </v-list-item>
@@ -209,7 +209,7 @@
                             align-sm-center align-center
                             search-icon-placeholder
                           "
-                          placeholder="جستجو کنید..."
+                          placeholder="Search..."
                         >
                         </v-text-field>
                         <v-btn class="pl-0 btn-transparent d-flex justify-end">
@@ -228,7 +228,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>نمونه سوال</p>
+                            <p>Sample Exam</p>
                             <p>50,000 +</p>
                           </div>
                         </nuxt-link>
@@ -248,7 +248,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>محتوای آموزشی</p>
+                            <p>Training content</p>
                             <p>30,000 +</p>
                           </div>
                         </nuxt-link>
@@ -262,7 +262,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>پرسش و پاسخ</p>
+                            <p>Q & A</p>
                             <p>20,000 +</p>
                           </div>
                         </nuxt-link>
@@ -276,7 +276,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>آزمون آنلاین</p>
+                            <p>Online Exam</p>
                             <p>5,000 +</p>
                           </div>
                         </nuxt-link>
@@ -290,7 +290,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>درسنانه آموزشی</p>
+                            <p>Training content</p>
                             <p>1,500 +</p>
                           </div>
                         </nuxt-link>
@@ -304,7 +304,7 @@
                             ></span>
                           </div>
                           <div class="responsive-search-item">
-                            <p>مدرسه یاب</p>
+                            <p>School finder</p>
                             <p>130,000 +</p>
                           </div>
                         </nuxt-link>
@@ -358,8 +358,8 @@ export default {
           link: "",
           icon: "mdi-chevron-left",
           subMenuList: [
-            { title: "قوانین و مقررات", link: "" },
-            { title: "پرسش های متداول", link: "" },
+            { title: "Terms and Conditions", link: "" },
+            { title: "FAQ's", link: "" },
             { title: "راهنمای عضویت", link: "" },
           ],
         },
@@ -406,32 +406,32 @@ export default {
       ],
       menuItems: [
         {
-          title: "خانه",
+          title: "Home",
           link: "./",
-          icon: "fa-house-chimney",
+          icon: "",
         },
         {
-          title: "آشنایی",
+          title: "Announcement",
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            { title: "قوانین و مقررات", link: "" },
-            { title: "پرسش های متداول", link: "" },
-            { title: "راهنمای عضویت", link: "" },
+            { title: "Terms and Conditions", link: "" },
+            { title: "Privacy Policy", link: "" },
+            { title: "FAQs", link: "" },
           ],
         },
         {
-          title: "المپیادها",
+          title: "Olympiad",
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            { title: "المپیاد ریاضی", link: "" },
-            { title: "المپیاد فیزیک", link: "" },
-            { title: "المپیاد شیمی", link: "" },
+            { title: "International Mathematical Olympiad (IMO)", link: "" },
+            { title: "International Physics Olympiad (IPhO)", link: "" },
+            { title: "International Chemistry Olympiad (IChO)", link: "" },
           ],
         },
         {
-          title: "نمونه و تیزهوشان",
+          title: "High-level",
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
@@ -441,7 +441,7 @@ export default {
           ],
         },
         {
-          title: "کتاب های درسی",
+          title: "Books",
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
@@ -451,7 +451,7 @@ export default {
           ],
         },
         {
-          title: "پیشنهاد ویژه",
+          title: "Suggestions",
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
@@ -464,7 +464,7 @@ export default {
         //   title: "تدریس آنلاین",
         //   link: "",
         //   icon: "fa-tv",
-         
+
         // },
       ],
       selectedItem: 1,

@@ -53,7 +53,7 @@
             <!-- <v-icon
               class="mdi mdi-format-list-bulleted ms-1 footer-text"
             ></v-icon> -->
-            <span class="footer-text">موارد بیشتر</span>
+            <span class="footer-text">More</span>
           </v-list-item>
         </nuxt-link>
         <nuxt-link

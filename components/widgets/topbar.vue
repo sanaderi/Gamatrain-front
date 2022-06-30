@@ -27,7 +27,7 @@
             </v-btn>
             <v-text-field
               class="py-1 my-0 search-field main-search-icon mr-2"
-              placeholder="جستجو..."
+              placeholder="Search..."
             >
             </v-text-field>
           </div>
