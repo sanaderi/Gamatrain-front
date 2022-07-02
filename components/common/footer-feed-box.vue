@@ -28,7 +28,7 @@
               class="feed-subtitle d-flex justify-space-between"
             >
               <div class="d-flex align-center">
-                <v-list-item-avatar class="ma-0 ms-1 ml-3 avatar-parent">
+                <v-list-item-avatar class="ma-0 ms-1 mr-3 avatar-parent">
                     <v-img
                       :src="require('@/assets/images/' + item.avatar)"
                     ></v-img>

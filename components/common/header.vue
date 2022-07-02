@@ -368,7 +368,7 @@ export default {
           link: "",
           icon: "fa-chevron-left",
           subMenuList: [
-            { title: "المپیاد ریاضی", link: "" },
+            { title: "المپیاد Math", link: "" },
             { title: "المپیاد فیزیک", link: "" },
             { title: "المپیاد شیمی", link: "" },
           ],

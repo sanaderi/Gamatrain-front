@@ -675,8 +675,6 @@ body {
 
         .v-input__control>.v-input__slot {
           margin-bottom: 0;
-          min-height: 4rem;
-          padding: 0.7rem;
         }
 
         .v-text-field>.v-input__control>.v-input__slot {
@@ -1269,7 +1267,7 @@ body {
         font-weight: 500;
         color: $gray45;
         border-bottom: 3px solid $blue11;
-        width: 50%;
+        width: 60%;
         margin: 1.5rem 0;
         padding: 0.7rem 1rem;
       }
@@ -1280,7 +1278,7 @@ body {
         font-size: $fontsize25;
         font-weight: 700;
         color: $gray45;
-        width: 56%;
+        width: 60%;
 
         .icon {
           font-size: 2.5rem;

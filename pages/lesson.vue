@@ -536,8 +536,8 @@ export default {
           askText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن + حل تمرین (1 و 2) درس 11"
         },
         {
-          responsiveText: "فیلم ریاضی هفتم | فصل 2: عددهای صحیح ...",
-          askText: " فیلم ریاضی هفتم | فصل 2: عددهای صحیح (جلسه چهارم: حل نمونه)"
+          responsiveText: "فیلم Math هفتم | فصل 2: عددهای صحیح ...",
+          askText: " فیلم Math هفتم | فصل 2: عددهای صحیح (جلسه چهارم: حل نمونه)"
         },
         {
           responsiveText: "پاورپوینت مطالعات اجتماعی هفتم | درس12: ...",
@@ -553,8 +553,8 @@ export default {
           testText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن + حل تمرین (1 و 2) درس 11"
         },
         {
-          responsiveText: "فیلم ریاضی هفتم | فصل 2: عددهای صحیح ...",
-          testText: " فیلم ریاضی هفتم | فصل 2: عددهای صحیح (جلسه چهارم: حل نمونه)"
+          responsiveText: "فیلم Math هفتم | فصل 2: عددهای صحیح ...",
+          testText: " فیلم Math هفتم | فصل 2: عددهای صحیح (جلسه چهارم: حل نمونه)"
         },
         {
           responsiveText: "پاورپوینت مطالعات اجتماعی هفتم | درس12: ...",
@@ -582,7 +582,7 @@ export default {
         img2: "book.png",
         videoTitle: "Video of the complete educational course, the seventh mathematics of the first year of high school",
         bookTitle:
-          "آلبوم بانک تست های Online Exam، ریاضی هفتم دوره اول متوسطه",
+          "آلبوم بانک تست های Online Exam، Math هفتم دوره اول متوسطه",
         testNumber: "2717",
         videoTeacher: "Arian Etemdi",
         durition: " 8 Hour (26 File)",
@@ -611,7 +611,7 @@ export default {
       model: null,
       bookSample: {
         sampleImg: "booksample.png",
-        sampleText: "آزمون تستی فصل 2تا 8 ریاضی هفتم teacherستان اسوه اصفهن",
+        sampleText: "آزمون تستی فصل 2تا 8 Math هفتم teacherستان اسوه اصفهن",
         samplefooterImg: "dexter-morse3.png",
         sfooterName: "Arian Etemdi"
       },
@@ -643,7 +643,7 @@ export default {
 
       this.input = null
     },
-   
+
     color() {
 
     }

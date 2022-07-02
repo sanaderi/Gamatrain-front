@@ -262,7 +262,7 @@ export default {
           path: "",
           icon: "fa-caret-down",
           subMenuList: [
-            { title: "المپیاد ریاضی", path: "" },
+            { title: "المپیاد Math", path: "" },
             { title: "المپیاد فیزیک", path: "" },
             { title: "المپیاد شیمی", path: "" },
           ],

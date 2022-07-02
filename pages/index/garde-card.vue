@@ -31,7 +31,7 @@
     <v-divider class="grade-divider"></v-divider>
     <v-card-text class="grade-update">
       <div class="footer-card card-footer">
-        <span>آخرین بروزرسانی: </span>
+        <span>Last update: </span>
         <span>{{ grade.update }}</span>
       </div>
     </v-card-text>
