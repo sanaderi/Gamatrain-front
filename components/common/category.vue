@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div >
     <!--   Start: category  main-container Desktop -->
-    <v-container class="d-sm-flex d-none py-0 mt-6">
-      <v-row class="justify-center align-center category box">
+    <v-container class="d-sm-flex d-none py-0 ">
+      <v-row class="justify-center align-center category box mb-0 pb-0">
         <v-col
           v-for="(item, category) in items"
           :key="category"

@@ -3,8 +3,8 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
 
   head: {
-    titleTemplate: "%s - Gama-Ui",
-    title: "Gama-Ui",
+    titleTemplate: "%s | Gama",
+    title: "Sample tests | Online exams | Powerpoint | Tutorials | School finder | Tutor",
     htmlAttrs: {
       lang: "en",
     },

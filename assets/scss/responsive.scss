@@ -639,13 +639,15 @@ body {
           .v-slide-group__prev {
             display: none;
           }
+
           .v-slide-group__next {
             display: none;
           }
+
           .sample-width {
             max-width: 376px !important;
           }
-          
+
         }
 
       }
@@ -682,6 +684,98 @@ body {
       }
 
       // End : Lesson page
+
+
+      // start: sample-q
+
+      .sample-q {
+        padding: 0;
+
+        .sample-q-contents {
+          padding: 0;
+
+          .mobile-sample-header {
+            .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+              display: none;
+            }
+
+            .v-tabs {
+              .v-tabs-bar {
+                min-height: 8rem;
+                border-radius: 0;
+                padding: 0rem 1rem;
+
+                .v-tabs-bar__content {
+                  .nav-link {
+                    margin: 0 1rem;
+                  }
+                }
+              }
+            }
+          }
+
+          .sample-q-items-mobile {
+            .sample-q-item {
+              margin-left: 1rem;
+              margin-right: 1rem;
+
+
+
+              .item-content-tags {
+                .item-content-tag {
+                  padding: 0.5rem 0.8rem;
+                  margin: 0 0.2rem;
+                  border-radius: 1.6rem;
+                  background: rgba(33, 33, 33, 0.08);
+                  font-size: 10px;
+                }
+              }
+
+              .item-content-word-pdf-icon {
+                position: relative;
+
+                .word-icon {
+                  right: 8% !important;
+                  position: absolute;
+                }
+
+                .pdf-icon {
+                  position: absolute;
+                  right: 8%;
+                  top: 3rem;
+                }
+              }
+
+              .sample-q-item-footer {
+                padding: 0 0.5rem;
+
+                .item-content-user p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-file-type p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-view p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-last-update p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+              }
+            }
+
+          }
+        }
+
+      }
     }
   }
 }

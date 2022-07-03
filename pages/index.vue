@@ -2,58 +2,37 @@
   <div class="home-page-content">
     <v-divider></v-divider>
     <!-- Start:mobile header -->
-    <div
-      class="
+    <div class="
         d-flex
         align-center
         justify-space-between
         logo-search-content
         mx-5
-        d-flex d-sm-none
-      "
-    >
+        d-flex d-sm-none ">
       <div class="pl-2 header-search mobile-res-search my-4">
         <v-btn class="px-0 btn-transparent search-btn-icon">
           <v-icon class="search-icon">mdi-magnify</v-icon>
         </v-btn>
         <v-divider vertical></v-divider>
-        <v-text-field
-          class="py-1 my-0 search-field main-search-icon mr-2 mt-4"
-          placeholder="Search ..."
-        >
+        <v-text-field class="py-1 my-0 search-field main-search-icon mr-2 mt-4" placeholder="Search ...">
         </v-text-field>
       </div>
     </div>
     <!-- End: mobile header -->
     <section class="banner-sec">
       <v-carousel class="index-banner">
-        <v-carousel-item
-          v-for="(item, index) in items"
-          cover
-          :key="'banner' + index"
-          :src="require('@/assets/images/' + item.src)"
-          reverse-transition="fade-transition"
-          transition="fade-transition"
-          class="banner"
-        ></v-carousel-item>
+        <v-carousel-item v-for="(item, index) in items" cover :key="'banner' + index"
+          :src="require('@/assets/images/' + item.src)" reverse-transition="fade-transition"
+          transition="fade-transition" class="banner"></v-carousel-item>
       </v-carousel>
     </section>
     <Category />
     <!--  Start: search grade  -->
-    <section class="d-none d-sm-block search-sec mb-8">
+    <section class="d-none d-sm-block search-sec mb-1">
       <v-container>
         <div class="box search-container">
-          <search
-            :items1="items1"
-            :items2="items2"
-            :items3="items3"
-            :values1="values1"
-            :value1="value1"
-            :values2="values2"
-            :value2="value2"
-            :values3="values3"
-            :value3="value2"
-          ></search>
+          <search :items1="items1" :items2="items2" :items3="items3" :values1="values1" :value1="value1"
+            :values2="values2" :value2="value2" :values3="values3" :value3="value2"></search>
         </div>
       </v-container>
     </section>
@@ -62,29 +41,15 @@
     <section class="grades-list d-sm-flex d-none">
       <v-container>
         <v-row class="justify-space-between mx-0 grade-list">
-          <v-col
-            v-for="(grade, index) in gradeList"
-            :key="'DgradeList' + index"
-            cols="12"
-            md="3"
-            sm="6"
-            class="grade-card-body"
-          >
+          <v-col v-for="(grade, index) in gradeList" :key="'DgradeList' + index" cols="12" md="3" sm="6"
+            class="grade-card-body">
             <v-card :class="'grade-card grade-card' + (index + 1)">
               <p v-if="grade.showMore" class="total-content position-relative">
-                <nuxt-link
-                  v-for="(item, more) in grade.totalContent"
-                  :key="more.value"
-                  :to="item.to"
-                  class="content"
-                >
+                <nuxt-link v-for="(item, more) in grade.totalContent" :key="more.value" :to="item.to" class="content">
                   {{ item.content }}،
                 </nuxt-link>
-                <v-btn
-                  @click="grade.showMore = !grade.showMore"
-                  :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
-                  >بازگشت</v-btn
-                >
+                <v-btn @click="grade.showMore = !grade.showMore"
+                  :class="'mt-5 showmore-btn showmore-btn' + (index + 1)">بازگشت</v-btn>
               </p>
               <div v-if="!grade.showMore">
                 <!--            <v-card-->
@@ -92,13 +57,9 @@
                 <!--            >-->
                 <v-card-title class="d-block pa-0 pb-2">
                   <div class="d-flex justify-space-between align-item">
-                    <nuxt-link
-                      to=""
-                      :class="'grade-title grade-title' + (index + 1)"
-                      class="mb-2"
-                    >
+                    <nuxt-link to="" :class="'grade-title grade-title' + (index + 1)" class="mb-2">
                       <span :class="'label-tag label-tag' + (index + 1)">{{
-                        index + 1
+                          index + 1
                       }}</span>
                       {{ grade.title }}
                     </nuxt-link>
@@ -108,61 +69,32 @@
                     </div>
                   </div>
                   <p class="d-inline-block">
-                    <nuxt-link
-                      v-for="(item, summery) in grade.summeryContent"
-                      :key="summery.value"
-                      :to="item.to"
-                      class="content grade-list-lessons"
-                    >
+                    <nuxt-link v-for="(item, summery) in grade.summeryContent" :key="summery.value" :to="item.to"
+                      class="content grade-list-lessons">
                       {{ item.content }}،
                     </nuxt-link>
                     ...
                   </p>
-                  <span
-                    class="btn-transparent more-content pointer"
-                    @click="grade.showMore = !grade.showMore"
-                    >more</span
-                  >
+                  <span class="btn-transparent more-content pointer"
+                    @click="grade.showMore = !grade.showMore">more</span>
                 </v-card-title>
                 <v-divider class="my-5"></v-divider>
 
                 <v-card-text class="pa-0 grade-items mb-3">
-                  <nuxt-link
-                    to="grade.link"
-                    v-for="(item,idxkey) in grade.cat"
-                    :key="idxkey.title"
-                    class="
+                  <nuxt-link to="grade.link" v-for="(item, idxkey) in grade.cat" :key="idxkey.title" class="
                       d-flex
                       align-center
                       justify-space-between
                       pa-0
                       pb-0
                       grade__item
-                    "
-                  >
-                    <div
-                      class="py-0 d-flex align-center right grade__item-title"
-                    >
-                      <v-icon
-                        v-if="item.title === 'Sample Exam'"
-                        class="ml-4 icon icong-test"
-                      ></v-icon>
-                      <v-icon
-                        v-else-if="item.title === 'Training Content'"
-                        class="ml-4 icon icong-learnfiles"
-                      ></v-icon>
-                      <v-icon
-                        v-else-if="item.title === 'Q & A'"
-                        class="ml-4 icon icong-qa"
-                      ></v-icon>
-                      <v-icon
-                        v-else-if="item.title === 'Online Exam'"
-                        class="ml-4 icon icong-azmoon"
-                      ></v-icon>
-                      <span
-                        class="text-center type my-2 grade-item__text"
-                        v-text="item.title"
-                      ></span>
+                    ">
+                    <div class="py-0 d-flex align-center right grade__item-title">
+                      <v-icon v-if="item.title === 'Sample Exam'" class="ml-4 icon icong-test"></v-icon>
+                      <v-icon v-else-if="item.title === 'Training Content'" class="ml-4 icon icong-learnfiles"></v-icon>
+                      <v-icon v-else-if="item.title === 'Q & A'" class="ml-4 icon icong-qa"></v-icon>
+                      <v-icon v-else-if="item.title === 'Online Exam'" class="ml-4 icon icong-azmoon"></v-icon>
+                      <span class="text-center type my-2 grade-item__text" v-text="item.title"></span>
                     </div>
                     <div class="py-1 left">
                       <div class="text-left stat" v-text="item.stat"></div>
@@ -170,18 +102,15 @@
                   </nuxt-link>
                 </v-card-text>
                 <v-divider class="grade-divider"></v-divider>
-                <v-card-text
-                  class="
+                <v-card-text class="
                     pt-3
                     pb-2
                     px-0
                     grade-card__update
                     d-sm-flex d-none
                     justify-end
-                  "
-                >
-                  <div
-                    class="
+                  ">
+                  <div class="
                       d-flex
                       align-center
                       footer-card
@@ -189,15 +118,12 @@
                       justify-end
                       mt-2
                       x
-                    "
-                  >
-                    <span
-                      class="
+                    ">
+                    <span class="
                         fa-solid fa-calendar-days
                         footer-card-calendar
                         ml-2
-                      "
-                    ></span>
+                      "></span>
                     <span class="ml-1 last-update">آخرین بروزرسانی: </span>
                     <span class="last-update">{{ grade.update }}</span>
                   </div>
@@ -213,39 +139,23 @@
     <section class="grades-list d-sm-none d-flex">
       <v-container>
         <v-row class="justify-space-between mx-0 grade-list" v-if="showLess">
-          <v-col
-            cols="12"
-            md="3"
-            sm="6"
-            v-for="(grade, index) in gradeList.slice(0, 3)"
-            :key="index.value"
-            class="grade-card-body"
-          >
+          <v-col cols="12" md="3" sm="6" v-for="(grade, index) in gradeList.slice(0, 3)" :key="index.value"
+            class="grade-card-body">
             <v-card :class="' grade-card grade-card' + (index + 1)">
               <p v-if="grade.showMore" class="total-content position-relative">
-                <nuxt-link
-                  v-for="(item, gradeCard) in grade.totalContent"
-                  :key="gradeCard.value"
-                  :to="item.to"
-                  class="content ml-1"
-                >
+                <nuxt-link v-for="(item, gradeCard) in grade.totalContent" :key="gradeCard.value" :to="item.to"
+                  class="content ml-1">
                   {{ item.content }}،
                 </nuxt-link>
-                <v-btn
-                  @click="grade.showMore = !grade.showMore"
-                  :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
-                  >بازگشت</v-btn
-                >
+                <v-btn @click="grade.showMore = !grade.showMore"
+                  :class="'mt-5 showmore-btn showmore-btn' + (index + 1)">بازگشت</v-btn>
               </p>
               <div v-if="!grade.showMore">
                 <v-card-title class="d-block pa-0 pb-2">
                   <div class="d-flex justify-space-between align-item">
-                    <h2
-                      :class="'grade-title grade-title' + (index + 1)"
-                      class="mb-2"
-                    >
+                    <h2 :class="'grade-title grade-title' + (index + 1)" class="mb-2">
                       <span :class="'label-tag label-tag' + (index + 1)">{{
-                        index + 1
+                          index + 1
                       }}</span>
                       {{ grade.title }}
                     </h2>
@@ -255,28 +165,17 @@
                     </div>
                   </div>
                   <p class="d-inline-block">
-                    <nuxt-link
-                      v-for="(item, summeryContent) in grade.summeryContent"
-                      :key="summeryContent.value"
-                      :to="item.to"
-                      class="content grade-list-lessons"
-                    >
+                    <nuxt-link v-for="(item, summeryContent) in grade.summeryContent" :key="summeryContent.value"
+                      :to="item.to" class="content grade-list-lessons">
                       {{ item.content }}،
                     </nuxt-link>
                     ...
                   </p>
-                  <span
-                    class="btn-transparent more-content pointer"
-                    @click="grade.showMore = !grade.showMore"
-                    >more</span
-                  >
+                  <span class="btn-transparent more-content pointer"
+                    @click="grade.showMore = !grade.showMore">more</span>
                   <p v-if="grade.showMore" class="total-content">
-                    <nuxt-link
-                      v-for="(item, totalContent) in grade.totalContent"
-                      :key="totalContent.value"
-                      :to="item.to"
-                      class="content"
-                    >
+                    <nuxt-link v-for="(item, totalContent) in grade.totalContent" :key="totalContent.value"
+                      :to="item.to" class="content">
                       {{ item.content }}،
                     </nuxt-link>
                   </p>
@@ -284,38 +183,16 @@
                 <v-divider class="my-5"></v-divider>
 
                 <v-card-text class="pa-0 grade-items mb-3">
-                  <nuxt-link
-                    to="grade.link"
-                    v-for="item in grade.cat"
-                    :key="item.title"
-                    :class="
-                      'd-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item' +
-                      (index + 1)
-                    "
-                  >
-                    <div
-                      class="py-0 d-flex align-center right grade__item-title"
-                    >
-                      <v-icon
-                        v-if="item.title === 'Sample Exam'"
-                        class="ml-1 icon icong-test"
-                      ></v-icon>
-                      <v-icon
-                        v-else-if="item.title === 'Training Content'"
-                        class="ml-1 icon icong-learnfiles"
-                      ></v-icon>
-                      <v-icon
-                        v-else-if="item.title === 'Q & A'"
-                        class="ml-1 icon icong-qa"
-                      ></v-icon>
-                      <v-icon
-                        v-else-if="item.title === 'Online Exam'"
-                        class="ml-1 icon icong-azmoon"
-                      ></v-icon>
-                      <span
-                        class="text-center type my-2 grade-item__text"
-                        v-text="item.title"
-                      ></span>
+                  <nuxt-link to="grade.link" v-for="item in grade.cat" :key="item.title" :class="
+                    'd-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item' +
+                    (index + 1)
+                  ">
+                    <div class="py-0 d-flex align-center right grade__item-title">
+                      <v-icon v-if="item.title === 'Sample Exam'" class="ml-1 icon icong-test"></v-icon>
+                      <v-icon v-else-if="item.title === 'Training Content'" class="ml-1 icon icong-learnfiles"></v-icon>
+                      <v-icon v-else-if="item.title === 'Q & A'" class="ml-1 icon icong-qa"></v-icon>
+                      <v-icon v-else-if="item.title === 'Online Exam'" class="ml-1 icon icong-azmoon"></v-icon>
+                      <span class="text-center type my-2 grade-item__text" v-text="item.title"></span>
                     </div>
                     <div class="py-1 left">
                       <div class="text-left stat" v-text="item.stat"></div>
@@ -323,18 +200,15 @@
                   </nuxt-link>
                 </v-card-text>
                 <v-divider class="grade-divider"></v-divider>
-                <v-card-text
-                  class="
+                <v-card-text class="
                     pt-3
                     pb-2
                     px-0
                     grade-card__update
                     d-sm-flex d-none
                     justify-end
-                  "
-                >
-                  <div
-                    class="
+                  ">
+                  <div class="
                       d-flex
                       align-center
                       footer-card
@@ -342,8 +216,7 @@
                       justify-end
                       mt-2
                       x
-                    "
-                  >
+                    ">
                     <span class="fa-solid fa-calendar-days ml-2"></span>
                     <span class="ml-1">آخرین بروزرسانی: </span>
                     <span>{{ grade.update }}</span>
@@ -356,39 +229,22 @@
           </v-col>
         </v-row>
         <v-row v-else class="justify-space-between mx-0 grade-list">
-          <v-col
-            v-for="(grade, index) in gradeList"
-            :key="index.value"
-            cols="12"
-            md="3"
-            sm="6"
-            class="grade-card-body"
-          >
+          <v-col v-for="(grade, index) in gradeList" :key="index.value" cols="12" md="3" sm="6" class="grade-card-body">
             <v-card :class="' grade-card grade-card' + (index + 1)">
               <p v-if="grade.showMore" class="total-content position-relative">
-                <nuxt-link
-                  v-for="(item, mTotalContent) in grade.totalContent"
-                  :key="mTotalContent.value"
-                  :to="item.to"
-                  class="content"
-                >
+                <nuxt-link v-for="(item, mTotalContent) in grade.totalContent" :key="mTotalContent.value" :to="item.to"
+                  class="content">
                   {{ item.content }}،
                 </nuxt-link>
-                <v-btn
-                  @click="grade.showMore = !grade.showMore"
-                  :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
-                  >بازگشت</v-btn
-                >
+                <v-btn @click="grade.showMore = !grade.showMore"
+                  :class="'mt-5 showmore-btn showmore-btn' + (index + 1)">بازگشت</v-btn>
               </p>
               <div v-if="!grade.showMore">
                 <v-card-title class="d-block pa-0 pb-2">
                   <div class="d-flex justify-space-between align-item">
-                    <h2
-                      :class="'grade-title grade-title' + (index + 1)"
-                      class="mb-2"
-                    >
+                    <h2 :class="'grade-title grade-title' + (index + 1)" class="mb-2">
                       <span :class="'label-tag label-tag' + (index + 1)">{{
-                        index + 1
+                          index + 1
                       }}</span>
                       {{ grade.title }}
                     </h2>
@@ -398,28 +254,17 @@
                     </div>
                   </div>
                   <p class="d-inline-block">
-                    <nuxt-link
-                      v-for="(item, mSummeryContent) in grade.summeryContent"
-                      :key="mSummeryContent.value"
-                      :to="item.to"
-                      class="content grade-list-lessons"
-                    >
+                    <nuxt-link v-for="(item, mSummeryContent) in grade.summeryContent" :key="mSummeryContent.value"
+                      :to="item.to" class="content grade-list-lessons">
                       {{ item.content }}،
                     </nuxt-link>
                     ...
                   </p>
-                  <span
-                    class="btn-transparent more-content pointer"
-                    @click="grade.showMore = !grade.showMore"
-                    >more</span
-                  >
+                  <span class="btn-transparent more-content pointer"
+                    @click="grade.showMore = !grade.showMore">more</span>
                   <p v-if="grade.showMore" class="total-content">
-                    <nuxt-link
-                      v-for="(item, tContent) in grade.totalContent"
-                      :key="tContent.value"
-                      :to="item.to"
-                      class="content"
-                    >
+                    <nuxt-link v-for="(item, tContent) in grade.totalContent" :key="tContent.value" :to="item.to"
+                      class="content">
                       {{ item.content }}،
                     </nuxt-link>
                   </p>
@@ -427,38 +272,16 @@
                 <v-divider class="my-5"></v-divider>
 
                 <v-card-text class="pa-0 grade-items mb-3">
-                  <nuxt-link
-                    to="grade.link"
-                    v-for="item in grade.cat"
-                    :key="item.title"
-                    :class="
-                      'd-flex align-center justify-space-between  pa-0 pb-0 grade__item grade__item' +
-                      (index + 1)
-                    "
-                  >
-                    <div
-                      class="py-0 d-flex align-center right grade__item-title"
-                    >
-                      <v-icon
-                        v-if="item.title === 'Sample Exam'"
-                        class="ml-1 icon icong-test"
-                      ></v-icon>
-                      <v-icon
-                        v-else-if="item.title === 'Training Content'"
-                        class="ml-1 icon icong-learnfiles"
-                      ></v-icon>
-                      <v-icon
-                        v-else-if="item.title === 'Q & A'"
-                        class="ml-1 icon icong-qa"
-                      ></v-icon>
-                      <v-icon
-                        v-else-if="item.title === 'Online Exam'"
-                        class="ml-1 icon icong-azmoon"
-                      ></v-icon>
-                      <span
-                        class="text-center type my-2 grade-item__text"
-                        v-text="item.title"
-                      ></span>
+                  <nuxt-link to="grade.link" v-for="item in grade.cat" :key="item.title" :class="
+                    'd-flex align-center justify-space-between  pa-0 pb-0 grade__item grade__item' +
+                    (index + 1)
+                  ">
+                    <div class="py-0 d-flex align-center right grade__item-title">
+                      <v-icon v-if="item.title === 'Sample Exam'" class="ml-1 icon icong-test"></v-icon>
+                      <v-icon v-else-if="item.title === 'Training Content'" class="ml-1 icon icong-learnfiles"></v-icon>
+                      <v-icon v-else-if="item.title === 'Q & A'" class="ml-1 icon icong-qa"></v-icon>
+                      <v-icon v-else-if="item.title === 'Online Exam'" class="ml-1 icon icong-azmoon"></v-icon>
+                      <span class="text-center type my-2 grade-item__text" v-text="item.title"></span>
                     </div>
                     <div class="py-1 left">
                       <div class="text-left stat" v-text="item.stat"></div>
@@ -466,18 +289,15 @@
                   </nuxt-link>
                 </v-card-text>
                 <v-divider class="grade-divider"></v-divider>
-                <v-card-text
-                  class="
+                <v-card-text class="
                     pt-3
                     pb-2
                     px-0
                     grade-card__update
                     d-sm-flex d-none
                     justify-end
-                  "
-                >
-                  <div
-                    class="
+                  ">
+                  <div class="
                       d-flex
                       align-center
                       footer-card
@@ -485,8 +305,7 @@
                       justify-end
                       mt-2
                       x
-                    "
-                  >
+                    ">
                     <span class="fa-solid fa-calendar-days ml-2"></span>
                     <span class="ml-1">آخرین بروزرسانی: </span>
                     <span>{{ grade.update }}</span>
@@ -498,10 +317,7 @@
             </v-card>
           </v-col>
         </v-row>
-        <button
-          class="showmore d-flex justify-center mt-4 mb-12"
-          @click="showLess = !showLess"
-        >
+        <button class="showmore d-flex justify-center mt-4 mb-12" @click="showLess = !showLess">
           <span v-if="showLess" class="showmore-span">
             مشاهده more
             <i class="fa-solid fa-chevron-down mx-2"></i>
@@ -517,44 +333,27 @@
     <section class="feed-box d-none d-md-flex">
       <v-container>
         <v-row>
-          <v-col
-            v-for="(feed, feedBox) in footerFeedList"
-            :key="feedBox.value"
-            cols="12"
-            md="4"
-            sm="4"
-          >
+          <v-col v-for="(feed, feedBox) in footerFeedList" :key="feedBox.value" cols="12" md="4" sm="4">
             <footer-feed-box :feed="feed"></footer-feed-box>
           </v-col>
           <v-col cols="12" md="4" sm="4" class="third-feed-box mt-3 pa-0">
             <div class="feed-header">
-              <img
-                :src="require('@/assets/images/' + thirdFeedBoxIcon)"
-                alt=""
-                class="mx-2"
-                width="28"
-              />
+              <img :src="require('@/assets/images/' + thirdFeedBoxIcon)" alt="" class="mx-2" width="28" />
               Latest News
             </div>
 
             <div class="d-flex flex-column pa-3">
-              <div
-                class="feed-box-item d-flex"
-                v-for="feed in thirdFeedBox"
-                :key="feed.value"
-              >
+              <div class="feed-box-item d-flex" v-for="feed in thirdFeedBox" :key="feed.value">
                 <div class="feedBoxImg">
                   <img :src="require('@/assets/images/' + feed.img)" alt="" />
                 </div>
-                <div
-                  class="
+                <div class="
                     feed-content
                     pa-3
                     d-flex
                     flex-column
                     justify-space-between
-                  "
-                >
+                  ">
                   <p>
                     {{ feed.para }}
                   </p>
@@ -573,9 +372,7 @@
               <v-divider></v-divider>
             </div>
             <div class="feed-footer d-flex align-center pa-3">
-              <nuxt-link to="" class="pb-0 feed-more mr-4"
-                >More</nuxt-link
-              >
+              <nuxt-link to="" class="pb-0 feed-more mr-4">More</nuxt-link>
             </div>
           </v-col>
         </v-row>
@@ -834,7 +631,7 @@ export default {
         update: "14 فروردین",
       },
       {
-        title: "کلاس سوم",
+        title: "3st Grade",
         summeryContent: [
           { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
@@ -890,7 +687,7 @@ export default {
         update: "14 فروردین",
       },
       {
-        title: "کلاس چهارم",
+        title: "4st Grade",
         summeryContent: [
           { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
@@ -946,232 +743,7 @@ export default {
         update: "14 فروردین",
       },
       {
-        title: "کلاس پنجم",
-        summeryContent: [
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-        ],
-        showMore: false,
-        totalContent: [
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-        ],
-        link: "",
-        cat: [
-          {
-            title: "Sample Exam",
-            stat: "1355",
-          },
-          {
-            title: "Training Content",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Online Exam",
-            stat: "22",
-          },
-        ],
-        update: "14 فروردین",
-      },
-      {
-        title: "کلاس ششم",
-        summeryContent: [
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-        ],
-        showMore: false,
-        totalContent: [
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-        ],
-        cat: [
-          {
-            title: "Sample Exam",
-            stat: "1355",
-          },
-          {
-            title: "Training Content",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Online Exam",
-            stat: "22",
-          },
-        ],
-        update: "14 فروردین",
-      },
-      {
-        title: "کلاس هفتم",
-        summeryContent: [
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-        ],
-        showMore: false,
-        totalContent: [
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-        ],
-        cat: [
-          {
-            title: "Sample Exam",
-            stat: "1355",
-          },
-          {
-            title: "Training Content",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Online Exam",
-            stat: "22",
-          },
-        ],
-        update: "14 فروردین",
-      },
-      {
-        title: "کلاس هشتم",
-        summeryContent: [
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-        ],
-        showMore: false,
-        totalContent: [
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-          { content: "نگارش", to: "" },
-          { content: "ریاضی", to: "" },
-          { content: "علوم تجربی", to: "" },
-          { content: "فارسی", to: "" },
-        ],
-        cat: [
-          {
-            title: "Sample Exam",
-            stat: "1355",
-          },
-          {
-            title: "Training Content",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Online Exam",
-            stat: "22",
-          },
-        ],
-        update: "14 فروردین",
-      },
-      {
-        title: "کلاس نهم",
+        title: "5st Grade",
         summeryContent: [
           { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
@@ -1228,7 +800,7 @@ export default {
         update: "14 فروردین",
       },
       {
-        title: "کلاس دهم",
+        title: "6st Grade",
         summeryContent: [
           { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
@@ -1284,7 +856,7 @@ export default {
         update: "14 فروردین",
       },
       {
-        title: "کلاس یازدهم",
+        title: "7st Grade",
         summeryContent: [
           { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },
@@ -1340,7 +912,232 @@ export default {
         update: "14 فروردین",
       },
       {
-        title: "کلاس دوازدهم",
+        title: "8st Grade",
+        summeryContent: [
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+        ],
+        showMore: false,
+        totalContent: [
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+        ],
+        cat: [
+          {
+            title: "Sample Exam",
+            stat: "1355",
+          },
+          {
+            title: "Training Content",
+            stat: "1211",
+          },
+          {
+            title: "Q & A",
+            stat: "68",
+          },
+          {
+            title: "Online Exam",
+            stat: "22",
+          },
+        ],
+        update: "14 فروردین",
+      },
+      {
+        title: "9st Grade",
+        summeryContent: [
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+        ],
+        showMore: false,
+        totalContent: [
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+        ],
+        link: "",
+        cat: [
+          {
+            title: "Sample Exam",
+            stat: "1355",
+          },
+          {
+            title: "Training Content",
+            stat: "1211",
+          },
+          {
+            title: "Q & A",
+            stat: "68",
+          },
+          {
+            title: "Online Exam",
+            stat: "22",
+          },
+        ],
+        update: "14 فروردین",
+      },
+      {
+        title: "10st Grade",
+        summeryContent: [
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+        ],
+        showMore: false,
+        totalContent: [
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+        ],
+        cat: [
+          {
+            title: "Sample Exam",
+            stat: "1355",
+          },
+          {
+            title: "Training Content",
+            stat: "1211",
+          },
+          {
+            title: "Q & A",
+            stat: "68",
+          },
+          {
+            title: "Online Exam",
+            stat: "22",
+          },
+        ],
+        update: "14 فروردین",
+      },
+      {
+        title: "11st Grade",
+        summeryContent: [
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+        ],
+        showMore: false,
+        totalContent: [
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+          { content: "نگارش", to: "" },
+          { content: "ریاضی", to: "" },
+          { content: "علوم تجربی", to: "" },
+          { content: "فارسی", to: "" },
+        ],
+        cat: [
+          {
+            title: "Sample Exam",
+            stat: "1355",
+          },
+          {
+            title: "Training Content",
+            stat: "1211",
+          },
+          {
+            title: "Q & A",
+            stat: "68",
+          },
+          {
+            title: "Online Exam",
+            stat: "22",
+          },
+        ],
+        update: "14 فروردین",
+      },
+      {
+        title: "12st Grade",
         summeryContent: [
           { content: "فارسی", to: "" },
           { content: "نگارش", to: "" },

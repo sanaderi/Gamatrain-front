@@ -289,21 +289,23 @@
                 <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
-                <div class="owl-carousel owl-theme">
+                <!-- <div class="owl-carousel owl-theme">
                   <div class="item-video" v-for="item in videos" :key="item.value">
                     <video :src="require('@/assets/video/' + item.vid)" controls width="575" class="video-carousel">
                     </video>
                   </div>
-                </div>
-                <!-- <v-slide-group multiple center-active>
-                  <v-slide-item v-for="item in videos" :key="item.value">
-                    <div class="item-video">
-                      <video :src="require('@/assets/video/' + item.vid)" controls  class="video-carousel-desktop">
-                      </video>
-                    </div>
-                  </v-slide-item>
-                </v-slide-group> -->
-                <!-- <div class="filter"></div> -->
+                </div> -->
+                <!-- <v-carousel :show-arrows="false">
+                  <v-carousel-item class="item-video" v-for="item in videos" :key="item.value">
+                    <video :src="require('@/assets/video/' + item.vid)" controls width="575" class="video-carousel"
+                      :poster="require('@/assets/images/' + item.img)">
+                    </video>
+                    <Video />
+                  </v-carousel-item>
+                </v-carousel> -->
+                <Video />
+
+
               </div>
               <div class="date-name d-flex align-center justify-space-between my-5">
                 <div class="d-flex align-center">
@@ -481,8 +483,10 @@
 <script>
 import category from "~/components/common/category.vue";
 import timeLine from "~/components/common/timeline.vue";
+import Video from "~/components/common/video.vue";
+
 export default {
-  components: { category, timeLine, },
+  components: { category, timeLine, Video },
   data() {
     return {
       e6: 1,
@@ -501,19 +505,31 @@ export default {
       testNumber: "20 تست",
       videos: [
         {
-
+          img: "vid.png",
           vid: "video.mp4"
         },
         {
+          img: "vid.png",
           vid: "video.mp4"
         },
         {
+          img: "vid.png",
           vid: "video.mp4"
         },
         {
+          img: "vid.png",
           vid: "video.mp4"
         },
         {
+          img: "vid.png",
+          vid: "video.mp4"
+        },
+        {
+          img: "vid.png",
+          vid: "video.mp4"
+        },
+        {
+          img: "vid.png",
           vid: "video.mp4"
         },
       ],
@@ -621,6 +637,7 @@ export default {
     };
 
   },
+
   computed: {
     timeline() {
       return this.events.slice().reverse()
@@ -643,7 +660,7 @@ export default {
 
       this.input = null
     },
-   
+
     color() {
 
     }
@@ -651,3 +668,11 @@ export default {
 
 };
 </script>
+
+<style>
+.video-wrapper {
+  width: 100%;
+  margin: auto;
+  max-width: 700px;
+}
+</style>
