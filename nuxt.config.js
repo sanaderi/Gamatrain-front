@@ -17,16 +17,13 @@ export default {
     link: [
       { rel: "stylesheet", href: "/assets/css/fontawesome.min.css" },
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "stylesheet", href: "https://vjs.zencdn.net/7.19.2/video-js.css" },
       { rel: "stylesheet", href: "/assets/css/all.min.css" },
-      { rel: "stylesheet", href: "/assets/css/owl.carousel.min.css" },
-      { rel: "stylesheet", href: "/assets/css/owl.theme.default.css" },
-
     ],
     script: [
       { src: './assets/js/jquery.js', body: true },
-      { src: './assets/js/owl.carousel.min.js', body: true },
+      { src: 'https://vjs.zencdn.net/7.19.2/video.min.js',body:true },
       { src: '/assets/js/main.js', body: true },
-
     ],
   },
 
@@ -75,8 +72,8 @@ export default {
   build: {
 
   },
-  server:{
-    host:"0.0.0.0",
-    port:3002
+  server: {
+    host: "0.0.0.0",
+    port: 3002
   }
 };

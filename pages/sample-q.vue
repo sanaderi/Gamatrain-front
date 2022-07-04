@@ -1,5 +1,6 @@
 <template>
     <div>
+        <FilterModal/>
         <!-- mobile header -->
         <div class="
         d-flex
@@ -21,8 +22,8 @@
         <section class="sample-q">
             <v-container>
                 <v-row>
-                    <v-col lg="3">
-                        <div class="sample-filter d-none d-md-block">
+                    <v-col lg="3"  >
+                        <div class="sample-filter d-none d-sm-block">
                             <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
                                 <v-expansion-panel>
                                     <v-expansion-panel-header class="filter-title">
@@ -41,7 +42,7 @@
                             </div>
                         </div>
                     </v-col>
-                    <v-col lg="9" class="sample-q-contents">
+                    <v-col lg="9" md="9" sm="12"  class="sample-q-contents">
                         <div class="sample-q-content">
                             <v-breadcrumbs :items="breadcrumbs" class="sample-q-breadcrumb d-none d-md-block">
                                 <template v-slot:divider>
@@ -128,7 +129,7 @@
                                 </v-tabs>
                             </v-card>
                             <!-- sample-q-items-desktop -->
-                            <div class="sample-q-items sample-q-items-desktop d-none d-md-block">
+                            <div class="sample-q-items sample-q-items-desktop d-none d-lg-block">
                                 <div class="sample-q-item pa-6 my-5" v-for="item in items" :key="item.value">
                                     <v-row>
                                         <v-col lg="2">
@@ -216,22 +217,22 @@
                                 </div>
                             </div>
                             <!-- sample-q-items-mobile -->
-                            <div class="sample-q-items sample-q-items-mobile">
-                                <div class="sample-q-item pa-1 my-5" v-for="item in items" :key="item.value">
+                            <div class="sample-q-items sample-q-items-mobile d-block d-lg-none">
+                                <div class="sample-q-item pa-1 pa-sm-5 my-5" v-for="item in items" :key="item.value">
                                     <v-row>
-                                        <v-col cols="2" class="pa-1">
+                                        <v-col cols="3" class="pa-1">
                                             <div class="sample-book">
-                                                <img :src="require('assets/images/' + item.itemImg)" alt="" width="70">
+                                                <img :src="require('assets/images/' + item.itemImg)" alt="" width="65" height="90">
                                             </div>
                                         </v-col>
-                                        <v-col cols="8">
-                                            <div class="sample-book-contents">
+                                        <v-col cols="7" class="px-0">
+                                            <div class="sample-book-contents d-flex flex-column justify-space-between">
                                                 <p class="sample-book-title px-1">
                                                     <nuxt-link to="">
                                                         {{ item.title }}
                                                     </nuxt-link>
                                                 </p>
-                                                <div class="item-content-tags d-flex mt-6">
+                                                <div class="item-content-tags d-flex mt-3">
                                                     <div class="item-content-tag" v-for="item in tags">
                                                         <nuxt-link to="">
                                                             <p>
@@ -244,13 +245,13 @@
                                         </v-col>
                                         <v-col cols="2" class="pa-0">
                                             <div class="item-content-cup-icon d-flex align-center">
-                                                <svg width="39" height="39" viewBox="0 0 39 39" fill="none"
+                                                <svg width="37" height="25" viewBox="0 0 39 39" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg" class="mx-1">
                                                     <path
                                                         d="M34.375 4.57227H30.125V0.322266H8.875V4.57227H4.625C2.2875 4.57227 0.375 6.48477 0.375 8.82227V10.9473C0.375 16.366 4.455 20.786 9.70375 21.4448C11.0425 24.6323 13.9113 27.0335 17.375 27.7348V34.3223H8.875V38.5723H30.125V34.3223H21.625V27.7348C25.0888 27.0335 27.9575 24.6323 29.2963 21.4448C34.545 20.786 38.625 16.366 38.625 10.9473V8.82227C38.625 6.48477 36.7125 4.57227 34.375 4.57227ZM4.625 10.9473V8.82227H8.875V16.9398C6.41 16.0473 4.625 13.7098 4.625 10.9473ZM34.375 10.9473C34.375 13.7098 32.59 16.0473 30.125 16.9398V8.82227H34.375V10.9473Z"
                                                         fill="#F9A825" />
                                                 </svg>
-                                                <svg width="51" height="52" viewBox="0 0 51 52" fill="none"
+                                                <svg width="52" height="40" viewBox="0 0 51 52" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M23.1094 22.5998L19.455 18.9453L17.2014 21.1989L23.1094 27.1069L33.7987 16.4176L31.5452 14.1641L23.1094 22.5998Z"
@@ -276,9 +277,9 @@
                                             </div>
                                         </v-col>
                                     </v-row>
-                                    <div class="sample-q-item-footer d-flex ">
+                                    <div class="sample-q-item-footer d-flex mt-2">
                                         <div class="item-content-user d-flex align-center mr-2">
-                                            <img :src="require('@/assets/images/' + item.userImg)" alt="" width="30">
+                                            <img :src="require('@/assets/images/' + item.userImg)" alt="" width="25">
                                             <p class="mx-2">{{ item.user }}</p>
                                         </div>
                                         <div class="item-content-file-type d-flex align-center mx-auto">
@@ -298,18 +299,19 @@
                             </div>
                             <Pagination />
                         </div>
-
                     </v-col>
                 </v-row>
             </v-container>
         </section>
     </div>
+
 </template>
 <script>
 import category from "~/components/common/category.vue";
 import Pagination from "~/components/common/pagination.vue";
+import FilterModal from "~/components/common/filter-modal.vue";
 export default {
-    components: { category, Pagination },
+    components: { category, Pagination, FilterModal },
     data() {
         return {
             sampleFilters: [
@@ -374,102 +376,102 @@ export default {
             ],
             items: [
                 {
-                    itemImg: "book1.png",
+                    itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "Lorem Ipsum is simply dummy text of theprinting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "Arzeshyabi mostamar",
+                    type: "mostamar",
                     view: "15835",
                     update: "3 july"
                 },
                 {
-                    itemImg: "book1.png",
+                    itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "Lorem Ipsum is simply dummy text of theprinting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "Arzeshyabi mostamar",
+                    type: "mostamar",
                     view: "15835",
                     update: "3july"
                 },
                 {
-                    itemImg: "book1.png",
+                    itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "Lorem Ipsum is simply dummy text of theprinting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "Arzeshyabi mostamar",
+                    type: "mostamar",
                     view: "15835",
                     update: "3july"
                 },
                 {
-                    itemImg: "book1.png",
+                    itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "Lorem Ipsum is simply dummy text of theprinting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "Arzeshyabi mostamar",
+                    type: "mostamar",
                     view: "15835",
                     update: "3july"
                 },
                 {
-                    itemImg: "book1.png",
+                    itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "Lorem Ipsum is simply dummy text of theprinting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "Arzeshyabi mostamar",
+                    type: "mostamar",
                     view: "15835",
                     update: "3july"
                 },
                 {
-                    itemImg: "book1.png",
+                    itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "Lorem Ipsum is simply dummy text of theprinting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "Arzeshyabi mostamar",
+                    type: "mostamar",
                     view: "15835",
                     update: "3july"
                 },
                 {
-                    itemImg: "book1.png",
+                    itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "Lorem Ipsum is simply dummy text of theprinting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "Arzeshyabi mostamar",
+                    type: "mostamar",
                     view: "15835",
                     update: "3july"
                 },
                 {
-                    itemImg: "book1.png",
+                    itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "Lorem Ipsum is simply dummy text of theprinting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "Arzeshyabi mostamar",
+                    type: "mostamar",
                     view: "15835",
                     update: "3july"
                 },
                 {
-                    itemImg: "book1.png",
+                    itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "Lorem Ipsum is simply dummy text of theprinting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "Arzeshyabi mostamar",
+                    type: "mostamar",
                     view: "15835",
                     update: "3july"
                 },
                 {
-                    itemImg: "book1.png",
+                    itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "Lorem Ipsum is simply dummy text of theprinting and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "Arzeshyabi mostamar",
+                    type: "mostamar",
                     view: "15835",
                     update: "3july"
                 },

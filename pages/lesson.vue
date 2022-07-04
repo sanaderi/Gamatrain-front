@@ -644,7 +644,7 @@ export default {
     },
   },
   mounted() {
-    generateSlider(),
+    
       this.color()
   },
   methods: {
