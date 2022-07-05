@@ -655,26 +655,82 @@ body {
       }
 
       .feed {
-        .lastfile-titles {
-          width: 75%;
-        }
-
-        .video-slide {
-          height: 28rem !important;
-
-          .rating {
-            bottom: 21%;
+        .last-files {
+          .lastfile-titles {
+            width: 75%;
           }
 
-          .v-carousel__controls {
-            width: 45% !important;
+          .video-slider {
+            position: relative;
 
-            .v-btn--icon.v-size--small {
-              width: 15px;
+            .slider-rating {
+              bottom: 6%;
+
+              .v-icon {
+                padding: 0.2rem;
+              }
+            }
+
+            .v-carousel {
+              height: 157px !important;
+
+              .v-carousel__controls {
+                background: none;
+                position: absolute;
+                bottom: -2% !important;
+                right: 0 !important;
+                display: flex;
+                justify-content: flex-end;
+                z-index: 5;
+                width: 42% !important;
+
+                .v-item-group {
+                  margin-right: 0;
+                }
+              }
+
+              .item-video {
+                .v-carousel__item {
+                  .my-player-dimensions {
+                    width: 293px;
+                    height: 153px;
+
+                    .vjs-big-play-button {
+                      left: 44%;
+                      top: 43%;
+                      background: #000000;
+                      border: none;
+                      border-radius: 50%;
+                      height: 3rem;
+                      width: 1em;
+                      z-index: 2;
+
+                      .vjs-icon-placeholder::before {
+                        top: -20%;
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
-
         }
+        // .video-slide {
+        //   height: 28rem !important;
+
+        //   .rating {
+        //     bottom: 21%;
+        //   }
+
+        //   .v-carousel__controls {
+        //     width: 45% !important;
+
+        //     .v-btn--icon.v-size--small {
+        //       width: 15px;
+        //     }
+        //   }
+
+        // }
 
         .related-ask-test {
           padding: 0;

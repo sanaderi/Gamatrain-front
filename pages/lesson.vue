@@ -289,23 +289,9 @@
                 <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
-                <!-- <div class="owl-carousel owl-theme">
-                  <div class="item-video" v-for="item in videos" :key="item.value">
-                    <video :src="require('@/assets/video/' + item.vid)" controls width="575" class="video-carousel">
-                    </video>
-                  </div>
-                </div> -->
-                <!-- <v-carousel :show-arrows="false">
-                  <v-carousel-item class="item-video" v-for="item in videos" :key="item.value">
-                    <video :src="require('@/assets/video/' + item.vid)" controls width="575" class="video-carousel"
-                      :poster="require('@/assets/images/' + item.img)">
-                    </video>
-                    <Video />
-                  </v-carousel-item>
-                </v-carousel> -->
                 <Video />
-
-
+                <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
+                  empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
               </div>
               <div class="date-name d-flex align-center justify-space-between my-5">
                 <div class="d-flex align-center">
@@ -337,21 +323,9 @@
                 <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
-                <div class="owl-carousel owl-theme">
-                  <div class="item-video" v-for="item in videos" :key="item.value">
-                    <video :src="require('@/assets/video/' + item.vid)" controls width="350" class="video-carousel">
-                    </video>
-                  </div>
-                </div>
-                <!-- <v-slide-group multiple center-active>
-                  <v-slide-item v-for="item in videos" :key="item.value">
-                    <div class="item-video">
-                      <video :src="require('@/assets/video/' + item.vid)" controls  class="video-carousel-mobile">
-                      </video>
-                    </div>
-                  </v-slide-item>
-                </v-slide-group> -->
-                <!-- <div class="filter"></div> -->
+                <Video />
+                <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
+                  empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
               </div>
               <p class="lastFile-text my-5">
                 {{ lastFile.responsiveText }}
@@ -644,8 +618,8 @@ export default {
     },
   },
   mounted() {
-    
-      this.color()
+
+    this.color()
   },
   methods: {
     comment() {

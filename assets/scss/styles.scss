@@ -55,7 +55,7 @@ body {
     .v-btn--active .v-icon {
       color: transparent;
       display: block;
-      width: 25px;
+      width: 21px;
       height: 15px;
       background: white;
       border-radius: 7px;
@@ -2407,6 +2407,13 @@ body {
     .video-slider {
       position: relative;
 
+      .slider-rating {
+        position: absolute;
+        bottom: 18%;
+        left: 1%;
+        z-index: 6;
+      }
+
       .video-carousel-mobile {
         height: 27.5rem !important;
         width: 35rem !important;
@@ -2421,21 +2428,78 @@ body {
 
         .v-window__container {
           .item-video {
+            .shadow {
+              background: #ffffff52;
+              content: " ";
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              left: 0;
+              top: 0;
+              z-index: 1;
+            }
+
             .video-carousel {
               border-radius: 1rem;
+
+              .vjs-poster {
+                border-radius: 0.8rem;
+              }
+
+              .vjs-big-play-button {
+                left: 45%;
+                top: 45%;
+                background: $black;
+                border: none;
+                border-radius: 50%;
+                height: 5rem;
+                width: 2em;
+                z-index: 2;
+
+                .vjs-icon-placeholder::before {
+                  top: 3px;
+                }
+              }
+
+              .vjs-control-bar {
+                display: none;
+              }
             }
           }
         }
 
         .v-btn--active .v-icon {
-          background: #666464;
+          background: $white;
           height: 10px;
         }
 
         .v-carousel__controls {
           background: none;
           width: 100%;
-          bottom: -4%;
+          position: absolute;
+          bottom: 15% !important;
+          right: 0;
+          display: flex;
+          justify-content: flex-end;
+          z-index: 5;
+
+          .v-item-group {
+            margin-right: 2rem;
+
+            .v-size--small {
+              width: 2rem !important;
+            }
+
+            .v-carousel__controls__item {
+              .v-btn__content {
+                .v-icon {
+                  font-size: 1.2rem !important;
+                }
+              }
+            }
+          }
+
+
         }
       }
 
@@ -2474,26 +2538,26 @@ body {
         display: none;
       }
 
-      .v-carousel__controls {
-        background: none !important;
-        width: 32% !important;
-        bottom: -1% !important;
-        left: -1% !important;
-        position: absolute !important;
+      // .v-carousel__controls {
+      //   background: none !important;
+      //   width: 32% !important;
+      //   bottom: -1% !important;
+      //   left: -1% !important;
+      //   position: absolute !important;
 
-        .v-btn--active .v-icon {
-          width: 18px;
-          height: 10px;
-        }
+      //   .v-btn--active .v-icon {
+      //     width: 18px;
+      //     height: 10px;
+      //   }
 
-        .v-carousel__controls__item .v-btn__content .v-icon {
-          font-size: 1rem !important;
-        }
+      //   .v-carousel__controls__item .v-btn__content .v-icon {
+      //     font-size: 1rem !important;
+      //   }
 
-        .v-btn--icon.v-size--small {
-          width: 15px;
-        }
-      }
+      //   .v-btn--icon.v-size--small {
+      //     width: 15px;
+      //   }
+      // }
     }
   }
 

@@ -1,43 +1,48 @@
 <template>
-
-    <v-carousel :show-arrows="false">
-        <!-- <v-carousel-item class="item-video" v-for="item in videos" :key="item.value">
-            <video :src="require('@/assets/video/' + item.vid)" controls width="575" class="video-carousel"
-                      :poster="require('@/assets/images/' + item.img)">
-                    </video>
-            <video-player :src="item.url" />
-        </v-carousel-item> -->
-        <video id="my-player" class="video-js" controls preload="auto" poster="//vjs.zencdn.net/v/oceans.png"
-            data-setup='{}'>
-            <source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
-        </video>
-    </v-carousel>
-
-
-
+        <v-carousel :show-arrows="false">
+            <v-carousel-item class="item-video" v-for="item in videos" :key="item.value">
+                <video id="my-player" class="video-js video-carousel" controls
+                    :poster="require('@/assets/images/' + item.img)" data-setup='{}'>
+                    <source :src="require('@/assets/video/' + item.vid)" type="video/mp4" />
+                </video>
+                <div class="shadow"></div>
+            </v-carousel-item>
+        </v-carousel>
 </template>
-
-
 <script>
 // import VideoPlayer from "nuxt-video-player";
 // require("nuxt-video-player/src/assets/css/main.css");
 export default {
     data() {
         return {
-            // videos: [
-            //     {
-            //         url: "https://www.youtube.com/watch?v=r1XE8ON8fos"
-            //     },
-            //     {
-            //         url: "https://www.youtube.com/watch?v=MWSR17vEVBw"
-            //     },
-            //     {
-            //         url: "https://www.youtube.com/watch?v=r1XE8ON8fos"
-            //     },
-            //     {
-            //         url: "https://www.youtube.com/watch?v=MWSR17vEVBw"
-            //     },
-            // ]
+            rating: 4.5,
+            videos: [
+                {
+                    img: "vid.png",
+                    vid: "video.mp4"
+                },
+                {
+                    img: "vid.png",
+                    vid: "video.mp4"
+                },
+                {
+                    img: "vid.png",
+                    vid: "video.mp4"
+                },
+                {
+                    img: "vid.png",
+                    vid: "video.mp4"
+                },
+                {
+                    img: "vid.png",
+                    vid: "video.mp4"
+                },
+                {
+                    img: "vid.png",
+                    vid: "video.mp4"
+                },
+
+            ]
         }
     },
     components: {

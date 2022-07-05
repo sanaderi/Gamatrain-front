@@ -17,12 +17,11 @@ export default {
     link: [
       { rel: "stylesheet", href: "/assets/css/fontawesome.min.css" },
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      { rel: "stylesheet", href: "https://vjs.zencdn.net/7.19.2/video-js.css" },
+      { rel: "stylesheet", href: "/assets/css/video-js.css" },
       { rel: "stylesheet", href: "/assets/css/all.min.css" },
     ],
     script: [
-      { src: './assets/js/jquery.js', body: true },
-      { src: 'https://vjs.zencdn.net/7.19.2/video.min.js',body:true },
+      { src: './assets/js/video.min.js',body:true },
       { src: '/assets/js/main.js', body: true },
     ],
   },
