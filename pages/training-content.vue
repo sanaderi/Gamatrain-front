@@ -18,12 +18,12 @@
                 </v-text-field>
             </div>
         </div>
-        <!-- Start : sample-q -->
-        <section class="sample-q">
+        <!-- Start : training -->
+        <section class="training-content">
             <v-container>
                 <v-row>
                     <v-col lg="3"  >
-                        <div class="sample-filter d-none d-sm-block">
+                        <div class="training-content-filter d-none d-sm-block">
                             <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
                                 <v-expansion-panel>
                                     <v-expansion-panel-header class="filter-title">
@@ -33,38 +33,30 @@
                                         {{ item.filterContent }}
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
-                                <v-divider class="filter-divider my-2"></v-divider>
                             </v-expansion-panels>
-                            <div v-for="item in switchs" :key="item.value"
-                                class="filter-switchs d-flex justify-space-between w-100 ">
-                                <p class="switch-title mb-0">{{ item.switchTitle }}</p>
-                                <v-switch class="mt-0 pt-0"></v-switch>
-                            </div>
+                           
                         </div>
                     </v-col>
-                    <v-col lg="9" md="9" sm="12"  class="sample-q-contents">
-                        <div class="sample-q-content">
-                            <v-breadcrumbs :items="breadcrumbs" class="sample-q-breadcrumb d-none d-md-block">
+                    <v-col lg="9" md="9" sm="12"  class="training-contents">
+                        <div class="training-contents">
+                            <v-breadcrumbs :items="breadcrumbs" class="training-breadcrumb d-none d-md-block">
                                 <template v-slot:divider>
                                     <v-icon>mdi-chevron-right</v-icon>
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-sample-header">
+                            <v-card class="d-none d-md-block desktop-training-header">
                                 <v-tabs>
                                     <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
                                     <i class="fa-solid fa-list"></i>
-                                    <!-- <nuxt-link to="lesson" v-for="i in 6" :key="i" :href="'#tab-' + i">
-                                        Item {{ i }}
-                                    </nuxt-link> -->
                                     <v-badge bordered class="pa-1 mx-10" content="35000">
-                                        <nuxt-link to="sample-q" class="nav-link nav-link1">
+                                        <nuxt-link to="sample-q" class="nav-link ">
                                             Sample Exam
                                             <span class="'icon icong-test"></span>
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="1258" color="#2E7D32">
-                                        <nuxt-link to="training-content" class="nav-link">
+                                        <nuxt-link to="training-content" class="nav-link nav-link1">
                                             Training Content
                                         </nuxt-link>
                                     </v-badge>
@@ -91,18 +83,18 @@
                                 </v-tabs>
                             </v-card>
                             <!-- header mobile -->
-                            <v-card class="d-block d-md-none mobile-sample-header">
+                            <v-card class="d-block d-md-none mobile-training-header">
                                 <v-tabs>
                                     <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
                                     <i class="fa-solid fa-list"></i>
 
-                                    <nuxt-link to="sample-q" class="nav-link nav-link1">
+                                    <nuxt-link to="sample-q" class="nav-link ">
                                         Sample Exam
                                         <span class="'icon icong-test"></span>
                                     </nuxt-link>
 
 
-                                    <nuxt-link to="training-content" class="nav-link">
+                                    <nuxt-link to="training-content" class="nav-link nav-link1">
                                         Training Content
                                     </nuxt-link>
 
@@ -128,9 +120,9 @@
 
                                 </v-tabs>
                             </v-card>
-                            <!-- sample-q-items-desktop -->
-                            <div class="sample-q-items sample-q-items-desktop d-none d-lg-block">
-                                <div class="sample-q-item pa-6 my-5" v-for="item in items" :key="item.value">
+                            <!-- training-items-desktop -->
+                            <div class="training-items training-items-desktop d-none d-lg-block">
+                                <div class="training-item pa-6 my-5" v-for="item in items" :key="item.value">
                                     <v-row>
                                         <v-col lg="2">
                                             <div class="item-img">
@@ -138,7 +130,7 @@
                                             </div>
                                         </v-col>
                                         <v-col lg="10">
-                                            <div class="sample-item-content d-flex flex-column justify-space-between">
+                                            <div class="training-item-content d-flex flex-column justify-space-between">
                                                 <div class="item-content-title d-flex justify-space-between">
                                                     <p>
                                                         {{ item.title }}
@@ -216,18 +208,18 @@
                                     </v-row>
                                 </div>
                             </div>
-                            <!-- sample-q-items-mobile -->
-                            <div class="sample-q-items sample-q-items-mobile d-block d-lg-none">
-                                <div class="sample-q-item pa-1 pa-sm-5 my-5" v-for="item in items" :key="item.value">
+                            <!-- training-items-mobile -->
+                            <div class="training-items training-items-mobile d-block d-lg-none">
+                                <div class="training-item pa-1 pa-sm-5 my-5" v-for="item in items" :key="item.value">
                                     <v-row>
                                         <v-col cols="3" class="pa-1">
-                                            <div class="sample-book">
+                                            <div class="training-book">
                                                 <img :src="require('assets/images/' + item.itemImg)" alt="" width="65" height="90">
                                             </div>
                                         </v-col>
                                         <v-col cols="7" class="px-0">
-                                            <div class="sample-book-contents d-flex flex-column justify-space-between">
-                                                <p class="sample-book-title px-1">
+                                            <div class="training-book-contents d-flex flex-column justify-space-between">
+                                                <p class="training-book-title px-1">
                                                     <nuxt-link to="">
                                                         {{ item.title }}
                                                     </nuxt-link>
@@ -277,7 +269,7 @@
                                             </div>
                                         </v-col>
                                     </v-row>
-                                    <div class="sample-q-item-footer d-flex mt-2">
+                                    <div class="training-item-footer d-flex mt-2">
                                         <div class="item-content-user d-flex align-center mr-2">
                                             <img :src="require('@/assets/images/' + item.userImg)" alt="" width="25">
                                             <p class="mx-2">{{ item.user }}</p>
@@ -332,20 +324,7 @@ export default {
                     filterContent: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
                 },
             ],
-            switchs: [
-                {
-                    switchTitle: "Word",
-                },
-                {
-                    switchTitle: "PDF",
-                },
-                {
-                    switchTitle: "With Answer",
-                },
-                {
-                    switchTitle: "Free",
-                },
-            ],
+            // 
             breadcrumbs: [
                 {
                     text: 'Dashboard',
@@ -358,7 +337,7 @@ export default {
                     href: 'breadcrumbs_link_1',
                 },
                 {
-                    text: 'sample Question',
+                    text: 'Training-Content',
                     disabled: true,
                     href: 'breadcrumbs_link_2',
                 },

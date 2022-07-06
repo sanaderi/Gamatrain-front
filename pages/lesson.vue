@@ -289,7 +289,7 @@
                 <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
-                <Video />
+                <Video :videos="videos"></Video>
                 <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
                   empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
               </div>
@@ -323,7 +323,7 @@
                 <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
-                <Video />
+                <Video ></Video>
                 <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
                   empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
               </div>
@@ -502,10 +502,7 @@ export default {
           img: "vid.png",
           vid: "video.mp4"
         },
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
+
       ],
       lastFile: {
         img: "dexter-morse2.png",

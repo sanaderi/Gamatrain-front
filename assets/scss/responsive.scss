@@ -715,6 +715,7 @@ body {
             }
           }
         }
+
         // .video-slide {
         //   height: 28rem !important;
 
@@ -911,6 +912,175 @@ body {
         }
 
       }
+
+      // Start : training-Content
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .sample-filter {
+
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .training-contnet {
+        padding: 0;
+
+        .training-contents {
+          padding: 0;
+
+          .mobile-training-header {
+            .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+              display: none;
+            }
+
+            .v-tabs {
+              .v-tabs-bar {
+                min-height: 6rem;
+                border-radius: 0;
+                padding: 0rem 1rem;
+
+                .v-tabs-bar__content {
+                  .nav-link1 {
+                    padding: 0 0.7rem;
+
+                    span {
+                      font-size: 3rem;
+                      color: $blue3;
+                    }
+                  }
+
+                  .nav-link {
+                    margin: 0 1rem;
+                  }
+                }
+              }
+            }
+          }
+
+          .training-items-mobile {
+            .training-item {
+              margin-left: 1rem;
+              margin-right: 1rem;
+              box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1), 0px 1px 10px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.12);
+
+              .training-book img {
+                border-radius: 1.2rem;
+              }
+
+              .training-book-contents {
+                min-height: 100%;
+
+              }
+
+              .item-content-tags {
+                .item-content-tag {
+                  padding: 0.5rem 0.8rem;
+                  margin: 0 0.2rem;
+                  border-radius: 0.6rem;
+                  background: rgba(33, 33, 33, 0.08);
+                  font-size: 8px;
+                }
+              }
+
+              .item-content-word-pdf-icon {
+                position: relative;
+
+                .word-icon {
+                  right: 10% !important;
+                  position: absolute;
+                }
+
+                .pdf-icon {
+                  position: absolute;
+                  right: 10%;
+                  top: 3rem;
+                }
+              }
+
+              .training-item-footer {
+                padding: 0.6rem;
+
+                .item-content-user p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-file-type p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-view p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-last-update p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+              }
+            }
+
+          }
+
+          .training-items-desktop {
+            .training-item {
+              .item-img img {
+                border-radius: 1.2rem;
+              }
+            }
+          }
+
+        }
+
+      }
+
+      // End : training-Content
     }
   }
 }

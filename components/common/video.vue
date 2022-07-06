@@ -1,16 +1,12 @@
 <template>
-  <!-- <v-carousel :show-arrows="false">
-      <v-carousel-item class="item-video" v-for="item in videos" :key="item.value">
-          <video id="my-player" class="video-js video-carousel" controls
-              :poster="require('@/assets/images/' + item.img)" data-setup='{}'>
-              <source :src="require('@/assets/video/' + item.vid)" type="video/mp4" />
-          </video>
-          <div class="shadow"></div>
-      </v-carousel-item>
-  </v-carousel> -->
   <v-carousel :show-arrows="false">
     <v-carousel-item v-for="(item, index) in videos" :key="index">
-      <div class="video-player">
+      <div
+        id="videoPlayer"
+        class="video-player"
+        @mouseover="showPlayBtn(index)"
+        @mouseleave="hidePlayBtn(index)"
+      >
         <video
           :id="'video' + index"
           :poster="require('@/assets/images/' + item.img)"
@@ -18,7 +14,7 @@
           class="video"
           width="100%">
         </video>
-        <div class="buttons">
+        <div v-show="show" class="buttons">
           <button
             :id="'pausePlay' + index"
             class="play"
@@ -30,41 +26,15 @@
     </v-carousel-item>
   </v-carousel>
 </template>
+
 <script>
-// import VideoPlayer from "nuxt-video-player";
-// require("nuxt-video-player/src/assets/css/main.css");
 export default {
+  props: {
+    videos: Array
+  },
   data() {
     return {
-      video: "video.mp4",
-      img: "vid.png",
-      videos: [
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-
-      ]
+      show: true,
     }
   },
   components: {
@@ -81,6 +51,18 @@ export default {
       } else {
         btn.className = "play";
         vid.pause();
+      }
+    },
+    showPlayBtn() {
+      this.show= true
+    },
+    hidePlayBtn: function (index) {
+      let vid = document.getElementById('video' + index)
+
+      if (!vid.paused) {
+        this.show = false
+      } else {
+        this.show = true
       }
     }
   },
