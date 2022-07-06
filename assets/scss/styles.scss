@@ -2407,9 +2407,51 @@ body {
     .video-slider {
       position: relative;
 
+      .video-player {
+        position: relative;
+
+        .shadow {
+          background: #ffffff52;
+          content: " ";
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          z-index: 1;
+        }
+
+        .buttons button {
+          position: absolute;
+          top: 44%;
+          left: 46%;
+          width: 5rem;
+          height: 5rem;
+          color: red;
+          z-index: 10;
+          border-radius: 50%;
+          background: $black;
+
+        }
+
+        .buttons button.play:before {
+          content: "\f04b";
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          font-size: 2rem;
+        }
+
+        .buttons button.pause:before {
+          content: "\f04c";
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          font-size: 2rem;
+        }
+      }
+
       .slider-rating {
         position: absolute;
-        bottom: 18%;
+        bottom: 12%;
         left: 1%;
         z-index: 6;
       }
@@ -2477,7 +2519,7 @@ body {
           background: none;
           width: 100%;
           position: absolute;
-          bottom: 15% !important;
+          bottom: 9% !important;
           right: 0;
           display: flex;
           justify-content: flex-end;
