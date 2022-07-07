@@ -289,21 +289,9 @@
                 <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
-                <div class="owl-carousel owl-theme">
-                  <div class="item-video" v-for="item in videos" :key="item.value">
-                    <video :src="require('@/assets/video/' + item.vid)" controls width="575" class="video-carousel">
-                    </video>
-                  </div>
-                </div>
-                <!-- <v-slide-group multiple center-active>
-                  <v-slide-item v-for="item in videos" :key="item.value">
-                    <div class="item-video">
-                      <video :src="require('@/assets/video/' + item.vid)" controls  class="video-carousel-desktop">
-                      </video>
-                    </div>
-                  </v-slide-item>
-                </v-slide-group> -->
-                <!-- <div class="filter"></div> -->
+                <Video :videos="videos"></Video>
+                <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
+                  empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
               </div>
               <div class="date-name d-flex align-center justify-space-between my-5">
                 <div class="d-flex align-center">
@@ -335,21 +323,9 @@
                 <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
-                <div class="owl-carousel owl-theme">
-                  <div class="item-video" v-for="item in videos" :key="item.value">
-                    <video :src="require('@/assets/video/' + item.vid)" controls width="350" class="video-carousel">
-                    </video>
-                  </div>
-                </div>
-                <!-- <v-slide-group multiple center-active>
-                  <v-slide-item v-for="item in videos" :key="item.value">
-                    <div class="item-video">
-                      <video :src="require('@/assets/video/' + item.vid)" controls  class="video-carousel-mobile">
-                      </video>
-                    </div>
-                  </v-slide-item>
-                </v-slide-group> -->
-                <!-- <div class="filter"></div> -->
+                <Video ></Video>
+                <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
+                  empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
               </div>
               <p class="lastFile-text my-5">
                 {{ lastFile.responsiveText }}
@@ -481,8 +457,10 @@
 <script>
 import category from "~/components/common/category.vue";
 import timeLine from "~/components/common/timeline.vue";
+import Video from "~/components/common/video.vue";
+
 export default {
-  components: { category, timeLine, },
+  components: { category, timeLine, Video },
   data() {
     return {
       e6: 1,
@@ -501,21 +479,30 @@ export default {
       testNumber: "20 تست",
       videos: [
         {
+          img: "vid.png",
+          vid: "video.mp4"
+        },
+        {
+          img: "vid.png",
+          vid: "video.mp4"
+        },
+        {
+          img: "vid.png",
+          vid: "video.mp4"
+        },
+        {
+          img: "vid.png",
+          vid: "video.mp4"
+        },
+        {
+          img: "vid.png",
+          vid: "video.mp4"
+        },
+        {
+          img: "vid.png",
+          vid: "video.mp4"
+        },
 
-          vid: "video.mp4"
-        },
-        {
-          vid: "video.mp4"
-        },
-        {
-          vid: "video.mp4"
-        },
-        {
-          vid: "video.mp4"
-        },
-        {
-          vid: "video.mp4"
-        },
       ],
       lastFile: {
         img: "dexter-morse2.png",
@@ -621,14 +608,15 @@ export default {
     };
 
   },
+
   computed: {
     timeline() {
       return this.events.slice().reverse()
     },
   },
   mounted() {
-    generateSlider(),
-      this.color()
+
+    this.color()
   },
   methods: {
     comment() {
@@ -643,7 +631,7 @@ export default {
 
       this.input = null
     },
-   
+
     color() {
 
     }
@@ -651,3 +639,11 @@ export default {
 
 };
 </script>
+
+<style>
+.video-wrapper {
+  width: 100%;
+  margin: auto;
+  max-width: 700px;
+}
+</style>

@@ -3,30 +3,26 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
 
   head: {
-    titleTemplate: "%s - Gama-Ui",
-    title: "Gama-Ui",
+    titleTemplate: "%s | Gama",
+    title: "Sample tests | Online exams | Powerpoint | Tutorials | School finder | Tutor",
     htmlAttrs: {
       lang: "en",
     },
     meta: [
-      {charset: "utf-8"},
-      {name: "viewport", content: "width=device-width, initial-scale=1"},
-      {hid: "description", name: "description", content: ""},
-      {name: "format-detection", content: "telephone=no"},
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "" },
+      { name: "format-detection", content: "telephone=no" },
     ],
     link: [
       { rel: "stylesheet", href: "/assets/css/fontawesome.min.css" },
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "stylesheet", href: "/assets/css/video-js.css" },
       { rel: "stylesheet", href: "/assets/css/all.min.css" },
-      { rel: "stylesheet", href: "/assets/css/owl.carousel.min.css" },
-      { rel: "stylesheet", href: "/assets/css/owl.theme.default.css" },
-
     ],
     script: [
-      { src: './assets/js/jquery.js', body: true },
-      { src: './assets/js/owl.carousel.min.js', body: true },
+      { src: './assets/js/video.min.js',body:true },
       { src: '/assets/js/main.js', body: true },
-
     ],
   },
 

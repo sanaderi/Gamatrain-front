@@ -23,10 +23,10 @@
         >
           <div class="px-2 header-search desktop-search">
             <v-btn class="px-0 btn-transparent search-btn-icon">
-              <v-icon class="search-icon ml-3">mdi-magnify</v-icon>
+              <v-icon class="search-icon mr-3">mdi-magnify</v-icon>
             </v-btn>
             <v-text-field
-              class="py-1 my-0 search-field main-search-icon mr-2"
+              class="py-1 my-0 search-field main-search-icon ml-2"
               placeholder="Search..."
             >
             </v-text-field>
