@@ -40,7 +40,7 @@
     </section>
     <Category />
     <!--  Start: search grade  -->
-    <section class="d-none d-sm-block search-sec mb-1">
+    <section class="d-none d-sm-block search-sec mb-8">
       <v-container>
         <div class="box search-container">
           <search

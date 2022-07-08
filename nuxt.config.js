@@ -17,16 +17,12 @@ export default {
     link: [
       { rel: "stylesheet", href: "/assets/css/fontawesome.min.css" },
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "stylesheet", href: "/assets/css/video-js.css" },
       { rel: "stylesheet", href: "/assets/css/all.min.css" },
-      { rel: "stylesheet", href: "/assets/css/owl.carousel.min.css" },
-      { rel: "stylesheet", href: "/assets/css/owl.theme.default.css" },
-
     ],
     script: [
-      { src: './assets/js/jquery.js', body: true },
-      { src: './assets/js/owl.carousel.min.js', body: true },
+      { src: './assets/js/video.min.js',body:true },
       { src: '/assets/js/main.js', body: true },
-
     ],
   },
 

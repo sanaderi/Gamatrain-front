@@ -62,7 +62,7 @@
                     <!-- <v-list-item-icon>
                                          <v-icon class="">{{ item.icon }}</v-icon>
                                        </v-list-item-icon> -->
-                    <v-list-item-title v-text="item.title" class="menu-title" />
+                    <v-list-item-title v-text="item.title" class="menu-title"/>
                   </v-list-item>
 
                   <v-list-group
@@ -73,8 +73,9 @@
                   >
                     <template v-slot:activator>
                       <v-list-item-title class="sidemenu-item">{{
-                        item.title
-                      }}</v-list-item-title>
+                          item.title
+                        }}
+                      </v-list-item-title>
                     </template>
 
                     <v-list-item
@@ -96,9 +97,9 @@
                   </nuxt-link>
 
                   <nuxt-link to=""
-                    ><p class="logout-item mx-2">
-                      خروج از حساب کاربری
-                    </p></nuxt-link
+                  ><p class="logout-item mx-2">
+                    خروج از حساب کاربری
+                  </p></nuxt-link
                   >
                 </div>
               </v-list>
@@ -140,15 +141,17 @@
                   open-on-hover
                   bottom
                   offset-y
+                  class="main-menu"
                 >
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn v-bind="attrs" v-on="on">
-                      <nuxt-link :to="item.link" class="headermenu-item">
-                        <span v-show="item.title=='Home'" class="fa-solid fa-house-chimney mx-1"/>
-                        {{ item.title }}
-                        <span :class="'mr-1 fa-solid ' + item.icon"></span>
-                      </nuxt-link>
-                    </v-btn>
+                      <v-btn v-bind="attrs" v-on="on" class="menu-item"
+                      >
+                        <nuxt-link :to="item.link" class="headermenu-item">
+                          <span v-show="item.title=='Home'" class="fa-solid fa-house-chimney mx-1"/>
+                          {{ item.title }}
+                          <span :class="'mr-1 fa-solid ' + item.icon"></span>
+                        </nuxt-link>
+                      </v-btn>
                   </template>
                   <v-list :class="'dropdown-items dropdown-items'+ (side + 1)">
                     <v-list-item
@@ -317,18 +320,20 @@
             <!--  End: show Search in mobile  -->
           </div>
           <div class="header-logo d-block d-sm-none">
-            <v-img
-              class="logo"
-              :src="require('@/assets/images/' + logo)"
-              max-width="100"
-            ></v-img>
+            <nuxt-link to="/">
+              <v-img
+                class="logo"
+                :src="require('@/assets/images/' + logo)"
+                max-width="100"
+              />
+            </nuxt-link>
           </div>
           <div class="header-bell d-block d-sm-none">
             <nuxt-link to="">
               <i class="fa-regular fa-bell fa-2xl ml-4"></i>
             </nuxt-link>
           </div>
-          <PopularHashtags />
+          <PopularHashtags/>
         </div>
       </v-container>
       <!--   End: navbar   -->
@@ -358,9 +363,9 @@ export default {
           link: "",
           icon: "mdi-chevron-left",
           subMenuList: [
-            { title: "Terms and Conditions", link: "" },
-            { title: "FAQ's", link: "" },
-            { title: "راهنمای عضویت", link: "" },
+            {title: "Terms and Conditions", link: ""},
+            {title: "FAQ's", link: ""},
+            {title: "راهنمای عضویت", link: ""},
           ],
         },
         {
@@ -368,9 +373,9 @@ export default {
           link: "",
           icon: "fa-chevron-left",
           subMenuList: [
-            { title: "المپیاد Math", link: "" },
-            { title: "المپیاد فیزیک", link: "" },
-            { title: "المپیاد شیمی", link: "" },
+            {title: "المپیاد Math", link: ""},
+            {title: "المپیاد فیزیک", link: ""},
+            {title: "المپیاد شیمی", link: ""},
           ],
         },
         {
@@ -378,9 +383,9 @@ export default {
           link: "",
           icon: "fa-chevron-left",
           subMenuList: [
-            { title: "آزمون ورودی پایه چهارم", link: "" },
-            { title: "آزمون ورودی پایه پنجم", link: "" },
-            { title: "آزمون ورودی پایه ششم", link: "" },
+            {title: "آزمون ورودی پایه چهارم", link: ""},
+            {title: "آزمون ورودی پایه پنجم", link: ""},
+            {title: "آزمون ورودی پایه ششم", link: ""},
           ],
         },
         {
@@ -388,9 +393,9 @@ export default {
           link: "",
           icon: "fa-chevron-left",
           subMenuList: [
-            { title: "دوره دبستان", link: "" },
-            { title: "دوره اول متوسطه", link: "" },
-            { title: "دوره دوم متوسطه", link: "" },
+            {title: "دوره دبستان", link: ""},
+            {title: "دوره اول متوسطه", link: ""},
+            {title: "دوره دوم متوسطه", link: ""},
           ],
         },
         {
@@ -398,9 +403,9 @@ export default {
           link: "",
           icon: "fa-caret-down",
           subMenuList: [
-            { title: "امتحانات هماهنگ نهم", link: "" },
-            { title: "امتحانات هماهنگ ششم", link: "" },
-            { title: "امتحانات هماهنگ دوازدهم", link: "" },
+            {title: "امتحانات هماهنگ نهم", link: ""},
+            {title: "امتحانات هماهنگ ششم", link: ""},
+            {title: "امتحانات هماهنگ دوازدهم", link: ""},
           ],
         },
       ],
@@ -415,9 +420,9 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            { title: "Terms and Conditions", link: "" },
-            { title: "Privacy Policy", link: "" },
-            { title: "FAQs", link: "" },
+            {title: "Terms and Conditions", link: ""},
+            {title: "Privacy Policy", link: ""},
+            {title: "FAQs", link: ""},
           ],
         },
         {
@@ -425,9 +430,9 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            { title: "International Mathematical Olympiad (IMO)", link: "" },
-            { title: "International Physics Olympiad (IPhO)", link: "" },
-            { title: "International Chemistry Olympiad (IChO)", link: "" },
+            {title: "International Mathematical Olympiad (IMO)", link: ""},
+            {title: "International Physics Olympiad (IPhO)", link: ""},
+            {title: "International Chemistry Olympiad (IChO)", link: ""},
           ],
         },
         {
@@ -435,9 +440,9 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            { title: "آزمون ورودی پایه چهارم", link: "" },
-            { title: "آزمون ورودی پایه پنجم", link: "" },
-            { title: "آزمون ورودی پایه ششم", link: "" },
+            {title: "آزمون ورودی پایه چهارم", link: ""},
+            {title: "آزمون ورودی پایه پنجم", link: ""},
+            {title: "آزمون ورودی پایه ششم", link: ""},
           ],
         },
         {
@@ -445,9 +450,9 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            { title: "دوره دبستان", link: "" },
-            { title: "دوره اول متوسطه", link: "" },
-            { title: "دوره دوم متوسطه", link: "" },
+            {title: "دوره دبستان", link: ""},
+            {title: "دوره اول متوسطه", link: ""},
+            {title: "دوره دوم متوسطه", link: ""},
           ],
         },
         {
@@ -455,9 +460,9 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            { title: "امتحانات هماهنگ نهم", link: "" },
-            { title: "امتحانات هماهنگ ششم", link: "" },
-            { title: "امتحانات هماهنگ دوازدهم", link: "" },
+            {title: "امتحانات هماهنگ نهم", link: ""},
+            {title: "امتحانات هماهنگ ششم", link: ""},
+            {title: "امتحانات هماهنگ دوازدهم", link: ""},
           ],
         },
         // {
@@ -469,10 +474,10 @@ export default {
       ],
       selectedItem: 1,
       socialList: [
-        { link: "telegram", icon: "fa-telegram" },
-        { link: "twitter", icon: "fa-twitter" },
-        { link: "instagram", icon: "fa-instagram" },
-        { link: "Youtube", icon: "fa-youtube" },
+        {link: "telegram", icon: "fa-telegram"},
+        {link: "twitter", icon: "fa-twitter"},
+        {link: "instagram", icon: "fa-instagram"},
+        {link: "Youtube", icon: "fa-youtube"},
       ],
     };
   },
@@ -483,3 +488,11 @@ export default {
   },
 };
 </script>
+
+
+<style>
+.menu-item:hover {
+  border-bottom: 3px solid rgb(0, 139, 139);
+}
+
+</style>
