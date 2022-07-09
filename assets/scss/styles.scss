@@ -2490,7 +2490,7 @@ body {
       .v-carousel {
         height: 340px !important;
 
-       
+
 
         .v-btn--active .v-icon {
           background: $white;
@@ -2718,6 +2718,7 @@ body {
                 .nav-link1 span {
                   font-size: 3rem;
                   padding-left: 1rem;
+                  color: $blue13;
                 }
               }
 
@@ -2748,6 +2749,7 @@ body {
       .nav-link1 span {
         font-size: 3rem;
         padding-left: 1rem;
+        color: $blue13;
       }
 
       i {
@@ -2869,8 +2871,8 @@ body {
     }
   }
 }
-
 // End: Sample-q
+
 
 // Start :  Training Content
 .training-content {
@@ -2996,15 +2998,15 @@ body {
           height: 1rem;
           width: 1rem;
           transform: rotate(30deg);
-          right: 0%;
-          top: 10%;
+          right: 1%;
+          top: -3%;
           position: absolute;
         }
 
         .book-carousel-q {
 
           width: 80%;
-          height: 54px;
+          height: 35px;
           background: #FFD12F;
           position: relative;
           border-radius: 15rem;
@@ -3029,6 +3031,7 @@ body {
         margin-right: 0 !important;
         position: relative;
         border-radius: 0 1rem 1rem 0;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px !important;
 
         .slide-item:hover {
           transform: translateY(-20px);
@@ -3231,5 +3234,798 @@ body {
     }
   }
 }
-
 // End : Training Content
+
+
+// Start : Q & A
+.q-a {
+  padding: 3rem;
+  border-top: 1px solid $hashtag;
+
+  .q-a-contents {
+    .q-a-content {
+      .q-a-breadcrumb {
+        color: $gray4;
+        background-color: $gray12;
+        border-radius: 1.2rem;
+      }
+
+      .v-card:not(.v-sheet--outlined) {
+        box-shadow: none;
+      }
+    }
+
+
+    .desktop-q-a-header {
+      margin: 1rem 0;
+      border-radius: 1.2rem;
+
+      .v-tabs {
+        .v-tabs-bar {
+          background: $gray12;
+          padding: 1rem 2rem;
+          min-height: 11rem;
+
+          .v-slide-group__wrapper {
+            .v-slide-group__content {
+              align-items: center;
+
+              .v-badge--bordered .v-badge__badge::after {
+                border-style: none;
+              }
+
+              .v-badge {
+                .nav-link1 {
+                  padding: 0.5rem;
+                  border: 1px solid $border;
+                  background: rgba(189, 8, 28, 0.05);
+                  border-radius: 1.4rem;
+                  display: flex;
+                  align-items: center;
+                }
+
+                .nav-link1 span {
+                  font-size: 3rem;
+                  padding-left: 1rem;
+                  color: $red5;
+                }
+              }
+
+              i {
+                color: $gray4;
+              }
+
+              a {
+                margin: auto;
+                color: $gray4;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .mobile-q-a-header {
+      .nav-link1 {
+        padding: 0.5rem;
+        border: 1px solid $border;
+        background: rgba(191, 54, 12, 0.05) !important;
+        border-radius: 1.4rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-link1 span {
+        font-size: 3rem;
+        padding-left: 1rem;
+        color: $red5;
+      }
+
+      i {
+        display: none;
+      }
+
+      .nav-link {
+        color: $gray4  !important;
+      }
+    }
+
+    .q-a-items {
+      margin: 3rem 0;
+
+      .q-a-item {
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 1.2rem;
+
+        .item-img {
+          .item-image {
+            border-radius: 1rem;
+          }
+        }
+
+
+        .q-a-content {
+          min-height: 100%;
+
+          .item-content-title {
+            font-size: 24px;
+            color: $gray45;
+          }
+
+          .item-content-subtitle {
+            color: $gray4;
+            width: 90%;
+          }
+
+          .item-content-tags {
+            .item-content-tag {
+              padding: 0.5rem 0.8rem;
+              margin: 0 0.5rem;
+              border-radius: 1.6rem;
+              background: rgba(33, 33, 33, 0.08);
+            }
+          }
+
+          .item-content-footer {
+            color: $gray8;
+
+            .item-content-footer-icon {
+              margin: 0 1.5rem;
+            }
+          }
+        }
+      }
+    }
+
+    .sample-q-pagination {
+      .v-pagination__item {
+        font-size: 1.5rem;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      }
+
+      .v-pagination__item--active {
+        background-color: $green  !important;
+        border-color: $green  !important;
+      }
+    }
+  }
+
+  .q-a-filter {
+    background-color: $gray12;
+    padding: 2rem;
+    border-radius: 1.2rem;
+
+    .v-expansion-panels {
+      .filter-divider {
+        flex: 1 1 100% !important;
+      }
+
+      .v-expansion-panel {
+        border-radius: 0.4rem;
+        margin: 1rem 0;
+
+        .filter-title {
+          font-size: 16px;
+          color: $gray45;
+        }
+      }
+
+      .v-expansion-panel::before {
+        box-shadow: none;
+      }
+
+      .v-expansion-panel:not(:first-child)::after {
+        border-top: none;
+      }
+    }
+
+    .filter-switchs {
+      .v-input {
+        .v-input__slot {
+          .v-input--switch__track {
+            width: 40px;
+            height: 20px;
+          }
+
+          .v-input--switch__thumb {
+            width: 25px;
+            height: 25px;
+          }
+
+          .v-input--selection-controls__ripple {
+            left: -12px;
+            top: calc(50% - 22px);
+          }
+        }
+      }
+
+      .switch-title {
+        font-size: 1.6rem;
+        color: $gray11;
+      }
+    }
+  }
+}
+// End: Q & A
+
+
+// Start :  Online-Exam
+.online-exam {
+  padding: 3rem;
+  border-top: 1px solid $hashtag;
+
+  .online-exam-contents {
+    .online-exam-content {
+      .online-exam-breadcrumb {
+        color: $gray4;
+        background-color: $gray12;
+        border-radius: 1.2rem;
+      }
+
+      .v-card:not(.v-sheet--outlined) {
+        box-shadow: none;
+      }
+    }
+
+
+    .desktop-online-exam-header {
+      margin: 1rem 0;
+      border-radius: 1.2rem;
+
+      .v-tabs {
+        .v-tabs-bar {
+          background: $gray12;
+          padding: 1rem 2rem;
+          min-height: 11rem;
+
+          .v-slide-group__wrapper {
+            .v-slide-group__content {
+              align-items: center;
+
+              .v-badge--bordered .v-badge__badge::after {
+                border-style: none;
+              }
+
+              .v-badge {
+                .nav-link1 {
+                  padding: 0.7rem;
+                  border: 1px solid $border;
+                  background: rgba(86, 0, 232, 0.05);
+                  border-radius: 1.4rem;
+                  display: flex;
+                  align-items: center;
+
+                  .icong-learnfiles::before {
+                    color: $category-content;
+                  }
+                }
+
+                .nav-link1 span {
+                  font-size: 3rem;
+                  padding-left: 1rem;
+                  color: $violet2;
+                }
+              }
+
+              i {
+                color: $gray4;
+              }
+
+              a {
+                margin: auto;
+                color: $gray4;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .mobile-online-exam-header {
+      .nav-link1 {
+        padding: 0.5rem;
+        border: 1px solid $border;
+        background: rgba(86, 0, 232, 0.05) !important;
+        border-radius: 1.4rem;
+        display: flex;
+        align-items: center;
+
+        .icong-learnfiles::before {
+          color: $category-content;
+        }
+      }
+
+      .nav-link1 span {
+        font-size: 3rem;
+        padding-left: 1rem;
+        color: $violet2;
+      }
+
+      i {
+        display: none;
+      }
+
+      .nav-link {
+        color: $gray4  !important;
+      }
+    }
+
+    .book-carousel {
+      background-color: $green;
+      border-radius: 1rem;
+
+      .container {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .book-carousel-sub {
+        min-height: 100%;
+        justify-content: center;
+
+        .book-carousel-title h4 {
+          font-size: 2.4rem;
+          color: $white;
+        }
+
+        .book-carousel-title p {
+          font-size: 2.4rem;
+          color: $white;
+        }
+
+        .book-carousel-q ::before {
+          content: url("../images/quote.png");
+          height: 1rem;
+          width: 1rem;
+          transform: rotate(30deg);
+          right: 1%;
+          top: -3%;
+          position: absolute;
+        }
+
+        .book-carousel-q {
+
+          width: 80%;
+          height: 35px;
+          background: #FFD12F;
+          position: relative;
+          border-radius: 15rem;
+          padding: 0.4rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          p {
+            font-size: 1.4rem;
+            color: $white;
+            color: $green;
+          }
+        }
+
+      }
+
+
+
+      .book-carousel-books {
+        background-color: $green14;
+        margin-right: 0 !important;
+        position: relative;
+        border-radius: 0 1rem 1rem 0;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px !important;
+
+        .slide-item:hover {
+          transform: translateY(-20px);
+        }
+
+        .slide-item {
+          height: 40rem;
+          transition: 0.3s;
+
+          .book-body {
+            background-color: $white;
+            border-radius: 1rem;
+
+            .book-body-image {
+              padding: 1rem;
+              width: 155px;
+              height: 190px;
+              border-radius: 2rem;
+            }
+
+            .book-title {
+              font-size: 2rem;
+              font-weight: 700;
+            }
+
+            .book-test {
+              font-size: 14px;
+              background-color: hwb(180 0% 45% / 0.1);
+              border-radius: 1rem;
+
+              .test-number {
+                font-size: 24px;
+                font-weight: 500;
+              }
+            }
+
+            .book-price {
+              font-size: 14px;
+              background-color: hwb(47 18% 0% / 0.1);
+              border-radius: 1rem;
+
+              .price-number {
+                font-size: 24px;
+                font-weight: 500;
+              }
+            }
+          }
+        }
+
+        .v-slide-group__prev {
+          width: 3rem;
+          height: 3rem;
+          position: absolute;
+          left: 9px;
+          top: 50%;
+          min-width: 0;
+          background-color: $white;
+          border-radius: 50%;
+          z-index: 6;
+          box-shadow: 0px 23px 29px rgba(0, 0, 0, 0.25);
+        }
+
+        .v-slide-group__next {
+          width: 3rem;
+          height: 3rem;
+          position: absolute;
+          right: 9px;
+          top: 50%;
+          min-width: 0;
+          background-color: $white;
+          border-radius: 50%;
+          z-index: 6;
+          box-shadow: 0px 23px 29px rgba(0, 0, 0, 0.25);
+        }
+
+
+
+
+
+
+      }
+    }
+
+    .online-exam-items {
+      margin: 3rem 0;
+
+      .online-exam-item {
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 1.2rem;
+
+        .item-image {
+          border-radius: 1rem;
+        }
+
+        .online-exam-item-content {
+          min-height: 100%;
+
+          .item-content-title {
+            font-size: 24px;
+            color: $gray45;
+          }
+
+          .item-content-title-icon {
+            align-items: flex-start;
+          }
+
+          .item-content-subtitle {
+            color: $gray4;
+            width: 60%;
+          }
+
+          .item-content-tags {
+            .item-content-tag {
+              padding: 0.5rem 0.8rem;
+              margin: 0 0.5rem;
+              border-radius: 1.6rem;
+              background: rgba(33, 33, 33, 0.08);
+            }
+          }
+
+          .item-content-footer {
+            color: $gray8;
+            font-size: 12px;
+
+            .item-content-footer-icon {
+              margin: 0 1.5rem;
+            }
+          }
+        }
+      }
+    }
+
+    .training-pagination {
+      .v-pagination__item {
+        font-size: 1.5rem;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      }
+
+      .v-pagination__item--active {
+        background-color: $green  !important;
+        border-color: $green  !important;
+      }
+    }
+  }
+
+  .online-exam-filter {
+    background-color: $gray12;
+    padding: 2rem;
+    border-radius: 1.2rem;
+
+    .v-expansion-panels {
+      .filter-divider {
+        flex: 1 1 100% !important;
+      }
+
+      .v-expansion-panel {
+        border-radius: 0.4rem;
+        margin: 1rem 0;
+
+        .filter-title {
+          font-size: 16px;
+          color: $gray45;
+        }
+      }
+
+      .v-expansion-panel::before {
+        box-shadow: none;
+      }
+
+      .v-expansion-panel:not(:first-child)::after {
+        border-top: none;
+      }
+    }
+
+    .filter-switchs {
+      .v-input {
+        .v-input__slot {
+          .v-input--switch__track {
+            width: 40px;
+            height: 20px;
+          }
+
+          .v-input--switch__thumb {
+            width: 25px;
+            height: 25px;
+          }
+
+          .v-input--selection-controls__ripple {
+            left: -12px;
+            top: calc(50% - 22px);
+          }
+        }
+      }
+
+      .switch-title {
+        font-size: 1.6rem;
+        color: $gray11;
+      }
+    }
+  }
+}
+// End : Online-Exam
+
+// Start : Q & A
+.tutorial {
+  padding: 3rem;
+  border-top: 1px solid $hashtag;
+
+  .tutorial-contents {
+    .tutorial-content {
+      .tutorial-breadcrumb {
+        color: $gray4;
+        background-color: $gray12;
+        border-radius: 1.2rem;
+      }
+
+      .v-card:not(.v-sheet--outlined) {
+        box-shadow: none;
+      }
+    }
+
+
+    .desktop-tutorial-header {
+      margin: 1rem 0;
+      border-radius: 1.2rem;
+
+      .v-tabs {
+        .v-tabs-bar {
+          background: $gray12;
+          padding: 1rem 2rem;
+          min-height: 11rem;
+
+          .v-slide-group__wrapper {
+            .v-slide-group__content {
+              align-items: center;
+
+              .v-badge--bordered .v-badge__badge::after {
+                border-style: none;
+              }
+
+              .v-badge {
+                .nav-link1 {
+                  padding: 0.5rem;
+                  border: 1px solid $border;
+                  background: rgba(189, 8, 28, 0.05);
+                  border-radius: 1.4rem;
+                  display: flex;
+                  align-items: center;
+                }
+
+                .nav-link1 span {
+                  font-size: 3rem;
+                  padding-left: 1rem;
+                  color: $category-textbook;
+                }
+              }
+
+              i {
+                color: $gray4;
+              }
+
+              a {
+                margin: auto;
+                color: $gray4;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .mobile-tutorial-header {
+      .nav-link1 {
+        padding: 0.5rem;
+        border: 1px solid $border;
+        background: rgba(191, 54, 12, 0.05) !important;
+        border-radius: 1.4rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-link1 span {
+        font-size: 3rem;
+        padding-left: 1rem;
+        color: $category-textbook;
+      }
+
+      i {
+        display: none;
+      }
+
+      .nav-link {
+        color: $gray4  !important;
+      }
+    }
+
+    .tutorial-items {
+      margin: 3rem 0;
+
+      .tutorial-item {
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 1.2rem;
+
+        .item-img {
+          .item-image {
+            border-radius: 1rem;
+          }
+        }
+
+
+        .tutorial-content {
+          min-height: 100%;
+
+          .tutorial-title {
+            font-size: 24px;
+            color: $gray45;
+          }
+
+          .item-content-subtitle {
+            color: $gray4;
+            width: 90%;
+          }
+
+          .item-content-tags {
+            .item-content-tag {
+              padding: 0.5rem 0.8rem;
+              margin: 0 0.5rem;
+              border-radius: 1.6rem;
+              background: rgba(33, 33, 33, 0.08);
+            }
+          }
+
+          .item-content-footer {
+            color: $gray8;
+
+            .item-content-footer-icon {
+              margin: 0 1.5rem;
+            }
+          }
+        }
+      }
+    }
+
+    .sample-q-pagination {
+      .v-pagination__item {
+        font-size: 1.5rem;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      }
+
+      .v-pagination__item--active {
+        background-color: $green  !important;
+        border-color: $green  !important;
+      }
+    }
+  }
+
+  .tutorial-filter {
+    background-color: $gray12;
+    padding: 2rem;
+    border-radius: 1.2rem;
+
+    .v-expansion-panels {
+      .filter-divider {
+        flex: 1 1 100% !important;
+      }
+
+      .v-expansion-panel {
+        border-radius: 0.4rem;
+        margin: 1rem 0;
+
+        .filter-title {
+          font-size: 16px;
+          color: $gray45;
+        }
+      }
+
+      .v-expansion-panel::before {
+        box-shadow: none;
+      }
+
+      .v-expansion-panel:not(:first-child)::after {
+        border-top: none;
+      }
+    }
+
+    .filter-switchs {
+      .v-input {
+        .v-input__slot {
+          .v-input--switch__track {
+            width: 40px;
+            height: 20px;
+          }
+
+          .v-input--switch__thumb {
+            width: 25px;
+            height: 25px;
+          }
+
+          .v-input--selection-controls__ripple {
+            left: -12px;
+            top: calc(50% - 22px);
+          }
+        }
+      }
+
+      .switch-title {
+        font-size: 1.6rem;
+        color: $gray11;
+      }
+    }
+  }
+}
+// End: Q & A
+
