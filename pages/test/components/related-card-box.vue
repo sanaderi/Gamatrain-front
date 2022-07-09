@@ -34,7 +34,7 @@
           <v-list-item class="pa-0">
             <i class="fa-solid fa-plus ml-1 icon"></i>
             <span v-if="(related.class == 'learning')">Send file</span>
-            <span v-else-if="(related.class == 'question')">ارسال پرسش</span>
+            <span v-else-if="(related.class == 'question')">Send question</span>
           </v-list-item>
         </nuxt-link>
       </div>
