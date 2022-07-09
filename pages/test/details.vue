@@ -251,7 +251,7 @@
               <div class="sample-test-title">
                 <nuxt-link to="" class="d-flex align-center ">
                   <span class="d-flex align-center icong-test ml-2 icon"></span>
-                  <h3>Sample Examات مرتبط</h3>
+                  <h3>Related Sample Exams</h3>
                 </nuxt-link>
               </div>
               <div class="sample-test-slider-holder">
@@ -459,9 +459,9 @@ export default {
       },
       {
         class: 'question',
-        header: 'Q & A های مرتبط',
+        header: 'Related Q&As',
         icon: 'qa',
-        description: '   سوال کنید یا به سوالات دیگران پاسخ دهید ...',
+        description: "Ask questions or answer other people's questions...",
         contentItemList: [
           {
             title: 'تدریس آنلاین صفحه 53 تا 58 عربی (3) انسانی دوازدهم | درس 4: نِظامُ الطَّبيعَةِ ',

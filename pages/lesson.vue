@@ -12,14 +12,14 @@
           <v-col md="3" cols="12" class="lesson-details">
             <div class="d-flex flex-column details-content">
               <div class="last-update mb-3">
-                <i class="fa-solid fa-calendar-days ml-2"></i>Last update :
+                <i class="fa-solid fa-calendar-days mr-2"></i>Last update :
                 {{ lastUpdate }}
               </div>
               <div class="visit mb-3">
-                <i class="fa-solid fa-eye ml-2"></i>Viewed:{{ visit }}
+                <i class="fa-solid fa-eye mr-2"></i>Viewed:{{ visit }}
               </div>
               <div class="error-report">
-                <i class="fa-solid fa-circle-exclamation ml-2"></i>Crash report
+                <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
               </div>
             </div>
           </v-col>
@@ -39,14 +39,14 @@
           <v-col md="3" cols="12" class="lesson-details">
             <div class="d-flex align-center details-content">
               <div class="last-update ml-8">
-                <i class="fa-solid fa-calendar-days ml-2"></i>
+                <i class="fa-solid fa-calendar-days mr-2"></i>
                 {{ lastUpdate }}
               </div>
               <div class="visit ml-8">
-                <i class="fa-solid fa-eye ml-2"></i>{{ visit }}
+                <i class="fa-solid fa-eye mr-2"></i>{{ visit }}
               </div>
               <div class="error-report">
-                <i class="fa-solid fa-circle-exclamation ml-2"></i>Crash report
+                <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
               </div>
             </div>
           </v-col>
@@ -76,14 +76,14 @@
                   <div class="d-flex flex-column card-details">
                     <p class="card-title">{{ card.videoTitle }}</p>
                     <p class="video-teacher">
-                      <i class="fa-solid fa-user ml-2"></i>{{ card.videoTeacher }}
+                      <i class="fa-solid fa-user mr-2"></i>{{ card.videoTeacher }}
                     </p>
                     <div class="d-flex justify-space-between">
                       <p class="durition">
-                        <i class="fa-regular fa-clock ml-2"></i>Time:
+                        <i class="fa-regular fa-clock mr-2"></i>Time:
                         {{ card.durition }}
                       </p>
-                      <nuxt-link to="" class="more-link d-none d-md-block">more</nuxt-link>
+                      <nuxt-link to="" class="more-link d-none d-md-block">More</nuxt-link>
                     </div>
                   </div>
                 </v-col>
@@ -102,16 +102,16 @@
                   <div class="d-flex flex-column card-details">
                     <p class="card-title">{{ card.bookTitle }}</p>
                     <p class="test-number">
-                      <i class="fa-solid fa-grip-lines ml-2"></i>Number of tests: {{
+                      <i class="fa-solid fa-grip-lines mr-2"></i>Number of tests: {{
                           card.testNumber
                       }}
                     </p>
                     <div class="d-flex justify-space-between">
                       <p class="levels">
-                        <i class="fa-solid fa-arrow-trend-up ml-2"></i>Difficulty
+                        <i class="fa-solid fa-arrow-trend-up mr-2"></i>Difficulty
                         :{{ card.easy }} {{ card.medium }} {{ card.hard }}
                       </p>
-                      <nuxt-link to="" class="more-link d-none d-md-block">more</nuxt-link>
+                      <nuxt-link to="" class="more-link d-none d-md-block">More</nuxt-link>
                     </div>
                   </div>
                 </v-col>
@@ -129,7 +129,7 @@
           <v-col md="3">
             <div class="cataloge pa-6 d-none d-md-block">
               <p class="cataloge-title d-flex align-center">
-                <img :src="require('@/assets/images/' + bookmark)" alt="" class="ml-2">
+                <img :src="require('@/assets/images/' + bookmark)" alt="" class="mr-2">
 
                 {{ book.catalogeTitle }}
               </p>
@@ -146,24 +146,23 @@
                 </v-btn>
                 <v-btn x-large class="responsive-button" @click.stop="drawer = !drawer">
                   <i class="fa-solid fa-receipt ml-6"></i>
-                  فهرست
+                 List
                 </v-btn>
               </div>
               <v-navigation-drawer v-model="drawer" class="sidebar-nav pa-5" width="320">
                 <div class="sidebar-timeline-title d-flex align-center ma-2">
-                  <img :src="require('@/assets/images/' + bookmark)" alt="" class="ml-2">
+                  <img :src="require('@/assets/images/' + bookmark)" alt="" class="mr-2">
                   <p>{{ sidebartimelinetitle }}</p>
                 </div>
                 <v-stepper v-model="e6" vertical class="stepper">
                   <v-stepper-step :complete="e6 > 1" step="1" @click="e6 = 1" color="#008B8B">
                     Select an app
-
                   </v-stepper-step>
                   <v-stepper-content step="1">
                     <v-row>
                       <v-col cols="12" v-for="item in timelines" :key="item.value">
                         <nuxt-link id="lesson-name" to="" class="stepper-item">
-                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          <!-- <i class="fa-regular fa-window-minimize mr-2"></i> -->
                           {{ item.lessonName }}
                         </nuxt-link>
                       </v-col>
@@ -178,7 +177,7 @@
                     <v-row>
                       <v-col cols="12" v-for="item in timelines" :key="item.value">
                         <nuxt-link id="lesson-name" to="" class="stepper-item">
-                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          <!-- <i class="fa-regular fa-window-minimize mr-2"></i> -->
                           {{ item.lessonName }}
                         </nuxt-link>
                       </v-col>
@@ -186,14 +185,14 @@
                   </v-stepper-content>
 
                   <v-stepper-step :complete="e6 > 3" step="3" @click="e6 = 3" color="#008B8B">
-                    Select an ad format and name ad unit
+                    Select an ad format and name ad unitaaa
                   </v-stepper-step>
 
                   <v-stepper-content step="3">
                     <v-row>
                       <v-col cols="12" v-for="item in timelines" :key="item.value">
                         <nuxt-link id="lesson-name" to="" class="stepper-item">
-                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          <!-- <i class="fa-regular fa-window-minimize mr-2"></i> -->
                           {{ item.lessonName }}
                         </nuxt-link>
                       </v-col>
@@ -207,7 +206,7 @@
                     <v-row>
                       <v-col cols="12" v-for="item in timelines" :key="item.value">
                         <nuxt-link id="lesson-name" to="" class="stepper-item">
-                          <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+                          <!-- <i class="fa-regular fa-window-minimize mr-2"></i> -->
                           {{ item.lessonName }}
                         </nuxt-link>
                       </v-col>
@@ -227,7 +226,7 @@
 
               </div>
               <div class="learn-more pa-6">
-                <p class="learnmore-title mb-6"> more بدانید</p>
+                <p class="learnmore-title mb-6"> Know more</p>
                 <p class="learnmore-text">{{ book.learnmoreText }}</p>
               </div>
             </div>
@@ -243,8 +242,8 @@
           <div class="sample-titles d-flex align-center ">
             <i class="icon icong-test title-icon d-flex algn-center"></i>
             <div class="sample-title mx-3">
-              <p class="s-title">Sample Examات مرتبط</p>
-              <p class="s-subtitle">از Sample Examات دیگردیدن فرمایید ...</p>
+              <p class="s-title">Related Sample Exams</p>
+              <p class="s-subtitle">Check out the other sample exams...</p>
             </div>
           </div>
           <div class="sample-slider mt-10">
@@ -259,14 +258,14 @@
                       </span>
                     </div>
                     <div class="sample-text">
-                      <p>{{ bookSample.sampleText }}</p>
+                      <p>{{ bookSample.sampleText.length>50 ? `${bookSample.sampleText.substring(0,50)}...` :  bookSample.sampleText}}</p>
                     </div>
                     <div class="sbook-footer d-flex justify-space-between align-center mt-4">
                       <div class="d-flex align-center">
                         <img :src="require('@/assets/images/' + bookSample.samplefooterImg)" alt="">
                         <p class="sfooter-name mx-2">{{ bookSample.sfooterName }}</p>
                       </div>
-                      <nuxt-link to="" class="mb-0 sfooter-link">آزمون انلاین</nuxt-link>
+                      <nuxt-link to="" class="mb-0 sfooter-link">Online exam</nuxt-link>
                     </div>
                   </div>
                 </v-slide-item>
@@ -296,20 +295,20 @@
               <div class="date-name d-flex align-center justify-space-between my-5">
                 <div class="d-flex align-center">
                   <img :src="require('@/assets/images/' + lastFile.img)" alt="">
-                  <p class="mr-2">{{ lastFile.name }}</p>
+                  <p class="ml-2">{{ lastFile.name }}</p>
                 </div>
                 <div class="d-flex align-center">
                   <i class="fa-solid fa-calendar-days"></i>
-                  <p class="mr-2">{{ lastFile.date }}</p>
+                  <p class="ml-2">{{ lastFile.date }}</p>
                 </div>
-                <p> اعداد اسلاید ها : {{ lastFile.number }}</p>
+                <p> Slide numbers: {{ lastFile.number }}</p>
               </div>
               <p class="lastFile-text">
-                {{ lastFile.lastFileText }}
+                {{ lastFile.lastFileText.length>350 ? `${lastFile.lastFileText.substring(0,350)}...` : lastFile.lastFileText }}
               </p>
               <div class="date-name d-flex align-center justify-space-between my-5">
-                <p>محتوا : {{ lastFile.content }}</p>
-                <p> بودجه بندی : {{ lastFile.budget }}</p>
+                <p>Content:{{ lastFile.content }}</p>
+                <p> Budgeting: {{ lastFile.budget }}</p>
               </div>
             </div>
           </v-col>
@@ -323,7 +322,7 @@
                 <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
-                <Video ></Video>
+                <Video :videos="videos"></Video>
                 <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
                   empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
               </div>
@@ -345,27 +344,27 @@
           <!-- End : Mobile lastFIle -->
 
 
-          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column">
+          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column justify-space-between">
             <!-- Start : Desktop askCard -->
             <div class="ask-card mb-6 pa-4 d-none d-md-block">
               <div class="ask-title d-flex align-center mb-5">
                 <span :class="'icon icong-' + askCard.icon" class="ask-icon d-flex align-center"></span>
-                <div class="ask-title-texts d-flex flex-column mr-3">
-                  <div class="asktitle">Q & A های مرتبط</div>
-                  <div class="asksubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
+                <div class="ask-title-texts d-flex flex-column ml-3">
+                  <div class="asktitle">Related Q&As</div>
+                  <div class="asksubtitle">Ask questions or answer other people's questions...</div>
 
                 </div>
               </div>
               <div class="ask-texts d-flex" v-for="(item, ask) in askTexts " :key="ask.value">
-                <p class="my-5 ask-text">
-                  <i class="fa-solid fa-link ask-text-icon ml-2"></i>
-                  {{ item.askText }}
+                <p class="my-3 ask-text">
+                  <i class="fa-solid fa-link ask-text-icon mr-2"></i>
+                  {{ item.askText.length>80 ? `${item.askText.substring(0,80)}...` : item.askText.substring(0,80) }}
                 </p>
               </div>
               <v-divider class="mt-4"></v-divider>
               <div class="ask-footer my-4 ">
-                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال File</v-btn>
-                <nuxt-link to="" class="askcard-footer-link mr-6">
+                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>Send file</v-btn>
+                <nuxt-link to="" class="askcard-footer-link ml-6">
                   More
                 </nuxt-link>
               </div>
@@ -375,22 +374,22 @@
             <div class="ask-card mb-6 pa-4  d-block d-md-none">
               <div class="ask-title d-flex align-center mb-4">
                 <span :class="'icon icong-' + askCard.icon" class="ask-icon d-flex align-center"></span>
-                <div class="ask-title-texts d-flex flex-column mr-3">
-                  <div class="asktitle">Q & A های مرتبط</div>
-                  <div class="asksubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
+                <div class="ask-title-texts d-flex flex-column ml-3">
+                  <div class="asktitle">Related Q&As</div>
+                  <div class="asksubtitle">Ask questions or answer other people's questions...</div>
 
                 </div>
               </div>
               <div class="ask-texts d-flex" v-for="(item, ask) in askTexts " :key="ask.value">
                 <p class="my-4 ask-text">
-                  <i class="fa-solid fa-link ask-text-icon ml-2"></i>
+                  <i class="fa-solid fa-link ask-text-icon mr-2"></i>
                   {{ item.responsiveText }}
                 </p>
               </div>
               <v-divider class="mt-4"></v-divider>
               <div class="ask-footer mt-4">
-                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>ارسال File</v-btn>
-                <nuxt-link to="" class="askcard-footer-link mr-6">
+                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus mr-2"></i>Send file</v-btn>
+                <nuxt-link to="" class="askcard-footer-link mx-6">
                   More
                 </nuxt-link>
               </div>
@@ -400,15 +399,15 @@
             <div class="test-card  pa-4 d-none d-md-block">
               <div class="test-title d-flex align-center mb-5">
                 <span :class="'icon icong-' + testCard.icon" class="test-icon d-flex align-center"></span>
-                <div class="test-title-texts d-flex flex-column mr-3">
-                  <div class="testtitle">Q & A های مرتبط</div>
-                  <div class="testsubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
+                <div class="test-title-texts d-flex flex-column ml-3">
+                  <div class="testtitle">Related Q&As</div>
+                  <div class="testsubtitle">Ask questions or answer other people's questions...</div>
                 </div>
               </div>
               <div class="test-texts d-flex" v-for="(item, test) in testTexts " :key="test.value">
-                <p class="my-5 test-text">
-                  <i class="fa-solid fa-link test-text-icon ml-2"></i>
-                  {{ item.testText }}
+                <p class="my-3 test-text">
+                  <i class="fa-solid fa-link test-text-icon mr-2"></i>
+                  {{ item.testText.length>80 ? `${item.testText.substring(0,80)}...` : item.testText}}
                 </p>
               </div>
               <v-divider class="mt-4"></v-divider>
@@ -424,14 +423,14 @@
             <div class="test-card  pa-4 d-block d-md-none">
               <div class="test-title d-flex align-center mb-4">
                 <span :class="'icon icong-' + testCard.icon" class="test-icon d-flex align-center"></span>
-                <div class="test-title-texts d-flex flex-column mr-3">
-                  <div class="testtitle">Q & A های مرتبط</div>
-                  <div class="testsubtitle">سوال کنید یا به سوالات دیگران پاسخ دهید ...</div>
+                <div class="test-title-texts d-flex flex-column ml-3">
+                  <div class="testtitle">Related Q&As</div>
+                  <div class="testsubtitle">Ask questions or answer other people's questions...</div>
                 </div>
               </div>
               <div class="test-texts d-flex" v-for="(item, test) in testTexts " :key="test.value">
                 <p class="my-4 test-text">
-                  <i class="fa-solid fa-link test-text-icon ml-2"></i>
+                  <i class="fa-solid fa-link test-text-icon mr-2"></i>
                   {{ item.responsiveText }}
                 </p>
               </div>
@@ -476,7 +475,7 @@ export default {
       drawer: false,
       // model: null,
       sidebartimelinetitle: "Biology",
-      testNumber: "20 تست",
+      testNumber: "20 Test",
       videos: [
         {
           img: "vid.png",
@@ -510,25 +509,25 @@ export default {
         date: "27 Jun",
         number: "27",
         responsiveText: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک ......",
-        lastFileText: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد کتابهای زیادی در شصت ......",
-        content: "آموزش سطح تیزهوشان (pptx)",
-        budget: "صفحه ۱ تا صفحه ۱۶۸"
+        lastFileText: "Lorem Epsom is a fictitious text produced with incomprehensible simplicity from the printing industry and using graphic designers, printers and texts, but also newspapers and magazines in columns and rows as necessary and for the current conditions of technology and diverse applications with the aim of improving practical tools. A lot in sixty...",
+        content: "Gifted level education (pptx)",
+        budget: "Page 1 to page 168"
       },
       askCard: {
         icon: "qa",
       },
       askTexts: [
         {
-          responsiveText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن ...",
-          askText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن + حل تمرین (1 و 2) درس 11"
+          responsiveText: "Exercise solution video (3 and 4) lesson 10 and text translation...",
+          askText: "Exercise solution video (3 and 4) lesson 10 and text translation + exercise solution (1 and 2) lesson 11"
         },
         {
-          responsiveText: "فیلم ریاضی هفتم | فصل 2: عددهای صحیح ...",
-          askText: " فیلم ریاضی هفتم | فصل 2: عددهای صحیح (جلسه چهارم: حل نمونه)"
+          responsiveText: "Math 7th movie Chapter 2: Integers...",
+          askText: "Math 7th movie Chapter 2: Integers (fourth session: sample solution)"
         },
         {
-          responsiveText: "پاورپوینت مطالعات اجتماعی هفتم | درس12: ...",
-          askText: " پاورپوینت مطالعات اجتماعی هفتم | درس 12: حفاظت از زیستگاه‌های ایران"
+          responsiveText: "7th social studies PowerPoint Lesson 12: ...",
+          askText: "7th social studies PowerPoint Lesson 12: Protection of Iran's habitats"
         },
       ],
       testCard: {
@@ -536,16 +535,16 @@ export default {
       },
       testTexts: [
         {
-          responsiveText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن ...",
-          testText: "فیلم حل تمرین (3 و 4) درس 10 و ترجمه متن + حل تمرین (1 و 2) درس 11"
+          responsiveText: "Exercise solution video (3 and 4) lesson 10 and text translation...",
+          testText: "Exercise solution video (3 and 4) lesson 10 and text translation + exercise solution (1 and 2) lesson 11"
         },
         {
-          responsiveText: "فیلم ریاضی هفتم | فصل 2: عددهای صحیح ...",
-          testText: " فیلم ریاضی هفتم | فصل 2: عددهای صحیح (جلسه چهارم: حل نمونه)"
+          responsiveText: "Math 7th movie Chapter 2: Integers...",
+          testText: "Math 7th movie Chapter 2: Integers (fourth session: sample solution)"
         },
         {
-          responsiveText: "پاورپوینت مطالعات اجتماعی هفتم | درس12: ...",
-          testText: " پاورپوینت مطالعات اجتماعی هفتم | درس 12: حفاظت از زیستگاه‌های ایران"
+          responsiveText: "7th social studies PowerPoint Lesson 12: ...",
+          testText: "7th social studies PowerPoint Lesson 12: Protection of Iran's habitats"
         },
       ],
       rating: 4,
@@ -569,7 +568,7 @@ export default {
         img2: "book.png",
         videoTitle: "Video of the complete educational course, the seventh mathematics of the first year of high school",
         bookTitle:
-          "آلبوم بانک تست های Online Exam، ریاضی هفتم دوره اول متوسطه",
+          "Online Exam test bank album, Math 7th first period of high school",
         testNumber: "2717",
         videoTeacher: "Arian Etemdi",
         durition: " 8 Hour (26 File)",
@@ -579,26 +578,26 @@ export default {
       },
       book: {
         catalogeTitle: "Biology (2)",
-        learnmoreText: "التهاب پرده‌های مننژ، مننژیت نام دارد و از علامت‌های آن سر درد، تب و خشکی گردن است. مننژیت در اثر عفونت‌های ویروسی یا باکتریایی ایجاد می‌شود."
+        learnmoreText: "Inflammation of the meninges is called meningitis and its symptoms are headache, fever and dry neck. Meningitis is caused by viral or bacterial infections."
 
       },
       bookContent: [
         {
-          bookText: "در گذشته آموختید که دستگاه عصبی دو بخش مرکزی و محیطی دارد (شکل 11). به‌نظر شما چرا دو بخش این دستگاه را مرکزی و محیطی نامیده‌‌اند؟",
+          bookText: "In the past, you learned that the nervous system has two central and peripheral parts (Figure 11). Why do you think this device is called central and peripheral?",
           bookPic: "9_1.png",
-          picSub: "شکل 11- دستگاه عصبی مرکزی (رنگ زرد) و محیطی (رنگ آبی)",
+          picSub: "Figure 11- Central nervous system (yellow color) and peripheral (blue color)",
         },
         {
-          bookTitle: "دستگاه عصبی مرکزی",
-          bookText: "دستگاه عصبی مرکزی شامل مغز و نخاع است که مراکز نظارت بر فعالیت‌های بدن‌اند. این دستگاه، اطلاعات دریافتی از محیط و درون بدن را تفسیر می‌کند و به آنها پاسخ می‌دهد. مغز و نخاع از دو بخش ",
+          bookTitle: "Central nervous system",
+          bookText: "The central nervous system includes the brain and the spinal cord, which are the centers for monitoring the body's activities. This device interprets the information received from the environment and inside the body and responds to them. Brain and spinal cord from two parts ",
           bookPic: "9_2.png",
-          picSub: "شکل 12- برش عرضی مغز و نخاع",
+          picSub: "Figure 12- Transverse section of the brain and spinal cord",
         },
       ],
       model: null,
       bookSample: {
         sampleImg: "booksample.png",
-        sampleText: "آزمون تستی فصل 2تا 8 ریاضی هفتم teacherستان اسوه اصفهن",
+        sampleText: "Test exam of 2nd to 8th chapter of Math 7th teacher of Esveh Isfahan University",
         samplefooterImg: "dexter-morse3.png",
         sfooterName: "Arian Etemdi"
       },

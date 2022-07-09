@@ -31,7 +31,7 @@
     </v-stepper-content>
 
     <v-stepper-step :complete="e6 > 3" step="3" @click="e6 = 3" color="#008B8B" class="stepper-3">
-      Select an ad format and name ad unit
+      Select an ad format and ..
     </v-stepper-step>
 
     <v-stepper-content step="3">

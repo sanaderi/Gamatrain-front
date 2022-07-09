@@ -45,7 +45,7 @@
         sm="12"
 
       >
-        <v-btn large class="search-btn" depressed> Search </v-btn>
+        <v-btn  class="search-btn" depressed> Search </v-btn>
       </v-col>
     </v-row>
   </form>

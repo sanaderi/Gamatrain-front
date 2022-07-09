@@ -36,11 +36,13 @@
       </div>
       <v-spacer></v-spacer>
       <div>
-        <v-img
-          class="logo"
-          :src="require('@/assets/images/' + logo)"
-          max-width="150"
-        ></v-img>
+        <nuxt-link to="/">
+          <v-img
+            class="logo"
+            :src="require('@/assets/images/' + logo)"
+            max-width="150"
+          />
+        </nuxt-link>
       </div>
     </v-container>
   </div>
