@@ -57,7 +57,6 @@
                                     <v-badge bordered class="pa-1 mx-auto" content="1258" color="#2E7D32">
                                         <nuxt-link to="training-content" class="nav-link ">
                                             Training Content
-                                            <span class="'icon icong-learnfiles"></span>
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="21260" color="#BF360C">
@@ -65,7 +64,7 @@
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="1690" color="#5600E8">
                                         <nuxt-link to="online-exam" class="nav-link nav-link1">
-                                            online Exam
+                                            Online Exam
                                             <span class="'icon icong-azmoon"></span>
                                         </nuxt-link>
                                     </v-badge>
@@ -73,7 +72,7 @@
                                         <nuxt-link to="tutorial" class="nav-link"> tutorial </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
-                                        <nuxt-link to="" class="nav-link"> Teacher </nuxt-link>
+                                        <nuxt-link to="teachers" class="nav-link"> Teacher </nuxt-link>
                                     </v-badge>
                                 </v-tabs>
                             </v-card>
@@ -94,13 +93,13 @@
                                     <nuxt-link to="q&a" class="nav-link"> Q & A </nuxt-link>
 
                                     <nuxt-link to="online-exam" class="nav-link nav-link1">
-                                        online Exam
+                                        Online Exam
                                         <span class="'icon icong-azmoon"></span>
                                     </nuxt-link>
 
                                     <nuxt-link to="tutorial" class="nav-link"> tutorial </nuxt-link>
 
-                                    <nuxt-link to="" class="nav-link"> Teacher </nuxt-link>
+                                    <nuxt-link to="teachers" class="nav-link"> Teacher </nuxt-link>
                                 </v-tabs>
                             </v-card>
                             <!-- Book Carousel -->
@@ -250,7 +249,12 @@
                                 align-center
                                 mx-auto
                               ">
-                                                            <i class="fa-solid fa-folder"></i>
+                                                            <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M15.6667 1.99967H9.00008L7.33342 0.333008H2.33341C1.41675 0.333008 0.675081 1.08301 0.675081 1.99967L0.666748 11.9997C0.666748 12.9163 1.41675 13.6663 2.33341 13.6663H15.6667C16.5834 13.6663 17.3334 12.9163 17.3334 11.9997V3.66634C17.3334 2.74967 16.5834 1.99967 15.6667 1.99967ZM10.6667 10.333H4.00008V8.66634H10.6667V10.333ZM14.0001 6.99967H4.00008V5.33301H14.0001V6.99967Z"
+                                                                    fill="#616161" />
+                                                            </svg>
                                                             <p class="mx-2">test type : {{ item.type }}</p>
                                                         </div>
 

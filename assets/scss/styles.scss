@@ -2709,7 +2709,7 @@ body {
                 .nav-link1 {
                   padding: 0.5rem;
                   border: 1px solid $border;
-                  background: rgba(1, 87, 155, 0.02);
+                  background: rgba(41, 98, 255, 0.05);
                   border-radius: 1.4rem;
                   display: flex;
                   align-items: center;
@@ -2740,7 +2740,7 @@ body {
       .nav-link1 {
         padding: 0.5rem;
         border: 1px solid $border;
-        background: $blue12  !important;
+        background: rgba(41, 98, 255, 0.05) !important;
         border-radius: 1.4rem;
         display: flex;
         align-items: center;
@@ -2871,6 +2871,7 @@ body {
     }
   }
 }
+
 // End: Sample-q
 
 
@@ -3234,6 +3235,7 @@ body {
     }
   }
 }
+
 // End : Training Content
 
 
@@ -3377,7 +3379,7 @@ body {
       }
     }
 
-    .sample-q-pagination {
+    .q-a-pagination {
       .v-pagination__item {
         font-size: 1.5rem;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -3447,6 +3449,7 @@ body {
     }
   }
 }
+
 // End: Q & A
 
 
@@ -3815,9 +3818,10 @@ body {
     }
   }
 }
+
 // End : Online-Exam
 
-// Start : Q & A
+// Start : tutorial
 .tutorial {
   padding: 3rem;
   border-top: 1px solid $hashtag;
@@ -3957,7 +3961,7 @@ body {
       }
     }
 
-    .sample-q-pagination {
+    .tutorial-pagination {
       .v-pagination__item {
         font-size: 1.5rem;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -4027,5 +4031,588 @@ body {
     }
   }
 }
-// End: Q & A
 
+// End: tutorial
+
+// Start : Teachers
+.teachers {
+  padding: 3rem;
+  border-top: 1px solid $hashtag;
+
+  .teachers-contents {
+    .teachers-content {
+      .teachers-breadcrumb {
+        color: $gray4;
+        background-color: $gray12;
+        border-radius: 1.2rem;
+      }
+
+      .v-card:not(.v-sheet--outlined) {
+        box-shadow: none;
+      }
+    }
+
+
+    .desktop-teachers-header {
+      margin: 1rem 0;
+      border-radius: 1.2rem;
+
+      .v-tabs {
+        .v-tabs-bar {
+          background: $gray12;
+          padding: 1rem 2rem;
+          min-height: 11rem;
+
+          .v-slide-group__wrapper {
+            .v-slide-group__content {
+              align-items: center;
+
+              .v-badge--bordered .v-badge__badge::after {
+                border-style: none;
+              }
+
+              .v-badge {
+                .nav-link1 {
+                  padding: 0.5rem;
+                  border: 1px solid $border;
+                  background: rgba(142, 36, 170, 0.05);
+                  ;
+                  border-radius: 1.4rem;
+                  display: flex;
+                  align-items: center;
+                }
+
+                .nav-link1 span {
+                  font-size: 3rem;
+                  padding-left: 1rem;
+                  color: $category-tutor;
+                }
+              }
+
+              i {
+                color: $gray4;
+              }
+
+              a {
+                margin: auto;
+                color: $gray4;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .mobile-teachers-header {
+      .nav-link1 {
+        padding: 0.5rem;
+        border: 1px solid $border;
+        background: rgba(142, 36, 170, 0.05) !important;
+        border-radius: 1.4rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-link1 span {
+        font-size: 3rem;
+        padding-left: 1rem;
+        color: $red5;
+      }
+
+      i {
+        display: none;
+      }
+
+      .nav-link {
+        color: $gray4  !important;
+      }
+    }
+
+    .teacher-items {
+      .card {
+        padding: 1.6rem;
+
+        .card-user {
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+          position: relative;
+
+          .card-user-header {
+            .card-user-profile::before {
+              content: " ";
+              position: absolute;
+              height: 0.7rem;
+              width: 0.7rem;
+              background-color: #F16D50;
+              color: red;
+              border-radius: 50%;
+              top: 85%;
+            }
+
+
+            .card-user-profile {
+              filter: drop-shadow(0px 3.29412px 8.23529px rgba(0, 0, 0, 0.1));
+
+              .card-user-image {
+                border-radius: 50%;
+                outline: 3px solid $orange8;
+              }
+            }
+
+            .card-user-name {
+              font-size: 1.8rem;
+              color: $gray45;
+            }
+          }
+
+          .card-user-header-mobile {
+            .card-user-profile::before {
+              content: " ";
+              position: absolute;
+              height: 0.7rem;
+              width: 0.7rem;
+              background-color: #F16D50;
+              border-radius: 50%;
+              top: 85%;
+            }
+
+            .card-user-profile1::before {
+              background-color: $green15;
+            }
+
+            .card-user-profile2::before {
+              background-color: $orange8;
+            }
+
+            .card-user-profile3::before {
+              background-color: hsla(0, 0%, 0%, 0.082);
+            }
+
+            .card-user-profile4::before {
+              background-color: $green15;
+            }
+
+            .card-user-profile5::before {
+              background-color: $orange8;
+            }
+
+            .card-user-profile6::before {
+              background-color: hsla(0, 0%, 0%, 0.082);
+            }
+
+            .card-user-profile7::before {
+              background-color: $green15;
+            }
+
+            .card-user-profile8::before {
+              background-color: $orange8;
+            }
+
+            .card-user-profile9::before {
+              background-color: hsla(0, 0%, 0%, 0.082);
+            }
+
+
+            .card-user-profile {
+              filter: drop-shadow(0px 3.29412px 8.23529px rgba(0, 0, 0, 0.1));
+
+              .card-user-image {
+                border-radius: 50%;
+
+              }
+
+              .card-user-image1 {
+                outline: 3px solid $green15;
+              }
+
+              .card-user-image2 {
+                outline: 3px solid $orange8;
+              }
+
+              .card-user-image3 {
+                outline: 3px solid $gray0;
+              }
+
+              .card-user-image4 {
+                outline: 3px solid $green15;
+              }
+
+              .card-user-image5 {
+                outline: 3px solid $orange8;
+              }
+
+              .card-user-image6 {
+                outline: 3px solid $gray0;
+              }
+
+              .card-user-image7 {
+                outline: 3px solid $green15;
+              }
+
+              .card-user-image8 {
+                outline: 3px solid $orange8;
+              }
+
+              .card-user-image9 {
+                outline: 3px solid $gray0;
+              }
+
+            }
+
+            .card-user-name {
+              font-size: 1.8rem;
+              color: $gray45;
+            }
+
+            .card-user-active1 {
+              color: $green15;
+            }
+
+            .card-user-active1::before {
+              content: url("../images/online.svg");
+              position: absolute;
+              right: 3%;
+              top: 13%;
+            }
+
+            .card-user-active1::after {
+              content: url("../images/cup1.svg");
+              position: absolute;
+              right: 2.5%;
+              top: 20%;
+            }
+
+            .card-user-active2 {
+              color: $orange8;
+            }
+
+            .card-user-active2::before {
+              content: url("../images/offline.svg");
+              position: absolute;
+              right: 3%;
+              top: 13%;
+            }
+
+            .card-user-active3 {
+              color: $gray0;
+            }
+
+            .card-user-active3::before {
+              content: url("../images/longtime.svg");
+              position: absolute;
+              right: 3%;
+              top: 13%;
+            }
+
+            .card-user-active4 {
+              color: $green15;
+            }
+
+            .card-user-active4::before {
+              content: url("../images/online.svg");
+              position: absolute;
+              right: 3%;
+              top: 13%;
+            }
+
+            .card-user-active4::after {
+              content: url("../images/cup1.svg");
+              position: absolute;
+              right: 2.5%;
+              top: 20%;
+            }
+
+            .card-user-active5 {
+              color: $orange8;
+            }
+
+            .card-user-active5::before {
+              content: url("../images/offline.svg");
+              position: absolute;
+              right: 3%;
+              top: 13%;
+            }
+
+            .card-user-active6 {
+              color: $gray0;
+            }
+
+            .card-user-active6::before {
+              content: url("../images/longtime.svg");
+              position: absolute;
+              right: 3%;
+              top: 13%;
+            }
+
+            .card-user-active7 {
+              color: $green15;
+            }
+
+            .card-user-active7::before {
+              content: url("../images/online.svg");
+              position: absolute;
+              right: 3%;
+              top: 13%;
+            }
+
+            .card-user-active7::after {
+              content: url("../images/cup1.svg");
+              position: absolute;
+              right: 2.5%;
+              top: 20%;
+            }
+
+            .card-user-active8 {
+              color: $orange8;
+            }
+
+            .card-user-active8::before {
+              content: url("../images/offline.svg");
+              position: absolute;
+              right: 3%;
+              top: 13%;
+            }
+
+            .card-user-active9 {
+              color: $gray0;
+            }
+
+            .card-user-active9::before {
+              content: url("../images/longtime.svg");
+              position: absolute;
+              right: 3%;
+              top: 13%;
+            }
+
+          }
+
+          .card-user-profile-sub {
+            color: $orange8;
+          }
+
+
+
+          .card-user-content {
+            .card-user-major {
+              color: $green;
+              font-size: 1.2rem;
+              letter-spacing: 0.06px;
+            }
+
+            .card-user-address {
+              color: $gray0;
+              font-size: 1.2rem;
+              letter-spacing: 0.06px;
+            }
+
+            .card-user-details {
+              display: flex;
+              justify-content: space-between;
+
+              .button {
+                background: none;
+                box-shadow: none;
+              }
+
+              .v-snack {
+                .v-snack__wrapper {
+                  border-radius: 1.2rem 1.2rem 0 0;
+                  min-width: 100%;
+                  background-color: #f0f0f0;
+                  box-shadow: none;
+                  margin: 0;
+                  min-height: 210px;
+                  display: block;
+
+                  .v-snack__content {
+                    display: flex;
+                    position: relative;
+                    font-size: 1.2rem;
+                    color: $black;
+
+                    .star {
+                      p {
+                        color: $black;
+                      }
+                    }
+
+                    .cup {
+                      p {
+                        color: $black;
+                      }
+                    }
+
+                    .increase {
+                      p {
+                        color: $black;
+                      }
+                    }
+
+                    .back-btn {
+                      position: absolute;
+                      right: 0;
+                      top: 70%;
+                      font-size: 1.2rem;
+                    }
+
+                  }
+
+
+                }
+              }
+
+              .card-user-detail {
+                p {
+                  font-size: 1.2rem;
+                  color: $gray4;
+                }
+              }
+            }
+
+            .card-user-tags {
+              .card-user-tag:hover {
+                color: $white;
+                background: $green;
+              }
+
+              .card-user-tag {
+                background: rgba(33, 33, 33, 0.08);
+                border-radius: 13.3333px;
+                text-align: center;
+                color: $gray4;
+                cursor: pointer;
+                margin-right: 1.5rem;
+              }
+            }
+
+            .card-user-btns {
+              .card-user-btn-chat {
+                width: 100%;
+                background: $white;
+                border: 1px solid $green15;
+
+                .v-btn__content {
+                  color: $green15;
+                }
+              }
+
+              .card-user-btn-chat:hover {
+                background: $green15;
+                border: 1px solid $green15;
+
+                .v-btn__content {
+                  color: $white;
+
+                  svg {
+                    path {
+                      fill: $white;
+                    }
+                  }
+                }
+              }
+
+              .card-user-btn-class {
+                width: 100%;
+                background: $white;
+                border: 1px solid $orange9;
+
+                .v-btn__content {
+                  color: $orange9;
+                }
+              }
+
+              .card-user-btn-class:hover {
+                background: $orange9;
+                border: 1px solid $orange9;
+
+                .v-btn__content {
+                  color: $white;
+
+                  svg {
+                    path {
+                      fill: $white;
+                    }
+                  }
+                }
+              }
+
+
+            }
+          }
+        }
+      }
+
+
+    }
+
+    .teachers-pagination {
+      .v-pagination__item {
+        font-size: 1.5rem;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      }
+
+      .v-pagination__item--active {
+        background-color: $green  !important;
+        border-color: $green  !important;
+      }
+    }
+  }
+
+  .teachers-filter {
+    background-color: $gray12;
+    padding: 2rem;
+    border-radius: 1.2rem;
+
+    .v-expansion-panels {
+      .filter-divider {
+        flex: 1 1 100% !important;
+      }
+
+      .v-expansion-panel {
+        border-radius: 0.4rem;
+        margin: 1rem 0;
+
+        .filter-title {
+          font-size: 16px;
+          color: $gray45;
+        }
+      }
+
+      .v-expansion-panel::before {
+        box-shadow: none;
+      }
+
+      .v-expansion-panel:not(:first-child)::after {
+        border-top: none;
+      }
+    }
+
+    .filter-switchs {
+      .v-input {
+        .v-input__slot {
+          .v-input--switch__track {
+            width: 40px;
+            height: 20px;
+          }
+
+          .v-input--switch__thumb {
+            width: 25px;
+            height: 25px;
+          }
+
+          .v-input--selection-controls__ripple {
+            left: -12px;
+            top: calc(50% - 22px);
+          }
+        }
+      }
+
+      .switch-title {
+        font-size: 1.6rem;
+        color: $gray11;
+      }
+    }
+  }
+}
+
+// End : Teachers

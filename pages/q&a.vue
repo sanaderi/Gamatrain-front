@@ -69,7 +69,7 @@
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="1690" color="#5600E8">
                                         <nuxt-link to="online-exam" class="nav-link">
-                                            online Exam
+                                            Online Exam
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
@@ -78,7 +78,7 @@
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
-                                        <nuxt-link to="" class="nav-link">
+                                        <nuxt-link to="teachers" class="nav-link">
                                             Teacher
                                         </nuxt-link>
                                     </v-badge>
@@ -107,7 +107,7 @@
 
 
                                     <nuxt-link to="online-exam" class="nav-link">
-                                        online Exam
+                                        Online Exam
                                     </nuxt-link>
 
 
@@ -116,7 +116,7 @@
                                     </nuxt-link>
 
 
-                                    <nuxt-link to="" class="nav-link">
+                                    <nuxt-link to="teachers" class="nav-link">
                                         Teacher
                                     </nuxt-link>
 
@@ -173,7 +173,7 @@
                                     </v-row>
                                 </div>
                             </div>
-                            <!-- sample-q-items-mobile -->
+                            <!-- Q-a-items-mobile -->
                             <div class="q-a-items q-a-items-mobile d-block d-lg-none">
                                 <div class="q-a-item pa-1 pa-sm-5 my-5" v-for="item in items" :key="item.value">
                                     <v-row>

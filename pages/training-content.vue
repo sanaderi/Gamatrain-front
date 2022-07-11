@@ -64,13 +64,13 @@
                                         <nuxt-link to="q&a" class="nav-link"> Q & A </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="1690" color="#5600E8">
-                                        <nuxt-link to="online-exam" class="nav-link"> online Exam </nuxt-link>
+                                        <nuxt-link to="online-exam" class="nav-link"> Online Exam </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
                                         <nuxt-link to="tutorial" class="nav-link"> tutorial </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
-                                        <nuxt-link to="" class="nav-link"> Teacher </nuxt-link>
+                                        <nuxt-link to="teachers" class="nav-link"> Teacher </nuxt-link>
                                     </v-badge>
                                 </v-tabs>
                             </v-card>
@@ -91,11 +91,11 @@
 
                                     <nuxt-link to="q&a" class="nav-link"> Q & A </nuxt-link>
 
-                                    <nuxt-link to="online-exam" class="nav-link"> online Exam </nuxt-link>
+                                    <nuxt-link to="online-exam" class="nav-link"> Online Exam </nuxt-link>
 
                                     <nuxt-link to="tutorial" class="nav-link"> tutorial </nuxt-link>
 
-                                    <nuxt-link to="" class="nav-link"> Teacher </nuxt-link>
+                                    <nuxt-link to="teachers" class="nav-link"> Teacher </nuxt-link>
                                 </v-tabs>
                             </v-card>
                             <!-- Book Carousel -->
