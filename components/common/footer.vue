@@ -35,12 +35,7 @@
               </v-list-item>
 
               <v-list-item class="footer-item">
-                <p class="about-footer-para">
-                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
-                  با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و
-                  مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
-                  تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای
-                  کاربردی می باشد.
+                <p class="about-footer-para">Lorem Epsom is a fake text with the production of incomprehensible simplicity from the printing industry, and using graphic designers, printers and texts but also newspapers and magazines in columns and rows as necessary, and for the current conditions of the technology required, and diverse applications with the aim of improving the tools It is practical.
                 </p>
               </v-list-item>
             </v-list>
