@@ -322,7 +322,7 @@
                 <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
-                <Video ></Video>
+                <Video :videos="videos"></Video>
                 <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
                   empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
               </div>
@@ -344,7 +344,7 @@
           <!-- End : Mobile lastFIle -->
 
 
-          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column">
+          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column justify-space-between">
             <!-- Start : Desktop askCard -->
             <div class="ask-card mb-6 pa-4 d-none d-md-block">
               <div class="ask-title d-flex align-center mb-5">
@@ -356,7 +356,7 @@
                 </div>
               </div>
               <div class="ask-texts d-flex" v-for="(item, ask) in askTexts " :key="ask.value">
-                <p class="my-5 ask-text">
+                <p class="my-3 ask-text">
                   <i class="fa-solid fa-link ask-text-icon mr-2"></i>
                   {{ item.askText.length>80 ? `${item.askText.substring(0,80)}...` : item.askText.substring(0,80) }}
                 </p>
@@ -389,7 +389,7 @@
               <v-divider class="mt-4"></v-divider>
               <div class="ask-footer mt-4">
                 <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus mr-2"></i>Send file</v-btn>
-                <nuxt-link to="" class="askcard-footer-link mr-6">
+                <nuxt-link to="" class="askcard-footer-link mx-6">
                   More
                 </nuxt-link>
               </div>
@@ -405,7 +405,7 @@
                 </div>
               </div>
               <div class="test-texts d-flex" v-for="(item, test) in testTexts " :key="test.value">
-                <p class="my-5 test-text">
+                <p class="my-3 test-text">
                   <i class="fa-solid fa-link test-text-icon mr-2"></i>
                   {{ item.testText.length>80 ? `${item.testText.substring(0,80)}...` : item.testText}}
                 </p>

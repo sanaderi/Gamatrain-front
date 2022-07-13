@@ -20,11 +20,11 @@
             </div>
         </div>
         <!-- Start : training -->
-        <section class="training-content">
+        <section class="online-exam">
             <v-container>
                 <v-row>
                     <v-col lg="3">
-                        <div class="training-content-filter d-none d-sm-block">
+                        <div class="online-exam-filter d-none d-sm-block">
                             <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
                                 <v-expansion-panel>
                                     <v-expansion-panel-header class="filter-title">
@@ -37,15 +37,15 @@
                             </v-expansion-panels>
                         </div>
                     </v-col>
-                    <v-col lg="9" md="9" sm="12" class="training-contents">
-                        <div class="training-contents">
-                            <v-breadcrumbs :items="breadcrumbs" class="training-breadcrumb d-none d-md-block">
+                    <v-col lg="9" md="9" sm="12" class="online-exam-contents">
+                        <div class="online-exam-content">
+                            <v-breadcrumbs :items="breadcrumbs" class="online-exam-breadcrumb d-none d-md-block">
                                 <template v-slot:divider>
                                     <v-icon>mdi-chevron-right</v-icon>
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-training-header">
+                            <v-card class="d-none d-md-block desktop-online-exam-header">
                                 <v-tabs>
                                     <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
                                     <i class="fa-solid fa-list"></i>
@@ -55,16 +55,18 @@
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="1258" color="#2E7D32">
-                                        <nuxt-link to="training-content" class="nav-link nav-link1">
+                                        <nuxt-link to="training-content" class="nav-link ">
                                             Training Content
-                                            <span class="'icon icong-learnfiles"></span>
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="21260" color="#BF360C">
                                         <nuxt-link to="q&a" class="nav-link"> Q & A </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="1690" color="#5600E8">
-                                        <nuxt-link to="online-exam" class="nav-link"> Online Exam </nuxt-link>
+                                        <nuxt-link to="online-exam" class="nav-link nav-link1">
+                                            Online Exam
+                                            <span class="'icon icong-azmoon"></span>
+                                        </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
                                         <nuxt-link to="tutorial" class="nav-link"> tutorial </nuxt-link>
@@ -75,7 +77,7 @@
                                 </v-tabs>
                             </v-card>
                             <!-- header mobile -->
-                            <v-card class="d-block d-md-none mobile-training-header">
+                            <v-card class="d-block d-md-none mobile-online-exam-header">
                                 <v-tabs>
                                     <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
                                     <i class="fa-solid fa-list"></i>
@@ -84,14 +86,16 @@
                                         Sample Exam
                                     </nuxt-link>
 
-                                    <nuxt-link to="training-content" class="nav-link nav-link1">
+                                    <nuxt-link to="training-content" class="nav-link ">
                                         Training Content
-                                        <span class="'icon icong-learnfiles"></span>
                                     </nuxt-link>
 
                                     <nuxt-link to="q&a" class="nav-link"> Q & A </nuxt-link>
 
-                                    <nuxt-link to="online-exam" class="nav-link"> Online Exam </nuxt-link>
+                                    <nuxt-link to="online-exam" class="nav-link nav-link1">
+                                        Online Exam
+                                        <span class="'icon icong-azmoon"></span>
+                                    </nuxt-link>
 
                                     <nuxt-link to="tutorial" class="nav-link"> tutorial </nuxt-link>
 
@@ -116,7 +120,7 @@
                             align-center
                             my-3
                           ">
-                                                    <h4>Course</h4>
+                                                    <h4 class="text-center">With Album test</h4>
                                                     <p>{{ bookCarousel.carouselName }}</p>
                                                 </div>
                                                 <div class="carousel-img  my-3 d-flex justify-center">
@@ -127,11 +131,11 @@
                                                         " class="books-image"></v-img>
                                                 </div>
                                                 <div class="book-carousel-q  my-3">
-                                                    <p>complete courses</p>
+                                                    <p>Lets Create Test</p>
                                                 </div>
                                             </div>
                                         </v-col>
-                                        <v-col lg="10"  cols="8" class="pa-0">
+                                        <v-col lg="10" cols="8" class="pa-0">
                                             <v-sheet class="mx-auto book-carousel-books" elevation="8" max-width="900">
                                                 <v-slide-group v-model="model" class="pa-4" center-active show-arrows>
                                                     <v-slide-item v-for="book in books" :key="book.value"
@@ -146,9 +150,9 @@
                                                                 </nuxt-link>
                                                                 <nuxt-link to="">
                                                                     <div
-                                                                        class="book-season pa-2 my-2 d-flex justify-space-between align-center">
-                                                                        <p class="season-number">{{ book.season }}</p>
-                                                                        <p>Season</p>
+                                                                        class="book-test pa-2 my-2 d-flex justify-space-between align-center">
+                                                                        <p class="test-number">{{ book.test }}</p>
+                                                                        <p>test</p>
                                                                     </div>
                                                                 </nuxt-link>
                                                                 <nuxt-link to="">
@@ -171,8 +175,8 @@
                                 </v-container>
                             </div>
                             <!-- training-items-desktop -->
-                            <div class="training-items training-items-desktop d-none d-lg-block">
-                                <div class="training-item pa-6 my-5" v-for="item in items" :key="item.value">
+                            <div class="online-exam-items online-exam-items-desktop d-none d-lg-block">
+                                <div class="online-exam-item pa-6 my-5" v-for="item in items" :key="item.value">
                                     <v-row>
                                         <v-col lg="2">
                                             <div class="item-img">
@@ -182,7 +186,7 @@
                                         </v-col>
                                         <v-col lg="10">
                                             <div class="
-                          training-item-content
+                          online-exam-item-content
                           d-flex
                           flex-column
                           justify-space-between
@@ -195,29 +199,28 @@
                                                     <p>
                                                         {{ item.title }}
                                                     </p>
-                                                    <div class="item-content-title-icon d-flex">
-                                                        <svg width="39" height="39" viewBox="0 0 39 39" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg" class="mx-1">
-                                                            <path
-                                                                d="M34.375 4.57227H30.125V0.322266H8.875V4.57227H4.625C2.2875 4.57227 0.375 6.48477 0.375 8.82227V10.9473C0.375 16.366 4.455 20.786 9.70375 21.4448C11.0425 24.6323 13.9113 27.0335 17.375 27.7348V34.3223H8.875V38.5723H30.125V34.3223H21.625V27.7348C25.0888 27.0335 27.9575 24.6323 29.2963 21.4448C34.545 20.786 38.625 16.366 38.625 10.9473V8.82227C38.625 6.48477 36.7125 4.57227 34.375 4.57227ZM4.625 10.9473V8.82227H8.875V16.9398C6.41 16.0473 4.625 13.7098 4.625 10.9473ZM34.375 10.9473C34.375 13.7098 32.59 16.0473 30.125 16.9398V8.82227H34.375V10.9473Z"
-                                                                fill="#F9A825" />
-                                                        </svg>
-                                                        <svg width="51" height="52" viewBox="0 0 51 52" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M23.1094 22.5998L19.455 18.9453L17.2014 21.1989L23.1094 27.1069L33.7987 16.4176L31.5452 14.1641L23.1094 22.5998Z"
-                                                                fill="#32BA91" />
-                                                            <path
-                                                                d="M43.0312 20.0723C43.0312 10.3918 35.1836 2.54102 25.5 2.54102C15.8196 2.54102 7.96875 10.3918 7.96875 20.0723C7.96875 26.782 11.7443 32.6071 17.2826 35.554L15.9375 50.3535L25.5 43.9785L35.0625 50.3535L33.7174 35.554C36.5296 34.0627 38.8825 31.8336 40.5234 29.106C42.1643 26.3784 43.0313 23.2554 43.0312 20.0723V20.0723ZM25.5 34.416C17.5775 34.416 11.1562 27.9948 11.1562 20.0723C11.1562 12.1497 17.5775 5.72852 25.5 5.72852C33.4225 5.72852 39.8438 12.1497 39.8438 20.0723C39.8438 27.9948 33.4225 34.416 25.5 34.416Z"
-                                                                fill="#32BA91" />
-                                                        </svg>
-                                                        <svg width="51" height="30" viewBox="0 0 51 30" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M38.2498 3.87516L35.2536 0.878906L21.7811 14.3514L24.7773 17.3477L38.2498 3.87516ZM47.2598 0.878906L24.7773 23.3614L15.8948 14.5002L12.8986 17.4964L24.7773 29.3752L50.2773 3.87516L47.2598 0.878906ZM0.871094 17.4964L12.7498 29.3752L15.7461 26.3789L3.88859 14.5002L0.871094 17.4964Z"
-                                                                fill="#EC4949" />
-                                                        </svg>
-                                                    </div>
+
+                                                </div>
+                                                <div class="item-content-features">
+                                                    <v-row>
+                                                        <v-col lg="3" class="d-flex align-center">
+                                                            <i class="fa-solid fa-list"></i>
+                                                            <p class="mx-2 ">Number of questions :{{ item.qNumber }}
+                                                            </p>
+                                                        </v-col>
+                                                        <v-col lg="3" class="d-flex align-center">
+                                                            <i class="fa-solid fa-temperature-three-quarters"></i>
+                                                            <p class="mx-2 ">difficulty level :{{ item.level }} </p>
+                                                        </v-col>
+                                                        <v-col lg="3" class="d-flex align-center">
+                                                            <i class="fa-solid fa-circle-play"></i>
+                                                            <p class="mx-2 ">Start :{{ item.start }} </p>
+                                                        </v-col>
+                                                        <v-col lg="3" class="d-flex align-center">
+                                                            <i class="fa-solid fa-circle-stop"></i>
+                                                            <p class="mx-2 ">Finish :{{ item.End }} </p>
+                                                        </v-col>
+                                                    </v-row>
                                                 </div>
 
                                                 <div class="item-content-tags d-flex">
@@ -246,8 +249,13 @@
                                 align-center
                                 mx-auto
                               ">
-                                                            <i class="fa-solid fa-folder"></i>
-                                                            <p class="mx-2">file type : {{ item.type }}</p>
+                                                            <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M15.6667 1.99967H9.00008L7.33342 0.333008H2.33341C1.41675 0.333008 0.675081 1.08301 0.675081 1.99967L0.666748 11.9997C0.666748 12.9163 1.41675 13.6663 2.33341 13.6663H15.6667C16.5834 13.6663 17.3334 12.9163 17.3334 11.9997V3.66634C17.3334 2.74967 16.5834 1.99967 15.6667 1.99967ZM10.6667 10.333H4.00008V8.66634H10.6667V10.333ZM14.0001 6.99967H4.00008V5.33301H14.0001V6.99967Z"
+                                                                    fill="#616161" />
+                                                            </svg>
+                                                            <p class="mx-2">test type : {{ item.type }}</p>
                                                         </div>
 
                                                         <div class="
@@ -270,67 +278,68 @@
                                 </div>
                             </div>
                             <!-- training-items-mobile -->
-                            <div class="training-items training-items-mobile d-block d-lg-none">
-                                <div class="training-item pa-1 pa-sm-5 my-5" v-for="item in items" :key="item.value">
+                            <div class="online-exam-items online-exam-items-mobile d-block d-lg-none">
+                                <div class="online-exam-item pa-1 pa-sm-5 my-5" v-for="item in items" :key="item.value">
                                     <v-row>
-                                        <v-col cols="3" sm="1" class="pa-1">
-                                            <div class="training-book">
+                                        <v-col cols="2" sm="1" class="pa-1">
+                                            <div class="online-exam-book">
                                                 <img :src="require('assets/images/' + item.itemImg)" alt="" width="65"
                                                     height="90" />
                                             </div>
                                         </v-col>
-                                        <v-col cols="7" sm="8" class="px-0">
+                                        <v-col cols="10" sm="8" class="px-0">
                                             <div class="
-                          training-book-contents
+                          online-exam-book-contents
                           d-flex
                           flex-column
                           justify-space-between
+                          ml-2
                         ">
-                                                <p class="training-book-title px-1">
+                                                <p class="online-exam-book-title px-1">
                                                     <nuxt-link to="">
                                                         {{ item.title }}
                                                     </nuxt-link>
                                                 </p>
-                                                <div class="item-content-tags d-flex mt-3">
-                                                    <div class="item-content-tag" v-for="item in tags"
-                                                        :key="item.values">
-                                                        <nuxt-link to="">
-                                                            <p>
-                                                                {{ item.tag }}
+                                                <div class="item-content-features">
+                                                    <v-row>
+                                                        <v-col cols="6"
+                                                            class="d-flex align-center item-content-feature">
+                                                            <i class="fa-solid fa-list"></i>
+                                                            <p class="mx-2 ">Number of questions :{{ item.qNumber }}
                                                             </p>
-                                                        </nuxt-link>
-                                                    </div>
+                                                        </v-col>
+                                                        <v-col cols="6"
+                                                            class="d-flex align-center item-content-feature">
+                                                            <i class="fa-solid fa-temperature-three-quarters"></i>
+                                                            <p class="mx-2 ">difficulty level :{{ item.level }} </p>
+                                                        </v-col>
+                                                        <v-col cols="6"
+                                                            class="d-flex align-center item-content-feature">
+                                                            <i class="fa-solid fa-circle-play"></i>
+                                                            <p class="mx-2 ">Start :{{ item.start }} </p>
+                                                        </v-col>
+                                                        <v-col cols="6"
+                                                            class="d-flex align-center item-content-feature">
+                                                            <i class="fa-solid fa-circle-stop"></i>
+                                                            <p class="mx-2 ">Finish :{{ item.End }} </p>
+                                                        </v-col>
+                                                    </v-row>
                                                 </div>
+
                                             </div>
                                         </v-col>
-                                        <v-col cols="2" sm="3" class="pa-0">
-                                            <div class="item-content-cup-icon d-flex align-center">
-                                                <svg width="51" height="30" viewBox="0 0 51 30" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M38.2498 3.87516L35.2536 0.878906L21.7811 14.3514L24.7773 17.3477L38.2498 3.87516ZM47.2598 0.878906L24.7773 23.3614L15.8948 14.5002L12.8986 17.4964L24.7773 29.3752L50.2773 3.87516L47.2598 0.878906ZM0.871094 17.4964L12.7498 29.3752L15.7461 26.3789L3.88859 14.5002L0.871094 17.4964Z"
-                                                        fill="#EC4949" />
-                                                </svg>
-                                                <svg width="37" height="25" viewBox="0 0 39 39" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg" class="mx-1">
-                                                    <path
-                                                        d="M34.375 4.57227H30.125V0.322266H8.875V4.57227H4.625C2.2875 4.57227 0.375 6.48477 0.375 8.82227V10.9473C0.375 16.366 4.455 20.786 9.70375 21.4448C11.0425 24.6323 13.9113 27.0335 17.375 27.7348V34.3223H8.875V38.5723H30.125V34.3223H21.625V27.7348C25.0888 27.0335 27.9575 24.6323 29.2963 21.4448C34.545 20.786 38.625 16.366 38.625 10.9473V8.82227C38.625 6.48477 36.7125 4.57227 34.375 4.57227ZM4.625 10.9473V8.82227H8.875V16.9398C6.41 16.0473 4.625 13.7098 4.625 10.9473ZM34.375 10.9473C34.375 13.7098 32.59 16.0473 30.125 16.9398V8.82227H34.375V10.9473Z"
-                                                        fill="#F9A825" />
-                                                </svg>
-                                                <svg width="52" height="40" viewBox="0 0 51 52" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M23.1094 22.5998L19.455 18.9453L17.2014 21.1989L23.1094 27.1069L33.7987 16.4176L31.5452 14.1641L23.1094 22.5998Z"
-                                                        fill="#32BA91" />
-                                                    <path
-                                                        d="M43.0312 20.0723C43.0312 10.3918 35.1836 2.54102 25.5 2.54102C15.8196 2.54102 7.96875 10.3918 7.96875 20.0723C7.96875 26.782 11.7443 32.6071 17.2826 35.554L15.9375 50.3535L25.5 43.9785L35.0625 50.3535L33.7174 35.554C36.5296 34.0627 38.8825 31.8336 40.5234 29.106C42.1643 26.3784 43.0313 23.2554 43.0312 20.0723V20.0723ZM25.5 34.416C17.5775 34.416 11.1562 27.9948 11.1562 20.0723C11.1562 12.1497 17.5775 5.72852 25.5 5.72852C33.4225 5.72852 39.8438 12.1497 39.8438 20.0723C39.8438 27.9948 33.4225 34.416 25.5 34.416Z"
-                                                        fill="#32BA91" />
-                                                </svg>
-                                            </div>
-                                            <div class="item-content-word-pdf-icon d-flex flex-column"></div>
-                                        </v-col>
+
                                     </v-row>
-                                    <div class="training-item-footer d-flex mt-2">
+                                    <div class="item-content-tags d-flex mt-3">
+                                        <div class="item-content-tag" v-for="item in tags" :key="item.values">
+                                            <nuxt-link to="">
+                                                <p>
+                                                    {{ item.tag }}
+                                                </p>
+                                            </nuxt-link>
+                                        </div>
+                                    </div>
+                                    <div class="online-exam-item-footer d-flex mt-2">
                                         <div class="item-content-user d-flex align-center">
                                             <img :src="require('@/assets/images/' + item.userImg)" alt="" width="25" />
                                             <p class="mx-2">{{ item.user }}</p>
@@ -365,68 +374,68 @@ export default {
         return {
             model: null,
             bookCarousel: {
-                carouselName: "List",
-                carouselImg: "carouselBook.png",
+                carouselName: "Create Test",
+                carouselImg: "test.png",
             },
             books: [
                 {
                     img: "poster1.jpg",
                     title: "Maths",
-                    season: "14",
+                    test: "14",
                     price: "16",
                 },
                 {
                     img: "book2.png",
                     title: "History",
-                    season: "14",
+                    test: "14",
                     price: "16",
                 },
                 {
                     img: "book3.png",
                     title: "Art",
-                    season: "14",
+                    test: "14",
                     price: "16",
                 },
                 {
                     img: "book4.png",
                     title: "Geography",
-                    season: "14",
+                    test: "14",
                     price: "16",
                 },
                 {
                     img: "poster1.jpg",
                     title: "Maths",
-                    season: "14",
+                    test: "14",
                     price: "16",
                 },
                 {
                     img: "book2.png",
                     title: "Maths",
-                    season: "14",
+                    test: "14",
                     price: "16",
                 },
                 {
                     img: "poster1.jpg",
                     title: "Maths",
-                    season: "14",
+                    test: "14",
                     price: "16",
                 },
                 {
                     img: "book2.png",
                     title: "History",
-                    season: "14",
+                    test: "14",
                     price: "16",
                 },
                 {
                     img: "book3.png",
                     title: "Art",
-                    season: "14",
+                    test: "14",
                     price: "16",
                 },
                 {
                     img: "book4.png",
                     title: "Geography",
-                    season: "14",
+                    test: "14",
                     price: "16",
                 },
 
@@ -485,102 +494,140 @@ export default {
             items: [
                 {
                     itemImg: "book1.jpg",
-
+                    qNumber: "20",
+                    level: "Hard",
+                    start: "Free",
+                    End: "Free",
                     title:
-                        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                        " standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "PDF",
+                    type: "Test",
                     update: "3 july",
                 },
                 {
                     itemImg: "book1.jpg",
-
+                    qNumber: "20",
+                    level: "Hard",
+                    start: "Free",
+                    End: "Free",
                     title:
-                        " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                        "  standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "PDF",
-
-                    update: "3july",
-                },
-                {
-                    itemImg: "book1.jpg",
-                    title:
-                        " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "PDF",
+                    type: "Test",
 
                     update: "3july",
                 },
                 {
                     itemImg: "book1.jpg",
+                    qNumber: "20",
+                    level: "Hard",
+                    start: "Free",
+                    End: "Free",
                     title:
-                        ". Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                        "standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "PDF",
+                    type: "Test",
 
                     update: "3july",
                 },
                 {
                     itemImg: "book1.jpg",
+                    qNumber: "20",
+                    level: "Hard",
+                    start: "Free",
+                    End: "Free",
                     title:
-                        " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                        ". standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "PDF",
+                    type: "Test",
 
                     update: "3july",
                 },
                 {
                     itemImg: "book1.jpg",
+                    qNumber: "20",
+                    level: "Hard",
+                    start: "Free",
+                    End: "Free",
                     title:
-                        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                        "  standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "PDF",
+                    type: "Test",
 
                     update: "3july",
                 },
                 {
                     itemImg: "book1.jpg",
+                    qNumber: "20",
+                    level: "Hard",
+                    start: "Free",
+                    End: "Free",
                     title:
-                        " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                        " standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "PDF",
+                    type: "Test",
 
                     update: "3july",
                 },
                 {
                     itemImg: "book1.jpg",
+                    qNumber: "20",
+                    level: "Hard",
+                    start: "Free",
+                    End: "Free",
                     title:
-                        " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                        "standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "PDF",
+                    type: "Test",
 
                     update: "3july",
                 },
                 {
                     itemImg: "book1.jpg",
+                    qNumber: "20",
+                    level: "Hard",
+                    start: "Free",
+                    End: "Free",
                     title:
-                        " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                        " standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "PDF",
+                    type: "Test",
 
                     update: "3july",
                 },
                 {
                     itemImg: "book1.jpg",
+                    qNumber: "20",
+                    level: "Hard",
+                    start: "Free",
+                    End: "Free",
                     title:
-                        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+                        "  standard dummy text ever since the 1500s",
                     userImg: "dexter-morse2.png",
                     user: "Alireza Davoodi",
-                    type: "PDF",
+                    type: "Test",
+
+                    update: "3july",
+                },
+                {
+                    itemImg: "book1.jpg",
+                    qNumber: "20",
+                    level: "Hard",
+                    start: "Free",
+                    End: "Free",
+                    title:
+                        " standard dummy text ever since the 1500s",
+                    userImg: "dexter-morse2.png",
+                    user: "Alireza Davoodi",
+                    type: "Test",
 
                     update: "3july",
                 },

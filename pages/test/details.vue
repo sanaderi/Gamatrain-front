@@ -20,24 +20,9 @@
         <div class="detail mt-8">
           <v-row>
             <v-col cols="12" md="3">
-              <div class="detail-image-holder">
-                <nuxt-link to="linkPoster">
-                  <img :alt=detail.title :src="require(`~/assets/images/${detail.poster}`)" class="detail-image"/>
-                </nuxt-link>
-              </div>
-              <div class="detail-preview-image-holder">
-                <img :alt=detail.title :src="require(`~/assets/images/${detail.previewImage}`)"
-                     class="detail-preview-image"/>
-                <div class="description-preview-holder">
-                  <p class="text-center preview-text">Preview the first page of the file</p>
-                  <p class="text-center font-weight-bold pdf-page-numbers">Num of file pages: 17</p>
-                </div>
-                <!--   fileCopyRight  -->
-                <div class="d-block d-md-none mt-7 text-center file-copy-right">
-                  <p class="">It is forbidden to republish the contents in cyber space.</p>
-                </div>
-              </div>
-
+              <!--Show gallery of preview and book first page-->
+              <preview-gallery/>
+              <!--Show gallery of preview and book first page-->
             </v-col>
             <v-col cols="12" md="6">
               <!--  Description   -->
@@ -354,9 +339,11 @@ import Breadcrumb from "../../components/widgets/breadcrumb";
 import LastViews from "@/components/common/last-views";
 import RelatedCardBox from "./components/related-card-box"
 import Category from "@/components/common/category";
+import PreviewGallery from "@/components/details/preview-gallery";
 
 export default {
   components: {
+    PreviewGallery,
     Category,
     Breadcrumb,
     LastViews,

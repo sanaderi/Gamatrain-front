@@ -65,6 +65,1072 @@ body {
         max-width: 98%;
         width: 98%;
       }
+
+      // start: sample-q
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .sample-filter {
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .sample-q {
+        padding: 0;
+
+        .sample-q-contents {
+          padding: 0;
+
+          .mobile-sample-header {
+            .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+              display: none;
+            }
+
+            .v-tabs {
+              .v-tabs-bar {
+                min-height: 6rem;
+                border-radius: 0;
+                padding: 0rem 1rem;
+
+                .v-tabs-bar__content {
+                  .nav-link1 {
+                    padding: 0 0.7rem;
+
+                    span {
+                      font-size: 3rem;
+                      color: $blue3;
+                    }
+                  }
+
+                  .nav-link {
+                    margin: 0 1rem;
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+              }
+            }
+          }
+
+          .sample-q-items-mobile {
+            .sample-q-item {
+              margin-left: 1rem;
+              margin-right: 1rem;
+              box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1),
+                0px 1px 10px rgba(0, 0, 0, 0.08),
+                0px 2px 4px rgba(0, 0, 0, 0.12);
+
+              .sample-book img {
+                border-radius: 1.2rem;
+              }
+
+              .sample-book-contents {
+                min-height: 100%;
+              }
+
+              .item-content-tags {
+                .item-content-tag {
+                  padding: 0.5rem 0.8rem;
+                  margin: 0 0.2rem;
+                  border-radius: 0.6rem;
+                  background: rgba(33, 33, 33, 0.08);
+                  font-size: 8px;
+                }
+              }
+
+              .item-content-word-pdf-icon {
+                position: relative;
+
+                .word-icon {
+                  right: 10% !important;
+                  position: absolute;
+                }
+
+                .pdf-icon {
+                  position: absolute;
+                  right: 10%;
+                  top: 3rem;
+                }
+              }
+
+              .sample-q-item-footer {
+                padding: 0.6rem;
+
+                .item-content-user p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-file-type p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-view p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-last-update p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+              }
+            }
+          }
+
+          .sample-q-items-desktop {
+            .sample-q-item {
+              .item-img img {
+                border-radius: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+
+      // Start : training-Content
+
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .sample-filter {
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .training-content {
+        padding: 0;
+
+        .training-contents {
+          padding: 0;
+
+          .mobile-training-header {
+            .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+              display: none;
+            }
+
+            .v-tabs {
+              .v-tabs-bar {
+                min-height: 6rem;
+                border-radius: 0;
+                padding: 0rem 1rem;
+
+                .v-tabs-bar__content {
+                  .nav-link1 {
+                    padding: 0 0.7rem;
+
+                    span {
+                      font-size: 3rem;
+                      color: $blue3;
+                    }
+                  }
+
+                  .nav-link {
+                    margin: auto;
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+              }
+            }
+          }
+
+          .training-items-mobile {
+            .training-item {
+              margin-left: 1rem;
+              margin-right: 1rem;
+              box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1),
+                0px 1px 10px rgba(0, 0, 0, 0.08),
+                0px 2px 4px rgba(0, 0, 0, 0.12);
+
+              .training-book img {
+                border-radius: 1.2rem;
+              }
+
+              .training-book-contents {
+                min-height: 100%;
+              }
+
+              .item-content-tags {
+                .item-content-tag {
+                  padding: 0.5rem 0.8rem;
+                  margin: 0 0.2rem;
+                  border-radius: 0.6rem;
+                  background: rgba(33, 33, 33, 0.08);
+                  font-size: 8px;
+                }
+              }
+
+              .item-content-word-pdf-icon {
+                position: relative;
+
+                .word-icon {
+                  right: 10% !important;
+                  position: absolute;
+                }
+
+                .pdf-icon {
+                  position: absolute;
+                  right: 10%;
+                  top: 3rem;
+                }
+              }
+
+              .training-item-footer {
+                padding: 0.6rem;
+
+                .item-content-user p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-file-type p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-view p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-last-update p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+              }
+            }
+          }
+
+          .training-items-desktop {
+            .training-item {
+              .item-img img {
+                border-radius: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+
+      // End : training-Content
+
+      // start: Q & A
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .q-a-filter {
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+        z-index: 50;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .q-a {
+        padding: 0;
+
+        .q-a-contents {
+          padding: 0;
+
+          .mobile-q-a-header {
+            .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+              display: none;
+            }
+
+            .v-tabs {
+              .v-tabs-bar {
+                min-height: 6rem;
+                border-radius: 0;
+                padding: 1rem;
+                background-color: $gray12;
+
+                .v-tabs-bar__content {
+                  .nav-link1 {
+                    padding: 0 0.7rem;
+                    background-color: rgba(191, 54, 12, 0.05);
+
+                    span {
+                      font-size: 3rem;
+                      color: $red5;
+                    }
+                  }
+
+                  .nav-link {
+                    margin: 0 1rem;
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+              }
+            }
+          }
+
+          .q-a-items-mobile {
+            .q-a-item {
+              margin-left: 1rem;
+              margin-right: 1rem;
+              box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1),
+                0px 1px 10px rgba(0, 0, 0, 0.08),
+                0px 2px 4px rgba(0, 0, 0, 0.12);
+
+              .q-a-book img {
+                border-radius: 1.2rem;
+              }
+
+              .q-a-book-contents {
+                min-height: 100%;
+              }
+
+              .item-content-tags {
+                .item-content-tag {
+                  padding: 0.5rem 0.8rem;
+                  margin: 0 0.2rem;
+                  border-radius: 0.6rem;
+                  background: rgba(33, 33, 33, 0.08);
+                  font-size: 8px;
+                }
+              }
+
+              .item-content-word-pdf-icon {
+                position: relative;
+
+                .word-icon {
+                  right: 10% !important;
+                  position: absolute;
+                }
+
+                .pdf-icon {
+                  position: absolute;
+                  right: 10%;
+                  top: 3rem;
+                }
+              }
+
+              .q-a-item-footer {
+                padding: 0.6rem;
+
+                .item-content-user p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-file-type p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-view p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-last-update p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+              }
+            }
+          }
+
+          .q-a-items-desktop {
+            .q-a-item {
+              .item-img img {
+                border-radius: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+
+      // End: Q & A
+
+      // Start : Online-Exam
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .online-exam-filter {
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+        z-index: 10;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .online-exam {
+        padding: 0;
+
+        .online-exam-contents {
+          padding: 0;
+
+          .online-exam-content {
+            padding: 0;
+
+            .mobile-online-exam-header {
+              .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+                display: none;
+              }
+
+              .v-tabs {
+                .v-tabs-bar {
+                  min-height: 6rem;
+                  border-radius: 0;
+                  padding: 1rem;
+                  background-color: $gray12;
+
+                  .v-tabs-bar__content {
+                    .nav-link1 {
+                      padding: 0 0.7rem;
+
+                      span {
+                        font-size: 3rem;
+                        color: $violet2;
+                      }
+                    }
+
+                    .nav-link {
+                      margin: 0 1rem;
+                      display: flex;
+                      align-items: center;
+                    }
+                  }
+                }
+              }
+            }
+
+            .book-carousel {
+              border-radius: 0;
+
+              .book-carousel-sub {
+                .book-carousel-title h4 {
+                  font-size: 14px;
+                }
+
+                .book-carousel-title p {
+                  font-size: 12px;
+                }
+
+                .carousel-img {
+                  .books-image {
+                    width: 106px;
+                    height: 114px;
+                  }
+                }
+
+                .book-carousel-q ::before {
+                  content: url("../images/quote.png");
+                  height: 0;
+                  width: 1rem;
+                  transform: rotate(30deg);
+                  right: 0%;
+                  top: -10%;
+                  position: absolute;
+                }
+
+                .book-carousel-q {
+
+                  width: 80%;
+                  height: 30px;
+                  background: #FFD12F;
+                  position: relative;
+                  border-radius: 15rem;
+                  padding: 0.4rem;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+
+                  p {
+                    color: $green;
+                  }
+                }
+
+                p {
+                  font-size: 0.9rem;
+                  color: $white;
+                }
+              }
+
+
+
+              .book-carousel-books {
+
+                // .v-slide-group__prev,
+                // .v-slide-group__next {
+                //   display: none;
+                // }
+
+                .slide-item {
+                  height: 30rem;
+
+                  .book-body {
+                    width: 17rem;
+
+                    .book-body-image {
+                      width: 100%;
+                      height: 117px;
+                      padding: 0;
+                      border-radius: 1rem;
+                    }
+
+                    .book-title {
+                      font-size: 1.2rem;
+                    }
+
+                    .book-season {
+                      .season-number {
+                        font-size: 14px;
+                      }
+
+                      p {
+                        font-size: 8.5px;
+                      }
+                    }
+
+                    .book-price {
+                      .price-number {
+                        font-size: 14px;
+                      }
+
+                      p {
+                        font-size: 8.5px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .online-exam-items-mobile {
+              .online-exam-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+                box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1),
+                  0px 1px 10px rgba(0, 0, 0, 0.08),
+                  0px 2px 4px rgba(0, 0, 0, 0.12);
+
+                .online-exam-book img {
+                  border-radius: 1.2rem;
+                }
+
+                .online-exam-book-contents {
+                  min-height: 100%;
+                }
+
+                .item-content-features {
+                  .item-content-feature {
+                    padding: 0.5rem;
+                  }
+
+                  .item-content-feature p {
+                    font-size: 1rem;
+                  }
+
+                }
+
+                .item-content-word-pdf-icon {
+                  position: relative;
+
+                  .word-icon {
+                    right: 10% !important;
+                    position: absolute;
+                  }
+
+                  .pdf-icon {
+                    position: absolute;
+                    right: 10%;
+                    top: 3rem;
+                  }
+                }
+
+                .item-content-tags {
+                  .item-content-tag {
+                    padding: 0.6rem 1.8rem;
+                    margin: 0 0.2rem;
+                    border-radius: 0.6rem;
+                    background: rgba(33, 33, 33, 0.08);
+                    font-size: 8px;
+                  }
+                }
+
+                .online-exam-item-footer {
+                  padding: 0.6rem;
+
+                  .item-content-user p {
+                    font-size: 10px;
+                    color: $gray8;
+                  }
+
+                  .item-content-file-type p {
+                    font-size: 10px;
+                    color: $gray8;
+                  }
+
+                  .item-content-view p {
+                    font-size: 10px;
+                    color: $gray8;
+                  }
+
+                  .item-content-last-update p {
+                    font-size: 10px;
+                    color: $gray8;
+                  }
+                }
+              }
+            }
+
+            .online-exam-items-desktop {
+              .online-exam-item {
+                .item-img img {
+                  border-radius: 1.2rem;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // End : Online-Exam
+
+      // start: Tutorial
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .tutorial-filter {
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+        z-index: 50;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .tutorial {
+        padding: 0;
+
+        .tutorial-contents {
+
+          .mobile-tutorial-header {
+            .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+              display: none;
+            }
+
+            .v-tabs {
+              .v-tabs-bar {
+                min-height: 6rem;
+                border-radius: 0;
+                padding: 1rem;
+                background-color: $gray12;
+
+                .v-tabs-bar__content {
+                  .nav-link1 {
+                    padding: 0 0.7rem;
+                    background-color: rgba(191, 54, 12, 0.05);
+
+                    span {
+                      font-size: 3rem;
+                      color: $category-textbook;
+                    }
+                  }
+
+                  .nav-link {
+                    margin: 0 1rem;
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+              }
+            }
+          }
+
+          .tutorial-items-mobile {
+            .tutorial-item {
+              margin-left: 1rem;
+              margin-right: 1rem;
+              box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1),
+                0px 1px 10px rgba(0, 0, 0, 0.08),
+                0px 2px 4px rgba(0, 0, 0, 0.12);
+
+              .tutorial-book img {
+                border-radius: 1.2rem;
+              }
+
+              .tutorial-book-contents {
+                min-height: 100%;
+              }
+
+              .item-content-tags {
+                .item-content-tag {
+                  padding: 0.5rem 0.8rem;
+                  margin: 0 0.2rem;
+                  border-radius: 0.6rem;
+                  background: rgba(33, 33, 33, 0.08);
+                  font-size: 8px;
+                }
+              }
+
+              .tutorial-item-footer {
+                padding: 0.6rem;
+
+                .item-content-user p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-file-type p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-view p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-last-update p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+              }
+            }
+          }
+
+          .tutorial-items-desktop {
+            .tutorial-item {
+              .item-img img {
+                border-radius: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+
+      // End: Tutorial
+
+      // start: Teachers
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .teachers-filter {
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+        z-index: 50;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .teachers {
+        padding: 0;
+
+        .teachers-contents {
+          padding: 0;
+
+          .mobile-teachers-header {
+            .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+              display: none;
+            }
+
+            .v-tabs {
+              .v-tabs-bar {
+                min-height: 6rem;
+                border-radius: 0;
+                padding: 1rem;
+                background-color: $gray12;
+
+                .v-tabs-bar__content {
+                  .nav-link1 {
+                    padding: 0 0.7rem;
+                    background-color: rgba(142, 36, 170, 0.05);
+
+                    span {
+                      font-size: 3rem;
+                      color: $category-tutor;
+                    }
+                  }
+
+                  .nav-link {
+                    margin: 0 1rem;
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+              }
+            }
+          }
+
+          .teacher-items {
+            .card {
+              padding: 1rem;
+
+              .card-user {
+                border-radius: 1.2rem;
+                box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1), 0px 1px 10px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.12);
+
+                .card-user-content {
+                  .card-user-tags {
+                    .card-user-tag {
+                      border-radius: 0.6rem;
+                      margin-right: 0.5rem;
+                    }
+                  }
+
+                  .card-user-details {
+                    display: flex;
+                    justify-content: flex-start;
+                  }
+                }
+              }
+            }
+
+          }
+
+
+        }
+      }
+
+      // End: Teachers
     }
 
     @media (min-width: 960px) {}
@@ -313,7 +1379,132 @@ body {
       }
     }
 
-    @media screen and (max-width: 610px) {
+    @media (max-width:811px) {
+      // start: Teachers
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .teachers-filter {
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+        z-index: 50;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .teachers {
+        padding: 0;
+
+        .teachers-contents {
+          padding: 0;
+
+          .mobile-teachers-header {
+            .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+              display: none;
+            }
+
+            .v-tabs {
+              .v-tabs-bar {
+                min-height: 6rem;
+                border-radius: 0;
+                padding: 1rem;
+                background-color: $gray12;
+
+                .v-tabs-bar__content {
+                  .nav-link1 {
+                    padding: 0 0.7rem;
+                    background-color: rgba(142, 36, 170, 0.05);
+
+                    span {
+                      font-size: 3rem;
+                      color: $category-tutor;
+                    }
+                  }
+
+                  .nav-link {
+                    margin: 0 1rem;
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+              }
+            }
+          }
+
+          .teacher-items {
+            padding: 2rem;
+            .card {
+              padding: 1rem;
+
+              .card-user {
+                border-radius: 1.2rem;
+                box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1), 0px 1px 10px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.12);
+
+                .card-user-content {
+                  .card-user-tags {
+                    .card-user-tag {
+                      border-radius: 0.6rem;
+                      margin-right: 0.5rem;
+                    }
+                  }
+
+                  .card-user-details {
+                    display: flex;
+                    justify-content: flex-start;
+                  }
+                }
+              }
+            }
+
+          }
+
+
+        }
+      }
+
+      // End: Teachers
+    }
+     @media screen and (max-width: 610px) {
       .test-details-content {
         .detail {
           .download-links {
@@ -663,6 +1854,56 @@ body {
           .video-slider {
             position: relative;
 
+            .video-player {
+              position: relative;
+
+              .buttons {
+                //opacity: 0;
+              }
+
+              &:hover .buttons {
+                //opacity: 1;
+                transition: .3s ease-in-out;
+              }
+
+              .buttons button {
+                position: absolute;
+                top: 34%;
+                left: 43%;
+                width: 4rem;
+                height: 4rem;
+                color: #FFFFFF;
+                z-index: 10;
+                border-radius: 50%;
+                background: $black;
+              }
+
+              .buttons button.play:before {
+                content: "\f04b";
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                font-size: 2rem;
+              }
+
+              .buttons button.pause:before {
+                content: "\f04c";
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                font-size: 2rem;
+              }
+
+              .shadow {
+                background: #ffffff52;
+                content: " ";
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 1;
+              }
+            }
+
             .slider-rating {
               bottom: 6%;
 
@@ -756,7 +1997,6 @@ body {
         }
 
         .sample-filter {
-
           .v-expansion-panel {
             border: 1px solid $border;
             border-radius: 0.4rem;
@@ -768,7 +2008,6 @@ body {
 
           .v-expansion-panel::before {
             box-shadow: none;
-
           }
         }
 
@@ -789,15 +2028,16 @@ body {
         position: fixed;
         bottom: 8%;
         left: 5%;
+        z-index: 50;
 
         .filter-mobile-btn {
           background-color: $green;
           padding: 2rem;
-          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
           border-radius: 1.2rem;
         }
       }
-
 
       .sample-q {
         padding: 0;
@@ -814,7 +2054,8 @@ body {
               .v-tabs-bar {
                 min-height: 6rem;
                 border-radius: 0;
-                padding: 0rem 1rem;
+                padding: 1rem;
+                background-color: $gray12;
 
                 .v-tabs-bar__content {
                   .nav-link1 {
@@ -828,6 +2069,8 @@ body {
 
                   .nav-link {
                     margin: 0 1rem;
+                    display: flex;
+                    align-items: center;
                   }
                 }
               }
@@ -838,7 +2081,9 @@ body {
             .sample-q-item {
               margin-left: 1rem;
               margin-right: 1rem;
-              box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1), 0px 1px 10px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.12);
+              box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1),
+                0px 1px 10px rgba(0, 0, 0, 0.08),
+                0px 2px 4px rgba(0, 0, 0, 0.12);
 
               .sample-book img {
                 border-radius: 1.2rem;
@@ -846,7 +2091,6 @@ body {
 
               .sample-book-contents {
                 min-height: 100%;
-
               }
 
               .item-content-tags {
@@ -896,10 +2140,8 @@ body {
                   font-size: 10px;
                   color: $gray8;
                 }
-
               }
             }
-
           }
 
           .sample-q-items-desktop {
@@ -910,8 +2152,9 @@ body {
             }
           }
         }
-
       }
+
+      // End: sample-q
 
       // Start : training-Content
       .v-dialog__content {
@@ -923,7 +2166,6 @@ body {
         }
 
         .sample-filter {
-
           .v-expansion-panel {
             border: 1px solid $border;
             border-radius: 0.4rem;
@@ -935,7 +2177,6 @@ body {
 
           .v-expansion-panel::before {
             box-shadow: none;
-
           }
         }
 
@@ -956,16 +2197,18 @@ body {
         position: fixed;
         bottom: 8%;
         left: 5%;
+        z-index: 10;
 
         .filter-mobile-btn {
           background-color: $green;
           padding: 2rem;
-          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
           border-radius: 1.2rem;
         }
       }
 
-      .training-contnet {
+      .training-content {
         padding: 0;
 
         .training-contents {
@@ -980,7 +2223,8 @@ body {
               .v-tabs-bar {
                 min-height: 6rem;
                 border-radius: 0;
-                padding: 0rem 1rem;
+                padding: 1rem;
+                background-color: $gray12;
 
                 .v-tabs-bar__content {
                   .nav-link1 {
@@ -994,6 +2238,110 @@ body {
 
                   .nav-link {
                     margin: 0 1rem;
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+              }
+            }
+          }
+
+          .book-carousel {
+            border-radius: 0;
+
+            .book-carousel-sub {
+              .book-carousel-title h4 {
+                font-size: 14px;
+              }
+
+              .book-carousel-title p {
+                font-size: 12px;
+              }
+
+              .carousel-img {
+                .books-image {
+                  width: 106px;
+                  height: 114px;
+                }
+              }
+
+              .book-carousel-q ::before {
+                content: url("../images/quote.png");
+                height: 0;
+                width: 1rem;
+                transform: rotate(30deg);
+                right: 0%;
+                top: -10%;
+                position: absolute;
+              }
+
+              .book-carousel-q {
+
+                width: 80%;
+                height: 30px;
+                background: #FFD12F;
+                position: relative;
+                border-radius: 15rem;
+                padding: 0.4rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                p {
+                  color: $green;
+                }
+              }
+
+              p {
+                font-size: 0.9rem;
+                color: $white;
+              }
+            }
+
+
+
+            .book-carousel-books {
+
+              .v-slide-group__prev,
+              .v-slide-group__next {
+                display: none;
+              }
+
+              .slide-item {
+                height: 30rem;
+
+                .book-body {
+                  width: 17rem;
+
+                  .book-body-image {
+                    width: 100%;
+                    height: 117px;
+                    padding: 0;
+                    border-radius: 1rem;
+                  }
+
+                  .book-title {
+                    font-size: 1.2rem;
+                  }
+
+                  .book-season {
+                    .season-number {
+                      font-size: 14px;
+                    }
+
+                    p {
+                      font-size: 8.5px;
+                    }
+                  }
+
+                  .book-price {
+                    .price-number {
+                      font-size: 14px;
+                    }
+
+                    p {
+                      font-size: 8.5px;
+                    }
                   }
                 }
               }
@@ -1004,7 +2352,9 @@ body {
             .training-item {
               margin-left: 1rem;
               margin-right: 1rem;
-              box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1), 0px 1px 10px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.12);
+              box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1),
+                0px 1px 10px rgba(0, 0, 0, 0.08),
+                0px 2px 4px rgba(0, 0, 0, 0.12);
 
               .training-book img {
                 border-radius: 1.2rem;
@@ -1012,7 +2362,6 @@ body {
 
               .training-book-contents {
                 min-height: 100%;
-
               }
 
               .item-content-tags {
@@ -1062,10 +2411,8 @@ body {
                   font-size: 10px;
                   color: $gray8;
                 }
-
               }
             }
-
           }
 
           .training-items-desktop {
@@ -1075,12 +2422,743 @@ body {
               }
             }
           }
-
         }
-
       }
 
       // End : training-Content
+
+      // start: Q & A
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .q-a-filter {
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+        z-index: 50;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .q-a {
+        padding: 0;
+
+        .q-a-contents {
+          padding: 0;
+
+          .mobile-q-a-header {
+            .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+              display: none;
+            }
+
+            .v-tabs {
+              .v-tabs-bar {
+                min-height: 6rem;
+                border-radius: 0;
+                padding: 1rem;
+                background-color: $gray12;
+
+                .v-tabs-bar__content {
+                  .nav-link1 {
+                    padding: 0 0.7rem;
+                    background-color: rgba(191, 54, 12, 0.05);
+
+                    span {
+                      font-size: 3rem;
+                      color: $red5;
+                    }
+                  }
+
+                  .nav-link {
+                    margin: 0 1rem;
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+              }
+            }
+          }
+
+          .q-a-items-mobile {
+            .q-a-item {
+              margin-left: 1rem;
+              margin-right: 1rem;
+              box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1),
+                0px 1px 10px rgba(0, 0, 0, 0.08),
+                0px 2px 4px rgba(0, 0, 0, 0.12);
+
+              .q-a-book img {
+                border-radius: 1.2rem;
+              }
+
+              .q-a-book-contents {
+                min-height: 100%;
+              }
+
+              .item-content-tags {
+                .item-content-tag {
+                  padding: 0.5rem 0.8rem;
+                  margin: 0 0.2rem;
+                  border-radius: 0.6rem;
+                  background: rgba(33, 33, 33, 0.08);
+                  font-size: 8px;
+                }
+              }
+
+              .item-content-word-pdf-icon {
+                position: relative;
+
+                .word-icon {
+                  right: 10% !important;
+                  position: absolute;
+                }
+
+                .pdf-icon {
+                  position: absolute;
+                  right: 10%;
+                  top: 3rem;
+                }
+              }
+
+              .q-a-item-footer {
+                padding: 0.6rem;
+
+                .item-content-user p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-file-type p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-view p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-last-update p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+              }
+            }
+          }
+
+          .q-a-items-desktop {
+            .q-a-item {
+              .item-img img {
+                border-radius: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+
+      // End: Q & A
+
+      // Start : Online-Exam
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .online-exam-filter {
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+        z-index: 10;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .online-exam {
+        padding: 0;
+
+        .online-exam-contents {
+          padding: 0;
+
+          .online-exam-content {
+            padding: 0;
+
+            .mobile-online-exam-header {
+              .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+                display: none;
+              }
+
+              .v-tabs {
+                .v-tabs-bar {
+                  min-height: 6rem;
+                  border-radius: 0;
+                  padding: 1rem;
+                  background-color: $gray12;
+
+                  .v-tabs-bar__content {
+                    .nav-link1 {
+                      padding: 0 0.7rem;
+
+                      span {
+                        font-size: 3rem;
+                        color: $violet2;
+                      }
+                    }
+
+                    .nav-link {
+                      margin: 0 1rem;
+                      display: flex;
+                      align-items: center;
+                    }
+                  }
+                }
+              }
+            }
+
+            .book-carousel {
+              border-radius: 0;
+
+              .book-carousel-sub {
+                .book-carousel-title h4 {
+                  font-size: 14px;
+                }
+
+                .book-carousel-title p {
+                  font-size: 12px;
+                }
+
+                .carousel-img {
+                  .books-image {
+                    width: 106px;
+                    height: 114px;
+                  }
+                }
+
+                .book-carousel-q ::before {
+                  content: url("../images/quote.png");
+                  height: 0;
+                  width: 1rem;
+                  transform: rotate(30deg);
+                  right: 0%;
+                  top: -10%;
+                  position: absolute;
+                }
+
+                .book-carousel-q {
+
+                  width: 80%;
+                  height: 30px;
+                  background: #FFD12F;
+                  position: relative;
+                  border-radius: 15rem;
+                  padding: 0.4rem;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+
+                  p {
+                    color: $green;
+                  }
+                }
+
+                p {
+                  font-size: 0.9rem;
+                  color: $white;
+                }
+              }
+
+
+
+              .book-carousel-books {
+
+                .v-slide-group__prev,
+                .v-slide-group__next {
+                  display: none;
+                }
+
+                .slide-item {
+                  height: 30rem;
+
+                  .book-body {
+                    width: 17rem;
+
+                    .book-body-image {
+                      width: 100%;
+                      height: 117px;
+                      padding: 0;
+                      border-radius: 1rem;
+                    }
+
+                    .book-title {
+                      font-size: 1.2rem;
+                    }
+
+                    .book-season {
+                      .season-number {
+                        font-size: 14px;
+                      }
+
+                      p {
+                        font-size: 8.5px;
+                      }
+                    }
+
+                    .book-price {
+                      .price-number {
+                        font-size: 14px;
+                      }
+
+                      p {
+                        font-size: 8.5px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            .online-exam-items-mobile {
+              .online-exam-item {
+                margin-left: 1rem;
+                margin-right: 1rem;
+                box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1),
+                  0px 1px 10px rgba(0, 0, 0, 0.08),
+                  0px 2px 4px rgba(0, 0, 0, 0.12);
+
+                .online-exam-book img {
+                  border-radius: 1.2rem;
+                }
+
+                .online-exam-book-contents {
+                  min-height: 100%;
+                }
+
+                .item-content-features {
+                  .item-content-feature {
+                    padding: 0.5rem;
+                  }
+
+                  .item-content-feature p {
+                    font-size: 1rem;
+                  }
+
+                }
+
+                .item-content-word-pdf-icon {
+                  position: relative;
+
+                  .word-icon {
+                    right: 10% !important;
+                    position: absolute;
+                  }
+
+                  .pdf-icon {
+                    position: absolute;
+                    right: 10%;
+                    top: 3rem;
+                  }
+                }
+
+                .item-content-tags {
+                  .item-content-tag {
+                    padding: 0.6rem 1.8rem;
+                    margin: 0 0.2rem;
+                    border-radius: 0.6rem;
+                    background: rgba(33, 33, 33, 0.08);
+                    font-size: 8px;
+                  }
+                }
+
+                .online-exam-item-footer {
+                  padding: 0.6rem;
+
+                  .item-content-user p {
+                    font-size: 10px;
+                    color: $gray8;
+                  }
+
+                  .item-content-file-type p {
+                    font-size: 10px;
+                    color: $gray8;
+                  }
+
+                  .item-content-view p {
+                    font-size: 10px;
+                    color: $gray8;
+                  }
+
+                  .item-content-last-update p {
+                    font-size: 10px;
+                    color: $gray8;
+                  }
+                }
+              }
+            }
+
+            .online-exam-items-desktop {
+              .online-exam-item {
+                .item-img img {
+                  border-radius: 1.2rem;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // End : Online-Exam
+
+      // start: Tutorial
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .tutorial-filter {
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+        z-index: 50;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .tutorial {
+        padding: 0;
+
+        .tutorial-contents {
+
+          .mobile-tutorial-header {
+            .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+              display: none;
+            }
+
+            .v-tabs {
+              .v-tabs-bar {
+                min-height: 6rem;
+                border-radius: 0;
+                padding: 1rem;
+                background-color: $gray12;
+
+                .v-tabs-bar__content {
+                  .nav-link1 {
+                    padding: 0 0.7rem;
+                    background-color: rgba(191, 54, 12, 0.05);
+
+                    span {
+                      font-size: 3rem;
+                      color: $category-textbook;
+                    }
+                  }
+
+                  .nav-link {
+                    margin: 0 1rem;
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+              }
+            }
+          }
+
+          .tutorial-items-mobile {
+            .tutorial-item {
+              margin-left: 1rem;
+              margin-right: 1rem;
+              box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1),
+                0px 1px 10px rgba(0, 0, 0, 0.08),
+                0px 2px 4px rgba(0, 0, 0, 0.12);
+
+              .tutorial-book img {
+                border-radius: 1.2rem;
+              }
+
+              .tutorial-book-contents {
+                min-height: 100%;
+              }
+
+              .item-content-tags {
+                .item-content-tag {
+                  padding: 0.5rem 0.8rem;
+                  margin: 0 0.2rem;
+                  border-radius: 0.6rem;
+                  background: rgba(33, 33, 33, 0.08);
+                  font-size: 8px;
+                }
+              }
+
+              .tutorial-item-footer {
+                padding: 0.6rem;
+
+                .item-content-user p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-file-type p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-view p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+
+                .item-content-last-update p {
+                  font-size: 10px;
+                  color: $gray8;
+                }
+              }
+            }
+          }
+
+          .tutorial-items-desktop {
+            .tutorial-item {
+              .item-img img {
+                border-radius: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+
+      // End: Tutorial
+
+      // start: Teachers
+      .v-dialog__content {
+        .filter-show-result {
+          background: $green;
+          color: $white;
+          font-size: 1.4rem;
+          font-weight: 500;
+        }
+
+        .teachers-filter {
+          .v-expansion-panel {
+            border: 1px solid $border;
+            border-radius: 0.4rem;
+
+            .filter-title {
+              font-size: 1.6rem;
+            }
+          }
+
+          .v-expansion-panel::before {
+            box-shadow: none;
+          }
+        }
+
+        .filter-btn-result {
+          color: $green;
+          font-weight: 500;
+        }
+
+        .v-sheet {
+          .v-toolbar:not(.v-sheet--outlined) {
+            box-shadow: none;
+            border-bottom: 1px solid $border;
+          }
+        }
+      }
+
+      .filter-btn {
+        position: fixed;
+        bottom: 8%;
+        left: 5%;
+        z-index: 50;
+
+        .filter-mobile-btn {
+          background-color: $green;
+          padding: 2rem;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
+            0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+          border-radius: 1.2rem;
+        }
+      }
+
+      .teachers {
+        padding: 0;
+
+        .teachers-contents {
+          padding: 0;
+
+          .mobile-teachers-header {
+            .v-tabs:not(.v-tabs--vertical):not(.v-tabs--right)>.v-slide-group--is-overflowing.v-tabs-bar--is-mobile:not(.v-slide-group--has-affixes) .v-slide-group__prev {
+              display: none;
+            }
+
+            .v-tabs {
+              .v-tabs-bar {
+                min-height: 6rem;
+                border-radius: 0;
+                padding: 1rem;
+                background-color: $gray12;
+
+                .v-tabs-bar__content {
+                  .nav-link1 {
+                    padding: 0 0.7rem;
+                    background-color: rgba(142, 36, 170, 0.05);
+
+                    span {
+                      font-size: 3rem;
+                      color: $category-tutor;
+                    }
+                  }
+
+                  .nav-link {
+                    margin: 0 1rem;
+                    display: flex;
+                    align-items: center;
+                  }
+                }
+              }
+            }
+          }
+
+          .teacher-items {
+            padding: 0;
+            .card {
+              padding: 1rem;
+
+              .card-user {
+                border-radius: 1.2rem;
+                box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.1), 0px 1px 10px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.12);
+
+                .card-user-content {
+                  .card-user-tags {
+                    .card-user-tag {
+                      border-radius: 0.6rem;
+                    }
+                  }
+
+                  .card-user-details {
+                    display: flex;
+                    justify-content: flex-start;
+                  }
+                }
+              }
+            }
+
+          }
+
+
+        }
+      }
+
+      // End: Teachers
     }
   }
 }
