@@ -1,6 +1,6 @@
 <template>
   <div class="last-view-holder">
-    <h3 class="last-view-title">شما به تازگی از این صفحات دیدن کرده اید</h3>
+    <h3 class="last-view-title">You have just visited these pages</h3>
     <div class="last-view-slider-holder">
       <v-sheet
         class="mx-auto last-view-slider"
@@ -39,7 +39,7 @@ export default {
   data: () => ({
     model: null,
     lastviewList: [
-      {img: 'test1.png', description: 'مجموعه 120 سوال تستی درس 6 تا 9 تاریخ (3) دوازدهم'},
+      {img: 'test1.png', description: 'A collection of 120 test questions for lessons 6 to 9 on (3) 12th'},
     ]
   }),
 
