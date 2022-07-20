@@ -10,7 +10,7 @@
           class="card"
           xs="3"
         >
-          <nuxt-link to="">
+          <nuxt-link :to="item.link">
             <v-list-item class="d-flex flex-column mx-7 pa-0">
               <v-list-item-icon
                 class="ma-0 d-flex align-center justify-center p-icon"
@@ -72,7 +72,7 @@
             class="card"
             xs="3"
           >
-            <nuxt-link to="">
+            <nuxt-link :to="item.link">
               <v-list-item class="d-flex flex-column mx-7">
                 <v-list-item-icon
                   class="ma-0 d-flex align-center justify-center p-icon"
@@ -112,13 +112,13 @@ export default {
     selectedItem: 1,
     showMore: false,
     items: [
-      { class: "exam", text: "Online Exam", icon: "azmoon" },
-      { class: "test", text: "Sample Exam", icon: "test" },
-      { class: "content", text: "Training content", icon: "learnfiles" },
-      { class: "faq", text: "Q & A", icon: "qa" },
-      { class: "textbook ", text: "Tutorial", icon: "blog" },
-      { class: "school", text: "School finder", icon: "school" },
-      { class: "tutor", text: "Teacher", icon: "teacher" },
+      { class: "exam", text: "Online Exam", icon: "azmoon",link:"/online-exam" },
+      { class: "test", text: "Sample Exam", icon: "test",link:"/sample-q" },
+      { class: "content", text: "Training content", icon: "learnfiles" ,link:"/training-content" },
+      { class: "faq", text: "Q & A", icon: "qa",link:"/q&a" },
+      { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/tutorial" },
+      { class: "school", text: "School finder", icon: "school" ,link:"/schools" },
+      { class: "tutor", text: "Teacher", icon: "teacher" ,link:"/teachers" },
     ],
   }),
 };

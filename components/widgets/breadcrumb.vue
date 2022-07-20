@@ -1,8 +1,8 @@
 <template>
-  <div class="">
+  <div class="breadcrumbs-container">
     <v-breadcrumbs :items="breads">
       <template v-slot:divider>
-        <v-icon>mdi-chevron-left</v-icon>
+        <v-icon>mdi-chevron-right</v-icon>
       </template>
     </v-breadcrumbs>
   </div>
@@ -14,3 +14,11 @@ export default {
   }
 }
 </script>
+
+
+<style>
+.breadcrumbs-container{
+  background: #F5F5F5!important;
+  border-radius: 8px;
+}
+</style>

@@ -39,6 +39,7 @@
       </v-carousel>
     </section>
     <Category />
+
     <!--  Start: search grade  -->
     <section class="d-none d-sm-block search-sec mb-8">
       <v-container>
@@ -58,6 +59,8 @@
       </v-container>
     </section>
     <!--  End: search  -->
+
+
     <!-- Start:grade list desktop -->
     <section class="grades-list d-sm-flex d-none">
       <v-container>
@@ -513,6 +516,8 @@
       </v-container>
     </section>
     <!--  End: Grade list  -->
+
+
     <!--  Start: feed box  -->
     <section class="feed-box d-none d-md-flex">
       <v-container>
@@ -582,14 +587,14 @@
       </v-container>
     </section>
     <!--  End: Feed box  -->
+
     <!-- Start: Feedtabs respons -->
     <FeedTab />
-
     <!-- End: Feedtabs respons -->
+
 
     <!--  Start: Main stats  -->
     <!-- <section class="stat-sec my-8">
-
       <v-container>
         <div
           class="

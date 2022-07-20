@@ -22,7 +22,6 @@ export default {
     ],
     script: [
       { src: './assets/js/video.min.js',body:true },
-      { src: '/assets/js/main.js', body: true },
     ],
   },
 
