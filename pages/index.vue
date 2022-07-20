@@ -38,7 +38,7 @@
         ></v-carousel-item>
       </v-carousel>
     </section>
-    <Category />
+    <Category/>
 
     <!--  Start: search grade  -->
     <section class="d-none d-sm-block search-sec mb-8">
@@ -86,7 +86,8 @@
                 <v-btn
                   @click="grade.showMore = !grade.showMore"
                   :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
-                  >Return</v-btn
+                >Return
+                </v-btn
                 >
               </p>
               <div v-if="!grade.showMore">
@@ -101,8 +102,8 @@
                       class="mb-2"
                     >
                       <span :class="'label-tag label-tag' + (index + 1)">{{
-                        index + 1
-                      }}</span>
+                          index + 1
+                        }}</span>
                       {{ grade.title }}
                     </nuxt-link>
                     <div class="d-flex align-center res-update d-sm-none">
@@ -124,7 +125,7 @@
                   <span
                     class="btn-transparent more-content pointer"
                     @click="grade.showMore = !grade.showMore"
-                    >more</span
+                  >more</span
                   >
                 </v-card-title>
                 <v-divider class="my-5"></v-divider>
@@ -237,7 +238,8 @@
                 <v-btn
                   @click="grade.showMore = !grade.showMore"
                   :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
-                  >Return</v-btn
+                >Return
+                </v-btn
                 >
               </p>
               <div v-if="!grade.showMore">
@@ -248,8 +250,8 @@
                       class="mb-2"
                     >
                       <span :class="'label-tag label-tag' + (index + 1)">{{
-                        index + 1
-                      }}</span>
+                          index + 1
+                        }}</span>
                       {{ grade.title }}
                     </h2>
                     <div class="d-flex align-center res-update d-sm-none">
@@ -271,7 +273,7 @@
                   <span
                     class="btn-transparent more-content pointer"
                     @click="grade.showMore = !grade.showMore"
-                    >more</span
+                  >more</span
                   >
                   <p v-if="grade.showMore" class="total-content">
                     <nuxt-link
@@ -380,7 +382,8 @@
                 <v-btn
                   @click="grade.showMore = !grade.showMore"
                   :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
-                  >Return</v-btn
+                >Return
+                </v-btn
                 >
               </p>
               <div v-if="!grade.showMore">
@@ -391,8 +394,8 @@
                       class="mb-2"
                     >
                       <span :class="'label-tag label-tag' + (index + 1)">{{
-                        index + 1
-                      }}</span>
+                          index + 1
+                        }}</span>
                       {{ grade.title }}
                     </h2>
                     <div class="d-flex align-center res-update d-sm-none">
@@ -414,7 +417,7 @@
                   <span
                     class="btn-transparent more-content pointer"
                     @click="grade.showMore = !grade.showMore"
-                    >more</span
+                  >more</span
                   >
                   <p v-if="grade.showMore" class="total-content">
                     <nuxt-link
@@ -549,7 +552,7 @@
                 :key="feed.value"
               >
                 <div class="feedBoxImg">
-                  <img :src="require('@/assets/images/' + feed.img)" alt="" />
+                  <img :src="require('@/assets/images/' + feed.img)" alt=""/>
                 </div>
                 <div
                   class="
@@ -579,7 +582,8 @@
             </div>
             <div class="feed-footer d-flex align-center pa-3">
               <nuxt-link to="" class="pb-0 feed-more mr-4"
-                >More</nuxt-link
+              >More
+              </nuxt-link
               >
             </div>
           </v-col>
@@ -589,7 +593,7 @@
     <!--  End: Feed box  -->
 
     <!-- Start: Feedtabs respons -->
-    <FeedTab />
+    <FeedTab/>
     <!-- End: Feedtabs respons -->
 
 
@@ -628,7 +632,7 @@
         </div>
       </v-container>
     </section> -->
-    <Slider />
+    <Slider/>
     <!--  End: Main stats  -->
 
     <!--  Start: Last views  -->
@@ -638,7 +642,7 @@
       </v-container>
     </section> -->
     <!--  End: Last views   -->
-    <Scroll />
+    <Scroll/>
   </div>
 </template>
 
@@ -664,6 +668,7 @@ export default {
     Scroll,
   },
   data: () => ({
+    test_schools:'',
     less: true,
     showLess: true,
     thirdFeedBoxIcon: "News.png",
@@ -728,38 +733,38 @@ export default {
       {
         title: "1st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         link: "",
         cat: [
@@ -785,38 +790,38 @@ export default {
       {
         title: "2st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         cat: [
           {
@@ -841,38 +846,38 @@ export default {
       {
         title: "3st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         cat: [
           {
@@ -897,38 +902,38 @@ export default {
       {
         title: "4st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         cat: [
           {
@@ -953,38 +958,38 @@ export default {
       {
         title: "5st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         link: "",
         cat: [
@@ -1010,38 +1015,38 @@ export default {
       {
         title: "6st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         cat: [
           {
@@ -1066,38 +1071,38 @@ export default {
       {
         title: "7st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         cat: [
           {
@@ -1122,38 +1127,38 @@ export default {
       {
         title: "8st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         cat: [
           {
@@ -1178,38 +1183,38 @@ export default {
       {
         title: "9st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         link: "",
         cat: [
@@ -1235,38 +1240,38 @@ export default {
       {
         title: "10st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         cat: [
           {
@@ -1291,38 +1296,38 @@ export default {
       {
         title: "11st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         cat: [
           {
@@ -1347,38 +1352,38 @@ export default {
       {
         title: "12st Grade",
         summeryContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
         ],
         showMore: false,
         totalContent: [
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
-          { content: "Writing", to: "" },
-          { content: "Math", to: "" },
-          { content: "Experimental", to: "" },
-          { content: "Farsi", to: "" },
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
         ],
         cat: [
           {
@@ -1551,13 +1556,29 @@ export default {
     ],
 
     statList: [
-      { label: "School", value: "130,000", icon: "fa-graduation-cap" },
-      { label: "Teacher", value: "300,000", icon: "fa-graduation-cap" },
-      { label: "Student", value: "1,500,000", icon: "fa-graduation-cap" },
-      { label: "Sample Exam", value: "50,000", icon: "fa-graduation-cap" },
-      { label: "پاورپوینت", value: "30,000", icon: "fa-graduation-cap" },
-      { label: "Online Exam", value: "5,000", icon: "fa-graduation-cap" },
+      {label: "School", value: "130,000", icon: "fa-graduation-cap"},
+      {label: "Teacher", value: "300,000", icon: "fa-graduation-cap"},
+      {label: "Student", value: "1,500,000", icon: "fa-graduation-cap"},
+      {label: "Sample Exam", value: "50,000", icon: "fa-graduation-cap"},
+      {label: "پاورپوینت", value: "30,000", icon: "fa-graduation-cap"},
+      {label: "Online Exam", value: "5,000", icon: "fa-graduation-cap"},
     ],
   }),
+
+  mounted() {
+    this.testApi();
+  },
+  methods: {
+
+    // Only for test api
+    async testApi() {
+      await this.$axios.$get('/api/schools/search')
+        .then(response => {
+          this.test_schools=response;
+        }).catch(err => {
+
+      });
+    }
+  }
 };
 </script>
