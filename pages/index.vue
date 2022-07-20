@@ -59,8 +59,6 @@
       </v-container>
     </section>
     <!--  End: search  -->
-
-
     <!-- Start:grade list desktop -->
     <section class="grades-list d-sm-flex d-none">
       <v-container>
@@ -86,8 +84,7 @@
                 <v-btn
                   @click="grade.showMore = !grade.showMore"
                   :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
-                >Return
-                </v-btn
+                  >Return</v-btn
                 >
               </p>
               <div v-if="!grade.showMore">
@@ -102,8 +99,8 @@
                       class="mb-2"
                     >
                       <span :class="'label-tag label-tag' + (index + 1)">{{
-                          index + 1
-                        }}</span>
+                        index + 1
+                      }}</span>
                       {{ grade.title }}
                     </nuxt-link>
                     <div class="d-flex align-center res-update d-sm-none">
@@ -125,7 +122,7 @@
                   <span
                     class="btn-transparent more-content pointer"
                     @click="grade.showMore = !grade.showMore"
-                  >more</span
+                    >more</span
                   >
                 </v-card-title>
                 <v-divider class="my-5"></v-divider>
@@ -238,8 +235,7 @@
                 <v-btn
                   @click="grade.showMore = !grade.showMore"
                   :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
-                >Return
-                </v-btn
+                  >Return</v-btn
                 >
               </p>
               <div v-if="!grade.showMore">
@@ -250,8 +246,8 @@
                       class="mb-2"
                     >
                       <span :class="'label-tag label-tag' + (index + 1)">{{
-                          index + 1
-                        }}</span>
+                        index + 1
+                      }}</span>
                       {{ grade.title }}
                     </h2>
                     <div class="d-flex align-center res-update d-sm-none">

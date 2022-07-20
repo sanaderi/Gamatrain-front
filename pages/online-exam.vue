@@ -69,7 +69,7 @@
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
-                                        <nuxt-link to="tutorial" class="nav-link"> tutorial </nuxt-link>
+                                        <nuxt-link to="tutorial" class="nav-link"> Tutorial </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
                                         <nuxt-link to="teachers" class="nav-link"> Teacher </nuxt-link>
@@ -97,7 +97,7 @@
                                         <span class="'icon icong-azmoon"></span>
                                     </nuxt-link>
 
-                                    <nuxt-link to="tutorial" class="nav-link"> tutorial </nuxt-link>
+                                    <nuxt-link to="Tutorial" class="nav-link"> Tutorial </nuxt-link>
 
                                     <nuxt-link to="teachers" class="nav-link"> Teacher </nuxt-link>
                                 </v-tabs>

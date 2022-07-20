@@ -74,7 +74,7 @@
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
                                         <nuxt-link to="tutorial" class="nav-link">
-                                            tutorial
+                                            Tutorial
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
@@ -112,7 +112,7 @@
 
 
                                     <nuxt-link to="tutorial" class="nav-link">
-                                        tutorial
+                                        Tutorial
                                     </nuxt-link>
 
 
@@ -158,7 +158,7 @@
                                                             <p class="mx-2">{{ item.user }}</p>
                                                         </div>
                                                         <div class="item-content-file-type d-flex align-center mx-auto">
-                                                            <i class="fa-solid fa-arrow-rotate-left"></i>   
+                                                            <i class="fa-solid fa-arrow-rotate-left"></i>
                                                             <p class="mx-2">Answers : {{ item.answers }}</p>
                                                         </div>
                                                         <div
@@ -202,8 +202,8 @@
                                             </div>
                                         </v-col>
                                         <v-col cols="2" class="pa-0">
-                                            
-                                            
+
+
                                         </v-col>
                                     </v-row>
                                     <div class="q-a-item-footer d-flex mt-2">

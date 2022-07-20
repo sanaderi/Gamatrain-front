@@ -79,7 +79,7 @@
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
                                         <nuxt-link to="tutorial" class="nav-link">
-                                            tutorial
+                                            Tutorial
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
@@ -118,7 +118,7 @@
 
 
                                     <nuxt-link to="tutorial" class="nav-link">
-                                        tutorial
+                                        Tutorial
                                     </nuxt-link>
 
 

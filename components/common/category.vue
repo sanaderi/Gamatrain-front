@@ -116,7 +116,7 @@ export default {
       { class: "test", text: "Sample Exam", icon: "test",link:"/sample-q" },
       { class: "content", text: "Training content", icon: "learnfiles" ,link:"/training-content" },
       { class: "faq", text: "Q & A", icon: "qa",link:"/q&a" },
-      { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/tutorial" },
+      { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/Tutorial" },
       { class: "school", text: "School finder", icon: "school" ,link:"/schools" },
       { class: "tutor", text: "Teacher", icon: "teacher" ,link:"/teachers" },
     ],

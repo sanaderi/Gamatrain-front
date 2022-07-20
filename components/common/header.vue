@@ -412,7 +412,7 @@ export default {
       menuItems: [
         {
           title: "Home",
-          link: "./",
+          link: "/",
           icon: "",
         },
         {

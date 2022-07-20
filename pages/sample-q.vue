@@ -80,7 +80,7 @@
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
                                         <nuxt-link to="tutorial" class="nav-link">
-                                            tutorial
+                                            Tutorial
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
@@ -118,7 +118,7 @@
 
 
                                     <nuxt-link to="tutorial" class="nav-link">
-                                        tutorial
+                                        Tutorial
                                     </nuxt-link>
 
 
@@ -133,16 +133,16 @@
                                 <div class="sample-q-item pa-6 my-5" v-for="item in items" :key="item.value">
                                     <v-row>
                                         <v-col lg="2">
-                                            <div class="item-img">
+                                            <nuxt-link :to="`/test-details/${item.id}`" class="item-img">
                                                 <img :src="require('assets/images/' + item.itemImg)" alt="">
-                                            </div>
+                                            </nuxt-link>
                                         </v-col>
                                         <v-col lg="10">
                                             <div class="sample-item-content d-flex flex-column justify-space-between">
                                                 <div class="item-content-title d-flex justify-space-between">
-                                                    <p>
+                                                    <nuxt-link :to="`/test-details/${item.id}`">
                                                         {{ item.title }}
-                                                    </p>
+                                                    </nuxt-link>
                                                     <div class="item-content-title-icon d-flex align-center">
                                                         <svg width="39" height="39" viewBox="0 0 39 39" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg" class="mx-1">
@@ -162,7 +162,7 @@
                                                     </div>
                                                 </div>
                                                 <p class="item-content-subtitle">
-                                                    <nuxt-link to="">
+                                                    <nuxt-link :to="`/test-details/${item.id}`">
                                                         {{ item.subtitle }}
                                                     </nuxt-link>
 

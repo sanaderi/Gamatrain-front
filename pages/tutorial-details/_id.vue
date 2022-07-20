@@ -288,7 +288,7 @@
                 <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
-                <Video :videos="videos"></Video>
+                <Video :videos="videos" unique="desktop"></Video>
                 <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
                   empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
               </div>
@@ -322,7 +322,7 @@
                 <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
               </div>
               <div class="video-slider">
-                <Video :videos="videos"></Video>
+                <Video :videos="videos" unique="mobile"></Video>
                 <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
                   empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
               </div>
@@ -454,9 +454,9 @@
   </div>
 </template>
 <script>
-import category from "~/components/common/category.vue";
-import timeLine from "~/components/common/timeline.vue";
-import Video from "~/components/common/video.vue";
+import category from "@/components/common/category.vue";
+import timeLine from "@/components/common/timeline.vue";
+import Video from "@/components/common/video.vue";
 
 export default {
   components: { category, timeLine, Video },

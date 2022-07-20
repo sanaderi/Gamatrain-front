@@ -140,119 +140,115 @@
               </v-card>
             </v-col>
           </v-row>
-          <!-- bottom extra info-->
-          <div class="d-block d-md-flex d-flex justify-space-between flex-wrap extra-info">
-            <div class="d-flex align-center flex-wrap right extra-info-right">
-              <nuxt-link class="d-flex align-center owner ml-3" to="">
-                <img :src="require(`~/assets/images/teacher1.png`)" alt="" class="ml-1 owner-img">
-                <span class="main-content-footer">Shabani zahra</span>
-              </nuxt-link>
-              <div class="d-flex align-center ml-3">
-                <i class="fa-solid fa-folder ml-1 icon"></i>
-                <span class="main-content-footer"><span class="remove-res">Test type:</span>Multiple-choice questions</span>
-              </div>
-              <div class="d-flex align-center ml-3">
-                <i class="fa-solid fa-eye ml-1 icon"></i>
-                <span class="main-content-footer"><span class="remove-res"> Viewed :</span> 1895</span>
-              </div>
-              <div class="d-flex align-center ml-3 update">
-                <i class="fa-solid fa-calendar-days ml-1 icon remove-res"></i>
-                <span class="main-content-footer remove-res"> Updated on: 2020/12/16 </span>
-              </div>
-            </div>
-            <div class="d-flex align-center justify-end left  extra-info-left">
-              <div class="d-flex align-center justify-end report-error">
-                <i class="fa-solid fa-bullhorn ml-1 icon"></i>
-                <span class="modal-error main-content-footer">Crash report File </span>
-              </div>
-            </div>
-          </div>
+
         </div>
       </v-container>
     </section>
     <!--  End: detail  -->
 
-    <!--  Start: Course Card  -->
-    <section>
-      <v-container>
-        <div class="d-flex justify-space-between align-center course-card box">
-          <div class="right">
-            <div class="d-flex">
-              <nuxt-link to="">
-                <img :src="require(`~/assets/images/teacher1.png`)" alt="" class=" rounded-circle avatar-img"/>
-              </nuxt-link>
-              <div class="description">
-                <div>
-                  <nuxt-link to="">
-                    <h2 class="course-title">PowerPoint of the complete educational course, date (3) of the 12th grade of the second secondary-theoretical period</h2>
-                  </nuxt-link>
+
+    <v-container>
+      <v-row>
+        <v-col cols="12" md="6">
+          <!--  Start: Course Card  -->
+          <section>
+              <div class="d-flex  align-center course-card box">
+                <div class="right">
+                  <v-row >
+                    <v-col cols="2">
+                      <nuxt-link to="">
+                        <img height="98" width="98" :src="require(`~/assets/images/teacher1.png`)" alt="" />
+                      </nuxt-link>
+                    </v-col>
+                    <v-col cols="10">
+                      <div class="description ml-4">
+                        <div>
+                          <nuxt-link to="">
+                            <h2 class="course-title">PowerPoint of the complete educational course, date (3) of the 12th grade of the second secondary-theoretical period</h2>
+                          </nuxt-link>
+                        </div>
+                        <v-row>
+                          <v-col cols="10">
+                            <div>
+                              <nuxt-link to="" class="teacher">
+                                <i class="fa-solid fa-user icon"></i>
+                                <span>Lecturer: Shamsi Shabani</span>
+                              </nuxt-link>
+                            </div>
+                            <div>
+                              <p class="duration">
+                                <i class="fa-solid fa-clock icon"></i>
+                                <span>Course duration: 942 slides (13 files)</span>
+                              </p>
+                            </div>
+                          </v-col>
+                          <v-col cols="2">
+                            <nuxt-link to="" class="teal--text">
+                              <strong>
+                                View
+                              </strong>
+                            </nuxt-link>
+                          </v-col>
+                        </v-row>
+                      </div>
+                    </v-col>
+                  </v-row>
                 </div>
-                <div>
-                  <nuxt-link to="" class="teacher">
-                    <i class="fa-solid fa-user icon"></i>
-                    <span>Lecturer: Shamsi Shabani</span>
-                  </nuxt-link>
-                </div>
-                <div>
-                  <p class="duration">
-                    <i class="fa-solid fa-clock icon"></i>
-                    <span>Course duration: 942 slides (13 files)</span>
-                  </p>
-                </div>
+
               </div>
-            </div>
-          </div>
-          <div class="d-none d-sm-block left">
-            <nuxt-link to="" class="d-flex justify-center align-center rounded-circle goto">
-              <i class="fa-solid fa-arrow-left icon"></i>
-            </nuxt-link>
-          </div>
+          </section>
+          <!--  End: Course Card  -->
+        </v-col>
 
-        </div>
-      </v-container>
-    </section>
-    <!--  End: Course Card  -->
 
-    <!--  Start:  Azmoon test album card   -->
-    <section>
-      <v-container>
-        <div class="d-flex justify-space-between align-center album-card box">
-          <div class="right">
-            <div class="d-flex">
-              <nuxt-link to="">
-                <img :src="require(`~/assets/images/poster1.jpg`)" alt="" class="poster-img"/>
-              </nuxt-link>
-              <div class="description">
-                <div>
-                  <nuxt-link to="">
-                    <h2 class="course-title">Online Exam test bank album, date (3) twelfth of the second term of high school-theoretical</h2>
-                  </nuxt-link>
+        <v-col cols="12" md="6">
+          <!--  Start:  Azmoon test album card   -->
+          <section>
+              <div class="d-flex align-center album-card box">
+                <div class="right">
+                  <v-row >
+                    <v-col cols="2">
+                      <nuxt-link to="">
+                        <img :src="require(`~/assets/images/poster1.jpg`)" alt="" class="poster-img"/>
+                      </nuxt-link>
+                    </v-col>
+                    <v-col cols="10" >
+                      <div class="description ml-2" >
+                        <nuxt-link to="">
+                          <h2 class="course-title">Online Exam test bank album, date (3) twelfth of the second term of high school-theoretical</h2>
+                        </nuxt-link>
+
+                        <v-row>
+                          <v-col cols="10">
+                            <div class="num">
+                              <i class="fa-solid fa-list-ol icon"></i>
+                              <span>Number of tests: 1399</span>
+                            </div>
+                            <div class="level">
+                              <i class="fa-solid fa-superscript icon"></i>
+                              <span>Difficulty: Easy</span>
+                            </div>
+                          </v-col>
+                          <v-col cols="2">
+                            <nuxt-link to="" class="teal--text">
+                              <strong>
+                                View
+                              </strong>
+                            </nuxt-link>
+                          </v-col>
+                        </v-row>
+                      </div>
+                    </v-col>
+                  </v-row>
                 </div>
-                <div class="num">
-                    <i class="fa-solid fa-list-ol icon"></i>
-                    <span>Number of tests: 1399</span>
-                </div>
-                <div class="level">
-                    <i class="fa-solid fa-superscript icon"></i>
-                    <span>Difficulty: Easy</span>
-                </div>
-                <div class="d-flex align-center justify-center suggestion">
-                    <span class="d-inline-flex align-center icong-teacher ml-1"></span>
-                  <span>For teachers</span>
-                </div>
+
               </div>
-            </div>
-          </div>
-          <div class="d-none d-sm-block left">
-            <nuxt-link to="" class="d-flex justify-center align-center rounded-circle goto">
-              <i class="fa-solid fa-arrow-left icon"></i>
-            </nuxt-link>
-          </div>
+          </section>
+          <!--  End:  Azmoon test album card   -->
+        </v-col>
+      </v-row>
+    </v-container>
 
-        </div>
-      </v-container>
-    </section>
-    <!--  End:  Azmoon test album card   -->
 
     <!--  Start:  relatedBox  -->
     <section class="related-sec">

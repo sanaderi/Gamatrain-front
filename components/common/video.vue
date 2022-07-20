@@ -1,14 +1,14 @@
 <template>
   <v-carousel :show-arrows="false">
-    <v-carousel-item v-for="(item, index) in videos" :key="index">
+    <v-carousel-item v-for="(item, index) in videos" :key="unique + index">
       <div
-        id="videoPlayer"
+        :id="'videoPlayer' + unique"
         class="video-player"
         @mouseover="showPlayBtn(index)"
         @mouseleave="hidePlayBtn(index)"
       >
         <video
-          :id="'video' + index"
+          :id="'video' + unique + index"
           :poster="require('@/assets/images/' + item.img)"
           :src="require('assets/video/' + item.vid)"
           class="video"
@@ -16,7 +16,7 @@
         </video>
         <div v-show="show" class="buttons">
           <button
-            :id="'pausePlay' + index"
+            :id="'pausePlay' + unique + index"
             class="play"
             @click="play(index)">
           </button>
@@ -30,11 +30,12 @@
 <script>
 export default {
   props: {
-    videos: Array
+    videos: Array,
+    unique: String
   },
   data() {
     return {
-      show: true,
+      show: true
     }
   },
   components: {
@@ -42,8 +43,12 @@ export default {
   },
   methods: {
     play(index) {
-      let btn = document.getElementById('pausePlay'+ index)
-      let vid = document.getElementById('video'+ index)
+      let btn = document.getElementById('pausePlay' + this.unique + index)
+      let vid = document.getElementById('video' + this.unique + index)
+
+      if(!vid || !btn) {
+        return;
+      }
 
       if (vid.paused) {
         btn.className = "pause"
@@ -56,8 +61,12 @@ export default {
     showPlayBtn() {
       this.show= true
     },
-    hidePlayBtn: function (index) {
-      let vid = document.getElementById('video' + index)
+    hidePlayBtn(index) {
+      let vid = document.getElementById('video' + this.unique + index)
+
+      if(!vid) {
+        return;
+      }
 
       if (!vid.paused) {
         this.show = false

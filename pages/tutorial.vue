@@ -25,9 +25,10 @@
                     <v-col lg="3">
                         <div class="tutorial-filter d-none d-sm-block">
                             <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
-                                <v-expansion-panel>
+                                <v-expansion-panel >
                                     <v-expansion-panel-header class="filter-title">
-                                        {{ item.filterTitle }}
+
+                                      {{ item.filterTitle }}
                                     </v-expansion-panel-header>
                                     <v-expansion-panel-content class="filter-content ">
                                         {{ item.filterContent }}
@@ -74,7 +75,7 @@
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
                                         <nuxt-link to="tutorial" class="nav-link nav-link1">
-                                            tutorial
+                                            Tutorial
                                             <span class="'icon icong-blog"></span>
                                         </nuxt-link>
                                     </v-badge>
@@ -103,7 +104,7 @@
 
                                     <nuxt-link to="q&a" class="nav-link ">
                                         Q & A
-                                        
+
                                     </nuxt-link>
 
 
@@ -113,7 +114,7 @@
 
 
                                     <nuxt-link to="tutorial" class="nav-link nav-link1">
-                                        tutorial
+                                        Tutorial
                                         <span class="'icon icong-blog"></span>
                                     </nuxt-link>
 
@@ -130,19 +131,21 @@
                                     <v-row>
                                         <v-col lg="2">
                                             <div class="item-img">
-                                                <img :src="require('assets/images/' + item.itemImg)" alt=""
-                                                    class="item-image">
+                                                <nuxt-link :to="`/tutorial-details/${item.id}`">
+                                                  <img  :src="require('assets/images/' + item.itemImg)" alt=""
+                                                        class="item-image">
+                                                </nuxt-link>
                                             </div>
                                         </v-col>
                                         <v-col lg="10">
                                             <div class="tutorial-content d-flex flex-column justify-space-between">
                                                 <div class="tutorial-title d-flex justify-space-between">
-                                                    <p>
+                                                    <nuxt-link :to="`/tutorial-details/${item.id}`" >
                                                         {{ item.title }}
-                                                    </p>
+                                                    </nuxt-link>
                                                 </div>
                                                 <p class="item-content-subtitle">
-                                                    <nuxt-link to="">
+                                                    <nuxt-link :to="`/tutorial-details/${item.id}`">
                                                         {{ item.subtitle }}
                                                     </nuxt-link>
                                                 </p>
@@ -160,7 +163,7 @@
                                                                 alt="">
                                                             <p class="mx-2">{{ item.user }}</p>
                                                         </div>
-                                                        
+
                                                         <div
                                                             class="item-content-last-update d-flex align-center mx-auto">
                                                             <i class="fa-solid fa-calendar-days"></i>
