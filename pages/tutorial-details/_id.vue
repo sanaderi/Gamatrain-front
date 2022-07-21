@@ -236,212 +236,20 @@
     </section>
     <!-- End: Book -->
     <!-- Start : Sample Test -->
-    <section class="sample">
-      <v-container class="pb-md-16 pb-5">
-        <div class="d-flex flex-column align-center my-6">
-          <div class="sample-titles d-flex align-center ">
-            <i class="icon icong-test title-icon d-flex algn-center"></i>
-            <div class="sample-title mx-3">
-              <p class="s-title">Related Sample Exams</p>
-              <p class="s-subtitle">Check out the other sample exams...</p>
-            </div>
-          </div>
-          <div class="sample-slider mt-10">
-            <v-sheet class="mx-auto sample-width">
-              <v-slide-group multiple show-arrows>
-                <v-slide-item v-for="n in 7" :key="n">
-                  <div class="book-sample pa-4 mx-2">
-                    <div class="sample-img">
-                      <img :src="require('@/assets/images/' + bookSample.sampleImg)" alt="" class="sample-image">
-                      <span class="sample-test-number">
-                        <p>{{ testNumber }}</p>
-                      </span>
-                    </div>
-                    <div class="sample-text">
-                      <p>{{ bookSample.sampleText.length>50 ? `${bookSample.sampleText.substring(0,50)}...` :  bookSample.sampleText}}</p>
-                    </div>
-                    <div class="sbook-footer d-flex justify-space-between align-center mt-4">
-                      <div class="d-flex align-center">
-                        <img :src="require('@/assets/images/' + bookSample.samplefooterImg)" alt="">
-                        <p class="sfooter-name mx-2">{{ bookSample.sfooterName }}</p>
-                      </div>
-                      <nuxt-link to="" class="mb-0 sfooter-link">Online exam</nuxt-link>
-                    </div>
-                  </div>
-                </v-slide-item>
-              </v-slide-group>
-            </v-sheet>
-          </div>
-        </div>
-      </v-container>
-    </section>
+    <related-content/>
     <!-- End : Sample test -->
     <!-- Start: Feed -->
     <section class="feed">
       <v-container class="pa-4 pa-md-12 pt-10">
         <v-row>
-          <!-- Start : Descktop LastFile-->
-          <v-col md="6" class="last-files pa-4 d-none d-md-block">
-            <div class="lastfile-content d-flex flex-column">
-              <div class="lastfile-titles d-flex align-center pb-4 mb-5">
-                <span class="icon icong-learnfiles lastfile-icon-title"></span>
-                <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
-              </div>
-              <div class="video-slider">
-                <Video :videos="videos" unique="desktop"></Video>
-                <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
-                  empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
-              </div>
-              <div class="date-name d-flex align-center justify-space-between my-5">
-                <div class="d-flex align-center">
-                  <img :src="require('@/assets/images/' + lastFile.img)" alt="">
-                  <p class="ml-2">{{ lastFile.name }}</p>
-                </div>
-                <div class="d-flex align-center">
-                  <i class="fa-solid fa-calendar-days"></i>
-                  <p class="ml-2">{{ lastFile.date }}</p>
-                </div>
-                <p> Slide numbers: {{ lastFile.number }}</p>
-              </div>
-              <p class="lastFile-text">
-                {{ lastFile.lastFileText.length>350 ? `${lastFile.lastFileText.substring(0,350)}...` : lastFile.lastFileText }}
-              </p>
-              <div class="date-name d-flex align-center justify-space-between my-5">
-                <p>Content:{{ lastFile.content }}</p>
-                <p> Budgeting: {{ lastFile.budget }}</p>
-              </div>
-            </div>
-          </v-col>
-          <!-- End : Descktop LastFile-->
-
-          <!-- Start : Mobile lastFIle -->
-          <v-col cols="12" md="6" class="last-files pa-4 d-block d-md-none mb-6 mb-md-0">
-            <div class="lastfile-content d-flex flex-column">
-              <div class="lastfile-titles d-flex align-center pb-4 mb-5">
-                <span class="icon icong-learnfiles lastfile-icon-title"></span>
-                <p class="mb-0 mx-2 lastfile-title">Latest Training Content</p>
-              </div>
-              <div class="video-slider">
-                <Video :videos="videos" unique="mobile"></Video>
-                <v-rating v-model="rating" color="yellow darken-3" background-color="grey darken-1"
-                  empty-icon="$ratingFull" half-increments hover size="20" class="slider-rating"></v-rating>
-              </div>
-              <p class="lastFile-text my-5">
-                {{ lastFile.responsiveText }}
-              </p>
-              <div class="date-name d-flex align-center justify-space-between ">
-                <div class="d-flex align-center">
-                  <img :src="require('@/assets/images/' + lastFile.img)" alt="">
-                  <p class="mr-2">{{ lastFile.name }}</p>
-                </div>
-                <div class="d-flex align-center">
-                  <i class="fa-solid fa-calendar-days"></i>
-                  <p class="mr-2">{{ lastFile.date }}</p>
-                </div>
-              </div>
-            </div>
-          </v-col>
-          <!-- End : Mobile lastFIle -->
-
+         <v-col cols="12" md="6">
+           <latest-training-content/>
+         </v-col>
 
           <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column justify-space-between">
-            <!-- Start : Desktop askCard -->
-            <div class="ask-card mb-6 pa-4 d-none d-md-block">
-              <div class="ask-title d-flex align-center mb-5">
-                <span :class="'icon icong-' + askCard.icon" class="ask-icon d-flex align-center"></span>
-                <div class="ask-title-texts d-flex flex-column ml-3">
-                  <div class="asktitle">Related Q&As</div>
-                  <div class="asksubtitle">Ask questions or answer other people's questions...</div>
+              <related-qa/>
 
-                </div>
-              </div>
-              <div class="ask-texts d-flex" v-for="(item, ask) in askTexts " :key="ask.value">
-                <p class="my-3 ask-text">
-                  <i class="fa-solid fa-link ask-text-icon mr-2"></i>
-                  {{ item.askText.length>80 ? `${item.askText.substring(0,80)}...` : item.askText.substring(0,80) }}
-                </p>
-              </div>
-              <v-divider class="mt-4"></v-divider>
-              <div class="ask-footer my-4 ">
-                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus ml-2"></i>Send file</v-btn>
-                <nuxt-link to="" class="askcard-footer-link ml-6">
-                  More
-                </nuxt-link>
-              </div>
-            </div>
-            <!-- End:Desktop askCard -->
-            <!-- Start : Mobile askCard -->
-            <div class="ask-card mb-6 pa-4  d-block d-md-none">
-              <div class="ask-title d-flex align-center mb-4">
-                <span :class="'icon icong-' + askCard.icon" class="ask-icon d-flex align-center"></span>
-                <div class="ask-title-texts d-flex flex-column ml-3">
-                  <div class="asktitle">Related Q&As</div>
-                  <div class="asksubtitle">Ask questions or answer other people's questions...</div>
-
-                </div>
-              </div>
-              <div class="ask-texts d-flex" v-for="(item, ask) in askTexts " :key="ask.value">
-                <p class="my-4 ask-text">
-                  <i class="fa-solid fa-link ask-text-icon mr-2"></i>
-                  {{ item.responsiveText }}
-                </p>
-              </div>
-              <v-divider class="mt-4"></v-divider>
-              <div class="ask-footer mt-4">
-                <v-btn class="askcard-footer-btn"><i class="fa-solid fa-plus mr-2"></i>Send file</v-btn>
-                <nuxt-link to="" class="askcard-footer-link mx-6">
-                  More
-                </nuxt-link>
-              </div>
-            </div>
-            <!-- End:Mobile askCard -->
-            <!-- Start : Desktop testCard -->
-            <div class="test-card  pa-4 d-none d-md-block">
-              <div class="test-title d-flex align-center mb-5">
-                <span :class="'icon icong-' + testCard.icon" class="test-icon d-flex align-center"></span>
-                <div class="test-title-texts d-flex flex-column ml-3">
-                  <div class="testtitle">Related Q&As</div>
-                  <div class="testsubtitle">Ask questions or answer other people's questions...</div>
-                </div>
-              </div>
-              <div class="test-texts d-flex" v-for="(item, test) in testTexts " :key="test.value">
-                <p class="my-3 test-text">
-                  <i class="fa-solid fa-link test-text-icon mr-2"></i>
-                  {{ item.testText.length>80 ? `${item.testText.substring(0,80)}...` : item.testText}}
-                </p>
-              </div>
-              <v-divider class="mt-4"></v-divider>
-              <div class="test-footer my-4">
-                <nuxt-link to="" class="testcard-footer-link">
-                  More
-                </nuxt-link>
-              </div>
-            </div>
-            <!-- end: Desktop Testcard -->
-
-            <!-- Start : Mobile testCard -->
-            <div class="test-card  pa-4 d-block d-md-none">
-              <div class="test-title d-flex align-center mb-4">
-                <span :class="'icon icong-' + testCard.icon" class="test-icon d-flex align-center"></span>
-                <div class="test-title-texts d-flex flex-column ml-3">
-                  <div class="testtitle">Related Q&As</div>
-                  <div class="testsubtitle">Ask questions or answer other people's questions...</div>
-                </div>
-              </div>
-              <div class="test-texts d-flex" v-for="(item, test) in testTexts " :key="test.value">
-                <p class="my-4 test-text">
-                  <i class="fa-solid fa-link test-text-icon mr-2"></i>
-                  {{ item.responsiveText }}
-                </p>
-              </div>
-              <v-divider class="mt-4"></v-divider>
-              <div class="test-footer mt-4">
-                <nuxt-link to="" class="testcard-footer-link">
-                  More
-                </nuxt-link>
-              </div>
-            </div>
-            <!-- end: Mobile testcard -->
+              <related-online-exam/>
           </v-col>
 
         </v-row>
@@ -456,10 +264,13 @@
 <script>
 import category from "@/components/common/category.vue";
 import timeLine from "@/components/common/timeline.vue";
-import Video from "@/components/common/video.vue";
+import RelatedContent from "@/components/details/related-content";
+import LatestTrainingContent from "@/components/details/latest-training-content";
+import RelatedQa from "@/components/details/related-qa";
+import RelatedOnlineExam from "@/components/details/related-online-exam";
 
 export default {
-  components: { category, timeLine, Video },
+  components: {RelatedOnlineExam, RelatedQa, LatestTrainingContent, RelatedContent, category, timeLine },
   data() {
     return {
       e6: 1,
@@ -476,77 +287,10 @@ export default {
       // model: null,
       sidebartimelinetitle: "Biology",
       testNumber: "20 Test",
-      videos: [
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-        {
-          img: "vid.png",
-          vid: "video.mp4"
-        },
-
-      ],
-      lastFile: {
-        img: "dexter-morse2.png",
-        name: "Arian Etemdi",
-        date: "27 Jun",
-        number: "27",
-        responsiveText: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک ......",
-        lastFileText: "Lorem Epsom is a fictitious text produced with incomprehensible simplicity from the printing industry and using graphic designers, printers and texts, but also newspapers and magazines in columns and rows as necessary and for the current conditions of technology and diverse applications with the aim of improving practical tools. A lot in sixty...",
-        content: "Gifted level education (pptx)",
-        budget: "Page 1 to page 168"
-      },
       askCard: {
         icon: "qa",
       },
-      askTexts: [
-        {
-          responsiveText: "Exercise solution video (3 and 4) lesson 10 and text translation...",
-          askText: "Exercise solution video (3 and 4) lesson 10 and text translation + exercise solution (1 and 2) lesson 11"
-        },
-        {
-          responsiveText: "Math 7th movie Chapter 2: Integers...",
-          askText: "Math 7th movie Chapter 2: Integers (fourth session: sample solution)"
-        },
-        {
-          responsiveText: "7th social studies PowerPoint Lesson 12: ...",
-          askText: "7th social studies PowerPoint Lesson 12: Protection of Iran's habitats"
-        },
-      ],
-      testCard: {
-        icon: "azmoon"
-      },
-      testTexts: [
-        {
-          responsiveText: "Exercise solution video (3 and 4) lesson 10 and text translation...",
-          testText: "Exercise solution video (3 and 4) lesson 10 and text translation + exercise solution (1 and 2) lesson 11"
-        },
-        {
-          responsiveText: "Math 7th movie Chapter 2: Integers...",
-          testText: "Math 7th movie Chapter 2: Integers (fourth session: sample solution)"
-        },
-        {
-          responsiveText: "7th social studies PowerPoint Lesson 12: ...",
-          testText: "7th social studies PowerPoint Lesson 12: Protection of Iran's habitats"
-        },
-      ],
+
       rating: 4,
       items1: ["All", "دبستان", "متوسطه"],
       items2: ["All", "دبستان", "متوسطه"],
@@ -595,12 +339,7 @@ export default {
         },
       ],
       model: null,
-      bookSample: {
-        sampleImg: "booksample.png",
-        sampleText: "Test exam of 2nd to 8th chapter of Math 7th teacher of Esveh Isfahan University",
-        samplefooterImg: "dexter-morse3.png",
-        sfooterName: "Arian Etemdi"
-      },
+
       events: [],
       input: null,
       nonce: 0,

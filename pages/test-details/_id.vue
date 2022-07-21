@@ -1,7 +1,7 @@
 <template>
   <div class="test-details-content">
     <!-- Start : Category -->
-    <category />
+    <category/>
     <!-- End:Category -->
 
     <!--  Start: breadcrumb  -->
@@ -39,13 +39,14 @@
                     <p>Lesson 7: Iran during the reign of Reza Shah</p>
                     <p>Lesson 8: World War II and the world after it</p>
                     <p>Lesson 9: Nationalization movement of Iran's oil industry</p>
-                    <p>The designed questions contain 130 standard test questions from sixth to ninth courses with key answers and based on the new book printed in 1400</p>
+                    <p>The designed questions contain 130 standard test questions from sixth to ninth courses with key
+                      answers and based on the new book printed in 1400</p>
                   </div>
 
                   <div class="label-holder">
-                    <v-chip  v-for="(label, index) in detail.labels"
-                               :key="index" class="ma-1"
-                               to="/"
+                    <v-chip v-for="(label, index) in detail.labels"
+                            :key="index" class="ma-1"
+                            to="/"
                     >
                       {{ label }}
                     </v-chip>
@@ -87,7 +88,7 @@
                       width="48"
                     />
                   </v-col>
-                  <v-col cols="9" class="pl-0" >
+                  <v-col cols="9" class="pl-0">
                     <p class="creator_title">Arian Etemadi</p>
                   </v-col>
                 </v-row>
@@ -152,50 +153,51 @@
         <v-col cols="12" md="6">
           <!--  Start: Course Card  -->
           <section>
-              <div class="d-flex  align-center course-card box">
-                <div class="right">
-                  <v-row >
-                    <v-col cols="2">
-                      <nuxt-link to="">
-                        <img height="98" width="98" :src="require(`~/assets/images/teacher1.png`)" alt="" />
-                      </nuxt-link>
-                    </v-col>
-                    <v-col cols="10">
-                      <div class="description ml-4">
-                        <div>
-                          <nuxt-link to="">
-                            <h2 class="course-title">PowerPoint of the complete educational course, date (3) of the 12th grade of the second secondary-theoretical period</h2>
-                          </nuxt-link>
-                        </div>
-                        <v-row>
-                          <v-col cols="10">
-                            <div>
-                              <nuxt-link to="" class="teacher">
-                                <i class="fa-solid fa-user icon"></i>
-                                <span>Lecturer: Shamsi Shabani</span>
-                              </nuxt-link>
-                            </div>
-                            <div>
-                              <p class="duration">
-                                <i class="fa-solid fa-clock icon"></i>
-                                <span>Course duration: 942 slides (13 files)</span>
-                              </p>
-                            </div>
-                          </v-col>
-                          <v-col cols="2">
-                            <nuxt-link to="" class="teal--text">
-                              <strong>
-                                View
-                              </strong>
-                            </nuxt-link>
-                          </v-col>
-                        </v-row>
+            <div class="d-flex  align-center course-card box">
+              <div class="right">
+                <v-row>
+                  <v-col cols="2">
+                    <nuxt-link to="">
+                      <img height="98" width="98" :src="require(`~/assets/images/teacher1.png`)" alt=""/>
+                    </nuxt-link>
+                  </v-col>
+                  <v-col cols="10">
+                    <div class="description ml-4">
+                      <div>
+                        <nuxt-link to="">
+                          <h2 class="course-title">PowerPoint of the complete educational course, date (3) of the 12th
+                            grade of the second secondary-theoretical period</h2>
+                        </nuxt-link>
                       </div>
-                    </v-col>
-                  </v-row>
-                </div>
-
+                      <v-row>
+                        <v-col cols="10">
+                          <div>
+                            <nuxt-link to="" class="teacher">
+                              <i class="fa-solid fa-user icon"></i>
+                              <span>Lecturer: Shamsi Shabani</span>
+                            </nuxt-link>
+                          </div>
+                          <div>
+                            <p class="duration">
+                              <i class="fa-solid fa-clock icon"></i>
+                              <span>Course duration: 942 slides (13 files)</span>
+                            </p>
+                          </div>
+                        </v-col>
+                        <v-col cols="2">
+                          <nuxt-link to="" class="teal--text">
+                            <strong>
+                              View
+                            </strong>
+                          </nuxt-link>
+                        </v-col>
+                      </v-row>
+                    </div>
+                  </v-col>
+                </v-row>
               </div>
+
+            </div>
           </section>
           <!--  End: Course Card  -->
         </v-col>
@@ -204,45 +206,46 @@
         <v-col cols="12" md="6">
           <!--  Start:  Azmoon test album card   -->
           <section>
-              <div class="d-flex align-center album-card box">
-                <div class="right">
-                  <v-row >
-                    <v-col cols="2">
+            <div class="d-flex align-center album-card box">
+              <div class="right">
+                <v-row>
+                  <v-col cols="2">
+                    <nuxt-link to="">
+                      <img :src="require(`~/assets/images/poster1.jpg`)" alt="" class="poster-img"/>
+                    </nuxt-link>
+                  </v-col>
+                  <v-col cols="10">
+                    <div class="description ml-2">
                       <nuxt-link to="">
-                        <img :src="require(`~/assets/images/poster1.jpg`)" alt="" class="poster-img"/>
+                        <h2 class="course-title">Online Exam test bank album, date (3) twelfth of the second term of
+                          high school-theoretical</h2>
                       </nuxt-link>
-                    </v-col>
-                    <v-col cols="10" >
-                      <div class="description ml-2" >
-                        <nuxt-link to="">
-                          <h2 class="course-title">Online Exam test bank album, date (3) twelfth of the second term of high school-theoretical</h2>
-                        </nuxt-link>
 
-                        <v-row>
-                          <v-col cols="10">
-                            <div class="num">
-                              <i class="fa-solid fa-list-ol icon"></i>
-                              <span>Number of tests: 1399</span>
-                            </div>
-                            <div class="level">
-                              <i class="fa-solid fa-superscript icon"></i>
-                              <span>Difficulty: Easy</span>
-                            </div>
-                          </v-col>
-                          <v-col cols="2">
-                            <nuxt-link to="" class="teal--text">
-                              <strong>
-                                View
-                              </strong>
-                            </nuxt-link>
-                          </v-col>
-                        </v-row>
-                      </div>
-                    </v-col>
-                  </v-row>
-                </div>
-
+                      <v-row>
+                        <v-col cols="10">
+                          <div class="num">
+                            <i class="fa-solid fa-list-ol icon"></i>
+                            <span>Number of tests: 1399</span>
+                          </div>
+                          <div class="level">
+                            <i class="fa-solid fa-superscript icon"></i>
+                            <span>Difficulty: Easy</span>
+                          </div>
+                        </v-col>
+                        <v-col cols="2">
+                          <nuxt-link to="" class="teal--text">
+                            <strong>
+                              View
+                            </strong>
+                          </nuxt-link>
+                        </v-col>
+                      </v-row>
+                    </div>
+                  </v-col>
+                </v-row>
               </div>
+
+            </div>
           </section>
           <!--  End:  Azmoon test album card   -->
         </v-col>
@@ -250,83 +253,28 @@
     </v-container>
 
 
-    <!--  Start:  relatedBox  -->
-    <section class="related-sec">
-      <div class="">
-        <v-container>
-          <div class="box related-box">
-            <div class="sample-test-holder">
-              <div class="sample-test-title">
-                <nuxt-link to="" class="d-flex align-center ">
-                  <span class="d-flex align-center icong-test ml-2 icon"></span>
-                  <h3>Related Sample Exams</h3>
-                </nuxt-link>
-              </div>
-              <div class="sample-test-slider-holder">
-                <v-sheet
-                  class="mx-auto sample-test-slider"
-                >
-                  <v-slide-group
-                    v-model="model"
-                    active-class="success"
-                    class="pa-4"
-                    show-arrows
-                  >
-                    <v-slide-item
-                      v-for="(test,index) in sampleTestList"
-                      :key="index"
-                      v-slot="{ active, toggle }"
-                      class="mx-4"
-                      :class="[(test.type === 'azmoon') ? 'azmoon' : '']"
-                    >
-                      <div class="sample-test-item">
-                        <nuxt-link class=" " to="">
-                          <div class="position-relative sample-test-image-holder">
-                            <p  v-if="(test.type === 'azmoon')" class="label offlabel">Online Exam</p>
-                            <img :alt=test.description :src="require(`~/assets/images/${test.img}`)" class="sample-test-image" />
-                            <p class="font-weight-bold label page-label">
-                              {{test.pages}}
-                              <span v-if="(test.type === 'azmoon')"> تست</span>
-                              <span v-else> صفحه</span>
-                            </p>
-                          </div>
-                          <div class="sample-test-description">
-                            <p class="font-weight-bold description-title">{{ test.description }}</p>
-                            <div class="d-flex align-center">
-                              <img :src="require(`~/assets/images/${test.ownerImg}`)" class="ml-2 owner-image" alt="">
-                              <span class="owner-name"> {{ test.owner }} </span>
-                            </div>
-                          </div>
-                        </nuxt-link>
-                      </div>
+    <!-- Start : Sample Test -->
+    <related-content/>
+    <!-- End : Sample test -->
+    <!-- Start: Feed -->
+    <section class="feed">
+      <v-container class="pa-4 pa-md-12 pt-10">
+        <v-row>
+          <v-col cols="12" md="6">
+            <latest-training-content/>
+          </v-col>
 
-                    </v-slide-item>
-                  </v-slide-group>
-                </v-sheet>
-              </div>
-            </div>
-          </div>
-        </v-container>
-      </div>
-      <div>
-        <v-container>
-          <v-row>
-            <v-col v-for="(related, index) in relatedList" :key="index"
-                   cols="12" md="6">
-              <RelatedCardBox :related="related"></RelatedCardBox>
-            </v-col>
-          </v-row>
-        </v-container>
-      </div>
-    </section>
-    <!--  End: relatedBox   -->
- <!--  Start:  Last view  -->
-    <section class="last-view-sec">
-      <v-container>
-        <Last-views></Last-views>
+          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column justify-space-between">
+            <related-qa/>
+
+            <related-online-exam/>
+          </v-col>
+
+        </v-row>
       </v-container>
     </section>
-    <!--  End: Last view   -->
+    <!-- End: Feed -->
+
 
   </div>
 </template>
@@ -336,9 +284,17 @@ import LastViews from "@/components/common/last-views";
 import RelatedCardBox from "./components/related-card-box"
 import Category from "@/components/common/category";
 import PreviewGallery from "@/components/details/preview-gallery";
+import RelatedContent from "@/components/details/related-content";
+import LatestTrainingContent from "@/components/details/latest-training-content";
+import RelatedQa from "@/components/details/related-qa";
+import RelatedOnlineExam from "@/components/details/related-online-exam";
 
 export default {
   components: {
+    RelatedOnlineExam,
+    RelatedQa,
+    LatestTrainingContent,
+    RelatedContent,
     PreviewGallery,
     Category,
     Breadcrumb,
@@ -535,13 +491,13 @@ export default {
 </script>
 
 <style>
-.content_main_info{
+.content_main_info {
   padding: 27px;
-  background: #F5F5F5!important;
+  background: #F5F5F5 !important;
   border-radius: 6px;
 }
 
-.content_main_info .creator_title{
+.content_main_info .creator_title {
   font-size: 18px;
 }
 </style>
