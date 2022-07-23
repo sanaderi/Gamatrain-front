@@ -176,8 +176,10 @@
                                     <v-row>
                                         <v-col lg="2">
                                             <div class="item-img">
+                                              <nuxt-link :to="`/training-content-details/${item.id}`">
                                                 <img :src="require('assets/images/' + item.itemImg)" alt=""
-                                                    class="item-image" />
+                                                     class="item-image" />
+                                              </nuxt-link>
                                             </div>
                                         </v-col>
                                         <v-col lg="10">
@@ -192,9 +194,9 @@
                             d-flex
                             justify-space-between
                           ">
-                                                    <p>
+                                                    <nuxt-link :to="`/training-content-details/${item.id}`">
                                                         {{ item.title }}
-                                                    </p>
+                                                    </nuxt-link>
                                                     <div class="item-content-title-icon d-flex">
                                                         <svg width="39" height="39" viewBox="0 0 39 39" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg" class="mx-1">
