@@ -50,6 +50,7 @@ export default {
   modules: [
     'nuxt-material-design-icons',
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
   ],
 
   axios: {
@@ -58,7 +59,11 @@ export default {
   },
 
   proxy: {
-    '/api/': {target: "https://core.gamatrain.com", pathRewrite: {'^/api/v1/': '/api/'}, changeOrigin: true}
+    '/api':
+      {
+        target: "https://core.gamatrain.com/api/v1",
+        changeOrigin: true
+      }
 
   },
 
