@@ -64,7 +64,6 @@ export default {
         target: "https://core.gamatrain.com/api/v1",
         changeOrigin: true
       }
-
   },
 
 
