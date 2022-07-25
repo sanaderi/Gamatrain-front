@@ -23,17 +23,20 @@
                 <v-row>
                     <v-col lg="3">
                         <div class="teachers-filter d-none d-sm-block">
-                            <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
-                                <v-expansion-panel>
-                                    <v-expansion-panel-header class="filter-title">
-                                        {{ item.filterTitle }}
-                                    </v-expansion-panel-header>
-                                    <v-expansion-panel-content class="filter-content ">
-                                        {{ item.filterContent }}
-                                    </v-expansion-panel-content>
-                                </v-expansion-panel>
-                                <v-divider class="filter-divider my-2"></v-divider>
-                            </v-expansion-panels>
+                            <v-select :items="item" label="Grade" outlined> </v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Book" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Title" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Sample question" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Grade" outlined> </v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Book" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Title" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
                             <div v-for="item in switchs" :key="item.value"
                                 class="filter-switchs d-flex justify-space-between w-100 ">
                                 <p class="switch-title mb-0">{{ item.switchTitle }}</p>
@@ -49,7 +52,7 @@
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-teachers-header">
+                            <v-card class="d-none d-md-block desktop-teachers-header" id="header-teachers">
                                 <v-tabs>
                                     <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
                                     <i class="fa-solid fa-list"></i>
@@ -82,10 +85,10 @@
                                             tutorial
                                         </nuxt-link>
                                     </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
+                                    <v-badge bordered class="pa-1 mx-auto badge-teachers" content="2810" color="#8E24AA">
                                         <nuxt-link to="teachers" class="nav-link nav-link1">
+                                             <span class="'icon icong-teacher mr-1"></span>
                                             Teacher
-                                            <span class="'icon icong-teacher"></span>
                                         </nuxt-link>
                                     </v-badge>
                                 </v-tabs>
@@ -208,7 +211,7 @@
                                                             <p class="mb-0 mx-2">{{ item.star }}</p>
                                                         </nuxt-link>
                                                     </v-btn>
-                                                    <v-snackbar v-model="snackbar" :vertical="vertical">
+                                                    <v-snackbar v-model="snackbar" :vertical="vertical" timeout="0">
                                                         <div class="pa-3">
                                                             {{ title }}
                                                             <div class="star mt-8 mb-4">
@@ -318,6 +321,7 @@ export default {
     components: { category, Pagination, FilterModal },
     data() {
         return {
+            item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
             overlay: false,
             snackbar: false,
             title: 'Teachers rating :',
@@ -500,6 +504,22 @@ export default {
             ]
 
 
+        }
+    },
+    beforeMount() {
+        window.addEventListener('scroll', this.testHeader);
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.testHeader);
+    },
+    methods: {
+        testHeader() {
+            let header = document.getElementById("header-teachers")
+            if (scrollY > 210) {
+                header.classList.add("scroll-header")
+            } else if (scrollY < 200) {
+                header.classList.remove("scroll-header")
+            }
         }
     },
     watch: {

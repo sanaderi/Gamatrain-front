@@ -24,16 +24,13 @@
                 <v-row>
                     <v-col lg="3">
                         <div class="tutorial-filter d-none d-sm-block">
-                            <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
-                                <v-expansion-panel>
-                                    <v-expansion-panel-header class="filter-title">
-                                        {{ item.filterTitle }}
-                                    </v-expansion-panel-header>
-                                    <v-expansion-panel-content class="filter-content ">
-                                        {{ item.filterContent }}
-                                    </v-expansion-panel-content>
-                                </v-expansion-panel>
-                            </v-expansion-panels>
+                            <v-select :items="item" label="Grade" outlined> </v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Book" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Title" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Sample question" outlined></v-select>
                         </div>
                     </v-col>
                     <v-col lg="9" md="9" sm="12" class="tutorial-contents">
@@ -44,7 +41,7 @@
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-tutorial-header">
+                            <v-card class="d-none d-md-block desktop-tutorial-header" id="header-tutorial">
                                 <v-tabs>
                                     <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
                                     <i class="fa-solid fa-list"></i>
@@ -72,10 +69,10 @@
                                             Online Exam
                                         </nuxt-link>
                                     </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
+                                    <v-badge bordered class="pa-1 mx-auto badge-tutorial" content="169" color="#BD081C">
                                         <nuxt-link to="tutorial" class="nav-link nav-link1">
+                                            <span class="'icon icong-blog mr-1"></span>
                                             tutorial
-                                            <span class="'icon icong-blog"></span>
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
@@ -134,7 +131,7 @@
                                                     class="item-image">
                                             </div>
                                         </v-col>
-                                        <v-col lg="10">
+                                        <v-col lg="10" class="px-0">
                                             <div class="tutorial-content d-flex flex-column justify-space-between">
                                                 <div class="tutorial-title d-flex justify-space-between">
                                                     <p>
@@ -231,6 +228,7 @@ export default {
     components: { category, Pagination, FilterModal },
     data() {
         return {
+            item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
             sampleFilters: [
                 {
                     filterTitle: "grade",
@@ -384,6 +382,22 @@ export default {
                 },
             ]
         }
-    }
+    },
+    beforeMount() {
+        window.addEventListener('scroll', this.testHeader);
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.testHeader);
+    },
+    methods: {
+        testHeader() {
+            let header = document.getElementById("header-tutorial")
+            if (scrollY > 210) {
+                header.classList.add("scroll-header")
+            } else if (scrollY < 200) {
+                header.classList.remove("scroll-header")
+            }
+        }
+    },
 }
 </script>

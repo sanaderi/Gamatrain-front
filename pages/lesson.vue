@@ -141,12 +141,22 @@
           <v-col cols="12" md="9" class="pa-0 pa-md-3">
             <div class="book-contents pa-3 pa-md-6">
               <div class="responsive-buttons d-flex align-center d-block d-md-none">
-                <v-btn x-large class="d-flex justify-center responsive-button ml-4" @click.stop="drawer = !drawer">
-                  <i class="fa-solid fa-receipt "></i>
-                </v-btn>
                 <v-btn x-large class="responsive-button" @click.stop="drawer = !drawer">
-                  <i class="fa-solid fa-receipt ml-6"></i>
-                 List
+                  <!-- <i class="fa-solid fa-receipt"></i> -->
+                  <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M16.5 1.5L15 0L13.5 1.5L12 0L10.5 1.5L9 0L7.5 1.5L6 0L4.5 1.5L3 0V14H0V17C0 18.66 1.34 20 3 20H15C16.66 20 18 18.66 18 17V0L16.5 1.5ZM16 17C16 17.55 15.55 18 15 18C14.45 18 14 17.55 14 17V14H5V3H16V17Z"
+                      fill="white" />
+                    <path d="M12 5H6V7H12V5Z" fill="white" />
+                    <path d="M15 5H13V7H15V5Z" fill="white" />
+                    <path d="M12 8H6V10H12V8Z" fill="white" />
+                    <path d="M15 8H13V10H15V8Z" fill="white" />
+                  </svg>
+
+                  <p class="ml-3" id="sticky-button" v-show="isVisible">
+                    List
+                  </p>
+
                 </v-btn>
               </div>
               <v-navigation-drawer v-model="drawer" class="sidebar-nav pa-5" width="320">
@@ -155,7 +165,7 @@
                   <p>{{ sidebartimelinetitle }}</p>
                 </div>
                 <v-stepper v-model="e6" vertical class="stepper">
-                  <v-stepper-step :complete="e6 > 1" step="1" @click="e6 = 1" color="#008B8B">
+                  <v-stepper-step :complete="e6 > 1" step="1" @click="e6 = 1" color="#008B8B" class="stepper-1">
                     Select an app
                   </v-stepper-step>
                   <v-stepper-content step="1">
@@ -169,7 +179,7 @@
                     </v-row>
                   </v-stepper-content>
 
-                  <v-stepper-step :complete="e6 > 2" step="2" @click="e6 = 2" color="#008B8B">
+                  <v-stepper-step :complete="e6 > 2" step="2" @click="e6 = 2" color="#008B8B" class="stepper-2">
                     Configure analytics for this app
                   </v-stepper-step>
 
@@ -184,7 +194,7 @@
                     </v-row>
                   </v-stepper-content>
 
-                  <v-stepper-step :complete="e6 > 3" step="3" @click="e6 = 3" color="#008B8B">
+                  <v-stepper-step :complete="e6 > 3" step="3" @click="e6 = 3" color="#008B8B" class="stepper-3">
                     Select an ad format and name ad unitaaa
                   </v-stepper-step>
 
@@ -199,7 +209,7 @@
                     </v-row>
                   </v-stepper-content>
 
-                  <v-stepper-step step="4" @click="e6 = 4" color="#008B8B">
+                  <v-stepper-step step="4" @click="e6 = 4" color="#008B8B" class="stepper-4">
                     View setup instructions
                   </v-stepper-step>
                   <v-stepper-content step="4">
@@ -258,7 +268,9 @@
                       </span>
                     </div>
                     <div class="sample-text">
-                      <p>{{ bookSample.sampleText.length>50 ? `${bookSample.sampleText.substring(0,50)}...` :  bookSample.sampleText}}</p>
+                      <p>{{ bookSample.sampleText.length > 50 ? `${bookSample.sampleText.substring(0, 50)}...` :
+                          bookSample.sampleText
+                      }}</p>
                     </div>
                     <div class="sbook-footer d-flex justify-space-between align-center mt-4">
                       <div class="d-flex align-center">
@@ -278,7 +290,7 @@
     <!-- End : Sample test -->
     <!-- Start: Feed -->
     <section class="feed">
-      <v-container class="pa-4 pa-md-12 pt-10">
+      <v-container class="pa-2 pa-md-12 pt-10">
         <v-row>
           <!-- Start : Descktop LastFile-->
           <v-col md="6" class="last-files pa-4 d-none d-md-block">
@@ -304,7 +316,9 @@
                 <p> Slide numbers: {{ lastFile.number }}</p>
               </div>
               <p class="lastFile-text">
-                {{ lastFile.lastFileText.length>350 ? `${lastFile.lastFileText.substring(0,350)}...` : lastFile.lastFileText }}
+                {{ lastFile.lastFileText.length > 350 ? `${lastFile.lastFileText.substring(0, 350)}...` :
+                    lastFile.lastFileText
+                }}
               </p>
               <div class="date-name d-flex align-center justify-space-between my-5">
                 <p>Content:{{ lastFile.content }}</p>
@@ -358,7 +372,7 @@
               <div class="ask-texts d-flex" v-for="(item, ask) in askTexts " :key="ask.value">
                 <p class="my-3 ask-text">
                   <i class="fa-solid fa-link ask-text-icon mr-2"></i>
-                  {{ item.askText.length>80 ? `${item.askText.substring(0,80)}...` : item.askText.substring(0,80) }}
+                  {{ item.askText.length > 80 ? `${item.askText.substring(0, 80)}...` : item.askText.substring(0, 80) }}
                 </p>
               </div>
               <v-divider class="mt-4"></v-divider>
@@ -407,7 +421,7 @@
               <div class="test-texts d-flex" v-for="(item, test) in testTexts " :key="test.value">
                 <p class="my-3 test-text">
                   <i class="fa-solid fa-link test-text-icon mr-2"></i>
-                  {{ item.testText.length>80 ? `${item.testText.substring(0,80)}...` : item.testText}}
+                  {{ item.testText.length > 80 ? `${item.testText.substring(0, 80)}...` : item.testText }}
                 </p>
               </div>
               <v-divider class="mt-4"></v-divider>
@@ -462,6 +476,8 @@ export default {
   components: { category, timeLine, Video },
   data() {
     return {
+      isVisible: true,
+      a : 0,
       e6: 1,
       timelines: [
         {
@@ -518,7 +534,7 @@ export default {
       },
       askTexts: [
         {
-          responsiveText: "Exercise solution video (3 and 4) lesson 10 and text translation...",
+          responsiveText: "Exercise solution video (3 and 4) lesson 10 and text...",
           askText: "Exercise solution video (3 and 4) lesson 10 and text translation + exercise solution (1 and 2) lesson 11"
         },
         {
@@ -535,7 +551,7 @@ export default {
       },
       testTexts: [
         {
-          responsiveText: "Exercise solution video (3 and 4) lesson 10 and text translation...",
+          responsiveText: "Exercise solution video (3 and 4) lesson 10 and ...",
           testText: "Exercise solution video (3 and 4) lesson 10 and text translation + exercise solution (1 and 2) lesson 11"
         },
         {
@@ -606,6 +622,7 @@ export default {
       nonce: 0,
     };
 
+
   },
 
   computed: {
@@ -613,11 +630,31 @@ export default {
       return this.events.slice().reverse()
     },
   },
+  beforeMount() {
+    window.addEventListener('scroll', this.testScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.testScroll);
+  },
   mounted() {
 
     this.color()
   },
   methods: {
+    // handleScroll(e) {
+    //   this.isVisible =e.target.scrollTop > 100 ? false : true
+    //   console.log(window.scrollY)
+    // },
+    testScroll() {
+      let scroll = window.pageYOffset
+      if (this.a < scroll) {
+        this.isVisible = false
+       
+      } else {
+        this.isVisible = true
+      }
+      this.a = scroll
+    },
     comment() {
       const time = (new Date()).toTimeString()
       this.events.push({
@@ -645,4 +682,5 @@ export default {
   margin: auto;
   max-width: 700px;
 }
+
 </style>
