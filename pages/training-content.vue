@@ -25,7 +25,7 @@
                 <v-row>
                     <v-col lg="3">
                         <div class="training-content-filter d-none d-sm-block">
-                            <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
+                            <!-- <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
                                 <v-expansion-panel>
                                     <v-expansion-panel-header class="filter-title">
                                         {{ item.filterTitle }}
@@ -34,7 +34,15 @@
                                         {{ item.filterContent }}
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
-                            </v-expansion-panels>
+                            </v-expansion-panels> -->
+                            <v-select :items="item" label="Grade" outlined> </v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Book" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Title" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Sample question" outlined></v-select>
+                            
                         </div>
                     </v-col>
                     <v-col lg="9" md="9" sm="12" class="training-contents">
@@ -45,7 +53,7 @@
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-training-header">
+                            <v-card class="d-none d-md-block desktop-training-header" id="header-training">
                                 <v-tabs>
                                     <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
                                     <i class="fa-solid fa-list"></i>
@@ -54,10 +62,10 @@
                                             Sample Exam
                                         </nuxt-link>
                                     </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="1258" color="#2E7D32">
+                                    <v-badge bordered class="pa-1 mx-auto badge-training" content="1258" color="#2E7D32">
                                         <nuxt-link to="training-content" class="nav-link nav-link1">
+                                            <span class="'icon icong-learnfiles mr-1"></span>
                                             Training Content
-                                            <span class="'icon icong-learnfiles"></span>
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="21260" color="#BF360C">
@@ -146,14 +154,14 @@
                                                                 </nuxt-link>
                                                                 <nuxt-link to="">
                                                                     <div
-                                                                        class="book-season pa-2 my-2 d-flex justify-space-between align-center">
+                                                                        class="book-season px-2 py-1 my-2 d-flex justify-space-between align-center">
                                                                         <p class="season-number">{{ book.season }}</p>
                                                                         <p>Season</p>
                                                                     </div>
                                                                 </nuxt-link>
                                                                 <nuxt-link to="">
                                                                     <div
-                                                                        class="book-price  pa-2  my-2 d-flex justify-space-between align-center">
+                                                                        class="book-price  px-2 py-1  my-2 d-flex justify-space-between align-center">
                                                                         <p class="price-number">{{ book.price }}</p>
                                                                         <p>Dollar</p>
                                                                     </div>
@@ -180,7 +188,7 @@
                                                     class="item-image" />
                                             </div>
                                         </v-col>
-                                        <v-col lg="10">
+                                        <v-col lg="10" class="px-0">
                                             <div class="
                           training-item-content
                           d-flex
@@ -196,13 +204,19 @@
                                                         {{ item.title }}
                                                     </p>
                                                     <div class="item-content-title-icon d-flex">
+                                                        <svg width="51" height="30" viewBox="0 0 51 30" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M38.2498 3.87516L35.2536 0.878906L21.7811 14.3514L24.7773 17.3477L38.2498 3.87516ZM47.2598 0.878906L24.7773 23.3614L15.8948 14.5002L12.8986 17.4964L24.7773 29.3752L50.2773 3.87516L47.2598 0.878906ZM0.871094 17.4964L12.7498 29.3752L15.7461 26.3789L3.88859 14.5002L0.871094 17.4964Z"
+                                                                fill="#EC4949" />
+                                                        </svg>
                                                         <svg width="39" height="39" viewBox="0 0 39 39" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg" class="mx-1">
                                                             <path
                                                                 d="M34.375 4.57227H30.125V0.322266H8.875V4.57227H4.625C2.2875 4.57227 0.375 6.48477 0.375 8.82227V10.9473C0.375 16.366 4.455 20.786 9.70375 21.4448C11.0425 24.6323 13.9113 27.0335 17.375 27.7348V34.3223H8.875V38.5723H30.125V34.3223H21.625V27.7348C25.0888 27.0335 27.9575 24.6323 29.2963 21.4448C34.545 20.786 38.625 16.366 38.625 10.9473V8.82227C38.625 6.48477 36.7125 4.57227 34.375 4.57227ZM4.625 10.9473V8.82227H8.875V16.9398C6.41 16.0473 4.625 13.7098 4.625 10.9473ZM34.375 10.9473C34.375 13.7098 32.59 16.0473 30.125 16.9398V8.82227H34.375V10.9473Z"
                                                                 fill="#F9A825" />
                                                         </svg>
-                                                        <svg width="51" height="52" viewBox="0 0 51 52" fill="none"
+                                                        <svg width="51" height="40" viewBox="0 0 51 52" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
                                                                 d="M23.1094 22.5998L19.455 18.9453L17.2014 21.1989L23.1094 27.1069L33.7987 16.4176L31.5452 14.1641L23.1094 22.5998Z"
@@ -211,12 +225,7 @@
                                                                 d="M43.0312 20.0723C43.0312 10.3918 35.1836 2.54102 25.5 2.54102C15.8196 2.54102 7.96875 10.3918 7.96875 20.0723C7.96875 26.782 11.7443 32.6071 17.2826 35.554L15.9375 50.3535L25.5 43.9785L35.0625 50.3535L33.7174 35.554C36.5296 34.0627 38.8825 31.8336 40.5234 29.106C42.1643 26.3784 43.0313 23.2554 43.0312 20.0723V20.0723ZM25.5 34.416C17.5775 34.416 11.1562 27.9948 11.1562 20.0723C11.1562 12.1497 17.5775 5.72852 25.5 5.72852C33.4225 5.72852 39.8438 12.1497 39.8438 20.0723C39.8438 27.9948 33.4225 34.416 25.5 34.416Z"
                                                                 fill="#32BA91" />
                                                         </svg>
-                                                        <svg width="51" height="30" viewBox="0 0 51 30" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M38.2498 3.87516L35.2536 0.878906L21.7811 14.3514L24.7773 17.3477L38.2498 3.87516ZM47.2598 0.878906L24.7773 23.3614L15.8948 14.5002L12.8986 17.4964L24.7773 29.3752L50.2773 3.87516L47.2598 0.878906ZM0.871094 17.4964L12.7498 29.3752L15.7461 26.3789L3.88859 14.5002L0.871094 17.4964Z"
-                                                                fill="#EC4949" />
-                                                        </svg>
+                                                        
                                                     </div>
                                                 </div>
 
@@ -305,6 +314,15 @@
                                         </v-col>
                                         <v-col cols="2" sm="3" class="pa-0">
                                             <div class="item-content-cup-icon d-flex align-center">
+                                                 <svg width="52" height="40" viewBox="0 0 51 52" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M23.1094 22.5998L19.455 18.9453L17.2014 21.1989L23.1094 27.1069L33.7987 16.4176L31.5452 14.1641L23.1094 22.5998Z"
+                                                        fill="#32BA91" />
+                                                    <path
+                                                        d="M43.0312 20.0723C43.0312 10.3918 35.1836 2.54102 25.5 2.54102C15.8196 2.54102 7.96875 10.3918 7.96875 20.0723C7.96875 26.782 11.7443 32.6071 17.2826 35.554L15.9375 50.3535L25.5 43.9785L35.0625 50.3535L33.7174 35.554C36.5296 34.0627 38.8825 31.8336 40.5234 29.106C42.1643 26.3784 43.0313 23.2554 43.0312 20.0723V20.0723ZM25.5 34.416C17.5775 34.416 11.1562 27.9948 11.1562 20.0723C11.1562 12.1497 17.5775 5.72852 25.5 5.72852C33.4225 5.72852 39.8438 12.1497 39.8438 20.0723C39.8438 27.9948 33.4225 34.416 25.5 34.416Z"
+                                                        fill="#32BA91" />
+                                                </svg>
                                                 <svg width="51" height="30" viewBox="0 0 51 30" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -317,15 +335,7 @@
                                                         d="M34.375 4.57227H30.125V0.322266H8.875V4.57227H4.625C2.2875 4.57227 0.375 6.48477 0.375 8.82227V10.9473C0.375 16.366 4.455 20.786 9.70375 21.4448C11.0425 24.6323 13.9113 27.0335 17.375 27.7348V34.3223H8.875V38.5723H30.125V34.3223H21.625V27.7348C25.0888 27.0335 27.9575 24.6323 29.2963 21.4448C34.545 20.786 38.625 16.366 38.625 10.9473V8.82227C38.625 6.48477 36.7125 4.57227 34.375 4.57227ZM4.625 10.9473V8.82227H8.875V16.9398C6.41 16.0473 4.625 13.7098 4.625 10.9473ZM34.375 10.9473C34.375 13.7098 32.59 16.0473 30.125 16.9398V8.82227H34.375V10.9473Z"
                                                         fill="#F9A825" />
                                                 </svg>
-                                                <svg width="52" height="40" viewBox="0 0 51 52" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M23.1094 22.5998L19.455 18.9453L17.2014 21.1989L23.1094 27.1069L33.7987 16.4176L31.5452 14.1641L23.1094 22.5998Z"
-                                                        fill="#32BA91" />
-                                                    <path
-                                                        d="M43.0312 20.0723C43.0312 10.3918 35.1836 2.54102 25.5 2.54102C15.8196 2.54102 7.96875 10.3918 7.96875 20.0723C7.96875 26.782 11.7443 32.6071 17.2826 35.554L15.9375 50.3535L25.5 43.9785L35.0625 50.3535L33.7174 35.554C36.5296 34.0627 38.8825 31.8336 40.5234 29.106C42.1643 26.3784 43.0313 23.2554 43.0312 20.0723V20.0723ZM25.5 34.416C17.5775 34.416 11.1562 27.9948 11.1562 20.0723C11.1562 12.1497 17.5775 5.72852 25.5 5.72852C33.4225 5.72852 39.8438 12.1497 39.8438 20.0723C39.8438 27.9948 33.4225 34.416 25.5 34.416Z"
-                                                        fill="#32BA91" />
-                                                </svg>
+                                               
                                             </div>
                                             <div class="item-content-word-pdf-icon d-flex flex-column"></div>
                                         </v-col>
@@ -363,6 +373,7 @@ export default {
     components: { category, Pagination, FilterModal },
     data() {
         return {
+            item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
             model: null,
             bookCarousel: {
                 carouselName: "List",
@@ -373,61 +384,61 @@ export default {
                     img: "poster1.jpg",
                     title: "Maths",
                     season: "14",
-                    price: "16",
+                    price: "3405",
                 },
                 {
                     img: "book2.png",
                     title: "History",
                     season: "14",
-                    price: "16",
+                    price: "3405",
                 },
                 {
                     img: "book3.png",
                     title: "Art",
                     season: "14",
-                    price: "16",
+                    price: "3405",
                 },
                 {
                     img: "book4.png",
                     title: "Geography",
                     season: "14",
-                    price: "16",
+                    price: "3405",
                 },
                 {
                     img: "poster1.jpg",
                     title: "Maths",
                     season: "14",
-                    price: "16",
+                    price: "3405",
                 },
                 {
                     img: "book2.png",
                     title: "Maths",
                     season: "14",
-                    price: "16",
+                    price: "3405",
                 },
                 {
                     img: "poster1.jpg",
                     title: "Maths",
                     season: "14",
-                    price: "16",
+                    price: "3405",
                 },
                 {
                     img: "book2.png",
                     title: "History",
                     season: "14",
-                    price: "16",
+                    price: "3405",
                 },
                 {
                     img: "book3.png",
                     title: "Art",
                     season: "14",
-                    price: "16",
+                    price: "3405",
                 },
                 {
                     img: "book4.png",
                     title: "Geography",
                     season: "14",
-                    price: "16",
+                    price: "3405",
                 },
 
             ],
@@ -586,6 +597,22 @@ export default {
                 },
             ],
         };
+    },
+     beforeMount() {
+        window.addEventListener('scroll', this.testHeader);
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.testHeader);
+    },
+    methods: {
+        testHeader() {
+            let header = document.getElementById("header-training")
+            if (scrollY > 210) {
+                header.classList.add("scroll-header")
+            } else if (scrollY < 200) {
+                header.classList.remove("scroll-header")
+            }
+        }
     },
 };
 </script>

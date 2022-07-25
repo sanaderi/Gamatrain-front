@@ -1,6 +1,6 @@
 <template>
     <div>
-        <FilterModal/>
+        <FilterModal />
         <!-- mobile header -->
         <div class="
         d-flex
@@ -22,19 +22,16 @@
         <section class="sample-q">
             <v-container>
                 <v-row>
-                    <v-col lg="3"  >
+                    <v-col lg="3">
                         <div class="sample-filter d-none d-sm-block">
-                            <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
-                                <v-expansion-panel>
-                                    <v-expansion-panel-header class="filter-title">
-                                        {{ item.filterTitle }}
-                                    </v-expansion-panel-header>
-                                    <v-expansion-panel-content class="filter-content ">
-                                        {{ item.filterContent }}
-                                    </v-expansion-panel-content>
-                                </v-expansion-panel>
-                                <v-divider class="filter-divider my-2"></v-divider>
-                            </v-expansion-panels>
+                            <v-select :items="item" label="Grade" outlined> </v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Book" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Title" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Sample question" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
                             <div v-for="item in switchs" :key="item.value"
                                 class="filter-switchs d-flex justify-space-between w-100 ">
                                 <p class="switch-title mb-0">{{ item.switchTitle }}</p>
@@ -42,7 +39,7 @@
                             </div>
                         </div>
                     </v-col>
-                    <v-col lg="9" md="9" sm="12"  class="sample-q-contents">
+                    <v-col lg="9" md="9" sm="12" class="sample-q-contents">
                         <div class="sample-q-content">
                             <v-breadcrumbs :items="breadcrumbs" class="sample-q-breadcrumb d-none d-md-block">
                                 <template v-slot:divider>
@@ -50,17 +47,14 @@
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-sample-header">
+                            <v-card class="d-none d-md-block desktop-sample-header" id="header-sample">
                                 <v-tabs>
                                     <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
                                     <i class="fa-solid fa-list"></i>
-                                    <!-- <nuxt-link to="lesson" v-for="i in 6" :key="i" :href="'#tab-' + i">
-                                        Item {{ i }}
-                                    </nuxt-link> -->
-                                    <v-badge bordered class="pa-1 mx-10" content="35000">
+                                    <v-badge bordered class="pa-1 mx-10 badge-sample" content="35000">
                                         <nuxt-link to="sample-q" class="nav-link nav-link1">
+                                            <span class="'icon icong-test mr-1"></span>
                                             Sample Exam
-                                            <span class="'icon icong-test"></span>
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="1258" color="#2E7D32">
@@ -137,7 +131,7 @@
                                                 <img :src="require('assets/images/' + item.itemImg)" alt="">
                                             </div>
                                         </v-col>
-                                        <v-col lg="10">
+                                        <v-col lg="10" class="px-0">
                                             <div class="sample-item-content d-flex flex-column justify-space-between">
                                                 <div class="item-content-title d-flex justify-space-between">
                                                     <p>
@@ -222,7 +216,8 @@
                                     <v-row>
                                         <v-col cols="3" class="pa-1">
                                             <div class="sample-book">
-                                                <img :src="require('assets/images/' + item.itemImg)" alt="" width="65" height="90">
+                                                <img :src="require('assets/images/' + item.itemImg)" alt="" width="65"
+                                                    height="90">
                                             </div>
                                         </v-col>
                                         <v-col cols="7" class="px-0">
@@ -314,6 +309,7 @@ export default {
     components: { category, Pagination, FilterModal },
     data() {
         return {
+            item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
             sampleFilters: [
                 {
                     filterTitle: "grade",
@@ -477,6 +473,22 @@ export default {
                 },
             ]
         }
-    }
+    },
+    beforeMount() {
+        window.addEventListener('scroll', this.testHeader);
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.testHeader);
+    },
+    methods: {
+        testHeader() {
+            let header = document.getElementById("header-sample")
+            if (scrollY > 210) {
+                header.classList.add("scroll-header")
+            } else if (scrollY < 200) {
+                header.classList.remove("scroll-header")
+            }
+        }
+    },
 }
 </script>

@@ -24,7 +24,7 @@
                 <v-row>
                     <v-col lg="3">
                         <div class="q-a-filter d-none d-sm-block">
-                            <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
+                            <!-- <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
                                 <v-expansion-panel>
                                     <v-expansion-panel-header class="filter-title">
                                         {{ item.filterTitle }}
@@ -33,7 +33,13 @@
                                         {{ item.filterContent }}
                                     </v-expansion-panel-content>
                                 </v-expansion-panel>
-                            </v-expansion-panels>
+                            </v-expansion-panels> -->
+                            <v-select :items="item" label="Grade" outlined> </v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Book" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Title" outlined></v-select>
+                            
                         </div>
                     </v-col>
                     <v-col lg="9" md="9" sm="12" class="q-a-contents">
@@ -44,7 +50,7 @@
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-q-a-header">
+                            <v-card class="d-none d-md-block desktop-q-a-header" id="header-qa">
                                 <v-tabs>
                                     <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
                                     <i class="fa-solid fa-list"></i>
@@ -61,10 +67,10 @@
                                             Training Content
                                         </nuxt-link>
                                     </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="21260" color="#BF360C">
+                                    <v-badge bordered class="pa-1 mx-auto badge-q" content="21260" color="#BF360C">
                                         <nuxt-link to="q&a" class="nav-link nav-link1">
+                                            <span class="'icon icong-qa mr-1"></span>
                                             Q & A
-                                            <span class="'icon icong-qa"></span>
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="1690" color="#5600E8">
@@ -131,7 +137,7 @@
                                                 <img :src="require('assets/images/' + item.itemImg)" alt="" class="item-image">
                                             </div>
                                         </v-col>
-                                        <v-col lg="10">
+                                        <v-col lg="10" class="px-0">
                                             <div class="q-a-content d-flex flex-column justify-space-between">
                                                 <div class="q-a-title d-flex justify-space-between">
                                                     <p>
@@ -239,6 +245,7 @@ export default {
     components: { category, Pagination, FilterModal },
     data() {
         return {
+            item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
             sampleFilters: [
                 {
                     filterTitle: "grade",
@@ -388,6 +395,22 @@ export default {
                 },
             ]
         }
-    }
+    },
+     beforeMount() {
+        window.addEventListener('scroll', this.testHeader);
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.testHeader);
+    },
+    methods: {
+        testHeader() {
+            let header = document.getElementById("header-qa")
+            if (scrollY > 210) {
+                header.classList.add("scroll-header")
+            } else if (scrollY < 200) {
+                header.classList.remove("scroll-header")
+            }
+        }
+    },
 }
 </script>
