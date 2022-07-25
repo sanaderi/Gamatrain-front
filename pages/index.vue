@@ -1566,15 +1566,6 @@ export default {
   },
   methods: {
 
-    // Only for test api
-    async testApi() {
-      await this.$axios.$get('/api/schools/search')
-        .then(response => {
-          this.test_schools=response;
-        }).catch(err => {
-
-      });
-    }
   }
 };
 </script>

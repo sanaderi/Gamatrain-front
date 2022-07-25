@@ -30,7 +30,9 @@ export default {
   css: ["@/assets/css/gama6/styles.css", "@/assets/scss/app.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    {src: 'plugins/axios.js'}
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -50,7 +52,6 @@ export default {
   modules: [
     'nuxt-material-design-icons',
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
   ],
 
   axios: {
@@ -59,11 +60,8 @@ export default {
   },
 
   proxy: {
-    '/api':
-      {
-        target: "https://core.gamatrain.com/api/v1",
-        changeOrigin: true
-      }
+
+    '/api/v1/': {target: "https://core.gamatrain.com",pathRewrite: {'^/api/v1/': '/api/v1/'}, secure: false, changeOrigin: true}
   },
 
 
