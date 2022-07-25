@@ -2153,7 +2153,7 @@ body {
 
     .v-stepper__step__step {
       height: 35px;
-      width: 35px;
+      min-width: 35px;
       font-size: 1.5rem;
       margin-left: -0.5rem !important;
 
@@ -2197,7 +2197,7 @@ body {
 
       .v-stepper__step__step {
         height: 35px;
-        width: 35px;
+        min-width: 35px;
         font-size: 1.5rem;
         margin-left: -0.5rem !important;
 
@@ -2234,9 +2234,10 @@ body {
     }
 
     .responsive-buttons {
-      position: absolute;
-      top: -2%;
-      left: 2%;
+      position: fixed;
+      bottom: 5%;
+      right: 2%;
+      z-index: 5;
     }
 
     .responsive-button {
@@ -2246,6 +2247,7 @@ body {
       font-weight: 500;
       border-radius: 1.8rem;
       box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+
     }
   }
 }
@@ -2419,10 +2421,6 @@ body {
       .video-player {
         position: relative;
 
-        .buttons {
-          //opacity: 0;
-        }
-
         &:hover .buttons {
           //opacity: 1;
           transition: .3s ease-in-out;
@@ -2497,7 +2495,7 @@ body {
           width: 100%;
           position: absolute;
           bottom: 0 !important;
-          right: 0;
+          right: 0 !important;
           display: flex;
           justify-content: flex-end;
           z-index: 5;
@@ -2723,6 +2721,13 @@ body {
       box-shadow: none;
     }
 
+    .scroll-header {
+      position: fixed;
+      z-index: 5;
+      width: 57%;
+      top: 0;
+    }
+
     .desktop-sample-header {
       margin: 1rem 0;
       border-radius: 1.2rem;
@@ -2741,7 +2746,12 @@ body {
                 border-style: none;
               }
 
-              .v-badge {
+              .badge-sample {
+                .v-badge__wrapper {
+                  .v-badge__badge {
+                    inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
+                  }
+                }
                 .nav-link1 {
                   padding: 0.5rem;
                   border: 1px solid $border;
@@ -2752,7 +2762,7 @@ body {
                 }
 
                 .nav-link1 span {
-                  font-size: 3rem;
+                  font-size: 2.5rem;
                   padding-left: 1rem;
                   color: $blue13;
                 }
@@ -2783,7 +2793,7 @@ body {
       }
 
       .nav-link1 span {
-        font-size: 3rem;
+        font-size: 2.5rem;
         padding-left: 1rem;
         color: $blue13;
       }
@@ -2855,31 +2865,25 @@ body {
     background-color: $gray12;
     padding: 2rem;
     border-radius: 1.2rem;
+    .v-input__control {
+      height: 5rem;
+      .v-input__slot {
+        padding: 0 !important;
 
-    .v-expansion-panels {
-      .filter-divider {
-        flex: 1 1 100% !important;
-      }
+        .v-select__slot {
+          background: white;
+          border-radius: 0.4rem;
 
-      .v-expansion-panel {
-        border-radius: 0.4rem;
-        margin: 1rem 0;
+          .v-label {
+            left: 1rem !important;
+          }
 
-        .filter-title {
-          font-size: 16px;
-          color: $gray45;
+          .v-select__selection--comma {
+            margin: 7px 4px 7px 9px;
+          }
         }
       }
-
-      .v-expansion-panel::before {
-        box-shadow: none;
-      }
-
-      .v-expansion-panel:not(:first-child)::after {
-        border-top: none;
-      }
     }
-
     .filter-switchs {
       .v-input {
         .v-input__slot {
@@ -2927,6 +2931,13 @@ body {
       box-shadow: none;
     }
 
+    .scroll-header {
+      position: fixed;
+      z-index: 5;
+      width: 57%;
+      top: 0;
+    }
+
     .desktop-training-header {
       margin: 1rem 0;
       border-radius: 1.2rem;
@@ -2945,7 +2956,12 @@ body {
                 border-style: none;
               }
 
-              .v-badge {
+              .badge-training {
+                .v-badge__wrapper {
+                  .v-badge__badge {
+                    inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
+                  }
+                }
                 .nav-link1 {
                   padding: 0.7rem;
                   border: 1px solid $border;
@@ -2960,7 +2976,7 @@ body {
                 }
 
                 .nav-link1 span {
-                  font-size: 3rem;
+                  font-size: 2.5rem;
                   padding-left: 1rem;
                 }
               }
@@ -2994,7 +3010,7 @@ body {
       }
 
       .nav-link1 span {
-        font-size: 3rem;
+        font-size: 2.5rem;
         padding-left: 1rem;
       }
 
@@ -3023,11 +3039,13 @@ body {
         .book-carousel-title h4 {
           font-size: 2.4rem;
           color: $white;
+          font-weight: 700;
         }
 
         .book-carousel-title p {
           font-size: 2.4rem;
           color: $white;
+          font-weight: 700;
         }
 
         .book-carousel-q ::before {
@@ -3119,8 +3137,8 @@ body {
         }
 
         .v-slide-group__prev {
-          width: 3rem;
-          height: 3rem;
+          width: 3.5rem;
+          height: 3.5rem;
           position: absolute;
           left: 9px;
           top: 50%;
@@ -3132,8 +3150,8 @@ body {
         }
 
         .v-slide-group__next {
-          width: 3rem;
-          height: 3rem;
+          width: 3.5rem;
+          height: 3.5rem;
           position: absolute;
           right: 9px;
           top: 50%;
@@ -3220,27 +3238,23 @@ body {
     padding: 2rem;
     border-radius: 1.2rem;
 
-    .v-expansion-panels {
-      .filter-divider {
-        flex: 1 1 100% !important;
-      }
+    .v-input__control {
+      height: 5rem;
+      .v-input__slot {
+        padding: 0 !important;
 
-      .v-expansion-panel {
-        border-radius: 0.4rem;
-        margin: 1rem 0;
+        .v-select__slot {
+          background: white;
+          border-radius: 0.4rem;
 
-        .filter-title {
-          font-size: 16px;
-          color: $gray45;
+          .v-label {
+            left: 1rem !important;
+          }
+
+          .v-select__selection--comma {
+            margin: 7px 4px 7px 9px;
+          }
         }
-      }
-
-      .v-expansion-panel::before {
-        box-shadow: none;
-      }
-
-      .v-expansion-panel:not(:first-child)::after {
-        border-top: none;
       }
     }
 
@@ -3293,6 +3307,12 @@ body {
       }
     }
 
+    .scroll-header {
+      position: fixed;
+      z-index: 5;
+      width: 57%;
+      top: 0;
+    }
 
     .desktop-q-a-header {
       margin: 1rem 0;
@@ -3312,7 +3332,12 @@ body {
                 border-style: none;
               }
 
-              .v-badge {
+              .badge-q {
+                .v-badge__wrapper {
+                  .v-badge__badge {
+                    inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
+                  }
+                }
                 .nav-link1 {
                   padding: 0.5rem;
                   border: 1px solid $border;
@@ -3323,7 +3348,7 @@ body {
                 }
 
                 .nav-link1 span {
-                  font-size: 3rem;
+                  font-size: 2.5rem;
                   padding-left: 1rem;
                   color: $red5;
                 }
@@ -3354,7 +3379,7 @@ body {
       }
 
       .nav-link1 span {
-        font-size: 3rem;
+        font-size: 2.5rem;
         padding-left: 1rem;
         color: $red5;
       }
@@ -3385,7 +3410,7 @@ body {
         .q-a-content {
           min-height: 100%;
 
-          .item-content-title {
+          .q-a-title {
             font-size: 24px;
             color: $gray45;
           }
@@ -3434,27 +3459,23 @@ body {
     padding: 2rem;
     border-radius: 1.2rem;
 
-    .v-expansion-panels {
-      .filter-divider {
-        flex: 1 1 100% !important;
-      }
+    .v-input__control {
+      height: 5rem;
+      .v-input__slot {
+        padding: 0 !important;
 
-      .v-expansion-panel {
-        border-radius: 0.4rem;
-        margin: 1rem 0;
+        .v-select__slot {
+          background: white;
+          border-radius: 0.4rem;
 
-        .filter-title {
-          font-size: 16px;
-          color: $gray45;
+          .v-label {
+            left: 1rem !important;
+          }
+
+          .v-select__selection--comma {
+            margin: 7px 4px 7px 9px;
+          }
         }
-      }
-
-      .v-expansion-panel::before {
-        box-shadow: none;
-      }
-
-      .v-expansion-panel:not(:first-child)::after {
-        border-top: none;
       }
     }
 
@@ -3507,6 +3528,12 @@ body {
       }
     }
 
+    .scroll-header {
+      position: fixed;
+      z-index: 5;
+      width: 57%;
+      top: 0;
+    }
 
     .desktop-online-exam-header {
       margin: 1rem 0;
@@ -3526,7 +3553,12 @@ body {
                 border-style: none;
               }
 
-              .v-badge {
+              .badge-online {
+                .v-badge__wrapper {
+                  .v-badge__badge {
+                    inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
+                  }
+                }
                 .nav-link1 {
                   padding: 0.7rem;
                   border: 1px solid $border;
@@ -3541,7 +3573,7 @@ body {
                 }
 
                 .nav-link1 span {
-                  font-size: 3rem;
+                  font-size: 2.5rem;
                   padding-left: 1rem;
                   color: $violet2;
                 }
@@ -3576,7 +3608,7 @@ body {
       }
 
       .nav-link1 span {
-        font-size: 3rem;
+        font-size: 2.5rem;
         padding-left: 1rem;
         color: $violet2;
       }
@@ -3606,11 +3638,13 @@ body {
         .book-carousel-title h4 {
           font-size: 2.4rem;
           color: $white;
+          font-weight: 700;
         }
 
         .book-carousel-title p {
           font-size: 2.4rem;
           color: $white;
+          font-weight: 700;
         }
 
         .book-carousel-q ::before {
@@ -3803,27 +3837,23 @@ body {
     padding: 2rem;
     border-radius: 1.2rem;
 
-    .v-expansion-panels {
-      .filter-divider {
-        flex: 1 1 100% !important;
-      }
+    .v-input__control {
+      height: 5rem;
+      .v-input__slot {
+        padding: 0 !important;
 
-      .v-expansion-panel {
-        border-radius: 0.4rem;
-        margin: 1rem 0;
+        .v-select__slot {
+          background: white;
+          border-radius: 0.4rem;
 
-        .filter-title {
-          font-size: 16px;
-          color: $gray45;
+          .v-label {
+            left: 1rem !important;
+          }
+
+          .v-select__selection--comma {
+            margin: 7px 4px 7px 9px;
+          }
         }
-      }
-
-      .v-expansion-panel::before {
-        box-shadow: none;
-      }
-
-      .v-expansion-panel:not(:first-child)::after {
-        border-top: none;
       }
     }
 
@@ -3875,6 +3905,12 @@ body {
       }
     }
 
+    .scroll-header {
+      position: fixed;
+      z-index: 5;
+      width: 57%;
+      top: 0;
+    }
 
     .desktop-tutorial-header {
       margin: 1rem 0;
@@ -3894,7 +3930,12 @@ body {
                 border-style: none;
               }
 
-              .v-badge {
+              .badge-tutorial {
+                .v-badge__wrapper {
+                  .v-badge__badge {
+                    inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
+                  }
+                }
                 .nav-link1 {
                   padding: 0.5rem;
                   border: 1px solid $border;
@@ -3905,7 +3946,7 @@ body {
                 }
 
                 .nav-link1 span {
-                  font-size: 3rem;
+                  font-size: 2.5rem;
                   padding-left: 1rem;
                   color: $category-textbook;
                 }
@@ -3936,7 +3977,7 @@ body {
       }
 
       .nav-link1 span {
-        font-size: 3rem;
+        font-size: 2.5rem;
         padding-left: 1rem;
         color: $category-textbook;
       }
@@ -4016,27 +4057,23 @@ body {
     padding: 2rem;
     border-radius: 1.2rem;
 
-    .v-expansion-panels {
-      .filter-divider {
-        flex: 1 1 100% !important;
-      }
+    .v-input__control {
+      height: 5rem;
+      .v-input__slot {
+        padding: 0 !important;
 
-      .v-expansion-panel {
-        border-radius: 0.4rem;
-        margin: 1rem 0;
+        .v-select__slot {
+          background: white;
+          border-radius: 0.4rem;
 
-        .filter-title {
-          font-size: 16px;
-          color: $gray45;
+          .v-label {
+            left: 1rem !important;
+          }
+
+          .v-select__selection--comma {
+            margin: 7px 4px 7px 9px;
+          }
         }
-      }
-
-      .v-expansion-panel::before {
-        box-shadow: none;
-      }
-
-      .v-expansion-panel:not(:first-child)::after {
-        border-top: none;
       }
     }
 
@@ -4088,6 +4125,12 @@ body {
       }
     }
 
+    .scroll-header {
+      position: fixed;
+      z-index: 5;
+      width: 57%;
+      top: 0;
+    }
 
     .desktop-teachers-header {
       margin: 1rem 0;
@@ -4107,7 +4150,12 @@ body {
                 border-style: none;
               }
 
-              .v-badge {
+              .badge-teachers {
+                .v-badge__wrapper {
+                  .v-badge__badge {
+                    inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
+                  }
+                }
                 .nav-link1 {
                   padding: 0.5rem;
                   border: 1px solid $border;
@@ -4119,7 +4167,7 @@ body {
                 }
 
                 .nav-link1 span {
-                  font-size: 3rem;
+                  font-size: 2.5rem;
                   padding-left: 1rem;
                   color: $category-tutor;
                 }
@@ -4150,7 +4198,7 @@ body {
       }
 
       .nav-link1 span {
-        font-size: 3rem;
+        font-size: 2.5rem;
         padding-left: 1rem;
         color: $red5;
       }
@@ -4599,27 +4647,23 @@ body {
     padding: 2rem;
     border-radius: 1.2rem;
 
-    .v-expansion-panels {
-      .filter-divider {
-        flex: 1 1 100% !important;
-      }
+    .v-input__control {
+      height: 5rem;
+      .v-input__slot {
+        padding: 0 !important;
 
-      .v-expansion-panel {
-        border-radius: 0.4rem;
-        margin: 1rem 0;
+        .v-select__slot {
+          background: white;
+          border-radius: 0.4rem;
 
-        .filter-title {
-          font-size: 16px;
-          color: $gray45;
+          .v-label {
+            left: 1rem !important;
+          }
+
+          .v-select__selection--comma {
+            margin: 7px 4px 7px 9px;
+          }
         }
-      }
-
-      .v-expansion-panel::before {
-        box-shadow: none;
-      }
-
-      .v-expansion-panel:not(:first-child)::after {
-        border-top: none;
       }
     }
 

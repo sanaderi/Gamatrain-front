@@ -25,16 +25,13 @@
                 <v-row>
                     <v-col lg="3">
                         <div class="online-exam-filter d-none d-sm-block">
-                            <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
-                                <v-expansion-panel>
-                                    <v-expansion-panel-header class="filter-title">
-                                        {{ item.filterTitle }}
-                                    </v-expansion-panel-header>
-                                    <v-expansion-panel-content class="filter-content">
-                                        {{ item.filterContent }}
-                                    </v-expansion-panel-content>
-                                </v-expansion-panel>
-                            </v-expansion-panels>
+                            <v-select :items="item" label="Grade" outlined> </v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Book" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Title" outlined></v-select>
+                            <v-divider class="filter-divider my-5"></v-divider>
+                            <v-select :items="item" label="Sample question" outlined></v-select>
                         </div>
                     </v-col>
                     <v-col lg="9" md="9" sm="12" class="online-exam-contents">
@@ -45,11 +42,11 @@
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-online-exam-header">
+                            <v-card class="d-none d-md-block desktop-online-exam-header" id="header-online">
                                 <v-tabs>
                                     <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
                                     <i class="fa-solid fa-list"></i>
-                                    <v-badge bordered class="pa-1 mx-10" content="35000">
+                                    <v-badge bordered class="pa-1 mx-10 " content="35000">
                                         <nuxt-link to="sample-q" class="nav-link">
                                             Sample Exam
                                         </nuxt-link>
@@ -62,10 +59,10 @@
                                     <v-badge bordered class="pa-1 mx-auto" content="21260" color="#BF360C">
                                         <nuxt-link to="q&a" class="nav-link"> Q & A </nuxt-link>
                                     </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="1690" color="#5600E8">
+                                    <v-badge bordered class="pa-1 mx-auto badge-online" content="1690" color="#5600E8">
                                         <nuxt-link to="online-exam" class="nav-link nav-link1">
+                                            <span class="'icon icong-azmoon mr-1"></span>
                                             Online Exam
-                                            <span class="'icon icong-azmoon"></span>
                                         </nuxt-link>
                                     </v-badge>
                                     <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
@@ -150,14 +147,14 @@
                                                                 </nuxt-link>
                                                                 <nuxt-link to="">
                                                                     <div
-                                                                        class="book-test pa-2 my-2 d-flex justify-space-between align-center">
+                                                                        class="book-test px-2 py-1 my-2 d-flex justify-space-between align-center">
                                                                         <p class="test-number">{{ book.test }}</p>
                                                                         <p>test</p>
                                                                     </div>
                                                                 </nuxt-link>
                                                                 <nuxt-link to="">
                                                                     <div
-                                                                        class="book-price  pa-2  my-2 d-flex justify-space-between align-center">
+                                                                        class="book-price  px-2 py-1  my-2 d-flex justify-space-between align-center">
                                                                         <p class="price-number">{{ book.price }}</p>
                                                                         <p>Dollar</p>
                                                                     </div>
@@ -184,7 +181,7 @@
                                                     class="item-image" />
                                             </div>
                                         </v-col>
-                                        <v-col lg="10">
+                                        <v-col lg="10" class="px-0">
                                             <div class="
                           online-exam-item-content
                           d-flex
@@ -372,6 +369,7 @@ export default {
     components: { category, Pagination, FilterModal },
     data() {
         return {
+            item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
             model: null,
             bookCarousel: {
                 carouselName: "Create Test",
@@ -381,62 +379,62 @@ export default {
                 {
                     img: "poster1.jpg",
                     title: "Maths",
-                    test: "14",
-                    price: "16",
+                    test: "3405",
+                    price: "3405",
                 },
                 {
                     img: "book2.png",
                     title: "History",
-                    test: "14",
-                    price: "16",
+                    test: "3405",
+                    price: "3405",
                 },
                 {
                     img: "book3.png",
                     title: "Art",
-                    test: "14",
-                    price: "16",
+                    test: "3405",
+                    price: "3405",
                 },
                 {
                     img: "book4.png",
                     title: "Geography",
-                    test: "14",
-                    price: "16",
+                    test: "3405",
+                    price: "3405",
                 },
                 {
                     img: "poster1.jpg",
                     title: "Maths",
-                    test: "14",
-                    price: "16",
+                    test: "3405",
+                    price: "3405",
                 },
                 {
                     img: "book2.png",
                     title: "Maths",
-                    test: "14",
-                    price: "16",
+                    test: "3405",
+                    price: "3405",
                 },
                 {
                     img: "poster1.jpg",
                     title: "Maths",
-                    test: "14",
-                    price: "16",
+                    test: "3405",
+                    price: "3405",
                 },
                 {
                     img: "book2.png",
                     title: "History",
-                    test: "14",
-                    price: "16",
+                    test: "3405",
+                    price: "3405",
                 },
                 {
                     img: "book3.png",
                     title: "Art",
-                    test: "14",
-                    price: "16",
+                    test: "3405",
+                    price: "3405",
                 },
                 {
                     img: "book4.png",
                     title: "Geography",
-                    test: "14",
-                    price: "16",
+                    test: "3405",
+                    price: "3405",
                 },
 
             ],
@@ -633,6 +631,22 @@ export default {
                 },
             ],
         };
+    },
+    beforeMount() {
+        window.addEventListener('scroll', this.testHeader);
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.testHeader);
+    },
+    methods: {
+        testHeader() {
+            let header = document.getElementById("header-online")
+            if (scrollY > 210) {
+                header.classList.add("scroll-header")
+            } else if (scrollY < 200) {
+                header.classList.remove("scroll-header")
+            }
+        }
     },
 };
 </script>

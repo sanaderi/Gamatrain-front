@@ -58,12 +58,42 @@ body {
         max-width: 90%;
         width: 90%;
       }
+      .feed {
+        .last-files {
+          .video-slider {
+
+            .v-carousel {
+              .v-carousel__controls {
+                bottom: 8% !important;
+              }
+            }
+            .slider-rating {
+              bottom: 11%;
+            }
+          }
+        }
+      }
     }
 
     @media (max-width: 1380px) {
       .container {
         max-width: 98%;
         width: 98%;
+      }
+      .feed {
+        .last-files {
+          .video-slider {
+
+            .v-carousel {
+              .v-carousel__controls {
+                bottom: 10% !important;
+              }
+            }
+            .slider-rating {
+              bottom: 13%;
+            }
+          }
+        }
       }
 
       // start: sample-q
@@ -106,7 +136,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
 
         .filter-mobile-btn {
           background-color: $green;
@@ -272,7 +302,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
 
         .filter-mobile-btn {
           background-color: $green;
@@ -439,7 +469,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
         z-index: 50;
 
         .filter-mobile-btn {
@@ -609,7 +639,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5% !important;
         z-index: 10;
 
         .filter-mobile-btn {
@@ -895,7 +925,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
         z-index: 50;
 
         .filter-mobile-btn {
@@ -1049,7 +1079,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
         z-index: 50;
 
         .filter-mobile-btn {
@@ -1132,10 +1162,282 @@ body {
 
       // End: Teachers
     }
+    @media (max-width:1250px) {
+      .feed {
+        .last-files {
+          .video-slider {
 
-    @media (min-width: 960px) {}
+            .v-carousel {
+              .v-carousel__controls {
+                bottom: 17% !important;
+              }
+            }
+            .slider-rating {
+              bottom: 20%;
+            }
+          }
+        }
+      }
+    }
+    @media (max-width:1180px) {
+      .feed {
+        .last-files {
+          .video-slider {
+
+            .v-carousel {
+              .v-carousel__controls {
+                bottom: 22% !important;
+              }
+            }
+            .slider-rating {
+              bottom: 25%;
+            }
+          }
+        }
+      }
+    }
+    @media (max-width:1070px) {
+      .feed {
+        .last-files {
+          .video-slider {
+
+            .v-carousel {
+              .v-carousel__controls {
+                bottom: 27% !important;
+              }
+            }
+            .slider-rating {
+              bottom: 30%;
+            }
+          }
+        }
+      }
+    }
+    @media (max-width:1000px) {
+      .feed {
+        .last-files {
+          .video-slider {
+
+            .v-carousel {
+              .v-carousel__controls {
+                bottom: 32% !important;
+              }
+            }
+            .slider-rating {
+              bottom: 35%;
+            }
+          }
+        }
+      }
+    }
+
+    @media (min-width: 960px) {
+      
+    }
 
     @media screen and (max-width: 900px) {
+      .feed {
+        .last-files {
+          .video-slider {
+
+            .v-carousel {
+              .v-carousel__controls {
+                bottom: 0% !important;
+              }
+            }
+            .slider-rating {
+              bottom: 3%;
+            }
+          }
+        }
+      }
+        // category
+    .category {
+      .category-more {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        background: $gray10;
+      }
+
+      .cat-more-icon {
+        color: $gray25;
+        font-size: 4rem;
+      }
+
+      .cat-more-p {
+        font-size: 0.95rem;
+        color: $gray9;
+      }
+
+      border: none;
+      box-shadow: none;
+
+      .icon {
+        &:before {
+          font-size: 3.5rem;
+        }
+      }
+
+      .v-list-item__title {
+        font-size: $fontsize2;
+        white-space: break-spaces;
+      }
+
+      .test {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-test;
+        }
+
+        .p-icon {
+          background: $category-test;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .content {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-content;
+        }
+
+        .p-icon {
+          background: $category-content;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .faq {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-faq;
+        }
+
+        .p-icon {
+          background: $category-faq;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .exam {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-azmoon;
+        }
+
+        .p-icon {
+          background: $category-azmoon;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .textbook {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-textbook;
+        }
+
+        .p-icon {
+          background: $category-textbook;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .school {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-school;
+        }
+
+        .p-icon {
+          background: $category-school;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .tutor {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-tutor;
+        }
+
+        .p-icon {
+          background: $category-tutor;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+    }
       .category {
         .v-list-item {
           padding: 0;
@@ -1144,6 +1446,193 @@ body {
     }
 
     @media screen and (max-width: 820px) {
+        // category
+    .category {
+      .category-more {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        background: $gray10;
+      }
+
+      .cat-more-icon {
+        color: $gray25;
+        font-size: 4rem;
+      }
+
+      .cat-more-p {
+        font-size: 0.95rem;
+        color: $gray9;
+      }
+
+      border: none;
+      box-shadow: none;
+
+      .icon {
+        &:before {
+          font-size: 3.5rem;
+        }
+      }
+
+      .v-list-item__title {
+        font-size: $fontsize2;
+        white-space: break-spaces;
+      }
+
+      .test {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-test;
+        }
+
+        .p-icon {
+          background: $category-test;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .content {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-content;
+        }
+
+        .p-icon {
+          background: $category-content;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .faq {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-faq;
+        }
+
+        .p-icon {
+          background: $category-faq;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .exam {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-azmoon;
+        }
+
+        .p-icon {
+          background: $category-azmoon;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .textbook {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-textbook;
+        }
+
+        .p-icon {
+          background: $category-textbook;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .school {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-school;
+        }
+
+        .p-icon {
+          background: $category-school;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .tutor {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-tutor;
+        }
+
+        .p-icon {
+          background: $category-tutor;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+    }
       .container {
         padding: 0;
       }
@@ -1380,6 +1869,193 @@ body {
     }
 
     @media (max-width:811px) {
+      // category
+    .category {
+      .category-more {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        background: $gray10;
+      }
+
+      .cat-more-icon {
+        color: $gray25;
+        font-size: 4rem;
+      }
+
+      .cat-more-p {
+        font-size: 0.95rem;
+        color: $gray9;
+      }
+
+      border: none;
+      box-shadow: none;
+
+      .icon {
+        &:before {
+          font-size: 3.5rem;
+        }
+      }
+
+      .v-list-item__title {
+        font-size: $fontsize2;
+        white-space: break-spaces;
+      }
+
+      .test {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-test;
+        }
+
+        .p-icon {
+          background: $category-test;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .content {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-content;
+        }
+
+        .p-icon {
+          background: $category-content;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .faq {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-faq;
+        }
+
+        .p-icon {
+          background: $category-faq;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .exam {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-azmoon;
+        }
+
+        .p-icon {
+          background: $category-azmoon;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .textbook {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-textbook;
+        }
+
+        .p-icon {
+          background: $category-textbook;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .school {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-school;
+        }
+
+        .p-icon {
+          background: $category-school;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+
+      .tutor {
+        min-width: 33%;
+        display: flex;
+        justify-content: center;
+
+        .icon,
+        .v-list-item__title {
+          color: $category-tutor;
+        }
+
+        .p-icon {
+          background: $category-tutor;
+          border-radius: 10px;
+          width: 6rem;
+          height: 6rem;
+        }
+
+        .icon {
+          color: $white;
+        }
+      }
+    }
       // start: Teachers
       .v-dialog__content {
         .filter-show-result {
@@ -1420,7 +2096,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
         z-index: 50;
 
         .filter-mobile-btn {
@@ -1807,6 +2483,40 @@ body {
       }
 
       .book {
+        .stepper {
+          .stepper-item:hover {
+            color: $green;
+          }
+    
+          .stepper-item:focus {
+            color: $green;
+          }
+    
+          .stepper-1 {
+            .mdi-check::before {
+              content: "1";
+            }
+          }
+    
+          .stepper-2 {
+            .mdi-check::before {
+              content: "2";
+            }
+          }
+    
+          .stepper-3 {
+            .mdi-check::before {
+              content: "3";
+            }
+          }
+    
+          .stepper-4 {
+            .mdi-check::before {
+              content: "4";
+            }
+          }
+    
+        }
         .container {
           margin-bottom: 4rem !important;
         }
@@ -2023,7 +2733,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
         z-index: 50;
 
         .filter-mobile-btn {
@@ -2192,7 +2902,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
         z-index: 10;
 
         .filter-mobile-btn {
@@ -2463,7 +3173,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
         z-index: 50;
 
         .filter-mobile-btn {
@@ -2633,7 +3343,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
         z-index: 10;
 
         .filter-mobile-btn {
@@ -2919,7 +3629,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
         z-index: 50;
 
         .filter-mobile-btn {
@@ -3073,7 +3783,7 @@ body {
       .filter-btn {
         position: fixed;
         bottom: 8%;
-        left: 5%;
+        right: 5%;
         z-index: 50;
 
         .filter-mobile-btn {

@@ -1562,7 +1562,6 @@ export default {
   }),
 
   mounted() {
-    this.testApi();
   },
   methods: {
 

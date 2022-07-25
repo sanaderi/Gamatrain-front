@@ -22,6 +22,7 @@ export default {
       { rel: "stylesheet", href: "/assets/css/all.min.css" },
     ],
     script: [
+      { src: './assets/js/jquery.js',body:true },
       { src: './assets/js/video.min.js',body:true },
     ],
   },

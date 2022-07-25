@@ -8,7 +8,7 @@
           :key="category"
           :class="item.class"
           class="card"
-          xs="3"
+          
         >
           <nuxt-link :to="item.link">
             <v-list-item class="d-flex flex-column mx-7 pa-0">
