@@ -125,6 +125,8 @@
 
                 </v-tabs>
               </v-card>
+
+
               <!-- sample-q-items-desktop -->
               <div class="tutorial-items tutorial-items-desktop d-none d-lg-block">
                 <div class="tutorial-item pa-6 my-5" v-for="item in items" :key="item.value">
@@ -146,15 +148,19 @@
                         </div>
                         <p class="item-content-subtitle">
                           <nuxt-link :to="`/tutorial-details/${item.id}`">
-                            {{ item.subtitle }}
+                            {{ item.description }}
                           </nuxt-link>
                         </p>
-                        <div class="item-content-tags d-flex">
-                          <div class="item-content-tag " v-for="item in tags">
-                            <nuxt-link to="">
-                              {{ item.tag }}
-                            </nuxt-link>
-                          </div>
+                        <div>
+                            <v-chip to="">
+                              {{ item.section_title }}
+                            </v-chip>
+                            <v-chip to="">
+                              {{ item.base_title }}
+                            </v-chip>
+                            <v-chip to="">
+                              {{ item.lesson_title }}
+                            </v-chip>
                         </div>
                         <div class="item-content-footer d-flex justify-space-between">
                           <div class="d-flex ">
@@ -167,7 +173,7 @@
                             <div
                               class="item-content-last-update d-flex align-center mx-auto">
                               <i class="fa-solid fa-calendar-days"></i>
-                              <p class="mx-2">last update : {{ item.update }}</p>
+                              <p class="mx-2">last update : {{ item.up_date }}</p>
                             </div>
                           </div>
                         </div>
@@ -194,13 +200,9 @@
                           </nuxt-link>
                         </p>
                         <div class="item-content-tags d-flex mt-3">
-                          <div class="item-content-tag" v-for="item in tags">
-                            <nuxt-link to="">
-                              <p>
-                                {{ item.tag }}
-                              </p>
-                            </nuxt-link>
-                          </div>
+                            <v-chip to="">
+                                {{ item.section_title }}
+                            </v-chip>
                         </div>
                       </div>
                     </v-col>
