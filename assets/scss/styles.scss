@@ -2692,7 +2692,7 @@ body {
       top: 0;
     }
 
-    .desktop-sample-header {
+    .tab-header {
       margin: 1rem 0;
       border-radius: 1.2rem;
 
@@ -2716,16 +2716,22 @@ body {
                     inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
                   }
                 }
-                .nav-link1 {
+
+                .sample-q-icon {
                   padding: 0.5rem;
                   border: 1px solid $border;
                   background: rgba(41, 98, 255, 0.05);
                   border-radius: 1.4rem;
                   display: flex;
                   align-items: center;
+
+                  .icong-test {
+                    display: block !important;
+                  }
                 }
 
-                .nav-link1 span {
+                .sample-q-icon span {
+
                   font-size: 2.5rem;
                   padding-left: 1rem;
                   color: $blue13;
@@ -2743,31 +2749,6 @@ body {
             }
           }
         }
-      }
-    }
-
-    .mobile-sample-header {
-      .nav-link1 {
-        padding: 0.5rem;
-        border: 1px solid $border;
-        background: rgba(41, 98, 255, 0.05) !important;
-        border-radius: 1.4rem;
-        display: flex;
-        align-items: center;
-      }
-
-      .nav-link1 span {
-        font-size: 2.5rem;
-        padding-left: 1rem;
-        color: $blue13;
-      }
-
-      i {
-        display: none;
-      }
-
-      .nav-link {
-        color: $gray4  !important;
       }
     }
 
@@ -2791,17 +2772,10 @@ body {
             width: 60%;
           }
 
-          .item-content-tags {
-            .item-content-tag {
-              padding: 0.5rem 0.8rem;
-              margin: 0 0.5rem;
-              border-radius: 1.6rem;
-              background: rgba(33, 33, 33, 0.08);
-            }
-          }
-
           .item-content-footer {
             color: $gray8;
+            display: flex;
+            justify-content: space-between;
 
             .item-content-footer-icon {
               margin: 0 1.5rem;
@@ -2829,8 +2803,10 @@ body {
     background-color: $gray12;
     padding: 2rem;
     border-radius: 1.2rem;
+
     .v-input__control {
       height: 5rem;
+
       .v-input__slot {
         padding: 0 !important;
 
@@ -2848,6 +2824,7 @@ body {
         }
       }
     }
+
     .filter-switchs {
       .v-input {
         .v-input__slot {
@@ -2902,7 +2879,7 @@ body {
       top: 0;
     }
 
-    .desktop-training-header {
+    .tab-header {
       margin: 1rem 0;
       border-radius: 1.2rem;
 
@@ -2926,20 +2903,25 @@ body {
                     inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
                   }
                 }
-                .nav-link1 {
-                  padding: 0.7rem;
+
+                .training-content-icon {
+                  padding: 0.5rem;
                   border: 1px solid $border;
                   background: rgba(1, 87, 155, 0.02);
                   border-radius: 1.4rem;
                   display: flex;
                   align-items: center;
 
+                  .icong-learnfiles {
+                    display: block !important;
+                  }
+
                   .icong-learnfiles::before {
                     color: $category-content;
                   }
                 }
 
-                .nav-link1 span {
+                .training-content-icon span {
                   font-size: 2.5rem;
                   padding-left: 1rem;
                 }
@@ -2956,34 +2938,6 @@ body {
             }
           }
         }
-      }
-    }
-
-    .mobile-training-header {
-      .nav-link1 {
-        padding: 0.5rem;
-        border: 1px solid $border;
-        background: rgba(46, 125, 50, 0.05) !important;
-        border-radius: 1.4rem;
-        display: flex;
-        align-items: center;
-
-        .icong-learnfiles::before {
-          color: $category-content;
-        }
-      }
-
-      .nav-link1 span {
-        font-size: 2.5rem;
-        padding-left: 1rem;
-      }
-
-      i {
-        display: none;
-      }
-
-      .nav-link {
-        color: $gray4  !important;
       }
     }
 
@@ -3162,16 +3116,8 @@ body {
             width: 60%;
           }
 
-          .item-content-tags {
-            .item-content-tag {
-              padding: 0.5rem 0.8rem;
-              margin: 0 0.5rem;
-              border-radius: 1.6rem;
-              background: rgba(33, 33, 33, 0.08);
-            }
-          }
-
           .item-content-footer {
+            display: flex;
             color: $gray8;
             font-size: 12px;
 
@@ -3204,6 +3150,7 @@ body {
 
     .v-input__control {
       height: 5rem;
+
       .v-input__slot {
         padding: 0 !important;
 
@@ -3278,7 +3225,7 @@ body {
       top: 0;
     }
 
-    .desktop-q-a-header {
+    .tab-header {
       margin: 1rem 0;
       border-radius: 1.2rem;
 
@@ -3302,16 +3249,21 @@ body {
                     inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
                   }
                 }
-                .nav-link1 {
+
+                .q-a-icon {
                   padding: 0.5rem;
                   border: 1px solid $border;
                   background: rgba(189, 8, 28, 0.05);
                   border-radius: 1.4rem;
                   display: flex;
                   align-items: center;
+
+                  .icong-qa {
+                    display: block !important;
+                  }
                 }
 
-                .nav-link1 span {
+                .q-a-icon span {
                   font-size: 2.5rem;
                   padding-left: 1rem;
                   color: $red5;
@@ -3332,30 +3284,7 @@ body {
       }
     }
 
-    .mobile-q-a-header {
-      .nav-link1 {
-        padding: 0.5rem;
-        border: 1px solid $border;
-        background: rgba(191, 54, 12, 0.05) !important;
-        border-radius: 1.4rem;
-        display: flex;
-        align-items: center;
-      }
 
-      .nav-link1 span {
-        font-size: 2.5rem;
-        padding-left: 1rem;
-        color: $red5;
-      }
-
-      i {
-        display: none;
-      }
-
-      .nav-link {
-        color: $gray4  !important;
-      }
-    }
 
     .q-a-items {
       margin: 3rem 0;
@@ -3384,16 +3313,9 @@ body {
             width: 90%;
           }
 
-          .item-content-tags {
-            .item-content-tag {
-              padding: 0.5rem 0.8rem;
-              margin: 0 0.5rem;
-              border-radius: 1.6rem;
-              background: rgba(33, 33, 33, 0.08);
-            }
-          }
-
           .item-content-footer {
+            display: flex;
+            justify-content: space-between;
             color: $gray8;
 
             .item-content-footer-icon {
@@ -3425,6 +3347,7 @@ body {
 
     .v-input__control {
       height: 5rem;
+
       .v-input__slot {
         padding: 0 !important;
 
@@ -3499,7 +3422,7 @@ body {
       top: 0;
     }
 
-    .desktop-online-exam-header {
+    .tab-header {
       margin: 1rem 0;
       border-radius: 1.2rem;
 
@@ -3523,20 +3446,25 @@ body {
                     inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
                   }
                 }
-                .nav-link1 {
-                  padding: 0.7rem;
+
+                .exam-icon {
+                  padding: 0.5rem;
                   border: 1px solid $border;
                   background: rgba(86, 0, 232, 0.05);
                   border-radius: 1.4rem;
                   display: flex;
                   align-items: center;
 
+                  .icong-azmoon {
+                    display: block !important;
+                  }
+
                   .icong-learnfiles::before {
                     color: $category-content;
                   }
                 }
 
-                .nav-link1 span {
+                .exam-icon span {
                   font-size: 2.5rem;
                   padding-left: 1rem;
                   color: $violet2;
@@ -3557,34 +3485,7 @@ body {
       }
     }
 
-    .mobile-online-exam-header {
-      .nav-link1 {
-        padding: 0.5rem;
-        border: 1px solid $border;
-        background: rgba(86, 0, 232, 0.05) !important;
-        border-radius: 1.4rem;
-        display: flex;
-        align-items: center;
 
-        .icong-learnfiles::before {
-          color: $category-content;
-        }
-      }
-
-      .nav-link1 span {
-        font-size: 2.5rem;
-        padding-left: 1rem;
-        color: $violet2;
-      }
-
-      i {
-        display: none;
-      }
-
-      .nav-link {
-        color: $gray4  !important;
-      }
-    }
 
     .book-carousel {
       background-color: $green;
@@ -3762,17 +3663,19 @@ body {
           }
 
           .item-content-tags {
-            .item-content-tag {
-              padding: 0.5rem 0.8rem;
-              margin: 0 0.5rem;
-              border-radius: 1.6rem;
-              background: rgba(33, 33, 33, 0.08);
+            display: flex;
+
+            .v-chip {
+              padding: 0 0.6rem;
+              font-size: 1rem;
             }
           }
 
           .item-content-footer {
             color: $gray8;
             font-size: 12px;
+            display: flex;
+            justify-content: space-between;
 
             .item-content-footer-icon {
               margin: 0 1.5rem;
@@ -3803,6 +3706,7 @@ body {
 
     .v-input__control {
       height: 5rem;
+
       .v-input__slot {
         padding: 0 !important;
 
@@ -3876,7 +3780,7 @@ body {
       top: 0;
     }
 
-    .desktop-tutorial-header {
+    .tab-header {
       margin: 1rem 0;
       border-radius: 1.2rem;
 
@@ -3900,16 +3804,21 @@ body {
                     inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
                   }
                 }
-                .nav-link1 {
+
+                .tutorial-icon {
                   padding: 0.5rem;
                   border: 1px solid $border;
                   background: rgba(189, 8, 28, 0.05);
                   border-radius: 1.4rem;
                   display: flex;
                   align-items: center;
+
+                  .icong-blog {
+                    display: block !important;
+                  }
                 }
 
-                .nav-link1 span {
+                .tutorial-icon span {
                   font-size: 2.5rem;
                   padding-left: 1rem;
                   color: $category-textbook;
@@ -3930,31 +3839,6 @@ body {
       }
     }
 
-    .mobile-tutorial-header {
-      .nav-link1 {
-        padding: 0.5rem;
-        border: 1px solid $border;
-        background: rgba(191, 54, 12, 0.05) !important;
-        border-radius: 1.4rem;
-        display: flex;
-        align-items: center;
-      }
-
-      .nav-link1 span {
-        font-size: 2.5rem;
-        padding-left: 1rem;
-        color: $category-textbook;
-      }
-
-      i {
-        display: none;
-      }
-
-      .nav-link {
-        color: $gray4  !important;
-      }
-    }
-
     .tutorial-items {
       margin: 3rem 0;
 
@@ -3964,6 +3848,7 @@ body {
 
         .item-img {
           .item-image {
+            width: 100%;
             border-radius: 1rem;
           }
         }
@@ -3982,17 +3867,10 @@ body {
             width: 90%;
           }
 
-          .item-content-tags {
-            .item-content-tag {
-              padding: 0.5rem 0.8rem;
-              margin: 0 0.5rem;
-              border-radius: 1.6rem;
-              background: rgba(33, 33, 33, 0.08);
-            }
-          }
-
           .item-content-footer {
             color: $gray8;
+            display: flex;
+            justify-content: space-between;
 
             .item-content-footer-icon {
               margin: 0 1.5rem;
@@ -4023,6 +3901,7 @@ body {
 
     .v-input__control {
       height: 5rem;
+
       .v-input__slot {
         padding: 0 !important;
 
@@ -4096,7 +3975,7 @@ body {
       top: 0;
     }
 
-    .desktop-teachers-header {
+    .tab-header {
       margin: 1rem 0;
       border-radius: 1.2rem;
 
@@ -4120,17 +3999,21 @@ body {
                     inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
                   }
                 }
-                .nav-link1 {
+
+                .teacher-icon {
                   padding: 0.5rem;
                   border: 1px solid $border;
                   background: rgba(142, 36, 170, 0.05);
-                  ;
                   border-radius: 1.4rem;
                   display: flex;
                   align-items: center;
+
+                  .icong-teacher {
+                    display: block !important;
+                  }
                 }
 
-                .nav-link1 span {
+                .teacher-icon span {
                   font-size: 2.5rem;
                   padding-left: 1rem;
                   color: $category-tutor;
@@ -4613,6 +4496,7 @@ body {
 
     .v-input__control {
       height: 5rem;
+
       .v-input__slot {
         padding: 0 !important;
 

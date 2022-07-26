@@ -21,8 +21,8 @@
         <section class="teachers">
             <v-container>
                 <v-row>
-                    <v-col lg="3">
-                        <div class="teachers-filter d-none d-sm-block">
+                    <v-col lg="3" class="d-none d-sm-block">
+                        <div class="teachers-filter ">
                             <v-select :items="item" label="Grade" outlined> </v-select>
                             <v-divider class="filter-divider my-5"></v-divider>
                             <v-select :items="item" label="Book" outlined></v-select>
@@ -52,86 +52,7 @@
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-teachers-header" id="header-teachers">
-                                <v-tabs>
-                                    <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                                    <i class="fa-solid fa-list"></i>
-                                    <!-- <nuxt-link to="lesson" v-for="i in 6" :key="i" :href="'#tab-' + i">
-                                        Item {{ i }}
-                                    </nuxt-link> -->
-                                    <v-badge bordered class="pa-1 mx-10" content="35000">
-                                        <nuxt-link to="sample-q" class="nav-link ">
-                                            Sample Exam
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="1258" color="#2E7D32">
-                                        <nuxt-link to="training-content" class="nav-link">
-                                            Training Content
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="21260" color="#BF360C">
-                                        <nuxt-link to="q&a" class="nav-link ">
-                                            Q & A
-
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="1690" color="#5600E8">
-                                        <nuxt-link to="online-exam" class="nav-link">
-                                            Online Exam
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
-                                        <nuxt-link to="tutorial" class="nav-link">
-                                            tutorial
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto badge-teachers" content="2810" color="#8E24AA">
-                                        <nuxt-link to="teachers" class="nav-link nav-link1">
-                                             <span class="'icon icong-teacher mr-1"></span>
-                                            Teacher
-                                        </nuxt-link>
-                                    </v-badge>
-                                </v-tabs>
-                            </v-card>
-                            <!-- header mobile -->
-                            <v-card class="d-block d-md-none mobile-teachers-header">
-                                <v-tabs>
-                                    <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                                    <i class="fa-solid fa-list"></i>
-
-                                    <nuxt-link to="sample-q" class="nav-link ">
-                                        Sample Exam
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="training-content" class="nav-link">
-                                        Training Content
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="q&a" class="nav-link ">
-                                        Q & A
-
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="online-exam" class="nav-link">
-                                        Online Exam
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="tutorial" class="nav-link">
-                                        tutorial
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="teachers" class="nav-link nav-link1">
-                                        Teacher
-                                        <span class="'icon icong-teacher"></span>
-                                    </nuxt-link>
-
-                                </v-tabs>
-                            </v-card>
+                            <Tabs/>
                             <!-- Teacher Items -->
                             <div class="teacher-items mb-6">
                                 <v-row>
@@ -317,8 +238,9 @@
 import category from "~/components/common/category.vue";
 import Pagination from "~/components/common/pagination.vue";
 import FilterModal from "~/components/common/filter-modal.vue";
+import Tabs from "~/components/common/tabs.vue";
 export default {
-    components: { category, Pagination, FilterModal },
+    components: { category, Pagination, FilterModal, Tabs },
     data() {
         return {
             item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
@@ -506,22 +428,7 @@ export default {
 
         }
     },
-    beforeMount() {
-        window.addEventListener('scroll', this.testHeader);
-    },
-    beforeDestroy() {
-        window.removeEventListener('scroll', this.testHeader);
-    },
-    methods: {
-        testHeader() {
-            let header = document.getElementById("header-teachers")
-            if (scrollY > 210) {
-                header.classList.add("scroll-header")
-            } else if (scrollY < 200) {
-                header.classList.remove("scroll-header")
-            }
-        }
-    },
+   
     watch: {
         overlay(val) {
             val && setTimeout(() => {

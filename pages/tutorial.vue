@@ -22,8 +22,8 @@
         <section class="tutorial">
             <v-container>
                 <v-row>
-                    <v-col lg="3">
-                        <div class="tutorial-filter d-none d-sm-block">
+                    <v-col lg="3" class="d-none d-sm-block">
+                        <div class="tutorial-filter ">
                             <v-select :items="item" label="Grade" outlined> </v-select>
                             <v-divider class="filter-divider my-5"></v-divider>
                             <v-select :items="item" label="Book" outlined></v-select>
@@ -41,123 +41,44 @@
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-tutorial-header" id="header-tutorial">
-                                <v-tabs>
-                                    <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                                    <i class="fa-solid fa-list"></i>
-                                    <!-- <nuxt-link to="lesson" v-for="i in 6" :key="i" :href="'#tab-' + i">
-                                        Item {{ i }}
-                                    </nuxt-link> -->
-                                    <v-badge bordered class="pa-1 mx-10" content="35000">
-                                        <nuxt-link to="sample-q" class="nav-link ">
-                                            Sample Exam
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="1258" color="#2E7D32">
-                                        <nuxt-link to="training-content" class="nav-link">
-                                            Training Content
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="21260" color="#BF360C">
-                                        <nuxt-link to="q&a" class="nav-link ">
-                                            Q & A
-
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="1690" color="#5600E8">
-                                        <nuxt-link to="online-exam" class="nav-link">
-                                            Online Exam
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto badge-tutorial" content="169" color="#BD081C">
-                                        <nuxt-link to="tutorial" class="nav-link nav-link1">
-                                            <span class="'icon icong-blog mr-1"></span>
-                                            tutorial
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
-                                        <nuxt-link to="teachers" class="nav-link">
-                                            Teacher
-                                        </nuxt-link>
-                                    </v-badge>
-                                </v-tabs>
-                            </v-card>
-                            <!-- header mobile -->
-                            <v-card class="d-block d-md-none mobile-tutorial-header">
-                                <v-tabs>
-                                    <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                                    <i class="fa-solid fa-list"></i>
-
-                                    <nuxt-link to="sample-q" class="nav-link ">
-                                        Sample Exam
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="training-content" class="nav-link">
-                                        Training Content
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="q&a" class="nav-link ">
-                                        Q & A
-                                        
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="online-exam" class="nav-link">
-                                        Online Exam
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="tutorial" class="nav-link nav-link1">
-                                        tutorial
-                                        <span class="'icon icong-blog"></span>
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="teachers" class="nav-link">
-                                        Teacher
-                                    </nuxt-link>
-
-                                </v-tabs>
-                            </v-card>
+                            <Tabs />
                             <!-- sample-q-items-desktop -->
-                            <div class="tutorial-items tutorial-items-desktop d-none d-lg-block">
-                                <div class="tutorial-item pa-6 my-5" v-for="item in items" :key="item.value">
+                            <div class="tutorial-items tutorial-items-desktop d-block">
+                                <div class="tutorial-item pa-1 pa-sm-6 my-5" v-for="item in items" :key="item.value">
                                     <v-row>
-                                        <v-col lg="2">
+                                        <v-col lg="2" cols="3">
                                             <div class="item-img">
                                                 <img :src="require('assets/images/' + item.itemImg)" alt=""
                                                     class="item-image">
                                             </div>
                                         </v-col>
-                                        <v-col lg="10" class="px-0">
+                                        <v-col lg="10" cols="9" class="px-0">
                                             <div class="tutorial-content d-flex flex-column justify-space-between">
                                                 <div class="tutorial-title d-flex justify-space-between">
                                                     <p>
                                                         {{ item.title }}
                                                     </p>
                                                 </div>
-                                                <p class="item-content-subtitle">
+                                                <p class="item-content-subtitle d-none d-sm-block">
                                                     <nuxt-link to="">
                                                         {{ item.subtitle }}
                                                     </nuxt-link>
                                                 </p>
                                                 <div class="item-content-tags d-flex">
-                                                    <div class="item-content-tag " v-for="item in tags">
+                                                    <v-chip link v-for="item in tags" class="mr-1">
                                                         <nuxt-link to="">
                                                             {{ item.tag }}
                                                         </nuxt-link>
-                                                    </div>
+                                                    </v-chip>
                                                 </div>
-                                                <div class="item-content-footer d-flex justify-space-between">
+                                                <div class="item-content-footer" v-show="isDesk">
                                                     <div class="d-flex ">
                                                         <div class="item-content-user d-flex align-center mr-2">
                                                             <img :src="require('@/assets/images/' + item.userImg)"
                                                                 alt="">
                                                             <p class="mx-2">{{ item.user }}</p>
                                                         </div>
-                                                        
+
                                                         <div
                                                             class="item-content-last-update d-flex align-center mx-auto">
                                                             <i class="fa-solid fa-calendar-days"></i>
@@ -167,48 +88,22 @@
                                                 </div>
                                             </div>
                                         </v-col>
-                                    </v-row>
-                                </div>
-                            </div>
-                            <!-- sample-q-items-mobile -->
-                            <div class="tutorial-items tutorial-items-mobile d-block d-lg-none">
-                                <div class="tutorial-item pa-1 pa-sm-5 my-5" v-for="item in items" :key="item.value">
-                                    <v-row>
-                                        <v-col cols="3" class="pa-1">
-                                            <div class="tutorial-book">
-                                                <img :src="require('assets/images/' + item.itemImg)" alt="" width="65"
-                                                    height="90">
-                                            </div>
-                                        </v-col>
-                                        <v-col cols="7" class="px-0">
-                                            <div class="tutorial-book-contents d-flex flex-column justify-space-between">
-                                                <p class="tutorial-book-title px-1">
-                                                    <nuxt-link to="">
-                                                        {{ item.title }}
-                                                    </nuxt-link>
-                                                </p>
-                                                <div class="item-content-tags d-flex mt-3">
-                                                    <div class="item-content-tag" v-for="item in tags">
-                                                        <nuxt-link to="">
-                                                            <p>
-                                                                {{ item.tag }}
-                                                            </p>
-                                                        </nuxt-link>
+                                        <v-col cols="12" v-show="isMobile" class="py-1">
+                                            <div class="item-content-footer">
+                                                <div class="d-flex ">
+                                                    <div class="item-content-user d-flex align-center mr-2">
+                                                        <img :src="require('@/assets/images/' + item.userImg)" alt="">
+                                                        <p class="mx-2">{{ item.user }}</p>
+                                                    </div>
+
+                                                    <div class="item-content-last-update d-flex align-center mr-2">
+                                                        <i class="fa-solid fa-calendar-days"></i>
+                                                        <p class="mx-2">{{ item.update }}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </v-col>
                                     </v-row>
-                                    <div class="tutorial-item-footer d-flex mt-2">
-                                        <div class="item-content-user d-flex align-center mr-2">
-                                            <img :src="require('@/assets/images/' + item.userImg)" alt="" width="25">
-                                            <p class="mx-2">{{ item.user }}</p>
-                                        </div>
-                                        <div class="item-content-last-update d-flex align-center mx-auto">
-                                            <i class="fa-solid fa-calendar-days"></i>
-                                            <p class="mx-2">confirm date : {{ item.update }}</p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <Pagination />
@@ -224,10 +119,13 @@
 import category from "~/components/common/category.vue";
 import Pagination from "~/components/common/pagination.vue";
 import FilterModal from "~/components/common/filter-modal.vue";
+import Tabs from "~/components/common/tabs.vue";
 export default {
-    components: { category, Pagination, FilterModal },
+    components: { category, Pagination, FilterModal, Tabs },
     data() {
         return {
+            isDesk: true,
+            isMobile: false,
             item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
             sampleFilters: [
                 {
@@ -383,21 +281,17 @@ export default {
             ]
         }
     },
-    beforeMount() {
-        window.addEventListener('scroll', this.testHeader);
-    },
-    beforeDestroy() {
-        window.removeEventListener('scroll', this.testHeader);
+    mounted() {
+        this.onResize()
+        window.addEventListener('resize', this.onResize)
     },
     methods: {
-        testHeader() {
-            let header = document.getElementById("header-tutorial")
-            if (scrollY > 210) {
-                header.classList.add("scroll-header")
-            } else if (scrollY < 200) {
-                header.classList.remove("scroll-header")
+        onResize() {
+            if (window.innerWidth < 600) {
+                this.isDesk = false
+                this.isMobile = true
             }
-        }
+        },
     },
 }
 </script>
