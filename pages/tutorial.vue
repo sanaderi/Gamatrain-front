@@ -72,7 +72,9 @@
                                                     </v-chip>
                                                 </div>
                                                 <div class="item-content-footer" v-show="isDesk">
-                                                    <div class="d-flex ">
+                                                    <TabsContentFooter :footerCard="item.footerCard">
+                                                    </TabsContentFooter>
+                                                    <!-- <div class="d-flex ">
                                                         <div class="item-content-user d-flex align-center mr-2">
                                                             <img :src="require('@/assets/images/' + item.userImg)"
                                                                 alt="">
@@ -84,12 +86,14 @@
                                                             <i class="fa-solid fa-calendar-days"></i>
                                                             <p class="mx-2">last update : {{ item.update }}</p>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                         </v-col>
                                         <v-col cols="12" v-show="isMobile" class="py-1">
-                                            <div class="item-content-footer">
+                                            <TabsContentFooter :footerCard="item.footerCard">
+                                            </TabsContentFooter>
+                                            <!-- <div class="item-content-footer">
                                                 <div class="d-flex ">
                                                     <div class="item-content-user d-flex align-center mr-2">
                                                         <img :src="require('@/assets/images/' + item.userImg)" alt="">
@@ -101,7 +105,7 @@
                                                         <p class="mx-2">{{ item.update }}</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </v-col>
                                     </v-row>
                                 </div>
@@ -120,8 +124,10 @@ import category from "~/components/common/category.vue";
 import Pagination from "~/components/common/pagination.vue";
 import FilterModal from "~/components/common/filter-modal.vue";
 import Tabs from "~/components/common/tabs.vue";
+import TabsContentFooter from "~/components/common/tabs-content-footer.vue";
+
 export default {
-    components: { category, Pagination, FilterModal, Tabs },
+    components: { category, Pagination, FilterModal, Tabs, TabsContentFooter },
     data() {
         return {
             isDesk: true,
@@ -192,91 +198,102 @@ export default {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3 july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        update: "3 july"
+                    }
+
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        update: "3 july"
+                    }
                 },
             ]
         }

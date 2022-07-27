@@ -204,7 +204,7 @@
                                                                 class="card-user-btn-class">
 
 
-                                                                private class
+                                                                 class
                                                                 <svg width="15" height="18" viewBox="0 0 15 18"
                                                                     fill="none" xmlns="http://www.w3.org/2000/svg"
                                                                     class="ml-3">

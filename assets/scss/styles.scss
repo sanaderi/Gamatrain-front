@@ -2772,10 +2772,36 @@ body {
             width: 60%;
           }
 
-          .item-content-footer {
+          .card-footer {
             color: $gray8;
             display: flex;
             justify-content: space-between;
+
+            .item-content-file-answers {
+              display: flex;
+              align-items: center;
+              margin: auto;
+              display: none !important;
+            }
+
+            .item-content-file-type {
+              display: flex;
+              align-items: center;
+            }
+
+            .item-content-test-type {
+              display: none;
+            }
+
+            .item-content-view {
+              display: flex;
+              align-items: center;
+            }
+
+            .item-content-last-update {
+              display: flex;
+              align-items: center;
+            }
 
             .item-content-footer-icon {
               margin: 0 1.5rem;
@@ -3116,18 +3142,47 @@ body {
             width: 60%;
           }
 
-          .item-content-footer {
+          .card-footer {
             display: flex;
             color: $gray8;
             font-size: 12px;
 
-            .item-content-footer-icon {
-              margin: 0 1.5rem;
+            .item-content-file-answers {
+              display: flex;
+              align-items: center;
+              margin: auto;
+              display: none !important;
             }
+
+            .item-content-file-type {
+              display: flex;
+              align-items: center;
+            }
+
+            .item-content-test-type {
+              display: none;
+            }
+
+            .item-content-view {
+              display: flex;
+              align-items: center;
+              display: none;
+            }
+
+            .item-content-last-update {
+              display: flex;
+              align-items: center;
+            }
+
+            svg {
+              display: none;
+            }
+
           }
         }
       }
     }
+
 
     .training-pagination {
       .v-pagination__item {
@@ -3313,10 +3368,37 @@ body {
             width: 90%;
           }
 
-          .item-content-footer {
+          .card-footer {
             display: flex;
             justify-content: space-between;
             color: $gray8;
+
+            .item-content-file-answers {
+              display: flex;
+              align-items: center;
+              margin: auto;
+            }
+
+            .item-content-file-type {
+              display: none;
+            }
+
+            .item-content-test-type {
+              display: none;
+            }
+
+            .item-content-view {
+              display: none;
+            }
+
+            .item-content-last-update {
+              display: flex;
+              align-items: center;
+            }
+
+            svg {
+              display: none;
+            }
 
             .item-content-footer-icon {
               margin: 0 1.5rem;
@@ -3671,11 +3753,36 @@ body {
             }
           }
 
-          .item-content-footer {
+          .card-footer {
             color: $gray8;
             font-size: 12px;
             display: flex;
             justify-content: space-between;
+
+            .item-content-file-answers {
+              display: none;
+            }
+
+            .item-content-file-type {
+              display: none;
+            }
+
+            .item-content-view {
+              display: none;
+            }
+
+            .item-content-test-type {
+              display: flex;
+              align-items: center;
+            }
+            .item-content-last-update {
+              display: flex;
+              align-items: center;
+            }
+
+            svg {
+              display: none;
+            }
 
             .item-content-footer-icon {
               margin: 0 1.5rem;
@@ -3867,10 +3974,33 @@ body {
             width: 90%;
           }
 
-          .item-content-footer {
+          .card-footer {
             color: $gray8;
             display: flex;
             justify-content: space-between;
+            .item-content-user {
+              display: flex;
+              align-items: center;
+            }
+            .item-content-file-answers {
+              display: none;
+            }
+            .item-content-file-type {
+              display: none;
+            }
+            .item-content-test-type {
+             display: none;
+            }
+            .item-content-view {
+              display: none;
+            }
+            .item-content-last-update {
+              display: flex;
+              align-items: center;
+            }
+            svg {
+              display: none;
+            }
 
             .item-content-footer-icon {
               margin: 0 1.5rem;

@@ -117,11 +117,12 @@
                             </div>
                             <!-- training-items-desktop -->
                             <div class="online-exam-items online-exam-items-desktop d-block">
-                                <div class="online-exam-item pa-sm-6 pa-1 my-5" v-for="item in items" :key="item.value">
+                                <div class="online-exam-item pa-sm-6 pa-1 my-5" v-for="(item, index) in items"
+                                    :key="index">
                                     <v-row>
                                         <v-col lg="2" cols="3">
                                             <div class="item-img">
-                                                <img :src="require('assets/images/' + item.itemImg)" alt=""
+                                                <img :src="require('@/assets/images/' + item.itemImg)" alt=""
                                                     class="item-image" />
                                             </div>
                                         </v-col>
@@ -175,40 +176,9 @@
                                                     item-content-footer
                            
                                                          " v-show="isDesk">
-                                                    <div class="d-flex">
-                                                        <div class="item-content-user d-flex align-center mr-2">
-                                                            <img :src="
-                                                                require('@/assets/images/' + item.userImg)
-                                                            " alt="" />
-                                                            <p class="mx-2">{{ item.user }}</p>
-                                                        </div>
-                                                        <div class="
-                                                           item-content-file-type
-                                                            d-flex
-                                                             align-center
-                                                            mx-auto
-                                                        ">
-                                                            <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M15.6667 1.99967H9.00008L7.33342 0.333008H2.33341C1.41675 0.333008 0.675081 1.08301 0.675081 1.99967L0.666748 11.9997C0.666748 12.9163 1.41675 13.6663 2.33341 13.6663H15.6667C16.5834 13.6663 17.3334 12.9163 17.3334 11.9997V3.66634C17.3334 2.74967 16.5834 1.99967 15.6667 1.99967ZM10.6667 10.333H4.00008V8.66634H10.6667V10.333ZM14.0001 6.99967H4.00008V5.33301H14.0001V6.99967Z"
-                                                                    fill="#616161" />
-                                                            </svg>
-                                                            <p class="mx-2">test type : {{ item.type }}</p>
-                                                        </div>
-
-                                                        <div class="
-                                                           item-content-last-update
-                                                          d-flex
-                                                     align-center
-                                                           mx-auto
-                                                            ">
-                                                            <i class="fa-solid fa-calendar-days"></i>
-                                                            <p class="mx-2">
-                                                                last update : {{ item.update }}
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                                                    <TabsContentFooter :footerCard="item.footerCard">
+                                                    </TabsContentFooter>
+                                                   
                                                 </div>
                                             </div>
                                         </v-col>
@@ -222,45 +192,9 @@
                                             </div>
                                         </v-col>
                                         <v-col cols="12" v-show="isMobile">
-                                            <div class="
-                                                    item-content-footer
-                           
-                                                         ">
-                                                <div class="d-flex">
-                                                    <div class="item-content-user d-flex align-center mr-2">
-                                                        <img :src="
-                                                            require('@/assets/images/' + item.userImg)
-                                                        " alt="" />
-                                                        <p class="mx-2">{{ item.user }}</p>
-                                                    </div>
-                                                    <div class="
-                                                           item-content-file-type
-                                                            d-flex
-                                                             align-center
-                                                            mr-2
-                                                        ">
-                                                        <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M15.6667 1.99967H9.00008L7.33342 0.333008H2.33341C1.41675 0.333008 0.675081 1.08301 0.675081 1.99967L0.666748 11.9997C0.666748 12.9163 1.41675 13.6663 2.33341 13.6663H15.6667C16.5834 13.6663 17.3334 12.9163 17.3334 11.9997V3.66634C17.3334 2.74967 16.5834 1.99967 15.6667 1.99967ZM10.6667 10.333H4.00008V8.66634H10.6667V10.333ZM14.0001 6.99967H4.00008V5.33301H14.0001V6.99967Z"
-                                                                fill="#616161" />
-                                                        </svg>
-                                                        <p class="mx-2">{{ item.type }}</p>
-                                                    </div>
-
-                                                    <div class="
-                                                           item-content-last-update
-                                                          d-flex
-                                                     align-center
-                                                           mr-2
-                                                            ">
-                                                        <i class="fa-solid fa-calendar-days"></i>
-                                                        <p class="mx-2">
-                                                            {{ item.update }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <TabsContentFooter :footerCard="item.footerCard">
+                                            </TabsContentFooter>
+                                           
                                         </v-col>
                                     </v-row>
                                 </div>
@@ -278,8 +212,10 @@ import category from "~/components/common/category.vue";
 import Pagination from "~/components/common/pagination.vue";
 import FilterModal from "~/components/common/filter-modal.vue";
 import Tabs from "~/components/common/tabs.vue";
+import TabsContentFooter from "~/components/common/tabs-content-footer.vue";
+
 export default {
-    components: { category, Pagination, FilterModal, Tabs },
+    components: { category, Pagination, FilterModal, Tabs, TabsContentFooter },
     data() {
         return {
             isSvg: false,
@@ -416,10 +352,13 @@ export default {
                     End: "Free",
                     title:
                         " standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-                    update: "3 july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
+
                 },
                 {
                     itemImg: "book1.jpg",
@@ -429,11 +368,12 @@ export default {
                     End: "Free",
                     title:
                         "  standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -443,11 +383,12 @@ export default {
                     End: "Free",
                     title:
                         "standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -457,11 +398,12 @@ export default {
                     End: "Free",
                     title:
                         ". standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -471,11 +413,12 @@ export default {
                     End: "Free",
                     title:
                         "  standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -485,11 +428,12 @@ export default {
                     End: "Free",
                     title:
                         " standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -499,11 +443,12 @@ export default {
                     End: "Free",
                     title:
                         "standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -513,11 +458,12 @@ export default {
                     End: "Free",
                     title:
                         " standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -527,11 +473,12 @@ export default {
                     End: "Free",
                     title:
                         "  standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -541,11 +488,12 @@ export default {
                     End: "Free",
                     title:
                         " standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
             ],
         };

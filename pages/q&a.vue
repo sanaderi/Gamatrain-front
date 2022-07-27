@@ -43,11 +43,11 @@
                             <Tabs />
                             <!-- sample-q-items-desktop -->
                             <div class="q-a-items q-a-items-desktop d-block">
-                                <div class="q-a-item pa-1 pa-sm-6 my-5" v-for="item in items" :key="item.value">
+                                <div class="q-a-item pa-1 pa-sm-6 my-5" v-for="(item, index) in items" :key="index">
                                     <v-row>
                                         <v-col lg="2" cols="3">
                                             <div class="item-img">
-                                                <img :src="require('assets/images/' + item.itemImg)" alt=""
+                                                <img :src="require('@/assets/images/' + item.itemImg)" alt=""
                                                     class="item-image">
                                             </div>
                                         </v-col>
@@ -71,42 +71,14 @@
                                                     </v-chip>
                                                 </div>
                                                 <div class="item-content-footer " v-show="isDesk">
-                                                    <div class="d-flex ">
-                                                        <div class="item-content-user d-flex align-center mr-2">
-                                                            <img :src="require('@/assets/images/' + item.userImg)"
-                                                                alt="">
-                                                            <p class="mx-2">{{ item.user }}</p>
-                                                        </div>
-                                                        <div class="item-content-file-type d-flex align-center mx-auto">
-                                                            <i class="fa-solid fa-arrow-rotate-left"></i>
-                                                            <p class="mx-2">Answers : {{ item.answers }}</p>
-                                                        </div>
-                                                        <div
-                                                            class="item-content-last-update d-flex align-center mx-auto">
-                                                            <i class="fa-solid fa-calendar-days"></i>
-                                                            <p class="mx-2">last update : {{ item.update }}</p>
-                                                        </div>
-                                                    </div>
+                                                    <TabsContentFooter :footerCard="item.footerCard">
+                                                    </TabsContentFooter>
                                                 </div>
                                             </div>
                                         </v-col>
                                         <v-col cols="12" v-show="isMobile">
-                                            <div class="item-content-footer">
-                                                <div class="d-flex ">
-                                                    <div class="item-content-user d-flex align-center mr-1">
-                                                        <img :src="require('@/assets/images/' + item.userImg)" alt="">
-                                                        <p class="mx-2">{{ item.user }}</p>
-                                                    </div>
-                                                    <div class="item-content-file-type d-flex align-center mr-1">
-                                                        <i class="fa-solid fa-arrow-rotate-left"></i>
-                                                        <p class="mx-2">{{ item.answers }}</p>
-                                                    </div>
-                                                    <div class="item-content-last-update d-flex align-center mr-1">
-                                                        <i class="fa-solid fa-calendar-days"></i>
-                                                        <p class="mx-2">{{ item.update }}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <TabsContentFooter :footerCard="item.footerCard">
+                                            </TabsContentFooter>
                                         </v-col>
                                     </v-row>
                                 </div>
@@ -125,8 +97,9 @@ import category from "~/components/common/category.vue";
 import Pagination from "~/components/common/pagination.vue";
 import FilterModal from "~/components/common/filter-modal.vue";
 import Tabs from "~/components/common/tabs.vue";
+import TabsContentFooter from "~/components/common/tabs-content-footer.vue";
 export default {
-    components: { category, Pagination, FilterModal, Tabs },
+    components: { category, Pagination, FilterModal, Tabs, TabsContentFooter },
     data() {
         return {
             isSvg: false,
@@ -194,91 +167,112 @@ export default {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3 july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
+
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
             ]
         }

@@ -118,11 +118,12 @@
                             </div>
                             <!-- training-items-desktop -->
                             <div class="training-items training-items-desktop d-block">
-                                <div class="training-item pa-1  pa-sm-6  my-5" v-for="item in items" :key="item.value">
+                                <div class="training-item pa-1  pa-sm-6  my-5" v-for="(item, index) in items"
+                                    :key="index">
                                     <v-row>
                                         <v-col lg="2" cols="3">
                                             <div class="item-img">
-                                                <img :src="require('assets/images/' + item.itemImg)" alt=""
+                                                <img :src="require('@/assets/images/' + item.itemImg)" alt=""
                                                     class="item-image" />
                                             </div>
                                         </v-col>
@@ -180,50 +181,19 @@
                             justify-space-between
                           ">
                                                     <div class="item-content-footer" v-show="isDesk">
-                                                        <div class="item-content-user d-flex align-center mr-2">
-                                                            <img :src="
-                                                                require('@/assets/images/' + item.userImg)
-                                                            " alt="" />
-                                                            <p class="mx-2">{{ item.user }}</p>
-                                                        </div>
-                                                        <div class="item-content-file-type d-flex align-center mx-auto">
-                                                            <i class="fa-solid fa-folder"></i>
-                                                            <p class="mx-2">file type : {{ item.type }}</p>
-                                                        </div>
-
-                                                        <div class="item-content-last-update d-flex align-center mx-auto">
-                                                            <i class="fa-solid fa-calendar-days"></i>
-                                                            <p class="mx-2">
-                                                                last update : {{ item.update }}
-                                                            </p>
-                                                        </div>
+                                                        <TabsContentFooter :footerCard="item.footerCard">
+                                                        </TabsContentFooter>
                                                     </div>
                                                 </div>
                                             </div>
                                         </v-col>
                                         <v-col cols="12" class="d-block d-sm-none pb-3 pt-0" v-show="isMobile">
-                                            <div class="item-content-footer">
-                                                    <div class="d-flex " >
-                                                        <div class="item-content-user d-flex align-center mr-2">
-                                                            <img :src="require('@/assets/images/' + item.userImg)"
-                                                                alt="">
-                                                            <p class="mx-1">{{ item.user }}</p>
-                                                        </div>
-                                                        <div class="item-content-file-type d-flex align-center mr-2">
-                                                            <i class="fa-solid fa-folder "></i>
-                                                            <p class="mx-1"> {{ item.type }}</p>
-                                                        </div>
-                                                        <div
-                                                            class="item-content-last-update d-flex align-center mr-2">
-                                                            <i class="fa-solid fa-calendar-days"></i>
-                                                            <p class="mx-1">{{ item.update }}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <TabsContentFooter :footerCard="item.footerCard">
+                                            </TabsContentFooter>
                                         </v-col>
                                     </v-row>
                                 </div>
-                            </div>                           
+                            </div>
                             <Pagination />
                         </div>
                     </v-col>
@@ -237,13 +207,14 @@ import category from "~/components/common/category.vue";
 import Pagination from "~/components/common/pagination.vue";
 import FilterModal from "~/components/common/filter-modal.vue";
 import Tabs from "~/components/common/tabs.vue";
+import TabsContentFooter from "~/components/common/tabs-content-footer.vue";
 export default {
-    components: { category, Pagination, FilterModal, Tabs },
+    components: { category, Pagination, FilterModal, Tabs, TabsContentFooter },
     data() {
         return {
             isSvg: false,
             isDesk: true,
-            isMobile:false,
+            isMobile: false,
             item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
             model: null,
             bookCarousel: {
@@ -335,7 +306,7 @@ export default {
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit,",
                 },
             ],
-            
+
             breadcrumbs: [
                 {
                     text: "Dashboard",
@@ -369,96 +340,116 @@ export default {
                     itemImg: "book1.jpg",
                     title:
                         "Lorem Ipsum has been the text industry's standard dummy ... ",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "PDF",
-                    update: "3 july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "PDF",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title:
                         " Lorem Ipsum has been the text industry's standard dummy ...",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "PDF",
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "PDF",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title:
                         " Lorem Ipsum has been the text industry's standard dummy ...",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "PDF",
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "PDF",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title:
                         ".Lorem Ipsum has been the text industry's standard dummy ...",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "PDF",
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "PDF",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title:
                         "Lorem Ipsum has been the text industry's standard dummy ...",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "PDF",
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "PDF",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title:
                         "Lorem Ipsum has been the text industry's standard dummy ...",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "PDF",
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "PDF",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title:
                         "Lorem Ipsum has been the text industry's standard dummy ...",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "PDF",
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "PDF",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title:
                         " Lorem Ipsum has been the text industry's standard dummy ...",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "PDF",
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "PDF",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title:
                         "Lorem Ipsum has been the text industry's standard dummy ...",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "PDF",
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "PDF",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title:
                         "Lorem Ipsum has been the text industry's standard dummy ...",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "PDF",
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "PDF",
+                        update: "3 july"
+                    }
                 },
             ],
         };
     },
-     mounted() {
+    mounted() {
         this.onResize()
         window.addEventListener('resize', this.onResize)
     },
