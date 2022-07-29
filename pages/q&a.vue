@@ -22,24 +22,14 @@
         <section class="q-a">
             <v-container>
                 <v-row>
-                    <v-col lg="3">
+                    <v-col lg="3" class="d-none d-sm-block">
                         <div class="q-a-filter d-none d-sm-block">
-                            <!-- <v-expansion-panels v-for="item in sampleFilters" :key="item.value">
-                                <v-expansion-panel>
-                                    <v-expansion-panel-header class="filter-title">
-                                        {{ item.filterTitle }}
-                                    </v-expansion-panel-header>
-                                    <v-expansion-panel-content class="filter-content ">
-                                        {{ item.filterContent }}
-                                    </v-expansion-panel-content>
-                                </v-expansion-panel>
-                            </v-expansion-panels> -->
                             <v-select :items="item" label="Grade" outlined> </v-select>
                             <v-divider class="filter-divider my-5"></v-divider>
                             <v-select :items="item" label="Book" outlined></v-select>
                             <v-divider class="filter-divider my-5"></v-divider>
                             <v-select :items="item" label="Title" outlined></v-select>
-                            
+
                         </div>
                     </v-col>
                     <v-col lg="9" md="9" sm="12" class="q-a-contents">
@@ -50,182 +40,47 @@
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-q-a-header" id="header-qa">
-                                <v-tabs>
-                                    <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                                    <i class="fa-solid fa-list"></i>
-                                    <!-- <nuxt-link to="lesson" v-for="i in 6" :key="i" :href="'#tab-' + i">
-                                        Item {{ i }}
-                                    </nuxt-link> -->
-                                    <v-badge bordered class="pa-1 mx-10" content="35000">
-                                        <nuxt-link to="sample-q" class="nav-link ">
-                                            Sample Exam
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="1258" color="#2E7D32">
-                                        <nuxt-link to="training-content" class="nav-link">
-                                            Training Content
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto badge-q" content="21260" color="#BF360C">
-                                        <nuxt-link to="q&a" class="nav-link nav-link1">
-                                            <span class="'icon icong-qa mr-1"></span>
-                                            Q & A
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="1690" color="#5600E8">
-                                        <nuxt-link to="online-exam" class="nav-link">
-                                            Online Exam
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
-                                        <nuxt-link to="tutorial" class="nav-link">
-                                            tutorial
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
-                                        <nuxt-link to="teachers" class="nav-link">
-                                            Teacher
-                                        </nuxt-link>
-                                    </v-badge>
-                                </v-tabs>
-                            </v-card>
-                            <!-- header mobile -->
-                            <v-card class="d-block d-md-none mobile-q-a-header">
-                                <v-tabs>
-                                    <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                                    <i class="fa-solid fa-list"></i>
-
-                                    <nuxt-link to="sample-q" class="nav-link ">
-                                        Sample Exam
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="training-content" class="nav-link">
-                                        Training Content
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="q&a" class="nav-link nav-link1">
-                                        Q & A
-                                        <span class="'icon icong-qa"></span>
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="online-exam" class="nav-link">
-                                        Online Exam
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="tutorial" class="nav-link">
-                                        tutorial
-                                    </nuxt-link>
-
-
-                                    <nuxt-link to="teachers" class="nav-link">
-                                        Teacher
-                                    </nuxt-link>
-
-                                </v-tabs>
-                            </v-card>
+                            <Tabs />
                             <!-- sample-q-items-desktop -->
-                            <div class="q-a-items q-a-items-desktop d-none d-lg-block">
-                                <div class="q-a-item pa-6 my-5" v-for="item in items" :key="item.value">
+                            <div class="q-a-items q-a-items-desktop d-block">
+                                <div class="q-a-item pa-1 pa-sm-6 my-5" v-for="(item, index) in items" :key="index">
                                     <v-row>
-                                        <v-col lg="2">
+                                        <v-col lg="2" cols="3">
                                             <div class="item-img">
-                                                <img :src="require('assets/images/' + item.itemImg)" alt="" class="item-image">
+                                                <img :src="require('@/assets/images/' + item.itemImg)" alt=""
+                                                    class="item-image">
                                             </div>
                                         </v-col>
-                                        <v-col lg="10" class="px-0">
+                                        <v-col lg="10" cols="9" class="px-0">
                                             <div class="q-a-content d-flex flex-column justify-space-between">
                                                 <div class="q-a-title d-flex justify-space-between">
                                                     <p>
                                                         {{ item.title }}
                                                     </p>
                                                 </div>
-                                                <p class="item-content-subtitle">
+                                                <p class="item-content-subtitle d-none d-sm-block">
                                                     <nuxt-link to="">
                                                         {{ item.subtitle }}
                                                     </nuxt-link>
                                                 </p>
                                                 <div class="item-content-tags d-flex">
-                                                    <div class="item-content-tag " v-for="item in tags">
+                                                    <v-chip link v-for="item in tags" class="mr-1">
                                                         <nuxt-link to="">
                                                             {{ item.tag }}
                                                         </nuxt-link>
-                                                    </div>
+                                                    </v-chip>
                                                 </div>
-                                                <div class="item-content-footer d-flex justify-space-between">
-                                                    <div class="d-flex ">
-                                                        <div class="item-content-user d-flex align-center mr-2">
-                                                            <img :src="require('@/assets/images/' + item.userImg)"
-                                                                alt="">
-                                                            <p class="mx-2">{{ item.user }}</p>
-                                                        </div>
-                                                        <div class="item-content-file-type d-flex align-center mx-auto">
-                                                            <i class="fa-solid fa-arrow-rotate-left"></i>   
-                                                            <p class="mx-2">Answers : {{ item.answers }}</p>
-                                                        </div>
-                                                        <div
-                                                            class="item-content-last-update d-flex align-center mx-auto">
-                                                            <i class="fa-solid fa-calendar-days"></i>
-                                                            <p class="mx-2">last update : {{ item.update }}</p>
-                                                        </div>
-                                                    </div>
+                                                <div class="item-content-footer " v-show="isDesk">
+                                                    <TabsContentFooter :footerCard="item.footerCard">
+                                                    </TabsContentFooter>
                                                 </div>
                                             </div>
+                                        </v-col>
+                                        <v-col cols="12" v-show="isMobile">
+                                            <TabsContentFooter :footerCard="item.footerCard">
+                                            </TabsContentFooter>
                                         </v-col>
                                     </v-row>
-                                </div>
-                            </div>
-                            <!-- Q-a-items-mobile -->
-                            <div class="q-a-items q-a-items-mobile d-block d-lg-none">
-                                <div class="q-a-item pa-1 pa-sm-5 my-5" v-for="item in items" :key="item.value">
-                                    <v-row>
-                                        <v-col cols="3" class="pa-1">
-                                            <div class="q-a-book">
-                                                <img :src="require('assets/images/' + item.itemImg)" alt="" width="65"
-                                                    height="90">
-                                            </div>
-                                        </v-col>
-                                        <v-col cols="7" class="px-0">
-                                            <div class="q-a-book-contents d-flex flex-column justify-space-between">
-                                                <p class="q-a-book-title px-1">
-                                                    <nuxt-link to="">
-                                                        {{ item.title }}
-                                                    </nuxt-link>
-                                                </p>
-                                                <div class="item-content-tags d-flex mt-3">
-                                                    <div class="item-content-tag" v-for="item in tags">
-                                                        <nuxt-link to="">
-                                                            <p>
-                                                                {{ item.tag }}
-                                                            </p>
-                                                        </nuxt-link>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </v-col>
-                                        <v-col cols="2" class="pa-0">
-                                            
-                                            
-                                        </v-col>
-                                    </v-row>
-                                    <div class="q-a-item-footer d-flex mt-2">
-                                        <div class="item-content-user d-flex align-center mr-2">
-                                            <img :src="require('@/assets/images/' + item.userImg)" alt="" width="25">
-                                            <p class="mx-2">{{ item.user }}</p>
-                                        </div>
-                                        <div class="item-content-file-type d-flex align-center mx-auto">
-                                            <i class="fa-solid fa-arrow-rotate-left"></i>
-                                            <p class="mx-2"> answers : {{ item.answers }}</p>
-                                        </div>
-                                        <div class="item-content-last-update d-flex align-center mx-auto">
-                                            <i class="fa-solid fa-calendar-days"></i>
-                                            <p class="mx-2">confirm date : {{ item.update }}</p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <Pagination />
@@ -241,10 +96,15 @@
 import category from "~/components/common/category.vue";
 import Pagination from "~/components/common/pagination.vue";
 import FilterModal from "~/components/common/filter-modal.vue";
+import Tabs from "~/components/common/tabs.vue";
+import TabsContentFooter from "~/components/common/tabs-content-footer.vue";
 export default {
-    components: { category, Pagination, FilterModal },
+    components: { category, Pagination, FilterModal, Tabs, TabsContentFooter },
     data() {
         return {
+            isSvg: false,
+            isDesk: true,
+            isMobile: false,
             item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
             sampleFilters: [
                 {
@@ -307,110 +167,129 @@ export default {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3 july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
+
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: "and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
                     title: "Lorem Ipsum is simply dummy text of the printing",
                     subtitle: " and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    answers: "14",
-                    update: "3july"
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        answers: "14",
+                        update: "3 july"
+                    }
                 },
             ]
         }
     },
-     beforeMount() {
-        window.addEventListener('scroll', this.testHeader);
-    },
-    beforeDestroy() {
-        window.removeEventListener('scroll', this.testHeader);
+    mounted() {
+        this.onResize()
+        window.addEventListener('resize', this.onResize)
     },
     methods: {
-        testHeader() {
-            let header = document.getElementById("header-qa")
-            if (scrollY > 210) {
-                header.classList.add("scroll-header")
-            } else if (scrollY < 200) {
-                header.classList.remove("scroll-header")
+        onResize() {
+            if (window.innerWidth < 600) {
+                this.isDesk = false
+                this.isSvg = true
+                this.isMobile = true
             }
-        }
+        },
     },
+
 }
 </script>
