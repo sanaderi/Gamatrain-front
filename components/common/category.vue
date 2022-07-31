@@ -8,7 +8,7 @@
           :key="category"
           :class="item.class"
           class="card"
-          
+
         >
           <nuxt-link :to="item.link">
             <v-list-item class="d-flex flex-column mx-7 pa-0">
@@ -116,7 +116,7 @@ export default {
       { class: "test", text: "Sample Exam", icon: "test",link:"/sample-q" },
       { class: "content", text: "Training content", icon: "learnfiles" ,link:"/training-content" },
       { class: "faq", text: "Q & A", icon: "qa",link:"/q&a" },
-      { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/Tutorial" },
+      { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/tutorials" },
       { class: "school", text: "School finder", icon: "school" ,link:"/schools" },
       { class: "tutor", text: "Teacher", icon: "teacher" ,link:"/teachers" },
     ],

@@ -270,7 +270,39 @@ import RelatedQa from "@/components/details/related-qa";
 import RelatedOnlineExam from "@/components/details/related-online-exam";
 
 export default {
+  name:'tutorial-details',
   components: {RelatedOnlineExam, RelatedQa, LatestTrainingContent, RelatedContent, category, timeLine },
+
+  async asyncData({params, $axios}) {
+    // This could also be an action dispatch
+    const tutorialInfo = await $axios.$get(`/api/v1/tutorials/${params.id}`);
+    return {tutorialInfo};
+  },
+
+  // head() {
+  //   let tutorial= this.tutorial_info;
+  //   return {
+  //     title: car.Title,
+  //     meta: [
+  //       {
+  //         hid: `description`,
+  //         name: 'description',
+  //         content: tutorial.Description !== null ? tutorial.Description.replace(/<[^>]+>/g, '').replace("\n", " ").substr(0, 300) + '...' : ''
+  //       },
+  //       {
+  //         hid: `keywords`,
+  //         name: 'keywords',
+  //         keywords: tutorial.Title
+  //       },
+  //       {
+  //         hid: 'og:title',
+  //         name: 'og:title',
+  //         content: car.Title,
+  //       },
+  //     ]
+  //   }
+  // },
+
   data() {
     return {
       e6: 1,
@@ -353,7 +385,6 @@ export default {
     },
   },
   mounted() {
-
     this.color()
   },
   methods: {

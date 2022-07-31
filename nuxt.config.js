@@ -32,7 +32,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    {src: 'plugins/axios.js'}
+    {src: 'plugins/axios.js'},
+    {src: 'plugins/helper.js'}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -62,7 +63,7 @@ export default {
 
   proxy: {
 
-    '/api/v1/': {target: "https://core.gamatrain.com",pathRewrite: {'^/api/v1/': '/api/v1/'}, secure: false, changeOrigin: true}
+    '/api/v1/': {target: process.env.API_BASE_URL,pathRewrite: {'^/api/v1/': '/api/v1/'}, secure: false, changeOrigin: true}
   },
 
 

@@ -23,8 +23,8 @@
         <section class="online-exam">
             <v-container>
                 <v-row>
-                    <v-col lg="3">
-                        <div class="online-exam-filter d-none d-sm-block">
+                    <v-col lg="3" class="d-none d-sm-block">
+                        <div class="online-exam-filter ">
                             <v-select :items="item" label="Grade" outlined> </v-select>
                             <v-divider class="filter-divider my-5"></v-divider>
                             <v-select :items="item" label="Book" outlined></v-select>
@@ -42,63 +42,7 @@
                                 </template>
                             </v-breadcrumbs>
                             <!-- header desktop -->
-                            <v-card class="d-none d-md-block desktop-online-exam-header" id="header-online">
-                                <v-tabs>
-                                    <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                                    <i class="fa-solid fa-list"></i>
-                                    <v-badge bordered class="pa-1 mx-10 " content="35000">
-                                        <nuxt-link to="sample-q" class="nav-link">
-                                            Sample Exam
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="1258" color="#2E7D32">
-                                        <nuxt-link to="training-content" class="nav-link ">
-                                            Training Content
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="21260" color="#BF360C">
-                                        <nuxt-link to="q&a" class="nav-link"> Q & A </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto badge-online" content="1690" color="#5600E8">
-                                        <nuxt-link to="online-exam" class="nav-link nav-link1">
-                                            <span class="'icon icong-azmoon mr-1"></span>
-                                            Online Exam
-                                        </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="169" color="#BD081C">
-                                        <nuxt-link to="tutorial" class="nav-link"> Tutorial </nuxt-link>
-                                    </v-badge>
-                                    <v-badge bordered class="pa-1 mx-auto" content="2810" color="#8E24AA">
-                                        <nuxt-link to="teachers" class="nav-link"> Teacher </nuxt-link>
-                                    </v-badge>
-                                </v-tabs>
-                            </v-card>
-                            <!-- header mobile -->
-                            <v-card class="d-block d-md-none mobile-online-exam-header">
-                                <v-tabs>
-                                    <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
-                                    <i class="fa-solid fa-list"></i>
-
-                                    <nuxt-link to="sample-q" class="nav-link">
-                                        Sample Exam
-                                    </nuxt-link>
-
-                                    <nuxt-link to="training-content" class="nav-link ">
-                                        Training Content
-                                    </nuxt-link>
-
-                                    <nuxt-link to="q&a" class="nav-link"> Q & A </nuxt-link>
-
-                                    <nuxt-link to="online-exam" class="nav-link nav-link1">
-                                        Online Exam
-                                        <span class="'icon icong-azmoon"></span>
-                                    </nuxt-link>
-
-                                    <nuxt-link to="Tutorial" class="nav-link"> Tutorial </nuxt-link>
-
-                                    <nuxt-link to="teachers" class="nav-link"> Teacher </nuxt-link>
-                                </v-tabs>
-                            </v-card>
+                            <Tabs />
                             <!-- Book Carousel -->
                             <div class="book-carousel my-3">
                                 <v-container class="mx-0">
@@ -172,16 +116,17 @@
                                 </v-container>
                             </div>
                             <!-- training-items-desktop -->
-                            <div class="online-exam-items online-exam-items-desktop d-none d-lg-block">
-                                <div class="online-exam-item pa-6 my-5" v-for="item in items" :key="item.value">
+                            <div class="online-exam-items online-exam-items-desktop d-block">
+                                <div class="online-exam-item pa-sm-6 pa-1 my-5" v-for="(item, index) in items"
+                                    :key="index">
                                     <v-row>
-                                        <v-col lg="2">
+                                        <v-col lg="2" cols="3">
                                             <div class="item-img">
-                                                <img :src="require('assets/images/' + item.itemImg)" alt=""
+                                                <img :src="require('@/assets/images/' + item.itemImg)" alt=""
                                                     class="item-image" />
                                             </div>
                                         </v-col>
-                                        <v-col lg="10" class="px-0">
+                                        <v-col lg="10" cols="9" class="px-0">
                                             <div class="
                           online-exam-item-content
                           d-flex
@@ -200,157 +145,58 @@
                                                 </div>
                                                 <div class="item-content-features">
                                                     <v-row>
-                                                        <v-col lg="3" class="d-flex align-center">
+                                                        <v-col lg="3" cols="6" class="d-flex align-center py-2 px-0">
                                                             <i class="fa-solid fa-list"></i>
-                                                            <p class="mx-2 ">Number of questions :{{ item.qNumber }}
+                                                            <p class="mx-2 ">questions :{{ item.qNumber }}
                                                             </p>
                                                         </v-col>
-                                                        <v-col lg="3" class="d-flex align-center">
+                                                        <v-col lg="3" cols="6" class="d-flex align-center py-2 px-0">
                                                             <i class="fa-solid fa-temperature-three-quarters"></i>
                                                             <p class="mx-2 ">difficulty level :{{ item.level }} </p>
                                                         </v-col>
-                                                        <v-col lg="3" class="d-flex align-center">
+                                                        <v-col lg="3" cols="6" class="d-flex align-center py-2 px-0">
                                                             <i class="fa-solid fa-circle-play"></i>
                                                             <p class="mx-2 ">Start :{{ item.start }} </p>
                                                         </v-col>
-                                                        <v-col lg="3" class="d-flex align-center">
+                                                        <v-col lg="3" cols="6" class="d-flex align-center py-2 px-0">
                                                             <i class="fa-solid fa-circle-stop"></i>
                                                             <p class="mx-2 ">Finish :{{ item.End }} </p>
                                                         </v-col>
                                                     </v-row>
                                                 </div>
 
-                                                <div class="item-content-tags d-flex">
-                                                    <div class="item-content-tag" v-for="item in tags"
-                                                        :key="item.value">
+                                                <div class="item-content-tags" v-show="isTags">
+                                                    <v-chip link v-for="item in tags" class="mr-1">
                                                         <nuxt-link to="">
                                                             {{ item.tag }}
                                                         </nuxt-link>
-                                                    </div>
+                                                    </v-chip>
                                                 </div>
                                                 <div class="
-                            item-content-footer
-                            d-flex
-                            justify-space-between
-                          ">
-                                                    <div class="d-flex">
-                                                        <div class="item-content-user d-flex align-center mr-2">
-                                                            <img :src="
-                                                                require('@/assets/images/' + item.userImg)
-                                                            " alt="" />
-                                                            <p class="mx-2">{{ item.user }}</p>
-                                                        </div>
-                                                        <div class="
-                                item-content-file-type
-                                d-flex
-                                align-center
-                                mx-auto
-                              ">
-                                                            <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M15.6667 1.99967H9.00008L7.33342 0.333008H2.33341C1.41675 0.333008 0.675081 1.08301 0.675081 1.99967L0.666748 11.9997C0.666748 12.9163 1.41675 13.6663 2.33341 13.6663H15.6667C16.5834 13.6663 17.3334 12.9163 17.3334 11.9997V3.66634C17.3334 2.74967 16.5834 1.99967 15.6667 1.99967ZM10.6667 10.333H4.00008V8.66634H10.6667V10.333ZM14.0001 6.99967H4.00008V5.33301H14.0001V6.99967Z"
-                                                                    fill="#616161" />
-                                                            </svg>
-                                                            <p class="mx-2">test type : {{ item.type }}</p>
-                                                        </div>
-
-                                                        <div class="
-                                item-content-last-update
-                                d-flex
-                                align-center
-                                mx-auto
-                              ">
-                                                            <i class="fa-solid fa-calendar-days"></i>
-                                                            <p class="mx-2">
-                                                                last update : {{ item.update }}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-content-footer-icon d-flex flex-column"></div>
+                                                    item-content-footer
+                           
+                                                         " v-show="isDesk">
+                                                    <TabsContentFooter :footerCard="item.footerCard">
+                                                    </TabsContentFooter>
+                                                   
                                                 </div>
                                             </div>
                                         </v-col>
-                                    </v-row>
-                                </div>
-                            </div>
-                            <!-- training-items-mobile -->
-                            <div class="online-exam-items online-exam-items-mobile d-block d-lg-none">
-                                <div class="online-exam-item pa-1 pa-sm-5 my-5" v-for="item in items" :key="item.value">
-                                    <v-row>
-                                        <v-col cols="2" sm="1" class="pa-1">
-                                            <div class="online-exam-book">
-                                                <img :src="require('assets/images/' + item.itemImg)" alt="" width="65"
-                                                    height="90" />
-                                            </div>
-                                        </v-col>
-                                        <v-col cols="10" sm="8" class="px-0">
-                                            <div class="
-                          online-exam-book-contents
-                          d-flex
-                          flex-column
-                          justify-space-between
-                          ml-2
-                        ">
-                                                <p class="online-exam-book-title px-1">
+                                        <v-col cols="12" v-show="mobileTag" class="py-0">
+                                            <div class="item-content-tags ">
+                                                <v-chip link v-for="item in tags" class="mr-1">
                                                     <nuxt-link to="">
-                                                        {{ item.title }}
+                                                        {{ item.tag }}
                                                     </nuxt-link>
-                                                </p>
-                                                <div class="item-content-features">
-                                                    <v-row>
-                                                        <v-col cols="6"
-                                                            class="d-flex align-center item-content-feature">
-                                                            <i class="fa-solid fa-list"></i>
-                                                            <p class="mx-2 ">Number of questions :{{ item.qNumber }}
-                                                            </p>
-                                                        </v-col>
-                                                        <v-col cols="6"
-                                                            class="d-flex align-center item-content-feature">
-                                                            <i class="fa-solid fa-temperature-three-quarters"></i>
-                                                            <p class="mx-2 ">difficulty level :{{ item.level }} </p>
-                                                        </v-col>
-                                                        <v-col cols="6"
-                                                            class="d-flex align-center item-content-feature">
-                                                            <i class="fa-solid fa-circle-play"></i>
-                                                            <p class="mx-2 ">Start :{{ item.start }} </p>
-                                                        </v-col>
-                                                        <v-col cols="6"
-                                                            class="d-flex align-center item-content-feature">
-                                                            <i class="fa-solid fa-circle-stop"></i>
-                                                            <p class="mx-2 ">Finish :{{ item.End }} </p>
-                                                        </v-col>
-                                                    </v-row>
-                                                </div>
-
+                                                </v-chip>
                                             </div>
                                         </v-col>
-
+                                        <v-col cols="12" v-show="isMobile">
+                                            <TabsContentFooter :footerCard="item.footerCard">
+                                            </TabsContentFooter>
+                                           
+                                        </v-col>
                                     </v-row>
-                                    <div class="item-content-tags d-flex mt-3">
-                                        <div class="item-content-tag" v-for="item in tags" :key="item.values">
-                                            <nuxt-link to="">
-                                                <p>
-                                                    {{ item.tag }}
-                                                </p>
-                                            </nuxt-link>
-                                        </div>
-                                    </div>
-                                    <div class="online-exam-item-footer d-flex mt-2">
-                                        <div class="item-content-user d-flex align-center">
-                                            <img :src="require('@/assets/images/' + item.userImg)" alt="" width="25" />
-                                            <p class="mx-2">{{ item.user }}</p>
-                                        </div>
-                                        <div class="item-content-file-type d-flex align-center mx-1">
-                                            <i class="fa-solid fa-folder"></i>
-                                            <p class="mx-2">{{ item.type }}</p>
-                                        </div>
-
-                                        <div class="item-content-last-update d-flex align-center mx-1">
-                                            <i class="fa-solid fa-calendar-days"></i>
-                                            <p class="mx-2">{{ item.update }}</p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <Pagination />
@@ -365,10 +211,18 @@
 import category from "~/components/common/category.vue";
 import Pagination from "~/components/common/pagination.vue";
 import FilterModal from "~/components/common/filter-modal.vue";
+import Tabs from "~/components/common/tabs.vue";
+import TabsContentFooter from "~/components/common/tabs-content-footer.vue";
+
 export default {
-    components: { category, Pagination, FilterModal },
+    components: { category, Pagination, FilterModal, Tabs, TabsContentFooter },
     data() {
         return {
+            isSvg: false,
+            isDesk: true,
+            isMobile: false,
+            isTags: true,
+            mobileTag: false,
             item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
             model: null,
             bookCarousel: {
@@ -498,10 +352,13 @@ export default {
                     End: "Free",
                     title:
                         " standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-                    update: "3 july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
+
                 },
                 {
                     itemImg: "book1.jpg",
@@ -511,11 +368,12 @@ export default {
                     End: "Free",
                     title:
                         "  standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -525,11 +383,12 @@ export default {
                     End: "Free",
                     title:
                         "standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -539,11 +398,12 @@ export default {
                     End: "Free",
                     title:
                         ". standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -553,11 +413,12 @@ export default {
                     End: "Free",
                     title:
                         "  standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -567,11 +428,12 @@ export default {
                     End: "Free",
                     title:
                         " standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -581,11 +443,12 @@ export default {
                     End: "Free",
                     title:
                         "standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -595,11 +458,12 @@ export default {
                     End: "Free",
                     title:
                         " standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -609,11 +473,12 @@ export default {
                     End: "Free",
                     title:
                         "  standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
                 {
                     itemImg: "book1.jpg",
@@ -623,30 +488,30 @@ export default {
                     End: "Free",
                     title:
                         " standard dummy text ever since the 1500s",
-                    userImg: "dexter-morse2.png",
-                    user: "Alireza Davoodi",
-                    type: "Test",
-
-                    update: "3july",
+                    footerCard: {
+                        userImg: "dexter-morse2.png",
+                        user: "Alireza Davoodi",
+                        type: "Test",
+                        update: "3 july",
+                    }
                 },
             ],
         };
     },
-    beforeMount() {
-        window.addEventListener('scroll', this.testHeader);
-    },
-    beforeDestroy() {
-        window.removeEventListener('scroll', this.testHeader);
+    mounted() {
+        this.onResize()
+        window.addEventListener('resize', this.onResize)
     },
     methods: {
-        testHeader() {
-            let header = document.getElementById("header-online")
-            if (scrollY > 210) {
-                header.classList.add("scroll-header")
-            } else if (scrollY < 200) {
-                header.classList.remove("scroll-header")
+        onResize() {
+            if (window.innerWidth < 600) {
+                this.isDesk = false
+                this.isMobile = true
+                this.isTags = false
+                this.mobileTag = true
             }
-        }
+        },
     },
+
 };
 </script>
