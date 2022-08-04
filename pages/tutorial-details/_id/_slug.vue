@@ -25,8 +25,8 @@
           </v-col>
           <v-col md="9" cols="12" class="lessons-title">
             <div class="d-flex flex-column text-center lesson-content">
-              <p class="lesson-title mb-4">{{ lesson.lessonTitle }}</p>
-              <p class="lesson-subtitle">{{ lesson.lessonSub }}</p>
+              <p class="lesson-title mb-4">{{ lesson.title }}</p>
+              <p class="lesson-subtitle">{{ lesson.topic_title }}</p>
             </div>
           </v-col>
         </v-row>
@@ -52,8 +52,8 @@
           </v-col>
           <v-col md="9" cols="12" class="lessons-title">
             <div class="d-flex flex-column text-center lesson-content">
-              <p class="lesson-title mb-4">{{ lesson.lessonTitle }}</p>
-              <p class="lesson-subtitle">{{ lesson.lessonSub }}</p>
+<!--              <p class="lesson-title mb-4">{{ lesson.lessonTitle }}</p>-->
+<!--              <p class="lesson-subtitle">{{ lesson.lessonSub }}</p>-->
             </div>
           </v-col>
         </v-row>
@@ -214,21 +214,10 @@
                   </v-stepper-content>
                 </v-stepper>
               </v-navigation-drawer>
-              <div class="book-content" v-for="(item, bookContent) in bookContent" :key="bookContent">
-                <p class="book-title mb-3">{{ item.bookTitle }}</p>
-                <p class="bookText">{{ item.bookText }}</p>
-                <div class="book-pictures d-flex flex-column align-center my-10 my-md-6">
-                  <img :src="require('@/assets/images/' + item.bookPic)" alt="">
-                  <span class="book-subtitle pa-2">
-                    <p>{{ item.picSub }}</p>
-                  </span>
-                </div>
+              <div class="book-content">
+                <div class="bookText" v-html="tutorialInfo.content"/>
+              </div>
 
-              </div>
-              <div class="learn-more pa-6">
-                <p class="learnmore-title mb-6"> Know more</p>
-                <p class="learnmore-text">{{ book.learnmoreText }}</p>
-              </div>
             </div>
           </v-col>
         </v-row>
@@ -275,36 +264,47 @@ export default {
 
   async asyncData({params, $axios}) {
     // This could also be an action dispatch
-    const tutorialInfo = await $axios.$get(`/api/v1/tutorials/${params.id}`);
-    return {tutorialInfo};
+    const tutorialData = await $axios.$get(`/api/v1/tutorials/${params.id}`);
+
+   //Tutorial data
+    var tutorialInfo=tutorialData.data;
+
+    //Get and order title to display
+    var lessonInfo=tutorialInfo.title.split('|');
+    var lesson={title:lessonInfo[0],topic_title:lessonInfo[1]};
+
+
+    return {tutorialInfo,lesson};
   },
 
-  // head() {
-  //   let tutorial= this.tutorial_info;
-  //   return {
-  //     title: car.Title,
-  //     meta: [
-  //       {
-  //         hid: `description`,
-  //         name: 'description',
-  //         content: tutorial.Description !== null ? tutorial.Description.replace(/<[^>]+>/g, '').replace("\n", " ").substr(0, 300) + '...' : ''
-  //       },
-  //       {
-  //         hid: `keywords`,
-  //         name: 'keywords',
-  //         keywords: tutorial.Title
-  //       },
-  //       {
-  //         hid: 'og:title',
-  //         name: 'og:title',
-  //         content: car.Title,
-  //       },
-  //     ]
-  //   }
-  // },
+  head() {
+    return {
+      title: this.tutorialInfo.title,
+      meta: [
+        // {
+        //   hid: `description`,
+        //   name: 'description',
+        //   content: tutorial.Description !== null ? tutorial.Description.replace(/<[^>]+>/g, '').replace("\n", " ").substr(0, 300) + '...' : ''
+        // },
+        // {
+        //   hid: `keywords`,
+        //   name: 'keywords',
+        //   keywords: tutorial.Title
+        // },
+        // {
+        //   hid: 'og:title',
+        //   name: 'og:title',
+        //   content: car.Title,
+        // },
+      ]
+    }
+  },
 
   data() {
     return {
+
+
+
       e6: 1,
       timelines: [
         {
@@ -335,10 +335,7 @@ export default {
       value3: null,
       lastUpdate: "27 Jun",
       visit: "15383",
-      lesson: {
-        lessonTitle: "Tutorial Biology (2) Eleventh grade of experimental discipline",
-        lessonSub: "First Chapter- Speech 2: Nervous system structure With the answer",
-      },
+
       card: {
         img: "dexter-morse1.png",
         img2: "book.png",
@@ -415,4 +412,107 @@ export default {
   margin: auto;
   max-width: 700px;
 }
+
+
+/*Message style section*/
+.bookText .message{
+  padding: 15px!important;
+  border-radius: 5px;
+  margin-bottom: 12px;
+}
+.bookText .segment{
+  padding: 15px!important;
+  border-radius: 5px;
+  margin-bottom: 12px;
+}
+
+
+.bookText .ui.message.red {
+  background-color: #fff!important;
+  color: red;
+  box-shadow: 0 0 0 1px red inset, 0 0 0 0 transparent;
+}
+
+
+.bookText .ui.message.green {
+  background-color: #fff!important;
+  color: green;
+  box-shadow: 0 0 0 1px green inset, 0 0 0 0 transparent;
+}
+
+.bookText .ui.message.yellow {
+  background-color: #fff!important;
+  color: #b58105;
+  box-shadow: 0 0 0 1px #b58105 inset, 0 0 0 0 transparent;
+}
+
+/*End message style section*/
+
+
+/*Segment section*/
+.bookText .ui.segment.red {
+  background-color: #fff!important;
+  color: #000000;
+  border-top: 2px solid red;
+}
+
+.bookText .ui.segment.red h2{
+  color: red!important;
+  background: transparent!important;
+}
+
+.bookText .ui.segment.blue {
+  background-color: #fff!important;
+  color: #000000;
+  border-top: 2px solid blue;
+}
+
+.bookText .ui.segment.blue h2{
+  color: red!important;
+  background: transparent!important;
+}
+
+
+.bookText .ui.segment.green {
+  background-color: #fff!important;
+  color: #000000;
+  border-top: 2px solid green;
+}
+
+.bookText .ui.segment.green h2{
+  color: red!important;
+  background: transparent!important;
+}
+/*End section section*/
+
+
+.bookText .ui.table {
+  width: 100%;
+  background: #fff;
+  margin: 1em 0;
+  border: 1px solid rgba(34,36,38,.15);
+  box-shadow: none;
+  border-radius: 0.28571429rem;
+  text-align: left;
+  color: rgba(0,0,0,.87);
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/*Tutorial details table style*/
+.bookText .ui.table td{
+  padding: 20px;
+}
+/*End tutorial details table style*/
+
+
+/*Tutorial details image caption*/
+.bookText figcaption {
+  background-color: #efeeee;
+  padding: 5px 5px 5px 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+/*End tutorial details image caption*/
+
 </style>
