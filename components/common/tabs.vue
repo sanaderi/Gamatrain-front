@@ -28,7 +28,7 @@
                 </nuxt-link>
             </v-badge>
             <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-tutorial" content="169" color="#BD081C">
-                <nuxt-link to="tutorial" class="nav-link tutorial-icon">
+                <nuxt-link to="tutorials" class="nav-link tutorial-icon">
                     <span class="'icon icong-blog mr-1 d-none"></span>
                     tutorial
                 </nuxt-link>
@@ -46,7 +46,7 @@
 export default {
     data() {
         return {
-            
+
         }
     },
      beforeMount() {

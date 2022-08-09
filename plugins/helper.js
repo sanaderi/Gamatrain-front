@@ -4,8 +4,7 @@ const loadImg = {
   name: 'loadImg',
   getData(img) {
     var base_url=process.env.FILE_BASE_URL;
-    // https://core.gamatrain.com/uploads/tutorials/2022/07/26_QbeolmT05WDuNfZCb95z.png
-    var img_url = `${base_url}/uploads/lessonsPic/lPic_7841b48f28ca5f271af02fe0cc6770a6.jpg`;
+    var img_url = `${base_url}/uploads/lessonsPic/${img}`;
     return img_url;
   }
 }

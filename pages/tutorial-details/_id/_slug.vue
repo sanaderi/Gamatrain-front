@@ -264,17 +264,23 @@ export default {
 
   async asyncData({params, $axios}) {
     // This could also be an action dispatch
-    const tutorialData = await $axios.$get(`/api/v1/tutorials/${params.id}`);
+    const tutorialData =await $axios.$get(`/api/v1/tutorials/${params.id}`);
 
-   //Tutorial data
+
+    //Tutorial data
     var tutorialInfo=tutorialData.data;
+
+    //Get lesson tree
+    const tutorialLessonTree = await $axios.$get(`/api/v1/tutorials/lessonTree/${tutorialInfo.lesson}`);
+    var lessonTree=tutorialLessonTree.data;
+
 
     //Get and order title to display
     var lessonInfo=tutorialInfo.title.split('|');
     var lesson={title:lessonInfo[0],topic_title:lessonInfo[1]};
 
 
-    return {tutorialInfo,lesson};
+    return {tutorialInfo,lessonTree,lesson};
   },
 
   head() {
