@@ -1,81 +1,67 @@
 <template>
-  <v-stepper v-model="e6" vertical class="stepper">
-    <v-stepper-step :complete="e6 > 1" step="1" @click="e6 = 1" color="#008B8B" class="stepper-1">
-      Select an app
+  <v-stepper v-model="e6" vertical>
+   <span class="" v-for="(item,key) in lessonTree.topics">
+     <v-stepper-step
+       :step="key" @click="stepperClicked(item.tutorials,key)" color="#008B8B" class="pointer">
+       {{ item.title }}
+     </v-stepper-step>
+     <v-stepper-content class="pa-3" v-if="item.tutorials.length>1" :step="key">
+       <ul style="list-style-type: none;padding-left: 0">
+         <li v-for="tutorial in item.tutorials"
+             class="pointer mb-1" @click="openLink(tutorial.id,tutorial.title)">
+             <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
+            <v-tooltip left>
+                <template v-slot:activator="{ on, attrs }">
+                  <span
+                    v-bind="attrs"
+                    v-on="on"
+                  >{{ tutorial.title.substr(1, 40) }}...
+                  </span>
+              </template>
+              <span>{{tutorial.title}}</span>
+            </v-tooltip>
+         </li>
 
-    </v-stepper-step>
-    <v-stepper-content step="1">
-      <v-row>
-        <v-col cols="12" v-for="item in timelines" :key="item.value">
-          <nuxt-link id="lesson-name" to="" class="stepper-item">
-            <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
-            {{ item.lessonName }}
-          </nuxt-link>
-        </v-col>
-      </v-row>
-    </v-stepper-content>
-
-    <v-stepper-step :complete="e6 > 2" step="2" @click="e6 = 2" color="#008B8B" class="stepper-2">
-      Configure analytics for this app
-    </v-stepper-step>
-
-    <v-stepper-content step="2">
-      <v-row>
-        <v-col cols="12" v-for="item in timelines" :key="item.value">
-          <nuxt-link id="lesson-name" to="" class="stepper-item">
-            <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
-            {{ item.lessonName }}
-          </nuxt-link>
-        </v-col>
-      </v-row>
-    </v-stepper-content>
-
-    <v-stepper-step :complete="e6 > 3" step="3" @click="e6 = 3" color="#008B8B" class="stepper-3">
-      Select an ad format and ..
-    </v-stepper-step>
-
-    <v-stepper-content step="3">
-      <v-row>
-        <v-col cols="12" v-for="item in timelines" :key="item.value">
-          <nuxt-link id="lesson-name" to="" class="stepper-item">
-            <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
-            {{ item.lessonName }}
-          </nuxt-link>
-        </v-col>
-      </v-row>
-    </v-stepper-content>
-
-    <v-stepper-step step="4" @click="e6 = 4" color="#008B8B" class="stepper-4">
-      View setup instructions
-    </v-stepper-step>
-    <v-stepper-content step="4">
-      <v-row>
-        <v-col cols="12" v-for="item in timelines" :key="item.value">
-          <nuxt-link id="lesson-name" to="" class="stepper-item">
-            <!-- <i class="fa-regular fa-window-minimize ml-2"></i> -->
-            {{ item.lessonName }}
-          </nuxt-link>
-        </v-col>
-      </v-row>
-    </v-stepper-content>
+       </ul>
+     </v-stepper-content>
+     <v-stepper-content v-else :step="key"></v-stepper-content>
+   </span>
   </v-stepper>
 </template>
 
 <script>
 export default {
+  props: ['lessonTree'],
   data() {
     return {
       e6: 1,
-      timelines: [
-        {
-          lessonName: " Speech 1 :Nerve tissue cells",
-        },
-        {
-          lessonName: "Speech 2 : Nervous system structure",
-        }
-      ]
 
     }
   },
+  methods: {
+    openLink(id, title) {
+      this.$router.push({
+        path: `/tutorial-details/${id}/${title}`
+      })
+    },
+    stepperClicked(item,key) {
+      if (item.length===1){
+        this.$router.push({
+          path: `/tutorial-details/${item[0].id}/${item[0].title}`
+        })
+      }else {
+        this.e6=key;
+      }
+    },
+    findActiveTab(){
+      console.log("test");
+    }
+  }
 }
 </script>
+
+<style>
+.v-stepper__content {
+  border-left: 1px solid #e1e2e3;
+}
+</style>

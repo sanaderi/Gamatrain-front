@@ -8,6 +8,8 @@ const loadImg = {
     return img_url;
   }
 }
+
+
 //End Methods to retrieve image file whole of project
 
 

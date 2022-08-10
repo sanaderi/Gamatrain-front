@@ -127,14 +127,14 @@
       <v-container class="pa-0 mb-16">
         <v-row>
           <v-col md="3">
-            <div class="cataloge pa-6 d-none d-md-block">
+            <div class="cataloge pa-2 d-none d-md-block">
               <p class="cataloge-title d-flex align-center">
                 <img :src="require('@/assets/images/' + bookmark)" alt="" class="mr-2">
 
-                {{ book.catalogeTitle }}
+                {{ lessonTree.title }}
               </p>
               <div class="cataloge-content">
-                <timeLine />
+                <timeLine :lessonTree="lessonTree"/>
               </div>
             </div>
           </v-col>
@@ -152,7 +152,7 @@
               <v-navigation-drawer v-model="drawer" class="sidebar-nav pa-5" width="320">
                 <div class="sidebar-timeline-title d-flex align-center ma-2">
                   <img :src="require('@/assets/images/' + bookmark)" alt="" class="mr-2">
-                  <p>{{ sidebartimelinetitle }}</p>
+                  <p>{{ lessonTree.title }}</p>
                 </div>
                 <v-stepper v-model="e6" vertical class="stepper">
                   <v-stepper-step :complete="e6 > 1" step="1" @click="e6 = 1" color="#008B8B">
@@ -172,7 +172,6 @@
                   <v-stepper-step :complete="e6 > 2" step="2" @click="e6 = 2" color="#008B8B">
                     Configure analytics for this app
                   </v-stepper-step>
-
                   <v-stepper-content step="2">
                     <v-row>
                       <v-col cols="12" v-for="item in timelines" :key="item.value">
@@ -187,7 +186,6 @@
                   <v-stepper-step :complete="e6 > 3" step="3" @click="e6 = 3" color="#008B8B">
                     Select an ad format and name ad unitaaa
                   </v-stepper-step>
-
                   <v-stepper-content step="3">
                     <v-row>
                       <v-col cols="12" v-for="item in timelines" :key="item.value">
@@ -323,7 +321,6 @@ export default {
       bookmark: "bookmark.png",
       drawer: false,
       // model: null,
-      sidebartimelinetitle: "Biology",
       testNumber: "20 Test",
       askCard: {
         icon: "qa",
@@ -520,5 +517,7 @@ export default {
   font-size: 14px;
 }
 /*End tutorial details image caption*/
+
+
 
 </style>

@@ -121,7 +121,7 @@ body {
         }
       }
 
-      // training content 
+      // training content
       .training-content {
         .training-contents {
           .scroll-header {
@@ -1717,52 +1717,6 @@ body {
         }
       }
 
-      .book {
-        .stepper {
-          .stepper-item:hover {
-            color: $green;
-          }
-
-          .stepper-item:focus {
-            color: $green;
-          }
-
-          .stepper-1 {
-            .mdi-check::before {
-              content: "1";
-            }
-          }
-
-          .stepper-2 {
-            .mdi-check::before {
-              content: "2";
-            }
-          }
-
-          .stepper-3 {
-            .mdi-check::before {
-              content: "3";
-            }
-          }
-
-          .stepper-4 {
-            .mdi-check::before {
-              content: "4";
-            }
-          }
-
-        }
-
-        .container {
-          margin-bottom: 4rem !important;
-        }
-
-        .book-contents {
-          position: relative;
-          border-radius: 0;
-          padding: 30px 12px !important;
-        }
-      }
 
       .sample {
         .sample-titles {
@@ -2046,7 +2000,7 @@ body {
                 .item-content-test-type  {
                   display: none;
                 }
-    
+
                 .item-content-footer-icon {
                   margin: 0 1.5rem;
                 }
