@@ -80,7 +80,7 @@
                 <v-row class=" align-center">
                   <v-col cols="3">
                     <v-img
-                      :src="require('@/assets/images/dexter-morse1.png')"
+                      :src="require('assets/images/dexter-morse1.png')"
                       alt=""
                       class="d-inline-block"
                       cover
@@ -279,7 +279,7 @@
   </div>
 </template>
 <script>
-import Breadcrumb from "../../components/widgets/breadcrumb";
+import Breadcrumb from "../../../components/widgets/breadcrumb";
 import LastViews from "@/components/common/last-views";
 import RelatedCardBox from "./components/related-card-box"
 import Category from "@/components/common/category";
