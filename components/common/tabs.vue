@@ -79,6 +79,8 @@ export default {
 </script>
 
 <style>
+
+/*Remove default style for vuetify tabs and apply new style*/
 .v-tab {
   text-transform: none !important;
   font-size: 1.2rem;
@@ -91,7 +93,6 @@ export default {
   display: flex;
   align-items: center;
 }
-
 
 .v-tab--active .badge-sample .nav-link {
   background: rgba(41, 98, 255, .05);
@@ -116,6 +117,8 @@ export default {
 .v-tab--active .badge-teachers .nav-link {
   background: rgba(142, 36, 170, 0.05);
 }
+
+
 
 .nav-link .icon {
   display: none !important;
@@ -176,5 +179,6 @@ export default {
   padding-left: 1rem;
   color: #8e24aa;
 }
+/*End Remove default style for vuetify tabs and apply new style*/
 
 </style>

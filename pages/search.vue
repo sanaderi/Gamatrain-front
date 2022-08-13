@@ -24,13 +24,7 @@
         <v-row>
           <v-col lg="3" class="d-none d-sm-block">
             <div class="search-filter">
-              <v-select :items="item" label="Grade" outlined></v-select>
-              <v-divider class="filter-divider my-5"></v-divider>
-              <v-select :items="item" label="Book" outlined></v-select>
-              <v-divider class="filter-divider my-5"></v-divider>
-              <v-select :items="item" label="Title" outlined></v-select>
-              <v-divider class="filter-divider my-5"></v-divider>
-              <v-select :items="item" label="Sample question" outlined></v-select>
+              <search-filter/>
             </div>
           </v-col>
           <v-col lg="9" md="9" sm="12" class="search-contents">
@@ -56,12 +50,13 @@
 
 <script>
 import Tabs from "@/components/common/tabs.vue";
+import searchFilter from "@/components/search/filter";
 
 export default {
   name: "searchPage",
   layout: 'search_layout',
 
-  components: {Tabs},
+  components: {Tabs,searchFilter},
   data(){
     return {
       breadcrumbs: [
@@ -81,7 +76,12 @@ export default {
           href: 'breadcrumbs_link_2',
         },
       ],
+
     }
+  },
+  mounted() {
+  },
+  methods:{
   }
 
 }
