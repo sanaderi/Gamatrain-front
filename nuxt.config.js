@@ -54,6 +54,7 @@ export default {
   modules: [
     'nuxt-material-design-icons',
     '@nuxtjs/axios',
+    '@nuxtjs/toast',
   ],
 
   axios: {
@@ -62,10 +63,22 @@ export default {
   },
 
   proxy: {
-
     '/api/v1/': {target: process.env.API_BASE_URL,pathRewrite: {'^/api/v1/': '/api/v1/'}, secure: false, changeOrigin: true}
   },
 
+  toast: {
+    position: 'top-center',
+    duration: 3000,
+    register: [ // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

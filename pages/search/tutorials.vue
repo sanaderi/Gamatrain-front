@@ -99,12 +99,26 @@ export default {
     return{
       page_loading:false,
       items: [],
-      page:1
+      page:1,
+      section_val:this.$route.query.section,
+      base_val:this.$route.query.base
     }
   },
   mounted() {
     this.getTutorialList();
     this.scroll();
+  },
+  watch:{
+    "$route.query.section"(val){
+      this.items=[];
+      this.section_val=val;
+      this.getTutorialList();
+    },
+    "$route.query.base"(val){
+      this.items=[];
+      this.base_val=val;
+      this.getTutorialList();
+    },
   },
   methods:{
     async getTutorialList() {
@@ -114,6 +128,8 @@ export default {
           params: {
             type: 'tutorial',
             page: this.page,
+            section:this.section_val,
+            base:this.base_val
           }
         }).then(response => {
         this.items.push(...response.data.list);

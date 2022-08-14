@@ -115,7 +115,7 @@ export default {
       { class: "exam", text: "Online Exam", icon: "azmoon",link:"/search/online-exam" },
       { class: "test", text: "Sample Exam", icon: "test",link:"/search/sample-q" },
       { class: "content", text: "Training content", icon: "learnfiles" ,link:"/search/training-contents" },
-      { class: "faq", text: "Q & A", icon: "qa",link:"/search/q&a" },
+      { class: "faq", text: "Q & A", icon: "qa",link:"/search/q-a" },
       { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/search/tutorials" },
       { class: "school", text: "School finder", icon: "school" ,link:"/search/schools" },
       { class: "tutor", text: "Teacher", icon: "teacher" ,link:"/search/teachers" },

@@ -1,113 +1,114 @@
 <template>
   <div>
-    <p>Applied filter</p>
-    <v-divider/>
-    <div>
+    <!--Selected filter, user can disable any filter from here-->
+    <div v-if="enabledAppliedFilter()">
+      <p>Applied filter</p>
+      <v-divider/>
       <v-chip
-        v-if="select_section_title"
+        v-if="applied_filter.select_section_title"
         class="ma-2"
         close
         label
         outlined
-        @click:close="select_section_title = null"
+        @click:close="section_val = 0"
       >
-        {{ select_section_title }}
+        {{ applied_filter.select_section_title }}
       </v-chip>
       <v-chip
-        v-if="select_base_title"
+        v-if="applied_filter.select_base_title"
         class="ma-2"
         close
         label
         outlined
         @click:close="base_val = 0"
       >
-        {{ select_base_title }}
+        {{ applied_filter.select_base_title }}
       </v-chip>
+    </div>
+    <!--End select filter  -->
+    <div>
+      <p class="mt-5">Grade</p>
+      <v-divider class="mb-3" />
 
-      <div>
-        <p class="mt-5">Grade</p>
-        <v-divider class="mb-4"/>
-
-        <v-container
-          fluid
-          id="scroll-target"
-          style="max-height: 300px"
-          class="overflow-y-auto"
+      <v-container
+        fluid
+        id="scroll-target"
+        style="max-height: 200px"
+        class="overflow-y-auto"
+      >
+        <v-row
+          v-scroll:#scroll-target="onScroll"
+          align="center"
+          justify="center"
+          style="height: 110px;overflow-x: hidden"
         >
-          <v-row
-            v-scroll:#scroll-target="onScroll"
-            align="center"
-            justify="center"
-            style="height: 200px;overflow-x: hidden"
-          >
-            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
-              <v-radio-group
-                v-model="section_val"
-                class="mt-0 pr-0"
-                column
+          <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
+            <v-radio-group
+              v-model="section_val"
+              class="mt-0 pr-0"
+              column
+            >
+              <v-radio
+                label="All"
+                color="red"
+                :value="0"
               >
-                <v-radio
-                  label="All"
-                  color="red"
-                  :value="0"
-                >
-                </v-radio>
-                <v-radio v-for="item in filter.section_list"
-                         :label="item.title"
-                         color="red"
-                         :value="item.id"
-                >
-                </v-radio>
+              </v-radio>
+              <v-radio v-for="item in filter.section_list"
+                       :label="item.title"
+                       color="red"
+                       :value="item.id"
+              >
+              </v-radio>
 
-              </v-radio-group>
-            </v-col>
+            </v-radio-group>
+          </v-col>
 
 
-          </v-row>
-        </v-container>
-      </div>
-      <div v-show="filter.base_list.length>0">
-        <p class="mt-5">Base</p>
-        <v-divider class="mb-4"/>
+        </v-row>
+      </v-container>
+    </div>
+    <div v-show="filter.base_list.length>0">
+      <p class="mt-5">Base</p>
+      <v-divider class="mb-3"/>
 
-        <v-container
-          fluid
-          id="scroll-target"
-          style="max-height: 300px"
-          class="overflow-y-auto"
+      <v-container
+        fluid
+        id="scroll-target"
+        style="max-height: 200px"
+        class="overflow-y-auto"
+      >
+        <v-row
+          v-scroll:#scroll-target="onScroll"
+          align="center"
+          justify="center"
+          style="height: 110px;overflow-x: hidden"
         >
-          <v-row
-            v-scroll:#scroll-target="onScroll"
-            align="center"
-            justify="center"
-            style="height: 100px"
-          >
-            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100px;overflow-x: hidden">
-              <v-radio-group
-                v-model="base_val"
-                class="mt-0 pr-0"
-                column
+          <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
+            <v-radio-group
+              v-model="base_val"
+              class="mt-0 pr-0"
+              column
+            >
+              <v-radio
+                label="All"
+                color="red"
+                :value="0"
               >
-                <v-radio
-                  label="All"
-                  color="red"
-                  :value="0"
-                >
-                </v-radio>
-                <v-radio v-for="item in filter.base_list"
-                         :label="item.title"
-                         color="red"
-                         :value="item.id"
-                >
-                </v-radio>
+              </v-radio>
+              <v-radio v-for="item in filter.base_list"
+                       :label="item.title"
+                       color="red"
+                       :value="item.id"
+              >
+              </v-radio>
 
-              </v-radio-group>
-            </v-col>
+            </v-radio-group>
+          </v-col>
 
 
-          </v-row>
-        </v-container>
-      </div>
+        </v-row>
+      </v-container>
     </div>
   </div>
 </template>
@@ -132,12 +133,16 @@ export default {
       scrollInvoked: 0,
 
       section_loading: false,
-      section_val: 0,
-      select_section_title: '',
+      section_val: this.$route.query.section ? this.$route.query.section : 0,
 
-      base_val:0,
-      select_base_title: '',
 
+      base_val: 0,
+
+
+      applied_filter: {
+        select_section_title: '',
+        select_base_title: '',
+      },
 
       filter: {
         section_list: [],
@@ -146,53 +151,74 @@ export default {
 
     }
   },
-  mounted() {
+  beforeMount() {
     var params = {
       type: 'section'
     };
     this.getFilterList(params, 'section');
 
-    this.getProductBrandData();
-    this.getProductCateData();
+    if (this.$route.query.section>0){
+      this.base_val=this.$route.query.base;
+      this.getFilterList(params, 'base');
+    }
+
+
+  },
+  mounted() {
+
+
+
+    // if (this.section_val > 0)
+    //   setTimeout(() => {
+    //     this.operateBaseOnSection(this.section_val);
+    //   }, 2000);
+
   },
   watch: {
     section_val(val) {
-      this.$emit('update:sectionVal', val);
       if (val > 0) {
-        this.select_section_title = this.filter.section_list.find(x => x.id === val).title;
+        this.$router.replace({query:{section:val}})
+
+        this.applied_filter.select_section_title = this.filter.section_list.find(x => x.id === val).title;
 
         //Load base list
-        var params={
-          type:'base',
-          section_id:val
+        var params = {
+          type: 'base',
+          section_id: val
         }
-        this.getFilterList(params,'base');
+        this.getFilterList(params, 'base');
 
-      } else{
-        this.select_section_title = "";
-        this.filter.base_list=[];
+      } else {
+        this.$router.replace({query:{}})
+
+        this.applied_filter.select_section_title = "";
+
+        //Reset base filter
+        this.base_val = 0;
+        this.filter.base_list = [];
       }
 
 
-      this.$emit('update:sectionTitle', this.select_section_title);
     },
     base_val(val) {
-      this.$emit('update:baseVal', val);
+      this.$toast.success(val);
       if (val > 0) {
-        this.select_base_title = this.filter.base_list.find(x => x.id === val).title;
-      } else
-        this.select_base_title = "";
-      this.$emit('update:baseTitle', this.select_base_title);
+        this.$router.replace({query:{section:this.section_val,base:val}}).catch(error => {
+          if (error.name != "NavigationDuplicated") {
+            //Do none
+          }
+        });
+        this.applied_filter.select_base_title = this.filter.base_list.find(x => x.id === val).title;
+      } else{
+        this.$router.replace({query:{section:this.section_val}})
+        this.applied_filter.select_base_title = "";
+
+      }
     },
     product_title(val) {
       this.$emit('update:productTitle', val)
     },
-    brand_keyword(val) {
-      this.getProductBrandData();
-    },
-    cate_keyword(val) {
-      this.getProductCateData();
-    },
+
 
 
   },
@@ -201,44 +227,6 @@ export default {
       this.scrollInvoked++
     },
 
-    getProductBrandData() {
-      this.product_brand_loading = true;
-      //Get brand list
-      let product_brandApiURL = `/api/product_brand_list`;
-      this.$axios.$post(product_brandApiURL,
-        {
-          "paginate_option": false,
-          "keyword": this.brand_keyword
-        }
-      ).then(response => {
-        this.product_brands = response;
-        this.product_brand_loading = false;
-        this.product_brand_val = parseInt(this.brandId);
-
-      })
-        .catch(e => {
-          this.product_brand_loading = false;
-        })
-    },
-
-    getProductCateData() {
-      this.product_cate_loading = true;
-      //Get category list
-      let product_cateApiURL = `/api/category_list`;
-      this.$axios.$post(product_cateApiURL,
-        {
-          "paginate_option": false,
-          "keyword": this.cate_keyword
-        }
-      ).then(response => {
-        this.product_categories = response;
-        this.product_cate_loading = false;
-        this.product_cate_val = parseInt(this.cateId);
-      })
-        .catch(e => {
-          this.product_cate_loading = false;
-        })
-    },
 
     getFilterList(params, type) {
       this.$axios.$get('/api/v1/types/list', {
@@ -246,12 +234,23 @@ export default {
       }).then(res => {
         if (type === 'section')
           this.filter.section_list = res.data;
-        else if(type==='base')
+        else if (type === 'base')
           this.filter.base_list = res.data;
+
+
       }).catch(err => {
         this.$toast.error(err);
       })
-    }
+    },
+
+    //Check user selected at least one filter
+    enabledAppliedFilter() {
+      if (this.applied_filter.select_base_title !== '' || this.applied_filter.select_section_title !== '')
+        return true;
+      else
+        return false;
+    },
+
 
   }
 }

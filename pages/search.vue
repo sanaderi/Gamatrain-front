@@ -24,7 +24,7 @@
         <v-row>
           <v-col lg="3" class="d-none d-sm-block">
             <div class="search-filter">
-              <search-filter/>
+              <search-filter />
             </div>
           </v-col>
           <v-col lg="9" md="9" sm="12" class="search-contents">
@@ -37,7 +37,7 @@
               <!-- header desktop -->
               <Tabs/>
               <!-- sample-q-items-desktop -->
-             <NuxtChild/>
+             <NuxtChild ref="tab_content"/>
             </div>
           </v-col>
         </v-row>
@@ -77,9 +77,17 @@ export default {
         },
       ],
 
+      section_val:0,
+
     }
   },
   mounted() {
+  },
+
+  watch:{
+    section_val(val){
+      this.$refs.tab_content.section_val=val
+    }
   },
   methods:{
   }
