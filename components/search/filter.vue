@@ -201,7 +201,6 @@ export default {
 
     },
     base_val(val) {
-      this.$toast.success(val);
       if (val > 0) {
         this.$router.replace({query:{section:this.section_val,base:val}}).catch(error => {
           if (error.name != "NavigationDuplicated") {
