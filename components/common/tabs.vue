@@ -1,7 +1,7 @@
 <template>
   <v-card class="d-block tab-header sticky-scroll">
     <v-tabs v-model="active_tab">
-      <v-tab @click="openLink('sample-q')">
+      <v-tab @click="openLink('test')">
         <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-sample" content="35000">
           <div class="nav-link sample-q-icon">
             <span class="icon icong-test mr-1"></span>
@@ -9,7 +9,7 @@
           </div>
         </v-badge>
       </v-tab>
-      <v-tab  @click="openLink('training-contents')">
+      <v-tab @click="openLink('learnfiles')">
         <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-training" content="1258" color="#2E7D32">
           <div class="nav-link training-content-icon">
             <span class="icon icong-learnfiles mr-1"></span>
@@ -17,7 +17,7 @@
           </div>
         </v-badge>
       </v-tab>
-      <v-tab  @click="openLink('q-a')">
+      <v-tab @click="openLink('question')">
         <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-q" content="21260" color="#BF360C">
           <div class="nav-link q-a-icon">
             <span class="icon icong-qa mr-1 "></span>
@@ -25,7 +25,7 @@
           </div>
         </v-badge>
       </v-tab>
-      <v-tab @click="openLink('online-exam')">
+      <v-tab @click="openLink('azmoon')">
         <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-online" content="1690" color="#5600E8">
           <div class="nav-link exam-icon">
             <span class="icon icong-azmoon mr-1"></span>
@@ -33,7 +33,7 @@
           </div>
         </v-badge>
       </v-tab>
-      <v-tab @click="openLink('tutorials')">
+      <v-tab @click="openLink('dars')">
         <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-tutorial" content="169" color="#BD081C">
           <div class="nav-link tutorial-icon">
             <span class="icon icong-blog mr-1"></span>
@@ -41,7 +41,7 @@
           </div>
         </v-badge>
       </v-tab>
-      <v-tab @click="openLink('teachers')">
+      <v-tab @click="openLink('tutor')">
         <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-teachers" content="2810" color="#8E24AA">
           <div class="nav-link teacher-icon">
             <span class="icon icong-teacher mr-1"></span>
@@ -56,23 +56,23 @@
 export default {
   data() {
     return {
-       active_tab:0
+      active_tab: 0
     }
   },
   beforeMount() {
-    var active_route=this.$route.path;
-    if (active_route==="/search/sample-q")
-      this.active_tab=0;
-    else if (active_route==="/search/training-contents")
-      this.active_tab=1;
-    else if (active_route==="/search/q-a")
-      this.active_tab=2;
-    else if (active_route==="/search/online-exam")
-      this.active_tab=3;
-    else if (active_route==="/search/tutorials")
-      this.active_tab=4;
-    else if (active_route==="/search/teachers")
-      this.active_tab=5;
+    var active_route = this.$route.query.type;
+    if (active_route === "test")
+      this.active_tab = 0;
+    else if (active_route === "learnfiles")
+      this.active_tab = 1;
+    else if (active_route === "question")
+      this.active_tab = 2;
+    else if (active_route === "azmoon")
+      this.active_tab = 3;
+    else if (active_route === "dars")
+      this.active_tab = 4;
+    else if (active_route === "tutor")
+      this.active_tab = 5;
 
   },
   beforeDestroy() {
@@ -80,9 +80,21 @@ export default {
   },
 
   methods: {
-    openLink(val){
-      this.$router.push({path:`/search/${val}`,query:this.$route.query})
+    openLink(val) {
+      const query = {type: val}
+      if (this.$route.query.section) {
+        query.section = this.$route.query.section
+      }
+      if (this.$route.query.base) {
+        query.base = this.$route.query.base;
+      }
+      if (this.$route.query.lesson) {
+        query.lesson = this.$route.query.lesson;
+      }
+
+      this.$router.replace({query: query})
     }
+
     // testHeader() {
     //     let header = document.querySelector(".sticky-scroll")
     //     if (scrollY > 210) {
@@ -136,7 +148,6 @@ export default {
 }
 
 
-
 .nav-link .icon {
   display: none !important;
 }
@@ -152,9 +163,10 @@ export default {
 }
 
 
-.v-tab--active:hover::before{
+.v-tab--active:hover::before {
   opacity: 0;
 }
+
 .v-tab:hover::before {
   opacity: 0;
 }
@@ -196,6 +208,7 @@ export default {
   padding-left: 1rem;
   color: #8e24aa;
 }
+
 /*End Remove default style for vuetify tabs and apply new style*/
 
 </style>

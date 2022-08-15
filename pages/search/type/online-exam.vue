@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  props:["items"],
   name: "online-exam"
 }
 </script>

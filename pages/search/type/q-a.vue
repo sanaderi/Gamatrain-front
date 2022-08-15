@@ -111,33 +111,17 @@
       </div>
     </v-col>
 
-    <v-row v-show="page_loading">
-      <v-col cols="12" class="text-center">
-        <v-progress-circular
-          :size="40"
-          :width="4"
-          class="mt-12 mb-12"
-          color="orange"
-          indeterminate
-        />
-      </v-col>
-    </v-row>
 
   </v-row>
 </template>
 
 <script>
-import TabsContentFooter from "@/components/common/tabs-content-footer";
 
 export default {
-  name: "training-contents",
-  components: {TabsContentFooter},
+  name: "question-answer",
+  props:["items"],
   data() {
     return {
-      page_loading: false,
-      items: [],
-      page: 1,
-
       bookCarousel: {
         carouselName: "List",
         carouselImg: "carouselBook.png",
@@ -211,48 +195,10 @@ export default {
     }
   },
   mounted() {
-    this.getTutorialList();
-    this.scroll();
+
   },
   methods: {
-    async getTutorialList() {
-      this.page_loading = true;
-      await this.$axios.$get('/api/v1/search',
-        {
-          params: {
-            type: 'question',
-            page: this.page,
-          }
-        }).then(response => {
-        this.items.push(...response.data.list);
-      }).catch(err => {
 
-      }).finally(() => {
-        this.page_loading = false;
-      });
-    },
-    scroll() {//For infinite loading
-      window.onscroll = () => {
-        //Scroll position
-        var scrollPosition = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) + window.innerHeight + 50;
-        let bottomOfWindow = scrollPosition >= document.documentElement.offsetHeight
-
-        //Avoid the number of requests
-        if (this.timer) {
-          clearTimeout(this.timer);
-          this.timer = null;
-        }
-
-        //Load next page
-        if (bottomOfWindow) {
-          this.page_loading=true;
-          this.timer = setTimeout(() => {
-            this.page++
-            this.getTutorialList();
-          }, 800)
-        }
-      }
-    },
   }
 }
 </script>
