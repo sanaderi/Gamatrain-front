@@ -24,7 +24,7 @@
         <v-row>
           <v-col lg="3" class="d-none d-sm-block">
             <div class="search-filter">
-              <search-filter/>
+              <search-filter :setBreadCrumbs.sync="breadcrumbs"/>
             </div>
           </v-col>
           <v-col lg="9" md="9" sm="12" class="search-contents">
@@ -35,7 +35,7 @@
                 </template>
               </v-breadcrumbs>
               <!-- header desktop -->
-              <Tabs/>
+              <Tabs ref="content_tabs"/>
               <!-- sample-q-items-desktop -->
               <div class="text-center" v-if="page_loading===false && items.length===0">
                 Oops! no data found
@@ -99,28 +99,11 @@ export default {
   },
   data() {
     return {
-      breadcrumbs: [
-        {
-          text: 'Dashboard',
-          disabled: false,
-          href: 'breadcrumbs_dashboard',
-        },
-        {
-          text: 'Olympiads',
-          disabled: false,
-          href: 'breadcrumbs_link_1',
-        },
-        {
-          text: 'sample Question',
-          disabled: true,
-          href: 'breadcrumbs_link_2',
-        },
-      ],
-      page_loading:false,
-      page:1,
+      breadcrumbs: [],
+      page_loading: false,
+      page: 1,
 
-      items:[],
-
+      items: [],
 
 
     }
@@ -134,49 +117,61 @@ export default {
   },
 
   watch: {
-    "$route.query.type"(val){
-      this.page=1;
-      this.items=[];
+    "$route.query.type"(val) {
+      this.page = 1;
+      this.items = [];
       this.getContentList();
 
     },
-    "$route.query.section"(val){
-      this.page=1;
-      this.items=[];
+    "$route.query.section"(val) {
+      this.page = 1;
+      this.items = [];
       this.getContentList();
 
     },
-    "$route.query.base"(val){
-      this.page=1;
-      this.items=[];
+    "$route.query.base"(val) {
+      this.page = 1;
+      this.items = [];
       this.getContentList();
     },
-    "$route.query.lesson"(val){
-      this.page=1;
-      this.items=[];
+    "$route.query.lesson"(val) {
+      this.page = 1;
+      this.items = [];
+      this.getContentList();
+    },
+    "$route.query.topic"(val) {
+      this.page = 1;
+      this.items = [];
+      this.getContentList();
+    },
+    "$route.query.test_type"(val) {
+      this.page = 1;
+      this.items = [];
       this.getContentList();
     },
   },
   methods: {
-
     // Get content list
     async getContentList() {
-      this.page_loading=true;
+      this.page_loading = true;
       await this.$axios.$get('/api/v1/search',
         {
           params: {
-            type:this.$route.query.type,
+            type: this.$route.query.type,
             page: this.page,
-            section:this.$route.query.section,
-            base:this.$route.query.base,
-            lesson:this.$route.query.lesson
+            section: this.$route.query.section,
+            base: this.$route.query.base,
+            lesson: this.$route.query.lesson,
+            topic: this.$route.query.topic,
+            test_type: this.$route.query.test_type
           }
         }).then(response => {
         this.items.push(...response.data.list);
+        this.$refs.content_tabs.content_statistics = response.data.types_stats;
       }).catch(err => {
 
-      }).finally(()=>{
-        this.page_loading=false;
+      }).finally(() => {
+        this.page_loading = false;
       });
     },
     scroll() {//For infinite loading
@@ -193,7 +188,7 @@ export default {
 
         //Load next page
         if (bottomOfWindow) {
-          this.page_loading=true;
+          this.page_loading = true;
           this.timer = setTimeout(() => {
             this.page++
             this.getContentList();
@@ -201,6 +196,9 @@ export default {
         }
       }
     },
+
+
+
   }
 
 }

@@ -34,6 +34,26 @@
       >
         {{ applied_filter.select_lesson_title }}
       </v-chip>
+      <v-chip
+        v-if="applied_filter.select_topic_title"
+        class="mt-1"
+        close
+        label
+        outlined
+        @click:close="topic_val = 0"
+      >
+        {{ applied_filter.select_topic_title }}
+      </v-chip>
+      <v-chip
+        v-if="applied_filter.select_file_type_title"
+        class="mt-1"
+        close
+        label
+        outlined
+        @click:close="file_type_val = 0"
+      >
+        {{ applied_filter.select_file_type_title }}
+      </v-chip>
     </div>
     <!--End select filter  -->
     <div>
@@ -139,6 +159,7 @@
         >
           <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
             <v-radio-group
+              @change="changeLessonVal"
               v-model="lesson_val"
               class="mt-0 pr-0"
               column
@@ -163,6 +184,100 @@
         </v-row>
       </v-container>
     </div>
+
+    <!--Topic filter-->
+    <div v-show="filter.topic_list.length>0">
+      <p class="mt-5">Topic</p>
+      <v-divider class="mb-3"/>
+
+      <v-container
+        fluid
+        id="scroll-target"
+        style="max-height: 200px"
+        class="overflow-y-auto"
+      >
+        <v-row
+          v-scroll:#scroll-target="onScroll"
+          align="center"
+          justify="center"
+          style="height: 110px;overflow-x: hidden"
+        >
+          <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
+            <v-radio-group
+              @change="changeTopicVal"
+              v-model="topic_val"
+              class="mt-0 pr-0"
+              column
+            >
+              <v-radio
+                label="All"
+                color="red"
+                :value="0"
+              >
+              </v-radio>
+              <v-radio
+                v-for="item in filter.topic_list"
+                :label="item.title"
+                color="red"
+                :value="item.id"
+              >
+              </v-radio>
+
+            </v-radio-group>
+          </v-col>
+
+
+        </v-row>
+      </v-container>
+    </div>
+
+    <!--File type filter-->
+    <div v-show="filter.file_type_list.length>0">
+      <p class="mt-5">{{ $route.query.type === 'test' ? 'Sample exam' : 'Training content' }} Type</p>
+      <v-divider class="mb-3"/>
+
+      <v-container
+        fluid
+        id="scroll-target"
+        style="max-height: 200px"
+        class="overflow-y-auto"
+      >
+        <v-row
+          v-scroll:#scroll-target="onScroll"
+          align="center"
+          justify="center"
+          style="height: 110px;overflow-x: hidden"
+        >
+          <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
+            <v-radio-group
+              @change="changeFileTypeVal"
+              v-model="file_type_val"
+              class="mt-0 pr-0"
+              column
+            >
+              <v-radio
+                label="All"
+                color="red"
+                :value="0"
+              >
+              </v-radio>
+              <v-radio
+                v-for="item in filter.file_type_list"
+                :label="item.title"
+                color="red"
+                :value="item.id"
+              >
+              </v-radio>
+
+            </v-radio-group>
+          </v-col>
+
+
+        </v-row>
+      </v-container>
+    </div>
+
+
   </div>
 </template>
 
@@ -191,19 +306,27 @@ export default {
 
       base_val: 0,
       lesson_val: 0,
+      topic_val: 0,
+      file_type_val:0,
 
 
       applied_filter: {
         select_section_title: '',
         select_base_title: '',
         select_lesson_title: '',
+        select_topic_title: '',
+        select_file_type_title: '',
       },
 
       filter: {
         section_list: [],
         base_list: [],
         lesson_list: [],
-      }
+        topic_list: [],
+        file_type_list: []
+      },
+
+      breadcrumbs: []
 
     }
   },
@@ -213,15 +336,38 @@ export default {
     };
     this.getFilterList(params, 'section');
 
+    this.setBreadcrumbInfo();
 
+    //Get sample exam test type
+    if (this.$route.query.type === 'test')
+      this.getFileType();
   },
   watch: {
+    "$route.query.type"(val) {
+      this.filter.file_type_list = [];
+      if (this.$route.query.type === 'test')
+        this.getFileType();
+    },
     section_val(val) {
       //Reset base filter
       this.base_val = 0;
+      this.lesson_val = 0;
+      this.topic_val = 0;
+
       this.filter.base_list = [];
       this.filter.lesson_list = [];
+      this.filter.topic_list = [];
+
+      //Reset related tags
+      this.applied_filter.select_section_title = '';
+      this.applied_filter.select_base_title = '';
+      this.applied_filter.select_lesson_title = '';
+      this.applied_filter.select_topic_title = '';
+      //End reset related tags
+
       this.updateQueryParams();
+      this.setBreadcrumbInfo();
+
 
       if (val > 0) {
         this.applied_filter.select_section_title = this.filter.section_list.find(x => x.id === val).title;
@@ -237,27 +383,23 @@ export default {
       }
 
     },
-    lesson_val(val) {
-      this.updateQueryParams();
-      if (val > 0) {
+    base_val(val) {
+      if (val === 0) {
+        //Rest other related filter
+        this.lesson_val = 0;
+        this.topic_val = 0;
 
-        // this.applied_filter.select_lesson_title = this.filter.lesson_list.find(x => x.id === val).title;
-
-        var params = {
-          type: 'lesson',
-          base_id: val
-        }
-
-        // this.getFilterList(params, 'lesson');
-      } else {
-        this.applied_filter.select_lesson_title = "";
-
+        this.applied_filter.select_base_title = '';
       }
     },
-    product_title(val) {
-      this.$emit('update:productTitle', val)
-    },
+    lesson_val(val) {
+      if (val === 0) {
+        //Rest other related filter
+        this.topic_val = 0;
 
+        this.applied_filter.select_lesson_title = '';
+      }
+    }
   },
   methods: {
     onScroll() {
@@ -267,8 +409,8 @@ export default {
       this.$axios.$get('/api/v1/types/list', {
         params
       }).then(res => {
-        var data={};
-        if (type === 'section'){
+        var data = {};
+        if (type === 'section') {
           this.filter.section_list = res.data;
 
           //Initiate loading filter
@@ -279,10 +421,13 @@ export default {
             }
             this.getFilterList(data, 'base');
             this.base_val = this.$route.query.base;
+
+            this.applied_filter.select_section_title = this.filter.section_list.find(x => x.id === this.section_val).title;
+
+
           }
           //
-        }
-        else if (type === 'base'){
+        } else if (type === 'base') {
           this.filter.base_list = res.data;
 
           //Get lesson data
@@ -294,11 +439,45 @@ export default {
             this.getFilterList(data, 'lesson');
 
             //Set lesson val
-            this.lesson_val=this.$route.query.lesson;
+            this.lesson_val = this.$route.query.lesson;
+
+            //Enable tag
+            this.applied_filter.select_base_title = this.filter.base_list.find(x => x.id === this.base_val).title;
+
+
+            //End type breadcrumb
+            // var breadcrumb_item = {
+            //   text: this.applied_filter.select_section_title,
+            //   disabled: false,
+            //   href: '/',
+            // };
+            // this.breadcrumbs.push(breadcrumb_item);
+            //Section breadcrumb
           }
-        }
-        else if (type === 'lesson')
+        } else if (type === 'lesson') {
           this.filter.lesson_list = res.data;
+
+          //Get lesson data
+          if (this.$route.query.lesson > 0) {
+            data = {
+              type: 'topic',
+              lesson_id: this.$route.query.lesson
+            }
+            this.getFilterList(data, 'topic');
+
+            //Set topic val
+            this.topic_val = this.$route.query.topic;
+
+            //Enable tag
+            this.applied_filter.select_lesson_title = this.filter.lesson_list.find(x => x.id === this.lesson_val).title;
+
+          }
+        } else if (type === 'topic') {
+          this.filter.topic_list = res.data;
+
+          //Enable tag
+          this.applied_filter.select_topic_title = this.filter.topic_list.find(x => x.id === this.topic_val).title;
+        }
 
 
       }).catch(err => {
@@ -308,7 +487,10 @@ export default {
 
     //Check user selected at least one filter
     enabledAppliedFilter() {
-      if (this.applied_filter.select_base_title !== '' || this.applied_filter.select_section_title !== '')
+      if (this.applied_filter.select_base_title !== '' || this.applied_filter.select_section_title !== ''
+        || this.applied_filter.select_lesson_title !== '' || this.applied_filter.select_topic_title !== ''
+        || this.applied_filter.select_file_type_title !== ''
+      )
         return true;
       else
         return false;
@@ -316,23 +498,94 @@ export default {
 
 
     //Change base val option
-    changeBaseVal(val){
+    changeBaseVal() {
       this.lesson_val = 0;
       this.filter.lesson_list = [];
+
+      //Reset related tags
+      this.applied_filter.select_base_title = '';
+      this.applied_filter.select_lesson_title = '';
+      this.applied_filter.select_topic_title = '';
+      //End reset related tags
+
+
       this.updateQueryParams();
-      if (val > 0) {
+      if (this.base_val > 0) {
         var params = {
           type: 'lesson',
-          base_id: this.$route.query.base
+          base_id: this.base_val
         }
 
         this.getFilterList(params, 'lesson');
+
+        //Enable base title tag
+        this.applied_filter.select_base_title = this.filter.base_list.find(x => x.id === this.base_val).title;
       } else {
         this.applied_filter.select_base_title = "";
 
       }
     },
 
+    //Change lesson val option
+    changeLessonVal() {
+      this.topic_val = 0;
+      this.filter.topic_list = [];
+
+      //Reset related tags
+      this.applied_filter.select_lesson_title = '';
+      this.applied_filter.select_topic_title = '';
+      //End reset related tags
+
+      this.updateQueryParams();
+      if (this.lesson_val > 0) {
+        var params = {
+          type: 'topic',
+          lesson_id: this.lesson_val
+        }
+
+        this.getFilterList(params, 'topic');
+
+        //Enable lesson title tag
+        this.applied_filter.select_lesson_title = this.filter.lesson_list.find(x => x.id === this.lesson_val).title;
+      } else {
+        this.applied_filter.select_topic_title = "";
+
+      }
+    },
+
+
+    //Change topic val option
+    changeTopicVal() {
+      //Reset related tags
+      this.applied_filter.select_topic_title = '';
+      //End reset related tags
+
+      this.updateQueryParams();
+      //Enable topic title tag
+
+      if (this.topic_val > 0)
+        this.applied_filter.select_topic_title = this.filter.topic_list.find(x => x.id === this.topic_val).title;
+      else
+        this.applied_filter.select_topic_title = "";
+
+
+    },
+    //Change topic val option
+
+    //Change file type option
+    changeFileTypeVal() {
+      this.updateQueryParams();
+      //Enable topic title tag
+
+      if (this.file_type_val > 0)
+        this.applied_filter.select_file_type_title = this.filter.file_type_list.find(x => x.id === this.file_type_val).title;
+      else
+        this.applied_filter.select_file_type_title = "";
+
+
+    },
+
+    //Update router query params
     updateQueryParams() {
       const query = {type: this.$route.query.type}
       if (this.section_val !== 0) {
@@ -344,9 +597,69 @@ export default {
       if (this.lesson_val !== 0) {
         query.lesson = this.lesson_val;
       }
+      if (this.topic_val !== 0) {
+        query.topic = this.topic_val;
+      }
+      if (this.file_type_val !== 0 && query.type==="test") {
+        query.test_type = this.file_type_val;
+      }
       // handle more query parameters here ...
-      this.$router.replace({query: query}).catch(err=>{
+      this.$router.replace({query: query}).catch(err => {
         //Do noting
+      })
+    },
+
+    //set breadcrumbs
+    setBreadcrumbInfo() {
+      this.breadcrumbs = [];
+
+      //Type breadcrumb
+      var active_tab = this.$route.query.type;
+      var breadcrumb_item = {
+        text: '',
+        disabled: false,
+        href: `/search?type=${active_tab}`,
+      };
+      if (active_tab === "test")
+        breadcrumb_item.text = "Sample test"
+      else if (active_tab === "learnfiles")
+        breadcrumb_item.text = "Training content"
+      else if (active_tab === "question")
+        breadcrumb_item.text = 'Q & A';
+      else if (active_tab === "azmoon")
+        breadcrumb_item.text = 'Online Exam';
+      else if (active_tab === "dars")
+        breadcrumb_item.text = 'Tutorial';
+      else if (active_tab === "tutor")
+        breadcrumb_item.text = 'Teacher';
+
+      this.breadcrumbs.push(breadcrumb_item);
+
+
+      //Emit to parent
+
+      this.$emit('update:setBreadCrumbs', this.breadcrumbs);
+
+
+    },
+
+    //Get file type
+    getFileType() {
+      this.$axios.$get('/api/v1/types/list',
+        {
+          params: {
+            type: this.$route.query.type ? 'test_type' : ''
+          }
+        })
+        .then(res => {
+          this.filter.file_type_list = res.data;
+
+          if (this.$route.query.test_type>0){
+            this.file_type_val=this.$route.query.test_type;
+            this.applied_filter.select_file_type_title = this.filter.file_type_list.find(x => x.id === this.file_type_val).title;
+          }
+        }).catch(err => {
+        this.$toast.error(err);
       })
     }
 

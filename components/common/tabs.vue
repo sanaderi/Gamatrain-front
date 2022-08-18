@@ -2,7 +2,7 @@
   <v-card class="d-block tab-header sticky-scroll">
     <v-tabs v-model="active_tab">
       <v-tab @click="openLink('test')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-sample" content="35000">
+        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-sample" :content="content_statistics.test">
           <div class="nav-link sample-q-icon">
             <span class="icon icong-test mr-1"></span>
             Sample Exam
@@ -10,7 +10,7 @@
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('learnfiles')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-training" content="1258" color="#2E7D32">
+        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-training" :content="content_statistics.learnfiles" color="#2E7D32">
           <div class="nav-link training-content-icon">
             <span class="icon icong-learnfiles mr-1"></span>
             Training Content
@@ -18,7 +18,7 @@
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('question')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-q" content="21260" color="#BF360C">
+        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-q" :content="content_statistics.question" color="#BF360C">
           <div class="nav-link q-a-icon">
             <span class="icon icong-qa mr-1 "></span>
             Q & A
@@ -26,7 +26,7 @@
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('azmoon')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-online" content="1690" color="#5600E8">
+        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-online" :content="content_statistics.azmoon" color="#5600E8">
           <div class="nav-link exam-icon">
             <span class="icon icong-azmoon mr-1"></span>
             Online Exam
@@ -34,7 +34,7 @@
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('dars')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-tutorial" content="169" color="#BD081C">
+        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-tutorial" :content="content_statistics.tutorial" color="#BD081C">
           <div class="nav-link tutorial-icon">
             <span class="icon icong-blog mr-1"></span>
             Tutorial
@@ -42,7 +42,8 @@
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('tutor')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-teachers" content="2810" color="#8E24AA">
+        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-teachers"
+                 :content="content_statistics.tutor" color="#8E24AA">
           <div class="nav-link teacher-icon">
             <span class="icon icong-teacher mr-1"></span>
             Teacher
@@ -56,7 +57,16 @@
 export default {
   data() {
     return {
-      active_tab: 0
+      active_tab: 0,
+      content_statistics:{
+        azmoon:'',
+        dars:'',
+        learnfiles:'',
+        question:'',
+        test:'',
+        tutor:'',
+        tutorial:'',
+      }
     }
   },
   beforeMount() {
@@ -90,6 +100,12 @@ export default {
       }
       if (this.$route.query.lesson) {
         query.lesson = this.$route.query.lesson;
+      }
+      if (this.$route.query.topic) {
+        query.topic = this.$route.query.topic;
+      }
+      if (this.$route.query.test_type !== 0 && type==="test") {
+        query.test_type = this.test_type;
       }
 
       this.$router.replace({query: query})
