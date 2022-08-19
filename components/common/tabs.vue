@@ -104,8 +104,11 @@ export default {
       if (this.$route.query.topic) {
         query.topic = this.$route.query.topic;
       }
-      if (this.$route.query.test_type !== 0 && type==="test") {
-        query.test_type = this.test_type;
+      if (this.$route.query.test_type !== 0 && query.type==="test") {
+        query.test_type = this.$route.query.test_type;
+      }
+      if (this.$route.query.level !== 0 && query.type==="test") {
+        query.level = this.$route.query.level;
       }
 
       this.$router.replace({query: query})

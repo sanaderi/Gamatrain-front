@@ -114,6 +114,8 @@ export default {
     this.getContentList();
     this.scroll();
 
+
+
   },
 
   watch: {
@@ -149,6 +151,11 @@ export default {
       this.items = [];
       this.getContentList();
     },
+    "$route.query.level"(val) {
+      this.page = 1;
+      this.items = [];
+      this.getContentList();
+    },
   },
   methods: {
     // Get content list
@@ -163,7 +170,8 @@ export default {
             base: this.$route.query.base,
             lesson: this.$route.query.lesson,
             topic: this.$route.query.topic,
-            test_type: this.$route.query.test_type
+            test_type: this.$route.query.test_type,
+            level: this.$route.query.level
           }
         }).then(response => {
         this.items.push(...response.data.list);

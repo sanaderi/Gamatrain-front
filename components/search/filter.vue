@@ -54,6 +54,16 @@
       >
         {{ applied_filter.select_file_type_title }}
       </v-chip>
+      <v-chip
+        v-if="applied_filter.select_test_level_title"
+        class="mt-1"
+        close
+        label
+        outlined
+        @click:close="test_level_val = 0"
+      >
+        {{ applied_filter.select_test_level_title }}
+      </v-chip>
     </div>
     <!--End select filter  -->
     <div>
@@ -98,6 +108,8 @@
         </v-row>
       </v-container>
     </div>
+
+    <!--Base filter-->
     <div v-show="filter.base_list.length>0">
       <p class="mt-5">Base</p>
       <v-divider class="mb-3"/>
@@ -141,6 +153,8 @@
         </v-row>
       </v-container>
     </div>
+
+    <!--Lesson filter-->
     <div v-show="filter.lesson_list.length>0">
       <p class="mt-5">Lesson</p>
       <v-divider class="mb-3"/>
@@ -277,6 +291,51 @@
       </v-container>
     </div>
 
+    <!--Test level filter-->
+    <div v-show="filter.test_level_list.length>0 && $route.query.type==='test'">
+      <p class="mt-5">Level</p>
+      <v-divider class="mb-3"/>
+
+      <v-container
+        fluid
+        id="scroll-target"
+        style="max-height: 200px"
+        class="overflow-y-auto"
+      >
+        <v-row
+          v-scroll:#scroll-target="onScroll"
+          align="center"
+          justify="center"
+          style="height: 110px;overflow-x: hidden"
+        >
+          <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
+            <v-radio-group
+              v-model="test_level_val"
+              class="mt-0 pr-0"
+              column
+            >
+              <v-radio
+                label="All"
+                color="red"
+                :value="0"
+              >
+              </v-radio>
+              <v-radio
+                v-for="item in filter.test_level_list"
+                :label="item.title"
+                color="red"
+                :value="item.id"
+              >
+              </v-radio>
+
+            </v-radio-group>
+          </v-col>
+
+
+        </v-row>
+      </v-container>
+    </div>
+
 
   </div>
 </template>
@@ -297,7 +356,6 @@ export default {
   },
   data() {
     return {
-      chip4: true,
       scrollInvoked: 0,
 
       section_loading: false,
@@ -307,7 +365,8 @@ export default {
       base_val: 0,
       lesson_val: 0,
       topic_val: 0,
-      file_type_val:0,
+      file_type_val: 0,
+      test_level_val:0,
 
 
       applied_filter: {
@@ -316,6 +375,7 @@ export default {
         select_lesson_title: '',
         select_topic_title: '',
         select_file_type_title: '',
+        select_test_level_title:''
       },
 
       filter: {
@@ -323,7 +383,21 @@ export default {
         base_list: [],
         lesson_list: [],
         topic_list: [],
-        file_type_list: []
+        file_type_list: [],
+        test_level_list: [
+          {
+            id:'1',
+            title:'Simple'
+          },
+          {
+            id:'2',
+            title:'Medium'
+          },
+          {
+            id:'3',
+            title:'Hard'
+          },
+        ]
       },
 
       breadcrumbs: []
@@ -341,6 +415,11 @@ export default {
     //Get sample exam test type
     if (this.$route.query.type === 'test')
       this.getFileType();
+
+
+    if (this.$route.query.level>0){
+      this.test_level_val=this.$route.query.level;
+    }
   },
   watch: {
     "$route.query.type"(val) {
@@ -399,6 +478,17 @@ export default {
 
         this.applied_filter.select_lesson_title = '';
       }
+    },
+    test_level_val(val){
+      if (val>0){
+        this.applied_filter.select_test_level_title = this.filter.test_level_list
+          .find(x => x.id === val).title;
+        this.updateQueryParams();
+      }else{
+        this.applied_filter.select_test_level_title = "";
+      }
+
+
     }
   },
   methods: {
@@ -469,14 +559,15 @@ export default {
             this.topic_val = this.$route.query.topic;
 
             //Enable tag
-            this.applied_filter.select_lesson_title = this.filter.lesson_list.find(x => x.id === this.lesson_val).title;
+            this.applied_filter.select_lesson_title = this.filter.lesson_list.find(x => x.id === this.$route.query.lesson).title;
 
           }
         } else if (type === 'topic') {
           this.filter.topic_list = res.data;
 
           //Enable tag
-          this.applied_filter.select_topic_title = this.filter.topic_list.find(x => x.id === this.topic_val).title;
+          if (this.$route.query.topic > 0)
+            this.applied_filter.select_topic_title = this.filter.topic_list.find(x => x.id === this.topic_val).title;
         }
 
 
@@ -490,6 +581,7 @@ export default {
       if (this.applied_filter.select_base_title !== '' || this.applied_filter.select_section_title !== ''
         || this.applied_filter.select_lesson_title !== '' || this.applied_filter.select_topic_title !== ''
         || this.applied_filter.select_file_type_title !== ''
+        || this.applied_filter.select_test_level_title !== ''
       )
         return true;
       else
@@ -600,8 +692,11 @@ export default {
       if (this.topic_val !== 0) {
         query.topic = this.topic_val;
       }
-      if (this.file_type_val !== 0 && query.type==="test") {
+      if (this.file_type_val !== 0 && query.type === "test") {
         query.test_type = this.file_type_val;
+      }
+      if (this.test_level_val !== 0 && query.type === "test") {
+        query.level = this.test_level_val;
       }
       // handle more query parameters here ...
       this.$router.replace({query: query}).catch(err => {
@@ -654,8 +749,8 @@ export default {
         .then(res => {
           this.filter.file_type_list = res.data;
 
-          if (this.$route.query.test_type>0){
-            this.file_type_val=this.$route.query.test_type;
+          if (this.$route.query.test_type > 0) {
+            this.file_type_val = this.$route.query.test_type;
             this.applied_filter.select_file_type_title = this.filter.file_type_list.find(x => x.id === this.file_type_val).title;
           }
         }).catch(err => {
