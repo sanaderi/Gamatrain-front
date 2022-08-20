@@ -41,7 +41,7 @@ body {
     font-family: sans-serif;
 
     .v-carousel__controls__item {
-      color: $gray4  !important;
+      color: $gray4 !important;
     }
 
     .v-text-field--outlined fieldset {
@@ -128,11 +128,11 @@ body {
       font-size: $fontsize2;
     }
 
-    .theme--light.v-text-field>.v-input__control>.v-input__slot::before {
+    .theme--light.v-text-field > .v-input__control > .v-input__slot::before {
       display: none;
     }
 
-    .v-text-field>.v-input__control>.v-input__slot::after {
+    .v-text-field > .v-input__control > .v-input__slot::after {
       width: 0 !important;
     }
 
@@ -178,13 +178,12 @@ body {
     }
 
 
-
     .v-carousel__controls__item {
       margin: 0 0 !important;
     }
 
     .v-btn.v-btn--has-bg.search-btn {
-      background-color: $search  !important;
+      background-color: $search !important;
     }
 
     .container {
@@ -253,7 +252,7 @@ body {
 
       //navbar
       .navbar-items {
-        .v-list-group--active>.v-list-group__header>.v-list-group__header__append-icon .v-icon {
+        .v-list-group--active > .v-list-group__header > .v-list-group__header__append-icon .v-icon {
           transform: rotate(-90deg);
         }
 
@@ -328,7 +327,7 @@ body {
         }
 
         .sidemenu-item {
-          color: $gray4  !important;
+          color: $gray4 !important;
         }
 
         .logout-item {
@@ -347,7 +346,7 @@ body {
       //header-search
 
       .main-search-icon input::placeholder {
-        color: $gray4  !important;
+        color: $gray4 !important;
         opacity: 1;
       }
 
@@ -667,18 +666,18 @@ body {
 
       .search-container .search-container p {
         margin: 2rem;
-        color: $gray11  !important;
+        color: $gray11 !important;
       }
 
       .grade-search {
         background: $gray10;
         border: 1px solid $border;
 
-        .v-input__control>.v-input__slot {
+        .v-input__control > .v-input__slot {
           margin-bottom: 0;
         }
 
-        .v-text-field>.v-input__control>.v-input__slot {
+        .v-text-field > .v-input__control > .v-input__slot {
           background: blue !important;
         }
 
@@ -705,51 +704,51 @@ body {
 
     // grade-card
     .grade__item1 {
-      background: $grade__item1  !important;
+      background: $grade__item1 !important;
     }
 
     .grade__item2 {
-      background: $grade__item2  !important;
+      background: $grade__item2 !important;
     }
 
     .grade__item3 {
-      background: $grade__item3  !important;
+      background: $grade__item3 !important;
     }
 
     .grade__item4 {
-      background: $grade__item4  !important;
+      background: $grade__item4 !important;
     }
 
     .grade__item5 {
-      background: $grade__item5  !important;
+      background: $grade__item5 !important;
     }
 
     .grade__item6 {
-      background: $grade__item6  !important;
+      background: $grade__item6 !important;
     }
 
     .grade__item7 {
-      background: $grade__item7  !important;
+      background: $grade__item7 !important;
     }
 
     .grade__item8 {
-      background: $grade__item8  !important;
+      background: $grade__item8 !important;
     }
 
     .grade__item9 {
-      background: $grade__item9  !important;
+      background: $grade__item9 !important;
     }
 
     .grade__item10 {
-      background: $grade__item10  !important;
+      background: $grade__item10 !important;
     }
 
     .grade__item11 {
-      background: $grade__item11  !important;
+      background: $grade__item11 !important;
     }
 
     .grade__item12 {
-      background: $grade__item12  !important;
+      background: $grade__item12 !important;
     }
 
     .grade-list-lessons {
@@ -906,7 +905,7 @@ body {
       }
 
       .more-content {
-        color: $blue9  !important;
+        color: $blue9 !important;
         font-size: 1.2rem;
         font-weight: 400;
       }
@@ -957,7 +956,7 @@ body {
 
       &.grade-card1 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(39, 174, 96, 0.02);
 
@@ -972,7 +971,7 @@ body {
 
       &.grade-card2 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(192, 57, 43, 0.02);
 
@@ -987,7 +986,7 @@ body {
 
       &.grade-card3 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(1, 87, 155, 0.02);
 
@@ -1002,7 +1001,7 @@ body {
 
       &.grade-card4 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(86, 0, 232, 0.02);
 
@@ -1017,7 +1016,7 @@ body {
 
       &.grade-card5 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(51, 105, 30, 0.02);
 
@@ -1032,7 +1031,7 @@ body {
 
       &.grade-card6 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(191, 54, 12, 0.02);
 
@@ -1047,12 +1046,12 @@ body {
 
       &.grade-card7 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(46, 125, 50, 0.02);
 
         .grade-title7 {
-          color: $green105  !important;
+          color: $green105 !important;
         }
 
         .label-tag7 {
@@ -1062,7 +1061,7 @@ body {
 
       &.grade-card8 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(249, 168, 37, 0.02);
 
@@ -1077,7 +1076,7 @@ body {
 
       &.grade-card9 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(86, 0, 232, 0.02);
 
@@ -1092,7 +1091,7 @@ body {
 
       &.grade-card10 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(39, 174, 96, 0.02);
 
@@ -1107,7 +1106,7 @@ body {
 
       &.grade-card11 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(81, 45, 168, 0.02);
 
@@ -1122,7 +1121,7 @@ body {
 
       &.grade-card12 {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
         border-radius: 10px;
         background: rgba(3, 169, 244, 0.02);
 
@@ -1183,7 +1182,7 @@ body {
     // footer feed card
     .feed-card {
       box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
+      rgba(0, 0, 0, 0.05) 0px 1px 1px 0px !important;
       border-radius: 4px;
       border: 1px solid $border;
     }
@@ -1243,7 +1242,7 @@ body {
       max-width: 30.5%;
       margin-right: 1rem;
       box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+      rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
       border: 1px solid $border;
 
       .feed-box-item {
@@ -1331,7 +1330,7 @@ body {
 
       &.learning {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 
         .feed-header {
           border-bottom: 3px solid $green10;
@@ -1352,14 +1351,14 @@ body {
           }
 
           .theme--light i {
-            color: $white  !important;
+            color: $white !important;
           }
         }
       }
 
       &.question {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 
         .feed-header {
           border-bottom: 3px solid $red5;
@@ -1380,14 +1379,14 @@ body {
           }
 
           .theme--light i {
-            color: $white  !important;
+            color: $white !important;
           }
         }
       }
 
       &.news {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
-          rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 
         .feed-header {
           border-bottom: 3px solid $blue11;
@@ -1487,7 +1486,7 @@ body {
 
     // Footer
     .theme--light.v-footer {
-      background-color: $white  !important;
+      background-color: $white !important;
       border-top: 0.1rem solid #e3e3e3 !important;
     }
 
@@ -1568,7 +1567,7 @@ body {
           &.active {
             color: $yellow2;
             text-shadow: 0 -1px 0 #ddc507, -1px 0 0 #ddc507, 0 1px 0 #ddc507,
-              1px 0 0 #ddc507 !important;
+            1px 0 0 #ddc507 !important;
           }
         }
 
@@ -1995,7 +1994,8 @@ body {
           border-radius: 0.3rem;
           margin-left: 1.6rem;
 
-          .icon {}
+          .icon {
+          }
         }
 
         .footer-text.theme--light.v-icon {
@@ -2018,6 +2018,17 @@ body {
 
     //  close body and v-application
   }
+}
+
+//
+.book-no-img {
+  width: 100%;
+  height: 160px;
+  min-height: 75px;
+  padding: 5px;
+  text-align: center;
+  background-color: #f9f3f3 !important;
+  border-radius: 8px;
 }
 
 // Start : Lesson page
@@ -2066,7 +2077,7 @@ body {
   .card {
     outline: 1px solid $green11;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14),
-      0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
+    0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2);
   }
 
   .card-title {
@@ -2241,7 +2252,7 @@ body {
     }
 
     .responsive-button {
-      background: $green  !important;
+      background: $green !important;
       color: white;
       font-size: 1.4rem;
       font-weight: 500;
@@ -2294,7 +2305,7 @@ body {
       background-color: unset;
     }
 
-    .v-slide-group.v-item-group>.v-slide-group__prev {
+    .v-slide-group.v-item-group > .v-slide-group__prev {
       visibility: hidden;
     }
 
@@ -2391,7 +2402,7 @@ body {
     }
 
     .lastfile-titles {
-      border-bottom: 3px solid $category-content ;
+      border-bottom: 3px solid $category-content;
       width: 42%;
       margin-right: -2.7%;
       padding-right: 3%;
@@ -2484,7 +2495,6 @@ body {
         height: 340px !important;
 
 
-
         .v-btn--active .v-icon {
           background: $white;
           height: 10px;
@@ -2534,7 +2544,6 @@ body {
     .video-slide {
       border-radius: 0.4rem;
       position: relative;
-
 
 
       .rating {
@@ -2615,7 +2624,7 @@ body {
 
 
     .askcard-footer-btn {
-      background-color: $green  !important;
+      background-color: $green !important;
       color: $white;
     }
 
@@ -2629,7 +2638,6 @@ body {
       font-size: 4rem;
       color: $category-faq;
     }
-
 
 
     .testtitle {
@@ -2654,7 +2662,7 @@ body {
     }
 
     .testcard-footer-btn {
-      background-color: $green  !important;
+      background-color: $green !important;
       color: $white;
     }
 
@@ -2662,7 +2670,6 @@ body {
       color: $green;
     }
   }
-
 
 
   .online-exam-card {
@@ -2675,7 +2682,6 @@ body {
     .online-text-icon {
       color: $green;
     }
-
 
 
     .online-exam-title {
@@ -2791,26 +2797,33 @@ body {
             color: $gray8;
             display: flex;
             justify-content: space-between;
+
             .item-content-user {
               display: flex;
               align-items: center;
             }
+
             .item-content-file-answers {
               display: none;
             }
+
             .item-content-file-type {
               display: none;
             }
+
             .item-content-test-type {
               display: none;
             }
+
             .item-content-view {
               display: none;
             }
+
             .item-content-last-update {
               display: flex;
               align-items: center;
             }
+
             svg {
               display: none;
             }
@@ -2882,228 +2895,221 @@ body {
 //End search page
 
 
-
 // Start :  Training Content
 .training-content {
 
 
-    .book-carousel {
-      background-color: $green10;
-      border-radius: 1rem;
+  .book-carousel {
+    background-color: $green10;
+    border-radius: 1rem;
 
-      .container {
-        width: 100%;
-        max-width: 100%;
+    .container {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .book-carousel-sub {
+      min-height: 100%;
+      justify-content: center;
+
+      .book-carousel-title h4 {
+        font-size: 2.4rem;
+        color: $white;
+        font-weight: 700;
       }
 
-      .book-carousel-sub {
-        min-height: 100%;
+      .book-carousel-title p {
+        font-size: 2.4rem;
+        color: $white;
+        font-weight: 700;
+      }
+
+      .book-carousel-q ::before {
+        content: url("../images/quote.png");
+        height: 1rem;
+        width: 1rem;
+        transform: rotate(30deg);
+        right: 1%;
+        top: -3%;
+        position: absolute;
+      }
+
+      .book-carousel-q {
+
+        width: 80%;
+        height: 35px;
+        background: #FFD12F;
+        position: relative;
+        border-radius: 15rem;
+        padding: 0.4rem;
+        display: flex;
+        align-items: center;
         justify-content: center;
 
-        .book-carousel-title h4 {
-          font-size: 2.4rem;
+        p {
+          font-size: 1.4rem;
           color: $white;
-          font-weight: 700;
+          color: $green;
         }
-
-        .book-carousel-title p {
-          font-size: 2.4rem;
-          color: $white;
-          font-weight: 700;
-        }
-
-        .book-carousel-q ::before {
-          content: url("../images/quote.png");
-          height: 1rem;
-          width: 1rem;
-          transform: rotate(30deg);
-          right: 1%;
-          top: -3%;
-          position: absolute;
-        }
-
-        .book-carousel-q {
-
-          width: 80%;
-          height: 35px;
-          background: #FFD12F;
-          position: relative;
-          border-radius: 15rem;
-          padding: 0.4rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          p {
-            font-size: 1.4rem;
-            color: $white;
-            color: $green;
-          }
-        }
-
       }
 
+    }
 
 
-      .book-carousel-books {
-        background-color: #649f67;
-        margin-right: 0 !important;
-        position: relative;
-        border-radius: 0 1rem 1rem 0;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px !important;
+    .book-carousel-books {
+      background-color: #649f67;
+      margin-right: 0 !important;
+      position: relative;
+      border-radius: 0 1rem 1rem 0;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px !important;
 
-        .slide-item:hover {
-          transform: translateY(-20px);
-        }
+      .slide-item:hover {
+        transform: translateY(-20px);
+      }
 
-        .slide-item {
-          height: 40rem;
-          transition: 0.3s;
+      .slide-item {
+        height: 40rem;
+        transition: 0.3s;
 
-          .book-body {
-            background-color: $white;
+        .book-body {
+          background-color: $white;
+          border-radius: 1rem;
+
+          .book-body-image {
+            padding: 1rem;
+            width: 155px;
+            height: 190px;
+            border-radius: 2rem;
+          }
+
+          .book-title {
+            font-size: 2rem;
+            font-weight: 700;
+          }
+
+          .book-season {
+            font-size: 14px;
+            background-color: #effcef;
             border-radius: 1rem;
 
-            .book-body-image {
-              padding: 1rem;
-              width: 155px;
-              height: 190px;
-              border-radius: 2rem;
+            .season-number {
+              font-size: 24px;
+              font-weight: 500;
             }
+          }
 
-            .book-title {
-              font-size: 2rem;
-              font-weight: 700;
-            }
+          .book-price {
+            font-size: 14px;
+            background-color: #F5F5F5;
+            border-radius: 1rem;
 
-            .book-season {
-              font-size: 14px;
-              background-color: #effcef;
-              border-radius: 1rem;
-
-              .season-number {
-                font-size: 24px;
-                font-weight: 500;
-              }
-            }
-
-            .book-price {
-              font-size: 14px;
-              background-color: #F5F5F5;
-              border-radius: 1rem;
-
-              .price-number {
-                font-size: 24px;
-                font-weight: 500;
-              }
+            .price-number {
+              font-size: 24px;
+              font-weight: 500;
             }
           }
         }
-
-        .v-slide-group__prev {
-          width: 3.5rem;
-          height: 3.5rem;
-          position: absolute;
-          left: 9px;
-          top: 50%;
-          min-width: 0;
-          background-color: $white;
-          border-radius: 50%;
-          z-index: 6;
-          box-shadow: 0px 23px 29px rgba(0, 0, 0, 0.25);
-        }
-
-        .v-slide-group__next {
-          width: 3.5rem;
-          height: 3.5rem;
-          position: absolute;
-          right: 9px;
-          top: 50%;
-          min-width: 0;
-          background-color: $white;
-          border-radius: 50%;
-          z-index: 6;
-          box-shadow: 0px 23px 29px rgba(0, 0, 0, 0.25);
-        }
-
-
-
-
-
-
       }
+
+      .v-slide-group__prev {
+        width: 3.5rem;
+        height: 3.5rem;
+        position: absolute;
+        left: 9px;
+        top: 50%;
+        min-width: 0;
+        background-color: $white;
+        border-radius: 50%;
+        z-index: 6;
+        box-shadow: 0px 23px 29px rgba(0, 0, 0, 0.25);
+      }
+
+      .v-slide-group__next {
+        width: 3.5rem;
+        height: 3.5rem;
+        position: absolute;
+        right: 9px;
+        top: 50%;
+        min-width: 0;
+        background-color: $white;
+        border-radius: 50%;
+        z-index: 6;
+        box-shadow: 0px 23px 29px rgba(0, 0, 0, 0.25);
+      }
+
+
     }
+  }
 
-    .training-items {
-      margin: 3rem 0;
+  .training-items {
+    margin: 3rem 0;
 
-      .training-item {
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 1.2rem;
+    .training-item {
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 1.2rem;
 
-        .item-image {
-          width: 100%;
-          border-radius: 1rem;
+      .item-image {
+        width: 100%;
+        border-radius: 1rem;
+      }
+
+      .training-item-content {
+        min-height: 100%;
+
+        .item-content-title {
+          font-size: 24px;
+          color: $gray45;
         }
 
-        .training-item-content {
-          min-height: 100%;
+        .item-content-title-icon {
+          align-items: flex-start;
+        }
 
-          .item-content-title {
-            font-size: 24px;
-            color: $gray45;
-          }
+        .item-content-subtitle {
+          color: $gray4;
+          width: 60%;
+        }
 
-          .item-content-title-icon {
-            align-items: flex-start;
-          }
+        .card-footer {
+          display: flex;
+          color: $gray8;
+          font-size: 12px;
 
-          .item-content-subtitle {
-            color: $gray4;
-            width: 60%;
-          }
-
-          .card-footer {
+          .item-content-file-answers {
             display: flex;
-            color: $gray8;
-            font-size: 12px;
-
-            .item-content-file-answers {
-              display: flex;
-              align-items: center;
-              margin: auto;
-              display: none !important;
-            }
-
-            .item-content-file-type {
-              display: flex;
-              align-items: center;
-            }
-
-            .item-content-test-type {
-              display: none;
-            }
-
-            .item-content-view {
-              display: flex;
-              align-items: center;
-              display: none;
-            }
-
-            .item-content-last-update {
-              display: flex;
-              align-items: center;
-            }
-
-            svg {
-              display: none;
-            }
-
+            align-items: center;
+            margin: auto;
+            display: none !important;
           }
+
+          .item-content-file-type {
+            display: flex;
+            align-items: center;
+          }
+
+          .item-content-test-type {
+            display: none;
+          }
+
+          .item-content-view {
+            display: flex;
+            align-items: center;
+            display: none;
+          }
+
+          .item-content-last-update {
+            display: flex;
+            align-items: center;
+          }
+
+          svg {
+            display: none;
+          }
+
         }
       }
     }
-
+  }
 
 
 }
@@ -3179,7 +3185,6 @@ body {
     }
 
 
-
     .q-a-items {
       margin: 3rem 0;
 
@@ -3252,12 +3257,12 @@ body {
       .v-pagination__item {
         font-size: 1.5rem;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
       }
 
       .v-pagination__item--active {
-        background-color: $green  !important;
-        border-color: $green  !important;
+        background-color: $green !important;
+        border-color: $green !important;
       }
     }
   }
@@ -3334,7 +3339,6 @@ body {
     }
 
 
-
     .book-carousel {
       background-color: $green;
       border-radius: 1rem;
@@ -3390,7 +3394,6 @@ body {
         }
 
       }
-
 
 
       .book-carousel-books {
@@ -3475,10 +3478,6 @@ body {
         }
 
 
-
-
-
-
       }
     }
 
@@ -3510,14 +3509,7 @@ body {
             width: 60%;
           }
 
-          .item-content-tags {
-            display: flex;
 
-            .v-chip {
-              padding: 0 0.6rem;
-              font-size: 1rem;
-            }
-          }
 
           .card-footer {
             color: $gray8;
@@ -3541,6 +3533,7 @@ body {
               display: flex;
               align-items: center;
             }
+
             .item-content-last-update {
               display: flex;
               align-items: center;
@@ -3562,12 +3555,12 @@ body {
       .v-pagination__item {
         font-size: 1.5rem;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
       }
 
       .v-pagination__item--active {
-        background-color: $green  !important;
-        border-color: $green  !important;
+        background-color: $green !important;
+        border-color: $green !important;
       }
     }
   }
@@ -3674,26 +3667,33 @@ body {
             color: $gray8;
             display: flex;
             justify-content: space-between;
+
             .item-content-user {
               display: flex;
               align-items: center;
             }
+
             .item-content-file-answers {
               display: none;
             }
+
             .item-content-file-type {
               display: none;
             }
+
             .item-content-test-type {
-             display: none;
+              display: none;
             }
+
             .item-content-view {
               display: none;
             }
+
             .item-content-last-update {
               display: flex;
               align-items: center;
             }
+
             svg {
               display: none;
             }
@@ -3816,7 +3816,7 @@ body {
       }
 
       .nav-link {
-        color: $gray4  !important;
+        color: $gray4 !important;
       }
     }
 
@@ -4082,7 +4082,6 @@ body {
           }
 
 
-
           .card-user-content {
             .card-user-major {
               color: $green;
@@ -4240,16 +4239,17 @@ body {
       .v-pagination__item {
         font-size: 1.5rem;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
       }
 
       .v-pagination__item--active {
-        background-color: $green  !important;
-        border-color: $green  !important;
+        background-color: $green !important;
+        border-color: $green !important;
       }
     }
   }
 
 }
+
 
 // End : Teachers

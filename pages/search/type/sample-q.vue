@@ -4,15 +4,19 @@
       <v-row>
         <v-col lg="2" cols="3">
           <div class="item-img">
-            <img :src="item.lesson_pic" alt=""
-                 class="item-image">
+            <img v-if="item.lesson_pic" :src="item.lesson_pic" alt=""
+                 class="item-image"/>
+            <v-card v-else class="book-no-img ">
+              <p class="font-weight-bold mb-3 mt-5">{{ item.lesson_title }}</p>
+              <a href="https://gamatrain.com">Gamatrain.com</a>
+            </v-card>
           </div>
         </v-col>
         <v-col lg="10" cols="9" class="px-0">
           <div class="tutorial-content d-flex flex-column justify-space-between">
             <div class="tutorial-title d-flex justify-space-between">
               <nuxt-link :to="`/details/${item.id}/${item.title_url}`">
-                {{ item.title }}
+                {{ item.title.length>64 ? item.title.substr(0,61)+'...' : item.title }}
               </nuxt-link>
             </div>
             <p class="item-content-subtitle mb-2 d-none d-sm-block">

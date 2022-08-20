@@ -337,6 +337,40 @@
     </div>
 
 
+    <!--Test feature-->
+    <div v-show="$route.query.type==='test'">
+      <p class="mt-5">Test features</p>
+      <v-divider class="mb-3"/>
+
+      <v-container
+        fluid
+        id="scroll-target"
+        style="max-height: 180px"
+        class="overflow-y-auto"
+      >
+        <v-row
+          v-scroll:#scroll-target="onScroll"
+          align="center"
+          justify="center"
+          style="height: 180px;overflow-x: hidden"
+        >
+          <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
+            <v-checkbox v-for="item in filter.test_feature_filter"
+                        class="my-0" style="height: 4rem"
+                        @change="changeTestFeature(item.label,item.checkbox)"
+                        :hide-details="true"
+                        color="red"
+                        v-model="item.checkbox"
+                        :label="item.label"
+            />
+          </v-col>
+
+
+        </v-row>
+      </v-container>
+    </div>
+
+
   </div>
 </template>
 
@@ -356,6 +390,7 @@ export default {
   },
   data() {
     return {
+      checkbox: 1,
       scrollInvoked: 0,
 
       section_loading: false,
@@ -366,7 +401,11 @@ export default {
       lesson_val: 0,
       topic_val: 0,
       file_type_val: 0,
-      test_level_val:0,
+      test_level_val: 0,
+      word_checkbox_val: false,
+      pdf_checkbox_val: false,
+      free_checkbox_val: false,
+      answer_checkbox_val: false,
 
 
       applied_filter: {
@@ -375,7 +414,7 @@ export default {
         select_lesson_title: '',
         select_topic_title: '',
         select_file_type_title: '',
-        select_test_level_title:''
+        select_test_level_title: ''
       },
 
       filter: {
@@ -386,16 +425,34 @@ export default {
         file_type_list: [],
         test_level_list: [
           {
-            id:'1',
-            title:'Simple'
+            id: '1',
+            title: 'Simple'
           },
           {
-            id:'2',
-            title:'Medium'
+            id: '2',
+            title: 'Medium'
           },
           {
-            id:'3',
-            title:'Hard'
+            id: '3',
+            title: 'Hard'
+          },
+        ],
+        test_feature_filter: [
+          {
+            checkbox: (this.$route.query.word==='1' ? true : false),
+            label: "Word",
+          },
+          {
+            checkbox: (this.$route.query.pdf==='1' ? true : false),
+            label: "Pdf",
+          },
+          {
+            checkbox: (this.$route.query.free==='1' ? true : false),
+            label: "Free",
+          },
+          {
+            checkbox: (this.$route.query.a_file==='1' ? true : false),
+            label: "By answer",
           },
         ]
       },
@@ -417,8 +474,8 @@ export default {
       this.getFileType();
 
 
-    if (this.$route.query.level>0){
-      this.test_level_val=this.$route.query.level;
+    if (this.$route.query.level > 0) {
+      this.test_level_val = this.$route.query.level;
     }
   },
   watch: {
@@ -479,17 +536,19 @@ export default {
         this.applied_filter.select_lesson_title = '';
       }
     },
-    test_level_val(val){
-      if (val>0){
+    test_level_val(val) {
+      if (val > 0) {
         this.applied_filter.select_test_level_title = this.filter.test_level_list
           .find(x => x.id === val).title;
         this.updateQueryParams();
-      }else{
+      } else {
         this.applied_filter.select_test_level_title = "";
       }
 
 
-    }
+    },
+
+
   },
   methods: {
     onScroll() {
@@ -698,6 +757,18 @@ export default {
       if (this.test_level_val !== 0 && query.type === "test") {
         query.level = this.test_level_val;
       }
+      if (this.word_checkbox_val === 1 && query.type === "test") {
+        query.word = 1;
+      }
+      if (this.pdf_checkbox_val === 1 && query.type === "test") {
+        query.pdf = 1;
+      }
+      if (this.free_checkbox_val === 1 && query.type === "test") {
+        query.free = 1;
+      }
+      if (this.answer_checkbox_val === 1 && query.type === "test") {
+        query.a_file = 1;
+      }
       // handle more query parameters here ...
       this.$router.replace({query: query}).catch(err => {
         //Do noting
@@ -756,6 +827,44 @@ export default {
         }).catch(err => {
         this.$toast.error(err);
       })
+    },
+
+    //Test feature type
+    changeTestFeature(type, val) {
+      //Word option
+      if (type === 'Word')
+        if (val === true)
+          this.word_checkbox_val = 1;
+        else
+          this.word_checkbox_val = 0;
+
+      //Pdf option
+      if (type === 'Pdf')
+        if (val === true)
+          this.pdf_checkbox_val = 1;
+        else
+          this.pdf_checkbox_val = 0;
+
+      //Free option
+      if (type === 'Free')
+        if (val === true)
+          this.free_checkbox_val = 1;
+        else
+          this.free_checkbox_val = 0;
+
+
+      //By answer option
+      if (type === 'By answer')
+        this.$toast.success("hh");
+        if (val === true)
+          this.answer_checkbox_val = 1;
+        else
+          this.answer_checkbox_val = 0;
+
+
+      this.updateQueryParams();
+
+
     }
 
 

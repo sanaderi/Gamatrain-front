@@ -110,6 +110,18 @@ export default {
       if (this.$route.query.level !== 0 && query.type==="test") {
         query.level = this.$route.query.level;
       }
+      if (this.$route.query.word === 1 && query.type==="test") {
+        query.word = 1;
+      }
+      if (this.$route.query.pdf === 1 && query.type==="test") {
+        query.pdf = 1;
+      }
+      if (this.$route.query.free === 1 && query.type==="test") {
+        query.free = 1;
+      }
+      if (this.$route.query.a_file === 1 && query.type==="test") {
+        query.a_file = 1;
+      }
 
       this.$router.replace({query: query})
     }

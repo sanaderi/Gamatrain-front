@@ -8,26 +8,29 @@
         <div class="training-item pa-1  pa-sm-6  my-5" v-for="(item, index) in items"
              :key="index">
           <v-row>
-            <v-col lg="2" cols="3">
+            <v-col lg="2" cols="3" >
               <div class="item-img">
-                <img :src="item.lesson_pic" alt=""
+                <img v-if="item.lesson_pic" :src="item.lesson_pic" alt=""
                      class="item-image"/>
+                <v-card v-else class="book-no-img ">
+                  <p class="font-weight-bold mb-3 mt-3">{{ item.lesson_title }}</p>
+                  <a href="https://gamatrain.com">Gamatrain.com</a>
+                </v-card>
+
               </div>
             </v-col>
             <v-col lg="10" cols="9" class="px-0">
-              <div class="
-                          training-item-content
+              <v-row class="training-item-content
                           d-flex
                           flex-column
                           justify-space-between
                         ">
-                <div class="
-                            item-content-title
+                <div class="item-content-title
                             d-flex
                             justify-space-between
                           ">
                   <nuxt-link :to="`/details/${item.id}/${item.title_url}`">
-                    {{ item.title }}
+                    {{ item.title.length>54 ? item.title.substr(0,51)+'...' : item.title }}
                   </nuxt-link>
 
 
@@ -59,7 +62,7 @@
 
                 <p class="item-content-subtitle mb-2 d-none d-sm-block">
                   <nuxt-link :to="`/tutorial-details/${item.id}/${item.title_url}`">
-                    {{ item.description.substr(0,60) }}...
+                    {{ item.question.substr(0,60) }}...
                   </nuxt-link>
                 </p>
 
@@ -95,13 +98,13 @@
                     <div
                       class="item-content-last-update d-flex align-center mx-auto">
                       <i class="fa-solid fa-calendar-days"></i>
-                      <p class="mx-2">last update : {{ item.up_date }}</p>
+                      <p class="mx-2">last update : {{ item.last_reply }}</p>
                     </div>
                   </div>
                 </div>
 
 
-              </div>
+              </v-row>
             </v-col>
 
           </v-row>

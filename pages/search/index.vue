@@ -156,6 +156,26 @@ export default {
       this.items = [];
       this.getContentList();
     },
+    "$route.query.word"(val) {
+      this.page = 1;
+      this.items = [];
+      this.getContentList();
+    },
+    "$route.query.pdf"(val) {
+      this.page = 1;
+      this.items = [];
+      this.getContentList();
+    },
+    "$route.query.free"(val) {
+      this.page = 1;
+      this.items = [];
+      this.getContentList();
+    },
+    "$route.query.a_file"(val) {
+      this.page = 1;
+      this.items = [];
+      this.getContentList();
+    },
   },
   methods: {
     // Get content list
@@ -171,7 +191,11 @@ export default {
             lesson: this.$route.query.lesson,
             topic: this.$route.query.topic,
             test_type: this.$route.query.test_type,
-            level: this.$route.query.level
+            level: this.$route.query.level,
+            pdf: this.$route.query.pdf,
+            word: this.$route.query.word,
+            free: this.$route.query.free,
+            a_file: this.$route.query.a_file,
           }
         }).then(response => {
         this.items.push(...response.data.list);
