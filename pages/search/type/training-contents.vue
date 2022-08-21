@@ -102,7 +102,7 @@
                             d-flex
                             justify-space-between
                           ">
-                  <nuxt-link :to="`/details/${item.id}/${item.title_url}`">
+                  <nuxt-link :to="`/details/${item.id}/${item.title_url}`" class="text-h5 text-md-h4">
                     {{ item.title.length>52 ? item.title.substr(0,49)+'...' : item.title }}
                   </nuxt-link>
 
@@ -141,17 +141,17 @@
 
                 <div class="item-content-tags d-flex">
                   <v-chip link class="mr-1" small>
-                    <nuxt-link to="">
+                    <nuxt-link :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}&lesson=${item.lesson}`">
                       {{ item.lesson_title }}
                     </nuxt-link>
                   </v-chip>
                   <v-chip link class="mr-1" small>
-                    <nuxt-link to="">
+                    <nuxt-link :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}`">
                       {{ item.base_title }}
                     </nuxt-link>
                   </v-chip>
                   <v-chip link class="mr-1" small>
-                    <nuxt-link to="">
+                    <nuxt-link :to="`/search?type=${$route.query.type}&section=${item.section}`">
                       {{ item.section_title }}
                     </nuxt-link>
                   </v-chip>

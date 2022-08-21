@@ -37,7 +37,7 @@
           xs="3"
           v-show="!showMore"
         >
-          <nuxt-link to="">
+          <nuxt-link :to="item.link">
             <v-list-item class="d-flex flex-column mx-7">
               <v-list-item-icon
                 class="ma-0 d-flex align-center justify-center p-icon"

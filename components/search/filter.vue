@@ -357,7 +357,7 @@
           <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
             <v-checkbox v-for="item in filter.test_feature_filter"
                         class="my-0" style="height: 4rem"
-                        @change="changeTestFeature(item.label,item.checkbox)"
+                        @change="changeTestFeature(item.value,item.checkbox)"
                         :hide-details="true"
                         color="red"
                         v-model="item.checkbox"
@@ -439,20 +439,24 @@ export default {
         ],
         test_feature_filter: [
           {
-            checkbox: (this.$route.query.word==='1' ? true : false),
+            checkbox: (this.$route.query.word === '1' ? true : false),
             label: "Word",
+            value: 'word'
           },
           {
-            checkbox: (this.$route.query.pdf==='1' ? true : false),
+            checkbox: (this.$route.query.pdf === '1' ? true : false),
             label: "Pdf",
+            value: "pdf"
           },
           {
-            checkbox: (this.$route.query.free==='1' ? true : false),
+            checkbox: (this.$route.query.free === '1' ? true : false),
             label: "Free",
+            value: "free"
           },
           {
-            checkbox: (this.$route.query.a_file==='1' ? true : false),
+            checkbox: (this.$route.query.a_file === '1' ? true : false),
             label: "By answer",
+            value: "a_file"
           },
         ]
       },
@@ -526,6 +530,17 @@ export default {
         this.topic_val = 0;
 
         this.applied_filter.select_base_title = '';
+      }else{
+        if (this.filter.lesson_list.length===0){
+          var params = {
+            type: 'lesson',
+            base_id: this.base_val
+          }
+
+          this.getFilterList(params, 'lesson');
+
+
+        }
       }
     },
     lesson_val(val) {
@@ -534,6 +549,8 @@ export default {
         this.topic_val = 0;
 
         this.applied_filter.select_lesson_title = '';
+      }else{
+        this.changeLessonVal();
       }
     },
     test_level_val(val) {
@@ -573,6 +590,8 @@ export default {
 
             this.applied_filter.select_section_title = this.filter.section_list.find(x => x.id === this.section_val).title;
 
+            //Set breadcrumbs info
+            this.setBreadcrumbInfo();
 
           }
           //
@@ -593,15 +612,9 @@ export default {
             //Enable tag
             this.applied_filter.select_base_title = this.filter.base_list.find(x => x.id === this.base_val).title;
 
+            //Set breadcrumbs info
+            this.setBreadcrumbInfo();
 
-            //End type breadcrumb
-            // var breadcrumb_item = {
-            //   text: this.applied_filter.select_section_title,
-            //   disabled: false,
-            //   href: '/',
-            // };
-            // this.breadcrumbs.push(breadcrumb_item);
-            //Section breadcrumb
           }
         } else if (type === 'lesson') {
           this.filter.lesson_list = res.data;
@@ -620,6 +633,8 @@ export default {
             //Enable tag
             this.applied_filter.select_lesson_title = this.filter.lesson_list.find(x => x.id === this.$route.query.lesson).title;
 
+            //Set breadcrumbs info
+            this.setBreadcrumbInfo();
           }
         } else if (type === 'topic') {
           this.filter.topic_list = res.data;
@@ -801,6 +816,42 @@ export default {
 
       this.breadcrumbs.push(breadcrumb_item);
 
+      //Grade section
+      if (this.applied_filter.select_section_title){
+        this.breadcrumbs.push(
+          {
+            text:this.applied_filter.select_section_title,
+            disabled: false,
+            href: `/search?type=${active_tab}&section=${this.section_val}`
+          }
+        );
+      }
+
+      //Base section
+      if (this.applied_filter.select_base_title){
+        this.breadcrumbs.push(
+          {
+            text:this.applied_filter.select_base_title,
+            disabled: false,
+            href: `/search?type=${active_tab}&section=${this.section_val}&base=${this.base_val}`
+          }
+        );
+      }
+
+      //Lesson section
+      if (this.applied_filter.select_lesson_title){
+        this.breadcrumbs.push(
+          {
+            text:this.applied_filter.select_lesson_title,
+            disabled: false,
+            href: `/search?type=${active_tab}&section=${this.section_val}&base=${this.base_val}&lesson=${this.lesson_val}`
+          }
+        );
+      }
+
+
+
+
 
       //Emit to parent
 
@@ -832,21 +883,21 @@ export default {
     //Test feature type
     changeTestFeature(type, val) {
       //Word option
-      if (type === 'Word')
+      if (type === 'word')
         if (val === true)
           this.word_checkbox_val = 1;
         else
           this.word_checkbox_val = 0;
 
       //Pdf option
-      if (type === 'Pdf')
+      if (type === 'pdf')
         if (val === true)
           this.pdf_checkbox_val = 1;
         else
           this.pdf_checkbox_val = 0;
 
       //Free option
-      if (type === 'Free')
+      if (type === 'free')
         if (val === true)
           this.free_checkbox_val = 1;
         else
@@ -854,8 +905,7 @@ export default {
 
 
       //By answer option
-      if (type === 'By answer')
-        this.$toast.success("hh");
+      if (type === 'a_file')
         if (val === true)
           this.answer_checkbox_val = 1;
         else

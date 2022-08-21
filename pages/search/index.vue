@@ -1,6 +1,50 @@
 <template>
   <div>
-    <FilterModal/>
+
+    <!--Mobile filter-->
+    <v-row justify="center" class="d-block d-sm-none filter-btn">
+      <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition ">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn dark v-bind="attrs" v-on="on" class="filter-mobile-btn">
+            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M0.755061 1.61C2.77506 4.2 6.50506 9 6.50506 9V15C6.50506 15.55 6.95506 16 7.50506 16H9.50506C10.0551 16 10.5051 15.55 10.5051 15V9C10.5051 9 14.2251 4.2 16.2451 1.61C16.7551 0.95 16.2851 0 15.4551 0H1.54506C0.715061 0 0.245061 0.95 0.755061 1.61Z"
+                fill="white"/>
+            </svg>
+            <p v-show="Visible" class="ml-4">
+              filter
+            </p>
+
+
+          </v-btn>
+        </template>
+        <v-card>
+          <v-toolbar class="filter-btn-header">
+            <v-toolbar-items>
+              <v-btn text @click="dialog = false">
+                Search in samples
+              </v-btn>
+            </v-toolbar-items>
+            <v-spacer></v-spacer>
+            <v-btn icon @click="dialog = false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-toolbar>
+          <div class="filter-btn-content">
+            <div class="filter-btn-result my-4">
+              <p class="text-right mx-4">result : {{ result_count }}</p>
+            </div>
+            <search-filter ref="side_filter" class="mx-3"/>
+            <div class="show-result d-flex justify-end">
+              <v-btn medium class="filter-show-result mr-4" @click="dialog=!dialog">
+                show result
+              </v-btn>
+            </div>
+          </div>
+        </v-card>
+      </v-dialog>
+    </v-row>
+
     <!-- mobile header -->
     <div class="
         d-flex
@@ -24,7 +68,7 @@
         <v-row>
           <v-col lg="3" class="d-none d-sm-block">
             <div class="search-filter">
-              <search-filter :setBreadCrumbs.sync="breadcrumbs"/>
+              <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs"/>
             </div>
           </v-col>
           <v-col lg="9" md="9" sm="12" class="search-contents">
@@ -97,6 +141,30 @@ export default {
     Test,
     Tutorials
   },
+
+  async asyncData({query}) {
+    var page_title = '';
+    if (query.type === 'learnfiles')
+      page_title = 'Training content';
+    else if (query.type === 'test')
+      page_title = 'Sample exam';
+    else if (query.type === 'question')
+      page_title = 'Q & A';
+    else if (query.type === 'azmoon')
+      page_title = 'Online exam';
+    else if (query.type === 'dars')
+      page_title = 'Tutorial';
+    else if (query.type === 'tutor')
+      page_title = 'Teacher';
+
+    return {page_title};
+
+  },
+  head() {
+    return {
+      title: this.page_title,
+    }
+  },
   data() {
     return {
       breadcrumbs: [],
@@ -105,40 +173,102 @@ export default {
 
       items: [],
 
+      // Mobile filter
+      Visible: true,
+      result_count: 0,
+      dialog: false,
+
+
+
+
 
     }
   },
+
   beforeMount() {
+    window.addEventListener('scroll', this.testScroll);
   },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.testScroll);
+  },
+
   mounted() {
     this.getContentList();
     this.scroll();
-
-
-
   },
 
   watch: {
     "$route.query.type"(val) {
       this.page = 1;
       this.items = [];
+
+      if (this.$route.query.type === 'learnfiles')
+        this.page_title = 'Training content';
+      else if (this.$route.query.type === 'test')
+        this.page_title = 'Sample exam';
+      else if (this.$route.query.type === 'question')
+        this.page_title = 'Q & A';
+      else if (this.$route.query.type === 'azmoon')
+        this.page_title = 'Online exam';
+      else if (this.$route.query.type === 'dars')
+        this.page_title = 'Tutorial';
+      else if (this.$route.query.type === 'tutor')
+        this.page_title = 'Teacher';
+
+      this.$refs.side_filter.setBreadcrumbInfo();
+
       this.getContentList();
 
     },
     "$route.query.section"(val) {
       this.page = 1;
       this.items = [];
+
+      //Fire when click on tag in content card, set section value on side filter
+      if (val > 0)
+        this.$refs.side_filter.section_val = val;
+      else
+        this.$refs.side_filter.section_val = 0;
+      //End fire when click on tag in content card, set section value on side filter
+
+
+
+      this.$refs.side_filter.setBreadcrumbInfo();
       this.getContentList();
 
     },
     "$route.query.base"(val) {
       this.page = 1;
       this.items = [];
+
+      //Fire when click on tag in content card, set base value on side filter
+      if (val > 0)
+        this.$refs.side_filter.base_val = val;
+      else
+        this.$refs.side_filter.base_val = 0;
+      //Fire when click on tag in content card, set base value on side filter
+
+
+
+      this.$refs.side_filter.setBreadcrumbInfo();
+
       this.getContentList();
     },
     "$route.query.lesson"(val) {
       this.page = 1;
       this.items = [];
+
+
+      //Fire when click on tag in content card, set lesson value on side filter
+      if (val > 0)
+        this.$refs.side_filter.lesson_val = val;
+      else
+        this.$refs.side_filter.lesson_val = 0;
+      //End click on tag in content card
+
+
+      //Set breadcrumbs info
+      this.$refs.side_filter.setBreadcrumbInfo();
       this.getContentList();
     },
     "$route.query.topic"(val) {
@@ -199,6 +329,7 @@ export default {
           }
         }).then(response => {
         this.items.push(...response.data.list);
+        this.result_count=response.data.num;
         this.$refs.content_tabs.content_statistics = response.data.types_stats;
       }).catch(err => {
 
@@ -228,6 +359,14 @@ export default {
         }
       }
     },
+    testScroll() {
+      if (this.scroll < scrollY) {
+        this.Visible = false
+      } else {
+        this.Visible = true
+      }
+      this.scroll = scrollY
+    }
 
 
 

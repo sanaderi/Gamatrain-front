@@ -96,7 +96,7 @@
                 <div class="item-content-title
                             d-flex
                             justify-space-between">
-                  <p>
+                  <p class="text-h5 text-md-h4">
                     {{ item.title.length>54 ? item.title.substr(0,51)+'...' : item.title }}
                   </p>
 
@@ -125,17 +125,17 @@
 
                 <div >
                   <v-chip link class="mr-1" small>
-                    <nuxt-link to="">
+                    <nuxt-link :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}&lesson=${item.lesson}`">
                       {{ item.lesson_title }}
                     </nuxt-link>
                   </v-chip>
                   <v-chip link class="mr-1" small>
-                    <nuxt-link to="">
+                    <nuxt-link :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}`">
                       {{ item.base_title }}
                     </nuxt-link>
                   </v-chip>
                   <v-chip link class="mr-1" small>
-                    <nuxt-link to="">
+                    <nuxt-link :to="`/search?type=${$route.query.type}&section=${item.section}`">
                       {{ item.section_title }}
                     </nuxt-link>
                   </v-chip>

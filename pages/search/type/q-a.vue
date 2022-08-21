@@ -68,17 +68,20 @@
 
                 <div class="item-content-tags d-flex">
                   <v-chip link class="mr-1" small>
-                    <nuxt-link to="">
+                    <nuxt-link
+                      :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}&lesson=${item.lesson}`"
+                      class="text-h5 text-md-h4"
+                    >
                       {{ item.lesson_title }}
                     </nuxt-link>
                   </v-chip>
                   <v-chip link class="mr-1" small>
-                    <nuxt-link to="">
+                    <nuxt-link :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}`">
                       {{ item.base_title }}
                     </nuxt-link>
                   </v-chip>
                   <v-chip link class="mr-1" small>
-                    <nuxt-link to="">
+                    <nuxt-link :to="`/search?type=${$route.query.type}&section=${item.section}`">
                       {{ item.section_title }}
                     </nuxt-link>
                   </v-chip>
