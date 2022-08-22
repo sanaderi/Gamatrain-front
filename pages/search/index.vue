@@ -127,6 +127,7 @@ import Tutorials from "@/pages/search/type/tutorials";
 import Teachers from "@/pages/search/type/teachers";
 
 export default {
+  auth:false,
   name: "searchPage",
   layout: 'search_layout',
 

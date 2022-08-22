@@ -55,6 +55,7 @@ export default {
     'nuxt-material-design-icons',
     '@nuxtjs/axios',
     '@nuxtjs/toast',
+    '@nuxtjs/auth-next'
   ],
 
   axios: {
@@ -64,6 +65,20 @@ export default {
 
   proxy: {
     '/api/v1/': {target: process.env.API_BASE_URL,pathRewrite: {'^/api/v1/': '/api/v1/'}, secure: false, changeOrigin: true}
+  },
+
+
+  router: {
+    middleware: ['auth']
+  },
+
+  auth: {
+    redirect: {
+      login: '/?access=denied',
+      logout: '/',
+      callback: '/login',
+      home: '/'
+    }
   },
 
   toast: {

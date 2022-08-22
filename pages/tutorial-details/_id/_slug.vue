@@ -258,6 +258,7 @@ import RelatedOnlineExam from "@/components/details/related-online-exam";
 
 export default {
   name:'tutorial-details',
+  auth:false,
   components: {RelatedOnlineExam, RelatedQa, LatestTrainingContent, RelatedContent, category, timeLine },
 
   async asyncData({params, $axios}) {
@@ -305,6 +306,7 @@ export default {
   },
 
   data() {
+
     return {
 
 
