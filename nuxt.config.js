@@ -55,7 +55,8 @@ export default {
     'nuxt-material-design-icons',
     '@nuxtjs/axios',
     '@nuxtjs/toast',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/markdownit'
   ],
 
   axios: {

@@ -12,11 +12,11 @@
           <v-col md="3" cols="12" class="lesson-details">
             <div class="d-flex flex-column details-content">
               <div class="last-update mb-3">
-                <i class="fa-solid fa-calendar-days mr-2"></i>Last update :
-                {{ lastUpdate }}
+                <i class="fa-solid fa-calendar-days mr-2"></i>Last update:
+                {{ tutorialInfo.up_date }}
               </div>
               <div class="visit mb-3">
-                <i class="fa-solid fa-eye mr-2"></i>Viewed:{{ visit }}
+                <i class="fa-solid fa-eye mr-2"></i>Viewed: {{ tutorialInfo.views }}
               </div>
               <div class="error-report">
                 <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
@@ -40,10 +40,10 @@
             <div class="d-flex align-center details-content">
               <div class="last-update ml-8">
                 <i class="fa-solid fa-calendar-days mr-2"></i>
-                {{ lastUpdate }}
+                {{ tutorialInfo.up_date }}
               </div>
               <div class="visit ml-8">
-                <i class="fa-solid fa-eye mr-2"></i>{{ visit }}
+                <i class="fa-solid fa-eye mr-2"></i>{{ tutorialInfo.views }}
               </div>
               <div class="error-report">
                 <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
@@ -213,7 +213,7 @@
                 </v-stepper>
               </v-navigation-drawer>
               <div class="book-content">
-                <div class="bookText" v-html="tutorialInfo.content"/>
+                <div class="bookText e-mathjax" ref="mathJaxEl" v-html="tutorialInfo.content"/>
               </div>
 
             </div>
@@ -284,6 +284,9 @@ export default {
 
   head() {
     return {
+      script: [
+        { src: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML' }
+      ],
       title: this.tutorialInfo.title,
       meta: [
         // {
@@ -387,7 +390,8 @@ export default {
     },
   },
   mounted() {
-    this.color()
+    this.renderMathJax();
+    this.color();
   },
   methods: {
     comment() {
@@ -405,6 +409,31 @@ export default {
 
     color() {
 
+    },
+
+    readMD () {
+      return this.$md.render(this.mdData)
+    },
+
+    renderMathJax () {
+      if(window.MathJax) {
+        window.MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\(","\)"] ],
+            displayMath: [ ['$$','$$'], ["\[","\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          // Center justify equations in code and markdown cells. Elsewhere
+          // we use CSS to left justify single line equations in code cells.
+          displayAlign: 'center',
+          "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+          }
+        });
+        window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub,this.$refs.mathJaxEl]);
+      }
     }
   },
 
