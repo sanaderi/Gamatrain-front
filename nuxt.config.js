@@ -10,20 +10,20 @@ export default {
       lang: "en",
     },
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
-      { name: "format-detection", content: "telephone=no" },
+      {charset: "utf-8"},
+      {name: "viewport", content: "width=device-width, initial-scale=1"},
+      {hid: "description", name: "description", content: ""},
+      {name: "format-detection", content: "telephone=no"},
     ],
     link: [
-      { rel: "stylesheet", href: "/assets/css/fontawesome.min.css" },
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      { rel: "stylesheet", href: "/assets/css/video-js.css" },
-      { rel: "stylesheet", href: "/assets/css/all.min.css" },
+      {rel: "stylesheet", href: "/assets/css/fontawesome.min.css"},
+      {rel: "icon", type: "image/x-icon", href: "/favicon.ico"},
+      {rel: "stylesheet", href: "/assets/css/video-js.css"},
+      {rel: "stylesheet", href: "/assets/css/all.min.css"},
     ],
     script: [
-      { src: './assets/js/jquery.js',body:true },
-      { src: './assets/js/video.min.js',body:true },
+      {src: './assets/js/jquery.js', body: true},
+      {src: './assets/js/video.min.js', body: true},
     ],
   },
 
@@ -32,8 +32,10 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {src: 'plugins/vee-validate.js', ssr: true},
     {src: 'plugins/axios.js'},
-    {src: 'plugins/helper.js'}
+    {src: 'plugins/helper.js'},
+    {src: 'plugins/vuex-persist', ssr: false}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -65,7 +67,12 @@ export default {
   },
 
   proxy: {
-    '/api/v1/': {target: process.env.API_BASE_URL,pathRewrite: {'^/api/v1/': '/api/v1/'}, secure: false, changeOrigin: true}
+    '/api/v1/': {
+      target: process.env.API_BASE_URL,
+      pathRewrite: {'^/api/v1/': '/api/v1/'},
+      secure: false,
+      changeOrigin: true
+    }
   },
 
 
@@ -74,10 +81,39 @@ export default {
   },
 
   auth: {
+    strategies: {
+      // google: {
+      //   clientId: process.env.GOOGLE_CLIENT_Id,
+      //   redirectUri: process.env.GOOGLE_REDIRECT_URI,
+      //   codeChallengeMethod: '',
+      //   responseType: 'code',
+      //   grantType: 'google',
+      //   endpoints: {
+      //     token: '/api/google_login',
+      //     userInfo: '/api/user'
+      //   },
+      //   user: {
+      //     property: 'user',
+      //     autoFetch: false
+      //   }
+      // },
+      local: {
+        token: {
+          property: 'jwtToken',
+          global: true,
+        },
+        endpoints: {
+          login: {url: '/api/v1/users/login', method: 'post'},
+          refresh: {url: '/api/v1/users/refresh_token', method: 'post'},
+          user: false,
+          logout: {url: '/api/v1/users/logout', method: 'post'}
+        }
+      }
+    },
     redirect: {
       login: '/?access=denied',
       logout: '/',
-      callback: '/login',
+      callback: '/user-dashboard',
       home: '/'
     }
   },
@@ -118,10 +154,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-
+    transpile: ["vee-validate"],
   },
-  server:{
-    host:"0.0.0.0",
-    port:3002
+  server: {
+    host: "0.0.0.0",
+    port: 3002
   }
 };

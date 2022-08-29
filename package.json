@@ -22,10 +22,12 @@
     "nuxt": "^2.15.7",
     "nuxt-material-design-icons": "^1.0.4",
     "nuxt-video-player": "^1.0.17",
+    "vee-validate": "^3.4.14",
     "vue-core-video-player": "^0.2.0",
     "vue-mathjax": "^0.1.1",
     "vueperslides": "^2.15.2",
-    "vuetify": "^2.5.5"
+    "vuetify": "^2.5.5",
+    "vuex-persist": "^3.1.3"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.7",
