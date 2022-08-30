@@ -2,17 +2,15 @@
   <div class="topbar d-none d-sm-block">
     <v-container class="d-flex align-center justify-space-between topbar-items">
       <div class="d-flex align-center">
-        <div v-if="$auth.isLoggedIn">
-          <nuxt-link to="">
+          <nuxt-link v-if="$auth.loggedIn" to="/user/dashboard">
             <v-avatar size="32">
-              <img :src="require('@/assets/images/' + avatar)" alt="John"/>
+              <v-img :src="loadAvatar()" alt="user avatar"/>
             </v-avatar>
           </nuxt-link>
-          <nuxt-link to="" class="d-flex align-center mr-3 ml-5 ">
+          <nuxt-link v-if="$auth.loggedIn" to="/user/dashboard" class="d-block align-center mr-3 ml-5 ">
             <i class="fa-regular fa-bell fa-xl topbar-bell d-none d-sm-block"></i>
           </nuxt-link>
-        </div>
-        <div v-else>
+        <div v-if="!$auth.loggedIn">
           <v-btn plain @click="openLoginDialog">
             <i class="fa-solid fa-sign-in mr-1"></i>
             Login
@@ -120,6 +118,12 @@ export default {
     },
     openRegisterDialog() {
       this.$refs.register_modal.register_dialog = true;
+    },
+    loadAvatar() {
+      if (this.$auth.user.avatar)
+        return `${process.env.FILE_BASE_URL}/uploads/user/avatars/${this.$auth.user.avatar}`
+      else
+        return `${process.env.FILE_BASE_URL}/assets/image/avatars/default/png/user.png`
     }
   },
 

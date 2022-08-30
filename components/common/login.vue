@@ -59,7 +59,8 @@
                   <v-btn color="primary"
                          type="submit"
                          :disabled="invalid"
-                         block :loading="login_loading">
+                         block
+                         :loading="login_loading">
                     Login
                   </v-btn>
                 </v-col>
@@ -95,6 +96,7 @@ export default {
       this.$emit("update:switchToRegister", 'register')
     },
     async submit() {
+      this.login_loading=true;
       const querystring = require('querystring');
       await this.$axios.$post('/api/v1/users/login', querystring.stringify({
           identity: this.email,
@@ -104,7 +106,6 @@ export default {
           "Content-Type": "application/x-www-form-urlencoded"
         }
       }).then(response => {
-
         this.$auth.setUserToken(response.data.jwtToken);
         this.$auth.setUser(response.data.info);
         this.login_dialog=false;
@@ -112,8 +113,11 @@ export default {
         this.$router.push({
           path: "/user/dashboard"
         })
-      }).catch(({response}) => {
-          this.$toast.error(response.data.message);
+      }).catch(err => {
+        if (err.response.status==400)
+          this.$toast.error(err.response.data.message);
+      }).finally(()=>{
+        this.login_loading=false;
       });
     },
   }

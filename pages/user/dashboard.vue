@@ -1,12 +1,23 @@
 <template>
-<p>
-  Wellcome dear {{this.$auth.user.first_name}}
-</p>
+<v-container>
+  <p>
+    Wellcome dear {{this.$auth.user.first_name}}
+  </p>
+
+  <v-btn outlined @click="logout()">
+    Logout
+  </v-btn>
+</v-container>
 </template>
 
 <script>
 export default {
-  name: "dashboard"
+  name: "user-dashboard",
+  methods:{
+    logout(){
+      this.$auth.logout();
+    }
+  }
 }
 </script>
 

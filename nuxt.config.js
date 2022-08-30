@@ -113,7 +113,7 @@ export default {
     redirect: {
       login: '/?access=denied',
       logout: '/',
-      callback: '/user-dashboard',
+      callback: false,
       home: '/'
     }
   },
