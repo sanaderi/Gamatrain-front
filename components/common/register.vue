@@ -1,88 +1,275 @@
 <template>
-    <v-dialog
-      v-model="register_dialog"
-      max-width="300px"
-    >
-      <v-card>
-        <v-card-title>
-          <span class="text-h5">Register</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12"  v-show="!otp_holder">
-                <v-text-field
-                  dense
-                  label="Email*"
-                  required
-                  outlined
-                />
-                <p class="text-h6">
-                  A agree <span class="blue--text">terms and conditions</span>
-                </p>
-              </v-col>
-              <v-col cols="12" v-show="otp_holder">
-                <p class="text-h6">Please enter code received your email addrees?</p>
-                <v-otp-input
-                  v-model="otp"
-                  :disabled="otp_loading"
-                  length="5"
-                  @finish="onFinish"
-                ></v-otp-input>
-              </v-col>
-              <v-col cols="12">
-                <v-divider class="mb-3"/>
-                <p v-show="!otp_holder" class="text-h6 text-center pointer" @click="switchToLogin">
-                  Already registered? login now
-                </p>
-                <p v-show="otp_holder" class="text-h6 text-center pointer" @click="sendOtpCode">
-                  Send code again
-                </p>
-                <v-divider class="mt-3"/>
-              </v-col>
-              <v-col cols="6">
-                <v-btn outlined block @click="cancelRegister()">
-                  Cancel
-                </v-btn>
-              </v-col>
-              <v-col cols="6">
-                <v-btn color="primary" block @click="sendOtpCode">
-                  Register
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
+  <v-dialog
+    v-model="register_dialog"
+    max-width="300px"
+  >
+    <v-card>
+      <v-card-title>
+        <span class="text-h5">Register</span>
+      </v-card-title>
+      <v-card-text>
+        <v-col cols="12">
+          <v-row v-show="identity_holder">
+            <validation-observer ref="observer" v-slot="{ invalid }">
+              <form @submit.prevent="requestRegister()">
+                <v-col cols="12">
+                  <validation-provider v-slot="{ errors }" name="request_identity" rules="required">
+                    <v-text-field
+                      dense
+                      label="Email or phone"
+                      :error-messages="errors"
+                      v-model="identity"
+                      outlined
+                    />
+                  </validation-provider>
+                  <p class="text-h6">
+                    A agree <span class="blue--text">terms and conditions</span>
+                  </p>
+                </v-col>
+
+                <v-col cols="12">
+                  <v-divider class="mb-3"/>
+                  <p class="text-h6 text-center pointer" @click="switchToLogin">
+                    Already registered? login now
+                  </p>
+
+                  <v-divider class="mt-3"/>
+                </v-col>
+                <v-row>
+                  <v-col cols="6" lg="6">
+                    <v-btn outlined @click="cancelRegister()">
+                      Cancel
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="6" lg="6">
+                    <v-btn color="primary" type="submit" :loading="register_loading" :disabled="invalid">
+                      Register
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </form>
+            </validation-observer>
+          </v-row>
+          <v-row v-show="otp_holder">
+            <!--Otp holder-->
+            <v-col cols="12">
+              <p class="text-h6">Please enter code received your email address?</p>
+              <v-otp-input
+                v-model="otp"
+                :disabled="otp_loading"
+                length="5"
+                @finish="onFinish"
+              ></v-otp-input>
+            </v-col>
+            <v-col cols="12">
+              <v-divider class="my-3 text-center "/>
+              <v-btn plain class="text-none  pointer" @click="sendOtpCodeAgain()" :disabled="sendOtpBtnStatus">
+                Send code again
+                <span v-show="countDown" class="ml-3 ">{{ countDown }}</span>
+              </v-btn>
+            </v-col>
+            <!--End otp holder-->
+          </v-row>
+          <v-row v-show="select_pass_holder">
+            <!--Otp holder-->
+            <v-col cols="12">
+              <p class="text-h6">Please enter password</p>
+              <validation-observer ref="final_reg_observer" v-slot="{ invalid }">
+                <form @submit.prevent="finalRegister()">
+                  <v-col cols="12">
+                    <validation-provider v-slot="{ errors }" name="password" rules="required|min:8">
+                      <v-text-field
+                        label="Password"
+                        v-model="password"
+                        outlined
+                        :error-messages="errors"
+                        dense
+                        type="password"
+                        :type="show1 ? 'text' : 'password'"
+                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                        @click:append="show1 = !show1"
+                        required
+                      />
+                    </validation-provider>
+                  </v-col>
+                  <!--     Confirm Password       -->
+                  <v-col cols="12">
+                    <validation-provider name="confirmPassword" v-slot="{errors}"
+                                         rules="required|min:8|confirmed:password">
+                      <v-text-field
+                        v-model="confirmPassword"
+                        type="password"
+                        :error-messages="errors"
+                        label="Confirm password"
+                        dense
+                        outlined>
+                      </v-text-field>
+                    </validation-provider>
+                  </v-col>
+
+                  <v-row>
+                    <v-col cols="6" lg="6">
+                      <v-btn outlined @click="cancelRegister()">
+                        Cancel
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="6" lg="6">
+                      <v-btn color="primary" type="submit" :loading="register_loading" :disabled="invalid">
+                        Register
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </form>
+              </validation-observer>
+            </v-col>
+
+            <!--End otp holder-->
+          </v-row>
+        </v-col>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
+import {ValidationProvider, ValidationObserver} from "vee-validate";
+import querystring from "querystring";
+
 export default {
   name: "register",
+  components: {
+    ValidationObserver,
+    ValidationProvider
+  },
   data() {
     return {
       register_dialog: false,
       show1: false,
+      password: '',
+      confirmPassword: '',
+      register_loading: false,
 
-      otp:'',
-      otp_holder:false,
-      otp_loading:false,
+      otp: '',
+      identity: '',
+      otp_loading: false,
+      countDown: 60,
+      sendOtpBtnStatus: true,
+
+
+      identity_holder: true,
+      otp_holder: false,
+      select_pass_holder: false
     }
   },
-  methods:{
+  mounted() {
+  },
+  watch: {
+    countDown(val) {
+      //When user wait 10 second
+      if (val === 0)
+        this.sendOtpBtnStatus = false;
+
+      //When user request new otp code
+      if (val === 60)
+        this.countDownTimer()
+
+    }
+  },
+  methods: {
     switchToLogin() {
-      this.$emit("update:switchToLogin",'login')
+      this.$emit("update:switchToLogin", 'login')
     },
-    cancelRegister(){
-      this.register_dialog=false;
-      this.otp_holder=false;
+    cancelRegister() {
+      this.register_dialog = false;
+      this.identity_holder=true;
+      this.otp_holder = false;
+      this.select_pass_holder = false;
     },
-    sendOtpCode(){
-      this.otp_holder=true;
+    requestRegister() {
+      this.register_loading = true;
+      const querystring = require('querystring');
+
+      this.$axios.$post("/api/v1/users/register",
+        querystring.stringify({
+          type: 'request',
+          identity: this.identity
+        })).then(response => {
+        this.$toast.success("Otp code sent");
+        this.identity_holder=false;
+        this.otp_holder = true;
+        this.countDownTimer();
+      }).catch(err => {
+        if (err.response.status == 400)
+          this.$toast.error(err.response.data.message);
+      }).finally(() => {
+        this.register_loading = false;
+      })
     },
-    onFinish(){
-      this.$toast.success("Register successed")
+    onFinish() {//Finish enter otp code
+      const querystring = require('querystring');
+
+      this.$axios.$post("/api/v1/users/register",
+        querystring.stringify({
+          type: 'confirm',
+          identity: this.identity,
+          code: this.otp
+        })).then(response => {
+        this.otp_holder = false;
+        this.select_pass_holder = true;
+      }).catch(err => {
+        if (err.response.status == 400)
+          this.$toast.error(err.response.data.message);
+      }).finally(() => {
+        this.register_loading = false;
+      })
+    },
+    sendOtpCodeAgain() {//Send otp code again
+      const querystring = require('querystring');
+
+      this.$axios.$post("/api/v1/users/register",
+        querystring.stringify({
+          type: 'resend_code',
+          identity: this.identity
+        })).then(response => {
+        this.countDown = 60;
+        this.sendOtpBtnStatus = true;
+        this.$toast.success("Otp code sent again");
+      }).catch(err => {
+        if (err.response.status == 400)
+          this.$toast.error(err.response.data.message);
+      }).finally(() => {
+        this.register_loading = false;
+      })
+    },
+    countDownTimer() {
+      if (this.countDown > 0) {
+        setTimeout(() => {
+          this.countDown -= 1
+          this.countDownTimer()
+        }, 1000)
+      }
+    },
+    finalRegister() {//Final refister (level 3: receive password from user)
+      this.register_loading = true;
+      const querystring = require('querystring');
+
+      this.$axios.$post("/api/v1/users/register",
+        querystring.stringify({
+          type: 'register',
+          identity:this.identity,
+          pass:this.password
+        })).then(response => {
+        this.$toast.success("Registered successfully");
+        this.register_dialog=false;
+        this.identity_holder=true;
+        this.otp_holder = false;
+        this.select_pass_holder = false;
+      }).catch(err => {
+        if (err.response.status == 400)
+          this.$toast.error(err.response.data.message);
+      }).finally(() => {
+        this.register_loading = false;
+      })
     }
   }
 }

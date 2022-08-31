@@ -52,9 +52,6 @@ export default {
       }else {
         this.e6=key;
       }
-    },
-    findActiveTab(){
-      console.log("test");
     }
   }
 }

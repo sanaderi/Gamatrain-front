@@ -13,11 +13,11 @@
             <form @submit.prevent="submit">
               <v-row>
                 <v-col cols="12">
-                  <validation-provider v-slot="{ errors }" name="Email" rules="required|email">
+                  <validation-provider v-slot="{ errors }" name="Email or Phone" rules="required">
                     <v-text-field
-                      v-model="email"
+                      v-model="identity"
                       dense
-                      label="Email"
+                      label="Email or Phone"
                       :error-messages="errors"
                       required
                       outlined
@@ -83,7 +83,7 @@ export default {
       login_dialog: false,
       show1: false,
       login_loading: false,
-      email:'',
+      identity:'',
       password:''
     }
   },
@@ -99,7 +99,7 @@ export default {
       this.login_loading=true;
       const querystring = require('querystring');
       await this.$axios.$post('/api/v1/users/login', querystring.stringify({
-          identity: this.email,
+          identity: this.identity,
           pass: this.password
       }),{
         headers: {
