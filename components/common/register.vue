@@ -8,105 +8,44 @@
         <span class="text-h5">Register</span>
       </v-card-title>
       <v-card-text>
-        <v-col cols="12">
-          <v-row v-show="identity_holder">
-            <validation-observer ref="observer" v-slot="{ invalid }">
-              <form @submit.prevent="requestRegister()">
-                <v-col cols="12">
-                  <validation-provider v-slot="{ errors }" name="request_identity" rules="required">
-                    <v-text-field
-                      dense
-                      label="Email or phone"
-                      :error-messages="errors"
-                      v-model="identity"
-                      outlined
-                    />
-                  </validation-provider>
-                  <p class="text-h6">
-                    A agree <span class="blue--text">terms and conditions</span>
-                  </p>
-                </v-col>
+        <v-row>
 
-                <v-col cols="12">
-                  <v-divider class="mb-3"/>
-                  <p class="text-h6 text-center pointer" @click="switchToLogin">
-                    Already registered? login now
-                  </p>
+          <v-col cols="12">
+            <v-divider class="my-2"/>
+            <v-btn block class="btn-google" @click="loginWithGoogle()" :loading="google_login_loading">
+              <img width="5px" height="auto"  :src="require('../../assets/images/google-logo.png')"/>
+              Signin Using Google
+            </v-btn>
+          </v-col>
+          <v-col cols="12">
+            <div v-show="identity_holder">
+              <validation-observer ref="observer" v-slot="{ invalid }">
+                <form @submit.prevent="requestRegister()">
+                  <v-row>
+                    <v-col cols="12">
+                      <validation-provider v-slot="{ errors }" name="request_identity" rules="required">
+                        <v-text-field
+                          dense
+                          label="Email or phone"
+                          :error-messages="errors"
+                          v-model="identity"
+                          outlined
+                        />
+                      </validation-provider>
+                      <p class="text-h6">
+                        A agree <span class="blue--text">terms and conditions</span>
+                      </p>
+                    </v-col>
 
-                  <v-divider class="mt-3"/>
-                </v-col>
-                <v-row>
-                  <v-col cols="6" lg="6">
-                    <v-btn outlined @click="cancelRegister()">
-                      Cancel
-                    </v-btn>
-                  </v-col>
-                  <v-col cols="6" lg="6">
-                    <v-btn color="primary" type="submit" :loading="register_loading" :disabled="invalid">
-                      Register
-                    </v-btn>
-                  </v-col>
-                </v-row>
-              </form>
-            </validation-observer>
-          </v-row>
-          <v-row v-show="otp_holder">
-            <!--Otp holder-->
-            <v-col cols="12">
-              <p class="text-h6">Please enter code received your email address?</p>
-              <v-otp-input
-                v-model="otp"
-                :disabled="otp_loading"
-                length="5"
-                @finish="onFinish"
-              ></v-otp-input>
-            </v-col>
-            <v-col cols="12">
-              <v-divider class="my-3 text-center "/>
-              <v-btn plain class="text-none  pointer" @click="sendOtpCodeAgain()" :disabled="sendOtpBtnStatus">
-                Send code again
-                <span v-show="countDown" class="ml-3 ">{{ countDown }}</span>
-              </v-btn>
-            </v-col>
-            <!--End otp holder-->
-          </v-row>
-          <v-row v-show="select_pass_holder">
-            <!--Otp holder-->
-            <v-col cols="12">
-              <p class="text-h6">Please enter password</p>
-              <validation-observer ref="final_reg_observer" v-slot="{ invalid }">
-                <form @submit.prevent="finalRegister()">
-                  <v-col cols="12">
-                    <validation-provider v-slot="{ errors }" name="password" rules="required|min:8">
-                      <v-text-field
-                        label="Password"
-                        v-model="password"
-                        outlined
-                        :error-messages="errors"
-                        dense
-                        type="password"
-                        :type="show1 ? 'text' : 'password'"
-                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                        @click:append="show1 = !show1"
-                        required
-                      />
-                    </validation-provider>
-                  </v-col>
-                  <!--     Confirm Password       -->
-                  <v-col cols="12">
-                    <validation-provider name="confirmPassword" v-slot="{errors}"
-                                         rules="required|min:8|confirmed:password">
-                      <v-text-field
-                        v-model="confirmPassword"
-                        type="password"
-                        :error-messages="errors"
-                        label="Confirm password"
-                        dense
-                        outlined>
-                      </v-text-field>
-                    </validation-provider>
-                  </v-col>
+                    <v-col cols="12">
+                      <v-divider class="mb-3"/>
+                      <p class="text-h6 text-center pointer" @click="switchToLogin">
+                        Already registered? login now
+                      </p>
 
+                      <v-divider class="mt-3"/>
+                    </v-col>
+                  </v-row>
                   <v-row>
                     <v-col cols="6" lg="6">
                       <v-btn outlined @click="cancelRegister()">
@@ -121,11 +60,86 @@
                   </v-row>
                 </form>
               </validation-observer>
-            </v-col>
+            </div>
+            <div v-show="otp_holder">
+              <!--Otp holder-->
+              <v-col cols="12">
+                <p class="text-h6">Please enter code received your email address?</p>
+                <v-otp-input
+                  v-model="otp"
+                  :disabled="otp_loading"
+                  length="5"
+                  @finish="onFinish"
+                ></v-otp-input>
+              </v-col>
+              <v-col cols="12">
+                <v-divider class="my-3 text-center "/>
+                <v-btn plain class="text-none  pointer" @click="sendOtpCodeAgain()" :disabled="sendOtpBtnStatus">
+                  Send code again
+                  <span v-show="countDown" class="ml-3 ">{{ countDown }}</span>
+                </v-btn>
+              </v-col>
+              <!--End otp holder-->
+            </div>
+            <div v-show="select_pass_holder">
+              <!--Otp holder-->
+              <v-col cols="12">
+                <p class="text-h6">Please enter password</p>
+                <validation-observer ref="final_reg_observer" v-slot="{ invalid }">
+                  <form @submit.prevent="finalRegister()">
+                    <v-row>
+                      <v-col cols="12">
+                        <validation-provider v-slot="{ errors }" name="password" rules="required|min:8">
+                          <v-text-field
+                            label="Password"
+                            v-model="password"
+                            outlined
+                            :error-messages="errors"
+                            dense
+                            type="password"
+                            :type="show1 ? 'text' : 'password'"
+                            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                            @click:append="show1 = !show1"
+                            required
+                          />
+                        </validation-provider>
+                      </v-col>
+                      <!--     Confirm Password       -->
+                      <v-col cols="12">
+                        <validation-provider name="confirmPassword" v-slot="{errors}"
+                                             rules="required|min:8|confirmed:password">
+                          <v-text-field
+                            v-model="confirmPassword"
+                            type="password"
+                            :error-messages="errors"
+                            label="Confirm password"
+                            dense
+                            outlined>
+                          </v-text-field>
+                        </validation-provider>
+                      </v-col>
+                    </v-row>
 
-            <!--End otp holder-->
-          </v-row>
-        </v-col>
+                    <v-row>
+                      <v-col cols="6" lg="6">
+                        <v-btn outlined @click="cancelRegister()">
+                          Cancel
+                        </v-btn>
+                      </v-col>
+                      <v-col cols="6" lg="6">
+                        <v-btn color="primary" type="submit" :loading="register_loading" :disabled="invalid">
+                          Register
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </form>
+                </validation-observer>
+              </v-col>
+
+              <!--End otp holder-->
+            </div>
+          </v-col>
+        </v-row>
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -133,7 +147,6 @@
 
 <script>
 import {ValidationProvider, ValidationObserver} from "vee-validate";
-import querystring from "querystring";
 
 export default {
   name: "register",
@@ -144,6 +157,7 @@ export default {
   data() {
     return {
       register_dialog: false,
+      google_login_loading:false,
       show1: false,
       password: '',
       confirmPassword: '',
@@ -270,11 +284,28 @@ export default {
       }).finally(() => {
         this.register_loading = false;
       })
-    }
+    },
+
+
+    loginWithGoogle() {
+      this.google_login_loading=true;
+      this.$auth.loginWith('google', {params: {prompt: "select_account"}})
+      this.google_login_loading=false;
+    },
   }
 }
 </script>
 
 <style scoped>
+.btn-google {
+  color: #545454;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 1px #ddd;
+}
 
+.btn-google img{
+  width: 30px;
+  margin-right: 8px;
+  max-width: 30px;
+}
 </style>
