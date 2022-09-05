@@ -54,12 +54,12 @@
                   </div>
                 </div>
                 <div v-if="!$auth.loggedIn" class="d-flex align-center">
-                  <v-btn plain @click="$refs.header_topbar.openLoginDialog">
+                  <v-btn plain @click="openLoginDialog">
                     <i class="fa-solid fa-sign-in mr-1"></i>
                     Login
                   </v-btn>
 
-                  <v-btn plain @click="$refs.header_topbar.openRegisterDialog">
+                  <v-btn plain @click="openRegisterDialog">
                     <i class="fa-solid fa-user-plus mr-1"></i>
                     Register
                   </v-btn>
@@ -502,6 +502,12 @@ export default {
     showSearchBox() {
       this.searchBox = true;
     },
+    openLoginDialog() {
+      this.$refs.header_topbar.openLoginDialog();
+    },
+    openRegisterDialog() {
+      this.$refs.header_topbar.openRegisterDialog();
+    }
   },
 };
 </script>
