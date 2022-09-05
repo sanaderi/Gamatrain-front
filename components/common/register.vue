@@ -10,12 +10,15 @@
       <v-card-text>
         <v-row>
 
-          <v-col cols="12">
+          <v-col cols="12" class="text-center">
             <v-divider class="my-2"/>
-            <v-btn block class="btn-google" @click="loginWithGoogle()" :loading="google_login_loading">
-              <img width="5px" height="auto"  :src="require('../../assets/images/google-logo.png')"/>
-              Signin Using Google
-            </v-btn>
+
+            <div v-show="google_register_loading">
+              <v-progress-circular color="teal" class="mr-2" size="20" width="2" indeterminate>
+              </v-progress-circular>
+              <span style="font-size: 1.2rem"> Loading google sign in</span>
+            </div>
+            <div v-show="!google_register_loading" ref="googleRegisterBtn"/>
           </v-col>
           <v-col cols="12">
             <div v-show="identity_holder">
@@ -157,7 +160,7 @@ export default {
   data() {
     return {
       register_dialog: false,
-      google_login_loading:false,
+      google_register_loading: true,
       show1: false,
       password: '',
       confirmPassword: '',
@@ -172,12 +175,34 @@ export default {
 
       identity_holder: true,
       otp_holder: false,
-      select_pass_holder: false
+      select_pass_holder: false,
+
     }
   },
-  mounted() {
-  },
   watch: {
+    register_dialog(val) {
+      if (val === true){
+        //Initialize google login
+        setTimeout(() => {
+          window.google.accounts.id.initialize({
+            client_id: process.env.GOOGLE_CLIENT_Id,
+            callback: this.handleCredentialResponse,
+            auto_select: true
+          })
+
+          window.google.accounts.id.renderButton(
+            this.$refs.googleRegisterBtn, {
+              text: 'Login',
+              size: 'large',
+              width: '252',
+              theme: 'outline' // option : filled_black | outline | filled_blue
+            }
+          );
+
+          this.google_register_loading = false;
+        }, 4000);
+      }
+    },
     countDown(val) {
       //When user wait 10 second
       if (val === 0)
@@ -190,12 +215,35 @@ export default {
     }
   },
   methods: {
+    //Handle google login callback
+    async handleCredentialResponse(response) {
+      const querystring = require('querystring');
+
+      await this.$axios.post('/api/v1/users/googleAuth',
+        querystring.stringify({
+          id_token: response.credential,
+        })).then(response => {
+        this.$auth.setUserToken(response.data.data.jwtToken);
+        this.$auth.setUser(response.data.data.info);
+        this.register_dialog = false;
+        this.$toast.success("Logged in successfully");
+        this.$router.push({
+          path: "/user/dashboard"
+        })
+      }).catch(({response}) => {
+        if (response.status == 401) {
+          this.$toast.error(this.$t(`LOGIN_WRONG_DATA`));
+        } else if (response.status == 500 || response.status == 504) {
+          this.$toast.error(this.$t(`REQUEST_FAILED`));
+        }
+      });
+    },
     switchToLogin() {
       this.$emit("update:switchToLogin", 'login')
     },
     cancelRegister() {
       this.register_dialog = false;
-      this.identity_holder=true;
+      this.identity_holder = true;
       this.otp_holder = false;
       this.select_pass_holder = false;
     },
@@ -209,7 +257,7 @@ export default {
           identity: this.identity
         })).then(response => {
         this.$toast.success("Otp code sent");
-        this.identity_holder=false;
+        this.identity_holder = false;
         this.otp_holder = true;
         this.countDownTimer();
       }).catch(err => {
@@ -270,12 +318,12 @@ export default {
       this.$axios.$post("/api/v1/users/register",
         querystring.stringify({
           type: 'register',
-          identity:this.identity,
-          pass:this.password
+          identity: this.identity,
+          pass: this.password
         })).then(response => {
         this.$toast.success("Registered successfully");
-        this.register_dialog=false;
-        this.identity_holder=true;
+        this.register_dialog = false;
+        this.identity_holder = true;
         this.otp_holder = false;
         this.select_pass_holder = false;
       }).catch(err => {
@@ -286,12 +334,6 @@ export default {
       })
     },
 
-
-    loginWithGoogle() {
-      this.google_login_loading=true;
-      this.$auth.loginWith('google', {params: {prompt: "select_account"}})
-      this.google_login_loading=false;
-    },
   }
 }
 </script>
@@ -303,7 +345,7 @@ export default {
   box-shadow: 0 1px 2px 1px #ddd;
 }
 
-.btn-google img{
+.btn-google img {
   width: 30px;
   margin-right: 8px;
   max-width: 30px;

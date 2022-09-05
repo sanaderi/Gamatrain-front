@@ -9,12 +9,14 @@
       </v-card-title>
       <v-card-text>
         <v-row>
-          <v-col cols="12">
+          <v-col cols="12" class="text-center">
             <v-divider class="my-2"/>
-            <v-btn block class="btn-google" @click="loginWithGoogle()" :loading="google_login_loading">
-              <img width="5px" height="auto" :src="require('../../assets/images/google-logo.png')"/>
-              Signin Using Google
-            </v-btn>
+            <div v-show="google_login_loading">
+              <v-progress-circular color="teal" class="mr-2" size="20" width="2" indeterminate>
+              </v-progress-circular>
+              <span style="font-size: 1.2rem"> Loading google sign in</span>
+            </div>
+            <div v-show="!google_login_loading" ref="googleLoginBtn"/>
           </v-col>
           <v-col cols="12">
             <validation-observer ref="observer" v-slot="{ invalid }">
@@ -84,6 +86,7 @@
 
 <script>
 import {ValidationProvider, ValidationObserver} from "vee-validate";
+import querystring from "querystring";
 
 export default {
   name: "login",
@@ -92,16 +95,71 @@ export default {
       login_dialog: false,
       show1: false,
       login_loading: false,
-      google_login_loading: false,
       identity: '',
-      password: ''
+      password: '',
+
+
+      google_login_loading: true
+
     }
   },
   components: {
     ValidationProvider,
     ValidationObserver,
   },
+  mounted() {
+
+  },
+  watch:{
+    login_dialog(val){
+      if (val===true){
+        //Initialize google login
+        setTimeout(() => {
+          window.google.accounts.id.initialize({
+            client_id: process.env.GOOGLE_CLIENT_Id,
+            callback: this.handleCredentialResponse,
+            auto_select: true
+          })
+
+          window.google.accounts.id.renderButton(
+            this.$refs.googleLoginBtn, {
+              text: 'Login',
+              size: 'large',
+              width: '252',
+              theme: 'outline' // option : filled_black | outline | filled_blue
+            }
+          );
+
+          this.google_login_loading = false;
+        }, 4000);
+      }
+    }
+  },
   methods: {
+    //Handle google login callback
+    async handleCredentialResponse(response) {
+      const querystring = require('querystring');
+
+      await this.$axios.post('/api/v1/users/googleAuth',
+        querystring.stringify({
+          id_token: response.credential,
+        })).then(response => {
+        this.$auth.setUserToken(response.data.data.jwtToken);
+        this.$auth.setUser(response.data.data.info);
+        this.login_dialog = false;
+        this.$toast.success("Logged in successfully");
+        this.$router.push({
+          path: "/user/dashboard"
+        })
+      }).catch(({response}) => {
+        if (response.status == 401) {
+          this.$toast.error(this.$t(`LOGIN_WRONG_DATA`));
+        } else if (response.status == 500 || response.status == 504) {
+          this.$toast.error(this.$t(`REQUEST_FAILED`));
+        }
+      });
+    },
+
     switchToRegister() {
       this.$emit("update:switchToRegister", 'register')
     },
@@ -129,13 +187,7 @@ export default {
       }).finally(() => {
         this.login_loading = false;
       });
-    },
-
-    loginWithGoogle() {
-      this.google_login_loading = false;
-      this.$auth.loginWith('google', {params: {prompt: "select_account"}})
-      this.google_login_loading = true;
-    },
+    }
   }
 }
 </script>

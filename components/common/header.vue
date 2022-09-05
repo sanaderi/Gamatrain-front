@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="main-header">
-      <topbar></topbar>
+      <topbar ref="header_topbar"></topbar>
       <!--   Start: navbar   main-container -->
       <v-container class="pa-0">
         <div class="d-flex align-center justify-space-between">
@@ -16,6 +16,7 @@
               <!-- Start:  Menu items -->
               <v-list nav dense>
                 <div
+                  v-if="$auth.loggedIn"
                   class="
                     sidemenu-profile
                     d-flex
@@ -24,28 +25,44 @@
                     mb-5
                   "
                 >
-                  <nuxt-link to="">
+                  <nuxt-link to="/user/dashboard">
                     <v-avatar size="40">
-                      <img
-                        :src="require('@/assets/images/' + avatar)"
-                        alt="John"
+                      <v-img
+                        :src="$loadAvatar.currentUser($auth)"
+                        alt="Avatar"
                       />
                     </v-avatar>
                   </nuxt-link>
                   <div class="profile-info">
-                    <p class="profile-name">حبیب الله حق شناس</p>
+                    <p class="profile-name">{{$auth.user.first_name}} {{$auth.user.last_name}} |
+                      <span @click="$auth.logout()">
+                      Logout
+                    </span>
+                    </p>
+
                     <div
                       class="profile-wallet d-flex justify-space-between mr-2"
                     >
                       <div class="d-flex">
-                        <p class="wallet">{{ wallet }}</p>
-                        <p class="mx-3 wallet-balance">{{ walletBalance }}</p>
+                        <p class="wallet">Wallet: </p>
+                        <p class="mx-3 wallet-balance">$2000</p>
                       </div>
                       <nuxt-link to="">
                         <i class="fa-solid fa-angle-left ml-4 profile-wallet-arrow"></i>
                       </nuxt-link>
                     </div>
                   </div>
+                </div>
+                <div v-if="!$auth.loggedIn" class="d-flex align-center">
+                  <v-btn plain @click="$refs.header_topbar.openLoginDialog">
+                    <i class="fa-solid fa-sign-in mr-1"></i>
+                    Login
+                  </v-btn>
+
+                  <v-btn plain @click="$refs.header_topbar.openRegisterDialog">
+                    <i class="fa-solid fa-user-plus mr-1"></i>
+                    Register
+                  </v-btn>
                 </div>
                 <v-divider></v-divider>
 

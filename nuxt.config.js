@@ -22,8 +22,9 @@ export default {
       {rel: "stylesheet", href: "/assets/css/all.min.css"},
     ],
     script: [
-      {src: './assets/js/jquery.js', body: true},
-      {src: './assets/js/video.min.js', body: true},
+      {src: 'https://accounts.google.com/gsi/client',defer:true,async:true, body: true},
+      // {src: './assets/js/jquery.js', body: true},
+      // {src: './assets/js/video.min.js', body: true},
     ],
   },
 
@@ -82,21 +83,21 @@ export default {
 
   auth: {
     strategies: {
-      google: {
-        clientId: process.env.GOOGLE_CLIENT_Id,
-        redirectUri: process.env.GOOGLE_REDIRECT_URI,
-        codeChallengeMethod: '',
-        responseType: 'code',
-        grantType: 'google',
-        endpoints: {
-          token: '/api/google_login',
-          userInfo: '/api/user'
-        },
-        user: {
-          property: 'user',
-          autoFetch: false
-        }
-      },
+      // google: {
+      //   clientId: process.env.GOOGLE_CLIENT_Id,
+      //   redirectUri: process.env.GOOGLE_REDIRECT_URI,
+      //   codeChallengeMethod: '',
+      //   responseType: 'code',
+      //   grantType: 'google',
+      //   endpoints: {
+      //     token: '/api/google_login',
+      //     userInfo: '/api/user'
+      //   },
+      //   user: {
+      //     property: 'user',
+      //     autoFetch: false
+      //   }
+      // },
       local: {
         token: {
           property: 'jwtToken',

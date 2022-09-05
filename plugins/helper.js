@@ -10,13 +10,26 @@ const loadImg = {
 }
 
 
+const loadAvatar= {
+  name:'loadAvatar',
+  currentUser(auth){
+    if (auth.user.avatar)
+      return `${process.env.FILE_BASE_URL}/uploads/user/avatars/${auth.user.avatar}`
+    else
+      return `${process.env.FILE_BASE_URL}/assets/image/avatars/default/png/user.png`
+  }
+
+}
+
+
 //End Methods to retrieve image file whole of project
 
 
 
 //Inject top methods to usable whole of project
-export default ({ app }, inject) => {
-  inject('loadImg', loadImg)
+export default ({ $auth,app}, inject) => {
+  inject('loadImg', loadImg);
+  inject('loadAvatar', loadAvatar);
 }
 //End Inject top methods to usable whole of project
 

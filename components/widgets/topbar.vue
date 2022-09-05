@@ -4,7 +4,7 @@
       <div class="d-flex align-center">
           <nuxt-link v-if="$auth.loggedIn" to="/user/dashboard">
             <v-avatar size="32">
-              <v-img :src="loadAvatar()" alt="user avatar"/>
+              <v-img :src="$loadAvatar.currentUser($auth)" alt="user avatar"/>
             </v-avatar>
           </nuxt-link>
           <nuxt-link v-if="$auth.loggedIn" to="/user/dashboard" class="d-block align-center mr-3 ml-5 ">
@@ -119,12 +119,7 @@ export default {
     openRegisterDialog() {
       this.$refs.register_modal.register_dialog = true;
     },
-    loadAvatar() {
-      if (this.$auth.user.avatar)
-        return `${process.env.FILE_BASE_URL}/uploads/user/avatars/${this.$auth.user.avatar}`
-      else
-        return `${process.env.FILE_BASE_URL}/assets/image/avatars/default/png/user.png`
-    }
+
   },
 
 };
