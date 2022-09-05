@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  middleware:['user_type'],
   name: "user-dashboard",
   methods:{
     logout(){
