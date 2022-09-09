@@ -2,15 +2,17 @@
   <div class="topbar d-none d-sm-block">
     <v-container class="d-flex align-center justify-space-between topbar-items">
       <div class="d-flex align-center">
-          <nuxt-link v-if="$auth.loggedIn" to="/user/dashboard">
+        <div class="d-flex align-center" v-if="$auth.loggedIn">
+          <nuxt-link :to="$auth.user.group_id==='5' ? '/teacher/dashboard' : '/student/dashboard'">
             <v-avatar size="32">
               <v-img :src="$loadAvatar.currentUser($auth)" alt="user avatar"/>
             </v-avatar>
           </nuxt-link>
-          <nuxt-link v-if="$auth.loggedIn" to="/user/dashboard" class="d-block align-center mr-3 ml-5 ">
+          <nuxt-link  :to="$auth.user.group_id==='5' ? '/teacher/dashboard' : '/student/dashboard'" class="d-block align-center mr-3 ml-5 ">
             <i class="fa-regular fa-bell fa-xl topbar-bell d-none d-sm-block"></i>
           </nuxt-link>
-        <div v-if="!$auth.loggedIn">
+        </div>
+        <div class="d-flex align-center" v-if="!$auth.loggedIn">
           <v-btn plain @click="openLoginDialog">
             <i class="fa-solid fa-sign-in mr-1"></i>
             Login
@@ -47,7 +49,7 @@
         <!--  End:  Search and logo in header  -->
       </div>
       <v-spacer></v-spacer>
-      <div>
+      <div >
         <nuxt-link to="/">
           <v-img
             class="logo"

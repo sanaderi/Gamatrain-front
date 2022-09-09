@@ -23,8 +23,8 @@ export default {
     ],
     script: [
       {src: 'https://accounts.google.com/gsi/client',defer:true,async:true},
-      {src: './assets/js/jquery.js', body: true},
-      {src: './assets/js/video.min.js', body: true},
+      // {src: './assets/js/jquery.js', body: true},
+      // {src: './assets/js/video.min.js', body: true},
     ],
   },
 

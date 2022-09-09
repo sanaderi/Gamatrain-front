@@ -227,9 +227,14 @@ export default {
         this.$auth.setUser(response.data.data.info);
         this.register_dialog = false;
         this.$toast.success("Logged in successfully");
+
+
+        var path="/student/dashboard";
+        if(this.$auth.user.group_id==="5")
+          path="/teacher/dashboard";
         this.$router.push({
-          path: "/user/dashboard"
-        })
+          path: path
+        });
       }).catch(({response}) => {
         if (response.status == 401) {
           this.$toast.error(this.$t(`LOGIN_WRONG_DATA`));

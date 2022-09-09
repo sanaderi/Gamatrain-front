@@ -148,9 +148,13 @@ export default {
         this.$auth.setUser(response.data.data.info);
         this.login_dialog = false;
         this.$toast.success("Logged in successfully");
+
+        var path="/student/dashboard";
+        if(this.$auth.user.group_id==="5")
+          path="/teacher/dashboard";
         this.$router.push({
-          path: "/user/dashboard"
-        })
+          path: path
+        });
       }).catch(({response}) => {
         if (response.status == 401) {
           this.$toast.error(this.$t(`LOGIN_WRONG_DATA`));
@@ -178,9 +182,13 @@ export default {
         this.$auth.setUser(response.data.info);
         this.login_dialog = false;
         this.$toast.success("Logged in successfully");
+
+        var path="/student/dashboard";
+        if(this.$auth.user.group_id==="5")
+          path="/teacher/dashboard";
         this.$router.push({
-          path: "/user/dashboard"
-        })
+          path: path
+        });
       }).catch(err => {
         if (err.response.status == 400)
           this.$toast.error(err.response.data.message);

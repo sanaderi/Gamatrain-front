@@ -134,7 +134,7 @@
                 </div>
 
                 <p class="item-content-subtitle mb-2 d-none d-sm-block">
-                  <nuxt-link :to="`/tutorial-details/${item.id}/${item.title_url}`">
+                  <nuxt-link :to="`/tutorials/${item.id}/${item.title_url}`">
                     {{ item.description.substr(0,60) }}...
                   </nuxt-link>
                 </p>

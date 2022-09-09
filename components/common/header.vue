@@ -25,7 +25,7 @@
                     mb-5
                   "
                 >
-                  <nuxt-link to="/user/dashboard">
+                  <nuxt-link :to="$auth.user.group_id==='5' ? '/teacher/dashboard' : '/student/dashboard'">
                     <v-avatar size="40">
                       <v-img
                         :src="$loadAvatar.currentUser($auth)"

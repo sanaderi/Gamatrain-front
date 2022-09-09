@@ -42,8 +42,10 @@ export default {
     }
   },
   mounted() {
-    if (this.$auth.user.group_id === 5 || this.$auth.user.group_id === 6)
-      this.$router.push({path:'/user/dashboard'});
+    if (this.$auth.user.group_id === "5")
+      this.$router.push({path: '/teacher/dashboard'});
+    else if (this.$auth.user.group_id === "6")
+      this.$router.push({path: '/student/dashboard'});
   },
   methods: {
     async setUserType() {
@@ -65,8 +67,12 @@ export default {
           //Update current user data
           this.$auth.setUser(updatedData);
           this.$auth.user.group_id = this.user_type;
+
+          var path="/student/dashboard";
+          if(this.$auth.user.group_id==="5")
+            path="/teacher/dashboard";
           this.$router.push({
-            path: '/user/dashboard'
+            path: path
           });
         }
       }).catch(err => {

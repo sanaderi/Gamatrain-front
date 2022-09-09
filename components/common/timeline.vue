@@ -41,13 +41,13 @@ export default {
   methods: {
     openLink(id, title) {
       this.$router.push({
-        path: `/tutorial-details/${id}/${title}`
+        path: `/tutorials/${id}/${title}`
       })
     },
     stepperClicked(item,key) {
       if (item.length===1){
         this.$router.push({
-          path: `/tutorial-details/${item[0].id}/${item[0].title}`
+          path: `/tutorials/${item[0].id}/${item[0].title}`
         })
       }else {
         this.e6=key;

@@ -15,12 +15,12 @@
         <v-col lg="10" cols="9" class="px-0">
           <div class="tutorial-content d-flex flex-column justify-space-between">
             <div class="tutorial-title d-flex justify-space-between">
-              <nuxt-link :to="`/tutorial-details/${item.id}/${item.title_url}`" class="text-h5 text-md-h4">
+              <nuxt-link :to="`/tutorials/${item.id}/${item.title_url}`" class="text-h5 text-md-h4">
                 {{ item.title.length>72 ? item.title.substr(0,69)+'...' : item.title }}
               </nuxt-link>
             </div>
             <p class="item-content-subtitle mb-2 d-none d-sm-block">
-              <nuxt-link :to="`/tutorial-details/${item.id}/${item.title_url}`">
+              <nuxt-link :to="`/tutorials/${item.id}/${item.title_url}`">
                 {{ item.description.substr(0,60) }}....
               </nuxt-link>
             </p>
