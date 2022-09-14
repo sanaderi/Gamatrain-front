@@ -1,63 +1,86 @@
 <template>
-  <div class="topbar d-none d-sm-block">
-    <v-container class="d-flex align-center justify-space-between topbar-items">
-      <div class="d-flex align-center">
-        <div class="d-flex align-center" v-if="$auth.loggedIn">
-          <nuxt-link :to="$auth.user.group_id==='5' ? '/teacher/dashboard' : '/student/dashboard'">
-            <v-avatar size="32">
-              <v-img :src="$loadAvatar.currentUser($auth)" alt="user avatar"/>
-            </v-avatar>
-          </nuxt-link>
-          <nuxt-link  :to="$auth.user.group_id==='5' ? '/teacher/dashboard' : '/student/dashboard'" class="d-block align-center mr-3 ml-5 ">
-            <i class="fa-regular fa-bell fa-xl topbar-bell d-none d-sm-block"></i>
-          </nuxt-link>
-        </div>
-        <div class="d-flex align-center" v-if="!$auth.loggedIn">
-          <v-btn plain @click="openLoginDialog">
-            <i class="fa-solid fa-sign-in mr-1"></i>
-            Login
-          </v-btn>
+  <div class="topbar d-none d-md-block">
+    <v-container class="align-center justify-space-between topbar-items">
+      <v-row>
+        <v-col md="4" lg="2">
+          <div class="align-center pt-5">
+            <div class="d-flex align-center" v-if="$auth.loggedIn">
 
-          <v-btn plain @click="openRegisterDialog">
-            <i class="fa-solid fa-user-plus mr-1"></i>
-            Register
-          </v-btn>
-        </div>
+              <v-menu
+                transition="slide-x-transition"
+                offset-y
+                min-width="150"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <div v-bind="attrs" v-on="on">
+                    <v-avatar size="32"
+                    >
+                      <v-img :src="$loadAvatar.currentUser($auth)" alt="user avatar"/>
+                    </v-avatar>
+                    <span class="pointer pa-2">{{ $auth.user.first_name }}</span>
+                  </div>
+                </template>
+                <v-list>
+                  <v-list-item
+                               v-for="(item, i) in user_profile_items"
+                               :key="i"
+                               :to="item.link"
+                  >
+                    <v-list-item-title class="user_menu_title">
+                      <v-icon small>
+                        {{item.icon}}
+                      </v-icon>
+                      {{ item.title }}</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item
+                    class="pointer"
+                    @click="$auth.logout()"
+                  >
 
+                    <v-list-item-title  class="user_menu_title">
+                      <v-icon small>
+                        mdi-logout
+                      </v-icon>
+                      Logout
+                    </v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
 
-        <!--  Start:  Search and logo in header  -->
-        <div
-          class="
-            d-flex
-            align-center
-            justify-space-between
-            logo-search-content
-            ml-8
-          "
-        >
-          <div class="px-2 header-search desktop-search">
-            <v-btn class="px-0 btn-transparent search-btn-icon">
-              <v-icon class="search-icon mr-3">mdi-magnify</v-icon>
-            </v-btn>
-            <v-text-field
-              class="py-1 my-0 search-field main-search-icon ml-2"
-              placeholder="Search..."
-            >
-            </v-text-field>
+              <nuxt-link :to="$auth.user.group_id==='5' ? '/teacher/dashboard' : '/student/dashboard'"
+                         class="d-block align-center mr-3 ml-5 ">
+                <i class="fa-regular fa-bell fa-xl topbar-bell d-none d-sm-block"></i>
+              </nuxt-link>
+            </div>
+            <div class="d-flex align-center" v-if="!$auth.loggedIn">
+              <v-btn plain @click="openLoginDialog">
+                <i class="fa-solid fa-sign-in mr-1"></i>
+                Login
+              </v-btn>
+
+              <v-btn plain @click="openRegisterDialog">
+                <i class="fa-solid fa-user-plus mr-1"></i>
+                Register
+              </v-btn>
+            </div>
           </div>
-        </div>
-        <!--  End:  Search and logo in header  -->
-      </div>
-      <v-spacer></v-spacer>
-      <div >
-        <nuxt-link to="/">
-          <v-img
-            class="logo"
-            :src="require('@/assets/images/' + logo)"
-            max-width="150"
-          />
-        </nuxt-link>
-      </div>
+        </v-col>
+        <v-col md="5" lg="3">
+          <!--  Start:  Search and logo in header  -->
+          <search-box class="ml-lg-4 mt-4"/>
+          <v-spacer></v-spacer>
+          <!--  End:  Search and logo in header  -->
+        </v-col>
+        <v-col md="3" lg="7">
+          <nuxt-link to="/" class="float-md-right pt-5">
+            <v-img
+              class="logo"
+              :src="require('@/assets/images/' + logo)"
+              max-width="150"
+            />
+          </nuxt-link>
+        </v-col>
+      </v-row>
     </v-container>
 
     <div>
@@ -75,6 +98,7 @@
 <script>
 import Login from "@/components/common/login";
 import Register from "@/components/common/register";
+import SearchBox from "@/components/common/search-box";
 
 export default {
   data() {
@@ -86,11 +110,36 @@ export default {
         {title: "Photos", icon: "mdi-image"},
         {title: "About", icon: "mdi-help-box"},
       ],
+
+      user_profile_items: [
+        {
+          title: 'Dashboard',
+          icon:'mdi-view-dashboard',
+          link: this.$auth && this.$auth.user && this.$auth.user.group_id === '5' ? '/teacher/dashboard' : '/student/dashboard'
+        },
+        {
+          title: 'Messages',
+          icon:'mdi-email-outline',
+          link: this.$auth && this.$auth.user &&  this.$auth.user.group_id === '5' ? '/teacher/ticket' : '/student/ticket'
+        },
+        {
+          title: 'Edit profile',
+          icon:'mdi-account-outline',
+          link: this.$auth && this.$auth.user &&  this.$auth.user.group_id === '5' ? '/teacher/info' : '/student/info'
+        },
+        {
+          title: 'Edit pass',
+          icon:'mdi-key',
+          link: this.$auth && this.$auth.user &&  this.$auth.user.group_id === '5' ? '/teacher/edit_pass' : '/student/edit_pass'
+        },
+
+      ],
       right: null,
       currentOpenDialog: '',
     };
   },
   components: {
+    SearchBox,
     Register,
     Login
   },
@@ -126,3 +175,9 @@ export default {
 
 };
 </script>
+<style>
+.user_menu_title{
+  font-size: 1.2rem!important;
+  padding: 1rem!important;
+}
+</style>

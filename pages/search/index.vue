@@ -45,23 +45,13 @@
       </v-dialog>
     </v-row>
 
-    <!-- mobile header -->
-    <div class="
-        d-flex
-        align-center
-        justify-space-between
-        logo-search-content
-        mx-5
-        d-flex d-sm-none ">
-      <div class="pl-2 header-search mobile-res-search my-4">
-        <v-btn class="px-0 btn-transparent search-btn-icon">
-          <v-icon class="search-icon">mdi-magnify</v-icon>
-        </v-btn>
-        <v-divider vertical></v-divider>
-        <v-text-field class="py-1 my-0 search-field main-search-icon mr-2 mt-4" placeholder="Search ...">
-        </v-text-field>
-      </div>
-    </div>
+
+    <v-divider></v-divider>
+    <!--     Start:mobile header-->
+    <search-box class="d-block d-md-none mx-3 my-2"/>
+    <!--     End: mobile header-->
+
+
     <!-- Start : sample-q -->
     <section class="search-page">
       <v-container>
@@ -125,9 +115,10 @@ import TrainingContents from "@/pages/search/type/training-contents";
 import Test from "@/pages/search/type/sample-q";
 import Tutorials from "@/pages/search/type/tutorials";
 import Teachers from "@/pages/search/type/teachers";
+import searchBox from "@/components/common/search-box";
 
 export default {
-  auth:false,
+  auth: false,
   name: "searchPage",
   layout: 'search_layout',
 
@@ -140,7 +131,8 @@ export default {
     QuestionAnswer,
     TrainingContents,
     Test,
-    Tutorials
+    Tutorials,
+    searchBox
   },
 
   async asyncData({query}) {
@@ -178,9 +170,6 @@ export default {
       Visible: true,
       result_count: 0,
       dialog: false,
-
-
-
 
 
     }
@@ -233,7 +222,6 @@ export default {
       //End fire when click on tag in content card, set section value on side filter
 
 
-
       this.$refs.side_filter.setBreadcrumbInfo();
       this.getContentList();
 
@@ -248,7 +236,6 @@ export default {
       else
         this.$refs.side_filter.base_val = 0;
       //Fire when click on tag in content card, set base value on side filter
-
 
 
       this.$refs.side_filter.setBreadcrumbInfo();
@@ -330,7 +317,7 @@ export default {
           }
         }).then(response => {
         this.items.push(...response.data.list);
-        this.result_count=response.data.num;
+        this.result_count = response.data.num;
         this.$refs.content_tabs.content_statistics = response.data.types_stats;
       }).catch(err => {
 
@@ -368,7 +355,6 @@ export default {
       }
       this.scroll = scrollY
     }
-
 
 
   }

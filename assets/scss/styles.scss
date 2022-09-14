@@ -13,6 +13,11 @@ body {
   font-size: 14px;
   transition: 0.5s ease-in-out;
 
+
+  .pointer{
+    cursor: pointer!important;
+  }
+
   .dropdown-items {
     border-radius: 5px;
   }
@@ -216,10 +221,11 @@ body {
     //header
     .main-header {
 
+
       // border-bottom: 1px solid $gray1;
       .headermenu-item {
-        color: $gray4;
         font-weight: 400;
+        padding-bottom: 2rem;
       }
 
       //topbar
@@ -252,7 +258,7 @@ body {
         }
 
         .mdi-chevron-down::before {
-          transform: rotate(90deg);
+          transform: rotate(-90deg);
         }
 
         .theme--light.v-app-bar.v-toolbar.v-sheet {
@@ -358,18 +364,8 @@ body {
         color: $gray4;
       }
 
-      .logo-search-content {
-        width: 40rem;
-      }
 
-      .search-btn-icon {
-        min-width: 0 !important;
-        margin: 0;
-      }
 
-      .search-btn-icon span {
-        border-right: 1px solid $border;
-      }
 
       .header-search {
         &.desktop-search {
@@ -429,27 +425,7 @@ body {
       height: 28rem !important;
     }
 
-    // popular-hashtags
-    .popular-hashtags {
-      width: 23%;
 
-      .popular-hashtags-item {
-        color: $gray45;
-      }
-
-      .popular-hashtag {
-        background-color: $hashtag;
-        width: 50%;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-      }
-
-      .popular-hashtag-circle {
-        background-color: rgba(0, 0, 0, 0.1);
-        width: 3rem;
-        height: 3rem;
-        font-size: 2rem;
-      }
-    }
 
     // category
     .category {

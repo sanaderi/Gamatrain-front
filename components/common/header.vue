@@ -2,6 +2,57 @@
   <div>
     <header class="main-header">
       <topbar ref="header_topbar"></topbar>
+
+      <!-- Desktop App bar in top page for menu list -->
+      <v-container class="d-none d-md-block"  >
+        <v-row >
+          <v-col md="6" lg="6" >
+            <v-toolbar-items >
+              <v-menu
+                v-for="(item, side) in menuItems"
+                :key="side"
+                open-on-hover
+                bottom
+                offset-y
+                class="main-menu"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn plain   v-bind="attrs" v-on="on" class="menu-item "
+                  >
+                    <nuxt-link :to="item.link" class="headermenu-item">
+                      <span v-show="item.title=='Home'" class="fa-solid fa-house-chimney mx-1"/>
+                      {{ item.title }}
+                      <span :class="'mr-1 fa-solid ' + item.icon"></span>
+                    </nuxt-link>
+                  </v-btn>
+                </template>
+                <v-list :class="'dropdown-items dropdown-items'+ (side + 1)">
+                  <v-list-item
+                    v-for="(subMenuItem, side) in item.subMenuList"
+                    :key="side"
+                    class="dropdown-item"
+                    :to="subMenuItem.link"
+                  >
+                      {{ subMenuItem.title }}
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </v-toolbar-items>
+          </v-col>
+          <v-col md="6" lg="6" class="text-right" >
+            <span>Most visited: </span>
+            <v-chip to="/" color="rgba(33, 33, 33, 0.08)">
+              <v-chip small color="rgba(0, 0, 0, 0.16);">
+                #
+              </v-chip>
+              Test maker
+            </v-chip>
+          </v-col>
+        </v-row>
+      </v-container>
+      <!-- End: Desktop app bar in top page for menu list -->
+
+
       <!--   Start: navbar   main-container -->
       <v-container class="pa-0">
         <div class="d-flex align-center justify-space-between">
@@ -11,10 +62,10 @@
               v-model="sidebar"
               app
               class="hidden-md-and-up main-sidebar"
-              right
             >
               <!-- Start:  Menu items -->
-              <v-list nav dense>
+              <v-list dense shaped class=" pl-1">
+                <!--Profile info-->
                 <div
                   v-if="$auth.loggedIn"
                   class="
@@ -33,22 +84,23 @@
                       />
                     </v-avatar>
                   </nuxt-link>
+
                   <div class="profile-info">
-                    <p class="profile-name">{{$auth.user.first_name}} {{$auth.user.last_name}} |
-                      <span @click="$auth.logout()">
-                      Logout
-                    </span>
-                    </p>
+                    <nuxt-link
+                      :to="$auth.user.group_id==='5' ? '/teacher/dashboard' : '/student/dashboard'"
+                      class="profile-name">{{ $auth.user.first_name }} {{ $auth.user.last_name }}
+                    </nuxt-link>
+
 
                     <div
                       class="profile-wallet d-flex justify-space-between mr-2"
                     >
                       <div class="d-flex">
                         <p class="wallet">Wallet: </p>
-                        <p class="mx-3 wallet-balance">$2000</p>
+                        <p class="mx-3 wallet-balance">${{ $auth.user.credit }}</p>
                       </div>
                       <nuxt-link to="">
-                        <i class="fa-solid fa-angle-left ml-4 profile-wallet-arrow"></i>
+                        <i class="fa-solid fa-angle-right ml-4 profile-wallet-arrow"></i>
                       </nuxt-link>
                     </div>
                   </div>
@@ -64,67 +116,62 @@
                     Register
                   </v-btn>
                 </div>
-                <v-divider></v-divider>
+                <v-divider class="mb-2"></v-divider>
+                <!--End Profile info-->
 
+
+                <!--Mobile menu items-->
                 <div
-                  v-for="(item, side) in sidemenuItems"
+                  v-for="(item, side) in menuItems"
                   :key="side"
-                  class="my-8"
                 >
                   <v-list-item
+                    class="py-2"
+                    active-class="menu_active"
                     v-if="!item.subMenuList"
                     :to="item.link"
-                    class="menuu"
                   >
-                    <!-- <v-list-item-icon>
-                                         <v-icon class="">{{ item.icon }}</v-icon>
-                                       </v-list-item-icon> -->
                     <v-list-item-title v-text="item.title" class="menu-title"/>
                   </v-list-item>
 
                   <v-list-group
                     v-else
+                    active-class="menu_group_active"
                     :key="item.title"
                     no-action
                     :value="false"
                   >
                     <template v-slot:activator>
-                      <v-list-item-title class="sidemenu-item">{{
-                          item.title
-                        }}
-                      </v-list-item-title>
+                      <v-list-item-title v-text="item.title" class="py-2"></v-list-item-title>
                     </template>
 
                     <v-list-item
+                      class="pl-7 "
+                      active-class="menu_active"
                       v-for="(subMenuItem, side) in item.subMenuList"
-                      :to="subMenuItem.path"
+                      :to="subMenuItem.link"
                       :key="side.title"
                     >
-                      <nuxt-link :to="subMenuItem.link">
-                        <span class="fa-solid fa-angles-left ms-2"></span>
-                        {{ subMenuItem.title }}
-                      </nuxt-link>
+                      <v-list-item-content class="py-2">
+                        <v-list-item-title v-text="subMenuItem.title"></v-list-item-title>
+                      </v-list-item-content>
                     </v-list-item>
                   </v-list-group>
                 </div>
-                <v-divider></v-divider>
-                <div class="logout d-flex align-center my-4">
-                  <nuxt-link to="">
-                    <v-icon>mdi-logout</v-icon>
-                  </nuxt-link>
+                <v-divider class="my-3"></v-divider>
+                <div v-if="$auth.loggedIn" @click="$auth.logout()" class="logout d-flex align-center my-4 ">
+                  <v-icon>mdi-logout</v-icon>
+                  <p class="logout-item mx-2">
+                    Logout
+                  </p>
 
-                  <nuxt-link to=""
-                  ><p class="logout-item mx-2">
-                    خروج از حساب کاربری
-                  </p></nuxt-link
-                  >
                 </div>
               </v-list>
               <!-- End:  Menu items -->
 
               <!-- Start:  Social link -->
               <v-list dense>
-                <v-list-item-group class="d-flex justify-center align-center">
+                <v-list-item-group class="d-flex justify-center align-center mt-5">
                   <a
                     v-for="(socialItem, i) in socialList"
                     :key="i"
@@ -141,216 +188,40 @@
             </v-navigation-drawer>
             <!-- End:  show sidebar menu in mobile -->
 
-            <!-- Start: App bar in top page for menu list -->
-            <v-app-bar class="desktop-nav">
-              <!--   hamburgers-icon in mobile-->
-              <span class="d-block d-md-none">
-                <v-btn class="pa-0 btn-transparent" @click="sidebar = !sidebar">
-                  <span class="fa-solid fa-bars hamburgers-icon"></span>
-                </v-btn>
-              </span>
-              <v-spacer></v-spacer>
-              <!--  show menu in desktop -->
-              <v-toolbar-items class="d-none d-md-block">
-                <v-menu
-                  v-for="(item, side) in menuItems"
-                  :key="side"
-                  open-on-hover
-                  bottom
-                  offset-y
-                  class="main-menu"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                      <v-btn v-bind="attrs" v-on="on" class="menu-item"
-                      >
-                        <nuxt-link :to="item.link" class="headermenu-item">
-                          <span v-show="item.title=='Home'" class="fa-solid fa-house-chimney mx-1"/>
-                          {{ item.title }}
-                          <span :class="'mr-1 fa-solid ' + item.icon"></span>
-                        </nuxt-link>
-                      </v-btn>
-                  </template>
-                  <v-list :class="'dropdown-items dropdown-items'+ (side + 1)">
-                    <v-list-item
-                      v-for="(subMenuItem, side) in item.subMenuList"
-                      :key="side"
-                      class="dropdown-item"
-                    >
-                      <nuxt-link :to="subMenuItem.link">
-                        {{ subMenuItem.title }}
-                      </nuxt-link>
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
-              </v-toolbar-items>
-            </v-app-bar>
-            <!-- End: App bar in top page for menu list -->
 
-            <!-- Start: show Search in mobile -->
-            <div class="mobile-search">
-              <!--              <v-btn class="pa-0 btn-transparent" @click="showSearchBox">-->
-              <!--                <span class="fa-solid fa-magnifying-glass search-icon"></span>-->
-              <!--              </v-btn>-->
-              <template>
-                <v-row justify="center">
-                  <v-dialog
-                    v-model="dialog"
-                    fullscreen
-                    hide-overlay
-                    transition="dialog-bottom-transition"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        v-bind="attrs"
-                        v-on="on"
-                        class="pa-0 btn-transparent"
-                      >
-                        <span
-                          class="fa-solid fa-magnifying-glass search-icon"
-                        ></span>
-                      </v-btn>
-                    </template>
-                    <v-card class="mobile-card-dialog-search">
-                      <v-btn
-                        class="close-mobile-dialog-search dialog-search-close"
-                        dark
-                        icon
-                        @click="dialog = false"
-                      >
-                        <v-icon>mdi-close</v-icon>
-                      </v-btn>
-                      <div class="ml-3 px-2 search-box">
-                        <v-text-field
-                          class="
-                            py-1
-                            my-0
-                            search-field
-                            d-flex
-                            align-sm-center align-center
-                            search-icon-placeholder
-                          "
-                          placeholder="Search..."
-                        >
-                        </v-text-field>
-                        <v-btn class="pl-0 btn-transparent d-flex justify-end">
-                          <v-icon class="search-icon">mdi-magnify</v-icon>
-                        </v-btn>
-                      </div>
-                      <!--   category    -->
-                      <section class="category-sec">
-                        <nuxt-link
-                          to=""
-                          class="d-flex align-center test-cat mb-5"
-                        >
-                          <div>
-                            <span
-                              class="icong-test icon ml-5 d-flex align-center"
-                            ></span>
-                          </div>
-                          <div class="responsive-search-item">
-                            <p>Sample Exam</p>
-                            <p>50,000 +</p>
-                          </div>
-                        </nuxt-link>
-                        <nuxt-link
-                          to=""
-                          class="d-flex align-center learnfile-cat mb-5"
-                        >
-                          <div>
-                            <span
-                              class="
-                                icong-learnfiles
-                                icon
-                                ml-5
-                                d-flex
-                                align-center
-                              "
-                            ></span>
-                          </div>
-                          <div class="responsive-search-item">
-                            <p>Training content</p>
-                            <p>30,000 +</p>
-                          </div>
-                        </nuxt-link>
-                        <nuxt-link
-                          to=""
-                          class="d-flex align-center qa-cat mb-5"
-                        >
-                          <div>
-                            <span
-                              class="icong-qa icon ml-5 d-flex align-center"
-                            ></span>
-                          </div>
-                          <div class="responsive-search-item">
-                            <p>Q & A</p>
-                            <p>20,000 +</p>
-                          </div>
-                        </nuxt-link>
-                        <nuxt-link
-                          to=""
-                          class="d-flex align-center azmoon-cat mb-5"
-                        >
-                          <div>
-                            <span
-                              class="icong-azmoon icon ml-5 d-flex align-center"
-                            ></span>
-                          </div>
-                          <div class="responsive-search-item">
-                            <p>Online Exam</p>
-                            <p>5,000 +</p>
-                          </div>
-                        </nuxt-link>
-                        <nuxt-link
-                          to=""
-                          class="d-flex align-center blog-cat mb-5"
-                        >
-                          <div>
-                            <span
-                              class="icong-blog icon ml-5 d-flex align-center"
-                            ></span>
-                          </div>
-                          <div class="responsive-search-item">
-                            <p>Training content</p>
-                            <p>1,500 +</p>
-                          </div>
-                        </nuxt-link>
-                        <nuxt-link
-                          to=""
-                          class="d-flex align-center school-cat mb-5"
-                        >
-                          <div>
-                            <span
-                              class="icong-school icon ml-5 d-flex align-center"
-                            ></span>
-                          </div>
-                          <div class="responsive-search-item">
-                            <p>School finder</p>
-                            <p>130,000 +</p>
-                          </div>
-                        </nuxt-link>
-                      </section>
-                    </v-card>
-                  </v-dialog>
-                </v-row>
-              </template>
-            </div>
-            <!--  End: show Search in mobile  -->
+
+            <!--Mobile nav-->
+            <v-app-bar class="d-block d-md-none mobile_bar" fixed>
+              <!--   hamburgers-icon in mobile-->
+              <v-btn icon @click="sidebar = !sidebar">
+                <v-icon large>
+                  mdi-menu
+                </v-icon>
+              </v-btn>
+              <v-spacer></v-spacer>
+
+              <!--Logo section-->
+              <nuxt-link to="/">
+                <v-img
+                  class="logo"
+                  :src="require('@/assets/images/' + logo)"
+                  max-width="100"
+                />
+              </nuxt-link>
+              <!--End logo section-->
+
+              <v-spacer></v-spacer>
+              <nuxt-link to="">
+                <i class="fa-regular fa-bell fa-2xl ml-4"></i>
+              </nuxt-link>
+
+            </v-app-bar>
+            <!--End mobile nav-->
+
+
           </div>
-          <div class="header-logo d-block d-sm-none">
-            <nuxt-link to="/">
-              <v-img
-                class="logo"
-                :src="require('@/assets/images/' + logo)"
-                max-width="100"
-              />
-            </nuxt-link>
-          </div>
-          <div class="header-bell d-block d-sm-none">
-            <nuxt-link to="">
-              <i class="fa-regular fa-bell fa-2xl ml-4"></i>
-            </nuxt-link>
-          </div>
-          <PopularHashtags/>
+
+
         </div>
       </v-container>
       <!--   End: navbar   -->
@@ -359,12 +230,10 @@
 </template>
 <script>
 import topbar from "../widgets/topbar";
-import PopularHashtags from "./popular-hashtags.vue";
 
 export default {
   components: {
     topbar,
-    PopularHashtags,
   },
   data() {
     return {
@@ -374,58 +243,6 @@ export default {
       avatar: "dexter-morse.png",
       wallet: "کیف پول:",
       walletBalance: "2000 تومان",
-      sidemenuItems: [
-        {
-          title: "آشنایی",
-          link: "",
-          icon: "mdi-chevron-left",
-          subMenuList: [
-            {title: "Terms and Conditions", link: ""},
-            {title: "FAQ's", link: ""},
-            {title: "راهنمای عضویت", link: ""},
-          ],
-        },
-        {
-          title: "المپیادها",
-          link: "",
-          icon: "fa-chevron-left",
-          subMenuList: [
-            {title: "المپیاد Math", link: ""},
-            {title: "المپیاد فیزیک", link: ""},
-            {title: "المپیاد شیمی", link: ""},
-          ],
-        },
-        {
-          title: "نمونه و تیزهوشان",
-          link: "",
-          icon: "fa-chevron-left",
-          subMenuList: [
-            {title: "آزمون ورودی پایه چهارم", link: ""},
-            {title: "آزمون ورودی پایه پنجم", link: ""},
-            {title: "آزمون ورودی پایه ششم", link: ""},
-          ],
-        },
-        {
-          title: "کتب درسی",
-          link: "",
-          icon: "fa-chevron-left",
-          subMenuList: [
-            {title: "دوره دبستان", link: ""},
-            {title: "دوره اول متوسطه", link: ""},
-            {title: "دوره دوم متوسطه", link: ""},
-          ],
-        },
-        {
-          title: "پیشنهاد ویژه",
-          link: "",
-          icon: "fa-caret-down",
-          subMenuList: [
-            {title: "امتحانات هماهنگ نهم", link: ""},
-            {title: "امتحانات هماهنگ ششم", link: ""},
-            {title: "امتحانات هماهنگ دوازدهم", link: ""},
-          ],
-        },
-      ],
       menuItems: [
         {
           title: "Home",
@@ -439,7 +256,7 @@ export default {
           subMenuList: [
             {title: "Terms and Conditions", link: ""},
             {title: "Privacy Policy", link: ""},
-            {title: "FAQs", link: ""},
+            {title: "FAQs", link: "/faq"},
           ],
         },
         {
@@ -457,9 +274,9 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            {title: "آزمون ورودی پایه چهارم", link: ""},
-            {title: "آزمون ورودی پایه پنجم", link: ""},
-            {title: "آزمون ورودی پایه ششم", link: ""},
+            {title: "Fourth grade entrance exam", link: ""},
+            {title: "Fifth grade entrance exam", link: ""},
+            {title: "Sixth grade entrance exam", link: ""},
           ],
         },
         {
@@ -467,9 +284,9 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            {title: "دوره دبستان", link: ""},
-            {title: "دوره اول متوسطه", link: ""},
-            {title: "دوره دوم متوسطه", link: ""},
+            {title: "Primary school period", link: ""},
+            {title: "First year of high school", link: ""},
+            {title: "Second year of high school", link: ""},
           ],
         },
         {
@@ -477,17 +294,11 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            {title: "امتحانات هماهنگ نهم", link: ""},
-            {title: "امتحانات هماهنگ ششم", link: ""},
-            {title: "امتحانات هماهنگ دوازدهم", link: ""},
+            {title: "9th coordinated exams", link: ""},
+            {title: "6th coordinated exams", link: ""},
+            {title: "12th Coordinated Exams", link: ""},
           ],
-        },
-        // {
-        //   title: "تدریس آنلاین",
-        //   link: "",
-        //   icon: "fa-tv",
-
-        // },
+        }
       ],
       selectedItem: 1,
       socialList: [
@@ -499,9 +310,6 @@ export default {
     };
   },
   methods: {
-    showSearchBox() {
-      this.searchBox = true;
-    },
     openLoginDialog() {
       this.$refs.header_topbar.openLoginDialog();
     },
@@ -518,4 +326,19 @@ export default {
   border-bottom: 3px solid rgb(0, 139, 139);
 }
 
+.menu_active {
+  border-bottom: 4px solid white !important;
+  background-color: rgba(33, 186, 69, 0.1);
+  color: #21ba45 !important;
+}
+
+.menu_group_active {
+  border-bottom: 4px solid white !important;
+  background-color: #e1e2e3;
+  color: #000 !important;
+}
+
+.mobile_bar .v-toolbar__content {
+  padding: 0 1.4rem 0 0.5rem !important;
+}
 </style>

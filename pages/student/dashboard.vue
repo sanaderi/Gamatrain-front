@@ -4,33 +4,15 @@
     <category/>
     <!-- End:Category -->
 
-    <v-row class="d-block d-md-none  ">
-      <v-col cols="12" sm="12" class="pb-0 pb-sm-3 px-0 px-sm-0">
-        <v-menu offset-y>
-          <template v-slot:activator="{on,attrs}">
-            <v-btn
-              outlined
-              block
-              color="teal"
-              v-bind="attrs"
-              v-on="on"
-              x-large>
-              <img class="mr-2" width="20" :src="require('@/assets/images/dashboard-icon.png')">
-              <p class="text-h5">Dashboard Menu</p>
-              <i class="fa-solid fa-caret-down mx-2"></i>
-              <v-spacer/>
-            </v-btn>
-          </template>
-          <v-divider></v-divider>
+    <v-divider class="d-block d-md-none"/>
 
-          <navigation/>
-        </v-menu>
-        <!--Nav for mobile-->
-      </v-col>
-    </v-row>
+    <!--Mobile menu-->
+    <dashboard-mobile-menu/>
+    <!--End Mobile menu-->
+
 
     <v-card flat class="mt-0">
-      <v-card-text class="px-0">
+      <v-card-text class="px-0 pt-0">
         <v-row>
           <!--Desktop dashboard menu-->
           <v-col class="d-none d-md-block" md="2">
@@ -62,37 +44,8 @@
           <!--End desktop dashboard menu-->
 
 
-          <v-col cols="12" md="10" class="px-0 px-md-2">
-            <!--Choose username-->
-            <v-alert
-              class="py-0 pl-5"
-              color="#00D2AE"
-              prominent
-            >
-              <v-row>
-                <v-col cols="12" md="8" class="pb-0">
-                  <v-text-field
-                    v-model="message"
-                    filled
-                    dense
-                    class="mt-4 mb-0"
-                    :style="$vuetify.breakpoint.mdAndUp ? 'width: 500px' : ''"
-                    label="Choose username"
-                    type="text"
-                  >
-                    <templete slot="append">
-                      <v-btn class="default" absolute style="right: 0;height:100%;top: 0;bottom: 0">choose</v-btn>
-                    </templete>
-                  </v-text-field>
-                </v-col>
-                <v-col md="4" class=" d-none d-md-block pb-0">
-                  <v-img width="200" :src="require('@/assets/images/username_pick_1.png')">
-                    <v-img width="100" class="mt-4" :src="require('@/assets/images/username_pic_2.png')"/>
-                  </v-img>
-                </v-col>
-              </v-row>
-            </v-alert>
-            <!--End choose username-->
+          <v-col cols="12" md="10" class="px-0 px-md-2 pt-0 mt-0">
+
 
             <!--Profile section-->
             <v-row>
@@ -100,7 +53,7 @@
                 <v-card :flat="$vuetify.breakpoint.xs">
                   <v-card-text class="pa-0 px-sm-8 pa-md-3">
                     <v-row>
-                      <v-col cols="12" md="3" class="d-flex">
+                      <v-col cols="12" md="8" class="d-flex pb-0">
                         <v-btn class="d-flex" outlined fab x-large>
                           <v-icon>
                             mdi-account-outline
@@ -121,11 +74,39 @@
                           </p>
                         </div>
                       </v-col>
-                      <v-col md="9" class="d-none d-md-block text-right ">
-                        <question-statistics/>
+                      <v-col cols="12" md="4" class="text-right pb-0">
+                        <!--Choose username-->
+                        <v-alert
+                          class="py-0 pl-5"
+                          prominent
+                        >
+                          <v-row>
+                            <v-col cols="12" md="12" class="pa-0 pa-md-3">
+                              <v-text-field
+                                v-model="username"
+                                filled
+                                dense
+                                class="mt-4 mb-0"
+                                label="Choose username"
+                                type="text"
+                              >
+                                <templete slot="append">
+                                  <v-btn class="default"
+                                         absolute style="right: 0;height:80%;top: 10%;bottom: 0">
+                                    choose
+                                  </v-btn>
+                                </templete>
+                              </v-text-field>
+                            </v-col>
+
+                          </v-row>
+                        </v-alert>
+                        <!--End choose username-->
                       </v-col>
+
+
                       <!--Profile complete progress-->
-                      <v-col cols="12">
+                      <v-col cols="12" class="pt-0">
                         <p class="text-h5 font-weight-bold mt-3 mb-3">
                           Profile complete: 20%
                         </p>
@@ -139,69 +120,71 @@
                       </v-col>
                       <!--End profile complete progress-->
 
-                      <!--Desktop question statistics-->
-                      <v-col md="12" class="d-block d-md-none text-center ">
-                        <question-statistics/>
-                      </v-col>
-                      <!--Desktop question statistics-->
-
 
                       <!--Statistics section-->
                       <v-col cols="12" class="px-0 px-md-4">
                         <v-card color="#F8FAFB" class="mt-3 dashboard-statistic" flat>
                           <v-card-text class="px-0 px-sm-6 px-md-2">
                             <v-row class="text-center">
-                              <v-col cols="4" class="d-md-flex">
-                                <v-btn color="#D4F4EE" fab x-large>
-                                  <i class="fa-solid fa-wallet" style="color: #00D2AE;"></i>
-                                </v-btn>
-                                <div class="pa-3">
-                                  <p class="text-h6">
-                                    Wallet balance
-                                  </p>
-                                  <p class="text-h5 ">
-                                    <strong>
-                                      $251,000
-                                    </strong>
+                              <v-col cols="12" md="8">
+                                <v-row>
+                                  <v-col cols="4" class="d-md-flex">
+                                    <v-btn color="#D4F4EE" fab x-large>
+                                      <i class="fa-solid fa-wallet" style="color: #00D2AE;"></i>
+                                    </v-btn>
+                                    <div class="pa-3">
+                                      <p class="text-h6">
+                                        Wallet balance
+                                      </p>
+                                      <p class="text-h5 ">
+                                        <strong>
+                                          $251,000
+                                        </strong>
 
-                                  </p>
+                                      </p>
 
-                                </div>
+                                    </div>
+                                  </v-col>
+                                  <v-col cols="4" class="d-md-flex">
+                                    <v-btn color="rgba(142, 11, 228, 0.1)" fab x-large>
+                                      <i class="fa-regular fa-envelope" style="color: #8E0BE4;"></i>
+                                    </v-btn>
+                                    <div class="pa-3">
+                                      <p class="text-h6">
+                                        Unread mesages
+                                      </p>
+                                      <p class="text-h5 ">
+                                        <strong>
+                                          15
+                                        </strong>
+
+                                      </p>
+
+                                    </div>
+                                  </v-col>
+                                  <v-col cols="4" class="d-md-flex">
+                                    <v-btn color="rgba(218, 222, 255, 1)" fab x-large>
+                                      <i class="fa-regular fa-star" style="color: #0B62E4;"></i>
+                                    </v-btn>
+                                    <div class="pa-3">
+                                      <p class="text-h6">
+                                        Score
+                                      </p>
+                                      <p class="text-h5 ">
+                                        <strong>
+                                          6/10
+                                        </strong>
+
+                                      </p>
+
+                                    </div>
+                                  </v-col>
+                                </v-row>
                               </v-col>
-                              <v-col cols="4" class="d-md-flex">
-                                <v-btn color="rgba(142, 11, 228, 0.1)" fab x-large>
-                                  <i class="fa-regular fa-envelope" style="color: #8E0BE4;"></i>
-                                </v-btn>
-                                <div class="pa-3">
-                                  <p class="text-h6">
-                                    Unread mesages
-                                  </p>
-                                  <p class="text-h5 ">
-                                    <strong>
-                                      15
-                                    </strong>
-
-                                  </p>
-
-                                </div>
+                              <v-col cols="12" md="4" class="question-statistics-holder ">
+                                <question-statistics/>
                               </v-col>
-                              <v-col cols="4" class="d-md-flex">
-                                <v-btn color="rgba(218, 222, 255, 1)" fab x-large>
-                                  <i class="fa-regular fa-star" style="color: #0B62E4;"></i>
-                                </v-btn>
-                                <div class="pa-3">
-                                  <p class="text-h6">
-                                    Score
-                                  </p>
-                                  <p class="text-h5 ">
-                                    <strong>
-                                      6/10
-                                    </strong>
 
-                                  </p>
-
-                                </div>
-                              </v-col>
 
                             </v-row>
                           </v-card-text>
@@ -283,16 +266,10 @@
               <v-col cols="12" class="px-0 px-sm-2">
                 <v-card>
                   <v-card-title class="text-h4">
-                    <i class="fa-solid fa-laptop mr-2"></i>
-                    Exams
-                  </v-card-title>
-                  <v-card-text class="px-sm-8 px-md-4">
-                    <v-alert type="warning">
-                      You have not participated in 10 out of 20 tests
-                    </v-alert>
-                    <v-row class="mt-8">
+                    <v-row>
                       <v-col cols="6">
-                        <p class="text-h4">Exams</p>
+                        <i class="fa-solid fa-laptop mr-2"></i>
+                        Exams
                       </v-col>
                       <v-col cols="6" class="text-right">
                         <v-btn class="warning">
@@ -300,6 +277,12 @@
                         </v-btn>
                       </v-col>
                     </v-row>
+                  </v-card-title>
+                  <v-card-text class="px-sm-8 px-md-4">
+                    <v-alert type="warning">
+                      You have not participated in 10 out of 20 tests
+                    </v-alert>
+
                     <v-row class="mt-5 d-flex d-md-none">
                       <v-col cols="6">
                         <p class="text-h5">
@@ -363,6 +346,8 @@
               </v-col>
             </v-row>
             <!--End exams section-->
+
+
           </v-col>
         </v-row>
       </v-card-text>
@@ -380,17 +365,7 @@ export default {
   components: {QuestionStatistics, Navigation, Category},
   data() {
     return {
-      items: [
-        {title: 'Add', icon: 'mdi-plus-circle-outline'},
-        {title: 'Online exam', icon: 'mdi-laptop'},
-        {title: 'Financial', icon: 'mdi-credit-card-outline'},
-        {title: 'Messages', icon: 'mdi-email-outline'},
-        {title: 'Profile', icon: 'mdi-account-outline'},
-        {title: 'Notification', icon: 'mdi-bell-outline'},
-      ],
 
-      drawer: true,
-      mini: false,
 
       exams: [
         {course_name: 'Mathmatics', participated: 0, not_participated: 15},
@@ -424,4 +399,10 @@ export default {
   font-size: 1.2rem !important;
   font-weight: bolder;
 }
+
+.question-statistics-holder {
+  background: #bf360c;
+  border-radius: 5px;
+}
+
 </style>

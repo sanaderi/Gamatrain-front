@@ -14,7 +14,7 @@
                      class="item-image"/>
                 <v-card v-else class="book-no-img ">
                   <p class="font-weight-bold mb-3 mt-3">{{ item.lesson_title }}</p>
-                  <a href="https://gamatrain.com">Gamatrain.com</a>
+                  <a href="https://gamatrain.com" >Gamatrain.com</a>
                 </v-card>
 
               </div>

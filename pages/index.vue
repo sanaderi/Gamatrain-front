@@ -1,30 +1,9 @@
 <template>
   <div class="home-page-content">
     <v-divider></v-divider>
-    <!-- Start:mobile header -->
-    <div
-      class="
-        d-flex
-        align-center
-        justify-space-between
-        logo-search-content
-        mx-5
-        d-flex d-sm-none
-      "
-    >
-      <div class="pl-2 header-search mobile-res-search my-4">
-        <v-btn class="px-0 btn-transparent search-btn-icon">
-          <v-icon class="search-icon">mdi-magnify</v-icon>
-        </v-btn>
-        <v-divider vertical></v-divider>
-        <v-text-field
-          class="py-1 my-0 search-field main-search-icon mr-2 mt-4"
-          placeholder="Search ..."
-        >
-        </v-text-field>
-      </div>
-    </div>
-    <!-- End: mobile header -->
+<!--     Start:mobile header-->
+      <search-box class="d-block d-md-none mx-3 my-2"/>
+<!--     End: mobile header-->
     <section class="banner-sec">
       <v-carousel class="index-banner">
         <v-carousel-item
@@ -653,10 +632,12 @@ import Category from "~/components/common/category.vue";
 import FeedTab from "../components/common/feedTab.vue";
 import Slider from "../components/common/slider.vue";
 import Scroll from "~/components/common/scroll.vue";
+import SearchBox from "@/components/common/search-box";
 
 export default {
   auth: false,
   components: {
+    SearchBox,
     LastViews,
     FooterFeedBox,
     Search,
