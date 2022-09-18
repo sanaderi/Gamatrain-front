@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="dashboard">
     <!-- Start : Category -->
     <category/>
     <!-- End:Category -->
@@ -45,80 +45,15 @@
 
 
           <v-col cols="12" md="10" class="px-0 px-md-2 pt-0 mt-0">
-
-
             <!--Profile section-->
             <v-row>
               <v-col cols="12" class="px-0 px-md-2">
                 <v-card :flat="$vuetify.breakpoint.xs">
                   <v-card-text class="pa-0 px-sm-8 pa-md-3">
                     <v-row>
-                      <v-col cols="12" md="8" class="d-flex pb-0">
-                        <v-btn class="d-flex" outlined fab x-large>
-                          <v-icon>
-                            mdi-account-outline
-                          </v-icon>
-                        </v-btn>
-                        <div class="pa-3">
-                          <p class="text-h4 ">
-                            <strong v-if="$auth.user.first_name || $auth.user.last_name">
-                              {{ $auth.user.first_name }} {{ $auth.user.last_name }}
-                            </strong>
-                            <strong v-else>
-                              No name
-                            </strong>
-
-                          </p>
-                          <p class="text-h5">
-                            High school student
-                          </p>
-                        </div>
-                      </v-col>
-                      <v-col cols="12" md="4" class="text-right pb-0">
-                        <!--Choose username-->
-                        <v-alert
-                          class="py-0 pl-5"
-                          prominent
-                        >
-                          <v-row>
-                            <v-col cols="12" md="12" class="pa-0 pa-md-3">
-                              <v-text-field
-                                v-model="username"
-                                filled
-                                dense
-                                class="mt-4 mb-0"
-                                label="Choose username"
-                                type="text"
-                              >
-                                <templete slot="append">
-                                  <v-btn class="default"
-                                         absolute style="right: 0;height:80%;top: 10%;bottom: 0">
-                                    choose
-                                  </v-btn>
-                                </templete>
-                              </v-text-field>
-                            </v-col>
-
-                          </v-row>
-                        </v-alert>
-                        <!--End choose username-->
-                      </v-col>
-
-
-                      <!--Profile complete progress-->
-                      <v-col cols="12" class="pt-0">
-                        <p class="text-h5 font-weight-bold mt-3 mb-3">
-                          Profile complete: 20%
-                        </p>
-                        <v-progress-linear
-                          color="teal"
-                          height="8"
-                          buffer-value="0"
-                          value="20"
-                          stream
-                        ></v-progress-linear>
-                      </v-col>
-                      <!--End profile complete progress-->
+                    <v-col cols="12">
+                      <general-info-dashboard/>
+                    </v-col>
 
 
                       <!--Statistics section-->
@@ -128,7 +63,24 @@
                             <v-row class="text-center">
                               <v-col cols="12" md="8">
                                 <v-row>
-                                  <v-col cols="4" class="d-md-flex">
+                                  <v-col cols="3" class="d-md-flex">
+                                    <v-btn color="#DFF4EE" fab x-large>
+                                      <i class="fa-solid fa-dollar" style="color: teal"></i>
+                                    </v-btn>
+                                    <div class="pa-3">
+                                      <p class="text-h6">
+                                        Income
+                                      </p>
+                                      <p class="text-h6 text-md-h5 ">
+                                        <strong>
+                                          $80,000
+                                        </strong>
+
+                                      </p>
+
+                                    </div>
+                                  </v-col>
+                                  <v-col cols="3" class="d-md-flex">
                                     <v-btn color="#D4F4EE" fab x-large>
                                       <i class="fa-solid fa-wallet" style="color: #00D2AE;"></i>
                                     </v-btn>
@@ -136,16 +88,16 @@
                                       <p class="text-h6">
                                         Wallet
                                       </p>
-                                      <p class="text-h5 ">
+                                      <p class="text-h6 text-md-h5 ">
                                         <strong>
-                                          $251,000
+                                          $80,000
                                         </strong>
 
                                       </p>
 
                                     </div>
                                   </v-col>
-                                  <v-col cols="4" class="d-md-flex">
+                                  <v-col cols="3" class="d-md-flex">
                                     <v-btn color="rgba(142, 11, 228, 0.1)" fab x-large>
                                       <i class="fa-regular fa-envelope" style="color: #8E0BE4;"></i>
                                     </v-btn>
@@ -153,7 +105,7 @@
                                       <p class="text-h6">
                                         Msg
                                       </p>
-                                      <p class="text-h5 ">
+                                      <p class="text-h6 text-md-h5 ">
                                         <strong>
                                           15
                                         </strong>
@@ -162,7 +114,7 @@
 
                                     </div>
                                   </v-col>
-                                  <v-col cols="4" class="d-md-flex">
+                                  <v-col cols="3" class="d-md-flex">
                                     <v-btn color="rgba(218, 222, 255, 1)" fab x-large>
                                       <i class="fa-regular fa-star" style="color: #0B62E4;"></i>
                                     </v-btn>
@@ -170,7 +122,7 @@
                                       <p class="text-h6">
                                         Score
                                       </p>
-                                      <p class="text-h5 ">
+                                      <p class="text-h6 text-md-h5 ">
                                         <strong>
                                           6/10
                                         </strong>
@@ -184,8 +136,6 @@
                               <v-col cols="12" md="4" class="question-statistics-holder ">
                                 <question-statistics/>
                               </v-col>
-
-
                             </v-row>
                           </v-card-text>
                         </v-card>
@@ -252,101 +202,17 @@
                         </v-card>
                       </v-col>
                       <!--End teaching request-->
-
-
                     </v-row>
+
+                    <!--Content type-->
+                    <create-content-button/>
+                    <!--End content type-->
+
                   </v-card-text>
                 </v-card>
               </v-col>
             </v-row>
             <!--End profile section-->
-
-            <!--Exams section-->
-            <v-row>
-              <v-col cols="12" class="px-0 px-sm-2">
-                <v-card>
-                  <v-card-title class="text-h4">
-                    <v-row>
-                      <v-col cols="6">
-                        <i class="fa-solid fa-laptop mr-2"></i>
-                        Exams
-                      </v-col>
-                      <v-col cols="6" class="text-right">
-                        <v-btn class="warning">
-                          See result
-                        </v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-card-title>
-                  <v-card-text class="px-sm-8 px-md-4">
-                    <v-alert type="warning">
-                      You have not participated in 10 out of 20 tests
-                    </v-alert>
-
-                    <v-row class="mt-5 d-flex d-md-none">
-                      <v-col cols="6">
-                        <p class="text-h5">
-                          <i class="fa-regular fa-circle-check green--text "></i>
-                          Participated
-                        </p>
-                      </v-col>
-                      <v-col cols="6">
-                        <p class="text-h5">
-                          <i class="fa-regular fa-times-circle red--text "></i>
-                          Not Participated
-                        </p>
-                      </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col cols="12" class="px-0 px-sm-4 px-md-4">
-                        <v-simple-table class="exams_table">
-                          <template v-slot:default>
-                            <thead>
-                            <tr>
-                              <th class="text-left text-h5">
-                                Course name
-                              </th>
-                              <th class="text-center teal--text text-h5">
-                                <i class="fa-regular fa-circle-check fa-xl green--text d-block d-md-none"></i>
-                                <span class="d-none d-md-block">
-                                Participated
-                                </span>
-                              </th>
-                              <th class="text-center orange--text text-h5">
-                                <i class="fa-regular fa-times-circle fa-xl red--text d-block d-md-none"></i>
-                                <span class="d-none d-md-block">
-                                  Not Participated
-                                </span>
-                              </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr
-                              v-for="item in exams"
-                              :key="item.name"
-                            >
-                              <td>{{ item.course_name }}</td>
-                              <td class="text-center">{{ item.participated }}</td>
-                              <td class="text-center">{{ item.not_participated }}</td>
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr bgcolor="#E5FBF7">
-                              <td>Total</td>
-                              <td class="text-center">5</td>
-                              <td class="text-center">32</td>
-                            </tr>
-                            </tfoot>
-                          </template>
-                        </v-simple-table>
-                      </v-col>
-                    </v-row>
-                  </v-card-text>
-                </v-card>
-              </v-col>
-            </v-row>
-            <!--End exams section-->
-
 
           </v-col>
         </v-row>
@@ -359,11 +225,13 @@
 import Category from "@/components/common/category";
 import Navigation from "@/components/dashboard/navigation";
 import QuestionStatistics from "@/components/dashboard/question-statistics";
+import CreateContentButton from "@/components/dashboard/create-content-button";
+import GeneralInfoDashboard from "@/components/dashboard/general-info-dashboard";
 
 export default {
   name: "dashboard",
   middleware:['user_type'],
-  components: {QuestionStatistics, Navigation, Category},
+  components: {GeneralInfoDashboard, CreateContentButton, QuestionStatistics, Navigation, Category},
   data() {
     return {
 

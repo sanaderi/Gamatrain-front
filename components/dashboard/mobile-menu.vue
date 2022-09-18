@@ -23,7 +23,6 @@
         </v-tab>
 
       </v-tabs>
-      </v-card>
     </v-col>
   </v-row>
   <!--End dashboard mobile menu-->

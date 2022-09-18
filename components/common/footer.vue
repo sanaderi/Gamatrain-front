@@ -120,7 +120,7 @@
           d-md-none
         "
       >
-        <p>همراه ما باشید</p>
+        <p>Be with us</p>
         <div>
           <img
             :src="require('@/assets/images/' + item.img)"

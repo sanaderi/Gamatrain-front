@@ -533,11 +533,11 @@ body {
 
         .icon,
         .v-list-item__title {
-          color: $category-azmoon;
+          color: $category-online-exam;
         }
 
         .p-icon {
-          background: $category-azmoon;
+          background: $category-online-exam;
           border-radius: 10px;
           width: 6rem;
           height: 6rem;
@@ -1987,6 +1987,8 @@ body {
       }
     }
 
+
+
     //  close body and v-application
   }
 }
@@ -2646,7 +2648,7 @@ body {
   .online-exam-card {
     .online-exam-icon {
       font-size: 4rem;
-      color: $category-azmoon;
+      color: $category-online-exam;
     }
 
 
@@ -4220,6 +4222,112 @@ body {
   }
 
 }
-
-
 // End : Teachers
+
+
+
+//User dashboard
+.dashboard{
+  .create_content_section{
+    margin: 2rem 0 2rem 0!important;
+
+    .counter{
+      font-style: normal;
+      font-weight: 900;
+      font-size: 2.2rem;
+      line-height: 30px;
+    }
+
+    .title{
+      font-size: 1.4rem!important;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .sample_exam{
+
+      .icon_btn{
+        background: rgba(11, 161, 228, 0.15);
+
+        .icon{
+          color: $category-test;
+          font-size: 4rem;
+        }
+      }
+
+
+
+
+      .icon_link{
+        .icon{
+          color: #0BA1E4;
+        }
+      }
+
+
+    }
+
+
+    .training_content{
+      .icon_btn{
+        background: rgba(87, 186, 84, 0.15);
+
+        .icon{
+          color: $category-content;
+          font-size: 4rem;
+        }
+      }
+
+      .icon_link{
+        .icon{
+          color: $category-content;
+        }
+      }
+
+
+    }
+
+
+    .question_answer{
+      .icon_btn{
+        background: rgba(255, 152, 0, 0.15);;
+
+        .icon{
+          color: $category-faq;
+          font-size: 4rem;
+        }
+      }
+
+      .icon_link{
+        .icon{
+          color: $category-faq;
+        }
+      }
+
+
+    }
+
+    .online_exam{
+      .icon_btn{
+        background: rgba(63, 81, 181, 0.15);
+
+        .icon{
+          color: $category-online-exam;
+          font-size: 4rem;
+        }
+      }
+
+      .icon_link{
+        .icon{
+          color: $category-online-exam;
+        }
+      }
+
+
+    }
+
+
+  }
+}
+
+
