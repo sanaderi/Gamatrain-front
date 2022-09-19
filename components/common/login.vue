@@ -149,11 +149,9 @@ export default {
         this.login_dialog = false;
         this.$toast.success("Logged in successfully");
 
-        var path="/student/dashboard";
-        if(this.$auth.user.group_id==="5")
-          path="/teacher/dashboard";
+
         this.$router.push({
-          path: path
+          path: '/dashboard'
         });
       }).catch(({response}) => {
         if (response.status == 401) {
@@ -179,15 +177,13 @@ export default {
         }
       }).then(response => {
         this.$auth.setUserToken(response.data.jwtToken);
+        console.log("hi"+response.data.jwtToken);
         this.$auth.setUser(response.data.info);
         this.login_dialog = false;
         this.$toast.success("Logged in successfully");
 
-        var path="/student/dashboard";
-        if(this.$auth.user.group_id==="5")
-          path="/teacher/dashboard";
         this.$router.push({
-          path: path
+          path: "/dashboard"
         });
       }).catch(err => {
         if (err.response.status == 400)

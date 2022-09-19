@@ -229,11 +229,8 @@ export default {
         this.$toast.success("Logged in successfully");
 
 
-        var path="/student/dashboard";
-        if(this.$auth.user.group_id==="5")
-          path="/teacher/dashboard";
         this.$router.push({
-          path: path
+          path: "/dashboard"
         });
       }).catch(({response}) => {
         if (response.status == 401) {

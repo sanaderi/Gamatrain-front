@@ -5,7 +5,7 @@
        <Nuxt />
     </div>
     <v-footer padless class="mt-2">
-      <footer1 />
+      <main_footer />
     </v-footer>
   </v-app>
 </template>
@@ -13,13 +13,13 @@
 <script>
 import main_header from '../components/common/header.vue';
 import category from '../components/common/category'
-import footer1 from '../components/common/footer'
+import main_footer from '../components/common/footer'
 
 export default {
   components: {
     main_header,
     category,
-    footer1
+    main_footer
   },
   data () {
     return {

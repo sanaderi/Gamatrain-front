@@ -47,7 +47,7 @@
                 </v-list>
               </v-menu>
 
-              <nuxt-link :to="$auth.user.group_id==='5' ? '/teacher/dashboard' : '/student/dashboard'"
+              <nuxt-link to="/dashboard"
                          class="d-block align-center mr-3 ml-5 ">
                 <i class="fa-regular fa-bell fa-xl topbar-bell d-none d-sm-block"></i>
               </nuxt-link>
@@ -115,22 +115,22 @@ export default {
         {
           title: 'Dashboard',
           icon:'mdi-view-dashboard',
-          link: this.$auth && this.$auth.user && this.$auth.user.group_id === '5' ? '/teacher/dashboard' : '/student/dashboard'
+          link: '/dashboard'
         },
         {
           title: 'Messages',
           icon:'mdi-email-outline',
-          link: this.$auth && this.$auth.user &&  this.$auth.user.group_id === '5' ? '/teacher/ticket' : '/student/ticket'
+          link: '/ticket'
         },
         {
           title: 'Edit profile',
           icon:'mdi-account-outline',
-          link: this.$auth && this.$auth.user &&  this.$auth.user.group_id === '5' ? '/teacher/info' : '/student/info'
+          link: '/info'
         },
         {
           title: 'Edit pass',
           icon:'mdi-key',
-          link: this.$auth && this.$auth.user &&  this.$auth.user.group_id === '5' ? '/teacher/edit_pass' : '/student/edit_pass'
+          link: '/edit_pass'
         },
 
       ],

@@ -204,9 +204,7 @@
                       <!--End teaching request-->
                     </v-row>
 
-                    <!--Content type-->
-                    <create-content-button/>
-                    <!--End content type-->
+
 
                   </v-card-text>
                 </v-card>
@@ -230,7 +228,7 @@ import GeneralInfoDashboard from "@/components/dashboard/general-info-dashboard"
 
 export default {
   name: "dashboard",
-  middleware:['user_type'],
+  middleware:['user_type','basic_info'],
   components: {GeneralInfoDashboard, CreateContentButton, QuestionStatistics, Navigation, Category},
   data() {
     return {

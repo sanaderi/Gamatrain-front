@@ -76,7 +76,7 @@
                     mb-5
                   "
                 >
-                  <nuxt-link :to="$auth.user.group_id==='5' ? '/teacher/dashboard' : '/student/dashboard'">
+                  <nuxt-link to="/dashboard'">
                     <v-avatar size="40">
                       <v-img
                         :src="$loadAvatar.currentUser($auth)"
@@ -87,7 +87,7 @@
 
                   <div class="profile-info">
                     <nuxt-link
-                      :to="$auth.user.group_id==='5' ? '/teacher/dashboard' : '/student/dashboard'"
+                      :to="'/dashboard'"
                       class="profile-name">{{ $auth.user.first_name }} {{ $auth.user.last_name }}
                     </nuxt-link>
 
