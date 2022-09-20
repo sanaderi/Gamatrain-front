@@ -1,3 +1,4 @@
+import Vue from 'vue'
 
 //Methods to retrieve image file whole of project
 const loadImg = {
@@ -30,6 +31,13 @@ const loadAvatar= {
 export default ({ $auth,app}, inject) => {
   inject('loadImg', loadImg);
   inject('loadAvatar', loadAvatar);
+
+
+
+  //For format number
+  Vue.filter('numberFormat', function (value) {
+    return Number(value).toLocaleString("en-US");
+  })
 }
 //End Inject top methods to usable whole of project
 

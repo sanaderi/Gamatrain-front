@@ -6,9 +6,12 @@
         <v-card :flat="$vuetify.breakpoint.xs">
           <v-card-text class="pa-0 px-sm-8 pa-md-3">
             <v-row>
+
+              <!--General info-->
               <v-col cols="12">
-                <general-info-dashboard/>
+                <general-info-dashboard ref="general_info"/>
               </v-col>
+              <!--End general info-->
 
 
               <!--Statistics section-->
@@ -16,6 +19,7 @@
                 <v-card color="#F8FAFB" class="mt-3 dashboard-statistic" flat>
                   <v-card-text class="px-0 px-sm-6 px-md-2">
                     <v-row class="text-center">
+                      <v-col md="2" class="d-none d-md-block"></v-col>
                       <v-col cols="12" md="8">
                         <v-row>
                           <v-col :cols="user_type==='5' ? 3 : 4" :class="user_type==='5' ? 'd-md-flex' : 'd-none'">
@@ -28,7 +32,9 @@
                               </p>
                               <p class="text-h6 text-md-h5 ">
                                 <strong>
-                                  $80,000
+                                  ${{
+                                    (this.user_info.user && this.user_info.user.cash ? Math.ceil(this.user_info.user.cash) : 0) | numberFormat
+                                  }}
                                 </strong>
 
                               </p>
@@ -45,7 +51,7 @@
                               </p>
                               <p class="text-h5 ">
                                 <strong>
-                                  $251,000
+                                  ${{ $auth.user.credit | numberFormat }}
                                 </strong>
 
                               </p>
@@ -62,7 +68,9 @@
                               </p>
                               <p class="text-h5 ">
                                 <strong>
-                                  15
+                                  {{
+                                    user_info.unreadMessages && user_info.unreadMessages.total ? user_info.unreadMessages.total : 0
+                                  }}
                                 </strong>
 
                               </p>
@@ -79,7 +87,7 @@
                               </p>
                               <p class="text-h5 ">
                                 <strong>
-                                  6/10
+                                  {{ this.user_info.user && this.user_info.user.score ? this.user_info.user.score : 0 }}
                                 </strong>
 
                               </p>
@@ -88,9 +96,11 @@
                           </v-col>
                         </v-row>
                       </v-col>
-                      <v-col cols="12" md="4" class="question-statistics-holder ">
-                        <question-statistics/>
-                      </v-col>
+                      <v-col md="2" class="d-none d-md-block"></v-col>
+
+                      <!--                      <v-col cols="12" md="4" class="question-statistics-holder ">-->
+<!--                        <question-statistics ref="question-statistics"/>-->
+<!--                      </v-col>-->
 
 
                     </v-row>
@@ -100,71 +110,15 @@
               <!--End Statistics section-->
 
               <!--Teaching request-->
-              <v-col cols="12" class="px-0 px-md-4">
-                <v-card>
-                  <v-card-text class="px-0 px-sm-6 px-md-4">
-                    <v-row>
-                      <v-col cols="12" md="6">
-                        <v-row>
-                          <v-col cols="12" class="d-flex">
-                            <v-btn class="d-flex" outlined fab small>
-                              <v-icon>
-                                mdi-account-outline
-                              </v-icon>
-                            </v-btn>
-                            <div class="ml-2">
-                              <p class="text-h5 ">
-                                <strong>
-                                  Nasrin javadi
-                                </strong>
-
-                              </p>
-                              <p class="text-h6">
-                                Teaching request from nasrin javadi
-                              </p>
-                            </div>
-                          </v-col>
-
-                          <v-col cols="6" class="teaching-request-details">
-                            <i class="fa-regular fa-clock teal--text"></i>
-                            <span>
-                                    Tuesday, 18:00
-                                  </span>
-                          </v-col>
-                          <v-col cols="6" class="teaching-request-details">
-                            <i class="fa-solid fa-book-open teal--text"></i>
-                            <span>
-                                    Lesson: math
-                                  </span>
-                          </v-col>
-                          <v-col cols="6" md="6">
-                            <v-btn color="#E2CA31" block>Ok</v-btn>
-                          </v-col>
-                          <v-col cols="6" md="6">
-                            <v-btn color="#00D2AE" block>Send message</v-btn>
-                          </v-col>
-                        </v-row>
-                      </v-col>
-                      <v-col cols="12" md="6" class="text-right px-6 px-sm-3 pt-0 pt-md-4">
-                        <v-btn :width="$vuetify.breakpoint.smAndDown ? '' : '200'"
-                               :block="$vuetify.breakpoint.smAndDown"
-                               outlined
-                        >
-                          <i class="fa-solid  fa-exclamation-circle red--text mr-3"></i>
-                          Cancel
-                        </v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-card-text>
-                </v-card>
-              </v-col>
+              <!--Note: this section in English version is disabled-->
+              <!--<teaching-request/>-->
               <!--End teaching request-->
 
 
             </v-row>
 
             <!--Content type-->
-            <create-content-button v-if="$auth.user.group_id==='5'"/>
+            <create-content-button ref="create-content-section" />
             <!--End content type-->
           </v-card-text>
         </v-card>
@@ -234,18 +188,26 @@
                     <tbody>
                     <tr
                       v-for="item in exams"
-                      :key="item.name"
+                      :key="item.id"
                     >
-                      <td>{{ item.course_name }}</td>
+                      <td>{{ item.title }}</td>
                       <td class="text-center">{{ item.participated }}</td>
-                      <td class="text-center">{{ item.not_participated }}</td>
+                      <td class="text-center">{{ item.total - item.participated }}</td>
                     </tr>
                     </tbody>
                     <tfoot>
                     <tr bgcolor="#E5FBF7">
                       <td>Total</td>
-                      <td class="text-center">5</td>
-                      <td class="text-center">32</td>
+                      <td class="text-center">
+                        {{
+                          user_info.examSuggestions && user_info.examSuggestions.participated ? user_info.examSuggestions.participated : ''
+                        }}
+                      </td>
+                      <td class="text-center">
+                        {{
+                          user_info.examSuggestions && user_info.examSuggestions.total ? user_info.examSuggestions.total : ''
+                        }}
+                      </td>
                     </tr>
                     </tfoot>
                   </template>
@@ -266,14 +228,21 @@ import Navigation from "@/components/dashboard/navigation";
 import QuestionStatistics from "@/components/dashboard/question-statistics";
 import CreateContentButton from "@/components/dashboard/create-content-button";
 import GeneralInfoDashboard from "@/components/dashboard/general-info-dashboard";
+import TeachingRequest from "@/components/dashboard/teaching-request";
 
 
 export default {
   layout: "dashboard_layout",
   name: "dashboard",
-  middleware: ['user_type','basic_info'],
+  middleware: ['user_type', 'basic_info'],
   components: {
+    TeachingRequest,
     GeneralInfoDashboard, CreateContentButton, QuestionStatistics, Navigation, Category
+  },
+  head() {
+    return {
+      title: 'Dashboard'
+    }
   },
   mounted() {
     this.getUserInfo();
@@ -281,26 +250,54 @@ export default {
   data() {
     return {
       user_type: this.$auth.user.group_id,
-      exams: [
-        {course_name: 'Mathmatics', participated: 0, not_participated: 15},
-        {course_name: 'Phyisics', participated: 0, not_participated: 15},
-        {course_name: 'History', participated: 0, not_participated: 15}
-      ]
+      exams: [],
+      user_info: '',
+      pendingReserves: ''
     }
   },
-  methods:{
-    getUserInfo(){
-      var apiUrl='/api/v1/students/dashboard';
-      if (this.user_type==='5')
-        apiUrl='/api/v1/teachers/dashboard';
+  methods: {
+    getUserInfo() {
+      var apiUrl = '/api/v1/students/dashboard';
+      if (this.user_type === '5')
+        apiUrl = '/api/v1/teachers/dashboard';
 
       this.$axios.$get(apiUrl)
-        .then(response=>{
-        console.log(response);
-      }).catch(err=>{
+        .then(response => {
+          this.user_info = response.data;
+          this.$refs.general_info.userData = this.user_info.user;
+          this.$refs.general_info.progressData = this.user_info.profileCompletion;
+
+          this.$refs["create-content-section"].$refs["question-statistics"].statistics = this.user_info.stats;
+
+          // For teacher user
+
+          if (this.user_type === '5') {
+            var stats = this.user_info.stats;
+            this.initContentStats(stats);
+          }
+
+
+          //Fill table
+          this.exams = this.user_info.examSuggestions.lessons;
+
+
+        }).catch(err => {
         this.$toast.error(err.response.data.message);
       });
 
+    },
+    initContentStats(stats) {//Init create content box statistics
+      var objIndex = this.$refs["create-content-section"].button_list.findIndex(x => x.class === 'sample_exam');
+      this.$refs["create-content-section"].button_list[objIndex].count = stats.test.total;
+
+      var objIndex = this.$refs["create-content-section"].button_list.findIndex(x => x.class === 'training_content');
+      this.$refs["create-content-section"].button_list[objIndex].count = stats.file.total;
+
+      var objIndex = this.$refs["create-content-section"].button_list.findIndex(x => x.class === 'question_answer');
+      this.$refs["create-content-section"].button_list[objIndex].count = stats.question.total;
+
+      var objIndex = this.$refs["create-content-section"].button_list.findIndex(x => x.class === 'online_exam');
+      this.$refs["create-content-section"].button_list[objIndex].count = stats.test.total;
     }
   }
 }
@@ -329,9 +326,9 @@ export default {
   font-weight: bolder;
 }
 
-.question-statistics-holder {
-  background: #bf360c;
-  border-radius: 5px;
-}
+/*.question-statistics-holder {*/
+/*  background: #bf360c;*/
+/*  border-radius: 5px;*/
+/*}*/
 
 </style>
