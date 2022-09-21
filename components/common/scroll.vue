@@ -1,12 +1,15 @@
 <template>
-  <button class="scroll-to-top" >
+  <div class="scroll-to-top" >
     <v-btn @click="scrollToTop()" class="scroll">
       <i class="fa-solid fa-angle-up scroll-icon"></i>
     </v-btn>
-  </button>
+  </div>
 </template>
+
+
 <script>
 export default {
+  name:'scroll',
   // mounted() {
   //   $(document).scroll(function() {
 
@@ -31,9 +34,10 @@ export default {
   },
 };
 </script>
+
+
+
 <style>
-
-
 .scroll-to-top .v-btn:not(.v-btn--round).v-size--default {
   min-width: 5rem;
 }

@@ -38,12 +38,12 @@
             label="Choose username"
             type="text"
           >
-            <templete slot="append">
+            <template slot="append">
               <v-btn class="default"
                      absolute style="right: 0;height:80%;top: 10%;bottom: 0">
                 choose
               </v-btn>
-            </templete>
+            </template>
           </v-text-field>
         </v-col>
 

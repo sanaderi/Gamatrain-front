@@ -177,7 +177,6 @@ export default {
         }
       }).then(response => {
         this.$auth.setUserToken(response.data.jwtToken);
-        console.log("hi"+response.data.jwtToken);
         this.$auth.setUser(response.data.info);
         this.login_dialog = false;
         this.$toast.success("Logged in successfully");
