@@ -11,10 +11,11 @@
         class="fixed-tabs-bar"
       >
         <v-tab
+          @click="openLink(item)"
           v-for="item in items">
 
           <span>{{ item.title }}</span>
-          <v-btn icon>
+          <v-btn icon >
             <v-icon>
               {{ item.icon }}
             </v-icon>
@@ -24,6 +25,23 @@
 
       </v-tabs>
     </v-col>
+
+    <v-bottom-sheet v-model="sheet">
+
+      <v-list>
+        <v-list-item
+          :to="sub_item.link"
+          v-for="sub_item in subList"
+          :key="sub_item.title"
+          @click="sheet = false"
+        >
+         <v-list-item-icon>
+           <v-icon>{{sub_item.icon}}</v-icon>
+         </v-list-item-icon>
+          <v-list-item-title class="text-h6">{{ sub_item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-bottom-sheet>
   </v-row>
   <!--End dashboard mobile menu-->
 </template>
@@ -35,14 +53,39 @@ export default {
     return{
       active_tab:1,
       items: [
-        {title: 'Add', icon: 'mdi-plus-circle-outline'},
-        {title: 'Online exam', icon: 'mdi-laptop'},
-        {title: 'Financial', icon: 'mdi-credit-card-outline'},
-        {title: 'Messages', icon: 'mdi-email-outline'},
-        {title: 'Profile', icon: 'mdi-account-outline'},
-        {title: 'Notification', icon: 'mdi-bell-outline'},
+        {title: 'Add', icon: 'mdi-plus-circle-outline', link: '/'},
+        {title: 'Online exam', icon: 'mdi-laptop', link: '/'},
+        {title: 'Financial', icon: 'mdi-credit-card-outline', link: '/'},
+        {title: 'Messages', icon: 'mdi-email-outline', link: '/'},
+        {
+          title: 'Profile',
+          icon: 'mdi-account-outline',
+          link: '',
+          subMenuList: [
+            {title: "Edit profile", link: "",icon:'mdi-account-outline'},
+            {title: "Identity confirmation", link: "",icon:'mdi-account-outline'},
+            {title: "Edit password", link: "/dashboard/edit-pass",icon:'mdi-key'},
+            {title: "Setting", link: "/dashboard/setting",icon:'mdi-account-outline'},
+          ],
+        },
+        {title: 'Notification', icon: 'mdi-bell-outline', link: '/'},
+
+      ],
+      sheet:false,
+      subList: [
+
       ],
 
+    }
+  },
+  methods:{
+    openLink(item){
+      if(!item.subMenuList)
+        this.$router.push({path:item.link});
+      else{
+        this.subList=item.subMenuList;
+        this.sheet=true;
+      }
     }
   }
 }

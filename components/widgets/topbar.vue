@@ -130,7 +130,7 @@ export default {
         {
           title: 'Edit pass',
           icon:'mdi-key',
-          link: '/edit_pass'
+          link: '/dashboard/edit-pass'
         },
 
       ],

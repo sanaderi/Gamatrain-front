@@ -1,47 +1,56 @@
 <template>
   <v-container>
     <validation-observer ref="observer" v-slot="{invalid}">
-      <form @submit.prevent="updateInfo()">
+      <form @submit.prevent="updatePass()">
         <v-row class="mt-8">
           <v-col cols="12">
-            <p class="text-h4 text-md-h3">Personal info</p>
+            <p class="text-h4 text-md-h3">Edit password</p>
             <v-divider class="my-4"/>
             <p class="text-h5 text-md-h4">
-              So that we can remember you more easily :)
+              To edit the password, please enter the previous password and the new password
             </p>
           </v-col>
           <v-col cols="12" md="3">
-            <validation-provider v-slot="{ errors }" name="first_name" rules="required">
+            <validation-provider v-slot="{ errors }" name="oldpass" rules="required|min:4">
               <v-text-field
+                type="password"
+                :append-icon="show_oldpass ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show_oldpass ? 'text' : 'password'"
+                @click:append="show_oldpass = !show_oldpass"
                 dense
-                label="First name"
+                label="Current password"
                 :error-messages="errors"
-                v-model="info.first_name"
+                v-model="info.oldpass"
                 outlined
               />
             </validation-provider>
           </v-col>
           <v-col cols="12" md="3">
-            <validation-provider v-slot="{ errors }" name="last_name" rules="required">
+            <validation-provider v-slot="{ errors }" name="newpass" rules="required|min:4">
               <v-text-field
+                type="password"
+                :append-icon="show_newpass ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show_newpass ? 'text' : 'password'"
+                @click:append="show_newpass = !show_newpass"
                 dense
-                label="Last name"
+                label="New password"
                 :error-messages="errors"
-                v-model="info.last_name"
+                v-model="info.newpass"
                 outlined
               />
             </validation-provider>
           </v-col>
           <v-col cols="12" md="3">
-            <validation-provider v-slot="{ errors }" name="sex" rules="required">
-              <v-select
+            <validation-provider v-slot="{ errors }" name="repeat_newpass" rules="required|min:4|confirmed:newpass">
+              <v-text-field
+                type="password"
+                :append-icon="show_repeat_newpass ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show_repeat_newpass ? 'text' : 'password'"
+                @click:append="show_repeat_newpass = !show_repeat_newpass"
                 dense
-                :items="sex_list"
-                label="Gender"
-                item-text="title"
-                item-value="id"
+                label="Repeat new password"
                 :error-messages="errors"
-                v-model="info.sex"
+                v-model="info.repeat_newpass"
                 outlined
               />
             </validation-provider>
@@ -75,38 +84,25 @@ export default {
   data() {
     return {
       info: {
-        first_name: this.$auth.user.first_name,
-        last_name: this.$auth.user.last_name,
-        sex: this.$auth.user.sex
+        oldpass: '',
+        newpass: '',
+        repeat_newpass: ''
       },
-      sex_list: [
-        {id: 1, title: 'Male'},
-        {id: 2, title: 'Female'},
-      ],
-      update_loading:false
+      update_loading:false,
+
+      show_oldpass: false,
+      show_newpass: false,
+      show_repeat_newpass: false,
     }
   },
   methods: {
-    updateInfo() {
+    updatePass() {
       this.update_loading = true;
       const querystring = require('querystring');
 
-      this.$axios.$post('/api/v1/users/info', querystring.stringify(this.info))
+      this.$axios.$put('/api/v1/users/password', querystring.stringify(this.info))
         .then(response => {
-          var updatedData = {
-            avatar: this.$auth.user.avatar,
-            credit: this.$auth.user.credit,
-            email: this.$auth.user.email,
-            first_name: this.info.first_name,
-            last_name: this.info.last_name,
-            group_id: this.$auth.user.group_id,
-            phone: this.$auth.user.phone,
-            sex: this.info.sex.toString()
-          };
-          //Update current user data
-          this.$auth.setUser(updatedData);
-
-
+          this.$toast.success("Changed successfully")
           this.$router.push({
             path: "/dashboard"
           });
