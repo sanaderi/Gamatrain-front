@@ -1,7 +1,7 @@
 <template>
   <v-row v-if="progressData.num<10 || userData.username==='0'">
     <v-col cols="12" md="8">
-      <div  class="d-flex pb-0" v-if="progressData.num<10">
+      <div class="d-flex pb-0" v-if="progressData.num<10">
         <nuxt-link to="/dashboard/edit-profile">
           <img width="72" height="72" v-if="userData.avatar" :src="userData.avatar"/>
           <v-btn v-else class="d-flex" outlined fab x-large>
@@ -30,21 +30,32 @@
       <!--Choose username-->
       <v-row v-if="userData.username==='0'">
         <v-col cols="12" md="12" class="pa-0 pa-md-3">
-          <v-text-field
-            v-model="username"
-            filled
-            dense
-            class="mt-4 mb-0"
-            label="Choose username"
-            type="text"
-          >
-            <template slot="append">
-              <v-btn class="default"
-                     absolute style="right: 0;height:80%;top: 10%;bottom: 0">
-                choose
-              </v-btn>
-            </template>
-          </v-text-field>
+          <validation-observer ref="observer" v-slot="{invalid}">
+            <form @submit.prevent="updateUsername()">
+              <validation-provider name="username"
+                                   v-slot="{errors}" rules="required|min:6">
+                <v-text-field
+                  v-model="username"
+                  filled
+                  dense
+                  :error-messages="errors"
+                  class="mt-4 mb-0"
+                  label="Choose username"
+                  type="text"
+                >
+                  <template slot="append">
+                    <v-btn class="default"
+                           type="submit"
+                           :disabled="invalid"
+                           absolute style="right: 0;height:80%;top: 10%;bottom: 0">
+                      choose
+                    </v-btn>
+                  </template>
+                </v-text-field>
+              </validation-provider>
+            </form>
+          </validation-observer>
+
         </v-col>
 
       </v-row>
@@ -75,6 +86,8 @@
 </template>
 
 <script>
+import {ValidationProvider, ValidationObserver} from "vee-validate";
+
 export default {
   name: "general-info-dashboard",
   data() {
@@ -83,6 +96,21 @@ export default {
       progressData: {},
       username: ''
 
+    }
+  },
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
+  methods: {
+    updateUsername() {
+      this.$axios.$put('/api/v1/users/username',
+        {username: this.username})
+        .then(response => {
+          this.userData.username = this.username;
+        }).catch(err => {
+        this.$toast.error(err.response.data.message);
+      })
     }
   }
 }

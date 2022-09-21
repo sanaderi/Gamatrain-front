@@ -16,6 +16,7 @@ import category from '../components/common/category'
 import main_footer from '../components/common/footer'
 
 export default {
+  name:'default_layout',
   components: {
     main_header,
     category,
