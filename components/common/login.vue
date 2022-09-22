@@ -49,9 +49,9 @@
                         required
                       />
                     </validation-provider>
-                    <a>
+                    <p @click="switchToPassRecover" class="pointer">
                       Forget password
-                    </a>
+                    </p>
                   </v-col>
                   <v-col cols="12">
                     <v-divider class="mb-3"/>
@@ -164,6 +164,10 @@ export default {
 
     switchToRegister() {
       this.$emit("update:switchToRegister", 'register')
+    },
+    switchToPassRecover() {
+      this.$emit("update:switchToPassRecover", 'pass_recover')
+
     },
     async submit() {
       this.login_loading = true;

@@ -85,12 +85,22 @@
 
     <div>
       <!--Login component-->
-      <login ref="login_modal" :switchToRegister.sync="currentOpenDialog"/>
+      <login ref="login_modal" :switchToRegister.sync="currentOpenDialog"
+             :switchToPassRecover.sync="currentOpenDialog"
+      />
       <!--End login component-->
 
       <!--Register component-->
       <register ref="register_modal" :switchToLogin.sync="currentOpenDialog"/>
       <!--End register component-->
+
+      <!--Recover password component-->
+      <pass-recover ref="pass_recover_modal" :switchToLogin.sync="currentOpenDialog"
+                    :switchToRegister.sync="currentOpenDialog"
+      />
+      <!--End recover password component-->
+
+
     </div>
   </div>
 </template>
@@ -99,8 +109,10 @@
 import Login from "@/components/common/login";
 import Register from "@/components/common/register";
 import SearchBox from "@/components/common/search-box";
+import PassRecover from "@/components/common/pass-recover";
 
 export default {
+  name:"top-bar",
   data() {
     return {
       logo: "mainlogo4.png",
@@ -139,6 +151,7 @@ export default {
     };
   },
   components: {
+    PassRecover,
     SearchBox,
     Register,
     Login
@@ -147,13 +160,20 @@ export default {
     currentOpenDialog(val) {
       if (val === 'login') {
         this.$refs.register_modal.register_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = false;
         this.$refs.login_modal.login_dialog = true;
       } else if (val === 'register') {
         this.$refs.login_modal.login_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = false;
         this.$refs.register_modal.register_dialog = true;
+      } else if (val === 'pass_recover') {
+        this.$refs.login_modal.login_dialog = false;
+        this.$refs.register_modal.register_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = true;
       } else {
         this.$refs.login_modal.login_dialog = false;
         this.$refs.login_modal.register_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = false;
       }
 
     }
