@@ -62,7 +62,7 @@
 
                 <p class="item-content-subtitle mb-2 d-none d-sm-block">
                   <nuxt-link :to="`/tutorials/${item.id}/${item.title_url}`">
-                    {{ item.question.substr(0,60) }}...
+                    {{ item.question.length>63 ? item.question.substr(0,60)+'...' : item.question }}
                   </nuxt-link>
                 </p>
 
@@ -70,7 +70,6 @@
                   <v-chip link class="mr-1" small>
                     <nuxt-link
                       :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}&lesson=${item.lesson}`"
-                      class="text-h5 text-md-h4"
                     >
                       {{ item.lesson_title }}
                     </nuxt-link>

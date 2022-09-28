@@ -5,7 +5,7 @@
         <div class="footer-head d-flex justify-space-between align-center">
           <v-list-item class="footer-item">
             <nuxt-link
-              to=""
+              to="/"
               class="d-md-flex align-center footer-item-link d-none"
             >
               <img

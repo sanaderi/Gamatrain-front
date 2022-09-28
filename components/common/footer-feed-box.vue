@@ -3,7 +3,7 @@
     <v-list>
       <v-subheader
         v-if="feed.header"
-        class="d-flex align-center feed-header"
+        class="d-none d-md-flex align-center feed-header"
       >
         <span
           :class="

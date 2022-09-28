@@ -17,11 +17,11 @@
     <!--  Start: detail  -->
     <section>
       <v-container class="py-0">
-        <div class="detail mt-8">
+        <div class="detail mt-md-8">
           <v-row>
             <v-col cols="12" md="3">
               <!--Show gallery of preview and book first page-->
-              <preview-gallery/>
+              <preview-gallery ref="preview_gallery"/>
               <!--Show gallery of preview and book first page-->
             </v-col>
             <v-col cols="12" md="6">
@@ -29,40 +29,103 @@
               <div class="d-flex mb-4">
                 <div class="w-100">
                   <div class="d-flex align-center justify-space-between header">
-                    <h1 class="detail-title">{{ detail.title }}</h1>
+                    <h1 class="detail-title">
+                      {{ contentData.title }}
+                    </h1>
                   </div>
-                  <div class="description-holder">
-                    <p>Suitable for fields:</p>
-                    <p class="mb-7">-Literature and Humanities</p>
-                    <p> Topics: </p>
-                    <p>Lesson 6: World War I and Iran</p>
-                    <p>Lesson 7: Iran during the reign of Reza Shah</p>
-                    <p>Lesson 8: World War II and the world after it</p>
-                    <p>Lesson 9: Nationalization movement of Iran's oil industry</p>
-                    <p>The designed questions contain 130 standard test questions from sixth to ninth courses with key
-                      answers and based on the new book printed in 1400</p>
+                  <div class="description-holder my-4">
+                    <!--Topics-->
+                    <p>
+                      <i class="fa-solid fa-list ml-1 icon"></i>
+                      Topics:
+                    </p>
+                    <ul>
+                      <li v-for="item in contentData.topics">
+                        {{ item.title }}
+                      </li>
+                    </ul>
+                    <!--End topics-->
+
+                    <!--Question number-->
+                    <p class="mt-1">
+                      <i class="fa-solid fa-question ml-1 icon"></i>
+                      Questions: {{ contentData.tests_num }}
+                    </p>
+                    <!--End question number-->
+
+
+                    <!--Difficulty level-->
+                    <p class="mt-1">
+                      <i class="fa-solid fa-temperature-three-quarters ml-1 icon"></i>
+                      Difficulty level: {{ contentData.level }}
+                    </p>
+                    <!--End difficulty level-->
+
+
+                    <!--Start date-->
+                    <p class="mt-1">
+                      <i class="fa-solid fa-circle-play"></i>
+                      Start: {{ contentData.start_date ? contentData.start_date : '-' }}
+                    </p>
+                    <!--End start date-->
+
+                    <!--End date-->
+                    <p class="mt-1">
+                      <i class="fa-solid fa-circle-stop"></i>
+                      End: {{ contentData.end_date ? contentData.end_date : '-' }}
+                    </p>
+                    <!--End end date-->
+
+
+                    <!--Duration-->
+                    <p class="mt-1">
+                      <i class="fa-solid fa-clock"></i>
+                      End: {{ contentData.azmoon_time }} minutes
+                    </p>
+                    <!--End duration-->
+
+
+
                   </div>
 
                   <div class="label-holder">
-                    <v-chip v-for="(label, index) in detail.labels"
-                            :key="index" class="ma-1"
-                            to="/"
-                    >
-                      {{ label }}
+                    <v-chip link class="mr-1">
+                      <nuxt-link :to="`/search?type=azmoon&section=${contentData.section}`">
+                        {{ contentData.section_title }}
+                      </nuxt-link>
                     </v-chip>
+                    <v-chip link class="mr-1">
+                      <nuxt-link :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}`">
+                        {{ contentData.base_title }}
+                      </nuxt-link>
+                    </v-chip>
+                    <v-chip link class="ma-1">
+                      <nuxt-link
+                        :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`">
+                        {{ contentData.lesson_title }}
+                      </nuxt-link>
+                    </v-chip>
+                    <v-chip class="ma-1">
+                      {{ contentData.edu_month_title }}
+                    </v-chip>
+
+
                   </div>
                 </div>
               </div>
               <!--   Download Btn and Description  -->
               <div class="text-center download-sec">
                 <div class="d-none d-md-block mb-4">
-                  <p>
+                  <p v-if="!$auth.loggedIn">
                     <span class="mdi mdi-bell icon"></span>
-                    <span class="login">Login</span>
-                    <span class="register">
+                    <span @click="openAuthDialog('login')" class="login">Login</span>
+                    <span  @click="openAuthDialog('register')" class="register">
                     (register)
                     </span>
                     to download and charge your wallet.
+                  </p>
+                  <p v-else>
+                    Your wallet charge is ${{$auth.user.credit}}
                   </p>
                 </div>
                 <div class="font-weight-bold answer">
@@ -80,7 +143,7 @@
                 <v-row class=" align-center">
                   <v-col cols="3">
                     <v-img
-                      :src="require('assets/images/dexter-morse1.png')"
+                      :src="contentData.avatar"
                       alt=""
                       class="d-inline-block"
                       cover
@@ -89,22 +152,21 @@
                     />
                   </v-col>
                   <v-col cols="9" class="pl-0">
-                    <p class="creator_title">Arian Etemadi</p>
+                    <p class="creator_title">
+                      {{contentData.first_name}} {{contentData.last_name}}
+                    </p>
                   </v-col>
                 </v-row>
                 <v-divider class="my-2"/>
                 <v-row>
                   <v-col cols="12" class="pb-0">
-                    File type: continuous evaluation
+                    File type: {{contentData.azmoon_type_title}}
                   </v-col>
                   <v-col cols="12" class="pb-0">
-                    Number of file pages: 4
+                    Viewed: Unknown
                   </v-col>
                   <v-col cols="12" class="pb-0">
-                    Viewed: 153583
-                  </v-col>
-                  <v-col cols="12" class="pb-0">
-                    last update:9 Jul 2021
+                    last update: {{contentData.up_date}}
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     Crash report
@@ -126,14 +188,15 @@
                 </div>
                 <v-divider/>
                 <v-row class="mt-1">
-                  <v-col cols="12" class="pb-0">
-                    <v-btn block color="primary">
-                      Download WORD file | 0.5$
+                  <v-col v-for="(item,key) in contentData.price" cols="12" class="pb-0">
+                    <v-btn v-if="key==='participation'" block color="success">
+                      Start | {{item.price>0 ? '$'+item.price : 'Free'}}
                     </v-btn>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-btn block color="error">
-                      Download PDF file | 0.1$
+                    <v-btn v-else-if="key==='word'" block color="primary">
+                      Download WORD file | {{item.price>0 ? '$'+item.price : 'Free'}}
+                    </v-btn>
+                    <v-btn v-else-if="key==='pdf'" block color="error">
+                      Download PDF file | {{item.price>0 ? '$'+item.price : 'Free'}}
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -290,8 +353,8 @@ import RelatedQa from "@/components/details/related-qa";
 import RelatedOnlineExam from "@/components/details/related-online-exam";
 
 export default {
-  name:"test-details",
-  auth:false,
+  name: "exam-details",
+  auth: false,
   components: {
     RelatedOnlineExam,
     RelatedQa,
@@ -303,41 +366,38 @@ export default {
     LastViews,
     RelatedCardBox
   },
-  // async asyncData({params, $axios}) {
-  //   // This could also be an action dispatch
-  //   const contentData =await $axios.$get(`/api/v1/exams/${params.id}`);
-  //   return {contentData};
-  // },
+  async asyncData({params, $axios}) {
+    // This could also be an action dispatch
+    const content = await $axios.$get(`/api/v1/exams/${params.id}`);
+    var contentData = [];
+
+    //Check data exist
+    if (content.status === 1){
+      contentData = content.data;
+    }
+
+    return {contentData};
+  },
+  mounted() {
+    //Init gallery image
+    if (this.contentData){
+      this.$refs.preview_gallery.images.push('https://gama.ir/uploads/lessonsPic/lPic_e9d076b6bd2bdea6f16da58513e7f471.jpg');
+      this.$refs.preview_gallery.images.push(this.contentData.thumb_pic_url);
+      this.$refs.preview_gallery.carouselVal=1;
+    }
+
+    this.initBreadCrumb();
+  },
 
   data: () => ({
     rating: 4.5,
-    contentData:[],
+    contentData: [],
     breads: [
       {
-        text: 'Sample Exam',
+        text: 'Online exam',
         disabled: false,
-        href: 'breadcrumbs_dashboard',
-      },
-      {
-        text: 'Second year of high school',
-        disabled: false,
-        href: 'breadcrumbs_link_1',
-      },
-      {
-        text: 'Twelfth',
-        disabled: false,
-        href: 'breadcrumbs_link_2',
-      },
-      {
-        text: 'Literature and Humanities',
-        disabled: false,
-        href: 'breadcrumbs_link_3',
-      },
-      {
-        text: 'Date(3)',
-        disabled: true,
-        href: 'breadcrumbs_link_4',
-      },
+        href: '/search?type=azmoon',
+      }
     ],
     detail: {
       poster: 'poster1.jpg',
@@ -496,6 +556,30 @@ export default {
       },
     ],
   }),
+  methods:{
+    initBreadCrumb(){
+      this.breads.push(
+        {
+          text: this.contentData.section_title,
+          disabled: false,
+          href: `/search?type=azmoon&section=${this.contentData.section}`,
+        },
+        {
+          text: this.contentData.base_title,
+          disabled: false,
+          href: `/search?type=azmoon&section=${this.contentData.section}&base=${this.contentData.base}`,
+        },
+        {
+          text: this.contentData.lesson_title,
+          disabled: false,
+          href: `/search?type=azmoon&section=${this.contentData.section}&base=${this.contentData.base}&lesson=${this.contentData.lesson}`,
+        },
+      );
+    },
+    openAuthDialog(val){
+      this.$router.push({query:{auth_form:val}});
+    }
+  }
 }
 </script>
 

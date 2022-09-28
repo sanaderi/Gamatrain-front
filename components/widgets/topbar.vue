@@ -22,22 +22,23 @@
                 </template>
                 <v-list>
                   <v-list-item
-                               v-for="(item, i) in user_profile_items"
-                               :key="i"
-                               :to="item.link"
+                    v-for="(item, i) in user_profile_items"
+                    :key="i"
+                    :to="item.link"
                   >
                     <v-list-item-title class="user_menu_title">
                       <v-icon small>
-                        {{item.icon}}
+                        {{ item.icon }}
                       </v-icon>
-                      {{ item.title }}</v-list-item-title>
+                      {{ item.title }}
+                    </v-list-item-title>
                   </v-list-item>
                   <v-list-item
                     class="pointer"
                     @click="$auth.logout()"
                   >
 
-                    <v-list-item-title  class="user_menu_title">
+                    <v-list-item-title class="user_menu_title">
                       <v-icon small>
                         mdi-logout
                       </v-icon>
@@ -112,7 +113,7 @@ import SearchBox from "@/components/common/search-box";
 import PassRecover from "@/components/common/pass-recover";
 
 export default {
-  name:"top-bar",
+  name: "top-bar",
   data() {
     return {
       logo: "mainlogo4.png",
@@ -126,22 +127,22 @@ export default {
       user_profile_items: [
         {
           title: 'Dashboard',
-          icon:'mdi-view-dashboard',
+          icon: 'mdi-view-dashboard',
           link: '/dashboard'
         },
         {
           title: 'Messages',
-          icon:'mdi-email-outline',
+          icon: 'mdi-email-outline',
           link: '/ticket'
         },
         {
           title: 'Edit profile',
-          icon:'mdi-account-outline',
+          icon: 'mdi-account-outline',
           link: '/info'
         },
         {
           title: 'Edit pass',
-          icon:'mdi-key',
+          icon: 'mdi-key',
           link: '/dashboard/edit-pass'
         },
 
@@ -176,6 +177,18 @@ export default {
         this.$refs.pass_recover_modal.pass_recover_dialog = false;
       }
 
+    },
+
+    //Handle auth form from all of section
+    "$route.query.auth_form"(val) {
+      if (val === 'login'){
+        this.$refs.login_modal.login_dialog = true;
+        this.$router.push({query:{}});
+      }else if (val=='register'){
+        this.$refs.register_modal.register_dialog = true;
+        this.$router.push({query:{}});
+      }
+
     }
   },
   mounted() {
@@ -196,8 +209,8 @@ export default {
 };
 </script>
 <style>
-.user_menu_title{
-  font-size: 1.2rem!important;
-  padding: 1rem!important;
+.user_menu_title {
+  font-size: 1.2rem !important;
+  padding: 1rem !important;
 }
 </style>

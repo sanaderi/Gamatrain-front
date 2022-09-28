@@ -19,7 +19,42 @@ const loadAvatar= {
     else
       return `${process.env.FILE_BASE_URL}/assets/image/avatars/default/png/user.png`
   }
+}
 
+//Convert level number to human understandable text
+const testLevel= {
+  name:'showTestLevel',
+  show(val){
+    if (val==='1')
+      return 'Simple';
+    if (val==='2')
+      return 'Middle';
+    if (val==='3')
+      return 'Hard';
+  }
+}
+
+
+const timeAgo={
+  name:'timeAgo',
+  calc(date){
+    var timestamp = Date.parse(date)/1000;
+    var strTime = ["Second", "Min", "Hour", "Day", "Month", "Year"];
+    var length = ["60","60","24","30","12","10"];
+
+    const currentDate = new Date();
+    var currentTime = currentDate.getTime()/1000;
+
+    if(currentTime >= timestamp) {
+      var diff = currentTime- timestamp;
+      for(var i = 0; diff >= length[i] && i < length.length-1; i++) {
+        diff = diff / length[i];
+      }
+
+      diff = Math.round(diff);
+      return `${diff} ${strTime[i]}${diff>1 ? "'s" : ''} Ago`;
+    }
+  }
 }
 
 
@@ -31,6 +66,8 @@ const loadAvatar= {
 export default ({ $auth,app}, inject) => {
   inject('loadImg', loadImg);
   inject('loadAvatar', loadAvatar);
+  inject('testLevel',testLevel);
+  inject('timeAgo',timeAgo);
 
 
 

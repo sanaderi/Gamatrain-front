@@ -486,11 +486,11 @@
           @click="showLess = !showLess"
         >
           <span v-if="showLess" class="showmore-span">
-            مشاهده more
+            View more
             <i class="fa-solid fa-chevron-down mx-2"></i>
           </span>
           <span v-else class="showless-span">
-            مشاهده کمتر<i class="fa-solid fa-chevron-up mx-2"></i>
+            View less<i class="fa-solid fa-chevron-up mx-2"></i>
           </span>
         </button>
       </v-container>
@@ -498,76 +498,7 @@
     <!--  End: Grade list  -->
 
 
-    <!--  Start: feed box  -->
-    <section class="feed-box d-none d-md-flex">
-      <v-container>
-        <v-row>
-          <v-col
-            v-for="(feed, feedBox) in footerFeedList"
-            :key="feedBox.value"
-            cols="12"
-            md="4"
-            sm="4"
-          >
-            <footer-feed-box :feed="feed"></footer-feed-box>
-          </v-col>
-          <v-col cols="12" md="4" sm="4" class="third-feed-box mt-3 pa-0">
-            <div class="feed-header">
-              <img
-                :src="require('@/assets/images/' + thirdFeedBoxIcon)"
-                alt=""
-                class="mx-2"
-                width="28"
-              />
-              Latest News
-            </div>
 
-            <div class="d-flex flex-column pa-3">
-              <div
-                class="feed-box-item d-flex"
-                v-for="feed in thirdFeedBox"
-                :key="feed.value"
-              >
-                <div class="feedBoxImg">
-                  <img :src="require('@/assets/images/' + feed.img)" alt=""/>
-                </div>
-                <div
-                  class="
-                    feed-content
-                    pa-3
-                    d-flex
-                    flex-column
-                    justify-space-between
-                  "
-                >
-                  <p>
-                    {{ feed.para }}
-                  </p>
-                  <div class="d-flex justify-space-between">
-                    <div class="feed-title">
-                      <i class="fa-solid fa-grip-vertical ml-2"></i>
-                      {{ feed.title }}
-                    </div>
-                    <div class="feed-date">
-                      <i class="fa-solid fa-calendar-days ml-2"></i>
-                      {{ feed.date }}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <v-divider></v-divider>
-            </div>
-            <div class="feed-footer d-flex align-center pa-3">
-              <nuxt-link to="" class="pb-0 feed-more mr-4"
-              >More
-              </nuxt-link
-              >
-            </div>
-          </v-col>
-        </v-row>
-      </v-container>
-    </section>
-    <!--  End: Feed box  -->
 
     <!-- Start: Feedtabs respons -->
     <FeedTab/>
@@ -626,7 +557,6 @@
 <script>
 import GardeCard from "./index/garde-card";
 import Search from "./index/search";
-import FooterFeedBox from "../components/common/footer-feed-box";
 import LastViews from "../components/common/last-views";
 import Category from "~/components/common/category.vue";
 import FeedTab from "../components/common/feedTab.vue";
@@ -639,7 +569,6 @@ export default {
   components: {
     SearchBox,
     LastViews,
-    FooterFeedBox,
     Search,
     GardeCard,
     Category,
@@ -651,40 +580,7 @@ export default {
     test_schools: '',
     less: true,
     showLess: true,
-    thirdFeedBoxIcon: "News.png",
 
-    thirdFeedBox: [
-      {
-        img: "laptop.png",
-        para: "Lorem Epsom fake text with the production of incomprehensible simplicity from the printing industry and using...",
-        title: "Training",
-        date: "27 Jun",
-      },
-      {
-        img: "laptop.png",
-        para: "Lorem Epsom fake text with the production of incomprehensible simplicity from the printing industry and using...",
-        title: "Training",
-        date: "27 Jun",
-      },
-      {
-        img: "laptop.png",
-        para: "Lorem Epsom fake text with the production of incomprehensible simplicity from the printing industry and using...",
-        title: "Training",
-        date: "27 Jun",
-      },
-      {
-        img: "laptop.png",
-        para: "Lorem Epsom fake text with the production of incomprehensible simplicity from the printing industry and using...",
-        title: "Training",
-        date: "27 Jun",
-      },
-      {
-        img: "laptop.png",
-        para: "Lorem Epsom fake text with the production of incomprehensible simplicity from the printing industry and using...",
-        title: "Training",
-        date: "27 Jun",
-      },
-    ],
 
     items: [
       {
@@ -1426,113 +1322,6 @@ export default {
           "ثبت درسنامه، نکات آموزشی، جزوه های آموزشی توسط teacherان",
         ],
       },
-    ],
-    footerFeedList: [
-      {
-        class: "learning",
-        header: "Latest Training Content",
-        icon: "learnfiles",
-        contentItemList: [
-          {
-            avatar: "dexter-morse2.png",
-            title:
-              "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
-            name: "Arian Etemadi",
-            date: "Jun 21",
-          },
-          {
-            avatar: "dexter-morse2.png",
-            title:
-              "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-            name: "Arian Etemadi",
-            date: "Jun 21",
-          },
-          {
-            avatar: "dexter-morse2.png",
-            title:
-              "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
-            name: "Arian Etemadi",
-            date: "Jun 21",
-          },
-          {
-            avatar: "dexter-morse2.png",
-            title:
-              "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-            name: "Arian Etemadi",
-            date: "Jun 21",
-          },
-        ],
-      },
-      {
-        class: "question",
-        header: "Latest Q&A",
-        icon: "qa",
-        contentItemList: [
-          {
-            avatar: "dexter-morse2.png",
-            title:
-              "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-            name: "Arian Etemadi",
-            date: "Jun 21",
-          },
-          {
-            avatar: "dexter-morse2.png",
-            title:
-              "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
-            name: "Arian Etemadi",
-            date: "Jun 21",
-          },
-          {
-            avatar: "dexter-morse2.png",
-            title:
-              "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-            name: "Arian Etemadi",
-            date: "Jun 21",
-          },
-          {
-            avatar: "dexter-morse2.png",
-            title:
-              "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
-            name: "Arian Etemadi",
-            date: "Jun 21",
-          },
-        ],
-      },
-      // {
-      //   class: "news",
-      //   header: " Latest News",
-      //   icon: "news",
-      //   contentItemList: [
-      //     {
-      //       avatar: "dexter-morse2.png",
-      //       title:
-      //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-      //       name: "Arian Etemadi",
-      //       date: "Jun 21",
-      //     },
-      //     {
-      //       avatar: "dexter-morse2.png",
-      //       title:
-      //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
-      //       name: "Arian Etemadi",
-      //       date: "Jun 21",
-      //     },
-      //     {
-      //       avatar: "dexter-morse2.png",
-      //       title:
-      //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-      //       name: "Arian Etemadi",
-      //       date: "Jun 21",
-      //     },
-      //     {
-      //       avatar: "dexter-morse2.png",
-      //       title:
-      //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-      //       name: "Arian Etemadi",
-      //       date: "Jun 21",
-      //     },
-      //   ],
-      // },
     ],
 
     statList: [

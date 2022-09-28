@@ -1,432 +1,191 @@
 <template v-slot:extension>
-  <div class="d-md-none d-flex flex-column feed-tab">
-    <v-tabs v-model="tabs" centered>
-      <v-tabs-slider color="green"></v-tabs-slider>
+  <div>
+    <!--  Start: feed box  -->
+    <section class="feed-box d-none d-md-flex">
+      <v-container>
+        <v-row>
+          <v-col
+            v-for="(feed, feedBox) in footerFeedList"
+            :key="feedBox.value"
+            cols="12"
+            md="4"
+            sm="4"
+          >
+            <footer-feed-box :feed="feed"></footer-feed-box>
+          </v-col>
+          <v-col cols="12" md="4" sm="4" class="third-feed-box mt-3 pa-0">
+            <latest-news/>
+          </v-col>
+        </v-row>
+      </v-container>
+    </section>
+    <!--  End: Feed box  -->
 
-      <v-tab v-for="(item, index) in items" :key="index" class="feed-tab-title">
-      <img :src="require('@/assets/images/' + item.icon)" alt="" class="mx-1" width="20" height="20">
-        {{ item.title }}
-      </v-tab>
-    </v-tabs>
-    <v-tabs-items v-model="tabs" class="feed-card ma-4">
-      <v-tab-item>
-        <v-card flat class="d-flex flex-column pa-3">
-          <v-card-text>
-            <p class="feed-p-res">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
 
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
+    <div class="d-md-none d-flex flex-column feed-tab">
+      <v-tabs v-model="tabs" centered>
+        <v-tabs-slider color="green"></v-tabs-slider>
 
-            <div
-              class="
-                feedtab-footer
-                d-flex
-                justify-space-between
-                align-center
-                pa-3
-                mt-3
-              "
-            >
-              <nuxt-link to="" class="pb-0 feed-file-more mr-4"
-                >More</nuxt-link
-              >
-              <nuxt-link
-                to=""
-                class="add-file-tab d-flex justify-center align-center"
-              >
-                <i class="fa-solid fa-plus add-file-icon"></i>
-              </nuxt-link>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-      <v-tab-item>
-        <v-card flat>
-          <v-card-text>
-            <p class="feed-p-res">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
+        <v-tab v-for="(item, index) in items" :key="index" class="feed-tab-title">
+          <img :src="require('@/assets/images/' + item.icon)" alt="" class="mx-1" width="20" height="20">
+          {{ item.title }}
+        </v-tab>
+      </v-tabs>
+      <v-tabs-items v-model="tabs" class="feed-card ma-4">
+        <v-tab-item  v-for="(feed, feedBox) in footerFeedList"
+                     :key="feedBox.value">
+          <footer-feed-box :feed="feed"></footer-feed-box>
+        </v-tab-item>
 
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-
-            <div
-              class="
-                feedtab-footer
-                d-flex
-                justify-space-between
-                align-center
-                pa-3
-                mt-3
-              "
-            >
-              <nuxt-link to="" class="pb-0 feed-ask-more mr-4"
-                >More</nuxt-link
-              >
-              <nuxt-link
-                to=""
-                class="add-ask-tab d-flex justify-center align-center"
-              >
-                <i class="fa-solid fa-plus add-ask-icon"></i>
-              </nuxt-link>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-      <v-tab-item>
-        <v-card flat>
-          <v-card-text>
-            <p class="feed-p-res">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-            <p class="feed-p-res mt-5">
-              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
-              استفاده از طراحان گرافیک است.
-            </p>
-            <div class="d-flex justify-space-between px-3 my-5">
-              <div class="avatar d-flex align-center">
-                <span class="feed-icon">
-                  <v-img
-                    :src="require('@/assets/images/' + avatar)"
-                    alt=""
-                    cover
-                    width="128"
-                  />
-                </span>
-                <div class="feed-name mx-3">Arian Etemadi</div>
-              </div>
-              <div class="date d-flex align-center">
-                <i class="fa-solid fa-calendar-days mx-3"></i>
-                <p>27 Jun</p>
-              </div>
-            </div>
-            <v-divider></v-divider>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-    </v-tabs-items>
+        <v-tab-item>
+          <latest-news/>
+        </v-tab-item>
+      </v-tabs-items>
+    </div>
   </div>
 </template>
 <script>
+import FooterFeedBox from "@/components/common/footer-feed-box";
+import LatestNews from "@/components/common/latest-news";
+
 export default {
+  name:'feedTab',
+  components:{
+    LatestNews,
+    FooterFeedBox
+  },
   data() {
     return {
       tabs: null,
       items:[
         {
           icon:"file.png",
-          title:"File های آموزشی"
+          title:"Latest Training Content"
         },
          {
            icon:"ask.png",
-          title:"پرسش ها"
+          title:"Latest Q&A"
         },
          {
            icon:"News.png",
-          title:"اخبار"
+          title:"Latest News"
         },
       ],
       // items: ["File های آموزشی", "پرسش ها", "اخبار"],
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       avatar: "dexter-morse2.png",
+
+      footerFeedList: [
+        {
+          class: "learning",
+          header: "Latest Training Content",
+          icon: "learnfiles",
+          contentItemList: [
+            {
+              avatar: "dexter-morse2.png",
+              title:
+                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
+              name: "Arian Etemadi",
+              date: "Jun 21",
+            },
+            {
+              avatar: "dexter-morse2.png",
+              title:
+                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
+              name: "Arian Etemadi",
+              date: "Jun 21",
+            },
+            {
+              avatar: "dexter-morse2.png",
+              title:
+                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
+              name: "Arian Etemadi",
+              date: "Jun 21",
+            },
+            {
+              avatar: "dexter-morse2.png",
+              title:
+                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
+              name: "Arian Etemadi",
+              date: "Jun 21",
+            },
+          ],
+        },
+        {
+          class: "question",
+          header: "Latest Q&A",
+          icon: "qa",
+          contentItemList: [
+            {
+              avatar: "dexter-morse2.png",
+              title:
+                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
+              name: "Arian Etemadi",
+              date: "Jun 21",
+            },
+            {
+              avatar: "dexter-morse2.png",
+              title:
+                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
+              name: "Arian Etemadi",
+              date: "Jun 21",
+            },
+            {
+              avatar: "dexter-morse2.png",
+              title:
+                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
+              name: "Arian Etemadi",
+              date: "Jun 21",
+            },
+            {
+              avatar: "dexter-morse2.png",
+              title:
+                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
+              name: "Arian Etemadi",
+              date: "Jun 21",
+            },
+          ],
+        },
+        // {
+        //   class: "news",
+        //   header: " Latest News",
+        //   icon: "news",
+        //   contentItemList: [
+        //     {
+        //       avatar: "dexter-morse2.png",
+        //       title:
+        //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
+        //       name: "Arian Etemadi",
+        //       date: "Jun 21",
+        //     },
+        //     {
+        //       avatar: "dexter-morse2.png",
+        //       title:
+        //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
+        //       name: "Arian Etemadi",
+        //       date: "Jun 21",
+        //     },
+        //     {
+        //       avatar: "dexter-morse2.png",
+        //       title:
+        //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
+        //       name: "Arian Etemadi",
+        //       date: "Jun 21",
+        //     },
+        //     {
+        //       avatar: "dexter-morse2.png",
+        //       title:
+        //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
+        //       name: "Arian Etemadi",
+        //       date: "Jun 21",
+        //     },
+        //   ],
+        // },
+      ],
+
+
+
+
     };
   },
 };
