@@ -61,7 +61,7 @@
               <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs"/>
             </div>
           </v-col>
-          <v-col lg="9" md="9" sm="12" class="search-contents">
+          <v-col lg="9" md="9" sm="12" class="search-contents px-0">
             <div class="search-content">
               <v-breadcrumbs :items="breadcrumbs" class="search-breadcrumb d-none d-md-block">
                 <template v-slot:divider>

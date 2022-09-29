@@ -8,7 +8,7 @@
         <div class="training-item pa-1  pa-sm-6  my-5" v-for="(item, index) in items"
              :key="index">
           <v-row>
-            <v-col lg="2" cols="3" >
+            <v-col lg="2" cols="3" class="pr-0" >
               <div class="item-img">
                 <img v-if="item.lesson_pic" :src="item.lesson_pic" alt=""
                      class="item-image"/>
@@ -100,7 +100,7 @@
                     <div
                       class="item-content-last-update d-flex align-center mx-auto">
                       <i class="fa-solid fa-calendar-days"></i>
-                      <p class="mx-2">last update : {{ item.last_reply }}</p>
+                      <p class="mx-2">reply: {{$timeAgo.calc(item.last_reply)}}</p>
                     </div>
                   </div>
                 </div>

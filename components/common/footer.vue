@@ -35,7 +35,8 @@
               </v-list-item>
 
               <v-list-item class="footer-item">
-                <p class="about-footer-para">Lorem Epsom is a fake text with the production of incomprehensible simplicity from the printing industry, and using graphic designers, printers and texts but also newspapers and magazines in columns and rows as necessary, and for the current conditions of the technology required, and diverse applications with the aim of improving the tools It is practical.
+                <p class="about-footer-para">
+                  Gama training and measurement platform was published in Iran since 2013 by a group of university graduates. Gama's goal is to develop educational justice with the participation of all teachers from all over the country. In these years, Gama has been the leader of the country's online education market in communicating between schools and teachers, students and families.
                 </p>
               </v-list-item>
             </v-list>

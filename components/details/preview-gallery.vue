@@ -4,6 +4,7 @@
       <div class="card-carousel">
         <v-carousel
           :show-arrows="false"
+          :hide-delimiters="(images.length>1 ? false : true)"
           v-model="carouselVal"
         >
           <v-carousel-item

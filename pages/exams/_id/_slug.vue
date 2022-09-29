@@ -139,7 +139,7 @@
               </div>
             </v-col>
             <v-col md="3">
-              <v-card flat class="content_main_info">
+              <v-card flat  class="content_main_info">
                 <v-row class=" align-center">
                   <v-col cols="3">
                     <v-img
@@ -166,7 +166,7 @@
                     Viewed: Unknown
                   </v-col>
                   <v-col cols="12" class="pb-0">
-                    last update: {{contentData.up_date}}
+                    Last update: {{$timeAgo.calc(contentData.up_date)}}
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     Crash report
@@ -186,8 +186,9 @@
                     hover
                   />
                 </div>
-                <v-divider/>
-                <v-row class="mt-1">
+                <v-divider class="d-none d-md-block"/>
+
+                <v-row class="mt-1 d-none d-md-block">
                   <v-col v-for="(item,key) in contentData.price" cols="12" class="pb-0">
                     <v-btn v-if="key==='participation'" block color="success">
                       Start | {{item.price>0 ? '$'+item.price : 'Free'}}
@@ -205,9 +206,52 @@
             </v-col>
           </v-row>
 
+
         </div>
       </v-container>
     </section>
+
+
+
+    <!--Mobile order section-->
+    <v-card class="order-btn-holder d-block d-md-none">
+      <v-card-text class="pb-0">
+        <v-row class="px-10 text-center">
+          <v-col v-for="(item,key) in contentData.price" cols="12" class="pb-1 pt-0">
+            <v-btn v-if="key==='participation'" block  color="success">
+              Start | {{item.price>0 ? '$'+item.price : 'Free'}}
+            </v-btn>
+            <v-btn v-else-if="key==='word'" block color="primary">
+              Download WORD file | {{item.price>0 ? '$'+item.price : 'Free'}}
+            </v-btn>
+            <v-btn v-else-if="key==='pdf'" block color="error">
+              Download PDF file | {{item.price>0 ? '$'+item.price : 'Free'}}
+            </v-btn>
+          </v-col>
+
+          <v-col cols="12">
+            <div class="mb-4">
+              <p v-if="!$auth.loggedIn">
+                <span class="mdi mdi-bell icon"></span>
+                <span @click="openAuthDialog('login')" class="login">Login</span>
+                <span  @click="openAuthDialog('register')" class="register">
+                    (register)
+                    </span>
+                to download and charge your wallet.
+              </p>
+              <p v-else>
+                Your wallet charge is ${{$auth.user.credit}}
+              </p>
+            </div>
+          </v-col>
+        </v-row>
+
+
+      </v-card-text>
+    </v-card>
+    <!--End mobile order section-->
+
+
     <!--  End: detail  -->
 
 
@@ -215,101 +259,101 @@
       <v-row>
         <v-col cols="12" md="6">
           <!--  Start: Course Card  -->
-          <section>
-            <div class="d-flex  align-center course-card box">
-              <div class="right">
-                <v-row>
-                  <v-col cols="2">
-                    <nuxt-link to="">
-                      <img height="98" width="98" :src="require(`~/assets/images/teacher1.png`)" alt=""/>
-                    </nuxt-link>
-                  </v-col>
-                  <v-col cols="10">
-                    <div class="description ml-4">
-                      <div>
-                        <nuxt-link to="">
-                          <h2 class="course-title">PowerPoint of the complete educational course, date (3) of the 12th
-                            grade of the second secondary-theoretical period</h2>
-                        </nuxt-link>
-                      </div>
-                      <v-row>
-                        <v-col cols="10">
-                          <div>
-                            <nuxt-link to="" class="teacher">
-                              <i class="fa-solid fa-user icon"></i>
-                              <span>Lecturer: Shamsi Shabani</span>
-                            </nuxt-link>
-                          </div>
-                          <div>
-                            <p class="duration">
-                              <i class="fa-solid fa-clock icon"></i>
-                              <span>Course duration: 942 slides (13 files)</span>
-                            </p>
-                          </div>
-                        </v-col>
-                        <v-col cols="2">
-                          <nuxt-link to="" class="teal--text">
-                            <strong>
-                              View
-                            </strong>
-                          </nuxt-link>
-                        </v-col>
-                      </v-row>
-                    </div>
-                  </v-col>
-                </v-row>
-              </div>
+<!--          <section>-->
+<!--            <div class="d-flex  align-center course-card box">-->
+<!--              <div class="right">-->
+<!--                <v-row>-->
+<!--                  <v-col cols="2">-->
+<!--                    <nuxt-link to="">-->
+<!--                      <img height="98" width="98" :src="require(`~/assets/images/teacher1.png`)" alt=""/>-->
+<!--                    </nuxt-link>-->
+<!--                  </v-col>-->
+<!--                  <v-col cols="10">-->
+<!--                    <div class="description ml-4">-->
+<!--                      <div>-->
+<!--                        <nuxt-link to="">-->
+<!--                          <h2 class="course-title">PowerPoint of the complete educational course, date (3) of the 12th-->
+<!--                            grade of the second secondary-theoretical period</h2>-->
+<!--                        </nuxt-link>-->
+<!--                      </div>-->
+<!--                      <v-row>-->
+<!--                        <v-col cols="10">-->
+<!--                          <div>-->
+<!--                            <nuxt-link to="" class="teacher">-->
+<!--                              <i class="fa-solid fa-user icon"></i>-->
+<!--                              <span>Lecturer: Shamsi Shabani</span>-->
+<!--                            </nuxt-link>-->
+<!--                          </div>-->
+<!--                          <div>-->
+<!--                            <p class="duration">-->
+<!--                              <i class="fa-solid fa-clock icon"></i>-->
+<!--                              <span>Course duration: 942 slides (13 files)</span>-->
+<!--                            </p>-->
+<!--                          </div>-->
+<!--                        </v-col>-->
+<!--                        <v-col cols="2">-->
+<!--                          <nuxt-link to="" class="teal&#45;&#45;text">-->
+<!--                            <strong>-->
+<!--                              View-->
+<!--                            </strong>-->
+<!--                          </nuxt-link>-->
+<!--                        </v-col>-->
+<!--                      </v-row>-->
+<!--                    </div>-->
+<!--                  </v-col>-->
+<!--                </v-row>-->
+<!--              </div>-->
 
-            </div>
-          </section>
+<!--            </div>-->
+<!--          </section>-->
           <!--  End: Course Card  -->
         </v-col>
 
 
         <v-col cols="12" md="6">
           <!--  Start:  Azmoon test album card   -->
-          <section>
-            <div class="d-flex align-center album-card box">
-              <div class="right">
-                <v-row>
-                  <v-col cols="2">
-                    <nuxt-link to="">
-                      <img :src="require(`~/assets/images/poster1.jpg`)" alt="" class="poster-img"/>
-                    </nuxt-link>
-                  </v-col>
-                  <v-col cols="10">
-                    <div class="description ml-2">
-                      <nuxt-link to="">
-                        <h2 class="course-title">Online Exam test bank album, date (3) twelfth of the second term of
-                          high school-theoretical</h2>
-                      </nuxt-link>
+<!--          <section>-->
+<!--            <div class="d-flex align-center album-card box">-->
+<!--              <div class="right">-->
+<!--                <v-row>-->
+<!--                  <v-col cols="2">-->
+<!--                    <nuxt-link to="">-->
+<!--                      <img :src="require(`~/assets/images/poster1.jpg`)" alt="" class="poster-img"/>-->
+<!--                    </nuxt-link>-->
+<!--                  </v-col>-->
+<!--                  <v-col cols="10">-->
+<!--                    <div class="description ml-2">-->
+<!--                      <nuxt-link to="">-->
+<!--                        <h2 class="course-title">Online Exam test bank album, date (3) twelfth of the second term of-->
+<!--                          high school-theoretical</h2>-->
+<!--                      </nuxt-link>-->
 
-                      <v-row>
-                        <v-col cols="10">
-                          <div class="num">
-                            <i class="fa-solid fa-list-ol icon"></i>
-                            <span>Number of tests: 1399</span>
-                          </div>
-                          <div class="level">
-                            <i class="fa-solid fa-superscript icon"></i>
-                            <span>Difficulty: Easy</span>
-                          </div>
-                        </v-col>
-                        <v-col cols="2">
-                          <nuxt-link to="" class="teal--text">
-                            <strong>
-                              View
-                            </strong>
-                          </nuxt-link>
-                        </v-col>
-                      </v-row>
-                    </div>
-                  </v-col>
-                </v-row>
-              </div>
+<!--                      <v-row>-->
+<!--                        <v-col cols="10">-->
+<!--                          <div class="num">-->
+<!--                            <i class="fa-solid fa-list-ol icon"></i>-->
+<!--                            <span>Number of tests: 1399</span>-->
+<!--                          </div>-->
+<!--                          <div class="level">-->
+<!--                            <i class="fa-solid fa-superscript icon"></i>-->
+<!--                            <span>Difficulty: Easy</span>-->
+<!--                          </div>-->
+<!--                        </v-col>-->
+<!--                        <v-col cols="2">-->
+<!--                          <nuxt-link to="" class="teal&#45;&#45;text">-->
+<!--                            <strong>-->
+<!--                              View-->
+<!--                            </strong>-->
+<!--                          </nuxt-link>-->
+<!--                        </v-col>-->
+<!--                      </v-row>-->
+<!--                    </div>-->
+<!--                  </v-col>-->
+<!--                </v-row>-->
+<!--              </div>-->
 
-            </div>
-          </section>
+<!--            </div>-->
+<!--          </section>-->
           <!--  End:  Azmoon test album card   -->
         </v-col>
       </v-row>
@@ -317,24 +361,24 @@
 
 
     <!-- Start : Sample Test -->
-    <related-content/>
+<!--    <related-content/>-->
     <!-- End : Sample test -->
     <!-- Start: Feed -->
     <section class="feed">
-      <v-container class="pa-4 pa-md-12 pt-10">
-        <v-row>
-          <v-col cols="12" md="6">
-            <latest-training-content/>
-          </v-col>
+<!--      <v-container class="pa-4 pa-md-12 pt-10">-->
+<!--        <v-row>-->
+<!--          <v-col cols="12" md="6">-->
+<!--            <latest-training-content/>-->
+<!--          </v-col>-->
 
-          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column justify-space-between">
-            <related-qa/>
+<!--          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column justify-space-between">-->
+<!--            <related-qa/>-->
 
-            <related-online-exam/>
-          </v-col>
+<!--            <related-online-exam/>-->
+<!--          </v-col>-->
 
-        </v-row>
-      </v-container>
+<!--        </v-row>-->
+<!--      </v-container>-->
     </section>
     <!-- End: Feed -->
 
@@ -381,7 +425,7 @@ export default {
   mounted() {
     //Init gallery image
     if (this.contentData){
-      this.$refs.preview_gallery.images.push('https://gama.ir/uploads/lessonsPic/lPic_e9d076b6bd2bdea6f16da58513e7f471.jpg');
+      // this.$refs.preview_gallery.images.push('https://gama.ir/uploads/lessonsPic/lPic_e9d076b6bd2bdea6f16da58513e7f471.jpg');
       this.$refs.preview_gallery.images.push(this.contentData.thumb_pic_url);
       this.$refs.preview_gallery.carouselVal=1;
     }
@@ -390,6 +434,7 @@ export default {
   },
 
   data: () => ({
+    sell_btn:true,
     rating: 4.5,
     contentData: [],
     breads: [
@@ -592,5 +637,22 @@ export default {
 
 .content_main_info .creator_title {
   font-size: 18px;
+}
+
+
+.order-btn-holder {
+  /*position: -webkit-sticky!important;*/
+  position: fixed!important;
+  bottom: 0!important;
+  z-index: 2!important;
+  border-top:0.1rem solid #e1e2e3;
+}
+
+.order-btn-holder .v-btn{
+  width: 40% !important;
+}
+
+.order-btn-holder p{
+  font-size: 1.3rem;
 }
 </style>

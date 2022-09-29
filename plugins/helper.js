@@ -39,7 +39,7 @@ const timeAgo={
   name:'timeAgo',
   calc(date){
     var timestamp = Date.parse(date)/1000;
-    var strTime = ["Second", "Min", "Hour", "Day", "Month", "Year"];
+    var strTime = ["second", "min", "hour", "day", "month", "year"];
     var length = ["60","60","24","30","12","10"];
 
     const currentDate = new Date();
@@ -52,7 +52,7 @@ const timeAgo={
       }
 
       diff = Math.round(diff);
-      return `${diff} ${strTime[i]}${diff>1 ? "'s" : ''} Ago`;
+      return `${diff} ${strTime[i]}${diff>1 ? "'s" : ''} ago`;
     }
   }
 }
