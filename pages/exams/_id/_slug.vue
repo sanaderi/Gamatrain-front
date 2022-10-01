@@ -124,9 +124,10 @@
                     </span>
                     to download and charge your wallet.
                   </p>
-                  <p v-else>
+                  <span v-else>
                     Your wallet charge is ${{$auth.user.credit}}
-                  </p>
+                  </span>
+                  <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/dashboard/credit?">(Charge wallet)</nuxt-link>
                 </div>
                 <div class="font-weight-bold answer">
                   <span class="mdi mdi-checkbox-marked icon"></span>
@@ -160,19 +161,86 @@
                 <v-divider class="my-2"/>
                 <v-row>
                   <v-col cols="12" class="pb-0">
+                    <i class="fa-solid fa-folder mr-1 icon"></i>
                     File type: {{contentData.azmoon_type_title}}
                   </v-col>
                   <v-col cols="12" class="pb-0">
+                    <i class="fa-solid fa-eye mr-1 icon"></i>
                     Viewed: Unknown
                   </v-col>
                   <v-col cols="12" class="pb-0">
+                    <i class="fa-solid fa-calendar-alt mr-1 icon"></i>
                     Last update: {{$timeAgo.calc(contentData.up_date)}}
                   </v-col>
                   <v-col cols="12" class="pb-0">
+                    <i class="fa-solid fa-bug mr-1 icon"></i>
                     Crash report
                   </v-col>
                   <v-col cols="12" class="pb-0">
-                    Share
+                    <!--Dialog for share-->
+                    <v-dialog
+                      transition="dialog-top-transition"
+                      class="share_dialog"
+                      max-width="600"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <span
+                          v-bind="attrs"
+                          v-on="on"
+                        >
+                          <i class="fa-solid fa-share-alt mr-1 icon"></i>
+                          Share
+                        </span>
+                      </template>
+                      <template v-slot:default="dialog">
+                        <v-card>
+                          <v-toolbar
+                            color="default"
+                          >
+                            Share
+                          </v-toolbar>
+                          <v-card-text class="mt-5">
+                            <p class="mb-3">
+                              Share this content:
+                            </p>
+                            <v-row>
+                              <v-col cols="12">
+                                <v-btn outlined block @click="copyUrl">
+                                  <i class="fa-solid fa-copy mr-1 icon"></i>
+                                  &nbsp;
+                                  {{ copy_btn }}
+                                </v-btn>
+                              </v-col>
+                              <v-col cols="6">
+                                <v-btn
+                                  @click="shareSocial('whatsapp')"
+                                  target="_blank"
+                                  block color="#25d366" class="white--text">
+                                  <i class="fab fa-whatsapp mr-1 icon"></i>
+                                   WhatsApp
+                                </v-btn>
+                              </v-col>
+                              <v-col cols="6">
+                                <v-btn block color="#00acee" class="white--text"
+                                       @click="shareSocial('telegram')"
+                                >
+                                  <i class="fab fa-telegram-plane mr-1 icon"></i>
+                                   Telegram
+                                </v-btn>
+                              </v-col>
+                            </v-row>
+
+                          </v-card-text>
+                          <v-card-actions class="justify-end">
+                            <v-btn
+                              text
+                              @click="dialog.value = false"
+                            >close
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </template>
+                    </v-dialog>
                   </v-col>
                 </v-row>
 
@@ -203,6 +271,13 @@
                 </v-row>
 
               </v-card>
+              <v-row>
+                <v-col cols="12" class="text-center">
+                  <p class="mt-2  ">
+                    <i class="fa-solid fa-exclamation-circle mr-1 icon"></i>
+                    Republishing is prohibited in cyber space.</p>
+                </v-col>
+              </v-row>
             </v-col>
           </v-row>
 
@@ -233,15 +308,16 @@
             <div class="mb-4">
               <p v-if="!$auth.loggedIn">
                 <span class="mdi mdi-bell icon"></span>
-                <span @click="openAuthDialog('login')" class="login">Login</span>
-                <span  @click="openAuthDialog('register')" class="register">
+                <span @click="openAuthDialog('login')" class="login blue--text">Login</span>
+                <span  @click="openAuthDialog('register')" class="register blue--text">
                     (register)
                     </span>
-                to download and charge your wallet.
+                <span>to download and charge.</span>
               </p>
-              <p v-else>
+              <span v-else>
                 Your wallet charge is ${{$auth.user.credit}}
-              </p>
+                <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/dashboard/credit?">(Charge wallet)</nuxt-link>
+              </span>
             </div>
           </v-col>
         </v-row>
@@ -600,6 +676,8 @@ export default {
         ],
       },
     ],
+
+    copy_btn: 'Copy',
   }),
   methods:{
     initBreadCrumb(){
@@ -623,7 +701,22 @@ export default {
     },
     openAuthDialog(val){
       this.$router.push({query:{auth_form:val}});
-    }
+    },
+
+
+    //Social section
+    copyUrl() {
+      navigator.clipboard.writeText(window.location.href);
+      this.copy_btn = 'Copied';
+
+    },
+    shareSocial(social_name) {
+      if (social_name == 'whatsapp')
+        window.open(`https://api.whatsapp.com/send?text=${window.location.href}`);
+      else if (social_name == 'telegram')
+        window.open(`https://telegram.me/share/url?url=${window.location.href}&text=${this.contentData.title}`);
+
+    },
   }
 }
 </script>
@@ -652,7 +745,11 @@ export default {
   width: 40% !important;
 }
 
-.order-btn-holder p{
+.order-btn-holder span{
   font-size: 1.3rem;
+}
+
+ p{
+  font-size: 1.3rem!important;
 }
 </style>
