@@ -42,7 +42,7 @@ export default {
     }
   },
   mounted() {
-      this.$router.push({path: '/dashboard'});
+      this.$router.push({path: '/user'});
   },
   methods: {
     async setUserType() {
@@ -67,7 +67,7 @@ export default {
 
 
           this.$router.push({
-            path: "/dashboard"
+            path: "/user"
           });
         }
       }).catch(err => {

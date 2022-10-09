@@ -4,9 +4,17 @@
       <div class="card-carousel">
         <v-row>
           <v-col cols="2" class="pr-0">
-            <div v-for="item in items"  class="side-help-icon">
-              <span :class="' icon icong-' + item.icon"/>
-            </div>
+            <nuxt-link :to="`${item.link}&state=${help_link_data.state}&section=${help_link_data.section}&base=${help_link_data.base}&course=${help_link_data.course}
+                  &lesson=${help_link_data.lesson}`"  v-for="item in items"  class="side-help-icon" >
+              <v-tooltip right>
+                <template v-slot:activator="{ on, attrs }">
+                <span v-bind="attrs"
+                      v-on="on" :class="' icon icong-' + item.icon"/>
+
+                </template>
+                <span>{{item.text}}</span>
+              </v-tooltip>
+            </nuxt-link>
           </v-col>
           <v-col cols="10" class="pl-1" >
             <v-carousel
@@ -54,6 +62,13 @@ export default {
     return {
       carouselVal: null,
       images: [],
+      help_link_data:{
+        state:'',
+        section:'',
+        base:'',
+        course:'',
+        lesson:''
+      },
 
       active_img: 1,
 
@@ -118,6 +133,7 @@ export default {
 
 .side-help-icon{
   padding: 0.6rem;
+  display: block;
   max-width: 4rem;
   border-radius: 10px;
   margin-bottom: 1rem;

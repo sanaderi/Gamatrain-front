@@ -4,7 +4,7 @@
     <v-navigation-drawer
       permanent
     >
-      <v-list-item class="px-2 " to="/dashboard">
+      <v-list-item class="px-2 " to="/user">
         <v-list-item-avatar>
           <v-img class="mr-2" :src="require('@/assets/images/dashboard-icon.png')"></v-img>
         </v-list-item-avatar>

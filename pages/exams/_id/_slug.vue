@@ -127,7 +127,7 @@
                   <span v-else>
                     Your wallet charge is ${{$auth.user.credit}}
                   </span>
-                  <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/dashboard/credit?">(Charge wallet)</nuxt-link>
+                  <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/credit?">(Charge wallet)</nuxt-link>
                 </div>
                 <div class="font-weight-bold answer">
                   <span class="mdi mdi-checkbox-marked icon"></span>
@@ -316,7 +316,7 @@
               </p>
               <span v-else>
                 Your wallet charge is ${{$auth.user.credit}}
-                <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/dashboard/credit?">(Charge wallet)</nuxt-link>
+                <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/credit?">(Charge wallet)</nuxt-link>
               </span>
             </div>
           </v-col>
@@ -504,6 +504,15 @@ export default {
       // this.$refs.preview_gallery.images.push('https://gama.ir/uploads/lessonsPic/lPic_e9d076b6bd2bdea6f16da58513e7f471.jpg');
       this.$refs.preview_gallery.images.push(this.contentData.thumb_pic_url);
       this.$refs.preview_gallery.carouselVal=1;
+
+      //Update help link data
+      this.$refs.preview_gallery.help_link_data={
+        state:this.contentData.state,
+        section:this.contentData.section,
+        base:this.contentData.base,
+        course:this.contentData.course,
+        lesson:this.contentData.lesson
+      }
     }
 
     this.initBreadCrumb();

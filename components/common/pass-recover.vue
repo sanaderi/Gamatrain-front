@@ -230,7 +230,7 @@ export default {
 
 
         this.$router.push({
-          path: "/dashboard"
+          path: "/user"
         });
       }).catch(({response}) => {
         if (response.status == 401) {

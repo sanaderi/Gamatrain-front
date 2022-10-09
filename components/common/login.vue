@@ -151,7 +151,7 @@ export default {
 
 
         this.$router.push({
-          path: '/dashboard'
+          path: '/user'
         });
       }).catch(({response}) => {
         if (response.status == 401) {
@@ -186,7 +186,7 @@ export default {
         this.$toast.success("Logged in successfully");
 
         this.$router.push({
-          path: "/dashboard"
+          path: "/user"
         });
       }).catch(err => {
         if (err.response.status == 400)

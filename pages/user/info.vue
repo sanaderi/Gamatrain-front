@@ -108,7 +108,7 @@ export default {
 
 
           this.$router.push({
-            path: "/dashboard"
+            path: "/user"
           });
         }).catch(err => {
         this.$toast.error(err.response.data.message);

@@ -3,7 +3,7 @@
     <v-container class="align-center justify-space-between topbar-items">
       <v-row>
         <v-col md="4" lg="2">
-          <div class="align-center pt-5">
+          <div class="align-center  pt-5">
             <div class="d-flex align-center" v-if="$auth.loggedIn">
 
               <v-menu
@@ -48,12 +48,12 @@
                 </v-list>
               </v-menu>
 
-              <nuxt-link to="/dashboard"
+              <nuxt-link to="/user"
                          class="d-block align-center mr-3 ml-5 ">
                 <i class="fa-regular fa-bell fa-xl topbar-bell d-none d-sm-block"></i>
               </nuxt-link>
             </div>
-            <div class="d-flex align-center" v-if="!$auth.loggedIn">
+            <div class="d-flex align-center" v-else>
               <v-btn plain @click="openLoginDialog">
                 <i class="fa-solid fa-sign-in mr-1"></i>
                 Login
@@ -128,7 +128,7 @@ export default {
         {
           title: 'Dashboard',
           icon: 'mdi-view-dashboard',
-          link: '/dashboard'
+          link: '/user'
         },
         {
           title: 'Messages',
@@ -143,7 +143,7 @@ export default {
         {
           title: 'Edit pass',
           icon: 'mdi-key',
-          link: '/dashboard/edit-pass'
+          link: '/user/edit-pass'
         },
 
       ],

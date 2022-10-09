@@ -171,6 +171,8 @@ export default {
       result_count: 0,
       dialog: false,
 
+      all_files_loaded: false,
+
 
     }
   },
@@ -191,6 +193,7 @@ export default {
     "$route.query.type"(val) {
       this.page = 1;
       this.items = [];
+      this.all_files_loaded=false;
 
       if (this.$route.query.type === 'learnfiles')
         this.page_title = 'Training content';
@@ -213,6 +216,7 @@ export default {
     "$route.query.section"(val) {
       this.page = 1;
       this.items = [];
+      this.all_files_loaded=false;
 
       //Fire when click on tag in content card, set section value on side filter
       if (val > 0)
@@ -229,6 +233,8 @@ export default {
     "$route.query.base"(val) {
       this.page = 1;
       this.items = [];
+      this.all_files_loaded=false;
+
 
       //Fire when click on tag in content card, set base value on side filter
       if (val > 0)
@@ -245,6 +251,8 @@ export default {
     "$route.query.lesson"(val) {
       this.page = 1;
       this.items = [];
+      this.all_files_loaded=false;
+
 
 
       //Fire when click on tag in content card, set lesson value on side filter
@@ -262,68 +270,86 @@ export default {
     "$route.query.topic"(val) {
       this.page = 1;
       this.items = [];
+      this.all_files_loaded=false;
+
       this.getContentList();
     },
     "$route.query.test_type"(val) {
       this.page = 1;
       this.items = [];
+      this.all_files_loaded=false;
+
       this.getContentList();
     },
     "$route.query.level"(val) {
       this.page = 1;
       this.items = [];
+      this.all_files_loaded=false;
+
       this.getContentList();
     },
     "$route.query.word"(val) {
       this.page = 1;
       this.items = [];
+      this.all_files_loaded=false;
+
       this.getContentList();
     },
     "$route.query.pdf"(val) {
       this.page = 1;
       this.items = [];
+      this.all_files_loaded=false;
+
       this.getContentList();
     },
     "$route.query.free"(val) {
       this.page = 1;
       this.items = [];
+      this.all_files_loaded=false;
+
       this.getContentList();
     },
     "$route.query.a_file"(val) {
       this.page = 1;
       this.items = [];
+      this.all_files_loaded=false;
+
       this.getContentList();
     },
   },
   methods: {
     // Get content list
     async getContentList() {
-      this.page_loading = true;
-      await this.$axios.$get('/api/v1/search',
-        {
-          params: {
-            type: this.$route.query.type,
-            page: this.page,
-            section: this.$route.query.section,
-            base: this.$route.query.base,
-            lesson: this.$route.query.lesson,
-            topic: this.$route.query.topic,
-            test_type: this.$route.query.test_type,
-            level: this.$route.query.level,
-            pdf: this.$route.query.pdf,
-            word: this.$route.query.word,
-            free: this.$route.query.free,
-            a_file: this.$route.query.a_file,
-          }
-        }).then(response => {
-        this.items.push(...response.data.list);
-        this.result_count = response.data.num;
-        this.$refs.content_tabs.content_statistics = response.data.types_stats;
-      }).catch(err => {
+      if (!this.all_files_loaded) {
+        this.page_loading = true;
+        await this.$axios.$get('/api/v1/search',
+          {
+            params: {
+              type: this.$route.query.type,
+              page: this.page,
+              section: this.$route.query.section,
+              base: this.$route.query.base,
+              lesson: this.$route.query.lesson,
+              topic: this.$route.query.topic,
+              test_type: this.$route.query.test_type,
+              level: this.$route.query.level,
+              pdf: this.$route.query.pdf,
+              word: this.$route.query.word,
+              free: this.$route.query.free,
+              a_file: this.$route.query.a_file,
+            }
+          }).then(response => {
+          this.items.push(...response.data.list);
+          this.result_count = response.data.num;
+          this.$refs.content_tabs.content_statistics = response.data.types_stats;
+          if (response.data.list.length === 0)//For terminate auto load request
+            this.all_files_loaded = true;
+        }).catch(err => {
 
-      }).finally(() => {
-        this.page_loading = false;
-      });
+        }).finally(() => {
+          this.page_loading = false;
+        });
+      }
     },
     scroll() {//For infinite loading
       window.onscroll = () => {
@@ -338,7 +364,7 @@ export default {
         }
 
         //Load next page
-        if (bottomOfWindow) {
+        if (bottomOfWindow && this.all_files_loaded === false) {
           this.page_loading = true;
           this.timer = setTimeout(() => {
             this.page++

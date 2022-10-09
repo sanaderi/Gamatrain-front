@@ -104,7 +104,7 @@ export default {
         .then(response => {
           this.$toast.success("Changed successfully")
           this.$router.push({
-            path: "/dashboard"
+            path: "/user"
           });
         }).catch(err => {
         this.$toast.error(err.response.data.message);

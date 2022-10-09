@@ -51,9 +51,15 @@ export default {
   name: "dashboard-mobile-menu",
   data(){
     return{
-      active_tab:1,
+      active_tab:0,
       items: [
-        {title: 'Add', icon: 'mdi-plus-circle-outline', link: '/'},
+        {
+          title: 'Add',
+          icon: 'mdi-plus-circle-outline',
+          link: '',
+          machine_name:'add_content'
+
+        },
         {title: 'Online exam', icon: 'mdi-laptop', link: '/'},
         {title: 'Financial', icon: 'mdi-credit-card-outline', link: '/'},
         {title: 'Messages', icon: 'mdi-email-outline', link: '/'},
@@ -64,8 +70,8 @@ export default {
           subMenuList: [
             {title: "Edit profile", link: "",icon:'mdi-account-outline'},
             {title: "Identity confirmation", link: "",icon:'mdi-account-outline'},
-            {title: "Edit password", link: "/dashboard/edit-pass",icon:'mdi-key'},
-            {title: "Setting", link: "/dashboard/setting",icon:'mdi-account-outline'},
+            {title: "Edit password", link: "/user/edit-pass",icon:'mdi-key'},
+            {title: "Setting", link: "/user/setting",icon:'mdi-account-outline'},
           ],
         },
         {title: 'Notification', icon: 'mdi-bell-outline', link: '/'},
@@ -77,6 +83,21 @@ export default {
       ],
 
     }
+  },
+  beforeMount() {
+    var index=this.items.findIndex(x=>x.machine_name==='add_content');
+
+    if (this.$auth.user.group_id==='5')
+      this.items[index].subMenuList=[
+        {title: "Test", link: "/user/test",icon:'icong-test', icon_type:'custom'},
+        {title: "Training content", link: "/user/training-content",icon:'icong-learnfiles', icon_type:'custom'},
+        {title: "Q & A", link: "/user/question",icon:'icong-qa', icon_type:'custom'}
+      ];
+    else
+      this.items[index].subMenuList=[
+        {title: "Q & A's", link: "/user/question",icon:'icong-qa', icon_type:'custom'},
+        {title: "Online exam's", link: "/user/online_exam",icon:'icong-azmoon', icon_type:'custom'}
+      ];
   },
   methods:{
     openLink(item){

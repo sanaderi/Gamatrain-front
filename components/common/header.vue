@@ -76,7 +76,7 @@
                     mb-5
                   "
                 >
-                  <nuxt-link to="/dashboard'">
+                  <nuxt-link to="/user'">
                     <v-avatar size="40">
                       <v-img
                         :src="$loadAvatar.currentUser($auth)"
@@ -87,7 +87,7 @@
 
                   <div class="profile-info">
                     <nuxt-link
-                      :to="'/dashboard'"
+                      :to="'/user'"
                       class="profile-name">{{ $auth.user.first_name }} {{ $auth.user.last_name }}
                     </nuxt-link>
 
@@ -105,7 +105,7 @@
                     </div>
                   </div>
                 </div>
-                <div v-if="!$auth.loggedIn" class="d-flex align-center">
+                <div v-else class="d-flex align-center">
                   <v-btn plain @click="openLoginDialog">
                     <i class="fa-solid fa-sign-in mr-1"></i>
                     Login

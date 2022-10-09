@@ -5,20 +5,18 @@
       :key="item.title"
     >
       <v-list-item
-
-        v-if="!item.subMenuList"
+        v-show="!item.subMenuList"
         link
       >
         <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon v-text="item.icon"></v-icon>
         </v-list-item-icon>
-
         <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-title v-text="item.title"></v-list-item-title>
         </v-list-item-content>
       </v-list-item>
       <v-list-group
-        v-else
+        v-show="item.subMenuList"
         active-class="menu_group_active"
         :key="item.title"
         no-action
@@ -53,7 +51,7 @@ export default {
   data() {
     return {
       items: [
-        {title: 'Add', icon: 'mdi-plus-circle-outline'},
+        {title: 'Add', icon: 'mdi-plus-circle-outline', machine_name: 'add_content'},
         {title: 'Online exam', icon: 'mdi-laptop'},
         {title: 'Financial', icon: 'mdi-credit-card-outline'},
         {title: 'Messages', icon: 'mdi-email-outline'},
@@ -64,13 +62,28 @@ export default {
           subMenuList: [
             {title: "Edit profile", link: ""},
             {title: "Identity confirmation", link: ""},
-            {title: "Edit password", link: "/dashboard/edit-pass"},
-            {title: "Setting", link: "/dashboard/setting"},
+            {title: "Edit password", link: "/user/edit-pass"},
+            {title: "Setting", link: "/user/setting"},
           ],
         },
         {title: 'Notification', icon: 'mdi-bell-outline'},
       ],
     }
+  },
+  beforeMount() {
+    var index = this.items.findIndex(x => x.machine_name === 'add_content');
+
+    if (this.$auth.user.group_id === '5')
+      this.items[index].subMenuList = [
+        {title: "Test", link: "/user/test", icon: 'icong-test', icon_type: 'custom'},
+        {title: "Training content", link: "/user/training-content", icon: 'icong-test', icon_type: 'custom'},
+        {title: "Q & A", link: "/user/question", icon: 'icong-test', icon_type: 'custom'}
+      ];
+    else
+      this.items[index].subMenuList = [
+        {title: "Q & A's", link: "/user/question", icon: 'icong-test', icon_type: 'custom'},
+        {title: "Online exam's", link: "/user/online_exam", icon: 'icong-test', icon_type: 'custom'}
+      ];
   }
 }
 </script>

@@ -257,9 +257,9 @@ export default {
   },
   methods: {
     getUserInfo() {
-      var apiUrl = '/api/v1/students/dashboard';
+      var apiUrl = '/api/v1/students/user';
       if (this.user_type === '5')
-        apiUrl = '/api/v1/teachers/dashboard';
+        apiUrl = '/api/v1/teachers/user';
 
       this.$axios.$get(apiUrl)
         .then(response => {
