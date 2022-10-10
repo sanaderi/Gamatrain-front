@@ -82,7 +82,7 @@ export default {
     else
       this.items[index].subMenuList = [
         {title: "Q & A's", link: "/user/question", icon: 'icong-test', icon_type: 'custom'},
-        {title: "Online exam's", link: "/user/online_exam", icon: 'icong-test', icon_type: 'custom'}
+        {title: "Online exam's", link: "/user/online-exam", icon: 'icong-test', icon_type: 'custom'}
       ];
   }
 }

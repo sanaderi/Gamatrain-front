@@ -3,9 +3,9 @@
     <v-col cols="12" class="px-0 px-sm-2">
       <v-row>
         <v-col cols="12" class="pl-5">
-          <span class="icon icong-learnfiles text-h3 teal--text"></span>
+          <span class="icon icong-test text-h3 teal--text"></span>
           <span class="text-h4 teal--text">
-            Training content submission form
+            Q & A submission form
           </span>
         </v-col>
       </v-row>
@@ -16,7 +16,7 @@
               <validation-observer ref="observer" v-slot="{invalid}">
                 <form @submit.prevent="submitQuestion">
                   <v-row>
-                    <v-col cols="12" md="4">
+                    <v-col cols="12" md="3">
                       <validation-provider v-slot="{errors}" name="grade" role="required">
                         <v-autocomplete
                           dense
@@ -30,7 +30,7 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="12" md="4">
+                    <v-col cols="12" md="3">
                       <validation-provider v-slot="{errors}" name="base" role="required">
                         <v-autocomplete
                           dense
@@ -55,7 +55,7 @@
                     <!--                        />-->
                     <!--                      </validation-provider>-->
                     <!--                    </v-col>-->
-                    <v-col cols="12" md="4">
+                    <v-col cols="12" md="3">
                       <validation-provider v-slot="{errors}" name="lesson" role="required">
                         <v-autocomplete
                           dense
@@ -69,32 +69,34 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="12" md="12">
+                    <v-col cols="12" md="3">
                       <validation-provider v-slot="{errors}" name="topic" role="required">
-                        <topic-selector :topic-list="topic_list" @selectTopic="selectTopic"/>
-                      </validation-provider>
-                    </v-col>
-                    <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="content_type" role="required">
                         <v-autocomplete
                           dense
-                          :items="content_type_list"
+                          :items="topic_list"
                           item-value="id"
                           item-text="title"
-                          v-model="form.content_type"
+                          v-model="form.topic"
                           :error-messages="errors"
-                          label="Content type"
+                          label="Topic"
                           outlined
-                        />
+                        >
+                          <template v-slot:item="data">
+                            <p :class="data.item.season ? 'topic_season' : ''" class="py-2">
+                              {{ data.item.title }}
+                            </p>
+                          </template>
+                        </v-autocomplete>
                       </validation-provider>
                     </v-col>
+
                     <v-col cols="12" md="12">
                       <validation-provider v-slot="{errors}" name="title" role="required">
                         <v-text-field
                           dense
                           v-model="form.title"
                           :error-messages="errors"
-                          label="Title"
+                          label="Summary of the question"
                           outlined
                         />
                       </validation-provider>
@@ -108,80 +110,21 @@
                           label="Describe"
                           hint="You must enter at least 70 characters."
                           persistent-hint
-                          placeholder="Write a brief description about the files to help the user make an informed choice"
+                          placeholder="Full description of the question"
                           outlined
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="12">
-                      <v-checkbox
-                        dense
-                        v-model="form.online_teaching"
-                        label="This is an online teaching session"
-                      />
-
-                    </v-col>
-                    <v-col cols="12" md="12" v-show="form.online_teaching">
-                      <v-date-picker
-                        v-model="form.date"
-                        full-width
-                      ></v-date-picker>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      md="4"
-                      v-show="form.online_teaching"
-                    >
-                      <v-menu
-                        ref="menu"
-                        v-model="timepicker_menu"
-                        :close-on-content-click="false"
-                        :nudge-right="40"
-                        :return-value.sync="form.teaching_time"
-                        transition="scale-transition"
-                        offset-y
-                      >
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-text-field
-                            v-model="form.teaching_time"
-                            label="Start time"
-                            prepend-icon="mdi-clock-time-four-outline"
-                            readonly
-                            outlined
-                            dense
-                            v-bind="attrs"
-                            v-on="on"
-                          ></v-text-field>
-                        </template>
-                        <v-time-picker
-                          v-if="timepicker_menu"
-                          v-model="form.teaching_time"
-                          full-width
-                          @click:minute="$refs.menu.save(form.teaching_time)"
-                        ></v-time-picker>
-                      </v-menu>
-                    </v-col>
-                    <v-col cols="12" md="4" v-show="form.online_teaching">
-                      <v-text-field
-                        outlined
-                        dense
-                        v-model="form.duration"
-                        type="number"
-                        min="0"
-                        label="Duration(min)"/>
-                    </v-col>
-
-
-                    <v-col cols="12" md="4" v-show="!form.online_teaching">
+                    <v-col cols="12" md="3">
                       <validation-provider v-slot="{errors}" name="pdf_question_answer_file">
                         <v-file-input
                           dense
                           v-model="form.pdf_question_answer_file"
                           :error-messages="errors"
-                          label="Presentation file"
+                          label="Attach file"
                           prepend-icon=""
                           color="red"
-                          prepend-inner-icon="mdi-play-box"
+                          prepend-inner-icon="mdi-file"
                           append-icon="mdi-folder-open"
                           outlined
                         />
@@ -189,43 +132,20 @@
                     </v-col>
 
 
-                    <v-col cols="12">
-                      <v-divider class="my-3"/>
 
-                      <p class="text-h5">Content cover</p>
-                      <p class="text-h6">
-                        What pages of the book does this content cover?
-                      </p>
-                    </v-col>
-                    <v-col cols="12" md="4">
-                      <v-text-field type="number" min="1" label="From page" dense outlined v-model="form.from_page"/>
-                    </v-col>
-                    <v-col cols="12" md="4">
-                      <v-text-field type="number" min="1" label="To page" dense outlined v-model="form.to_page"/>
-                    </v-col>
-                    <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="word_question_answer_file">
-                        <v-checkbox
-                          dense
-                          v-model="form.free_available"
-                          :error-messages="errors"
-                          label="I would like the file to be freely available to others."
-                        />
-                      </validation-provider>
-                    </v-col>
 
+                  </v-row>
+                  <v-row>
                     <v-col cols="12" md="6" class="pb-0">
                       <v-btn type="submit" lg color="success" block>
                         Submit
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
-                      <v-btn lg outlined color="error" to="/user/training-content" block>
+                      <v-btn lg outlined color="error" to="/user/question" block>
                         Discard
                       </v-btn>
                     </v-col>
-
-
                   </v-row>
                 </form>
               </validation-observer>
@@ -244,7 +164,7 @@ import TopicSelector from "@/components/form/topic-selector";
 
 export default {
   layout: 'dashboard_layout',
-  name: "add-training-content",
+  name: "add-question",
   data() {
     return {
       form: {
@@ -252,20 +172,22 @@ export default {
         base: '',
         lesson: '',
         topic: '',
-        content_type: '',
-        online_teaching:false,
-        date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-        teaching_time:null,
-
+        test_type: '',
+        answer_status: '',
+        test_level: '',
+        year: '',
+        month: '',
+        holding_level: '',
+        state: '',
+        area: '',
+        school: ''
       },
-
-      timepicker_menu:false,
       section_list: [],
       base_list: [],
       field_list: [],
       lesson_list: [],
       topic_list: [],
-      content_type_list: [],
+      test_type_list: [],
       answer_status_list: [
         {id: 0, title: "Has answer"},
         {id: 1, title: "Has key answer"},
@@ -315,7 +237,7 @@ export default {
   },
   head() {
     return {
-      title: 'Training content submission'
+      title: 'Q & A submission form'
     }
   },
   components: {
@@ -325,14 +247,13 @@ export default {
   },
   mounted() {
     this.getTypeList('section');
-    this.getTypeList('content_type')
+    this.getTypeList('test_type')
     this.getTypeList('state')
   },
   watch: {
     "form.grade"(val) {
       this.getTypeList('base', val);
-      if (this.form.area)
-        this.getTypeList('school');
+      this.getTypeList('school');
     },
     "form.base"(val) {
       this.getTypeList('lesson', val);
@@ -384,8 +305,8 @@ export default {
 
         } else if (type === 'topic') {
           this.topic_list = res.data;
-        } else if (type === 'content_type') {
-          this.content_type_list = res.data;
+        } else if (type === 'test_type') {
+          this.test_type_list = res.data;
         } else if (type === 'state') {
           this.state_list = res.data;
         } else if (type === 'area') {
@@ -404,8 +325,9 @@ export default {
     submitQuestion() {
       this.$toast.success("hi");
     },
-    selectTopic(event){
-      this.form.topic=event;
+
+    selectTopic(event) {
+      this.form.topic = event;
     }
   }
 
@@ -445,4 +367,8 @@ export default {
   font-weight: 900;
 }
 
+.topic_season {
+  font-weight: bolder !important;
+  color: blue !important;
+}
 </style>

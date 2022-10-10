@@ -112,42 +112,7 @@
                       </v-col>
                       <v-col cols="12" md="12">
                         <validation-provider v-slot="{errors}" name="topic" role="required">
-                          <v-autocomplete
-                            v-model="form.topic"
-                            :items="topic_list"
-                            dense
-                            :error-messages="errors"
-                            outlined
-                            chips
-                            color="blue-grey lighten-2"
-                            label="Topic"
-                            item-text="title"
-                            item-value="id"
-                            multiple
-                          >
-                            <template v-slot:selection="data">
-                              <v-chip
-                                v-bind="data.attrs"
-                                :input-value="data.selected"
-                                close
-                                small
-                                @click="data.select"
-                                @click:close="removeTopic(data.item)"
-                              >
-                                {{ data.item.title.length>40 ? data.item.title.substr(0,37)+ '...' : data.item.title }}
-                              </v-chip>
-                            </template>
-                            <template v-slot:item="data">
-                              <template>
-                                <v-list-item-content>
-                                  <v-list-item-title
-                                    :class="data.item.season ? 'topic_season' : ''"
-                                    v-html="data.item.title"></v-list-item-title>
-                                  <v-list-item-subtitle v-html="data.item.group"></v-list-item-subtitle>
-                                </v-list-item-content>
-                              </template>
-                            </template>
-                          </v-autocomplete>
+                          <topic-selector :topic-list="topic_list" @selectTopic="selectTopic"/>
                         </validation-provider>
                       </v-col>
                       <v-col cols="12" md="4">
@@ -366,6 +331,7 @@
 <script>
 
 import {ValidationObserver, ValidationProvider} from "vee-validate";
+import TopicSelector from "@/components/form/topic-selector";
 
 export default {
   layout: 'dashboard_layout',
@@ -446,6 +412,7 @@ export default {
     }
   },
   components: {
+    TopicSelector,
     ValidationProvider,
     ValidationObserver
   },
@@ -525,14 +492,14 @@ export default {
       })
     },
 
-    removeTopic(item) {
-      const index = this.form.topic.indexOf(item.id)
-      if (index >= 0) this.form.topic.splice(index, 1)
-    },
 
     submitQuestion() {
       this.$toast.success("hi");
     },
+
+    selectTopic(event){
+      this.form.topic=event;
+    }
   }
 
 }
