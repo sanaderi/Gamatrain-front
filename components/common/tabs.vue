@@ -141,12 +141,12 @@ export default {
 <style>
 
 /*Remove default style for vuetify tabs and apply new style*/
-.v-tab {
+.tab-header .v-tab {
   text-transform: none !important;
   font-size: 1.2rem;
 }
 
-.v-tab--active .nav-link {
+.tab-header .v-tab--active .nav-link {
   padding: 0.5rem;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 1.4rem;
@@ -154,51 +154,51 @@ export default {
   align-items: center;
 }
 
-.v-tab--active .badge-sample .nav-link {
+.tab-header .v-tab--active .badge-sample .nav-link {
   background: rgba(41, 98, 255, .05);
 }
 
-.v-tab--active .badge-training .nav-link {
+.tab-header .v-tab--active .badge-training .nav-link {
   background: rgba(1, 87, 155, .02);
 }
 
-.v-tab--active .badge-q .nav-link {
+.tab-header .v-tab--active .badge-q .nav-link {
   background: rgba(189, 8, 28, .05);
 }
 
-.v-tab--active .badge-online .nav-link {
+.tab-header .v-tab--active .badge-online .nav-link {
   background: rgba(86, 0, 232, 0.05);
 }
 
-.v-tab--active .badge-tutorial .nav-link {
+.tab-header .v-tab--active .badge-tutorial .nav-link {
   background: rgba(189, 8, 28, 0.05);
 }
 
-.v-tab--active .badge-teachers .nav-link {
+.tab-header .v-tab--active .badge-teachers .nav-link {
   background: rgba(142, 36, 170, 0.05);
 }
 
 
-.nav-link .icon {
+.tab-header .nav-link .icon {
   display: none !important;
 }
 
-.v-tab--active .nav-link .icon {
+.tab-header .v-tab--active .nav-link .icon {
   display: block !important;
   font-size: 2.5rem !important;
   padding-left: 1rem !important;
 }
 
-.v-tabs-slider {
+.tab-header .v-tabs-slider {
   display: none !important;
 }
 
 
-.v-tab--active:hover::before {
+.tab-header .v-tab--active:hover::before {
   opacity: 0;
 }
 
-.v-tab:hover::before {
+.tab-header .v-tab:hover::before {
   opacity: 0;
 }
 

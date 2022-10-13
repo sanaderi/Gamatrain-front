@@ -5,20 +5,11 @@
         <v-col cols="12" class="pl-5">
           <span class="icon icong-qa text-h3 teal--text"></span>
           <span class="text-h4 teal--text">
-            Online exam
+            Participated tests
           </span>
         </v-col>
       </v-row>
       <v-card class="mt-3">
-        <v-card-title class="text-h4">
-          <v-row>
-            <v-col cols="12" class="text-left">
-              <v-btn to="/user/question/create" color="teal" class="white--text">
-                New question
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-card-title>
         <v-card-text class="px-sm-8 px-md-4">
           <v-row>
             <v-col cols="12" class="px-0 px-sm-4 px-md-4">
@@ -30,19 +21,19 @@
                       #
                     </th>
                     <th class="text-center text-h5">
-                      Title
+                      Test
                     </th>
                     <th class="text-center text-h5">
-                      Unread answer
-                    </th>
-                    <th class="text-center text-h5">
-                      Status
+                      Lesson
                     </th>
                     <th class="text-center text-h5">
                       Date
                     </th>
                     <th class="text-center text-h5">
-                      Actions
+                      Status
+                    </th>
+                    <th class="text-center text-h5">
+                      Report card
                     </th>
                   </tr>
                   </thead>

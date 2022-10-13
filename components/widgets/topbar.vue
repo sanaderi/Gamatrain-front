@@ -133,7 +133,7 @@ export default {
         {
           title: 'Messages',
           icon: 'mdi-email-outline',
-          link: '/ticket'
+          link: '/user/ticket'
         },
         {
           title: 'Edit profile',

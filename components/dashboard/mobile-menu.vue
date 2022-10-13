@@ -1,6 +1,6 @@
 <template>
   <!--Dashboard mobile menu-->
-  <v-row class="d-block d-md-none">
+  <v-row class="d-block d-md-none mobile_dashboard_menu">
     <v-col cols="12" class="px-0 pb-0 mb-0">
       <v-tabs
         background-color="#fff"
@@ -62,7 +62,7 @@ export default {
         },
         {title: 'Online exam', icon: 'mdi-laptop', link: '/'},
         {title: 'Financial', icon: 'mdi-credit-card-outline', link: '/'},
-        {title: 'Messages', icon: 'mdi-email-outline', link: '/'},
+        {title: 'Messages', icon: 'mdi-email-outline', link: '/user/ticket'},
         {
           title: 'Profile',
           icon: 'mdi-account-outline',
@@ -114,9 +114,16 @@ export default {
 
 <style>
 
-.v-slide-group__prev,.v-slide-group__next {
+.mobile_dashboard_menu .v-slide-group__prev,.v-slide-group__next {
   display: none !important;
 }
+
+.mobile_dashboard_menu .v-tabs-slider {
+  display: none !important;
+}
+
+
+
 
 
 .fixed-tabs-bar {

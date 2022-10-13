@@ -1119,7 +1119,7 @@ body {
               padding: 1rem 0;
 
               .v-slide-group__prev {
-                display: none;
+                display: none!important;
               }
 
               .v-badge {
@@ -1165,7 +1165,7 @@ body {
               padding: 1rem 0;
 
               .v-slide-group__prev {
-                display: none;
+                display: none!important;
               }
 
               .v-badge {
@@ -1199,7 +1199,7 @@ body {
               padding: 1rem 0;
 
               .v-slide-group__prev {
-                display: none;
+                display: none!important;
               }
 
               .v-badge {
@@ -1233,7 +1233,7 @@ body {
               padding: 1rem 0;
 
               .v-slide-group__prev {
-                display: none;
+                display: none!important;
               }
 
               .v-badge {
@@ -1267,7 +1267,7 @@ body {
               padding: 1rem 0;
 
               .v-slide-group__prev {
-                display: none;
+                display: none!important;
               }
 
               .v-badge {
@@ -1358,7 +1358,7 @@ body {
                 padding: 1rem 0;
 
                 .v-slide-group__prev {
-                  display: none;
+                  display: none!important;
                 }
 
                 .v-badge {
@@ -1408,6 +1408,9 @@ body {
     }
 
     @media screen and (max-width: 610px) {
+      .v-slide-group__next, .v-slide-group__prev{
+        display: none!important;
+      }
       .test-details-content {
         .detail {
           .download-links {
@@ -1711,7 +1714,7 @@ body {
 
         .sample-slider {
           .v-slide-group__prev {
-            display: none;
+            display: none!important;
           }
 
           .v-slide-group__next {
@@ -1942,7 +1945,7 @@ body {
                 padding: 1rem 0;
 
                 .v-slide-group__prev {
-                  display: none;
+                  display: none!important;
                 }
 
                 .v-badge {
@@ -2132,7 +2135,7 @@ body {
                 padding: 1rem 0;
 
                 .v-slide-group__prev {
-                  display: none;
+                  display: none!important;
                 }
 
                 .v-badge {
@@ -2364,7 +2367,7 @@ body {
                 padding: 1rem 0;
 
                 .v-slide-group__prev {
-                  display: none;
+                  display: none!important;
                 }
 
                 .v-badge {
@@ -2531,7 +2534,7 @@ body {
                   padding: 1rem 0;
 
                   .v-slide-group__prev {
-                    display: none;
+                    display: none!important;
                   }
 
                   .v-badge {
@@ -2968,7 +2971,7 @@ body {
                 padding: 1rem 0;
 
                 .v-slide-group__prev {
-                  display: none;
+                  display: none!important;
                 }
 
                 .v-badge {

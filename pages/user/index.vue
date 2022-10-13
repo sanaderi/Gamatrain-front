@@ -246,6 +246,7 @@ export default {
   },
   mounted() {
     this.getUserInfo();
+
   },
   data() {
     return {
@@ -298,7 +299,7 @@ export default {
 
       var objIndex = this.$refs["create-content-section"].button_list.findIndex(x => x.class === 'online_exam');
       this.$refs["create-content-section"].button_list[objIndex].count = stats.test.total;
-    }
+    },
   }
 }
 </script>

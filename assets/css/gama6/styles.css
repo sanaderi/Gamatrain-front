@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: "gama6";
-  src:url("fonts/gama6.eot");
-  src:url("fonts/gama6.eot?#iefix") format("embedded-opentype"),
-    url("fonts/gama6.woff") format("woff"),
-    url("fonts/gama6.ttf") format("truetype"),
-    url("fonts/gama6.svg#gama6") format("svg");
+  src: url("fonts/gama6.eot");
+  src: url("fonts/gama6.eot?#iefix") format("embedded-opentype"),
+  url("fonts/gama6.woff") format("woff"),
+  url("fonts/gama6.ttf") format("truetype"),
+  url("fonts/gama6.svg#gama6") format("svg");
   font-weight: normal;
   font-style: normal;
 
@@ -41,33 +41,43 @@
 .icong-azmoon:before {
   content: "\61";
 }
+
 .icong-blog:before {
   content: "\62";
 }
+
 .icong-learnfiles:before {
   content: "\63";
 }
+
 .icong-news:before {
   content: "\64";
 }
+
 .icong-qa:before {
   content: "\65";
 }
+
 .icong-school:before {
   content: "\66";
 }
+
 .icong-set:before {
   content: "\67";
 }
+
 .icong-shop:before {
   content: "\68";
 }
+
 .icong-student:before {
   content: "\69";
 }
+
 .icong-teacher:before {
   content: "\6a";
 }
+
 .icong-test:before {
   content: "\6b";
 }

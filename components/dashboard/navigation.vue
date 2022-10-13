@@ -7,6 +7,7 @@
       <v-list-item
         v-show="!item.subMenuList"
         link
+        :to="item.link"
       >
         <v-list-item-icon>
           <v-icon v-text="item.icon"></v-icon>
@@ -54,7 +55,7 @@ export default {
         {title: 'Add', icon: 'mdi-plus-circle-outline', machine_name: 'add_content'},
         {title: 'Online exam', icon: 'mdi-laptop'},
         {title: 'Financial', icon: 'mdi-credit-card-outline'},
-        {title: 'Messages', icon: 'mdi-email-outline'},
+        {title: 'Messages', icon: 'mdi-email-outline',link:'/user/ticket'},
         {
           title: 'Profile',
           icon: 'mdi-account-outline',
