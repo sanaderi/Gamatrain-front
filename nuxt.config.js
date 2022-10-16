@@ -36,7 +36,9 @@ export default {
     {src: 'plugins/vee-validate.js', ssr: true},
     {src: 'plugins/axios.js'},
     {src: 'plugins/helper.js'},
-    {src: 'plugins/vuex-persist', ssr: false}
+    {src: 'plugins/vuex-persist', ssr: false},
+    {src: 'plugins/vue-emoji-picker', ssr: false},
+    {src: 'plugins/img-cropper', ssr: false}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

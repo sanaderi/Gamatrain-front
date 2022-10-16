@@ -8,6 +8,13 @@ const phone    = {
   }
 };
 
+let telRegex = /^(0)\d{10}$/;
+const tel    = {
+  validate(value, args) {
+    return telRegex.test(value);
+  }
+};
+
 const dictionary = {
   en: {
     messages: {
@@ -16,6 +23,7 @@ const dictionary = {
       confirmed: () => `Password does not match`,
       min      : (_, {length}) => `This field must be at least ${length} characters`,
       phone    : () => `Phone is not valid`,
+      tel   : () => `Tel is not valid`,
       size    : (_, {size}) => `Max size is ${size}KB`,
       image    : () => `Image type is incorrect`,
     },
@@ -28,6 +36,7 @@ extend("email", email);
 extend("confirmed", confirmed);
 extend("min", min);
 extend("phone", phone);
+extend("tel", tel);
 extend("image", image);
 
 

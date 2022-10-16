@@ -17,7 +17,7 @@
                 <form @submit.prevent="submitQuestion">
                   <v-row>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="grade" role="required">
+                      <validation-provider v-slot="{errors}" name="grade" rules="required">
                         <v-autocomplete
                           dense
                           v-model="form.grade"
@@ -31,7 +31,7 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="base" role="required">
+                      <validation-provider v-slot="{errors}" name="base" rules="required">
                         <v-autocomplete
                           dense
                           v-model="form.base"
@@ -45,7 +45,7 @@
                       </validation-provider>
                     </v-col>
                     <!--                    <v-col cols="12" md="4">-->
-                    <!--                      <validation-provider v-slot="{errors}" name="field" role="required">-->
+                    <!--                      <validation-provider v-slot="{errors}" name="field" rules="required">-->
                     <!--                        <v-autocomplete-->
                     <!--                          dense-->
                     <!--                          v-model="form.field"-->
@@ -56,7 +56,7 @@
                     <!--                      </validation-provider>-->
                     <!--                    </v-col>-->
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="lesson" role="required">
+                      <validation-provider v-slot="{errors}" name="lesson" rules="required">
                         <v-autocomplete
                           dense
                           :items="lesson_list"
@@ -70,12 +70,12 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="topic" role="required">
+                      <validation-provider v-slot="{errors}" name="topic" rules="required">
                         <topic-selector :topic-list="topic_list" @selectTopic="selectTopic"/>
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="content_type" role="required">
+                      <validation-provider v-slot="{errors}" name="content_type" rules="required">
                         <v-autocomplete
                           dense
                           :items="content_type_list"
@@ -89,7 +89,7 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="title" role="required">
+                      <validation-provider v-slot="{errors}" name="title" rules="required">
                         <v-text-field
                           dense
                           v-model="form.title"
@@ -100,7 +100,7 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="describe" role="required">
+                      <validation-provider v-slot="{errors}" name="describe" rules="required">
                         <v-textarea
                           dense
                           v-model="form.describe"

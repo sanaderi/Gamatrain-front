@@ -21,14 +21,16 @@
         <v-col cols="12">
           <v-text-field
             filled
+            v-model="user_direct"
             height="40"
             outlined
+            shaped
+            readonly
             dense
-            label="Search..."
           >
-            <template slot="prepend-inner">
-              <v-btn icon>
-                <v-icon class="search-icon pb-2">mdi-magnify</v-icon>
+            <template slot="append">
+              <v-btn icon class="pointer" color="teal" @click="copyUrl">
+                <v-icon class="search-icon pb-2">mdi-content-copy</v-icon>
               </v-btn>
 
             </template>
@@ -174,7 +176,15 @@ export default {
           username:"@admin"
         },
       ],
+      user_direct:`gamatrain.com/direct/${this.$auth.username}`
     }
+  },
+  methods:{
+    copyUrl() {
+      navigator.clipboard.writeText(this.user_direct);
+      this.$toast.success('Copied');
+
+    },
   }
 }
 </script>
@@ -201,7 +211,7 @@ font-size: 1.4rem;
   border-right: 10px solid transparent!important;
   bottom: -15px;
   right: 10px;
-  z-index: 500;
+  z-index: 1;
   border-top: 20px solid #009688;
   background-color: transparent!important;
 

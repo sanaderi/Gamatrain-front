@@ -244,7 +244,7 @@ export default {
       title: 'Dashboard'
     }
   },
-  mounted() {
+  created() {
     this.getUserInfo();
 
   },
@@ -258,9 +258,9 @@ export default {
   },
   methods: {
     getUserInfo() {
-      var apiUrl = '/api/v1/students/user';
+      var apiUrl = '/api/v1/students/dashboard';
       if (this.user_type === '5')
-        apiUrl = '/api/v1/teachers/user';
+        apiUrl = '/api/v1/teachers/dashboard';
 
       this.$axios.$get(apiUrl)
         .then(response => {

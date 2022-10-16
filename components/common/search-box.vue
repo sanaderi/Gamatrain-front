@@ -12,7 +12,6 @@
       <v-btn icon>
         <v-icon class="search-icon pb-2">mdi-magnify</v-icon>
       </v-btn>
-
     </template>
   </v-text-field>
   <!--  End:  Search and logo in header  -->

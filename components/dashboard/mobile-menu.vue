@@ -68,7 +68,7 @@ export default {
           icon: 'mdi-account-outline',
           link: '',
           subMenuList: [
-            {title: "Edit profile", link: "",icon:'mdi-account-outline'},
+            {title: "Edit profile", link: "/user/profile",icon:'mdi-account-outline'},
             {title: "Identity confirmation", link: "",icon:'mdi-account-outline'},
             {title: "Edit password", link: "/user/edit-pass",icon:'mdi-key'},
             {title: "Setting", link: "/user/setting",icon:'mdi-account-outline'},
