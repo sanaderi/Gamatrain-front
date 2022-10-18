@@ -5,7 +5,7 @@
         <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-sample" :content="content_statistics.test">
           <div class="nav-link sample-q-icon">
             <span class="icon icong-test mr-1"></span>
-            Sample Exam
+            Exam Paper
           </div>
         </v-badge>
       </v-tab>
@@ -13,7 +13,7 @@
         <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-training" :content="content_statistics.learnfiles" color="#2E7D32">
           <div class="nav-link training-content-icon">
             <span class="icon icong-learnfiles mr-1"></span>
-            Training Content
+            Presentation
           </div>
         </v-badge>
       </v-tab>
@@ -46,7 +46,7 @@
                  :content="content_statistics.tutor" color="#8E24AA">
           <div class="nav-link teacher-icon">
             <span class="icon icong-teacher mr-1"></span>
-            Teacher
+            Tutor
           </div>
         </v-badge>
       </v-tab>

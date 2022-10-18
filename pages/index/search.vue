@@ -5,27 +5,27 @@
       <v-col cols="12" md="3" sm="12" class="search-item">
         <v-autocomplete
           class="grade-search"
-          v-model="form.grade"
+          v-model="form.level"
           :items="section_list"
           item-text="title"
           clearable
           item-value="id"
           dense
           outlined
-          label="Grade level"
+          label="Level"
         ></v-autocomplete>
       </v-col>
       <v-col cols="12" md="3" sm="12" class="search-item">
         <v-autocomplete
           class="grade-search"
-          v-model="form.base"
-          :items="base_list"
+          v-model="form.grade"
+          :items="grade_list"
           item-text="title"
           item-value="id"
           clearable
           dense
           outlined
-          label="Base"
+          label="Garde"
         ></v-autocomplete>
       </v-col>
       <v-col cols="12" md="3" sm="12" class="search-item">
@@ -63,24 +63,24 @@ export default {
   data() {
     return {
       form: {
+        level: '',
         grade: '',
-        base: '',
         lesson: '',
       },
       section_list: [],
-      base_list: [],
+      grade_list: [],
       lesson_list: [],
 
     };
   },
   watch: {
-    "form.grade"(val) {
-      this.base_list = [];
+    "form.level"(val) {
+      this.grade_list = [];
       this.lesson_list = [];
       if (val)
         this.getTypeList('base', val);
     },
-    "form.base"(val) {
+    "form.grade"(val) {
       this.lesson_list = [];
       if (val)
         this.getTypeList('lesson', val);
@@ -107,7 +107,7 @@ export default {
         if (type === 'section') {
           this.section_list = res.data;
         } else if (type === 'base') {
-          this.base_list = res.data;
+          this.grade_list = res.data;
 
         } else if (type === 'lesson') {
           this.lesson_list = res.data;

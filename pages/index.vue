@@ -125,11 +125,11 @@
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'Sample Exam'"
+                        v-if="item.title === 'Exam Paper'"
                         class="mr-4 icon icong-test"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'Training Content'"
+                        v-else-if="item.title === 'Presentation'"
                         class="mr-4 icon icong-learnfiles"
                       ></v-icon>
                       <v-icon
@@ -279,11 +279,11 @@
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'Sample Exam'"
+                        v-if="item.title === 'Exam Paper'"
                         class="ml-1 icon icong-test"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'Training Content'"
+                        v-else-if="item.title === 'Presentation'"
                         class="ml-1 icon icong-learnfiles"
                       ></v-icon>
                       <v-icon
@@ -423,11 +423,11 @@
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'Sample Exam'"
+                        v-if="item.title === 'Exam Paper'"
                         class="ml-1 icon icong-test"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'Training Content'"
+                        v-else-if="item.title === 'Presentation'"
                         class="ml-1 icon icong-learnfiles"
                       ></v-icon>
                       <v-icon
@@ -607,7 +607,7 @@ export default {
     value3: null,
     gradeList: [
       {
-        title: "1st Grade",
+        title: "1st Level",
         summeryContent: [
           {content: "Farsi", to: ""},
           {content: "Writing", to: ""},
@@ -645,11 +645,11 @@ export default {
         link: "",
         cat: [
           {
-            title: "Sample Exam",
+            title: "Exam Paper",
             stat: "1355",
           },
           {
-            title: "Training Content",
+            title: "Presentation",
             stat: "1211",
           },
           {
@@ -664,7 +664,7 @@ export default {
         update: "2 Jul",
       },
       {
-        title: "2st Grade",
+        title: "2st Level",
         summeryContent: [
           {content: "Farsi", to: ""},
           {content: "Writing", to: ""},
@@ -701,11 +701,11 @@ export default {
         ],
         cat: [
           {
-            title: "Sample Exam",
+            title: "Exam Paper",
             stat: "1355",
           },
           {
-            title: "Training Content",
+            title: "Presentation",
             stat: "1211",
           },
           {
@@ -720,7 +720,7 @@ export default {
         update: "2 Jul",
       },
       {
-        title: "3st Grade",
+        title: "3st Level",
         summeryContent: [
           {content: "Farsi", to: ""},
           {content: "Writing", to: ""},
@@ -757,11 +757,11 @@ export default {
         ],
         cat: [
           {
-            title: "Sample Exam",
+            title: "Exam Paper",
             stat: "1355",
           },
           {
-            title: "Training Content",
+            title: "Presentation",
             stat: "1211",
           },
           {
@@ -776,7 +776,7 @@ export default {
         update: "2 Jul",
       },
       {
-        title: "4st Grade",
+        title: "4st Level",
         summeryContent: [
           {content: "Farsi", to: ""},
           {content: "Writing", to: ""},
@@ -813,11 +813,11 @@ export default {
         ],
         cat: [
           {
-            title: "Sample Exam",
+            title: "Exam Paper",
             stat: "1355",
           },
           {
-            title: "Training Content",
+            title: "Presentation",
             stat: "1211",
           },
           {
@@ -832,232 +832,7 @@ export default {
         update: "2 Jul",
       },
       {
-        title: "5st Grade",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        link: "",
-        cat: [
-          {
-            title: "Sample Exam",
-            stat: "1355",
-          },
-          {
-            title: "Training Content",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Online Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "6st Grade",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Sample Exam",
-            stat: "1355",
-          },
-          {
-            title: "Training Content",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Online Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "7st Grade",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Sample Exam",
-            stat: "1355",
-          },
-          {
-            title: "Training Content",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Online Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "8st Grade",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Sample Exam",
-            stat: "1355",
-          },
-          {
-            title: "Training Content",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Online Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "9st Grade",
+        title: "5st Level",
         summeryContent: [
           {content: "Farsi", to: ""},
           {content: "Writing", to: ""},
@@ -1095,11 +870,11 @@ export default {
         link: "",
         cat: [
           {
-            title: "Sample Exam",
+            title: "Exam Paper",
             stat: "1355",
           },
           {
-            title: "Training Content",
+            title: "Presentation",
             stat: "1211",
           },
           {
@@ -1114,7 +889,7 @@ export default {
         update: "2 Jul",
       },
       {
-        title: "10st Grade",
+        title: "6st Level",
         summeryContent: [
           {content: "Farsi", to: ""},
           {content: "Writing", to: ""},
@@ -1151,11 +926,11 @@ export default {
         ],
         cat: [
           {
-            title: "Sample Exam",
+            title: "Exam Paper",
             stat: "1355",
           },
           {
-            title: "Training Content",
+            title: "Presentation",
             stat: "1211",
           },
           {
@@ -1170,7 +945,7 @@ export default {
         update: "2 Jul",
       },
       {
-        title: "11st Grade",
+        title: "7st Level",
         summeryContent: [
           {content: "Farsi", to: ""},
           {content: "Writing", to: ""},
@@ -1207,11 +982,11 @@ export default {
         ],
         cat: [
           {
-            title: "Sample Exam",
+            title: "Exam Paper",
             stat: "1355",
           },
           {
-            title: "Training Content",
+            title: "Presentation",
             stat: "1211",
           },
           {
@@ -1226,7 +1001,7 @@ export default {
         update: "2 Jul",
       },
       {
-        title: "12st Grade",
+        title: "8st Level",
         summeryContent: [
           {content: "Farsi", to: ""},
           {content: "Writing", to: ""},
@@ -1263,11 +1038,236 @@ export default {
         ],
         cat: [
           {
-            title: "Sample Exam",
+            title: "Exam Paper",
             stat: "1355",
           },
           {
-            title: "Training Content",
+            title: "Presentation",
+            stat: "1211",
+          },
+          {
+            title: "Q & A",
+            stat: "68",
+          },
+          {
+            title: "Online Exam",
+            stat: "22",
+          },
+        ],
+        update: "2 Jul",
+      },
+      {
+        title: "9st Level",
+        summeryContent: [
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+        ],
+        link: "",
+        cat: [
+          {
+            title: "Exam Paper",
+            stat: "1355",
+          },
+          {
+            title: "Presentation",
+            stat: "1211",
+          },
+          {
+            title: "Q & A",
+            stat: "68",
+          },
+          {
+            title: "Online Exam",
+            stat: "22",
+          },
+        ],
+        update: "2 Jul",
+      },
+      {
+        title: "10st Level",
+        summeryContent: [
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+        ],
+        cat: [
+          {
+            title: "Exam Paper",
+            stat: "1355",
+          },
+          {
+            title: "Presentation",
+            stat: "1211",
+          },
+          {
+            title: "Q & A",
+            stat: "68",
+          },
+          {
+            title: "Online Exam",
+            stat: "22",
+          },
+        ],
+        update: "2 Jul",
+      },
+      {
+        title: "11st Level",
+        summeryContent: [
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+        ],
+        cat: [
+          {
+            title: "Exam Paper",
+            stat: "1355",
+          },
+          {
+            title: "Presentation",
+            stat: "1211",
+          },
+          {
+            title: "Q & A",
+            stat: "68",
+          },
+          {
+            title: "Online Exam",
+            stat: "22",
+          },
+        ],
+        update: "2 Jul",
+      },
+      {
+        title: "12st Level",
+        summeryContent: [
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+        ],
+        showMore: false,
+        totalContent: [
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+          {content: "Writing", to: ""},
+          {content: "Math", to: ""},
+          {content: "Experimental", to: ""},
+          {content: "Farsi", to: ""},
+        ],
+        cat: [
+          {
+            title: "Exam Paper",
+            stat: "1355",
+          },
+          {
+            title: "Presentation",
             stat: "1211",
           },
           {
@@ -1294,10 +1294,10 @@ export default {
         ],
       },
       {
-        title: "Teacher",
+        title: "Tutor",
         icon: "teacher",
         details: [
-          "جستجوی بهترین Teacher در نزدیکی شما",
+          "جستجوی بهترین Tutor در نزدیکی شما",
           "گفتگوی Student و معلم",
           "پرداخت آنلاین یا اعتباری مبلغ حق التدریس",
           "برگزاری حضوری کلاس در خانه Student",
@@ -1326,9 +1326,9 @@ export default {
 
     statList: [
       {label: "School", value: "130,000", icon: "fa-graduation-cap"},
-      {label: "Teacher", value: "300,000", icon: "fa-graduation-cap"},
+      {label: "Tutor", value: "300,000", icon: "fa-graduation-cap"},
       {label: "Student", value: "1,500,000", icon: "fa-graduation-cap"},
-      {label: "Sample Exam", value: "50,000", icon: "fa-graduation-cap"},
+      {label: "Exam Paper", value: "50,000", icon: "fa-graduation-cap"},
       {label: "پاورپوینت", value: "30,000", icon: "fa-graduation-cap"},
       {label: "Online Exam", value: "5,000", icon: "fa-graduation-cap"},
     ],

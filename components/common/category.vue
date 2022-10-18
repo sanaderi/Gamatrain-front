@@ -113,12 +113,12 @@ export default {
     showMore: false,
     items: [
       { class: "exam", text: "Online Exam", icon: "azmoon",link:"/search?type=azmoon" },
-      { class: "test", text: "Sample Exam", icon: "test",link:"/search?type=test" },
-      { class: "content", text: "Training content", icon: "learnfiles" ,link:"/search?type=learnfiles" },
+      { class: "test", text: "Exam Paper", icon: "test",link:"/search?type=test" },
+      { class: "content", text: "Presentation", icon: "learnfiles" ,link:"/search?type=learnfiles" },
       { class: "faq", text: "Q & A", icon: "qa",link:"/search?type=question" },
       { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/search?type=dars" },
       { class: "school", text: "School finder", icon: "school" ,link:"/search?type=school" },
-      { class: "tutor", text: "Teacher", icon: "teacher" ,link:"/search?type=tutor" },
+      { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor" },
     ],
   }),
 };

@@ -14,8 +14,8 @@ body {
   transition: 0.5s ease-in-out;
 
 
-  .pointer{
-    cursor: pointer!important;
+  .pointer {
+    cursor: pointer !important;
   }
 
   .dropdown-items {
@@ -48,7 +48,6 @@ body {
     .v-carousel__controls__item {
       color: $gray4 !important;
     }
-
 
 
     .v-carousel__controls__item .v-icon {
@@ -365,8 +364,6 @@ body {
       }
 
 
-
-
       .header-search {
         &.desktop-search {
           border: 0.1rem solid rgba(34, 36, 38, 0.15);
@@ -424,7 +421,6 @@ body {
     .banner .v-image {
       height: 28rem !important;
     }
-
 
 
     // category
@@ -1988,7 +1984,6 @@ body {
     }
 
 
-
     //  close body and v-application
   }
 }
@@ -2005,10 +2000,10 @@ body {
     border-radius: 8px;
 
     p {
-     font-size: 1rem;
+      font-size: 1rem;
     }
 
-    a{
+    a {
       font-size: 1rem;
     }
   }
@@ -2028,14 +2023,14 @@ body {
 
     }
 
-    a{
+    a {
       font-size: 1.2rem;
     }
   }
 }
 
 
-@media only screen and (min-width: 960px){
+@media only screen and (min-width: 960px) {
 
   .book-no-img {
     width: 15rem;
@@ -2049,7 +2044,7 @@ body {
 
     }
 
-    a{
+    a {
       font-size: 1.4rem;
     }
   }
@@ -2918,7 +2913,7 @@ body {
 //End search page
 
 
-// Start :  Training Content
+// Start :  Presentation
 .training-content {
 
 
@@ -3137,7 +3132,7 @@ body {
 
 }
 
-// End : Training Content
+// End : Presentation
 
 
 // Start : Q & A
@@ -3530,7 +3525,6 @@ body {
             color: $gray4;
             width: 60%;
           }
-
 
 
           .card-footer {
@@ -4272,44 +4266,42 @@ body {
   }
 
 }
+
 // End : Teachers
 
 
-
 //User dashboard
-.dashboard{
-  .create_content_section{
-    margin: 2rem 0 2rem 0!important;
+.dashboard {
+  .create_content_section {
+    margin: 2rem 0 2rem 0 !important;
 
-    .counter{
+    .counter {
       font-style: normal;
       font-weight: 900;
       font-size: 2.2rem;
       line-height: 30px;
     }
 
-    .title{
-      font-size: 1.4rem!important;
+    .title {
+      font-size: 1.4rem !important;
       font-weight: 400;
       font-style: normal;
     }
 
-    .sample_exam{
+    .sample_exam {
 
-      .icon_btn{
+      .icon_btn {
         background: rgba(11, 161, 228, 0.15);
 
-        .icon{
+        .icon {
           color: $category-test;
           font-size: 4rem;
         }
       }
 
 
-
-
-      .icon_link{
-        .icon{
+      .icon_link {
+        .icon {
           color: #0BA1E4;
         }
       }
@@ -4318,18 +4310,18 @@ body {
     }
 
 
-    .training_content{
-      .icon_btn{
+    .training_content {
+      .icon_btn {
         background: rgba(87, 186, 84, 0.15);
 
-        .icon{
+        .icon {
           color: $category-content;
           font-size: 4rem;
         }
       }
 
-      .icon_link{
-        .icon{
+      .icon_link {
+        .icon {
           color: $category-content;
         }
       }
@@ -4338,18 +4330,18 @@ body {
     }
 
 
-    .question_answer{
-      .icon_btn{
+    .question_answer {
+      .icon_btn {
         background: rgba(255, 152, 0, 0.15);;
 
-        .icon{
+        .icon {
           color: $category-faq;
           font-size: 4rem;
         }
       }
 
-      .icon_link{
-        .icon{
+      .icon_link {
+        .icon {
           color: $category-faq;
         }
       }
@@ -4357,18 +4349,18 @@ body {
 
     }
 
-    .online_exam{
-      .icon_btn{
+    .online_exam {
+      .icon_btn {
         background: rgba(63, 81, 181, 0.15);
 
-        .icon{
+        .icon {
           color: $category-online-exam;
           font-size: 4rem;
         }
       }
 
-      .icon_link{
-        .icon{
+      .icon_link {
+        .icon {
           color: $category-online-exam;
         }
       }
@@ -4381,5 +4373,75 @@ body {
 
 }
 
+
+//Charge wallet
+#charge-wallet {
+  p {
+    font-size: 2rem;
+  }
+
+  #select_charge_package {
+    .v-input--selection-controls__input {
+      display: none !important;
+    }
+
+    .radio_card {
+      width: 100% !important;
+    }
+
+    .active_radio .radio_card {
+      border-bottom: 10px solid teal !important;
+    }
+
+  }
+
+  #credit-notice li {
+    line-height: 2rem;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    list-style: none;
+    position: relative;
+  }
+
+  #credit-notice li::before {
+    position: absolute;
+    top: 0;
+    font-weight: bolder;
+    left: -20px;
+    font-family: "Font Awesome 5 Free";
+    content: "\f00c";
+    color: #00D2AE;
+    font-size: 1.5rem;
+  }
+
+
+  #payment-logo-list {
+    margin-right: auto;
+    margin-left: auto;
+
+
+    .v-input--selection-controls__input {
+      display: none !important;
+    }
+
+
+    .theme--light.v-image {
+      display: inline-block;
+      max-width: 7.5rem;
+      height: 5rem;
+    }
+
+
+    .active_radio {
+      #logo_holder {
+        padding-left: 8px;
+        padding-right: 8px;
+        border:1px solid rgba(0,128,0,0.7) !important;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+//End charge wallet
 
 

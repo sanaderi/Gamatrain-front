@@ -5,7 +5,7 @@
         <v-col cols="12" class="pl-5">
           <span class="icon icong-test text-h3 teal--text"></span>
           <span class="text-h4 teal--text">
-            Training content
+            Presentation
           </span>
         </v-col>
       </v-row>
@@ -13,33 +13,36 @@
         <v-card-title class="text-h4">
           <v-row>
             <v-col cols="12" class="text-left">
-              <v-btn to="/user/training-content/create" color="teal" class="white--text">
-                New training content
+              <v-btn to="/user/presentation/create" color="teal" class="white--text">
+                New presentation
+              </v-btn>
+              <v-btn @click="filter_block=!filter_block" color="orange" outlined class="white--text">
+                Filter
               </v-btn>
             </v-col>
           </v-row>
         </v-card-title>
         <v-card-text class="px-sm-8 px-md-4">
-          <v-row>
+          <v-row v-show="filter_block">
             <v-col cols="12" md="3">
               <v-autocomplete
                 dense
-                v-model="form.grade"
-                :items="section_list"
+                v-model="form.level"
+                :items="level_list"
                 item-text="title"
                 item-value="id"
-                label="Grade"
+                label="Level"
                 outlined
               />
             </v-col>
             <v-col cols="12" md="3">
               <v-autocomplete
                 dense
-                v-model="form.base"
-                :items="base_list"
+                v-model="form.grade"
+                :items="grade_list"
                 item-value="id"
                 item-text="title"
-                label="Base"
+                label="Grade"
                 outlined
               />
             </v-col>
@@ -140,14 +143,15 @@ export default {
   // },
   data() {
     return {
+      filter_block:false,
       form: {
+        level: '',
         grade: '',
-        base: '',
         lesson: '',
       },
       exam_list: [],
-      section_list:[],
-      base_list:[],
+      level_list:[],
+      grade_list:[],
       lesson_list:[],
       status_list:[
         {id:'',title:'All'},
@@ -163,14 +167,14 @@ export default {
   },
   head() {
     return {
-      title: 'Training content manage'
+      title: 'Presentation manage'
     }
   },
   watch: {
-    "form.grade"(val) {
+    "form.level"(val) {
       this.getTypeList('base', val);
     },
-    "form.base"(val) {
+    "form.grade"(val) {
       this.getTypeList('lesson', val);
     },
     "form.lesson"(val) {
@@ -197,9 +201,9 @@ export default {
         params
       }).then(res => {
         if (type === 'section') {
-          this.section_list = res.data;
+          this.level_list = res.data;
         } else if (type === 'base') {
-          this.base_list = res.data;
+          this.grade_list = res.data;
 
         } else if (type === 'lesson') {
           this.lesson_list = res.data;

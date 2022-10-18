@@ -54,7 +54,16 @@ export default {
       items: [
         {title: 'Add', icon: 'mdi-plus-circle-outline', machine_name: 'add_content'},
         {title: 'Online exam', icon: 'mdi-laptop'},
-        {title: 'Financial', icon: 'mdi-credit-card-outline'},
+        {
+          title: 'Financial',
+          icon: 'mdi-credit-card-outline',
+          subMenuList: [
+            {title: "Charge wallet", link: "/user/charge-wallet"},
+            {title: "Participation link", link: "/user/participation-link"},
+            {title: "Payment report", link: "/user/payment-report"},
+          ],
+
+        },
         {title: 'Messages', icon: 'mdi-email-outline',link:'/user/ticket'},
         {
           title: 'Profile',
@@ -76,8 +85,8 @@ export default {
 
     if (this.$auth.user.group_id === '5')
       this.items[index].subMenuList = [
-        {title: "Test", link: "/user/test", icon: 'icong-test', icon_type: 'custom'},
-        {title: "Training content", link: "/user/training-content", icon: 'icong-test', icon_type: 'custom'},
+        {title: "Exam Paper", link: "/user/exam-paper", icon: 'icong-test', icon_type: 'custom'},
+        {title: "Presentation", link: "/user/presentation", icon: 'icong-test', icon_type: 'custom'},
         {title: "Q & A", link: "/user/question", icon: 'icong-test', icon_type: 'custom'}
       ];
     else

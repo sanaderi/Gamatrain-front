@@ -5,7 +5,7 @@
         <v-col cols="12" class="pl-5">
           <span class="icon icong-learnfiles text-h3 teal--text"></span>
           <span class="text-h4 teal--text">
-            Training content submission form
+            Presentation submission form
           </span>
         </v-col>
       </v-row>
@@ -17,29 +17,29 @@
                 <form @submit.prevent="submitQuestion">
                   <v-row>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="grade" rules="required">
+                      <validation-provider v-slot="{errors}" name="level" rules="required">
                         <v-autocomplete
                           dense
-                          v-model="form.grade"
+                          v-model="form.level"
                           :items="section_list"
                           :error-messages="errors"
                           item-text="title"
                           item-value="id"
-                          label="Grade"
+                          label="Level"
                           outlined
                         />
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="base" rules="required">
+                      <validation-provider v-slot="{errors}" name="grade" rules="required">
                         <v-autocomplete
                           dense
-                          v-model="form.base"
-                          :items="base_list"
+                          v-model="form.grade"
+                          :items="grade_list"
                           item-value="id"
                           item-text="title"
                           :error-messages="errors"
-                          label="Base"
+                          label="Grade"
                           outlined
                         />
                       </validation-provider>
@@ -220,7 +220,7 @@
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
-                      <v-btn lg outlined color="error" to="/user/training-content" block>
+                      <v-btn lg outlined color="error" to="/user/presentation" block>
                         Discard
                       </v-btn>
                     </v-col>
@@ -248,8 +248,8 @@ export default {
   data() {
     return {
       form: {
+        level: '',
         grade: '',
-        base: '',
         lesson: '',
         topic: '',
         content_type: '',
@@ -261,7 +261,7 @@ export default {
 
       timepicker_menu:false,
       section_list: [],
-      base_list: [],
+      grade_list: [],
       field_list: [],
       lesson_list: [],
       topic_list: [],
@@ -315,7 +315,7 @@ export default {
   },
   head() {
     return {
-      title: 'Training content submission'
+      title: 'Presentation submission'
     }
   },
   components: {
@@ -329,12 +329,12 @@ export default {
     this.getTypeList('state')
   },
   watch: {
-    "form.grade"(val) {
+    "form.level"(val) {
       this.getTypeList('base', val);
       if (this.form.area)
         this.getTypeList('school');
     },
-    "form.base"(val) {
+    "form.grade"(val) {
       this.getTypeList('lesson', val);
     },
     "form.lesson"(val) {
@@ -365,7 +365,7 @@ export default {
       }
 
       if (type === 'school') {
-        params.section_id = this.form.grade;
+        params.section_id = this.form.level;
         params.area_id = this.form.area;
       }
 
@@ -377,7 +377,7 @@ export default {
         if (type === 'section') {
           this.section_list = res.data;
         } else if (type === 'base') {
-          this.base_list = res.data;
+          this.grade_list = res.data;
 
         } else if (type === 'lesson') {
           this.lesson_list = res.data;

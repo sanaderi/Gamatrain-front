@@ -148,37 +148,37 @@
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >Teacher</v-col
+          >Tutor</v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >Teacher</v-col
+          >Tutor</v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >Teacher</v-col
+          >Tutor</v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >Teacher</v-col
+          >Tutor</v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >Teacher</v-col
+          >Tutor</v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >Teacher</v-col
+          >Tutor</v-col
         >
       </v-row>
     </div>

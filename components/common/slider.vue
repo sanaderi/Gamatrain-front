@@ -35,10 +35,10 @@ export default {
   data: () => ({
     statList: [
       { label: "School", value: 130000, counter: 0, icon: "school" },
-      { label: "Teacher", value: 300000, counter: 0, icon: "teacher" },
+      { label: "Tutor", value: 300000, counter: 0, icon: "teacher" },
       { label: "Student", value: 1500000, counter: 0, icon: "student" },
       { label: "School", value: 130000, counter: 0, icon: "school" },
-      { label: "Teacher", value: 300000, counter: 0, icon: "teacher" },
+      { label: "Tutor", value: 300000, counter: 0, icon: "teacher" },
       { label: "Student", value: 1500000, counter: 0, icon: "student" },
     ],
     countsInterval: null,

@@ -119,71 +119,6 @@
         <!--End personal information-->
 
 
-        <!--School profile-->
-        <v-row>
-          <v-col cols="12" class="pl-5 text-h4 teal--text">
-            <v-icon large color="teal">mdi-account-school-outline</v-icon>
-            <span>
-           School Profile
-        </span>
-          </v-col>
-
-          <v-col cols="12" md="3">
-            <validation-provider v-slot="{errors}" name="grade" rules="required">
-              <v-autocomplete
-                dense
-                v-model="form.grade"
-                :items="section_list"
-                :error-messages="errors"
-                item-text="title"
-                item-value="id"
-                label="Grade"
-                outlined
-              />
-            </validation-provider>
-          </v-col>
-          <v-col cols="12" md="3">
-            <validation-provider v-slot="{errors}" name="base" rules="required">
-              <v-autocomplete
-                dense
-                v-model="form.base"
-                :items="base_list"
-                item-value="id"
-                item-text="title"
-                :error-messages="errors"
-                label="Base"
-                outlined
-              />
-            </validation-provider>
-          </v-col>
-          <!--                    <v-col cols="12" md="4">-->
-          <!--                      <validation-provider v-slot="{errors}" name="field" rules="required">-->
-          <!--                        <v-autocomplete-->
-          <!--                          dense-->
-          <!--                          v-model="form.field"-->
-          <!--                          :error-messages="errors"-->
-          <!--                          label="Field"-->
-          <!--                          outlined-->
-          <!--                        />-->
-          <!--                      </validation-provider>-->
-          <!--                    </v-col>-->
-          <v-col cols="12" md="3">
-            <validation-provider v-slot="{errors}" name="lesson" rules="required">
-              <v-autocomplete
-                dense
-                :items="lesson_list"
-                item-value="id"
-                item-text="title"
-                v-model="form.lesson"
-                :error-messages="errors"
-                label="Lesson"
-                outlined
-              />
-            </validation-provider>
-          </v-col>
-        </v-row>
-        <!--End school profile-->
-
         <!--Location details-->
         <v-row>
           <v-col cols="12" class="pl-5 text-h4 teal--text">
@@ -221,45 +156,80 @@
               />
             </validation-provider>
           </v-col>
-          <v-col cols="12" md="3" v-if="form.grade && form.area">
+          <v-col cols="12" md="6" lg="6" xl="6" >
+            <validation-provider v-slot="{ errors }" name="businessLocation" rules="required">
+              <LocationField label="Location" @locationSelected="selectLocation"/>
+            </validation-provider>
+          </v-col>
+
+        </v-row>
+        <!--End location details-->
+
+        <!--School profile-->
+        <v-row>
+          <v-col cols="12" class="pl-5 text-h4 teal--text">
+            <v-icon large color="teal">mdi-account-school-outline</v-icon>
+            <span>
+           School Profile
+        </span>
+          </v-col>
+
+          <v-col cols="12" md="3">
+            <validation-provider v-slot="{errors}" name="level" rules="required">
+              <v-autocomplete
+                dense
+                v-model="form.level"
+                :items="level_list"
+                :error-messages="errors"
+                item-text="title"
+                item-value="id"
+                label="Level"
+                outlined
+              />
+            </validation-provider>
+          </v-col>
+          <v-col cols="12" md="3">
+            <validation-provider v-slot="{errors}" name="grade" rules="required">
+              <v-autocomplete
+                dense
+                v-model="form.grade"
+                :items="grade_list"
+                item-value="id"
+                item-text="title"
+                :error-messages="errors"
+                label="Grade"
+                outlined
+              />
+            </validation-provider>
+          </v-col>
+          <!--                    <v-col cols="12" md="4">-->
+          <!--                      <validation-provider v-slot="{errors}" name="field" rules="required">-->
+          <!--                        <v-autocomplete-->
+          <!--                          dense-->
+          <!--                          v-model="form.field"-->
+          <!--                          :error-messages="errors"-->
+          <!--                          label="Field"-->
+          <!--                          outlined-->
+          <!--                        />-->
+          <!--                      </validation-provider>-->
+          <!--                    </v-col>-->
+          <v-col cols="12" md="3">
             <validation-provider v-slot="{errors}" name="school" rules="required">
               <v-autocomplete
                 dense
                 :items="school_list"
-                v-model="form.school"
-                item-text="title"
                 item-value="id"
+                item-text="title"
+                v-model="form.school"
                 :error-messages="errors"
                 label="School"
                 outlined
               />
             </validation-provider>
           </v-col>
-          <v-col cols="12" md="3">
-            <validation-provider v-slot="{errors}" name="address" rules="required">
-              <v-text-field
-                dense
-                v-model="form.address"
-                :error-messages="errors"
-                label="Exact address of residence"
-                outlined
-              />
-            </validation-provider>
-          </v-col>
-          <v-col cols="12" md="3">
-            <validation-provider v-slot="{errors}" name="tel" rules="required|tel">
-              <v-text-field
-                dense
-                v-model="form.tel"
-                :error-messages="errors"
-                label="Tel"
-                outlined
-              />
-            </validation-provider>
-          </v-col>
-
         </v-row>
-        <!--End location details-->
+        <!--End school profile-->
+
 
 
         <v-row>
@@ -327,6 +297,7 @@
 
 <script>
 import {ValidationObserver, ValidationProvider} from "vee-validate";
+import LocationField from "@/components/Form/LocationField";
 import 'vue-advanced-cropper/dist/style.css';
 
 export default {
@@ -359,13 +330,12 @@ export default {
         {id: 1, title: 'Male'},
         {id: 2, title: 'Female'}
       ],
-      section_list: [],
-      base_list: [],
-      lesson_list: [],
+      level_list: [],
+      grade_list: [],
+      school_list: [],
       field_list: [],
       state_list: [],
       area_list: [],
-      school_list: [],
       //End list
     }
   },
@@ -377,6 +347,7 @@ export default {
   components: {
     ValidationObserver,
     ValidationProvider,
+    LocationField
 
   },
   created() {
@@ -385,16 +356,10 @@ export default {
     this.getUserInfo();
   },
   watch: {
-    "form.grade"(val) {
+    "form.level"(val) {
       this.getTypeList('base', val);
       if (this.form.area)
         this.getTypeList('school');
-    },
-    "form.base"(val) {
-      this.getTypeList('lesson', val);
-    },
-    "form.lesson"(val) {
-      this.getTypeList('topic', val);
     },
     "form.state"(val) {
       this.getTypeList('area', val);
@@ -446,7 +411,7 @@ export default {
       }
 
       if (type === 'school') {
-        params.section_id = this.form.grade;
+        params.section_id = this.form.level;
         params.area_id = this.form.area;
       }
 
@@ -456,9 +421,9 @@ export default {
       }).then(res => {
         var data = {};
         if (type === 'section') {
-          this.section_list = res.data;
+          this.level_list = res.data;
         } else if (type === 'base') {
-          this.base_list = res.data;
+          this.grade_list = res.data;
 
         } else if (type === 'lesson') {
           this.lesson_list = res.data;
@@ -497,6 +462,15 @@ export default {
       console.log(canvas.toDataURL());
       this.avatar_url = canvas.toDataURL();
     },
+
+    selectLocation(location) {
+      this.businessLocation.location = location.lat + ',' + location.lng;
+      this.businessLocation.country_code = location.country_code;
+      this.businessLocation.country = location.country;
+      this.businessLocation.state = location.state;
+      this.$refs.phone_num_input.country_code=location.country_code;
+    },
+
   }
 }
 </script>

@@ -6,7 +6,7 @@
         <div class="sample-titles d-flex align-center ">
           <i class="icon icong-test title-icon d-flex algn-center"></i>
           <div class="sample-title mx-3">
-            <p class="s-title">Related Sample Exams</p>
+            <p class="s-title">Related Exam Papers</p>
             <p class="s-subtitle">Check out the other sample exams...</p>
           </div>
         </div>

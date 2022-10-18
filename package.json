@@ -20,6 +20,7 @@
     "@splidejs/vue-splide": "^0.6.3",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
+    "nuxt-leaflet": "^0.0.27",
     "nuxt-material-design-icons": "^1.0.4",
     "nuxt-video-player": "^1.0.17",
     "v-emoji-picker": "^2.3.3",

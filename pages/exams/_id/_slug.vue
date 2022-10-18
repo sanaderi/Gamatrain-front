@@ -617,7 +617,7 @@ export default {
             link: ''
           },
           {
-            title: 'Pamphlet and Sample Exams descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
+            title: 'Pamphlet and Exam Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
             link: ''
           },
           {
@@ -637,7 +637,7 @@ export default {
             link: ''
           },
           {
-            title: 'Pamphlet and Sample Exams descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
+            title: 'Pamphlet and Exam Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
             link: ''
           },
           {
@@ -656,7 +656,7 @@ export default {
             link: ''
           },
           {
-            title: 'Pamphlet and Sample Exams descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
+            title: 'Pamphlet and Exam Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
             link: ''
           },
           {
@@ -675,7 +675,7 @@ export default {
             link: ''
           },
           {
-            title: 'Pamphlet and Sample Exams descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
+            title: 'Pamphlet and Exam Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
             link: ''
           },
           {

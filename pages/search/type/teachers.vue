@@ -214,7 +214,7 @@ export default {
       item: ['Foo', 'Bar', 'Fizz', 'Buzz'],
       overlay: false,
       snackbar: false,
-      title: 'Teachers rating :',
+      title: 'Tutors rating :',
       vertical: true,
       star: "8543",
       cup: "22",

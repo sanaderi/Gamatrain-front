@@ -5,7 +5,7 @@
         <v-col cols="12" class="pl-5">
           <span class="icon icong-test text-h3 teal--text"></span>
           <span class="text-h4 teal--text">
-            Test
+            Exam Paper
           </span>
         </v-col>
       </v-row>
@@ -13,8 +13,8 @@
         <v-card-title class="text-h4">
           <v-row>
             <v-col cols="12" class="text-left">
-              <v-btn to="/user/test/create" color="teal" class="white--text">
-                New test
+              <v-btn to="/user/exam-paper/create" color="teal" class="white--text">
+                New Exam Paper
               </v-btn>
             </v-col>
           </v-row>
@@ -98,7 +98,7 @@ export default {
   },
   head(){
     return{
-      title:'Test manage'
+      title:'Exam Paper manage'
     }
   },
   mounted() {
