@@ -138,7 +138,7 @@ export default {
         {
           title: 'Edit profile',
           icon: 'mdi-account-outline',
-          link: '/info'
+          link: '/user/profile'
         },
         {
           title: 'Edit pass',

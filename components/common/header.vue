@@ -76,7 +76,7 @@
                     mb-5
                   "
                 >
-                  <nuxt-link to="/user'">
+                  <nuxt-link to="/user">
                     <v-avatar size="40">
                       <v-img
                         :src="$loadAvatar.currentUser($auth)"
@@ -99,7 +99,7 @@
                         <p class="wallet">Wallet: </p>
                         <p class="mx-3 wallet-balance">${{ $auth.user.credit }}</p>
                       </div>
-                      <nuxt-link to="">
+                      <nuxt-link to="/user">
                         <i class="fa-solid fa-angle-right ml-4 profile-wallet-arrow"></i>
                       </nuxt-link>
                     </div>

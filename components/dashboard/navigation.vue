@@ -71,12 +71,12 @@ export default {
           link: '',
           subMenuList: [
             {title: "Edit profile", link: "/user/profile"},
-            {title: "Identity confirmation", link: ""},
+            {title: "Identity confirmation", link: "/user/identity-confirmation"},
             {title: "Edit password", link: "/user/edit-pass"},
             {title: "Setting", link: "/user/setting"},
           ],
         },
-        {title: 'Notification', icon: 'mdi-bell-outline'},
+        // {title: 'Notification', icon: 'mdi-bell-outline'},
       ],
     }
   },

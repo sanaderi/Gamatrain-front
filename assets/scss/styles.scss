@@ -13,6 +13,13 @@ body {
   font-size: 14px;
   transition: 0.5s ease-in-out;
 
+  table{
+    tr{
+      td{
+        font-size: 1.4rem!important;
+      }
+    }
+  }
 
   .pointer {
     cursor: pointer !important;
