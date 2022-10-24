@@ -57,10 +57,23 @@ export default {
           title: 'Add',
           icon: 'mdi-plus-circle-outline',
           link: '',
-          machine_name: 'add_content'
+          machine_name: 'add_content',
+          subMenuList: [
+            {title: "Exam Paper", link: "/user/exam-paper", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
+            {title: "Presentation", link: "/user/presentation", icon: 'icong-learnfiles', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
+            {title: "Q & A", link: "/user/question", icon: 'icong-qa', icon_type: 'custom'}
+          ]
 
         },
-        {title: 'Online exam', icon: 'mdi-laptop', link: '/'},
+        {
+          title: "Online exam's",
+          icon: 'mdi-laptop',
+          link: '/test-maker',
+          subMenuList: [
+            {title: "Test result", link: "/user/online-exam", icon: 'mdi-chart-timeline', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
+            {title: "Test maker", link: "/test-maker", icon: 'icong-azmoon', icon_type: 'custom'},
+          ]
+        },
         {
           title: 'Financial',
           icon: 'mdi-credit-card-outline',
@@ -90,21 +103,6 @@ export default {
 
     }
   },
-  beforeMount() {
-    var index = this.items.findIndex(x => x.machine_name === 'add_content');
-
-    if (this.$auth.user.group_id === '5')
-      this.items[index].subMenuList = [
-        {title: "Exam Paper", link: "/user/exam-paper", icon: 'icong-test', icon_type: 'custom'},
-        {title: "Presentation", link: "/user/presentation", icon: 'icong-learnfiles', icon_type: 'custom'},
-        {title: "Q & A", link: "/user/question", icon: 'icong-qa', icon_type: 'custom'}
-      ];
-    else
-      this.items[index].subMenuList = [
-        {title: "Q & A's", link: "/user/question", icon: 'icong-qa', icon_type: 'custom'},
-        {title: "Online exam's", link: "/user/online-exam", icon: 'icong-azmoon', icon_type: 'custom'}
-      ];
-  },
   methods: {
     openLink(item) {
       if (!item.subMenuList)
@@ -119,32 +117,5 @@ export default {
 </script>
 
 <style>
-
-.mobile_dashboard_menu .v-slide-group__prev, .v-slide-group__next {
-  display: none !important;
-}
-
-.mobile_dashboard_menu .v-tabs-slider {
-  display: none !important;
-}
-
-
-.fixed-tabs-bar {
-  /*position: -webkit-sticky!important;*/
-  position: fixed !important;
-  bottom: 0 !important;
-  z-index: 2 !important;
-  border-top: 0.1rem solid #e1e2e3;
-}
-
-.tab_actived {
-  border-bottom: 4px solid white !important;
-  background-color: rgba(33, 186, 69, 0.1);
-  color: #21ba45 !important;
-}
-
-.tab_actived i {
-  color: #21ba45 !important;
-}
 
 </style>

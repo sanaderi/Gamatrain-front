@@ -300,12 +300,6 @@ export default {
         {id: 11, title: "November"},
         {id: 12, title: "December"},
       ],
-      holding_level_list: [
-        {id: 1, title: "School"},
-        {id: 2, title: "District"},
-        {id: 3, title: "State"},
-        {id: 4, title: "Country"},
-      ],
       state_list: [],
       area_list: [],
       school_list: [],

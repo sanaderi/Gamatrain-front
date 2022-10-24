@@ -35,6 +35,7 @@
           active-class="menu_active"
           v-for="(subMenuItem, side) in item.subMenuList"
           :to="subMenuItem.link"
+          :disabled="subMenuItem.status"
           :key="side.title"
         >
           <v-list-item-content class="py-2">
@@ -52,8 +53,24 @@ export default {
   data() {
     return {
       items: [
-        {title: 'Add', icon: 'mdi-plus-circle-outline', machine_name: 'add_content'},
-        {title: 'Online exam', icon: 'mdi-laptop'},
+        {
+          title: 'Add',
+          icon: 'mdi-plus-circle-outline',
+          machine_name: 'add_content',
+          subMenuList: [
+            {title: "Exam Paper", link: "/user/exam-paper", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
+            {title: "Presentation", link: "/user/presentation", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
+            {title: "Q & A", link: "/user/question", icon: 'icong-test', icon_type: 'custom'}
+          ]
+        },
+        {
+          title: 'Online exam',
+          icon: 'mdi-laptop',
+          subMenuList: [
+            {title: "Test result", link: "/user/online-exam", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
+            {title: "Test maker", link: "/test-maker", icon: 'icong-test', icon_type: 'custom'},
+          ]
+        },
         {
           title: 'Financial',
           icon: 'mdi-credit-card-outline',
@@ -81,19 +98,6 @@ export default {
     }
   },
   beforeMount() {
-    var index = this.items.findIndex(x => x.machine_name === 'add_content');
-
-    if (this.$auth.user.group_id === '5')
-      this.items[index].subMenuList = [
-        {title: "Exam Paper", link: "/user/exam-paper", icon: 'icong-test', icon_type: 'custom'},
-        {title: "Presentation", link: "/user/presentation", icon: 'icong-test', icon_type: 'custom'},
-        {title: "Q & A", link: "/user/question", icon: 'icong-test', icon_type: 'custom'}
-      ];
-    else
-      this.items[index].subMenuList = [
-        {title: "Q & A's", link: "/user/question", icon: 'icong-test', icon_type: 'custom'},
-        {title: "Online exam's", link: "/user/online-exam", icon: 'icong-test', icon_type: 'custom'}
-      ];
   }
 }
 </script>

@@ -4452,3 +4452,121 @@ body {
 //End charge wallet
 
 
+
+//Test maker
+.test-maker{
+  span{
+    font-size: 1.5rem!important;
+  }
+  p{
+    font-size: 1.7rem!important;
+
+  }
+}
+//End test maker
+
+
+//Mobile dashboard menu
+.mobile_dashboard_menu{
+
+  .v-slide-group__prev, .v-slide-group__next {
+    display: none !important;
+  }
+
+  .v-tabs-slider {
+    display: none !important;
+  }
+
+
+  .fixed-tabs-bar {
+    /*position: -webkit-sticky!important;*/
+    position: fixed !important;
+    bottom: 0 !important;
+    z-index: 2 !important;
+    border-top: 0.1rem solid #e1e2e3;
+  }
+
+  .tab_actived {
+    border-bottom: 4px solid white !important;
+    background-color: rgba(33, 186, 69, 0.1);
+    color: #21ba45 !important;
+  }
+
+  .tab_actived i {
+    color: #21ba45 !important;
+  }
+
+}
+//End mobile dashboard menu
+
+
+//Test maker menu
+#test_maker_menu{
+  .v-slide-group__prev, .v-slide-group__next {
+    display: none !important;
+  }
+
+  .v-tabs-slider {
+    display: none !important;
+  }
+
+
+  //@media only screen and (min-width: 700px){
+    .fixed-tabs-bar {
+      /*position: -webkit-sticky!important;*/
+      position: fixed !important;
+      left: 0 !important;
+      right: 0;
+      bottom: 0;
+      z-index: 2 !important;
+      border-top: 0.1rem solid #e1e2e3;
+    //}
+  }
+
+
+  .tab_actived {
+    border-bottom: 4px solid white !important;
+    background-color: rgba(33, 186, 69, 0.1);
+    color: #ffffff !important;
+  }
+
+  .tab_actived i {
+    color: #ffffff !important;
+  }
+
+}
+//End test maker menu
+
+
+//Test album
+#test-album{
+  .album-card{
+    .album-img{
+      border-radius: 1rem;
+    }
+    .price_label{
+      font-size: 1.7rem;
+
+      .subscription_label{
+        font-size: 1.2rem;
+        color: gray;
+      }
+    }
+    .test-count-label{
+      background-color: rgba(0,139,139,.1)!important;
+      color: #008b8b!important;
+      padding-left: 4rem;
+      padding-right: 4rem;
+
+      .label-text{
+        font-size: 1.6rem;
+        font-weight: 200!important;
+      }
+      .label-val{
+        font-size: 1.6rem;
+        font-weight: 800!important;
+      }
+    }
+  }
+}
+//End Test album
