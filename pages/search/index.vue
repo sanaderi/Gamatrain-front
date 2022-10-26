@@ -177,12 +177,7 @@ export default {
     }
   },
 
-  beforeMount() {
-    window.addEventListener('scroll', this.testScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.testScroll);
-  },
+
 
   mounted() {
     this.getContentList();
@@ -373,14 +368,6 @@ export default {
         }
       }
     },
-    testScroll() {
-      if (this.scroll < scrollY) {
-        this.Visible = false
-      } else {
-        this.Visible = true
-      }
-      this.scroll = scrollY
-    }
 
 
   }

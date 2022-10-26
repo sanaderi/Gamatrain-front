@@ -1,98 +1,266 @@
 <template>
-  <div>
-    <v-col cols="12" class="px-0 px-sm-2">
-      <v-row>
-        <v-col cols="12" class="pl-5">
-          <span class="icon icong-qa text-h3 teal--text"></span>
-          <span class="text-h4 teal--text">
+  <v-container>
+    <div>
+      <v-col cols="12" class="px-0 px-sm-2">
+        <v-row>
+          <v-col cols="12" class="pl-5">
+            <span class="icon icong-qa text-h3 teal--text"></span>
+            <span class="text-h4 teal--text">
             Participated tests
           </span>
-        </v-col>
-      </v-row>
-      <v-card class="mt-3">
-        <v-card-text class="px-sm-8 px-md-4">
-          <v-row>
-            <v-col cols="12" class="px-0 px-sm-4 px-md-4">
-              <v-simple-table class="exams_table">
-                <template v-slot:default>
-                  <thead>
-                  <tr>
-                    <th class="text-left text-h5">
-                      #
-                    </th>
-                    <th class="text-center text-h5">
-                      Test
-                    </th>
-                    <th class="text-center text-h5">
-                      Lesson
-                    </th>
-                    <th class="text-center text-h5">
-                      Date
-                    </th>
-                    <th class="text-center text-h5">
-                      Status
-                    </th>
-                    <th class="text-center text-h5">
-                      Report card
-                    </th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr
-                    v-show="exam_list.length>0"
-                    v-for="item in exam_list"
-                    :key="item.id"
-                  >
-                    <td></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                  </tr>
-                  <tr v-show="exam_list.length===0">
-                    <td colspan="8">
-                      <p>Opps! no data found</p>
-                    </td>
-                  </tr>
-                  </tbody>
-                </template>
-              </v-simple-table>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
-    </v-col>
-  </div>
+          </v-col>
+        </v-row>
+        <v-card class="mt-3">
+          <v-card-text class="px-sm-8 px-md-4">
+            <!--Filter section-->
+            <v-row class="d-none d-md-flex">
+              <v-col cols="12" md="3">
+                <v-autocomplete
+                  dense
+                  v-model="filter.level"
+                  clearable
+                  :items="level_list"
+                  item-text="title"
+                  item-value="id"
+                  label="Level"
+                  outlined
+                />
+              </v-col>
+              <v-col cols="12" md="3">
+                <v-autocomplete
+                  dense
+                  v-model="filter.grade"
+                  clearable
+                  :items="grade_list"
+                  item-value="id"
+                  item-text="title"
+                  label="Grade"
+                  outlined
+                />
+              </v-col>
+              <v-col cols="12" md="3">
+                <v-autocomplete
+                  dense
+                  :items="lesson_list"
+                  item-value="id"
+                  item-text="title"
+                  v-model="filter.lesson"
+                  clearable
+                  label="Lesson"
+                  outlined
+                />
+              </v-col>
+            </v-row>
+            <!--End filter section-->
+
+            <v-row>
+              <v-col cols="12" class="px-0 px-sm-4 px-md-4">
+                <v-simple-table class="exams_table">
+                  <template v-slot:default>
+                    <thead>
+                    <tr>
+                      <th class="text-left text-h5">
+                        #
+                      </th>
+                      <th class="text-center text-h5">
+                        Test
+                      </th>
+                      <th class="text-center text-h5">
+                        Lesson
+                      </th>
+                      <th class="text-center text-h5">
+                        Date
+                      </th>
+                      <th class="text-center text-h5">
+                        Status
+                      </th>
+                      <th class="text-center text-h5">
+                        Report card
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                      v-show="exam_list.length>0"
+                      v-for="item in exam_list"
+                      :key="item.id"
+                    >
+                      <td></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                    </tr>
+                    <tr v-show="exam_list.length===0">
+                      <td colspan="8">
+                        <p>Opps! no data found</p>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </div>
+  </v-container>
 </template>
 
 <script>
 export default {
-  layout: "dashboard_layout",
-  name: "question-manage",
-  // async asyncData({params,$axios}) {
-  //   const examData=await $axios.$get('/api/v1/exams');
-  //   return {examData};
-  // },
-  head(){
-    return{
-     title:'Q & A manage'
+  layout: "test-maker-layout",
+  name: "participated-test-manage",
+  head() {
+    return {
+      title: 'Participated tests'
     }
   },
   data() {
     return {
+      filter: {
+        level: '',
+        grade: '',
+        lesson: '',
+      },
+
+      level_list: [],
+      grade_list: [],
+      field_list: [],
+      lesson_list: [],
       exam_list: [],
+
+      page_loading: false,
+      page: 1,
+      all_files_loaded: false,
+
     }
   },
   mounted() {
-    console.log("Exam list:"+this.exam_list.length);
+    this.getTypeList('section');
+    this.getExams();
+    this.scroll();
+
+  },
+  watch: {
+    "filter.level"(val) {
+      this.filter.grade = '';
+      this.filter.lesson = '';
+      if (val)
+        this.getTypeList('base', val);
+
+      this.page = 1;
+      this.all_files_loaded = false;
+      this.exam_list = [];
+      this.getExams();
+    },
+    "filter.grade"(val) {
+      this.filter.lesson = '';
+      if (val)
+        this.getTypeList('lesson', val);
+
+      this.page = 1;
+      this.all_files_loaded = false;
+      this.exam_list = [];
+      this.getExams();
+    },
+    "filter.lesson"(val) {
+      this.page = 1;
+      this.all_files_loaded = false;
+      this.exam_list = [];
+      this.getExams();
+    }
+  },
+  methods: {
+    getTypeList(type, parent = '') {
+      var params = {
+        type: type
+      }
+      if (type === 'base')
+        params.section_id = parent;
+      if (type === 'lesson') {
+        params.base_id = parent;
+      }
+
+
+      this.$axios.$get('/api/v1/types/list', {
+        params
+      }).then(res => {
+        var data = {};
+        if (type === 'section') {
+          this.level_list = res.data;
+        } else if (type === 'base') {
+          this.grade_list = res.data;
+
+        } else if (type === 'lesson') {
+          this.lesson_list = res.data;
+        }
+      }).catch(err => {
+        this.$toast.error(err);
+      })
+    },
+    getExams() {
+      if (!this.all_files_loaded) {
+        this.page_loading = true;
+        this.$axios.$get('/api/v1/exams/participants', {},
+          {
+            params: {
+              perpage: 20,
+              section: this.filter.level,
+              base: this.filter.grade,
+              lesson: this.filter.lesson
+            }
+          }).then(response => {
+          this.exam_list.push(...response.data.list);
+
+          if (response.data.list.length === 0)//For terminate auto load request
+            this.all_files_loaded = true;
+        }).catch(err => {
+          console.log(err);
+        }).finally(() => {
+            this.page_loading = false;
+          }
+        )
+      }
+    },
+    showStatus(id) {
+      if (id === "6")
+        return "Under construction";
+      else if (id === "7")
+        return "Published";
+    },
+    scroll() {//For infinite loading
+      window.onscroll = () => {
+        //Scroll position
+        var scrollPosition = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) + window.innerHeight + 50;
+        let bottomOfWindow = scrollPosition >= document.documentElement.offsetHeight
+
+        //Avoid the number of requests
+        if (this.timer) {
+          clearTimeout(this.timer);
+          this.timer = null;
+        }
+
+        //Load next page
+        if (bottomOfWindow && this.all_files_loaded === false) {
+          this.page_loading = true;
+          this.timer = setTimeout(() => {
+            this.page++
+            this.getExams();
+          }, 800)
+        }
+      }
+    },
+
   }
 
 }
 </script>
 
 <style scoped>
-p{
+p {
   font-size: 1.4rem;
 }
 </style>

@@ -55,15 +55,26 @@
 
         <!--Album list-->
         <v-row>
-          <v-col cols="12" md="3" v-for="album in album_list">
+          <v-col cols="12" class="text-center" v-if="page_loading===false && album_list.length===0">
+            <p>
+              Oops! no data found
+            </p>
+          </v-col>
+          <v-col cols="12" md="3"
+                 v-else
+                 v-for="album in album_list">
             <v-card>
               <v-card-title class="text-h4">
-                {{ album.lesson_title }} album
+                <nuxt-link :to="`/albums/${album.lesson}`">
+                  {{ album.lesson_title }} album
+                </nuxt-link>
               </v-card-title>
               <v-card-text>
                 <v-row>
                   <v-col cols="7">
-                    <v-img class="album-img" :src="album.lesson_pic"/>
+                    <nuxt-link :to="`/albums/${album.lesson}`">
+                      <v-img class="album-img" :src="album.lesson_pic"/>
+                    </nuxt-link>
                   </v-col>
                   <v-col cols="5" class="d-flex align-center justify-center pr-0">
                     <p class="price_label green--text" v-show="album.price==='0'">
@@ -96,6 +107,19 @@
             </v-card>
           </v-col>
         </v-row>
+
+        <v-row v-show="page_loading">
+          <v-col cols="12" class="text-center">
+            <v-progress-circular
+              :size="40"
+              :width="4"
+              class="mt-12 mb-12"
+              color="orange"
+              indeterminate
+            />
+          </v-col>
+        </v-row>
+
         <!--End album list-->
 
       </v-card-text>
@@ -116,7 +140,7 @@ export default {
   name: "test-maker",
   head() {
     return {
-      title: 'Create online exam'
+      title: 'Online exam albums'
     }
   },
   components: {
@@ -127,6 +151,11 @@ export default {
   data() {
     return {
       test_step: 1,
+      page_loading: false,
+      page: 1,
+      all_files_loaded: false,
+
+
       filter: {
         level: '',
         grade: '',
@@ -144,17 +173,34 @@ export default {
   mounted() {
     this.getTypeList('section');
     this.getAlbumList();
+    this.scroll();
   },
   watch: {
     "filter.level"(val) {
-      this.getTypeList('base', val);
+      this.filter.grade = '';
+      this.filter.lesson = '';
+      if (val)
+        this.getTypeList('base', val);
+
+      this.page = 1;
+      this.all_files_loaded = false;
+      this.album_list = [];
       this.getAlbumList();
     },
     "filter.grade"(val) {
-      this.getTypeList('lesson', val);
+      this.filter.lesson = '';
+      if (val)
+        this.getTypeList('lesson', val);
+
+      this.page = 1;
+      this.all_files_loaded = false;
+      this.album_list = [];
       this.getAlbumList();
     },
     "filter.lesson"(val) {
+      this.page = 1;
+      this.all_files_loaded = false;
+      this.album_list = [];
       this.getAlbumList();
     }
   },
@@ -168,7 +214,6 @@ export default {
       if (type === 'lesson') {
         params.base_id = parent;
       }
-
 
 
       this.$axios.$get('/api/v1/types/list', {
@@ -188,20 +233,50 @@ export default {
       })
     },
     getAlbumList() {
-      this.$axios.$get('/api/v1/albums',{
-        params:{
-          perpage:12,
-          section:this.filter.level,
-          base:this.filter.grade,
-          lesson:this.filter.lesson
+      if (!this.all_files_loaded) {
+        this.page_loading = true;
+        this.$axios.$get('/api/v1/albums', {
+          params: {
+            perpage: 12,
+            section: this.filter.level,
+            base: this.filter.grade,
+            lesson: this.filter.lesson
+          }
+        })
+          .then(response => {
+            this.album_list.push(...response.data.list);
+
+            if (response.data.list.length === 0)//For terminate auto load request
+              this.all_files_loaded = true;
+          }).catch(err => {
+          console.log(err);
+        }).finally(() => {
+          this.page_loading = false;
+        });
+      }
+    },
+    scroll() {//For infinite loading
+      window.onscroll = () => {
+        //Scroll position
+        var scrollPosition = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) + window.innerHeight + 50;
+        let bottomOfWindow = scrollPosition >= document.documentElement.offsetHeight
+
+        //Avoid the number of requests
+        if (this.timer) {
+          clearTimeout(this.timer);
+          this.timer = null;
         }
-      })
-        .then(res => {
-          this.album_list = res.data.list;
-        }).catch(err => {
-        console.log(err);
-      })
-    }
+
+        //Load next page
+        if (bottomOfWindow && this.all_files_loaded === false) {
+          this.page_loading = true;
+          this.timer = setTimeout(() => {
+            this.page++
+            this.getAlbumList();
+          }, 800)
+        }
+      }
+    },
 
   }
 }
