@@ -218,6 +218,12 @@
                 </v-stepper>
               </v-navigation-drawer>
               <div class="book-content">
+                <div class="bookText e-mathjax" ref="mathJaxEl">
+                <p>vvv $\sqrt {(5-2 \sqrt {6})^2} + \sqrt {(7-3 \sqrt {6})^2}+\sqrt {(2-\sqrt{6})^2}$</p><p>ssss<br>&nbsp;</p>
+                vvv $\sqrt {(5-2 \sqrt {6})^2} + \sqrt {(7-3 \sqrt {6})^2}+\sqrt {(2-\sqrt{6})^2}$
+
+                ssss
+                </div>
                 <div class="bookText e-mathjax" ref="mathJaxEl" v-html="tutorialInfo.content"/>
               </div>
 

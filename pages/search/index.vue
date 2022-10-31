@@ -140,7 +140,7 @@ export default {
     if (query.type === 'learnfiles')
       page_title = 'Presentation';
     else if (query.type === 'test')
-      page_title = 'Exam Paper';
+      page_title = 'Exam Papers';
     else if (query.type === 'question')
       page_title = 'Q & A';
     else if (query.type === 'azmoon')

@@ -14,6 +14,7 @@
       >
         <v-tab
           @click="openLink(item)"
+          :disabled="item.status"
           v-for="item in items">
 
           <span>{{ item.title }}</span>
@@ -67,7 +68,7 @@ export default {
 
         },
         {
-          title: 'Create test',
+          title: 'Create online exam',
           icon: 'mdi-plus-circle-outline',
           link: '/test-maker/create',
         },
@@ -75,6 +76,13 @@ export default {
           title: 'Test list',
           icon: 'mdi-list-box-outline',
           link: '',
+        },
+
+        {
+          title: 'Create Test',
+          icon: 'mdi-plus-circle-outline',
+          link: '/test-maker/create-test',
+          status:(this.$auth && this.$auth.user.group_id === '6' ? true : false)
         },
 
       ],

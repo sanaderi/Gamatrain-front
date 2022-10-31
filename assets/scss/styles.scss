@@ -4573,3 +4573,27 @@ body {
   }
 }
 //End Test album
+
+
+//Create test
+#create-test{
+  .answer_label{
+    writing-mode:vertical-lr;text-orientation: sideways
+  }
+  p{
+    font-size: 1.8rem;
+  }
+
+  #test-maker-question {
+    .ck-editor__editable_inline {
+      height: 48rem !important;
+    }
+  }
+
+  #test-maker-answer {
+    .ck-editor__editable_inline {
+      height: 30rem !important;
+    }
+  }
+}
+//End create test
