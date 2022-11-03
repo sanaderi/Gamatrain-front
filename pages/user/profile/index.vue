@@ -306,6 +306,7 @@ export default {
   data() {
     return {
       cropper_dialog:false,
+
       stencil_size: {
         width: 180,
         height: 180
@@ -314,6 +315,7 @@ export default {
         width: 180,
         height: 180
       },
+
       user_type: this.$auth.user.group_id,
       form: {
         name: '',
