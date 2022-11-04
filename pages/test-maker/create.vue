@@ -21,7 +21,7 @@
                   <validation-provider v-slot="{errors}" name="level" rules="required">
                     <v-autocomplete
                       dense
-                      v-model="form.level"
+                      v-model="form.section"
                       :items="level_list"
                       :error-messages="errors"
                       item-text="title"
@@ -35,7 +35,7 @@
                   <validation-provider v-slot="{errors}" name="grade" rules="required">
                     <v-autocomplete
                       dense
-                      v-model="form.grade"
+                      v-model="form.base"
                       :items="grade_list"
                       item-value="id"
                       item-text="title"
@@ -70,11 +70,15 @@
                     />
                   </validation-provider>
                 </v-col>
+
+
                 <v-col cols="12" md="12">
                   <validation-provider v-slot="{errors}" name="topic" rules="required">
                     <topic-selector :topic-list="topic_list" @selectTopic="selectTopic"/>
                   </validation-provider>
                 </v-col>
+
+
                 <v-col cols="12" md="4">
                   <validation-provider v-slot="{errors}" name="test_type" rules="required">
                     <v-autocomplete
@@ -82,13 +86,15 @@
                       :items="test_type_list"
                       item-value="id"
                       item-text="title"
-                      v-model="form.test_type"
+                      v-model="form.type"
                       :error-messages="errors"
                       label="Test type"
                       outlined
                     />
                   </validation-provider>
                 </v-col>
+
+
                 <v-col cols="12" md="4">
                   <validation-provider v-slot="{errors}" name="test_level" rules="required">
                     <v-autocomplete
@@ -96,7 +102,7 @@
                       :items="test_level_list"
                       item-value="id"
                       item-text="title"
-                      v-model="form.test_level"
+                      v-model="form.level"
                       :error-messages="errors"
                       label="Level"
                       outlined
@@ -121,12 +127,11 @@
                 </v-col>
 
 
-                <v-col cols="12" md="4"
-                >
+                <v-col cols="12" md="4">
                   <validation-provider v-slot="{errors}" name="test_duration" role="required">
                     <v-text-field
                       dense
-                      v-model="form.test_duration"
+                      v-model="form.duration"
                       item-text="title"
                       type="number"
                       min="1"
@@ -138,48 +143,45 @@
                   </validation-provider>
                 </v-col>
 
-                <v-col cols="12" md="4" v-if="form.holding_level===1 || form.holding_level===2 || form.holding_level===3">
-                  <validation-provider v-slot="{errors}" name="state" role="required">
-                    <v-autocomplete
-                      dense
-                      :items="state_list"
-                      v-model="form.state"
-                      item-text="title"
-                      item-value="id"
-                      :error-messages="errors"
-                      label="State"
-                      outlined
-                    />
-                  </validation-provider>
+                <v-col cols="12" md="4"
+                       v-if="form.holding_level===1 || form.holding_level===2 || form.holding_level===3">
+                  <v-autocomplete
+                    dense
+                    :items="state_list"
+                    v-model="form.state"
+                    item-text="title"
+                    item-value="id"
+                    :error-messages="errors"
+                    label="State"
+                    outlined
+                  />
                 </v-col>
+
                 <v-col cols="12" md="4" v-if="form.holding_level===1 || form.holding_level===2">
-                  <validation-provider v-slot="{errors}" name="area" role="required">
-                    <v-autocomplete
-                      dense
-                      :items="area_list"
-                      v-model="form.area"
-                      item-text="title"
-                      item-value="id"
-                      :error-messages="errors"
-                      label="Area"
-                      outlined
-                    />
-                  </validation-provider>
+                  <v-autocomplete
+                    dense
+                    :items="area_list"
+                    v-model="form.area"
+                    item-text="title"
+                    item-value="id"
+                    :error-messages="errors"
+                    label="Area"
+                    outlined
+                  />
                 </v-col>
                 <v-col cols="12" md="4" v-if="form.level && form.area && form.holding_level===1">
-                  <validation-provider v-slot="{errors}" name="school" role="required">
-                    <v-autocomplete
-                      dense
-                      :items="school_list"
-                      v-model="form.school"
-                      item-text="title"
-                      item-value="id"
-                      :error-messages="errors"
-                      label="School"
-                      outlined
-                    />
-                  </validation-provider>
+                  <v-autocomplete
+                    dense
+                    :items="school_list"
+                    v-model="form.school"
+                    item-text="title"
+                    item-value="id"
+                    :error-messages="errors"
+                    label="School"
+                    outlined
+                  />
                 </v-col>
+
                 <v-col cols="12" md="12">
                   <validation-provider v-slot="{errors}" name="title" role="required">
                     <v-text-field
@@ -194,49 +196,49 @@
 
 
                 <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="negative_point">
-                    <v-checkbox
-                      dense
-                      v-model="form.negative_point"
-                      :error-messages="errors"
-                      label="Negative point"
-                    />
-                  </validation-provider>
+                  <v-checkbox
+                    dense
+                    v-model="form.negativePoint"
+                    :error-messages="errors"
+                    label="Negative point"
+                  />
                 </v-col>
 
 
                 <v-col cols="12" md="4">
                   <v-checkbox
                     dense
-                    v-model="form.holding_time"
+                    v-model="form.holdingTime"
                     label="Time of holding"
                   />
 
                 </v-col>
-                <v-col cols="12" md="12" v-show="form.holding_time">
+
+                <v-col cols="12" md="12" v-show="form.holdingTime">
                   <v-date-picker
                     color="teal"
-                    v-model="form.date"
+                    v-model="teaching_date"
                     full-width
                   ></v-date-picker>
                 </v-col>
+
                 <v-col
                   cols="12"
                   md="4"
-                  v-show="form.holding_time"
+                  v-show="form.holdingTime"
                 >
                   <v-menu
                     ref="menu"
                     v-model="timepicker_menu"
                     :close-on-content-click="false"
                     :nudge-right="40"
-                    :return-value.sync="form.teaching_time"
+                    :return-value.sync="teaching_time"
                     transition="scale-transition"
                     offset-y
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
-                        v-model="form.teaching_time"
+                        v-model="teaching_time"
                         label="Start time"
                         prepend-icon="mdi-clock-time-four-outline"
                         readonly
@@ -248,9 +250,10 @@
                     </template>
                     <v-time-picker
                       v-if="timepicker_menu"
-                      v-model="form.teaching_time"
+                      v-model="teaching_time"
                       full-width
-                      @click:minute="$refs.menu.save(form.teaching_time)"
+                      format="24hr"
+                      @click:minute="$refs.menu.save(teaching_time)"
                     ></v-time-picker>
                   </v-menu>
                 </v-col>
@@ -259,7 +262,10 @@
                 <v-col cols="12">
                   <v-row>
                     <v-col cols="12" md="6" class="pb-0">
-                      <v-btn type="submit" lg color="teal" class="white--text" block>
+                      <v-btn type="submit"
+                             :loading="submit_loading"
+                             :disabled="invalid"
+                             lg color="teal" class="white--text" block>
                         Continue
                       </v-btn>
                     </v-col>
@@ -327,6 +333,7 @@
 <script>
 import {ValidationObserver, ValidationProvider} from "vee-validate";
 import TopicSelector from "@/components/form/topic-selector";
+import {min} from "vee-validate/dist/rules";
 
 
 export default {
@@ -346,20 +353,26 @@ export default {
     return {
       test_step: 1,
       form: {
-        level: '',
-        grade: '',
+        section: '',
+        base: '',
         lesson: '',
-        topic: '',
-        test_type: '',
-        test_level: '',
-        holding_time: '',
+        topics: '',
+        type: '',
+        level: '',
+        holdingTime: false,
         state: '',
         area: '',
         school: '',
-        test_duration:3,
-        date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+        duration: 3,
+        startDate: 0,
+        title: ''
       },
-      timepicker_menu:false,
+      teaching_time: '',
+      teaching_time_secounds: 0,
+      teaching_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      teaching_date_time: '',
+
+      timepicker_menu: false,
 
       level_list: [],
       grade_list: [],
@@ -390,6 +403,8 @@ export default {
         {id: 3, title: "State"},
         {id: 4, title: "Country"},
       ],
+
+      submit_loading: false
     }
   },
   mounted() {
@@ -398,11 +413,26 @@ export default {
     this.getTypeList('state')
   },
   watch: {
-    "form.level"(val) {
-      this.getTypeList('base', val);
-      this.getTypeList('school');
+    "teaching_date"(val) {//Convert date to secounds
+      this.form.startDate = this.teaching_time_secounds;
+      this.teaching_date_time = (this.$moment(val).format('x') / 1000);
+      this.form.startDate = this.teaching_date_time + this.teaching_time_secounds;
     },
-    "form.grade"(val) {
+    "teaching_time"(val) {//Convert hour and minute to seconds
+      var val_split = val.split(':');
+      var hour = val_split[0] * 3600;
+      var minute = val_split[1] * 60;
+      var final_time = (hour + minute);
+
+      this.teaching_time_secounds = final_time;
+      this.form.startDate = (this.teaching_date_time + this.teaching_time_secounds);
+    },
+    "form.section"(val) {
+      this.getTypeList('base', val);
+      if (this.form.area)
+        this.getTypeList('school');
+    },
+    "form.base"(val) {
       this.getTypeList('lesson', val);
     },
     "form.lesson"(val) {
@@ -412,7 +442,8 @@ export default {
       this.getTypeList('area', val);
     },
     "form.area"(val) {
-      this.getTypeList('school');
+      if (this.form.section)
+        this.getTypeList('school');
     }
   },
   methods: {
@@ -467,9 +498,21 @@ export default {
         this.$toast.error(err);
       })
     },
-
     selectTopic(event) {
-      this.form.topic = event;
+      this.form.topics = event;
+    },
+    submitQuestion() {
+      this.submit_loading = true;
+      const querystring = require('querystring');
+      this.$axios.$post('/api/v1/exams', querystring.stringify(this.form))
+        .then(response => {
+          this.$toast.success("Created successfully");
+          this.test_step = 2;
+        }).catch(error => {
+        this.$toast.error(error.response.data.message);
+      }).finally(() => {
+        this.submit_loading = false;
+      })
     }
   }
 }

@@ -4587,8 +4587,9 @@ body {
 //Create test
 #create-test {
   .answer_label {
-    writing-mode: vertical-lr;
-    text-orientation: sideways
+    text-align: center;
+    display: block;
+    margin-right: 1rem;
   }
 
   p {
@@ -4599,23 +4600,36 @@ body {
     position: relative;
 
     .ck-editor__editable_inline {
-      height: 48rem !important;
+      height: 54.5rem !important;
+      max-height: 54.5rem !important;
     }
+
+
+    @media only screen and (max-width: 960px) {
+      .ck-editor__editable_inline {
+        height: 20.5rem !important;
+        max-height: 20.5rem !important;
+      }
+    }
+
+
+
 
     .image-input {
       position: absolute;
-      bottom: 6rem;
-      right: 2.4rem;
+      bottom: 2.2rem;
+      right: 2.2rem;
       width: 7rem;
       height: 7rem;
       border-radius: 5px;
 
       i {
-        font-size: 8rem;
+        font-size: 9.2rem;
+        color: #A11333;
       }
     }
 
-    .img-clear-btn{
+    .img-clear-btn {
       position: absolute;
       bottom: 4.8rem;
       right: 8.4rem;
@@ -4627,23 +4641,25 @@ body {
     position: relative;
 
     .ck-editor__editable_inline {
-      height: 30rem !important;
+      height: 15rem !important;
+      max-height: 15rem !important;
     }
 
     .image-input {
       position: absolute;
-      bottom: 3rem;
-      right: 2.4rem;
+      bottom: 1.4rem;
+      right: 2.2rem;
       width: 7rem;
       height: 7rem;
       border-radius: 5px;
 
       i {
-        font-size: 8rem;
+        font-size: 9.2rem;
+        color: #A11333;
       }
     }
 
-    .img-clear-btn{
+    .img-clear-btn {
       position: absolute;
       bottom: 2rem;
       right: 8.4rem;
@@ -4653,8 +4669,15 @@ body {
 
 
   #test-image-options {
-    .image-holder{
-       position: relative;
+    .ck-editor__editable_inline {
+      height: 8.8rem !important;
+      max-height: 8.8rem !important;
+    }
+
+    .image-holder {
+      position: relative;
+      height: 12.5rem;
+      margin-left: 2rem;
 
       .image-input {
         width: 7rem;
@@ -4662,13 +4685,14 @@ body {
         border-radius: 5px;
 
         i {
-          font-size: 8rem;
+          font-size: 9.2rem;
+          color: #A11333;
         }
       }
 
-      .img-clear-btn{
+      .img-clear-btn {
         position: absolute;
-        bottom: 0rem;
+        bottom: 2.6rem;
         left: 5.4rem;
         border-radius: 5px;
       }

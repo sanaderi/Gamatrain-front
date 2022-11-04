@@ -64,12 +64,12 @@
               <v-tooltip bottom>
                 <template v-slot:activator="{on,attrs}">
                   <v-btn
+                    color="teal"
+                    class="white--text py-5"
                     v-bind="attrs"
                     v-on="on"
-                    outlined block @click="path_panel_expand=!path_panel_expand">
-                    <v-icon>
-                      mdi-arrow-expand
-                    </v-icon>
+                    block @click="path_panel_expand=!path_panel_expand">
+                    <i class="fas fa-route mx-3 fa-xl"></i>
                   </v-btn>
                 </template>
                 <span>
@@ -78,7 +78,7 @@
               </v-tooltip>
             </v-col>
 
-            <v-col :cols="path_panel_expand ? 4 : 10" :md="path_panel_expand ? 4 : 11">
+            <v-col :cols="path_panel_expand ? 12 : 10" :md="path_panel_expand ? 4 : 11">
               <validation-provider v-slot="{errors}" name="lesson" rules="required">
                 <v-autocomplete
                   dense
@@ -103,29 +103,14 @@
               />
             </v-col>
 
-            <v-col cols="12" md="4" v-show="path_panel_expand">
-              <validation-provider v-slot="{errors}" name="txt_direction" rules="required">
-                <v-autocomplete
-                  dense
-                  :items="txt_direction_list"
-                  item-value="value"
-                  item-text="title"
-                  v-model="form.direction"
-                  :error-messages="errors"
-                  label="Text direction"
-                  outlined
-                />
-              </validation-provider>
-            </v-col>
 
             <v-col cols="12" md="6" id="test-maker-question">
-              <p>Questions</p>
+              <p>Question:</p>
               <client-only placeholder="loading...">
                 <validation-provider v-slot="{errors}" name="question" rules="required">
                   <ckeditor-nuxt v-model="form.question" :config="editorConfig"/>
                 </validation-provider>
               </client-only>
-
               <img width="72 " height="72" class="pointer image-input"
                    v-if="form.q_file_base64"
                    @click="selectFile('q_file')"
@@ -133,7 +118,7 @@
               <v-btn v-else
                      icon class="image-input" @click="selectFile('q_file')">
                 <v-icon>
-                  mdi-image
+                  mdi-camera
                 </v-icon>
               </v-btn>
 
@@ -145,32 +130,39 @@
             </v-col>
             <v-col cols="12" md="6">
               <v-row>
-                <v-col cols="1">
-                  <p class="answer_label">Options:</p>
-                </v-col>
-                <v-col cols="10" class="d-flex align-center justify-center">
-                  <p class="mr-3">Option type:</p>
-                  <v-radio-group v-model="form.testImgAnswers" row>
-                    <v-radio label="Text" :value="false" class="mr-8"/>
-
-                    <v-radio label="Photo" :value="true" class="ml-8"/>
-                  </v-radio-group>
+                <v-col cols="12" class="d-flex align-center justify-center">
+                  <p class="mr-3 mt-5">Choices type:</p>
+                  <v-checkbox
+                    v-model="text_answer"
+                    label="Text"
+                    color="teal"
+                    class="mr-10"
+                    @click="answerTypeChanged('txt')"
+                    hide-details
+                  />
+                  <v-checkbox
+                    v-model="photo_answer"
+                    label="Photo"
+                    color="teal"
+                    @click="answerTypeChanged('photo')"
+                    hide-details
+                  />
                 </v-col>
 
               </v-row>
               <validation-provider v-slot="{errors}" name="true_answer" rules="required">
                 <v-radio-group v-model="form.true_answer" id="test-image-options">
                   <v-row>
-                    <v-col cols="1">
+                    <v-col class="pb-0" cols="1">
                       <v-radio value="1"></v-radio>
                       <span class="answer_label">A</span>
                     </v-col>
-                    <v-col cols="11" v-show="form.testImgAnswers===false">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
                       <client-only placeholder="loading...">
                           <ckeditor-nuxt v-model="form.answer_a" :config="editorConfig"/>
                       </client-only>
                     </v-col>
-                    <v-col cols="11" v-show="form.testImgAnswers===true">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
                       <div class="image-holder">
                         <img width="72 " height="72" class="pointer image-input"
                              v-if="form.a_file_base64"
@@ -180,7 +172,7 @@
                                icon class="image-input"
                                @click="selectFile('a_file')">
                           <v-icon>
-                            mdi-image
+                            mdi-camera
                           </v-icon>
                         </v-btn>
 
@@ -195,16 +187,16 @@
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-col cols="1">
+                    <v-col class="pb-0" cols="1">
                       <v-radio value="2"></v-radio>
                       <span class="answer_label">B</span>
                     </v-col>
-                    <v-col cols="11" v-show="form.testImgAnswers===false">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
                       <client-only placeholder="loading...">
                           <ckeditor-nuxt v-model="form.answer_b" :config="editorConfig"/>
                       </client-only>
                     </v-col>
-                    <v-col cols="11" v-show="form.testImgAnswers===true">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
                       <div class="image-holder">
                         <img width="72 " height="72" class="pointer image-input"
                              v-if="form.b_file_base64"
@@ -214,7 +206,7 @@
                                icon class="image-input"
                                @click="selectFile('b_file')">
                           <v-icon>
-                            mdi-image
+                            mdi-camera
                           </v-icon>
                         </v-btn>
 
@@ -229,16 +221,16 @@
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-col cols="1">
+                    <v-col class="pb-0" cols="1">
                       <v-radio value="3"></v-radio>
                       <span class="answer_label">C</span>
                     </v-col>
-                    <v-col cols="11" v-show="form.testImgAnswers===false">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
                       <client-only placeholder="loading...">
                           <ckeditor-nuxt v-model="form.answer_c" :config="editorConfig"/>
                       </client-only>
                     </v-col>
-                    <v-col cols="11" v-show="form.testImgAnswers===true">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
                       <div class="image-holder">
                         <img width="72 " height="72" class="pointer image-input"
                              v-if="form.c_file_base64"
@@ -248,7 +240,7 @@
                                icon class="image-input"
                                @click="selectFile('c_file')">
                           <v-icon>
-                            mdi-image
+                            mdi-camera
                           </v-icon>
                         </v-btn>
 
@@ -263,16 +255,16 @@
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-col cols="1">
+                    <v-col class="pb-0" cols="1">
                       <v-radio value="4"></v-radio>
                       <span class="answer_label">D</span>
                     </v-col>
-                    <v-col cols="11" v-show="form.testImgAnswers===false">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
                       <client-only placeholder="loading...">
                           <ckeditor-nuxt v-model="form.answer_d" :config="editorConfig"/>
                       </client-only>
                     </v-col>
-                    <v-col cols="11" v-show="form.testImgAnswers===true">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
                       <div class="image-holder">
                         <img width="72 " height="72" class="pointer image-input"
                              v-if="form.d_file_base64"
@@ -282,7 +274,7 @@
                                icon class="image-input"
                                @click="selectFile('d_file')">
                           <v-icon>
-                            mdi-image
+                            mdi-camera
                           </v-icon>
                         </v-btn>
 
@@ -294,6 +286,7 @@
                           </v-icon>
                         </v-btn>
                       </div>
+                      <v-divider/>
                     </v-col>
                   </v-row>
                 </v-radio-group>
@@ -302,7 +295,7 @@
           </v-row>
           <v-row>
             <v-col cols="12" id="test-maker-answer">
-              <p>Descriptive answer</p>
+              <p>Solution:</p>
               <client-only placeholder="loading...">
                 <ckeditor-nuxt v-model="form.answer_full" :config="editorConfig"/>
               </client-only>
@@ -316,7 +309,7 @@
                      icon class="image-input"
                      @click="selectFile('answer_full_file')">
                 <v-icon>
-                  mdi-image
+                  mdi-camera
                 </v-icon>
               </v-btn>
 
@@ -342,7 +335,7 @@
                   </v-btn>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-btn lg outlined color="error" to="/user/dashboard" block>
+                  <v-btn lg outlined color="error" to="/test-maker" block>
                     Discard
                   </v-btn>
                 </v-col>
@@ -471,9 +464,11 @@ export default {
       create_loading: false,
       test_step: 1,
       editorConfig: {
+        toolbar:['bold','underline','alignment','mathType'],
         plugins: [
           'Autoformat',
           'Essentials',
+          'MathType',
           'Alignment',
           'Bold',
           'Underline',
@@ -489,7 +484,7 @@ export default {
         grade: '',
         lesson: '',
         topic: '',
-        txt_direction: 'ltr',
+        direction: 'ltr',
         true_answer: '',
         question:'',
         q_file_base64: '',
@@ -537,7 +532,8 @@ export default {
         width: 180,
         height: 180
       },
-
+      text_answer:true,
+      photo_answer:false,
     }
   },
   mounted() {
@@ -554,7 +550,7 @@ export default {
     },
     "form.lesson"(val) {
       this.getTypeList('topic', val);
-    }
+    },
   },
   methods: {
     getTypeList(type, parent = '') {
@@ -745,6 +741,26 @@ export default {
         this.form.d_file_base64 = '';
         this.$refs["d-input"].$refs.input.value = null;
         this.current_crop_file = '';
+      }
+    },
+
+    answerTypeChanged(type){
+      if (type==='txt'){
+        if (this.text_answer===true){
+          this.photo_answer=false;
+          this.form.testImgAnswers=false;
+        }else{
+          this.photo_answer=true;
+          this.form.testImgAnswers=true;
+        }
+      }else{
+        if (this.photo_answer===true){
+          this.text_answer=false;
+          this.form.testImgAnswers=true;
+        }else{
+          this.text_answer=true;
+          this.form.testImgAnswers=false;
+        }
       }
     }
 

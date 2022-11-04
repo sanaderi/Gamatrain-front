@@ -51,7 +51,8 @@ export default {
     'nuxt-leaflet',
     // https://go.nuxtjs.dev/vuetify
     ["@nuxtjs/vuetify"],
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/moment',
 
   ],
 
