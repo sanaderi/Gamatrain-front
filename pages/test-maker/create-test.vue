@@ -111,6 +111,7 @@
                   <ckeditor-nuxt v-model="form.question" :config="editorConfig"/>
                 </validation-provider>
               </client-only>
+              {{ form.question }}
               <img width="72 " height="72" class="pointer image-input"
                    v-if="form.q_file_base64"
                    @click="selectFile('q_file')"
@@ -159,7 +160,7 @@
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
                       <client-only placeholder="loading...">
-                          <ckeditor-nuxt v-model="form.answer_a" :config="editorConfig"/>
+                        <ckeditor-nuxt v-model="form.answer_a" :config="editorConfig"/>
                       </client-only>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
@@ -193,7 +194,7 @@
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
                       <client-only placeholder="loading...">
-                          <ckeditor-nuxt v-model="form.answer_b" :config="editorConfig"/>
+                        <ckeditor-nuxt v-model="form.answer_b" :config="editorConfig"/>
                       </client-only>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
@@ -227,7 +228,7 @@
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
                       <client-only placeholder="loading...">
-                          <ckeditor-nuxt v-model="form.answer_c" :config="editorConfig"/>
+                        <ckeditor-nuxt v-model="form.answer_c" :config="editorConfig"/>
                       </client-only>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
@@ -261,7 +262,7 @@
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
                       <client-only placeholder="loading...">
-                          <ckeditor-nuxt v-model="form.answer_d" :config="editorConfig"/>
+                        <ckeditor-nuxt v-model="form.answer_d" :config="editorConfig"/>
                       </client-only>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
@@ -464,7 +465,9 @@ export default {
       create_loading: false,
       test_step: 1,
       editorConfig: {
-        toolbar:['bold','underline','alignment','mathType'],
+        toolbar: ['bold', 'underline', 'alignment'
+          , 'mathType', 'chemType'
+        ],
         plugins: [
           'Autoformat',
           'Essentials',
@@ -476,6 +479,9 @@ export default {
           'Paragraph',
           'WordCount',
         ],
+        mathType: {
+          wiriseditorparselatex: false
+        }
       },
 
 
@@ -486,7 +492,7 @@ export default {
         topic: '',
         direction: 'ltr',
         true_answer: '',
-        question:'',
+        question: '',
         q_file_base64: '',
         answer_full: '',
         answer_full_file_base64: '',
@@ -532,8 +538,8 @@ export default {
         width: 180,
         height: 180
       },
-      text_answer:true,
-      photo_answer:false,
+      text_answer: true,
+      photo_answer: false,
     }
   },
   mounted() {
@@ -613,7 +619,7 @@ export default {
           this.path_panel_expand = false;
 
 
-          this.form.question='';
+          this.form.question = '';
           this.form.q_file_base64 = '';
 
           this.form.answer_full = '';
@@ -744,22 +750,22 @@ export default {
       }
     },
 
-    answerTypeChanged(type){
-      if (type==='txt'){
-        if (this.text_answer===true){
-          this.photo_answer=false;
-          this.form.testImgAnswers=false;
-        }else{
-          this.photo_answer=true;
-          this.form.testImgAnswers=true;
+    answerTypeChanged(type) {
+      if (type === 'txt') {
+        if (this.text_answer === true) {
+          this.photo_answer = false;
+          this.form.testImgAnswers = false;
+        } else {
+          this.photo_answer = true;
+          this.form.testImgAnswers = true;
         }
-      }else{
-        if (this.photo_answer===true){
-          this.text_answer=false;
-          this.form.testImgAnswers=true;
-        }else{
-          this.text_answer=true;
-          this.form.testImgAnswers=false;
+      } else {
+        if (this.photo_answer === true) {
+          this.text_answer = false;
+          this.form.testImgAnswers = true;
+        } else {
+          this.text_answer = true;
+          this.form.testImgAnswers = false;
         }
       }
     }

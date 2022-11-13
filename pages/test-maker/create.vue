@@ -1,17 +1,19 @@
 <template>
   <v-container class="test-maker">
     <v-stepper
+      flat
       v-model="test_step"
       vertical
     >
       <v-stepper-step
         :complete="test_step > 1"
         step="1"
+        class="pointer"
+        @click="test_step=1"
         color="teal"
       >
         <p>Header</p>
       </v-stepper-step>
-
       <v-stepper-content step="1">
         <v-card flat class="mt-3 pb-10">
           <validation-observer ref="observer" v-slot="{invalid}">
@@ -198,8 +200,7 @@
                 <v-col cols="12" md="4">
                   <v-checkbox
                     dense
-                    v-model="form.negativePoint"
-                    :error-messages="errors"
+                    v-model="form.negative_point"
                     label="Negative point"
                   />
                 </v-col>
@@ -208,13 +209,13 @@
                 <v-col cols="12" md="4">
                   <v-checkbox
                     dense
-                    v-model="form.holdingTime"
+                    v-model="form.holding_time"
                     label="Time of holding"
                   />
 
                 </v-col>
 
-                <v-col cols="12" md="12" v-show="form.holdingTime">
+                <v-col cols="12" md="12" v-show="form.holding_time">
                   <v-date-picker
                     color="teal"
                     v-model="teaching_date"
@@ -225,7 +226,7 @@
                 <v-col
                   cols="12"
                   md="4"
-                  v-show="form.holdingTime"
+                  v-show="form.holding_time"
                 >
                   <v-menu
                     ref="menu"
@@ -285,39 +286,293 @@
 
       </v-stepper-content>
 
+
       <v-stepper-step
         :complete="test_step > 2"
+        @click="test_step=2"
         step="2"
+        class="pointer"
         color="teal"
       >
         <p>Tests</p>
       </v-stepper-step>
-
       <v-stepper-content step="2">
-        <v-card
-          color="grey lighten-1"
-          class="mb-12"
-          height="200px"
-        ></v-card>
-        <v-btn
-          color="primary"
-          @click="test_step = 3"
-        >
-          Continue
-        </v-btn>
-        <v-btn text>
-          Cancel
-        </v-btn>
+        <v-card flat class="mt-3 pb-10">
+          <validation-observer ref="observer" v-slot="{invalid}">
+            <form @submit.prevent="submitQuestionLevel2">
+              <v-row>
+                <v-col cols="12" md="4">
+                  <validation-provider v-slot="{errors}" name="level" rules="required">
+                    <v-autocomplete
+                      dense
+                      v-model="filter.section"
+                      :items="level_list"
+                      :error-messages="errors"
+                      item-text="title"
+                      clearable
+                      item-value="id"
+                      label="Level"
+                      outlined
+                    />
+                  </validation-provider>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <validation-provider v-slot="{errors}" name="grade" rules="required">
+                    <v-autocomplete
+                      dense
+                      v-model="filter.base"
+                      :items="grade_list"
+                      item-value="id"
+                      item-text="title"
+                      :error-messages="errors"
+                      label="Grade"
+                      outlined
+                    />
+                  </validation-provider>
+                </v-col>
+                <!--                    <v-col cols="12" md="4">-->
+                <!--                      <validation-provider v-slot="{errors}" name="field" rules="required">-->
+                <!--                        <v-autocomplete-->
+                <!--                          dense-->
+                <!--                          v-model="form.field"-->
+                <!--                          :error-messages="errors"-->
+                <!--                          label="Field"-->
+                <!--                          outlined-->
+                <!--                        />-->
+                <!--                      </validation-provider>-->
+                <!--                    </v-col>-->
+                <v-col cols="12" md="4">
+                  <validation-provider v-slot="{errors}" name="lesson" rules="required">
+                    <v-autocomplete
+                      dense
+                      :items="lesson_list"
+                      item-value="id"
+                      item-text="title"
+                      v-model="filter.lesson"
+                      :error-messages="errors"
+                      label="Lesson"
+                      outlined
+                    />
+                  </validation-provider>
+                </v-col>
+
+                <v-col cols="12" md="4">
+                  <validation-provider v-slot="{errors}" name="topic" rules="required">
+                    <v-autocomplete
+                      dense
+                      :items="topic_list"
+                      item-value="id"
+                      item-text="title"
+                      v-model="filter.topic"
+                      :error-messages="errors"
+                      label="Topic"
+                      outlined
+                    >
+                      <template v-slot:item="data">
+                        <p :class="data.item.season ? 'topic_season' : ''" class="py-2">
+                          {{ data.item.title }}
+                        </p>
+                      </template>
+                    </v-autocomplete>
+                  </validation-provider>
+                </v-col>
+
+                <v-col cols="12" md="4">
+                  <validation-provider v-slot="{errors}" name="video_analysis" rules="required">
+                    <v-autocomplete
+                      dense
+                      :items="video_analysis_options"
+                      item-value="value"
+                      item-text="title"
+                      v-model="filter.testsHasVideo"
+                      :error-messages="errors"
+                      label="Video analysis"
+                      outlined
+                    />
+                  </validation-provider>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-checkbox
+                    class="mt-1"
+                    v-model="filter.myTests"
+                    label="My own tests"
+                    outlined
+                  />
+                </v-col>
+
+                <v-col cols="12">
+                  <v-card id="test-list" flat
+                          class="overflow-y-auto"
+                          max-height="300"
+                          ref="testList"
+                          @scroll="onScroll"
+                  >
+                    <v-card-text>
+                      <v-row ref="testListContent">
+                        <v-col
+                          v-show="test_list.length>0"
+                          v-for="item in test_list" cols="12">
+                          <v-row class="mb-2">
+                            <v-col cols="12">
+                              <v-chip>
+                                {{ item.lesson_title }}
+                              </v-chip>
+                              <v-chip>
+                                {{ item.topics_title }}
+                              </v-chip>
+                              <v-chip outlined
+                                      color="success"
+                                      v-show="item.level==='1'">
+                                Simple
+                              </v-chip>
+                              <v-chip outlined
+                                      color="primary"
+                                      v-show="item.level==='2'"
+                              >
+                                Middle
+                              </v-chip>
+                              <v-chip outlined
+                                      color="error"
+                                      v-show="item.level==='3'"
+                              >
+                                Hard
+                              </v-chip>
+                            </v-col>
+                          </v-row>
+                          <div id="test-question"
+                               ref="mathJaxEl"
+                               v-html="item.question"/>
+                          <img :src="item.q_file"/>
+
+                          <div class="answer">
+                            <v-icon v-show="item.true_answer==='1'" class="true_answer" large>
+                              mdi-check
+                            </v-icon>
+                            <span>1)</span>
+                            <span
+                              ref="mathJaxEl"
+                              v-html="item.answer_a"></span>
+                          </div>
+                          <div class="answer">
+                            <v-icon v-show="item.true_answer==='2'" large class="true_answer">
+                              mdi-check
+                            </v-icon>
+
+                            <span>2)</span>
+                            <span
+                              ref="mathJaxEl"
+                              v-html="item.answer_b"></span>
+                          </div>
+                          <div class="answer ">
+                            <v-icon v-show="item.true_answer==='3'" large class="true_answer">
+                              mdi-check
+                            </v-icon>
+
+                            <span>3)</span>
+                            <span
+                              ref="mathJaxEl"
+                              v-html="item.answer_c"></span>
+                          </div>
+                          <div class="answer">
+                            <v-icon class="true_answer" v-show="item.true_answer==='4'" large>
+                              mdi-check
+                            </v-icon>
+                            <span>4)</span>
+                            <span
+                              ref="mathJaxEl"
+                              v-html="item.answer_d"/>
+                          </div>
+                          <v-row>
+                            <v-col cols="6">
+                              <v-btn icon>
+                                <v-icon color="blue">
+                                  mdi-bullhorn-outline
+                                </v-icon>
+                              </v-btn>
+                              <v-btn icon>
+                                <v-icon color="green">
+                                  mdi-eye
+                                </v-icon>
+                              </v-btn>
+                              <v-btn icon>
+                                <v-icon color="red">
+                                  mdi-video
+                                </v-icon>
+                              </v-btn>
+                            </v-col>
+                            <v-col cols="6" class="text-right">
+                              <v-btn color="blue" dark small
+                                     v-show="!tests.find(x=>x===item.id)"
+                                     @click="applyTest(item.id,'add')"
+                              >
+                                <v-icon small dark>
+                                  mdi-plus
+                                </v-icon>
+                                Add
+                              </v-btn>
+                              <v-btn color="red" dark small
+                                     v-show="tests.find(x=>x===item.id)"
+                                     @click="applyTest(item.id,'remove')"
+                              >
+                                <v-icon small dark>
+                                  mdi-minus
+                                </v-icon>
+                                Delete
+                              </v-btn>
+                            </v-col>
+                          </v-row>
+                          <v-divider class="mt-3"/>
+                        </v-col>
+
+                        <v-col v-show="!all_tests_loaded" cols="12" class="text-center">
+                          <v-progress-circular
+                            :size="40"
+                            :width="4"
+                            class="mt-12 mb-12"
+                            color="orange"
+                            indeterminate
+                          />
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+
+                <v-col cols="12">
+                  <v-row>
+                    <v-col cols="12" md="6" class="pb-0">
+                      <v-btn type="submit"
+                             :loading="submit_loading"
+                             :disabled="invalid"
+                             lg color="teal" class="white--text" block>
+                        Continue
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <v-btn lg outlined color="error" to="/user/dashboard" block>
+                        Discard
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-col>
+
+
+              </v-row>
+            </form>
+          </validation-observer>
+        </v-card>
       </v-stepper-content>
+
 
       <v-stepper-step
         :complete="test_step > 3"
+        @click="test_step=3"
         color="teal"
+        class="pointer"
         step="3"
       >
         Publish
       </v-stepper-step>
-
       <v-stepper-content step="3">
         <v-card
           color="grey lighten-1"
@@ -341,7 +596,10 @@ export default {
   name: "test-maker",
   head() {
     return {
-      title: 'Create online exam'
+      title: 'Create online exam',
+      script: [
+        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
+      ],
     }
   },
   components: {
@@ -351,7 +609,9 @@ export default {
   },
   data() {
     return {
-      test_step: 1,
+      test_step: 2,
+      exam_id: '',
+      exam_code: '',
       form: {
         section: '',
         base: '',
@@ -359,16 +619,25 @@ export default {
         topics: '',
         type: '',
         level: '',
-        holdingTime: false,
+        holding_time: false,
         state: '',
         area: '',
         school: '',
         duration: 3,
-        startDate: 0,
-        title: ''
+        start_date: parseInt(this.$moment().format('x') / 1000),
+        title: '',
+        negative_point: false,
+      },
+      filter: {
+        section: '',
+        base: '',
+        lesson: '',
+        topic: '',
+        page: 1,
+        perpage: 40
       },
       teaching_time: '',
-      teaching_time_secounds: 0,
+      teaching_time_seconds: 0,
       teaching_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       teaching_date_time: '',
 
@@ -394,6 +663,20 @@ export default {
           title: 'Hard'
         },
       ],
+      video_analysis_options: [
+        {
+          value: 0,
+          title: 'All',
+        },
+        {
+          value: 1,
+          title: 'Have',
+        },
+        {
+          value: -1,
+          title: 'Do not have',
+        },
+      ],
       state_list: [],
       area_list: [],
       school_list: [],
@@ -403,20 +686,29 @@ export default {
         {id: 3, title: "State"},
         {id: 4, title: "Country"},
       ],
-
-      submit_loading: false
+      submit_loading: false,
+      test_list: [],
+      test_loading: false,
+      all_tests_loaded: false,
+      tests: []
     }
   },
   mounted() {
     this.getTypeList('section');
-    this.getTypeList('test_type')
-    this.getTypeList('state')
+    this.getTypeList('test_type');
+    this.getTypeList('state');
+
+    this.renderMathJax();
+
+    this.getExamTests();
+
+
   },
   watch: {
     "teaching_date"(val) {//Convert date to secounds
-      this.form.startDate = this.teaching_time_secounds;
+      this.form.start_date = this.teaching_time_seconds;
       this.teaching_date_time = (this.$moment(val).format('x') / 1000);
-      this.form.startDate = this.teaching_date_time + this.teaching_time_secounds;
+      this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
     },
     "teaching_time"(val) {//Convert hour and minute to seconds
       var val_split = val.split(':');
@@ -424,30 +716,86 @@ export default {
       var minute = val_split[1] * 60;
       var final_time = (hour + minute);
 
-      this.teaching_time_secounds = final_time;
-      this.form.startDate = (this.teaching_date_time + this.teaching_time_secounds);
+      this.teaching_time_seconds = final_time;
+      this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
     },
+
     "form.section"(val) {
       this.getTypeList('base', val);
+      this.filter.section = val;//Init second level filter
+
       if (this.form.area)
         this.getTypeList('school');
     },
+
+    "filter.section"(val) {
+      this.getTypeList('base', val, 'filter');
+      this.all_tests_loaded = true;
+      this.grade_list = [];
+      this.lesson_list = [];
+      this.topic_list = [];
+
+      this.test_list = [];
+    },
+
     "form.base"(val) {
       this.getTypeList('lesson', val);
+      this.filter.base = val;//Init second level filter
+
+      this.generateTitle();
     },
+    "filter.base"(val) {
+      this.getTypeList('lesson', val, 'filter');
+      this.all_tests_loaded = true;
+
+      this.lesson_list = [];
+      this.topic_list = [];
+
+      this.test_list = [];
+    },
+
     "form.lesson"(val) {
       this.getTypeList('topic', val);
+      this.filter.lesson = val;//Init second level filter
+
+      this.generateTitle();
     },
+
+
+    "filter.lesson"(val) {
+      this.getTypeList('topic', val, 'filter');
+      this.all_tests_loaded = false;
+      this.topic_list = [];
+      this.test_list = [];
+      this.getExamTests();
+    },
+
     "form.state"(val) {
       this.getTypeList('area', val);
     },
     "form.area"(val) {
       if (this.form.section)
         this.getTypeList('school');
-    }
+    },
+
+
+    "filter.topic"(val) {
+      this.test_list = [];
+      this.getExamTests();
+    },
+
+    "filter.testsHasVideo"(val) {
+      this.test_list = [];
+      this.getExamTests();
+    },
+
+    "filter.myTests"(val) {
+      this.test_list = [];
+      this.getExamTests();
+    },
   },
   methods: {
-    getTypeList(type, parent = '') {
+    getTypeList(type, parent = '', trigger = '') {
       var params = {
         type: type
       }
@@ -498,22 +846,181 @@ export default {
         this.$toast.error(err);
       })
     },
+
     selectTopic(event) {
-      this.form.topics = event;
+      var numbers = [];
+      for (var i = 0; i < event.length; i++) {
+        numbers[i] = parseInt(event[i]);
+      }
+      this.form.topics = numbers;
     },
+
     submitQuestion() {
       this.submit_loading = true;
-      const querystring = require('querystring');
-      this.$axios.$post('/api/v1/exams', querystring.stringify(this.form))
-        .then(response => {
-          this.$toast.success("Created successfully");
-          this.test_step = 2;
-        }).catch(error => {
+
+      //Arrange to form data
+      let formData = new FormData();
+      for (let key in this.form) {
+        formData.append(key, this.form[key]);
+      }
+      //End arrange to form data
+
+      this.$axios.$post('/api/v1/exams', formData,
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        }
+      ).then(response => {
+        this.$toast.success("Created successfully");
+        this.exam_id = response.data.id;
+        this.exam_code = response.data.code;
+        this.test_step = 2;
+      }).catch(error => {
         this.$toast.error(error.response.data.message);
       }).finally(() => {
         this.submit_loading = false;
       })
-    }
+    },
+
+    generateTitle() {
+      var lesson_title = ''
+      if (this.form.lesson) {
+        lesson_title = this.lesson_list
+          .find(x => x.id === this.form.lesson).title;
+      }
+
+
+      var base_title = ''
+      if (this.form.base)
+        base_title = this.grade_list
+          .find(x => x.id === this.form.base).title;
+
+      this.form.title = `${lesson_title} Test ${base_title} Grade`
+    },
+
+    getExamTests() {
+      this.test_loading = true;
+      this.$axios.$get('/api/v1/examTests', {
+        params: {
+          lesson: this.filter.lesson,
+          topic: this.filter.topic,
+          myTests: this.filter.myTests,
+          testsHasVideo: this.filter.testsHasVideo,
+          page: this.filter.page,
+          perpage: this.filter.perpage
+        }
+      })
+        .then(response => {
+          this.test_list.push(...response.data.list);
+
+          this.$nextTick(function () {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+          });
+
+          if (response.data.list.length === 0)//For terminate auto load request
+            this.all_tests_loaded = true;
+          else
+            this.all_tests_loaded = false;
+        }).catch(err => {
+        console.log(err);
+      }).finally(() => {
+        this.test_loading = false;
+      })
+    },
+
+    renderMathJax() {
+      if (window.MathJax) {
+        window.MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$', '$'], ["\(", "\)"]],
+            displayMath: [['$$', '$$'], ["\[", "\]"]],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          // Center justify equations in code and markdown cells. Elsewhere
+          // we use CSS to left justify single line equations in code cells.
+          displayAlign: 'center',
+          "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: {automatic: true}
+          }
+        });
+        MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
+
+
+      }
+    },
+
+    onScroll() {
+      var scrollPosition = this.$refs.testList.$el.scrollTop;
+      let contentHeight = this.$refs.testListContent.clientHeight;
+
+      //Avoid the number of requests
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+
+      if (scrollPosition > (contentHeight - 1000) && this.all_tests_loaded === false)
+        this.timer = setTimeout(() => {
+          this.test_loading = true;
+          this.filter.page++;
+          this.getExamTests();
+        }, 800);
+    },
+
+    applyTest(item, type) {
+      if (this.tests.find(x => x == item) && type === 'remove') {
+        this.tests.splice(this.tests.indexOf(item), 1);
+        this.submitTest();
+      }
+
+      if (!this.tests.find(x => x == item) && type === 'add') {
+        this.tests.push(item);
+         this.submitTest();
+      }
+    },
+    submitTest(){
+      let formData = new FormData();
+
+      for (var i = 0; i < this.tests.length; i++) {
+        formData.append("tests[]", this.tests[i]);
+      }
+
+      this.$axios.$put(`/api/v1/exams/tests/24`
+        , this.urlencodeFormData(formData),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        }
+      )
+        .then(response => {
+          console.log(response);
+        }).catch(err => {
+        console.log(err);
+      })
+    },
+
+
+    //Convert form data from multipart to urlencode
+    urlencodeFormData(fd) {
+      var s = '';
+
+      for (var pair of fd.entries()) {
+        if (typeof pair[1] == 'string') {
+          s += (s ? '&' : '') + this.encode(pair[0]) + '=' + this.encode(pair[1]);
+        }
+      }
+      return s;
+    },
+    encode(s) {
+      return encodeURIComponent(s).replace(/%20/g, '+');
+    },
+    //End convert form data from multipart to urlencode
+
+
   }
 }
 </script>

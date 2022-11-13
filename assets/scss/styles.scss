@@ -4613,8 +4613,6 @@ body {
     }
 
 
-
-
     .image-input {
       position: absolute;
       bottom: 2.2rem;
@@ -4699,6 +4697,45 @@ body {
     }
 
   }
+
 }
 
 //End create test
+
+//Create online exam
+#test-list {
+  #test-question {
+    font-weight: bolder;
+    margin-bottom: 1rem;
+    line-height: 2.2rem;
+    font-size: 1.8rem!important;
+
+
+    p{
+      font-size: 1.8rem!important;
+    }
+  }
+
+
+  .answer {
+    margin-bottom: 0.8rem;
+    position: relative;
+    font-size: 1.8rem!important;
+
+    span {
+      p {
+        display: inline;
+        font-size: 1.8rem!important;
+      }
+    }
+
+    .true_answer {
+      position: absolute;
+      top: -1rem;
+      left: -1rem;
+      color: green;
+    }
+  }
+}
+
+//End create online exam
