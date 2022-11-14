@@ -271,7 +271,7 @@
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
-                      <v-btn lg outlined color="error" to="/user/dashboard" block>
+                      <v-btn lg outlined color="error" to="/user" block>
                         Discard
                       </v-btn>
                     </v-col>
@@ -298,287 +298,317 @@
       </v-stepper-step>
       <v-stepper-content step="2">
         <v-card flat class="mt-3 pb-10">
-          <validation-observer ref="observer" v-slot="{invalid}">
-            <form @submit.prevent="submitQuestionLevel2">
-              <v-row>
-                <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="level" rules="required">
-                    <v-autocomplete
-                      dense
-                      v-model="filter.section"
-                      :items="level_list"
-                      :error-messages="errors"
-                      item-text="title"
-                      clearable
-                      item-value="id"
-                      label="Level"
-                      outlined
-                    />
-                  </validation-provider>
-                </v-col>
-                <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="grade" rules="required">
-                    <v-autocomplete
-                      dense
-                      v-model="filter.base"
-                      :items="grade_list"
-                      item-value="id"
-                      item-text="title"
-                      :error-messages="errors"
-                      label="Grade"
-                      outlined
-                    />
-                  </validation-provider>
-                </v-col>
-                <!--                    <v-col cols="12" md="4">-->
-                <!--                      <validation-provider v-slot="{errors}" name="field" rules="required">-->
-                <!--                        <v-autocomplete-->
-                <!--                          dense-->
-                <!--                          v-model="form.field"-->
-                <!--                          :error-messages="errors"-->
-                <!--                          label="Field"-->
-                <!--                          outlined-->
-                <!--                        />-->
-                <!--                      </validation-provider>-->
-                <!--                    </v-col>-->
-                <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="lesson" rules="required">
-                    <v-autocomplete
-                      dense
-                      :items="lesson_list"
-                      item-value="id"
-                      item-text="title"
-                      v-model="filter.lesson"
-                      :error-messages="errors"
-                      label="Lesson"
-                      outlined
-                    />
-                  </validation-provider>
-                </v-col>
+          <v-row>
+            <v-col cols="12" md="4">
+              <v-autocomplete
+                dense
+                v-model="filter.section"
+                :items="level_list"
+                :error-messages="errors"
+                item-text="title"
+                clearable
+                item-value="id"
+                label="Level"
+                outlined
+              />
+            </v-col>
+            <v-col cols="12" md="4">
+              <v-autocomplete
+                dense
+                v-model="filter.base"
+                :items="grade_list"
+                item-value="id"
+                item-text="title"
+                :error-messages="errors"
+                label="Grade"
+                outlined
+              />
+            </v-col>
+            <!--                    <v-col cols="12" md="4">-->
+            <!--                      <validation-provider v-slot="{errors}" name="field" rules="required">-->
+            <!--                        <v-autocomplete-->
+            <!--                          dense-->
+            <!--                          v-model="form.field"-->
+            <!--                          :error-messages="errors"-->
+            <!--                          label="Field"-->
+            <!--                          outlined-->
+            <!--                        />-->
+            <!--                      </validation-provider>-->
+            <!--                    </v-col>-->
+            <v-col cols="12" md="4">
+              <v-autocomplete
+                dense
+                :items="lesson_list"
+                item-value="id"
+                item-text="title"
+                v-model="filter.lesson"
+                :error-messages="errors"
+                label="Lesson"
+                outlined
+              />
+            </v-col>
 
-                <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="topic" rules="required">
-                    <v-autocomplete
-                      dense
-                      :items="topic_list"
-                      item-value="id"
-                      item-text="title"
-                      v-model="filter.topic"
-                      :error-messages="errors"
-                      label="Topic"
-                      outlined
-                    >
-                      <template v-slot:item="data">
-                        <p :class="data.item.season ? 'topic_season' : ''" class="py-2">
-                          {{ data.item.title }}
-                        </p>
-                      </template>
-                    </v-autocomplete>
-                  </validation-provider>
-                </v-col>
+            <v-col cols="12" md="4">
+              <v-autocomplete
+                dense
+                :items="topic_list"
+                item-value="id"
+                item-text="title"
+                v-model="filter.topic"
+                :error-messages="errors"
+                label="Topic"
+                outlined
+              >
+                <template v-slot:item="data">
+                  <p :class="data.item.season ? 'topic_season' : ''" class="py-2">
+                    {{ data.item.title }}
+                  </p>
+                </template>
+              </v-autocomplete>
+            </v-col>
 
-                <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="video_analysis" rules="required">
-                    <v-autocomplete
-                      dense
-                      :items="video_analysis_options"
-                      item-value="value"
-                      item-text="title"
-                      v-model="filter.testsHasVideo"
-                      :error-messages="errors"
-                      label="Video analysis"
-                      outlined
-                    />
-                  </validation-provider>
-                </v-col>
-                <v-col cols="12" md="4">
-                  <v-checkbox
-                    class="mt-1"
-                    v-model="filter.myTests"
-                    label="My own tests"
-                    outlined
-                  />
-                </v-col>
+            <v-col cols="12" md="4">
+              <v-autocomplete
+                dense
+                :items="video_analysis_options"
+                item-value="value"
+                item-text="title"
+                v-model="filter.testsHasVideo"
+                :error-messages="errors"
+                label="Video analysis"
+                outlined
+              />
+            </v-col>
+            <v-col cols="12" md="4">
+              <v-checkbox
+                class="mt-1"
+                v-model="filter.myTests"
+                label="My own tests"
+                outlined
+              />
+            </v-col>
 
-                <v-col cols="12">
-                  <v-card id="test-list" flat
-                          class="overflow-y-auto"
-                          max-height="300"
-                          ref="testList"
-                          @scroll="onScroll"
-                  >
-                    <v-card-text>
-                      <v-row ref="testListContent">
-                        <v-col
-                          v-show="test_list.length>0"
-                          v-for="item in test_list" cols="12">
-                          <v-row class="mb-2">
-                            <v-col cols="12">
-                              <v-chip>
-                                {{ item.lesson_title }}
-                              </v-chip>
-                              <v-chip>
-                                {{ item.topics_title }}
-                              </v-chip>
-                              <v-chip outlined
-                                      color="success"
-                                      v-show="item.level==='1'">
-                                Simple
-                              </v-chip>
-                              <v-chip outlined
-                                      color="primary"
-                                      v-show="item.level==='2'"
-                              >
-                                Middle
-                              </v-chip>
-                              <v-chip outlined
-                                      color="error"
-                                      v-show="item.level==='3'"
-                              >
-                                Hard
-                              </v-chip>
-                            </v-col>
-                          </v-row>
-                          <div id="test-question"
-                               ref="mathJaxEl"
-                               v-html="item.question"/>
-                          <img :src="item.q_file"/>
-
-                          <div class="answer">
-                            <v-icon v-show="item.true_answer==='1'" class="true_answer" large>
-                              mdi-check
-                            </v-icon>
-                            <span>1)</span>
-                            <span
-                              ref="mathJaxEl"
-                              v-html="item.answer_a"></span>
-                          </div>
-                          <div class="answer">
-                            <v-icon v-show="item.true_answer==='2'" large class="true_answer">
-                              mdi-check
-                            </v-icon>
-
-                            <span>2)</span>
-                            <span
-                              ref="mathJaxEl"
-                              v-html="item.answer_b"></span>
-                          </div>
-                          <div class="answer ">
-                            <v-icon v-show="item.true_answer==='3'" large class="true_answer">
-                              mdi-check
-                            </v-icon>
-
-                            <span>3)</span>
-                            <span
-                              ref="mathJaxEl"
-                              v-html="item.answer_c"></span>
-                          </div>
-                          <div class="answer">
-                            <v-icon class="true_answer" v-show="item.true_answer==='4'" large>
-                              mdi-check
-                            </v-icon>
-                            <span>4)</span>
-                            <span
-                              ref="mathJaxEl"
-                              v-html="item.answer_d"/>
-                          </div>
-                          <v-row>
-                            <v-col cols="6">
-                              <v-btn icon>
-                                <v-icon color="blue">
-                                  mdi-bullhorn-outline
-                                </v-icon>
-                              </v-btn>
-                              <v-btn icon>
-                                <v-icon color="green">
-                                  mdi-eye
-                                </v-icon>
-                              </v-btn>
-                              <v-btn icon>
-                                <v-icon color="red">
-                                  mdi-video
-                                </v-icon>
-                              </v-btn>
-                            </v-col>
-                            <v-col cols="6" class="text-right">
-                              <v-btn color="blue" dark small
-                                     v-show="!tests.find(x=>x===item.id)"
-                                     @click="applyTest(item.id,'add')"
-                              >
-                                <v-icon small dark>
-                                  mdi-plus
-                                </v-icon>
-                                Add
-                              </v-btn>
-                              <v-btn color="red" dark small
-                                     v-show="tests.find(x=>x===item.id)"
-                                     @click="applyTest(item.id,'remove')"
-                              >
-                                <v-icon small dark>
-                                  mdi-minus
-                                </v-icon>
-                                Delete
-                              </v-btn>
-                            </v-col>
-                          </v-row>
-                          <v-divider class="mt-3"/>
-                        </v-col>
-
-                        <v-col v-show="!all_tests_loaded" cols="12" class="text-center">
-                          <v-progress-circular
-                            :size="40"
-                            :width="4"
-                            class="mt-12 mb-12"
-                            color="orange"
-                            indeterminate
-                          />
+            <v-col cols="12">
+              <v-card id="test-list" flat
+                      class="overflow-y-auto"
+                      max-height="300"
+                      ref="testList"
+                      @scroll="onScroll"
+              >
+                <v-card-text>
+                  <v-row ref="testListContent">
+                    <v-col
+                      v-show="test_list.length>0"
+                      v-for="item in test_list" cols="12">
+                      <v-row class="mb-2">
+                        <v-col cols="12">
+                          <v-chip>
+                            {{ item.lesson_title }}
+                          </v-chip>
+                          <v-chip>
+                            {{ item.topics_title }}
+                          </v-chip>
+                          <v-chip outlined
+                                  color="success"
+                                  v-show="item.level==='1'">
+                            Simple
+                          </v-chip>
+                          <v-chip outlined
+                                  color="primary"
+                                  v-show="item.level==='2'"
+                          >
+                            Middle
+                          </v-chip>
+                          <v-chip outlined
+                                  color="error"
+                                  v-show="item.level==='3'"
+                          >
+                            Hard
+                          </v-chip>
                         </v-col>
                       </v-row>
-                    </v-card-text>
-                  </v-card>
-                </v-col>
+                      <div id="test-question"
+                           ref="mathJaxEl"
+                           v-html="item.question"/>
+                      <img :src="item.q_file"/>
 
-                <v-col cols="12">
-                  <v-row>
-                    <v-col cols="12" md="6" class="pb-0">
-                      <v-btn type="submit"
-                             :loading="submit_loading"
-                             :disabled="invalid"
-                             lg color="teal" class="white--text" block>
-                        Continue
-                      </v-btn>
+                      <div class="answer">
+                        <v-icon v-show="item.true_answer==='1'" class="true_answer" large>
+                          mdi-check
+                        </v-icon>
+                        <span>1)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-html="item.answer_a"></span>
+                      </div>
+                      <div class="answer">
+                        <v-icon v-show="item.true_answer==='2'" large class="true_answer">
+                          mdi-check
+                        </v-icon>
+
+                        <span>2)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-html="item.answer_b"></span>
+                      </div>
+                      <div class="answer ">
+                        <v-icon v-show="item.true_answer==='3'" large class="true_answer">
+                          mdi-check
+                        </v-icon>
+
+                        <span>3)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-html="item.answer_c"></span>
+                      </div>
+                      <div class="answer">
+                        <v-icon class="true_answer" v-show="item.true_answer==='4'" large>
+                          mdi-check
+                        </v-icon>
+                        <span>4)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-html="item.answer_d"/>
+                      </div>
+                      <v-row>
+                        <v-col cols="6">
+                          <v-btn icon>
+                            <v-icon color="blue">
+                              mdi-bullhorn-outline
+                            </v-icon>
+                          </v-btn>
+                          <v-btn icon>
+                            <v-icon color="green">
+                              mdi-eye
+                            </v-icon>
+                          </v-btn>
+                          <v-btn icon>
+                            <v-icon color="red">
+                              mdi-video
+                            </v-icon>
+                          </v-btn>
+                        </v-col>
+                        <v-col cols="6" class="text-right">
+                          <v-btn color="blue" dark small
+                                 v-show="!tests.find(x=>x===item.id)"
+                                 @click="applyTest(item.id,'add')"
+                          >
+                            <v-icon small dark>
+                              mdi-plus
+                            </v-icon>
+                            Add
+                          </v-btn>
+                          <v-btn color="red" dark small
+                                 v-show="tests.find(x=>x===item.id)"
+                                 @click="applyTest(item.id,'remove')"
+                          >
+                            <v-icon small dark>
+                              mdi-minus
+                            </v-icon>
+                            Delete
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+                      <v-divider class="mt-3"/>
                     </v-col>
-                    <v-col cols="12" md="6">
-                      <v-btn lg outlined color="error" to="/user/dashboard" block>
-                        Discard
-                      </v-btn>
+
+                    <v-col v-show="!all_tests_loaded" cols="12" class="text-center">
+                      <v-progress-circular
+                        :size="40"
+                        :width="4"
+                        class="mt-12 mb-12"
+                        color="orange"
+                        indeterminate
+                      />
                     </v-col>
                   </v-row>
+                </v-card-text>
+              </v-card>
+            </v-col>
+
+            <v-col cols="12">
+              <v-row>
+                <v-col cols="12" md="6" class="pb-0">
+                  <v-btn @click="publishTest"
+                         :disabled="tests.length<5"
+                         :loading="publish_loading"
+                         lg color="teal" class="white--text" block>
+                    <span v-show="tests.length<5">Add at least {{ 5 - tests.length }} more tests</span>
+                    <span v-show="tests.length>=5">Publish</span>
+                  </v-btn>
                 </v-col>
-
-
+                <v-col cols="12" md="6">
+                  <v-btn lg outlined color="error" to="/user" block>
+                    Discard
+                  </v-btn>
+                </v-col>
               </v-row>
-            </form>
-          </validation-observer>
+            </v-col>
+
+
+          </v-row>
         </v-card>
       </v-stepper-content>
 
 
       <v-stepper-step
         :complete="test_step > 3"
-        @click="test_step=3"
         color="teal"
         class="pointer"
         step="3"
       >
         Publish
       </v-stepper-step>
-      <v-stepper-content step="3">
-        <v-card
-          color="grey lighten-1"
-          class="mb-12"
-          height="200px"
-        ></v-card>
+      <v-stepper-content step="3" >
+        <v-card>
+          <v-card-text class="text-center">
+            <v-row>
+              <v-col cols="12" >
+                <p class="font-weight-bold teal--text mb-3">
+                  Your test is ready to use!
+                </p>
+                <p>
+                  Send below link  to your students or friends.
+                </p>
+
+                <div class="d-flex mt-4 align-center justify-center">
+                  <v-text-field
+                    outlined
+                    id="share_link"
+                    shaped
+                    @click="copyUrl"
+                    style="max-width: 320px"
+                    dense
+                    v-model="test_share_link"
+                  >
+                    <template slot="append">
+                      <v-btn icon @click="copyUrl" class="mb-1">
+                        <v-icon>
+                          mdi-content-copy
+                        </v-icon>
+                      </v-btn>
+                    </template>
+                  </v-text-field>
+                </div>
+
+                <p class="mt-3">
+                  To view the results of the participants, go to the following path:
+                </p>
+
+                <div class="d-flex mt-4 align-center justify-center">
+                  <v-breadcrumbs :items="[{text:'Dashboard',href:'/user'},
+                                           {text:'My online exams',href:'/user/online-exam'}]">
+                    <template v-slot:divider>
+                      <v-icon>mdi-forward</v-icon>
+                    </template>
+                  </v-breadcrumbs>
+
+                </div>
+              </v-col>
+            </v-row>
+
+          </v-card-text>
+        </v-card>
       </v-stepper-content>
 
     </v-stepper>
@@ -609,7 +639,7 @@ export default {
   },
   data() {
     return {
-      test_step: 2,
+      test_step: 1,
       exam_id: '',
       exam_code: '',
       form: {
@@ -687,10 +717,12 @@ export default {
         {id: 4, title: "Country"},
       ],
       submit_loading: false,
+      publish_loading: false,
       test_list: [],
       test_loading: false,
       all_tests_loaded: false,
-      tests: []
+      tests: [],
+      test_share_link: `gamatrain.com/online-test/${this.exam_code}`
     }
   },
   mounted() {
@@ -875,6 +907,8 @@ export default {
         this.$toast.success("Created successfully");
         this.exam_id = response.data.id;
         this.exam_code = response.data.code;
+        this.test_share_link=`gamatrain.com/online-test/${response.data.code}`
+
         this.test_step = 2;
       }).catch(error => {
         this.$toast.error(error.response.data.message);
@@ -978,17 +1012,18 @@ export default {
 
       if (!this.tests.find(x => x == item) && type === 'add') {
         this.tests.push(item);
-         this.submitTest();
+        this.submitTest();
       }
     },
-    submitTest(){
+
+    submitTest() {
       let formData = new FormData();
 
       for (var i = 0; i < this.tests.length; i++) {
         formData.append("tests[]", this.tests[i]);
       }
 
-      this.$axios.$put(`/api/v1/exams/tests/24`
+      this.$axios.$put(`/api/v1/exams/tests/${this.exam_id}`
         , this.urlencodeFormData(formData),
         {
           headers: {
@@ -1000,6 +1035,23 @@ export default {
           console.log(response);
         }).catch(err => {
         console.log(err);
+      })
+    },
+
+
+    /**
+     * @brief publish test
+     */
+    publishTest() {
+      this.publish_loading = true;
+      this.$axios.$put(`/api/v1/exams/publish/${this.exam_id}`)
+        .then(response => {
+          if (response.data.message === 'done')
+            this.test_step = 3;
+        }).catch(err => {
+        console.log(err);
+      }).finally(() => {
+        this.publish_loading = false;
       })
     },
 
@@ -1021,6 +1073,11 @@ export default {
     //End convert form data from multipart to urlencode
 
 
+    copyUrl() {
+      navigator.clipboard.writeText(this.test_share_link);
+      this.$toast.success('Copied');
+
+    },
   }
 }
 </script>

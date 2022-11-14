@@ -466,7 +466,7 @@ export default {
       test_step: 1,
       editorConfig: {
         toolbar: ['bold', 'underline', 'alignment'
-          , 'mathType', 'chemType'
+          // , 'mathType', 'chemType'
         ],
         plugins: [
           'Autoformat',
