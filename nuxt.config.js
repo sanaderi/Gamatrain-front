@@ -39,6 +39,7 @@ export default {
     {src: 'plugins/vuex-persist', ssr: false},
     {src: 'plugins/vue-emoji-picker', ssr: false},
     {src: 'plugins/img-cropper', ssr: false},
+    {src: 'plugins/vuedraggable', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

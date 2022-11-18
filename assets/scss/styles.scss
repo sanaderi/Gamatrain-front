@@ -4463,8 +4463,18 @@ body {
     font-size: 1.7rem !important;
   }
 
+
+
   #share_link{
     cursor: pointer!important;
+  }
+}
+
+#preview-dialog{
+  font-size: 1.8rem!important;
+  padding-top: 4rem;
+  p{
+    font-size: 1.8rem!important;
   }
 }
 
@@ -4608,6 +4618,7 @@ body {
     }
 
 
+
     @media only screen and (max-width: 960px) {
       .ck-editor__editable_inline {
         height: 20.5rem !important;
@@ -4706,7 +4717,7 @@ body {
 //End create test
 
 //Create online exam
-#test-list {
+.test-list {
   #test-question {
     font-weight: bolder;
     margin-bottom: 1rem;

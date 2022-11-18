@@ -1,5 +1,26 @@
 <template>
   <v-container class="test-maker">
+    <v-row class="mt-4">
+      <v-col cols="6">
+        <span class="icon icong-azmoon text-h3  teal--text"></span>
+        <span class="text-h4 teal--text">
+            Create online exam
+        </span>
+      </v-col>
+      <v-col cols="6" id="tool-box" class="text-right">
+        <v-btn outlined fab small @click="printPreviewDialog=!printPreviewDialog">
+          <v-icon>
+            mdi-printer-eye
+          </v-icon>
+        </v-btn>
+        <!--        <v-btn fab small color="error">-->
+        <!--          <v-icon>-->
+        <!--            mdi-delete-->
+        <!--          </v-icon>-->
+        <!--        </v-btn>-->
+      </v-col>
+    </v-row>
+
     <v-stepper
       flat
       v-model="test_step"
@@ -153,7 +174,6 @@
                     v-model="form.state"
                     item-text="title"
                     item-value="id"
-                    :error-messages="errors"
                     label="State"
                     outlined
                   />
@@ -166,7 +186,6 @@
                     v-model="form.area"
                     item-text="title"
                     item-value="id"
-                    :error-messages="errors"
                     label="Area"
                     outlined
                   />
@@ -178,7 +197,6 @@
                     v-model="form.school"
                     item-text="title"
                     item-value="id"
-                    :error-messages="errors"
                     label="School"
                     outlined
                   />
@@ -304,7 +322,6 @@
                 dense
                 v-model="filter.section"
                 :items="level_list"
-                :error-messages="errors"
                 item-text="title"
                 clearable
                 item-value="id"
@@ -319,7 +336,6 @@
                 :items="grade_list"
                 item-value="id"
                 item-text="title"
-                :error-messages="errors"
                 label="Grade"
                 outlined
               />
@@ -342,7 +358,6 @@
                 item-value="id"
                 item-text="title"
                 v-model="filter.lesson"
-                :error-messages="errors"
                 label="Lesson"
                 outlined
               />
@@ -355,7 +370,6 @@
                 item-value="id"
                 item-text="title"
                 v-model="filter.topic"
-                :error-messages="errors"
                 label="Topic"
                 outlined
               >
@@ -374,7 +388,6 @@
                 item-value="value"
                 item-text="title"
                 v-model="filter.testsHasVideo"
-                :error-messages="errors"
                 label="Video analysis"
                 outlined
               />
@@ -389,8 +402,7 @@
             </v-col>
 
             <v-col cols="12">
-              <v-card id="test-list" flat
-                      class="overflow-y-auto"
+              <v-card class="test-list overflow-y-auto" flat
                       max-height="300"
                       ref="testList"
                       @scroll="onScroll"
@@ -491,7 +503,7 @@
                         <v-col cols="6" class="text-right">
                           <v-btn color="blue" dark small
                                  v-show="!tests.find(x=>x===item.id)"
-                                 @click="applyTest(item.id,'add')"
+                                 @click="applyTest(item,'add')"
                           >
                             <v-icon small dark>
                               mdi-plus
@@ -500,7 +512,7 @@
                           </v-btn>
                           <v-btn color="red" dark small
                                  v-show="tests.find(x=>x===item.id)"
-                                 @click="applyTest(item.id,'remove')"
+                                 @click="applyTest(item,'remove')"
                           >
                             <v-icon small dark>
                               mdi-minus
@@ -559,16 +571,16 @@
       >
         Publish
       </v-stepper-step>
-      <v-stepper-content step="3" >
+      <v-stepper-content step="3">
         <v-card>
           <v-card-text class="text-center">
             <v-row>
-              <v-col cols="12" >
+              <v-col cols="12">
                 <p class="font-weight-bold teal--text mb-3">
                   Your test is ready to use!
                 </p>
                 <p>
-                  Send below link  to your students or friends.
+                  Send below link to your students or friends.
                 </p>
 
                 <div class="d-flex mt-4 align-center justify-center">
@@ -612,6 +624,149 @@
       </v-stepper-content>
 
     </v-stepper>
+
+
+    <v-row justify="center">
+      <v-dialog
+
+        v-model="printPreviewDialog"
+        fullscreen
+        hide-overlay
+        transition="dialog-bottom-transition"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            color="primary"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            Open Dialog
+          </v-btn>
+        </template>
+        <v-card class="test-list">
+          <v-toolbar
+            dark
+            color="teal"
+          >
+            <v-btn
+              icon
+              dark
+              @click="printPreviewDialog = false"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-toolbar-items>
+              <v-btn
+                dark
+                text
+                @click="printPreviewDialog = false"
+              >
+                Ok
+              </v-btn>
+            </v-toolbar-items>
+          </v-toolbar>
+
+          <v-card-text id="preview-dialog">
+            <v-row>
+              <v-col cols="12">
+                <p class="text-h4 font-weight-bold">{{ form.title }}</p>
+              </v-col>
+              <v-col cols="4">Question's num: {{ tests.length }}</v-col>
+              <v-col cols="4">Duration: {{ form.duration }}</v-col>
+              <v-col cols="4">Level: {{ calcLevel(form.level) }}</v-col>
+              <v-col cols="12">
+                <v-chip label color="error">
+                  Topics:
+                </v-chip>
+              </v-col>
+              <v-col cols="4" v-for="item in topicTitleArr">
+                {{ item }}
+              </v-col>
+              <v-col cols="12">
+                <v-divider/>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" v-show="previewTestList.length>0">
+                <draggable v-model="previewTestList" @end="previewDragEnd">
+                  <v-row v-for="item in previewTestList">
+                    <v-col
+                      cols="12">
+                      <div id="test-question"
+                           ref="mathJaxEl"
+                           v-html="item.question"/>
+                      <img :src="item.q_file"/>
+
+                      <div class="answer">
+                        <span>1)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-html="item.answer_a"></span>
+                      </div>
+                      <div class="answer">
+                        <span>2)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-html="item.answer_b"></span>
+                      </div>
+                      <div class="answer ">
+                        <span>3)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-html="item.answer_c"></span>
+                      </div>
+                      <div class="answer">
+                        <span>4)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-html="item.answer_d"/>
+                      </div>
+                      <v-row>
+                        <v-col cols="6">
+                          <v-btn icon fab color="blue">
+                            <v-icon>
+                              mdi-cursor-move
+                            </v-icon>
+                          </v-btn>
+                        </v-col>
+                        <v-col cols="6" class="text-right">
+                          <v-btn color="blue" dark small
+                                 v-show="!tests.find(x=>x===item.id)"
+                                 @click="applyTest(item,'add')"
+                          >
+                            <v-icon small dark>
+                              mdi-plus
+                            </v-icon>
+                            Add
+                          </v-btn>
+                          <v-btn color="red" dark small
+                                 v-show="tests.find(x=>x===item.id)"
+                                 @click="applyTest(item,'remove')"
+                          >
+                            <v-icon small dark>
+                              mdi-minus
+                            </v-icon>
+                            Delete
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+                      <v-divider class="mt-3"/>
+                    </v-col>
+                  </v-row>
+                </draggable>
+              </v-col>
+              <v-col v-show="!previewTestList.length" cols="12" class="text-center">
+                <p>
+                  Oops! no data found
+                </p>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+    </v-row>
   </v-container>
 </template>
 
@@ -722,8 +877,13 @@ export default {
       test_loading: false,
       all_tests_loaded: false,
       tests: [],
-      test_share_link: `gamatrain.com/online-test/${this.exam_code}`
+      test_share_link: `gamatrain.com/online-test/${this.exam_code}`,
+      printPreviewDialog: false,
+      previewTestList: [],
+
+      topicTitleArr: [],
     }
+
   },
   mounted() {
     this.getTypeList('section');
@@ -885,6 +1045,16 @@ export default {
         numbers[i] = parseInt(event[i]);
       }
       this.form.topics = numbers;
+      if (this.form.topics.length)
+        this.getTopicTitleList();
+    },
+    getTopicTitleList() {
+      this.topicTitleArr=[];
+      var title = '';
+      for (var index in this.form.topics) {
+        title = this.topic_list.find(x => x.id == this.form.topics[index]).title;
+        this.topicTitleArr.push(title);
+      }
     },
 
     submitQuestion() {
@@ -907,7 +1077,7 @@ export default {
         this.$toast.success("Created successfully");
         this.exam_id = response.data.id;
         this.exam_code = response.data.code;
-        this.test_share_link=`gamatrain.com/online-test/${response.data.code}`
+        this.test_share_link = `gamatrain.com/online-test/${response.data.code}`
 
         this.test_step = 2;
       }).catch(error => {
@@ -1005,13 +1175,26 @@ export default {
     },
 
     applyTest(item, type) {
-      if (this.tests.find(x => x == item) && type === 'remove') {
-        this.tests.splice(this.tests.indexOf(item), 1);
+      if (this.tests.find(x => x == item.id) && type === 'remove') {
+        this.tests.splice(this.tests.indexOf(item.id), 1);
+
+        //Remove from preview
+        var previewIndex = this.previewTestList.findIndex(x => x.id == item.id);
+        this.previewTestList.splice(previewIndex, 1);
+
         this.submitTest();
       }
 
-      if (!this.tests.find(x => x == item) && type === 'add') {
-        this.tests.push(item);
+      if (!this.tests.find(x => x == item.id) && type === 'add') {
+        this.tests.push(item.id);
+
+        //Add to preview list
+        this.previewTestList.push(item);
+
+        this.$nextTick(function () {
+          MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        });
+
         this.submitTest();
       }
     },
@@ -1023,7 +1206,8 @@ export default {
         formData.append("tests[]", this.tests[i]);
       }
 
-      this.$axios.$put(`/api/v1/exams/tests/${this.exam_id}`
+      // this.$axios.$put(`/api/v1/exams/tests/${this.exam_id}`
+      this.$axios.$put(`/api/v1/exams/tests/57`
         , this.urlencodeFormData(formData),
         {
           headers: {
@@ -1076,8 +1260,26 @@ export default {
     copyUrl() {
       navigator.clipboard.writeText(this.test_share_link);
       this.$toast.success('Copied');
-
     },
+
+    previewDragEnd() {
+      this.$nextTick(function () {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      });
+
+      var new_list = [];
+      for (var index in this.previewTestList) {
+        new_list.push(this.previewTestList[index].id)
+      }
+      this.tests = new_list;
+      this.submitTest();
+    },
+
+    //Return title of level for show in preview list
+    calcLevel(level) {
+      if (level)
+        return this.level_list.find(x => x.id === level).title;
+    }
   }
 }
 </script>
