@@ -489,7 +489,6 @@ export default {
   async asyncData({params, $axios}) {
     // This could also be an action dispatch
     const content = await $axios.$get(`/api/v1/exams/${params.id}`);
-    console.log(content);
 
     var contentData = [];
 

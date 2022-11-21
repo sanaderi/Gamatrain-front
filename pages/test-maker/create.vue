@@ -628,7 +628,6 @@
 
     <v-row justify="center">
       <v-dialog
-
         v-model="printPreviewDialog"
         fullscreen
         hide-overlay
@@ -1048,6 +1047,7 @@ export default {
       if (this.form.topics.length)
         this.getTopicTitleList();
     },
+
     getTopicTitleList() {
       this.topicTitleArr=[];
       var title = '';

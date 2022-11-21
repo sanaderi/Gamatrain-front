@@ -67,7 +67,7 @@
                       :key="item.id"
                     >
                       <td class="py-3">
-                        <p class="font-weight-bold">{{ item.title }}</p>
+                        <nuxt-link :to="`/exams/${item.id}`" class="font-weight-bold">{{ item.title }}</nuxt-link>
                         <p class="mt-2">
                           <span class="icong-student"></span>
                           Participants: {{ item.participants.total }}

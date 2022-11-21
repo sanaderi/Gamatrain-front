@@ -13,6 +13,9 @@ body {
   font-size: 14px;
   transition: 0.5s ease-in-out;
 
+  p{
+    font-size: 1.8rem
+  }
   table {
     tr {
       td {
@@ -4459,7 +4462,7 @@ body {
     font-size: 1.5rem !important;
   }
 
-  p {
+  p,a {
     font-size: 1.7rem !important;
   }
 

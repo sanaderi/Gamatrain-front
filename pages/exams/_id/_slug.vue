@@ -258,7 +258,10 @@
 
                 <v-row class="mt-1 d-none d-md-block">
                   <v-col v-for="(item,key) in contentData.price" cols="12" class="pb-0">
-                    <v-btn v-if="key==='participation'" block color="success">
+                    <v-btn v-show="!$auth.loggedIn" @click="openAuthDialog('login')"  v-if="key==='participation'" block color="success">
+                      Start | {{item.price>0 ? '$'+item.price : 'Free'}}
+                    </v-btn>
+                    <v-btn v-show="$auth.loggedIn" :to="`/exams/start/${contentData.id}`"  v-if="key==='participation'" block color="success">
                       Start | {{item.price>0 ? '$'+item.price : 'Free'}}
                     </v-btn>
                     <v-btn v-else-if="key==='word'" block color="primary">
