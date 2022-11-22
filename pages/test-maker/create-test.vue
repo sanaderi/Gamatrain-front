@@ -79,18 +79,15 @@
             </v-col>
 
             <v-col :cols="path_panel_expand ? 12 : 10" :md="path_panel_expand ? 4 : 11">
-              <validation-provider v-slot="{errors}" name="lesson" rules="required">
-                <v-autocomplete
-                  dense
-                  :items="topic_list"
-                  item-value="id"
-                  item-text="title"
-                  v-model="form.topic"
-                  :error-messages="errors"
-                  label="Topic"
-                  outlined
-                />
-              </validation-provider>
+              <v-autocomplete
+                dense
+                :items="topic_list"
+                item-value="id"
+                item-text="title"
+                v-model="form.topic"
+                label="Topic"
+                outlined
+              />
             </v-col>
 
 
@@ -111,7 +108,6 @@
                   <ckeditor-nuxt v-model="form.question" :config="editorConfig"/>
                 </validation-provider>
               </client-only>
-              {{ form.question }}
               <img width="72 " height="72" class="pointer image-input"
                    v-if="form.q_file_base64"
                    @click="selectFile('q_file')"
@@ -486,6 +482,8 @@ export default {
 
 
       form: {
+        section: '',
+        base: '',
         level: '',
         grade: '',
         lesson: '',
@@ -544,12 +542,17 @@ export default {
   },
   mounted() {
     this.getTypeList('section');
-    this.getTypeList('test_type')
+    this.getTypeList('test_type');
     this.getTypeList('state');
+    this.getCurrentExamInfo();
+  },
+  created() {
+    this.getCurrentExamInfo();
   },
   watch: {
     "form.section"(val) {
       this.getTypeList('base', val);
+
     },
     "form.base"(val) {
       this.getTypeList('lesson', val);
@@ -618,6 +621,9 @@ export default {
           this.$toast.success("Created successfully")
           this.path_panel_expand = false;
 
+          var submit_data = this.form;
+          if (this.exam_id)
+            this.submitTest(response.data.id, submit_data);
 
           this.form.question = '';
           this.form.q_file_base64 = '';
@@ -768,7 +774,83 @@ export default {
           this.form.testImgAnswers = false;
         }
       }
-    }
+    },
+
+    getCurrentExamInfo() {
+      if (this.$store.state.user.examId) {
+        this.exam_id = this.$store.state.user.examId;
+        this.test_step = 2;
+        this.$axios.$get(`/api/v1/exams/info/${this.exam_id}`)
+          .then(response => {
+            this.form.section = response.data.section;
+            this.form.base = response.data.base;
+            this.form.lesson = response.data.lesson;
+
+            console.log(response);
+          }).catch(err => {
+          console.log(err);
+        })
+      }
+    },
+
+
+    submitTest(new_test_id, submit_data) {
+      let formData = new FormData();
+
+      console.log(submit_data.question);
+      console.log(submit_data.answer_a);
+
+      for (var i in this.$store.getters["user/getPreviewTestList"]) {
+        formData.append("tests[]", this.$store.getters["user/getPreviewTestList"][i].id);
+      }
+
+      formData.append("tests[]", new_test_id);
+
+      var newPreview = {
+        id: new_test_id,
+        question: submit_data.question,
+        q_file: submit_data.q_file,
+        answer_a: submit_data.answer_a,
+        answer_b: submit_data.answer_b,
+        answer_c: submit_data.answer_c,
+        answer_d: submit_data.answer_d,
+        true_answer: submit_data.true_answer
+      };
+
+      var test = submit_data;
+      this.$axios.$put(`/api/v1/exams/tests/${this.exam_id}`
+        , this.urlencodeFormData(formData),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        }
+      )
+        .then(response => {
+          console.log(newPreview);
+          this.$store.commit("user/addPreviewTestList", newPreview);
+        }).catch(err => {
+        console.log(err);
+      })
+    },
+
+
+    //Convert form data from multipart to urlencode
+    urlencodeFormData(fd) {
+      var s = '';
+
+      for (var pair of fd.entries()) {
+        if (typeof pair[1] == 'string') {
+          s += (s ? '&' : '') + this.encode(pair[0]) + '=' + this.encode(pair[1]);
+        }
+      }
+      return s;
+    },
+    encode(s) {
+      return encodeURIComponent(s).replace(/%20/g, '+');
+    },
+    //End convert form data from multipart to urlencode
+
 
   }
 }

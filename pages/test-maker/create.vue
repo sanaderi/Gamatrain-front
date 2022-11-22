@@ -95,7 +95,7 @@
                 </v-col>
 
 
-                <v-col cols="12" md="12">
+                <v-col cols="12" md="12" v-if="topic_list.length">
                   <validation-provider v-slot="{errors}" name="topic" rules="required">
                     <topic-selector :topic-list="topic_list" @selectTopic="selectTopic"/>
                   </validation-provider>
@@ -118,36 +118,36 @@
                 </v-col>
 
 
-                <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="test_level" rules="required">
-                    <v-autocomplete
-                      dense
-                      :items="test_level_list"
-                      item-value="id"
-                      item-text="title"
-                      v-model="form.level"
-                      :error-messages="errors"
-                      label="Level"
-                      outlined
-                    />
-                  </validation-provider>
-                </v-col>
+                <!--                <v-col cols="12" md="4">-->
+                <!--                  <validation-provider v-slot="{errors}" name="test_level" rules="required">-->
+                <!--                    <v-autocomplete-->
+                <!--                      dense-->
+                <!--                      :items="test_level_list"-->
+                <!--                      item-value="id"-->
+                <!--                      item-text="title"-->
+                <!--                      v-model="form.level"-->
+                <!--                      :error-messages="errors"-->
+                <!--                      label="Level"-->
+                <!--                      outlined-->
+                <!--                    />-->
+                <!--                  </validation-provider>-->
+                <!--                </v-col>-->
 
-                <v-col cols="12" md="4"
-                >
-                  <validation-provider v-slot="{errors}" name="holding_level" role="required">
-                    <v-autocomplete
-                      dense
-                      :items="holding_level_list"
-                      v-model="form.holding_level"
-                      item-text="title"
-                      item-value="id"
-                      :error-messages="errors"
-                      label="Holding level"
-                      outlined
-                    />
-                  </validation-provider>
-                </v-col>
+                <!--                <v-col cols="12" md="4"-->
+                <!--                >-->
+                <!--                  <validation-provider v-slot="{errors}" name="holding_level" role="required">-->
+                <!--                    <v-autocomplete-->
+                <!--                      dense-->
+                <!--                      :items="holding_level_list"-->
+                <!--                      v-model="form.holding_level"-->
+                <!--                      item-text="title"-->
+                <!--                      item-value="id"-->
+                <!--                      :error-messages="errors"-->
+                <!--                      label="Holding level"-->
+                <!--                      outlined-->
+                <!--                    />-->
+                <!--                  </validation-provider>-->
+                <!--                </v-col>-->
 
 
                 <v-col cols="12" md="4">
@@ -190,7 +190,7 @@
                     outlined
                   />
                 </v-col>
-                <v-col cols="12" md="4" v-if="form.level && form.area && form.holding_level===1">
+                <v-col cols="12" md="4" v-if="form.section && form.area && form.holding_level===1">
                   <v-autocomplete
                     dense
                     :items="school_list"
@@ -215,23 +215,23 @@
                 </v-col>
 
 
-                <v-col cols="12" md="4">
-                  <v-checkbox
-                    dense
-                    v-model="form.negative_point"
-                    label="Negative point"
-                  />
-                </v-col>
+                <!--                <v-col cols="12" md="4">-->
+                <!--                  <v-checkbox-->
+                <!--                    dense-->
+                <!--                    v-model="form.negative_point"-->
+                <!--                    label="Negative point"-->
+                <!--                  />-->
+                <!--                </v-col>-->
 
 
-                <v-col cols="12" md="4">
-                  <v-checkbox
-                    dense
-                    v-model="form.holding_time"
-                    label="Time of holding"
-                  />
+                <!--                <v-col cols="12" md="4">-->
+                <!--                  <v-checkbox-->
+                <!--                    dense-->
+                <!--                    v-model="form.holding_time"-->
+                <!--                    label="Time of holding"-->
+                <!--                  />-->
 
-                </v-col>
+                <!--                </v-col>-->
 
                 <v-col cols="12" md="12" v-show="form.holding_time">
                   <v-date-picker
@@ -321,7 +321,7 @@
               <v-autocomplete
                 dense
                 v-model="filter.section"
-                :items="level_list"
+                :items="filter_level_list"
                 item-text="title"
                 clearable
                 item-value="id"
@@ -333,8 +333,9 @@
               <v-autocomplete
                 dense
                 v-model="filter.base"
-                :items="grade_list"
+                :items="filter_grade_list"
                 item-value="id"
+                clearable
                 item-text="title"
                 label="Grade"
                 outlined
@@ -354,9 +355,10 @@
             <v-col cols="12" md="4">
               <v-autocomplete
                 dense
-                :items="lesson_list"
+                :items="filter_lesson_list"
                 item-value="id"
                 item-text="title"
+                clearable
                 v-model="filter.lesson"
                 label="Lesson"
                 outlined
@@ -502,7 +504,7 @@
                         </v-col>
                         <v-col cols="6" class="text-right">
                           <v-btn color="blue" dark small
-                                 v-show="!tests.find(x=>x===item.id)"
+                                 v-show="!tests.find(x=>x==item.id)"
                                  @click="applyTest(item,'add')"
                           >
                             <v-icon small dark>
@@ -511,7 +513,7 @@
                             Add
                           </v-btn>
                           <v-btn color="red" dark small
-                                 v-show="tests.find(x=>x===item.id)"
+                                 v-show="tests.find(x=>x==item.id)"
                                  @click="applyTest(item,'remove')"
                           >
                             <v-icon small dark>
@@ -633,16 +635,6 @@
         hide-overlay
         transition="dialog-bottom-transition"
       >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="primary"
-            dark
-            v-bind="attrs"
-            v-on="on"
-          >
-            Open Dialog
-          </v-btn>
-        </template>
         <v-card class="test-list">
           <v-toolbar
             dark
@@ -688,7 +680,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="12" v-show="previewTestList.length>0">
+              <v-col cols="12" v-show="$store.getters['user/getPreviewTestListLength']">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
                   <v-row v-for="item in previewTestList">
                     <v-col
@@ -732,7 +724,7 @@
                         </v-col>
                         <v-col cols="6" class="text-right">
                           <v-btn color="blue" dark small
-                                 v-show="!tests.find(x=>x===item.id)"
+                                 v-show="!tests.find(x=>x==item.id)"
                                  @click="applyTest(item,'add')"
                           >
                             <v-icon small dark>
@@ -741,7 +733,7 @@
                             Add
                           </v-btn>
                           <v-btn color="red" dark small
-                                 v-show="tests.find(x=>x===item.id)"
+                                 v-show="tests.find(x=>x==item.id)"
                                  @click="applyTest(item,'remove')"
                           >
                             <v-icon small dark>
@@ -756,7 +748,7 @@
                   </v-row>
                 </draggable>
               </v-col>
-              <v-col v-show="!previewTestList.length" cols="12" class="text-center">
+              <v-col v-show="!$store.getters['user/getPreviewTestListLength']" cols="12" class="text-center">
                 <p>
                   Oops! no data found
                 </p>
@@ -802,7 +794,7 @@ export default {
         lesson: '',
         topics: '',
         type: '',
-        level: '',
+        level: '2',
         holding_time: false,
         state: '',
         area: '',
@@ -828,9 +820,16 @@ export default {
       timepicker_menu: false,
 
       level_list: [],
+      filter_level_list: [],
+
       grade_list: [],
+      filter_grade_list: [],
+
       field_list: [],
+
       lesson_list: [],
+      filter_lesson_list: [],
+
       topic_list: [],
       test_type_list: [],
       test_level_list: [
@@ -878,8 +877,7 @@ export default {
       tests: [],
       test_share_link: `gamatrain.com/online-test/${this.exam_code}`,
       printPreviewDialog: false,
-      previewTestList: [],
-
+      previewTestList: this.$store.getters["user/getPreviewTestList"],
       topicTitleArr: [],
     }
 
@@ -892,9 +890,11 @@ export default {
     this.renderMathJax();
 
     this.getExamTests();
+    this.getCurrentExamInfo();
 
 
   },
+
   watch: {
     "teaching_date"(val) {//Convert date to secounds
       this.form.start_date = this.teaching_time_seconds;
@@ -922,9 +922,8 @@ export default {
     "filter.section"(val) {
       this.getTypeList('base', val, 'filter');
       this.all_tests_loaded = true;
-      this.grade_list = [];
-      this.lesson_list = [];
-      this.topic_list = [];
+      this.filter_grade_list = [];
+      this.filter_lesson_list = [];
 
       this.test_list = [];
     },
@@ -939,8 +938,7 @@ export default {
       this.getTypeList('lesson', val, 'filter');
       this.all_tests_loaded = true;
 
-      this.lesson_list = [];
-      this.topic_list = [];
+      this.filter_lesson_list = [];
 
       this.test_list = [];
     },
@@ -956,7 +954,6 @@ export default {
     "filter.lesson"(val) {
       this.getTypeList('topic', val, 'filter');
       this.all_tests_loaded = false;
-      this.topic_list = [];
       this.test_list = [];
       this.getExamTests();
     },
@@ -1003,7 +1000,7 @@ export default {
       }
 
       if (type === 'school') {
-        params.section_id = this.form.level;
+        params.section_id = this.form.section;
         params.area_id = this.form.area;
       }
 
@@ -1013,12 +1010,27 @@ export default {
       }).then(res => {
         var data = {};
         if (type === 'section') {
-          this.level_list = res.data;
+          if (trigger === 'filter') {
+            this.filter_level_list = res.data;
+          } else {
+            this.level_list = res.data;
+            this.filter_level_list = res.data;
+          }
         } else if (type === 'base') {
-          this.grade_list = res.data;
+          if (trigger === 'filter') {
+            this.filter_grade_list = res.data;
+          } else {
+            this.grade_list = res.data;
+            this.filter_grade_list = res.data;
+          }
 
         } else if (type === 'lesson') {
-          this.lesson_list = res.data;
+          if (trigger === 'filter') {
+            this.filter_lesson_list = res.data;
+          } else {
+            this.lesson_list = res.data;
+            this.filter_lesson_list = res.data;
+          }
 
         } else if (type === 'topic') {
           this.topic_list = res.data;
@@ -1049,7 +1061,7 @@ export default {
     },
 
     getTopicTitleList() {
-      this.topicTitleArr=[];
+      this.topicTitleArr = [];
       var title = '';
       for (var index in this.form.topics) {
         title = this.topic_list.find(x => x.id == this.form.topics[index]).title;
@@ -1079,6 +1091,7 @@ export default {
         this.exam_code = response.data.code;
         this.test_share_link = `gamatrain.com/online-test/${response.data.code}`
 
+        this.$store.commit('user/setCurrentExamId', this.exam_id);
         this.test_step = 2;
       }).catch(error => {
         this.$toast.error(error.response.data.message);
@@ -1089,14 +1102,14 @@ export default {
 
     generateTitle() {
       var lesson_title = ''
-      if (this.form.lesson) {
+      if (this.form.lesson && this.lesson_list.length > 0) {
         lesson_title = this.lesson_list
           .find(x => x.id === this.form.lesson).title;
       }
 
 
       var base_title = ''
-      if (this.form.base)
+      if (this.form.base && this.grade_list.length > 0)
         base_title = this.grade_list
           .find(x => x.id === this.form.base).title;
 
@@ -1118,9 +1131,11 @@ export default {
         .then(response => {
           this.test_list.push(...response.data.list);
 
-          this.$nextTick(function () {
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-          });
+          if (this.test_list.length) {
+            this.$nextTick(function () {
+              MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            });
+          }
 
           if (response.data.list.length === 0)//For terminate auto load request
             this.all_tests_loaded = true;
@@ -1155,6 +1170,19 @@ export default {
 
       }
     },
+    computed: {
+      previewTestList: {
+        get() {
+          return [this.$store.state["user/previewTestList"]];
+        },
+        set(value) {
+          for (var i in value) {
+            this.$store.commit('user/addPreviewTestList', value[i]);
+
+          }
+        }
+      }
+    },
 
     onScroll() {
       var scrollPosition = this.$refs.testList.$el.scrollTop;
@@ -1179,8 +1207,7 @@ export default {
         this.tests.splice(this.tests.indexOf(item.id), 1);
 
         //Remove from preview
-        var previewIndex = this.previewTestList.findIndex(x => x.id == item.id);
-        this.previewTestList.splice(previewIndex, 1);
+        this.$store.commit('user/removePreviewTestList', item.id);
 
         this.submitTest();
       }
@@ -1189,11 +1216,15 @@ export default {
         this.tests.push(item.id);
 
         //Add to preview list
-        this.previewTestList.push(item);
+        this.$store.commit('user/addPreviewTestList', item)
 
-        this.$nextTick(function () {
-          MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-        });
+
+        if (this.$store.getters["user/getPreviewTestListLength"]) {
+          this.$nextTick(function () {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+          });
+        }
+
 
         this.submitTest();
       }
@@ -1206,8 +1237,7 @@ export default {
         formData.append("tests[]", this.tests[i]);
       }
 
-      // this.$axios.$put(`/api/v1/exams/tests/${this.exam_id}`
-      this.$axios.$put(`/api/v1/exams/tests/57`
+      this.$axios.$put(`/api/v1/exams/tests/${this.exam_id}`
         , this.urlencodeFormData(formData),
         {
           headers: {
@@ -1230,13 +1260,36 @@ export default {
       this.publish_loading = true;
       this.$axios.$put(`/api/v1/exams/publish/${this.exam_id}`)
         .then(response => {
-          if (response.data.message === 'done')
+          if (response.data.message === 'done') {
             this.test_step = 3;
+            this.$store.commit('user/setCurrentExamId', '');
+            this.$store.commit('user/setPreviewTestList', []);
+          }
         }).catch(err => {
         console.log(err);
       }).finally(() => {
         this.publish_loading = false;
       })
+    },
+
+
+    getCurrentExamInfo() {
+      if (this.$store.state.user.examId) {
+        this.exam_id = this.$store.state.user.examId;
+        this.test_step = 2;
+        this.$axios.$get(`/api/v1/exams/info/${this.exam_id}`)
+          .then(response => {
+            this.tests = response.data.tests;
+
+            this.form.section = response.data.section;
+            this.form.base = response.data.base;
+            this.form.lesson = response.data.lesson;
+
+            console.log(response);
+          }).catch(err => {
+          console.log(err);
+        })
+      }
     },
 
 
@@ -1267,6 +1320,7 @@ export default {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
       });
 
+
       var new_list = [];
       for (var index in this.previewTestList) {
         new_list.push(this.previewTestList[index].id)
@@ -1278,7 +1332,7 @@ export default {
     //Return title of level for show in preview list
     calcLevel(level) {
       if (level)
-        return this.level_list.find(x => x.id === level).title;
+        return this.test_level_list.find(x => x.id === level).title;
     }
   }
 }

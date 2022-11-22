@@ -79,7 +79,7 @@ export default {
         },
 
         {
-          title: 'Create Test',
+          title: 'Add Test',
           icon: 'mdi-plus-circle-outline',
           link: '/test-maker/create-test',
           status:(this.$auth && this.$auth.user.group_id === '6' ? true : false)
