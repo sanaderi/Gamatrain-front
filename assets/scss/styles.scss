@@ -13,9 +13,10 @@ body {
   font-size: 14px;
   transition: 0.5s ease-in-out;
 
-  p{
+  p {
     font-size: 1.8rem
   }
+
   table {
     tr {
       td {
@@ -4462,22 +4463,22 @@ body {
     font-size: 1.5rem !important;
   }
 
-  p,a {
+  p, a {
     font-size: 1.7rem !important;
   }
 
 
-
-  #share_link{
-    cursor: pointer!important;
+  #share_link {
+    cursor: pointer !important;
   }
 }
 
-#preview-dialog{
-  font-size: 1.8rem!important;
+#preview-dialog {
+  font-size: 1.8rem !important;
   padding-top: 4rem;
-  p{
-    font-size: 1.8rem!important;
+
+  p {
+    font-size: 1.8rem !important;
   }
 }
 
@@ -4621,7 +4622,6 @@ body {
     }
 
 
-
     @media only screen and (max-width: 960px) {
       .ck-editor__editable_inline {
         height: 20.5rem !important;
@@ -4652,6 +4652,7 @@ body {
     }
   }
 
+
   #test-maker-answer {
     position: relative;
 
@@ -4680,6 +4681,10 @@ body {
       right: 8.4rem;
       border-radius: 5px;
     }
+  }
+
+  #img-cropper-dialog {
+    position: relative!important;
   }
 
 
@@ -4725,11 +4730,11 @@ body {
     font-weight: bolder;
     margin-bottom: 1rem;
     line-height: 2.2rem;
-    font-size: 1.8rem!important;
+    font-size: 1.8rem !important;
 
 
-    p{
-      font-size: 1.8rem!important;
+    p {
+      font-size: 1.8rem !important;
     }
   }
 
@@ -4737,12 +4742,12 @@ body {
   .answer {
     margin-bottom: 0.8rem;
     position: relative;
-    font-size: 1.8rem!important;
+    font-size: 1.8rem !important;
 
     span {
       p {
         display: inline;
-        font-size: 1.8rem!important;
+        font-size: 1.8rem !important;
       }
     }
 

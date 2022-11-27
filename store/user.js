@@ -9,7 +9,8 @@ export const state = () => ({
   lName: '',
   lastPath: '',
   examId: '',
-  previewTestList: [{title:'55'}],
+  examCode: '',
+  previewTestList: [],
 })
 
 // contains your actions
@@ -30,6 +31,9 @@ export const mutations = {
   //For online exam creation
   setCurrentExamId(state, examId) {
     state.examId = examId;
+  },
+  setCurrentExamCode(state, examCode) {
+    state.examCode = examCode;
   },
   setPreviewTestList(state, previewTestList) {
     state.previewTestList=previewTestList;
@@ -59,6 +63,9 @@ export const getters = {
   //For online exam creation
   getCurrentExamId(state) {
     return state().examId;
+  },
+  getCurrentExamCode(state) {
+    return state().examCode;
   },
 
   getPreviewTestList(state) {

@@ -8,11 +8,17 @@
         </span>
       </v-col>
       <v-col cols="6" id="tool-box" class="text-right">
+        <v-btn outlined color="error" fab small @click="confirmDeleteDialog=true">
+          <v-icon>
+            mdi-delete
+          </v-icon>
+        </v-btn>
         <v-btn outlined fab small @click="printPreviewDialog=!printPreviewDialog">
           <v-icon>
             mdi-printer-eye
           </v-icon>
         </v-btn>
+
         <!--        <v-btn fab small color="error">-->
         <!--          <v-icon>-->
         <!--            mdi-delete-->
@@ -25,6 +31,7 @@
       flat
       v-model="test_step"
       vertical
+      class="mb-16"
     >
       <v-stepper-step
         :complete="test_step > 1"
@@ -285,7 +292,7 @@
                              :loading="submit_loading"
                              :disabled="invalid"
                              lg color="teal" class="white--text" block>
-                        Continue
+                        Next step
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
@@ -317,6 +324,22 @@
       <v-stepper-content step="2">
         <v-card flat class="mt-3 pb-10">
           <v-row>
+            <v-col cols="12">
+              <v-switch
+                color="teal"
+                v-model="testListSwitch"
+                label="I want to select from list"
+              ></v-switch>
+            </v-col>
+          </v-row>
+          <v-row v-show="!testListSwitch">
+            <v-col cols="12">
+              <create-test-form :goToPreviewStep.sync="test_step"
+                                :updateTestList.sync="lastCreatedTest"
+              />
+            </v-col>
+          </v-row>
+          <v-row v-show="testListSwitch">
             <v-col cols="12" md="4">
               <v-autocomplete
                 dense
@@ -447,42 +470,50 @@
                       <img :src="item.q_file"/>
 
                       <div class="answer">
-                        <v-icon v-show="item.true_answer==='1'" class="true_answer" large>
+                        <v-icon v-show="item.true_answer=='1'" class="true_answer" large>
                           mdi-check
                         </v-icon>
                         <span>1)</span>
                         <span
                           ref="mathJaxEl"
+                          v-show="item.answer_a"
                           v-html="item.answer_a"></span>
+                        <img v-show="item.a_file" :src="item.a_file"/>
                       </div>
                       <div class="answer">
-                        <v-icon v-show="item.true_answer==='2'" large class="true_answer">
+                        <v-icon v-show="item.true_answer=='2'" large class="true_answer">
                           mdi-check
                         </v-icon>
 
                         <span>2)</span>
                         <span
                           ref="mathJaxEl"
+                          v-show="item.answer_b"
                           v-html="item.answer_b"></span>
+                        <img v-show="item.b_file" :src="item.b_file"/>
                       </div>
                       <div class="answer ">
-                        <v-icon v-show="item.true_answer==='3'" large class="true_answer">
+                        <v-icon v-show="item.true_answer=='3'" large class="true_answer">
                           mdi-check
                         </v-icon>
 
                         <span>3)</span>
                         <span
                           ref="mathJaxEl"
+                          v-show="item.answer_c"
                           v-html="item.answer_c"></span>
+                        <img v-show="item.c_file" :src="item.c_file"/>
                       </div>
                       <div class="answer">
-                        <v-icon class="true_answer" v-show="item.true_answer==='4'" large>
+                        <v-icon class="true_answer" v-show="item.true_answer=='4'" large>
                           mdi-check
                         </v-icon>
                         <span>4)</span>
                         <span
                           ref="mathJaxEl"
+                          v-show="item.answer_d"
                           v-html="item.answer_d"/>
+                        <img v-show="item.d_file" :src="item.d_file"/>
                       </div>
                       <v-row>
                         <v-col cols="6">
@@ -543,12 +574,12 @@
             <v-col cols="12">
               <v-row>
                 <v-col cols="12" md="6" class="pb-0">
-                  <v-btn @click="publishTest"
+                  <v-btn @click="test_step=3"
                          :disabled="tests.length<5"
                          :loading="publish_loading"
                          lg color="teal" class="white--text" block>
                     <span v-show="tests.length<5">Add at least {{ 5 - tests.length }} more tests</span>
-                    <span v-show="tests.length>=5">Publish</span>
+                    <span v-show="tests.length>=5">Next step</span>
                   </v-btn>
                 </v-col>
                 <v-col cols="12" md="6">
@@ -567,14 +598,156 @@
 
       <v-stepper-step
         :complete="test_step > 3"
+        @click="test_step=3"
         color="teal"
         class="pointer"
         step="3"
       >
-        Publish
+        Review
       </v-stepper-step>
       <v-stepper-content step="3">
-        <v-card>
+        <v-card flat class="pb-10 test-list">
+          <v-card-text id="preview-dialog">
+            <v-row>
+              <v-col cols="12">
+                <p class="text-h4 font-weight-bold">{{ form.title }}</p>
+              </v-col>
+              <v-col cols="4">Question's num: {{ tests.length }}</v-col>
+              <v-col cols="4">Duration: {{ form.duration }}</v-col>
+              <v-col cols="4">Level: {{ calcLevel(form.level) }}</v-col>
+              <v-col cols="12">
+                <v-chip label color="error">
+                  Topics:
+                </v-chip>
+              </v-col>
+              <v-col cols="4" v-for="item in topicTitleArr">
+                {{ item }}
+              </v-col>
+              <v-col cols="12">
+                <v-divider/>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" v-show="$store.getters['user/getPreviewTestListLength']">
+                <draggable v-model="previewTestList" @end="previewDragEnd">
+                  <v-row v-for="item in previewTestList">
+                    <v-col
+                      cols="12">
+                      <div id="test-question"
+                           ref="mathJaxEl"
+                           v-html="item.question"/>
+                      <img :src="item.q_file"/>
+
+                      <div class="answer">
+                        <span>1)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-show="item.answer_a"
+                          v-html="item.answer_a"></span>
+                        <img v-show="item.a_file" :src="item.a_file"/>
+                      </div>
+                      <div class="answer">
+                        <span>2)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-show="item.answer_b"
+                          v-html="item.answer_b"></span>
+                        <img v-show="item.b_file" :src="item.b_file"/>
+                      </div>
+                      <div class="answer ">
+                        <span>3)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-show="item.answer_c"
+                          v-html="item.answer_c"></span>
+                        <img v-show="item.c_file" :src="item.c_file"/>
+                      </div>
+                      <p class="answer">
+                        <span>4)</span>
+                        <span
+                          ref="mathJaxEl"
+                          v-show="item.answer_d"
+                          v-html="item.answer_d"/>
+                        <img v-show="item.d_file" :src="item.d_file"/>
+                      </p>
+                      <v-row>
+                        <v-col cols="6">
+                          <v-btn icon fab color="blue">
+                            <v-icon>
+                              mdi-cursor-move
+                            </v-icon>
+                          </v-btn>
+                        </v-col>
+                        <v-col cols="6" class="text-right">
+                          <v-btn color="blue" dark small
+                                 v-show="!tests.find(x=>x==item.id)"
+                                 @click="applyTest(item,'add')"
+                          >
+                            <v-icon small dark>
+                              mdi-plus
+                            </v-icon>
+                            Add
+                          </v-btn>
+                          <v-btn color="red" dark small
+                                 v-show="tests.find(x=>x==item.id)"
+                                 @click="applyTest(item,'remove')"
+                          >
+                            <v-icon small dark>
+                              mdi-minus
+                            </v-icon>
+                            Delete
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+                      <v-divider class="mt-3"/>
+                    </v-col>
+                  </v-row>
+                </draggable>
+              </v-col>
+              <v-col v-show="!$store.getters['user/getPreviewTestListLength']" cols="12" class="text-center">
+                <p>
+                  Oops! no data found
+                </p>
+              </v-col>
+            </v-row>
+
+            <!--Publish button-->
+            <v-row>
+              <v-col cols="12">
+                <v-row>
+                  <v-col cols="12" md="6" class="pb-0">
+                    <v-btn @click="publishTest"
+                           :disabled="tests.length<5"
+                           :loading="publish_loading"
+                           lg color="teal" class="white--text" block>
+                      <span v-show="tests.length<5">Add at least {{ 5 - tests.length }} more tests</span>
+                      <span v-show="tests.length>=5">Publish</span>
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-btn lg outlined color="error" to="/user" block>
+                      Discard
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+            <!--End publish button-->
+          </v-card-text>
+        </v-card>
+      </v-stepper-content>
+
+
+      <v-stepper-step
+        :complete="test_step > 4"
+        color="teal"
+        class="pointer"
+        step="4"
+      >
+        Publish
+      </v-stepper-step>
+      <v-stepper-content step="4">
+        <v-card class="mb-16">
           <v-card-text class="text-center">
             <v-row>
               <v-col cols="12">
@@ -694,26 +867,34 @@
                         <span>1)</span>
                         <span
                           ref="mathJaxEl"
+                          v-show="item.answer_a"
                           v-html="item.answer_a"></span>
+                        <img v-show="item.a_file" :src="item.a_file"/>
                       </div>
                       <div class="answer">
                         <span>2)</span>
                         <span
                           ref="mathJaxEl"
+                          v-show="item.answer_b"
                           v-html="item.answer_b"></span>
+                        <img v-show="item.b_file" :src="item.b_file"/>
                       </div>
                       <div class="answer ">
                         <span>3)</span>
                         <span
                           ref="mathJaxEl"
+                          v-show="item.answer_c"
                           v-html="item.answer_c"></span>
+                        <img v-show="item.c_file" :src="item.c_file"/>
                       </div>
-                      <div class="answer">
+                      <p class="answer">
                         <span>4)</span>
                         <span
                           ref="mathJaxEl"
+                          v-show="item.answer_d"
                           v-html="item.answer_d"/>
-                      </div>
+                        <img v-show="item.d_file" :src="item.d_file"/>
+                      </p>
                       <v-row>
                         <v-col cols="6">
                           <v-btn icon fab color="blue">
@@ -758,6 +939,41 @@
         </v-card>
       </v-dialog>
     </v-row>
+
+    <v-row>
+      <v-dialog
+        v-model="confirmDeleteDialog"
+        persistent
+        max-width="290"
+      >
+        <v-card>
+          <v-card-title class="text-h5">
+            Are you sure of deleting the online exam?
+          </v-card-title>
+          <v-card-text>
+            If you are sure about the deletion, click Agree button.
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="green darken-1"
+              text
+              @click="confirmDeleteDialog = false"
+            >
+              Disagree
+            </v-btn>
+            <v-btn
+              color="green darken-1"
+              text
+              :loading="deleteLoading"
+              @click="deleteOnlineExam"
+            >
+              Agree
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
   </v-container>
 </template>
 
@@ -765,6 +981,7 @@
 import {ValidationObserver, ValidationProvider} from "vee-validate";
 import TopicSelector from "@/components/form/topic-selector";
 import {min} from "vee-validate/dist/rules";
+import CreateTestForm from "@/components/test-maker/create-test-form";
 
 
 export default {
@@ -779,6 +996,7 @@ export default {
     }
   },
   components: {
+    CreateTestForm,
     ValidationObserver,
     ValidationProvider,
     TopicSelector
@@ -875,14 +1093,20 @@ export default {
       test_loading: false,
       all_tests_loaded: false,
       tests: [],
-      test_share_link: `gamatrain.com/online-test/${this.exam_code}`,
+      test_share_link: `gamatrain.com/online-test/${this.$store.state["user/examCode"]}`,
       printPreviewDialog: false,
+      confirmDeleteDialog: false,
+      deleteLoading: false,
       previewTestList: this.$store.getters["user/getPreviewTestList"],
       topicTitleArr: [],
+
+      testListSwitch:false,
+      lastCreatedTest:''
     }
 
   },
   mounted() {
+    this.getCurrentExamInfo();
     this.getTypeList('section');
     this.getTypeList('test_type');
     this.getTypeList('state');
@@ -890,7 +1114,6 @@ export default {
     this.renderMathJax();
 
     this.getExamTests();
-    this.getCurrentExamInfo();
 
 
   },
@@ -912,11 +1135,13 @@ export default {
     },
 
     "form.section"(val) {
-      this.getTypeList('base', val);
-      this.filter.section = val;//Init second level filter
+      if (val){
+        this.getTypeList('base', val);
+        this.filter.section = val;//Init second level filter
 
-      if (this.form.area)
-        this.getTypeList('school');
+        if (this.form.area)
+          this.getTypeList('school');
+      }
     },
 
     "filter.section"(val) {
@@ -981,6 +1206,11 @@ export default {
       this.test_list = [];
       this.getExamTests();
     },
+    lastCreatedTest(val){
+      if (val && !this.tests.find(x => x == val)){
+          this.tests.push(val);
+      }
+    }
   },
   methods: {
     getTypeList(type, parent = '', trigger = '') {
@@ -1092,6 +1322,7 @@ export default {
         this.test_share_link = `gamatrain.com/online-test/${response.data.code}`
 
         this.$store.commit('user/setCurrentExamId', this.exam_id);
+        this.$store.commit('user/setCurrentExamCode', this.exam_code);
         this.test_step = 2;
       }).catch(error => {
         this.$toast.error(error.response.data.message);
@@ -1232,24 +1463,25 @@ export default {
 
     submitTest() {
       let formData = new FormData();
-
       for (var i = 0; i < this.tests.length; i++) {
         formData.append("tests[]", this.tests[i]);
       }
 
-      this.$axios.$put(`/api/v1/exams/tests/${this.exam_id}`
-        , this.urlencodeFormData(formData),
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+      if (this.tests.length){
+        this.$axios.$put(`/api/v1/exams/tests/${this.exam_id}`
+          , this.urlencodeFormData(formData),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+            }
           }
-        }
-      )
-        .then(response => {
-          console.log(response);
-        }).catch(err => {
-        console.log(err);
-      })
+        )
+          .then(response => {
+            console.log(response);
+          }).catch(err => {
+          console.log(err);
+        })
+      }
     },
 
 
@@ -1261,7 +1493,7 @@ export default {
       this.$axios.$put(`/api/v1/exams/publish/${this.exam_id}`)
         .then(response => {
           if (response.data.message === 'done') {
-            this.test_step = 3;
+            this.test_step = 4;
             this.$store.commit('user/setCurrentExamId', '');
             this.$store.commit('user/setPreviewTestList', []);
           }
@@ -1276,10 +1508,11 @@ export default {
     getCurrentExamInfo() {
       if (this.$store.state.user.examId) {
         this.exam_id = this.$store.state.user.examId;
+        this.exam_code = this.$store.state.user.examCode;
         this.test_step = 2;
         this.$axios.$get(`/api/v1/exams/info/${this.exam_id}`)
           .then(response => {
-            this.tests = response.data.tests;
+            this.tests = response.data.tests.length ? response.data.tests : [];
 
             this.form.section = response.data.section;
             this.form.base = response.data.base;
@@ -1333,6 +1566,43 @@ export default {
     calcLevel(level) {
       if (level)
         return this.test_level_list.find(x => x.id === level).title;
+    },
+
+    deleteOnlineExam() {
+      this.deleteLoading = true;
+      this.$axios.$delete(`/api/v1/exams/${this.exam_id}`)
+        .then(response => {
+          this.exam_id='';
+          this.exam_code='';
+          this.$store.commit('user/setCurrentExamId', this.exam_id);
+          this.$store.commit('user/setCurrentExamCode', this.exam_code);
+
+          this.previewTestList=[];
+          this.$store.commit('user/setCurrentExamId', '');
+          this.$store.commit('user/setPreviewTestList', []);
+          this.tests=[];
+
+          //Reset form
+           this.form.section="";
+           this.grade_list=[];
+           this.lesson_list=[];
+           this.topic_list=[];
+
+           this.form.type="";
+           this.form.duration=3;
+           this.form.title="";
+          //End reset form
+
+          this.test_step=1;
+          this.$toast.success("Deleted successfully");
+
+        }).catch(err => {
+        this.$toast.error("An error occurred");
+      }).finally(() => {
+        this.deleteLoading = false;
+        this.confirmDeleteDialog=false;
+      })
+      ;
     }
   }
 }

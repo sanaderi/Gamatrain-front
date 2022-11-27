@@ -179,29 +179,35 @@ export default {
     "filter.level"(val) {
       this.filter.grade = '';
       this.filter.lesson = '';
-      if (val)
+      if (val){
+        this.page = 1;
+        this.all_files_loaded = false;
+        this.album_list = [];
+        this.getAlbumList();
         this.getTypeList('base', val);
+      }
 
-      this.page = 1;
-      this.all_files_loaded = false;
-      this.album_list = [];
-      this.getAlbumList();
     },
     "filter.grade"(val) {
       this.filter.lesson = '';
-      if (val)
+      if (val){
+        this.album_list = [];
+        this.page = 1;
+        this.all_files_loaded = false;
+        this.getAlbumList();
         this.getTypeList('lesson', val);
 
-      this.page = 1;
-      this.all_files_loaded = false;
-      this.album_list = [];
-      this.getAlbumList();
+      }
+
+
     },
     "filter.lesson"(val) {
-      this.page = 1;
-      this.all_files_loaded = false;
-      this.album_list = [];
-      this.getAlbumList();
+      if (val){
+        this.page = 1;
+        this.all_files_loaded = false;
+        this.album_list = [];
+        this.getAlbumList();
+      }
     }
   },
   methods: {

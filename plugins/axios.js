@@ -1,4 +1,4 @@
-export default function ({ $axios, redirect }) {
+export default function ({ $axios,app, redirect }) {
   $axios.onRequest(config => {
     // do something
   })
@@ -8,5 +8,15 @@ export default function ({ $axios, redirect }) {
     // if (code === 400) {
     //   redirect('/400')
     // }
+  })
+
+  $axios.onResponseError(error => {
+    const code = parseInt(error.response && error.response.status);
+    if (code == 403) {
+      if (app.$auth.loggedIn) {
+        app.$auth.logout();
+      } else
+        redirect("'/?access=denied'");
+    }
   })
 }
