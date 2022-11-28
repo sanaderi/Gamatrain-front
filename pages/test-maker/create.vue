@@ -1305,11 +1305,17 @@ export default {
       //Arrange to form data
       let formData = new FormData();
       for (let key in this.form) {
+        if (key!='topics')
         formData.append(key, this.form[key]);
       }
+
+      for (let key in this.form.topics)
+        formData.append('topics[]', this.form.topics[key]);
+
       //End arrange to form data
 
-      this.$axios.$post('/api/v1/exams', formData,
+      this.$axios.$post('/api/v1/exams',
+        this.urlencodeFormData(formData),
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"

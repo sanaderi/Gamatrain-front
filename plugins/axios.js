@@ -16,7 +16,7 @@ export default function ({ $axios,app, redirect }) {
       if (app.$auth.loggedIn) {
         app.$auth.logout();
       } else
-        redirect("'/?access=denied'");
+        redirect("/?access=denied");
     }
   })
 }
