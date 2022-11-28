@@ -240,49 +240,49 @@
 
                 <!--                </v-col>-->
 
-                <v-col cols="12" md="12" v-show="form.holding_time">
-                  <v-date-picker
-                    color="teal"
-                    v-model="teaching_date"
-                    full-width
-                  ></v-date-picker>
-                </v-col>
+<!--                <v-col cols="12" md="12" v-show="form.holding_time">-->
+<!--                  <v-date-picker-->
+<!--                    color="teal"-->
+<!--                    v-model="teaching_date"-->
+<!--                    full-width-->
+<!--                  ></v-date-picker>-->
+<!--                </v-col>-->
 
-                <v-col
-                  cols="12"
-                  md="4"
-                  v-show="form.holding_time"
-                >
-                  <v-menu
-                    ref="menu"
-                    v-model="timepicker_menu"
-                    :close-on-content-click="false"
-                    :nudge-right="40"
-                    :return-value.sync="teaching_time"
-                    transition="scale-transition"
-                    offset-y
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="teaching_time"
-                        label="Start time"
-                        prepend-icon="mdi-clock-time-four-outline"
-                        readonly
-                        outlined
-                        dense
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                    <v-time-picker
-                      v-if="timepicker_menu"
-                      v-model="teaching_time"
-                      full-width
-                      format="24hr"
-                      @click:minute="$refs.menu.save(teaching_time)"
-                    ></v-time-picker>
-                  </v-menu>
-                </v-col>
+<!--                <v-col-->
+<!--                  cols="12"-->
+<!--                  md="4"-->
+<!--                  v-show="form.holding_time"-->
+<!--                >-->
+<!--                  <v-menu-->
+<!--                    ref="menu"-->
+<!--                    v-model="timepicker_menu"-->
+<!--                    :close-on-content-click="false"-->
+<!--                    :nudge-right="40"-->
+<!--                    :return-value.sync="teaching_time"-->
+<!--                    transition="scale-transition"-->
+<!--                    offset-y-->
+<!--                  >-->
+<!--                    <template v-slot:activator="{ on, attrs }">-->
+<!--                      <v-text-field-->
+<!--                        v-model="teaching_time"-->
+<!--                        label="Start time"-->
+<!--                        prepend-icon="mdi-clock-time-four-outline"-->
+<!--                        readonly-->
+<!--                        outlined-->
+<!--                        dense-->
+<!--                        v-bind="attrs"-->
+<!--                        v-on="on"-->
+<!--                      ></v-text-field>-->
+<!--                    </template>-->
+<!--                    <v-time-picker-->
+<!--                      v-if="timepicker_menu"-->
+<!--                      v-model="teaching_time"-->
+<!--                      full-width-->
+<!--                      format="24hr"-->
+<!--                      @click:minute="$refs.menu.save(teaching_time)"-->
+<!--                    ></v-time-picker>-->
+<!--                  </v-menu>-->
+<!--                </v-col>-->
 
 
                 <v-col cols="12">
@@ -334,7 +334,7 @@
           </v-row>
           <v-row v-show="!testListSwitch">
             <v-col cols="12">
-              <create-test-form :goToPreviewStep.sync="test_step"
+              <create-test-form ref="create-form" :goToPreviewStep.sync="test_step"
                                 :updateTestList.sync="lastCreatedTest"
               />
             </v-col>
@@ -1018,7 +1018,7 @@ export default {
         area: '',
         school: '',
         duration: 3,
-        start_date: parseInt(this.$moment().format('x') / 1000),
+        // start_date: parseInt(this.$moment().format('x') / 1000),
         title: '',
         negative_point: false,
       },
@@ -1030,12 +1030,12 @@ export default {
         page: 1,
         perpage: 40
       },
-      teaching_time: '',
-      teaching_time_seconds: 0,
-      teaching_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      teaching_date_time: '',
+      // teaching_time: '',
+      // teaching_time_seconds: 0,
+      // teaching_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      // teaching_date_time: '',
 
-      timepicker_menu: false,
+      // timepicker_menu: false,
 
       level_list: [],
       filter_level_list: [],
@@ -1100,8 +1100,8 @@ export default {
       previewTestList: this.$store.getters["user/getPreviewTestList"],
       topicTitleArr: [],
 
-      testListSwitch:false,
-      lastCreatedTest:''
+      testListSwitch: false,
+      lastCreatedTest: ''
     }
 
   },
@@ -1119,25 +1119,26 @@ export default {
   },
 
   watch: {
-    "teaching_date"(val) {//Convert date to secounds
-      this.form.start_date = this.teaching_time_seconds;
-      this.teaching_date_time = (this.$moment(val).format('x') / 1000);
-      this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
-    },
-    "teaching_time"(val) {//Convert hour and minute to seconds
-      var val_split = val.split(':');
-      var hour = val_split[0] * 3600;
-      var minute = val_split[1] * 60;
-      var final_time = (hour + minute);
-
-      this.teaching_time_seconds = final_time;
-      this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
-    },
+    // "teaching_date"(val) {//Convert date to secounds
+    //   this.form.start_date = this.teaching_time_seconds;
+    //   this.teaching_date_time = (this.$moment(val).format('x') / 1000);
+    //   this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
+    // },
+    // "teaching_time"(val) {//Convert hour and minute to seconds
+    //   var val_split = val.split(':');
+    //   var hour = val_split[0] * 3600;
+    //   var minute = val_split[1] * 60;
+    //   var final_time = (hour + minute);
+    //
+    //   this.teaching_time_seconds = final_time;
+    //   this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
+    // },
 
     "form.section"(val) {
-      if (val){
+      if (val) {
         this.getTypeList('base', val);
         this.filter.section = val;//Init second level filter
+        this.$refs["create-form"].form.section=val;
 
         if (this.form.area)
           this.getTypeList('school');
@@ -1156,6 +1157,8 @@ export default {
     "form.base"(val) {
       this.getTypeList('lesson', val);
       this.filter.base = val;//Init second level filter
+      this.$refs["create-form"].form.base=val;
+
 
       this.generateTitle();
     },
@@ -1171,6 +1174,8 @@ export default {
     "form.lesson"(val) {
       this.getTypeList('topic', val);
       this.filter.lesson = val;//Init second level filter
+      this.$refs["create-form"].form.lesson=val;
+
 
       this.generateTitle();
     },
@@ -1206,9 +1211,9 @@ export default {
       this.test_list = [];
       this.getExamTests();
     },
-    lastCreatedTest(val){
-      if (val && !this.tests.find(x => x == val)){
-          this.tests.push(val);
+    lastCreatedTest(val) {
+      if (val && !this.tests.find(x => x == val)) {
+        this.tests.push(val);
       }
     }
   },
@@ -1305,12 +1310,13 @@ export default {
       //Arrange to form data
       let formData = new FormData();
       for (let key in this.form) {
-        if (key!='topics')
-        formData.append(key, this.form[key]);
+        if (key != 'topics')
+          formData.append(key, this.form[key]);
       }
 
-      for (let key in this.form.topics)
-        formData.append('topics[]', this.form.topics[key]);
+      if (this.form.topics.length)
+        for (let key in this.form.topics)
+          formData.append('topics[]', this.form.topics[key]);
 
       //End arrange to form data
 
@@ -1473,7 +1479,7 @@ export default {
         formData.append("tests[]", this.tests[i]);
       }
 
-      if (this.tests.length){
+      if (this.tests.length) {
         this.$axios.$put(`/api/v1/exams/tests/${this.exam_id}`
           , this.urlencodeFormData(formData),
           {
@@ -1499,6 +1505,28 @@ export default {
       this.$axios.$put(`/api/v1/exams/publish/${this.exam_id}`)
         .then(response => {
           if (response.data.message === 'done') {
+            this.exam_id = '';
+            this.exam_code = '';
+            this.$store.commit('user/setCurrentExamId', this.exam_id);
+            this.$store.commit('user/setCurrentExamCode', this.exam_code);
+
+            this.previewTestList = [];
+            this.$store.commit('user/setCurrentExamId', '');
+            this.$store.commit('user/setPreviewTestList', []);
+            this.tests = [];
+
+            //Reset form
+            this.form.section = "";
+            this.grade_list = [];
+            this.lesson_list = [];
+            this.topic_list = [];
+
+            this.form.type = "";
+            this.form.duration = 3;
+            this.form.title = "";
+            //End reset form
+
+
             this.test_step = 4;
             this.$store.commit('user/setCurrentExamId', '');
             this.$store.commit('user/setPreviewTestList', []);
@@ -1578,35 +1606,35 @@ export default {
       this.deleteLoading = true;
       this.$axios.$delete(`/api/v1/exams/${this.exam_id}`)
         .then(response => {
-          this.exam_id='';
-          this.exam_code='';
+          this.exam_id = '';
+          this.exam_code = '';
           this.$store.commit('user/setCurrentExamId', this.exam_id);
           this.$store.commit('user/setCurrentExamCode', this.exam_code);
 
-          this.previewTestList=[];
+          this.previewTestList = [];
           this.$store.commit('user/setCurrentExamId', '');
           this.$store.commit('user/setPreviewTestList', []);
-          this.tests=[];
+          this.tests = [];
 
           //Reset form
-           this.form.section="";
-           this.grade_list=[];
-           this.lesson_list=[];
-           this.topic_list=[];
+          this.form.section = "";
+          this.grade_list = [];
+          this.lesson_list = [];
+          this.topic_list = [];
 
-           this.form.type="";
-           this.form.duration=3;
-           this.form.title="";
+          this.form.type = "";
+          this.form.duration = 3;
+          this.form.title = "";
           //End reset form
 
-          this.test_step=1;
+          this.test_step = 1;
           this.$toast.success("Deleted successfully");
 
         }).catch(err => {
         this.$toast.error("An error occurred");
       }).finally(() => {
         this.deleteLoading = false;
-        this.confirmDeleteDialog=false;
+        this.confirmDeleteDialog = false;
       })
       ;
     }
