@@ -517,6 +517,18 @@
                       </div>
                       <v-row>
                         <v-col cols="6">
+                          <v-btn icon
+                                 :to="`/test-maker/create-test/edit/${item.id}`"
+                                 v-show="item.owner==true">
+                            <v-icon >
+                              mdi-pencil
+                            </v-icon>
+                          </v-btn>
+                          <v-btn icon v-show="item.owner==true">
+                            <v-icon color="error">
+                              mdi-delete
+                            </v-icon>
+                          </v-btn>
                           <v-btn icon>
                             <v-icon color="blue">
                               mdi-bullhorn-outline
