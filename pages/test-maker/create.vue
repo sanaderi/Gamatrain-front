@@ -1120,7 +1120,7 @@ export default {
   mounted() {
     this.getCurrentExamInfo();
     this.getTypeList('section');
-    this.getTypeList('test_type');
+    this.getTypeList('exam_type');
     this.getTypeList('state');
 
     this.renderMathJax();
@@ -1281,7 +1281,7 @@ export default {
 
         } else if (type === 'topic') {
           this.topic_list = res.data;
-        } else if (type === 'test_type') {
+        } else if (type === 'exam_type') {
           this.test_type_list = res.data;
         } else if (type === 'state') {
           this.state_list = res.data;
