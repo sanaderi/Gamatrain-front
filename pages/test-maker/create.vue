@@ -240,49 +240,49 @@
 
                 <!--                </v-col>-->
 
-<!--                <v-col cols="12" md="12" v-show="form.holding_time">-->
-<!--                  <v-date-picker-->
-<!--                    color="teal"-->
-<!--                    v-model="teaching_date"-->
-<!--                    full-width-->
-<!--                  ></v-date-picker>-->
-<!--                </v-col>-->
+                <!--                <v-col cols="12" md="12" v-show="form.holding_time">-->
+                <!--                  <v-date-picker-->
+                <!--                    color="teal"-->
+                <!--                    v-model="teaching_date"-->
+                <!--                    full-width-->
+                <!--                  ></v-date-picker>-->
+                <!--                </v-col>-->
 
-<!--                <v-col-->
-<!--                  cols="12"-->
-<!--                  md="4"-->
-<!--                  v-show="form.holding_time"-->
-<!--                >-->
-<!--                  <v-menu-->
-<!--                    ref="menu"-->
-<!--                    v-model="timepicker_menu"-->
-<!--                    :close-on-content-click="false"-->
-<!--                    :nudge-right="40"-->
-<!--                    :return-value.sync="teaching_time"-->
-<!--                    transition="scale-transition"-->
-<!--                    offset-y-->
-<!--                  >-->
-<!--                    <template v-slot:activator="{ on, attrs }">-->
-<!--                      <v-text-field-->
-<!--                        v-model="teaching_time"-->
-<!--                        label="Start time"-->
-<!--                        prepend-icon="mdi-clock-time-four-outline"-->
-<!--                        readonly-->
-<!--                        outlined-->
-<!--                        dense-->
-<!--                        v-bind="attrs"-->
-<!--                        v-on="on"-->
-<!--                      ></v-text-field>-->
-<!--                    </template>-->
-<!--                    <v-time-picker-->
-<!--                      v-if="timepicker_menu"-->
-<!--                      v-model="teaching_time"-->
-<!--                      full-width-->
-<!--                      format="24hr"-->
-<!--                      @click:minute="$refs.menu.save(teaching_time)"-->
-<!--                    ></v-time-picker>-->
-<!--                  </v-menu>-->
-<!--                </v-col>-->
+                <!--                <v-col-->
+                <!--                  cols="12"-->
+                <!--                  md="4"-->
+                <!--                  v-show="form.holding_time"-->
+                <!--                >-->
+                <!--                  <v-menu-->
+                <!--                    ref="menu"-->
+                <!--                    v-model="timepicker_menu"-->
+                <!--                    :close-on-content-click="false"-->
+                <!--                    :nudge-right="40"-->
+                <!--                    :return-value.sync="teaching_time"-->
+                <!--                    transition="scale-transition"-->
+                <!--                    offset-y-->
+                <!--                  >-->
+                <!--                    <template v-slot:activator="{ on, attrs }">-->
+                <!--                      <v-text-field-->
+                <!--                        v-model="teaching_time"-->
+                <!--                        label="Start time"-->
+                <!--                        prepend-icon="mdi-clock-time-four-outline"-->
+                <!--                        readonly-->
+                <!--                        outlined-->
+                <!--                        dense-->
+                <!--                        v-bind="attrs"-->
+                <!--                        v-on="on"-->
+                <!--                      ></v-text-field>-->
+                <!--                    </template>-->
+                <!--                    <v-time-picker-->
+                <!--                      v-if="timepicker_menu"-->
+                <!--                      v-model="teaching_time"-->
+                <!--                      full-width-->
+                <!--                      format="24hr"-->
+                <!--                      @click:minute="$refs.menu.save(teaching_time)"-->
+                <!--                    ></v-time-picker>-->
+                <!--                  </v-menu>-->
+                <!--                </v-col>-->
 
 
                 <v-col cols="12">
@@ -520,7 +520,7 @@
                           <v-btn icon
                                  :to="`/test-maker/create-test/edit/${item.id}`"
                                  v-show="item.owner==true">
-                            <v-icon >
+                            <v-icon>
                               mdi-pencil
                             </v-icon>
                           </v-btn>
@@ -691,6 +691,14 @@
                           </v-btn>
                         </v-col>
                         <v-col cols="6" class="text-right">
+                          <v-btn small
+                                 v-show="item.owner==true"
+                                 :to="`/test-maker/create-test/edit/${item.id}`">
+                            <v-icon small dark>
+                              mdi-pencil
+                            </v-icon>
+                            Edit
+                          </v-btn>
                           <v-btn color="blue" dark small
                                  v-show="!tests.find(x=>x==item.id)"
                                  @click="applyTest(item,'add')"
@@ -1150,7 +1158,7 @@ export default {
       if (val) {
         this.getTypeList('base', val);
         this.filter.section = val;//Init second level filter
-        this.$refs["create-form"].form.section=val;
+        this.$refs["create-form"].form.section = val;
 
         if (this.form.area)
           this.getTypeList('school');
@@ -1169,7 +1177,7 @@ export default {
     "form.base"(val) {
       this.getTypeList('lesson', val);
       this.filter.base = val;//Init second level filter
-      this.$refs["create-form"].form.base=val;
+      this.$refs["create-form"].form.base = val;
 
 
       this.generateTitle();
@@ -1186,7 +1194,7 @@ export default {
     "form.lesson"(val) {
       this.getTypeList('topic', val);
       this.filter.lesson = val;//Init second level filter
-      this.$refs["create-form"].form.lesson=val;
+      this.$refs["create-form"].form.lesson = val;
 
 
       this.generateTitle();

@@ -804,7 +804,8 @@ export default {
         answer_d: submit_data.answer_d,
         d_file:submit_data.d_file_base64,
 
-        true_answer: submit_data.true_answer
+        true_answer: submit_data.true_answer,
+        owner:true
       };
 
       var test = submit_data;
