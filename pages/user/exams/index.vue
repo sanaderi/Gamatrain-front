@@ -81,7 +81,9 @@
                           {{ showStatus(item.status) }}
                           <v-tooltip bottom>
                             <template v-slot:activator="{ on, attrs }">
-                              <v-btn icon color="error" small v-bind="attrs" v-on="on">
+                              <v-btn icon color="error"
+                                     @click="openDeleteConfirmDialog(item.id)"
+                                     small v-bind="attrs" v-on="on">
                                 <v-icon small>
                                   mdi-delete
                                 </v-icon>
@@ -130,7 +132,6 @@
                         />
                       </td>
                     </tr>
-
                     </tbody>
                   </template>
                 </v-simple-table>
@@ -139,6 +140,44 @@
           </v-card-text>
         </v-card>
       </v-col>
+
+
+      <v-dialog
+        v-model="deleteConfirmDialog"
+        max-width="290"
+      >
+        <v-card>
+          <v-card-title class="text-h5">
+            Are you sure?
+          </v-card-title>
+
+          <v-card-text>
+            <p>
+              If you are sure to delete, click Yes.
+            </p>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn
+              text
+              @click="deleteConfirmDialog = false"
+            >
+              No
+            </v-btn>
+
+            <v-btn
+              color="green darken-1"
+              text
+              :loading="delete_loading"
+              @click="deleteAddress()"
+            >
+              Yes
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </v-container>
 </template>
@@ -174,6 +213,12 @@ export default {
       page: 1,
       all_files_loaded: false,
 
+
+      //Delete section
+      deleteConfirmDialog: false,
+      delete_loading: false,
+      delete_exam_id:null
+      //End delete section
     }
   },
   mounted() {
@@ -290,6 +335,38 @@ export default {
         }
       }
     },
+
+
+    openDeleteConfirmDialog(item_id) {
+      this.delete_exam_id = item_id;
+      this.deleteConfirmDialog = true;
+    },
+    async deleteAddress() {
+      this.delete_loading=true;
+      await this.$axios.$delete(`/api/v1/exams/${this.delete_exam_id}`,
+      ).then(response => {
+        this.delete_exam_id = null;
+        this.deleteConfirmDialog = false;
+
+        //Clear Exams global variable
+        this.$store.commit('user/setCurrentExamId', '');
+        this.$store.commit('user/setCurrentExamCode', '');
+        this.$store.commit('user/setCurrentExamId', '');
+        this.$store.commit('user/setPreviewTestList', []);
+        //End clear Exams global variable
+
+
+        this.$toast.success("Deleted successfully");
+        this.exam_list = [];
+        this.getExams();
+      })
+        .catch(e => {
+          this.delete_exam_id = null;
+          this.deleteConfirmDialog = false;
+        }).finally(()=>{
+          this.delete_loading=false;
+        })
+    }
 
   }
 

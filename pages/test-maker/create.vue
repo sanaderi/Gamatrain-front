@@ -439,10 +439,10 @@
                       v-for="item in test_list" cols="12">
                       <v-row class="mb-2">
                         <v-col cols="12">
-                          <v-chip>
+                          <v-chip v-show="item.lesson_title">
                             {{ item.lesson_title }}
                           </v-chip>
-                          <v-chip>
+                          <v-chip v-show="item.topics_title">
                             {{ item.topics_title }}
                           </v-chip>
                           <v-chip outlined
@@ -1011,7 +1011,7 @@ export default {
     return {
       title: 'Create online exam',
       script: [
-        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
+        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`, defer: true}
       ],
     }
   },
@@ -1139,6 +1139,13 @@ export default {
   },
 
   watch: {
+    "$route.query"(val) {
+      if (val && val.active === 'test_list') {
+        this.test_step = 2;
+        this.testListSwitch = true;
+      }
+    },
+
     // "teaching_date"(val) {//Convert date to secounds
     //   this.form.start_date = this.teaching_time_seconds;
     //   this.teaching_date_time = (this.$moment(val).format('x') / 1000);
@@ -1154,6 +1161,7 @@ export default {
     //   this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
     // },
 
+
     "form.section"(val) {
       if (val) {
         this.getTypeList('base', val);
@@ -1166,12 +1174,17 @@ export default {
     },
 
     "filter.section"(val) {
-      this.getTypeList('base', val, 'filter');
+      if (val) {
+        this.getTypeList('base', val, 'filter');
+      }
       this.all_tests_loaded = true;
       this.filter_grade_list = [];
       this.filter_lesson_list = [];
-
+      this.filter.page = 1;
       this.test_list = [];
+
+      this.filter.base = '';
+      this.filter.lesson = '';
     },
 
     "form.base"(val) {
@@ -1183,27 +1196,37 @@ export default {
       this.generateTitle();
     },
     "filter.base"(val) {
-      this.getTypeList('lesson', val, 'filter');
+      if (val) {
+        this.getTypeList('lesson', val, 'filter');
+      }
       this.all_tests_loaded = true;
 
       this.filter_lesson_list = [];
 
+      this.filter.lesson = '';
+      this.filter.page = 1;
       this.test_list = [];
+
     },
 
     "form.lesson"(val) {
-      this.getTypeList('topic', val);
+      if (val) {
+        this.getTypeList('topic', val);
+      }
       this.filter.lesson = val;//Init second level filter
       this.$refs["create-form"].form.lesson = val;
-
 
       this.generateTitle();
     },
 
 
     "filter.lesson"(val) {
-      this.getTypeList('topic', val, 'filter');
+      if (val) {
+        this.getTypeList('topic', val, 'filter');
+      }
       this.all_tests_loaded = false;
+
+      this.filter.page = 1;
       this.test_list = [];
       this.getExamTests();
     },
@@ -1218,16 +1241,19 @@ export default {
 
 
     "filter.topic"(val) {
+      this.filter.page = 1;
       this.test_list = [];
       this.getExamTests();
     },
 
     "filter.testsHasVideo"(val) {
+      this.filter.page = 1;
       this.test_list = [];
       this.getExamTests();
     },
 
     "filter.myTests"(val) {
+      this.filter.page = 1;
       this.test_list = [];
       this.getExamTests();
     },

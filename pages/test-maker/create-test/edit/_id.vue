@@ -139,12 +139,12 @@
                       <v-radio value="1"></v-radio>
                       <span class="answer_label">A</span>
                     </v-col>
-                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers==false">
                       <client-only placeholder="loading...">
                         <ckeditor-nuxt v-model="form.answer_a" :config="editorConfig"/>
                       </client-only>
                     </v-col>
-                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers==true">
                       <div class="image-holder">
                         <img width="72 " height="72" class="pointer image-input"
                              v-if="form.a_file_base64"
@@ -173,12 +173,12 @@
                       <v-radio value="2"></v-radio>
                       <span class="answer_label">B</span>
                     </v-col>
-                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers==false">
                       <client-only placeholder="loading...">
                         <ckeditor-nuxt v-model="form.answer_b" :config="editorConfig"/>
                       </client-only>
                     </v-col>
-                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers==true">
                       <div class="image-holder">
                         <img width="72 " height="72" class="pointer image-input"
                              v-if="form.b_file_base64"
@@ -207,12 +207,12 @@
                       <v-radio value="3"></v-radio>
                       <span class="answer_label">C</span>
                     </v-col>
-                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers==false">
                       <client-only placeholder="loading...">
                         <ckeditor-nuxt v-model="form.answer_c" :config="editorConfig"/>
                       </client-only>
                     </v-col>
-                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers==true">
                       <div class="image-holder">
                         <img width="72 " height="72" class="pointer image-input"
                              v-if="form.c_file_base64"
@@ -241,12 +241,12 @@
                       <v-radio value="4"></v-radio>
                       <span class="answer_label">D</span>
                     </v-col>
-                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers==false">
                       <client-only placeholder="loading...">
                         <ckeditor-nuxt v-model="form.answer_d" :config="editorConfig"/>
                       </client-only>
                     </v-col>
-                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
+                    <v-col class="pb-0" cols="11" v-show="form.testImgAnswers==true">
                       <div class="image-holder">
                         <img width="72 " height="72" class="pointer image-input"
                              v-if="form.d_file_base64"
@@ -317,7 +317,7 @@
                   </v-btn>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-btn  lg outlined color="error" to="/test-maker"
+                  <v-btn lg outlined color="error" to="/test-maker"
                          block>
                     Discard
                   </v-btn>
@@ -333,28 +333,28 @@
     <!--Hidden input section-->
     <div>
       <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
+                    accept="image/png,image/webp,image/jpeg,image/jpg"
                     @change="uploadFile('q_file')"
                     v-model="form_hidden_data.q_file" ref="question-input"/>
 
       <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
+                    accept="image/png,image/webp,image/jpeg,image/jpg"
                     @change="uploadFile('answer_full_file')"
                     v-model="form_hidden_data.answer_full_file" ref="answer-full-input"/>
       <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
+                    accept="image/png,image/webp,image/jpeg,image/jpg"
                     @change="uploadFile('a_file')"
                     v-model="form_hidden_data.a_file" ref="a-input"/>
       <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
+                    accept="image/png,image/webp,image/jpeg,image/jpg"
                     @change="uploadFile('b_file')"
                     v-model="form_hidden_data.b_file" ref="b-input"/>
       <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
+                    accept="image/png,image/webp,image/jpeg,image/jpg"
                     @change="uploadFile('c_file')"
                     v-model="form_hidden_data.c_file" ref="c-input"/>
       <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
+                    accept="image/png,image/webp,image/jpeg,image/jpg"
                     @change="uploadFile('d_file')"
                     v-model="form_hidden_data.d_file" ref="d-input"/>
 
@@ -391,7 +391,9 @@
               </div>
             </v-card-text>
             <v-card-actions style="position: sticky;bottom: 0;left: 0;right: 0" class="pa-0">
-              <v-btn dark class="teal text-center" x-large block @click="cropper_dialog=false">
+              <v-btn dark class="teal text-center" x-large block
+                     :loading="update_file_loading"
+                     @click="updateFile">
                 Confirm
               </v-btn>
             </v-card-actions>
@@ -525,6 +527,8 @@ export default {
       },
       text_answer: true,
       photo_answer: false,
+      update_file_loading: false,
+      target_file: '',//Current file to crop, change and upload
     }
   },
   mounted() {
@@ -603,12 +607,12 @@ export default {
       this.$axios.$put(`/api/v1/examTests/${this.$route.params.id}`,
         querystring.stringify(this.form))
         .then(response => {
-          if (response.status==1){
+          if (response.status == 1) {
             this.$toast.success("Updated successfully");
             this.$router.push({
               path:'/test-maker/create'
             });
-          }else{
+          } else {
             this.$toast.error("An error occurred, try again")
           }
         }).catch(err => {
@@ -621,18 +625,25 @@ export default {
     },
 
     selectFile(file_name) {
-      if (file_name === 'q_file')
+      if (file_name === 'q_file') {
         this.$refs["question-input"].$refs.input.click();
-      else if (file_name === 'answer_full_file')
+        this.target_file = 'q_file_base64';
+      } else if (file_name === 'answer_full_file') {
         this.$refs["answer-full-input"].$refs.input.click();
-      else if (file_name === 'a_file')
+        this.target_file = 'answer_full_file_base64';
+      } else if (file_name === 'a_file') {
         this.$refs["a-input"].$refs.input.click();
-      else if (file_name === 'b_file')
+        this.target_file = 'a_file_base64';
+      } else if (file_name === 'b_file') {
         this.$refs["b-input"].$refs.input.click();
-      else if (file_name === 'c_file')
+        this.target_file = 'b_file_base64';
+      } else if (file_name === 'c_file') {
         this.$refs["c-input"].$refs.input.click();
-      else if (file_name === 'd_file')
+        this.target_file = 'c_file_base64';
+      } else if (file_name === 'd_file') {
         this.$refs["d-input"].$refs.input.click();
+        this.target_file = 'd_file_base64';
+      }
     },
     uploadFile(file_name) {
       var file = ''
@@ -716,6 +727,8 @@ export default {
         this.$refs["d-input"].$refs.input.value = null;
         this.current_crop_file = '';
       }
+
+      this.$axios.$delete(`/api/v1/examTests/${this.$route.params.id}/files/${file_name}`);
     },
 
     answerTypeChanged(type) {
@@ -739,32 +752,37 @@ export default {
     },
 
     getCurrentExamTestsInfo() {
-        this.$axios.$get(`/api/v1/examTests/${this.$route.params.id}`)
-          .then(response => {
-            this.form.section = response.data.section;
-            this.form.base = response.data.base;
-            this.form.lesson = response.data.lesson;
-            this.form.topic = response.data.topic;
-            this.form.question = response.data.question;
-            this.form.q_file_base64 = response.data.q_file;
-            this.form.testImgAnswers=response.data.testImgAnswers;
-            this.form.true_answer=response.data.true_answer;
-            this.form.answer_a=response.data.answer_a;
-            this.form.answer_b=response.data.answer_b;
-            this.form.answer_c=response.data.answer_c;
-            this.form.answer_d=response.data.answer_d;
-            this.form.a_file_base64=response.data.a_file;
-            this.form.b_file_base64=response.data.b_file;
-            this.form.c_file_base64=response.data.c_file;
-            this.form.d_file_base64=response.data.d_file;
-            this.form.answer_full=response.data.answer_full;
-            this.form.answer_full_file_base64=response.data.answer_full_file;
+      this.$axios.$get(`/api/v1/examTests/${this.$route.params.id}`)
+        .then(response => {
+          this.form.section = response.data.section;
+          this.form.base = response.data.base;
+          this.form.lesson = response.data.lesson;
+          this.form.topic = response.data.topic;
+          this.form.question = response.data.question;
+          this.form.q_file_base64 = response.data.q_file;
+          this.form.testImgAnswers = response.data.testImgAnswers;
 
-          }).catch(err => {
-          console.log(err);
-        })
+          if (this.form.testImgAnswers == true) {
+            this.photo_answer = true;
+            this.text_answer = false;
+          }
+
+          this.form.true_answer = response.data.true_answer;
+          this.form.answer_a = response.data.answer_a;
+          this.form.answer_b = response.data.answer_b;
+          this.form.answer_c = response.data.answer_c;
+          this.form.answer_d = response.data.answer_d;
+          this.form.a_file_base64 = response.data.a_file;
+          this.form.b_file_base64 = response.data.b_file;
+          this.form.c_file_base64 = response.data.c_file;
+          this.form.d_file_base64 = response.data.d_file;
+          this.form.answer_full = response.data.answer_full;
+          this.form.answer_full_file_base64 = response.data.answer_full_file;
+
+        }).catch(err => {
+        console.log(err);
+      })
     },
-
 
 
     //Convert form data from multipart to urlencode
@@ -783,6 +801,35 @@ export default {
     },
     //End convert form data from multipart to urlencode
 
+    updateFile() {
+      this.update_file_loading = true;
+      let formData = new FormData();
+      if (this.target_file == 'a_file_base64')
+        formData.append('a_file_base64', this.form.a_file_base64);
+      else if (this.target_file == 'b_file_base64')
+        formData.append('b_file_base64', this.form.b_file_base64);
+      else if (this.target_file == 'c_file_base64')
+        formData.append('c_file_base64', this.form.c_file_base64);
+      else if (this.target_file == 'd_file_base64')
+        formData.append('d_file_base64', this.form.d_file_base64);
+      else if (this.target_file == 'q_file_base64')
+        formData.append('q_file_base64', this.form.q_file_base64);
+      else if (this.target_file == 'answer_full_file_base64')
+        formData.append('answer_full_file_base64', this.form.answer_full_file_base64);
+
+      this.$axios.$post(`/api/v1/examTests/${this.$route.params.id}/files`,
+        formData,
+        {
+          headers: {
+            'accept': '*/*',
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      ).finally(() => {
+        this.update_file_loading = false;
+        this.cropper_dialog = false;
+      })
+    }
 
   }
 }

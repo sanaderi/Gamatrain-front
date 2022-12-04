@@ -140,9 +140,11 @@
                       <span class="answer_label">A</span>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
-                      <client-only placeholder="loading...">
-                        <ckeditor-nuxt v-model="form.answer_a" :config="editorConfig"/>
-                      </client-only>
+                      <validation-provider v-slot="{errors}" name="answer_a" :rules="text_answer_rules">
+                        <client-only placeholder="loading...">
+                          <ckeditor-nuxt v-model="form.answer_a" :config="editorConfig"/>
+                        </client-only>
+                      </validation-provider>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
                       <div class="image-holder">
@@ -174,9 +176,11 @@
                       <span class="answer_label">B</span>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
-                      <client-only placeholder="loading...">
-                        <ckeditor-nuxt v-model="form.answer_b" :config="editorConfig"/>
-                      </client-only>
+                      <validation-provider v-slot="{errors}" name="answer_b" :rules="text_answer_rules">
+                        <client-only placeholder="loading...">
+                          <ckeditor-nuxt v-model="form.answer_b" :config="editorConfig"/>
+                        </client-only>
+                      </validation-provider>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
                       <div class="image-holder">
@@ -208,9 +212,11 @@
                       <span class="answer_label">C</span>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
-                      <client-only placeholder="loading...">
-                        <ckeditor-nuxt v-model="form.answer_c" :config="editorConfig"/>
-                      </client-only>
+                      <validation-provider v-slot="{errors}" name="answer_c" :rules="text_answer_rules">
+                        <client-only placeholder="loading...">
+                          <ckeditor-nuxt v-model="form.answer_c" :config="editorConfig"/>
+                        </client-only>
+                      </validation-provider>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
                       <div class="image-holder">
@@ -242,9 +248,11 @@
                       <span class="answer_label">D</span>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===false">
-                      <client-only placeholder="loading...">
-                        <ckeditor-nuxt v-model="form.answer_d" :config="editorConfig"/>
-                      </client-only>
+                      <validation-provider v-slot="{errors}" name="answer_d" :rules="text_answer_rules">
+                        <client-only placeholder="loading...">
+                          <ckeditor-nuxt v-model="form.answer_d" :config="editorConfig"/>
+                        </client-only>
+                      </validation-provider>
                     </v-col>
                     <v-col class="pb-0" cols="11" v-show="form.testImgAnswers===true">
                       <div class="image-holder">
@@ -336,39 +344,48 @@
               </v-row>
             </v-col>
           </v-row>
+
+          <!--Hidden input section-->
+          <div>
+            <v-file-input class="d-none"
+                          accept="image/png,image/webp,image/jpeg,image/jpg"
+                          @change="uploadFile('q_file')"
+                          v-model="form_hidden_data.q_file" ref="question-input"/>
+
+            <v-file-input class="d-none"
+                          accept="image/png,image/webp,image/jpeg,image/jpg"
+                          @change="uploadFile('answer_full_file')"
+                          v-model="form_hidden_data.answer_full_file" ref="answer-full-input"/>
+
+            <validation-provider v-slot="{errors}" name="a_file" :rules="photo_answer_rules">
+              <v-file-input class="d-none"
+                            accept="image/png,image/webp,image/jpeg,image/jpg"
+                            @change="uploadFile('a_file')"
+                            v-model="form_hidden_data.a_file" ref="a-input"/>
+            </validation-provider>
+            <validation-provider v-slot="{errors}" name="b_file" :rules="photo_answer_rules">
+              <v-file-input class="d-none"
+                            accept="image/png,image/webp,image/jpeg,image/jpg"
+                            @change="uploadFile('b_file')"
+                            v-model="form_hidden_data.b_file" ref="b-input"/>
+            </validation-provider>
+            <validation-provider v-slot="{errors}" name="c_file" :rules="photo_answer_rules">
+              <v-file-input class="d-none"
+                            accept="image/png,image/webp,image/jpeg,image/jpg"
+                            @change="uploadFile('c_file')"
+                            v-model="form_hidden_data.c_file" ref="c-input"/>
+            </validation-provider>
+            <validation-provider v-slot="{errors}" name="d_file" :rules="photo_answer_rules">
+              <v-file-input class="d-none"
+                            accept="image/png,image/webp,image/jpeg,image/jpg"
+                            @change="uploadFile('d_file')"
+                            v-model="form_hidden_data.d_file" ref="d-input"/>
+            </validation-provider>
+
+          </div>
         </form>
       </validation-observer>
     </v-card>
-
-    <!--Hidden input section-->
-    <div>
-      <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
-                    @change="uploadFile('q_file')"
-                    v-model="form_hidden_data.q_file" ref="question-input"/>
-
-      <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
-                    @change="uploadFile('answer_full_file')"
-                    v-model="form_hidden_data.answer_full_file" ref="answer-full-input"/>
-      <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
-                    @change="uploadFile('a_file')"
-                    v-model="form_hidden_data.a_file" ref="a-input"/>
-      <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
-                    @change="uploadFile('b_file')"
-                    v-model="form_hidden_data.b_file" ref="b-input"/>
-      <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
-                    @change="uploadFile('c_file')"
-                    v-model="form_hidden_data.c_file" ref="c-input"/>
-      <v-file-input class="d-none"
-                    accept="image/png,image/webp,"
-                    @change="uploadFile('d_file')"
-                    v-model="form_hidden_data.d_file" ref="d-input"/>
-
-    </div>
 
 
     <!--Cropper dialog-->
@@ -478,12 +495,12 @@ export default {
         testImgAnswers: false
       },
       form_hidden_data: {
-        q_file: '',
-        answer_full_file: '',
-        a_file: '',
-        b_file: '',
-        c_file: '',
-        d_file: '',
+        q_file: [],
+        answer_full_file: [],
+        a_file: [],
+        b_file: [],
+        c_file: [],
+        d_file: []
       },
       timepicker_menu: false,
 
@@ -514,7 +531,9 @@ export default {
         height: 180
       },
       text_answer: true,
+      text_answer_rules: 'required',
       photo_answer: false,
+      photo_answer_rules: ''
     }
   },
   mounted() {
@@ -595,44 +614,44 @@ export default {
       const querystring = require('querystring');
       this.$axios.$post('/api/v1/examTests', querystring.stringify(this.form))
         .then(response => {
-           if (response.status==1){
-             this.$toast.success("Created successfully")
-             this.path_panel_expand = false;
+          if (response.status == 1) {
+            this.$toast.success("Created successfully")
+            this.path_panel_expand = false;
 
-             var submit_data = this.form;
-             if (this.$store.state.user.examId)
-               this.submitTest(response.data.id, submit_data);
+            var submit_data = this.form;
+            if (this.$store.state.user.examId)
+              this.submitTest(response.data.id, submit_data);
 
-             this.form.question = '';
-             this.form.q_file_base64 = '';
+            this.form.question = '';
+            this.form.q_file_base64 = '';
 
-             this.form.answer_full = '';
-             this.form.answer_full_file_base64 = '';
+            this.form.answer_full = '';
+            this.form.answer_full_file_base64 = '';
 
-             this.form.true_answer = '';
+            this.form.true_answer = '';
 
-             this.form.testImgAnswers = false;
-             this.text_answer = true;
-             this.photo_answer = false;
+            this.form.testImgAnswers = false;
+            this.text_answer = true;
+            this.photo_answer = false;
 
-             this.form.answer_a = '';
-             this.form.answer_b = '';
-             this.form.answer_c = '';
-             this.form.answer_d = '';
-             this.form.a_file_base64 = '';
-             this.form.b_file_base64 = '';
-             this.form.c_file_base64 = '';
-             this.form.d_file_base64 = '';
+            this.form.answer_a = '';
+            this.form.answer_b = '';
+            this.form.answer_c = '';
+            this.form.answer_d = '';
+            this.form.a_file_base64 = '';
+            this.form.b_file_base64 = '';
+            this.form.c_file_base64 = '';
+            this.form.d_file_base64 = '';
 
-             this.$refs["question-input"].$refs.input.value = null;
-             this.$refs["answer-full-input"].$refs.input.value = null;
-             this.$refs["a-input"].$refs.input.value = null;
-             this.$refs["b-input"].$refs.input.value = null;
-             this.$refs["c-input"].$refs.input.value = null;
-             this.$refs["d-input"].$refs.input.value = null;
-           }else{
-             this.$toast.error("An error occurred, try again")
-           }
+            this.$refs["question-input"].$refs.input.value = null;
+            this.$refs["answer-full-input"].$refs.input.value = null;
+            this.$refs["a-input"].$refs.input.value = null;
+            this.$refs["b-input"].$refs.input.value = null;
+            this.$refs["c-input"].$refs.input.value = null;
+            this.$refs["d-input"].$refs.input.value = null;
+          } else {
+            this.$toast.error("An error occurred, try again")
+          }
         }).catch(err => {
         if (err.response.status === 400)
           this.$toast.error(err.response.data.message);
@@ -745,17 +764,25 @@ export default {
         if (this.text_answer === true) {
           this.photo_answer = false;
           this.form.testImgAnswers = false;
+          this.text_answer_rules = 'required';
+          this.photo_answer_rules = '';
         } else {
           this.photo_answer = true;
           this.form.testImgAnswers = true;
+          this.text_answer_rules = '';
+          this.photo_answer_rules = 'required';
         }
       } else {
         if (this.photo_answer === true) {
           this.text_answer = false;
           this.form.testImgAnswers = true;
+          this.text_answer_rules = '';
+          this.photo_answer_rules = 'required';
         } else {
           this.text_answer = true;
           this.form.testImgAnswers = false;
+          this.text_answer_rules = 'required';
+          this.photo_answer_rules = '';
         }
       }
     },
@@ -796,16 +823,16 @@ export default {
         a_file: submit_data.a_file_base64,
 
         answer_b: submit_data.answer_b,
-        b_file:submit_data.b_file_base64,
+        b_file: submit_data.b_file_base64,
 
         answer_c: submit_data.answer_c,
-        c_file:submit_data.c_file_base64,
+        c_file: submit_data.c_file_base64,
 
         answer_d: submit_data.answer_d,
-        d_file:submit_data.d_file_base64,
+        d_file: submit_data.d_file_base64,
 
         true_answer: submit_data.true_answer,
-        owner:true
+        owner: true
       };
 
       var test = submit_data;
@@ -819,7 +846,7 @@ export default {
       )
         .then(response => {
           this.$store.commit("user/addPreviewTestList", newPreview);
-          this.$emit('update:updateTestList',new_test_id);
+          this.$emit('update:updateTestList', new_test_id);
         }).catch(err => {
         console.log(err);
       })
@@ -842,8 +869,8 @@ export default {
     },
     //End convert form data from multipart to urlencode
 
-    goToPreviewStep(){
-      this.$emit('update:goToPreviewStep',3);
+    goToPreviewStep() {
+      this.$emit('update:goToPreviewStep', 3);
     }
 
   }

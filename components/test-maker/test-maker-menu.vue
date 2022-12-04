@@ -75,7 +75,7 @@ export default {
         {
           title: 'Test list',
           icon: 'mdi-list-box-outline',
-          link: '',
+          link: '/test-maker/create?active=test_list',
         },
 
         {
