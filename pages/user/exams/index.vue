@@ -94,7 +94,9 @@
 
                           <v-tooltip bottom>
                             <template v-slot:activator="{ on, attrs }">
-                              <v-btn icon small v-bind="attrs" v-on="on">
+                              <v-btn icon small v-bind="attrs" v-on="on"
+                              :to="`/test-maker/edit/${item.id}`"
+                              >
                                 <v-icon small>
                                   mdi-note-edit-outline
                                 </v-icon>
@@ -171,7 +173,7 @@
               color="green darken-1"
               text
               :loading="delete_loading"
-              @click="deleteAddress()"
+              @click="deleteExam()"
             >
               Yes
             </v-btn>
@@ -341,7 +343,7 @@ export default {
       this.delete_exam_id = item_id;
       this.deleteConfirmDialog = true;
     },
-    async deleteAddress() {
+    async deleteExam() {
       this.delete_loading=true;
       await this.$axios.$delete(`/api/v1/exams/${this.delete_exam_id}`,
       ).then(response => {

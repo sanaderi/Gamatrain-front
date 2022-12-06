@@ -179,18 +179,18 @@ export default {
     "filter.level"(val) {
       this.filter.grade = '';
       this.filter.lesson = '';
-      if (val){
-        this.page = 1;
-        this.all_files_loaded = false;
-        this.album_list = [];
-        this.getAlbumList();
+      if (val) {
         this.getTypeList('base', val);
       }
+      this.page = 1;
+      this.all_files_loaded = false;
+      this.album_list = [];
+      this.getAlbumList();
 
     },
     "filter.grade"(val) {
       this.filter.lesson = '';
-      if (val){
+      if (val) {
         this.album_list = [];
         this.page = 1;
         this.all_files_loaded = false;
@@ -202,7 +202,7 @@ export default {
 
     },
     "filter.lesson"(val) {
-      if (val){
+      if (val) {
         this.page = 1;
         this.all_files_loaded = false;
         this.album_list = [];
@@ -239,7 +239,7 @@ export default {
       })
     },
     getAlbumList() {
-      if (!this.all_files_loaded) {
+      if (this.all_files_loaded===false) {
         this.page_loading = true;
         this.$axios.$get('/api/v1/albums', {
           params: {
@@ -250,9 +250,14 @@ export default {
           }
         })
           .then(response => {
-            this.album_list.push(...response.data.list);
+            let result=response.data.list;
+            for (var index in result) {
+              if (this.album_list.findIndex(x => x.id === result[index].id) == -1)
+                this.album_list.push(result[index]);
+            }
 
-            if (response.data.list.length === 0)//For terminate auto load request
+            console.log("Length"+result.length);
+            if (result.length === 0)//For terminate auto load request
               this.all_files_loaded = true;
           }).catch(err => {
           console.log(err);

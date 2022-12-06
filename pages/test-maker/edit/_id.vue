@@ -102,7 +102,7 @@
                 </v-col>
 
 
-                <v-col cols="12" md="12" v-if="topic_list.length">
+                <v-col cols="12" md="12" v-if="topic_list && topic_list.length">
                   <validation-provider v-slot="{errors}" name="topic" rules="required">
                     <topic-selector :topic-list="topic_list" @selectTopic="selectTopic"/>
                   </validation-provider>
@@ -859,7 +859,7 @@
               <v-col cols="12">
                 <p class="text-h4 font-weight-bold">{{ form.title }}</p>
               </v-col>
-              <v-col cols="4">Question's num: {{ tests.length }}</v-col>
+<!--              <v-col cols="4">Question's num: {{ tests.length }}</v-col>-->
               <v-col cols="4">Duration: {{ form.duration }}</v-col>
               <v-col cols="4">Level: {{ calcLevel(form.level) }}</v-col>
               <v-col cols="12">
@@ -1314,6 +1314,24 @@ export default {
     }
   },
   methods: {
+    //Load exam info for edit
+    getCurrentExamInfo() {
+        this.exam_id = this.$route.params.id;
+        this.$axios.$get(`/api/v1/exams/info/${this.$route.params.id}`)
+          .then(response => {
+            console.log(response);
+            this.tests = response.data.tests.length ? response.data.tests : [];
+
+            this.form.section = response.data.section;
+            this.form.base = response.data.base;
+            this.form.lesson = response.data.lesson;
+
+            console.log(response);
+          }).catch(err => {
+          console.log(err);
+        })
+    },
+
     getTypeList(type, parent = '', trigger = '') {
       var params = {
         type: type
@@ -1537,7 +1555,7 @@ export default {
         this.timer = setTimeout(() => {
           this.test_loading = true;
           this.filter.page++;
-          this.getExamTests();
+          // this.getExamTests();
         }, 800);
     },
 
@@ -1635,25 +1653,6 @@ export default {
     },
 
 
-    getCurrentExamInfo() {
-      if (this.$store.state.user.examId) {
-        this.exam_id = this.$store.state.user.examId;
-        this.exam_code = this.$store.state.user.examCode;
-        this.test_step = 2;
-        this.$axios.$get(`/api/v1/exams/info/${this.exam_id}`)
-          .then(response => {
-            this.tests = response.data.tests.length ? response.data.tests : [];
-
-            this.form.section = response.data.section;
-            this.form.base = response.data.base;
-            this.form.lesson = response.data.lesson;
-
-            console.log(response);
-          }).catch(err => {
-          console.log(err);
-        })
-      }
-    },
 
 
     //Convert form data from multipart to urlencode
@@ -1748,7 +1747,7 @@ export default {
         this.$toast.success("Deleted successfully");
         this.filter.page=1;
         this.test_list = [];
-        this.getExamTests();
+        // this.getExamTests();
       })
         .catch(err => {
           console.log(err);
