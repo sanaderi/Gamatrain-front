@@ -20,7 +20,6 @@
         <v-col cols="12" >
           <v-checkbox v-for="item in topicList"
                       v-model="topic"
-
                       :value="item.id"
                       hide-details="true"
                       multiple
@@ -40,11 +39,11 @@
 
 <script>
 export default {
-  props: ['topicList'],
+  props: ['topicList','selectedTopics'],
   name: "topic-selector",
   data() {
     return {
-      topic: '',
+      topic:this.selectedTopics ? this.selectedTopics : [],
     }
   },
   watch: {

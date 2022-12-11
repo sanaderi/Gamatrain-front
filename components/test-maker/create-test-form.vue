@@ -451,6 +451,7 @@ export default {
   },
   data() {
     return {
+      examEditMode:false,//When user in online exam edit page
       path_panel_expand: true,
       create_loading: false,
       test_step: 1,
@@ -621,6 +622,11 @@ export default {
             var submit_data = this.form;
             if (this.$store.state.user.examId)
               this.submitTest(response.data.id, submit_data);
+            else if(this.examEditMode===true){
+              console.log("pass level 1 : "+response.data.id);
+
+              this.$emit('update:updateTestList',response.data.id);
+            }
 
             this.form.question = '';
             this.form.q_file_base64 = '';
@@ -851,6 +857,7 @@ export default {
         console.log(err);
       })
     },
+
 
 
     //Convert form data from multipart to urlencode
