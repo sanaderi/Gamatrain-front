@@ -13,7 +13,7 @@
           <v-col cols="4">
             <p>Unanswered questions:
               <v-chip label color="teal" dark>
-                {{ contentData.tests.length - answerData.length }}
+                {{ contentData.tests.length - Object.keys(answerData).length }}
               </v-chip>
             </p>
           </v-col>
@@ -118,7 +118,7 @@
             </v-btn>
           </v-col>
           <v-col cols="12" md="6">
-            <v-btn lg outlined color="error" to="/user" block>
+            <v-btn lg outlined color="error" to="/search?type=azmoon" block>
               Discard
             </v-btn>
           </v-col>
@@ -156,7 +156,7 @@ export default {
     return {
       contentData: [],
       submit_loading: false,
-      answerData: [],
+      answerData: {},
       answerForm: [],
       remainTime: 0,
       pinQuestionsArr:[],
@@ -171,8 +171,7 @@ export default {
   },
   methods: {
     selectAnswer(question_id, answer) {
-      this.answerData.push(`${question_id}:${answer}`);
-
+      this.$set(this.answerData,question_id,answer);
     },
     renderMathJax() {
       if (window.MathJax) {
@@ -211,7 +210,7 @@ export default {
         }
       )
         .then(response => {
-          console.log(response);
+          this.$router.push(response.data.id)
         }).catch(err => {
         console.log(err);
       }).finally(() => {
