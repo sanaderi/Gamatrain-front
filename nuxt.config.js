@@ -112,7 +112,7 @@ export default {
           login: {url: '/api/v1/users/login', method: 'post'},
           refresh: {url: '/api/v1/users/refresh_token', method: 'post'},
           user: false,
-          logout: {url: '/api/v1/users/logout', method: 'post'}
+          logout: {url: '/api/v1/users/logout', method: 'get'}
         }
       }
     },

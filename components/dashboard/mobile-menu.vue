@@ -70,7 +70,7 @@ export default {
           icon: 'mdi-laptop',
           link: '/test-maker',
           subMenuList: [
-            {title: "Test result", link: "/user/online-exam", icon: 'mdi-chart-timeline', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
+            {title: "Test result", link: "/exams/participants", icon: 'mdi-chart-timeline', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
             {title: "Test maker", link: "/test-maker", icon: 'icong-azmoon', icon_type: 'custom'},
           ]
         },

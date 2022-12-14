@@ -20,7 +20,7 @@
           <v-col cols="4">
             <a :href="nextPin ? `#item-${nextPin}` : ''" @click="updateNextPin()">Pined question:
               <v-chip label color="teal" dark>
-                {{pinQuestionsArr.length}}
+                {{ pinQuestionsArr.length }}
               </v-chip>
             </a>
           </v-col>
@@ -37,14 +37,14 @@
           <v-col
             :id="`item-${item.id}`"
             cols="12" v-show="contentData.tests.length>0"
-                 v-for="item in contentData.tests"
+            v-for="item in contentData.tests"
           >
             <div id="test-question"
                  ref="mathJaxEl"
                  v-html="item.question"/>
             <img :src="item.q_file"/>
 
-            <v-radio-group @change="selectAnswer(item.id,$event)">
+            <v-radio-group v-model="answerData[item.id]">
               <v-radio value="1">
                 <template slot="label">
                   <div class="answer">
@@ -129,6 +129,8 @@
 </template>
 
 <script>
+import error from "@/layouts/error";
+
 export default {
   name: "exam-start",
   layout: "test-maker-layout",
@@ -140,17 +142,23 @@ export default {
       ],
     }
   },
-  async asyncData({params, $axios}) {
-    // This could also be an action dispatch
-    const content = await $axios.$get(`/api/v1/exams/start/${params.id}`);
-    var contentData = [];
+  async asyncData({params, redirect, $axios}) {
+    try {
+// This could also be an action dispatch
+      const content = await $axios.$get(`/api/v1/exams/start/${params.id}`)
+      var contentData = [];
 
-    //Check data exist
-    if (content.status === 1) {
-      contentData = content.data;
+      //Check data exist
+      if (content.status === 1) {
+        contentData = content.data;
+      }
+
+      return {contentData};
+    } catch (error) {
+      if (error.response.status == 400)
+        if (error.response.data)
+          redirect(`/exams/result/${error.response.data.data.id}`);
     }
-
-    return {contentData};
   },
   data() {
     return {
@@ -159,20 +167,19 @@ export default {
       answerData: {},
       answerForm: [],
       remainTime: 0,
-      pinQuestionsArr:[],
-      nextPin:'',
+      pinQuestionsArr: [],
+      nextPin: '',
     }
-  },
+  }
+  ,
   mounted() {
     this.remainTime = this.contentData.exam.azmoon_time * 60;
     this.countDownTimer();
     this.renderMathJax();
 
-  },
+  }
+  ,
   methods: {
-    selectAnswer(question_id, answer) {
-      this.$set(this.answerData,question_id,answer);
-    },
     renderMathJax() {
       if (window.MathJax) {
         window.MathJax.Hub.Config({
@@ -194,7 +201,8 @@ export default {
 
 
       }
-    },
+    }
+    ,
     endExam() {
       this.submit_loading = true;
       const querystring = require('querystring');
@@ -210,13 +218,16 @@ export default {
         }
       )
         .then(response => {
-          this.$router.push(response.data.id)
-        }).catch(err => {
-        console.log(err);
+          this.$router.push(`/exams/result/${response.data.id}`);
+        }).catch(error => {
+        if (error.response.status == 400)
+          if (error.response.data)
+            this.$router.push({path:`/exams/result/${error.response.data.data.id}`});
       }).finally(() => {
         this.submit_loading = false;
       })
-    },
+    }
+    ,
 
 
     //Convert form data from multipart to urlencode
@@ -229,11 +240,13 @@ export default {
         }
       }
       return s;
-    },
+    }
+    ,
 
     encode(s) {
       return encodeURIComponent(s).replace(/%20/g, '+');
-    },
+    }
+    ,
 
 
     countDownTimer() {
@@ -245,7 +258,8 @@ export default {
       } else {
         this.endExam();
       }
-    },
+    }
+    ,
 
 
     //Convert seconds to readable HH:ii:ss format
@@ -258,32 +272,35 @@ export default {
         return `${this.pad(hours)}:${this.pad(minutes)}:${this.pad(secs)}`;
       else
         return `${this.pad(minutes)}:${this.pad(secs)}`;
-    },
+    }
+    ,
     pad(num) {
       return ("0" + num).slice(-2);
-    },
+    }
+    ,
     //End convert seconds to readable HH:ii:ss format
 
 
-    pinQuestion(question_id){
+    pinQuestion(question_id) {
       this.pinQuestionsArr.push(question_id);
 
       //Init next pin for first time
-      if (this.pinQuestionsArr.length===1)
-        this.nextPin=question_id;
-    },
-    updateNextPin(){
-      if(this.pinQuestionsArr.length){
-        var index=this.pinQuestionsArr.findIndex(x=>x===this.nextPin);
-        if ((index+1)===this.pinQuestionsArr.length)
-          this.nextPin=this.pinQuestionsArr[0];
+      if (this.pinQuestionsArr.length === 1)
+        this.nextPin = question_id;
+    }
+    ,
+    updateNextPin() {
+      if (this.pinQuestionsArr.length) {
+        var index = this.pinQuestionsArr.findIndex(x => x === this.nextPin);
+        if ((index + 1) === this.pinQuestionsArr.length)
+          this.nextPin = this.pinQuestionsArr[0];
         else
-          this.nextPin=this.pinQuestionsArr[index+1];
+          this.nextPin = this.pinQuestionsArr[index + 1];
       }
-    },
-    eraseTest(question_id){
-      var index=this.contentData.tests.findIndex(x=>x.id===question_id);
-      this.contentData.tests.splice(index,1);
+    }
+    ,
+    eraseTest(question_id) {
+      this.$delete(this.answerData,question_id);
     }
   }
 

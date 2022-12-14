@@ -11,12 +11,12 @@ export default function ({ $axios,app, redirect }) {
   })
 
   $axios.onResponseError(error => {
-    const code = parseInt(error.response && error.response.status);
-    if (code == 403) {
-      if (app.$auth.loggedIn) {
-        app.$auth.logout();
-      } else
-        redirect("/?access=denied");
-    }
+    // const code = parseInt(error.response && error.response.status);
+    // if (code == 403) {
+    //   if (app.$auth.loggedIn) {
+    //     app.$auth.logout();
+    //   } else
+    //     redirect("/?access=denied");
+    // }
   })
 }

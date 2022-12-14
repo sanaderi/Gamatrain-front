@@ -67,7 +67,7 @@ export default {
           title: 'Online exam',
           icon: 'mdi-laptop',
           subMenuList: [
-            {title: "Test result", link: "/user/online-exam", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
+            {title: "Test result", link: "/exams/participants", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
             {title: "Test maker", link: "/test-maker", icon: 'icong-test', icon_type: 'custom'},
           ]
         },

@@ -264,13 +264,18 @@
                       Start | {{item.price>0 ? '$'+item.price : 'Free'}}
                     </v-btn>
                     <v-btn v-show="$auth.loggedIn" :to="`/exams/start/${contentData.id}`"
-                           v-if="key==='participation'" block color="success">
+                           v-if="key==='participation'"
+
+                           block color="success">
                       Start | {{item.price>0 ? '$'+item.price : 'Free'}}
                     </v-btn>
                     <v-btn v-else-if="key==='word'" block color="primary">
                       Download WORD file | {{item.price>0 ? '$'+item.price : 'Free'}}
                     </v-btn>
-                    <v-btn v-else-if="key==='pdf'" block color="error">
+                    <v-btn
+                      @click="startDownload()"
+                      :loading="download_loading"
+                      v-else-if="key==='pdf'" block color="error">
                       Download PDF file | {{item.price>0 ? '$'+item.price : 'Free'}}
                     </v-btn>
                   </v-col>
@@ -698,6 +703,7 @@ export default {
     ],
 
     copy_btn: 'Copy',
+    download_loading:false,
   }),
   methods:{
     initBreadCrumb(){
@@ -737,6 +743,28 @@ export default {
         window.open(`https://telegram.me/share/url?url=${window.location.href}&text=${this.contentData.title}`);
 
     },
+
+    //Download file
+    startDownload(){
+      this.download_loading=true;
+      this.$axios.$get(`/api/v1/exams/download/${this.$route.params.id}`)
+        .then(response=>{
+          var FileSaver = require('file-saver');
+          FileSaver.saveAs(response.data.url,response.data.name);
+        }).catch(err=>{
+          if (err.response.status==400){
+            if (err.response.data.status==0 && err.response.data.error=="creditNotEnough"){
+              this.$toast.info("No enough credit");
+            }
+          }else if (err.response.status==403){
+            this.$router.push({query:{auth_form:'login'}});
+          }
+        console.log(err);
+      }).finally(()=>{
+        this.download_loading=false;
+      })
+    }
+    //End download file
   }
 }
 </script>

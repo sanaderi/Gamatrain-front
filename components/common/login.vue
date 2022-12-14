@@ -110,9 +110,9 @@ export default {
   mounted() {
 
   },
-  watch:{
-    login_dialog(val){
-      if (val===true){
+  watch: {
+    login_dialog(val) {
+      if (val === true) {
         //Initialize google login
         setTimeout(() => {
           window.google.accounts.id.initialize({
@@ -185,9 +185,11 @@ export default {
         this.login_dialog = false;
         this.$toast.success("Logged in successfully");
 
-        this.$router.push({
-          path: "/user"
-        });
+
+        if (this.$route.path == '/')
+          this.$router.push({
+            path: "/user"
+          });
       }).catch(err => {
         if (err.response.status == 400)
           this.$toast.error(err.response.data.message);
