@@ -99,8 +99,8 @@
                       <v-col md="2" class="d-none d-md-block"></v-col>
 
                       <!--                      <v-col cols="12" md="4" class="question-statistics-holder ">-->
-<!--                        <question-statistics ref="question-statistics"/>-->
-<!--                      </v-col>-->
+                      <!--                        <question-statistics ref="question-statistics"/>-->
+                      <!--                      </v-col>-->
 
 
                     </v-row>
@@ -118,7 +118,7 @@
             </v-row>
 
             <!--Content type-->
-            <create-content-button ref="create-content-section" />
+            <create-content-button ref="create-content-section"/>
             <!--End content type-->
           </v-card-text>
         </v-card>
@@ -283,6 +283,8 @@ export default {
 
 
         }).catch(err => {
+        if (err.response.status == 403)
+          this.$auth.logout();
         this.$toast.error(err.response.data.message);
       });
 
