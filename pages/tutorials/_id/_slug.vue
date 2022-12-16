@@ -44,9 +44,9 @@
               <p class="lesson-subtitle">{{ lesson.topic_title }}</p>
             </div>
           </v-col>
-          <v-col  cols="12" class="lesson-details">
+          <v-col cols="12" class="lesson-details">
             <v-divider/>
-            <v-row >
+            <v-row>
               <v-col cols="5" class="last-update">
                 <i class="fa-solid fa-calendar-days mr-2"></i>
                 {{ tutorialInfo.up_date.split(' ')[0] }}
@@ -139,7 +139,9 @@
                 {{ lessonTree.title }}
               </p>
               <div class="cataloge-content">
-                <timeLine :lessonTree="lessonTree"/>
+                <timeLine :lessonTree="lessonTreeTopics"
+                :activeMenu="activeMenu"
+                />
               </div>
             </div>
           </v-col>
@@ -278,6 +280,21 @@ export default {
     //Get lesson tree
     const tutorialLessonTree = await $axios.$get(`/api/v1/tutorials/lessonTree/${tutorialInfo.lesson}`);
     var lessonTree = tutorialLessonTree.data;
+    let lessonTreeTopics = []
+    let activeMenu=1;
+    for (var i in lessonTree.topics) {
+       if (lessonTree.topics[i].season===true)
+         lessonTreeTopics.push(lessonTree.topics[i]);
+
+
+
+    }
+
+    for(var i in lessonTreeTopics){
+      if (lessonTreeTopics[i].tutorials &&
+            lessonTreeTopics[i].tutorials.findIndex(x=>x.id==params.id)!==-1)
+        activeMenu=Number(i)+1;
+    }
 
 
     //Get and order title to display
@@ -285,7 +302,7 @@ export default {
     var lesson = {title: lessonInfo[0], topic_title: lessonInfo[1]};
 
 
-    return {tutorialInfo, lessonTree, lesson};
+    return {tutorialInfo, lessonTreeTopics,lessonTree, lesson,activeMenu};
   },
 
   head() {
