@@ -63,7 +63,7 @@ export default {
           subMenuList: [
             {title: "My tests", link: "/user/exams", icon: 'mdi-clipboard-list-outline', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
             {title: "Album list", link: "/test-maker", icon: 'mdi-image-album', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
-            {title: "Test results", link: "/exams/participants", icon: 'mdi-list-status', icon_type: 'custom'}
+            {title: "Test results", link: "/exams/result-list", icon: 'mdi-list-status', icon_type: 'custom'}
           ]
 
         },

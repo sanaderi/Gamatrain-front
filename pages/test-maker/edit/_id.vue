@@ -808,7 +808,7 @@
 
                 <div class="d-flex mt-4 align-center justify-center">
                   <v-breadcrumbs :items="[{text:'Dashboard',href:'/user'},
-                                           {text:'My online exams',href:'/exams/participants'}]">
+                                           {text:'My online exams',href:'/exams/result-list'}]">
                     <template v-slot:divider>
                       <v-icon>mdi-forward</v-icon>
                     </template>

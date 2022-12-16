@@ -197,6 +197,8 @@
                           />
                         </validation-provider>
                       </v-col>
+
+
                       <v-col cols="12" md="4">
                         <validation-provider v-slot="{errors}" name="state" role="required">
                           <v-autocomplete
@@ -239,6 +241,8 @@
                           />
                         </validation-provider>
                       </v-col>
+
+
                       <v-col cols="12" md="12">
                         <validation-provider v-slot="{errors}" name="title" role="required">
                           <v-text-field

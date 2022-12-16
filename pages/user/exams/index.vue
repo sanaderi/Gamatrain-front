@@ -68,10 +68,10 @@
                     >
                       <td class="py-3">
                         <nuxt-link :to="`/exams/${item.id}`" class="font-weight-bold">{{ item.title }}</nuxt-link>
-                        <p class="mt-2">
+                        <nuxt-link :to="`/exams/participants/${item.id}`" class="mt-2 d-block">
                           <span class="icong-student"></span>
                           Participants: {{ item.participants.total }}
-                        </p>
+                        </nuxt-link>
                       </td>
                       <td class="text-right">
                         <p>

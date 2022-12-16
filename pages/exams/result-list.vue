@@ -6,7 +6,7 @@
           <v-col cols="12" class="pl-5">
             <span class="icon icong-qa text-h3 teal--text"></span>
             <span class="text-h4 teal--text">
-            Participated tests
+            Exams result list
           </span>
           </v-col>
         </v-row>
@@ -204,7 +204,7 @@ export default {
     getExams() {
       if (!this.all_files_loaded) {
         this.page_loading = true;
-        this.$axios.$get('/api/v1/exams/participants', {},
+        this.$axios.$get('/api/v1/exams/result-list', {},
           {
             params: {
               perpage: 20,
