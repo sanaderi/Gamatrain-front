@@ -139,8 +139,7 @@
                 {{ lessonTree.title }}
               </p>
               <div class="cataloge-content">
-                <timeLine :lessonTree="lessonTreeTopics"
-                :activeMenu="activeMenu"
+                <timeLine :lessonTree="lessonTree.list"
                 />
               </div>
             </div>
@@ -280,21 +279,10 @@ export default {
     //Get lesson tree
     const tutorialLessonTree = await $axios.$get(`/api/v1/tutorials/lessonTree/${tutorialInfo.lesson}`);
     var lessonTree = tutorialLessonTree.data;
-    let lessonTreeTopics = []
-    let activeMenu=1;
-    for (var i in lessonTree.topics) {
-       if (lessonTree.topics[i].season===true)
-         lessonTreeTopics.push(lessonTree.topics[i]);
 
 
 
-    }
 
-    for(var i in lessonTreeTopics){
-      if (lessonTreeTopics[i].tutorials &&
-            lessonTreeTopics[i].tutorials.findIndex(x=>x.id==params.id)!==-1)
-        activeMenu=Number(i)+1;
-    }
 
 
     //Get and order title to display
@@ -302,7 +290,7 @@ export default {
     var lesson = {title: lessonInfo[0], topic_title: lessonInfo[1]};
 
 
-    return {tutorialInfo, lessonTreeTopics,lessonTree, lesson,activeMenu};
+    return {tutorialInfo, lessonTree, lesson};
   },
 
   head() {
