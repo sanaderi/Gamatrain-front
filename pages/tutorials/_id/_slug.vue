@@ -1,5 +1,18 @@
 <template>
   <div>
+    <!--Start: menu button-->
+    <v-btn
+      class="d-block d-md-none"
+      fixed bottom right style="z-index:10 "
+      x-large color="teal" dark rounded @click.stop="drawer = !drawer">
+      <v-icon>
+        mdi-format-list-numbered
+      </v-icon>
+      <span v-show="expandListMenu" class="text-h6">&nbsp;List</span>
+    </v-btn>
+    <!--End: menu button-->
+
+
     <!-- Start : Category -->
     <category/>
     <!-- End:Category -->
@@ -129,6 +142,7 @@
     <!-- End: Cart -->
     <!-- Start : Book -->
     <v-container>
+
       <section class="book">
         <v-row>
           <v-col md="3" class="d-none d-md-block">
@@ -146,16 +160,8 @@
           </v-col>
           <v-col cols="12" md="9" class="pa-0 pa-md-3">
             <div class="book-contents pa-3 pa-md-6">
-              <div class="responsive-buttons d-flex align-center d-block d-md-none">
-                <v-btn x-large class="d-flex justify-center responsive-button ml-4" @click.stop="drawer = !drawer">
-                  <i class="fa-solid fa-receipt "></i>
-                </v-btn>
-                <v-btn x-large class="responsive-button" @click.stop="drawer = !drawer">
-                  <i class="fa-solid fa-receipt ml-6"></i>
-                  List
-                </v-btn>
-              </div>
-              <v-navigation-drawer v-model="drawer" class="sidebar-nav pa-5" width="320">
+              <v-navigation-drawer v-model="drawer" style="z-index: 10"
+                                   class="sidebar-nav pa-5" width="320">
                 <div class="sidebar-timeline-title d-flex align-center ma-2">
                   <img :src="require('@/assets/images/' + bookmark)" alt="" class="mr-2">
                   <p>{{ lessonTree.title }}</p>
@@ -281,10 +287,6 @@ export default {
     var lessonTree = tutorialLessonTree.data;
 
 
-
-
-
-
     //Get and order title to display
     var lessonInfo = tutorialInfo.title.split('|');
     var lesson = {title: lessonInfo[0], topic_title: lessonInfo[1]};
@@ -300,6 +302,7 @@ export default {
       ],
       title: this.tutorialInfo.title,
       meta: [
+
         // {
         //   hid: `description`,
         //   name: 'description',
@@ -320,11 +323,9 @@ export default {
   },
 
   data() {
-
     return {
-
-
       e6: 1,
+      expandListMenu:true,
       timelines: [
         {
           lessonName: " Speech 1 :Nerve tissue cells",
@@ -401,7 +402,16 @@ export default {
   },
   mounted() {
     this.renderMathJax();
-    this.color();
+  },
+  created() {
+    if (process.client) {
+      window.addEventListener('scroll', this.handleScroll);
+    }
+  },
+  destroyed () {
+    if (process.client) {
+      window.removeEventListener('scroll', this.handleScroll);
+    }
   },
   methods: {
     comment() {
@@ -416,15 +426,6 @@ export default {
 
       this.input = null
     },
-
-    color() {
-
-    },
-
-    readMD() {
-      return this.$md.render(this.mdData)
-    },
-
     renderMathJax() {
       if (window.MathJax) {
         window.MathJax.Hub.Config({
@@ -444,7 +445,14 @@ export default {
         });
         window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
       }
+    },
+    handleScroll(){
+      if (window.scrollY>1000)
+        this.expandListMenu=false;
+      else
+        this.expandListMenu=true;
     }
+
   },
 
 };
@@ -455,6 +463,10 @@ export default {
   width: 100%;
   margin: auto;
   max-width: 700px;
+}
+
+.panel-body:has(table){
+  overflow-x: auto!important;
 }
 
 
@@ -477,6 +489,12 @@ export default {
   background-color: #fff !important;
   color: red;
   box-shadow: 0 0 0 1px red inset, 0 0 0 0 transparent;
+}
+
+.bookText .ui.message.blue {
+  background-color: #fff !important;
+  color: blue;
+  box-shadow: 0 0 0 1px blue inset, 0 0 0 0 transparent;
 }
 
 

@@ -1,6 +1,7 @@
-# Gama-Front
+## Gama-Front
 
-## Build Setup
+### Build Setup
+#### Update base information in .env file (If don't have an .env file, you can create it by copying .env.example) 
 
 ```bash
 # install dependencies
