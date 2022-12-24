@@ -147,14 +147,8 @@
         <v-row>
           <v-col md="3" class="d-none d-md-block">
             <div class="cataloge pa-2 ">
-              <p class="cataloge-title d-flex align-center">
-                <img :src="require('@/assets/images/' + bookmark)" alt="" class="mr-2">
-
-                {{ lessonTree.title }}
-              </p>
               <div class="cataloge-content">
-                <timeLine :lessonTree="lessonTree.list"
-                />
+                <timeLine :lessonTree="lessonTree"/>
               </div>
             </div>
           </v-col>
@@ -162,67 +156,7 @@
             <div class="book-contents pa-3 pa-md-6">
               <v-navigation-drawer v-model="drawer" style="z-index: 10"
                                    class="sidebar-nav pa-5" width="320">
-                <div class="sidebar-timeline-title d-flex align-center ma-2">
-                  <img :src="require('@/assets/images/' + bookmark)" alt="" class="mr-2">
-                  <p>{{ lessonTree.title }}</p>
-                </div>
-                <v-stepper v-model="e6" vertical class="stepper">
-                  <v-stepper-step :complete="e6 > 1" step="1" @click="e6 = 1" color="#008B8B">
-                    Select an app
-                  </v-stepper-step>
-                  <v-stepper-content step="1">
-                    <v-row>
-                      <v-col cols="12" v-for="item in timelines" :key="item.value">
-                        <nuxt-link id="lesson-name" to="" class="stepper-item">
-                          <!-- <i class="fa-regular fa-window-minimize mr-2"></i> -->
-                          {{ item.lessonName }}
-                        </nuxt-link>
-                      </v-col>
-                    </v-row>
-                  </v-stepper-content>
-
-                  <v-stepper-step :complete="e6 > 2" step="2" @click="e6 = 2" color="#008B8B">
-                    Configure analytics for this app
-                  </v-stepper-step>
-                  <v-stepper-content step="2">
-                    <v-row>
-                      <v-col cols="12" v-for="item in timelines" :key="item.value">
-                        <nuxt-link id="lesson-name" to="" class="stepper-item">
-                          <!-- <i class="fa-regular fa-window-minimize mr-2"></i> -->
-                          {{ item.lessonName }}
-                        </nuxt-link>
-                      </v-col>
-                    </v-row>
-                  </v-stepper-content>
-
-                  <v-stepper-step :complete="e6 > 3" step="3" @click="e6 = 3" color="#008B8B">
-                    Select an ad format and name ad unitaaa
-                  </v-stepper-step>
-                  <v-stepper-content step="3">
-                    <v-row>
-                      <v-col cols="12" v-for="item in timelines" :key="item.value">
-                        <nuxt-link id="lesson-name" to="" class="stepper-item">
-                          <!-- <i class="fa-regular fa-window-minimize mr-2"></i> -->
-                          {{ item.lessonName }}
-                        </nuxt-link>
-                      </v-col>
-                    </v-row>
-                  </v-stepper-content>
-
-                  <v-stepper-step step="4" @click="e6 = 4" color="#008B8B">
-                    View setup instructions
-                  </v-stepper-step>
-                  <v-stepper-content step="4">
-                    <v-row>
-                      <v-col cols="12" v-for="item in timelines" :key="item.value">
-                        <nuxt-link id="lesson-name" to="" class="stepper-item">
-                          <!-- <i class="fa-regular fa-window-minimize mr-2"></i> -->
-                          {{ item.lessonName }}
-                        </nuxt-link>
-                      </v-col>
-                    </v-row>
-                  </v-stepper-content>
-                </v-stepper>
+                <timeLine :lessonTree="lessonTree"/>
               </v-navigation-drawer>
               <div class="book-content">
                 <div class="bookText e-mathjax" ref="mathJaxEl" v-html="tutorialInfo.content"/>
@@ -465,9 +399,11 @@ export default {
   max-width: 700px;
 }
 
-.panel-body:has(table){
+.panel-body{
   overflow-x: auto!important;
 }
+
+
 
 
 /*Message style section*/
