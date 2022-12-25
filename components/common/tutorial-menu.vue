@@ -5,7 +5,7 @@
       &nbsp;{{ lessonTree.title }}
     </p>
     <v-treeview
-      :items="lessonTree.list"
+      :items="lessonTree.list.filter(x=>(x.tutorials && x.tutorials.length>0) || (x.chapters && x.chapters.length>0))"
       active-class="selected_topic_itm"
       color="teal"
       open-on-click
@@ -13,15 +13,17 @@
       :active="activeMenu"
       item-key="id"
       item-children="chapters"
+
     >
       <template v-slot:prepend="{ item }" >
         <v-icon
           class="teal--text"
-          :small="!item.chapters"
-          v-text="`mdi-${item.chapters ? 'folder' : 'circle-outline'}`"
+          small
+          v-text="`mdi-${item.chapters ? 'circle' : 'circle-outline'}`"
         ></v-icon>
       </template>
       <template v-slot:label="{ item }" >
+        <!--If tutorials length is one is a link-->
         <nuxt-link
           v-if="item.tutorials && item.tutorials.length==1"
           :to="`/tutorials/${item.tutorials[0].id}/${item.title}`" class="v-treeview-node__label">

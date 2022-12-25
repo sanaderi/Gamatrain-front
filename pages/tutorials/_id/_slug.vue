@@ -148,7 +148,7 @@
           <v-col md="3" class="d-none d-md-block">
             <div class="cataloge pa-2 ">
               <div class="cataloge-content">
-                <timeLine :lessonTree="lessonTree"/>
+                <TutorialMenu :lessonTree="lessonTree"/>
               </div>
             </div>
           </v-col>
@@ -156,7 +156,7 @@
             <div class="book-contents pa-3 pa-md-6">
               <v-navigation-drawer v-model="drawer" style="z-index: 10"
                                    class="sidebar-nav pa-5" width="320">
-                <timeLine :lessonTree="lessonTree"/>
+                <TutorialMenu :lessonTree="lessonTree"/>
               </v-navigation-drawer>
               <div class="book-content">
                 <div class="bookText e-mathjax" ref="mathJaxEl" v-html="tutorialInfo.content"/>
@@ -197,7 +197,7 @@
 </template>
 <script>
 import category from "@/components/common/category.vue";
-import timeLine from "@/components/common/timeline.vue";
+import TutorialMenu from "@/components/common/tutorial-menu";
 import RelatedContent from "@/components/details/related-content";
 import LatestTrainingContent from "@/components/details/latest-training-content";
 import RelatedQa from "@/components/details/related-qa";
@@ -206,7 +206,7 @@ import RelatedOnlineExam from "@/components/details/related-online-exam";
 export default {
   name: 'tutorial-details',
   auth: false,
-  components: {RelatedOnlineExam, RelatedQa, LatestTrainingContent, RelatedContent, category, timeLine},
+  components: {RelatedOnlineExam, RelatedQa, LatestTrainingContent, RelatedContent, category, TutorialMenu},
 
   async asyncData({params, $axios}) {
     // This could also be an action dispatch
