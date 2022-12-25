@@ -374,7 +374,11 @@ export default {
           displayAlign: 'center',
           "HTML-CSS": {
             styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: {automatic: true}
+            linebreaks: {automatic: true},
+            availableFonts : ["Asana Math"],
+            preferredFont : "Asana Math",
+            webFont : "Asana Math-Web",
+            imageFont : null
           }
         });
         window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
@@ -401,6 +405,19 @@ export default {
 
 .panel-body{
   overflow-x: auto!important;
+}
+
+.book-content{
+  overflow-x: auto!important;
+}
+
+.table-holder{
+  overflow-x: auto!important;
+}
+.book-content img{
+  max-width: 86vw!important;
+  margin-right: 0.1rem!important;
+  margin-left: 0.1rem!important;
 }
 
 
