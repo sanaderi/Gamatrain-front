@@ -100,7 +100,15 @@
                     <div
                       class="item-content-last-update d-flex align-center mx-auto">
                       <i class="fa-solid fa-calendar-days"></i>
-                      <p class="mx-2">reply: {{$timeAgo.calc(item.last_reply)}}</p>
+                      <p class="mx-2">
+                    <span class="d-none d-md-inline">
+                      Reply:
+                    </span>
+                        <span class="date_string d-inline-block">
+                      {{ $moment(item.last_reply).fromNow() }}
+                    </span>
+                      </p>
+
                     </div>
                   </div>
                 </div>

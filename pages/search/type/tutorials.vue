@@ -55,9 +55,17 @@
                 <div
                   class="item-content-last-update d-flex align-center mx-auto">
                   <i class="fa-solid fa-calendar-days"></i>
-                  <p class="mx-2">last update : {{ item.up_date }}</p>
+                  <p class="mx-2">
+                    <span class="d-none d-md-inline">
+                      Last update :
+                    </span>
+                    <span class="date_string d-inline-block">
+                      {{ $moment(item.up_date).fromNow() }}
+                    </span>
+                  </p>
                 </div>
               </div>
+
             </div>
           </div>
         </v-col>

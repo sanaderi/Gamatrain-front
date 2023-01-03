@@ -4,11 +4,14 @@
     <v-btn
       class="d-block d-md-none"
       fixed bottom right style="z-index:10 "
+      min-width="40"
       x-large color="teal" dark rounded @click.stop="drawer = !drawer">
       <v-icon>
         mdi-format-list-numbered
       </v-icon>
-      <span v-show="expandListMenu" class="text-h6">&nbsp;List</span>
+      <v-slide-x-reverse-transition>
+        <span v-show="expandListMenu" class="text-h6">&nbsp;List</span>
+      </v-slide-x-reverse-transition>
     </v-btn>
     <!--End: menu button-->
 
@@ -232,7 +235,7 @@ export default {
   head() {
     return {
       script: [
-        {src: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_HTML'}
+        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
       ],
       title: this.tutorialInfo.title,
       meta: [
@@ -259,7 +262,7 @@ export default {
   data() {
     return {
       e6: 1,
-      expandListMenu:true,
+      expandListMenu: true,
       timelines: [
         {
           lessonName: " Speech 1 :Nerve tissue cells",
@@ -342,7 +345,7 @@ export default {
       window.addEventListener('scroll', this.handleScroll);
     }
   },
-  destroyed () {
+  destroyed() {
     if (process.client) {
       window.removeEventListener('scroll', this.handleScroll);
     }
@@ -375,20 +378,20 @@ export default {
           "HTML-CSS": {
             styles: {'.MathJax_Display': {"margin": 0}},
             linebreaks: {automatic: true},
-            availableFonts : ["Asana Math"],
-            preferredFont : "Asana Math",
-            webFont : "Asana Math-Web",
-            imageFont : null
+            availableFonts: ["Asana Math"],
+            preferredFont: "Asana Math",
+            webFont: "Asana Math-Web",
+            imageFont: null
           }
         });
         window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
       }
     },
-    handleScroll(){
-      if (window.scrollY>1000)
-        this.expandListMenu=false;
+    handleScroll() {
+      if (window.scrollY > 1000)
+        this.expandListMenu = false;
       else
-        this.expandListMenu=true;
+        this.expandListMenu = true;
     }
 
   },
@@ -403,24 +406,23 @@ export default {
   max-width: 700px;
 }
 
-.panel-body{
-  overflow-x: auto!important;
+.panel-body {
+  overflow-x: auto !important;
 }
 
-.book-content{
-  overflow-x: auto!important;
+.book-content {
+  overflow-x: auto !important;
 }
 
-.table-holder{
-  overflow-x: auto!important;
-}
-.book-content img{
-  max-width: 86vw!important;
-  margin-right: 0.1rem!important;
-  margin-left: 0.1rem!important;
+.table-holder {
+  overflow-x: auto !important;
 }
 
-
+.book-content img {
+  max-width: 86vw !important;
+  margin-right: 0.1rem !important;
+  margin-left: 0.1rem !important;
+}
 
 
 /*Message style section*/

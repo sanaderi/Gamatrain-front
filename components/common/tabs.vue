@@ -10,7 +10,8 @@
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('learnfiles')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-training" :content="content_statistics.learnfiles" color="#2E7D32">
+        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-training" :content="content_statistics.learnfiles"
+                 color="#2E7D32">
           <div class="nav-link training-content-icon">
             <span class="icon icong-learnfiles mr-1"></span>
             Presentation
@@ -34,7 +35,8 @@
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('dars')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-tutorial" :content="content_statistics.tutorial" color="#BD081C">
+        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-tutorial" :content="content_statistics.tutorial"
+                 color="#BD081C">
           <div class="nav-link tutorial-icon">
             <span class="icon icong-blog mr-1"></span>
             Tutorial
@@ -58,14 +60,14 @@ export default {
   data() {
     return {
       active_tab: 0,
-      content_statistics:{
-        azmoon:'',
-        dars:'',
-        learnfiles:'',
-        question:'',
-        test:'',
-        tutor:'',
-        tutorial:'',
+      content_statistics: {
+        azmoon: '',
+        dars: '',
+        learnfiles: '',
+        question: '',
+        test: '',
+        tutor: '',
+        tutorial: '',
       }
     }
   },
@@ -104,22 +106,22 @@ export default {
       if (this.$route.query.topic) {
         query.topic = this.$route.query.topic;
       }
-      if (this.$route.query.test_type !== 0 && query.type==="test") {
+      if (this.$route.query.test_type !== 0 && query.type === "test") {
         query.test_type = this.$route.query.test_type;
       }
-      if (this.$route.query.level !== 0 && query.type==="test") {
+      if (this.$route.query.level !== 0 && query.type === "test") {
         query.level = this.$route.query.level;
       }
-      if (this.$route.query.word === 1 && query.type==="test") {
+      if (this.$route.query.word === 1 && query.type === "test") {
         query.word = 1;
       }
-      if (this.$route.query.pdf === 1 && query.type==="test") {
+      if (this.$route.query.pdf === 1 && query.type === "test") {
         query.pdf = 1;
       }
-      if (this.$route.query.free === 1 && query.type==="test") {
+      if (this.$route.query.free === 1 && query.type === "test") {
         query.free = 1;
       }
-      if (this.$route.query.a_file === 1 && query.type==="test") {
+      if (this.$route.query.a_file === 1 && query.type === "test") {
         query.a_file = 1;
       }
 
@@ -145,13 +147,25 @@ export default {
   text-transform: none !important;
   font-size: 1.2rem;
 }
+.tab-header .v-tab .nav-link {
+  padding: 0.8rem 0.8rem 0.8rem 0;
+}
+
+.tab-header .v-tab:before {
+  background-color: transparent !important;
+}
+.tab-header .v-badge__wrapper{
+  right:1.5rem!important;
+  top:0rem!important;
+}
 
 .tab-header .v-tab--active .nav-link {
-  padding: 0.5rem;
+  padding: 0.8rem 0.8rem 0.8rem 0.2rem;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 1.4rem;
   display: flex;
   align-items: center;
+  color: #000000;
 }
 
 .tab-header .v-tab--active .badge-sample .nav-link {
@@ -201,7 +215,9 @@ export default {
 .tab-header .v-tab:hover::before {
   opacity: 0;
 }
-
+.tab-header .v-badge__badge{
+  top:-0.6rem!important;
+}
 
 .sample-q-icon span {
   font-size: 2.5rem;

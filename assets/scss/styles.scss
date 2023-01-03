@@ -74,6 +74,10 @@ body {
       border-radius: 7px;
     }
 
+    .date_string:first-letter{
+      text-transform: capitalize!important;
+    }
+
     .v-btn--active::before {
       opacity: 0;
     }
@@ -1999,6 +2003,8 @@ body {
   }
 }
 
+
+
 //
 @media only screen and (max-width: 600px) {
 
@@ -2772,8 +2778,7 @@ body {
       .v-tabs {
         .v-tabs-bar {
           background: $gray12;
-          padding: 1rem 2rem;
-          min-height: 11rem;
+          min-height: 6.8rem;
 
           .v-slide-group__wrapper {
             .v-slide-group__content {

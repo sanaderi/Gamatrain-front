@@ -16,7 +16,7 @@
           <div class="tutorial-content d-flex flex-column justify-space-between">
             <div class="tutorial-title d-flex justify-space-between">
               <nuxt-link :to="`/exam-papers/${item.id}/${item.title_url}`" class="text-h5 text-md-h4">
-                {{ item.title.length>64 ? item.title.substr(0,61)+'...' : item.title }}
+                {{ item.title.length > 64 ? item.title.substr(0, 61) + '...' : item.title }}
               </nuxt-link>
             </div>
             <p class="item-content-subtitle mb-2 d-none d-sm-block">
@@ -26,7 +26,8 @@
             </p>
             <div class="item-content-tags d-flex">
               <v-chip link class="mr-1" small>
-                <nuxt-link :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}&lesson=${item.lesson}`">
+                <nuxt-link
+                  :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}&lesson=${item.lesson}`">
                   {{ item.lesson_title }}
                 </nuxt-link>
               </v-chip>
@@ -55,7 +56,14 @@
                 <div
                   class="item-content-last-update d-flex align-center mx-auto">
                   <i class="fa-solid fa-calendar-days"></i>
-                  <p class="mx-2">last update : {{ item.up_date }}</p>
+                  <p class="mx-2">
+                    <span class="d-none d-md-inline">
+                      Last update :
+                    </span>
+                    <span class="date_string d-inline-block">
+                      {{ $moment(item.up_date).fromNow() }}
+                    </span>
+                  </p>
                 </div>
               </div>
             </div>

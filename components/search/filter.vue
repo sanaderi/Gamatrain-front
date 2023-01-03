@@ -2,7 +2,7 @@
   <div>
     <!--Selected filter, user can disable any filter from here-->
     <div v-if="enabledAppliedFilter()">
-      <p>Applied filter</p>
+      <p class="mb-2 mb-md-1">Applied filter</p>
       <v-divider class="mb-1"/>
       <v-chip
         v-if="applied_filter.select_section_title"
@@ -67,7 +67,7 @@
     </div>
     <!--End select filter  -->
     <div>
-      <p class="mt-5">Grade</p>
+      <p class="mb-2 mb-md-1 mt-5">Grade</p>
       <v-divider class="mb-3"/>
 
       <v-container
@@ -111,7 +111,7 @@
 
     <!--Base filter-->
     <div v-show="filter.base_list.length>0">
-      <p class="mt-5">Base</p>
+      <p class="mb-2 mb-md-1 mt-5">Base</p>
       <v-divider class="mb-3"/>
 
       <v-container
@@ -156,7 +156,7 @@
 
     <!--Lesson filter-->
     <div v-show="filter.lesson_list.length>0">
-      <p class="mt-5">Lesson</p>
+      <p class="mb-2 mb-md-1 mt-5">Lesson</p>
       <v-divider class="mb-3"/>
 
       <v-container
@@ -201,7 +201,7 @@
 
     <!--Topic filter-->
     <div v-show="filter.topic_list.length>0">
-      <p class="mt-5">Topic</p>
+      <p class="mb-2 mb-md-1 mt-5">Topic</p>
       <v-divider class="mb-3"/>
 
       <v-container
@@ -247,7 +247,7 @@
 
     <!--File type filter-->
     <div v-show="filter.file_type_list.length>0">
-      <p class="mt-5">{{ $route.query.type === 'test' ? 'Exam Paper' : 'Presentation' }} Type</p>
+      <p class="mb-2 mb-md-1 mt-5">{{ $route.query.type === 'test' ? 'Exam Paper' : 'Presentation' }} Type</p>
       <v-divider class="mb-3"/>
 
       <v-container
@@ -293,7 +293,7 @@
 
     <!--Test level filter-->
     <div v-show="filter.test_level_list.length>0 && $route.query.type==='test'">
-      <p class="mt-5">Level</p>
+      <p class="mb-2 mb-md-1 mt-5">Level</p>
       <v-divider class="mb-3"/>
 
       <v-container
@@ -339,7 +339,7 @@
 
     <!--Test feature-->
     <div v-show="$route.query.type==='test'">
-      <p class="mt-5">Test features</p>
+      <p class="mb-2 mb-md-1 mt-5">Test features</p>
       <v-divider class="mb-3"/>
 
       <v-container
@@ -923,16 +923,6 @@ export default {
 </script>
 
 <style scoped>
-.brand_filter p {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 36px;
 
-  /* identical to box height */
-  text-align: right;
-
-  color: rgba(0, 0, 0, 0.54);
-}
 
 </style>

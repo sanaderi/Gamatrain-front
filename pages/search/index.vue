@@ -5,42 +5,49 @@
     <v-row justify="center" class="d-block d-sm-none filter-btn">
       <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition ">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn dark v-bind="attrs" v-on="on" class="filter-mobile-btn">
-            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M0.755061 1.61C2.77506 4.2 6.50506 9 6.50506 9V15C6.50506 15.55 6.95506 16 7.50506 16H9.50506C10.0551 16 10.5051 15.55 10.5051 15V9C10.5051 9 14.2251 4.2 16.2451 1.61C16.7551 0.95 16.2851 0 15.4551 0H1.54506C0.715061 0 0.245061 0.95 0.755061 1.61Z"
-                fill="white"/>
-            </svg>
-            <p v-show="Visible" class="ml-4">
-              filter
-            </p>
+          <v-btn v-bind="attrs" v-on="on"
+                 class="d-block d-md-none"
+                 min-width="40"
+                 fixed bottom right style="z-index:10 "
+                 x-large color="teal" dark rounded
+          >
+            <v-icon>
+              mdi-filter
+            </v-icon>
+            <v-slide-x-reverse-transition>
+              <span v-show="expandFilterMenu" class="text-h6">
+                filter
+              </span>
+            </v-slide-x-reverse-transition>
 
 
           </v-btn>
         </template>
         <v-card>
-          <v-toolbar class="filter-btn-header">
-            <v-toolbar-items>
-              <v-btn text @click="dialog = false">
-                Search in samples
+          <div style="position: sticky;top: 0;left: 0;right: 0;z-index: 10">
+            <v-toolbar class="filter-btn-header">
+              <v-toolbar-items>
+                <v-btn text @click="dialog = false">
+                  Search in content
+                </v-btn>
+              </v-toolbar-items>
+              <v-spacer></v-spacer>
+              <v-btn icon @click="dialog = false">
+                <v-icon>mdi-close</v-icon>
               </v-btn>
-            </v-toolbar-items>
-            <v-spacer></v-spacer>
-            <v-btn icon @click="dialog = false">
-              <v-icon>mdi-close</v-icon>
-            </v-btn>
-          </v-toolbar>
-          <div class="filter-btn-content">
+            </v-toolbar>
             <div class="filter-btn-result my-4">
-              <p class="text-right mx-4">result : {{ result_count }}</p>
-            </div>
-            <search-filter ref="side_filter" class="mx-3"/>
-            <div class="show-result d-flex justify-end">
-              <v-btn medium class="filter-show-result mr-4" @click="dialog=!dialog">
-                show result
-              </v-btn>
+              <p class="text-right mx-4 transparent"   :class="result_count==0 ? 'red--text' : ''">Result : {{ result_count }}</p>
             </div>
           </div>
+          <v-card-text>
+              <search-filter ref="side_filter" class="mx-3"/>
+          </v-card-text>
+          <v-card-actions style="position: sticky;bottom: 0;left: 0;right: 0">
+            <v-btn medium block class="filter-show-result mr-4" @click="dialog=!dialog">
+              show result
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-dialog>
     </v-row>
@@ -167,28 +174,36 @@ export default {
       items: [],
 
       // Mobile filter
-      Visible: true,
       result_count: 0,
       dialog: false,
 
       all_files_loaded: false,
 
-
+      expandFilterMenu: true
     }
   },
 
 
-
   mounted() {
     this.getContentList();
-    this.scroll();
+  },
+
+  created() {
+    if (process.client) {
+      window.addEventListener('scroll', this.scroll);
+    }
+  },
+  destroyed() {
+    if (process.client) {
+      window.removeEventListener('scroll', this.scroll);
+    }
   },
 
   watch: {
     "$route.query.type"(val) {
       this.page = 1;
       this.items = [];
-      this.all_files_loaded=false;
+      this.all_files_loaded = false;
 
       if (this.$route.query.type === 'learnfiles')
         this.page_title = 'Presentation';
@@ -211,7 +226,7 @@ export default {
     "$route.query.section"(val) {
       this.page = 1;
       this.items = [];
-      this.all_files_loaded=false;
+      this.all_files_loaded = false;
 
       //Fire when click on tag in content card, set section value on side filter
       if (val > 0)
@@ -228,7 +243,7 @@ export default {
     "$route.query.base"(val) {
       this.page = 1;
       this.items = [];
-      this.all_files_loaded=false;
+      this.all_files_loaded = false;
 
 
       //Fire when click on tag in content card, set base value on side filter
@@ -246,8 +261,7 @@ export default {
     "$route.query.lesson"(val) {
       this.page = 1;
       this.items = [];
-      this.all_files_loaded=false;
-
+      this.all_files_loaded = false;
 
 
       //Fire when click on tag in content card, set lesson value on side filter
@@ -265,49 +279,49 @@ export default {
     "$route.query.topic"(val) {
       this.page = 1;
       this.items = [];
-      this.all_files_loaded=false;
+      this.all_files_loaded = false;
 
       this.getContentList();
     },
     "$route.query.test_type"(val) {
       this.page = 1;
       this.items = [];
-      this.all_files_loaded=false;
+      this.all_files_loaded = false;
 
       this.getContentList();
     },
     "$route.query.level"(val) {
       this.page = 1;
       this.items = [];
-      this.all_files_loaded=false;
+      this.all_files_loaded = false;
 
       this.getContentList();
     },
     "$route.query.word"(val) {
       this.page = 1;
       this.items = [];
-      this.all_files_loaded=false;
+      this.all_files_loaded = false;
 
       this.getContentList();
     },
     "$route.query.pdf"(val) {
       this.page = 1;
       this.items = [];
-      this.all_files_loaded=false;
+      this.all_files_loaded = false;
 
       this.getContentList();
     },
     "$route.query.free"(val) {
       this.page = 1;
       this.items = [];
-      this.all_files_loaded=false;
+      this.all_files_loaded = false;
 
       this.getContentList();
     },
     "$route.query.a_file"(val) {
       this.page = 1;
       this.items = [];
-      this.all_files_loaded=false;
+      this.all_files_loaded = false;
 
       this.getContentList();
     },
@@ -347,6 +361,15 @@ export default {
       }
     },
     scroll() {//For infinite loading
+
+      //Section for control filter menu button on mobile device
+      if (window.scrollY > 1000)
+        this.expandFilterMenu = false;
+      else
+        this.expandFilterMenu = true;
+      //End section for control filter menu button on mobile device
+
+
       window.onscroll = () => {
         //Scroll position
         var scrollPosition = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) + window.innerHeight + 50;

@@ -32,7 +32,14 @@
         <div
           class="item-content-last-update d-flex align-center mx-auto">
           <i class="fa-solid fa-calendar-days"></i>
-          <p class="mx-2">Updated : {{ $timeAgo.calc(contentData.up_date) }}</p>
+          <p class="mx-2">
+                    <span class="d-none d-md-inline">
+                      Updated:
+                    </span>
+            <span class="date_string d-inline-block">
+                      {{ $moment(contentData.up_date).fromNow() }}
+                    </span>
+          </p>
         </div>
       </div>
     </div>
