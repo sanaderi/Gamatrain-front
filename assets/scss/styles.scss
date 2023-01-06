@@ -9,7 +9,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif!important;
+  font-family: sans-serif !important;
   font-size: 14px;
   transition: 0.5s ease-in-out;
 
@@ -74,8 +74,8 @@ body {
       border-radius: 7px;
     }
 
-    .date_string:first-letter{
-      text-transform: capitalize!important;
+    .date_string:first-letter {
+      text-transform: capitalize !important;
     }
 
     .v-btn--active::before {
@@ -2004,7 +2004,6 @@ body {
 }
 
 
-
 //
 @media only screen and (max-width: 600px) {
 
@@ -2929,10 +2928,50 @@ body {
 //End search page
 
 
+// Start :  Paper
+.paper-content {
+  .paper-items {
+
+    .paper-item {
+      box-shadow: 0px 2px 10px rgb(0 0 0 / 10%) !important;
+      border-bottom: 0.1rem solid #e1e2e3;
+      border-right: 0.1rem solid #e1e2e3;
+      border-radius: 20rem;
+      margin-bottom: 0.8rem !important;
+
+      .item-image {
+        width: inherit;
+        height: 100%;
+        max-height: 16.4rem;
+        max-width: 12.2rem;
+        min-width: 7.8rem;
+        border-radius: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .item-content-footer {
+        p {
+          font-size: 1.4rem !important;
+        }
+
+        @media screen and (max-width: 600px) {
+          p {
+            font-size: 1rem !important;
+          }
+        }
+
+      }
+    }
+  }
+
+
+}
+
+// End : Paper
+
 // Start :  Presentation
 .training-content {
-
-
   .book-carousel {
     background-color: $green10;
     border-radius: 1rem;
@@ -4689,7 +4728,7 @@ body {
   }
 
   #img-cropper-dialog {
-    position: relative!important;
+    position: relative !important;
   }
 
 

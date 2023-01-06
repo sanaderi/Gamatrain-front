@@ -1,5 +1,5 @@
 <template>
-  <v-row class="training-content">
+  <v-row class="tutorial-items tutorial-items-desktop d-block">
     <v-col cols="12" class="training-contents px-0">
 
 

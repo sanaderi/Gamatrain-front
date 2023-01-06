@@ -2,7 +2,7 @@
   <div>
 
     <!--Mobile filter-->
-    <v-row justify="center" class="d-block d-sm-none filter-btn">
+    <v-row justify="center" class="d-block d-md-none">
       <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition ">
         <template v-slot:activator="{ on, attrs }">
           <v-btn v-bind="attrs" v-on="on"
@@ -63,7 +63,7 @@
     <section class="search-page">
       <v-container>
         <v-row>
-          <v-col lg="3" class="d-none d-sm-block">
+          <v-col lg="3" class="d-none d-md-block">
             <div class="search-filter">
               <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs"/>
             </div>
@@ -82,7 +82,7 @@
                 Oops! no data found
               </div>
               <div v-else>
-                <Test v-if="$route.query.type==='test'" :items="items"/>
+                <Paper v-if="$route.query.type==='test'" :items="items"/>
                 <TrainingContents v-else-if="$route.query.type==='learnfiles'" :items="items"/>
                 <QuestionAnswer v-else-if="$route.query.type==='question'" :items="items"/>
                 <OnlineExam v-else-if="$route.query.type==='azmoon'" :items="items"/>
@@ -119,7 +119,7 @@ import FilterModal from "@/components/common/filter-modal";
 import OnlineExam from "@/pages/search/type/online-exam";
 import QuestionAnswer from "@/pages/search/type/q-a";
 import TrainingContents from "@/pages/search/type/training-contents";
-import Test from "@/pages/search/type/sample-q";
+import Paper from "@/pages/search/type/paper";
 import Tutorials from "@/pages/search/type/tutorials";
 import Teachers from "@/pages/search/type/teachers";
 import searchBox from "@/components/common/search-box";
@@ -137,7 +137,7 @@ export default {
     OnlineExam,
     QuestionAnswer,
     TrainingContents,
-    Test,
+    Paper,
     Tutorials,
     searchBox
   },
