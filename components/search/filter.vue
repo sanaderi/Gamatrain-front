@@ -370,6 +370,98 @@
       </v-container>
     </div>
 
+    <!--State-->
+    <div v-show="$route.query.type==='tutor'">
+      <p class="mb-2 mb-md-1 mt-5">State</p>
+      <v-divider class="mb-3"/>
+
+      <v-container
+        fluid
+        id="scroll-target"
+        style="max-height: 200px"
+        class="overflow-y-auto"
+      >
+        <v-row
+          v-scroll:#scroll-target="onScroll"
+          align="center"
+          justify="center"
+          style="height: 110px;overflow-x: hidden"
+        >
+          <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
+            <v-radio-group
+              v-model="state_val"
+              @change="changeStateVal"
+              class="mt-0 pr-0"
+              column
+            >
+              <v-radio
+                label="All"
+                color="red"
+                value="0"
+              >
+              </v-radio>
+              <v-radio
+                v-for="item in filter.state_list"
+                :label="item.title"
+                color="red"
+                :value="item.id"
+              >
+              </v-radio>
+
+            </v-radio-group>
+          </v-col>
+
+
+        </v-row>
+      </v-container>
+    </div>
+
+
+    <!--City-->
+    <div v-show="filter.city_list.length>0 && $route.query.type==='tutor'">
+      <p class="mb-2 mb-md-1 mt-5">City</p>
+      <v-divider class="mb-3"/>
+
+      <v-container
+        fluid
+        id="scroll-target"
+        style="max-height: 200px"
+        class="overflow-y-auto"
+      >
+        <v-row
+          v-scroll:#scroll-target="onScroll"
+          align="center"
+          justify="center"
+          style="height: 110px;overflow-x: hidden"
+        >
+          <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
+            <v-radio-group
+              v-model="city_val"
+              class="mt-0 pr-0"
+              column
+            >
+              <v-radio
+                label="All"
+                color="red"
+                :value="0"
+              >
+              </v-radio>
+              <v-radio
+                v-for="item in filter.city_list"
+                :label="item.title"
+                color="red"
+                :value="item.id"
+              >
+              </v-radio>
+
+            </v-radio-group>
+          </v-col>
+
+
+        </v-row>
+      </v-container>
+    </div>
+
 
   </div>
 </template>
@@ -402,6 +494,8 @@ export default {
       topic_val: 0,
       file_type_val: 0,
       test_level_val: 0,
+      state_val: 0,
+      city_val: 0,
       word_checkbox_val: false,
       pdf_checkbox_val: false,
       free_checkbox_val: false,
@@ -414,7 +508,9 @@ export default {
         select_lesson_title: '',
         select_topic_title: '',
         select_file_type_title: '',
-        select_test_level_title: ''
+        select_test_level_title: '',
+        select_state_title: '',
+        select_city_title: '',
       },
 
       filter: {
@@ -458,18 +554,23 @@ export default {
             label: "By answer",
             value: "a_file"
           },
-        ]
+        ],
+        state_list: [],
+        city_list: [],
       },
 
       breadcrumbs: []
 
     }
   },
-  mounted() {
+  created() {
     var params = {
       type: 'section'
     };
     this.getFilterList(params, 'section');
+
+    if (this.$route.query.type === 'tutor')
+      this.getFilterList({type: 'state'}, 'state');
 
     this.setBreadcrumbInfo();
 
@@ -497,6 +598,7 @@ export default {
       this.filter.base_list = [];
       this.filter.lesson_list = [];
       this.filter.topic_list = [];
+      this.filter.city_list = [];
 
       //Reset related tags
       this.applied_filter.select_section_title = '';
@@ -530,8 +632,8 @@ export default {
         this.topic_val = 0;
 
         this.applied_filter.select_base_title = '';
-      }else{
-        if (this.filter.lesson_list.length===0){
+      } else {
+        if (this.filter.lesson_list.length === 0) {
           var params = {
             type: 'lesson',
             base_id: this.base_val
@@ -549,7 +651,7 @@ export default {
         this.topic_val = 0;
 
         this.applied_filter.select_lesson_title = '';
-      }else{
+      } else {
         this.changeLessonVal();
       }
     },
@@ -564,6 +666,35 @@ export default {
 
 
     },
+
+
+    state_val(val) {
+      this.filter.city_list = [];
+
+      this.updateQueryParams();
+      // this.setBreadcrumbInfo();
+      if (this.state_val > 0) {
+        this.applied_filter.select_state_title = this.filter.state_list.find(x => x.id === this.state_val).title;
+        //Load city list
+        var params = {
+          type: 'city',
+          state_id: val
+        }
+        this.getFilterList(params, 'city');
+
+      } else {
+        this.applied_filter.select_state_title = "";
+      }
+    },
+    city_val(val) {
+      this.updateQueryParams();
+      if (val > 0 && this.filter.city_list.length) {
+        this.applied_filter.select_city_title = this.filter.city_list.find(x => x.id === val).title;
+      } else {
+        this.applied_filter.select_city_title = "";
+      }
+
+    }
 
 
   },
@@ -642,6 +773,23 @@ export default {
           //Enable tag
           if (this.$route.query.topic > 0)
             this.applied_filter.select_topic_title = this.filter.topic_list.find(x => x.id === this.topic_val).title;
+        } else if (type === 'state') {
+          this.filter.state_list = res.data;
+
+          //Enable tag
+          if (this.$route.query.state > 0){
+            this.state_val=this.$route.query.state;
+            this.applied_filter.select_state_title = this.filter.state_list.find(x => x.id === this.state_val).title;
+          }
+          if (this.$route.query.city > 0)
+            this.city_val=this.$route.query.city;
+
+        } else if (type === 'city') {
+          this.filter.city_list = res.data;
+
+          //Enable tag
+          if (this.city_val>0 && this.filter.city_list.length)
+            this.applied_filter.select_city_title = this.filter.city_list.find(x => x.id === this.city_val).title;
         }
 
 
@@ -712,7 +860,7 @@ export default {
         this.getFilterList(params, 'topic');
 
         //Enable lesson title tag
-        this.applied_filter.select_lesson_title = this.filter.lesson_list.find(x => x.id === this.lesson_val).title;
+        // this.applied_filter.select_lesson_title = this.filter.lesson_list.find(x => x.id === this.lesson_val).title;
       } else {
         this.applied_filter.select_topic_title = "";
 
@@ -751,6 +899,27 @@ export default {
 
     },
 
+
+    changeStateVal() {
+      this.city_val = 0;
+      this.filter.city_list = [];
+
+      this.updateQueryParams();
+      // this.setBreadcrumbInfo();
+      if (this.state_val > 0) {
+        this.applied_filter.select_state_title = this.filter.state_list.find(x => x.id === this.state_val).title;
+        //Load city list
+        var params = {
+          type: 'city',
+          state_id: val
+        }
+        this.getFilterList(params, 'city');
+
+      } else {
+        this.applied_filter.select_state_title = "";
+      }
+    },
+
     //Update router query params
     updateQueryParams() {
       const query = {type: this.$route.query.type}
@@ -784,9 +953,15 @@ export default {
       if (this.answer_checkbox_val === 1 && query.type === "test") {
         query.a_file = 1;
       }
-      // handle more query parameters here ...
+      if (this.state_val != 0 && query.type === "tutor") {
+        query.state = this.state_val;
+      }
+      if (this.city_val !== 0 && query.type === "tutor") {
+        query.city = this.city_val;
+      }
+      // Handle more query parameters here ...
       this.$router.replace({query: query}).catch(err => {
-        //Do noting
+      //Do noting
       })
     },
 
@@ -817,10 +992,10 @@ export default {
       this.breadcrumbs.push(breadcrumb_item);
 
       //Grade section
-      if (this.applied_filter.select_section_title){
+      if (this.applied_filter.select_section_title) {
         this.breadcrumbs.push(
           {
-            text:this.applied_filter.select_section_title,
+            text: this.applied_filter.select_section_title,
             disabled: false,
             href: `/search?type=${active_tab}&section=${this.section_val}`
           }
@@ -828,10 +1003,10 @@ export default {
       }
 
       //Base section
-      if (this.applied_filter.select_base_title){
+      if (this.applied_filter.select_base_title) {
         this.breadcrumbs.push(
           {
-            text:this.applied_filter.select_base_title,
+            text: this.applied_filter.select_base_title,
             disabled: false,
             href: `/search?type=${active_tab}&section=${this.section_val}&base=${this.base_val}`
           }
@@ -839,18 +1014,15 @@ export default {
       }
 
       //Lesson section
-      if (this.applied_filter.select_lesson_title){
+      if (this.applied_filter.select_lesson_title) {
         this.breadcrumbs.push(
           {
-            text:this.applied_filter.select_lesson_title,
+            text: this.applied_filter.select_lesson_title,
             disabled: false,
             href: `/search?type=${active_tab}&section=${this.section_val}&base=${this.base_val}&lesson=${this.lesson_val}`
           }
         );
       }
-
-
-
 
 
       //Emit to parent
@@ -922,7 +1094,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-
-</style>

@@ -37,11 +37,12 @@
               </v-btn>
             </v-toolbar>
             <div class="filter-btn-result my-4">
-              <p class="text-right mx-4 transparent"   :class="result_count==0 ? 'red--text' : ''">Result : {{ result_count }}</p>
+              <p class="text-right mx-4 transparent" :class="result_count==0 ? 'red--text' : ''">Result :
+                {{ result_count }}</p>
             </div>
           </div>
           <v-card-text>
-              <search-filter ref="side_filter" class="mx-3"/>
+            <search-filter ref="side_filter" class="mx-3"/>
           </v-card-text>
           <v-card-actions style="position: sticky;bottom: 0;left: 0;right: 0">
             <v-btn medium block class="filter-show-result mr-4" @click="dialog=!dialog">
@@ -83,7 +84,7 @@
               </div>
               <div v-else>
                 <Paper v-if="$route.query.type==='test'" :items="items"/>
-                <TrainingContents v-else-if="$route.query.type==='learnfiles'" :items="items"/>
+                <Multimedia v-else-if="$route.query.type==='learnfiles'" :items="items"/>
                 <QuestionAnswer v-else-if="$route.query.type==='question'" :items="items"/>
                 <OnlineExam v-else-if="$route.query.type==='azmoon'" :items="items"/>
                 <Tutorials v-else-if="$route.query.type==='dars'" :items="items"/>
@@ -118,7 +119,7 @@ import searchFilter from "@/components/search/filter";
 import FilterModal from "@/components/common/filter-modal";
 import OnlineExam from "@/pages/search/type/online-exam";
 import QuestionAnswer from "@/pages/search/type/q-a";
-import TrainingContents from "@/pages/search/type/training-contents";
+import Multimedia from "@/pages/search/type/multimedia.vue";
 import Paper from "@/pages/search/type/paper";
 import Tutorials from "@/pages/search/type/tutorials";
 import Teachers from "@/pages/search/type/teachers";
@@ -136,7 +137,7 @@ export default {
     searchFilter,
     OnlineExam,
     QuestionAnswer,
-    TrainingContents,
+    Multimedia,
     Paper,
     Tutorials,
     searchBox
@@ -325,28 +326,65 @@ export default {
 
       this.getContentList();
     },
+    "$route.query.state"(val) {
+      this.page = 1;
+      this.items = [];
+      this.all_files_loaded = false;
+
+      //Fire when click on tag in content card, set state value on side filter
+      if (val > 0) {
+        this.$refs.side_filter.state_val = val;
+      } else {
+        this.$refs.side_filter.state_val = 0;
+      }
+      //End fire when click on tag in content card, set state value on side filter
+
+      this.getContentList();
+
+    },
+    "$route.query.city"(val) {
+      this.page = 1;
+      this.items = [];
+      this.all_files_loaded = false;
+
+      //Fire when click on tag in content card, set city value on side filter
+      if (val > 0)
+        this.$refs.side_filter.city_val = val;
+      else
+        this.$refs.side_filter.city_val = 0;
+      //End fire when click on tag in content card, set section value on side filter
+
+      this.getContentList();
+    },
+
   },
   methods: {
     // Get content list
     async getContentList() {
       if (!this.all_files_loaded) {
         this.page_loading = true;
+        let params={
+          type: this.$route.query.type,
+          page: this.page,
+          section: this.$route.query.section,
+          base: this.$route.query.base,
+          lesson: this.$route.query.lesson,
+          topic: this.$route.query.topic,
+          test_type: this.$route.query.test_type,
+          level: this.$route.query.level,
+          pdf: this.$route.query.pdf,
+          word: this.$route.query.word,
+          free: this.$route.query.free,
+          a_file: this.$route.query.a_file,
+        };
+
+        if (this.$route.query.type=='tutor'){
+          params.state=this.$route.query.state;
+          params.city=this.$route.query.city;
+        }
         await this.$axios.$get('/api/v1/search',
           {
-            params: {
-              type: this.$route.query.type,
-              page: this.page,
-              section: this.$route.query.section,
-              base: this.$route.query.base,
-              lesson: this.$route.query.lesson,
-              topic: this.$route.query.topic,
-              test_type: this.$route.query.test_type,
-              level: this.$route.query.level,
-              pdf: this.$route.query.pdf,
-              word: this.$route.query.word,
-              free: this.$route.query.free,
-              a_file: this.$route.query.a_file,
-            }
+            params: params
           }).then(response => {
           this.items.push(...response.data.list);
           this.result_count = response.data.num;

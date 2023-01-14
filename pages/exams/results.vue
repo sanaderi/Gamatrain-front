@@ -6,7 +6,7 @@
           <v-col cols="12" class="pl-5">
             <span class="icon icong-qa text-h3 teal--text"></span>
             <span class="text-h4 teal--text">
-            Exams result list
+            Exams results
           </span>
           </v-col>
         </v-row>
@@ -59,14 +59,8 @@
                   <template v-slot:default>
                     <thead>
                     <tr>
-                      <th class="text-left text-h5">
-                        #
-                      </th>
-                      <th class="text-center text-h5">
-                        Test
-                      </th>
-                      <th class="text-center text-h5">
-                        Lesson
+                      <th class="text-h5">
+                        Title
                       </th>
                       <th class="text-center text-h5">
                         Date
@@ -80,23 +74,47 @@
                     </tr>
                     </thead>
                     <tbody>
+
                     <tr
                       v-show="exam_list.length>0"
                       v-for="item in exam_list"
                       :key="item.id"
                     >
-                      <td></td>
-                      <td class="text-center"></td>
-                      <td class="text-center"></td>
-                      <td class="text-center"></td>
-                      <td class="text-center"></td>
-                      <td class="text-center"></td>
-                    </tr>
-                    <tr v-show="exam_list.length===0">
-                      <td colspan="8">
-                        <p>Opps! no data found</p>
+                      <td>
+                        {{ item.exam_title }}
+                      </td>
+                      <td class="text-center">
+                        {{ item.subdate }}
+                      </td>
+                      <td class="text-center " :class="item.status==1 ? 'green--text' : 'red--text'">
+                        {{ item.status == 1 ? 'Complete' : 'Incomplete' }}
+                      </td>
+                      <td class="text-center">
+                        <nuxt-link v-show="item.status==1" :to="`/exams/result/${item.id}`">
+                          Report card
+                        </nuxt-link>
+                        <nuxt-link v-show="item.status!=1" :to="`/exams/start/${item.id}`">
+                          Continue
+                        </nuxt-link>
                       </td>
                     </tr>
+                    <tr v-show="page_loading===false && exam_list.length===0">
+                      <td colspan="4">
+                        <p>Oops! no data found</p>
+                      </td>
+                    </tr>
+                    <tr v-show="page_loading">
+                      <td cols="4" class="text-center">
+                        <v-progress-circular
+                          :size="40"
+                          :width="4"
+                          class="mt-12 mb-12"
+                          color="orange"
+                          indeterminate
+                        />
+                      </td>
+                    </tr>
+
                     </tbody>
                   </template>
                 </v-simple-table>
@@ -112,10 +130,10 @@
 <script>
 export default {
   layout: "test-maker-layout",
-  name: "participated-test-manage",
+  name: "user-exams-results",
   head() {
     return {
-      title: 'Participated tests'
+      title: 'Exams results'
     }
   },
   data() {
@@ -204,10 +222,11 @@ export default {
     getExams() {
       if (!this.all_files_loaded) {
         this.page_loading = true;
-        this.$axios.$get('/api/v1/exams/result-list', {},
+        this.$axios.$get('/api/v1/exams/results',
           {
             params: {
               perpage: 20,
+              page: this.page,
               section: this.filter.level,
               base: this.filter.grade,
               lesson: this.filter.lesson

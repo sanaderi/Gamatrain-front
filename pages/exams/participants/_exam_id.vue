@@ -107,11 +107,23 @@
                         </nuxt-link>
                       </td>
                     </tr>
-                    <tr v-show="participants_list.length===0">
+                    <tr v-show="page_loading===false && participants_list.length===0">
                       <td colspan="4">
-                        <p>Opps! no data found</p>
+                        <p>Oops! no data found</p>
                       </td>
                     </tr>
+                    <tr v-show="page_loading">
+                      <td cols="4" class="text-center">
+                        <v-progress-circular
+                          :size="40"
+                          :width="4"
+                          class="mt-12 mb-12"
+                          color="orange"
+                          indeterminate
+                        />
+                      </td>
+                    </tr>
+
                     </tbody>
                   </template>
                 </v-simple-table>
@@ -304,7 +316,7 @@ export default {
           this.page_loading = true;
           this.timer = setTimeout(() => {
             this.page++
-            this.getParticipants();
+            this.getExams();
           }, 800)
         }
       }

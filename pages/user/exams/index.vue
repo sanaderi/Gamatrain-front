@@ -119,7 +119,7 @@
                       </td>
                     </tr>
                     <tr v-show="page_loading===false && exam_list.length===0">
-                      <td colspan="8">
+                      <td colspan="2">
                         <p>Oops! no data found</p>
                       </td>
                     </tr>
@@ -194,7 +194,7 @@ export default {
   // },
   head() {
     return {
-      title: 'Q & A manage'
+      title: 'My tests'
     }
   },
   data() {
@@ -292,6 +292,7 @@ export default {
         this.$axios.$get('/api/v1/exams', {
           params: {
             perpage: 20,
+            page: this.page,
             section: this.filter.level,
             base: this.filter.grade,
             lesson: this.filter.lesson

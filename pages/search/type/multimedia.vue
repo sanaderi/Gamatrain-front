@@ -1,7 +1,7 @@
 <template>
-  <div class="paper-content">
-    <div class="paper-items">
-      <v-card rounded class="mb-1 paper-item" v-for="item in items" :key="item.value">
+  <div class="multimedia-content">
+    <div class="multimedia-items">
+      <v-card rounded class="mb-1 multimedia-item" v-for="item in items" :key="item.value">
         <v-card-text class="pb-0">
           <v-row>
             <v-col md="2" cols="3">
@@ -16,24 +16,24 @@
               </div>
             </v-col>
             <v-col md="10" cols="9" class="px-0">
-              <v-card flat class="tutorial-content d-flex flex-column pl-3 pl-md-0 justify-space-between">
+              <v-card flat class="tutorial-content d-flex flex-column justify-space-between">
                 <v-card-text class="px-0 pt-0">
                   <div class="tutorial-title d-flex justify-space-between">
-                    <nuxt-link :to="`/papers/${item.id}/${item.title_url}`" class="text-h6 text-md-h5">
-                      {{ item.title }}
+                    <nuxt-link :to="`/multimedia/${item.id}/${item.title_url}`" class="text-h5 text-md-h4">
+                      {{ item.title.length > 64 ? item.title.substr(0, 61) + '...' : item.title }}
                     </nuxt-link>
                   </div>
                   <p class="item-content-subtitle my-2 d-none d-sm-block">
-                    <nuxt-link :to="`/papers/${item.id}/${item.title_url}`">
-                      {{ item.description.substr(0, 120) }}...
+                    <nuxt-link :to="`/multimedia/${item.id}/${item.title_url}`">
+                      {{ item.description.substr(0, 150) }}...
                     </nuxt-link>
                   </p>
-                  <div class="mt-3">
+                  <div >
                     <v-chip class="mr-1 mb-1"
                             :x-small="$vuetify.breakpoint.xs"
                             :small="!$vuetify.breakpoint.xs"
                             :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}&lesson=${item.lesson}`"
-                            >
+                    >
                       {{ item.lesson_title }}
                     </v-chip>
                     <v-chip
@@ -56,7 +56,7 @@
                 <v-card-actions class="item-content-footer pb-2  d-none d-md-block">
                   <v-row>
                     <v-col cols="8" class="px-0">
-                      <div class="d-flex pt-3 pt-md-0">
+                      <div class="d-flex pt-3">
                         <div class="item-content-user d-flex align-center">
                           <v-avatar size="2em">
                             <img :src="require('assets/images/defaultAvatar1.jpg')"
@@ -105,14 +105,16 @@
                       </div>
 
                     </v-col>
-                    <v-col cols="4" >
-                      <div class="text-right align-right float-right d-flex align-content-center  " >
-                        <nuxt-link icon :to="`/papers/${item.id}/${item.title_url}`">
-                          <span v-show="item.q_file_word"  class="fa-solid fa-file-word fa-2xl blue--text "></span>
-                        </nuxt-link>
-                        <nuxt-link icon :to="`/papers/${item.id}/${item.title_url}`">
-                          <span v-show="item.q_file" class="fa-solid fa-file-pdf fa-2xl red--text pl-1"></span>
-                        </nuxt-link>
+                    <v-col cols="4" class="px-0">
+                      <div class="text-right align-center">
+                        <v-btn icon :to="`/multimedia/${item.id}/${item.title_url}`">
+                          <v-icon color="blue" v-show="item.q_file_word">
+                            mdi-file-word
+                          </v-icon>
+                          <v-icon color="red" v-show="item.q_file">
+                            mdi-file-pdf-box
+                          </v-icon>
+                        </v-btn>
                       </div>
                     </v-col>
                   </v-row>
@@ -174,14 +176,16 @@
               </div>
 
             </v-col>
-            <v-col cols="2" class="py-2">
-              <div class="text-right align-right float-right d-flex ">
-                <nuxt-link icon :to="`/papers/${item.id}/${item.title_url}`">
-                  <span v-show="item.q_file_word"  class="fa-solid fa-file-word fa-lg  blue--text "></span>
-                </nuxt-link>
-                <nuxt-link icon :to="`/papers/${item.id}/${item.title_url}`">
-                  <span v-show="item.q_file" class="fa-solid fa-file-pdf fa-lg red--text pl-1"></span>
-                </nuxt-link>
+            <v-col cols="2" class="py-0">
+              <div class="text-right align-center">
+                <v-btn icon :to="`/multimedia/${item.id}/${item.title_url}`">
+                  <v-icon color="blue" v-show="item.q_file_word">
+                    mdi-file-word
+                  </v-icon>
+                  <v-icon color="red" v-show="item.q_file">
+                    mdi-file-pdf-box
+                  </v-icon>
+                </v-btn>
               </div>
             </v-col>
           </v-row>
@@ -192,16 +196,22 @@
 </template>
 
 <script>
+
+import TrainingContentCarousel from "@/components/search/training-content-carousel";
 export default {
-  name: "paper",
-  props: ["items"],
+  name: "multimedia",
+  components: {TrainingContentCarousel},
+  props:["items"],
   data() {
-    return {}
+    return {
+
+    }
   },
   mounted() {
-
   },
-  methods: {}
+  methods: {
+
+  }
 }
 </script>
 
