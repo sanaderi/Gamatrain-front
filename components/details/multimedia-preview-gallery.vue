@@ -3,10 +3,9 @@
     <section class="product-gallery rounded-lg  ">
       <div class="card-carousel">
         <v-row justify="center" >
-          <!--Mobile side section-->
-          <v-col cols="12" class="pr-0 d-flex d-md-none">
+          <!--Side section-->
+          <v-col cols="12" class="pr-0 pb-0 d-flex ">
             <v-btn icon
-                   small
               :to="`${item.link}&state=${help_link_data.state}&section=${help_link_data.section}&base=${help_link_data.base}&course=${help_link_data.course}
                   &lesson=${help_link_data.lesson}`"
               v-for="item in items"  class="side-help-icon mr-1" >
@@ -20,32 +19,15 @@
               </v-tooltip>
             </v-btn>
           </v-col>
-          <!--End mobile side section-->
+          <!--End side section-->
 
-          <!--Desktop side section-->
-          <v-col cols="2" class="pr-0 d-none d-md-block">
-            <nuxt-link
-                  :to="`${item.link}&state=${help_link_data.state}&section=${help_link_data.section}&base=${help_link_data.base}&course=${help_link_data.course}
-                  &lesson=${help_link_data.lesson}`"
-                       v-for="item in items"  class="side-help-icon" >
-              <v-tooltip right>
-                <template v-slot:activator="{ on, attrs }">
-                <span v-bind="attrs"
-                      v-on="on" :class="' icon icong-' + item.icon"/>
 
-                </template>
-                <span>{{item.text}}</span>
-              </v-tooltip>
-            </nuxt-link>
-          </v-col>
-          <!--End desktop side section-->
-
-          <v-col cols="12" md="10"  class="pl-1 " >
+          <v-col cols="12" class="pt-0" >
             <div class="mx-8 mx-md-0">
               <v-carousel
-                height="386"
-                :show-arrows="false"
-                :hide-delimiters="(images.length>1 ? false : true)"
+                height="296"
+                show-arrows
+                hide-delimiters
                 v-model="carouselVal"
               >
                 <v-carousel-item
@@ -82,7 +64,7 @@
 
 <script>
 export default {
-  name: "preview-gallery",
+  name: "multimedia-preview-gallery",
   data() {
     return {
       carouselVal: null,

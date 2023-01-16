@@ -146,9 +146,9 @@ export default {
   async asyncData({query}) {
     var page_title = '';
     if (query.type === 'learnfiles')
-      page_title = 'Presentation';
+      page_title = 'Multimedia';
     else if (query.type === 'test')
-      page_title = 'Exam Papers';
+      page_title = 'Papers';
     else if (query.type === 'question')
       page_title = 'Q & A';
     else if (query.type === 'azmoon')
@@ -207,9 +207,9 @@ export default {
       this.all_files_loaded = false;
 
       if (this.$route.query.type === 'learnfiles')
-        this.page_title = 'Presentation';
+        this.page_title = 'Multimedia';
       else if (this.$route.query.type === 'test')
-        this.page_title = 'Exam Paper';
+        this.page_title = 'Paper';
       else if (this.$route.query.type === 'question')
         this.page_title = 'Q & A';
       else if (this.$route.query.type === 'azmoon')

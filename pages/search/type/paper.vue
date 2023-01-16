@@ -3,21 +3,34 @@
     <div class="paper-items">
       <v-card rounded class="mb-1 paper-item" v-for="item in items" :key="item.value">
         <v-card-text class="pb-0">
-          <v-row>
-            <v-col md="2" cols="3">
+          <v-row >
+            <v-col md="2" cols="3" class="py-4">
               <div class="item-img">
                 <v-img v-if="item.lesson_pic"
                        :src="item.lesson_pic" :alt="item.lesson_title"
-                       class="item-image"/>
+                       class="item-image">
+                  <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                    >
+                      <v-progress-circular
+                        indeterminate
+                        color="grey lighten-5"
+                      ></v-progress-circular>
+                    </v-row>
+                  </template>
+                </v-img>
                 <v-card v-else class="book-no-img ">
                   <p class="font-weight-bold mb-3 mt-5">{{ item.lesson_title }}</p>
                   <a href="https://gamatrain.com">Gamatrain.com</a>
                 </v-card>
               </div>
             </v-col>
-            <v-col md="10" cols="9" class="px-0">
-              <v-card flat class="tutorial-content d-flex flex-column pl-3 pl-md-0 justify-space-between">
-                <v-card-text class="px-0 pt-0">
+            <v-col md="10" cols="9" class="px-0 pb-0 py-md-4">
+              <v-card flat class="fill-height tutorial-content d-flex flex-column pl-3 pl-md-0 justify-space-between">
+                <v-card-text class="pa-0">
                   <div class="tutorial-title d-flex justify-space-between">
                     <nuxt-link :to="`/papers/${item.id}/${item.title_url}`" class="text-h6 text-md-h5">
                       {{ item.title }}
