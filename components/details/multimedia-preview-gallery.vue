@@ -6,6 +6,7 @@
           <!--Side section-->
           <v-col cols="12" class="pr-0 pb-0 d-flex ">
             <v-btn icon
+                   :small="$vuetify.breakpoint.xs"
               :to="`${item.link}&state=${help_link_data.state}&section=${help_link_data.section}&base=${help_link_data.base}&course=${help_link_data.course}
                   &lesson=${help_link_data.lesson}`"
               v-for="item in items"  class="side-help-icon mr-1" >
@@ -22,11 +23,13 @@
           <!--End side section-->
 
 
-          <v-col cols="12" class="pt-0" >
-            <div class="mx-8 mx-md-0">
+          <v-col cols="12" class="pa-0 px-md-3" >
+            <div class="mx-md-0">
               <v-carousel
                 height="296"
                 show-arrows
+                cycle
+                :show-arrows-on-hover="!$vuetify.breakpoint.xs"
                 hide-delimiters
                 v-model="carouselVal"
               >
@@ -38,6 +41,7 @@
               </v-carousel>
               <div class="thumbnails" v-if="images.length>1">
                 <v-slide-group
+                  center-active
                   class="pa-4"
                   active-class="success"
                 >

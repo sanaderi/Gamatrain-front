@@ -58,7 +58,7 @@ export default {
     ["@nuxtjs/vuetify"],
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
-
+    '@nuxtjs/pwa',
   ],
 
 
@@ -169,6 +169,17 @@ export default {
   build: {
     transpile: ["vee-validate","vue-chartjs"],
   },
+
+  pwa: {
+    manifest: {
+      name: 'Gamatrain App',
+      short_name:'Gamatrain',
+      description:'Big training platform',
+      lang: 'en',
+      useWebmanifestExtension: false
+    }
+  },
+
   server: {
     host: "0.0.0.0",
     port: 3002

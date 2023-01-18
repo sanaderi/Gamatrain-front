@@ -29,7 +29,7 @@
               <div class="d-flex mb-4">
                 <div class="w-100">
                   <div class="d-flex align-center justify-space-between header">
-                    <h1 class="detail-title">
+                    <h1 class="text-h5 font-weight-bold">
                       {{ contentData.title }}
                     </h1>
                   </div>
@@ -128,7 +128,7 @@
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <i class="fa-solid fa-calendar-alt mr-1 icon"></i>
-                    Last update: {{$timeAgo.calc(contentData.up_date)}}
+                    Last update: {{ $moment(contentData.up_date).fromNow() }}
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <i class="fa-solid fa-bug mr-1 icon"></i>

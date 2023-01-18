@@ -29,43 +29,48 @@
               <div class="d-flex mb-4">
                 <div class="w-100">
                   <div class="d-flex align-center justify-space-between header">
-                    <h1 class="detail-title">
+                    <h1 class="text-h5 font-weight-bold">
                       {{ contentData.title }}
                     </h1>
                   </div>
                   <div class="description-holder my-4">
                     <!--Description-->
-                    <v-tabs>
-                      <v-tab>Description</v-tab>
-                      <v-tab>Book chapters</v-tab>
-                    </v-tabs>
-
-                    <p v-html="contentData.description"></p>
+                    <div class="description-tabs">
+                      <v-tabs v-model="description_tab" color="teal">
+                        <v-tab key="tab-description">Description</v-tab>
+                        <v-tab key="tab-chapters">Book chapters</v-tab>
+                      </v-tabs>
+                    </div>
+                    <div class="description-tabs">
+                      <v-tabs-items v-model="description_tab">
+                        <v-tab-item key="tab-description">
+                          <span v-html="contentData.description"></span>
+                        </v-tab-item>
+                        <v-tab-item key="tab-chapters">
+                          No chapter found
+                        </v-tab-item>
+                      </v-tabs-items>
+                    </div>
                     <!--End description-->
                   </div>
 
                   <div class="label-holder">
                     <v-chip link class="mr-1">
-                      <nuxt-link :to="`/search?type=test&section=${contentData.section}`">
+                      <nuxt-link :to="`/search?type=learnfiles&section=${contentData.section}`">
                         {{ contentData.section_title }}
                       </nuxt-link>
                     </v-chip>
                     <v-chip link class="mr-1">
-                      <nuxt-link :to="`/search?type=test&section=${contentData.section}&base=${contentData.base}`">
+                      <nuxt-link
+                        :to="`/search?type=learnfiles&section=${contentData.section}&base=${contentData.base}`">
                         {{ contentData.base_title }}
                       </nuxt-link>
                     </v-chip>
                     <v-chip link class="ma-1">
                       <nuxt-link
-                        :to="`/search?type=test&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`">
+                        :to="`/search?type=learnfiles&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`">
                         {{ contentData.lesson_title }}
                       </nuxt-link>
-                    </v-chip>
-                    <v-chip class="ma-1">
-                      {{ contentData.edu_month_title }}
-                    </v-chip>
-                    <v-chip class="ma-1">
-                      {{ contentData.edu_year }}
                     </v-chip>
 
 
@@ -78,13 +83,13 @@
                   <p v-if="!$auth.loggedIn">
                     <span class="mdi mdi-bell icon"></span>
                     <span @click="openAuthDialog('login')" class="login">Login</span>
-                    <span  @click="openAuthDialog('register')" class="register">
+                    <span @click="openAuthDialog('register')" class="register">
                     (register)
                     </span>
                     to download and charge your wallet.
                   </p>
                   <span v-else>
-                    Your wallet charge is ${{$auth.user.credit}}
+                    Your wallet charge is ${{ $auth.user.credit }}
                   </span>
                   <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/credit?">(Charge wallet)</nuxt-link>
                 </div>
@@ -99,7 +104,7 @@
               </div>
             </v-col>
             <v-col md="3">
-              <v-card flat  class="content_main_info">
+              <v-card flat class="content_main_info">
                 <v-row class=" align-center">
                   <v-col cols="3">
                     <v-img
@@ -113,7 +118,7 @@
                   </v-col>
                   <v-col cols="9" class="pl-0">
                     <p class="creator_title">
-                      {{contentData.first_name}} {{contentData.last_name}}
+                      {{ contentData.first_name }} {{ contentData.last_name }}
                     </p>
                   </v-col>
                 </v-row>
@@ -121,19 +126,19 @@
                 <v-row>
                   <v-col cols="12" class="pb-0">
                     <i class="fa-solid fa-folder mr-1 icon"></i>
-                    File type: {{contentData.test_type_title}}
+                    File type: {{ contentData.content_type_title }}
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <i class="fa-solid fa-book-open-reader mr-1 icon"></i>
-                    Page count: {{contentData.q_file_pages}}
+                    Page count: {{ contentData.file_pages }}
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <i class="fa-solid fa-eye mr-1 icon"></i>
-                    Viewed: {{contentData.views}}
+                    Viewed: {{ contentData.views }}
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <i class="fa-solid fa-calendar-alt mr-1 icon"></i>
-                    Last update: {{$timeAgo.calc(contentData.up_date)}}
+                    Last update: {{ $moment(contentData.up_date).fromNow() }}
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <i class="fa-solid fa-bug mr-1 icon"></i>
@@ -180,7 +185,7 @@
                                   target="_blank"
                                   block color="#25d366" class="white--text">
                                   <i class="fab fa-whatsapp mr-1 icon"></i>
-                                   WhatsApp
+                                  WhatsApp
                                 </v-btn>
                               </v-col>
                               <v-col cols="6">
@@ -188,7 +193,7 @@
                                        @click="shareSocial('telegram')"
                                 >
                                   <i class="fab fa-telegram-plane mr-1 icon"></i>
-                                   Telegram
+                                  Telegram
                                 </v-btn>
                               </v-col>
                             </v-row>
@@ -220,35 +225,14 @@
                 <v-divider class="d-none d-md-block"/>
 
                 <v-row class="mt-1 d-none d-md-block">
-                  <v-col  cols="12" class="pb-0">
-<!--                    <div v-if="contentData.files.word.exist==true">-->
-<!--                      <v-btn @click="startDownload('q_word')"-->
-<!--                             block color="primary" class="mb-2">-->
-<!--                        Question Word file | {{contentData.files.word.price>0 ? '$'+contentData.files.word.price : 'Free'}}-->
-<!--                      </v-btn>-->
-<!--                    </div>-->
-<!--                    <div v-if="contentData.files.pdf.exist==true">-->
-<!--                      <v-btn @click="startDownload('q_pdf')"-->
-<!--                             class="mb-2"-->
-<!--                             block color="error">-->
-<!--                        Question PDF file | {{contentData.files.word.price>0 ? '$'+contentData.files.word.price : 'Free'}}-->
-<!--                      </v-btn>-->
-<!--                    </div>-->
-<!--                    <div v-if="contentData.files.answer.exist==true">-->
-<!--                      <v-btn v-show="contentData.files.answer.ext=='pdf'"-->
-<!--                             class="mb-2"-->
-<!--                             @click="startDownload('a_file')"-->
-<!--                             block color="error">-->
-<!--                        Answer PDF file | {{contentData.files.word.price>0 ? '$'+contentData.files.word.price : 'Free'}}-->
-<!--                      </v-btn>-->
-<!--                      <v-btn v-show="contentData.files.answer.ext=='word'"-->
-<!--                             @click="startDownload('a_file')"-->
-<!--                             block color="primary"-->
-<!--                             class="mb-2"-->
-<!--                      >-->
-<!--                        Answer Word file | {{contentData.files.word.price>0 ? '$'+contentData.files.word.price : 'Free'}}-->
-<!--                      </v-btn>-->
-<!--                    </div>-->
+                  <v-col cols="12" class="pb-0">
+                    <div v-if="contentData.files.ext=='pptx'">
+                      <v-btn @click="startDownload('pptx')"
+                             block dark color="#bf360c" class="mb-2">
+                        Powerpoint file |
+                        {{ contentData.files.price > 0 ? '$' + contentData.files.price : 'Free' }}
+                      </v-btn>
+                    </div>
 
                   </v-col>
                 </v-row>
@@ -270,40 +254,18 @@
     </section>
 
 
-
     <!--Mobile order section-->
     <v-card class="order-btn-holder d-block d-md-none">
       <v-card-text class="pb-0">
         <v-row class="px-10 text-center">
           <v-col cols="12" class="pb-1 pt-0">
-<!--            <div v-if="contentData.files.word.exist==true">-->
-<!--              <v-btn @click="startDownload('q_word')"-->
-<!--                     block color="primary" class="mb-2">-->
-<!--                Question Word file | {{contentData.files.word.price>0 ? '$'+contentData.files.word.price : 'Free'}}-->
-<!--              </v-btn>-->
-<!--            </div>-->
-<!--            <div v-if="contentData.files.pdf.exist==true">-->
-<!--              <v-btn @click="startDownload('q_pdf')"-->
-<!--                     class="mb-2"-->
-<!--                     block color="error">-->
-<!--                Question PDF file | {{contentData.files.word.price>0 ? '$'+contentData.files.word.price : 'Free'}}-->
-<!--              </v-btn>-->
-<!--            </div>-->
-<!--            <div v-if="contentData.files.answer.exist==true">-->
-<!--              <v-btn v-show="contentData.files.answer.ext=='pdf'"-->
-<!--                     class="mb-2"-->
-<!--                     @click="startDownload('a_file')"-->
-<!--                     block color="error">-->
-<!--                Answer PDF file | {{contentData.files.word.price>0 ? '$'+contentData.files.word.price : 'Free'}}-->
-<!--              </v-btn>-->
-<!--              <v-btn v-show="contentData.files.answer.ext=='word'"-->
-<!--                     @click="startDownload('a_file')"-->
-<!--                     block color="primary"-->
-<!--                     class="mb-2"-->
-<!--              >-->
-<!--                Answer Word file | {{contentData.files.word.price>0 ? '$'+contentData.files.word.price : 'Free'}}-->
-<!--              </v-btn>-->
-<!--            </div>-->
+            <div v-if="contentData.files.ext=='pptx'">
+              <v-btn @click="startDownload('pptx')"
+                     block color="#bf360c" dark class="mb-2">
+                Powerpoint file |
+                {{ contentData.files.price > 0 ? '$' + contentData.files.price : 'Free' }}
+              </v-btn>
+            </div>
           </v-col>
 
           <v-col cols="12">
@@ -311,13 +273,13 @@
               <p v-if="!$auth.loggedIn">
                 <span class="mdi mdi-bell icon"></span>
                 <span @click="openAuthDialog('login')" class="login blue--text">Login</span>
-                <span  @click="openAuthDialog('register')" class="register blue--text">
+                <span @click="openAuthDialog('register')" class="register blue--text">
                     (register)
                     </span>
                 <span>to download and charge.</span>
               </p>
               <span v-else>
-                Your wallet charge is ${{$auth.user.credit}}
+                Your wallet charge is ${{ $auth.user.credit }}
                 <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/credit?">(Charge wallet)</nuxt-link>
               </span>
             </div>
@@ -331,107 +293,105 @@
 
 
     <!--  End: detail  -->
-
-
     <v-container>
       <v-row>
         <v-col cols="12" md="6">
           <!--  Start: Course Card  -->
-<!--          <section>-->
-<!--            <div class="d-flex  align-center course-card box">-->
-<!--              <div class="right">-->
-<!--                <v-row>-->
-<!--                  <v-col cols="2">-->
-<!--                    <nuxt-link to="">-->
-<!--                      <img height="98" width="98" :src="require(`~/assets/images/teacher1.png`)" alt=""/>-->
-<!--                    </nuxt-link>-->
-<!--                  </v-col>-->
-<!--                  <v-col cols="10">-->
-<!--                    <div class="description ml-4">-->
-<!--                      <div>-->
-<!--                        <nuxt-link to="">-->
-<!--                          <h2 class="course-title">PowerPoint of the complete educational course, date (3) of the 12th-->
-<!--                            grade of the second secondary-theoretical period</h2>-->
-<!--                        </nuxt-link>-->
-<!--                      </div>-->
-<!--                      <v-row>-->
-<!--                        <v-col cols="10">-->
-<!--                          <div>-->
-<!--                            <nuxt-link to="" class="teacher">-->
-<!--                              <i class="fa-solid fa-user icon"></i>-->
-<!--                              <span>Lecturer: Shamsi Shabani</span>-->
-<!--                            </nuxt-link>-->
-<!--                          </div>-->
-<!--                          <div>-->
-<!--                            <p class="duration">-->
-<!--                              <i class="fa-solid fa-clock icon"></i>-->
-<!--                              <span>Course duration: 942 slides (13 files)</span>-->
-<!--                            </p>-->
-<!--                          </div>-->
-<!--                        </v-col>-->
-<!--                        <v-col cols="2">-->
-<!--                          <nuxt-link to="" class="teal&#45;&#45;text">-->
-<!--                            <strong>-->
-<!--                              View-->
-<!--                            </strong>-->
-<!--                          </nuxt-link>-->
-<!--                        </v-col>-->
-<!--                      </v-row>-->
-<!--                    </div>-->
-<!--                  </v-col>-->
-<!--                </v-row>-->
-<!--              </div>-->
+          <!--          <section>-->
+          <!--            <div class="d-flex  align-center course-card box">-->
+          <!--              <div class="right">-->
+          <!--                <v-row>-->
+          <!--                  <v-col cols="2">-->
+          <!--                    <nuxt-link to="">-->
+          <!--                      <img height="98" width="98" :src="require(`~/assets/images/teacher1.png`)" alt=""/>-->
+          <!--                    </nuxt-link>-->
+          <!--                  </v-col>-->
+          <!--                  <v-col cols="10">-->
+          <!--                    <div class="description ml-4">-->
+          <!--                      <div>-->
+          <!--                        <nuxt-link to="">-->
+          <!--                          <h2 class="course-title">PowerPoint of the complete educational course, date (3) of the 12th-->
+          <!--                            grade of the second secondary-theoretical period</h2>-->
+          <!--                        </nuxt-link>-->
+          <!--                      </div>-->
+          <!--                      <v-row>-->
+          <!--                        <v-col cols="10">-->
+          <!--                          <div>-->
+          <!--                            <nuxt-link to="" class="teacher">-->
+          <!--                              <i class="fa-solid fa-user icon"></i>-->
+          <!--                              <span>Lecturer: Shamsi Shabani</span>-->
+          <!--                            </nuxt-link>-->
+          <!--                          </div>-->
+          <!--                          <div>-->
+          <!--                            <p class="duration">-->
+          <!--                              <i class="fa-solid fa-clock icon"></i>-->
+          <!--                              <span>Course duration: 942 slides (13 files)</span>-->
+          <!--                            </p>-->
+          <!--                          </div>-->
+          <!--                        </v-col>-->
+          <!--                        <v-col cols="2">-->
+          <!--                          <nuxt-link to="" class="teal&#45;&#45;text">-->
+          <!--                            <strong>-->
+          <!--                              View-->
+          <!--                            </strong>-->
+          <!--                          </nuxt-link>-->
+          <!--                        </v-col>-->
+          <!--                      </v-row>-->
+          <!--                    </div>-->
+          <!--                  </v-col>-->
+          <!--                </v-row>-->
+          <!--              </div>-->
 
-<!--            </div>-->
-<!--          </section>-->
+          <!--            </div>-->
+          <!--          </section>-->
           <!--  End: Course Card  -->
         </v-col>
 
 
         <v-col cols="12" md="6">
           <!--  Start:  Azmoon test album card   -->
-<!--          <section>-->
-<!--            <div class="d-flex align-center album-card box">-->
-<!--              <div class="right">-->
-<!--                <v-row>-->
-<!--                  <v-col cols="2">-->
-<!--                    <nuxt-link to="">-->
-<!--                      <img :src="require(`~/assets/images/poster1.jpg`)" alt="" class="poster-img"/>-->
-<!--                    </nuxt-link>-->
-<!--                  </v-col>-->
-<!--                  <v-col cols="10">-->
-<!--                    <div class="description ml-2">-->
-<!--                      <nuxt-link to="">-->
-<!--                        <h2 class="course-title">Online Exam test bank album, date (3) twelfth of the second term of-->
-<!--                          high school-theoretical</h2>-->
-<!--                      </nuxt-link>-->
+          <!--          <section>-->
+          <!--            <div class="d-flex align-center album-card box">-->
+          <!--              <div class="right">-->
+          <!--                <v-row>-->
+          <!--                  <v-col cols="2">-->
+          <!--                    <nuxt-link to="">-->
+          <!--                      <img :src="require(`~/assets/images/poster1.jpg`)" alt="" class="poster-img"/>-->
+          <!--                    </nuxt-link>-->
+          <!--                  </v-col>-->
+          <!--                  <v-col cols="10">-->
+          <!--                    <div class="description ml-2">-->
+          <!--                      <nuxt-link to="">-->
+          <!--                        <h2 class="course-title">Online Exam test bank album, date (3) twelfth of the second term of-->
+          <!--                          high school-theoretical</h2>-->
+          <!--                      </nuxt-link>-->
 
-<!--                      <v-row>-->
-<!--                        <v-col cols="10">-->
-<!--                          <div class="num">-->
-<!--                            <i class="fa-solid fa-list-ol icon"></i>-->
-<!--                            <span>Number of tests: 1399</span>-->
-<!--                          </div>-->
-<!--                          <div class="level">-->
-<!--                            <i class="fa-solid fa-superscript icon"></i>-->
-<!--                            <span>Difficulty: Easy</span>-->
-<!--                          </div>-->
-<!--                        </v-col>-->
-<!--                        <v-col cols="2">-->
-<!--                          <nuxt-link to="" class="teal&#45;&#45;text">-->
-<!--                            <strong>-->
-<!--                              View-->
-<!--                            </strong>-->
-<!--                          </nuxt-link>-->
-<!--                        </v-col>-->
-<!--                      </v-row>-->
-<!--                    </div>-->
-<!--                  </v-col>-->
-<!--                </v-row>-->
-<!--              </div>-->
+          <!--                      <v-row>-->
+          <!--                        <v-col cols="10">-->
+          <!--                          <div class="num">-->
+          <!--                            <i class="fa-solid fa-list-ol icon"></i>-->
+          <!--                            <span>Number of tests: 1399</span>-->
+          <!--                          </div>-->
+          <!--                          <div class="level">-->
+          <!--                            <i class="fa-solid fa-superscript icon"></i>-->
+          <!--                            <span>Difficulty: Easy</span>-->
+          <!--                          </div>-->
+          <!--                        </v-col>-->
+          <!--                        <v-col cols="2">-->
+          <!--                          <nuxt-link to="" class="teal&#45;&#45;text">-->
+          <!--                            <strong>-->
+          <!--                              View-->
+          <!--                            </strong>-->
+          <!--                          </nuxt-link>-->
+          <!--                        </v-col>-->
+          <!--                      </v-row>-->
+          <!--                    </div>-->
+          <!--                  </v-col>-->
+          <!--                </v-row>-->
+          <!--              </div>-->
 
-<!--            </div>-->
-<!--          </section>-->
+          <!--            </div>-->
+          <!--          </section>-->
           <!--  End:  Azmoon test album card   -->
         </v-col>
       </v-row>
@@ -439,24 +399,24 @@
 
 
     <!-- Start : Sample Test -->
-<!--    <related-content/>-->
+    <!--    <related-content/>-->
     <!-- End : Sample test -->
     <!-- Start: Feed -->
     <section class="feed">
-<!--      <v-container class="pa-4 pa-md-12 pt-10">-->
-<!--        <v-row>-->
-<!--          <v-col cols="12" md="6">-->
-<!--            <latest-training-content/>-->
-<!--          </v-col>-->
+      <!--      <v-container class="pa-4 pa-md-12 pt-10">-->
+      <!--        <v-row>-->
+      <!--          <v-col cols="12" md="6">-->
+      <!--            <latest-training-content/>-->
+      <!--          </v-col>-->
 
-<!--          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column justify-space-between">-->
-<!--            <related-qa/>-->
+      <!--          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column justify-space-between">-->
+      <!--            <related-qa/>-->
 
-<!--            <related-online-exam/>-->
-<!--          </v-col>-->
+      <!--            <related-online-exam/>-->
+      <!--          </v-col>-->
 
-<!--        </v-row>-->
-<!--      </v-container>-->
+      <!--        </v-row>-->
+      <!--      </v-container>-->
     </section>
     <!-- End: Feed -->
 
@@ -494,7 +454,7 @@ export default {
     var contentData = [];
 
     //Check data exist
-    if (content.status === 1){
+    if (content.status === 1) {
       contentData = content.data;
     }
 
@@ -502,18 +462,18 @@ export default {
   },
   mounted() {
     //Init gallery image
-    if (this.contentData){
-      this.$refs.preview_gallery.images=this.contentData.previewData.preview;
-      this.$refs.preview_gallery.carouselVal=0;
+    if (this.contentData) {
+      this.$refs.preview_gallery.images = this.contentData.previewData.preview;
+      this.$refs.preview_gallery.carouselVal = 0;
 
 
       //Update help link data
-      this.$refs.preview_gallery.help_link_data={
-        state:this.contentData.state,
-        section:this.contentData.section,
-        base:this.contentData.base,
-        course:this.contentData.course,
-        lesson:this.contentData.lesson
+      this.$refs.preview_gallery.help_link_data = {
+        state: this.contentData.state,
+        section: this.contentData.section,
+        base: this.contentData.base,
+        course: this.contentData.course,
+        lesson: this.contentData.lesson
       }
     }
 
@@ -521,7 +481,8 @@ export default {
   },
 
   data: () => ({
-    sell_btn:true,
+    description_tab: null,
+    sell_btn: true,
     rating: 4.5,
     contentData: [],
     breads: [
@@ -689,15 +650,15 @@ export default {
     ],
 
     copy_btn: 'Copy',
-    download_loading:false,
+    download_loading: false,
   }),
-  methods:{
-    initBreadCrumb(){
+  methods: {
+    initBreadCrumb() {
       this.breads.push(
         {
           text: this.contentData.section_title,
           disabled: false,
-          href: `/search?type=test&section=${this.contentData.section}`,
+          href: `/search?type=learnfiles&section=${this.contentData.section}`,
         },
         {
           text: this.contentData.base_title,
@@ -711,8 +672,8 @@ export default {
         },
       );
     },
-    openAuthDialog(val){
-      this.$router.push({query:{auth_form:val}});
+    openAuthDialog(val) {
+      this.$router.push({query: {auth_form: val}});
     },
 
 
@@ -731,33 +692,29 @@ export default {
     },
 
     //Download file
-    startDownload(type){
-      if (this.$auth.loggedIn){
-        this.download_loading=true;
-        let apiUrl='';
-        if (type==='q_word')
-          apiUrl=`/api/v1/tests/download/${this.$route.params.id}/word`
-        if (type==='q_pdf')
-          apiUrl=`/api/v1/tests/download/${this.$route.params.id}/pdf`
-        if (type==='a_file')
-          apiUrl=`/api/v1/tests/download/${this.$route.params.id}/answer`
+    startDownload(type) {
+      if (this.$auth.loggedIn) {
+        this.download_loading = true;
+        let apiUrl = '';
+        if (type === 'pptx')
+          apiUrl = `/api/v1/files/download/${this.$route.params.id}`
+
         this.$axios.$get(apiUrl)
-          .then(response=>{
+          .then(response => {
             var FileSaver = require('file-saver');
-            FileSaver.saveAs(response.data.url,response.data.name);
-          }).catch(err=>{
-          if (err.response.status==400){
-            if (err.response.data.status==0 && err.response.data.error=="creditNotEnough"){
+            FileSaver.saveAs(response.data.url, response.data.name);
+          }).catch(err => {
+          if (err.response.status == 400) {
+            if (err.response.data.status == 0 && err.response.data.error == "creditNotEnough") {
               this.$toast.info("No enough credit");
             }
-          }else if (err.response.status==403){
-            this.$router.push({query:{auth_form:'login'}});
+          } else if (err.response.status == 403) {
+            this.$router.push({query: {auth_form: 'login'}});
           }
-          console.log(err);
-        }).finally(()=>{
-          this.download_loading=false;
+        }).finally(() => {
+          this.download_loading = false;
         })
-      }else{
+      } else {
         this.openAuthDialog('login');
       }
     }
@@ -780,26 +737,43 @@ export default {
 
 .order-btn-holder {
   /*position: -webkit-sticky!important;*/
-  position: fixed!important;
-  bottom: 0!important;
-  z-index: 2!important;
-  border-top:0.1rem solid #e1e2e3;
+  position: fixed !important;
+  bottom: 0 !important;
+  z-index: 2 !important;
+  border-top: 0.1rem solid #e1e2e3;
 }
 
-.order-btn-holder .v-btn{
+.order-btn-holder .v-btn {
   width: 40% !important;
 }
 
-.order-btn-holder span{
+.order-btn-holder span {
   font-size: 1.3rem;
 }
 
- p{
-  font-size: 1.3rem!important;
+p {
+  font-size: 1.3rem !important;
 }
 
-.v-tab{
-  font-size: 1rem!important;
-  color: teal!important;
+.description-holder .v-tab {
+  font-size: 1rem !important;
 }
+
+.description-holder .description-tabs {
+  background: #F5F5F5 !important;
+  padding: 0.8rem !important;
+  border-radius: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.description-holder .description-tabs .theme--light.v-tabs-items {
+  background: #F5F5F5 !important;
+  padding: 1.5rem;
+}
+
+.description-holder .v-tabs-bar__content {
+  background: #F5F5F5 !important;
+}
+
+
 </style>

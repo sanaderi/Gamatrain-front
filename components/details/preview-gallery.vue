@@ -56,6 +56,7 @@
               </v-carousel>
               <div class="thumbnails" v-if="images.length>1">
                 <v-slide-group
+                  center-active
                   class="pa-4"
                   active-class="success"
                 >
