@@ -70,7 +70,6 @@
             </div>
           </v-col>
           <v-col lg="9" md="9" sm="12" class="search-contents px-0">
-            <div class="search-content">
               <v-breadcrumbs :items="breadcrumbs" class="search-breadcrumb d-none d-md-block">
                 <template v-slot:divider>
                   <v-icon>mdi-chevron-right</v-icon>
@@ -86,12 +85,10 @@
                 <Paper v-if="$route.query.type==='test'" :items="items"/>
                 <Multimedia v-else-if="$route.query.type==='learnfiles'" :items="items"/>
                 <QuestionAnswer v-else-if="$route.query.type==='question'" :items="items"/>
-                <OnlineExam v-else-if="$route.query.type==='azmoon'" :items="items"/>
-                <Tutorials v-else-if="$route.query.type==='dars'" :items="items"/>
-                <Teachers v-else-if="$route.query.type==='tutor'" :items="items"/>
+                <Exam v-else-if="$route.query.type==='azmoon'" :items="items"/>
+                <Tutorial v-else-if="$route.query.type==='dars'" :items="items"/>
+                <Tutor v-else-if="$route.query.type==='tutor'" :items="items"/>
               </div>
-            </div>
-
           </v-col>
         </v-row>
         <v-row v-show="page_loading">
@@ -117,12 +114,12 @@
 import Tabs from "@/components/common/tabs.vue";
 import searchFilter from "@/components/search/filter";
 import FilterModal from "@/components/common/filter-modal";
-import OnlineExam from "@/pages/search/type/online-exam";
-import QuestionAnswer from "@/pages/search/type/q-a";
-import Multimedia from "@/pages/search/type/multimedia.vue";
-import Paper from "@/pages/search/type/paper";
-import Tutorials from "@/pages/search/type/tutorials";
-import Teachers from "@/pages/search/type/teachers";
+import Exam from "@/components/search/type/exam.vue";
+import QuestionAnswer from "~/components/search/type/q-a.vue";
+import Multimedia from "~/components/search/type/multimedia.vue";
+import Paper from "~/components/search/type/paper.vue";
+import Tutorial from "@/components/search/type/tutorial.vue";
+import Tutor from "~/components/search/type/tutor.vue";
 import searchBox from "@/components/common/search-box";
 
 export default {
@@ -131,15 +128,15 @@ export default {
   layout: 'search_layout',
 
   components: {
-    Teachers,
+    Tutor,
     FilterModal,
     Tabs,
     searchFilter,
-    OnlineExam,
+    Exam,
     QuestionAnswer,
     Multimedia,
     Paper,
-    Tutorials,
+    Tutorial,
     searchBox
   },
 

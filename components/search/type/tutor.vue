@@ -202,12 +202,13 @@
 
 </template>
 <script>
-import category from "@/components/common/category.vue";
-import Pagination from "@/components/common/pagination.vue";
-import FilterModal from "@/components/common/filter-modal.vue";
-import Tabs from "@/components/common/tabs.vue";
+import category from "~/components/common/category.vue";
+import Pagination from "~/components/common/pagination.vue";
+import FilterModal from "~/components/common/filter-modal.vue";
+import Tabs from "~/components/common/tabs.vue";
 
 export default {
+  name:'tutor-list',
   components: {category, Pagination, FilterModal, Tabs},
   data() {
     return {

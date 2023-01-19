@@ -3,7 +3,7 @@
     <div class="online-exam-title d-flex align-center mb-5">
       <span :class="'icon icong-' + testCard.icon" class="online-exam-icon d-flex align-center"></span>
       <div class="online-exam-title-texts d-flex flex-column ml-3">
-        <div class="online-exam-title">Related Online Exam</div>
+        <div class="online-exam-title">Related Exam</div>
       </div>
     </div>
     <div class="online-exam-texts d-flex" v-for="(item, test) in testTexts " :key="test.value">

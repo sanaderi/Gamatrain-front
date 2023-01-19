@@ -397,7 +397,7 @@
 <!--                  <v-col cols="10">-->
 <!--                    <div class="description ml-2">-->
 <!--                      <nuxt-link to="">-->
-<!--                        <h2 class="course-title">Online Exam test bank album, date (3) twelfth of the second term of-->
+<!--                        <h2 class="course-title">Exam test bank album, date (3) twelfth of the second term of-->
 <!--                          high school-theoretical</h2>-->
 <!--                      </nuxt-link>-->
 
@@ -482,6 +482,11 @@ export default {
     Breadcrumb,
     LastViews,
     RelatedCardBox
+  },
+  head(){
+    return{
+      title: this.contentData.title
+    }
   },
   async asyncData({params, $axios}) {
     // This could also be an action dispatch

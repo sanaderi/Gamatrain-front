@@ -30,7 +30,7 @@
         <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-online" :content="content_statistics.azmoon" color="#5600E8">
           <div class="nav-link exam-icon">
             <span class="icon icong-azmoon mr-1"></span>
-            Online Exam
+            Exam
           </div>
         </v-badge>
       </v-tab>

@@ -99,12 +99,12 @@ export default {
       active_img: 1,
 
       items: [
-        { class: "exam", text: "Online Exam", icon: "azmoon",link:"/search?type=azmoon" },
+        { class: "exam", text: "Exam", icon: "azmoon",link:"/search?type=azmoon" },
         { class: "test", text: "Exam Paper", icon: "test",link:"/search?type=test" },
         { class: "content", text: "Presentation", icon: "learnfiles" ,link:"/search?type=learnfiles" },
         { class: "faq", text: "Q & A", icon: "qa",link:"/search?type=question" },
         { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/search?type=dars" },
-        { class: "school", text: "School finder", icon: "school" ,link:"/search?type=school" },
+        { class: "school", text: "School", icon: "school" ,link:"/search?type=school" },
         { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor" },
       ],
     }

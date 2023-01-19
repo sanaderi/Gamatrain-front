@@ -983,7 +983,7 @@ export default {
       else if (active_tab === "question")
         breadcrumb_item.text = 'Q & A';
       else if (active_tab === "azmoon")
-        breadcrumb_item.text = 'Online Exam';
+        breadcrumb_item.text = 'Exam';
       else if (active_tab === "dars")
         breadcrumb_item.text = 'Tutorial';
       else if (active_tab === "tutor")

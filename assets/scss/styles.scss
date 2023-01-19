@@ -2016,7 +2016,7 @@ body {
     border-radius: 8px;
 
     p {
-      font-size: 1rem!important;
+      font-size: 1rem !important;
     }
 
     a {
@@ -2050,8 +2050,8 @@ body {
 
   .book-no-img {
     width: 12.5rem;
-    height: 14rem!important;
-    min-height: 14rem!important;
+    height: 14rem !important;
+    min-height: 14rem !important;
     padding: 5px;
     margin: auto;
     text-align: center;
@@ -2059,7 +2059,7 @@ body {
     border-radius: 8px;
 
     p {
-      font-size: 1.4rem!important;
+      font-size: 1.4rem !important;
     }
 
     a {
@@ -2753,16 +2753,14 @@ body {
   border-top: 1px solid $hashtag;
 
   .search-contents {
-    .search-content {
-      .search-breadcrumb {
-        color: $gray4;
-        background-color: $gray12;
-        border-radius: 1.2rem;
-      }
+    .search-breadcrumb {
+      color: $gray4;
+      background-color: $gray12;
+      border-radius: 1.2rem;
+    }
 
-      .v-card:not(.v-sheet--outlined) {
-        box-shadow: none;
-      }
+    .v-card:not(.v-sheet--outlined) {
+      box-shadow: none;
     }
 
     .scroll-header {
@@ -2800,78 +2798,45 @@ body {
       }
     }
 
-    .tutorial-items {
-      margin: 3rem 0;
 
-      .tutorial-item {
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 1.2rem;
 
-        .item-img {
-          .item-image {
-            width: 100%;
-            border-radius: 1rem;
-          }
+
+    // Start:  Content
+    .content-items {
+
+      .content-item {
+        box-shadow: 0px 2px 10px rgb(0 0 0 / 10%) !important;
+        border-bottom: 0.1rem solid #e1e2e3;
+        border-right: 0.1rem solid #e1e2e3;
+        border-radius: 20rem;
+        margin-bottom: 0.8rem !important;
+
+        .item-image {
+          width: inherit;
+          height: 100%;
+          max-height: 16.4rem;
+          max-width: 12.2rem;
+          min-width: 7.8rem;
+          border-radius: 1rem;
+          margin-left: auto;
+          margin-right: auto;
         }
 
-
-        .tutorial-content {
-
-
-          min-height: 100%;
-
-          .tutorial-title {
-            font-size: 24px;
-            color: $gray45;
+        .item-content-footer {
+          p {
+            font-size: 1.4rem !important;
           }
 
-          .item-content-subtitle {
-            color: $gray4;
-            width: 90%;
-          }
-
-          .card-footer {
-            color: $gray8;
-            display: flex;
-            justify-content: space-between;
-
-            .item-content-user {
-              display: flex;
-              align-items: center;
-            }
-
-            .item-content-file-answers {
-              display: none;
-            }
-
-            .item-content-file-type {
-              display: none;
-            }
-
-            .item-content-test-type {
-              display: none;
-            }
-
-            .item-content-view {
-              display: none;
-            }
-
-            .item-content-last-update {
-              display: flex;
-              align-items: center;
-            }
-
-            svg {
-              display: none;
-            }
-
-            .item-content-footer-icon {
-              margin: 0 1.5rem;
+          @media screen and (max-width: 600px) {
+            p {
+              font-size: 1rem !important;
             }
           }
+
         }
       }
     }
+    // End: Content
 
   }
 
@@ -2932,686 +2897,9 @@ body {
 //End search page
 
 
-// Start:  Paper
-.paper-content {
-  .paper-items {
 
-    .paper-item {
-      box-shadow: 0px 2px 10px rgb(0 0 0 / 10%) !important;
-      border-bottom: 0.1rem solid #e1e2e3;
-      border-right: 0.1rem solid #e1e2e3;
-      border-radius: 20rem;
-      margin-bottom: 0.8rem !important;
 
-      .item-image {
-        width: inherit;
-        height: 100%;
-        max-height: 16.4rem;
-        max-width: 12.2rem;
-        min-width: 7.8rem;
-        border-radius: 1rem;
-        margin-left: auto;
-        margin-right: auto;
-      }
 
-      .item-content-footer {
-        p {
-          font-size: 1.4rem !important;
-        }
-
-        @media screen and (max-width: 600px) {
-          p {
-            font-size: 1rem !important;
-          }
-        }
-
-      }
-    }
-  }
-
-
-}
-// End: Paper
-
-// Start: Multimedia
-.multimedia-content {
-  .multimedia-items {
-
-    .multimedia-item {
-      box-shadow: 0px 2px 10px rgb(0 0 0 / 10%) !important;
-      border-bottom: 0.1rem solid #e1e2e3;
-      border-right: 0.1rem solid #e1e2e3;
-      border-radius: 20rem;
-      margin-bottom: 0.8rem !important;
-
-      .item-image {
-        width: inherit;
-        height: 100%;
-        max-height: 16.4rem;
-        max-width: 12.2rem;
-        min-width: 7.8rem;
-        border-radius: 1rem;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .item-content-footer {
-        p {
-          font-size: 1.4rem !important;
-        }
-
-        @media screen and (max-width: 600px) {
-          p {
-            font-size: 1rem !important;
-          }
-        }
-
-      }
-    }
-  }
-
-
-}
-// End : Multimedia
-
-
-
-// Start : Q & A
-.q-a {
-  padding: 3rem;
-  border-top: 1px solid $hashtag;
-
-  .q-a-contents {
-    .q-a-content {
-      .q-a-breadcrumb {
-        color: $gray4;
-        background-color: $gray12;
-        border-radius: 1.2rem;
-      }
-
-      .v-card:not(.v-sheet--outlined) {
-        box-shadow: none;
-      }
-    }
-
-    .scroll-header {
-      position: fixed;
-      z-index: 5;
-      width: 57%;
-      top: 0;
-    }
-
-    .tab-header {
-      margin: 1rem 0;
-      border-radius: 1.2rem;
-
-      .v-tabs {
-        .v-tabs-bar {
-          background: $gray12;
-          padding: 1rem 2rem;
-          min-height: 11rem;
-
-          .v-slide-group__wrapper {
-            .v-slide-group__content {
-              align-items: center;
-
-              .v-badge--bordered .v-badge__badge::after {
-                border-style: none;
-              }
-
-              .badge-q {
-                .v-badge__wrapper {
-                  .v-badge__badge {
-                    inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
-                  }
-                }
-
-
-              }
-
-              i {
-                color: $gray4;
-              }
-
-              a {
-                margin: auto;
-                color: $gray4;
-              }
-            }
-          }
-        }
-      }
-    }
-
-
-    .q-a-items {
-      margin: 3rem 0;
-
-      .q-a-item {
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 1.2rem;
-
-        .item-img {
-          .item-image {
-            width: 100%;
-            border-radius: 1rem;
-          }
-        }
-
-
-        .q-a-content {
-          min-height: 100%;
-
-          .q-a-title {
-            font-size: 24px;
-            color: $gray45;
-          }
-
-          .item-content-subtitle {
-            color: $gray4;
-            width: 90%;
-          }
-
-          .card-footer {
-            display: flex;
-            justify-content: space-between;
-            color: $gray8;
-
-            .item-content-file-answers {
-              display: flex;
-              align-items: center;
-              margin: auto;
-            }
-
-            .item-content-file-type {
-              display: none;
-            }
-
-            .item-content-test-type {
-              display: none;
-            }
-
-            .item-content-view {
-              display: none;
-            }
-
-            .item-content-last-update {
-              display: flex;
-              align-items: center;
-            }
-
-            svg {
-              display: none;
-            }
-
-            .item-content-footer-icon {
-              margin: 0 1.5rem;
-            }
-          }
-        }
-      }
-    }
-
-    .q-a-pagination {
-      .v-pagination__item {
-        font-size: 1.5rem;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-      }
-
-      .v-pagination__item--active {
-        background-color: $green !important;
-        border-color: $green !important;
-      }
-    }
-  }
-
-}
-
-// End: Q & A
-
-
-// Start :  Online-Exam
-.online-exam {
-  border-top: 1px solid $hashtag;
-
-  .online-exam-contents {
-    .online-exam-content {
-      .online-exam-breadcrumb {
-        color: $gray4;
-        background-color: $gray12;
-        border-radius: 1.2rem;
-      }
-
-      .v-card:not(.v-sheet--outlined) {
-        box-shadow: none;
-      }
-    }
-
-    .scroll-header {
-      position: fixed;
-      z-index: 5;
-      width: 57%;
-      top: 0;
-    }
-
-    .tab-header {
-      margin: 1rem 0;
-      border-radius: 1.2rem;
-
-      .v-tabs {
-        .v-tabs-bar {
-          background: $gray12;
-          padding: 1rem 2rem;
-          min-height: 11rem;
-
-          .v-slide-group__wrapper {
-            .v-slide-group__content {
-              align-items: center;
-
-              .v-badge--bordered .v-badge__badge::after {
-                border-style: none;
-              }
-
-              .badge-online {
-                .v-badge__wrapper {
-                  .v-badge__badge {
-                    inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
-                  }
-                }
-
-              }
-
-              i {
-                color: $gray4;
-              }
-
-              a {
-                margin: auto;
-                color: $gray4;
-              }
-            }
-          }
-        }
-      }
-    }
-
-
-    .book-carousel {
-      background-color: $green;
-      border-radius: 1rem;
-
-      .container {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      .book-carousel-sub {
-        min-height: 100%;
-        justify-content: center;
-
-        .book-carousel-title h4 {
-          font-size: 2.4rem;
-          color: $white;
-          font-weight: 700;
-        }
-
-        .book-carousel-title p {
-          font-size: 2.4rem;
-          color: $white;
-          font-weight: 700;
-        }
-
-        .book-carousel-q ::before {
-          content: url("../images/quote.png");
-          height: 1rem;
-          width: 1rem;
-          transform: rotate(30deg);
-          right: 1%;
-          top: -3%;
-          position: absolute;
-        }
-
-        .book-carousel-q {
-
-          width: 80%;
-          height: 35px;
-          background: #FFD12F;
-          position: relative;
-          border-radius: 15rem;
-          padding: 0.4rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          p {
-            font-size: 1.4rem;
-            color: $white;
-            color: $green;
-          }
-        }
-
-      }
-
-
-      .book-carousel-books {
-        background-color: $green14;
-        margin-right: 0 !important;
-        position: relative;
-        border-radius: 0 1rem 1rem 0;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px !important;
-
-        .slide-item:hover {
-          transform: translateY(-20px);
-        }
-
-        .slide-item {
-          height: 40rem;
-          transition: 0.3s;
-
-          .book-body {
-            background-color: $white;
-            border-radius: 1rem;
-
-            .book-body-image {
-              padding: 1rem;
-              width: 155px;
-              height: 190px;
-              border-radius: 2rem;
-            }
-
-            .book-title {
-              font-size: 2rem;
-              font-weight: 700;
-            }
-
-            .book-test {
-              font-size: 14px;
-              background-color: hwb(180 0% 45% / 0.1);
-              border-radius: 1rem;
-
-              .test-number {
-                font-size: 24px;
-                font-weight: 500;
-              }
-            }
-
-            .book-price {
-              font-size: 14px;
-              background-color: hwb(47 18% 0% / 0.1);
-              border-radius: 1rem;
-
-              .price-number {
-                font-size: 24px;
-                font-weight: 500;
-              }
-            }
-          }
-        }
-
-        .v-slide-group__prev {
-          width: 3rem;
-          height: 3rem;
-          position: absolute;
-          left: 9px;
-          top: 50%;
-          min-width: 0;
-          background-color: $white;
-          border-radius: 50%;
-          z-index: 6;
-          box-shadow: 0px 23px 29px rgba(0, 0, 0, 0.25);
-        }
-
-        .v-slide-group__next {
-          width: 3rem;
-          height: 3rem;
-          position: absolute;
-          right: 9px;
-          top: 50%;
-          min-width: 0;
-          background-color: $white;
-          border-radius: 50%;
-          z-index: 6;
-          box-shadow: 0px 23px 29px rgba(0, 0, 0, 0.25);
-        }
-
-
-      }
-    }
-
-    .online-exam-items {
-      margin: 3rem 0;
-
-      .online-exam-item {
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 1.2rem;
-
-        .item-image {
-          border-radius: 1rem;
-        }
-
-        .online-exam-item-content {
-          min-height: 100%;
-
-          .item-content-title {
-            font-size: 24px;
-            color: $gray45;
-          }
-
-          .item-content-title-icon {
-            align-items: flex-start;
-          }
-
-          .item-content-subtitle {
-            color: $gray4;
-            width: 60%;
-          }
-
-
-          .card-footer {
-            color: $gray8;
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-
-            .item-content-file-answers {
-              display: none;
-            }
-
-            .item-content-file-type {
-              display: none;
-            }
-
-            .item-content-view {
-              display: none;
-            }
-
-            .item-content-test-type {
-              display: flex;
-              align-items: center;
-            }
-
-            .item-content-last-update {
-              display: flex;
-              align-items: center;
-            }
-
-            svg {
-              display: none;
-            }
-
-            .item-content-footer-icon {
-              margin: 0 1.5rem;
-            }
-          }
-        }
-      }
-    }
-
-    .training-pagination {
-      .v-pagination__item {
-        font-size: 1.5rem;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-      }
-
-      .v-pagination__item--active {
-        background-color: $green !important;
-        border-color: $green !important;
-      }
-    }
-  }
-
-}
-
-// End : Online-Exam
-
-// Start : tutorial
-.tutorial {
-  padding: 3rem;
-  border-top: 1px solid $hashtag;
-
-  .tutorial-contents {
-    .tutorial-content {
-      .tutorial-breadcrumb {
-        color: $gray4;
-        background-color: $gray12;
-        border-radius: 1.2rem;
-      }
-
-      .v-card:not(.v-sheet--outlined) {
-        box-shadow: none;
-      }
-    }
-
-    .scroll-header {
-      position: fixed;
-      z-index: 5;
-      width: 57%;
-      top: 0;
-    }
-
-    .tab-header {
-      margin: 1rem 0;
-      border-radius: 1.2rem;
-
-      .v-tabs {
-        .v-tabs-bar {
-          background: $gray12;
-          padding: 1rem 2rem;
-          min-height: 11rem;
-
-          .v-slide-group__wrapper {
-            .v-slide-group__content {
-              align-items: center;
-
-              .v-badge--bordered .v-badge__badge::after {
-                border-style: none;
-              }
-
-              .badge-tutorial {
-                .v-badge__wrapper {
-                  .v-badge__badge {
-                    inset: auto auto calc(100% - 12px) calc(100% - 20px) !important;
-                  }
-                }
-
-              }
-
-              i {
-                color: $gray4;
-              }
-
-              a {
-                margin: auto;
-                color: $gray4;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    .tutorial-items {
-      margin: 3rem 0;
-
-      .tutorial-item {
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 1.2rem;
-
-        .item-img {
-          .item-image {
-            width: 100%;
-            border-radius: 1rem;
-          }
-        }
-
-
-        .tutorial-content {
-          min-height: 22rem!important;
-          @media screen and (max-width: 600px) {
-            min-height: 10rem!important;
-          }
-          .tutorial-title {
-            font-size: 24px;
-            color: $gray45;
-          }
-
-          .item-content-subtitle {
-            color: $gray4;
-            width: 90%;
-          }
-
-          .card-footer {
-            color: $gray8;
-            display: flex;
-            justify-content: space-between;
-
-            .item-content-user {
-              display: flex;
-              align-items: center;
-            }
-
-            .item-content-file-answers {
-              display: none;
-            }
-
-            .item-content-file-type {
-              display: none;
-            }
-
-            .item-content-test-type {
-              display: none;
-            }
-
-            .item-content-view {
-              display: none;
-            }
-
-            .item-content-last-update {
-              display: flex;
-              align-items: center;
-            }
-
-            svg {
-              display: none;
-            }
-
-            .item-content-footer-icon {
-              margin: 0 1.5rem;
-            }
-
-
-          }
-        }
-      }
-    }
-
-  }
-
-}
-
-// End: tutorial
 
 // Start : Teachers
 .teachers {

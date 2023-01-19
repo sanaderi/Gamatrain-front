@@ -297,7 +297,7 @@ export default {
         img2: "book.png",
         videoTitle: "Video of the complete educational course, the seventh mathematics of the first year of high school",
         bookTitle:
-          "Online Exam test bank album, Math 7th first period of high school",
+          "Exam test bank album, Math 7th first period of high school",
         testNumber: "2717",
         videoTeacher: "Arian Etemdi",
         durition: " 8 Hour (26 File)",

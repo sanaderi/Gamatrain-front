@@ -137,7 +137,7 @@
                         class="mr-4 icon icong-qa"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'Online Exam'"
+                        v-else-if="item.title === 'Exam'"
                         class="mr-4 icon icong-azmoon"
                       ></v-icon>
                       <span
@@ -291,7 +291,7 @@
                         class="ml-1 icon icong-qa"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'Online Exam'"
+                        v-else-if="item.title === 'Exam'"
                         class="ml-1 icon icong-azmoon"
                       ></v-icon>
                       <span
@@ -435,7 +435,7 @@
                         class="ml-1 icon icong-qa"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'Online Exam'"
+                        v-else-if="item.title === 'Exam'"
                         class="ml-1 icon icong-azmoon"
                       ></v-icon>
                       <span
@@ -657,7 +657,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -713,7 +713,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -769,7 +769,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -825,7 +825,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -882,7 +882,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -938,7 +938,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -994,7 +994,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -1050,7 +1050,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -1107,7 +1107,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -1163,7 +1163,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -1219,7 +1219,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -1275,7 +1275,7 @@ export default {
             stat: "68",
           },
           {
-            title: "Online Exam",
+            title: "Exam",
             stat: "22",
           },
         ],
@@ -1284,7 +1284,7 @@ export default {
     ],
     siteFeatureList: [
       {
-        title: "School finder",
+        title: "School",
         icon: "school",
         details: [
           "لیست مدارس کشور با قابلیت فیلتر و جستجو",
@@ -1330,7 +1330,7 @@ export default {
       {label: "Student", value: "1,500,000", icon: "fa-graduation-cap"},
       {label: "Exam Paper", value: "50,000", icon: "fa-graduation-cap"},
       {label: "پاورپوینت", value: "30,000", icon: "fa-graduation-cap"},
-      {label: "Online Exam", value: "5,000", icon: "fa-graduation-cap"},
+      {label: "Exam", value: "5,000", icon: "fa-graduation-cap"},
     ],
   }),
 

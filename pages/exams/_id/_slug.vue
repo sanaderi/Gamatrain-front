@@ -416,7 +416,7 @@
 <!--                  <v-col cols="10">-->
 <!--                    <div class="description ml-2">-->
 <!--                      <nuxt-link to="">-->
-<!--                        <h2 class="course-title">Online Exam test bank album, date (3) twelfth of the second term of-->
+<!--                        <h2 class="course-title">Exam test bank album, date (3) twelfth of the second term of-->
 <!--                          high school-theoretical</h2>-->
 <!--                      </nuxt-link>-->
 
@@ -501,6 +501,11 @@ export default {
     Breadcrumb,
     LastViews,
     RelatedCardBox
+  },
+  head(){
+    return{
+      title: this.contentData.title
+    }
   },
   async asyncData({params, $axios}) {
     // This could also be an action dispatch
@@ -785,6 +790,8 @@ export default {
   /*position: -webkit-sticky!important;*/
   position: fixed!important;
   bottom: 0!important;
+  right:0!important;
+  left: 0!important;
   z-index: 2!important;
   border-top:0.1rem solid #e1e2e3;
 }

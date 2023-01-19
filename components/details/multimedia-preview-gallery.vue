@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <section class="product-gallery rounded-lg  ">
+  <v-row>
+    <v-col cols="12" class="product-gallery rounded-lg  ">
       <div class="card-carousel">
         <v-row justify="center" >
           <!--Side section-->
-          <v-col cols="12" class="pr-0 pb-0 d-flex ">
+          <v-col cols="12" class=" pb-0 d-flex ">
             <v-btn icon
                    :small="$vuetify.breakpoint.xs"
               :to="`${item.link}&state=${help_link_data.state}&section=${help_link_data.section}&base=${help_link_data.base}&course=${help_link_data.course}
@@ -23,8 +23,8 @@
           <!--End side section-->
 
 
-          <v-col cols="12" class="pa-0 px-md-3" >
-            <div class="mx-md-0">
+          <v-col cols="12"  >
+            <div >
               <v-carousel
                 height="296"
                 show-arrows
@@ -56,14 +56,13 @@
 
                   </v-slide-item>
                 </v-slide-group>
-
               </div>
             </div>
           </v-col>
         </v-row>
       </div>
-    </section>
-  </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -84,12 +83,12 @@ export default {
       active_img: 1,
 
       items: [
-        { class: "exam", text: "Online Exam", icon: "azmoon",link:"/search?type=azmoon" },
+        { class: "exam", text: "Exam", icon: "azmoon",link:"/search?type=azmoon" },
         { class: "test", text: "Exam Paper", icon: "test",link:"/search?type=test" },
         { class: "content", text: "Presentation", icon: "learnfiles" ,link:"/search?type=learnfiles" },
         { class: "faq", text: "Q & A", icon: "qa",link:"/search?type=question" },
         { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/search?type=dars" },
-        { class: "school", text: "School finder", icon: "school" ,link:"/search?type=school" },
+        { class: "school", text: "School", icon: "school" ,link:"/search?type=school" },
         { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor" },
       ],
     }

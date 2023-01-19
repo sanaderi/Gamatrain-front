@@ -6,11 +6,11 @@
 
     <!--  Start: breadcrumb  -->
     <section>
-      <v-container class="py-0">
-        <div class=" mt-0 py-0 header-path">
+      <v-row class=" mt-0 py-0 header-path">
+        <v-col cols="12">
           <breadcrumb :breads="breads"/>
-        </div>
-      </v-container>
+        </v-col>
+      </v-row>
     </section>
     <!--  End: breadcrumb  -->
 
@@ -255,7 +255,7 @@
 
 
     <!--Mobile order section-->
-    <v-card class="order-btn-holder d-block d-md-none">
+    <v-card class="order-btn-holder d-block d-md-none " width="100%">
       <v-card-text class="pb-0">
         <v-row class="px-10 text-center">
           <v-col cols="12" class="pb-1 pt-0">
@@ -362,7 +362,7 @@
           <!--                  <v-col cols="10">-->
           <!--                    <div class="description ml-2">-->
           <!--                      <nuxt-link to="">-->
-          <!--                        <h2 class="course-title">Online Exam test bank album, date (3) twelfth of the second term of-->
+          <!--                        <h2 class="course-title">Exam test bank album, date (3) twelfth of the second term of-->
           <!--                          high school-theoretical</h2>-->
           <!--                      </nuxt-link>-->
 
@@ -447,6 +447,11 @@ export default {
     Breadcrumb,
     LastViews,
     RelatedCardBox
+  },
+  head(){
+    return{
+      title: this.contentData.title
+    }
   },
   async asyncData({params, $axios}) {
     // This could also be an action dispatch
