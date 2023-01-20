@@ -62,8 +62,6 @@
                     <v-chip class="ma-1">
                       {{ contentData.edu_year }}
                     </v-chip>
-
-
                   </div>
                 </div>
               </div>

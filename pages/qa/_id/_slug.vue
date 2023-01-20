@@ -6,7 +6,7 @@
 
     <!--  Start: breadcrumb  -->
     <section>
-      <v-container class="py-0">
+      <v-container class="py-0 mb-4">
         <div class=" mt-0 py-0 header-path">
           <breadcrumb :breads="breads"/>
         </div>
@@ -19,30 +19,194 @@
       <v-container class="py-0">
         <div class="detail mt-md-8">
           <v-row>
-            <v-col cols="8">
-              <v-row class="fill-height" >
-                <v-col cols="1" >
-                  <v-card   flat color="#F5F5F5"  min-height="200">
-
+            <v-col cols="12" md="9">
+              <v-row class="fill-height">
+                <!--Score action-->
+                <v-col cols="1" class="pr-0 d-none d-md-block">
+                  <v-card flat color="#F5F5F5" class="d-flex fill-height text-center" min-height="200">
+                    <v-row>
+                      <v-col cols="12">
+                        <v-btn icon x-large>
+                          <v-icon size="88">
+                            mdi-menu-up
+                          </v-icon>
+                        </v-btn>
+                        <p class="text-h4">
+                          5
+                        </p>
+                        <v-btn icon x-large>
+                          <v-icon size="88">
+                            mdi-menu-down
+                          </v-icon>
+                        </v-btn>
+                        <v-btn icon width="100%">
+                          <v-icon>
+                            mdi-bookmark
+                          </v-icon>
+                        </v-btn>
+                        <v-btn icon width="100%">
+                          <v-icon>
+                            mdi-alert-octagon-outline
+                          </v-icon>
+                        </v-btn>
+                        <v-btn icon width="100%">
+                          <v-icon>
+                            mdi-share-variant-outline
+                          </v-icon>
+                        </v-btn>
+                      </v-col>
+                      <v-col cols="12"  align-self="end">
+                        <v-btn icon class="mb-4"   width="100%">
+                          <v-icon>
+                            mdi-reply
+                          </v-icon>
+                        </v-btn>
+                      </v-col>
+                    </v-row>
                   </v-card>
                 </v-col>
-                <v-col cols="11">
+                <!--End score action-->
+
+                <v-col cols="12" md="11">
                   <v-card color="#F5F5F5" flat>
-                     <v-card-text>
-                       <h1 class="text-h5 font-weight-bold">
-                         {{contentData.title}}
-                       </h1>
+                    <v-card-text>
+                      <h1 class="text-h4 font-weight-bold mb-2">
+                        {{ contentData.title }}
+                      </h1>
 
-                       <p class="mt-2" v-html="contentData.question"/>
+                      <v-row>
+                        <v-col cols="9" >
+                          <div class="d-flex pb-0">
+                            <nuxt-link to="/user/edit-profile">
+                              <img width="47" height="47"
+                                   v-if="contentData.avatar" :src="contentData.avatar"/>
+                              <v-btn v-else width="47" height="47" class="d-flex" outlined fab x-large>
+                                <v-icon>
+                                  mdi-account-outline
+                                </v-icon>
+                              </v-btn>
+                            </nuxt-link>
+                            <div class="pa-3">
+                              <p class="text-h6 ">
+                                <strong v-if="contentData.first_name || contentData.last_name">
+                                  {{ contentData.first_name }} {{ contentData.last_name }}
+                                </strong>
+                                <strong v-else>
+                                  No name
+                                </strong>
+                              </p>
+                              <p class="text-h6">
+                               <span class="orange--text">
+                                 Unknown question('s)
+                               </span>
+                                |
+                                <span class="green--text">
+                                 {{ contentData.replies.num }} Answer('s)
+                               </span>
+                                |
+                                <span class="blue--text">
+                                 {{ contentData.score }} Score
+                               </span>
+                              </p>
+                            </div>
+                          </div>
+                        </v-col>
 
-                     </v-card-text>
+                        <v-col cols="3" class="text-right">
+                          <v-btn outlined color="success">
+                            <v-icon class="mr-1">
+                              mdi-message-reply-text
+                            </v-icon>
+                            Chat
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+
+                      <p class="mt-2 text-h5" v-html="contentData.question.replace(/\n/g, '<br />')"/>
+
+
+                      <div class="label-holder mt-10 mb-0">
+                        <v-chip link class="mr-1">
+                          <nuxt-link :to="`/search?type=learnfiles&section=${contentData.section}`">
+                            {{ contentData.section_title }}
+                          </nuxt-link>
+                        </v-chip>
+                        <v-chip link class="mr-1">
+                          <nuxt-link
+                            :to="`/search?type=learnfiles&section=${contentData.section}&base=${contentData.base}`">
+                            {{ contentData.base_title }}
+                          </nuxt-link>
+                        </v-chip>
+                        <v-chip link class="ma-1">
+                          <nuxt-link
+                            :to="`/search?type=learnfiles&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`">
+                            {{ contentData.lesson_title }}
+                          </nuxt-link>
+                        </v-chip>
+
+
+                      </div>
+
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-row>
+                        <v-col cols="4" md="6">
+                          <v-btn text plain class="simple-btn">
+                            <v-icon class="mr-1">
+                              mdi-comment-plus
+                            </v-icon>
+                            Add comment
+                          </v-btn>
+                        </v-col>
+                        <v-col cols="8" md="6" class="text-right d-flex">
+                          <v-spacer/>
+                          <v-btn text class="simple-btn">
+                            <v-icon class="mr-1">
+                              mdi-calendar-month
+                            </v-icon>
+                            {{$moment(contentData.up_date).fromNow()}}
+                          </v-btn>
+                          <v-btn text class="simple-btn">
+                            <v-icon class="mr-1">
+                              mdi-clock-time-five-outline
+                            </v-icon>
+                            {{$moment(contentData.up_date).format('HH:mm')}}
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-card-actions>
                   </v-card>
                 </v-col>
               </v-row>
-            </v-col>
-            <v-col cols="4">
 
+              <!--Answers section-->
+<!--              <v-row>-->
+<!--                <v-col cols="3">-->
+<!--                  Two answers-->
+<!--                </v-col>-->
+<!--                <v-col cols="9">-->
+<!--                  <v-divider/>-->
+<!--                </v-col>-->
+<!--              </v-row>-->
+
+              <!--End answers section-->
             </v-col>
+
+            <!--Similar questions-->
+            <v-col cols="3" class="d-none d-md-block">
+               <v-card color="#F5F5F5" class="fill-height" flat>
+                  <v-card-text>
+                    <h2 class="text-h4 text-center">
+                      Similar questions
+                    </h2>
+                    <v-divider style="width: 80%" class="my-3 mx-auto"/>
+                    <p class="text-center">
+                      Opps! not found
+                    </p>
+                  </v-card-text>
+               </v-card>
+            </v-col>
+            <!--End similar questions-->
           </v-row>
         </div>
       </v-container>
@@ -73,9 +237,9 @@ export default {
     Breadcrumb,
     LastViews,
   },
-  head(){
-    return{
-      title:this.contentData.title
+  head() {
+    return {
+      title: this.contentData.title
     }
   },
   async asyncData({params, $axios}) {
@@ -84,7 +248,7 @@ export default {
     var contentData = [];
 
     //Check data exist
-    if (content.status === 1){
+    if (content.status === 1) {
       contentData = content.data;
     }
 
@@ -95,7 +259,7 @@ export default {
   },
 
   data: () => ({
-    sell_btn:true,
+    sell_btn: true,
     rating: 4.5,
     contentData: [],
     breads: [
@@ -263,10 +427,10 @@ export default {
     ],
 
     copy_btn: 'Copy',
-    download_loading:false,
+    download_loading: false,
   }),
-  methods:{
-    initBreadCrumb(){
+  methods: {
+    initBreadCrumb() {
       this.breads.push(
         {
           text: this.contentData.section_title,
@@ -285,8 +449,8 @@ export default {
         },
       );
     },
-    openAuthDialog(val){
-      this.$router.push({query:{auth_form:val}});
+    openAuthDialog(val) {
+      this.$router.push({query: {auth_form: val}});
     },
 
 
@@ -322,21 +486,21 @@ export default {
 
 .order-btn-holder {
   /*position: -webkit-sticky!important;*/
-  position: fixed!important;
-  bottom: 0!important;
-  z-index: 2!important;
-  border-top:0.1rem solid #e1e2e3;
+  position: fixed !important;
+  bottom: 0 !important;
+  z-index: 2 !important;
+  border-top: 0.1rem solid #e1e2e3;
 }
 
-.order-btn-holder .v-btn{
+.order-btn-holder .v-btn {
   width: 40% !important;
 }
 
-.order-btn-holder span{
+.order-btn-holder span {
   font-size: 1.3rem;
 }
 
- p{
-  font-size: 1.3rem!important;
+p {
+  font-size: 1.3rem !important;
 }
 </style>
