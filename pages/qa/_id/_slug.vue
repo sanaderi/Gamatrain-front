@@ -20,177 +20,349 @@
         <div class="detail mt-md-8">
           <v-row>
             <v-col cols="12" md="9">
-              <v-row class="fill-height">
-                <!--Score action-->
-                <v-col cols="1" class="pr-0 d-none d-md-block">
-                  <v-card flat color="#F5F5F5" class="d-flex fill-height text-center" min-height="200">
-                    <v-row>
-                      <v-col cols="12">
-                        <v-btn icon x-large>
-                          <v-icon size="88">
-                            mdi-menu-up
-                          </v-icon>
-                        </v-btn>
-                        <p class="text-h4">
-                          5
-                        </p>
-                        <v-btn icon x-large>
-                          <v-icon size="88">
-                            mdi-menu-down
-                          </v-icon>
-                        </v-btn>
-                        <v-btn icon width="100%">
-                          <v-icon>
-                            mdi-bookmark
-                          </v-icon>
-                        </v-btn>
-                        <v-btn icon width="100%">
-                          <v-icon>
-                            mdi-alert-octagon-outline
-                          </v-icon>
-                        </v-btn>
-                        <v-btn icon width="100%">
-                          <v-icon>
-                            mdi-share-variant-outline
-                          </v-icon>
-                        </v-btn>
-                      </v-col>
-                      <v-col cols="12"  align-self="end">
-                        <v-btn icon class="mb-4"   width="100%">
-                          <v-icon>
-                            mdi-reply
-                          </v-icon>
-                        </v-btn>
-                      </v-col>
-                    </v-row>
-                  </v-card>
-                </v-col>
-                <!--End score action-->
+             <!--Question section-->
+              <v-row>
+                <v-col cols="12">
+                  <v-row class="fill-height">
+                    <!--Score action-->
+                    <v-col cols="1" class="pr-0 d-none d-md-block">
+                      <v-card flat color="#F5F5F5" class="d-flex fill-height text-center" min-height="200">
+                        <v-row>
+                          <v-col cols="12">
+                            <v-btn icon x-large>
+                              <v-icon size="88">
+                                mdi-menu-up
+                              </v-icon>
+                            </v-btn>
+                            <p class="text-h4">
+                              5
+                            </p>
+                            <v-btn icon x-large>
+                              <v-icon size="88">
+                                mdi-menu-down
+                              </v-icon>
+                            </v-btn>
+                            <v-btn icon width="100%">
+                              <v-icon>
+                                mdi-bookmark
+                              </v-icon>
+                            </v-btn>
+                            <v-btn icon width="100%">
+                              <v-icon>
+                                mdi-alert-octagon-outline
+                              </v-icon>
+                            </v-btn>
+                            <v-btn icon width="100%">
+                              <v-icon>
+                                mdi-share-variant-outline
+                              </v-icon>
+                            </v-btn>
+                          </v-col>
+                          <v-col cols="12"  align-self="end">
+                            <v-btn icon class="mb-4"   width="100%">
+                              <v-icon>
+                                mdi-reply
+                              </v-icon>
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-card>
+                    </v-col>
+                    <!--End score action-->
 
-                <v-col cols="12" md="11">
-                  <v-card color="#F5F5F5" flat>
-                    <v-card-text>
-                      <h1 class="text-h4 font-weight-bold mb-2">
-                        {{ contentData.title }}
-                      </h1>
+                    <v-col cols="12" md="11">
+                      <v-card color="#F5F5F5" flat>
+                        <v-card-text>
+                          <h1 class="text-h4 font-weight-bold mb-2">
+                            {{ contentData.title }}
+                          </h1>
 
-                      <v-row>
-                        <v-col cols="9" >
-                          <div class="d-flex pb-0">
-                            <nuxt-link to="/user/edit-profile">
-                              <img width="47" height="47"
-                                   v-if="contentData.avatar" :src="contentData.avatar"/>
-                              <v-btn v-else width="47" height="47" class="d-flex" outlined fab x-large>
-                                <v-icon>
-                                  mdi-account-outline
-                                </v-icon>
-                              </v-btn>
-                            </nuxt-link>
-                            <div class="pa-3">
-                              <p class="text-h6 ">
-                                <strong v-if="contentData.first_name || contentData.last_name">
-                                  {{ contentData.first_name }} {{ contentData.last_name }}
-                                </strong>
-                                <strong v-else>
-                                  No name
-                                </strong>
-                              </p>
-                              <p class="text-h6">
+                          <v-row>
+                            <v-col cols="9" >
+                              <div class="d-flex pb-0">
+                                <nuxt-link to="/user/edit-profile">
+                                  <img width="47" height="47"
+                                       v-if="contentData.avatar" :src="contentData.avatar"/>
+                                  <v-btn v-else width="47" height="47" class="d-flex" outlined fab x-large>
+                                    <v-icon>
+                                      mdi-account-outline
+                                    </v-icon>
+                                  </v-btn>
+                                </nuxt-link>
+                                <div class="pa-3">
+                                  <p class="text-h6 ">
+                                    <strong v-if="contentData.first_name || contentData.last_name">
+                                      {{ contentData.first_name }} {{ contentData.last_name }}
+                                    </strong>
+                                    <strong v-else>
+                                      No name
+                                    </strong>
+                                  </p>
+                                  <p class="text-h6">
                                <span class="orange--text">
                                  Unknown question('s)
                                </span>
-                                |
-                                <span class="green--text">
+                                    |
+                                    <span class="green--text">
                                  {{ contentData.replies.num }} Answer('s)
                                </span>
-                                |
-                                <span class="blue--text">
+                                    |
+                                    <span class="blue--text">
                                  {{ contentData.score }} Score
                                </span>
-                              </p>
-                            </div>
+                                  </p>
+                                </div>
+                              </div>
+                            </v-col>
+
+                            <v-col cols="3" class="text-right">
+                              <v-btn outlined color="success">
+                                <v-icon class="mr-1">
+                                  mdi-message-reply-text
+                                </v-icon>
+                                Chat
+                              </v-btn>
+                            </v-col>
+                          </v-row>
+
+                          <p class="mt-2 text-h5" v-html="contentData.question.replace(/\n/g, '<br />')"/>
+
+
+                          <div class="label-holder mt-10 mb-0">
+                            <v-chip link class="mr-1">
+                              <nuxt-link :to="`/search?type=learnfiles&section=${contentData.section}`">
+                                {{ contentData.section_title }}
+                              </nuxt-link>
+                            </v-chip>
+                            <v-chip link class="mr-1">
+                              <nuxt-link
+                                :to="`/search?type=learnfiles&section=${contentData.section}&base=${contentData.base}`">
+                                {{ contentData.base_title }}
+                              </nuxt-link>
+                            </v-chip>
+                            <v-chip link class="ma-1">
+                              <nuxt-link
+                                :to="`/search?type=learnfiles&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`">
+                                {{ contentData.lesson_title }}
+                              </nuxt-link>
+                            </v-chip>
+
+
                           </div>
-                        </v-col>
 
-                        <v-col cols="3" class="text-right">
-                          <v-btn outlined color="success">
-                            <v-icon class="mr-1">
-                              mdi-message-reply-text
-                            </v-icon>
-                            Chat
-                          </v-btn>
-                        </v-col>
-                      </v-row>
+                        </v-card-text>
+                        <v-card-actions>
+                          <v-row>
+                            <v-col cols="4" md="6">
+                              <v-btn text plain class="simple-btn">
+                                <v-icon class="mr-1">
+                                  mdi-comment-plus
+                                </v-icon>
+                                Add comment
+                              </v-btn>
+                            </v-col>
+                            <v-col cols="8" md="6" class="text-right d-flex">
+                              <v-spacer/>
+                              <v-btn text class="simple-btn">
+                                <v-icon class="mr-1">
+                                  mdi-calendar-month
+                                </v-icon>
+                                {{$moment(contentData.up_date).fromNow()}}
+                              </v-btn>
+                              <v-btn text class="simple-btn">
+                                <v-icon class="mr-1">
+                                  mdi-clock-time-five-outline
+                                </v-icon>
+                                {{$moment(contentData.up_date).format('HH:mm')}}
+                              </v-btn>
+                            </v-col>
+                          </v-row>
+                        </v-card-actions>
+                      </v-card>
+                    </v-col>
+                  </v-row>
 
-                      <p class="mt-2 text-h5" v-html="contentData.question.replace(/\n/g, '<br />')"/>
+                  <!--Answers section-->
+                  <!--              <v-row>-->
+                  <!--                <v-col cols="3">-->
+                  <!--                  Two answers-->
+                  <!--                </v-col>-->
+                  <!--                <v-col cols="9">-->
+                  <!--                  <v-divider/>-->
+                  <!--                </v-col>-->
+                  <!--              </v-row>-->
 
+                  <!--End answers section-->
+                </v-col>
+              </v-row>
+              <!--End question section-->
 
-                      <div class="label-holder mt-10 mb-0">
-                        <v-chip link class="mr-1">
-                          <nuxt-link :to="`/search?type=learnfiles&section=${contentData.section}`">
-                            {{ contentData.section_title }}
-                          </nuxt-link>
-                        </v-chip>
-                        <v-chip link class="mr-1">
-                          <nuxt-link
-                            :to="`/search?type=learnfiles&section=${contentData.section}&base=${contentData.base}`">
-                            {{ contentData.base_title }}
-                          </nuxt-link>
-                        </v-chip>
-                        <v-chip link class="ma-1">
-                          <nuxt-link
-                            :to="`/search?type=learnfiles&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`">
-                            {{ contentData.lesson_title }}
-                          </nuxt-link>
-                        </v-chip>
-
-
-                      </div>
-
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-row>
-                        <v-col cols="4" md="6">
-                          <v-btn text plain class="simple-btn">
-                            <v-icon class="mr-1">
-                              mdi-comment-plus
-                            </v-icon>
-                            Add comment
-                          </v-btn>
-                        </v-col>
-                        <v-col cols="8" md="6" class="text-right d-flex">
-                          <v-spacer/>
-                          <v-btn text class="simple-btn">
-                            <v-icon class="mr-1">
-                              mdi-calendar-month
-                            </v-icon>
-                            {{$moment(contentData.up_date).fromNow()}}
-                          </v-btn>
-                          <v-btn text class="simple-btn">
-                            <v-icon class="mr-1">
-                              mdi-clock-time-five-outline
-                            </v-icon>
-                            {{$moment(contentData.up_date).format('HH:mm')}}
-                          </v-btn>
-                        </v-col>
-                      </v-row>
-                    </v-card-actions>
-                  </v-card>
+              <v-row>
+                <v-col cols="2">
+                  <h2>
+                    {{contentData.replies.num}}
+                    <span v-if="contentData.replies.num>1">Answers</span>
+                    <span else>Answer</span>
+                  </h2>
+                </v-col>
+                <v-col cols="10">
+                  <v-divider class="my-4"/>
                 </v-col>
               </v-row>
 
-              <!--Answers section-->
-<!--              <v-row>-->
-<!--                <v-col cols="3">-->
-<!--                  Two answers-->
-<!--                </v-col>-->
-<!--                <v-col cols="9">-->
-<!--                  <v-divider/>-->
-<!--                </v-col>-->
-<!--              </v-row>-->
+              <!--Answer section-->
+              <v-row>
+                <v-col cols="12" >
+                  <v-row class="fill-height"
+                  v-for="answer in contentData.replies.list"
+                  >
+                    <!--Score action-->
+                    <v-col cols="1" class="pr-0 d-none d-md-block">
+                      <v-card flat color="#F5F5F5" class="d-flex fill-height text-center" min-height="200">
+                        <v-row>
+                          <v-col cols="12">
+                            <v-btn icon x-large>
+                              <v-icon size="88">
+                                mdi-menu-up
+                              </v-icon>
+                            </v-btn>
+                            <p class="text-h4">
+                              1
+                            </p>
+                            <v-btn icon x-large>
+                              <v-icon size="88">
+                                mdi-menu-down
+                              </v-icon>
+                            </v-btn>
+                            <v-btn icon width="100%">
+                              <v-icon>
+                                mdi-bookmark
+                              </v-icon>
+                            </v-btn>
+                            <v-btn icon width="100%">
+                              <v-icon>
+                                mdi-alert-octagon-outline
+                              </v-icon>
+                            </v-btn>
+                            <v-btn icon width="100%">
+                              <v-icon>
+                                mdi-share-variant-outline
+                              </v-icon>
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-card>
+                    </v-col>
+                    <!--End score action-->
 
-              <!--End answers section-->
+                    <v-col cols="12" md="11" >
+                      <v-card color="#F5F5F5"  flat >
+                        <v-card-text  >
+                          <v-row >
+                            <v-col cols="9" >
+                              <div class="d-flex pb-0">
+                                <nuxt-link to="/user/edit-profile">
+                                  <img width="47" height="47"
+                                       v-if="answer.avatar" :src="answer.avatar"/>
+                                  <v-btn v-else width="47" height="47" class="d-flex" outlined fab x-large>
+                                    <v-icon>
+                                      mdi-account-outline
+                                    </v-icon>
+                                  </v-btn>
+                                </nuxt-link>
+                                <div class="pa-3">
+                                  <p class="text-h6 ">
+                                    <strong v-if="answer.first_name || answer.last_name">
+                                      {{ answer.first_name }} {{ answer.last_name }}
+                                    </strong>
+                                    <strong v-else>
+                                      No name
+                                    </strong>
+                                  </p>
+                                  <p class="text-h6">
+                               <span class="orange--text">
+                                 Unknown question('s)
+                               </span>
+                                    |
+                                    <span class="green--text">
+                                 {{ contentData.replies.num }} Answer('s)
+                               </span>
+                                    |
+                                    <span class="blue--text">
+                                 {{ contentData.score }} Score
+                               </span>
+                                  </p>
+                                </div>
+                              </div>
+                            </v-col>
+
+                            <v-col cols="3" class="text-right">
+                              <v-btn outlined color="success">
+                                <v-icon class="mr-1">
+                                  mdi-message-reply-text
+                                </v-icon>
+                                Chat
+                              </v-btn>
+                            </v-col>
+                          </v-row>
+
+                          <div style="min-height: 16rem">
+                            <p class="mt-2 text-h5" v-html="answer.answer.replace(/\n/g, '<br />')"/>
+                          </div>
+                        </v-card-text>
+                        <v-card-actions >
+                          <v-row>
+                            <v-col cols="4" md="6">
+                              <v-btn text plain class="simple-btn">
+                                <v-icon class="mr-1">
+                                  mdi-comment-plus
+                                </v-icon>
+                                Add comment
+                              </v-btn>
+                            </v-col>
+                            <v-col cols="8" md="6" class="text-right d-flex">
+                              <v-spacer/>
+                              <v-btn text class="simple-btn">
+                                <v-icon class="mr-1">
+                                  mdi-calendar-month
+                                </v-icon>
+                                {{$moment(answer.subdate).fromNow()}}
+                              </v-btn>
+                              <v-btn text class="simple-btn">
+                                <v-icon class="mr-1">
+                                  mdi-clock-time-five-outline
+                                </v-icon>
+                                {{$moment(answer.subdate).format('HH:mm')}}
+                              </v-btn>
+                            </v-col>
+                          </v-row>
+                        </v-card-actions>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+
+                  <!--Answers section-->
+                  <!--              <v-row>-->
+                  <!--                <v-col cols="3">-->
+                  <!--                  Two answers-->
+                  <!--                </v-col>-->
+                  <!--                <v-col cols="9">-->
+                  <!--                  <v-divider/>-->
+                  <!--                </v-col>-->
+                  <!--              </v-row>-->
+
+                  <!--End answers section-->
+                </v-col>
+              </v-row>
+              <!--End answer section-->
             </v-col>
+
+
+
+
+
+
+
 
             <!--Similar questions-->
             <v-col cols="3" class="d-none d-md-block">
