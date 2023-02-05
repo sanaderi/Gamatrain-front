@@ -46,8 +46,20 @@
                         <v-tab-item key="tab-description">
                           <span v-html="contentData.description"></span>
                         </v-tab-item>
-                        <v-tab-item key="tab-chapters">
-                          No chapter found
+                        <v-tab-item key="tab-chapters" class="pa-0">
+                          <div color="#F5F5F5" flat style="max-height:25rem;overflow-y: auto">
+                            <ul class="pl-0" style="list-style-type: none">
+                              <li v-for="item in contentData.collectionList">
+                                <strong>{{ item.title }}</strong>
+                                <ul style="list-style-type: none"
+                                    v-if="item.chapters">
+                                  <li v-for="chapter in item.chapters">
+                                    {{chapter.title}}
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>
                         </v-tab-item>
                       </v-tabs-items>
                     </div>
