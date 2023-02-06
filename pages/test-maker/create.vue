@@ -172,6 +172,16 @@
                     />
                   </validation-provider>
                 </v-col>
+                <v-col cols="12" md="4">
+                  <v-file-input
+                    dense
+                    v-model="file_original"
+                    @change="uploadFile('file_original')"
+                    accept="application/pdf"
+                    label="Source file"
+                    outlined
+                  />
+                </v-col>
 
                 <v-col cols="12" md="4"
                        v-if="form.holding_level===1 || form.holding_level===2 || form.holding_level===3">
@@ -525,7 +535,7 @@
                             </v-icon>
                           </v-btn>
                           <v-btn icon v-show="item.owner==true"
-                          @click="openTestDeleteConfirmDialog(item.id)"
+                                 @click="openTestDeleteConfirmDialog(item.id)"
                           >
                             <v-icon color="error">
                               mdi-delete
@@ -1084,6 +1094,7 @@ export default {
         // start_date: parseInt(this.$moment().format('x') / 1000),
         title: '',
         negative_point: false,
+        file_original:''
       },
       filter: {
         section: '',
@@ -1168,10 +1179,14 @@ export default {
 
 
       //Delete exam test section
-      deleteTestConfirmDialog:false,
-      delete_exam_test_id:'',
-      delete_exam_test_loading:false,
+      deleteTestConfirmDialog: false,
+      delete_exam_test_id: '',
+      delete_exam_test_loading: false,
       //End Delete exam test section
+
+
+      file_original:'',
+      file_original_path:''
     }
 
   },
@@ -1245,6 +1260,7 @@ export default {
 
       this.generateTitle();
     },
+
     "filter.base"(val) {
       if (val) {
         this.getTypeList('lesson', val, 'filter');
@@ -1310,6 +1326,7 @@ export default {
     lastCreatedTest(val) {
       if (val && !this.tests.find(x => x == val)) {
         this.tests.push(val);
+        this.submitTest();
       }
     }
   },
@@ -1431,6 +1448,7 @@ export default {
 
         this.$store.commit('user/setCurrentExamId', this.exam_id);
         this.$store.commit('user/setCurrentExamCode', this.exam_code);
+        this.$refs["create-form"].getCurrentExamInfo();//Load original file
         this.test_step = 2;
       }).catch(error => {
         this.$toast.error(error.response.data.message);
@@ -1546,7 +1564,7 @@ export default {
         this.tests.splice(this.tests.indexOf(item.id), 1);
 
         //Remove from preview
-        this.$store.commit('user/removePreviewTestList', item.id);
+        // this.$store.commit('user/removePreviewTestList', item.id);
 
         this.submitTest();
       }
@@ -1555,14 +1573,14 @@ export default {
         this.tests.push(item.id);
 
         //Add to preview list
-        this.$store.commit('user/addPreviewTestList', item)
+        // this.$store.commit('user/addPreviewTestList', item)
 
 
-        if (this.$store.getters["user/getPreviewTestListLength"]) {
-          this.$nextTick(function () {
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-          });
-        }
+        // if (this.$store.getters["user/getPreviewTestListLength"]) {
+        //   this.$nextTick(function () {
+        //     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        //   });
+        // }
 
 
         this.submitTest();
@@ -1585,12 +1603,36 @@ export default {
           }
         )
           .then(response => {
-            console.log(response);
+            this.getExamCurrentTests();
           }).catch(err => {
           console.log(err);
         })
       }
     },
+
+    getExamCurrentTests() {
+      this.test_loading = true;
+      this.$axios.$get('/api/v1/examTests', {
+        params: {
+          exam_id: this.exam_id
+        }
+      })
+        .then(response => {
+          this.previewTestList = response.data.list;
+
+          if (this.previewTestList.length) {
+            this.$nextTick(function () {
+              MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            });
+          }
+
+        }).catch(err => {
+        console.log(err);
+      }).finally(() => {
+
+      })
+    },
+
 
 
     /**
@@ -1647,7 +1689,7 @@ export default {
             this.form.section = response.data.section;
             this.form.base = response.data.base;
             this.form.lesson = response.data.lesson;
-
+            this.file_original_path = response.data.file_original;
             console.log(response);
           }).catch(err => {
           console.log(err);
@@ -1708,6 +1750,7 @@ export default {
           this.$store.commit('user/setCurrentExamCode', this.exam_code);
 
           this.previewTestList = [];
+          this.$refs["create-form"].file_original_path='';
           this.$store.commit('user/setCurrentExamId', '');
           this.$store.commit('user/setPreviewTestList', []);
           this.tests = [];
@@ -1742,26 +1785,44 @@ export default {
       this.deleteTestConfirmDialog = true;
     },
     async deleteExamTest() {
-      this.delete_exam_test_loading=true;
+      this.delete_exam_test_loading = true;
       await this.$axios.$delete(`/api/v1/examTests/${this.delete_exam_test_id}`,
       ).then(response => {
         this.$toast.success("Deleted successfully");
-        this.filter.page=1;
+        this.filter.page = 1;
         this.test_list = [];
         this.getExamTests();
       })
         .catch(err => {
           console.log(err);
-        }).finally(()=>{
-          this.delete_exam_test_loading=false;
+        }).finally(() => {
+          this.delete_exam_test_loading = false;
           this.delete_exam_test_id = null;
           this.deleteTestConfirmDialog = false;
         })
-    }
-
-
-
+    },
     //End delete exam test
+
+
+    uploadFile(file_name) {
+      let formData=new FormData();
+      formData.append('file',this.file_original);
+      this.$axios.$post('/api/v1/upload',
+        formData,
+        {
+          headers: {
+            'accept': '*/*',
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      ).then(response => {
+        this.form.file_original=response.data[0].file.name;
+      }).catch(err => {
+
+      })
+      // }
+    },
+
   }
 }
 </script>

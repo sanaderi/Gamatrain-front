@@ -1,5 +1,7 @@
 <template>
   <v-container id="create-test" class="mb-16">
+    <embed :src="file_original_path" width="100%" height="200px;"
+    />
     <v-card flat class="mt-3 ">
       <validation-observer ref="observer" v-slot="{invalid}">
         <form @submit.prevent="updateQuestion">
@@ -489,6 +491,7 @@ export default {
         d_file_base64: '',
         testImgAnswers: false
       },
+      file_original_path: '',
       form_hidden_data: {
         q_file: '',
         answer_full_file: '',

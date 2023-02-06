@@ -82,7 +82,13 @@ export default {
       pathRewrite: {'^/api/v1/': '/api/v1/'},
       secure: false,
       changeOrigin: true
-    }
+    },
+    '/uploads/': {
+      target: process.env.API_BASE_URL,
+      pathRewrite: {'^/uploads': '/uploads'},
+      secure: false,
+      changeOrigin: true
+    },
   },
 
 

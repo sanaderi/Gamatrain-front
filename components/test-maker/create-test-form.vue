@@ -1,5 +1,7 @@
 <template>
   <div id="create-test">
+    <embed v-if="file_original_path" :src="file_original_path" width="100%" height="200px;"
+    />
     <v-card flat class="mt-3 ">
       <validation-observer ref="observer" v-slot="{invalid}">
         <form @submit.prevent="submitQuestion">
@@ -451,7 +453,7 @@ export default {
   },
   data() {
     return {
-      examEditMode:false,//When user in online exam edit page
+      examEditMode: false,//When user in online exam edit page
       path_panel_expand: true,
       create_loading: false,
       test_step: 1,
@@ -495,13 +497,14 @@ export default {
         d_file_base64: '',
         testImgAnswers: false
       },
+      file_original_path: '',
       form_hidden_data: {
-        q_file: [],
-        answer_full_file: [],
-        a_file: [],
-        b_file: [],
-        c_file: [],
-        d_file: []
+        q_file: null,
+        answer_full_file: null,
+        a_file: null,
+        b_file: null,
+        c_file: null,
+        d_file: null
       },
       timepicker_menu: false,
 
@@ -541,7 +544,6 @@ export default {
     this.getTypeList('section');
     this.getTypeList('test_type');
     this.getTypeList('state');
-    this.getCurrentExamInfo();
   },
   created() {
     this.getCurrentExamInfo();
@@ -619,14 +621,12 @@ export default {
             this.$toast.success("Created successfully")
             this.path_panel_expand = false;
 
-            var submit_data = this.form;
-            if (this.$store.state.user.examId)
-              this.submitTest(response.data.id, submit_data);
-            else if(this.examEditMode===true){
-              console.log("pass level 1 : "+response.data.id);
 
-              this.$emit('update:updateTestList',response.data.id);
-            }
+
+            //Edit mode or create exam progress
+            if (this.$store.state.user.examId || this.examEditMode === true)
+              this.$emit('update:updateTestList', response.data.id);
+            //End edit mode or create exam progress
 
             this.form.question = '';
             this.form.q_file_base64 = '';
@@ -803,61 +803,30 @@ export default {
             this.form.base = response.data.base;
             this.form.lesson = response.data.lesson;
 
-            console.log(response);
+            if (response.data.file_original)
+              this.getBase64FromUrl(response.data.file_original);
+
           }).catch(err => {
-          console.log(err);
+        })
+      }else if(this.$route.params.id){
+        this.$axios.$get(`/api/v1/exams/info/${this.$route.params.id}`)
+          .then(response => {
+            if (response.data.file_original)
+              this.getBase64FromUrl(response.data.file_original);
+
+          }).catch(err => {
         })
       }
     },
-
-
-    submitTest(new_test_id, submit_data) {
-      let formData = new FormData();
-
-      for (var i in this.$store.getters["user/getPreviewTestList"]) {
-        formData.append("tests[]", this.$store.getters["user/getPreviewTestList"][i].id);
-      }
-
-      formData.append("tests[]", new_test_id.toString());
-
-      console.log(submit_data);
-      var newPreview = {
-        id: new_test_id,
-        question: submit_data.question,
-        q_file: submit_data.q_file,
-        answer_a: submit_data.answer_a,
-        a_file: submit_data.a_file_base64,
-
-        answer_b: submit_data.answer_b,
-        b_file: submit_data.b_file_base64,
-
-        answer_c: submit_data.answer_c,
-        c_file: submit_data.c_file_base64,
-
-        answer_d: submit_data.answer_d,
-        d_file: submit_data.d_file_base64,
-
-        true_answer: submit_data.true_answer,
-        owner: true
-      };
-
-      var test = submit_data;
-      this.$axios.$put(`/api/v1/exams/tests/${this.$store.state.user.examId}`
-        , this.urlencodeFormData(formData),
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-          }
-        }
-      )
-        .then(response => {
-          this.$store.commit("user/addPreviewTestList", newPreview);
-          this.$emit('update:updateTestList', new_test_id);
-        }).catch(err => {
-        console.log(err);
+    async getBase64FromUrl(url) {
+      this.$axios.$get(url.replace(process.env.FILE_BASE_URL, ''), {
+        responseType: 'blob',
+      }).then(response => {
+        this.file_original_path = URL.createObjectURL(response);
       })
-    },
 
+
+    },
 
 
     //Convert form data from multipart to urlencode

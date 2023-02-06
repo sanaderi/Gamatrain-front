@@ -175,6 +175,17 @@
                   </validation-provider>
                 </v-col>
 
+                <v-col cols="12" md="4">
+                  <v-file-input
+                    dense
+                    v-model="file_original"
+                    @change="uploadFile('file_original')"
+                    accept="application/pdf"
+                    label="Source file"
+                    outlined
+                  />
+                </v-col>
+
                 <v-col cols="12" md="4"
                        v-if="form.holding_level===1 || form.holding_level===2 || form.holding_level===3">
                   <v-autocomplete
@@ -1086,7 +1097,9 @@ export default {
         // start_date: parseInt(this.$moment().format('x') / 1000),
         title: '',
         negative_point: false,
+        file_original:'',
       },
+      file_original:'',
       filter: {
         section: '',
         base: '',
@@ -1180,7 +1193,6 @@ export default {
 
   },
   mounted() {
-    this.getCurrentExamInfo();
     this.getTypeList('section');
     this.getTypeList('exam_type');
     this.getTypeList('state');
@@ -1317,9 +1329,7 @@ export default {
       this.getExamTests();
     },
     lastCreatedTest(val) {
-      console.log("pass level 2");
       if (val && !this.tests.find(x => x == val)) {
-        console.log("pass level 3");
         this.tests.push(val);
         this.submitTest();
       }
@@ -1344,6 +1354,7 @@ export default {
 
           this.form.exam_type = response.data.azmoon_type;
           this.form.duration = response.data.azmoon_time;
+          this.form.file_original = response.data.file_original;
           setTimeout(() => {
             this.form.title = response.data.title;
           }, 2000)
@@ -1607,7 +1618,7 @@ export default {
       }
 
       if (this.tests.length) {
-        this.$axios.$put(`/api/v1/exams/tests/${this.exam_id}`
+        this.$axios.$put(`/api/v1/exams/tests/${this.$route.params.id}`
           , this.urlencodeFormData(formData),
           {
             headers: {
@@ -1723,11 +1734,31 @@ export default {
           this.delete_exam_test_id = null;
           this.deleteTestConfirmDialog = false;
         })
-    }
+    },
 
 
 
     //End delete exam test
+
+    uploadFile(file_name) {
+      let formData=new FormData();
+      formData.append('file',this.file_original);
+      this.$axios.$post('/api/v1/upload',
+        formData,
+        {
+          headers: {
+            'accept': '*/*',
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      ).then(response => {
+        this.form.file_original=response.data[0].file.name;
+      }).catch(err => {
+
+      })
+      // }
+    },
+
   }
 }
 </script>
