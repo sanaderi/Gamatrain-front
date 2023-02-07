@@ -5,7 +5,7 @@
         <v-col cols="12" class="pl-5">
           <span class="icon icong-test text-h3 teal--text"></span>
           <span class="text-h4 teal--text">
-            Presentation
+            Multimedia
           </span>
         </v-col>
       </v-row>
@@ -13,8 +13,8 @@
         <v-card-title class="text-h4">
           <v-row>
             <v-col cols="12" class="text-left">
-              <v-btn to="/user/presentation/create" color="teal" class="white--text">
-                New presentation
+              <v-btn to="/user/multimedia/create" color="teal" class="white--text">
+                New multimedia
               </v-btn>
               <v-btn @click="filter_block=!filter_block" color="orange" outlined class="white--text">
                 Filter
@@ -167,7 +167,7 @@ export default {
   },
   head() {
     return {
-      title: 'Presentation manage'
+      title: 'Multimedia manage'
     }
   },
   watch: {

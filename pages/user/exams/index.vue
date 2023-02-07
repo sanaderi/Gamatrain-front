@@ -91,7 +91,6 @@
                             </template>
                             <span>Delete</span>
                           </v-tooltip>
-
                           <v-tooltip bottom>
                             <template v-slot:activator="{ on, attrs }">
                               <v-btn icon small v-bind="attrs" v-on="on"
@@ -227,7 +226,6 @@ export default {
     this.getTypeList('section');
     this.getExams();
     this.scroll();
-
   },
   watch: {
     "filter.level"(val) {

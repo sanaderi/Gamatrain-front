@@ -58,8 +58,8 @@ export default {
           icon: 'mdi-plus-circle-outline',
           machine_name: 'add_content',
           subMenuList: [
-            {title: "Exam Paper", link: "/user/exam-paper", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
-            {title: "Presentation", link: "/user/presentation", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
+            {title: "Paper", link: "/user/paper", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
+            {title: "Multimedia", link: "/user/multimedia", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
             {title: "Q & A", link: "/user/question", icon: 'icong-test', icon_type: 'custom'}
           ]
         },

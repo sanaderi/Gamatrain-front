@@ -3,7 +3,7 @@
    <div class="lastfile-content d-flex flex-column">
      <div class="lastfile-titles d-flex align-center pb-4 mb-5">
        <span class="icon icong-learnfiles lastfile-icon-title"></span>
-       <p class="mb-0 mx-2 lastfile-title">Latest Presentation</p>
+       <p class="mb-0 mx-2 lastfile-title">Latest Multimedia</p>
      </div>
      <div class="video-slider">
        <Video :videos="videos" unique="desktop"></Video>

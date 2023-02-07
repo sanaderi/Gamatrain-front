@@ -125,11 +125,11 @@
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'Exam Paper'"
+                        v-if="item.title === 'Paper'"
                         class="mr-4 icon icong-test"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'Presentation'"
+                        v-else-if="item.title === 'Multimedia'"
                         class="mr-4 icon icong-learnfiles"
                       ></v-icon>
                       <v-icon
@@ -279,11 +279,11 @@
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'Exam Paper'"
+                        v-if="item.title === 'Paper'"
                         class="ml-1 icon icong-test"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'Presentation'"
+                        v-else-if="item.title === 'Multimedia'"
                         class="ml-1 icon icong-learnfiles"
                       ></v-icon>
                       <v-icon
@@ -423,11 +423,11 @@
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'Exam Paper'"
+                        v-if="item.title === 'Paper'"
                         class="ml-1 icon icong-test"
                       ></v-icon>
                       <v-icon
-                        v-else-if="item.title === 'Presentation'"
+                        v-else-if="item.title === 'Multimedia'"
                         class="ml-1 icon icong-learnfiles"
                       ></v-icon>
                       <v-icon
@@ -645,11 +645,11 @@ export default {
         link: "",
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -701,11 +701,11 @@ export default {
         ],
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -757,11 +757,11 @@ export default {
         ],
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -813,11 +813,11 @@ export default {
         ],
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -870,11 +870,11 @@ export default {
         link: "",
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -926,11 +926,11 @@ export default {
         ],
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -982,11 +982,11 @@ export default {
         ],
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -1038,11 +1038,11 @@ export default {
         ],
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -1095,11 +1095,11 @@ export default {
         link: "",
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -1151,11 +1151,11 @@ export default {
         ],
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -1207,11 +1207,11 @@ export default {
         ],
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -1263,11 +1263,11 @@ export default {
         ],
         cat: [
           {
-            title: "Exam Paper",
+            title: "Paper",
             stat: "1355",
           },
           {
-            title: "Presentation",
+            title: "Multimedia",
             stat: "1211",
           },
           {
@@ -1328,7 +1328,7 @@ export default {
       {label: "School", value: "130,000", icon: "fa-graduation-cap"},
       {label: "Tutor", value: "300,000", icon: "fa-graduation-cap"},
       {label: "Student", value: "1,500,000", icon: "fa-graduation-cap"},
-      {label: "Exam Paper", value: "50,000", icon: "fa-graduation-cap"},
+      {label: "Paper", value: "50,000", icon: "fa-graduation-cap"},
       {label: "پاورپوینت", value: "30,000", icon: "fa-graduation-cap"},
       {label: "Exam", value: "5,000", icon: "fa-graduation-cap"},
     ],

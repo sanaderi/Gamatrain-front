@@ -47,13 +47,13 @@ export default {
       button_list:[
         {
           class:'sample_exam',
-          title:'Exam Paper',
+          title:'Paper',
           count:0,
           link:'/test/add',
           icon:'icong-test',
         },{
           class:'training_content',
-          title:'Presentation',
+          title:'Multimedia',
           count:0,
           link:'/training_content/add',
           icon:'icong-learnfiles',

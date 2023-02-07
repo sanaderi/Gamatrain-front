@@ -84,8 +84,8 @@ export default {
 
       items: [
         { class: "exam", text: "Exam", icon: "azmoon",link:"/search?type=azmoon" },
-        { class: "test", text: "Exam Paper", icon: "test",link:"/search?type=test" },
-        { class: "content", text: "Presentation", icon: "learnfiles" ,link:"/search?type=learnfiles" },
+        { class: "test", text: "Paper", icon: "test",link:"/search?type=test" },
+        { class: "content", text: "Multimedia", icon: "learnfiles" ,link:"/search?type=learnfiles" },
         { class: "faq", text: "Q & A", icon: "qa",link:"/search?type=question" },
         { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/search?type=dars" },
         { class: "school", text: "School", icon: "school" ,link:"/search?type=school" },

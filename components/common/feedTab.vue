@@ -60,7 +60,7 @@ export default {
       items:[
         {
           icon:"file.png",
-          title:"Latest Presentation"
+          title:"Latest Multimedia"
         },
          {
            icon:"ask.png",
@@ -78,7 +78,7 @@ export default {
       footerFeedList: [
         {
           class: "learning",
-          header: "Latest Presentation",
+          header: "Latest Multimedia",
           icon: "learnfiles",
           contentItemList: [
             {

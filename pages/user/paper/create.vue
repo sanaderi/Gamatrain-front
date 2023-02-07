@@ -5,7 +5,7 @@
         <v-col cols="12" class="pl-5">
           <span class="icon icong-test text-h3 teal--text"></span>
           <span class="text-h4 teal--text">
-            Exam paper submission form
+            Paper submission form
           </span>
         </v-col>
       </v-row>
@@ -112,7 +112,8 @@
                       </v-col>
                       <v-col cols="12" md="12">
                         <validation-provider v-slot="{errors}" name="topic" rules="required">
-                          <topic-selector :topic-list="topic_list" @selectTopic="selectTopic"/>
+                          <topic-selector :topic-list="topic_list"
+                                          @selectTopic="selectTopic"/>
                         </validation-provider>
                       </v-col>
                       <v-col cols="12" md="4">
@@ -315,7 +316,7 @@
                         </v-btn>
                       </v-col>
                       <v-col cols="12" md="6">
-                        <v-btn lg outlined color="error" to="/user/exam-paper" block>
+                        <v-btn lg outlined color="error" to="/user/paper" block>
                           Discard
                         </v-btn>
                       </v-col>
@@ -339,7 +340,7 @@ import TopicSelector from "@/components/form/topic-selector";
 
 export default {
   layout: 'dashboard_layout',
-  name: "add-test",
+  name: "add-paper",
   data() {
     return {
       form: {

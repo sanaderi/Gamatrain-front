@@ -247,7 +247,7 @@
 
     <!--File type filter-->
     <div v-show="filter.file_type_list.length>0">
-      <p class="mb-2 mb-md-1 mt-5">{{ $route.query.type === 'test' ? 'Exam Paper' : 'Presentation' }} Type</p>
+      <p class="mb-2 mb-md-1 mt-5">{{ $route.query.type === 'test' ? 'Paper' : 'Multimedia' }} Type</p>
       <v-divider class="mb-3"/>
 
       <v-container
@@ -979,7 +979,7 @@ export default {
       if (active_tab === "test")
         breadcrumb_item.text = "Sample test"
       else if (active_tab === "learnfiles")
-        breadcrumb_item.text = "Presentation"
+        breadcrumb_item.text = "Multimedia"
       else if (active_tab === "question")
         breadcrumb_item.text = 'Q & A';
       else if (active_tab === "azmoon")

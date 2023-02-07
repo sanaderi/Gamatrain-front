@@ -5,7 +5,7 @@
         <v-col cols="12" class="pl-5">
           <span class="icon icong-learnfiles text-h3 teal--text"></span>
           <span class="text-h4 teal--text">
-            Presentation submission form
+            Multimedia submission form
           </span>
         </v-col>
       </v-row>
@@ -178,7 +178,7 @@
                           dense
                           v-model="form.pdf_question_answer_file"
                           :error-messages="errors"
-                          label="Presentation file"
+                          label="Multimedia file"
                           prepend-icon=""
                           color="red"
                           prepend-inner-icon="mdi-play-box"
@@ -220,7 +220,7 @@
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
-                      <v-btn lg outlined color="error" to="/user/presentation" block>
+                      <v-btn lg outlined color="error" to="/user/multimedia" block>
                         Discard
                       </v-btn>
                     </v-col>
@@ -309,7 +309,7 @@ export default {
   },
   head() {
     return {
-      title: 'Presentation submission'
+      title: 'Multimedia submission'
     }
   },
   components: {
