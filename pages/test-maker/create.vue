@@ -652,7 +652,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="12" v-show="$store.getters['user/getPreviewTestListLength']">
+              <v-col cols="12" v-show="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
                   <v-row v-for="item in previewTestList">
                     <v-col
@@ -736,7 +736,7 @@
                   </v-row>
                 </draggable>
               </v-col>
-              <v-col v-show="!$store.getters['user/getPreviewTestListLength']" cols="12" class="text-center">
+              <v-col v-show="!previewTestList.length" cols="12" class="text-center">
                 <p>
                   Oops! no data found
                 </p>
@@ -885,7 +885,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="12" v-show="$store.getters['user/getPreviewTestListLength']">
+              <v-col cols="12" v-show="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
                   <v-row v-for="item in previewTestList">
                     <v-col
@@ -961,7 +961,7 @@
                   </v-row>
                 </draggable>
               </v-col>
-              <v-col v-show="!$store.getters['user/getPreviewTestListLength']" cols="12" class="text-center">
+              <v-col v-show="!previewTestList.length" cols="12" class="text-center">
                 <p>
                   Oops! no data found
                 </p>
@@ -1094,7 +1094,7 @@ export default {
         // start_date: parseInt(this.$moment().format('x') / 1000),
         title: '',
         negative_point: false,
-        file_original:''
+        file_original: ''
       },
       filter: {
         section: '',
@@ -1171,7 +1171,7 @@ export default {
       printPreviewDialog: false,
       confirmDeleteDialog: false,
       deleteLoading: false,
-      previewTestList: this.$store.getters["user/getPreviewTestList"],
+      previewTestList: [],
       topicTitleArr: [],
 
       testListSwitch: false,
@@ -1185,8 +1185,8 @@ export default {
       //End Delete exam test section
 
 
-      file_original:'',
-      file_original_path:''
+      file_original: '',
+      file_original_path: ''
     }
 
   },
@@ -1199,6 +1199,9 @@ export default {
     this.renderMathJax();
 
     this.getExamTests();
+
+    if (this.exam_id)
+      this.getExamCurrentTests();
 
 
   },
@@ -1527,19 +1530,6 @@ export default {
 
       }
     },
-    computed: {
-      previewTestList: {
-        get() {
-          return [this.$store.state["user/previewTestList"]];
-        },
-        set(value) {
-          for (var i in value) {
-            this.$store.commit('user/addPreviewTestList', value[i]);
-
-          }
-        }
-      }
-    },
 
     onScroll() {
       var scrollPosition = this.$refs.testList.$el.scrollTop;
@@ -1634,7 +1624,6 @@ export default {
     },
 
 
-
     /**
      * @brief publish test
      */
@@ -1650,7 +1639,6 @@ export default {
 
             this.previewTestList = [];
             this.$store.commit('user/setCurrentExamId', '');
-            this.$store.commit('user/setPreviewTestList', []);
             this.tests = [];
 
             //Reset form
@@ -1667,7 +1655,6 @@ export default {
 
             this.test_step = 4;
             this.$store.commit('user/setCurrentExamId', '');
-            this.$store.commit('user/setPreviewTestList', []);
           }
         }).catch(err => {
         console.log(err);
@@ -1750,9 +1737,9 @@ export default {
           this.$store.commit('user/setCurrentExamCode', this.exam_code);
 
           this.previewTestList = [];
-          this.$refs["create-form"].file_original_path='';
+          this.$refs["create-form"].file_original_path = '';
           this.$store.commit('user/setCurrentExamId', '');
-          this.$store.commit('user/setPreviewTestList', []);
+          // this.$store.commit('user/setPreviewTestList', []);
           this.tests = [];
 
           //Reset form
@@ -1805,8 +1792,8 @@ export default {
 
 
     uploadFile(file_name) {
-      let formData=new FormData();
-      formData.append('file',this.file_original);
+      let formData = new FormData();
+      formData.append('file', this.file_original);
       this.$axios.$post('/api/v1/upload',
         formData,
         {
@@ -1816,7 +1803,7 @@ export default {
           }
         }
       ).then(response => {
-        this.form.file_original=response.data[0].file.name;
+        this.form.file_original = response.data[0].file.name;
       }).catch(err => {
 
       })

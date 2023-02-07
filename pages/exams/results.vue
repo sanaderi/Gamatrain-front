@@ -114,7 +114,6 @@
                         />
                       </td>
                     </tr>
-
                     </tbody>
                   </template>
                 </v-simple-table>

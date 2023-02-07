@@ -29,9 +29,6 @@
                     <th class="text-left text-h5">
                       #
                     </th>
-                    <th class="text-center  text-h5">
-                      Code
-                    </th>
                     <th class="text-center text-h5">
                       Title
                     </th>
@@ -54,12 +51,11 @@
                   </thead>
                   <tbody>
                   <tr
-                    v-show="exam_list.length>0"
-                    v-for="item in exam_list"
+                    v-show="paper_list.length>0"
+                    v-for="item in paper_list"
                     :key="item.id"
                   >
-                    <td></td>
-                    <td class="text-center"></td>
+                    <td>{{ item.id }}</td>
                     <td class="text-center"></td>
                     <td class="text-center"></td>
                     <td class="text-center"></td>
@@ -67,9 +63,20 @@
                     <td class="text-center"></td>
                     <td class="text-center"></td>
                   </tr>
-                  <tr v-show="exam_list.length===0">
-                    <td colspan="8">
-                      <p>Opps! no data found</p>
+                  <tr v-show="page_loading===false && paper_list.length===0">
+                    <td colspan="7" class="text-center">
+                      <p>Oops! no data found</p>
+                    </td>
+                  </tr>
+                  <tr v-show="page_loading">
+                    <td colspan="7" class="text-center">
+                      <v-progress-circular
+                        :size="30"
+                        :width="3"
+                        class="mt-12 mb-12"
+                        color="orange"
+                        indeterminate
+                      />
                     </td>
                   </tr>
                   </tbody>
@@ -86,30 +93,63 @@
 <script>
 export default {
   layout: "dashboard_layout",
-  name: "test-manage",
+  name: "paper-manage",
   // async asyncData({params,$axios}) {
   //   const examData=await $axios.$get('/api/v1/exams');
   //   return {examData};
   // },
   data() {
     return {
-      exam_list: [],
+      paper_list: [],
+
+      //Paginate section
+      page_loading: false,
+      page: 1,
+      all_files_loaded: false,
+      //End paginate section
     }
   },
-  head(){
-    return{
-      title:'Exam Paper manage'
+  head() {
+    return {
+      title: 'Exam Paper manage'
     }
   },
   mounted() {
-    console.log("Exam list:"+this.exam_list.length);
+    this.getPaperList();
+  },
+  methods: {
+    getPaperList() {
+      if (!this.all_files_loaded) {
+        this.page_loading = true;
+        this.$axios.$get('/api/v1/tests',
+          {
+            params: {
+              perpage: 20,
+              page: this.page,
+              // section: this.filter.level,
+              // base: this.filter.grade,
+              // lesson: this.filter.lesson
+            }
+          }).then(response => {
+          this.exam_list.push(...response.data.list);
+
+          if (response.data.list.length === 0)//For terminate auto load request
+            this.all_files_loaded = true;
+        }).catch(err => {
+          console.log(err);
+        }).finally(() => {
+            this.page_loading = false;
+          }
+        )
+      }
+    },
   }
 
 }
 </script>
 
 <style scoped>
-p{
+p {
   font-size: 1.4rem;
 }
 </style>
