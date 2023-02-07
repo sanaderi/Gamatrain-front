@@ -9,78 +9,71 @@
           </span>
         </v-col>
       </v-row>
+
+      <!--Filter section-->
+      <v-row class="d-none d-md-flex">
+        <v-col cols="12" md="3">
+          <v-autocomplete
+            dense
+            v-model="filter.level"
+            clearable
+            :items="level_list"
+            item-text="title"
+            item-value="id"
+            label="Level"
+            outlined
+            @change="filterChanged('level')"
+          />
+        </v-col>
+        <v-col cols="12" md="3">
+          <v-autocomplete
+            dense
+            v-model="filter.grade"
+            clearable
+            :items="grade_list"
+            item-value="id"
+            item-text="title"
+            label="Grade"
+            outlined
+            @change="filterChanged('grade')"
+          />
+        </v-col>
+        <v-col cols="12" md="3">
+          <v-autocomplete
+            dense
+            :items="lesson_list"
+            item-value="id"
+            item-text="title"
+            v-model="filter.lesson"
+            clearable
+            label="Lesson"
+            outlined
+            @change="filterChanged('lesson')"
+          />
+        </v-col>
+      </v-row>
+      <!--End filter section-->
+
+
       <v-card class="mt-3">
         <v-card-title class="text-h4">
           <v-row>
             <v-col cols="12" class="text-left">
               <v-btn to="/user/multimedia/create" color="teal" class="white--text">
-                New multimedia
-              </v-btn>
-              <v-btn @click="filter_block=!filter_block" color="orange" outlined class="white--text">
-                Filter
+                New Multimedia
               </v-btn>
             </v-col>
           </v-row>
         </v-card-title>
         <v-card-text class="px-sm-8 px-md-4">
-          <v-row v-show="filter_block">
-            <v-col cols="12" md="3">
-              <v-autocomplete
-                dense
-                v-model="form.level"
-                :items="level_list"
-                item-text="title"
-                item-value="id"
-                label="Level"
-                outlined
-              />
-            </v-col>
-            <v-col cols="12" md="3">
-              <v-autocomplete
-                dense
-                v-model="form.grade"
-                :items="grade_list"
-                item-value="id"
-                item-text="title"
-                label="Grade"
-                outlined
-              />
-            </v-col>
-            <v-col cols="12" md="3">
-              <v-autocomplete
-                dense
-                :items="lesson_list"
-                item-value="id"
-                item-text="title"
-                v-model="form.lesson"
-                label="Lesson"
-                outlined
-              />
-            </v-col>
-            <v-col cols="12" md="3">
-              <v-autocomplete
-                dense
-                :items="status_list"
-                item-value="id"
-                item-text="title"
-                v-model="form.status"
-                label="Status"
-                outlined
-              />
-            </v-col>
-          </v-row>
-
           <v-row>
             <v-col cols="12" class="px-0 px-sm-4 px-md-4">
-              <v-simple-table class="exams_table">
+              <v-simple-table class="content_table">
                 <template v-slot:default>
                   <thead>
                   <tr>
                     <th class="text-left text-h5">
-                      Budgeting
-                    </th>
-                    <th class="text-center  text-h5">
-                      Code
+                      #
                     </th>
                     <th class="text-center text-h5">
                       Title
@@ -104,22 +97,69 @@
                   </thead>
                   <tbody>
                   <tr
-                    v-show="exam_list.length>0"
-                    v-for="item in exam_list"
+                    v-show="multimedia_list.length>0"
+                    v-for="item in multimedia_list"
                     :key="item.id"
                   >
-                    <td></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
+                    <td>{{ item.id }}</td>
+                    <td class="text-center" style="max-width: 20rem">
+                      <a :href="`/multimedias/${item.id}/${item.title}`" target="_blank">
+                        {{item.title}}
+                      </a>
+                    </td>
+                    <td class="text-center">
+                      {{item.teacher_score}}
+                    </td>
+                    <td class="text-center">
+                      {{item.downloads}}
+                    </td>
+                    <td class="text-center">
+                      {{item.subdate}}
+                    </td>
+                    <td class="text-center">
+                      {{calcStatus(item.status)}}
+                    </td>
+                    <td class="text-center">
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn icon color="error"
+                                 @click="openDeleteConfirmDialog(item.id)"
+                                 small v-bind="attrs" v-on="on">
+                            <v-icon small>
+                              mdi-delete
+                            </v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Delete</span>
+                      </v-tooltip>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn icon small v-bind="attrs" v-on="on"
+                                 :to="`/test-maker/edit/${item.id}`"
+                          >
+                            <v-icon small>
+                              mdi-note-edit-outline
+                            </v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Edit</span>
+                      </v-tooltip>
+                    </td>
                   </tr>
-                  <tr v-show="exam_list.length===0">
-                    <td colspan="8">
-                      <p>Opps! no data found</p>
+                  <tr v-show="page_loading===false && multimedia_list.length===0">
+                    <td colspan="7" class="text-center">
+                      <p>Oops! no data found</p>
+                    </td>
+                  </tr>
+                  <tr v-show="page_loading">
+                    <td colspan="7" class="text-center">
+                      <v-progress-circular
+                        :size="30"
+                        :width="3"
+                        class="mt-12 mb-12"
+                        color="orange"
+                        indeterminate
+                      />
                     </td>
                   </tr>
                   </tbody>
@@ -136,33 +176,29 @@
 <script>
 export default {
   layout: "dashboard_layout",
-  name: "test-manage",
-  // async asyncData({params,$axios}) {
-  //   const examData=await $axios.$get('/api/v1/exams');
-  //   return {examData};
-  // },
+  name: "multimedia-manage",
   data() {
     return {
-      filter_block:false,
-      form: {
+      multimedia_list: [],
+
+
+      //Filter section
+      filter: {
         level: '',
         grade: '',
         lesson: '',
       },
-      exam_list: [],
-      level_list:[],
-      grade_list:[],
-      lesson_list:[],
-      status_list:[
-        {id:'',title:'All'},
-        {id:0,title:'Not reviewed'},
-        {id:1,title:'Confirmed'},
-        {id:2,title:'Reference to type unit'},
-        {id:3,title:'Has message'},
-        {id:4,title:'Inactive'},
-        {id:5,title:'Deleted (admin)'},
-        {id:6,title:'Edited'},
-      ]
+      level_list: [],
+      grade_list: [],
+      field_list: [],
+      lesson_list: [],
+      //End filter section
+
+      //Paginate section
+      page_loading: false,
+      page: 1,
+      all_files_loaded: false,
+      //End paginate section
     }
   },
   head() {
@@ -170,21 +206,53 @@ export default {
       title: 'Multimedia manage'
     }
   },
-  watch: {
-    "form.level"(val) {
-      this.getTypeList('base', val);
-    },
-    "form.grade"(val) {
-      this.getTypeList('lesson', val);
-    },
-    "form.lesson"(val) {
-     //
-    }
-  },
   mounted() {
+    this.getMultimediaList();
     this.getTypeList('section');
+    this.scroll();
   },
-  methods:{
+  methods: {
+    getMultimediaList() {
+      if (!this.all_files_loaded) {
+        this.page_loading = true;
+        this.$axios.$get('/api/v1/files',
+          {
+            params: {
+              perpage: 20,
+              page: this.page,
+              section: this.filter.level,
+              base: this.filter.grade,
+              lesson: this.filter.lesson
+            }
+          }).then(response => {
+          this.multimedia_list.push(...response.data.list);
+
+          if (response.data.list.length === 0)//For terminate auto load request
+            this.all_files_loaded = true;
+        }).catch(err => {
+          console.log(err);
+        }).finally(() => {
+            this.page_loading = false;
+          }
+        )
+      }
+    },
+    calcStatus(val){
+      let title='';
+      if (val==0)
+        title='Unreviewed';
+      else if (val==1)
+        title='Confirmed';
+      else if (val==2)
+        title='Reference to type unit';
+      else if (val==3)
+        title='Has a message';
+      else if (val==4)
+        title='Inactive';
+      else if (val==5)
+        title='Edited';
+      return title
+    },
     getTypeList(type, parent = '') {
       var params = {
         type: type
@@ -196,10 +264,10 @@ export default {
       }
 
 
-
       this.$axios.$get('/api/v1/types/list', {
         params
       }).then(res => {
+        var data = {};
         if (type === 'section') {
           this.level_list = res.data;
         } else if (type === 'base') {
@@ -208,18 +276,75 @@ export default {
         } else if (type === 'lesson') {
           this.lesson_list = res.data;
         }
-
       }).catch(err => {
         this.$toast.error(err);
       })
     },
+
+    scroll() {//For infinite loading
+      window.onscroll = () => {
+        //Scroll position
+        var scrollPosition = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) + window.innerHeight + 50;
+        let bottomOfWindow = scrollPosition >= document.documentElement.offsetHeight
+
+        //Avoid the number of requests
+        if (this.timer) {
+          clearTimeout(this.timer);
+          this.timer = null;
+        }
+
+        //Load next page
+        if (bottomOfWindow && this.all_files_loaded === false) {
+          this.page_loading = true;
+          this.timer = setTimeout(() => {
+            this.page++
+            this.getMultimediaList();
+          }, 800)
+        }
+      }
+    },
+
+    filterChanged(type){
+      if(type=='level') {
+        this.filter.grade = '';
+        this.filter.lesson = '';
+        if (this.filter.level)
+          this.getTypeList('base', this.filter.level);
+
+        this.page = 1;
+        this.all_files_loaded = false;
+
+        this.grade_list=[];
+        this.lesson_list=[];
+        this.multimedia_list = [];
+
+        this.getMultimediaList();
+      }
+      else if (type=='grade') {
+        this.filter.lesson = '';
+        if (this.filter.grade)
+          this.getTypeList('lesson', this.filter.grade);
+
+        this.page = 1;
+        this.all_files_loaded = false;
+        this.multimedia_list = [];
+        this.lesson_list=[];
+        this.getMultimediaList();
+      }
+      else if(type=='lesson'){
+        this.page = 1;
+        this.all_files_loaded = false;
+        this.multimedia_list = [];
+        this.getMultimediaList();
+      }
+    }
   }
 
 }
 </script>
 
 <style scoped>
-p{
+p {
   font-size: 1.4rem;
 }
 </style>
