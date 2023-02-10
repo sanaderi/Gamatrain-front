@@ -356,8 +356,15 @@ export default {
         holding_level: '',
         state: '',
         area: '',
-        school: ''
+        school: '',
+        file_pdf:'',
+        file_word:'',
       },
+      //File section
+      file_pdf:'',
+      file_word:'',
+      //End file section
+
       section_list: [],
       grade_list: [],
       field_list: [],
@@ -504,7 +511,35 @@ export default {
 
     selectTopic(event){
       this.form.topic=event;
-    }
+    },
+
+
+    uploadFile(file_name) {
+      let formData = new FormData();
+      if (file_name=='file_pdf')
+        formData.append('file', this.file_pdf);
+      else if(file_name=='file_word')
+        formData.append('file', this.file_word);
+
+      this.$axios.$post('/api/v1/upload',
+        formData,
+        {
+          headers: {
+            'accept': '*/*',
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      ).then(response => {
+        if (file_name=='file_pdf')
+        this.form.file_pdf = response.data[0].file.name;
+        else if (file_name=='file_word')
+          this.form.file_word = response.data[0].file.name;
+      }).catch(err => {
+
+      })
+      // }
+    },
+
   }
 
 }
