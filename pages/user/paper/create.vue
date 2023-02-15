@@ -10,324 +10,295 @@
         </v-col>
       </v-row>
       <v-card class="mt-3">
-          <v-card-text class="px-0 px-sm-8 px-md-4">
-            <v-card-text>
-              <v-card >
-                <v-card-text>
-                  <v-alert
-                    icon="mdi-alert-octagon-outline"
-                    class=" submission-notice"
-                  >
-                    <p>
-                      Based on Gamma's new approach, only sample questions are reviewed that the test and the answer sheet
-                      are
-                      combined in one file. So that the test questions are placed at the beginning of the file and the
-                      answer sheet is at the
-                      end of it. Also, the answer sheet is only the answers to the questions and does not repeat the text
-                      of the questions. Avoid in the
-                      answer sheet section. It is obvious that if the files are combined, there is no need to add a file
-                      for the answer sheet section in
-                      the form of sending a sample question.
-                    </p>
-                  </v-alert>
-                  <ul class="notice_item">
-                    <li>
-                      Before registering and sending sample questions and educational content, read the following guide
-                      and if you do not have
-                      a suitable template for the exam page layout, use the templates suggested by Gama.
-                    </li>
-                    <li>
-                      Only register sample questions that are the result of your own design. Also, sample questions that
-                      have word files and
-                      explanatory answers are available on the site at higher prices.
-                    </li>
-                    <li>
-                      The presence of any watermark or ID on the files, copying of other people's files and sending
-                      duplicate files are not allowed,
-                      and if such cases are observed, the user will be subject to deduction of the expert's fee.
-                    </li>
-                    <li>
-                      If you plan to publish a series of serial tests on the site, collect all the tests in one file and
-                      register the same file on the site.
-                    </li>
-                  </ul>
-                </v-card-text>
-              </v-card>
-              <v-card flat class="mt-3">
-                <validation-observer ref="observer" v-slot="{invalid}">
-                  <form @submit.prevent="submitQuestion">
-                    <v-row>
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="level" rules="required">
-                          <v-autocomplete
-                            dense
-                            v-model="form.level"
-                            :items="section_list"
-                            :error-messages="errors"
-                            item-text="title"
-                            item-value="id"
-                            label="Level"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="grade" rules="required">
-                          <v-autocomplete
-                            dense
-                            v-model="form.grade"
-                            :items="grade_list"
-                            item-value="id"
-                            item-text="title"
-                            :error-messages="errors"
-                            label="Grade"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <!--                    <v-col cols="12" md="4">-->
-                      <!--                      <validation-provider v-slot="{errors}" name="field" rules="required">-->
-                      <!--                        <v-autocomplete-->
-                      <!--                          dense-->
-                      <!--                          v-model="form.field"-->
-                      <!--                          :error-messages="errors"-->
-                      <!--                          label="Field"-->
-                      <!--                          outlined-->
-                      <!--                        />-->
-                      <!--                      </validation-provider>-->
-                      <!--                    </v-col>-->
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="lesson" rules="required">
-                          <v-autocomplete
-                            dense
-                            :items="lesson_list"
-                            item-value="id"
-                            item-text="title"
-                            v-model="form.lesson"
-                            :error-messages="errors"
-                            label="Lesson"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="12">
-                        <validation-provider v-slot="{errors}" name="topic" rules="required">
-                          <topic-selector :topic-list="topic_list"
-                                          @selectTopic="selectTopic"/>
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="test_type" rules="required">
-                          <v-autocomplete
-                            dense
-                            :items="test_type_list"
-                            item-value="id"
-                            item-text="title"
-                            v-model="form.test_type"
-                            :error-messages="errors"
-                            label="Test type"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="answer_status" rules="required">
-                          <v-autocomplete
-                            dense
-                            :items="answer_status_list"
-                            item-value="id"
-                            item-text="title"
-                            v-model="form.answer_status"
-                            :error-messages="errors"
-                            label="Answer status"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="test_level" rules="required">
-                          <v-autocomplete
-                            dense
-                            :items="test_level_list"
-                            item-value="id"
-                            item-text="title"
-                            v-model="form.test_level"
-                            :error-messages="errors"
-                            label="Level"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="year" role="required">
-                          <v-autocomplete
-                            dense
-                            :items="year_list"
-                            v-model="form.year"
-                            :error-messages="errors"
-                            label="Year"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="month" role="required">
-                          <v-autocomplete
-                            dense
-                            :items="month_list"
-                            v-model="form.month"
-                            item-text="title"
-                            item-value="id"
-                            :error-messages="errors"
-                            label="Month"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="holding_level" role="required">
-                          <v-autocomplete
-                            dense
-                            :items="holding_level_list"
-                            v-model="form.holding_level"
-                            item-text="title"
-                            item-value="id"
-                            :error-messages="errors"
-                            label="Holding level"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
+        <v-card-text class="px-0 px-sm-8 px-md-4">
+          <v-card-text>
+            <v-card flat class="mt-3">
+              <validation-observer ref="observer" v-slot="{invalid}">
+                <form @submit.prevent="submitQuestion">
+                  <v-row>
+                    <v-col cols="12" md="4">
+                      <validation-provider v-slot="{errors}" name="level" rules="required">
+                        <v-autocomplete
+                          dense
+                          v-model="form.section"
+                          :items="section_list"
+                          :error-messages="errors"
+                          item-text="title"
+                          item-value="id"
+                          label="Level"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <validation-provider v-slot="{errors}" name="grade" rules="required">
+                        <v-autocomplete
+                          dense
+                          v-model="form.base"
+                          :items="grade_list"
+                          item-value="id"
+                          item-text="title"
+                          :error-messages="errors"
+                          label="Grade"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <validation-provider v-slot="{errors}" name="lesson" rules="required">
+                        <v-autocomplete
+                          dense
+                          :items="lesson_list"
+                          item-value="id"
+                          item-text="title"
+                          v-model="form.lesson"
+                          :error-messages="errors"
+                          label="Lesson"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="12" md="12" v-if="topic_list.length">
+                      <topic-selector :topic-list="topic_list"
+                                      @selectTopic="selectTopic"/>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <v-autocomplete
+                        dense
+                        :items="test_type_list"
+                        item-value="id"
+                        item-text="title"
+                        v-model="form.test_type"
+                        label="Test type"
+                        outlined
+                      />
+                    </v-col>
+                    <v-col cols="12" md="4">
+                       <v-autocomplete
+                          dense
+                          :items="answer_status_list"
+                          item-value="id"
+                          item-text="title"
+                          v-model="form.answer_type"
+                          label="Answer status"
+                          outlined
+                        />
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <v-autocomplete
+                        dense
+                        :items="test_level_list"
+                        item-value="id"
+                        item-text="title"
+                        v-model="form.level"
+                        label="Level"
+                        outlined
+                      />
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <validation-provider v-slot="{errors}" name="year" role="required">
+                        <v-autocomplete
+                          dense
+                          :items="year_list"
+                          v-model="form.edu_year"
+                          :error-messages="errors"
+                          label="Year"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <validation-provider v-slot="{errors}" name="month" role="required">
+                        <v-autocomplete
+                          dense
+                          :items="month_list"
+                          v-model="form.edu_month"
+                          item-text="title"
+                          item-value="id"
+                          :error-messages="errors"
+                          label="Month"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <v-autocomplete
+                        dense
+                        :items="holding_level_list"
+                        v-model="form.holding_level"
+                        item-text="title"
+                        item-value="id"
+                        label="Holding level"
+                        outlined
+                      />
+                    </v-col>
 
 
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="state" role="required">
-                          <v-autocomplete
-                            dense
-                            :items="state_list"
-                            v-model="form.state"
-                            item-text="title"
-                            item-value="id"
-                            :error-messages="errors"
-                            label="State"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="area" role="required">
-                          <v-autocomplete
-                            dense
-                            :items="area_list"
-                            v-model="form.area"
-                            item-text="title"
-                            item-value="id"
-                            :error-messages="errors"
-                            label="Area"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="4" v-if="form.level && form.area">
-                        <validation-provider v-slot="{errors}" name="school" role="required">
-                          <v-autocomplete
-                            dense
-                            :items="school_list"
-                            v-model="form.school"
-                            item-text="title"
-                            item-value="id"
-                            :error-messages="errors"
-                            label="School"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
+                    <v-col cols="12" md="4" v-if="form.holding_level<4">
+                      <v-autocomplete
+                        dense
+                        :items="state_list"
+                        v-model="form.state"
+                        item-text="title"
+                        item-value="id"
+                        label="State"
+                        outlined
+                      />
+                    </v-col>
+                    <v-col cols="12" md="4" v-if="form.holding_level<3">
+                      <v-autocomplete
+                        dense
+                        :items="area_list"
+                        v-model="form.area"
+                        item-text="title"
+                        item-value="id"
+                        label="Area"
+                        outlined
+                      />
+                    </v-col>
+                    <v-col cols="12" md="4" v-if="form.holding_level<2">
+                      <v-autocomplete
+                        dense
+                        :items="school_list"
+                        v-model="form.school"
+                        item-text="title"
+                        item-value="id"
+                        label="School"
+                        outlined
+                      />
+                    </v-col>
 
 
-                      <v-col cols="12" md="12">
-                        <validation-provider v-slot="{errors}" name="title" role="required">
-                          <v-text-field
-                            dense
-                            v-model="form.title"
-                            :error-messages="errors"
-                            label="Title"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="12">
-                        <validation-provider v-slot="{errors}" name="describe" role="required">
-                          <v-textarea
-                            dense
-                            v-model="form.describe"
-                            :error-messages="errors"
-                            label="Describe"
-                            hint="You must enter at least 70 characters."
-                            persistent-hint
-                            placeholder="Write a brief description about the files to help the user make an informed choice"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="pdf_question_answer_file">
-                          <v-file-input
-                            dense
-                            v-model="form.pdf_question_answer_file"
-                            :error-messages="errors"
-                            label="Pdf question & answer file"
-                            :prepend-icon="false"
-                            color="red"
-                            prepend-inner-icon="mdi-file-pdf-box"
-                            append-icon="mdi-folder-open"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <validation-provider v-slot="{errors}" name="word_question_answer_file">
-                          <v-file-input
-                            dense
-                            v-model="form.word_question_answer_file"
-                            :error-messages="errors"
-                            label="Word question & answer file"
-                            :prepend-icon="false"
-                            color="blue"
-                            prepend-inner-icon="mdi-file-word-outline"
-                            append-icon="mdi-folder-open"
-                            outlined
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <v-col cols="12" md="12">
-                        <validation-provider v-slot="{errors}" name="word_question_answer_file">
-                          <v-checkbox
-                            dense
-                            v-model="form.free_available"
-                            :error-messages="errors"
-                            label="I would like the file to be freely available to others."
-                          />
-                        </validation-provider>
-                      </v-col>
+                    <v-col cols="12" md="12">
+                      <validation-provider v-slot="{errors}" name="title" role="required">
+                        <v-text-field
+                          dense
+                          v-model="form.title"
+                          :error-messages="errors"
+                          label="Title"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="12" md="12">
+                      <validation-provider v-slot="{errors}" name="describe" role="required">
+                        <v-textarea
+                          dense
+                          v-model="form.description"
+                          :error-messages="errors"
+                          label="Describe"
+                          hint="You must enter at least 70 characters."
+                          persistent-hint
+                          placeholder="Write a brief description about the files to help the user make an informed choice"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <validation-provider v-slot="{errors}" name="pdf_question_answer_file">
+                        <v-file-input
+                          dense
+                          v-model="file_pdf"
+                          :error-messages="errors"
+                          :prepend-icon="null"
+                          label="Pdf question & answer file"
+                          color="red"
+                          :loading="file_pdf_loading"
+                          @change="uploadFile('file_pdf')"
+                          prepend-inner-icon="mdi-file-pdf-box"
+                          append-icon="mdi-folder-open"
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                      <v-file-input
+                        dense
+                        v-model="file_word"
+                        label="Word question & answer file"
+                        :prepend-icon="null"
+                        :loading="file_word_loading"
+                        color="blue"
+                        @change="uploadFile('file_word')"
+                        prepend-inner-icon="mdi-file-word-outline"
+                        append-icon="mdi-folder-open"
+                        outlined
+                      />
+                    </v-col>
 
-                      <v-col cols="12" md="6" class="pb-0">
-                        <v-btn type="submit" lg color="success" block>
-                          Submit
-                        </v-btn>
-                      </v-col>
-                      <v-col cols="12" md="6">
-                        <v-btn lg outlined color="error" to="/user/paper" block>
-                          Discard
-                        </v-btn>
-                      </v-col>
+                    <v-col cols="12" v-if="extraAttr.length">
+                        <v-row
+                          v-for="(item,index) in extraAttr"
+                        >
+                          <v-col cols="12" md="4">
+                            <v-autocomplete :items="extra_type_list"
+                                            outlined
+                                            :value="item.type"
+                                            @input="applyExtraType($event,index)"
+                                            dense
+                                            item-text="title"
+                                            item-value="id"
+                                            label="Select file type"/>
+
+                          </v-col>
+                          <v-col cols="12" md="4">
+                            <v-file-input
+                              dense
+                              label="Select file"
+                              :prepend-icon="null"
+                              :loading="file_extra_loading"
+                              color="green"
+                              :value="item.file_extra"
+                              @change="uploadFile('file_extra',index,$event)"
+                              prepend-inner-icon="mdi-plus"
+                              append-icon="mdi-folder-open"
+                              outlined
+                            />
+                          </v-col>
+                        </v-row>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-btn outlined color="success"
+                             @click="addExtraAttr"
+                      >
+                        <v-icon>
+                          mdi-plus
+                        </v-icon>
+                        Add Solution video
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="12" md="12">
+                      <validation-provider v-slot="{errors}" name="word_question_answer_file">
+                        <v-checkbox
+                          dense
+                          v-model="form.free_agreement"
+                          :error-messages="errors"
+                          label="I would like the file to be freely available to others."
+                        />
+                      </validation-provider>
+                    </v-col>
+
+                    <v-col cols="12" md="6" class="pb-0">
+                      <v-btn type="submit" lg color="success"
+                             :disabled="invalid"
+                             :loading="submit_loading"
+                             block>
+                        Submit
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <v-btn lg outlined color="error" to="/user/paper" block>
+                        Discard
+                      </v-btn>
+                    </v-col>
 
 
-                    </v-row>
-                  </form>
-                </validation-observer>
-              </v-card>
-            </v-card-text>
+                  </v-row>
+                </form>
+              </validation-observer>
+            </v-card>
           </v-card-text>
+        </v-card-text>
       </v-card>
     </v-col>
   </v-row>
@@ -337,6 +308,7 @@
 
 import {ValidationObserver, ValidationProvider} from "vee-validate";
 import TopicSelector from "@/components/form/topic-selector";
+import querystring from "querystring";
 
 export default {
   layout: 'dashboard_layout',
@@ -344,12 +316,12 @@ export default {
   data() {
     return {
       form: {
-        level: '',
+        section: '',
         grade: '',
         lesson: '',
-        topic: '',
+        topics: '',
         test_type: '',
-        answer_status: '',
+        answer_type: 0,
         test_level: '',
         year: '',
         month: '',
@@ -357,12 +329,17 @@ export default {
         state: '',
         area: '',
         school: '',
-        file_pdf:'',
-        file_word:'',
+        file_pdf: '',
+        file_word: '',
+        free_agreement:0
       },
       //File section
-      file_pdf:'',
-      file_word:'',
+      file_pdf: null,
+      file_word: null,
+
+      file_pdf_loading: false,
+      file_word_loading: false,
+      file_extra_loading: false,
       //End file section
 
       section_list: [],
@@ -372,7 +349,7 @@ export default {
       topic_list: [],
       test_type_list: [],
       answer_status_list: [
-        {id: 0, title: "Has answer"},
+        {id: 0, title: "No answer"},
         {id: 1, title: "Has key answer"},
         {id: 2, title: "Has descriptive answer"},
       ],
@@ -414,6 +391,10 @@ export default {
       state_list: [],
       area_list: [],
       school_list: [],
+      extraAttr: [],
+      extra_type_list: [],
+
+      submit_loading:false
 
 
     }
@@ -430,25 +411,47 @@ export default {
   },
   mounted() {
     this.getTypeList('section');
-    this.getTypeList('test_type')
-    this.getTypeList('state')
+    this.getTypeList('test_type');
+    this.getTypeList('state');
+    this.getExtraFileType();
   },
   watch: {
-    "form.level"(val) {
+    "form.section"(val) {
+      this.form.grade = '';
+      this.form.lesson = '';
+      this.form.topics = [];
+      this.grade_list = [];
+      this.lesson_list = [];
+      this.topic_list = [];
+
       this.getTypeList('base', val);
-      this.getTypeList('school');
+      if (this.form.area)
+        this.getTypeList('school');
     },
-    "form.grade"(val) {
-      this.getTypeList('lesson', val);
+    "form.base"(val) {
+      this.form.lesson = '';
+      if (val)
+        this.getTypeList('lesson', val);
     },
     "form.lesson"(val) {
-      this.getTypeList('topic', val);
+      if (val)
+        this.getTypeList('topic', val);
+      else {
+        this.form.topic = [];
+        this.topic_list = [];
+      }
     },
     "form.state"(val) {
       this.getTypeList('area', val);
     },
     "form.area"(val) {
       this.getTypeList('school');
+    },
+    "form.free_agreement"(val){
+      if (val==true)
+        this.form.free_agreement=1
+      else
+        this.form.free_agreement=0;
     }
   },
   methods: {
@@ -456,6 +459,7 @@ export default {
       var params = {
         type: type
       }
+
       if (type === 'base')
         params.section_id = parent;
       if (type === 'lesson') {
@@ -468,9 +472,9 @@ export default {
         params.state_id = parent;
       }
 
-      if (type === 'school'){
-        params.section_id=this.form.level;
-        params.area_id=this.form.area;
+      if (type === 'school') {
+        params.section_id = this.form.section;
+        params.area_id = this.form.area;
       }
 
 
@@ -504,22 +508,95 @@ export default {
       })
     },
 
+    async getExtraFileType() {
+      await this.$axios.$get('/api/v1/types/list',
+        {
+          params: {
+            type: 'test_extra_file'
+          }
+        })
+        .then(response => {
+          this.extra_type_list = response.data;
+        }).catch(error => {
 
+        });
+    },
     submitQuestion() {
-      this.$toast.success("hi");
-    },
-
-    selectTopic(event){
-      this.form.topic=event;
-    },
-
-
-    uploadFile(file_name) {
+      this.submit_loading=true;
+      //Arrange to form data
       let formData = new FormData();
-      if (file_name=='file_pdf')
+      for (let key in this.form) {
+        if (!(key == 'topics' || key=='file_extra'))
+          formData.append(key, this.form[key]);
+      }
+
+      if (this.form.topics.length)
+        for (let key in this.form.topics)
+          formData.append('topics[]', this.form.topics[key]);
+
+      if (this.extraAttr.length)
+        formData.append('file_extra', this.extraAttr);
+
+      //End arrange to form data
+
+      this.$axios.$post('/api/v1/tests',
+        this.urlencodeFormData(formData),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        }).then(response => {
+          if (response.data.id==0 && response.data.repeated)
+            this.$toast.info("The paper is duplicated");
+          else{
+            this.$toast.success("Submit successfully");
+            this.$router.push({
+              path:"/user/paper"
+            })
+          }
+        }).catch(err => {
+          if (err.response.status==403)
+            this.$router.push({query:{auth_form:'login'}});
+          else if (err.response.status==400)
+            this.$toast.error(err.response.data.message);
+      }).finally(()=>{
+        this.submit_loading=false;
+      });
+    },
+
+    //Convert form data from multipart to urlencode
+    urlencodeFormData(fd) {
+      var s = '';
+
+      for (var pair of fd.entries()) {
+        if (typeof pair[1] == 'string') {
+          s += (s ? '&' : '') + this.encode(pair[0]) + '=' + this.encode(pair[1]);
+        }
+      }
+      return s;
+    },
+    encode(s) {
+      return encodeURIComponent(s).replace(/%20/g, '+');
+    },
+    //End convert form data from multipart to urlencode
+
+    selectTopic(event) {
+      this.form.topics = event;
+    },
+
+
+    uploadFile(file_name, index = '', value = '') {
+      let formData = new FormData();
+      if (file_name == 'file_pdf') {
         formData.append('file', this.file_pdf);
-      else if(file_name=='file_word')
+        this.file_pdf_loading = true;
+      } else if (file_name == 'file_word') {
         formData.append('file', this.file_word);
+        this.file_word_loading = true;
+      } else if (file_name == 'file_extra') {
+        formData.append('file', value);
+        // this.file_extra_loading = true;
+      }
 
       this.$axios.$post('/api/v1/upload',
         formData,
@@ -530,16 +607,28 @@ export default {
           }
         }
       ).then(response => {
-        if (file_name=='file_pdf')
-        this.form.file_pdf = response.data[0].file.name;
-        else if (file_name=='file_word')
+        if (file_name == 'file_pdf')
+          this.form.file_pdf = response.data[0].file.name;
+        else if (file_name == 'file_word')
           this.form.file_word = response.data[0].file.name;
+        else if (file_name == 'file_extra')
+          this.extraAttr[index].file = response.data[0].file.name;
       }).catch(err => {
 
+      }).finally(() => {
+        this.file_pdf_loading = false;
+        this.file_word_loading = false;
       })
       // }
     },
 
+
+    addExtraAttr() {
+      this.extraAttr.push({type: '', file: null});
+    },
+    applyExtraType(value, index) {
+      this.extraAttr[index].type = value;
+    }
   }
 
 }

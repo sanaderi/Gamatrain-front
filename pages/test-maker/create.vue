@@ -1167,7 +1167,7 @@ export default {
       test_loading: false,
       all_tests_loaded: false,
       tests: [],
-      test_share_link: `gamatrain.com/online-test/${this.$store.state["user/examCode"]}`,
+      test_share_link: '',
       printPreviewDialog: false,
       confirmDeleteDialog: false,
       deleteLoading: false,
@@ -1202,6 +1202,7 @@ export default {
 
     if (this.exam_id)
       this.getExamCurrentTests();
+
 
 
   },
@@ -1447,7 +1448,7 @@ export default {
         this.$toast.success("Created successfully");
         this.exam_id = response.data.id;
         this.exam_code = response.data.code;
-        this.test_share_link = `gamatrain.com/online-test/${response.data.code}`
+        // this.test_share_link = `gamatrain.com/online-test/${response.data.code}`
 
         this.$store.commit('user/setCurrentExamId', this.exam_id);
         this.$store.commit('user/setCurrentExamCode', this.exam_code);
@@ -1496,6 +1497,9 @@ export default {
               MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             });
           }
+
+          this.$refs["create-form"].examTestListLenght=this.tests.length;
+
 
           if (response.data.list.length === 0)//For terminate auto load request
             this.all_tests_loaded = true;
@@ -1609,6 +1613,7 @@ export default {
       })
         .then(response => {
           this.previewTestList = response.data.list;
+          this.$refs["create-form"].examTestListLenght=this.tests.length;
 
           if (this.previewTestList.length) {
             this.$nextTick(function () {
@@ -1629,10 +1634,15 @@ export default {
      */
     publishTest() {
       this.publish_loading = true;
-      this.$axios.$put(`/api/v1/exams/publish/${this.exam_id}`)
+      var examId=this.exam_id;
+      this.$axios.$put(`/api/v1/exams/publish/${examId}`)
         .then(response => {
           if (response.data.message === 'done') {
+            this.test_share_link = `${process.env.BASE_URL}/exams/${examId}/your_exam`
+
+
             this.exam_id = '';
+
             this.exam_code = '';
             this.$store.commit('user/setCurrentExamId', this.exam_id);
             this.$store.commit('user/setCurrentExamCode', this.exam_code);

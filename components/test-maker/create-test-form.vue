@@ -335,12 +335,12 @@
                   <v-btn
                     @click="goToPreviewStep"
                     v-show="$nuxt.$route.path=='/test-maker/create'"
-                    :disabled="$store.getters['user/getPreviewTestListLength']<5"
+                    :disabled="examTestListLenght<5"
                     lg color="teal" class="white--text" block>
-                    <span v-show="$store.getters['user/getPreviewTestListLength']<5">Add at least {{
-                        5 - $store.getters['user/getPreviewTestListLength']
+                    <span v-show="examTestListLenght<5">Add at least {{
+                        5 - examTestListLenght
                       }} more tests</span>
-                    <span v-show="$store.getters['user/getPreviewTestListLength']>=5">Next step</span>
+                    <span v-show="examTestListLenght>=5">Next step</span>
                   </v-btn>
                 </v-col>
               </v-row>
@@ -537,7 +537,8 @@ export default {
       text_answer: true,
       text_answer_rules: 'required',
       photo_answer: false,
-      photo_answer_rules: ''
+      photo_answer_rules: '',
+      examTestListLenght:0
     }
   },
   mounted() {

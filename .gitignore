@@ -91,3 +91,5 @@ sw.*
 
 # Service worker
 sw.*
+
+OneSignalSDK*

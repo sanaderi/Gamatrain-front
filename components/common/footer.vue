@@ -147,39 +147,60 @@
         <v-col
           md="2"
           cols="4"
-          class="d-flex justify-center footer-bar-item align-center"
-          >Tutor</v-col
+          class="d-flex justify-center footer-bar-item align-center">
+          <nuxt-link to="/search?type=azmoon">
+            Exam
+          </nuxt-link>
+        </v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >Tutor</v-col
+          >
+          <nuxt-link to="/search?type=test">
+            Paper
+          </nuxt-link>
+        </v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >Tutor</v-col
+          >
+          <nuxt-link to="/search?type=learnfiles">
+            Multimedia
+          </nuxt-link>
+        </v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >Tutor</v-col
+          >
+          <nuxt-link to="/search?type=question">
+            Q & A
+          </nuxt-link>
+        </v-col
         >
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >Tutor</v-col
         >
+          <nuxt-link to="/search?type=dars">
+            Tutorial
+          </nuxt-link>
+        </v-col>
         <v-col
           md="2"
           cols="4"
           class="d-flex justify-center footer-bar-item align-center"
-          >Tutor</v-col
-        >
+          >
+          <nuxt-link to="/search?type=tutor">
+            Tutor
+          </nuxt-link>
+        </v-col>
       </v-row>
     </div>
   </div>
