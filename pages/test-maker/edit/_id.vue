@@ -175,16 +175,16 @@
                   </validation-provider>
                 </v-col>
 
-                <v-col cols="12" md="4">
-                  <v-file-input
-                    dense
-                    v-model="file_original"
-                    @change="uploadFile('file_original')"
-                    accept="application/pdf"
-                    label="Source file"
-                    outlined
-                  />
-                </v-col>
+<!--                <v-col cols="12" md="4">-->
+<!--                  <v-file-input-->
+<!--                    dense-->
+<!--                    v-model="file_original"-->
+<!--                    @change="uploadFile('file_original')"-->
+<!--                    accept="application/pdf"-->
+<!--                    label="Source file"-->
+<!--                    outlined-->
+<!--                  />-->
+<!--                </v-col>-->
 
                 <v-col cols="12" md="4"
                        v-if="form.holding_level===1 || form.holding_level===2 || form.holding_level===3">
@@ -943,6 +943,7 @@
                                  v-show="!tests.find(x=>x==item.id)"
                                  @click="applyTest(item,'add')"
                           >
+
                             <v-icon small dark>
                               mdi-plus
                             </v-icon>
@@ -1171,7 +1172,7 @@ export default {
       test_loading: false,
       all_tests_loaded: false,
       tests: [],
-      test_share_link: `gamatrain.com/online-test/${this.exam_code}`,
+      test_share_link: `${process.env.BASE_URI}/exams/${this.$route.params.id}`,
       printPreviewDialog: false,
       confirmDeleteDialog: false,
       deleteLoading: false,
@@ -1197,6 +1198,7 @@ export default {
     this.getTypeList('exam_type');
     this.getTypeList('state');
 
+    this.getCurrentExamInfo();
 
     this.getExamTests();
 
@@ -1344,7 +1346,7 @@ export default {
           console.log(response);
           this.tests = response.data.tests.length ? response.data.tests : [];
           this.exam_code = response.data.code;
-          this.test_share_link = `gamatrain.com/online-test/${this.exam_code}`;
+          this.test_share_link = `${process.env.BASE_URI}/exams/${this.$route.params.id}`;
           this.form.section = response.data.section;
           this.form.base = response.data.base;
           this.form.lesson = response.data.lesson;
@@ -1515,11 +1517,13 @@ export default {
         .then(response => {
           this.test_list.push(...response.data.list);
 
+
           if (this.test_list.length) {
             this.$nextTick(function () {
               MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             });
           }
+          this.$refs["create-form"].examTestListLenght=this.tests.length;
 
           if (response.data.list.length === 0)//For terminate auto load request
             this.all_tests_loaded = true;
@@ -1540,6 +1544,7 @@ export default {
       })
         .then(response => {
           this.previewTestList = response.data.list;
+          this.$refs["create-form"].examTestListLenght=this.tests.length;
 
           if (this.previewTestList.length) {
             this.$nextTick(function () {

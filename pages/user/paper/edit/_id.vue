@@ -14,7 +14,7 @@
           <v-card-text>
             <v-card flat class="mt-3">
               <validation-observer ref="observer" v-slot="{invalid}">
-                <form @submit.prevent="submitQuestion">
+                <form @submit.prevent="updateQuestion">
                   <v-row>
                     <v-col cols="12" md="4">
                       <validation-provider v-slot="{errors}" name="level" rules="required">
@@ -23,6 +23,7 @@
                           v-model="form.section"
                           :items="section_list"
                           :error-messages="errors"
+                          @change="changeOption('section',$event)"
                           item-text="title"
                           item-value="id"
                           label="Level"
@@ -35,6 +36,7 @@
                         <v-autocomplete
                           dense
                           v-model="form.base"
+                          @change="changeOption('base',$event)"
                           :items="grade_list"
                           item-value="id"
                           item-text="title"
@@ -51,6 +53,7 @@
                           :items="lesson_list"
                           item-value="id"
                           item-text="title"
+                          @change="changeOption('lesson',$event)"
                           v-model="form.lesson"
                           :error-messages="errors"
                           label="Lesson"
@@ -60,6 +63,7 @@
                     </v-col>
                     <v-col cols="12" md="12" v-if="topic_list.length">
                       <topic-selector :topic-list="topic_list"
+                                      :selectedTopics="form.topics"
                                       @selectTopic="selectTopic"/>
                     </v-col>
                     <v-col cols="12" md="4">
@@ -74,15 +78,15 @@
                       />
                     </v-col>
                     <v-col cols="12" md="4">
-                       <v-autocomplete
-                          dense
-                          :items="answer_status_list"
-                          item-value="id"
-                          item-text="title"
-                          v-model="form.answer_type"
-                          label="Answer status"
-                          outlined
-                        />
+                      <v-autocomplete
+                        dense
+                        :items="answer_status_list"
+                        item-value="id"
+                        item-text="title"
+                        v-model="form.answer_type"
+                        label="Answer status"
+                        outlined
+                      />
                     </v-col>
                     <v-col cols="12" md="4">
                       <v-autocomplete
@@ -139,6 +143,7 @@
                         dense
                         :items="state_list"
                         v-model="form.state"
+                        @change="changeOption('state',$event)"
                         item-text="title"
                         item-value="id"
                         label="State"
@@ -150,6 +155,7 @@
                         dense
                         :items="area_list"
                         v-model="form.area"
+                        @change="changeOption('area',$event)"
                         item-text="title"
                         item-value="id"
                         label="Area"
@@ -227,35 +233,35 @@
                     </v-col>
 
                     <v-col cols="12" v-if="extraAttr.length">
-                        <v-row
-                          v-for="(item,index) in extraAttr"
-                        >
-                          <v-col cols="12" md="4">
-                            <v-autocomplete :items="extra_type_list"
-                                            outlined
-                                            :value="item.type"
-                                            @input="applyExtraType($event,index)"
-                                            dense
-                                            item-text="title"
-                                            item-value="id"
-                                            label="Select file type"/>
+                      <v-row
+                        v-for="(item,index) in extraAttr"
+                      >
+                        <v-col cols="12" md="4">
+                          <v-autocomplete :items="extra_type_list"
+                                          outlined
+                                          :value="item.type"
+                                          @input="applyExtraType($event,index)"
+                                          dense
+                                          item-text="title"
+                                          item-value="id"
+                                          label="Select file type"/>
 
-                          </v-col>
-                          <v-col cols="12" md="4">
-                            <v-file-input
-                              dense
-                              label="Select file"
-                              :prepend-icon="null"
-                              :loading="file_extra_loading"
-                              color="green"
-                              :value="item.file_extra"
-                              @change="uploadFile('file_extra',index,$event)"
-                              prepend-inner-icon="mdi-plus"
-                              append-icon="mdi-folder-open"
-                              outlined
-                            />
-                          </v-col>
-                        </v-row>
+                        </v-col>
+                        <v-col cols="12" md="4">
+                          <v-file-input
+                            dense
+                            label="Select file"
+                            :prepend-icon="null"
+                            :loading="file_extra_loading"
+                            color="green"
+                            :value="item.file_extra"
+                            @change="uploadFile('file_extra',index,$event)"
+                            prepend-inner-icon="mdi-plus"
+                            append-icon="mdi-folder-open"
+                            outlined
+                          />
+                        </v-col>
+                      </v-row>
                     </v-col>
                     <v-col cols="12">
                       <v-btn outlined color="success"
@@ -281,9 +287,9 @@
                     <v-col cols="12" md="6" class="pb-0">
                       <v-btn type="submit" lg color="success"
                              :disabled="invalid"
-                             :loading="submit_loading"
+                             :loading="update_loading"
                              block>
-                        Submit
+                        Update
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
@@ -312,7 +318,7 @@ import querystring from "querystring";
 
 export default {
   layout: 'dashboard_layout',
-  name: "add-paper",
+  name: "edit-paper",
   data() {
     return {
       form: {
@@ -322,16 +328,18 @@ export default {
         topics: '',
         test_type: '',
         answer_type: 0,
-        test_level: '',
-        year: '',
-        month: '',
+        level: '',
+        edu_year: '',
+        edu_month: '',
         holding_level: '',
+        title:'',
+        description:'',
         state: '',
         area: '',
         school: '',
         file_pdf: '',
         file_word: '',
-        free_agreement:0
+        free_agreement: 0
       },
       //File section
       file_pdf: null,
@@ -394,15 +402,27 @@ export default {
       extraAttr: [],
       extra_type_list: [],
 
-      submit_loading:false
+      update_loading: false
 
 
     }
   },
   head() {
     return {
-      title: 'Add paper'
+      title: 'Edit paper'
     }
+  },
+  async asyncData({params, $axios}) {
+    // This could also be an action dispatch
+    const content = await $axios.$get(`/api/v1/tests/${params.id}`);
+    var paperData = [];
+
+    //Check data exist
+    if (content.status === 1) {
+      paperData = content.data;
+    }
+
+    return {paperData};
   },
   components: {
     TopicSelector,
@@ -414,47 +434,50 @@ export default {
     this.getTypeList('test_type');
     this.getTypeList('state');
     this.getExtraFileType();
+    this.initData();
   },
   watch: {
-    "form.section"(val) {
-      this.form.grade = '';
-      this.form.lesson = '';
-      this.form.topics = [];
-      this.grade_list = [];
-      this.lesson_list = [];
-      this.topic_list = [];
-
-      this.getTypeList('base', val);
-      if (this.form.area)
-        this.getTypeList('school');
-    },
-    "form.base"(val) {
-      this.form.lesson = '';
-      if (val)
-        this.getTypeList('lesson', val);
-    },
-    "form.lesson"(val) {
-      if (val)
-        this.getTypeList('topic', val);
-      else {
-        this.form.topic = [];
-        this.topic_list = [];
-      }
-    },
-    "form.state"(val) {
-      this.getTypeList('area', val);
-    },
-    "form.area"(val) {
-      this.getTypeList('school');
-    },
-    "form.free_agreement"(val){
-      if (val==true)
-        this.form.free_agreement=1
+    "form.free_agreement"(val) {
+      if (val == true)
+        this.form.free_agreement = 1
       else
-        this.form.free_agreement=0;
+        this.form.free_agreement = 0;
     }
   },
   methods: {
+    //Change option method
+    changeOption(optionName, optionVal) {
+      if (optionName == 'section') {
+        this.form.grade = '';
+        this.form.lesson = '';
+        this.form.topics = [];
+        this.grade_list = [];
+        this.lesson_list = [];
+        this.topic_list = [];
+
+        this.getTypeList('base', optionVal);
+        if (this.form.area)
+          this.getTypeList('school');
+
+      } else if (optionName == 'base') {
+        this.form.lesson = '';
+        if (optionVal)
+          this.getTypeList('lesson', optionVal);
+      } else if (optionName == 'lesson') {
+        if (optionVal)
+          this.getTypeList('topic', optionVal);
+        else {
+          this.form.topic = [];
+          this.topic_list = [];
+        }
+      } else if (optionName == 'state') {
+        this.getTypeList('area', val);
+      } else if (optionName == 'area') {
+        this.getTypeList('school');
+      }
+    },
+
+    //Get type list method
     getTypeList(type, parent = '') {
       var params = {
         type: type
@@ -507,7 +530,6 @@ export default {
         this.$toast.error(err);
       })
     },
-
     async getExtraFileType() {
       await this.$axios.$get('/api/v1/types/list',
         {
@@ -521,12 +543,12 @@ export default {
 
         });
     },
-    submitQuestion() {
-      this.submit_loading=true;
+    updateQuestion() {
+      this.update_loading = true;
       //Arrange to form data
       let formData = new FormData();
       for (let key in this.form) {
-        if (!(key == 'topics' || key=='file_extra'))
+        if (!(key == 'topics' || key == 'file_extra'))
           formData.append(key, this.form[key]);
       }
 
@@ -534,34 +556,34 @@ export default {
         for (let key in this.form.topics)
           formData.append('topics[]', this.form.topics[key]);
 
+      const querystring = require('querystring');
       if (this.extraAttr.length)
-        for (let key in this.extraAttr)
-          formData.append('file_extra[]', JSON.stringify(this.extraAttr[key]));
+        formData.append('file_extra', this.extraAttr);
 
       //End arrange to form data
 
-      this.$axios.$post('/api/v1/tests',
+      this.$axios.$put('/api/v1/tests',
         this.urlencodeFormData(formData),
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
           }
         }).then(response => {
-          if (response.data.id==0 && response.data.repeated)
-            this.$toast.info("The paper is duplicated");
-          else{
-            this.$toast.success("Submit successfully");
-            this.$router.push({
-              path:"/user/paper"
-            })
-          }
-        }).catch(err => {
-          if (err.response.status==403)
-            this.$router.push({query:{auth_form:'login'}});
-          else if (err.response.status==400)
-            this.$toast.error(err.response.data.message);
-      }).finally(()=>{
-        this.submit_loading=false;
+        if (response.data.id == 0 && response.data.repeated)
+          this.$toast.info("The paper is duplicated");
+        else {
+          this.$toast.success("Updated successfully");
+          this.$router.push({
+            path: "/user/paper"
+          })
+        }
+      }).catch(err => {
+        if (err.response.status == 403)
+          this.$router.push({query: {auth_form: 'login'}});
+        else if (err.response.status == 400)
+          this.$toast.error(err.response.data.message);
+      }).finally(() => {
+        this.update_loading = false;
       });
     },
 
@@ -629,6 +651,49 @@ export default {
     },
     applyExtraType(value, index) {
       this.extraAttr[index].type = value;
+    },
+    initData() {
+      this.form.section = this.paperData.section;
+      if (this.form.section) {//Load grad list
+        this.form.grade = '';
+        this.form.lesson = '';
+        this.form.topics = [];
+        this.grade_list = [];
+        this.lesson_list = [];
+        this.topic_list = [];
+
+        this.getTypeList('base', this.form.section);
+        if (this.form.area)
+          this.getTypeList('school');
+      }
+      this.form.base = this.paperData.base;
+      if (this.form.base) {//Load lesson list
+        this.form.lesson = '';
+        if (this.form.base)
+          this.getTypeList('lesson', this.form.base);
+      }
+      this.form.lesson = this.paperData.lesson;
+      if (this.form.lesson)
+        this.getTypeList('topic', this.form.lesson);
+      else {
+        this.form.topic = [];
+        this.topic_list = [];
+      }
+
+      if (this.paperData.topic)
+        this.form.topics=this.paperData.topic.split('+');
+
+
+      this.form.test_type=this.paperData.test_type;
+      this.form.answer_type = parseInt(this.paperData.answer_type);
+      this.form.level = this.paperData.level;
+      this.form.edu_year = parseInt(this.paperData.edu_year);
+      this.form.edu_month = parseInt(this.paperData.edu_month);
+      this.form.holding_level = parseInt(this.paperData.holding_level);
+      this.form.title = this.paperData.title;
+      this.form.description = this.paperData.description;
+
+      this.form.files=this.paperData;
     }
   }
 

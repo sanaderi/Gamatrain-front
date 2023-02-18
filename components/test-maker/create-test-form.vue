@@ -327,14 +327,8 @@
                   </v-btn>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-btn v-show="$nuxt.$route.path!='/test-maker/create'" lg outlined color="error" to="/test-maker"
-                         block>
-                    Discard
-                  </v-btn>
-
                   <v-btn
                     @click="goToPreviewStep"
-                    v-show="$nuxt.$route.path=='/test-maker/create'"
                     :disabled="examTestListLenght<5"
                     lg color="teal" class="white--text" block>
                     <span v-show="examTestListLenght<5">Add at least {{

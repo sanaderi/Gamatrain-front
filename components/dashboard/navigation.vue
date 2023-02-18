@@ -9,7 +9,7 @@
         link
         :to="item.link"
       >
-        <v-list-item-icon>
+        <v-list-item-icon class="mr-2">
           <v-icon v-text="item.icon"></v-icon>
         </v-list-item-icon>
         <v-list-item-content>
@@ -24,7 +24,7 @@
         :value="false"
       >
         <template v-slot:activator>
-          <v-list-item-icon>
+          <v-list-item-icon class="mr-2">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
           <v-list-item-title v-text="item.title" class="py-2"></v-list-item-title>

@@ -8,7 +8,7 @@
         </span>
       </v-col>
       <v-col cols="6" id="tool-box" class="text-right">
-        <v-btn outlined color="error" fab small @click="confirmDeleteDialog=true">
+        <v-btn outlined color="error" :disabled="!exam_id" fab small @click="confirmDeleteDialog=true">
           <v-icon>
             mdi-delete
           </v-icon>
@@ -404,6 +404,7 @@
                 :items="topic_list"
                 item-value="id"
                 item-text="title"
+                clearable
                 v-model="filter.topic"
                 label="Topic"
                 outlined
@@ -421,6 +422,7 @@
                 dense
                 :items="video_analysis_options"
                 item-value="value"
+                clearable
                 item-text="title"
                 v-model="filter.testsHasVideo"
                 label="Video analysis"
@@ -1638,7 +1640,7 @@ export default {
       this.$axios.$put(`/api/v1/exams/publish/${examId}`)
         .then(response => {
           if (response.data.message === 'done') {
-            this.test_share_link = `${process.env.BASE_URL}/exams/${examId}/your_exam`
+            this.test_share_link = `${process.env.BASE_URI}/exams/${examId}`
 
 
             this.exam_id = '';
@@ -1650,7 +1652,6 @@ export default {
             this.previewTestList = [];
             this.$store.commit('user/setCurrentExamId', '');
             this.tests = [];
-
             //Reset form
             this.form.section = "";
             this.grade_list = [];
@@ -1660,6 +1661,8 @@ export default {
             this.form.type = "";
             this.form.duration = 3;
             this.form.title = "";
+            this.form.file_original='';
+
             //End reset form
 
 
