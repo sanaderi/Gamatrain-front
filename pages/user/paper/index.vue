@@ -124,6 +124,7 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn icon color="green"
                                  :to="`/papers/${item.id}`"
+                                 target="_blank"
                                  small v-bind="attrs" v-on="on">
                             <v-icon small>
                               mdi-eye
@@ -182,6 +183,46 @@
         </v-card-text>
       </v-card>
     </v-col>
+
+     <!--Delete dialog-->
+    <v-dialog
+      v-model="deleteConfirmDialog"
+      max-width="290"
+    >
+      <v-card>
+        <v-card-title class="text-h5">
+          Are you sure?
+        </v-card-title>
+
+        <v-card-text>
+          <p>
+            If you are sure to delete, click Yes.
+          </p>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            text
+            @click="deleteConfirmDialog = false"
+          >
+            No
+          </v-btn>
+
+          <v-btn
+            color="green darken-1"
+            text
+            :loading="delete_loading"
+            @click="deletePaper()"
+          >
+            Yes
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!--End delete dialog-->
+
   </div>
 </template>
 
@@ -211,6 +252,12 @@ export default {
       page: 1,
       all_files_loaded: false,
       //End paginate section
+
+
+      //Delete section
+      deleteConfirmDialog:false,
+      delete_paper_id:null,
+      delete_loading:false,
     }
   },
   head() {
@@ -349,6 +396,31 @@ export default {
         this.paper_list = [];
         this.getPaperList();
       }
+    },
+
+
+    openDeleteConfirmDialog(item_id) {
+      this.delete_paper_id = item_id;
+      this.deleteConfirmDialog = true;
+    },
+
+    async deletePaper() {
+      this.delete_loading=true;
+      await this.$axios.$delete(`/api/v1/tests/${this.delete_paper_id}`,
+      ).then(response => {
+        this.delete_paper_id = null;
+        this.deleteConfirmDialog = false;
+
+        this.$toast.success("Deleted successfully");
+        this.paper_list = [];
+        this.getPaperList();
+      })
+        .catch(e => {
+          this.delete_paper_id = null;
+          this.deleteConfirmDialog = false;
+        }).finally(()=>{
+          this.delete_loading=false;
+        })
     }
   }
 

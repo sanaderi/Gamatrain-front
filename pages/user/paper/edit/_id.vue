@@ -214,13 +214,24 @@
                           prepend-inner-icon="mdi-file-pdf-box"
                           append-icon="mdi-folder-open"
                           outlined
-                        />
+                        >
+                          <template slot="append-outer">
+                            <v-btn small icon
+                                   @click="startDownload('q_pdf')"
+                                   v-show="paperData.files.pdf.exist">
+                              <v-icon>
+                                mdi-download
+                              </v-icon>
+                            </v-btn>
+                          </template>
+                        </v-file-input>
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
                       <v-file-input
                         dense
                         v-model="file_word"
+                        @click="startDownload('q_word')"
                         label="Word question & answer file"
                         :prepend-icon="null"
                         :loading="file_word_loading"
@@ -229,7 +240,15 @@
                         prepend-inner-icon="mdi-file-word-outline"
                         append-icon="mdi-folder-open"
                         outlined
-                      />
+                      >
+                        <template slot="append-outer">
+                          <v-btn small icon v-show="paperData.files.word.exist">
+                            <v-icon>
+                              mdi-download
+                            </v-icon>
+                          </v-btn>
+                        </template>
+                      </v-file-input>
                     </v-col>
 
                     <v-col cols="12" v-if="extraAttr.length">
@@ -259,7 +278,18 @@
                             prepend-inner-icon="mdi-plus"
                             append-icon="mdi-folder-open"
                             outlined
-                          />
+                          >
+                            <template slot="append-outer">
+                              <v-btn small icon
+                                     v-show="item.id"
+                                     @click="startDownload('extra',item.id)"
+                              >
+                                <v-icon>
+                                  mdi-download
+                                </v-icon>
+                              </v-btn>
+                            </template>
+                          </v-file-input>
                         </v-col>
                       </v-row>
                     </v-col>
@@ -332,13 +362,11 @@ export default {
         edu_year: '',
         edu_month: '',
         holding_level: '',
-        title:'',
-        description:'',
+        title: '',
+        description: '',
         state: '',
         area: '',
         school: '',
-        file_pdf: '',
-        file_word: '',
         free_agreement: 0
       },
       //File section
@@ -402,7 +430,8 @@ export default {
       extraAttr: [],
       extra_type_list: [],
 
-      update_loading: false
+      update_loading: false,
+      download_loading:false,
 
 
     }
@@ -556,13 +585,14 @@ export default {
         for (let key in this.form.topics)
           formData.append('topics[]', this.form.topics[key]);
 
-      const querystring = require('querystring');
       if (this.extraAttr.length)
-        formData.append('file_extra', this.extraAttr);
+        for (let key in this.extraAttr)
+          formData.append('file_extra[]', JSON.stringify(this.extraAttr[key]));
+
 
       //End arrange to form data
 
-      this.$axios.$put('/api/v1/tests',
+      this.$axios.$put(`/api/v1/tests/${this.$route.params.id}`,
         this.urlencodeFormData(formData),
         {
           headers: {
@@ -681,10 +711,10 @@ export default {
       }
 
       if (this.paperData.topic)
-        this.form.topics=this.paperData.topic.split('+');
+        this.form.topics = this.paperData.topic.split('+');
 
 
-      this.form.test_type=this.paperData.test_type;
+      this.form.test_type = this.paperData.test_type;
       this.form.answer_type = parseInt(this.paperData.answer_type);
       this.form.level = this.paperData.level;
       this.form.edu_year = parseInt(this.paperData.edu_year);
@@ -693,8 +723,46 @@ export default {
       this.form.title = this.paperData.title;
       this.form.description = this.paperData.description;
 
-      this.form.files=this.paperData;
+      if (this.paperData.files.extra)
+        for (let index in this.paperData.files.extra)
+          this.extraAttr.push({type:this.paperData.files.extra[index].type,
+            id:this.paperData.files.extra[index].id})
+    },
+
+    //Download file
+    startDownload(type,extra_id=''){
+      if (this.$auth.loggedIn){
+        this.download_loading=true;
+        let apiUrl='';
+        if (type==='q_word')
+          apiUrl=`/api/v1/tests/download/${this.$route.params.id}/word`
+        if (type==='q_pdf')
+          apiUrl=`/api/v1/tests/download/${this.$route.params.id}/pdf`
+        if (type==='a_file')
+          apiUrl=`/api/v1/tests/download/${this.$route.params.id}/answer`
+        if (type==='extra')
+          apiUrl=`/api/v1/tests/download/${this.$route.params.id}/${extra_id}`
+        this.$axios.$get(apiUrl)
+          .then(response=>{
+            var FileSaver = require('file-saver');
+            FileSaver.saveAs(response.data.url,response.data.name);
+          }).catch(err=>{
+          if (err.response.status==400){
+            if (err.response.data.status==0 && err.response.data.error=="creditNotEnough"){
+              this.$toast.info("No enough credit");
+            }
+          }else if (err.response.status==403){
+            this.$router.push({query:{auth_form:'login'}});
+          }
+          console.log(err);
+        }).finally(()=>{
+          this.download_loading=false;
+        })
+      }else{
+        this.openAuthDialog('login');
+      }
     }
+    //End download file
   }
 
 }
