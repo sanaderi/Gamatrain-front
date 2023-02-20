@@ -1,5 +1,5 @@
 import {extend, localize}                from "vee-validate";
-import {required, email, confirmed, min,size,image} from "vee-validate/dist/rules";
+import {required, email, confirmed, min,size,image,mimes} from "vee-validate/dist/rules";
 
 let phoneRegex = /^\+(?:[0-9\-] ?){6,14}[0-9]$/;
 const phone    = {
@@ -26,6 +26,7 @@ const dictionary = {
       tel   : () => `Tel is not valid`,
       size    : (_, {size}) => `Max size is ${size}KB`,
       image    : () => `Image type is incorrect`,
+      mimes    : () => `Type is incorrect`,
     },
   },
 };
@@ -38,6 +39,7 @@ extend("min", min);
 extend("phone", phone);
 extend("tel", tel);
 extend("image", image);
+extend("mimes", mimes);
 
 
 localize(dictionary);

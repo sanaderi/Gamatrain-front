@@ -100,7 +100,7 @@
                       />
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="year" role="required">
+                      <validation-provider v-slot="{errors}" name="year" rules="required">
                         <v-autocomplete
                           dense
                           :items="year_list"
@@ -112,7 +112,7 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="month" role="required">
+                      <validation-provider v-slot="{errors}" name="month" rules="required">
                         <v-autocomplete
                           dense
                           :items="month_list"
@@ -176,7 +176,7 @@
 
 
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="title" role="required">
+                      <validation-provider v-slot="{errors}" name="title" rules="required">
                         <v-text-field
                           dense
                           v-model="form.title"
@@ -187,7 +187,7 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="describe" role="required">
+                      <validation-provider v-slot="{errors}" name="describe" rules="required">
                         <v-textarea
                           dense
                           v-model="form.description"
