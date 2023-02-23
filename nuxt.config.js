@@ -59,18 +59,18 @@ export default {
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
     '@nuxtjs/pwa',
-    '@nuxtjs/onesignal',
+    // '@nuxtjs/onesignal',
   ],
 
-  oneSignal: {
-    init: {
-      appId: '782b76df-8189-482c-9047-1070af2d4a74',
-      allowLocalhostAsSecureOrigin: true,
-      welcomeNotification: {
-        disable: true
-      }
-    }
-  },
+  // oneSignal: {
+  //   init: {
+  //     appId: '782b76df-8189-482c-9047-1070af2d4a74',
+  //     allowLocalhostAsSecureOrigin: true,
+  //     welcomeNotification: {
+  //       disable: true
+  //     }
+  //   }
+  // },
 
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -198,7 +198,7 @@ export default {
   },
 
   server: {
-    host: "0.0.0.0",
+    // host: "0.0.0.0",
     port: 3002
   }
 };

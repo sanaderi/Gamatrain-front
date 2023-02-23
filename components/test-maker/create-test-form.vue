@@ -91,7 +91,8 @@
             <v-col cols="12" md="6" id="test-maker-question">
               <p>Question:</p>
               <client-only placeholder="loading...">
-                <validation-provider v-slot="{errors}" name="question" rules="required">
+                <validation-provider v-slot="{errors}" name="question"
+                                     rules="required">
                   <ckeditor-nuxt v-model="form.question" :config="editorConfig"/>
                 </validation-provider>
               </client-only>
@@ -819,8 +820,6 @@ export default {
       }).then(response => {
         this.file_original_path = URL.createObjectURL(response);
       })
-
-
     },
 
 

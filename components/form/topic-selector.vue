@@ -41,6 +41,11 @@
 export default {
   props: ['topicList','selectedTopics'],
   name: "topic-selector",
+  // $_veeValidate: {
+  //   value () {
+  //     return this.topic;
+  //   }
+  // },
   data() {
     return {
       topic:this.selectedTopics ? this.selectedTopics : [],

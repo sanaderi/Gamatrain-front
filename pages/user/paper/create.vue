@@ -45,7 +45,8 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="lesson" rules="required">
+                      <validation-provider v-slot="{errors}" name="lesson"
+                                           rules="required">
                         <v-autocomplete
                           dense
                           :items="lesson_list"
