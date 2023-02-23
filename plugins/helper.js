@@ -58,6 +58,30 @@ const timeAgo={
 }
 
 
+//Convert form data from multipart to urlencode
+// const encodeURI={
+//   name:'encodeURI',
+//   convert(s){
+//     return encodeURIComponent(s).replace(/%20/g, '+');
+//   }
+// }
+//
+// const urlencodeFormData={
+//   name:'urlencodeFormData',
+//   apply(fd){
+//     var s = '';
+//     for (var pair of fd.entries()) {
+//       if (typeof pair[1] == 'string') {
+//         s += (s ? '&' : '') + this.$encodeURI.convert(pair[0]) + '=' + this.$encodeURI.convert(pair[1]);
+//       }
+//     }
+//     return s;
+//   }
+// }
+//End convert form data from multipart to urlencode
+
+
+
 //End Methods to retrieve image file whole of project
 
 
@@ -68,6 +92,8 @@ export default ({ $auth,app}, inject) => {
   inject('loadAvatar', loadAvatar);
   inject('testLevel',testLevel);
   inject('timeAgo',timeAgo);
+  // inject('encodeURI',encodeURI);
+  // inject('urlencodeFormData',urlencodeFormData);
 
 
 

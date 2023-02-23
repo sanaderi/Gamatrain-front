@@ -103,7 +103,7 @@
                   >
                     <td>{{ item.id }}</td>
                     <td class="text-center" style="max-width: 20rem">
-                      <a :href="`/multimedias/${item.id}/${item.title}`" target="_blank">
+                      <a :href="`/multimedia/${item.id}/${item.title}`" target="_blank">
                         {{item.title}}
                       </a>
                     </td>

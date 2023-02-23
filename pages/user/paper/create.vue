@@ -187,7 +187,7 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="description" rules="required">
+                      <validation-provider v-slot="{errors}" name="description" rules="required|min:70">
                         <v-textarea
                           dense
                           v-model="form.description"

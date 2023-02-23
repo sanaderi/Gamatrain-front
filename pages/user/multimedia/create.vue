@@ -14,13 +14,13 @@
           <v-card-text>
             <v-card flat class="mt-3">
               <validation-observer ref="observer" v-slot="{invalid}">
-                <form @submit.prevent="submitQuestion">
+                <form @submit.prevent="submitContent">
                   <v-row>
                     <v-col cols="12" md="4">
                       <validation-provider v-slot="{errors}" name="level" rules="required">
                         <v-autocomplete
                           dense
-                          v-model="form.level"
+                          v-model="form.section"
                           :items="section_list"
                           :error-messages="errors"
                           item-text="title"
@@ -34,7 +34,7 @@
                       <validation-provider v-slot="{errors}" name="grade" rules="required">
                         <v-autocomplete
                           dense
-                          v-model="form.grade"
+                          v-model="form.base"
                           :items="grade_list"
                           item-value="id"
                           item-text="title"
@@ -44,19 +44,9 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <!--                    <v-col cols="12" md="4">-->
-                    <!--                      <validation-provider v-slot="{errors}" name="field" rules="required">-->
-                    <!--                        <v-autocomplete-->
-                    <!--                          dense-->
-                    <!--                          v-model="form.field"-->
-                    <!--                          :error-messages="errors"-->
-                    <!--                          label="Field"-->
-                    <!--                          outlined-->
-                    <!--                        />-->
-                    <!--                      </validation-provider>-->
-                    <!--                    </v-col>-->
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="lesson" rules="required">
+                      <validation-provider v-slot="{errors}" name="lesson"
+                                           rules="required">
                         <v-autocomplete
                           dense
                           :items="lesson_list"
@@ -69,23 +59,9 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="12" md="12">
+                    <v-col cols="12" md="12" v-if="topic_list.length">
                       <validation-provider v-slot="{errors}" name="topic" rules="required">
                         <topic-selector :topic-list="topic_list" @selectTopic="selectTopic"/>
-                      </validation-provider>
-                    </v-col>
-                    <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="content_type" rules="required">
-                        <v-autocomplete
-                          dense
-                          :items="content_type_list"
-                          item-value="id"
-                          item-text="title"
-                          v-model="form.content_type"
-                          :error-messages="errors"
-                          label="Content type"
-                          outlined
-                        />
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
@@ -100,10 +76,10 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="describe" rules="required">
+                      <validation-provider v-slot="{errors}" name="description" rules="required|min:70">
                         <v-textarea
                           dense
-                          v-model="form.describe"
+                          v-model="form.description"
                           :error-messages="errors"
                           label="Describe"
                           hint="You must enter at least 70 characters."
@@ -113,74 +89,94 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="12">
-                      <v-checkbox
-                        dense
-                        v-model="form.online_teaching"
-                        label="This is an online teaching session"
-                      />
+                    <!--                    <v-col cols="12">-->
+                    <!--                      <v-checkbox-->
+                    <!--                        dense-->
+                    <!--                        v-model="form.online_teaching"-->
+                    <!--                        label="This is an online teaching session"-->
+                    <!--                      />-->
 
+                    <!--                    </v-col>-->
+                    <!--                    <v-col cols="12" md="12" v-show="form.online_teaching">-->
+                    <!--                      <v-date-picker-->
+                    <!--                        v-model="form.date"-->
+                    <!--                        full-width-->
+                    <!--                      ></v-date-picker>-->
+                    <!--                    </v-col>-->
+                    <!--                    <v-col-->
+                    <!--                      cols="12"-->
+                    <!--                      md="4"-->
+                    <!--                      v-show="form.online_teaching"-->
+                    <!--                    >-->
+                    <!--                      <v-menu-->
+                    <!--                        ref="menu"-->
+                    <!--                        v-model="timepicker_menu"-->
+                    <!--                        :close-on-content-click="false"-->
+                    <!--                        :nudge-right="40"-->
+                    <!--                        :return-value.sync="form.teaching_time"-->
+                    <!--                        transition="scale-transition"-->
+                    <!--                        offset-y-->
+                    <!--                      >-->
+                    <!--                        <template v-slot:activator="{ on, attrs }">-->
+                    <!--                          <v-text-field-->
+                    <!--                            v-model="form.teaching_time"-->
+                    <!--                            label="Start time"-->
+                    <!--                            prepend-icon="mdi-clock-time-four-outline"-->
+                    <!--                            readonly-->
+                    <!--                            outlined-->
+                    <!--                            dense-->
+                    <!--                            v-bind="attrs"-->
+                    <!--                            v-on="on"-->
+                    <!--                          ></v-text-field>-->
+                    <!--                        </template>-->
+                    <!--                        <v-time-picker-->
+                    <!--                          v-if="timepicker_menu"-->
+                    <!--                          v-model="form.teaching_time"-->
+                    <!--                          full-width-->
+                    <!--                          @click:minute="$refs.menu.save(form.teaching_time)"-->
+                    <!--                        ></v-time-picker>-->
+                    <!--                      </v-menu>-->
+                    <!--                    </v-col>-->
+                    <!--                    <v-col cols="12" md="4" v-show="form.online_teaching">-->
+                    <!--                      <v-text-field-->
+                    <!--                        outlined-->
+                    <!--                        dense-->
+                    <!--                        v-model="form.duration"-->
+                    <!--                        type="number"-->
+                    <!--                        min="0"-->
+                    <!--                        label="Duration(min)"/>-->
+                    <!--                    </v-col>-->
+
+
+                    <v-col cols="12" md="4">
+                      <validation-provider v-slot="{errors}" name="content_type" rules="required">
+                        <v-autocomplete
+                          dense
+                          :items="content_type_list"
+                          item-value="id"
+                          item-text="title"
+                          v-model="form.content_type"
+                          :error-messages="errors"
+                          label="Content type"
+                          outlined
+                        />
+                      </validation-provider>
                     </v-col>
-                    <v-col cols="12" md="12" v-show="form.online_teaching">
-                      <v-date-picker
-                        v-model="form.date"
-                        full-width
-                      ></v-date-picker>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      md="4"
-                      v-show="form.online_teaching"
-                    >
-                      <v-menu
-                        ref="menu"
-                        v-model="timepicker_menu"
-                        :close-on-content-click="false"
-                        :nudge-right="40"
-                        :return-value.sync="form.teaching_time"
-                        transition="scale-transition"
-                        offset-y
+                    <v-col cols="12" md="4">
+                      <validation-provider
+                        v-slot="{validate,errors}" name="multimedia_file"
+                        rules="required|mimes:video/*,audio/*,application/exe,application/zip,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats,officedocument.presentationml.presentation"
+                        ref="file_provider"
                       >
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-text-field
-                            v-model="form.teaching_time"
-                            label="Start time"
-                            prepend-icon="mdi-clock-time-four-outline"
-                            readonly
-                            outlined
-                            dense
-                            v-bind="attrs"
-                            v-on="on"
-                          ></v-text-field>
-                        </template>
-                        <v-time-picker
-                          v-if="timepicker_menu"
-                          v-model="form.teaching_time"
-                          full-width
-                          @click:minute="$refs.menu.save(form.teaching_time)"
-                        ></v-time-picker>
-                      </v-menu>
-                    </v-col>
-                    <v-col cols="12" md="4" v-show="form.online_teaching">
-                      <v-text-field
-                        outlined
-                        dense
-                        v-model="form.duration"
-                        type="number"
-                        min="0"
-                        label="Duration(min)"/>
-                    </v-col>
-
-
-                    <v-col cols="12" md="4" v-show="!form.online_teaching">
-                      <validation-provider v-slot="{errors}" name="pdf_question_answer_file">
                         <v-file-input
                           dense
-                          v-model="form.pdf_question_answer_file"
                           :error-messages="errors"
                           label="Multimedia file"
-                          prepend-icon=""
+                          :prepend-icon="null"
                           color="red"
+                          v-model="multimedia_file"
+                          accept=".mp4,.avi,.m4a,.mpg,.flv,.docx,.pptx,.pdf,.exe,.apk,.mp3,.wave,.acc,.swf,.gif,.zip"
+                          @change="uploadFile('file',$event)"
                           prepend-inner-icon="mdi-play-box"
                           append-icon="mdi-folder-open"
                           outlined
@@ -215,7 +211,10 @@
                     </v-col>
 
                     <v-col cols="12" md="6" class="pb-0">
-                      <v-btn type="submit" lg color="success" block>
+                      <v-btn type="submit"
+                             :disabled="invalid"
+                             :loading="loading.form"
+                             lg color="success" block>
                         Submit
                       </v-btn>
                     </v-col>
@@ -251,15 +250,22 @@ export default {
         level: '',
         grade: '',
         lesson: '',
-        topic: '',
+        topics: [],
         content_type: '',
-        online_teaching:false,
-        date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-        teaching_time:null,
-
+        // online_teaching:false,
+        // date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+        // teaching_time:null,
+        from_page: '',
+        to_page: '',
+        free_agreement: 0,
+        title: '',
+        description: '',
+        file: ''
       },
 
-      timepicker_menu:false,
+      multimedia_file:null,
+
+      // timepicker_menu:false,
       section_list: [],
       grade_list: [],
       field_list: [],
@@ -305,6 +311,11 @@ export default {
       school_list: [],
 
 
+      //Handle loading object
+      loading:{
+        file:false,//Upload file
+        form:false,//Submit multimedia form
+      }
     }
   },
   head() {
@@ -323,22 +334,43 @@ export default {
     this.getTypeList('state')
   },
   watch: {
-    "form.level"(val) {
+    "form.section"(val) {
+      this.form.grade = '';
+      this.form.lesson = '';
+      this.form.topics = [];
+      this.grade_list = [];
+      this.lesson_list = [];
+      this.topic_list = [];
+
       this.getTypeList('base', val);
       if (this.form.area)
         this.getTypeList('school');
     },
-    "form.grade"(val) {
-      this.getTypeList('lesson', val);
+    "form.base"(val) {
+      this.form.lesson = '';
+      if (val)
+        this.getTypeList('lesson', val);
     },
     "form.lesson"(val) {
-      this.getTypeList('topic', val);
+      if (val)
+        this.getTypeList('topic', val);
+      else {
+        this.form.topic = [];
+        this.topic_list = [];
+      }
     },
+
     "form.state"(val) {
       this.getTypeList('area', val);
     },
     "form.area"(val) {
       this.getTypeList('school');
+    },
+    "form.free_agreement"(val) {
+      if (val == true)
+        this.form.free_agreement = 1
+      else
+        this.form.free_agreement = 0;
     }
   },
   methods: {
@@ -395,12 +427,101 @@ export default {
     },
 
 
-    submitQuestion() {
-      this.$toast.success("hi");
+    submitContent() {
+      this.submit_loading = true;
+      //Arrange to form data
+      let formData = new FormData();
+      for (let key in this.form) {
+        if (!(key == 'topics'))
+          formData.append(key, this.form[key]);
+      }
+
+      if (this.form.topics.length)
+        for (let key in this.form.topics)
+          formData.append('topics[]', this.form.topics[key]);
+
+      //End arrange to form data
+
+      this.$axios.$post('/api/v1/files',
+        this.urlencodeFormData(formData),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        }).then(response => {
+        if (response.data.id == 0 && response.data.repeated)
+          this.$toast.info("Th  e multimedia is duplicated");
+        else {
+          this.$toast.success("Submit successfully");
+          this.$router.push({
+            path: "/user/multimedia"
+          })
+        }
+      }).catch(err => {
+        if (err.response.status == 403)
+          this.$router.push({query: {auth_form: 'login'}});
+        else if (err.response.status == 400)
+          this.$toast.error(err.response.data.message);
+      }).finally(() => {
+        this.submit_loading = false;
+      });
     },
-    selectTopic(event){
-      this.form.topic=event;
-    }
+
+    //Convert form data from multipart to urlencode
+    urlencodeFormData(fd) {
+      var s = '';
+
+      for (var pair of fd.entries()) {
+        if (typeof pair[1] == 'string') {
+          s += (s ? '&' : '') + this.encode(pair[0]) + '=' + this.encode(pair[1]);
+        }
+      }
+      return s;
+    },
+    encode(s) {
+      return encodeURIComponent(s).replace(/%20/g, '+');
+    },
+    //End convert form data from multipart to urlencode
+
+
+    selectTopic(event) {
+      this.form.topics = event;
+    },
+
+    async uploadFile(file_name, value) {
+      if (!value)
+        return;
+
+      const { valid } = await this.$refs.file_provider.validate(value);
+
+      if (valid){
+        this.loading.file=true;
+        if (!value)//Check empty request
+          return;
+        let formData = new FormData();
+        formData.append('file', value);
+
+        this.$axios.$post('/api/v1/upload',
+          formData,
+          {
+            headers: {
+              'accept': '*/*',
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        ).then(response => {
+          this.form.file = response.data[0].file.name;
+        }).catch(err => {
+          this.$toast.error("An error occurred");
+        }).finally(() => {
+          this.loading.file = false;
+        })
+      }
+
+
+      // }
+    },
+
   }
 
 }
