@@ -75,7 +75,10 @@
                       />
                     </v-col>
                     <v-col cols="12" md="4">
-                       <v-autocomplete
+                      <validation-provider
+                        v-slot="{errors}" name="answer_type" rules="required"
+                      >
+                        <v-autocomplete
                           dense
                           :items="answer_status_list"
                           item-value="id"
@@ -84,6 +87,7 @@
                           label="Answer status"
                           outlined
                         />
+                      </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
                       <v-autocomplete
@@ -97,7 +101,7 @@
                       />
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="year" role="required">
+                      <validation-provider v-slot="{errors}" name="edu_year" rules="required">
                         <v-autocomplete
                           dense
                           :items="year_list"
@@ -109,7 +113,8 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="month" role="required">
+                      <validation-provider v-slot="{errors}"
+                                           name="edu_month" rules="required">
                         <v-autocomplete
                           dense
                           :items="month_list"
@@ -171,7 +176,7 @@
 
 
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="title" role="required">
+                      <validation-provider v-slot="{errors}" name="title" rules="required">
                         <v-text-field
                           dense
                           v-model="form.title"
@@ -182,7 +187,7 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="describe" role="required">
+                      <validation-provider v-slot="{errors}" name="description" rules="required">
                         <v-textarea
                           dense
                           v-model="form.description"
@@ -196,16 +201,21 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="pdf_question_answer_file">
+                      <validation-provider v-slot="{validate,errors}"
+                                           name="pdf_question_answer_file"
+                                           rules="required|mimes:application/pdf"
+                      >
                         <v-file-input
                           dense
                           v-model="file_pdf"
                           :error-messages="errors"
                           :prepend-icon="null"
+                          accept="application/pdf"
+                          ref="file_pdf_provider"
                           label="Pdf question & answer file"
                           color="red"
                           :loading="file_pdf_loading"
-                          @change="uploadFile('file_pdf')"
+                          @change="uploadFile('file_pdf',$event),validate"
                           prepend-inner-icon="mdi-file-pdf-box"
                           append-icon="mdi-folder-open"
                           outlined
@@ -213,50 +223,57 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <v-file-input
-                        dense
-                        v-model="file_word"
-                        label="Word question & answer file"
-                        :prepend-icon="null"
-                        :loading="file_word_loading"
-                        color="blue"
-                        @change="uploadFile('file_word')"
-                        prepend-inner-icon="mdi-file-word-outline"
-                        append-icon="mdi-folder-open"
-                        outlined
-                      />
+                      <validation-provider v-slot="{validate,errors}"
+                                           name="file_word"
+                                           rules="mimes:application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                      >
+                        <v-file-input
+                          dense
+                          v-model="file_word"
+                          label="Word question & answer file"
+                          :prepend-icon="null"
+                          :error-messages="errors"
+                          accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          :loading="file_word_loading"
+                          color="blue"
+                          @change="uploadFile('file_word',$event)"
+                          prepend-inner-icon="mdi-file-word-outline"
+                          append-icon="mdi-folder-open"
+                          outlined
+                        />
+                      </validation-provider>
                     </v-col>
 
                     <v-col cols="12" v-if="extraAttr.length">
-                        <v-row
-                          v-for="(item,index) in extraAttr"
-                        >
-                          <v-col cols="12" md="4">
-                            <v-autocomplete :items="extra_type_list"
-                                            outlined
-                                            :value="item.type"
-                                            @input="applyExtraType($event,index)"
-                                            dense
-                                            item-text="title"
-                                            item-value="id"
-                                            label="Select file type"/>
+                      <v-row
+                        v-for="(item,index) in extraAttr"
+                      >
+                        <v-col cols="12" md="4">
+                          <v-autocomplete :items="extra_type_list"
+                                          outlined
+                                          :value="item.type"
+                                          @input="applyExtraType($event,index)"
+                                          dense
+                                          item-text="title"
+                                          item-value="id"
+                                          label="Select file type"/>
 
-                          </v-col>
-                          <v-col cols="12" md="4">
-                            <v-file-input
-                              dense
-                              label="Select file"
-                              :prepend-icon="null"
-                              :loading="file_extra_loading"
-                              color="green"
-                              :value="item.file_extra"
-                              @change="uploadFile('file_extra',index,$event)"
-                              prepend-inner-icon="mdi-plus"
-                              append-icon="mdi-folder-open"
-                              outlined
-                            />
-                          </v-col>
-                        </v-row>
+                        </v-col>
+                        <v-col cols="12" md="4">
+                          <v-file-input
+                            dense
+                            label="Select file"
+                            :prepend-icon="null"
+                            :loading="file_extra_loading"
+                            color="green"
+                            :value="item.file_extra"
+                            @change="uploadFile('file_extra',$event,index)"
+                            prepend-inner-icon="mdi-plus"
+                            append-icon="mdi-folder-open"
+                            outlined
+                          />
+                        </v-col>
+                      </v-row>
                     </v-col>
                     <v-col cols="12">
                       <v-btn outlined color="success"
@@ -332,7 +349,9 @@ export default {
         school: '',
         file_pdf: '',
         file_word: '',
-        free_agreement:0
+        free_agreement: 0,
+        edu_year: '',
+        edu_month: '',
       },
       //File section
       file_pdf: null,
@@ -395,7 +414,7 @@ export default {
       extraAttr: [],
       extra_type_list: [],
 
-      submit_loading:false
+      submit_loading: false
 
 
     }
@@ -448,11 +467,11 @@ export default {
     "form.area"(val) {
       this.getTypeList('school');
     },
-    "form.free_agreement"(val){
-      if (val==true)
-        this.form.free_agreement=1
+    "form.free_agreement"(val) {
+      if (val == true)
+        this.form.free_agreement = 1
       else
-        this.form.free_agreement=0;
+        this.form.free_agreement = 0;
     }
   },
   methods: {
@@ -523,11 +542,11 @@ export default {
         });
     },
     submitQuestion() {
-      this.submit_loading=true;
+      this.submit_loading = true;
       //Arrange to form data
       let formData = new FormData();
       for (let key in this.form) {
-        if (!(key == 'topics' || key=='file_extra'))
+        if (!(key == 'topics' || key == 'file_extra'))
           formData.append(key, this.form[key]);
       }
 
@@ -548,21 +567,21 @@ export default {
             "Content-Type": "application/x-www-form-urlencoded"
           }
         }).then(response => {
-          if (response.data.id==0 && response.data.repeated)
-            this.$toast.info("The paper is duplicated");
-          else{
-            this.$toast.success("Submit successfully");
-            this.$router.push({
-              path:"/user/paper"
-            })
-          }
-        }).catch(err => {
-          if (err.response.status==403)
-            this.$router.push({query:{auth_form:'login'}});
-          else if (err.response.status==400)
-            this.$toast.error(err.response.data.message);
-      }).finally(()=>{
-        this.submit_loading=false;
+        if (response.data.id == 0 && response.data.repeated)
+          this.$toast.info("The paper is duplicated");
+        else {
+          this.$toast.success("Submit successfully");
+          this.$router.push({
+            path: "/user/paper"
+          })
+        }
+      }).catch(err => {
+        if (err.response.status == 403)
+          this.$router.push({query: {auth_form: 'login'}});
+        else if (err.response.status == 400)
+          this.$toast.error(err.response.data.message);
+      }).finally(() => {
+        this.submit_loading = false;
       });
     },
 
@@ -587,13 +606,15 @@ export default {
     },
 
 
-    uploadFile(file_name, index = '', value = '') {
+    uploadFile(file_name, value, index = '') {
+      if (!value)//Check empty request
+        return;
       let formData = new FormData();
       if (file_name == 'file_pdf') {
-        formData.append('file', this.file_pdf);
+        formData.append('file', value);
         this.file_pdf_loading = true;
       } else if (file_name == 'file_word') {
-        formData.append('file', this.file_word);
+        formData.append('file', value);
         this.file_word_loading = true;
       } else if (file_name == 'file_extra') {
         formData.append('file', value);

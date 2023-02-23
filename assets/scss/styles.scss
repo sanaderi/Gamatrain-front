@@ -395,9 +395,7 @@ body {
             margin-bottom: 0;
           }
 
-          .v-text-field__details {
-            display: none;
-          }
+
 
           .theme--light.v-btn:hover::before {
             opacity: 0;
@@ -663,11 +661,7 @@ body {
           background: blue !important;
         }
 
-        .v-input__control {
-          .v-text-field__details {
-            display: none;
-          }
-        }
+
       }
 
       .search-item {

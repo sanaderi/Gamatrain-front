@@ -142,7 +142,7 @@
 
                 <!--                <v-col cols="12" md="4"-->
                 <!--                >-->
-                <!--                  <validation-provider v-slot="{errors}" name="holding_level" role="required">-->
+                <!--                  <validation-provider v-slot="{errors}" name="holding_level" rules="required">-->
                 <!--                    <v-autocomplete-->
                 <!--                      dense-->
                 <!--                      :items="holding_level_list"-->
@@ -158,7 +158,7 @@
 
 
                 <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="test_duration" role="required">
+                  <validation-provider v-slot="{errors}" name="test_duration" rules="required">
                     <v-text-field
                       dense
                       v-model="form.duration"
@@ -220,7 +220,7 @@
                 </v-col>
 
                 <v-col cols="12" md="12">
-                  <validation-provider v-slot="{errors}" name="title" role="required">
+                  <validation-provider v-slot="{errors}" name="title" rules="required">
                     <v-text-field
                       dense
                       v-model="form.title"

@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style>
-.v-text-field__details{
+.grade-search .v-text-field__details{
   display: none!important;
 }
 </style>
