@@ -5,7 +5,7 @@
         <v-col cols="12" class="pl-5">
           <span class="icon icong-learnfiles text-h3 teal--text"></span>
           <span class="text-h4 teal--text">
-            Multimedia submission form
+            Edit multimedia
           </span>
         </v-col>
       </v-row>
@@ -14,12 +14,13 @@
           <v-card-text>
             <v-card flat class="mt-3">
               <validation-observer ref="observer" v-slot="{invalid}">
-                <form @submit.prevent="submitContent">
+                <form @submit.prevent="updateContent">
                   <v-row>
                     <v-col cols="12" md="4">
                       <validation-provider v-slot="{errors}" name="level" rules="required">
                         <v-autocomplete
                           dense
+                          @change="changeOption('section',$event)"
                           v-model="form.section"
                           :items="section_list"
                           :error-messages="errors"
@@ -34,6 +35,7 @@
                       <validation-provider v-slot="{errors}" name="grade" rules="required">
                         <v-autocomplete
                           dense
+                          @change="changeOption('base',$event)"
                           v-model="form.base"
                           :items="grade_list"
                           item-value="id"
@@ -53,6 +55,7 @@
                           item-value="id"
                           item-text="title"
                           v-model="form.lesson"
+                          @change="changeOption('lesson',$event)"
                           :error-messages="errors"
                           label="Lesson"
                           outlined
@@ -61,7 +64,9 @@
                     </v-col>
                     <v-col cols="12" md="12" v-if="topic_list.length">
                       <validation-provider v-slot="{errors}" name="topic" rules="required">
-                        <topic-selector :topic-list="topic_list" @selectTopic="selectTopic"/>
+                        <topic-selector :topic-list="topic_list"
+                                        :selectedTopics="form.topics"
+                                        @selectTopic="selectTopic"/>
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
@@ -165,7 +170,7 @@
                     <v-col cols="12" md="4">
                       <validation-provider
                         v-slot="{validate,errors}" name="multimedia_file"
-                        rules="required|mimes:video/*,audio/*,application/exe,application/zip,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats,officedocument.presentationml.presentation"
+                        rules="mimes:video/*,audio/*,application/exe,application/zip,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats,officedocument.presentationml.presentation"
                         ref="file_provider"
                       >
                         <v-file-input
@@ -180,7 +185,17 @@
                           prepend-inner-icon="mdi-play-box"
                           append-icon="mdi-folder-open"
                           outlined
-                        />
+                        >
+                          <template slot="append-outer">
+                            <v-btn small icon
+                                   @click="startDownload()"
+                                   v-show="multimediaData.files.exist">
+                              <v-icon>
+                                mdi-download
+                              </v-icon>
+                            </v-btn>
+                          </template>
+                        </v-file-input>
                       </validation-provider>
                     </v-col>
 
@@ -199,23 +214,13 @@
                     <v-col cols="12" md="4">
                       <v-text-field type="number" min="1" label="To page" dense outlined v-model="form.to_page"/>
                     </v-col>
-                    <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="word_question_answer_file">
-                        <v-checkbox
-                          dense
-                          v-model="form.free_available"
-                          :error-messages="errors"
-                          label="I would like the file to be freely available to others."
-                        />
-                      </validation-provider>
-                    </v-col>
 
                     <v-col cols="12" md="6" class="pb-0">
                       <v-btn type="submit"
                              :disabled="invalid"
                              :loading="loading.form"
                              lg color="success" block>
-                        Submit
+                        Update
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
@@ -243,7 +248,7 @@ import TopicSelector from "@/components/form/topic-selector";
 
 export default {
   layout: 'dashboard_layout',
-  name: "add-multimedia",
+  name: "edit-multimedia",
   data() {
     return {
       form: {
@@ -257,7 +262,6 @@ export default {
         // teaching_time:null,
         from_page: '',
         to_page: '',
-        free_agreement: 0,
         title: '',
         description: '',
         file: ''
@@ -306,22 +310,31 @@ export default {
         {id: 11, title: "November"},
         {id: 12, title: "December"},
       ],
-      state_list: [],
-      area_list: [],
-      school_list: [],
 
 
       //Handle loading object
       loading:{
         file:false,//Upload file
-        form:false,//Submit multimedia form
+        form:false,//Update multimedia form
       }
     }
   },
   head() {
     return {
-      title: 'Multimedia submission'
+      title: 'Edit multimedia'
     }
+  },
+  async asyncData({params, $axios}) {
+    // This could also be an action dispatch
+    const content = await $axios.$get(`/api/v1/files/${params.id}`);
+    var multimediaData = [];
+
+    //Check data exist
+    if (content.status === 1) {
+      multimediaData = content.data;
+    }
+
+    return {multimediaData};
   },
   components: {
     TopicSelector,
@@ -331,47 +344,7 @@ export default {
   mounted() {
     this.getTypeList('section');
     this.getTypeList('content_type')
-    this.getTypeList('state')
-  },
-  watch: {
-    "form.section"(val) {
-      this.form.grade = '';
-      this.form.lesson = '';
-      this.form.topics = [];
-      this.grade_list = [];
-      this.lesson_list = [];
-      this.topic_list = [];
-
-      this.getTypeList('base', val);
-      if (this.form.area)
-        this.getTypeList('school');
-    },
-    "form.base"(val) {
-      this.form.lesson = '';
-      if (val)
-        this.getTypeList('lesson', val);
-    },
-    "form.lesson"(val) {
-      if (val)
-        this.getTypeList('topic', val);
-      else {
-        this.form.topic = [];
-        this.topic_list = [];
-      }
-    },
-
-    "form.state"(val) {
-      this.getTypeList('area', val);
-    },
-    "form.area"(val) {
-      this.getTypeList('school');
-    },
-    "form.free_agreement"(val) {
-      if (val == true)
-        this.form.free_agreement = 1
-      else
-        this.form.free_agreement = 0;
-    }
+    this.initData();
   },
   methods: {
     getTypeList(type, parent = '') {
@@ -386,14 +359,7 @@ export default {
       if (type === 'topic') {
         params.lesson_id = parent;
       }
-      if (type === 'area') {
-        params.state_id = parent;
-      }
 
-      if (type === 'school') {
-        params.section_id = this.form.level;
-        params.area_id = this.form.area;
-      }
 
 
       this.$axios.$get('/api/v1/types/list', {
@@ -412,12 +378,6 @@ export default {
           this.topic_list = res.data;
         } else if (type === 'content_type') {
           this.content_type_list = res.data;
-        } else if (type === 'state') {
-          this.state_list = res.data;
-        } else if (type === 'area') {
-          this.area_list = res.data;
-        } else if (type === 'school') {
-          this.school_list = res.data;
         }
 
 
@@ -427,8 +387,8 @@ export default {
     },
 
 
-    submitContent() {
-      this.submit_loading = true;
+    updateContent() {
+      this.loading.form = true;
       //Arrange to form data
       let formData = new FormData();
       for (let key in this.form) {
@@ -442,7 +402,7 @@ export default {
 
       //End arrange to form data
 
-      this.$axios.$post('/api/v1/files',
+      this.$axios.$put(`/api/v1/files/${this.$route.params.id}`,
         this.urlencodeFormData(formData),
         {
           headers: {
@@ -452,7 +412,7 @@ export default {
         if (response.data.id == 0 && response.data.repeated)
           this.$toast.info("Th  e multimedia is duplicated");
         else {
-          this.$toast.success("Submit successfully");
+          this.$toast.success("Updated successfully");
           this.$router.push({
             path: "/user/multimedia"
           })
@@ -463,7 +423,7 @@ export default {
         else if (err.response.status == 400)
           this.$toast.error(err.response.data.message);
       }).finally(() => {
-        this.submit_loading = false;
+        this.loading.form = false;
       });
     },
 
@@ -522,6 +482,108 @@ export default {
       // }
     },
 
+
+    initData() {
+      this.form.section = this.multimediaData.section;
+      if (this.form.section) {//Load grad list
+        this.form.grade = '';
+        this.form.lesson = '';
+        this.form.topics = [];
+        this.grade_list = [];
+        this.lesson_list = [];
+        this.topic_list = [];
+
+        this.getTypeList('base', this.form.section);
+
+      }
+      this.form.base = this.multimediaData.base;
+      if (this.form.base) {//Load lesson list
+        this.form.lesson = '';
+        if (this.form.base)
+          this.getTypeList('lesson', this.form.base);
+      }
+      this.form.lesson = this.multimediaData.lesson;
+      if (this.form.lesson)
+        this.getTypeList('topic', this.form.lesson);
+      else {
+        this.form.topic = [];
+        this.topic_list = [];
+      }
+
+      if (this.multimediaData.topic){
+        this.form.topics = this.multimediaData.topic.split('+');
+      }
+
+
+      this.form.test_type = this.multimediaData.test_type;
+      this.form.answer_type = parseInt(this.multimediaData.answer_type);
+      this.form.level = this.multimediaData.level;
+      this.form.edu_year = parseInt(this.multimediaData.edu_year);
+      this.form.edu_month = parseInt(this.multimediaData.edu_month);
+      this.form.holding_level = parseInt(this.multimediaData.holding_level);
+      this.form.title = this.multimediaData.title;
+      this.form.description = this.multimediaData.description;
+      this.form.content_type = this.multimediaData.content_type;
+      this.form.from_page = this.multimediaData.from_page;
+      this.form.to_page = this.multimediaData.to_page;
+
+    },
+
+    //Download file
+    startDownload(){
+      if (this.$auth.loggedIn){
+        this.download_loading=true;
+        let apiUrl='';
+         apiUrl=`/api/v1/files/download/${this.$route.params.id}`
+        this.$axios.$get(apiUrl)
+          .then(response=>{
+            var FileSaver = require('file-saver');
+            FileSaver.saveAs(response.data.url,response.data.name);
+          }).catch(err=>{
+          if (err.response.status==400){
+            if (err.response.data.status==0 && err.response.data.error=="creditNotEnough"){
+              this.$toast.info("No enough credit");
+            }
+          }else if (err.response.status==403){
+            this.$router.push({query:{auth_form:'login'}});
+          }
+          console.log(err);
+        }).finally(()=>{
+          this.download_loading=false;
+        })
+      }else{
+        this.openAuthDialog('login');
+      }
+    },
+    //End download file
+
+
+    //Change option method
+    changeOption(optionName, optionVal) {
+      if (optionName == 'section') {
+        this.form.grade = '';
+        this.form.lesson = '';
+        this.form.topics = [];
+        this.grade_list = [];
+        this.lesson_list = [];
+        this.topic_list = [];
+
+        this.getTypeList('base', optionVal);
+
+
+      } else if (optionName == 'base') {
+        this.form.lesson = '';
+        if (optionVal)
+          this.getTypeList('lesson', optionVal);
+      } else if (optionName == 'lesson') {
+        if (optionVal)
+          this.getTypeList('topic', optionVal);
+        else {
+          this.form.topic = [];
+          this.topic_list = [];
+        }
+      }
+    },
   }
 
 }
