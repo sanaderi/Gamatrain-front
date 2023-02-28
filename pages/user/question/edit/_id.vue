@@ -5,7 +5,7 @@
         <v-col cols="12" class="pl-5">
           <span class="icon icong-test text-h3 teal--text"></span>
           <span class="text-h4 teal--text">
-            Q & A submission form
+            Q & A edit
           </span>
         </v-col>
       </v-row>
@@ -14,13 +14,14 @@
           <v-card-text>
             <v-card flat class="mt-3">
               <validation-observer ref="observer" v-slot="{invalid}">
-                <form @submit.prevent="submitContent">
+                <form @submit.prevent="updateContent">
                   <v-row>
                     <v-col cols="12" md="3">
                       <validation-provider v-slot="{errors}" name="level" rules="required">
                         <v-autocomplete
                           dense
                           v-model="form.section"
+                          @change="changeOption('section',$event)"
                           :items="section_list"
                           :error-messages="errors"
                           item-text="title"
@@ -38,6 +39,7 @@
                           :items="grade_list"
                           item-value="id"
                           item-text="title"
+                          @change="changeOption('base',$event)"
                           :error-messages="errors"
                           label="Grade"
                           outlined
@@ -59,6 +61,7 @@
                       <validation-provider v-slot="{errors}" name="lesson" rules="required">
                         <v-autocomplete
                           dense
+                          @change="changeOption('lesson',$event)"
                           :items="lesson_list"
                           item-value="id"
                           item-text="title"
@@ -132,7 +135,18 @@
                           prepend-inner-icon="mdi-file"
                           append-icon="mdi-folder-open"
                           outlined
-                        />
+                        >
+                          <template slot="append-outer">
+                            <v-btn small icon
+                                   :href="questionData.files.url"
+                                   target="_blank"
+                                   v-show="questionData.files.exist">
+                              <v-icon>
+                                mdi-download
+                              </v-icon>
+                            </v-btn>
+                          </template>
+                        </v-file-input>
                       </validation-provider>
                     </v-col>
 
@@ -144,7 +158,7 @@
                              :loading="loading.form"
                              :disabled="invalid"
                              lg color="success" block>
-                        Submit
+                        Update
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
@@ -169,7 +183,7 @@ import {ValidationObserver, ValidationProvider} from "vee-validate";
 
 export default {
   layout: 'dashboard_layout',
-  name: "add-question",
+  name: "edit-question",
   data() {
     return {
       form: {
@@ -189,10 +203,10 @@ export default {
 
       //Handle loading object
       loading: {
-        section:false,
-        base:false,
-        lesson:false,
-        topic:false,
+        section: false,
+        base: false,
+        lesson: false,
+        topic: false,
         file: false,//Upload file
         form: false,//Submit multimedia form
       }
@@ -200,8 +214,20 @@ export default {
   },
   head() {
     return {
-      title: 'Q & A submission form'
+      title: 'Q & A edit form'
     }
+  },
+  async asyncData({params, $axios}) {
+    // This could also be an action dispatch
+    const content = await $axios.$get(`/api/v1/questions/${params.id}`);
+    var questionData = [];
+
+    //Check data exist
+    if (content.status === 1) {
+      questionData = content.data;
+    }
+
+    return {questionData};
   },
   components: {
     ValidationProvider,
@@ -209,31 +235,7 @@ export default {
   },
   mounted() {
     this.getTypeList('section');
-  },
-  watch: {
-    "form.section"(val) {
-      this.form.base = '';
-      this.form.lesson = '';
-      this.form.topics = [];
-      this.grade_list = [];
-      this.lesson_list = [];
-      this.topic_list = [];
-
-      this.getTypeList('base', val);
-    },
-    "form.base"(val) {
-      this.form.lesson = '';
-      if (val)
-        this.getTypeList('lesson', val);
-    },
-    "form.lesson"(val) {
-      if (val)
-        this.getTypeList('topic', val);
-      else {
-        this.form.topics = [];
-        this.topic_list = [];
-      }
-    },
+    this.initData();
   },
   methods: {
     getTypeList(type, parent = '') {
@@ -275,13 +277,13 @@ export default {
         this.$toast.error(err);
       }).finally(() => {
         this.loading.section = false;
-        this.loading.base=false;
-        this.loading.lesson=false;
+        this.loading.base = false;
+        this.loading.lesson = false;
         this.loading.topic = false;
       });
     },
 
-    submitContent() {
+    updateContent() {
       this.loading.form = true;
       //Arrange to form data
       let formData = new FormData();
@@ -290,7 +292,7 @@ export default {
       }
 
 
-      this.$axios.$post('/api/v1/questions',
+      this.$axios.$put(`/api/v1/questions/${this.$route.params.id}`,
         this.urlencodeFormData(formData),
         {
           headers: {
@@ -300,7 +302,7 @@ export default {
         if (response.data.id == 0 && response.data.repeated)
           this.$toast.info("The question is duplicated");
         else {
-          this.$toast.success("Submit successfully");
+          this.$toast.success("Update successfully");
           this.$router.push({
             path: "/user/question"
           })
@@ -341,15 +343,10 @@ export default {
       if (!value)
         return;
 
-      console.log("Pass1");
       const {valid} = await this.$refs.file_provider.validate(value);
-      console.log(valid);
 
-      console.log("Pass2");
 
       if (valid) {
-        console.log("Pass3");
-
         this.loading.file = true;
         if (!value)//Check empty request
           return;
@@ -378,6 +375,70 @@ export default {
       // }
     },
 
+
+    initData() {
+      this.form.section = this.questionData.section;
+      if (this.form.section) {//Load grad list
+        this.form.grade = '';
+        this.form.lesson = '';
+        this.form.topics = '';
+        this.grade_list = [];
+        this.lesson_list = [];
+        this.topic_list = [];
+
+        this.getTypeList('base', this.form.section);
+
+      }
+      this.form.base = this.questionData.base;
+      if (this.form.base) {//Load lesson list
+        this.form.lesson = '';
+        if (this.form.base)
+          this.getTypeList('lesson', this.form.base);
+      }
+      this.form.lesson = this.questionData.lesson;
+      if (this.form.lesson)
+        this.getTypeList('topic', this.form.lesson);
+      else {
+        this.form.topic = [];
+        this.topic_list = [];
+      }
+
+      this.form.topics = this.questionData.topic;
+
+
+      this.form.title = this.questionData.title;
+      this.form.question = this.questionData.question;
+
+    },
+
+
+
+
+    changeOption(optionName, optionVal) {
+      if (optionName == 'section') {
+        this.form.grade = '';
+        this.form.lesson = '';
+        this.form.topics = [];
+        this.grade_list = [];
+        this.lesson_list = [];
+        this.topic_list = [];
+
+        this.getTypeList('base', optionVal);
+
+
+      } else if (optionName == 'base') {
+        this.form.lesson = '';
+        if (optionVal)
+          this.getTypeList('lesson', optionVal);
+      } else if (optionName == 'lesson') {
+        if (optionVal)
+          this.getTypeList('topic', optionVal);
+        else {
+          this.form.topic = [];
+          this.topic_list = [];
+        }
+      }
+    },
   }
 
 }

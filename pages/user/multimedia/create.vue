@@ -76,7 +76,8 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="description" rules="required|min:70">
+                      <validation-provider v-slot="{errors}" name="description"
+                                           rules="required|min:70">
                         <v-textarea
                           dense
                           v-model="form.description"
@@ -450,7 +451,7 @@ export default {
           }
         }).then(response => {
         if (response.data.id == 0 && response.data.repeated)
-          this.$toast.info("Th  e multimedia is duplicated");
+          this.$toast.info("The multimedia is duplicated");
         else {
           this.$toast.success("Submit successfully");
           this.$router.push({

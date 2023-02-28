@@ -202,6 +202,7 @@
                     </v-col>
                     <v-col cols="12" md="4">
                       <validation-provider v-slot="{validate,errors}"
+                                           ref="file_pdf_provider"
                                            name="pdf_question_answer_file"
                                            rules="required|mimes:application/pdf"
                       >
@@ -225,7 +226,8 @@
                     <v-col cols="12" md="4">
                       <validation-provider v-slot="{validate,errors}"
                                            name="file_word"
-                                           rules="mimes:application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                           ref="file_word_provider"
+                                           rules="mimes:application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                       >
                         <v-file-input
                           dense
@@ -233,7 +235,7 @@
                           label="Word question & answer file"
                           :prepend-icon="null"
                           :error-messages="errors"
-                          accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                           :loading="file_word_loading"
                           color="blue"
                           @change="uploadFile('file_word',$event)"
@@ -299,7 +301,7 @@
                     <v-col cols="12" md="6" class="pb-0">
                       <v-btn type="submit" lg color="success"
                              :disabled="invalid"
-                             :loading="submit_loading"
+                             :loading="loading.form"
                              block>
                         Submit
                       </v-btn>
@@ -414,7 +416,9 @@ export default {
       extraAttr: [],
       extra_type_list: [],
 
-      submit_loading: false
+      loading:{
+        form:false
+      }
 
 
     }
@@ -542,7 +546,7 @@ export default {
         });
     },
     submitQuestion() {
-      this.submit_loading = true;
+      this.loading.form = true;
       //Arrange to form data
       let formData = new FormData();
       for (let key in this.form) {
@@ -581,7 +585,7 @@ export default {
         else if (err.response.status == 400)
           this.$toast.error(err.response.data.message);
       }).finally(() => {
-        this.submit_loading = false;
+        this.loading.form = false;
       });
     },
 
@@ -606,16 +610,26 @@ export default {
     },
 
 
-    uploadFile(file_name, value, index = '') {
+    async uploadFile(file_name, value, index = '') {
       if (!value)//Check empty request
         return;
       let formData = new FormData();
       if (file_name == 'file_pdf') {
+        const {valid} = await this.$refs.file_pdf_provider.validate(value);
+        if (!valid)
+          return;
+
         formData.append('file', value);
         this.file_pdf_loading = true;
+        this.loading.form = true;
       } else if (file_name == 'file_word') {
+        const {valid} = await this.$refs.file_word_provider.validate(value);
+        if (!valid)
+          return;
+
         formData.append('file', value);
         this.file_word_loading = true;
+        this.loading.form = true;
       } else if (file_name == 'file_extra') {
         formData.append('file', value);
         // this.file_extra_loading = true;
@@ -641,6 +655,7 @@ export default {
       }).finally(() => {
         this.file_pdf_loading = false;
         this.file_word_loading = false;
+        this.loading.form = false;
       })
       // }
     },

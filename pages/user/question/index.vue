@@ -70,6 +70,31 @@
                     <td class="text-center">
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
+                          <v-btn icon color="green"
+                                 :to="`/qa/${item.id}`"
+                                 target="_blank"
+                                 small v-bind="attrs" v-on="on">
+                            <v-icon small>
+                              mdi-eye
+                            </v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Delete</span>
+                      </v-tooltip>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn icon small v-bind="attrs" v-on="on"
+                                 :to="`/user/question/edit/${item.id}`"
+                          >
+                            <v-icon small>
+                              mdi-note-edit-outline
+                            </v-icon>
+                          </v-btn>
+                        </template>
+                        <span>Edit</span>
+                      </v-tooltip>
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on, attrs }">
                           <v-btn icon color="error"
                                  @click="openDeleteConfirmDialog(item.id)"
                                  small v-bind="attrs" v-on="on">
@@ -79,18 +104,6 @@
                           </v-btn>
                         </template>
                         <span>Delete</span>
-                      </v-tooltip>
-                      <v-tooltip bottom>
-                        <template v-slot:activator="{ on, attrs }">
-                          <v-btn icon small v-bind="attrs" v-on="on"
-                                 :to="`/test-maker/edit/${item.id}`"
-                          >
-                            <v-icon small>
-                              mdi-note-edit-outline
-                            </v-icon>
-                          </v-btn>
-                        </template>
-                        <span>Edit</span>
                       </v-tooltip>
                     </td>
                   </tr>

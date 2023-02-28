@@ -64,11 +64,11 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12" v-if="topic_list.length">
-<!--                      <validation-provider name="topic" rules="required" v-slot="{errors}">-->
-                        <topic-selector :topic-list="topic_list"
-                                        :selectedTopics="form.topics"
-                                        @selectTopic="selectTopic"/>
-<!--                      </validation-provider>-->
+                      <!--                      <validation-provider name="topic" rules="required" v-slot="{errors}">-->
+                      <topic-selector :topic-list="topic_list"
+                                      :selectedTopics="form.topics"
+                                      @selectTopic="selectTopic"/>
+                      <!--                      </validation-provider>-->
                     </v-col>
                     <v-col cols="12" md="4">
                       <v-autocomplete
@@ -205,16 +205,20 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="pdf_question_answer_file">
+                      <validation-provider v-slot="{errors}"
+                                           ref="file_pdf_provider"
+                                           rules="mimes:application/pdf"
+                                           name="pdf_question_answer_file">
                         <v-file-input
                           dense
                           v-model="file_pdf"
+                          accept="application/pdf"
                           :error-messages="errors"
                           :prepend-icon="null"
                           label="Pdf question & answer file"
                           color="red"
                           :loading="file_pdf_loading"
-                          @change="uploadFile('file_pdf')"
+                          @change="uploadFile('file_pdf',$event)"
                           prepend-inner-icon="mdi-file-pdf-box"
                           append-icon="mdi-folder-open"
                           outlined
@@ -232,28 +236,36 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <v-file-input
-                        dense
-                        v-model="file_word"
-                        label="Word question & answer file"
-                        :prepend-icon="null"
-                        :loading="file_word_loading"
-                        color="blue"
-                        @change="uploadFile('file_word')"
-                        prepend-inner-icon="mdi-file-word-outline"
-                        append-icon="mdi-folder-open"
-                        outlined
+                      <validation-provider v-slot="{validate,errors}"
+                                           name="file_word"
+                                           ref="file_word_provider"
+                                           rules="mimes:application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                       >
-                        <template slot="append-outer">
-                          <v-btn small icon
-                                 @click="startDownload('q_word')"
-                                 v-show="paperData.files.word.exist">
-                            <v-icon>
-                              mdi-download
-                            </v-icon>
-                          </v-btn>
-                        </template>
-                      </v-file-input>
+                        <v-file-input
+                          dense
+                          v-model="file_word"
+                          label="Word question & answer file"
+                          :prepend-icon="null"
+                          :loading="file_word_loading"
+                          color="blue"
+                          accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          @change="uploadFile('file_word',$event)"
+                          prepend-inner-icon="mdi-file-word-outline"
+                          append-icon="mdi-folder-open"
+                          outlined
+                          :error-messages="errors"
+                        >
+                          <template slot="append-outer">
+                            <v-btn small icon
+                                   @click="startDownload('q_word')"
+                                   v-show="paperData.files.word.exist">
+                              <v-icon>
+                                mdi-download
+                              </v-icon>
+                            </v-btn>
+                          </template>
+                        </v-file-input>
+                      </validation-provider>
                     </v-col>
 
                     <v-col cols="12" v-if="extraAttr.length">
@@ -279,7 +291,7 @@
                             :loading="file_extra_loading"
                             color="green"
                             :value="item.file_extra"
-                            @change="uploadFile('file_extra',index,$event)"
+                            @change="uploadFile('file_extra',$event,index)"
                             prepend-inner-icon="mdi-plus"
                             append-icon="mdi-folder-open"
                             outlined
@@ -322,7 +334,7 @@
                     <v-col cols="12" md="6" class="pb-0">
                       <v-btn type="submit" lg color="success"
                              :disabled="invalid"
-                             :loading="update_loading"
+                             :loading="loading.form"
                              block>
                         Update
                       </v-btn>
@@ -435,8 +447,10 @@ export default {
       extraAttr: [],
       extra_type_list: [],
 
-      update_loading: false,
-      download_loading:false,
+      download_loading: false,
+      loading:{
+        form:false
+      }
 
 
     }
@@ -578,7 +592,7 @@ export default {
         });
     },
     updateQuestion() {
-      this.update_loading = true;
+      this.loading.form = true;
       //Arrange to form data
       let formData = new FormData();
       for (let key in this.form) {
@@ -618,7 +632,7 @@ export default {
         else if (err.response.status == 400)
           this.$toast.error(err.response.data.message);
       }).finally(() => {
-        this.update_loading = false;
+        this.loading.form = false;
       });
     },
 
@@ -643,14 +657,26 @@ export default {
     },
 
 
-    uploadFile(file_name, index = '', value = '') {
+    async uploadFile(file_name,value,index = '') {
+      if (!value)//Check empty request
+        return;
       let formData = new FormData();
       if (file_name == 'file_pdf') {
-        formData.append('file', this.file_pdf);
+        const {valid} = await this.$refs.file_pdf_provider.validate(value);
+        if (!valid)
+          return;
+
+        formData.append('file', value);
         this.file_pdf_loading = true;
+        this.loading.form=true;
       } else if (file_name == 'file_word') {
-        formData.append('file', this.file_word);
+        const {valid} = await this.$refs.file_word_provider.validate(value);
+        if (!valid)
+          return;
+
+        formData.append('file', value);
         this.file_word_loading = true;
+        this.loading.form=true;
       } else if (file_name == 'file_extra') {
         formData.append('file', value);
         // this.file_extra_loading = true;
@@ -676,6 +702,7 @@ export default {
       }).finally(() => {
         this.file_pdf_loading = false;
         this.file_word_loading = false;
+        this.loading.form=false;
       })
       // }
     },
@@ -730,40 +757,42 @@ export default {
 
       if (this.paperData.files.extra)
         for (let index in this.paperData.files.extra)
-          this.extraAttr.push({type:this.paperData.files.extra[index].type,
-            id:this.paperData.files.extra[index].id})
+          this.extraAttr.push({
+            type: this.paperData.files.extra[index].type,
+            id: this.paperData.files.extra[index].id
+          })
     },
 
     //Download file
-    startDownload(type,extra_id=''){
-      if (this.$auth.loggedIn){
-        this.download_loading=true;
-        let apiUrl='';
-        if (type==='q_word')
-          apiUrl=`/api/v1/tests/download/${this.$route.params.id}/word`
-        if (type==='q_pdf')
-          apiUrl=`/api/v1/tests/download/${this.$route.params.id}/pdf`
-        if (type==='a_file')
-          apiUrl=`/api/v1/tests/download/${this.$route.params.id}/answer`
-        if (type==='extra')
-          apiUrl=`/api/v1/tests/download/${this.$route.params.id}/extra/${extra_id}`
+    startDownload(type, extra_id = '') {
+      if (this.$auth.loggedIn) {
+        this.download_loading = true;
+        let apiUrl = '';
+        if (type === 'q_word')
+          apiUrl = `/api/v1/tests/download/${this.$route.params.id}/word`
+        if (type === 'q_pdf')
+          apiUrl = `/api/v1/tests/download/${this.$route.params.id}/pdf`
+        if (type === 'a_file')
+          apiUrl = `/api/v1/tests/download/${this.$route.params.id}/answer`
+        if (type === 'extra')
+          apiUrl = `/api/v1/tests/download/${this.$route.params.id}/extra/${extra_id}`
         this.$axios.$get(apiUrl)
-          .then(response=>{
+          .then(response => {
             var FileSaver = require('file-saver');
-            FileSaver.saveAs(response.data.url,response.data.name);
-          }).catch(err=>{
-          if (err.response.status==400){
-            if (err.response.data.status==0 && err.response.data.error=="creditNotEnough"){
+            FileSaver.saveAs(response.data.url, response.data.name);
+          }).catch(err => {
+          if (err.response.status == 400) {
+            if (err.response.data.status == 0 && err.response.data.error == "creditNotEnough") {
               this.$toast.info("No enough credit");
             }
-          }else if (err.response.status==403){
-            this.$router.push({query:{auth_form:'login'}});
+          } else if (err.response.status == 403) {
+            this.$router.push({query: {auth_form: 'login'}});
           }
           console.log(err);
-        }).finally(()=>{
-          this.download_loading=false;
+        }).finally(() => {
+          this.download_loading = false;
         })
-      }else{
+      } else {
         this.openAuthDialog('login');
       }
     }
