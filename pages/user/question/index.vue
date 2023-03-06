@@ -79,7 +79,7 @@
                             </v-icon>
                           </v-btn>
                         </template>
-                        <span>Delete</span>
+                        <span>View</span>
                       </v-tooltip>
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">

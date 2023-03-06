@@ -350,6 +350,7 @@ export default {
         this.loading.file = true;
         if (!value)//Check empty request
           return;
+        this.loading.form = true;
         let formData = new FormData();
         formData.append('file', value);
 
@@ -367,6 +368,7 @@ export default {
           this.$toast.error("An error occurred");
         }).finally(() => {
           this.loading.file = false;
+          this.loading.form = false;
         })
       }
 
