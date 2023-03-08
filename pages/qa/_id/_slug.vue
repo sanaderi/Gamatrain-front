@@ -34,7 +34,9 @@
                         <v-card flat color="#F5F5F5" class="d-flex fill-height text-center" min-height="200">
                           <v-row>
                             <v-col cols="12">
-                              <v-btn icon x-large>
+                              <v-btn icon x-large
+                                     @click="submitScore('question',contentData.id,'plus')"
+                              >
                                 <v-icon size="88">
                                   mdi-menu-up
                                 </v-icon>
@@ -42,7 +44,9 @@
                               <p class="text-h4">
                                 {{ contentData.score }}
                               </p>
-                              <v-btn icon x-large>
+                              <v-btn icon x-large
+                                     @click="submitScore('question',contentData.id,'minus')"
+                              >
                                 <v-icon size="88">
                                   mdi-menu-down
                                 </v-icon>
@@ -170,7 +174,9 @@
 
                                     <div class="d-flex d-md-none">
                                       <!--Score action sm and xs-->
-                                      <v-btn icon>
+                                      <v-btn icon
+                                             @click="submitScore('question',contentData.id,'plus')"
+                                      >
                                         <v-icon size="40">
                                           mdi-menu-up
                                         </v-icon>
@@ -178,7 +184,9 @@
                                       <p class="pt-3">
                                         {{ contentData.score }}
                                       </p>
-                                      <v-btn icon>
+                                      <v-btn icon
+                                             @click="submitScore('question',contentData.id,'minus')"
+                                      >
                                         <v-icon size="40">
                                           mdi-menu-down
                                         </v-icon>
@@ -247,11 +255,13 @@
                 </v-row>
                 <!--End question section-->
 
+
+                <!--Reply section-->
                 <v-row>
                   <v-col cols="3" md="2">
                     <h2 class="text-h5 text-md-h4">
-                      {{ answers.lenght }}
-                      <span v-if="answers.lenght>1">Answers</span>
+                      {{ contentData.replies.list.lenght }}
+                      <span v-if="contentData.replies.list.lenght>1">Answers</span>
                       <span v-else>Answer</span>
                     </h2>
                   </v-col>
@@ -264,14 +274,16 @@
                 <v-row>
                   <v-col cols="12" class="px-0 pt-0 px-sm-3 pt-sm-3">
                     <v-row
-                      v-for="answer in answers"
+                      v-for="answer in contentData.replies.list"
                     >
                       <!--Score action-->
                       <v-col cols="1" class="pr-0 d-none d-md-block ">
                         <v-card flat color="#F5F5F5" class="mb-4 d-flex fill-height text-center" min-height="200">
                           <v-row>
                             <v-col cols="12">
-                              <v-btn icon x-large>
+                              <v-btn icon x-large
+                                     @click="submitScore('reply',answer.id,'plus')"
+                              >
                                 <v-icon size="88">
                                   mdi-menu-up
                                 </v-icon>
@@ -279,7 +291,9 @@
                               <p class="text-h4">
                                 {{ answer.score }}
                               </p>
-                              <v-btn icon x-large>
+                              <v-btn icon x-large
+                                     @click="submitScore('reply',answer.id,'minus')"
+                              >
                                 <v-icon size="88">
                                   mdi-menu-down
                                 </v-icon>
@@ -289,6 +303,24 @@
                                   mdi-bookmark
                                 </v-icon>
                               </v-btn>
+
+                              <!--Select correct answer-->
+                              <v-tooltip bottom>
+                                <template v-slot:activator="{ on, attrs }">
+                                  <v-btn icon width="100%"
+                                         x-large
+                                         v-bind="attrs" v-on="on"
+                                         @click="selectCorrectAnswer(answer.id)"
+                                         v-if="contentData.owner==true && answer.selected==0">
+                                    <v-icon size="38" color="green">
+                                      mdi-check
+                                    </v-icon>
+                                  </v-btn>
+                                </template>
+                                <span>Select correct answer</span>
+                              </v-tooltip>
+
+                              <!--Edit button-->
                               <v-btn icon width="100%"
                                      @click="openEditReplyDialog(answer.id,answer.answer)"
                                      v-if="answer.owner==true">
@@ -296,6 +328,9 @@
                                   mdi-pencil
                                 </v-icon>
                               </v-btn>
+
+
+                              <!--Delete button -->
                               <v-btn icon width="100%"
                                      @click="openDeleteReplyConfirmDialog(answer.id)"
                                      v-if="answer.owner==true">
@@ -303,6 +338,8 @@
                                   mdi-delete
                                 </v-icon>
                               </v-btn>
+
+
                               <v-btn icon width="100%">
                                 <v-icon>
                                   mdi-alert-octagon-outline
@@ -320,7 +357,7 @@
                       <!--End score action-->
 
                       <v-col cols="12" md="11">
-                        <v-card color="#5EFF8126" flat class="fill-height">
+                        <v-card :color="answer.selected==1 ? '#5EFF8126' : '#F5F5F5'" flat class="fill-height">
                           <v-card-text class="d-flex fill-height">
                             <v-row>
                               <v-col cols="12" class="px-0 px-sm-3">
@@ -390,7 +427,7 @@
                               <v-col cols="12" class="px-0 pb-0 px-sm-3 pb-sm-3" align-self="end">
                                 <v-row>
                                   <v-col cols="7" md="6" class="px-0 pb-0 px-sm-3 pb-sm-3">
-                                    <v-btn text
+                                    <v-btn text disabled
                                            plain class="pl-0 simple-btn d-none d-md-block">
                                       <v-icon class="mr-1">
                                         mdi-comment-plus
@@ -399,15 +436,17 @@
                                     </v-btn>
                                     <div class="d-flex d-md-none">
                                       <!--Score action sm and xs-->
-                                      <v-btn icon>
+                                      <v-btn icon @click="submitScore('reply',answer.id,'plus')">
                                         <v-icon size="40">
                                           mdi-menu-up
                                         </v-icon>
                                       </v-btn>
                                       <p class="pt-3">
-                                        {{ contentData.score }}
+                                        {{ answer.score }}
                                       </p>
-                                      <v-btn icon>
+                                      <v-btn icon
+                                             @click="submitScore('reply',answer.id,'minus')"
+                                      >
                                         <v-icon size="40">
                                           mdi-menu-down
                                         </v-icon>
@@ -415,16 +454,36 @@
                                       <!--End score action sm and xs-->
 
                                       <p class="pt-3"> | </p>
-                                      <v-btn icon color="green">
+                                      <v-btn icon color="green"
+                                      @click="selectCorrectAnswer(answer.id)"
+                                             v-if="contentData.owner==true && answer.selected==0">
                                         <v-icon size="20">
                                           mdi-check
                                         </v-icon>
                                       </v-btn>
-                                      <v-btn icon>
+                                      <v-btn icon disabled>
                                         <v-icon size="20">
                                           mdi-comment-plus
                                         </v-icon>
                                       </v-btn>
+                                      <v-btn icon
+                                             @click="openEditReplyDialog(answer.id,answer.answer)"
+                                             v-if="answer.owner==true">
+                                        <v-icon size="20">
+                                          mdi-pencil
+                                        </v-icon>
+                                      </v-btn>
+
+
+                                      <!--Delete button -->
+                                      <v-btn icon
+                                             @click="openDeleteReplyConfirmDialog(answer.id)"
+                                             v-if="answer.owner==true">
+                                        <v-icon size="20">
+                                          mdi-delete
+                                        </v-icon>
+                                      </v-btn>
+
                                       <v-spacer/>
                                     </div>
                                   </v-col>
@@ -526,6 +585,7 @@
 
               </v-col>
               <!--End your answer-->
+
 
               <!--Similar questions-->
               <v-col cols="3" class="d-none d-md-block">
@@ -690,14 +750,12 @@ export default {
     // This could also be an action dispatch
     const content = await $axios.$get(`/api/v1/questions/${params.id}`);
     var contentData = [];
-    var answers = [];
     //Check data exist
     if (content.status === 1) {
       contentData = content.data;
-      answers = contentData.replies.list.reverse();
     }
 
-    return {contentData, answers};
+    return {contentData};
   },
   mounted() {
     this.initBreadCrumb();
@@ -799,7 +857,6 @@ export default {
         this.loading.reply_form = false;
       })
     },
-
     updateReply() {
       this.loading.edit_reply_form = true;
       const querystring = require('querystring');
@@ -822,11 +879,10 @@ export default {
         this.loading.reply_form = false;
       })
     },
-
     reInit() {//When form submit (answer, vote and etc)
       this.$axios.$get(`/api/v1/questions/${this.$route.params.id}`)
         .then(response => {
-          this.answers = response.data.replies.list.reverse();
+          this.contentData.replies.list = response.data.replies.list;
         }).catch(err => {
         console.log(err);
       });
@@ -838,7 +894,6 @@ export default {
       this.edit_answer_form.answer = answer;
       this.dialog.edit_reply_form = true;
     },
-
     openDeleteReplyConfirmDialog(item_id) {
       this.delete_reply_id = item_id;
       this.dialog.delete_reply_form = true;
@@ -861,9 +916,45 @@ export default {
         }).finally(() => {
           this.loading.delete_reply_form = false;
         })
+    },
+
+
+    async submitScore(content_type, id, type) {
+      if (this.$auth.loggedIn) {
+        var api = `/api/v1/questions/score/${id}/${type}`;
+        if (content_type == 'reply')
+          api = `/api/v1/questionReplies/score/${id}/${type}`;
+
+        await this.$axios.$post(api)
+          .then(response => {
+            if (response.status == 1) {
+              if (content_type == 'question')
+                this.contentData.score = response.data.score;
+              else {
+                var index = this.contentData.replies.list.findIndex(x => x.id == id);
+                this.contentData.replies.list[index].score = response.data.score;
+              }
+
+            }
+          }).catch(err => {
+            this.$toast.error("An error occurred");
+          })
+
+      } else {
+        this.openAuthDialog('login');
+      }
+    },
+
+    selectCorrectAnswer(id) {
+      this.$axios.$post(`/api/v1/questionReplies/select/${id}`)
+        .then(response => {
+          this.$toast.success("Select successfully");
+          window.scrollTo(0, 0);
+          this.reInit();
+        }).catch(err => {
+        this.$toast.error("An error occured");
+      })
     }
-
-
   }
 }
 </script>
