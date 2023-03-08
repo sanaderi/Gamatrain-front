@@ -341,15 +341,9 @@ export default {
       if (!value)
         return;
 
-      console.log("Pass1");
       const {valid} = await this.$refs.file_provider.validate(value);
-      console.log(valid);
-
-      console.log("Pass2");
 
       if (valid) {
-        console.log("Pass3");
-
         this.loading.file = true;
         if (!value)//Check empty request
           return;

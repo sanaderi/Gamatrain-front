@@ -14,13 +14,12 @@
           <v-card-text>
             <v-card flat class="mt-3">
               <validation-observer ref="observer" v-slot="{invalid}">
-                <form @submit.prevent="submitQuestion">
+                <form @submit.prevent="submitContent">
                   <v-row>
                     <v-col cols="12" md="6">
-                      <validation-provider v-slot="{errors}" name="subject" rules="required">
                         <v-autocomplete
                           dense
-                          v-model="form.subject"
+                          v-model="form.type"
                           :items="subject_list"
                           :error-messages="errors"
                           item-text="title"
@@ -28,10 +27,9 @@
                           label="Subject"
                           outlined
                         />
-                      </validation-provider>
                     </v-col>
                     <v-col cols="12" md="6">
-                      <validation-provider v-slot="{errors}" name="title" rules="required">
+                      <validation-provider v-slot="{errors}" name="title" rules="required|min:3">
                         <v-text-field
                           dense
                           v-model="form.title"
@@ -43,10 +41,10 @@
                     </v-col>
 
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="text" rules="required">
+                      <validation-provider v-slot="{errors}" name="text" rules="required|min:10">
                         <v-textarea
                           dense
-                          v-model="form.text"
+                          v-model="form.message"
                           :error-messages="errors"
                           label="Message text"
                           outlined
@@ -59,22 +57,25 @@
                         </strong>
                       </nuxt-link>
                     </v-col>
-                    <v-col cols="12" md="3">
-                      <validation-provider v-slot="{errors}" name="attach_file" rules="required">
+                    <v-col cols="12" md="4">
+                      <validation-provider v-slot="{validate,errors}"
+                                           rules="mimes:image/png,image/jpg,image/jpeg,image/gif,video/mp4,audio/mp3,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats,officedocument.presentationml.presentation"
+                                           ref="file_provider"
+                                           name="file">
                         <v-file-input
                           dense
-                          v-model="form.attach_file"
+                          v-model="file"
                           :error-messages="errors"
-                          multiple
                           label="Attach file"
-                          prepend-icon=""
+                          accept=".jpg,.jpeg,.png,.gif,.docx,.pptx,.pdf,.mp4,.mp3"
+                          @change="uploadFile('file',$event),validate"
+                          :prepend-icon="null"
                           color="red"
                           prepend-inner-icon="mdi-file"
                           append-icon="mdi-folder-open"
                           outlined
                         />
                       </validation-provider>
-
                     </v-col>
 
 
@@ -83,7 +84,7 @@
                   </v-row>
                   <v-row>
                     <v-col cols="12" md="6" class="pb-0">
-                      <v-btn type="submit" lg color="success" :disabled="invalid" block>
+                      <v-btn type="submit" lg color="success" :loading="loading.form" :disabled="invalid" block>
                         Submit
                       </v-btn>
                     </v-col>
@@ -110,21 +111,31 @@ import TopicSelector from "@/components/form/topic-selector";
 
 export default {
   layout: 'dashboard_layout',
-  name: "add-question",
+  name: "add-ticket",
   data() {
     return {
       form: {
-        subject: '',
         title: '',
-        text: ''
+        message: '',
+        type:'',
+        ticket_type:8818,
+        file:''
       },
+      file: null,
       subject_list: [],
+
+
+      //Handle loading object
+      loading: {
+        file: false,//Upload file
+        form: false,//Submit multimedia form
+      }
 
     }
   },
   head() {
     return {
-      title: 'Q & A submission form'
+      title: 'Ticket submission form'
     }
   },
   components: {
@@ -141,8 +152,6 @@ export default {
         type: type
       }
 
-
-
       this.$axios.$get('/api/v1/types/list', {
         params
       }).then(res => {
@@ -153,14 +162,88 @@ export default {
       })
     },
 
+    submitContent() {
+      this.loading.form = true;
+      //Arrange to form data
+      let formData = new FormData();
+      for (let key in this.form) {
+        formData.append(key, this.form[key]);
+      }
 
-    submitQuestion() {
-      this.$toast.success("hi");
+
+      this.$axios.$post('/api/v1/tickets',
+        this.urlencodeFormData(formData),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        }).then(response => {
+          this.$toast.success("Submit successfully");
+          this.$router.push({
+            path: "/user/ticket"
+          });
+      }).catch(err => {
+        if (err.response.status == 403)
+          this.$router.push({query: {auth_form: 'login'}});
+        else if (err.response.status == 400)
+          this.$toast.error(err.response.data.message);
+      }).finally(() => {
+        this.loading.form = false;
+      });
     },
 
-    selectTopic(event) {
-      this.form.topic = event;
-    }
+
+    async uploadFile(file_name, value) {
+      if (!value)
+        return;
+
+      const {valid} = await this.$refs.file_provider.validate(value);
+
+      if (valid) {
+        this.loading.file = true;
+        if (!value)//Check empty request
+          return;
+        let formData = new FormData();
+        formData.append('file', value);
+
+        this.$axios.$post('/api/v1/upload',
+          formData,
+          {
+            headers: {
+              'accept': '*/*',
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        ).then(response => {
+          this.form.file = response.data[0].file.name;
+        }).catch(err => {
+          this.$toast.error("An error occurred");
+        }).finally(() => {
+          this.loading.file = false;
+        })
+      }
+
+      console.log("Pass4");
+
+      // }
+    },
+
+
+    //Convert form data from multipart to urlencode
+    urlencodeFormData(fd) {
+      var s = '';
+
+      for (var pair of fd.entries()) {
+        if (typeof pair[1] == 'string') {
+          s += (s ? '&' : '') + this.encode(pair[0]) + '=' + this.encode(pair[1]);
+        }
+      }
+      return s;
+    },
+    encode(s) {
+      return encodeURIComponent(s).replace(/%20/g, '+');
+    },
+    //End convert form data from multipart to urlencode
   }
 
 }

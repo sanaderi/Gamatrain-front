@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-card  class="ticket_list">
+  <v-card  class="ticket_list" >
     <v-card-text>
       <v-tabs
         class="mb-3"
@@ -40,77 +40,86 @@
 
 
       <!--Message list-->
-      <v-row
-        align="center"
-        class="spacer mt-6 "
-        no-gutters
-        v-for="(message,index) in messages"
-      >
-        <v-col
-          cols="3"
-          sm="2"
-          md="1"
-          class="text-center"
-        >
-          <nuxt-link :to="`/direct/${message.username}`">
-            <v-avatar
-              size="56px"
+      <v-card max-height="500" class="overflow-y-auto"
+              @scroll="onScroll"
+              ref="ticketList"
+              flat>
+        <v-card-text>
+          <v-row
+            ref="ticketListContent"
+            align="center"
+            class="spacer mt-6 "
+            no-gutters
+            v-for="(message,index) in messages"
+          >
+            <v-col
+              cols="3"
+              sm="2"
+              md="1"
+              class="text-center"
             >
-              <img
-                v-if="message.avatar"
-                alt="Avatar"
-                src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
-              >
-              <v-icon
-                v-else
-                large
-                :color="message.color"
-                v-text="message.icon"
-              ></v-icon>
-            </v-avatar>
-          </nuxt-link>
-        </v-col>
-        <v-col cols="5" sm="6" md="5">
-          <p>
-            <nuxt-link :to="`/direct/${message.username}`">
-              <strong  v-html="message.name"></strong>
-            </nuxt-link>
-            <span class="d-none d-md-inline">
+              <nuxt-link :to="`/direct/${message.username}`">
+                <v-avatar
+                  size="56px"
+                >
+                  <img
+                    v-if="message.avatar"
+                    alt="Avatar"
+                    src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                  >
+                  <v-icon
+                    v-else
+                    large
+                    :color="message.color"
+                    v-text="message.icon"
+                  ></v-icon>
+                </v-avatar>
+              </nuxt-link>
+            </v-col>
+            <v-col cols="5" sm="6" md="5">
+              <p>
+                <nuxt-link :to="`/direct/${message.username}`">
+                  <strong  v-html="message.name"></strong>
+                </nuxt-link>
+                <span class="d-none d-md-inline">
               <i class="fa fa-calendar-alt ml-2"/>
               June,15 2022</span>
-            <span class="d-none d-md-inline ml-2 font-weight-regular">2:59PM</span>
-          </p>
-          <p class="mt-2 text-h5">
-            {{message.excerpt}}
-          </p>
-          <p class="d-md-none mt-2">
-            <i class="fa fa-calendar-alt"/>
-            June,15 2022</p>
-        </v-col>
+                <span class="d-none d-md-inline ml-2 font-weight-regular">2:59PM</span>
+              </p>
+              <p class="mt-2 text-h5">
+                {{message.body}}
+              </p>
+              <p class="d-md-none mt-2">
+                <i class="fa fa-calendar-alt"/>
+                June,15 2022</p>
+            </v-col>
 
 
-        <v-col
-          class="text-no-wrap text-right"
-          cols="4"
-          md="6"
-        >
-          <v-chip
-            v-if="message.new"
-            :color="`${message.color}`"
-            class="ml-0 mr-2 white--text"
-            small
-          >
-            {{ message.new }}
-          </v-chip>
-          <v-chip small class="font-weight-bold d-none d-md-inline-flex" :text-color="`${message.color}`" label v-html="message.title"
-                  :color="`${message.color}  lighten-4`"></v-chip>
-        </v-col>
+            <v-col
+              class="text-no-wrap text-right"
+              cols="4"
+              md="6"
+            >
+              <v-chip
+                v-if="message.unread"
+                color="teal"
+                class="ml-0 mr-2 white--text"
+                small
+              >
+                {{ message.unread }}
+              </v-chip>
+              <v-chip small class="font-weight-bold d-none d-md-inline-flex" text-color="teal" label v-html="message.title"
+                      color="teal lighten-4"></v-chip>
+            </v-col>
 
-        <v-col cols="12">
-          <v-divider class="mt-2" v-show="messages.length!==index+1"/>
-        </v-col>
+            <v-col cols="12">
+              <v-divider class="mt-2" v-show="messages.length!==index+1"/>
+            </v-col>
 
-      </v-row>
+          </v-row>
+        </v-card-text>
+      </v-card>
+
     </v-card-text>
 
 
@@ -135,7 +144,7 @@
 <script>
 export default {
   layout: "dashboard_layout",
-  name: "ticket",
+  name: "ticket-list",
   data(){
     return{
       ticket_tab:0,
@@ -147,44 +156,79 @@ export default {
         'Received',
         'Block list'
       ],
-      messages: [
-        {
-          avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-          name: 'John Leider',
-          title: 'Welcome to Gama!',
-          excerpt: 'Thank you for joining our community...',
-          color: "teal",
-          username:"@john"
-        },
-        {
-          color: 'teal',
-          icon: 'mdi-account-multiple',
-          name: 'Jak',
-          new: 1,
-          total: 3,
-          title: 'How are u?',
-          username:"@jack"
-        },
-        {
-          color: 'orange',
-          icon: 'mdi-tag',
-          name: 'Administrator',
-          new: 2,
-          total: 4,
-          title: 'New feature',
-          excerpt: 'Enable new feature',
-          username:"@admin"
-        },
-      ],
-      user_direct:`gamatrain.com/direct/${this.$auth.username}`
+      messages: [],
+      user_direct:`gamatrain.com/direct/${this.$auth.username}`,
+
+
+      //Paginate section
+      page_loading: false,
+      page: 1,
+      all_tickets_loaded: false,
+      timer: null
+      //End paginate section
     }
   },
+  head() {
+    return {
+      title: 'Ticket manage'
+    }
+  },
+  mounted() {
+    this.getMsgList();
+    // this.scroll();
+  },
   methods:{
+    getMsgList() {
+      if (!this.all_tickets_loaded) {
+        this.page_loading = true;
+        this.$axios.$get('/api/v1/tickets',
+          {
+            params: {
+              perpage: 15,
+              page: this.page,
+            }
+          }).then(response => {
+          this.messages.push(...response.data.list);
+
+          if (response.data.list.length === 0)//For terminate auto load request
+            this.all_tickets_loaded = true;
+        }).catch(err => {
+          console.log(err);
+        }).finally(() => {
+            this.page_loading = false;
+          }
+        )
+      }
+    },
     copyUrl() {
       navigator.clipboard.writeText(this.user_direct);
       this.$toast.success('Copied');
 
     },
+
+    onScroll() {
+      var scrollPosition = this.$refs.ticketList.$el.scrollTop;
+      let contentHeight = this.$refs.ticketListContent.clientHeight;
+
+      //Avoid the number of requests
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+
+      console.log(scrollPosition);
+      console.log(contentHeight);
+
+      if (scrollPosition > (contentHeight - 5000) && this.all_tickets_loaded === false)
+        this.timer = setTimeout(() => {
+          // this.loading.message_list = true;
+          this.page++;
+          this.getMsgList();
+        }, 800);
+    },
+
+
+
   }
 }
 </script>
