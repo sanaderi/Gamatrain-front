@@ -44,9 +44,8 @@
               @scroll="onScroll"
               ref="ticketList"
               flat>
-        <v-card-text>
+        <v-card-text ref="ticketListContent">
           <v-row
-            ref="ticketListContent"
             align="center"
             class="spacer mt-6 "
             no-gutters
@@ -63,59 +62,81 @@
                   size="56px"
                 >
                   <img
-                    v-if="message.avatar"
                     alt="Avatar"
-                    src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                    :src="require('assets/images/gama_user_avatar.png')"
                   >
-                  <v-icon
-                    v-else
-                    large
-                    :color="message.color"
-                    v-text="message.icon"
-                  ></v-icon>
                 </v-avatar>
               </nuxt-link>
             </v-col>
-            <v-col cols="5" sm="6" md="5">
-              <p>
-                <nuxt-link :to="`/direct/${message.username}`">
-                  <strong  v-html="message.name"></strong>
+
+            <v-col cols="7" sm="6" md="5">
+              <p >
+                <nuxt-link
+                  :to="`/user/ticket/detail/${message.id}`">
+                  <span class="ticket_title" :class="message.unread>0 ? 'unread_ticket' : ''"
+                        v-html="message.title"/>
                 </nuxt-link>
-                <span class="d-none d-md-inline">
-              <i class="fa fa-calendar-alt ml-2"/>
-              June,15 2022</span>
-                <span class="d-none d-md-inline ml-2 font-weight-regular">2:59PM</span>
               </p>
               <p class="mt-2 text-h5">
                 {{message.body}}
               </p>
               <p class="d-md-none mt-2">
+                <span>
                 <i class="fa fa-calendar-alt"/>
-                June,15 2022</p>
+                  {{$moment(message.up_date).format('MMM,DD YYYY')}}
+                </span>
+              </p>
             </v-col>
-
 
             <v-col
               class="text-no-wrap text-right"
-              cols="4"
+              cols="2"
               md="6"
             >
+              <p class="mb-2">
+                <span class="d-none d-md-inline">
+                    <i class="fa fa-calendar-alt ml-2"/>
+                    {{$moment(message.up_date).format('MMM,DD YYYY')}}
+                 </span>
+                <span class="d-none d-md-inline ml-2 font-weight-regular">
+                 {{$moment(message.up_date).format('h:mm A')}}
+              </span>
+              </p>
               <v-chip
                 v-if="message.unread"
-                color="teal"
+                :color="calcColor(message.status_message,'font')"
                 class="ml-0 mr-2 white--text"
                 small
               >
                 {{ message.unread }}
               </v-chip>
-              <v-chip small class="font-weight-bold d-none d-md-inline-flex" text-color="teal" label v-html="message.title"
-                      color="teal lighten-4"></v-chip>
+              <v-chip small class="font-weight-bold d-none d-md-inline-flex" :text-color="calcColor(message.status_message,'font')" label
+                      :color="calcColor(message.status_message,'bg')"
+              >
+                {{message.status_message}}
+              </v-chip>
             </v-col>
 
             <v-col cols="12">
-              <v-divider class="mt-2" v-show="messages.length!==index+1"/>
+              <v-divider class="mt-2" v-show="messages && messages.length!==index+1"/>
             </v-col>
 
+          </v-row>
+          <v-row v-show="page_loading===false && messages.length===0">
+            <v-col cols="12" class="text-center">
+              <p>Oops! no data found</p>
+            </v-col>
+          </v-row>
+          <v-row v-show="page_loading">
+            <v-col cols="12" class="text-center">
+              <v-progress-circular
+                :size="30"
+                :width="3"
+                class="mt-12 mb-12"
+                color="orange"
+                indeterminate
+              />
+            </v-col>
           </v-row>
         </v-card-text>
       </v-card>
@@ -131,7 +152,7 @@
       <v-col cols="12" class="text-right">
         <div class="new_msg_btn"  >
           <v-btn to="/user/ticket/create" x-large color="teal" class="white--text">
-            <fa class="fa fa-comment-alt fa-2xl mr-2"/>
+            <i class="fa fa-comment-alt fa-2xl mr-2"/>
             New
           </v-btn>
         </div>
@@ -157,7 +178,7 @@ export default {
         'Block list'
       ],
       messages: [],
-      user_direct:`gamatrain.com/direct/${this.$auth.username}`,
+      user_direct:`gamatrain.com/direct/${this.$auth.user.username}`,
 
 
       //Paginate section
@@ -194,6 +215,9 @@ export default {
             this.all_tickets_loaded = true;
         }).catch(err => {
           console.log(err);
+          if (err.response.status == 403)
+            this.$auth.logout();
+          this.$toast.error(err.response.data.message);
         }).finally(() => {
             this.page_loading = false;
           }
@@ -216,16 +240,54 @@ export default {
         this.timer = null;
       }
 
-      console.log(scrollPosition);
-      console.log(contentHeight);
-
-      if (scrollPosition > (contentHeight - 5000) && this.all_tickets_loaded === false)
+      if (scrollPosition > (contentHeight - 1000) && this.all_tickets_loaded === false)
         this.timer = setTimeout(() => {
           // this.loading.message_list = true;
           this.page++;
           this.getMsgList();
         }, 800);
     },
+    calcColor(status,type){
+      if (status=='new' && type=='bg')
+        return 'blue lighten-4';
+      else if (status=='new' && type=='font')
+        return 'blue';
+      //
+      else if (status=='inprogress' && type=='bg')
+        return '#FF9800 lighten-4';
+      else if (status=='inprogress' && type=='font')
+        return '#FF9800';
+      //
+      else if (status=='closed' && type=='bg')
+        return 'red lighten-4';
+      else if (status=='closed' && type=='font')
+        return 'red';
+      //
+      else if (status=='answered' && type=='bg')
+        return 'green lighten-4';
+      else if (status=='answered' && type=='font')
+        return 'green';
+      //
+      else if (status=='user-reply' && type=='bg')
+        return 'blue lighten-4';
+      else if (status=='user-reply' && type=='font')
+        return 'blue';
+      //
+      else if (status=='admin' && type=='bg')
+        return 'brown lighten-4';
+      else if (status=='admin' && type=='font')
+        return 'brown';
+      //
+      else if (status=='direct' && type=='bg')
+        return '#E91E63 lighten-4';
+      else if (status=='direct' && type=='font')
+        return '#E91E63';
+      //
+      else if (status=='broadcast' && type=='bg')
+        return '#8c2500 lighten-4';
+      else if (status=='broadcast' && type=='font')
+        return '#8c2500';
+    }
 
 
 
@@ -261,4 +323,10 @@ font-size: 1.4rem;
 
 }
 
+.ticket_title{
+  font-size: 1.8rem!important;
+}
+.unread_ticket{
+  font-weight: 1000!important;
+}
 </style>
