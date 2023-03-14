@@ -2,48 +2,118 @@
   <v-row>
     <v-col cols="12" class="px-0 px-sm-2">
       <v-row>
-        <v-col cols="12" class="pl-5 text-h4 teal--text">
-          <span class="fa-solid fa-envelope  "></span>
+        <v-col cols="12" class="pl-5 ">
+          <p class="text-h4 teal--text">
+            <span class="fa-solid fa-envelope  "></span>
+            <span>
+             {{ticketData.title}}
+            </span>
+          </p>
           <span>
-           Ticket detail
+             {{$moment(ticketData.sub_date).format('MMM,DD YYYY h:mm A')}}
           </span>
         </v-col>
       </v-row>
+
+
       <v-card class="mt-3" v-if="ticketData.replyable">
           <v-card-text>
             <v-row
               align="center"
               justify="center"
             >
-              <v-col cols="12" class="px-0 px-md-2">
-                <v-timeline dense>
-                  <v-timeline-item
-                    :color="item.side=='me' ? 'teal' : ''"
-                    small
-                    fill-dot
-                    v-for="item in ticketData.replies"
-                  >
-                    <v-card
-                      :color="item.side=='me' ? 'teal' : ''"
-                    >
+              <!--Start ticket-->
+              <v-col cols="12">
+                <p class="text-h5" v-html="ticketData.message.replace(/\n/g, '<br />')"/>
 
-                      <v-card-text class="text-h6" :class="item.side=='me' ? 'white--text' : ''">
-                        {{item.message}}
-                      </v-card-text>
-                      <v-card-actions class="text-h6" :class="item.side=='me' ? 'white--text' : ''">
-                        {{$moment(item.up_date).format('MMM,DD YYYY h:mm A')}}
-
-                        ({{item.user_}})
-                      </v-card-actions>
-                    </v-card>
-                  </v-timeline-item>
-                </v-timeline>
+                <v-divider class="my-3"/>
               </v-col>
+              <!--End start ticket-->
+
+              <!--Start replies-->
+              <v-col cols="12" class="px-0 px-md-2">
+                <v-container class="fill-height">
+                  <v-row class="fill-height pb-14" align="end">
+                    <v-col>
+                      <div v-for="(item, index) in ticketData.replies"
+                           :key="index"
+                           :class="['d-flex flex-row align-center my-2',
+                            item.side == 'me' ? 'justify-end ': null]">
+                        <v-card v-if="item.side == 'me'" flat
+                                color="#ffd08a"
+                              class="mr-3 sent-message">
+                          <v-card-text >
+                            <v-row>
+                              <v-col cols="12">
+                                {{ item.message }}
+                              </v-col>
+                              <v-col cols="12" class="py-0" v-if="item.file!=0">
+                                <a  class="v-btn--outlined pa-1 rounded"
+                                    x-small :href="item.file"
+                                        download
+                                        target="_blank" >
+                                  <v-icon x-small>
+                                    mdi-download
+                                  </v-icon>
+                                  Download attach file
+                                </a>
+                              </v-col>
+                            </v-row>
+                          </v-card-text>
+
+                          <v-card-actions>
+                            {{$moment(item.subdate).format('MMM,DD YYYY h:mm A')}}
+                          </v-card-actions>
+                        </v-card>
+
+                       <!--Chat avatar section-->
+                        <v-avatar v-if="item.side == 'me'"
+                                  size="36">
+                          <v-img v-if="ticketData.contact.me.avatar" :src="ticketData.contact.me.avatar"/>
+                          <span v-else class="white--text">
+                             {{item.first_name[0]}}
+                          </span>
+                        </v-avatar>
+                        <v-avatar v-else
+                                  size="36">
+                          <v-img  :src="ticketData.contact.that.avatar"/>
+                        </v-avatar>
+                        <!--End chat avatar section-->
+
+                        <v-card v-if="item.side == 'that'" flat
+                                color="#e1e2e3"
+                                class="ml-3 received-message">
+                          <v-card-text class="black--text">
+                            <v-row>
+                              <v-col cols="12">
+                                {{ item.message }}
+                              </v-col>
+                              <v-col cols="12" class="py-0" v-if="item.file!=0">
+                                <a  class="v-btn--outlined pa-1 rounded"
+                                    x-small :href="item.file"
+                                    download
+                                    target="_blank" >
+                                  <v-icon x-small>
+                                    mdi-download
+                                  </v-icon>
+                                  Download attach file
+                                </a>
+                              </v-col>
+                            </v-row>
+                          </v-card-text>
+                          <v-card-actions>
+                            {{$moment(item.subdate).format('MMM,DD YYYY h:mm A')}}
+                          </v-card-actions>
+                        </v-card>
+                      </div>
+                    </v-col>
+                  </v-row>
+                </v-container>
+
+              </v-col>
+              <!--End replies-->
 
             </v-row>
-
-            <p class="text-h5" v-html="ticketData.message.replace(/\n/g, '<br />')"/>
-            ({{ticketData.user_}})({{$auth.user}})
             <v-divider class="mt-3"/>
           </v-card-text>
           <v-card-text  class="px-0 px-sm-8 px-md-4">
@@ -88,15 +158,11 @@
                         />
                       </validation-provider>
                     </v-col>
-
-
-
-
                   </v-row>
                   <v-row>
                     <v-col cols="12" md="6" class="pb-0">
                       <v-btn type="submit" lg color="success" :loading="loading.form" :disabled="invalid" block>
-                        Submit
+                        Send
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
@@ -131,10 +197,8 @@ export default {
   data() {
     return {
       form: {
-        title: '',
+        id:this.$route.params.id,
         message: '',
-        type:'',
-        ticket_type:8818,
         file:''
       },
       file: null,
@@ -199,7 +263,7 @@ export default {
       }
 
 
-      this.$axios.$post('/api/v1/tickets',
+      this.$axios.$post('/api/v1/ticketReplies',
         this.urlencodeFormData(formData),
         {
           headers: {
@@ -207,9 +271,7 @@ export default {
           }
         }).then(response => {
           this.$toast.success("Submit successfully");
-          this.$router.push({
-            path: "/user/ticket"
-          });
+          this.refreshTickets();
       }).catch(err => {
         if (err.response.status == 403)
           this.$router.push({query: {auth_form: 'login'}});
@@ -272,6 +334,19 @@ export default {
       return encodeURIComponent(s).replace(/%20/g, '+');
     },
     //End convert form data from multipart to urlencode
+
+
+    refreshTickets(){
+      this.$axios.$get(`/api/v1/tickets/${this.$route.params.id}`)
+      .then(response=>{
+        this.ticketData=response.data;
+        this.form.message='';
+        this.form.file='';
+      }).catch(err=>{
+
+      });
+
+    }
   }
 
 }
@@ -313,5 +388,29 @@ export default {
 .topic_season {
   font-weight: bolder !important;
   color: blue !important;
+}
+
+.received-message::after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -8px;
+  right: auto;
+  bottom: -4px;
+  border: 8px solid;
+  border-color: #e1e2e3 transparent transparent transparent;
+}
+.sent-message::after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: auto;
+  right: -12px;
+  top: 12px;
+  bottom: 1px;
+  border: 12px solid;
+  border-color: #ffd08a transparent transparent transparent;
 }
 </style>
