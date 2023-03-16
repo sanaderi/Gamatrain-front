@@ -16,7 +16,7 @@
       </v-row>
 
 
-      <v-card class="mt-3" v-if="ticketData.replyable">
+      <v-card class="mt-3" >
           <v-card-text>
             <v-row
               align="center"
@@ -116,7 +116,7 @@
             </v-row>
             <v-divider class="mt-3"/>
           </v-card-text>
-          <v-card-text  class="px-0 px-sm-8 px-md-4">
+          <v-card-text  class="px-0 px-sm-8 px-md-4" v-if="ticketData.replyable">
             <v-card flat class="mt-3">
               <validation-observer ref="observer" v-slot="{invalid}">
                 <form @submit.prevent="submitContent">
