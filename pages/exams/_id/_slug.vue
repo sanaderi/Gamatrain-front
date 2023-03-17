@@ -173,8 +173,10 @@
                     Last update: {{$timeAgo.calc(contentData.up_date)}}
                   </v-col>
                   <v-col cols="12" class="pb-0">
-                    <i class="fa-solid fa-bug mr-1 icon"></i>
-                    Crash report
+                    <div class="pointer" @click="openCrashReportDialog">
+                      <i class="fa-solid fa-bug mr-1 icon"></i>
+                      Crash report
+                    </div>
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <!--Dialog for share-->
@@ -475,6 +477,7 @@
     <!-- End: Feed -->
 
 
+    <crash-report ref="crash_report"/>
   </div>
 </template>
 <script>
@@ -487,11 +490,13 @@ import RelatedContent from "@/components/details/related-content";
 import LatestTrainingContent from "@/components/details/latest-training-content";
 import RelatedQa from "@/components/details/related-qa";
 import RelatedOnlineExam from "@/components/details/related-online-exam";
+import CrashReport from "~/components/common/crash-report.vue";
 
 export default {
   name: "exam-details",
   auth: false,
   components: {
+    CrashReport,
     RelatedOnlineExam,
     RelatedQa,
     LatestTrainingContent,
@@ -768,8 +773,13 @@ export default {
       }).finally(()=>{
         this.download_loading=false;
       })
-    }
+    },
     //End download file
+
+    openCrashReportDialog() {
+      this.$refs.crash_report.dialog = true;
+      this.$refs.crash_report.form.type = "test";
+    }
   }
 }
 </script>

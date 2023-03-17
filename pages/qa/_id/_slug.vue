@@ -675,7 +675,7 @@
     </v-dialog>
     <!--End edit dialog-->
 
-    <!--Delete dialog-->
+    <!--Reply dialog-->
     <v-dialog
       v-model="dialog.delete_reply_form"
       max-width="290"
@@ -712,7 +712,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!--End delete dialog-->
+    <!--End Reply dialog-->
   </div>
 </template>
 <script>
