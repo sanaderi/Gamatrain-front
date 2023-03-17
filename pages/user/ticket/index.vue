@@ -115,6 +115,18 @@
               >
                 {{message.status_message}}
               </v-chip>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn icon color="error"
+                         @click="openDeleteConfirmDialog(message.id)"
+                         small v-bind="attrs" v-on="on">
+                    <v-icon small>
+                      mdi-delete
+                    </v-icon>
+                  </v-btn>
+                </template>
+                <span>Delete</span>
+              </v-tooltip>
             </v-col>
 
             <v-col cols="12">
@@ -159,6 +171,46 @@
       </v-col>
     </v-row>
   </div>
+
+  <!--Delete dialog-->
+  <v-dialog
+    v-model="deleteConfirmDialog"
+    max-width="290"
+  >
+    <v-card>
+      <v-card-title class="text-h5">
+        Are you sure?
+      </v-card-title>
+
+      <v-card-text>
+        <p>
+          If you are sure to delete, click Yes.
+        </p>
+      </v-card-text>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+
+        <v-btn
+          text
+          @click="deleteConfirmDialog = false"
+        >
+          No
+        </v-btn>
+
+        <v-btn
+          color="green darken-1"
+          text
+          :loading="delete_loading"
+          @click="deleteItem()"
+        >
+          Yes
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+  <!--End delete dialog-->
+
 </div>
 </template>
 
@@ -185,8 +237,13 @@ export default {
       page_loading: false,
       page: 1,
       all_tickets_loaded: false,
-      timer: null
+      timer: null,
       //End paginate section
+
+      //Delete section
+      deleteConfirmDialog:false,
+      delete_ticket_id:null,
+      delete_loading:false,
     }
   },
   head() {
@@ -287,9 +344,32 @@ export default {
         return '#8c2500 lighten-4';
       else if (status=='broadcast' && type=='font')
         return '#8c2500';
+    },
+
+    openDeleteConfirmDialog(item_id) {
+      this.delete_ticket_id = item_id;
+      this.deleteConfirmDialog = true;
+    },
+    async deleteItem() {
+      this.delete_loading=true;
+      await this.$axios.$delete(`/api/v1/tickets/${this.delete_ticket_id}`,
+      ).then(response => {
+        this.delete_ticket_id = null;
+        this.deleteConfirmDialog = false;
+
+        this.$toast.success("Deleted successfully");
+
+        this.page=1;
+        this.messages = [];
+        this.getMsgList();
+      })
+        .catch(e => {
+          this.delete_paper_id = null;
+          this.deleteConfirmDialog = false;
+        }).finally(()=>{
+          this.delete_loading=false;
+        })
     }
-
-
 
   }
 }
