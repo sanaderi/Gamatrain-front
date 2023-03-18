@@ -115,7 +115,7 @@
               >
                 {{message.status_message}}
               </v-chip>
-              <v-tooltip bottom>
+              <v-tooltip bottom v-if="message.deleteable">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn icon color="error"
                          @click="openDeleteConfirmDialog(message.id)"

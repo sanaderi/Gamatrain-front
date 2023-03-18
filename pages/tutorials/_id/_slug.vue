@@ -34,7 +34,7 @@
               <div class="visit mb-3">
                 <i class="fa-solid fa-eye mr-2"></i>Viewed: {{ tutorialInfo.views }}
               </div>
-              <div class="error-report pointer"  @click="openCrashReportDialog">
+              <div class="error-report pointer" @click="openCrashReportDialog">
                 <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
               </div>
             </div>
@@ -71,7 +71,9 @@
                 <i class="fa-solid fa-eye mr-2"></i>{{ tutorialInfo.views }}
               </v-col>
               <v-col cols="4" class="error-report">
-                <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
+                <div class="error-report pointer" @click="openCrashReportDialog">
+                  <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
+                </div>
               </v-col>
             </v-row>
           </v-col>
@@ -211,7 +213,15 @@ import CrashReport from "~/components/common/crash-report.vue";
 export default {
   name: 'tutorial-details',
   auth: false,
-  components: {CrashReport, RelatedOnlineExam, RelatedQa, LatestTrainingContent, RelatedContent, category, TutorialMenu},
+  components: {
+    CrashReport,
+    RelatedOnlineExam,
+    RelatedQa,
+    LatestTrainingContent,
+    RelatedContent,
+    category,
+    TutorialMenu
+  },
 
   async asyncData({params, $axios}) {
     // This could also be an action dispatch
