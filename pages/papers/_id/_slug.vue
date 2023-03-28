@@ -129,8 +129,10 @@
                     Last update: {{ $moment(contentData.up_date).fromNow() }}
                   </v-col>
                   <v-col cols="12" class="pb-0">
-                    <i class="fa-solid fa-bug mr-1 icon"></i>
-                    Crash report
+                    <div @click="openCrashReportDialog" class="pointer">
+                      <i class="fa-solid fa-bug mr-1 icon"></i>
+                      Crash report
+                    </div>
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <!--Dialog for share-->
@@ -453,6 +455,9 @@
     </section>
     <!-- End: Feed -->
 
+    <crash-report ref="crash_report"/>
+
+
 
   </div>
 </template>
@@ -466,11 +471,13 @@ import RelatedContent from "@/components/details/related-content";
 import LatestTrainingContent from "@/components/details/latest-training-content";
 import RelatedQa from "@/components/details/related-qa";
 import RelatedOnlineExam from "@/components/details/related-online-exam";
+import CrashReport from "~/components/common/crash-report.vue";
 
 export default {
   name: "paper-details",
   auth: false,
   components: {
+    CrashReport,
     RelatedOnlineExam,
     RelatedQa,
     LatestTrainingContent,
@@ -689,6 +696,8 @@ export default {
 
     copy_btn: 'Copy',
     download_loading:false,
+
+
   }),
   methods:{
     initBreadCrumb(){
@@ -728,8 +737,8 @@ export default {
         window.open(`https://telegram.me/share/url?url=${window.location.href}&text=${this.contentData.title}`);
 
     },
-
     //Download file
+
     startDownload(type){
       if (this.$auth.loggedIn){
         this.download_loading=true;
@@ -759,8 +768,13 @@ export default {
       }else{
         this.openAuthDialog('login');
       }
-    }
+    },
     //End download file
+
+    openCrashReportDialog(){
+      this.$refs.crash_report.dialog=true;
+      this.$refs.crash_report.form.type="test";
+    }
   }
 }
 </script>

@@ -8,7 +8,7 @@
         <v-card-text class="px-0 px-md-4">
           <v-row >
             <v-col cols="6" class="text-left">
-              <v-btn class="icon_btn" fab x-large>
+              <v-btn class="icon_btn" fab x-large :to="`${item.manage_link}`">
                 <span :class="`icon ${item.icon} group-icon`"></span>
               </v-btn>
 
@@ -49,25 +49,29 @@ export default {
           class:'sample_exam',
           title:'Paper',
           count:0,
-          link:'/test/add',
+          link:'/user/paper/create',
+          manage_link:'/user/paper',
           icon:'icong-test',
         },{
           class:'training_content',
           title:'Multimedia',
           count:0,
-          link:'/training_content/add',
+          link:'/user/multimedia/create',
+          manage_link:'/user/multimedia',
           icon:'icong-learnfiles',
         },{
           class:'question_answer',
           title:'Q & A',
           count:0,
-          link:'/question/add',
+          link:'/user/question/create',
+          manage_link:'/user/question',
           icon:'icong-qa',
         },{
           class:'online_exam',
           title:'Online exam',
           count:0,
-          link:'/online_exam/add',
+          link:'/test-maker/create',
+          manage_link:'/test-maker',
           icon:'icong-azmoon',
         },
       ]
