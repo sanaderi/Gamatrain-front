@@ -83,7 +83,8 @@ export default {
   ],
 
   axios: {
-    proxy: true,
+    proxy: false,
+    baseURL:process.env.API_BASE_URL,
     headers: {}
   },
 
