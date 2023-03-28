@@ -1,9 +1,9 @@
 <template>
   <div class="home-page-content">
     <v-divider></v-divider>
-<!--     Start:mobile header-->
-      <search-box class="d-block d-md-none mx-3 my-2"/>
-<!--     End: mobile header-->
+    <!--     Start:mobile header-->
+    <search-box class="d-block d-md-none mx-3 my-2"/>
+    <!--     End: mobile header-->
     <section class="banner-sec">
       <v-carousel class="index-banner">
         <v-carousel-item
@@ -43,34 +43,31 @@
       <v-container>
         <v-row class="justify-space-between mx-0 grade-list">
           <v-col
-            v-for="(grade, index) in gradeList"
+            v-for="(stat, index) in stats"
             :key="'DgradeList' + index"
             cols="12"
             md="3"
-            sm="6"
+            sm="4"
             class="grade-card-body"
           >
             <v-card :class="'grade-card grade-card' + (index + 1)">
-              <p v-if="grade.showMore" class="total-content position-relative">
+              <p v-show="stat.showMore" class="total-content">
                 <nuxt-link
-                  v-for="(item, more) in grade.totalContent"
-                  :key="more.value"
-                  :to="item.to"
-                  class="content"
+                  v-for="item in stat.lessons"
+                  to="/"
+                  class="content grade-list-lessons"
                 >
-                  {{ item.content }}،
+                  {{ item.title }},
                 </nuxt-link>
                 <v-btn
-                  @click="grade.showMore = !grade.showMore"
-                  :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
-                >Return
-                </v-btn
+                  @click="lessonExpand(index)"
+                  plain
+                  :class="'mt-5  text-lowercase showmore-btn' + (index + 1)"
                 >
+                  Return
+                </v-btn>
               </p>
-              <div v-if="!grade.showMore">
-                <!--            <v-card-->
-                <!--              class="mx-auto"-->
-                <!--            >-->
+              <div v-show="!stat.showMore">
                 <v-card-title class="d-block pa-0 pb-2">
                   <div class="d-flex justify-space-between align-item">
                     <nuxt-link
@@ -81,7 +78,7 @@
                       <span :class="'label-tag label-tag' + (index + 1)">{{
                           index + 1
                         }}</span>
-                      {{ grade.title }}
+                      {{ stat.base_title }}
                     </nuxt-link>
                     <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
@@ -90,28 +87,24 @@
                   </div>
                   <p class="d-inline-block">
                     <nuxt-link
-                      v-for="(item, summery) in grade.summeryContent"
-                      :key="summery.value"
-                      :to="item.to"
+                      v-for="item in stat.lessons.slice(0,3)"
+                      to="/"
                       class="content grade-list-lessons"
                     >
-                      {{ item.content }}،
+                      {{ item.title }},
                     </nuxt-link>
                     ...
                   </p>
                   <span
                     class="btn-transparent more-content pointer"
-                    @click="grade.showMore = !grade.showMore"
-                  >more</span
-                  >
+                    @click="lessonExpand(index)"
+                  >more</span>
                 </v-card-title>
                 <v-divider class="my-5"></v-divider>
 
                 <v-card-text class="pa-0 grade-items mb-3">
                   <nuxt-link
-                    to="grade.link"
-                    v-for="(item,idxkey) in grade.cat"
-                    :key="idxkey.title"
+                    to="stat.link"
                     class="
                       d-flex
                       align-center
@@ -125,28 +118,93 @@
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'Paper'"
                         class="mr-4 icon icong-test"
                       ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                        v-text="'Paper'"
+                      ></span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat" v-text="stat.tests"></div>
+                    </div>
+                  </nuxt-link>
+                  <nuxt-link
+                    to="stat.link"
+                    class="
+                      d-flex
+                      align-center
+                      justify-space-between
+                      pa-0
+                      pb-0
+                      grade__item
+                    "
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
                       <v-icon
-                        v-else-if="item.title === 'Multimedia'"
                         class="mr-4 icon icong-learnfiles"
                       ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                        v-text="'Multimedia'"
+                      ></span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat" v-text="stat.files"></div>
+                    </div>
+                  </nuxt-link>
+                  <nuxt-link
+                    to="stat.link"
+                    class="
+                      d-flex
+                      align-center
+                      justify-space-between
+                      pa-0
+                      pb-0
+                      grade__item
+                    "
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
                       <v-icon
-                        v-else-if="item.title === 'Q & A'"
                         class="mr-4 icon icong-qa"
                       ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                        v-text="'Q & A'"
+                      ></span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat" v-text="stat.questions"></div>
+                    </div>
+                  </nuxt-link>
+                  <nuxt-link
+                    to="stat.link"
+                    class="
+                      d-flex
+                      align-center
+                      justify-space-between
+                      pa-0
+                      pb-0
+                      grade__item
+                    "
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
                       <v-icon
-                        v-else-if="item.title === 'Exam'"
                         class="mr-4 icon icong-azmoon"
                       ></v-icon>
                       <span
                         class="text-center type my-2 grade-item__text"
-                        v-text="item.title"
+                        v-text="'Exam'"
                       ></span>
                     </div>
                     <div class="py-1 left">
-                      <div class="text-left stat" v-text="item.stat"></div>
+                      <div class="text-left stat" v-text="stat.exams"></div>
                     </div>
                   </nuxt-link>
                 </v-card-text>
@@ -179,12 +237,11 @@
                         ml-2
                       "
                     ></span>
-                    <span class="ml-1 last-update">Last update: </span>
-                    <span class="last-update">{{ grade.update }}</span>
+                    <span class="ml-1 last-update">Last update:&nbsp;</span>
+                    <span class="last-update">{{ $moment(stat.up_date).format("MMM DD") }}</span>
                   </div>
                 </v-card-text>
               </div>
-              <!--            </v-card>-->
             </v-card>
           </v-col>
         </v-row>
@@ -198,14 +255,14 @@
             cols="12"
             md="3"
             sm="6"
-            v-for="(grade, index) in gradeList.slice(0, 3)"
+            v-for="(stat, index) in stats.slice(0, 3)"
             :key="index.value"
             class="grade-card-body"
           >
             <v-card :class="' grade-card grade-card' + (index + 1)">
-              <p v-if="grade.showMore" class="total-content position-relative">
+              <p v-if="stat.showMore" class="total-content position-relative">
                 <nuxt-link
-                  v-for="(item, gradeCard) in grade.totalContent"
+                  v-for="(item, gradeCard) in stat.totalContent"
                   :key="gradeCard.value"
                   :to="item.to"
                   class="content ml-1"
@@ -213,13 +270,12 @@
                   {{ item.content }}،
                 </nuxt-link>
                 <v-btn
-                  @click="grade.showMore = !grade.showMore"
+                  @click="lessonExpand(index)"
                   :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
                 >Return
-                </v-btn
-                >
+                </v-btn>
               </p>
-              <div v-if="!grade.showMore">
+              <div v-if="!stat.showMore">
                 <v-card-title class="d-block pa-0 pb-2">
                   <div class="d-flex justify-space-between align-item">
                     <h2
@@ -229,7 +285,7 @@
                       <span :class="'label-tag label-tag' + (index + 1)">{{
                           index + 1
                         }}</span>
-                      {{ grade.title }}
+                      {{ stat.base_title }}
                     </h2>
                     <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
@@ -238,23 +294,22 @@
                   </div>
                   <p class="d-inline-block">
                     <nuxt-link
-                      v-for="(item, summeryContent) in grade.summeryContent"
-                      :key="summeryContent.value"
-                      :to="item.to"
+                      v-for="item in stat.lessons"
+                      to="/"
                       class="content grade-list-lessons"
                     >
-                      {{ item.content }}،
+                      {{ item.title }}،
                     </nuxt-link>
                     ...
                   </p>
                   <span
                     class="btn-transparent more-content pointer"
-                    @click="grade.showMore = !grade.showMore"
+                    @click="lessonExpand(index)"
                   >more</span
                   >
-                  <p v-if="grade.showMore" class="total-content">
+                  <p v-if="stat.showMore" class="total-content">
                     <nuxt-link
-                      v-for="(item, totalContent) in grade.totalContent"
+                      v-for="(item, totalContent) in stat.totalContent"
                       :key="totalContent.value"
                       :to="item.to"
                       class="content"
@@ -267,8 +322,8 @@
 
                 <v-card-text class="pa-0 grade-items mb-3">
                   <nuxt-link
-                    to="grade.link"
-                    v-for="item in grade.cat"
+                    to="stat.link"
+                    v-for="item in stat.cat"
                     :key="item.title"
                     :class="
                       'd-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item' +
@@ -327,8 +382,8 @@
                     "
                   >
                     <span class="fa-solid fa-calendar-days ml-2"></span>
-                    <span class="ml-1">Last update: </span>
-                    <span>{{ grade.update }}</span>
+                    <span class="ml-1">Last update:&nbsp;</span>
+                    <span>{{ $moment(stat.up_date).format("MMM DD") }}</span>
                   </div>
                 </v-card-text>
 
@@ -339,7 +394,7 @@
         </v-row>
         <v-row v-else class="justify-space-between mx-0 grade-list">
           <v-col
-            v-for="(grade, index) in gradeList"
+            v-for="(stat, index) in stats"
             :key="index.value"
             cols="12"
             md="3"
@@ -347,9 +402,9 @@
             class="grade-card-body"
           >
             <v-card :class="' grade-card grade-card' + (index + 1)">
-              <p v-if="grade.showMore" class="total-content position-relative">
+              <p v-if="stat.showMore" class="total-content position-relative">
                 <nuxt-link
-                  v-for="(item, mTotalContent) in grade.totalContent"
+                  v-for="(item, mTotalContent) in stat.totalContent"
                   :key="mTotalContent.value"
                   :to="item.to"
                   class="content"
@@ -357,13 +412,14 @@
                   {{ item.content }}،
                 </nuxt-link>
                 <v-btn
-                  @click="grade.showMore = !grade.showMore"
+                  @click="lessonExpand(index)"
                   :class="'mt-5 showmore-btn showmore-btn' + (index + 1)"
-                >Return
+                >
+                  Return
                 </v-btn
                 >
               </p>
-              <div v-if="!grade.showMore">
+              <div v-if="!stat.showMore">
                 <v-card-title class="d-block pa-0 pb-2">
                   <div class="d-flex justify-space-between align-item">
                     <h2
@@ -373,7 +429,7 @@
                       <span :class="'label-tag label-tag' + (index + 1)">{{
                           index + 1
                         }}</span>
-                      {{ grade.title }}
+                      {{ stat.base_title }}
                     </h2>
                     <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
@@ -382,23 +438,25 @@
                   </div>
                   <p class="d-inline-block">
                     <nuxt-link
-                      v-for="(item, mSummeryContent) in grade.summeryContent"
-                      :key="mSummeryContent.value"
-                      :to="item.to"
+                      v-for="item in stat.lessons"
+                      to="/"
                       class="content grade-list-lessons"
                     >
-                      {{ item.content }}،
+                      {{ item.title }}،
                     </nuxt-link>
-                    ...
+                    <span v-show="stat.lessons.length>3">
+                      ...
+                    </span>
                   </p>
                   <span
+                    v-show="stat.lessons.length>3"
                     class="btn-transparent more-content pointer"
-                    @click="grade.showMore = !grade.showMore"
+                    @click="lessonExpand(index)"
                   >more</span
                   >
-                  <p v-if="grade.showMore" class="total-content">
+                  <p v-if="stat.showMore" class="total-content">
                     <nuxt-link
-                      v-for="(item, tContent) in grade.totalContent"
+                      v-for="(item, tContent) in stat.totalContent"
                       :key="tContent.value"
                       :to="item.to"
                       class="content"
@@ -411,8 +469,8 @@
 
                 <v-card-text class="pa-0 grade-items mb-3">
                   <nuxt-link
-                    to="grade.link"
-                    v-for="item in grade.cat"
+                    to="stat.link"
+                    v-for="item in stat.cat"
                     :key="item.title"
                     :class="
                       'd-flex align-center justify-space-between  pa-0 pb-0 grade__item grade__item' +
@@ -471,8 +529,8 @@
                     "
                   >
                     <span class="fa-solid fa-calendar-days ml-2"></span>
-                    <span class="ml-1">Last update: </span>
-                    <span>{{ grade.update }}</span>
+                    <span class="ml-1">Last update:&nbsp;</span>
+                    <span>{{ $moment(stat.up_date).format("MMM DD") }}</span>
                   </div>
                 </v-card-text>
 
@@ -496,8 +554,6 @@
       </v-container>
     </section>
     <!--  End: Grade list  -->
-
-
 
 
     <!-- Start: Feedtabs respons -->
@@ -566,6 +622,8 @@ import SearchBox from "@/components/common/search-box";
 
 export default {
   auth: false,
+  name: 'home_page',
+
   components: {
     SearchBox,
     LastViews,
@@ -605,6 +663,7 @@ export default {
     value1: null,
     value2: null,
     value3: null,
+    stats: [],
     gradeList: [
       {
         title: "1st Level",
@@ -1334,10 +1393,35 @@ export default {
     ],
   }),
 
-  mounted() {
+  //Load data
+  async asyncData({params, $axios}) {
+    // This could also be an action dispatch
+    const response = await $axios.$get('/api/v1/home/stats');
+    var stats = [];
 
+    //Check data
+    if (response.status === 1){
+      stats=response.data;
+      for (var i in stats) {
+        stats[i].showMore = false;
+      }
+    }
+
+    return {stats};
   },
-  methods: {}
+
+  mounted() {
+  },
+  methods: {
+    lessonExpand(index) {
+      this.$toast.success("hi" + index);
+      if (this.stats[index].showMore == true)
+        this.stats[index].showMore = false;
+      else
+        this.stats[index].showMore = true;
+
+    },
+  }
 };
 </script>
 

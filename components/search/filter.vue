@@ -67,7 +67,7 @@
     </div>
     <!--End select filter  -->
     <div>
-      <p class="mb-2 mb-md-1 mt-5">Grade</p>
+      <p class="mb-2 mb-md-1 mt-5">Level</p>
       <v-divider class="mb-3"/>
 
       <v-container
