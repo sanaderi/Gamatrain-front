@@ -242,7 +242,7 @@
                       "
                     ></span>
                     <span class="ml-1 last-update">Last update:&nbsp;</span>
-                    <span class="last-update">{{ $moment(stat.up_date).format("MMM DD") }}</span>
+                    <span class="last-update">{{ $moment(stat.last_update).format("MMM DD") }}</span>
                   </div>
                 </v-card-text>
               </div>
@@ -295,7 +295,7 @@
                     </h2>
                     <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
-                      <p>{{$moment(stat.up_date).format("MMM DD")}}</p>
+                      <p>{{$moment(stat.last_update).format("MMM DD")}}</p>
                     </div>
                   </div>
                   <p class="d-inline-block">
@@ -445,7 +445,7 @@
                   >
                     <span class="fa-solid fa-calendar-days ml-2"></span>
                     <span class="ml-1">Last update:&nbsp;</span>
-                    <span>{{ $moment(stat.up_date).format("MMM DD") }}</span>
+                    <span>{{ $moment(stat.last_update).format("MMM DD") }}</span>
                   </div>
                 </v-card-text>
 
@@ -498,7 +498,7 @@
                     </h2>
                     <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
-                      <p>{{$moment(stat.up_date).format("MMM DD")}}</p>
+                      <p>{{$moment(stat.last_update).format("MMM DD")}}</p>
                     </div>
                   </div>
                   <p class="d-inline-block">
@@ -646,7 +646,7 @@
                   >
                     <span class="fa-solid fa-calendar-days ml-2"></span>
                     <span class="ml-1">Last update:&nbsp;</span>
-                    <span>{{ $moment(stat.up_date).format("MMM DD") }}</span>
+                    <span>{{ $moment(stat.last_update).format("MMM DD") }}</span>
                   </div>
                 </v-card-text>
 

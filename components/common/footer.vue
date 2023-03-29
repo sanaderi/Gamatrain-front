@@ -100,16 +100,16 @@
               </v-list-item>
             </v-list>
           </v-col>
-          <v-col md="2" sm="3" class="d-none d-md-block">
-            <div class="d-flex align-center mt-15">
-              <button>
-                <img :src="require('@/assets/images/' + enamad)" alt="" />
-              </button>
-              <button>
-                <img :src="require('@/assets/images/' + secondEnamad)" alt="" />
-              </button>
-            </div>
-          </v-col>
+<!--          <v-col md="2" sm="3" class="d-none d-md-block">-->
+<!--            <div class="d-flex align-center mt-15">-->
+<!--              <button>-->
+<!--                <img :src="require('@/assets/images/' + enamad)" alt="" />-->
+<!--              </button>-->
+<!--              <button>-->
+<!--                <img :src="require('@/assets/images/' + secondEnamad)" alt="" />-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </v-col>-->
         </v-row>
       </div>
       <div
@@ -132,77 +132,77 @@
           />
         </div>
       </div>
-      <div class="d-flex d-sm-none justify-center my-5">
-        <div class="enamad d-flex" v-for="(item,enamad) in enamads" :key="enamad">
-          <img
-            :src="require('@/assets/images/' + item.img)"
-            alt=""
-            width="64"
-          />
-        </div>
-      </div>
+<!--      <div class="d-flex d-sm-none justify-center my-5">-->
+<!--        <div class="enamad d-flex" v-for="(item,enamad) in enamads" :key="enamad">-->
+<!--          <img-->
+<!--            :src="require('@/assets/images/' + item.img)"-->
+<!--            alt=""-->
+<!--            width="64"-->
+<!--          />-->
+<!--        </div>-->
+<!--      </div>-->
     </v-container>
-    <div class="footer-bar">
-      <v-row>
-        <v-col
-          md="2"
-          cols="4"
-          class="d-flex justify-center footer-bar-item align-center">
-          <nuxt-link to="/search?type=azmoon">
-            Exam
-          </nuxt-link>
-        </v-col
-        >
-        <v-col
-          md="2"
-          cols="4"
-          class="d-flex justify-center footer-bar-item align-center"
-          >
-          <nuxt-link to="/search?type=test">
-            Paper
-          </nuxt-link>
-        </v-col
-        >
-        <v-col
-          md="2"
-          cols="4"
-          class="d-flex justify-center footer-bar-item align-center"
-          >
-          <nuxt-link to="/search?type=learnfiles">
-            Multimedia
-          </nuxt-link>
-        </v-col
-        >
-        <v-col
-          md="2"
-          cols="4"
-          class="d-flex justify-center footer-bar-item align-center"
-          >
-          <nuxt-link to="/search?type=question">
-            Q & A
-          </nuxt-link>
-        </v-col
-        >
-        <v-col
-          md="2"
-          cols="4"
-          class="d-flex justify-center footer-bar-item align-center"
-        >
-          <nuxt-link to="/search?type=dars">
-            Tutorial
-          </nuxt-link>
-        </v-col>
-        <v-col
-          md="2"
-          cols="4"
-          class="d-flex justify-center footer-bar-item align-center"
-          >
-          <nuxt-link to="/search?type=tutor">
-            Tutor
-          </nuxt-link>
-        </v-col>
-      </v-row>
-    </div>
+<!--    <div class="footer-bar">-->
+<!--      <v-row>-->
+<!--        <v-col-->
+<!--          md="2"-->
+<!--          cols="4"-->
+<!--          class="d-flex justify-center footer-bar-item align-center">-->
+<!--          <nuxt-link to="/search?type=azmoon">-->
+<!--            Exam-->
+<!--          </nuxt-link>-->
+<!--        </v-col-->
+<!--        >-->
+<!--        <v-col-->
+<!--          md="2"-->
+<!--          cols="4"-->
+<!--          class="d-flex justify-center footer-bar-item align-center"-->
+<!--          >-->
+<!--          <nuxt-link to="/search?type=test">-->
+<!--            Paper-->
+<!--          </nuxt-link>-->
+<!--        </v-col-->
+<!--        >-->
+<!--        <v-col-->
+<!--          md="2"-->
+<!--          cols="4"-->
+<!--          class="d-flex justify-center footer-bar-item align-center"-->
+<!--          >-->
+<!--          <nuxt-link to="/search?type=learnfiles">-->
+<!--            Multimedia-->
+<!--          </nuxt-link>-->
+<!--        </v-col-->
+<!--        >-->
+<!--        <v-col-->
+<!--          md="2"-->
+<!--          cols="4"-->
+<!--          class="d-flex justify-center footer-bar-item align-center"-->
+<!--          >-->
+<!--          <nuxt-link to="/search?type=question">-->
+<!--            Q & A-->
+<!--          </nuxt-link>-->
+<!--        </v-col-->
+<!--        >-->
+<!--        <v-col-->
+<!--          md="2"-->
+<!--          cols="4"-->
+<!--          class="d-flex justify-center footer-bar-item align-center"-->
+<!--        >-->
+<!--          <nuxt-link to="/search?type=dars">-->
+<!--            Tutorial-->
+<!--          </nuxt-link>-->
+<!--        </v-col>-->
+<!--        <v-col-->
+<!--          md="2"-->
+<!--          cols="4"-->
+<!--          class="d-flex justify-center footer-bar-item align-center"-->
+<!--          >-->
+<!--          <nuxt-link to="/search?type=tutor">-->
+<!--            Tutor-->
+<!--          </nuxt-link>-->
+<!--        </v-col>-->
+<!--      </v-row>-->
+<!--    </div>-->
   </div>
 </template>
 <script>
