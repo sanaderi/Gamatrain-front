@@ -41,7 +41,7 @@
           </v-col>
           <v-col md="6" lg="6" class="text-right" >
             <span>Most visited: </span>
-            <v-chip to="/" color="rgba(33, 33, 33, 0.08)">
+            <v-chip to="/test-maker/create" color="rgba(33, 33, 33, 0.08)">
               <v-chip small color="rgba(0, 0, 0, 0.16);">
                 #
               </v-chip>

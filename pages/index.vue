@@ -5,7 +5,7 @@
     <search-box class="d-block d-md-none mx-3 my-2"/>
     <!--     End: mobile header-->
     <section class="banner-sec">
-      <v-carousel class="index-banner">
+      <v-carousel class="index-banner d-none d-md-block">
         <v-carousel-item
           v-for="(item, index) in items"
           cover
@@ -38,6 +38,7 @@
       </v-container>
     </section>
     <!--  End: search  -->
+
     <!-- Start:grade list desktop -->
     <section class="grades-list d-sm-flex d-none">
       <v-container>
@@ -54,10 +55,10 @@
               <p v-show="stat.showMore" class="total-content">
                 <nuxt-link
                   v-for="item in stat.lessons"
-                  to="/"
+                  :to="`/search?type=test&section=${stat.section}&base=${stat.base}&lesson=${stat.lesson}&sortby=best`"
                   class="content grade-list-lessons"
                 >
-                  {{ item.title }},
+                  {{ item.title }}
                 </nuxt-link>
                 <v-btn
                   @click="lessonExpand(index)"
@@ -87,24 +88,27 @@
                   </div>
                   <p class="d-inline-block">
                     <nuxt-link
-                      v-for="item in stat.lessons.slice(0,3)"
-                      to="/"
+                      v-for="(item,index) in stat.lessons.slice(0,3)"
+                      :to="`/search?type=test&section=${stat.section}&base=${stat.base}&lesson=${stat.lesson}&sortby=best`"
                       class="content grade-list-lessons"
                     >
-                      {{ item.title }},
+                      {{ item.title }}
+                      <span v-show="index<2">
+                        ,
+                      </span>
                     </nuxt-link>
-                    ...
                   </p>
                   <span
+                    v-show="stat.lessons.length>3"
                     class="btn-transparent more-content pointer"
                     @click="lessonExpand(index)"
-                  >more</span>
+                  >... more</span>
                 </v-card-title>
                 <v-divider class="my-5"></v-divider>
 
                 <v-card-text class="pa-0 grade-items mb-3">
                   <nuxt-link
-                    to="stat.link"
+                    :to="`/search?type=test&section=${stat.section}&base=${stat.base}&sortby=best`"
                     class="
                       d-flex
                       align-center
@@ -130,7 +134,7 @@
                     </div>
                   </nuxt-link>
                   <nuxt-link
-                    to="stat.link"
+                    :to="`/search?type=learnfiles&section=${stat.section}&base=${stat.base}&sortby=best`"
                     class="
                       d-flex
                       align-center
@@ -156,33 +160,7 @@
                     </div>
                   </nuxt-link>
                   <nuxt-link
-                    to="stat.link"
-                    class="
-                      d-flex
-                      align-center
-                      justify-space-between
-                      pa-0
-                      pb-0
-                      grade__item
-                    "
-                  >
-                    <div
-                      class="py-0 d-flex align-center right grade__item-title"
-                    >
-                      <v-icon
-                        class="mr-4 icon icong-qa"
-                      ></v-icon>
-                      <span
-                        class="text-center type my-2 grade-item__text"
-                        v-text="'Q & A'"
-                      ></span>
-                    </div>
-                    <div class="py-1 left">
-                      <div class="text-left stat" v-text="stat.questions"></div>
-                    </div>
-                  </nuxt-link>
-                  <nuxt-link
-                    to="stat.link"
+                    :to="`/search?type=azmoon&section=${stat.section}&base=${stat.base}&sortby=best`"
                     class="
                       d-flex
                       align-center
@@ -205,6 +183,32 @@
                     </div>
                     <div class="py-1 left">
                       <div class="text-left stat" v-text="stat.exams"></div>
+                    </div>
+                  </nuxt-link>
+                  <nuxt-link
+                    :to="`/search?type=question&section=${stat.section}&base=${stat.base}&sortby=best`"
+                    class="
+                      d-flex
+                      align-center
+                      justify-space-between
+                      pa-0
+                      pb-0
+                      grade__item
+                    "
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
+                      <v-icon
+                        class="mr-4 icon icong-qa"
+                      ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                        v-text="'Q & A'"
+                      ></span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat" v-text="stat.questions"></div>
                     </div>
                   </nuxt-link>
                 </v-card-text>
@@ -248,6 +252,8 @@
       </v-container>
     </section>
     <!--  Start: Grades list mobile -->
+
+    <!-- Start:grade list mobile -->
     <section class="grades-list d-sm-none d-flex">
       <v-container>
         <v-row class="justify-space-between mx-0 grade-list" v-if="showLess">
@@ -260,7 +266,7 @@
             class="grade-card-body"
           >
             <v-card :class="' grade-card grade-card' + (index + 1)">
-              <p v-if="stat.showMore" class="total-content position-relative">
+              <p v-show="stat.showMore" class="total-content ">
                 <nuxt-link
                   v-for="(item, gradeCard) in stat.totalContent"
                   :key="gradeCard.value"
@@ -275,7 +281,7 @@
                 >Return
                 </v-btn>
               </p>
-              <div v-if="!stat.showMore">
+              <div v-show="!stat.showMore">
                 <v-card-title class="d-block pa-0 pb-2">
                   <div class="d-flex justify-space-between align-item">
                     <h2
@@ -289,32 +295,37 @@
                     </h2>
                     <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
-                      <p>27 Jun</p>
+                      <p>{{$moment(stat.up_date).format("MMM DD")}}</p>
                     </div>
                   </div>
                   <p class="d-inline-block">
                     <nuxt-link
-                      v-for="item in stat.lessons"
-                      to="/"
+                      v-for="(item,index) in stat.lessons"
+                      :to="`/search?type=test&section=${stat.section}&base=${stat.base}&lesson=${stat.lesson}&sortby=best`"
                       class="content grade-list-lessons"
                     >
-                      {{ item.title }}،
+                      {{ item.title }}
+                      <span v-show="index<2">
+                        ,
+                      </span>
                     </nuxt-link>
-                    ...
                   </p>
                   <span
+                    v-show="stat.lessons.length>3"
                     class="btn-transparent more-content pointer"
                     @click="lessonExpand(index)"
-                  >more</span
+                  >... more</span
                   >
                   <p v-if="stat.showMore" class="total-content">
                     <nuxt-link
-                      v-for="(item, totalContent) in stat.totalContent"
-                      :key="totalContent.value"
-                      :to="item.to"
+                      v-for="item in stat.lessons"
+                      :to="`/search?type=test&section=${stat.section}&base=${stat.base}&lesson=${stat.lesson}&sortby=best`"
                       class="content"
                     >
-                      {{ item.content }}،
+                      {{ item.title }}
+                      <span v-show="index<2">
+                        ,
+                      </span>
                     </nuxt-link>
                   </p>
                 </v-card-title>
@@ -322,40 +333,91 @@
 
                 <v-card-text class="pa-0 grade-items mb-3">
                   <nuxt-link
-                    to="stat.link"
-                    v-for="item in stat.cat"
-                    :key="item.title"
-                    :class="
-                      'd-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item' +
-                      (index + 1)
-                    "
+                    :to="`/search?type=test&section=${stat.section}&base=${stat.base}&sortby=best`"
+                    :class="'d-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item1'"
                   >
                     <div
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'Paper'"
                         class="ml-1 icon icong-test"
                       ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                      >
+                        Paper
+                      </span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat">
+                        {{stat.tests }}
+                      </div>
+                    </div>
+                  </nuxt-link>
+                  <nuxt-link
+                    :to="`/search?type=learnfiles&section=${stat.section}&base=${stat.base}&sortby=best`"
+                    :class="'d-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item2'"
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
                       <v-icon
-                        v-else-if="item.title === 'Multimedia'"
                         class="ml-1 icon icong-learnfiles"
                       ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                      >
+                        Multimedia
+                      </span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat">
+                        {{stat.files }}
+                      </div>
+                    </div>
+                  </nuxt-link>
+                  <nuxt-link
+                    :to="`/search?type=azmoon&section=${stat.section}&base=${stat.base}&sortby=best`"
+                    :class="'d-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item4'"
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
                       <v-icon
-                        v-else-if="item.title === 'Q & A'"
-                        class="ml-1 icon icong-qa"
-                      ></v-icon>
-                      <v-icon
-                        v-else-if="item.title === 'Exam'"
                         class="ml-1 icon icong-azmoon"
                       ></v-icon>
                       <span
                         class="text-center type my-2 grade-item__text"
-                        v-text="item.title"
-                      ></span>
+                      >
+                        Exam
+                      </span>
                     </div>
                     <div class="py-1 left">
-                      <div class="text-left stat" v-text="item.stat"></div>
+                      <div class="text-left stat">
+                        {{stat.exams }}
+                      </div>
+                    </div>
+                  </nuxt-link>
+                  <nuxt-link
+                    :to="`/search?type=question&section=${stat.section}&base=${stat.base}&sortby=best`"
+                    :class="'d-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item3'"
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
+                      <v-icon
+                        class="ml-1 icon icong-qa"
+                      ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                      >
+                        Q & A
+                      </span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat">
+                        {{stat.questions }}
+                      </div>
                     </div>
                   </nuxt-link>
                 </v-card-text>
@@ -402,14 +464,17 @@
             class="grade-card-body"
           >
             <v-card :class="' grade-card grade-card' + (index + 1)">
-              <p v-if="stat.showMore" class="total-content position-relative">
+              <p v-if="stat.showMore" class="total-content">
                 <nuxt-link
-                  v-for="(item, mTotalContent) in stat.totalContent"
+                  v-for="(item,index) in stat.lessons"
                   :key="mTotalContent.value"
                   :to="item.to"
                   class="content"
                 >
-                  {{ item.content }}،
+                  {{ item.title }}
+                  <span v-show="index<2">
+                        ,
+                      </span>
                 </nuxt-link>
                 <v-btn
                   @click="lessonExpand(index)"
@@ -433,26 +498,26 @@
                     </h2>
                     <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
-                      <p>27 Jun</p>
+                      <p>{{$moment(stat.up_date).format("MMM DD")}}</p>
                     </div>
                   </div>
                   <p class="d-inline-block">
                     <nuxt-link
-                      v-for="item in stat.lessons"
-                      to="/"
+                      v-for="(item,index) in stat.lessons.slice(0,3)"
+                      :to="`/search?type=test&section=${stat.section}&base=${stat.base}&lesson=${stat.lesson}&sortby=best`"
                       class="content grade-list-lessons"
                     >
-                      {{ item.title }}،
+                      {{ item.title }}
+                      <span v-show="index<2">
+                        ,
+                      </span>
                     </nuxt-link>
-                    <span v-show="stat.lessons.length>3">
-                      ...
-                    </span>
                   </p>
                   <span
                     v-show="stat.lessons.length>3"
                     class="btn-transparent more-content pointer"
                     @click="lessonExpand(index)"
-                  >more</span
+                  >... more</span
                   >
                   <p v-if="stat.showMore" class="total-content">
                     <nuxt-link
@@ -469,40 +534,91 @@
 
                 <v-card-text class="pa-0 grade-items mb-3">
                   <nuxt-link
-                    to="stat.link"
-                    v-for="item in stat.cat"
-                    :key="item.title"
-                    :class="
-                      'd-flex align-center justify-space-between  pa-0 pb-0 grade__item grade__item' +
-                      (index + 1)
-                    "
+                    :to="`/search?type=test&section=${stat.section}&base=${stat.base}&sortby=best`"
+                    :class="'d-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item1'"
                   >
                     <div
                       class="py-0 d-flex align-center right grade__item-title"
                     >
                       <v-icon
-                        v-if="item.title === 'Paper'"
                         class="ml-1 icon icong-test"
                       ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                      >
+                        Paper
+                      </span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat">
+                        {{stat.tests }}
+                      </div>
+                    </div>
+                  </nuxt-link>
+                  <nuxt-link
+                    :to="`/search?type=learnfiles&section=${stat.section}&base=${stat.base}&sortby=best`"
+                    :class="'d-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item2'"
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
                       <v-icon
-                        v-else-if="item.title === 'Multimedia'"
                         class="ml-1 icon icong-learnfiles"
                       ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                      >
+                        Multimedia
+                      </span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat">
+                        {{stat.files }}
+                      </div>
+                    </div>
+                  </nuxt-link>
+                  <nuxt-link
+                    :to="`/search?type=azmoon&section=${stat.section}&base=${stat.base}&sortby=best`"
+                    :class="'d-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item4'"
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
                       <v-icon
-                        v-else-if="item.title === 'Q & A'"
-                        class="ml-1 icon icong-qa"
-                      ></v-icon>
-                      <v-icon
-                        v-else-if="item.title === 'Exam'"
                         class="ml-1 icon icong-azmoon"
                       ></v-icon>
                       <span
                         class="text-center type my-2 grade-item__text"
-                        v-text="item.title"
-                      ></span>
+                      >
+                        Exam
+                      </span>
                     </div>
                     <div class="py-1 left">
-                      <div class="text-left stat" v-text="item.stat"></div>
+                      <div class="text-left stat">
+                        {{stat.exams }}
+                      </div>
+                    </div>
+                  </nuxt-link>
+                  <nuxt-link
+                    :to="`/search?type=question&section=${stat.section}&base=${stat.base}&sortby=best`"
+                    :class="'d-flex align-center justify-space-between pa-0 pb-0 grade__item grade__item3'"
+                  >
+                    <div
+                      class="py-0 d-flex align-center right grade__item-title"
+                    >
+                      <v-icon
+                        class="ml-1 icon icong-qa"
+                      ></v-icon>
+                      <span
+                        class="text-center type my-2 grade-item__text"
+                      >
+                        Q & A
+                      </span>
+                    </div>
+                    <div class="py-1 left">
+                      <div class="text-left stat">
+                        {{stat.questions }}
+                      </div>
                     </div>
                   </nuxt-link>
                 </v-card-text>
@@ -553,7 +669,7 @@
         </button>
       </v-container>
     </section>
-    <!--  End: Grade list  -->
+    <!--  End: Grade list mobile  -->
 
 
     <!-- Start: Feedtabs respons -->
@@ -642,17 +758,11 @@ export default {
 
     items: [
       {
-        src: "slider.png",
+        src: "banner_home_2.jpg",
       },
       {
-        src: "slider.png",
-      },
-      {
-        src: "slider.png",
-      },
-      {
-        src: "slider.png",
-      },
+        src: "banner_home_2.jpg"
+      }
     ],
     items1: ["All", "دبستان", "متوسطه"],
     items2: ["All", "دبستان", "متوسطه"],

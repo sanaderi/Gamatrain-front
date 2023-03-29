@@ -10,8 +10,10 @@
           class="card"
 
         >
-          <nuxt-link :to="item.link">
-            <v-list-item class="d-flex flex-column mx-7 pa-0">
+          <nuxt-link :to="item.link" disabled >
+            <v-list-item class="d-flex flex-column mx-7 pa-0"
+
+            >
               <v-list-item-icon
                 class="ma-0 d-flex align-center justify-center p-icon"
               >
@@ -51,18 +53,18 @@
           </nuxt-link>
         </v-col>
         <v-col xs="3" class="d-flex justify-center pa-0 ml-2">
-          <button
-            class="category-showmore"
-            @click="showMore = !showMore"
-            v-show="!showMore"
-          >
-            <nuxt-link to="">
-              <div class="category-more d-flex justify-center align-center ">
-                <i class="fa-solid fa-ellipsis cat-more-icon"></i>
-              </div>
-              <p class="mb-0 mr-1 cat-more-p">more</p>
-            </nuxt-link>
-          </button>
+<!--          <button-->
+<!--            class="category-showmore"-->
+<!--            @click="showMore = !showMore"-->
+<!--            v-show="!showMore"-->
+<!--          >-->
+<!--            <nuxt-link to="">-->
+<!--              <div class="category-more d-flex justify-center align-center ">-->
+<!--                <i class="fa-solid fa-ellipsis cat-more-icon"></i>-->
+<!--              </div>-->
+<!--              <p class="mb-0 mr-1 cat-more-p">more</p>-->
+<!--            </nuxt-link>-->
+<!--          </button>-->
         </v-col>
         <div v-if="showMore" class="d-flex flex-wrap">
           <v-col
@@ -72,7 +74,7 @@
             class="card"
             xs="3"
           >
-            <nuxt-link :to="item.link">
+            <nuxt-link :to="item.link" >
               <v-list-item class="d-flex flex-column mx-7">
                 <v-list-item-icon
                   class="ma-0 d-flex align-center justify-center p-icon"
@@ -117,8 +119,8 @@ export default {
       { class: "content", text: "Multimedia", icon: "learnfiles" ,link:"/search?type=learnfiles" },
       { class: "faq", text: "Q & A", icon: "qa",link:"/search?type=question" },
       { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/search?type=dars" },
-      { class: "school", text: "School", icon: "school" ,link:"/search?type=school" },
-      { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor" },
+      // { class: "school", text: "School", icon: "school" ,link:"/search?type=school",status:'disabled' },
+      // { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor",status:'disabled' },
     ],
   }),
 };
