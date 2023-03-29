@@ -1524,7 +1524,6 @@ export default {
   },
   methods: {
     lessonExpand(index) {
-      this.$toast.success("hi" + index);
       if (this.stats[index].showMore == true)
         this.stats[index].showMore = false;
       else
