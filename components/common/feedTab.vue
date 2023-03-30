@@ -5,13 +5,18 @@
       <v-container>
         <v-row>
           <v-col
-            v-for="(feed, feedBox) in footerFeedList"
-            :key="feedBox.value"
             cols="12"
             md="4"
             sm="4"
           >
-            <footer-feed-box :feed="feed"></footer-feed-box>
+            <footer-feed-box :feed="latestList.multimedia"></footer-feed-box>
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
+            sm="4"
+          >
+            <footer-feed-box :feed="latestList.question"></footer-feed-box>
           </v-col>
           <v-col cols="12" md="4" sm="4" class="third-feed-box mt-3 pa-0">
             <latest-news/>
@@ -32,11 +37,12 @@
         </v-tab>
       </v-tabs>
       <v-tabs-items v-model="tabs" class="feed-card ma-4">
-        <v-tab-item  v-for="(feed, feedBox) in footerFeedList"
-                     :key="feedBox.value">
-          <footer-feed-box :feed="feed"></footer-feed-box>
+        <v-tab-item>
+          <footer-feed-box :feed="latestList.multimedia"></footer-feed-box>
         </v-tab-item>
-
+        <v-tab-item>
+          <footer-feed-box :feed="latestList.question"></footer-feed-box>
+        </v-tab-item>
         <v-tab-item>
           <latest-news/>
         </v-tab-item>
@@ -47,146 +53,71 @@
 <script>
 import FooterFeedBox from "@/components/common/footer-feed-box";
 import LatestNews from "@/components/common/latest-news";
+import question from "~/pages/user/question/index.vue";
 
 export default {
-  name:'feedTab',
-  components:{
+  name: 'feedTab',
+  components: {
     LatestNews,
     FooterFeedBox
   },
   data() {
     return {
       tabs: null,
-      items:[
+      items: [
         {
-          icon:"file.png",
-          title:"Latest Multimedia"
+          icon: "file.png",
+          title: "Latest Multimedia"
         },
-         {
-           icon:"ask.png",
-          title:"Latest Q&A"
+        {
+          icon: "ask.png",
+          title: "Latest Q&A"
         },
-         {
-           icon:"News.png",
-          title:"Latest News"
+        {
+          icon: "News.png",
+          title: "Latest News"
         },
       ],
-      // items: ["File های آموزشی", "پرسش ها", "اخبار"],
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      avatar: "dexter-morse2.png",
 
-      footerFeedList: [
-        {
+      latestList: {
+        multimedia: {
           class: "learning",
           header: "Latest Multimedia",
           icon: "learnfiles",
-          contentItemList: [
-            {
-              avatar: "dexter-morse2.png",
-              title:
-                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
-              name: "Arian Etemadi",
-              date: "Jun 21",
-            },
-            {
-              avatar: "dexter-morse2.png",
-              title:
-                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-              name: "Arian Etemadi",
-              date: "Jun 21",
-            },
-            {
-              avatar: "dexter-morse2.png",
-              title:
-                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
-              name: "Arian Etemadi",
-              date: "Jun 21",
-            },
-            {
-              avatar: "dexter-morse2.png",
-              title:
-                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-              name: "Arian Etemadi",
-              date: "Jun 21",
-            },
-          ],
+          contentItemList: [],
         },
-        {
+        question: {
           class: "question",
           header: "Latest Q&A",
           icon: "qa",
-          contentItemList: [
-            {
-              avatar: "dexter-morse2.png",
-              title:
-                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-              name: "Arian Etemadi",
-              date: "Jun 21",
-            },
-            {
-              avatar: "dexter-morse2.png",
-              title:
-                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
-              name: "Arian Etemadi",
-              date: "Jun 21",
-            },
-            {
-              avatar: "dexter-morse2.png",
-              title:
-                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-              name: "Arian Etemadi",
-              date: "Jun 21",
-            },
-            {
-              avatar: "dexter-morse2.png",
-              title:
-                "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
-              name: "Arian Etemadi",
-              date: "Jun 21",
-            },
-          ],
+          contentItemList: [],
         },
-        // {
-        //   class: "news",
-        //   header: " Latest News",
-        //   icon: "news",
-        //   contentItemList: [
-        //     {
-        //       avatar: "dexter-morse2.png",
-        //       title:
-        //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-        //       name: "Arian Etemadi",
-        //       date: "Jun 21",
-        //     },
-        //     {
-        //       avatar: "dexter-morse2.png",
-        //       title:
-        //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers.",
-        //       name: "Arian Etemadi",
-        //       date: "Jun 21",
-        //     },
-        //     {
-        //       avatar: "dexter-morse2.png",
-        //       title:
-        //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-        //       name: "Arian Etemadi",
-        //       date: "Jun 21",
-        //     },
-        //     {
-        //       avatar: "dexter-morse2.png",
-        //       title:
-        //         "Lorem Epsom is a mock text produced with incomprehensible simplicity from the printing industry and used by graphic designers. ",
-        //       name: "Arian Etemadi",
-        //       date: "Jun 21",
-        //     },
-        //   ],
-        // },
-      ],
 
-
+      }
 
 
     };
   },
+  mounted() {
+    this.loadLatestList('multimedia');
+    this.loadLatestList('question');
+  },
+  methods: {
+    loadLatestList(type) {
+      var api = '/api/v1/home/files';
+      if (type == 'question')
+        var api = '/api/v1/home/questions';
+
+      this.$axios.$get(api)
+        .then(response => {
+          if (type == 'multimedia')
+            this.latestList.multimedia.contentItemList = response.data;
+          else if (type == 'question')
+            this.latestList.question.contentItemList = response.data;
+        }).catch(err=>{
+          console.log(err);
+      })
+    }
+  }
 };
 </script>
