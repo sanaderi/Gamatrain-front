@@ -1,10 +1,11 @@
 <template>
   <v-card :class="'mx-auto feed-card ' + feed.class">
     <v-list>
-      <v-subheader
-        v-if="feed.header"
-        class="d-none d-md-flex align-center feed-header"
-      >
+      <nuxt-link :to="feed.more_link">
+        <v-subheader
+          v-if="feed.header"
+          class="d-none d-md-flex align-center feed-header"
+        >
         <span
           :class="
             'd-flex align-center me-2 icon icong-' +
@@ -13,17 +14,17 @@
             feed.class
           "
         ></span>
-        {{ feed.header }}
-      </v-subheader>
-
+          {{ feed.header }}
+        </v-subheader>
+      </nuxt-link>
       <v-list-item
         v-for="(item, index) in feed.contentItemList"
         :key="index"
         class="feeds"
       >
-        <nuxt-link to="" class="pa-2">
-          <v-list-item-content class="pt-0 pr-1">
-            <p class="mb-1 feed-title">{{ item.title }}</p>
+        <span class="pa-2">
+          <v-list-item-content to="/tt" class="pt-0 pr-1">
+            <nuxt-link :to="`${feed.main_link}/${item.id}`" class="pb-2 feed-title">{{ item.title }}</nuxt-link>
             <v-list-item-subtitle
               class="feed-subtitle d-flex justify-space-between"
             >
@@ -33,7 +34,8 @@
                       :src="item.avatar"
                     ></v-img>
                 </v-list-item-avatar>
-                <span>{{ item.first_name }} {{ item.last_name }}</span>
+                <span v-if="feed.main_link=='qa'">{{ item.first_name }} {{ item.last_name }}</span>
+                <nuxt-link v-if="feed.main_link=='multimedia'" :to="`/teacher/@${item.username}`">{{ item.first_name }} {{ item.last_name }}</nuxt-link>
               </div>
               <div class="d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
@@ -42,33 +44,39 @@
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-divider></v-divider>
-        </nuxt-link>
+        </span>
       </v-list-item>
       <!-- <v-divider></v-divider> -->
       <div
         class="d-flex justify-space-between align-center pt-2 feed-card-footer"
       >
-        <nuxt-link to="latest">
+        <nuxt-link :to="feed.more_link">
           <v-list-item>
-            <!-- <v-icon
-              class="mdi mdi-format-list-bulleted ms-1 footer-text"
-            ></v-icon> -->
             <span class="footer-text">More</span>
           </v-list-item>
         </nuxt-link>
-        <nuxt-link
-          v-if="
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            rounded
+            v-bind="attrs"
+            v-on="on"
+            :color="feed.add_link_color"
+            dark
+            v-if="
             feed.class == 'learning' ||
             feed.class == 'question' ||
             feed.class == 'news'
           "
-          to=""
-          class="add-file"
-        >
-          <v-list-item class="d-flex justify-center">
+            min-width="20"
+            :to="feed.add_link"
+            class="add-file"
+          >
             <i class="fa-solid fa-plus"></i>
-          </v-list-item>
-        </nuxt-link>
+          </v-btn>
+          </template>
+          <span>{{ feed.add_link_title }}</span>
+        </v-tooltip>
       </div>
     </v-list>
   </v-card>

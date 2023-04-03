@@ -31,7 +31,8 @@
       <v-tabs v-model="tabs" centered>
         <v-tabs-slider color="green"></v-tabs-slider>
 
-        <v-tab v-for="(item, index) in items" :key="index" class="feed-tab-title">
+        <v-tab v-for="(item, index) in items" :key="index"
+               class="feed-tab-title">
           <img :src="require('@/assets/images/' + item.icon)" alt="" class="mx-1" width="20" height="20">
           {{ item.title }}
         </v-tab>
@@ -67,15 +68,18 @@ export default {
       items: [
         {
           icon: "file.png",
-          title: "Latest Multimedia"
+          title: "Latest Multimedia",
+          link:'/search?type=learnfiles',
         },
         {
           icon: "ask.png",
-          title: "Latest Q&A"
+          title: "Latest Q&A",
+          link:'/search?type=question',
         },
         {
           icon: "News.png",
-          title: "Latest News"
+          title: "Latest News",
+          link:"/"
         },
       ],
 
@@ -84,13 +88,23 @@ export default {
           class: "learning",
           header: "Latest Multimedia",
           icon: "learnfiles",
+          main_link:"multimedia",
           contentItemList: [],
+          more_link:'/search?type=learnfiles',
+          add_link:'/user/multimedia/create',
+          add_link_color:'#27ae60',
+          add_link_title:'Add a multimedia'
         },
         question: {
           class: "question",
           header: "Latest Q&A",
           icon: "qa",
+          main_link:"qa",
           contentItemList: [],
+          more_link:'/search?type=question',
+          add_link:'/user/question/create',
+          add_link_color:'#bf360c',
+          add_link_title:'Add a question'
         },
 
       }

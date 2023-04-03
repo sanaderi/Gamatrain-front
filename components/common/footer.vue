@@ -36,7 +36,7 @@
 
               <v-list-item class="footer-item">
                 <p class="about-footer-para">
-                  Gama training and measurement platform was published in Iran since 2013 by a group of university graduates. Gama's goal is to develop educational justice with the participation of all teachers from all over the country. In these years, Gama has been the leader of the country's online education market in communicating between schools and teachers, students and families.
+                  Since 2013, our team at GAMATrain has been working to improve global education system, specifically K-12 system. Our online education platform connects schools, teachers, students, and parents for better communication and knowledge sharing. GAMATrain’s ultimate goal is to promote fair and equal education opportunities around the world.
                 </p>
               </v-list-item>
             </v-list>
