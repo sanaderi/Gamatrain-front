@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-card min-height="740">
     <div class="feed-header d-none d-md-flex font-weight-bold">
       <img
         :src="require('@/assets/images/' + thirdFeedBoxIcon)"
@@ -50,7 +50,7 @@
       </nuxt-link
       >
     </div>
-  </div>
+  </v-card>
 </template>
 
 <script>

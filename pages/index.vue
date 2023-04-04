@@ -18,6 +18,7 @@
         ></v-carousel-item>
       </v-carousel>
     </section>
+
     <Category/>
 
     <!--  Start: search grade  -->
@@ -52,7 +53,7 @@
             sm="4"
             class="grade-card-body"
           >
-            <v-card :class="'grade-card grade-card' + (index + 1)">
+            <v-card   :class="'grade-card grade-card' + (index + 1)">
               <p v-show="stat.showMore" class="total-content">
                 <nuxt-link
                   v-for="item in stat.lessons"
@@ -84,10 +85,10 @@
                     </nuxt-link>
                     <div class="d-flex align-center res-update d-sm-none">
                       <i class="fa-solid fa-calendar-days mx-3"></i>
-                      <p>27فروردین</p>
+                      <p>{{$moment(stat.last_update).format("MMM DD")}}</p>
                     </div>
                   </div>
-                  <p class="d-inline-block">
+                  <v-card flat min-height="40" class="d-inline-block">
                     <nuxt-link
                       v-for="(item,index) in stat.lessons.slice(0,3)"
                       :to="`/search?type=test&section=${stat.section}&base=${stat.base}&lesson=${stat.lesson}&sortby=best`"
@@ -98,14 +99,14 @@
                         ,
                       </span>
                     </nuxt-link>
-                  </p>
-                  <span
-                    v-show="stat.lessons.length>3"
-                    class="btn-transparent more-content pointer"
-                    @click="lessonExpand(index)"
-                  >... more</span>
+                    <span
+                      v-show="stat.lessons.length>3"
+                      class="btn-transparent more-content pointer"
+                      @click="lessonExpand(index)"
+                    >... more</span>
+                  </v-card>
                 </v-card-title>
-                <v-divider class="my-5"></v-divider>
+                <v-divider class="mb-2"></v-divider>
 
                 <v-card-text class="pa-0 grade-items mb-3">
                   <nuxt-link
@@ -266,7 +267,7 @@
             :key="index.value"
             class="grade-card-body"
           >
-            <v-card :class="' grade-card grade-card' + (index + 1)">
+            <v-card  :class="' grade-card grade-card' + (index + 1)">
               <p v-show="stat.showMore" class="total-content ">
                 <nuxt-link
                   v-for="(item, gradeCard) in stat.totalContent"
@@ -274,7 +275,7 @@
                   :to="item.to"
                   class="content ml-1"
                 >
-                  {{ item.content }}،
+                  {{ item.content }},
                 </nuxt-link>
                 <v-btn
                   @click="lessonExpand(index)"
@@ -310,13 +311,12 @@
                         ,
                       </span>
                     </nuxt-link>
+                    <span
+                      v-show="stat.lessons.length>3"
+                      class="btn-transparent more-content pointer"
+                      @click="lessonExpand(index)"
+                    >... more</span>
                   </p>
-                  <span
-                    v-show="stat.lessons.length>3"
-                    class="btn-transparent more-content pointer"
-                    @click="lessonExpand(index)"
-                  >... more</span
-                  >
                   <p v-if="stat.showMore" class="total-content">
                     <nuxt-link
                       v-for="item in stat.lessons"
@@ -464,7 +464,7 @@
             sm="6"
             class="grade-card-body"
           >
-            <v-card :class="' grade-card grade-card' + (index + 1)">
+            <v-card  :class="' grade-card grade-card' + (index + 1)">
               <p v-if="stat.showMore" class="total-content">
                 <nuxt-link
                   v-for="(item,index) in stat.lessons"
@@ -513,13 +513,12 @@
                         ,
                       </span>
                     </nuxt-link>
+                    <span
+                      v-show="stat.lessons.length>3"
+                      class="btn-transparent more-content pointer"
+                      @click="lessonExpand(index)"
+                    >... more</span>
                   </p>
-                  <span
-                    v-show="stat.lessons.length>3"
-                    class="btn-transparent more-content pointer"
-                    @click="lessonExpand(index)"
-                  >... more</span
-                  >
                   <p v-if="stat.showMore" class="total-content">
                     <nuxt-link
                       v-for="(item, tContent) in stat.totalContent"
@@ -679,40 +678,6 @@
 
 
     <!--  Start: Main stats  -->
-    <!-- <section class="stat-sec my-8">
-      <v-container>
-        <div
-          class="
-            d-flex
-            justify-space-between
-            align-center
-            flex-wrap
-            stat-holder
-            mt-5
-          "
-         >
-          <div
-            v-for="(item, index) in statList"
-            :key="index"
-            class="
-              d-flex
-              flex-column
-              justify-center
-              align-center
-              mx-5
-              px-3
-              stat-item
-            "
-          >
-            <span class="stat-icon d-flex align-center justify-center">
-              <i :class="'fa solid ' + item.icon"> </i>
-            </span>
-            <span class="stat-label">{{ item.label }}</span>
-            <span class="stat-value">{{ item.value }} +</span>
-          </div>
-        </div>
-      </v-container>
-    </section> -->
     <Slider/>
     <!--  End: Main stats  -->
 
@@ -775,733 +740,6 @@ export default {
     value2: null,
     value3: null,
     stats: [],
-    gradeList: [
-      {
-        title: "1st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        link: "",
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "2st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "3st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "4st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "5st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        link: "",
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "6st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "7st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "8st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "9st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        link: "",
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "10st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "11st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-      {
-        title: "12st Level",
-        summeryContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-        ],
-        showMore: false,
-        totalContent: [
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-          {content: "Writing", to: ""},
-          {content: "Math", to: ""},
-          {content: "Experimental", to: ""},
-          {content: "Farsi", to: ""},
-        ],
-        cat: [
-          {
-            title: "Paper",
-            stat: "1355",
-          },
-          {
-            title: "Multimedia",
-            stat: "1211",
-          },
-          {
-            title: "Q & A",
-            stat: "68",
-          },
-          {
-            title: "Exam",
-            stat: "22",
-          },
-        ],
-        update: "2 Jul",
-      },
-    ],
-    siteFeatureList: [
-      {
-        title: "School",
-        icon: "school",
-        details: [
-          "لیست مدارس کشور با قابلیت فیلتر و جستجو",
-          "دسترسی به اطلاعات ارتباطی، امکانات و سطح آموزشی مدارس",
-          "ویرایش اطلاعات School ها و سیستم نظر سنجی",
-          "مشاهده نشانی School روی نقشه",
-        ],
-      },
-      {
-        title: "Tutor",
-        icon: "teacher",
-        details: [
-          "جستجوی بهترین Tutor در نزدیکی شما",
-          "گفتگوی Student و معلم",
-          "پرداخت آنلاین یا اعتباری مبلغ حق التدریس",
-          "برگزاری حضوری کلاس در خانه Student",
-        ],
-      },
-      {
-        title: "اخبار آموزشی",
-        icon: "news",
-        details: [
-          "پوشش کامل اخبار آموزشی استان های کشور",
-          "امکان فیلتر اخبار بر اساس استان مورد نظر",
-          "نمایش تقویم زمانی رویداد های مهم کشور",
-          "امکان عضویت در خبرنامه و ارسال گزینشی اخبار در تلگرام",
-        ],
-      },
-      {
-        title: "درسنامه Training",
-        icon: "blog",
-        details: [
-          "متن کامل کتاب های درسی از دبستان تا teacherستان",
-          "راهنمای کامل تمرین ها، خود آزمایی ها، کار برگه ها و فعالیت های کتاب",
-          "ثبت درسنامه، نکات آموزشی، جزوه های آموزشی توسط teacherان",
-        ],
-      },
-    ],
-
-    statList: [
-      {label: "School", value: "130,000", icon: "fa-graduation-cap"},
-      {label: "Tutor", value: "300,000", icon: "fa-graduation-cap"},
-      {label: "Student", value: "1,500,000", icon: "fa-graduation-cap"},
-      {label: "Paper", value: "50,000", icon: "fa-graduation-cap"},
-      {label: "پاورپوینت", value: "30,000", icon: "fa-graduation-cap"},
-      {label: "Exam", value: "5,000", icon: "fa-graduation-cap"},
-    ],
   }),
 
   //Load data

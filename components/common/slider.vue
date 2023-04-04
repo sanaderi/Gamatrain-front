@@ -1,7 +1,11 @@
 <template>
-  <div ref="slider">
-      <v-slide-group multiple show-arrows class="stat-sec">
-        <v-slide-item v-for="n in 8" :key="n">
+  <v-container ref="slider">
+      <p class="text-center text-md-h4 text-h5">
+        Stats and Achievements
+        (GAMA Experience in Iran’s EdTech Market)
+      </p>
+      <v-slide-group   class="stat-sec">
+        <v-slide-item v-for="(item, index) in statList" :key="index">
           <div class="
               d-flex
               justify-space-between
@@ -10,7 +14,7 @@
               stat-holder
               mt-5
             ">
-            <div v-for="(item, index) in statList" :key="index" class="
+            <div  class="
                 d-flex
                 flex-column
                 justify-center
@@ -27,7 +31,7 @@
           </div>
         </v-slide-item>
       </v-slide-group>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -35,11 +39,11 @@ export default {
   data: () => ({
     statList: [
       { label: "School", value: 130000, counter: 0, icon: "school" },
-      { label: "Tutor", value: 300000, counter: 0, icon: "teacher" },
-      { label: "Student", value: 1500000, counter: 0, icon: "student" },
-      { label: "School", value: 130000, counter: 0, icon: "school" },
-      { label: "Tutor", value: 300000, counter: 0, icon: "teacher" },
-      { label: "Student", value: 1500000, counter: 0, icon: "student" },
+      { label: "Tutor", value: 500000, counter: 0, icon: "teacher" },
+      { label: "Student", value: 3000000, counter: 0, icon: "student" },
+      { label: "Paper", value: 60000, counter: 0, icon: "test" },
+      { label: "Multimedia", value: 37000, counter: 0, icon: "learnfiles" },
+      { label: "Exam", value: 7000, counter: 0, icon: "azmoon" },
     ],
     countsInterval: null,
     countsIntervalCompleted: 0,
