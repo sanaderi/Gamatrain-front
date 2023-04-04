@@ -4,8 +4,9 @@
     <!--     Start:mobile header-->
     <search-box class="d-block d-md-none mx-3 my-2"/>
     <!--     End: mobile header-->
-    <section class="banner-sec">
-      <v-carousel class="index-banner d-none d-md-block">
+    <section>
+      <v-carousel hide-delimiters
+                  class="index-banner d-none d-md-block">
         <v-carousel-item
           v-for="(item, index) in items"
           cover
@@ -1534,3 +1535,9 @@ export default {
 };
 </script>
 
+<style>
+/*Home page banner control background*/
+.index-banner .v-window__prev, .v-window__next{
+  background: none!important;
+}
+</style>
