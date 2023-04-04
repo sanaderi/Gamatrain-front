@@ -1,7 +1,10 @@
 <template>
-  <form @submit.prevent="submit">
     <v-row class="mx-0 align-center search-container">
-      <p>Advanced search</p>
+      <v-col cols="12" md="2" sm="12">
+        <span class="text-h5">
+          Advanced search:
+        </span>
+      </v-col>
       <v-col cols="12" md="3" sm="12" class="search-item">
         <v-autocomplete
           class="grade-search"
@@ -42,16 +45,17 @@
         ></v-autocomplete>
       </v-col>
       <v-col
-        class="d-flex justify-md-center justify-end  search-item-button mr-10"
+        class="d-flex justify-md-center justify-end  search-item-button "
         cols="12"
         md="1"
         sm="12"
 
       >
-        <v-btn class="search-btn" depressed> Search</v-btn>
+        <v-btn class="search-btn"
+               :to="`/search?type=test&section=${form.level}&base=${form.grade}&lesson=${form.lesson}&sortby=best`"
+               depressed> Search</v-btn>
       </v-col>
     </v-row>
-  </form>
 </template>
 
 <script>
