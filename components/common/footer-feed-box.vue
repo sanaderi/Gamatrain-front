@@ -1,5 +1,5 @@
 <template>
-  <v-card min-height="760" :class="'feed-card ' + feed.class">
+  <v-card min-height="680" :class="'feed-card ' + feed.class">
     <v-list>
       <nuxt-link :to="feed.more_link">
         <v-subheader

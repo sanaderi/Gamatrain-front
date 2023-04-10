@@ -53,7 +53,7 @@
             sm="4"
             class="grade-card-body"
           >
-            <v-card   :class="'grade-card grade-card' + (index + 1)">
+            <v-card :class="'grade-card grade-card' + (index + 1)">
               <p v-show="stat.showMore" class="total-content">
                 <nuxt-link
                   v-for="item in stat.lessons"
@@ -218,7 +218,6 @@
                 <v-card-text
                   class="
                     pt-3
-                    pb-2
                     px-0
                     grade-card__update
                     d-sm-flex d-none
