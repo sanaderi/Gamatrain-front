@@ -192,7 +192,7 @@ export default {
     return {
       sidebar: false,
       dialog: false,
-      logo: "mainlogo4.png",
+      logo: "mainlogo-gamatrain.png",
       avatar: "dexter-morse.png",
       wallet: "کیف پول:",
       walletBalance: "2000 تومان",

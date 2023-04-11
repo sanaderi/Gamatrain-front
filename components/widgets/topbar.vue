@@ -116,7 +116,7 @@ export default {
   name: "top-bar",
   data() {
     return {
-      logo: "mainlogo4.png",
+      logo: "mainlogo-gamatrain.png",
       avatar: "dexter-morse.png",
       items: [
         {title: "Dashboard", icon: "mdi-view-dashboard"},

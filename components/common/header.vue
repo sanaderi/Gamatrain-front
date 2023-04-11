@@ -17,7 +17,10 @@
                 class="main-menu"
               >
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn plain   v-bind="attrs" v-on="on" class="menu-item "
+                  <v-btn plain
+                         min-height="35"
+                         max-height="35"
+                         v-bind="attrs" v-on="on" class="menu-item pb-0 "
                   >
                     <nuxt-link :to="item.link" class="headermenu-item">
                       <span v-show="item.title=='Home'" class="fa-solid fa-house-chimney mx-1"/>
@@ -40,7 +43,7 @@
             </v-toolbar-items>
           </v-col>
           <v-col md="6" lg="6" class="text-right" >
-            <span>Most visited: </span>
+            <span>Hot topics: </span>
             <v-chip to="/test-maker/create" color="rgba(33, 33, 33, 0.08)">
               <v-chip small color="rgba(0, 0, 0, 0.16);">
                 #
@@ -239,7 +242,7 @@ export default {
     return {
       sidebar: false,
       dialog: false,
-      logo: "mainlogo4.png",
+      logo: "mainlogo-gamatrain.png",
       avatar: "dexter-morse.png",
       wallet: "کیف پول:",
       walletBalance: "2000 تومان",

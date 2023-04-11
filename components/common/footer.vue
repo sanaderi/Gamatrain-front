@@ -9,8 +9,8 @@
               class="d-md-flex align-center footer-item-link d-none"
             >
               <img
-                :src="require(`~/assets/images/mainlogo4.png`)"
-                alt="گاما"
+                :src="require(`~/assets/images/mainlogo-gamatrain.png`)"
+                alt="Gamatrain"
                 width="128"
               />
             </nuxt-link>
@@ -31,7 +31,7 @@
           <v-col cols="12" md="4" sm="6" class="footer-items">
             <v-list class="py-0">
               <v-list-item class="footer-item">
-                <p class="about-footer footer-titles mt-3">About me</p>
+                <p class="about-footer footer-titles mt-3">About us</p>
               </v-list-item>
 
               <v-list-item class="footer-item">

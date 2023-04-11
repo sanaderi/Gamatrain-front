@@ -1,4 +1,8 @@
 //General
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 html {
   font-size: 62.5% !important;
 }
@@ -9,7 +13,6 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif !important;
   font-size: 14px;
   transition: 0.5s ease-in-out;
 
@@ -54,8 +57,7 @@ body {
   }
 
   .v-application {
-    font-family: sans-serif;
-
+    font-family: 'PT Sans', serif!important;
     .v-carousel__controls__item {
       color: $gray4 !important;
     }
@@ -239,7 +241,6 @@ body {
       // border-bottom: 1px solid $gray1;
       .headermenu-item {
         font-weight: 400;
-        padding-bottom: 2rem;
       }
 
       //topbar
@@ -420,7 +421,7 @@ body {
           width: 150px !important;
           max-width: 150px !important;
           height: 6.8rem;
-          background: url(../images/mainlogo4.png);
+          background: url(../images/mainlogo-gamatrain.png);
           background-size: 100% 100%;
         }
       }

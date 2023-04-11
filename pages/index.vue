@@ -6,6 +6,7 @@
     <!--     End: mobile header-->
     <section>
       <v-carousel hide-delimiters
+                  :show-arrows="false"
                   class="index-banner d-none d-md-block">
         <v-carousel-item
           v-for="(item, index) in items"
