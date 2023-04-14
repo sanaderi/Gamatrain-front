@@ -5,7 +5,7 @@ export default {
 
   head: {
     titleTemplate: "%s | Gama",
-    title: "Sample tests | Online exams | Powerpoint | Tutorials | School | Tutor",
+    title: "Learning together, earning together, building a brighter future",
     htmlAttrs: {
       lang: "en",
     },
