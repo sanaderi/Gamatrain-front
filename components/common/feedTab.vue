@@ -18,8 +18,9 @@
           >
             <footer-feed-box :feed="latestList.question"></footer-feed-box>
           </v-col>
-          <v-col cols="12" md="4" sm="4" class="third-feed-box mt-3 pa-0">
-            <latest-news/>
+          <v-col cols="12" md="4" sm="4" >
+<!--            <latest-news/>-->
+            <footer-feed-box :feed="latestList.paper"></footer-feed-box>
           </v-col>
         </v-row>
       </v-container>
@@ -45,7 +46,8 @@
           <footer-feed-box :feed="latestList.question"></footer-feed-box>
         </v-tab-item>
         <v-tab-item>
-          <latest-news/>
+<!--          <latest-news/>-->
+          <footer-feed-box :feed="latestList.paper"></footer-feed-box>
         </v-tab-item>
       </v-tabs-items>
     </div>
@@ -95,6 +97,17 @@ export default {
           add_link_color:'#27ae60',
           add_link_title:'Add a multimedia'
         },
+        paper: {
+          class: "test",
+          header: "Latest Papers",
+          icon: "test",
+          main_link:"papers",
+          contentItemList: [],
+          more_link:'/search?type=test',
+          add_link:'/user/paper/create',
+          add_link_color:'#01579b',
+          add_link_title:'Add a paper'
+        },
         question: {
           class: "question",
           header: "Latest Q&A",
@@ -115,17 +128,22 @@ export default {
   mounted() {
     this.loadLatestList('multimedia');
     this.loadLatestList('question');
+    this.loadLatestList('paper');
   },
   methods: {
     loadLatestList(type) {
       var api = '/api/v1/home/files';
       if (type == 'question')
-        var api = '/api/v1/home/questions';
+        api = '/api/v1/home/questions';
+      else if(type=='paper')
+        api = '/api/v1/home/tests';
 
       this.$axios.$get(api)
         .then(response => {
           if (type == 'multimedia')
             this.latestList.multimedia.contentItemList = response.data;
+          else if (type == 'paper')
+            this.latestList.paper.contentItemList = response.data;
           else if (type == 'question')
             this.latestList.question.contentItemList = response.data;
         }).catch(err=>{

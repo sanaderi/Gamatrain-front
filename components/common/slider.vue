@@ -1,20 +1,23 @@
 <template>
-  <v-container ref="slider">
-      <p class="text-center text-md-h4 text-h5">
-        Stats and Achievements
-        (GAMA Experience in Iran’s EdTech Market)
-      </p>
-      <v-slide-group   class="stat-sec">
-        <v-slide-item v-for="(item, index) in statList" :key="index">
-          <div class="
+  <v-container fluid ref="slider" class="px-0 pb-0">
+            <v-card outlined flat class="py-10" color="#FEF7FE">
+                  <p class="text-center text-md-h4 text-h5">
+                    Stats and Achievements
+                    (GAMA Experience in Iran’s EdTech Market)
+                  </p>
+
+                  <v-slide-group center  class="stat-sec text-center">
+                    <v-slide-item v-for="(item, index) in statList" :key="index">
+                      <div class="
               d-flex
               justify-space-between
               align-center
               flex-wrap
               stat-holder
               mt-5
+              px-lg-8
             ">
-            <div  class="
+                        <div  class="
                 d-flex
                 flex-column
                 justify-center
@@ -25,12 +28,13 @@
               <span class="stat-icon d-flex align-center justify-center">
                 <i :class="' icon-g icon icong-' + item.icon"> </i>
               </span>
-              <span class="stat-label">{{ item.label }}</span>
-              <span class="stat-value" :id="'stat' + index + 1">{{ item.counter }} +</span>
-            </div>
-          </div>
-        </v-slide-item>
-      </v-slide-group>
+                          <span class="stat-label">{{ item.label }}</span>
+                          <span class="stat-value" :id="'stat' + index + 1">{{ item.counter }} +</span>
+                        </div>
+                      </div>
+                    </v-slide-item>
+                  </v-slide-group>
+            </v-card>
   </v-container>
 </template>
 
@@ -40,7 +44,7 @@ export default {
     statList: [
       { label: "School", value: 130000, counter: 0, icon: "school" },
       { label: "Tutor", value: 500000, counter: 0, icon: "teacher" },
-      { label: "Student", value: 3000000, counter: 0, icon: "student" },
+      { label: "Student", value: 3000000, counter: 2700000, icon: "student" },
       { label: "Paper", value: 60000, counter: 0, icon: "test" },
       { label: "Multimedia", value: 37000, counter: 0, icon: "learnfiles" },
       { label: "Exam", value: 7000, counter: 0, icon: "azmoon" },

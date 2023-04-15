@@ -16,6 +16,16 @@ body {
     font-size: 1.8rem
   }
 
+  .font-size-14{
+    font-size: 14px!important;
+  }
+  .font-size-18{
+    font-size: 18px!important;
+  }
+  .font-size-20{
+    font-size: 20px!important;
+  }
+
   table {
     tr {
       td {
@@ -53,7 +63,7 @@ body {
   }
 
   .v-application {
-    font-family: 'Merriweather','PT Sans','Lato','Montserrat', serif!important;
+    font-family: 'PT Sans','Merriweather','Lato','Montserrat', serif!important;
     .v-carousel__controls__item {
       color: $gray4 !important;
     }
@@ -198,9 +208,7 @@ body {
       background-color: $search !important;
     }
 
-    .container {
-      max-width: 80%;
-    }
+
 
     .box {
       position: relative;
@@ -806,7 +814,7 @@ body {
     }
 
     .grade-card {
-      padding: 20px !important;
+      padding: 20px 20px 20px 20px !important;
       box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
       position: relative;
       margin-left: 1.5rem;
@@ -1266,6 +1274,10 @@ body {
         color: $orange2;
       }
 
+      .icontest {
+        color: $blue4;
+      }
+
       .v-list-item p.feed-title {
         font-size: $fontsize2;
         font-weight: 400;
@@ -1346,6 +1358,34 @@ body {
         .add-file {
           .v-list-item {
             background: $red5;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 10px;
+          }
+
+          .theme--light i {
+            color: $white !important;
+          }
+        }
+      }
+
+      &.test {
+        box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+
+        .feed-header {
+          border-bottom: 3px solid $blue4;
+          margin: 1rem 0;
+        }
+
+        .footer-text {
+          color: $blue4;
+          font-size: $fontsize0;
+        }
+
+        .add-file {
+          .v-list-item {
+            background: $blue4;
             width: 4rem;
             height: 4rem;
             border-radius: 10px;

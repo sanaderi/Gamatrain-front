@@ -20,10 +20,10 @@
       <v-list-item
         v-for="(item, index) in feed.contentItemList"
         :key="index"
-        class="feeds"
+        class="feed_item"
       >
         <span class="pa-2">
-          <v-list-item-content to="/tt" class="pt-0 pr-1">
+          <v-list-item-content  class="pt-0 pr-1">
             <nuxt-link :to="`${feed.main_link}/${item.id}`" class="pb-2 feed-title">{{ item.title }}</nuxt-link>
             <v-list-item-subtitle
               class="feed-subtitle d-flex justify-space-between"
@@ -35,7 +35,10 @@
                     ></v-img>
                 </v-list-item-avatar>
                 <span v-if="feed.main_link=='qa'">{{ item.first_name }} {{ item.last_name }}</span>
-                <nuxt-link v-if="feed.main_link=='multimedia'" :to="`/teacher/@${item.username}`">{{ item.first_name }} {{ item.last_name }}</nuxt-link>
+                <nuxt-link v-if="feed.main_link=='multimedia' || feed.main_link=='papers' "
+                           :to="`/teacher/@${item.username}`">
+                  {{ item.first_name }} {{ item.last_name }}
+                </nuxt-link>
               </div>
               <div class="d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
@@ -66,7 +69,8 @@
             v-if="
             feed.class == 'learning' ||
             feed.class == 'question' ||
-            feed.class == 'news'
+            feed.class == 'news' ||
+            feed.class == 'test'
           "
             min-width="20"
             :to="feed.add_link"
@@ -97,5 +101,9 @@ export default {
 .avatar-parent {
 
   border-radius: 0.8rem;
+}
+
+.feed_item{
+  min-height: 11rem!important;
 }
 </style>

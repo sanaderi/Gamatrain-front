@@ -4,7 +4,7 @@
     <div class="mt-16 mt-md-0">
        <Nuxt />
     </div>
-    <v-footer padless class="mt-2">
+    <v-footer >
       <main_footer />
     </v-footer>
   </v-app>

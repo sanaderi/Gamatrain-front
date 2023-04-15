@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <v-container>
-      <div class="footer-holder mb-8">
+    <v-container fluid >
+      <v-container class="footer-holder mb-8">
         <div class="footer-head d-flex justify-space-between align-center">
           <v-list-item class="footer-item">
             <nuxt-link
@@ -111,7 +110,7 @@
 <!--            </div>-->
 <!--          </v-col>-->
         </v-row>
-      </div>
+      </v-container>
       <div
         class="
           footer-social-icon
@@ -203,7 +202,7 @@
 <!--        </v-col>-->
 <!--      </v-row>-->
 <!--    </div>-->
-  </div>
+
 </template>
 <script>
 export default {
