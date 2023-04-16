@@ -69,6 +69,25 @@ body {
     }
 
 
+
+    .text-h1,
+    .text-h2,
+    .text-h3,
+    .text-h4,
+    .text-h5,
+    .text-h6,
+    .text-md-h1,
+    .text-md-h2,
+    .text-md-h3,
+    .text-md-h4,
+    .text-md-h5,
+    .text-md-h6,
+    {
+      font-family: 'PT Sans','Merriweather','Lato','Montserrat', serif!important;
+    }
+
+
+
     .v-carousel__controls__item .v-icon {
       opacity: 1 !important;
     }
@@ -1170,7 +1189,9 @@ body {
 
     .feed-tab-title {
       color: $gray45;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-transform: none!important;
     }
 
     .feed-name,
@@ -1256,13 +1277,13 @@ body {
 
     .feed-card {
       .v-subheader.feed-header {
-        font-size: $fontsize25;
-        font-weight: 700;
+        font-size: 1.6rem;
+        font-weight: 900;
         color: $gray45;
         width: 60%;
 
         .icon {
-          font-size: 2.5rem;
+          font-size: 3rem;
         }
       }
 
@@ -1278,9 +1299,9 @@ body {
         color: $blue4;
       }
 
-      .v-list-item p.feed-title {
-        font-size: $fontsize2;
-        font-weight: 400;
+      .v-list-item .feed-title {
+        font-size: 1.5rem!important;
+        font-weight: 500;
         line-height: 2 !important;
         color: $gray11;
         overflow: hidden;
@@ -1288,11 +1309,10 @@ body {
       }
 
       .v-list-item {
-        padding: 1rem !important;
       }
 
       .v-list-item__subtitle.feed-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: 400;
       }
 
@@ -1438,14 +1458,17 @@ body {
 
       .stat-value {
         font-size: 2.4rem;
+        line-height: 3rem;
         font-weight: 400;
-        color: $gray4;
       }
 
       .stat-label {
         font-weight: 400;
         font-size: 2rem;
-        color: $gray4;
+        line-height: 2.4rem;
+        color: rgba(0, 0, 0, 0.6);
+        margin-top: 0.5rem;
+        margin-bottom: 0.8rem;
       }
 
       .stat-icon {
@@ -1526,11 +1549,12 @@ body {
       .footer-item {
         padding: 0.3rem 0;
         margin: 0.7rem 0;
-        font-size: 1.4rem;
+        font-size: 1.4rem!important;
+        font-weight: 400;
         color: $gray4;
 
         .about-footer {
-          font-size: $fontsize4;
+          font-size: 2rem!important;
           font-weight: 400;
           color: $gray45;
         }

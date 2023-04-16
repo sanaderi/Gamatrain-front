@@ -20,11 +20,13 @@
       <v-list-item
         v-for="(item, index) in feed.contentItemList"
         :key="index"
-        class="feed_item"
+        class="feed_item  align-self-start"
       >
-        <span class="pa-2">
+        <div class="pa-2 d-inline-block ">
           <v-list-item-content  class="pt-0 pr-1">
-            <nuxt-link :to="`${feed.main_link}/${item.id}`" class="pb-2 feed-title">{{ item.title }}</nuxt-link>
+            <nuxt-link :to="`${feed.main_link}/${item.id}`" class="pb-2 feed-title">
+              {{ item.title }}
+            </nuxt-link>
             <v-list-item-subtitle
               class="feed-subtitle d-flex justify-space-between"
             >
@@ -47,7 +49,7 @@
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-divider></v-divider>
-        </span>
+        </div>
       </v-list-item>
       <!-- <v-divider></v-divider> -->
       <div
@@ -104,6 +106,7 @@ export default {
 }
 
 .feed_item{
-  min-height: 11rem!important;
+  min-height: 14rem!important;
+  max-height: 14rem!important;
 }
 </style>

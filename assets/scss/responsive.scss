@@ -675,6 +675,21 @@ body {
 
       .feed-tab {
         margin-top: 2rem;
+
+        .iconlearning {
+          color: $green5;
+          font-size: 2rem;
+        }
+
+        .iconquestion {
+          color: $orange2;
+          font-size: 2rem;
+        }
+
+        .icontest {
+          color: $blue4;
+          font-size: 2rem;
+        }
       }
 
       .status {

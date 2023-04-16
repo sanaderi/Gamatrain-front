@@ -34,7 +34,14 @@
 
         <v-tab v-for="(item, index) in items" :key="index"
                class="feed-tab-title">
-          <img :src="require('@/assets/images/' + item.icon)" alt="" class="mx-1" width="20" height="20">
+          <span
+            :class="
+            'd-flex align-center me-2 icon icong-' +
+            item.icon +
+            ' icon' +
+            item.class
+          "
+           ></span>
           {{ item.title }}
         </v-tab>
       </v-tabs>
@@ -69,18 +76,21 @@ export default {
       tabs: null,
       items: [
         {
-          icon: "file.png",
+          icon: "learnfiles",
+          class: "learning",
           title: "Latest Multimedia",
           link:'/search?type=learnfiles',
         },
         {
-          icon: "ask.png",
+          icon: "qa",
+          class: "question",
           title: "Latest Q&A",
           link:'/search?type=question',
         },
         {
-          icon: "News.png",
-          title: "Latest News",
+          icon: "test",
+          class: "test",
+          title: "Latest Papers",
           link:"/"
         },
       ],

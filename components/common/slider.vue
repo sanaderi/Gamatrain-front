@@ -1,7 +1,7 @@
 <template>
   <v-container fluid ref="slider" class="px-0 pb-0">
-            <v-card outlined flat class="py-10" color="#FEF7FE">
-                  <p class="text-center text-md-h4 text-h5">
+            <v-card outlined flat class="py-8" color="#FEF7FE">
+                  <p class="text-center text-md-h4 text-h5 font-weight-bold">
                     Stats and Achievements
                     (GAMA Experience in Iran’s EdTech Market)
                   </p>

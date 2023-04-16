@@ -140,6 +140,12 @@ import MobileStatsCardComponent from "~/components/home/MobileStatsCardComponent
 export default {
   auth: false,
   name: 'home_page',
+  head(){
+    return{
+      titleTemplate: "Gamatrain | %s",
+      title:'Learning together, earning together, building a brighter future',
+    }
+  },
 
   components: {
     MobileStatsCardComponent,

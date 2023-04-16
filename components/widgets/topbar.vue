@@ -3,7 +3,23 @@
     <v-container class="align-center justify-space-between topbar-items">
       <v-row>
         <v-col md="4" lg="2">
-          <div class="align-center  pt-5">
+          <nuxt-link to="/" class="float-md-left pt-5">
+            <v-img
+              class="logo"
+              :src="require('@/assets/images/' + logo)"
+              max-width="150"
+            />
+          </nuxt-link>
+        </v-col>
+        <v-col md="5" lg="3">
+          <!--  Start:  Search and logo in header  -->
+          <search-box class="ml-lg-4 mt-4"/>
+          <v-spacer></v-spacer>
+          <!--  End:  Search and logo in header  -->
+        </v-col>
+        <v-col md="3" lg="7">
+          <v-spacer/>
+          <div class="float-md-right  pt-5">
             <div class="d-flex align-center" v-if="$auth.loggedIn">
 
               <v-menu
@@ -66,21 +82,7 @@
             </div>
           </div>
         </v-col>
-        <v-col md="5" lg="3">
-          <!--  Start:  Search and logo in header  -->
-          <search-box class="ml-lg-4 mt-4"/>
-          <v-spacer></v-spacer>
-          <!--  End:  Search and logo in header  -->
-        </v-col>
-        <v-col md="3" lg="7">
-          <nuxt-link to="/" class="float-md-right pt-5">
-            <v-img
-              class="logo"
-              :src="require('@/assets/images/' + logo)"
-              max-width="150"
-            />
-          </nuxt-link>
-        </v-col>
+
       </v-row>
     </v-container>
 
