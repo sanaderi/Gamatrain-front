@@ -19,6 +19,9 @@ body {
   .font-size-14{
     font-size: 14px!important;
   }
+  .font-size-16{
+    font-size: 1.6rem!important;
+  }
   .font-size-18{
     font-size: 18px!important;
   }
@@ -2062,11 +2065,17 @@ body {
 
 //
 @media only screen and (max-width: 600px) {
+  .content-item{
+    min-height: 16rem!important;
+  }
 
   .book-no-img {
     width: 12rem;
-    height: 12rem;
-    padding: 4.4px;
+    min-width: 8rem;
+    min-height: 10.5rem;
+    max-height: 10.5rem;
+
+    padding: 0 4.4px 4.4px 4.4px;
     text-align: center;
     background-color: #f9f3f3 !important;
     border-radius: 8px;
@@ -2083,9 +2092,16 @@ body {
 
 @media only screen and (min-width: 600px) and (max-width: 960px) {
 
+  .content-item{
+    min-height: 17rem!important;
+  }
+
   .book-no-img {
     width: 12rem;
     height: 14rem;
+    min-width: 12rem;
+    min-height: 14.5rem;
+    max-height: 14.5rem;
     padding: 5px;
     text-align: center;
     background-color: #f9f3f3 !important;
@@ -2104,10 +2120,14 @@ body {
 
 @media only screen and (min-width: 960px) {
 
+  .content-item{
+    min-height: 16rem!important;
+  }
+
   .book-no-img {
-    width: 12.5rem;
+    width: 12rem;
     height: 14rem !important;
-    min-height: 14rem !important;
+    min-height: 14.5rem !important;
     padding: 5px;
     margin: auto;
     text-align: center;
@@ -2870,7 +2890,7 @@ body {
         .item-image {
           width: inherit;
           height: 100%;
-          max-height: 16.4rem;
+          max-height: 14.5rem;
           max-width: 12.2rem;
           min-width: 7.8rem;
           border-radius: 1rem;

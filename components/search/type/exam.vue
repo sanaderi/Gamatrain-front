@@ -1,16 +1,16 @@
 <template>
    <div class="content-items">
-      <v-card rounded class="mb-1 content-item" v-for="(item,key) in items" >
+      <v-card  rounded class="mb-1 content-item" v-for="(item,key) in items" >
         <v-card-text class="pb-0">
           <v-row class="justify-center">
-            <v-col md="2" cols="3" class="py-0 pr-0">
+            <v-col md="2" sm="2" cols="3" class="py-0 pr-0">
               <div class="item-img">
                 <v-img v-if="item.lesson_pic"
                        @error="imgErrorHandler(item,key)"
                        :src="item.lesson_pic" :alt="item.lesson_title"
                        class="item-image">
                 </v-img>
-                <v-card v-else  class="book-no-img  fill-height align-center justify-center"
+                <v-card v-else  class="book-no-img mx-auto  fill-height align-center justify-center"
                 >
                   <v-card-text class="px-0">
                     <p class="font-weight-bold mb-3 mt-5">{{ item.lesson_title }}</p>
@@ -19,7 +19,7 @@
                 </v-card>
               </div>
             </v-col>
-            <v-col md="10" cols="9" class="px-0 pb-0 py-md-4">
+            <v-col md="10" sm="10" cols="9" class="px-0 pb-0 py-md-4">
               <v-card  flat class="tutorial-content d-flex flex-column pl-3 pl-md-0 justify-space-between">
                 <v-card-text class="pa-0" >
                   <div class="tutorial-title d-flex justify-space-between">
@@ -77,7 +77,7 @@
                   </div>
                 </v-card-text>
                 <!--Item card footer-->
-                <v-card-actions class="item-content-footer pb-2  d-none d-md-block">
+                <v-card-actions class="item-content-footer pb-2  d-none d-sm-block">
                   <v-row>
                     <v-col cols="8" class="px-0">
                       <div class="d-flex pt-3 pt-md-0">
@@ -93,7 +93,7 @@
                           class="item-content-last-update d-flex align-center mx-auto">
                           <i class="fa-solid fa-calendar-days"></i>
                           <p class="mx-2">
-                    <span class="d-none d-md-inline">
+                    <span class="d-none d-sm-inline">
                       Last update:
                     </span>
                             <span class="date_string d-inline-block">
@@ -122,7 +122,7 @@
             </v-col>
           </v-row>
         </v-card-text>
-        <v-card-actions class="item-content-footer pt-0 d-block d-md-none">
+        <v-card-actions class="item-content-footer pt-0 d-block d-sm-none">
           <v-row>
             <v-col cols="12" class="py-0">
               <div class="d-flex pt-2">
@@ -138,7 +138,7 @@
                   class="item-content-last-update d-flex align-center mx-auto">
                   <i class="fa-solid fa-calendar-days"></i>
                   <p class="mx-2">
-                    <span class="d-none d-md-inline">
+                    <span class="d-none d-sm-inline">
                       Last update:
                     </span>
                     <span class="date_string d-inline-block">

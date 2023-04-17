@@ -36,17 +36,13 @@
                 <v-icon>mdi-close</v-icon>
               </v-btn>
             </v-toolbar>
-            <div class="filter-btn-result my-4">
-              <p class="text-right mx-4 transparent" :class="result_count==0 ? 'red--text' : ''">Result :
-                {{ result_count }}</p>
-            </div>
           </div>
           <v-card-text>
             <search-filter ref="side_filter" class="mx-3"/>
           </v-card-text>
           <v-card-actions style="position: sticky;bottom: 0;left: 0;right: 0">
             <v-btn medium block class="filter-show-result mr-4" @click="dialog=!dialog">
-              show result
+              show result ({{ result_count }})
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -60,24 +56,30 @@
     <!--     End: mobile header-->
 
 
-    <!-- Start : sample-q -->
+    <!-- Start  -->
     <section class="search-page">
       <v-container>
         <v-row>
-          <v-col lg="3" class="d-none d-md-block">
-            <div class="search-filter">
-              <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs"/>
-            </div>
+          <v-col lg="3" class="d-none d-md-block" >
+            <v-card flat  color="#f5f5f5" style="position: sticky;top:1rem;">
+             <v-card-text>
+               <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs"/>
+             </v-card-text>
+            </v-card>
           </v-col>
+
+
           <v-col lg="9" md="9" sm="12" class="search-contents px-0">
               <v-breadcrumbs :items="breadcrumbs" class="search-breadcrumb d-none d-md-block">
                 <template v-slot:divider>
                   <v-icon>mdi-chevron-right</v-icon>
                 </template>
               </v-breadcrumbs>
-              <!-- header desktop -->
-              <Tabs ref="content_tabs"/>
-              <!-- sample-q-items-desktop -->
+
+              <!-- Search tabs -->
+              <Tabs style="position:sticky;top: 0;z-index: 9" ref="content_tabs"/>
+              <!-- End search tabs -->
+
               <div class="text-center" v-if="page_loading===false && items.length===0">
                 Oops! no data found
               </div>

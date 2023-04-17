@@ -1,8 +1,8 @@
 <template>
-  <v-card class="d-block tab-header sticky-scroll">
-    <v-tabs v-model="active_tab">
+  <v-card class="d-block tab-header sticky-scroll ">
+    <v-tabs v-model="active_tab" >
       <v-tab @click="openLink('test')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-sample" :content="content_statistics.test">
+        <v-badge bordered class="pa-1 mx-1 mx-md-6 badge-sample" :content="content_statistics.test">
           <div class="nav-link sample-q-icon">
             <span class="icon icong-test mr-1"></span>
             Paper
@@ -10,7 +10,7 @@
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('learnfiles')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-training" :content="content_statistics.learnfiles"
+        <v-badge bordered class="pa-1 mx-1 mx-md-6 badge-training" :content="content_statistics.learnfiles"
                  color="#2E7D32">
           <div class="nav-link training-content-icon">
             <span class="icon icong-learnfiles mr-1"></span>
@@ -19,7 +19,7 @@
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('question')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-q" :content="content_statistics.question" color="#BF360C">
+        <v-badge bordered class="pa-1 mx-1 mx-md-6 badge-q" :content="content_statistics.question" color="#BF360C">
           <div class="nav-link q-a-icon">
             <span class="icon icong-qa mr-1 "></span>
             Q & A
@@ -27,7 +27,7 @@
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('azmoon')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-online" :content="content_statistics.azmoon" color="#5600E8">
+        <v-badge bordered class="pa-1 mx-1 mx-md-6 badge-online" :content="content_statistics.azmoon" color="#5600E8">
           <div class="nav-link exam-icon">
             <span class="icon icong-azmoon mr-1"></span>
             Exam
@@ -35,7 +35,7 @@
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('dars')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-tutorial" :content="content_statistics.tutorial"
+        <v-badge bordered class="pa-1 ml-1 mr-4  mx-md-6 badge-tutorial" :content="content_statistics.tutorial"
                  color="#BD081C">
           <div class="nav-link tutorial-icon">
             <span class="icon icong-blog mr-1"></span>
@@ -43,15 +43,15 @@
           </div>
         </v-badge>
       </v-tab>
-      <v-tab @click="openLink('tutor')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-teachers"
-                 :content="content_statistics.tutor" color="#8E24AA">
-          <div class="nav-link teacher-icon">
-            <span class="icon icong-teacher mr-1"></span>
-            Tutor
-          </div>
-        </v-badge>
-      </v-tab>
+<!--      <v-tab @click="openLink('tutor')">-->
+<!--        <v-badge bordered class="pa-1 mx-1 mx-md-6 badge-teachers"-->
+<!--                 :content="content_statistics.tutor" color="#8E24AA">-->
+<!--          <div class="nav-link teacher-icon">-->
+<!--            <span class="icon icong-teacher mr-1"></span>-->
+<!--            Tutor-->
+<!--          </div>-->
+<!--        </v-badge>-->
+<!--      </v-tab>-->
     </v-tabs>
   </v-card>
 </template>
