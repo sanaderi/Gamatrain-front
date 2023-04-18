@@ -1,11 +1,6 @@
 <template>
-  <div
-    id="scroll-target"
-    style="max-height: 90vh"
-    class="overflow-y-auto ">
+  <div>
     <div
-      v-scroll:#scroll-target="onScroll"
-      style="height: 80vh;overflow-x: hidden"
       class="content-search"
     >
       <!--Selected filter, user can disable any filter from here-->
@@ -77,40 +72,36 @@
       </div>
       <!--End select filter  -->
 
-    <v-expansion-panels>
+    <v-expansion-panels flat>
       <v-expansion-panel>
         <v-expansion-panel-header color="#f5f5f5" class="font-size-16 font-weight-bold">
           Level
         </v-expansion-panel-header>
-        <v-expansion-panel-content color="#f5f5f5">
-          <v-row
-            align="center"
-            justify="center"
-          >
-            <v-col cols="12" class="pt-0 pr-0 m-0">
-              <v-radio-group
-                v-model="section_val"
-                class="mt-0 pr-0"
-                column
-              >
-                <v-radio
-                  label="All"
-                  color="red"
-                  :value="0"
+        <v-expansion-panel-content  color="#f5f5f5">
+            <v-col
+              id="scroll-target"
+              style="max-height: 200px"
+              cols="12" class="overflow-y-auto pt-0 pr-0 m-0">
+                <v-radio-group
+                  v-model="section_val"
+                  class="mt-0 pr-0"
+                  column
                 >
-                </v-radio>
-                <v-radio v-for="item in filter.section_list"
-                         :label="item.title"
-                         color="red"
-                         :value="item.id"
-                >
-                </v-radio>
+                  <v-radio
+                    label="All"
+                    color="red"
+                    :value="0"
+                  >
+                  </v-radio>
+                  <v-radio v-for="item in filter.section_list"
+                           :label="item.title"
+                           color="red"
+                           :value="item.id"
+                  >
+                  </v-radio>
 
-              </v-radio-group>
+                </v-radio-group>
             </v-col>
-
-
-          </v-row>
         </v-expansion-panel-content>
       </v-expansion-panel>
 
@@ -127,7 +118,9 @@
             align="center"
             justify="center"
           >
-            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
+            <v-col cols="12"
+                   style="max-height: 200px"
+                   class="overflow-y-auto pt-0 pr-0 m-0" >
               <v-radio-group
                 v-model="base_val"
                 @change="changeBaseVal"
@@ -167,7 +160,9 @@
             align="center"
             justify="center"
           >
-            <v-col cols="12" class="pt-0 pr-0 m-0">
+            <v-col cols="12"
+                   style="max-height: 200px"
+                   class="pt-0 pr-0 m-0 overflow-y-auto">
               <v-radio-group
                 @change="changeLessonVal"
                 v-model="lesson_val"
@@ -189,8 +184,6 @@
 
               </v-radio-group>
             </v-col>
-
-
           </v-row>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -207,7 +200,8 @@
             align="center"
             justify="center"
           >
-            <v-col cols="12" class="pt-0 pr-0 m-0"
+            <v-col cols="12" class="pt-0 pr-0 m-0 overflow-y-auto"
+                   style="max-height: 200px"
             >
               <v-radio-group
                 @change="changeTopicVal"
@@ -250,7 +244,8 @@
             align="center"
             justify="center"
           >
-            <v-col cols="12" class="pt-0 pr-0 m-0"
+            <v-col cols="12" class="pt-0 pr-0 m-0 overflow-y-auto"
+                   style="max-height: 200px"
             >
               <v-radio-group
                 @change="changeFileTypeVal"
@@ -281,160 +276,161 @@
       </v-expansion-panel>
 
       <!--Test level filter-->
-      <v-expansion-panel v-show="filter.test_level_list.length>0 && $route.query.type==='test'">
-        <v-expansion-panel-header
-          color="#f5f5f5"
-          class="font-weight-bold font-size-16">
-          Level</v-expansion-panel-header>
-        <v-expansion-panel-content
-          color="#f5f5f5"
-        >
-          <v-row
-            align="center"
-            justify="center"
-          >
-            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
-              <v-radio-group
-                v-model="test_level_val"
-                class="mt-0 pr-0"
-                column
-              >
-                <v-radio
-                  label="All"
-                  color="red"
-                  :value="0"
-                >
-                </v-radio>
-                <v-radio
-                  v-for="item in filter.test_level_list"
-                  :label="item.title"
-                  color="red"
-                  :value="item.id"
-                >
-                </v-radio>
+<!--      <v-expansion-panel v-show="filter.test_level_list.length>0 && $route.query.type==='test'">-->
+<!--        <v-expansion-panel-header-->
+<!--          color="#f5f5f5"-->
+<!--          class="font-weight-bold font-size-16">-->
+<!--          Difficulty level-->
+<!--        </v-expansion-panel-header>-->
+<!--        <v-expansion-panel-content-->
+<!--          color="#f5f5f5"-->
+<!--        >-->
+<!--          <v-row-->
+<!--            align="center"-->
+<!--            justify="center"-->
+<!--          >-->
+<!--            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">-->
+<!--              <v-radio-group-->
+<!--                v-model="test_level_val"-->
+<!--                class="mt-0 pr-0"-->
+<!--                column-->
+<!--              >-->
+<!--                <v-radio-->
+<!--                  label="All"-->
+<!--                  color="red"-->
+<!--                  :value="0"-->
+<!--                >-->
+<!--                </v-radio>-->
+<!--                <v-radio-->
+<!--                  v-for="item in filter.test_level_list"-->
+<!--                  :label="item.title"-->
+<!--                  color="red"-->
+<!--                  :value="item.id"-->
+<!--                >-->
+<!--                </v-radio>-->
 
-              </v-radio-group>
-            </v-col>
+<!--              </v-radio-group>-->
+<!--            </v-col>-->
 
 
-          </v-row>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
+<!--          </v-row>-->
+<!--        </v-expansion-panel-content>-->
+<!--      </v-expansion-panel>-->
 
 
       <!--Test feature-->
-      <v-expansion-panel  v-show="$route.query.type==='test'">
-        <v-expansion-panel-header
-          color="#f5f5f5"
-          class="font-weight-bold font-size-16">
-          Test features
-        </v-expansion-panel-header>
-        <v-expansion-panel-content color="#f5f5f5">
-          <v-row
-            align="center"
-            justify="center"
-          >
-            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
-              <v-checkbox v-for="item in filter.test_feature_filter"
-                          class="my-0" style="height: 4rem"
-                          @change="changeTestFeature(item.value,item.checkbox)"
-                          :hide-details="true"
-                          color="red"
-                          v-model="item.checkbox"
-                          :label="item.label"
-              />
-            </v-col>
+<!--      <v-expansion-panel  v-show="$route.query.type==='test'">-->
+<!--        <v-expansion-panel-header-->
+<!--          color="#f5f5f5"-->
+<!--          class="font-weight-bold font-size-16">-->
+<!--          Test features-->
+<!--        </v-expansion-panel-header>-->
+<!--        <v-expansion-panel-content color="#f5f5f5">-->
+<!--          <v-row-->
+<!--            align="center"-->
+<!--            justify="center"-->
+<!--          >-->
+<!--            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">-->
+<!--              <v-checkbox v-for="item in filter.test_feature_filter"-->
+<!--                          class="my-0" style="height: 4rem"-->
+<!--                          @change="changeTestFeature(item.value,item.checkbox)"-->
+<!--                          :hide-details="true"-->
+<!--                          color="red"-->
+<!--                          v-model="item.checkbox"-->
+<!--                          :label="item.label"-->
+<!--              />-->
+<!--            </v-col>-->
 
 
-          </v-row>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
+<!--          </v-row>-->
+<!--        </v-expansion-panel-content>-->
+<!--      </v-expansion-panel>-->
 
       <!--State-->
-      <v-expansion-panel v-show="$route.query.type==='tutor'">
-        <v-expansion-panel-header
-          color="#f5f5f5"
-          class="font-weight-bold font-size-16">
-          State
-        </v-expansion-panel-header>
-        <v-expansion-panel-content
-          color="#f5f5f5"
-        >
-          <v-row
-            align="center"
-            justify="center"
-          >
-            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
-              <v-radio-group
-                v-model="state_val"
-                @change="changeStateVal"
-                class="mt-0 pr-0"
-                column
-              >
-                <v-radio
-                  label="All"
-                  color="red"
-                  value="0"
-                >
-                </v-radio>
-                <v-radio
-                  v-for="item in filter.state_list"
-                  :label="item.title"
-                  color="red"
-                  :value="item.id"
-                >
-                </v-radio>
+<!--      <v-expansion-panel v-show="$route.query.type==='tutor'">-->
+<!--        <v-expansion-panel-header-->
+<!--          color="#f5f5f5"-->
+<!--          class="font-weight-bold font-size-16">-->
+<!--          State-->
+<!--        </v-expansion-panel-header>-->
+<!--        <v-expansion-panel-content-->
+<!--          color="#f5f5f5"-->
+<!--        >-->
+<!--          <v-row-->
+<!--            align="center"-->
+<!--            justify="center"-->
+<!--          >-->
+<!--            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">-->
+<!--              <v-radio-group-->
+<!--                v-model="state_val"-->
+<!--                @change="changeStateVal"-->
+<!--                class="mt-0 pr-0"-->
+<!--                column-->
+<!--              >-->
+<!--                <v-radio-->
+<!--                  label="All"-->
+<!--                  color="red"-->
+<!--                  value="0"-->
+<!--                >-->
+<!--                </v-radio>-->
+<!--                <v-radio-->
+<!--                  v-for="item in filter.state_list"-->
+<!--                  :label="item.title"-->
+<!--                  color="red"-->
+<!--                  :value="item.id"-->
+<!--                >-->
+<!--                </v-radio>-->
 
-              </v-radio-group>
-            </v-col>
+<!--              </v-radio-group>-->
+<!--            </v-col>-->
 
 
-          </v-row>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
+<!--          </v-row>-->
+<!--        </v-expansion-panel-content>-->
+<!--      </v-expansion-panel>-->
 
 
       <!--City-->
-      <v-expansion-panel v-show="filter.city_list.length>0 && $route.query.type==='tutor'">
-        <v-expansion-panel-header
-          color="#f5f5f5"
-          class="font-size-16 font-weight-bold">
-          City
-        </v-expansion-panel-header>
-        <v-expansion-panel-content
-          color="#f5f5f5"
-        >
-          <v-row
-            align="center"
-            justify="center"
-          >
-            <v-col cols="12" class="pt-0 pr-0 m-0" >
-              <v-radio-group
-                v-model="city_val"
-                class="mt-0 pr-0"
-                column
-              >
-                <v-radio
-                  label="All"
-                  color="red"
-                  :value="0"
-                >
-                </v-radio>
-                <v-radio
-                  v-for="item in filter.city_list"
-                  :label="item.title"
-                  color="red"
-                  :value="item.id"
-                >
-                </v-radio>
+<!--      <v-expansion-panel v-show="filter.city_list.length>0 && $route.query.type==='tutor'">-->
+<!--        <v-expansion-panel-header-->
+<!--          color="#f5f5f5"-->
+<!--          class="font-size-16 font-weight-bold">-->
+<!--          City-->
+<!--        </v-expansion-panel-header>-->
+<!--        <v-expansion-panel-content-->
+<!--          color="#f5f5f5"-->
+<!--        >-->
+<!--          <v-row-->
+<!--            align="center"-->
+<!--            justify="center"-->
+<!--          >-->
+<!--            <v-col cols="12" class="pt-0 pr-0 m-0" >-->
+<!--              <v-radio-group-->
+<!--                v-model="city_val"-->
+<!--                class="mt-0 pr-0"-->
+<!--                column-->
+<!--              >-->
+<!--                <v-radio-->
+<!--                  label="All"-->
+<!--                  color="red"-->
+<!--                  :value="0"-->
+<!--                >-->
+<!--                </v-radio>-->
+<!--                <v-radio-->
+<!--                  v-for="item in filter.city_list"-->
+<!--                  :label="item.title"-->
+<!--                  color="red"-->
+<!--                  :value="item.id"-->
+<!--                >-->
+<!--                </v-radio>-->
 
-              </v-radio-group>
-            </v-col>
+<!--              </v-radio-group>-->
+<!--            </v-col>-->
 
 
-          </v-row>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
+<!--          </v-row>-->
+<!--        </v-expansion-panel-content>-->
+<!--      </v-expansion-panel>-->
     </v-expansion-panels>
 
     </div>
