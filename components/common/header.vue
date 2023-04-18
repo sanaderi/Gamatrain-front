@@ -253,6 +253,38 @@ export default {
           icon: "",
         },
         {
+          title: "Olympiad",
+          link: "",
+          icon: "fa-angle-down",
+          subMenuList: [
+            {title: "International Mathematical Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6028"},
+            {title: "International Physics Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6029"},
+            {title: "International Chemistry Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6030"},
+            {title: "International Olympiad in Informatics", link: "/search?type=test&section=6025&base=6026&lesson=6031"},
+            {title: "International Biology Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6032"},
+          ],
+        },
+        {
+          title: "Books",
+          link: "",
+          icon: "fa-angle-down",
+          subMenuList: [
+            {title: "1st grade", link: "/search?type=test&section=1&base=13&test_type=314"},
+            {title: "2nd grade", link: "/search?type=test&section=1&base=14&test_type=314"},
+            {title: "3rd grade", link: "/search?type=test&section=1&base=15&test_type=314"},
+            {title: "4th grade", link: "/search?type=test&section=1&base=16&test_type=314"},
+            {title: "5th grade", link: "/search?type=test&section=1&base=17&test_type=314"},
+            {title: "6th grade", link: "/search?type=test&section=1&base=18&test_type=314"},
+            {title: "7th grade", link: "/search?type=test&section=2&base=19&test_type=314"},
+            {title: "8th grade", link: "/search?type=test&section=2&base=20&test_type=314"},
+            {title: "9th grade", link: "/search?type=test&section=2&base=21&test_type=314"},
+            {title: "IGCSE", link: "/search?type=test&section=3&base=22&test_type=314"},
+            {title: "O-Level", link: "/search?type=test&section=3&base=23&test_type=314"},
+            {title: "As Level", link: "/search?type=test&section=1463&base=1464&test_type=314"},
+            {title: "A Level", link: "/search?type=test&section=1463&base=4161&test_type=314"},
+          ],
+        },
+        {
           title: "Announcement",
           link: "",
           icon: "fa-angle-down",
@@ -262,46 +294,6 @@ export default {
             {title: "FAQs", link: "/faq"},
           ],
         },
-        {
-          title: "Olympiad",
-          link: "",
-          icon: "fa-angle-down",
-          subMenuList: [
-            {title: "International Mathematical Olympiad (IMO)", link: ""},
-            {title: "International Physics Olympiad (IPhO)", link: ""},
-            {title: "International Chemistry Olympiad (IChO)", link: ""},
-          ],
-        },
-        {
-          title: "High-level",
-          link: "",
-          icon: "fa-angle-down",
-          subMenuList: [
-            {title: "Fourth grade entrance exam", link: ""},
-            {title: "Fifth grade entrance exam", link: ""},
-            {title: "Sixth grade entrance exam", link: ""},
-          ],
-        },
-        {
-          title: "Books",
-          link: "",
-          icon: "fa-angle-down",
-          subMenuList: [
-            {title: "Primary school period", link: ""},
-            {title: "First year of high school", link: ""},
-            {title: "Second year of high school", link: ""},
-          ],
-        },
-        {
-          title: "Suggestions",
-          link: "",
-          icon: "fa-angle-down",
-          subMenuList: [
-            {title: "9th coordinated exams", link: ""},
-            {title: "6th coordinated exams", link: ""},
-            {title: "12th Coordinated Exams", link: ""},
-          ],
-        }
       ],
       selectedItem: 1,
       socialList: [

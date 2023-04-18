@@ -73,7 +73,7 @@
                       <div class="d-flex pt-3 pt-md-0">
                         <div class="item-content-user d-flex align-center">
                           <v-avatar size="2em">
-                            <img :src="require('~/assets/images/defaultAvatar1.jpg')"
+                            <img :src="item.avatar"
                                  alt="Avatar">
                           </v-avatar>
                           <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>
@@ -142,7 +142,7 @@
               <div class="d-flex pt-2">
                 <div class="item-content-user d-flex align-center">
                   <v-avatar size="1.28em">
-                    <img :src="require('~/assets/images/defaultAvatar1.jpg')"
+                    <img :src="item.avatar"
                          alt="Avatar">
                   </v-avatar>
                   <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>

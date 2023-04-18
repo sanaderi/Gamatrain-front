@@ -51,7 +51,7 @@
               </v-list-item>
               <v-list-item class="footer-item">
                 <nuxt-link to="/search?type=question" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">QA</span>
+                  <span class="mr-2 footer-item-title">Q & A</span>
                 </nuxt-link>
               </v-list-item>
               <v-list-item class="footer-item">

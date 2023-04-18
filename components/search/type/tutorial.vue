@@ -62,15 +62,15 @@
                   <v-row>
                     <v-col cols="8" class="px-0">
                       <div class="d-flex pt-3 pt-md-0">
-                        <div class="item-content-user d-flex align-center">
-                          <v-avatar size="2em">
-                            <img :src="require('~/assets/images/defaultAvatar1.jpg')"
-                                 alt="Avatar">
-                          </v-avatar>
-                          <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>
-                        </div>
+<!--                        <div class="item-content-user d-flex align-center">-->
+<!--                          <v-avatar size="2em">-->
+<!--                            <img :src="item.avatar"-->
+<!--                                 alt="Avatar">-->
+<!--                          </v-avatar>-->
+<!--                          <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>-->
+<!--                        </div>-->
                         <div
-                          class="item-content-last-update d-flex align-center mx-auto">
+                          class="item-content-last-update d-flex ml-3">
                           <i class="fa-solid fa-eye"></i>
                           <p class="mx-2">
                     <span class="d-none d-sm-inline">
@@ -117,15 +117,15 @@
           <v-row>
             <v-col cols="12" class="py-0">
               <div class="d-flex pt-2">
-                <div class="item-content-user d-flex align-center">
-                  <v-avatar size="1.28em">
-                    <img :src="require('~/assets/images/defaultAvatar1.jpg')"
-                         alt="Avatar">
-                  </v-avatar>
-                  <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>
-                </div>
+<!--                <div class="item-content-user d-flex align-center">-->
+<!--                  <v-avatar size="1.28em">-->
+<!--                    <img :src="item.avatar"-->
+<!--                         alt="Avatar">-->
+<!--                  </v-avatar>-->
+<!--                  <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>-->
+<!--                </div>-->
                 <div
-                  class="item-content-last-update d-flex align-center mx-auto">
+                  class="item-content-last-update d-flex  mx-auto">
                   <i class="fa-solid fa-eye"></i>
                   <p class="mx-2">
                     <span class="d-none d-sm-inline">
