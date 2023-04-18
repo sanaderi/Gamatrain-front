@@ -77,7 +77,7 @@
               </v-breadcrumbs>
 
               <!-- Search tabs -->
-              <Tabs style="position:sticky;top: 0;z-index: 9" ref="content_tabs"/>
+              <Tabs style="position:sticky;top: 0;z-index: 5" ref="content_tabs"/>
               <!-- End search tabs -->
 
               <div class="text-center" v-if="page_loading===false && items.length===0">

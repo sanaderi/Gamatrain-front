@@ -2,10 +2,11 @@
   <div
     id="scroll-target"
     style="max-height: 90vh"
-    class="overflow-y-auto">
+    class="overflow-y-auto ">
     <div
       v-scroll:#scroll-target="onScroll"
       style="height: 80vh;overflow-x: hidden"
+      class="content-search"
     >
       <!--Selected filter, user can disable any filter from here-->
       <div v-if="enabledAppliedFilter()">
@@ -71,15 +72,17 @@
         >
           {{ applied_filter.select_test_level_title }}
         </v-chip>
+
+        <v-divider class="my-3"/>
       </div>
       <!--End select filter  -->
-      <div>
-        <p class="mb-2 mb-md-2 mt-5  font-size-16 font-weight-bold">Level</p>
-        <v-divider class="mb-3"/>
 
-        <v-container
-          fluid
-        >
+    <v-expansion-panels>
+      <v-expansion-panel>
+        <v-expansion-panel-header color="#f5f5f5" class="font-size-16 font-weight-bold">
+          Level
+        </v-expansion-panel-header>
+        <v-expansion-panel-content color="#f5f5f5">
           <v-row
             align="center"
             justify="center"
@@ -108,16 +111,17 @@
 
 
           </v-row>
-        </v-container>
-      </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
-      <!--Base filter-->
-      <div v-show="filter.base_list.length>0">
-        <p class="mb-2 mb-md-2 mt-5 font-weight-bold font-size-16">Base</p>
-        <v-divider class="mb-3"/>
-
-        <v-container
-          fluid
+      <!--Grade filter-->
+      <v-expansion-panel :disabled="!filter.base_list.length">
+        <v-expansion-panel-header
+          color="#f5f5f5"
+          class="font-weight-bold font-size-16"
+        >Grade</v-expansion-panel-header>
+        <v-expansion-panel-content
+          color="#f5f5f5"
         >
           <v-row
             align="center"
@@ -148,16 +152,16 @@
 
 
           </v-row>
-        </v-container>
-      </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
       <!--Lesson filter-->
-      <div v-show="filter.lesson_list.length>0">
-        <p class="mb-2 mb-md-2 mt-5 font-weight-bold font-size-16">Lesson</p>
-        <v-divider class="mb-3"/>
-
-        <v-container
-          fluid
+      <v-expansion-panel :disabled="!filter.lesson_list.length">
+        <v-expansion-panel-header
+          color="#f5f5f5"
+          class="font-weight-bold font-size-16">Lesson</v-expansion-panel-header>
+        <v-expansion-panel-content
+          color="#f5f5f5"
         >
           <v-row
             align="center"
@@ -188,16 +192,16 @@
 
 
           </v-row>
-        </v-container>
-      </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
       <!--Topic filter-->
-      <div v-show="filter.topic_list.length>0">
-        <p class="mb-2 mb-md-2 mt-5 font-weight-bold font-size-16">Topic</p>
-        <v-divider class="mb-3"/>
-
-        <v-container
-          fluid
+      <v-expansion-panel :disabled="!filter.topic_list.length">
+        <v-expansion-panel-header
+          color="#f5f5f5"
+          class="font-weight-bold font-size-16">Topic</v-expansion-panel-header>
+        <v-expansion-panel-content
+          color="#f5f5f5"
         >
           <v-row
             align="center"
@@ -230,24 +234,24 @@
 
 
           </v-row>
-        </v-container>
-      </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
       <!--File type filter-->
-      <div v-show="filter.file_type_list.length>0">
-        <p class="mb-2 mb-md-2 mt-5 font-size-16 font-weight-bold">
-          {{ $route.query.type === 'test' ? 'Paper' : 'Multimedia' }} Type</p>
-        <v-divider class="mb-3"/>
-
-        <v-container
-          fluid
+      <v-expansion-panel v-show="filter.file_type_list.length>0">
+        <v-expansion-panel-header
+          color="#f5f5f5"
+          class="font-size-16 font-weight-bold">
+          {{ $route.query.type === 'test' ? 'Paper' : 'Multimedia' }} Type</v-expansion-panel-header>
+        <v-expansion-panel-content
+          color="#f5f5f5"
         >
           <v-row
             align="center"
             justify="center"
           >
             <v-col cols="12" class="pt-0 pr-0 m-0"
-                   >
+            >
               <v-radio-group
                 @change="changeFileTypeVal"
                 v-model="file_type_val"
@@ -273,16 +277,17 @@
 
 
           </v-row>
-        </v-container>
-      </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
       <!--Test level filter-->
-      <div v-show="filter.test_level_list.length>0 && $route.query.type==='test'">
-        <p class="mb-2 mb-md-2 mt-5 font-weight-bold font-size-16">Level</p>
-        <v-divider class="mb-3"/>
-
-        <v-container
-          fluid
+      <v-expansion-panel v-show="filter.test_level_list.length>0 && $route.query.type==='test'">
+        <v-expansion-panel-header
+          color="#f5f5f5"
+          class="font-weight-bold font-size-16">
+          Level</v-expansion-panel-header>
+        <v-expansion-panel-content
+          color="#f5f5f5"
         >
           <v-row
             align="center"
@@ -313,19 +318,18 @@
 
 
           </v-row>
-        </v-container>
-      </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
 
       <!--Test feature-->
-      <div v-show="$route.query.type==='test'">
-        <p class="mb-2 mb-md-2 mt-5 font-weight-bold font-size-16">Test features</p>
-        <v-divider class="mb-3"/>
-
-        <v-container
-          fluid
-          id="scroll-target"
-        >
+      <v-expansion-panel  v-show="$route.query.type==='test'">
+        <v-expansion-panel-header
+          color="#f5f5f5"
+          class="font-weight-bold font-size-16">
+          Test features
+        </v-expansion-panel-header>
+        <v-expansion-panel-content color="#f5f5f5">
           <v-row
             align="center"
             justify="center"
@@ -343,16 +347,18 @@
 
 
           </v-row>
-        </v-container>
-      </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
       <!--State-->
-      <div v-show="$route.query.type==='tutor'">
-        <p class="mb-2 mb-md-2 mt-5 font-weight-bold font-size-16">State</p>
-        <v-divider class="mb-3"/>
-
-        <v-container
-          fluid
+      <v-expansion-panel v-show="$route.query.type==='tutor'">
+        <v-expansion-panel-header
+          color="#f5f5f5"
+          class="font-weight-bold font-size-16">
+          State
+        </v-expansion-panel-header>
+        <v-expansion-panel-content
+          color="#f5f5f5"
         >
           <v-row
             align="center"
@@ -384,23 +390,25 @@
 
 
           </v-row>
-        </v-container>
-      </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
 
 
       <!--City-->
-      <div v-show="filter.city_list.length>0 && $route.query.type==='tutor'">
-        <p class="mb-2 mb-md-1 mt-5">City</p>
-        <v-divider class="mb-3"/>
-
-        <v-container
-          fluid
+      <v-expansion-panel v-show="filter.city_list.length>0 && $route.query.type==='tutor'">
+        <v-expansion-panel-header
+          color="#f5f5f5"
+          class="font-size-16 font-weight-bold">
+          City
+        </v-expansion-panel-header>
+        <v-expansion-panel-content
+          color="#f5f5f5"
         >
           <v-row
             align="center"
             justify="center"
           >
-            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">
+            <v-col cols="12" class="pt-0 pr-0 m-0" >
               <v-radio-group
                 v-model="city_val"
                 class="mt-0 pr-0"
@@ -425,8 +433,10 @@
 
 
           </v-row>
-        </v-container>
-      </div>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+
     </div>
   </div>
 </template>
@@ -1059,3 +1069,10 @@ export default {
 }
 </script>
 
+<style>
+@media screen and (max-width:600px) {
+  .content-search .v-expansion-panel-header,.v-expansion-panel-content{
+    background: #fff!important;
+  }
+}
+</style>
