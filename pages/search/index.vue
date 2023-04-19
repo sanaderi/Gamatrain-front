@@ -27,7 +27,7 @@
           <div style="position: sticky;top: 0;left: 0;right: 0;z-index: 10">
             <v-toolbar class="filter-btn-header">
               <v-toolbar-items>
-                <v-btn text @click="dialog = false">
+                <v-btn class="text-h5 font-weight-bold" text @click="dialog = false">
                   Search in content
                 </v-btn>
               </v-toolbar-items>

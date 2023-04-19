@@ -5,7 +5,7 @@
     >
       <!--Selected filter, user can disable any filter from here-->
       <div v-if="enabledAppliedFilter()">
-        <p class="mb-2 mb-md-2 font-size-16 font-weight-bold">Applied filter</p>
+        <p class="my-2 mb-md-2 font-size-16 font-weight-bold black--text">Applied filter</p>
         <v-divider class="mb-1"/>
         <v-chip
           v-if="applied_filter.select_section_title"
@@ -72,16 +72,15 @@
       </div>
       <!--End select filter  -->
 
-    <v-expansion-panels flat>
+    <v-expansion-panels flat v-model="panel">
       <v-expansion-panel>
-        <v-expansion-panel-header color="#f5f5f5" class="font-size-16 font-weight-bold">
+        <v-expansion-panel-header color="#f5f5f5" class="px-0 font-size-16 font-weight-bold">
           Level
         </v-expansion-panel-header>
         <v-expansion-panel-content  color="#f5f5f5">
-            <v-col
-              id="scroll-target"
-              style="max-height: 200px"
-              cols="12" class="overflow-y-auto pt-0 pr-0 m-0">
+            <v-row>
+              <v-col
+                cols="12" class="content-box">
                 <v-radio-group
                   v-model="section_val"
                   class="mt-0 pr-0"
@@ -101,7 +100,8 @@
                   </v-radio>
 
                 </v-radio-group>
-            </v-col>
+              </v-col>
+            </v-row>
         </v-expansion-panel-content>
       </v-expansion-panel>
 
@@ -109,7 +109,7 @@
       <v-expansion-panel :disabled="!filter.base_list.length">
         <v-expansion-panel-header
           color="#f5f5f5"
-          class="font-weight-bold font-size-16"
+          class="px-0 font-weight-bold font-size-16"
         >Grade</v-expansion-panel-header>
         <v-expansion-panel-content
           color="#f5f5f5"
@@ -119,8 +119,7 @@
             justify="center"
           >
             <v-col cols="12"
-                   style="max-height: 200px"
-                   class="overflow-y-auto pt-0 pr-0 m-0" >
+                   class="content-box" >
               <v-radio-group
                 v-model="base_val"
                 @change="changeBaseVal"
@@ -152,7 +151,7 @@
       <v-expansion-panel :disabled="!filter.lesson_list.length">
         <v-expansion-panel-header
           color="#f5f5f5"
-          class="font-weight-bold font-size-16">Lesson</v-expansion-panel-header>
+          class="px-0 font-weight-bold font-size-16">Lesson</v-expansion-panel-header>
         <v-expansion-panel-content
           color="#f5f5f5"
         >
@@ -161,8 +160,7 @@
             justify="center"
           >
             <v-col cols="12"
-                   style="max-height: 200px"
-                   class="pt-0 pr-0 m-0 overflow-y-auto">
+                   class="content-box">
               <v-radio-group
                 @change="changeLessonVal"
                 v-model="lesson_val"
@@ -192,7 +190,7 @@
       <v-expansion-panel :disabled="!filter.topic_list.length">
         <v-expansion-panel-header
           color="#f5f5f5"
-          class="font-weight-bold font-size-16">Topic</v-expansion-panel-header>
+          class="px-0 font-weight-bold font-size-16">Topic</v-expansion-panel-header>
         <v-expansion-panel-content
           color="#f5f5f5"
         >
@@ -200,8 +198,7 @@
             align="center"
             justify="center"
           >
-            <v-col cols="12" class="pt-0 pr-0 m-0 overflow-y-auto"
-                   style="max-height: 200px"
+            <v-col cols="12" class="content-box"
             >
               <v-radio-group
                 @change="changeTopicVal"
@@ -235,7 +232,7 @@
       <v-expansion-panel v-show="filter.file_type_list.length>0">
         <v-expansion-panel-header
           color="#f5f5f5"
-          class="font-size-16 font-weight-bold">
+          class="px-0 font-size-16 font-weight-bold">
           {{ $route.query.type === 'test' ? 'Paper' : 'Multimedia' }} Type</v-expansion-panel-header>
         <v-expansion-panel-content
           color="#f5f5f5"
@@ -244,8 +241,7 @@
             align="center"
             justify="center"
           >
-            <v-col cols="12" class="pt-0 pr-0 m-0 overflow-y-auto"
-                   style="max-height: 200px"
+            <v-col cols="12" class="content-box"
             >
               <v-radio-group
                 @change="changeFileTypeVal"
@@ -453,6 +449,7 @@ export default {
   },
   data() {
     return {
+      panel:0,
       checkbox: 1,
       scrollInvoked: 0,
 
@@ -1070,5 +1067,16 @@ export default {
   .content-search .v-expansion-panel-header,.v-expansion-panel-content{
     background: #fff!important;
   }
+}
+
+.content-search .v-expansion-panel-content__wrap{
+   padding: 0 0 0 0.6rem!important;
+}
+.content-search .v-expansion-panel-content__wrap .content-box{
+   max-height: 20rem;
+  overflow-y: auto;
+  margin: 0;
+  padding-top: 0;
+  padding-right: 0;
 }
 </style>

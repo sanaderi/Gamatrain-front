@@ -3,13 +3,35 @@ html {
   font-size: 62.5% !important;
 }
 
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 0.8rem;
+  background: #cacdd3;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 body {
   overflow: initial !important;
   //direction: rtl;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 1.6rem;
   transition: 0.5s ease-in-out;
 
   p {
@@ -17,7 +39,7 @@ body {
   }
 
   .font-size-14{
-    font-size: 14px!important;
+    font-size: 1.4rem!important;
   }
   .font-size-16{
     font-size: 1.6rem!important;
@@ -51,7 +73,7 @@ body {
   }
 
   .dropdown-item {
-    margin: 2rem 0 !important;
+    padding: 0.8rem 1.8rem !important;
   }
 
   .v-item-active::before {
