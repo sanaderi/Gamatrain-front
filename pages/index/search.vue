@@ -1,61 +1,58 @@
 <template>
-    <v-row class="mx-0 align-center search-container">
-      <v-col cols="12" md="2" sm="12">
-        <span class="text-h5">
-          Advanced search:
-        </span>
-      </v-col>
-      <v-col cols="12" md="3" sm="12" class="search-item">
-        <v-autocomplete
-          class="grade-search"
-          v-model="form.level"
-          :items="section_list"
-          item-text="title"
-          clearable
-          item-value="id"
-          dense
-          outlined
-          label="Level"
-        ></v-autocomplete>
-      </v-col>
-      <v-col cols="12" md="3" sm="12" class="search-item">
-        <v-autocomplete
-          class="grade-search"
-          v-model="form.grade"
-          :items="grade_list"
-          item-text="title"
-          item-value="id"
-          clearable
-          dense
-          outlined
-          label="Garde"
-        ></v-autocomplete>
-      </v-col>
-      <v-col cols="12" md="3" sm="12" class="search-item">
-        <v-autocomplete
-          class="grade-search"
-          v-model="form.lesson"
-          :items="lesson_list"
-          item-text="title"
-          item-value="id"
-          dense
-          clearable
-          outlined
-          label="Lesson"
-        ></v-autocomplete>
-      </v-col>
-      <v-col
-        class="d-flex justify-md-center justify-end  search-item-button "
-        cols="12"
-        md="1"
-        sm="12"
+    <v-container>
+      <v-row class="mx-0 align-center search-container">
+        <v-col cols="12" md="3" sm="12" class="search-item">
+          <v-autocomplete
+            class="grade-search"
+            v-model="form.level"
+            :items="section_list"
+            item-text="title"
+            clearable
+            item-value="id"
+            dense
+            outlined
+            label="Level"
+          ></v-autocomplete>
+        </v-col>
+        <v-col cols="12" md="3" sm="12" class="search-item">
+          <v-autocomplete
+            class="grade-search"
+            v-model="form.grade"
+            :items="grade_list"
+            item-text="title"
+            item-value="id"
+            clearable
+            dense
+            outlined
+            label="Garde"
+          ></v-autocomplete>
+        </v-col>
+        <v-col cols="12" md="3" sm="12" class="search-item">
+          <v-autocomplete
+            class="grade-search"
+            v-model="form.lesson"
+            :items="lesson_list"
+            item-text="title"
+            item-value="id"
+            dense
+            clearable
+            outlined
+            label="Lesson"
+          ></v-autocomplete>
+        </v-col>
+        <v-col
+          class="d-flex justify-md-start justify-end  search-item-button "
+          cols="12"
+          md="3"
+          sm="12"
 
-      >
-        <v-btn class="search-btn"
-               :to="`/search?type=test&section=${form.level}&base=${form.grade}&lesson=${form.lesson}&sortby=best`"
-               depressed> Search</v-btn>
-      </v-col>
-    </v-row>
+        >
+          <v-btn class="search-btn"
+                 :to="`/search?type=test&section=${form.level}&base=${form.grade}&lesson=${form.lesson}&sortby=best`"
+                 depressed> Search</v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
 </template>
 
 <script>

@@ -19,7 +19,8 @@
     <div v-show="!stat.showMore">
       <v-card-title class="d-block pa-0 pb-2">
         <div class="d-flex justify-space-between align-item">
-          <h2
+          <nuxt-link
+            :to="`/search?type=test&section=${stat.section}&base=${stat.base}`"
             :class="'grade-title grade-title' + (itm_index + 1)"
             class="mb-2"
           >
@@ -27,7 +28,7 @@
                           itm_index + 1
                         }}</span>
             {{ stat.base_title }}
-          </h2>
+          </nuxt-link>
           <div class="d-flex align-center res-update d-sm-none">
             <i class="fa-solid fa-calendar-days mx-3"></i>
             <p>{{ $moment(stat.last_update).format("MMM DD") }}</p>

@@ -2,25 +2,25 @@
   <div >
     <!--   Start: category  main-container Desktop -->
     <v-container class="d-sm-flex d-none py-0 ">
-      <v-row class="justify-center align-center category box mb-0 pb-0">
+      <v-row class="justify-center align-center category box my-0 pb-0">
         <v-col
           v-for="(item, category) in items"
           :key="category"
           :class="item.class"
-          class="card"
+          class="card text-center pb-0"
 
         >
-          <nuxt-link :to="item.link" disabled >
-            <v-list-item class="d-flex flex-column mx-7 pa-0"
-
-            >
+          <nuxt-link :to="item.link">
+            <v-list-item class="d-flex flex-column  pa-0">
               <v-list-item-icon
-                class="ma-0 d-flex align-center justify-center p-icon"
+                class="my-0 mx-auto  align-center justify-center p-icon"
               >
                 <span :class="'icon icong-' + item.icon"></span>
               </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title v-text="item.text"></v-list-item-title>
+              <v-list-item-content class="mx-auto">
+                <v-list-item-title
+                  class="mx-auto cat-title"
+                                   v-text="item.text"></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </nuxt-link>
@@ -47,7 +47,7 @@
                 <span :class="'icon icong-' + item.icon"></span>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title v-text="item.text"></v-list-item-title>
+                <v-list-item-title class="cat-title" v-text="item.text"></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </nuxt-link>

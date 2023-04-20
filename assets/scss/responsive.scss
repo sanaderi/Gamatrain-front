@@ -264,6 +264,13 @@ body {
       }
     }
 
+    .category{
+      .cat-title{
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
+
     @media (min-width: 960px) {}
 
     @media screen and (max-width: 900px) {
@@ -292,6 +299,8 @@ body {
           border-radius: 50%;
           background: $gray10;
         }
+
+
 
         .cat-more-icon {
           color: $gray25;

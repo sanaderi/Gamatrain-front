@@ -23,7 +23,7 @@
               </v-list-item>
 
               <v-list-item class="footer-item">
-                <p class="about-footer-para">
+                <p class="about-footer-para font-size-15">
                   Since 2013, our team at GAMATrain has been working to improve global education system, specifically K-12 system. Our online education platform connects schools, teachers, students, and parents for better communication and knowledge sharing. GAMATrain’s ultimate goal is to promote fair and equal education opportunities around the world.
                 </p>
               </v-list-item>

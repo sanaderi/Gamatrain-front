@@ -208,14 +208,14 @@
                 <v-img
                   class="logo"
                   :src="require('@/assets/images/' + logo)"
-                  max-width="100"
+                  max-width="120"
                 />
               </nuxt-link>
               <!--End logo section-->
 
               <v-spacer></v-spacer>
               <nuxt-link to="">
-                <i class="fa-regular fa-bell fa-2xl ml-4"></i>
+                <i class="fa-regular fa-bell  ml-4 " ></i>
               </nuxt-link>
 
             </v-app-bar>
@@ -335,5 +335,10 @@ export default {
 
 .mobile_bar .v-toolbar__content {
   padding: 0 1.4rem 0 0.5rem !important;
+}
+
+.mobile_bar .fa-bell{
+  line-height: 3rem!important;
+  font-size: 2.8rem!important;
 }
 </style>

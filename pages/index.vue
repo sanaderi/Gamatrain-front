@@ -23,16 +23,12 @@
     <Category/>
 
     <!--  Start: search grade  -->
-    <section class="d-none d-sm-block search-sec mb-8">
-      <v-container>
-        <div class="box search-container">
-          <search
-            :value1="value1"
-            :value2="value2"
-            :value3="value2"
-          ></search>
-        </div>
-      </v-container>
+    <section class="d-none d-sm-block search-sec mb-4">
+      <v-card flat color="rgba(0,0,0,0.2)" rounded>
+        <v-card-text class="mt-0">
+          <search/>
+        </v-card-text>
+      </v-card>
     </section>
     <!--  End: search  -->
 
@@ -140,10 +136,10 @@ import MobileStatsCardComponent from "~/components/home/MobileStatsCardComponent
 export default {
   auth: false,
   name: 'home_page',
-  head(){
-    return{
+  head() {
+    return {
       titleTemplate: "Gamatrain | %s",
-      title:'Learning together, earning together, building a brighter future',
+      title: 'Learning together, earning together, building a brighter future',
     }
   },
 
@@ -198,11 +194,9 @@ export default {
 
   mounted() {
   },
-  watch:{
-
-  },
+  watch: {},
   methods: {
-    lessonExpandCard:function (index){
+    lessonExpandCard: function (index) {
       if (this.stats[index].showMore == true)
         this.stats[index].showMore = false;
       else
