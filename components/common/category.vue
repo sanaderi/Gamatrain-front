@@ -2,7 +2,7 @@
   <div >
     <!--   Start: category  main-container Desktop -->
     <v-container class="d-sm-flex d-none py-0 ">
-      <v-row class="justify-center align-center category box my-0 pb-0">
+      <v-row class="justify-center align-center category box mt-0 pb-0">
         <v-col
           v-for="(item, category) in items"
           :key="category"

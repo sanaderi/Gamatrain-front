@@ -19,8 +19,6 @@
                 filter
               </span>
             </v-slide-x-reverse-transition>
-
-
           </v-btn>
         </template>
         <v-card>
@@ -60,48 +58,48 @@
     <section class="search-page">
       <v-container>
         <v-row>
-          <v-col lg="3" class="d-none d-md-block" >
-            <v-card flat  color="#f5f5f5" style="position: sticky;top:1rem;">
-             <v-card-text>
-               <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs"/>
-             </v-card-text>
+          <v-col lg="3" class="d-none d-md-block">
+            <v-card flat color="#f5f5f5" style="position: sticky;top:1rem;">
+              <v-card-text>
+                <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs"/>
+              </v-card-text>
             </v-card>
           </v-col>
 
 
           <v-col lg="9" md="9" sm="12" class="search-contents px-0">
-              <v-breadcrumbs :items="breadcrumbs" class="search-breadcrumb d-none d-md-block">
-                <template v-slot:divider>
-                  <v-icon>mdi-chevron-right</v-icon>
-                </template>
-              </v-breadcrumbs>
+            <v-breadcrumbs :items="breadcrumbs" class="search-breadcrumb d-none d-md-block">
+              <template v-slot:divider>
+                <v-icon>mdi-chevron-right</v-icon>
+              </template>
+            </v-breadcrumbs>
 
-              <!-- Search tabs -->
-              <Tabs style="position:sticky;top: 0;z-index: 5" ref="content_tabs"/>
-              <!-- End search tabs -->
+            <!-- Search tabs -->
+            <Tabs style="position:sticky;top: 0;z-index: 5" ref="content_tabs"/>
+            <!-- End search tabs -->
 
-              <div class="text-center" v-if="page_loading===false && items.length===0">
-                Oops! no data found
-              </div>
-              <div v-else>
-                <Paper v-if="$route.query.type==='test'" :items="items"/>
-                <Multimedia v-else-if="$route.query.type==='learnfiles'" :items="items"/>
-                <QuestionAnswer v-else-if="$route.query.type==='question'" :items="items"/>
-                <Exam v-else-if="$route.query.type==='azmoon'" :items="items"/>
-                <Tutorial v-else-if="$route.query.type==='dars'" :items="items"/>
-                <Tutor v-else-if="$route.query.type==='tutor'" :items="items"/>
-              </div>
-          </v-col>
-        </v-row>
-        <v-row v-show="page_loading">
-          <v-col cols="12" class="text-center">
-            <v-progress-circular
-              :size="40"
-              :width="4"
-              class="mt-12 mb-12"
-              color="orange"
-              indeterminate
-            />
+            <div class="text-center" v-if="page_loading===false && items.length===0">
+              Oops! no data found
+            </div>
+            <div v-else>
+              <Paper v-if="$route.query.type==='test'" :items="items"/>
+              <Multimedia v-else-if="$route.query.type==='learnfiles'" :items="items"/>
+              <QuestionAnswer v-else-if="$route.query.type==='question'" :items="items"/>
+              <Exam v-else-if="$route.query.type==='azmoon'" :items="items"/>
+              <Tutorial v-else-if="$route.query.type==='dars'" :items="items"/>
+              <Tutor v-else-if="$route.query.type==='tutor'" :items="items"/>
+            </div>
+            <v-row v-show="page_loading">
+              <v-col cols="12" class="text-center">
+                <v-progress-circular
+                  :size="40"
+                  :width="4"
+                  class="mt-12 mb-12"
+                  color="orange"
+                  indeterminate
+                />
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
 
@@ -362,7 +360,7 @@ export default {
     async getContentList() {
       if (!this.all_files_loaded) {
         this.page_loading = true;
-        let params={
+        let params = {
           type: this.$route.query.type,
           page: this.page,
           section: this.$route.query.section,
@@ -377,9 +375,9 @@ export default {
           a_file: this.$route.query.a_file,
         };
 
-        if (this.$route.query.type=='tutor'){
-          params.state=this.$route.query.state;
-          params.city=this.$route.query.city;
+        if (this.$route.query.type == 'tutor') {
+          params.state = this.$route.query.state;
+          params.city = this.$route.query.city;
         }
         await this.$axios.$get('/api/v1/search',
           {

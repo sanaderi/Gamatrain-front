@@ -1,13 +1,13 @@
 <template>
   <div ref="slider" class="px-0 pb-0">
     <v-card outlined flat class="py-8" color="rgba(0,0,0,1)">
-      <v-card-text class="white--text">
+      <v-container class="white--text">
         <p class="text-left text-md-h4 text-h5 font-weight-bold">
           Stats and Achievements
           (GAMA Experience in Iran’s EdTech Market)
         </p>
 
-        <v-slide-group center class="stat-sec text-center">
+        <v-slide-group center class="stat-sec">
           <v-slide-item v-for="(item, index) in statList" :key="index">
             <div class="
               d-flex
@@ -16,7 +16,6 @@
               flex-wrap
               stat-holder
               mt-5
-              px-lg-8
             ">
               <div class="
                 d-flex
@@ -35,7 +34,7 @@
             </div>
           </v-slide-item>
         </v-slide-group>
-      </v-card-text>
+      </v-container>
     </v-card>
   </div>
 </template>

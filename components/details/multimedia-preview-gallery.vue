@@ -83,13 +83,13 @@ export default {
       active_img: 1,
 
       items: [
-        { class: "exam", text: "Exam", icon: "azmoon",link:"/search?type=azmoon" },
-        { class: "test", text: "Paper", icon: "test",link:"/search?type=test" },
-        { class: "content", text: "Multimedia", icon: "learnfiles" ,link:"/search?type=learnfiles" },
-        { class: "faq", text: "Q & A", icon: "qa",link:"/search?type=question" },
-        { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/search?type=dars" },
-        { class: "school", text: "School", icon: "school" ,link:"/search?type=school" },
-        { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor" },
+        { class: "exam", text: "Related exam", icon: "azmoon",link:"/search?type=azmoon" },
+        { class: "test", text: "Related paper", icon: "test",link:"/search?type=test" },
+        { class: "content", text: "Related multimedia", icon: "learnfiles" ,link:"/search?type=learnfiles" },
+        { class: "faq", text: "Related Q & A", icon: "qa",link:"/search?type=question" },
+        { class: "textbook ", text: "Related tutorial", icon: "blog" ,link:"/search?type=dars" },
+        // { class: "school", text: "School", icon: "school" ,link:"/search?type=school" },
+        // { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor" },
       ],
     }
   },

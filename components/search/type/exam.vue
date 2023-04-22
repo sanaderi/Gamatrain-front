@@ -32,21 +32,21 @@
                   <v-col cols="12" class="item-content-features">
                     <v-row>
                       <v-col lg="3" cols="7" class="d-flex align-center py-2 px-0">
-                        <i class="fa-solid fa-list"></i>
+                        <i class="fa-solid fa-list fa-xl"></i>
                         <p class="mx-2 ">Questions: {{ item.tests_num }}
                         </p>
                       </v-col>
                       <v-col lg="3" cols="5" class="d-flex align-center py-2 px-0">
-                        <i class="fa-solid fa-circle-play"></i>
+                        <i class="fa-solid fa-circle-play fa-xl"></i>
                         <p class="mx-2 ">Start: {{ item.start_date ? item.start_date : '-' }} </p>
                       </v-col>
                       <v-col lg="3" cols="7" class="d-flex align-center py-2 px-0">
-                        <i class="fa-solid fa-temperature-three-quarters"></i>
+                        <i class="fa-solid fa-temperature-three-quarters fa-xl"></i>
                         <p class="mx-2 ">Level: {{ $testLevel.show(item.level) }} </p>
                       </v-col>
 
                       <v-col lg="3" cols="5" class="d-flex align-center py-2 px-0">
-                        <i class="fa-solid fa-circle-stop"></i>
+                        <i class="fa-solid fa-circle-stop fa-xl"></i>
                         <p class="mx-2 ">End: {{ item.end_date ? item.end_date : '-' }} </p>
                       </v-col>
                     </v-row>
@@ -91,7 +91,7 @@
 
                         <div
                           class="item-content-last-update d-flex align-center mx-auto">
-                          <i class="fa-solid fa-calendar-days"></i>
+                          <i class="fa-solid fa-calendar-days fa-xl"></i>
                           <p class="mx-2">
                     <span class="d-none d-sm-inline">
                       Last update:

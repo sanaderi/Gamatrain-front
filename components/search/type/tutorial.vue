@@ -71,7 +71,7 @@
 <!--                        </div>-->
                         <div
                           class="item-content-last-update d-flex ml-3">
-                          <i class="fa-solid fa-eye"></i>
+                          <i class="fa-solid fa-eye fa-xl"></i>
                           <p class="mx-2">
                     <span class="d-none d-sm-inline">
                       Views:
@@ -83,7 +83,7 @@
                         </div>
                         <div
                           class="item-content-last-update d-flex align-center mx-auto">
-                          <i class="fa-solid fa-calendar-days"></i>
+                          <i class="fa-solid fa-calendar-days fa-xl"></i>
                           <p class="mx-2">
                     <span class="d-none d-sm-inline">
                       Last update:

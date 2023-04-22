@@ -69,7 +69,7 @@
                 <!--Item card footer-->
                 <v-card-actions class="item-content-footer pb-2  d-none d-sm-block">
                   <v-row>
-                    <v-col cols="8" class="px-0">
+                    <v-col cols="9" class="px-0">
                       <div class="d-flex pt-3 pt-md-0">
                         <div class="item-content-user d-flex align-center">
                           <v-avatar size="2em">
@@ -81,10 +81,10 @@
 
                         <div
                           class="item-content-last-update d-flex align-center mx-auto">
-                          <i class="fa-solid fa-sticky-note"></i>
+                          <i class="fa-solid fa-sticky-note fa-xl"></i>
                           <p class="mx-2">
                     <span class="d-none d-sm-inline">
-                      Test type:
+                      Paper type:
                     </span>
                             <span class="date_string d-inline-block">
                       {{ item.test_type_title }}
@@ -93,7 +93,7 @@
                         </div>
                         <div
                           class="item-content-last-update d-flex align-center mx-auto">
-                          <i class="fa-solid fa-eye"></i>
+                          <i class="fa-solid fa-eye fa-xl"></i>
                           <p class="mx-2">
                     <span class="d-none d-sm-inline">
                       Views:
@@ -105,7 +105,7 @@
                         </div>
                         <div
                           class="item-content-last-update d-flex align-center mx-auto">
-                          <i class="fa-solid fa-calendar-days"></i>
+                          <i class="fa-solid fa-calendar-days fa-xl"></i>
                           <p class="mx-2">
                     <span class="d-none d-sm-inline">
                       Last update:
@@ -117,9 +117,8 @@
                         </div>
 
                       </div>
-
                     </v-col>
-                    <v-col cols="4" >
+                    <v-col cols="3" >
                       <div class="text-right align-right float-right d-flex align-content-center  " >
                         <nuxt-link icon :to="`/papers/${item.id}/${item.title_url}`">
                           <span v-show="item.q_file_word"  class="fa-solid fa-file-word fa-2xl blue--text "></span>
@@ -153,7 +152,7 @@
                   <i class="fa-solid fa-sticky-note"></i>
                   <p class="mx-2">
                     <span class="d-none d-sm-inline">
-                      Test type:
+                      Paper type:
                     </span>
                     <span class="date_string d-inline-block">
                       {{ item.test_type_title }}

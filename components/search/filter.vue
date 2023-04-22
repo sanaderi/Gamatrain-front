@@ -554,7 +554,7 @@ export default {
   watch: {
     "$route.query.type"(val) {
       this.filter.file_type_list = [];
-      if (this.$route.query.type === 'test')
+      if (this.$route.query.type === 'test' || this.$route.query.type=='learnfiles')
         this.getFileType();
     },
     section_val(val) {
@@ -633,6 +633,12 @@ export default {
       }
 
 
+    },
+    file_type_val(val){
+      if (val==0){
+        this.applied_filter.select_file_type_title='';
+        this.updateQueryParams();
+      }
     },
 
 
@@ -1005,7 +1011,7 @@ export default {
       this.$axios.$get('/api/v1/types/list',
         {
           params: {
-            type: this.$route.query.type ? 'test_type' : ''
+            type: this.$route.query.type=='test' ? 'test_type' : ''
           }
         })
         .then(res => {

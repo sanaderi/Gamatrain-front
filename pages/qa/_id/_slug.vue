@@ -104,8 +104,8 @@
                                       </nuxt-link>
                                       <div class="pa-3 pt-0">
                                         <p class="text-h6 ">
-                                          <strong v-if="contentData.first_name || contentData.last_name">
-                                            {{ contentData.first_name }} {{ contentData.last_name }}
+                                          <strong v-if="contentData.name">
+                                            {{ contentData.name }}
                                           </strong>
                                           <strong v-else>
                                             No name
@@ -381,8 +381,8 @@
                                       </nuxt-link>
                                       <div class="pa-3 pt-0">
                                         <p class="text-h6 ">
-                                          <strong v-if="answer.first_name || answer.last_name">
-                                            {{ answer.first_name }} {{ answer.last_name }}
+                                          <strong v-if="answer.name">
+                                            {{ answer.name }}
                                           </strong>
                                           <strong v-else>
                                             No name

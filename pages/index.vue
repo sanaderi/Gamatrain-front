@@ -23,7 +23,7 @@
     <Category/>
 
     <!--  Start: search grade  -->
-    <section class="d-none d-sm-block search-sec mb-4">
+    <section class="d-none d-sm-block search-sec mb-4 ">
       <v-card flat color="rgba(0,0,0,0.2)" rounded>
         <v-card-text class="mt-0">
           <search/>
@@ -107,7 +107,7 @@
 
 
     <!--  Start: Main stats  -->
-    <Slider/>
+    <Slider class="d-none d-md-block"/>
     <!--  End: Main stats  -->
 
     <!--  Start: Last views  -->
