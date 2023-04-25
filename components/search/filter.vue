@@ -1011,7 +1011,7 @@ export default {
       this.$axios.$get('/api/v1/types/list',
         {
           params: {
-            type: this.$route.query.type=='test' ? 'test_type' : ''
+            type: this.$route.query.type=='test' ? 'test_type' : 'file_type'
           }
         })
         .then(res => {
