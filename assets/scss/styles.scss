@@ -3917,6 +3917,46 @@ body {
   }
 
 
+  #test-maker-answer-alternative {
+    position: relative;
+
+    .ck-editor__editable_inline {
+      height: 54.5rem !important;
+      max-height: 54.5rem !important;
+    }
+
+
+    @media only screen and (max-width: 960px) {
+      .ck-editor__editable_inline {
+        height: 20.5rem !important;
+        max-height: 20.5rem !important;
+      }
+    }
+
+
+    .image-input {
+      position: absolute;
+      bottom: 2.2rem;
+      right: 2.2rem;
+      width: 7rem;
+      height: 7rem;
+      border-radius: 5px;
+
+      i {
+        font-size: 9.2rem;
+        color: #A11333;
+      }
+    }
+
+    .img-clear-btn {
+      position: absolute;
+      bottom: 4.8rem;
+      right: 8.4rem;
+      border-radius: 5px;
+    }
+  }
+
+
   #test-maker-answer {
     position: relative;
 
