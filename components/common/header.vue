@@ -4,10 +4,10 @@
       <topbar ref="header_topbar"></topbar>
 
       <!-- Desktop App bar in top page for menu list -->
-      <v-container class="d-none d-md-block"  >
-        <v-row >
-          <v-col md="6" lg="6" >
-            <v-toolbar-items >
+      <v-container class="d-none d-md-block">
+        <v-row>
+          <v-col md="6" lg="6">
+            <v-toolbar-items>
               <v-menu
                 v-for="(item, side) in menuItems"
                 :key="side"
@@ -36,19 +36,21 @@
                     class="dropdown-item"
                     :to="subMenuItem.link"
                   >
-                      {{ subMenuItem.title }}
+                    {{ subMenuItem.title }}
                   </v-list-item>
                 </v-list>
               </v-menu>
             </v-toolbar-items>
           </v-col>
-          <v-col md="6" lg="6" class="text-right" >
-            <span>Hot topics: </span>
-            <v-chip to="/test-maker/create" color="rgba(33, 33, 33, 0.08)">
+          <v-col md="6" lg="6" class="text-right">
+            <span v-show="hotTopics.length">Hot topics: </span>
+            <v-chip v-show="hotTopics.length" :to="item.link"
+                    v-for="item in hotTopics"
+                    color="rgba(33, 33, 33, 0.08)">
               <v-chip small color="rgba(0, 0, 0, 0.16);">
                 #
               </v-chip>
-              Test maker
+              {{ item.title }}
             </v-chip>
           </v-col>
         </v-row>
@@ -192,7 +194,6 @@
             <!-- End:  show sidebar menu in mobile -->
 
 
-
             <!--Mobile nav-->
             <v-app-bar class="d-block d-md-none mobile_bar" fixed>
               <!--   hamburgers-icon in mobile-->
@@ -215,7 +216,7 @@
 
               <v-spacer></v-spacer>
               <nuxt-link to="">
-                <i class="fa-regular fa-bell  ml-4 " ></i>
+                <i class="fa-regular fa-bell  ml-4 "></i>
               </nuxt-link>
 
             </v-app-bar>
@@ -235,6 +236,7 @@
 import topbar from "../widgets/topbar";
 
 export default {
+  name: "header-component",
   components: {
     topbar,
   },
@@ -257,10 +259,16 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            {title: "International Mathematical Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6028"},
+            {
+              title: "International Mathematical Olympiad",
+              link: "/search?type=test&section=6025&base=6026&lesson=6028"
+            },
             {title: "International Physics Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6029"},
             {title: "International Chemistry Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6030"},
-            {title: "International Olympiad in Informatics", link: "/search?type=test&section=6025&base=6026&lesson=6031"},
+            {
+              title: "International Olympiad in Informatics",
+              link: "/search?type=test&section=6025&base=6026&lesson=6031"
+            },
             {title: "International Biology Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6032"},
           ],
         },
@@ -302,7 +310,17 @@ export default {
         {link: "instagram", icon: "fa-instagram"},
         {link: "Youtube", icon: "fa-youtube"},
       ],
+      hotTopics: {},
     };
+  },
+  async fetch() {
+    await this.$axios.$get('/api/v1/admin/values')
+      .then(response => {
+        if (response.data.mostVisitedTags.enable == "true")
+          this.hotTopics = response.data.mostVisitedTags.tags;
+      }).catch(err => {
+        console.log(err);
+      })
   },
   methods: {
     openLoginDialog() {
@@ -337,8 +355,8 @@ export default {
   padding: 0 1.4rem 0 0.5rem !important;
 }
 
-.mobile_bar .fa-bell{
-  line-height: 3rem!important;
-  font-size: 2.8rem!important;
+.mobile_bar .fa-bell {
+  line-height: 3rem !important;
+  font-size: 2.8rem !important;
 }
 </style>

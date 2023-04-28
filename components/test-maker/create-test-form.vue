@@ -68,7 +68,7 @@
               </v-tooltip>
             </v-col>
             <v-col :cols="path_panel_expand ? 12 : 10"
-                   :md="path_panel_expand ? 2 : 11">
+                   :md="path_panel_expand ? 2 : 9">
               <v-autocomplete
                 dense
                 :items="topic_list"
@@ -86,7 +86,7 @@
               </v-autocomplete>
             </v-col>
 
-            <v-col cols="12" md="2" v-show="path_panel_expand">
+            <v-col cols="12" md="2" >
               <validation-provider v-slot="{errors}" name="lesson" rules="required">
                 <v-autocomplete
                   dense
@@ -129,7 +129,8 @@
             </v-col>
             <!--End question section-->
 
-            <v-col cols="12" md="6" v-if="['tf','fourchoice','twochoice'].includes(form.type)">
+            <v-col cols="12" md="6"
+                   v-if="['tf','fourchoice','twochoice'].includes(form.type)">
               <!--Answer type-->
               <v-row v-if="['fourchoice','twochoice'].includes(form.type)">
                 <v-col cols="12" class="d-flex align-center justify-center">
@@ -310,8 +311,10 @@
 
 
             <!--Solution section-->
-            <v-col :cols="['tf','fourchoice','twochoice'].includes(form.type) ? 12 : 6"
-                   :id="['tf','fourchoice','twochoice'].includes(form.type) ? 'test-maker-answer' : 'test-maker-answer-alternative'">
+            <v-col cols="12"
+                   :md="['tf','fourchoice','twochoice'].includes(form.type) ? 12 : 6"
+                   :id="['tf','fourchoice','twochoice'].includes(form.type) ? 'test-maker-answer' : 'test-maker-answer-alternative'"
+            >
               <p>Solution:</p>
               <client-only placeholder="loading...">
                 <ckeditor-nuxt v-model="form.answer_full" :config="editorConfig"/>
@@ -506,7 +509,7 @@ export default {
         grade: '',
         lesson: '',
         topic: '',
-        type:'fourchoice',
+        type: 'fourchoice',
         direction: 'ltr',
         true_answer: '',
         question: '',
@@ -560,14 +563,14 @@ export default {
       text_answer_rules: 'required',
       photo_answer: false,
       photo_answer_rules: '',
-      examTestListLength:0,
-      typeList:[
-        {value:"fourchoice",title:"Multiple choice(4)"},
-        {value:"twochoice",title:"Multiple choice(2)"},
-        {value:"desprictive",title:"Open answer"},
-        {value:"tf",title:"True/False"},
-        {value:"blank",title:"Blank"},
-        {value:"shortanswer",title:"Short answer"},
+      examTestListLength: 0,
+      typeList: [
+        {value: "fourchoice", title: "Multiple choice(4)"},
+        {value: "twochoice", title: "Multiple choice(2)"},
+        {value: "descriptive", title: "Open-Ended"},
+        {value: "tf", title: "True/False"},
+        {value: "blank", title: "Blank"},
+        {value: "shortanswer", title: "Short answer"},
       ]
     }
   },
@@ -589,6 +592,16 @@ export default {
     },
     "form.lesson"(val) {
       this.getTypeList('topic', val);
+    },
+    "form.type"(val) {
+      if (val == 'tf'){
+        this.form.answer_a = 'True';
+        this.form.answer_b = 'False';
+      }else{
+        this.form.answer_a = '';
+        this.form.answer_b = '';
+      }
+
     },
   },
   methods: {
@@ -653,7 +666,6 @@ export default {
             this.path_panel_expand = false;
 
 
-
             //Edit mode or create exam progress
             if (this.$store.state.user.examId || this.examEditMode === true)
               this.$emit('update:updateTestList', response.data.id);
@@ -690,9 +702,11 @@ export default {
             this.$toast.error("An error occurred, try again")
           }
         }).catch(err => {
-        if (err.response.status === 400)
+        if (err.response.status == 400)
           this.$toast.error(err.response.data.message);
-        console.log(err);
+        else if (err.response.status == 403)
+          this.$auth.logout();
+        this.$toast.error(err.response.data.message);
       }).finally(() => {
         this.create_loading = false;
       })
@@ -839,7 +853,7 @@ export default {
 
           }).catch(err => {
         })
-      }else if(this.$route.params.id){
+      } else if (this.$route.params.id) {
         this.$axios.$get(`/api/v1/exams/info/${this.$route.params.id}`)
           .then(response => {
             if (response.data.file_original)

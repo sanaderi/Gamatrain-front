@@ -6,7 +6,7 @@
       <validation-observer ref="observer" v-slot="{invalid}">
         <form @submit.prevent="updateQuestion">
           <v-row>
-            <v-col cols="12" md="3" v-show="path_panel_expand">
+            <v-col cols="12" md="2" v-show="path_panel_expand">
               <validation-provider v-slot="{errors}" name="level" rules="required">
                 <v-autocomplete
                   dense
@@ -20,7 +20,7 @@
                 />
               </validation-provider>
             </v-col>
-            <v-col cols="12" md="3" v-show="path_panel_expand">
+            <v-col cols="12" md="2" v-show="path_panel_expand">
               <validation-provider v-slot="{errors}" name="grade" rules="required">
                 <v-autocomplete
                   dense
@@ -34,7 +34,7 @@
                 />
               </validation-provider>
             </v-col>
-            <v-col cols="12" md="3" v-show="path_panel_expand">
+            <v-col cols="12" md="2" v-show="path_panel_expand">
               <validation-provider v-slot="{errors}" name="lesson" rules="required">
                 <v-autocomplete
                   dense
@@ -69,7 +69,8 @@
               </v-tooltip>
             </v-col>
 
-            <v-col :cols="path_panel_expand ? 12 : 10" :md="path_panel_expand ? 3 : 11">
+            <v-col :cols="path_panel_expand ? 12 : 10"
+                   :md="path_panel_expand ? 2 : 11">
               <v-autocomplete
                 dense
                 :items="topic_list"
@@ -86,6 +87,22 @@
                 </template>
               </v-autocomplete>
             </v-col>
+
+            <v-col cols="12" md="2" >
+              <validation-provider v-slot="{errors}" name="lesson" rules="required">
+                <v-autocomplete
+                  dense
+                  :items="typeList"
+                  item-value="value"
+                  item-text="title"
+                  v-model="form.type"
+                  :error-messages="errors"
+                  label="Type"
+                  outlined
+                />
+              </validation-provider>
+            </v-col>
+
 
 
             <v-col cols="12" md="6" id="test-maker-question">
@@ -112,8 +129,12 @@
                 </v-icon>
               </v-btn>
             </v-col>
-            <v-col cols="12" md="6">
-              <v-row>
+            <v-col cols="12" md="6"
+                   v-if="['tf','fourchoice','twochoice'].includes(form.type)"
+            >
+              <v-row
+                v-if="['fourchoice','twochoice'].includes(form.type)"
+              >
                 <v-col cols="12" class="d-flex align-center justify-center">
                   <p class="mr-3 mt-5">Choices type:</p>
                   <v-checkbox
@@ -136,7 +157,7 @@
               </v-row>
               <validation-provider v-slot="{errors}" name="true_answer" rules="required">
                 <v-radio-group v-model="form.true_answer" id="test-image-options">
-                  <v-row>
+                  <v-row v-if="['fourchoice','twochoice','tf'].includes(form.type)">
                     <v-col class="pb-0" cols="1">
                       <v-radio value="1"></v-radio>
                       <span class="answer_label">A</span>
@@ -170,7 +191,7 @@
                       </div>
                     </v-col>
                   </v-row>
-                  <v-row>
+                  <v-row v-if="['fourchoice','twochoice','tf'].includes(form.type)">
                     <v-col class="pb-0" cols="1">
                       <v-radio value="2"></v-radio>
                       <span class="answer_label">B</span>
@@ -204,7 +225,7 @@
                       </div>
                     </v-col>
                   </v-row>
-                  <v-row>
+                  <v-row v-if="form.type=='fourchoice'">
                     <v-col class="pb-0" cols="1">
                       <v-radio value="3"></v-radio>
                       <span class="answer_label">C</span>
@@ -238,7 +259,7 @@
                       </div>
                     </v-col>
                   </v-row>
-                  <v-row>
+                  <v-row v-if="form.type=='fourchoice'">
                     <v-col class="pb-0" cols="1">
                       <v-radio value="4"></v-radio>
                       <span class="answer_label">D</span>
@@ -276,9 +297,13 @@
                 </v-radio-group>
               </validation-provider>
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" id="test-maker-answer">
+
+
+            <!--Solution section-->
+            <v-col
+              :md="['tf','fourchoice','twochoice'].includes(form.type) ? 12 : 6"
+              :id="['tf','fourchoice','twochoice'].includes(form.type) ? 'test-maker-answer' : 'test-maker-answer-alternative'"
+              cols="12">
               <p>Solution:</p>
               <client-only placeholder="loading...">
                 <ckeditor-nuxt v-model="form.answer_full" :config="editorConfig"/>
@@ -305,7 +330,10 @@
                 </v-icon>
               </v-btn>
             </v-col>
+            <!--End solution section-->
           </v-row>
+
+
 
           <v-row>
             <v-col cols="12">
@@ -479,6 +507,7 @@ export default {
         grade: '',
         lesson: '',
         topic: '',
+        type: 'fourchoice',
         direction: 'ltr',
         true_answer: '',
         question: '',
@@ -532,6 +561,15 @@ export default {
       photo_answer: false,
       update_file_loading: false,
       target_file: '',//Current file to crop, change and upload
+      typeList: [
+        {value: "fourchoice", title: "Multiple choice(4)"},
+        {value: "twochoice", title: "Multiple choice(2)"},
+        {value: "descriptive", title: "Open-Ended"},
+        {value: "tf", title: "True/False"},
+        {value: "blank", title: "Blank"},
+        {value: "shortanswer", title: "Short answer"},
+      ]
+
     }
   },
   mounted() {
@@ -761,6 +799,7 @@ export default {
           this.form.base = response.data.base;
           this.form.lesson = response.data.lesson;
           this.form.topic = response.data.topic;
+          this.form.type = response.data.type;
           this.form.question = response.data.question;
           this.form.q_file_base64 = response.data.q_file;
           this.form.testImgAnswers = response.data.testImgAnswers;
