@@ -176,6 +176,7 @@ export default {
         identity: this.identity,
         pass: this.password
       }), {
+        responseType:'text',
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }

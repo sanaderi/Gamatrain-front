@@ -581,7 +581,7 @@ export default {
         }
       }).catch(err => {
         if (err.response.status == 403)
-          this.$router.push({query: {auth_form: 'login'}});
+            this.$auth.logout();
         else if (err.response.status == 400)
           this.$toast.error(err.response.data.message);
       }).finally(() => {
@@ -651,7 +651,8 @@ export default {
         else if (file_name == 'file_extra')
           this.extraAttr[index].file = response.data[0].file.name;
       }).catch(err => {
-
+        if (err.response.status == 403)
+          this.$auth.logout();
       }).finally(() => {
         this.file_pdf_loading = false;
         this.file_word_loading = false;

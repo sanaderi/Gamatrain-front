@@ -289,7 +289,8 @@ export default {
           if (response.data.list.length === 0)//For terminate auto load request
             this.all_files_loaded = true;
         }).catch(err => {
-          console.log(err);
+          if (err.response.status == 403)
+            this.$auth.logout();
         }).finally(() => {
             this.page_loading = false;
           }
