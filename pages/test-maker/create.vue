@@ -818,7 +818,7 @@
 
                 <div class="d-flex mt-4 align-center justify-center">
                   <v-breadcrumbs :items="[{text:'Dashboard',href:'/user'},
-                                           {text:'My online exams',href:'/exams/results'}]">
+                                           {text:'My online exam',href:'/exam/results'}]">
                     <template v-slot:divider>
                       <v-icon>mdi-forward</v-icon>
                     </template>
@@ -1439,7 +1439,7 @@ export default {
 
       //End arrange to form data
 
-      this.$axios.$post('/api/v1/exams',
+      this.$axios.$post('/api/v1/exam',
         this.urlencodeFormData(formData),
         {
           headers: {
@@ -1640,7 +1640,7 @@ export default {
       this.$axios.$put(`/api/v1/exams/publish/${examId}`)
         .then(response => {
           if (response.data.message === 'done') {
-            this.test_share_link = `${process.env.BASE_URI}/exams/${examId}`
+            this.test_share_link = `${process.env.BASE_URI}/exam/${examId}`
 
 
             this.exam_id = '';

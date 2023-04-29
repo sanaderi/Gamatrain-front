@@ -220,7 +220,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <!--End exams section-->
+    <!--End exam section-->
   </div>
 </template>
 

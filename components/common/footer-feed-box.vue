@@ -24,9 +24,7 @@
       >
         <div class="pa-2 d-inline-block ">
           <v-list-item-content  class="pt-0 pr-1">
-            <nuxt-link :to="`${feed.main_link}/${item.id}`" class="pb-2 feed-title">
-              {{ item.title }}
-            </nuxt-link>
+            <nuxt-link v-html="item.title" :to="`${feed.main_link}/${item.id}`" class="pb-2 feed-title"/>
             <v-list-item-subtitle
               class="feed-subtitle d-flex justify-space-between"
             >

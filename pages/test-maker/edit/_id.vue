@@ -819,7 +819,7 @@
 
                 <div class="d-flex mt-4 align-center justify-center">
                   <v-breadcrumbs :items="[{text:'Dashboard',href:'/user'},
-                                           {text:'My online exams',href:'/exams/results'}]">
+                                           {text:'My online exam',href:'/exam/results'}]">
                     <template v-slot:divider>
                       <v-icon>mdi-forward</v-icon>
                     </template>
@@ -1172,7 +1172,7 @@ export default {
       test_loading: false,
       all_tests_loaded: false,
       tests: [],
-      test_share_link: `${process.env.BASE_URI}/exams/${this.$route.params.id}`,
+      test_share_link: `${process.env.BASE_URI}/exam/${this.$route.params.id}`,
       printPreviewDialog: false,
       confirmDeleteDialog: false,
       deleteLoading: false,
@@ -1346,7 +1346,7 @@ export default {
           console.log(response);
           this.tests = response.data.tests.length ? response.data.tests : [];
           this.exam_code = response.data.code;
-          this.test_share_link = `${process.env.BASE_URI}/exams/${this.$route.params.id}`;
+          this.test_share_link = `${process.env.BASE_URI}/exam/${this.$route.params.id}`;
           this.form.section = response.data.section;
           this.form.base = response.data.base;
           this.form.lesson = response.data.lesson;
@@ -1706,7 +1706,7 @@ export default {
         .then(response => {
           this.$toast.success("Deleted successfully");
           this.$router.push({
-            path: '/user/exams'
+            path: '/user/exam'
           })
         }).catch(err => {
         this.$toast.error("An error occurred");

@@ -1,39 +1,31 @@
 <template>
   <div ref="slider" class="px-0 pb-0">
     <v-card outlined flat class="py-8" color="rgba(0,0,0,1)">
-      <v-container class="white--text">
+      <v-container class="white--text ">
         <p class="text-left text-md-h4 text-h5 font-weight-bold">
           Stats and Achievements
           (GAMA Experience in Iran’s EdTech Market)
         </p>
-
-        <v-slide-group center class="stat-sec">
-          <v-slide-item v-for="(item, index) in statList" :key="index">
-            <div class="
-              d-flex
-              justify-space-between
-              align-center
-              flex-wrap
-              stat-holder
-              mt-5
-            ">
-              <div class="
-                d-flex
-                flex-column
-                justify-center
-                align-center
-                px-3
-                stat-item
-              ">
+        <v-row class="stat-sec mx-auto">
+          <v-col cols="2"
+                 v-for="(item, index) in statList"
+                 class="d-flex justify-center align-center stat-holder mt-5">
+                  <div
+                    class="
+                    d-flex
+                    flex-column
+                    justify-center
+                    align-center
+                    stat-item
+                 ">
               <span class="stat-icon d-flex align-center justify-center">
                 <i :class="' icon-g icon icong-' + item.icon"> </i>
               </span>
-                <span class="stat-label white--text">{{ item.label }}</span>
-                <span class="stat-value" :id="'stat' + index + 1">{{ item.counter | numberFormat }} +</span>
-              </div>
-            </div>
-          </v-slide-item>
-        </v-slide-group>
+                    <span class="stat-label white--text">{{ item.label }}</span>
+                    <span class="stat-value" :id="'stat' + index + 1">{{ item.counter | numberFormat }} +</span>
+                  </div>
+          </v-col>
+        </v-row>
       </v-container>
     </v-card>
   </div>

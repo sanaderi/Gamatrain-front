@@ -67,8 +67,8 @@
                       :key="item.id"
                     >
                       <td class="py-3">
-                        <nuxt-link :to="`/exams/${item.id}`" class="font-weight-bold">{{ item.title }}</nuxt-link>
-                        <nuxt-link :to="`/exams/participants/${item.id}`" class="mt-2 d-block">
+                        <nuxt-link :to="`/exam/${item.id}`" class="font-weight-bold">{{ item.title }}</nuxt-link>
+                        <nuxt-link :to="`/exam/participants/${item.id}`" class="mt-2 d-block">
                           <span class="icong-student"></span>
                           Participants: {{ item.participants.total }}
                         </nuxt-link>
@@ -188,7 +188,7 @@ export default {
   layout: "test-maker-layout",
   name: "exams-manage",
   // async asyncData({params,$axios}) {
-  //   const examData=await $axios.$get('/api/v1/exams');
+  //   const examData=await $axios.$get('/api/v1/exam');
   //   return {examData};
   // },
   head() {
@@ -287,7 +287,7 @@ export default {
     getExams() {
       if (!this.all_files_loaded) {
         this.page_loading = true;
-        this.$axios.$get('/api/v1/exams', {
+        this.$axios.$get('/api/v1/exam', {
           params: {
             perpage: 20,
             page: this.page,

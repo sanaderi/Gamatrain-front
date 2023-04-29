@@ -157,7 +157,7 @@ export default {
     } catch (error) {
       if (error.response.status == 400)
         if (error.response.data)
-          redirect(`/exams/result/${error.response.data.data.id}`);
+          redirect(`/exam/result/${error.response.data.data.id}`);
     }
   },
   data() {
@@ -218,11 +218,11 @@ export default {
         }
       )
         .then(response => {
-          this.$router.push(`/exams/result/${response.data.id}`);
+          this.$router.push(`/exam/result/${response.data.id}`);
         }).catch(error => {
         if (error.response.status == 400)
           if (error.response.data)
-            this.$router.push({path:`/exams/result/${error.response.data.data.id}`});
+            this.$router.push({path:`/exam/result/${error.response.data.data.id}`});
       }).finally(() => {
         this.submit_loading = false;
       })

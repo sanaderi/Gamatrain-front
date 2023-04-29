@@ -6,7 +6,7 @@
           <v-col cols="12" class="pl-5">
             <span class="icon icong-qa text-h3 teal--text"></span>
             <span class="text-h4 teal--text">
-            Exams results
+            Participated tests
           </span>
           </v-col>
         </v-row>
@@ -29,25 +29,38 @@
               <v-col cols="12" md="3">
                 <v-autocomplete
                   dense
-                  v-model="filter.grade"
-                  clearable
-                  :items="grade_list"
-                  item-value="id"
+                  :items="state_list"
+                  v-model="filter.state"
                   item-text="title"
-                  label="Grade"
+                  item-value="id"
+                  label="State"
                   outlined
+                  clearable
                 />
               </v-col>
               <v-col cols="12" md="3">
                 <v-autocomplete
                   dense
-                  :items="lesson_list"
-                  item-value="id"
+                  :items="area_list"
+                  v-model="filter.area"
                   item-text="title"
-                  v-model="filter.lesson"
-                  clearable
-                  label="Lesson"
+                  item-value="id"
+                  label="Area"
                   outlined
+                  clearable
+                />
+              </v-col>
+              <v-col cols="12" md="3">
+                <v-autocomplete
+                  dense
+                  :items="school_list"
+                  v-model="filter.school"
+                  item-text="title"
+                  item-value="id"
+                  :error-messages="errors"
+                  label="School"
+                  outlined
+                  clearable
                 />
               </v-col>
             </v-row>
@@ -59,14 +72,14 @@
                   <template v-slot:default>
                     <thead>
                     <tr>
-                      <th class="text-h5">
-                        Title
+                      <th class="text-center text-h5">
+                        Participant
                       </th>
                       <th class="text-center text-h5">
                         Date
                       </th>
                       <th class="text-center text-h5">
-                        Status
+                        Percent
                       </th>
                       <th class="text-center text-h5">
                         Report card
@@ -74,31 +87,27 @@
                     </tr>
                     </thead>
                     <tbody>
-
                     <tr
-                      v-show="exam_list.length>0"
-                      v-for="item in exam_list"
+                      v-show="participants_list.length>0"
+                      v-for="item in participants_list"
                       :key="item.id"
                     >
-                      <td>
-                        {{ item.exam_title }}
+                      <td class="text-center">
+                        {{ item.first_name }} {{ item.last_name }}
                       </td>
                       <td class="text-center">
                         {{ item.subdate }}
                       </td>
-                      <td class="text-center " :class="item.status==1 ? 'green--text' : 'red--text'">
-                        {{ item.status == 1 ? 'Complete' : 'Incomplete' }}
+                      <td class="text-center">
+                        {{ item.result_score }}
                       </td>
                       <td class="text-center">
-                        <nuxt-link v-show="item.status==1" :to="`/exams/result/${item.id}`">
-                          Report card
-                        </nuxt-link>
-                        <nuxt-link v-show="item.status!=1" :to="`/exams/start/${item.id}`">
-                          Continue
+                        <nuxt-link :to="`/exam/result/${item.id}`" class="teal--text">
+                          Show report card
                         </nuxt-link>
                       </td>
                     </tr>
-                    <tr v-show="page_loading===false && exam_list.length===0">
+                    <tr v-show="page_loading===false && participants_list.length===0">
                       <td colspan="4">
                         <p>Oops! no data found</p>
                       </td>
@@ -114,6 +123,7 @@
                         />
                       </td>
                     </tr>
+
                     </tbody>
                   </template>
                 </v-simple-table>
@@ -129,25 +139,28 @@
 <script>
 export default {
   layout: "test-maker-layout",
-  name: "user-exams-results",
+  name: "exams-participant",
   head() {
     return {
-      title: 'Exams results'
+      title: 'Participated tests'
     }
   },
   data() {
     return {
       filter: {
         level: '',
-        grade: '',
-        lesson: '',
+        state: '',
+        area: '',
+        school: '',
       },
 
       level_list: [],
-      grade_list: [],
-      field_list: [],
-      lesson_list: [],
-      exam_list: [],
+
+      state_list: [],
+      area_list: [],
+      school_list: [],
+
+      participants_list: [],
 
       page_loading: false,
       page: 1,
@@ -157,37 +170,65 @@ export default {
   },
   mounted() {
     this.getTypeList('section');
-    this.getExams();
+    this.getTypeList('state')
+
+    this.getParticipants();
     this.scroll();
 
   },
   watch: {
     "filter.level"(val) {
-      this.filter.grade = '';
-      this.filter.lesson = '';
-      if (val)
-        this.getTypeList('base', val);
+      this.school_list = [];
+      this.filter.school='';
+      if (val && this.filter.area)
+        this.getTypeList('school');
 
+      //Reload result
       this.page = 1;
       this.all_files_loaded = false;
-      this.exam_list = [];
-      this.getExams();
+      this.participants_list = [];
+      this.getParticipants();
+      //End reload result
     },
-    "filter.grade"(val) {
-      this.filter.lesson = '';
-      if (val)
-        this.getTypeList('lesson', val);
+    "filter.state"(val) {
+      this.area_list = [];
+      this.filter.area='';
 
+      this.school_list = [];
+      this.filter.school='';
+
+      if (val)
+        this.getTypeList('area', val);
+
+      //Reload result
       this.page = 1;
       this.all_files_loaded = false;
-      this.exam_list = [];
-      this.getExams();
+      this.participants_list = [];
+      this.getParticipants();
+      //End reload result
     },
-    "filter.lesson"(val) {
+    "filter.area"(val) {
+      this.school_list = [];
+      this.filter.school='';
+
+      if (val && this.filter.level)
+        this.getTypeList('school');
+
+      //Reload result
       this.page = 1;
       this.all_files_loaded = false;
-      this.exam_list = [];
-      this.getExams();
+      this.participants_list = [];
+      this.getParticipants();
+      //End reload result
+
+    },
+    "filter.school"(val) {
+      //Reload result
+      this.page = 1;
+      this.all_files_loaded = false;
+      this.participants_list = [];
+      this.getParticipants();
+      //End reload result
     }
   },
   methods: {
@@ -197,10 +238,16 @@ export default {
       }
       if (type === 'base')
         params.section_id = parent;
-      if (type === 'lesson') {
-        params.base_id = parent;
+
+
+      if (type === 'area') {
+        params.state_id = parent;
       }
 
+      if (type === 'school') {
+        params.section_id = this.filter.level;
+        params.area_id = this.filter.area;
+      }
 
       this.$axios.$get('/api/v1/types/list', {
         params
@@ -208,33 +255,36 @@ export default {
         var data = {};
         if (type === 'section') {
           this.level_list = res.data;
-        } else if (type === 'base') {
-          this.grade_list = res.data;
-
-        } else if (type === 'lesson') {
-          this.lesson_list = res.data;
+        } else if (type === 'state') {
+          this.state_list = res.data;
+        } else if (type === 'area') {
+          this.area_list = res.data;
+        } else if (type === 'school') {
+          this.school_list = res.data;
         }
       }).catch(err => {
         this.$toast.error(err);
       })
     },
-    getExams() {
-      if (!this.all_files_loaded) {
+    getParticipants() {
+      if (this.all_files_loaded == false) {
         this.page_loading = true;
-        this.$axios.$get('/api/v1/exams/results',
+        this.$axios.$get(`/api/v1/exams/participants/${this.$route.params.exam_id}`,
           {
             params: {
               perpage: 20,
               page: this.page,
               section: this.filter.level,
-              base: this.filter.grade,
-              lesson: this.filter.lesson
+              state: this.filter.state,
+              area: this.filter.area,
+              school: this.filter.school
             }
           }).then(response => {
-          this.exam_list.push(...response.data.list);
+          this.participants_list.push(...response.data.list);
 
-          if (response.data.list.length === 0)//For terminate auto load request
+          if (response.data.list.length === 0) {//For terminate auto load request
             this.all_files_loaded = true;
+          }
         }).catch(err => {
           console.log(err);
         }).finally(() => {

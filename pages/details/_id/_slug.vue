@@ -305,7 +305,7 @@ export default {
   },
   // async asyncData({params, $axios}) {
   //   // This could also be an action dispatch
-  //   const contentData =await $axios.$get(`/api/v1/exams/${params.id}`);
+  //   const contentData =await $axios.$get(`/api/v1/exam/${params.id}`);
   //   return {contentData};
   // },
 

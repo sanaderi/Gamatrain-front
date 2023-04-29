@@ -247,8 +247,8 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            {title: "9th coordinated exams", link: ""},
-            {title: "6th coordinated exams", link: ""},
+            {title: "9th coordinated exam", link: ""},
+            {title: "6th coordinated exam", link: ""},
             {title: "12th Coordinated Exams", link: ""},
           ],
         }
