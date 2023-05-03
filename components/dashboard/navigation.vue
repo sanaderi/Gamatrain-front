@@ -54,7 +54,7 @@ export default {
     return {
       items: [
         {
-          title: 'Add',
+          title: 'Contents',
           icon: 'mdi-plus-circle-outline',
           machine_name: 'add_content',
           subMenuList: [
@@ -64,11 +64,11 @@ export default {
           ]
         },
         {
-          title: 'Online exam',
+          title: 'Online Exam',
           icon: 'mdi-laptop',
           subMenuList: [
-            {title: "Test result", link: "/exam/results", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
-            {title: "Test maker", link: "/test-maker", icon: 'icong-test', icon_type: 'custom'},
+            {title: "Results", link: "/exam/results", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
+            {title: "Exam maker", link: "/test-maker", icon: 'icong-test', icon_type: 'custom'},
           ]
         },
         {
@@ -76,7 +76,7 @@ export default {
           icon: 'mdi-credit-card-outline',
           subMenuList: [
             {title: "Charge wallet", link: "/user/charge-wallet"},
-            {title: "Participation link", link: "/user/participation-link"},
+            {title: "Payments", link: "/user/payments"},
             {title: "Payment report", link: "/user/payment-report"},
           ],
 

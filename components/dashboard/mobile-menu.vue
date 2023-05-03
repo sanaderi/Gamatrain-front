@@ -54,7 +54,7 @@ export default {
       active_tab: 0,
       items: [
         {
-          title: 'Add',
+          title: 'Contents',
           icon: 'mdi-plus-circle-outline',
           link: '',
           machine_name: 'add_content',
@@ -63,15 +63,14 @@ export default {
             {title: "Multimedia", link: "/user/multimedia", icon: 'icong-learnfiles', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
             {title: "Q & A", link: "/user/question", icon: 'icong-qa', icon_type: 'custom'}
           ]
-
         },
         {
-          title: "Online exam's",
+          title: "Online Exam",
           icon: 'mdi-laptop',
           link: '/test-maker',
           subMenuList: [
-            {title: "Test result", link: "/exam/results", icon: 'mdi-chart-timeline', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
-            {title: "Test maker", link: "/test-maker", icon: 'icong-azmoon', icon_type: 'custom'},
+            {title: "Results", link: "/exam/results", icon: 'mdi-chart-timeline', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
+            {title: "Exam maker", link: "/test-maker", icon: 'icong-azmoon', icon_type: 'custom'},
           ]
         },
         {
@@ -79,7 +78,7 @@ export default {
           icon: 'mdi-credit-card-outline',
           subMenuList: [
             {title: "Charge wallet", icon: 'mdi-credit-card-plus-outline', link: "/user/charge-wallet"},
-            {title: "Participation link", icon: 'mdi-link', link: "/user/participation-link"},
+            {title: "Payments", icon: 'mdi-link', link: "/user/payments"},
             {title: "Payment report", icon: 'mdi-chart-line', link: "/user/payment-report"},
           ],
         },

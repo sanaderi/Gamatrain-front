@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!--Mobile filter-->
     <v-row justify="center" class="d-block d-md-none">
       <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition ">

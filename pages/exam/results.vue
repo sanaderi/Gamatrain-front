@@ -221,7 +221,7 @@ export default {
     getExams() {
       if (!this.all_files_loaded) {
         this.page_loading = true;
-        this.$axios.$get('/api/v1/exam/results',
+        this.$axios.$get('/api/v1/exams/results',
           {
             params: {
               perpage: 20,

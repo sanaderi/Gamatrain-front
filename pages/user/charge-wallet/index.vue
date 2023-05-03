@@ -6,7 +6,7 @@
             <v-icon color="teal">
               mdi-credit-card-plus-outline
             </v-icon>
-           Wallet charge
+           Charge Wallet
           </span>
       </v-col>
       <v-col cols="6" class="text-right">
