@@ -6,7 +6,7 @@
             <v-icon color="teal">
               mdi-credit-card-plus-outline
             </v-icon>
-           Charge Wallet
+           Top Up Wallet
           </span>
       </v-col>
       <v-col cols="6" class="text-right">
@@ -110,7 +110,7 @@ export default {
   name: "charge-wallet",
   head() {
     return {
-      title: 'Charge wallet',
+      title: 'Top Up Wallet',
     }
   },
   data() {

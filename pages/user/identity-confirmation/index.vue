@@ -6,7 +6,7 @@
             <v-icon color="teal">
               mdi-card-account-details
             </v-icon>
-           Identity confirmation
+           Confirm Identity
           </span>
       </v-col>
     </v-row>
@@ -83,7 +83,7 @@ export default {
   name: "identity-confirmation",
   head() {
     return {
-      title: 'Charge wallet',
+      title: 'Confirm Identity',
     }
   },
   components: {

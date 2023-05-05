@@ -4,6 +4,7 @@
     class="grade-search"
     filled
     height="40"
+    disabled
     outlined
     dense
     label="Search..."

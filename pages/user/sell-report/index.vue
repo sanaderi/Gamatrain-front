@@ -7,7 +7,7 @@
             <v-icon color="teal">
               mdi-chart-line
             </v-icon>
-            Payment report
+            Sell Report
           </span>
         </v-col>
       </v-row>

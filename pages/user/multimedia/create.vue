@@ -59,9 +59,9 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="12" md="12" v-if="topic_list.length">
+                    <v-col cols="12" md="12">
                       <validation-provider v-slot="{errors}" name="topic" rules="required">
-                        <topic-selector :topic-list="topic_list" @selectTopic="selectTopic"/>
+                        <topic-selector ref="topic-selector" :topic-list="topic_list" @selectTopic="selectTopic"/>
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
@@ -353,11 +353,14 @@ export default {
         this.getTypeList('lesson', val);
     },
     "form.lesson"(val) {
-      if (val)
+      if (val){
         this.getTypeList('topic', val);
+        this.$refs["topic-selector"].lesson_selected=true;
+      }
       else {
         this.form.topic = [];
         this.topic_list = [];
+        this.$refs["topic-selector"].lesson_selected=false;
       }
     },
 

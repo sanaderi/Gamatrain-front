@@ -6,7 +6,7 @@
             <v-icon color="teal">
               mdi-account-cog-outline
             </v-icon>
-           Setting
+           Settings
           </span>
       </v-col>
 
@@ -44,7 +44,7 @@ export default {
   name: "user-setting",
   head() {
     return {
-      title: 'Setting',
+      title: 'Settings',
     }
   },
   data() {

@@ -1,6 +1,6 @@
 <template>
   <v-card min-height="680" :class="'feed-card ' + feed.class">
-    <v-list>
+    <v-list style="width: 100%!important;">
       <nuxt-link :to="feed.more_link">
         <v-subheader
           v-if="feed.header"
@@ -22,7 +22,7 @@
         :key="index"
         class="feed_item  align-self-start"
       >
-        <div class="pa-2 d-inline-block ">
+        <v-card width="100%" flat class="d-inline-block ">
           <v-list-item-content  class="pt-0 pr-1">
             <nuxt-link v-html="item.title" :to="`${feed.main_link}/${item.id}`" class="pb-2 feed-title"/>
             <v-list-item-subtitle
@@ -47,7 +47,7 @@
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-divider></v-divider>
-        </div>
+        </v-card>
       </v-list-item>
       <!-- <v-divider></v-divider> -->
       <div

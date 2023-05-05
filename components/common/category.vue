@@ -4,6 +4,9 @@
     <v-container class="d-sm-flex d-none py-0 ">
       <v-row class="justify-center align-center category box mt-0 pb-0">
         <v-col
+          cols="1"
+          sm="2"
+          md="2"
           v-for="(item, category) in items"
           :key="category"
           :class="item.class"
@@ -28,6 +31,8 @@
       </v-row>
     </v-container>
     <!--   End: category    -->
+
+
     <!--   Start: category  main-container Mobile -->
     <v-container class="py-0 d-sm-none d-flex">
       <v-row class="justify-center align-center category box">
@@ -118,7 +123,7 @@ export default {
       { class: "test", text: "Paper", icon: "test",link:"/search?type=test" },
       { class: "content", text: "Multimedia", icon: "learnfiles" ,link:"/search?type=learnfiles" },
       { class: "faq", text: "Q & A", icon: "qa",link:"/search?type=question" },
-      { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/search?type=dars" },
+      { class: "textbook", text: "Tutorial", icon: "blog" ,link:"/search?type=dars" },
       // { class: "school", text: "School", icon: "school" ,link:"/search?type=school",status:'disabled' },
       // { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor",status:'disabled' },
     ],

@@ -343,7 +343,7 @@ export default {
   },
   head() {
     return {
-      title: "Edit profile"
+      title: "Edit Profile"
     }
   },
   components: {

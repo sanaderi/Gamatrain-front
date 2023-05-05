@@ -64,7 +64,8 @@
                     </v-col>
                     <v-col cols="12" md="12" v-if="topic_list.length">
                       <validation-provider v-slot="{errors}" name="topic" rules="required">
-                        <topic-selector :topic-list="topic_list"
+                        <topic-selector ref="topic-selector"
+                                        :topic-list="topic_list"
                                         :selectedTopics="form.topics"
                                         @selectTopic="selectTopic"/>
                       </validation-provider>
@@ -569,18 +570,22 @@ export default {
         this.topic_list = [];
 
         this.getTypeList('base', optionVal);
-
-
+        this.$refs["topic-selector"].lesson_selected=false;
       } else if (optionName == 'base') {
         this.form.lesson = '';
         if (optionVal)
           this.getTypeList('lesson', optionVal);
+
+        this.$refs["topic-selector"].lesson_selected=false;
       } else if (optionName == 'lesson') {
-        if (optionVal)
+        if (optionVal){
           this.getTypeList('topic', optionVal);
+          this.$refs["topic-selector"].lesson_selected=true;
+        }
         else {
           this.form.topic = [];
           this.topic_list = [];
+          this.$refs["topic-selector"].lesson_selected=false;
         }
       }
     },

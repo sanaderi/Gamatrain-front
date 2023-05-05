@@ -79,7 +79,7 @@
                   <span v-else>
                     Your wallet charge is ${{$auth.user.credit}}
                   </span>
-                  <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/credit?">(Charge wallet)</nuxt-link>
+                  <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)</nuxt-link>
                 </div>
                 <div class="font-weight-bold answer">
                   <span class="mdi mdi-checkbox-marked icon"></span>
@@ -313,7 +313,7 @@
               </p>
               <span v-else>
                 Your wallet charge is ${{$auth.user.credit}}
-                <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/credit?">(Charge wallet)</nuxt-link>
+                <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)</nuxt-link>
               </span>
             </div>
           </v-col>

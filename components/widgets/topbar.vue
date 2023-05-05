@@ -138,12 +138,12 @@ export default {
           link: '/user/ticket'
         },
         {
-          title: 'Edit profile',
+          title: 'Edit Profile',
           icon: 'mdi-account-outline',
           link: '/user/profile'
         },
         {
-          title: 'Edit pass',
+          title: 'Change Password',
           icon: 'mdi-key',
           link: '/user/edit-pass'
         },
