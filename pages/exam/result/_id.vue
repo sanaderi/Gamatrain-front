@@ -331,7 +331,6 @@ import PieChart from "@/components/chart/PieChart";
 export default {
   name: "exam-result",
   components: {PieChart},
-  layout: "test-maker-layout",
   head() {
     return {
       title: 'Online exam result',

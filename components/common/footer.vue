@@ -1,6 +1,5 @@
 <template>
-    <v-container fluid >
-      <v-container class="footer-holder mb-8">
+    <v-container fluid class="footer-holder mb-8">
         <div class="footer-head d-flex justify-space-between align-center">
           <v-list-item class="footer-item">
             <nuxt-link
@@ -111,7 +110,6 @@
             </v-list>
           </v-col>
         </v-row>
-      </v-container>
     </v-container>
 <!--    <div class="footer-bar">-->
 <!--      <v-row>-->

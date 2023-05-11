@@ -1,26 +1,28 @@
 <template>
   <v-container class="test-maker">
-    <v-card>
+    <v-card id="participating-exam-header">
       <v-card-text>
         <v-row class="text-center">
           <v-col cols="4">
             <p>Remaining time:
               <v-chip label color="teal" dark>
-                {{ this.hhmmss(remainTime) }}
+                {{ this.hhmmss(examStats.remainTime) }}
               </v-chip>
             </p>
           </v-col>
           <v-col cols="4">
-            <p>Unanswered questions:
+            <a :href="nextNotAnswer ? `#item-${nextNotAnswer}` : ''"
+            @click="updateNextNotAnswer()"
+            >Unanswered questions:
               <v-chip label color="teal" dark>
                 {{ contentData.tests.length - Object.keys(answerData).length }}
               </v-chip>
-            </p>
+            </a>
           </v-col>
           <v-col cols="4">
             <a :href="nextPin ? `#item-${nextPin}` : ''" @click="updateNextPin()">Pined question:
               <v-chip label color="teal" dark>
-                {{ pinQuestionsArr.length }}
+                {{ examStats.pinQuestionsArr.length }}
               </v-chip>
             </a>
           </v-col>
@@ -29,13 +31,16 @@
     </v-card>
 
 
-    <v-card class="test-list overflow-y-auto" height="80vh"
-
-    >
+    <v-card class="test-list mb-4" >
+      <v-card-title class="text-h4 font-weight-bold py-6">
+        {{contentData.exam.title}}
+      </v-card-title>
       <v-card-text>
+        <v-divider class="mb-4"/>
         <v-row>
           <v-col
             :id="`item-${item.id}`"
+            class="bookmark-target"
             cols="12" v-show="contentData.tests.length>0"
             v-for="item in contentData.tests"
           >
@@ -44,7 +49,7 @@
                  v-html="item.question"/>
             <img :src="item.q_file"/>
 
-            <v-radio-group v-model="answerData[item.id]">
+            <v-radio-group  @change="updateNotAnswerData(item.id)" v-model="answerData[item.id]">
               <v-radio value="1">
                 <template slot="label">
                   <div class="answer">
@@ -93,7 +98,7 @@
                     mdi-eraser
                   </v-icon>
                 </v-btn>
-                <v-btn icon fab :color="pinQuestionsArr.find(x=>x===item.id) ? 'teal' : ''"
+                <v-btn icon fab :color="examStats.pinQuestionsArr.find(x=>x===item.id) ? 'teal' : ''"
                        x-small @click="pinQuestion(item.id)">
                   <v-icon>
                     mdi-pin
@@ -129,11 +134,8 @@
 </template>
 
 <script>
-import error from "@/layouts/error";
-
 export default {
   name: "exam-start",
-  layout: "test-maker-layout",
   head() {
     return {
       title: 'Create online exam',
@@ -144,7 +146,7 @@ export default {
   },
   async asyncData({params, redirect, $axios}) {
     try {
-// This could also be an action dispatch
+      // This could also be an action dispatch
       const content = await $axios.$get(`/api/v1/exams/start/${params.id}`)
       var contentData = [];
 
@@ -166,20 +168,31 @@ export default {
       submit_loading: false,
       answerData: {},
       answerForm: [],
-      remainTime: 0,
-      pinQuestionsArr: [],
+      notAnsweredArr: [],
       nextPin: '',
+      nextNotAnswer: '',
+
+      examStats:{
+        id:'',
+        remainTime: 0,
+        pinQuestionsArr: [],
+      }
     }
-  }
-  ,
+  },
   mounted() {
-    this.remainTime = this.contentData.exam.azmoon_time * 60;
+    this.examStats.id = this.contentData.exam.id;
+    this.examStats.remainTime = this.contentData.exam.azmoon_time * 60;
     this.countDownTimer();
+    this.initNotAnswered();
     this.renderMathJax();
 
-  }
-  ,
+  },
   methods: {
+    initNotAnswered(){
+      for(var i in this.contentData.tests){
+        this.notAnsweredArr.push(this.contentData.tests[i].id);
+      }
+    },
     renderMathJax() {
       if (window.MathJax) {
         window.MathJax.Hub.Config({
@@ -201,8 +214,7 @@ export default {
 
 
       }
-    }
-    ,
+    },
     endExam() {
       this.submit_loading = true;
       const querystring = require('querystring');
@@ -222,12 +234,11 @@ export default {
         }).catch(error => {
         if (error.response.status == 400)
           if (error.response.data)
-            this.$router.push({path:`/exam/result/${error.response.data.data.id}`});
+            this.$router.push({path: `/exam/result/${error.response.data.data.id}`});
       }).finally(() => {
         this.submit_loading = false;
       })
-    }
-    ,
+    },
 
 
     //Convert form data from multipart to urlencode
@@ -240,26 +251,24 @@ export default {
         }
       }
       return s;
-    }
-    ,
+    },
 
     encode(s) {
       return encodeURIComponent(s).replace(/%20/g, '+');
-    }
-    ,
+    },
 
 
     countDownTimer() {
-      if (this.remainTime > 0) {
+      if (this.examStats.remainTime > 0) {
         setTimeout(() => {
-          this.remainTime -= 1
-          this.countDownTimer()
+          this.examStats.remainTime -= 1;
+          this.$store.commit('user/setExamParticipationData',this.examStats)
+          this.countDownTimer();
         }, 1000)
       } else {
         this.endExam();
       }
-    }
-    ,
+    },
 
 
     //Convert seconds to readable HH:ii:ss format
@@ -272,35 +281,48 @@ export default {
         return `${this.pad(hours)}:${this.pad(minutes)}:${this.pad(secs)}`;
       else
         return `${this.pad(minutes)}:${this.pad(secs)}`;
-    }
-    ,
+    },
+
     pad(num) {
       return ("0" + num).slice(-2);
-    }
-    ,
+    },
     //End convert seconds to readable HH:ii:ss format
 
 
     pinQuestion(question_id) {
-      this.pinQuestionsArr.push(question_id);
+      this.examStats.pinQuestionsArr.push(question_id);
 
       //Init next pin for first time
-      if (this.pinQuestionsArr.length === 1)
+      if (this.examStats.pinQuestionsArr.length === 1)
         this.nextPin = question_id;
-    }
-    ,
+    },
     updateNextPin() {
-      if (this.pinQuestionsArr.length) {
-        var index = this.pinQuestionsArr.findIndex(x => x === this.nextPin);
-        if ((index + 1) === this.pinQuestionsArr.length)
-          this.nextPin = this.pinQuestionsArr[0];
+      if (this.examStats.pinQuestionsArr.length) {
+        var index = this.examStats.pinQuestionsArr.findIndex(x => x === this.nextPin);
+        if ((index + 1) === this.examStats.pinQuestionsArr.length)
+          this.nextPin = this.examStats.pinQuestionsArr[0];
         else
-          this.nextPin = this.pinQuestionsArr[index + 1];
+          this.nextPin = this.examStats.pinQuestionsArr[index + 1];
       }
-    }
-    ,
+    },
+    updateNextNotAnswer() {
+      if (this.notAnsweredArr.length) {
+        var index = this.notAnsweredArr.findIndex(x => x === this.nextNotAnswer);
+        if ((index + 1) === this.notAnsweredArr.length)
+          this.nextNotAnswer = this.notAnsweredArr[0];
+        else
+          this.nextNotAnswer = this.notAnsweredArr[index + 1];
+      }
+    },
     eraseTest(question_id) {
-      this.$delete(this.answerData,question_id);
+      this.$delete(this.answerData, question_id);
+      this.notAnsweredArr.push(question_id);
+    },
+
+    updateNotAnswerData(item_id){
+      var index=this.notAnsweredArr.findIndex(x=>x==item_id);
+      if (index!==-1)
+        this.notAnsweredArr.splice(index,1);
     }
   }
 
@@ -308,5 +330,16 @@ export default {
 </script>
 
 <style scoped>
+#participating-exam-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10
+}
 
+.bookmark-target{
+  padding-top: 80px;
+  margin-top: -80px;
+}
 </style>

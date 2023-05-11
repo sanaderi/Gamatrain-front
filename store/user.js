@@ -11,10 +11,14 @@ export const state = () => ({
   examId: '',
   examCode: '',
   previewTestList: [],
+
+  examParticipationData: []
 })
 
 // contains your actions
-export const actions = {}
+export const actions = {
+
+}
 
 // contains your mutations
 export const mutations = {
@@ -36,7 +40,7 @@ export const mutations = {
     state.examCode = examCode;
   },
   setPreviewTestList(state, previewTestList) {
-    state.previewTestList=previewTestList;
+    state.previewTestList = previewTestList;
   },
   addPreviewTestList(state, previewTestList) {
     state.previewTestList.push(previewTestList);
@@ -45,6 +49,20 @@ export const mutations = {
     var previewIndex = state.previewTestList
       .findIndex(x => x.id == id);
     state.previewTestList.splice(previewIndex, 1);
+  },
+
+
+  //Save user participation exam data
+  setExamParticipationData(state, examStats) {
+    var index = state.examParticipationData.findIndex(x => x.id == examStats.id);
+    if (index === -1)
+      state.examParticipationData.push(examStats);
+    else{
+      state.examParticipationData[index].remainTime=examStats.remainTime;
+    }
+  },
+  updateRemainTime({ commit }, { index, remainTime }) {
+    commit('setRemainTime', { index, remainTime });
   }
 }
 
@@ -73,5 +91,10 @@ export const getters = {
   },
   getPreviewTestListLength(state) {
     return state.previewTestList.length;
+  },
+
+  //Get user participation exam data
+  getExamStatsData(state) {
+    return state.examParticipationData;
   }
 }

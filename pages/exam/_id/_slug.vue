@@ -208,8 +208,7 @@
                             <v-row>
                               <v-col cols="12">
                                 <v-btn outlined block @click="copyUrl">
-                                  <i class="fa-solid fa-copy mr-1 icon"></i>
-                                  &nbsp;
+                                  <i class="fa-solid fa-copy mr-1 icon"></i>&nbsp;
                                   {{ copy_btn }}
                                 </v-btn>
                               </v-col>
@@ -264,15 +263,19 @@
                     <v-btn v-show="!$auth.loggedIn"
                            @click="openAuthDialog('login')"
                            v-if="key==='participation'" block color="success">
-                      Start | {{item.price>0 ? '$'+item.price : 'Free'}}
+                        Start | {{item.price>0 ? '$'+item.price : 'Free'}}
                     </v-btn>
 
                     <!--For authenticated user-->
                     <v-btn v-show="$auth.loggedIn" :to="`/exam/start/${contentData.id}`"
                            v-if="key==='participation'"
-
                            block color="success">
-                      Start | {{item.price>0 ? '$'+item.price : 'Free'}}
+                      <span v-if="contentData.examUserData.status==1">
+                        Show result
+                      </span>
+                      <span v-else>
+                        Start | {{item.price>0 ? '$'+item.price : 'Free'}}
+                      </span>
                     </v-btn>
 
                     <v-btn v-else-if="key==='word'" block color="primary">
@@ -316,7 +319,12 @@
               Start | {{item.price>0 ? '$'+item.price : 'Free'}}
             </v-btn>
             <v-btn v-show="$auth.loggedIn" :to="`/exam/start/${contentData.id}`"  v-if="key==='participation'" block color="success">
-              Start | {{item.price>0 ? '$'+item.price : 'Free'}}
+              <span v-if="contentData.examUserData.status==1">
+                 Show result
+              </span>
+              <span v-else>
+                 Start | {{item.price>0 ? '$'+item.price : 'Free'}}
+              </span>
             </v-btn>
             <v-btn v-else-if="key==='word'" block color="primary">
               Download WORD file | {{item.price>0 ? '$'+item.price : 'Free'}}
