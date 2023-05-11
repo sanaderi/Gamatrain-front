@@ -1446,7 +1446,7 @@ export default {
 
       //End arrange to form data
 
-      this.$axios.$post('/api/v1/exam',
+      this.$axios.$post('/api/v1/exams',
         this.urlencodeFormData(formData),
         {
           headers: {

@@ -188,7 +188,7 @@ export default {
   layout: "test-maker-layout",
   name: "exams-manage",
   // async asyncData({params,$axios}) {
-  //   const examData=await $axios.$get('/api/v1/exam');
+  //   const examData=await $axios.$get('/api/v1/exams');
   //   return {examData};
   // },
   head() {
@@ -287,7 +287,7 @@ export default {
     getExams() {
       if (!this.all_files_loaded) {
         this.page_loading = true;
-        this.$axios.$get('/api/v1/exam', {
+        this.$axios.$get('/api/v1/exams', {
           params: {
             perpage: 20,
             page: this.page,

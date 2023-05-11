@@ -115,7 +115,7 @@ export default {
   layout: "dashboard_layout",
   name: "participation-manage",
   // async asyncData({params,$axios}) {
-  //   const examData=await $axios.$get('/api/v1/exam');
+  //   const examData=await $axios.$get('/api/v1/exams');
   //   return {examData};
   // },
   head(){
