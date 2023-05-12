@@ -83,7 +83,8 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/toast',
     '@nuxtjs/auth-next',
-    '@nuxtjs/markdownit'
+    '@nuxtjs/markdownit',
+    'cookie-universal-nuxt'
   ],
 
   axios: {

@@ -138,7 +138,7 @@ export default {
   name: "exam-start",
   head() {
     return {
-      title: 'Create online exam',
+      title: 'Start online exam',
       script: [
         {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
       ],
@@ -162,6 +162,9 @@ export default {
           redirect(`/exam/result/${error.response.data.data.id}`);
     }
   },
+  beforeDestroy() {
+    this.$cookies.set('examParticipationData',this.examStats);
+  },
   data() {
     return {
       contentData: [],
@@ -180,18 +183,42 @@ export default {
     }
   },
   mounted() {
-    this.examStats.id = this.contentData.exam.id;
-    this.examStats.remainTime = this.contentData.exam.azmoon_time * 60;
+    console.log(this.$cookies.get('examParticipationData'));
+    // this.examStats.id = this.contentData.exam.id;
+    // const newData=[...this.$store.state.user.examParticipationData]
+    // var index = newData.findIndex(x => x.id == this.examStats.id);
+    // if (index !== -1) {
+    //   this.answerData = this.$store.state.user.examParticipationData[index].answerData;
+    //   this.examStats.remainTime = this.$store.state.user.examParticipationData[index].remainTime;
+    //   this.nextNotAnswer = this.$store.state.user.examParticipationData[index].nextNotAnswer;
+    //   this.nextPin = this.$store.state.user.examParticipationData[index].nextPin;
+    //   if (this.$store.state.user.examParticipationData[index].notAnsweredArr.length == 0 || this.$store.state.user.examParticipationData[index].notAnsweredArr == undefined)
+    //     this.initNotAnswered();
+    //   else
+    //     this.notAnsweredArr = this.$store.state.user.examParticipationData[index].notAnsweredArr;
+    //
+    //   this.examStats.pinQuestionsArr = this.$store.state.user.examParticipationData[index].pinQuestionsArr != undefined ? this.$store.state.user.examParticipationData[index].pinQuestionsArr : [];
+    // } else {
+      this.examStats.remainTime = this.contentData.exam.azmoon_time * 60;
+      this.initNotAnswered();
+    // }
+
     this.countDownTimer();
-    this.initNotAnswered();
     this.renderMathJax();
 
   },
   methods: {
+    updateAnswerData() {
+      const payload = {
+        index: 3,
+        answerData: this.answerData
+      };
+      this.$store.commit('updateAnswerData', payload);
+    },
     initNotAnswered(){
-      for(var i in this.contentData.tests){
-        this.notAnsweredArr.push(this.contentData.tests[i].id);
-      }
+      // for(var i in this.contentData.tests){
+      //   this.notAnsweredArr.push(this.contentData.tests[i].id);
+      // }
     },
     renderMathJax() {
       if (window.MathJax) {
@@ -318,11 +345,11 @@ export default {
       this.$delete(this.answerData, question_id);
       this.notAnsweredArr.push(question_id);
     },
-
+    //
     updateNotAnswerData(item_id){
-      var index=this.notAnsweredArr.findIndex(x=>x==item_id);
-      if (index!==-1)
-        this.notAnsweredArr.splice(index,1);
+    //   var index=this.notAnsweredArr.findIndex(x=>x==item_id);
+    //   if (index!==-1)
+    //     this.notAnsweredArr.splice(index,1);
     }
   }
 
