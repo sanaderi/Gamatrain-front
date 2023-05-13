@@ -4,7 +4,7 @@
       <v-col cols="6">
         <span class="icon icong-azmoon text-h3  teal--text"></span>
         <span class="text-h4 teal--text">
-            Create online exam
+            New Exam
         </span>
       </v-col>
       <v-col cols="6" id="tool-box" class="text-right">
@@ -1064,7 +1064,7 @@ export default {
   name: "test-maker",
   head() {
     return {
-      title: 'Create online exam',
+      title: 'New Exam',
       script: [
         {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`, defer: true}
       ],

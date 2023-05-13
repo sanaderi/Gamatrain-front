@@ -8,7 +8,7 @@
               <v-icon color="teal" large>
                 mdi-clipboard-list-outline
               </v-icon>
-              My tests
+              My Exams
           </span>
           </v-col>
         </v-row>
@@ -193,7 +193,7 @@ export default {
   // },
   head() {
     return {
-      title: 'My tests'
+      title: 'My Exams'
     }
   },
   data() {

@@ -100,6 +100,7 @@
             </v-col>
           </v-row>
 
+
           <v-row>
             <v-col cols="12" md="4">
               <v-simple-table class="exams_table">
@@ -124,7 +125,10 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr v-for="(item,key) in contentData.result">
+                  <tr
+                    v-for="(item,key) in contentData.result"
+                    @click="questionDetails(item.id)"
+                  >
                     <td>{{ key + 1 }}</td>
                     <td class="text-center">
                       <i v-if="item.true_answer==1 && item.user_answer==1"
@@ -322,6 +326,32 @@
     </v-card>
 
 
+    <v-dialog
+      v-model="dialog.questionDetails"
+      max-width="290"
+    >
+      <v-card>
+        <v-card-title class="text-h5">
+          sss
+        </v-card-title>
+
+        <v-card-text>
+          <p class="text-h6">
+            ddddddddddddddddd
+          </p>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            text
+            @click="dialog.questionDetails = false"
+          >
+            No
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -364,14 +394,16 @@ export default {
     return {
       contentData: [],
       chartData: {},
-      download_loading: false
+      download_loading: false,
+      dialog:{
+        questionDetails:false
+      }
     }
   },
   mounted() {
 
   },
   methods: {
-
     //Download file
     startDownload() {
       this.download_loading = true;
@@ -391,8 +423,14 @@ export default {
       }).finally(() => {
         this.download_loading = false;
       })
-    }
+    },
     //End download file
+
+    //Show question details
+    questionDetails(id){
+      this.dialog.questionDetails=true;
+    }
+    //End show question details
   }
 
 }

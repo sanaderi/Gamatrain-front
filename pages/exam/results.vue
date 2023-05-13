@@ -6,7 +6,7 @@
           <v-col cols="12" class="pl-5">
             <span class="icon icong-qa text-h3 teal--text"></span>
             <span class="text-h4 teal--text">
-            Exams results
+            Results
           </span>
           </v-col>
         </v-row>
@@ -132,7 +132,7 @@ export default {
   name: "user-exams-results",
   head() {
     return {
-      title: 'Exams results'
+      title: 'Results'
     }
   },
   data() {

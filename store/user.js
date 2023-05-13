@@ -12,9 +12,6 @@ export const state = () => ({
   examCode: '',
   previewTestList: [],
 
-  //Exam room
-  examParticipationData: [],
-  //End exam room
 })
 
 // contains your actions
@@ -54,31 +51,6 @@ export const mutations = {
   },
 
 
-  //Save user participation exam data
-  setExamParticipationData(state, examStats) {
-    var index = state.examParticipationData.findIndex(x => x.id == examStats.id);
-    if (index === -1)
-      state.examParticipationData.push(examStats);
-    else{
-      state.examParticipationData[index].remainTime=examStats.remainTime;
-      state.examParticipationData[index].nextPin=examStats.nextPin;
-      state.examParticipationData[index].nextNotAnswer=examStats.nextNotAnswer;
-    }
-  },
-  pinQuestion(state, {questionId,id}) {
-    var index = state.examParticipationData.findIndex(x => x.id == id);
-    if (index !== -1)
-      state.examParticipationData[index].pinQuestionsArr.push(questionId);
-  },
-  selectQuestion(state, {val,id}) {
-    const index = state.examParticipationData.findIndex(x => x.id == id);
-    if (index !== -1)
-      state.examParticipationData[index].answerData=val;
-  },
-
-  updateAnswerData(state, payload) {
-    state.user.examParticipationData[payload.index].answerData = payload.answerData;
-  }
 
 }
 

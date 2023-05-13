@@ -11,16 +11,17 @@
             </p>
           </v-col>
           <v-col cols="4">
-            <a :href="nextNotAnswer ? `#item-${nextNotAnswer}` : ''"
-            @click="updateNextNotAnswer()"
+            <a :href="examStats.nextNotAnswer ? `#item-${examStats.nextNotAnswer}` : ''"
+               @click="updateNextNotAnswer()"
             >Unanswered questions:
               <v-chip label color="teal" dark>
-                {{ contentData.tests.length - Object.keys(answerData).length }}
+                {{ contentData.tests.length - Object.keys(examStats.answerData).length }}
               </v-chip>
             </a>
           </v-col>
           <v-col cols="4">
-            <a :href="nextPin ? `#item-${nextPin}` : ''" @click="updateNextPin()">Pined question:
+            <a :href="examStats.nextPin ? `#item-${examStats.nextPin}` : ''"
+               @click="updateNextPin()">Pined question:
               <v-chip label color="teal" dark>
                 {{ examStats.pinQuestionsArr.length }}
               </v-chip>
@@ -31,9 +32,9 @@
     </v-card>
 
 
-    <v-card class="test-list mb-4" >
+    <v-card class="test-list mb-4">
       <v-card-title class="text-h4 font-weight-bold py-6">
-        {{contentData.exam.title}}
+        {{ contentData.exam.title }}
       </v-card-title>
       <v-card-text>
         <v-divider class="mb-4"/>
@@ -49,7 +50,7 @@
                  v-html="item.question"/>
             <img :src="item.q_file"/>
 
-            <v-radio-group  @change="updateNotAnswerData(item.id)" v-model="answerData[item.id]">
+            <v-radio-group @change="updateNotAnswerData(item.id)" v-model="examStats.answerData[item.id]">
               <v-radio value="1">
                 <template slot="label">
                   <div class="answer">
@@ -163,63 +164,78 @@ export default {
     }
   },
   beforeDestroy() {
-    this.$cookies.set('examParticipationData',this.examStats);
+    this.updateLocalStorage();
   },
   data() {
     return {
       contentData: [],
       submit_loading: false,
-      answerData: {},
       answerForm: [],
-      notAnsweredArr: [],
-      nextPin: '',
-      nextNotAnswer: '',
 
-      examStats:{
-        id:'',
+      allExamStats: [],
+      examStats: {
+        id: '',
         remainTime: 0,
         pinQuestionsArr: [],
+        notAnsweredArr: [],
+        answerData: {},
+        nextPin: '',
+        nextNotAnswer: '',
       }
     }
   },
   mounted() {
-    console.log(this.$cookies.get('examParticipationData'));
-    // this.examStats.id = this.contentData.exam.id;
-    // const newData=[...this.$store.state.user.examParticipationData]
-    // var index = newData.findIndex(x => x.id == this.examStats.id);
-    // if (index !== -1) {
-    //   this.answerData = this.$store.state.user.examParticipationData[index].answerData;
-    //   this.examStats.remainTime = this.$store.state.user.examParticipationData[index].remainTime;
-    //   this.nextNotAnswer = this.$store.state.user.examParticipationData[index].nextNotAnswer;
-    //   this.nextPin = this.$store.state.user.examParticipationData[index].nextPin;
-    //   if (this.$store.state.user.examParticipationData[index].notAnsweredArr.length == 0 || this.$store.state.user.examParticipationData[index].notAnsweredArr == undefined)
-    //     this.initNotAnswered();
-    //   else
-    //     this.notAnsweredArr = this.$store.state.user.examParticipationData[index].notAnsweredArr;
-    //
-    //   this.examStats.pinQuestionsArr = this.$store.state.user.examParticipationData[index].pinQuestionsArr != undefined ? this.$store.state.user.examParticipationData[index].pinQuestionsArr : [];
-    // } else {
+    this.allExamStats = this.$cookies.get('allExamStats');
+    this.examStats.id = this.contentData.exam.id;
+    console.log(this.allExamStats);
+    console.log(this.examStats.answerData);
+    console.log(this.examStats.id);
+
+    var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
+    if (index !== -1) {
+      this.examStats.remainTime = this.allExamStats[index].remainTime;
+      this.examStats.answerData = this.allExamStats[index].answerData;
+      this.examStats.nextNotAnswer = this.allExamStats[index].nextNotAnswer;
+      if (this.allExamStats[index].notAnsweredArr.length == 0
+        || this.allExamStats[index].notAnsweredArr == undefined)
+        this.initNotAnswered();
+      else
+        this.examStats.notAnsweredArr = this.allExamStats[index].notAnsweredArr;
+
+      this.examStats.pinQuestionsArr =
+        this.allExamStats[index].pinQuestionsArr != undefined
+          ? this.allExamStats[index].pinQuestionsArr : [];
+    } else {
       this.examStats.remainTime = this.contentData.exam.azmoon_time * 60;
       this.initNotAnswered();
-    // }
+    }
 
     this.countDownTimer();
     this.renderMathJax();
 
   },
+  watch: {
+    "examStats.answerData"(val) {
+      this.updateLocalStorage();
+    }
+  },
   methods: {
-    updateAnswerData() {
-      const payload = {
-        index: 3,
-        answerData: this.answerData
-      };
-      this.$store.commit('updateAnswerData', payload);
+    updateLocalStorage() {
+      var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
+      if (index === -1)
+        this.allExamStats.push(this.examStats);
+      else {
+        this.allExamStats[index] = this.examStats;
+      }
+      this.$cookies.set('allExamStats', this.allExamStats);
     },
-    initNotAnswered(){
-      // for(var i in this.contentData.tests){
-      //   this.notAnsweredArr.push(this.contentData.tests[i].id);
-      // }
+
+    initNotAnswered() {
+      for (var i in this.contentData.tests) {
+        this.examStats.notAnsweredArr.push(this.contentData.tests[i].id);
+      }
     },
+
     renderMathJax() {
       if (window.MathJax) {
         window.MathJax.Hub.Config({
@@ -238,17 +254,26 @@ export default {
           }
         });
         MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
-
-
       }
     },
+
     endExam() {
       this.submit_loading = true;
+
+
+      //Delete from cookie
+      var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
+      if (index !== -1){
+        this.$delete(this.allExamStats, index);
+        this.$cookies.set('allExamStats', this.allExamStats);
+      }
+      //End delete from cookie
+
       const querystring = require('querystring');
       this.$axios.$post(`/api/v1/exams/end/${this.contentData.exam.id}`,
         querystring.stringify({
           startID: this.contentData.startID,
-          answers: JSON.stringify(this.answerData)
+          answers: JSON.stringify(this.examStats.answerData)
         })
         , {
           headers: {
@@ -284,19 +309,17 @@ export default {
       return encodeURIComponent(s).replace(/%20/g, '+');
     },
 
-
     countDownTimer() {
       if (this.examStats.remainTime > 0) {
         setTimeout(() => {
           this.examStats.remainTime -= 1;
-          this.$store.commit('user/setExamParticipationData',this.examStats)
+          // this.$store.commit('user/setExamParticipationData',this.examStats)
           this.countDownTimer();
         }, 1000)
       } else {
         this.endExam();
       }
     },
-
 
     //Convert seconds to readable HH:ii:ss format
     hhmmss(secs) {
@@ -315,41 +338,48 @@ export default {
     },
     //End convert seconds to readable HH:ii:ss format
 
-
     pinQuestion(question_id) {
       this.examStats.pinQuestionsArr.push(question_id);
 
       //Init next pin for first time
       if (this.examStats.pinQuestionsArr.length === 1)
-        this.nextPin = question_id;
+        this.examStats.nextPin = question_id;
+
+      this.updateLocalStorage();
     },
+
     updateNextPin() {
       if (this.examStats.pinQuestionsArr.length) {
-        var index = this.examStats.pinQuestionsArr.findIndex(x => x === this.nextPin);
+        var index = this.examStats.pinQuestionsArr.findIndex(x => x === this.examStats.nextPin);
         if ((index + 1) === this.examStats.pinQuestionsArr.length)
-          this.nextPin = this.examStats.pinQuestionsArr[0];
+          this.examStats.nextPin = this.examStats.pinQuestionsArr[0];
         else
-          this.nextPin = this.examStats.pinQuestionsArr[index + 1];
+          this.examStats.nextPin = this.examStats.pinQuestionsArr[index + 1];
       }
+      this.updateLocalStorage();
     },
+
     updateNextNotAnswer() {
-      if (this.notAnsweredArr.length) {
-        var index = this.notAnsweredArr.findIndex(x => x === this.nextNotAnswer);
-        if ((index + 1) === this.notAnsweredArr.length)
-          this.nextNotAnswer = this.notAnsweredArr[0];
+      if (this.examStats.notAnsweredArr.length) {
+        var index = this.examStats.notAnsweredArr.findIndex(x => x === this.examStats.nextNotAnswer);
+        if ((index + 1) === this.examStats.notAnsweredArr.length)
+          this.examStats.nextNotAnswer = this.examStats.notAnsweredArr[0];
         else
-          this.nextNotAnswer = this.notAnsweredArr[index + 1];
+          this.examStats.nextNotAnswer = this.examStats.notAnsweredArr[index + 1];
       }
+      this.updateLocalStorage();
     },
+
     eraseTest(question_id) {
-      this.$delete(this.answerData, question_id);
-      this.notAnsweredArr.push(question_id);
+      this.$delete(this.examStats.answerData, question_id);
+      this.examStats.notAnsweredArr.push(question_id);
+      this.updateLocalStorage();
     },
     //
-    updateNotAnswerData(item_id){
-    //   var index=this.notAnsweredArr.findIndex(x=>x==item_id);
-    //   if (index!==-1)
-    //     this.notAnsweredArr.splice(index,1);
+    updateNotAnswerData(item_id) {
+      var index = this.examStats.notAnsweredArr.findIndex(x => x == item_id);
+      if (index !== -1)
+        this.examStats.notAnsweredArr.splice(index, 1);
     }
   }
 
@@ -365,7 +395,7 @@ export default {
   z-index: 10
 }
 
-.bookmark-target{
+.bookmark-target {
   padding-top: 80px;
   margin-top: -80px;
 }

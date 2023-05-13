@@ -12,7 +12,7 @@ export default {
   name: "test-maker",
   head() {
     return {
-      title: 'Create online exam',
+      title: 'New Exam',
       correct_answer: 1,
       script: [
         //MathType to Latex

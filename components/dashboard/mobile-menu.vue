@@ -69,8 +69,8 @@ export default {
           icon: 'mdi-laptop',
           link: '/test-maker',
           subMenuList: [
-            {title: "Results", link: "/exam/results", icon: 'mdi-chart-timeline', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
-            {title: "Exam maker", link: "/test-maker", icon: 'icong-azmoon', icon_type: 'custom'},
+            {title: "Results", link: "/exam/results", icon: 'mdi-chart-timeline', icon_type: 'custom'},
+            {title: "Exam maker", link: "/user/exam", icon: 'icong-azmoon', icon_type: 'custom'},
           ]
         },
         {

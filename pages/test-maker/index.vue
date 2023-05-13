@@ -6,7 +6,7 @@
           <v-icon color="teal" large>
             mdi-image-album
           </v-icon>
-            Album list
+            Albums
           </span>
       </v-col>
     </v-row>
@@ -53,7 +53,7 @@
         </v-row>
         <!--End filter section-->
 
-        <!--Album list-->
+        <!--Albums-->
         <v-row>
           <v-col cols="12" class="text-center" v-if="page_loading===false && album_list.length===0">
             <p>
@@ -120,7 +120,7 @@
           </v-col>
         </v-row>
 
-        <!--End album list-->
+        <!--End albums-->
 
       </v-card-text>
 
