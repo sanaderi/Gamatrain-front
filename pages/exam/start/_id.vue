@@ -185,11 +185,9 @@ export default {
     }
   },
   mounted() {
-    this.allExamStats = this.$cookies.get('allExamStats');
+    if (this.$cookies.get('allExamStats'))
+      this.allExamStats = this.$cookies.get('allExamStats');
     this.examStats.id = this.contentData.exam.id;
-    console.log(this.allExamStats);
-    console.log(this.examStats.answerData);
-    console.log(this.examStats.id);
 
     var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
     if (index !== -1) {
@@ -263,7 +261,7 @@ export default {
 
       //Delete from cookie
       var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
-      if (index !== -1){
+      if (index !== -1) {
         this.$delete(this.allExamStats, index);
         this.$cookies.set('allExamStats', this.allExamStats);
       }

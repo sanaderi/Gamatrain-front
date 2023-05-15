@@ -126,8 +126,9 @@
                   </thead>
                   <tbody>
                   <tr
+                    class="pointer"
                     v-for="(item,key) in contentData.result"
-                    @click="questionDetails(item.id)"
+                    @click="questionDetails(item)"
                   >
                     <td>{{ key + 1 }}</td>
                     <td class="text-center">
@@ -327,29 +328,94 @@
 
 
     <v-dialog
-      v-model="dialog.questionDetails"
-      max-width="290"
+      v-model="dialog.questionDetails.status"
+      max-width="700"
     >
       <v-card>
-        <v-card-title class="text-h5">
-          sss
-        </v-card-title>
+        <v-card-text class="py-4" ref="mathJaxEl">
+          <v-col
+            class="test-list"
+            cols="12">
+            <div id="test-question"
 
-        <v-card-text>
-          <p class="text-h6">
-            ddddddddddddddddd
-          </p>
+                 v-html="dialog.questionDetails.question"/>
+            <img :src="dialog.questionDetails.q_file"/>
+
+            <div class="answer">
+              <v-icon v-show="dialog.questionDetails.true_answer=='1'" class="true_answer" large>
+                mdi-check
+              </v-icon>
+              <v-icon v-show="dialog.questionDetails.user_answer=='1' && dialog.questionDetails.true_answer!='1'"
+                      class="false_answer" large>
+                mdi-close
+              </v-icon>
+              <span>1)</span>
+              <span
+
+                v-show="dialog.questionDetails.answer_a"
+                v-html="dialog.questionDetails.answer_a"></span>
+              <img v-show="dialog.questionDetails.a_file" :src="dialog.questionDetails.a_file"/>
+            </div>
+            <div class="answer">
+              <v-icon v-show="dialog.questionDetails.true_answer=='2'" large class="true_answer">
+                mdi-check
+              </v-icon>
+              <v-icon v-show="dialog.questionDetails.user_answer=='2' && dialog.questionDetails.true_answer!='2'"
+                      class="false_answer" large>
+                mdi-close
+              </v-icon>
+
+              <span>2)</span>
+              <span
+
+                v-show="dialog.questionDetails.answer_b"
+                v-html="dialog.questionDetails.answer_b"></span>
+              <img v-show="dialog.questionDetails.b_file" :src="dialog.questionDetails.b_file"/>
+            </div>
+            <div class="answer ">
+              <v-icon v-show="dialog.questionDetails.true_answer=='3'" large class="true_answer">
+                mdi-check
+              </v-icon>
+
+              <span>3)</span>
+              <span
+
+                v-show="dialog.questionDetails.answer_c"
+                v-html="dialog.questionDetails.answer_c"></span>
+              <img v-show="dialog.questionDetails.c_file" :src="dialog.questionDetails.c_file"/>
+            </div>
+            <div class="answer">
+              <v-icon class="true_answer" v-show="dialog.questionDetails.true_answer=='4'" large>
+                mdi-check
+              </v-icon>
+              <span>4)</span>
+              <span
+
+                v-show="dialog.questionDetails.answer_d"
+                v-html="dialog.questionDetails.answer_d"/>
+              <img v-show="dialog.questionDetails.d_file" :src="dialog.questionDetails.d_file"/>
+            </div>
+            <v-row class="mt-3">
+              <v-col cols="10">
+                <v-btn icon>
+                  <v-icon color="blue">
+                    mdi-bullhorn-outline
+                  </v-icon>
+                </v-btn>
+                <v-btn icon>
+                  <v-icon color="green">
+                    mdi-eye
+                  </v-icon>
+                </v-btn>
+              </v-col>
+              <v-col cols="2" class="text-right">
+                <v-btn outlined  color="red" @click="dialog.questionDetails.status=false">
+                  Close
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-col>
         </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            text
-            @click="dialog.questionDetails = false"
-          >
-            No
-          </v-btn>
-        </v-card-actions>
       </v-card>
     </v-dialog>
   </v-container>
@@ -364,6 +430,9 @@ export default {
   head() {
     return {
       title: 'Online exam result',
+      script: [
+        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
+      ],
     }
   },
   async asyncData({params, $axios}) {
@@ -395,8 +464,10 @@ export default {
       contentData: [],
       chartData: {},
       download_loading: false,
-      dialog:{
-        questionDetails:false
+      dialog: {
+        questionDetails: {
+          status: false
+        }
       }
     }
   },
@@ -427,10 +498,56 @@ export default {
     //End download file
 
     //Show question details
-    questionDetails(id){
-      this.dialog.questionDetails=true;
-    }
+    questionDetails(item) {
+      this.dialog.questionDetails.question = item.question;
+      this.dialog.questionDetails.q_file = item.q_file;
+      this.dialog.questionDetails.true_answer = item.true_answer;
+      this.dialog.questionDetails.user_answer = item.user_answer;
+
+      this.dialog.questionDetails.answer_a = item.answer_a;
+      this.dialog.questionDetails.a_file = item.a_file;
+
+      this.dialog.questionDetails.answer_b = item.answer_b;
+      this.dialog.questionDetails.b_file = item.b_file;
+
+      this.dialog.questionDetails.answer_c = item.answer_c;
+      this.dialog.questionDetails.c_file = item.c_file;
+
+      this.dialog.questionDetails.answer_d = item.answer_d;
+      this.dialog.questionDetails.d_file = item.d_file;
+
+      setTimeout(()=>{
+        this.renderMathJax();
+      },1)
+
+
+      this.dialog.questionDetails.status = true;
+    },
     //End show question details
+
+
+    renderMathJax() {
+      if (window.MathJax) {
+        window.MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$', '$'], ["\(", "\)"]],
+            displayMath: [['$$', '$$'], ["\[", "\]"]],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          // Center justify equations in code and markdown cells. Elsewhere
+          // we use CSS to left justify single line equations in code cells.
+          displayAlign: 'center',
+          "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: {automatic: true}
+          }
+        });
+        MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
+
+
+      }
+    },
   }
 
 }
