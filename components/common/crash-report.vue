@@ -64,6 +64,25 @@ import {ValidationProvider, ValidationObserver} from "vee-validate";
 
 export default {
   name: "crash-report",
+  props:{
+    report_type_list:{
+      type:Array,
+      default:()=>[
+        {
+          value: 1,
+          label: 'The file cannot be downloaded',
+        },
+        {
+          value: 2,
+          label: 'The file is wrong',
+        },
+        {
+          value: 3,
+          label: 'The content of the file is inappropriate or incorrect.',
+        },
+      ]
+    }
+  },
   components: {
     ValidationObserver,
     ValidationProvider
@@ -78,20 +97,7 @@ export default {
         report_type: '',
         message: ''
       },
-      report_type_list: [
-        {
-          value: 1,
-          label: 'The file cannot be downloaded',
-        },
-        {
-          value: 2,
-          label: 'The file is wrong',
-        },
-        {
-          value: 3,
-          label: 'The content of the file is inappropriate or incorrect.',
-        },
-      ]
+
     }
   },
   methods: {

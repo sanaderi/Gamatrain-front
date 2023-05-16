@@ -326,7 +326,7 @@
       </v-card-text>
     </v-card>
 
-
+    <!--Show test details-->
     <v-dialog
       v-model="dialog.questionDetails.status"
       max-width="700"
@@ -397,7 +397,7 @@
             </div>
             <v-row class="mt-3">
               <v-col cols="10">
-                <v-btn icon>
+                <v-btn icon @click="openCrashReportDialog">
                   <v-icon color="blue">
                     mdi-bullhorn-outline
                   </v-icon>
@@ -418,15 +418,21 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    <!--End show test details-->
+
+    <crash-report ref="crash_report" :report_type_list="report_type_list"/>
+
+
   </v-container>
 </template>
 
 <script>
 import PieChart from "@/components/chart/PieChart";
+import CrashReport from "~/components/common/crash-report.vue";
 
 export default {
   name: "exam-result",
-  components: {PieChart},
+  components: {CrashReport, PieChart},
   head() {
     return {
       title: 'Online exam result',
@@ -468,7 +474,41 @@ export default {
         questionDetails: {
           status: false
         }
-      }
+      },
+      report_type_list:[
+        {
+          value: 1,
+          label: 'The selected option in the answer sheet is not correct.',
+        },
+        {
+          value: 2,
+          label: 'There is more than one correct option.',
+        },
+        {
+          value: 3,
+          label: 'None of the options are correct.',
+        },
+        {
+          value: 4,
+          label: 'There are typos in questions or options.',
+        },
+        {
+          value: 5,
+          label: 'This test is similar to another test in the same test.',
+        },
+        {
+          value: 6,
+          label: 'There are problems in the descriptive answer.',
+        },
+        {
+          value: 7,
+          label: 'This test is out of budget or topic.',
+        },
+        {
+          value: 8,
+          label: 'Other cases',
+        },
+      ]
     }
   },
   mounted() {
@@ -503,6 +543,7 @@ export default {
       this.dialog.questionDetails.q_file = item.q_file;
       this.dialog.questionDetails.true_answer = item.true_answer;
       this.dialog.questionDetails.user_answer = item.user_answer;
+      this.dialog.questionDetails.id = item.id;
 
       this.dialog.questionDetails.answer_a = item.answer_a;
       this.dialog.questionDetails.a_file = item.a_file;
@@ -548,6 +589,14 @@ export default {
 
       }
     },
+
+
+    openCrashReportDialog() {
+      this.dialog.questionDetails.status=false;
+      this.$refs.crash_report.dialog = true;
+      this.$refs.crash_report.form.id = this.dialog.questionDetails.id;
+      this.$refs.crash_report.form.type = "examTest";
+    }
   }
 
 }
