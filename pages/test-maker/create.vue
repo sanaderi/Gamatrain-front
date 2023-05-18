@@ -102,7 +102,7 @@
                 </v-col>
 
 
-                <v-col cols="12" md="12" >
+                <v-col cols="12" md="12">
                   <validation-provider v-slot="{errors}" name="topic" rules="required">
                     <topic-selector ref="topic-selector" :topic-list="topic_list" @selectTopic="selectTopic"/>
                   </validation-provider>
@@ -173,14 +173,14 @@
                   </validation-provider>
                 </v-col>
                 <v-col cols="12" md="4">
-                  <v-file-input
-                    dense
-                    v-model="file_original"
-                    @change="uploadFile('file_original')"
-                    accept="application/pdf"
-                    label="Source file"
-                    outlined
-                  />
+                    <v-file-input
+                      dense
+                      v-model="file_original"
+                      @change="uploadFile('file_original')"
+                      accept="application/pdf"
+                      label="Source file"
+                      outlined
+                    />
                 </v-col>
 
                 <v-col cols="12" md="4"
@@ -440,7 +440,7 @@
 
             <v-col cols="12">
               <v-card class="test-list overflow-y-auto" flat
-                      max-height="300"
+                      max-height="600"
                       ref="testList"
                       @scroll="onScroll"
               >
@@ -1186,7 +1186,7 @@ export default {
       //End Delete exam test section
 
 
-      file_original: '',
+      file_original: null,
       file_original_path: ''
     }
 
@@ -1206,6 +1206,17 @@ export default {
 
 
 
+
+    //Check active tab from route and enable it
+    if (this.$route.query && this.$route.query.active == 'test_list') {
+      this.test_step = 2;
+      this.testListSwitch = true;
+    }else{
+      this.test_step = 1;
+      this.testListSwitch = false;
+    }
+
+
   },
 
   watch: {
@@ -1213,10 +1224,13 @@ export default {
       if (val && val.active === 'test_list') {
         this.test_step = 2;
         this.testListSwitch = true;
+      }else{
+        this.test_step = 1;
+        this.testListSwitch = false;
       }
     },
 
-    // "teaching_date"(val) {//Convert date to secounds
+    // "teaching_date"(val) {//Convert date to seconds
     //   this.form.start_date = this.teaching_time_seconds;
     //   this.teaching_date_time = (this.$moment(val).format('x') / 1000);
     //   this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
@@ -1283,12 +1297,11 @@ export default {
     "form.lesson"(val) {
       if (val) {
         this.getTypeList('topic', val);
-        this.$refs["topic-selector"].lesson_selected=true;
-      }
-      else{
+        this.$refs["topic-selector"].lesson_selected = true;
+      } else {
         this.form.topic = [];
         this.topic_list = [];
-        this.$refs["topic-selector"].lesson_selected=false;
+        this.$refs["topic-selector"].lesson_selected = false;
       }
 
       this.filter.lesson = val;//Init second level filter
@@ -1506,7 +1519,7 @@ export default {
             });
           }
 
-          this.$refs["create-form"].examTestListLenght=this.tests.length;
+          this.$refs["create-form"].examTestListLenght = this.tests.length;
 
 
           if (response.data.list.length === 0)//For terminate auto load request
@@ -1545,7 +1558,9 @@ export default {
 
     onScroll() {
       var scrollPosition = this.$refs.testList.$el.scrollTop;
-      let contentHeight = this.$refs.testListContent.clientHeight;
+      let contentHeight = 0;
+      if (this.$refs.testListContent)
+        contentHeight = this.$refs.testListContent.clientHeight;
 
       //Avoid the number of requests
       if (this.timer) {
@@ -1621,7 +1636,7 @@ export default {
       })
         .then(response => {
           this.previewTestList = response.data.list;
-          this.$refs["create-form"].examTestListLenght=this.tests.length;
+          this.$refs["create-form"].examTestListLenght = this.tests.length;
 
           if (this.previewTestList.length) {
             this.$nextTick(function () {
@@ -1642,7 +1657,7 @@ export default {
      */
     publishTest() {
       this.publish_loading = true;
-      var examId=this.exam_id;
+      var examId = this.exam_id;
       this.$axios.$put(`/api/v1/exams/publish/${examId}`)
         .then(response => {
           if (response.data.message === 'done') {
@@ -1667,7 +1682,7 @@ export default {
             this.form.type = "";
             this.form.duration = 3;
             this.form.title = "";
-            this.form.file_original='';
+            this.form.file_original = '';
 
             //End reset form
 

@@ -402,7 +402,7 @@
                     mdi-bullhorn-outline
                   </v-icon>
                 </v-btn>
-                <v-btn icon>
+                <v-btn icon :to="`/test/${dialog.questionDetails.id}`">
                   <v-icon color="green">
                     mdi-eye
                   </v-icon>

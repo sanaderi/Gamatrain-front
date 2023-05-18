@@ -68,22 +68,22 @@
                 </v-list-item>
               </v-list-item>
               <v-list-item class="footer-item">
-                <nuxt-link to="/" class="d-flex align-center footer-item-link">
+                <nuxt-link to="/contact-us" class="d-flex align-center footer-item-link">
                   <span class="mr-2 footer-item-title">Contact Us</span>
                 </nuxt-link>
               </v-list-item>
               <v-list-item class="footer-item">
-                <nuxt-link to="" class="d-flex align-center footer-item-link">
+                <nuxt-link to="/about-us" class="d-flex align-center footer-item-link">
                   <span class="mr-2 footer-item-title">About Us</span>
                 </nuxt-link>
               </v-list-item>
               <v-list-item class="footer-item">
-                <nuxt-link to="" class="d-flex align-center footer-item-link">
+                <nuxt-link to="/faq" class="d-flex align-center footer-item-link">
                   <span class="mr-2 footer-item-title">FAQ's</span>
                 </nuxt-link>
               </v-list-item>
               <v-list-item class="footer-item">
-                <nuxt-link to="" class="d-flex align-center footer-item-link">
+                <nuxt-link to="terms-and-conditions" class="d-flex align-center footer-item-link">
                   <span class="mr-2 footer-item-title">Terms and Conditions</span>
                 </nuxt-link>
               </v-list-item>
@@ -177,7 +177,6 @@
 <script>
 export default {
   data: () => ({
-    links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
     enamad: "enamad.png",
     secondEnamad: "enamad2.png",
     enamads: [

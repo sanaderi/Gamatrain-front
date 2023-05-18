@@ -443,7 +443,7 @@
 
             <v-col cols="12">
               <v-card class="test-list overflow-y-auto" flat
-                      max-height="300"
+                      max-height="600"
                       ref="testList"
                       @scroll="onScroll"
               >

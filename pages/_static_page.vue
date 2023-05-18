@@ -2,8 +2,8 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h1 class="text-h4">{{ page_info.title }}</h1>
-        <p class="mt-3" v-html="page_info.describe"/>
+        <h1 class="text-h4 font-weight-bold">{{ pageData.title }}</h1>
+        <p class="mt-3" v-html="pageData.content"/>
       </v-col>
     </v-row>
   </v-container>
@@ -14,18 +14,28 @@ export default {
   auth: false,
   name: "static_page",
   async asyncData({params, $axios, error}) {
-    const page_info = await $axios.$get(`/api/v1/pages/${params.static_page}`);
+    var param = '';
+    if (params.static_page == 'about-us')
+      param='about';
+    else if(params.static_page=='terms-and-conditions')
+      param='terms';
+    else
+      param=params.static_page;
+
+      const page_info = await $axios.$get(`/api/v1/pages/${param}`);
 
     if (page_info.length === 0)
       error({statusCode: 404, message: 'Page not found'})
-    else
-      return {page_info};
+    else {
+      const pageData = page_info.data;
+      return {pageData};
+    }
   },
   head() {
     return {
-      title: this.page_info.title
+      title: this.pageData.title
     }
-  }
+  },
 }
 </script>
 
