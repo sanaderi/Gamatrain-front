@@ -215,9 +215,72 @@
               <!--End logo section-->
 
               <v-spacer></v-spacer>
-              <nuxt-link to="">
-                <i class="fa-regular fa-bell  ml-4 "></i>
-              </nuxt-link>
+              <v-menu
+                transition="slide-x-transition"
+                offset-y
+                min-width="150"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <div
+                    v-bind="attrs" v-on="on"
+                    class="notice-btn  d-block d-md-none align-center mr-3 ml-5
+                        "
+                  >
+                    <v-chip x-small
+                            color="red"
+                            text-color="white"
+                            class="px-1 ">
+                      {{notifications.length}}
+                    </v-chip>
+                    <v-icon
+                      size="28"
+                      class="topbar-bell"
+                    >
+                      mdi-bell-outline
+                    </v-icon>
+
+                  </div>
+                </template>
+                <v-card
+                  height="400"
+                  width="256"
+                  class="mx-auto"
+                >
+                  <v-list-item>
+                    <v-list-item-content>
+                      <v-list-item-title class="text-h5">
+                        Notifications
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list
+                    dense
+                    nav
+                  >
+                    <v-list-item
+                      v-for="item in notifications"
+                      :to="`/user/ticket/detail/${item.id}`"
+                      link
+                    >
+                      <v-list-item-icon class="mr-2">
+                        <v-icon color="rgb(255, 193, 7)" large>
+                          mdi-email</v-icon>
+                      </v-list-item-icon>
+
+                      <v-list-item-content>
+                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        <v-list-item-subtitle>
+                          <div v-html="item.body"/>
+                          <div >{{item.subdate}}</div>
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-card>
+              </v-menu>
 
             </v-app-bar>
             <!--End mobile nav-->
@@ -311,9 +374,21 @@ export default {
         {link: "Youtube", icon: "fa-youtube"},
       ],
       hotTopics: {},
+      notifications: []
+
     };
   },
   async fetch() {
+    //Get notifications
+    await this.$axios.$get('/api/v1/notifications/unreads')
+      .then(response => {
+        this.notifications = response.data.list;
+        this.$refs.header_topbar.notifications=this.notifications;
+      }).catch(err => {
+      console.log(err);
+    });
+    //End get notifications
+
     await this.$axios.$get('/api/v1/admin/values')
       .then(response => {
         if (response.data.mostVisitedTags.enable == "true")
@@ -359,4 +434,16 @@ export default {
   line-height: 3rem !important;
   font-size: 2.8rem !important;
 }
+
+
+.notice-btn{
+  position: relative;
+}
+
+.notice-btn .v-chip{
+  position: absolute;
+  top: 0rem;
+  right: 1.8rem;
+}
+
 </style>

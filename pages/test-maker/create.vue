@@ -1175,7 +1175,7 @@ export default {
       previewTestList: [],
       topicTitleArr: [],
 
-      testListSwitch: false,
+      testListSwitch: true,
       lastCreatedTest: '',
 
 
@@ -1211,9 +1211,12 @@ export default {
     if (this.$route.query && this.$route.query.active == 'test_list') {
       this.test_step = 2;
       this.testListSwitch = true;
+    }else if (this.$route.query && this.$route.query.active == 'add_test') {
+      this.test_step = 2;
+      this.testListSwitch = false;
     }else{
       this.test_step = 1;
-      this.testListSwitch = false;
+      this.testListSwitch = true;
     }
 
 
@@ -1224,9 +1227,12 @@ export default {
       if (val && val.active === 'test_list') {
         this.test_step = 2;
         this.testListSwitch = true;
+      }else if (this.$route.query && this.$route.query.active == 'add_test') {
+        this.test_step = 2;
+        this.testListSwitch = false;
       }else{
         this.test_step = 1;
-        this.testListSwitch = false;
+        this.testListSwitch = true;
       }
     },
 

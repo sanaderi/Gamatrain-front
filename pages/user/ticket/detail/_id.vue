@@ -218,6 +218,7 @@ export default {
       title: 'Ticket detail'
     }
   },
+
   async asyncData({params, $axios}) {
     // This could also be an action dispatch
     const content = await $axios.$get(`/api/v1/tickets/${params.id}`);

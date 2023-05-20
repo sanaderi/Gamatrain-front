@@ -77,13 +77,12 @@ export default {
           icon: 'mdi-list-box-outline',
           link: '/test-maker/create?active=test_list',
         },
-        //
-        // {
-        //   title: 'Add Test',
-        //   icon: 'mdi-plus-circle-outline',
-        //   link: '/test-maker/create-test',
-        //   status:(this.$auth && this.$auth.user.group_id === '6' ? true : false)
-        // },
+        {
+          title: 'Add New Test',
+          icon: 'mdi-plus-circle-outline',
+          link: '/test-maker/create?active=add_test',
+          // status:(this.$auth && this.$auth.user.group_id === '6' ? true : false)
+        },
 
       ],
       sheet: false,

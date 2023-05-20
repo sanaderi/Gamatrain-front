@@ -64,10 +64,74 @@
                 </v-list>
               </v-menu>
 
-              <nuxt-link to="/user"
-                         class="d-block align-center mr-3 ml-5 ">
-                <i class="fa-regular fa-bell fa-xl topbar-bell d-none d-sm-block"></i>
-              </nuxt-link>
+              <v-menu
+                transition="slide-x-transition"
+                offset-y
+                min-width="150"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <div
+                    v-bind="attrs" v-on="on"
+                       class="notice-btn d-block align-center mr-3 ml-5
+                        "
+                  >
+                    <v-chip x-small
+                            color="red"
+                            text-color="white"
+                            class="px-1 ">
+                      {{notifications.length}}
+                    </v-chip>
+                    <v-icon
+                      size="28"
+                      class="topbar-bell d-none d-sm-block"
+                    >
+                      mdi-bell-outline
+                    </v-icon>
+
+                  </div>
+                </template>
+                <v-card
+                  height="400"
+                  width="256"
+                  class="mx-auto"
+                >
+                  <v-list-item>
+                    <v-list-item-content>
+                      <v-list-item-title class="text-h5">
+                        Notifications
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-divider></v-divider>
+
+                  <v-list
+                    dense
+                    nav
+                  >
+                    <v-list-item
+                      v-for="item in notifications"
+                      :to="`/user/ticket/detail/${item.id}`"
+                      link
+                    >
+                      <v-list-item-icon class="mr-2">
+                        <v-icon color="rgb(255, 193, 7)" large>
+                          mdi-email</v-icon>
+                      </v-list-item-icon>
+
+                      <v-list-item-content>
+                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        <v-list-item-subtitle>
+                          <div v-html="item.body"/>
+                          <div >{{item.subdate}}</div>
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-card>
+              </v-menu>
+
+
             </div>
             <div class="d-flex align-center" v-else>
               <v-btn plain @click="openLoginDialog">
@@ -151,6 +215,7 @@ export default {
       ],
       right: null,
       currentOpenDialog: '',
+      notifications: []
     };
   },
   components: {
@@ -183,12 +248,12 @@ export default {
 
     //Handle auth form from all of section
     "$route.query.auth_form"(val) {
-      if (val === 'login'){
+      if (val === 'login') {
         this.$refs.login_modal.login_dialog = true;
-        this.$router.push({query:{}});
-      }else if (val=='register'){
+        this.$router.push({query: {}});
+      } else if (val == 'register') {
         this.$refs.register_modal.register_dialog = true;
-        this.$router.push({query:{}});
+        this.$router.push({query: {}});
       }
 
     }
@@ -197,6 +262,7 @@ export default {
     if (this.$route.query.access === 'denied') {
       this.$refs.login_modal.login_dialog = true;
     }
+
   },
   methods: {
     openLoginDialog() {
@@ -205,7 +271,6 @@ export default {
     openRegisterDialog() {
       this.$refs.register_modal.register_dialog = true;
     },
-
   },
 
 };
@@ -215,4 +280,5 @@ export default {
   font-size: 1.2rem !important;
   padding: 1rem !important;
 }
+
 </style>
