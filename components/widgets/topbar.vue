@@ -64,73 +64,7 @@
                 </v-list>
               </v-menu>
 
-              <v-menu
-                transition="slide-x-transition"
-                offset-y
-                min-width="150"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <div
-                    v-bind="attrs" v-on="on"
-                       class="notice-btn d-block align-center mr-3 ml-5
-                        "
-                  >
-                    <v-chip x-small
-                            color="red"
-                            text-color="white"
-                            class="px-1 ">
-                      {{notifications.length}}
-                    </v-chip>
-                    <v-icon
-                      size="28"
-                      class="topbar-bell d-none d-sm-block"
-                    >
-                      mdi-bell-outline
-                    </v-icon>
-
-                  </div>
-                </template>
-                <v-card
-                  height="400"
-                  width="256"
-                  class="mx-auto"
-                >
-                  <v-list-item>
-                    <v-list-item-content>
-                      <v-list-item-title class="text-h5">
-                        Notifications
-                      </v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-
-                  <v-divider></v-divider>
-
-                  <v-list
-                    dense
-                    nav
-                  >
-                    <v-list-item
-                      v-for="item in notifications"
-                      :to="`/user/ticket/detail/${item.id}`"
-                      link
-                    >
-                      <v-list-item-icon class="mr-2">
-                        <v-icon color="rgb(255, 193, 7)" large>
-                          mdi-email</v-icon>
-                      </v-list-item-icon>
-
-                      <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                        <v-list-item-subtitle>
-                          <div v-html="item.body"/>
-                          <div >{{item.subdate}}</div>
-                        </v-list-item-subtitle>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
-                </v-card>
-              </v-menu>
-
+              <notification-component class="d-none d-md-block"/>
 
             </div>
             <div class="d-flex align-center" v-else>
@@ -177,6 +111,7 @@ import Login from "@/components/common/login";
 import Register from "@/components/common/register";
 import SearchBox from "@/components/common/search-box";
 import PassRecover from "@/components/common/pass-recover";
+import NotificationComponent from "~/components/common/notification-component.vue";
 
 export default {
   name: "top-bar",
@@ -215,10 +150,10 @@ export default {
       ],
       right: null,
       currentOpenDialog: '',
-      notifications: []
     };
   },
   components: {
+    NotificationComponent,
     PassRecover,
     SearchBox,
     Register,
