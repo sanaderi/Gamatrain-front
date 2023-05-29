@@ -1,397 +1,135 @@
 <template>
   <div class="test-details-content">
-    <!--  Start: breadcrumb  -->
-<!--    <section>-->
-<!--      <v-container class="py-0">-->
-<!--        <div class=" mt-0 py-0 header-path">-->
-<!--          <breadcrumb :breads="breads"/>-->
-<!--        </div>-->
-<!--      </v-container>-->
-<!--    </section>-->
-<!--    &lt;!&ndash;  End: breadcrumb  &ndash;&gt;-->
+    <!--  Start: detail  -->
+    <section>
+      <v-container class="py-0">
+        <div class="detail mt-md-8">
+          <v-row>
+            <v-col cols="12" md="12">
+              <!--  Description   -->
+              <div class="d-flex mb-4">
+                <div class="w-100">
+                  <div class="description-holder my-4">
+                    <v-col
+                      class="test-list"
+                      cols="12">
+                      <div id="test-question"
+                           ref="test-question"
+                           v-html="contentData.question"/>
+                      <img :src="contentData.q_file"/>
 
-<!--    &lt;!&ndash;  Start: detail  &ndash;&gt;-->
-<!--    <section>-->
-<!--      <v-container class="py-0">-->
-<!--        <div class="detail mt-md-8">-->
-<!--          <v-row>-->
-
-<!--            <v-col cols="12" md="6">-->
-<!--              &lt;!&ndash;  Description   &ndash;&gt;-->
-<!--              <div class="d-flex mb-4">-->
-<!--                <div class="w-100">-->
-<!--                  <div class="d-flex align-center justify-space-between header">-->
-<!--                    <h1 class="detail-title">-->
-<!--                      {{ contentData.title }}-->
-<!--                    </h1>-->
-<!--                  </div>-->
-<!--                  <div class="description-holder my-4">-->
-<!--                    <v-card>-->
-<!--                      <v-card-text class="py-4" ref="mathJaxEl">-->
-<!--                        <v-col-->
-<!--                          class="test-list"-->
-<!--                          cols="12">-->
-<!--                          <div id="test-question"-->
-
-<!--                               v-html="contentData.question"/>-->
-<!--                          <img :src="contentData.q_file"/>-->
-
-<!--                          <div class="answer">-->
-<!--                            <v-icon v-show="contentData.true_answer=='1'" class="true_answer" large>-->
-<!--                              mdi-check-->
-<!--                            </v-icon>-->
-<!--                            <v-icon v-show="contentData.user_answer=='1' && contentData.true_answer!='1'"-->
-<!--                                    class="false_answer" large>-->
-<!--                              mdi-close-->
-<!--                            </v-icon>-->
-<!--                            <span>1)</span>-->
-<!--                            <span-->
-
-<!--                              v-show="contentData.answer_a"-->
-<!--                              v-html="contentData.answer_a"></span>-->
-<!--                            <img v-show="contentData.a_file" :src="contentData.a_file"/>-->
-<!--                          </div>-->
-<!--                          <div class="answer">-->
-<!--                            <v-icon v-show="contentData.true_answer=='2'" large class="true_answer">-->
-<!--                              mdi-check-->
-<!--                            </v-icon>-->
-<!--                            <v-icon v-show="contentData.user_answer=='2' && contentData.true_answer!='2'"-->
-<!--                                    class="false_answer" large>-->
-<!--                              mdi-close-->
-<!--                            </v-icon>-->
-
-<!--                            <span>2)</span>-->
-<!--                            <span-->
-
-<!--                              v-show="contentData.answer_b"-->
-<!--                              v-html="contentData.answer_b"></span>-->
-<!--                            <img v-show="contentData.b_file" :src="contentData.b_file"/>-->
-<!--                          </div>-->
-<!--                          <div class="answer ">-->
-<!--                            <v-icon v-show="contentData.true_answer=='3'" large class="true_answer">-->
-<!--                              mdi-check-->
-<!--                            </v-icon>-->
-
-<!--                            <span>3)</span>-->
-<!--                            <span-->
-
-<!--                              v-show="contentData.answer_c"-->
-<!--                              v-html="contentData.answer_c"></span>-->
-<!--                            <img v-show="contentData.c_file" :src="contentData.c_file"/>-->
-<!--                          </div>-->
-<!--                          <div class="answer">-->
-<!--                            <v-icon class="true_answer" v-show="contentData.true_answer=='4'" large>-->
-<!--                              mdi-check-->
-<!--                            </v-icon>-->
-<!--                            <span>4)</span>-->
-<!--                            <span-->
-
-<!--                              v-show="contentData.answer_d"-->
-<!--                              v-html="contentData.answer_d"/>-->
-<!--                            <img v-show="contentData.d_file" :src="contentData.d_file"/>-->
-<!--                          </div>-->
-<!--                          <v-row class="mt-3">-->
-<!--                            <v-col cols="10">-->
-<!--                              <v-btn icon @click="openCrashReportDialog">-->
-<!--                                <v-icon color="blue">-->
-<!--                                  mdi-bullhorn-outline-->
-<!--                                </v-icon>-->
-<!--                              </v-btn>-->
-<!--                              <v-btn icon :to="`/test/${contentData.id}`">-->
-<!--                                <v-icon color="green">-->
-<!--                                  mdi-eye-->
-<!--                                </v-icon>-->
-<!--                              </v-btn>-->
-<!--                            </v-col>-->
-<!--                            <v-col cols="2" class="text-right">-->
-<!--                              <v-btn outlined  color="red" @click="contentData.status=false">-->
-<!--                                Close-->
-<!--                              </v-btn>-->
-<!--                            </v-col>-->
-<!--                          </v-row>-->
-<!--                        </v-col>-->
-<!--                      </v-card-text>-->
-<!--                    </v-card>-->
-<!--                  </div>-->
-
-<!--                  <div class="label-holder">-->
-<!--                    <v-chip link class="mr-1">-->
-<!--                      <nuxt-link :to="`/search?type=azmoon&section=${contentData.section}`">-->
-<!--                        {{ contentData.section_title }}-->
-<!--                      </nuxt-link>-->
-<!--                    </v-chip>-->
-<!--                    <v-chip link class="mr-1">-->
-<!--                      <nuxt-link :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}`">-->
-<!--                        {{ contentData.base_title }}-->
-<!--                      </nuxt-link>-->
-<!--                    </v-chip>-->
-<!--                    <v-chip link class="ma-1">-->
-<!--                      <nuxt-link-->
-<!--                        :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`">-->
-<!--                        {{ contentData.lesson_title }}-->
-<!--                      </nuxt-link>-->
-<!--                    </v-chip>-->
-<!--                    <v-chip class="ma-1">-->
-<!--                      {{ contentData.edu_month_title }}-->
-<!--                    </v-chip>-->
+                      <v-radio-group  v-model="selectedOption"
+                      v-if="contentData.type=='fourchoice'"
+                      >
+                        <v-radio value="1"
+                                 class="pl-2"
+                                 :class="{
+                                     'true-answer': isCorrectAnswer(1),
+                                     'false-answer': isIncorrectAnswer(1),
+                                 }"
+                        >
+                          <template slot="label">
+                            <div class="answer" >
+                              <span>1)</span>
+                              <span
+                                ref="mathJaxEl"
+                                v-html="contentData.answer_a"></span>
+                            </div>
+                          </template>
+                        </v-radio>
+                        <v-radio value="2"
+                                 class="pl-2"
+                                 :class="{
+                                     'true-answer': isCorrectAnswer(2),
+                                     'false-answer': isIncorrectAnswer(2),
+                                 }"
+                        >
+                          <template slot="label">
+                            <div class="answer">
+                              <span>2)</span>
+                              <span
+                                ref="mathJaxEl"
+                                v-html="contentData.answer_b"></span>
+                            </div>
+                          </template>
+                        </v-radio>
+                        <v-radio value="3"
+                                 class="pl-2"
+                                 :class="{
+                                     'true-answer': isCorrectAnswer(3),
+                                     'false-answer': isIncorrectAnswer(3),
+                                 }"
+                        >
+                          <template slot="label">
+                            <div class="answer ">
+                              <span>3)</span>
+                              <span
+                                ref="mathJaxEl"
+                                v-html="contentData.answer_c"></span>
+                            </div>
+                          </template>
+                        </v-radio>
+                        <v-radio value="4"
+                                 class="pl-2"
+                                 :class="{
+                                     'true-answer': isCorrectAnswer(4),
+                                     'false-answer': isIncorrectAnswer(4),
+                                 }"
+                        >
+                          <template slot="label">
+                            <div class="answer">
+                              <span>4)</span>
+                              <span
+                                ref="mathJaxEl"
+                                v-html="contentData.answer_d"/>
+                            </div>
+                          </template>
+                        </v-radio>
+                      </v-radio-group>
 
 
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              &lt;!&ndash;   Download Btn and Description  &ndash;&gt;-->
-<!--              <div class="text-center download-sec">-->
-<!--                <div class="d-none d-md-block mb-4">-->
-<!--                  <p v-if="!$auth.loggedIn">-->
-<!--                    <span class="mdi mdi-bell icon"></span>-->
-<!--                    <span @click="openAuthDialog('login')" class="login">Login</span>-->
-<!--                    <span  @click="openAuthDialog('register')" class="register">-->
-<!--                    (register)-->
-<!--                    </span>-->
-<!--                    to download and charge your wallet.-->
-<!--                  </p>-->
-<!--                  <span v-else>-->
-<!--                    Your wallet charge is ${{$auth.user.credit}}-->
-<!--                  </span>-->
-<!--                  <nuxt-link class="blue&#45;&#45;text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)</nuxt-link>-->
-<!--                </div>-->
-<!--                <div class="font-weight-bold answer">-->
-<!--                  <span class="mdi mdi-checkbox-marked icon"></span>-->
-<!--                  <span> The key answer sheet is at the end of the exam file.</span>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              &lt;!&ndash;   fileCopyRight  &ndash;&gt;-->
-<!--              <div class="d-none d-md-block text-center file-copy-right">-->
-<!--                <p class="">It is forbidden to republish the contents in cyber space.</p>-->
-<!--              </div>-->
-<!--            </v-col>-->
-<!--            <v-col md="3">-->
-<!--              <v-card flat  class="content_main_info">-->
-<!--                <v-row class=" align-center">-->
-<!--                  <v-col cols="3">-->
-<!--                    <v-img-->
-<!--                      :src="contentData.avatar"-->
-<!--                      alt=""-->
-<!--                      class="d-inline-block"-->
-<!--                      cover-->
-<!--                      height="48"-->
-<!--                      width="48"-->
-<!--                    />-->
-<!--                  </v-col>-->
-<!--                  <v-col cols="9" class="pl-0">-->
-<!--                    <p class="creator_title">-->
-<!--                      {{contentData.first_name}} {{contentData.last_name}}-->
-<!--                    </p>-->
-<!--                  </v-col>-->
-<!--                </v-row>-->
-<!--                <v-divider class="my-2"/>-->
-<!--                <v-row>-->
-<!--                  <v-col cols="12" class="pb-0">-->
-<!--                    <i class="fa-solid fa-folder mr-1 icon"></i>-->
-<!--                    File type: {{contentData.azmoon_type_title}}-->
-<!--                  </v-col>-->
-<!--                  <v-col cols="12" class="pb-0">-->
-<!--                    <i class="fa-solid fa-eye mr-1 icon"></i>-->
-<!--                    Viewed: Unknown-->
-<!--                  </v-col>-->
-<!--                  <v-col cols="12" class="pb-0">-->
-<!--                    <i class="fa-solid fa-calendar-alt mr-1 icon"></i>-->
-<!--                    Last update: {{$timeAgo.calc(contentData.up_date)}}-->
-<!--                  </v-col>-->
-<!--                  <v-col cols="12" class="pb-0">-->
-<!--                    <div class="pointer" @click="openCrashReportDialog">-->
-<!--                      <i class="fa-solid fa-bug mr-1 icon"></i>-->
-<!--                      Crash report-->
-<!--                    </div>-->
-<!--                  </v-col>-->
-<!--                  <v-col cols="12" class="pb-0">-->
-<!--                    &lt;!&ndash;Dialog for share&ndash;&gt;-->
-<!--                    <v-dialog-->
-<!--                      transition="dialog-top-transition"-->
-<!--                      class="share_dialog"-->
-<!--                      max-width="600"-->
-<!--                    >-->
-<!--                      <template v-slot:activator="{ on, attrs }">-->
-<!--                        <span-->
-<!--                          v-bind="attrs"-->
-<!--                          v-on="on"-->
-<!--                        >-->
-<!--                          <i class="fa-solid fa-share-alt mr-1 icon"></i>-->
-<!--                          Share-->
-<!--                        </span>-->
-<!--                      </template>-->
-<!--                      <template v-slot:default="dialog">-->
-<!--                        <v-card>-->
-<!--                          <v-toolbar-->
-<!--                            color="default"-->
-<!--                          >-->
-<!--                            Share-->
-<!--                          </v-toolbar>-->
-<!--                          <v-card-text class="mt-5">-->
-<!--                            <p class="mb-3">-->
-<!--                              Share this content:-->
-<!--                            </p>-->
-<!--                            <v-row>-->
-<!--                              <v-col cols="12">-->
-<!--                                <v-btn outlined block @click="copyUrl">-->
-<!--                                  <i class="fa-solid fa-copy mr-1 icon"></i>&nbsp;-->
-<!--                                  {{ copy_btn }}-->
-<!--                                </v-btn>-->
-<!--                              </v-col>-->
-<!--                              <v-col cols="6">-->
-<!--                                <v-btn-->
-<!--                                  @click="shareSocial('whatsapp')"-->
-<!--                                  target="_blank"-->
-<!--                                  block color="#25d366" class="white&#45;&#45;text">-->
-<!--                                  <i class="fab fa-whatsapp mr-1 icon"></i>-->
-<!--                                  WhatsApp-->
-<!--                                </v-btn>-->
-<!--                              </v-col>-->
-<!--                              <v-col cols="6">-->
-<!--                                <v-btn block color="#00acee" class="white&#45;&#45;text"-->
-<!--                                       @click="shareSocial('telegram')"-->
-<!--                                >-->
-<!--                                  <i class="fab fa-telegram-plane mr-1 icon"></i>-->
-<!--                                  Telegram-->
-<!--                                </v-btn>-->
-<!--                              </v-col>-->
-<!--                            </v-row>-->
-
-<!--                          </v-card-text>-->
-<!--                          <v-card-actions class="justify-end">-->
-<!--                            <v-btn-->
-<!--                              text-->
-<!--                              @click="dialog.value = false"-->
-<!--                            >close-->
-<!--                            </v-btn>-->
-<!--                          </v-card-actions>-->
-<!--                        </v-card>-->
-<!--                      </template>-->
-<!--                    </v-dialog>-->
-<!--                  </v-col>-->
-<!--                </v-row>-->
-
-<!--                <div class="text-center mt-2">-->
-<!--                  <v-rating-->
-<!--                    v-model="rating"-->
-<!--                    color="yellow darken-3"-->
-<!--                    background-color="grey darken-1"-->
-<!--                    empty-icon="$ratingFull"-->
-<!--                    half-increments-->
-<!--                    hover-->
-<!--                  />-->
-<!--                </div>-->
-<!--                <v-divider class="d-none d-md-block"/>-->
-
-<!--                <v-row class="mt-1 d-none d-md-block">-->
-<!--                  <v-col v-for="(item,key) in contentData.price" cols="12" class="pb-0">-->
-<!--                    &lt;!&ndash;For not authenticated user&ndash;&gt;-->
-<!--                    <v-btn v-show="!$auth.loggedIn"-->
-<!--                           @click="openAuthDialog('login')"-->
-<!--                           v-if="key==='participation'" block color="success">-->
-<!--                      Start | {{item.price>0 ? '$'+item.price : 'Free'}}-->
-<!--                    </v-btn>-->
-
-<!--                    &lt;!&ndash;For authenticated user&ndash;&gt;-->
-<!--                    <v-btn v-show="$auth.loggedIn" :to="`/exam/start/${contentData.id}`"-->
-<!--                           v-if="key==='participation'"-->
-<!--                           block color="success">-->
-<!--                      <span v-if="contentData.examUserData.status==1">-->
-<!--                        Show result-->
-<!--                      </span>-->
-<!--                      <span v-else>-->
-<!--                        Start | {{item.price>0 ? '$'+item.price : 'Free'}}-->
-<!--                      </span>-->
-<!--                    </v-btn>-->
-
-<!--                    <v-btn v-else-if="key==='word'" block color="primary">-->
-<!--                      Download WORD file | {{item.price>0 ? '$'+item.price : 'Free'}}-->
-<!--                    </v-btn>-->
-<!--                    <v-btn-->
-<!--                      @click="startDownload()"-->
-<!--                      :loading="download_loading"-->
-<!--                      v-else-if="key==='pdf'" block color="error">-->
-<!--                      Download PDF file | {{item.price>0 ? '$'+item.price : 'Free'}}-->
-<!--                    </v-btn>-->
-<!--                  </v-col>-->
-<!--                </v-row>-->
-
-<!--              </v-card>-->
-<!--              <v-row>-->
-<!--                <v-col cols="12" class="text-center">-->
-<!--                  <p class="mt-2  ">-->
-<!--                    <i class="fa-solid fa-exclamation-circle mr-1 icon"></i>-->
-<!--                    Republishing is prohibited in cyber space.</p>-->
-<!--                </v-col>-->
-<!--              </v-row>-->
-<!--            </v-col>-->
-<!--          </v-row>-->
+                      <v-row class="mt-3">
+                        <v-col cols="10">
+                          <v-btn icon @click="openCrashReportDialog">
+                            <v-icon color="blue">
+                              mdi-bullhorn-outline
+                            </v-icon>
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-col>
+                  </div>
 
 
-<!--        </div>-->
-<!--      </v-container>-->
-<!--    </section>-->
+                  <!--Helpful link-->
+                  <div class="label-holder">
+                    <v-chip :to="`/search?type=azmoon&section=${contentData.section}`" link class="mr-1">
+                        {{ contentData.section_title }}
+                    </v-chip>
+                    <v-chip :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}`" link class="mr-1">
+                       {{ contentData.base_title }}
+                    </v-chip>
+                    <v-chip :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`" class="ma-1">
+                        {{ contentData.lesson_title }}
+                    </v-chip>
+
+
+                  </div>
+                  <!--End helpful link-->
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+        </div>
+      </v-container>
+    </section>
 
 
 
-<!--    &lt;!&ndash;Mobile order section&ndash;&gt;-->
-<!--    <v-card class="order-btn-holder d-block d-md-none">-->
-<!--      <v-card-text class="pb-0">-->
-<!--        <v-row class="px-10 text-center">-->
-<!--          <v-col v-for="(item,key) in contentData.price" cols="12" class="pb-1 pt-0">-->
-<!--            <v-btn v-show="!$auth.loggedIn"-->
-<!--                   @click="openAuthDialog('login')"-->
-<!--                   v-if="key==='participation'" block color="success">-->
-<!--              Start | {{item.price>0 ? '$'+item.price : 'Free'}}-->
-<!--            </v-btn>-->
-<!--            <v-btn v-show="$auth.loggedIn" :to="`/exam/start/${contentData.id}`"  v-if="key==='participation'" block color="success">-->
-<!--              <span v-if="contentData.examUserData.status==1">-->
-<!--                 Show result-->
-<!--              </span>-->
-<!--              <span v-else>-->
-<!--                 Start | {{item.price>0 ? '$'+item.price : 'Free'}}-->
-<!--              </span>-->
-<!--            </v-btn>-->
-<!--            <v-btn v-else-if="key==='word'" block color="primary">-->
-<!--              Download WORD file | {{item.price>0 ? '$'+item.price : 'Free'}}-->
-<!--            </v-btn>-->
-<!--            <v-btn v-else-if="key==='pdf'" block color="error">-->
-<!--              Download PDF file | {{item.price>0 ? '$'+item.price : 'Free'}}-->
-<!--            </v-btn>-->
-<!--          </v-col>-->
-
-<!--          <v-col cols="12">-->
-<!--            <div class="mb-4">-->
-<!--              <p v-if="!$auth.loggedIn">-->
-<!--                <span class="mdi mdi-bell icon"></span>-->
-<!--                <span @click="openAuthDialog('login')" class="login blue&#45;&#45;text">Login</span>-->
-<!--                <span  @click="openAuthDialog('register')" class="register blue&#45;&#45;text">-->
-<!--                    (register)-->
-<!--                    </span>-->
-<!--                <span>to download and charge.</span>-->
-<!--              </p>-->
-<!--              <span v-else>-->
-<!--                Your wallet charge is ${{$auth.user.credit}}-->
-<!--                <nuxt-link class="blue&#45;&#45;text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)</nuxt-link>-->
-<!--              </span>-->
-<!--            </div>-->
-<!--          </v-col>-->
-<!--        </v-row>-->
+    <!--  End: detail  -->
 
 
-<!--      </v-card-text>-->
-<!--    </v-card>-->
-<!--    &lt;!&ndash;End mobile order section&ndash;&gt;-->
-
-
-<!--    &lt;!&ndash;  End: detail  &ndash;&gt;-->
-
-
-
-
-
-
-<!--    <crash-report ref="crash_report"/>-->
+    <crash-report ref="crash_report" :report_type_list="report_type_list"/>
   </div>
 </template>
 <script>
@@ -410,33 +148,29 @@ export default {
   auth: false,
   components: {
     CrashReport,
-    RelatedOnlineExam,
-    RelatedQa,
-    LatestTrainingContent,
-    RelatedContent,
-    PreviewGallery,
-    Category,
-    Breadcrumb,
-    LastViews,
   },
-  head(){
-    return{
-      // title: this.contentData.title
+  head() {
+    return {
+      // title: this.$refs["test-question"].innerText
     }
   },
+
   async asyncData({params, $axios}) {
     const content = await $axios.$get(`/api/v1/examTests/${params.id}`);
     var contentData = [];
 
     //Check data exist
-    if (content.status === 1){
+    if (content.status === 1) {
       contentData = content.data;
     }
 
     return {contentData};
   },
+  mounted() {
+    document.title=this.$refs["test-question"].innerText;
+  },
   data: () => ({
-    sell_btn:true,
+    sell_btn: true,
     rating: 4.5,
     breads: [
       {
@@ -603,72 +337,60 @@ export default {
     ],
 
     copy_btn: 'Copy',
-    download_loading:false,
+    download_loading: false,
+    selectedOption:'',
+    report_type_list:[
+      {
+        value: 1,
+        label: 'The selected option in the answer sheet is not correct.',
+      },
+      {
+        value: 2,
+        label: 'There is more than one correct option.',
+      },
+      {
+        value: 3,
+        label: 'None of the options are correct.',
+      },
+      {
+        value: 4,
+        label: 'There are typos in questions or options.',
+      },
+      {
+        value: 5,
+        label: 'This test is similar to another test in the same test.',
+      },
+      {
+        value: 6,
+        label: 'There are problems in the descriptive answer.',
+      },
+      {
+        value: 7,
+        label: 'This test is out of budget or topic.',
+      },
+      {
+        value: 8,
+        label: 'Other cases',
+      },
+    ]
   }),
-  methods:{
-    initBreadCrumb(){
-      this.breads.push(
-        {
-          text: this.contentData.section_title,
-          disabled: false,
-          href: `/search?type=azmoon&section=${this.contentData.section}`,
-        },
-        {
-          text: this.contentData.base_title,
-          disabled: false,
-          href: `/search?type=azmoon&section=${this.contentData.section}&base=${this.contentData.base}`,
-        },
-        {
-          text: this.contentData.lesson_title,
-          disabled: false,
-          href: `/search?type=azmoon&section=${this.contentData.section}&base=${this.contentData.base}&lesson=${this.contentData.lesson}`,
-        },
-      );
-    },
-    openAuthDialog(val){
-      this.$router.push({query:{auth_form:val}});
-    },
 
 
-    //Social section
-    copyUrl() {
-      navigator.clipboard.writeText(window.location.href);
-      this.copy_btn = 'Copied';
+  methods: {
+    isCorrectAnswer(option) {
+      // Check if the selected option is the correct answer
+      return this.selectedOption && option==this.contentData.true_answer;
+    },
+    isIncorrectAnswer(option) {
+      // Check if the selected option is incorrect
+      return this.selectedOption && option==this.selectedOption && option!=this.contentData.true_answer;
+
 
     },
-    shareSocial(social_name) {
-      if (social_name == 'whatsapp')
-        window.open(`https://api.whatsapp.com/send?text=${window.location.href}`);
-      else if (social_name == 'telegram')
-        window.open(`https://telegram.me/share/url?url=${window.location.href}&text=${this.contentData.title}`);
-
-    },
-
-    //Download file
-    startDownload(){
-      this.download_loading=true;
-      this.$axios.$get(`/api/v1/exams/download/${this.$route.params.id}`)
-        .then(response=>{
-          var FileSaver = require('file-saver');
-          FileSaver.saveAs(response.data.url,response.data.name);
-        }).catch(err=>{
-        if (err.response.status==400){
-          if (err.response.data.status==0 && err.response.data.error=="creditNotEnough"){
-            this.$toast.info("No enough credit");
-          }
-        }else if (err.response.status==403){
-          this.$router.push({query:{auth_form:'login'}});
-        }
-        console.log(err);
-      }).finally(()=>{
-        this.download_loading=false;
-      })
-    },
-    //End download file
-
     openCrashReportDialog() {
       this.$refs.crash_report.dialog = true;
-      this.$refs.crash_report.form.type = "test";
+      this.$refs.crash_report.form.id = this.$route.params.id;
+      this.$refs.crash_report.form.type = "examTest";
     }
   }
 }
@@ -688,23 +410,37 @@ export default {
 
 .order-btn-holder {
   /*position: -webkit-sticky!important;*/
-  position: fixed!important;
-  bottom: 0!important;
-  right:0!important;
-  left: 0!important;
-  z-index: 2!important;
-  border-top:0.1rem solid #e1e2e3;
+  position: fixed !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+  z-index: 2 !important;
+  border-top: 0.1rem solid #e1e2e3;
 }
 
-.order-btn-holder .v-btn{
+.order-btn-holder .v-btn {
   width: 40% !important;
 }
 
-.order-btn-holder span{
+.order-btn-holder span {
   font-size: 1.3rem;
 }
 
-p{
-  font-size: 1.3rem!important;
+p {
+  font-size: 1.3rem !important;
+}
+
+.true-answer {
+  background-color: #4caf50; /* Green background color */
+  color: white!important; /* White text color */
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  border-radius: 5px;
+}
+
+.false-answer {
+  background-color: #f44336; /* Red background color */
+  color: white!important; /* White text color */
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  border-radius: 5px;
 }
 </style>

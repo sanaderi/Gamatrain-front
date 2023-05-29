@@ -100,7 +100,10 @@ export default ({ $auth,app}, inject) => {
   //For format number
   Vue.filter('numberFormat', function (value) {
     return Number(value).toLocaleString("en-US");
-  })
+  });
+
+
+
 }
 //End Inject top methods to usable whole of project
 
