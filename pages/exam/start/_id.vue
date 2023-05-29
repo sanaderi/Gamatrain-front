@@ -43,11 +43,12 @@
             :id="`item-${item.id}`"
             class="bookmark-target"
             cols="12" v-show="contentData.tests.length>0"
-            v-for="item in contentData.tests"
+            v-for="(item,key) in contentData.tests"
           >
             <div id="test-question"
+                  class="d-flex"
                  ref="mathJaxEl"
-                 v-html="item.question"/>
+                 v-html="`${key+1})&nbsp;${item.question}`"/>
             <img :src="item.q_file"/>
 
             <v-radio-group @change="updateNotAnswerData(item.id)" v-model="examStats.answerData[item.id]">
@@ -162,9 +163,6 @@ export default {
         if (error.response.data)
           redirect(`/exam/result/${error.response.data.data.id}`);
     }
-  },
-  beforeDestroy() {
-    this.updateLocalStorage();
   },
   data() {
     return {
@@ -313,6 +311,7 @@ export default {
           this.examStats.remainTime -= 1;
           // this.$store.commit('user/setExamParticipationData',this.examStats)
           this.countDownTimer();
+          this.updateLocalStorage();
         }, 1000)
       } else {
         this.endExam();
@@ -390,7 +389,7 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10
+  z-index: 5
 }
 
 .bookmark-target {

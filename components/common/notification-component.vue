@@ -2,6 +2,7 @@
   <v-menu
     transition="slide-x-transition"
     offset-y
+    class="notification-box"
     min-width="150"
   >
     <template v-slot:activator="{ on, attrs }">
@@ -41,7 +42,7 @@
             </v-list-item-content>
           </v-col>
           <v-col cols="auto" class="align-self-center ml-auto">
-            <v-btn small outlined color="red"
+            <v-btn small outlined color="red" class="unread-btn"
                    v-show="notifications.length"
                    :loading="loading.mark_read_all"
                    @click="markAllRead()"
@@ -64,21 +65,21 @@
           v-for="item in notifications"
           @click="openNotification(item.id)"
         >
-          <v-list-item-icon class="mr-2">
-            <v-icon color="rgb(255, 193, 7)" large>
+          <v-list-item-icon class="mr-2 mt-1">
+            <v-icon color="rgb(255, 193, 7)" large class="mt-4">
               mdi-email
             </v-icon>
           </v-list-item-icon>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-            <v-list-item-subtitle>
-              <div v-html="item.body"/>
-              <div>{{ item.subdate }}</div>
+          <v-list-item-content class="pt-2" >
+            <v-list-item-title class="font-weight-bold">{{ item.title }}</v-list-item-title>
+            <v-list-item-subtitle >
+              <div v-html="item.body" class="font-size-14 mb-1 black--text"/>
+              <div class="font-size-10">{{ item.subdate }}</div>
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item>
+        <v-list-item v-else>
           <v-list-item-content class="mt-5 mx-auto">
             There are no new notifications
           </v-list-item-content>
@@ -146,7 +147,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
+.unread-btn.v-btn.v-size--small {
+  font-size: 0.9rem!important;
+  font-weight: 800;
+}
+
 .notice-btn {
   position: relative;
 }
