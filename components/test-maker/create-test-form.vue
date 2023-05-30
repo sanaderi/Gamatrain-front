@@ -400,7 +400,9 @@
                             @change="uploadFile('c_file')"
                             v-model="form_hidden_data.c_file" ref="c-input"/>
             </validation-provider>
-            <validation-provider v-slot="{errors}" name="d_file" :rules="photo_answer_rules">
+            <validation-provider v-slot="{errors}" name="d_file"
+                                 :rules="photo_answer_rules"
+            >
               <v-file-input class="d-none"
                             accept="image/png,image/webp,image/jpeg,image/jpg"
                             @change="uploadFile('d_file')"
@@ -821,14 +823,14 @@ export default {
           this.photo_answer = true;
           this.form.testImgAnswers = true;
           this.text_answer_rules = '';
-          this.photo_answer_rules = 'required';
+          // this.photo_answer_rules = 'required';
         }
       } else {
         if (this.photo_answer === true) {
           this.text_answer = false;
           this.form.testImgAnswers = true;
           this.text_answer_rules = '';
-          this.photo_answer_rules = 'required';
+          // this.photo_answer_rules = 'required';
         } else {
           this.text_answer = true;
           this.form.testImgAnswers = false;

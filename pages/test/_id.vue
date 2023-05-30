@@ -16,24 +16,28 @@
                       <div id="test-question"
                            ref="test-question"
                            v-html="contentData.question"/>
-                      <img :src="contentData.q_file"/>
+                      <img class="answer-img" :src="contentData.q_file"/>
 
-                      <v-radio-group  v-model="selectedOption"
-                      v-if="contentData.type=='fourchoice'"
+                      <v-radio-group v-model="selectedOption"
+                                     @change="fireSelectedOption"
+                                     v-if="contentData.type=='fourchoice' || contentData.type=='twochoice'  || contentData.type=='tf' "
                       >
                         <v-radio value="1"
-                                 class="pl-2"
+                                 class="pl-2 "
                                  :class="{
                                      'true-answer': isCorrectAnswer(1),
                                      'false-answer': isIncorrectAnswer(1),
                                  }"
                         >
                           <template slot="label">
-                            <div class="answer" >
-                              <span>1)</span>
-                              <span
-                                ref="mathJaxEl"
-                                v-html="contentData.answer_a"></span>
+                            <div class="answer">
+                              <p>
+                                <span>1)&nbsp;</span>
+                                <span
+                                  ref="mathJaxEl"
+                                  v-html="contentData.answer_a"></span>
+                              </p>
+                              <img v-show="contentData.a_file" class="answer-img" :src="contentData.a_file"/>
                             </div>
                           </template>
                         </v-radio>
@@ -46,14 +50,17 @@
                         >
                           <template slot="label">
                             <div class="answer">
-                              <span>2)</span>
+                              <span>2)&nbsp;</span>
                               <span
                                 ref="mathJaxEl"
                                 v-html="contentData.answer_b"></span>
+                              <img v-show="contentData.b_file" :src="contentData.b_file" class="answer-img"/>
+
                             </div>
                           </template>
                         </v-radio>
                         <v-radio value="3"
+                                 v-if="contentData.type=='fourchoice'"
                                  class="pl-2"
                                  :class="{
                                      'true-answer': isCorrectAnswer(3),
@@ -61,15 +68,17 @@
                                  }"
                         >
                           <template slot="label">
-                            <div class="answer ">
-                              <span>3)</span>
+                            <div class="answer">
+                              <span>3)&nbsp;</span>
                               <span
                                 ref="mathJaxEl"
                                 v-html="contentData.answer_c"></span>
+                              <img v-show="contentData.c_file" class="answer-img" :src="contentData.c_file"/>
                             </div>
                           </template>
                         </v-radio>
                         <v-radio value="4"
+                                 v-if="contentData.type=='fourchoice'"
                                  class="pl-2"
                                  :class="{
                                      'true-answer': isCorrectAnswer(4),
@@ -78,14 +87,38 @@
                         >
                           <template slot="label">
                             <div class="answer">
-                              <span>4)</span>
+                              <span>4)&nbsp;</span>
                               <span
                                 ref="mathJaxEl"
                                 v-html="contentData.answer_d"/>
+
+                              <img v-show="contentData.d_file" class="answer-img" :src="contentData.d_file"/>
                             </div>
                           </template>
                         </v-radio>
                       </v-radio-group>
+
+
+                      <!--Answer section-->
+                      <v-expansion-panels
+                        v-if="contentData.answer_full || contentData.answer_full_file"
+                        class="mt-4" v-model="fullAnswer">
+                        <v-expansion-panel class="light-green">
+                          <v-expansion-panel-header
+                            @click="showAnswer()"
+                            class="text-h5 font-weight-bold">Show answer
+                          </v-expansion-panel-header>
+                          <v-expansion-panel-content class="light-green">
+                            <div v-html="contentData.answer_full"
+                                 ref="mathJaxEl"
+                            />
+                            <br>
+                            <img v-show="contentData.answer_full_file" class="answer-img"
+                                 :src="contentData.answer_full_file"/>
+                          </v-expansion-panel-content>
+                        </v-expansion-panel>
+                      </v-expansion-panels>
+                      <!--End answer section-->
 
 
                       <v-row class="mt-3">
@@ -103,17 +136,27 @@
 
                   <!--Helpful link-->
                   <div class="label-holder">
+                    <v-chip
+                      v-if="contentData.topic"
+                      :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}&topic=${contentData.topic}`"
+                      class="ma-1">
+                      {{ contentData.topic_title }}
+                    </v-chip>
+                    <v-chip
+                      :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`"
+                      class="ma-1">
+                      {{ contentData.lesson_title }}
+                    </v-chip>
+                    <v-chip :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}`" link
+                            class="mr-1">
+                      {{ contentData.base_title }}
+                    </v-chip>
                     <v-chip :to="`/search?type=azmoon&section=${contentData.section}`" link class="mr-1">
-                        {{ contentData.section_title }}
+                      {{ contentData.section_title }}
                     </v-chip>
-                    <v-chip :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}`" link class="mr-1">
-                       {{ contentData.base_title }}
+                    <v-chip  :to="`/tutorials/${contentData.tutorial_id}`" link class="mr-1 orange white--text">
+                      {{ contentData.section_title }}
                     </v-chip>
-                    <v-chip :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`" class="ma-1">
-                        {{ contentData.lesson_title }}
-                    </v-chip>
-
-
                   </div>
                   <!--End helpful link-->
                 </div>
@@ -123,7 +166,6 @@
         </div>
       </v-container>
     </section>
-
 
 
     <!--  End: detail  -->
@@ -152,11 +194,19 @@ export default {
   head() {
     return {
       // title: this.$refs["test-question"].innerText
+      script: [
+        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`, defer: true}
+      ],
     }
   },
 
   async asyncData({params, $axios}) {
-    const content = await $axios.$get(`/api/v1/examTests/${params.id}`);
+    const content = await $axios.$get(`/api/v1/examTests/${params.id}`,
+      {
+        params:{
+          full:true
+        }
+      });
     var contentData = [];
 
     //Check data exist
@@ -166,9 +216,12 @@ export default {
 
     return {contentData};
   },
+
   mounted() {
-    document.title=this.$refs["test-question"].innerText;
+    document.title = this.$refs["test-question"].innerText;
+    this.renderMathJax();
   },
+
   data: () => ({
     sell_btn: true,
     rating: 4.5,
@@ -189,157 +242,12 @@ export default {
       ]
     },
     model: null,
-    sampleTestList: [
-      {
-        type: 'azmoon',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
-      },
-      {
-        type: 'azmoon',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
-      },
-      {
-        type: 'azmoon',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
-      },
-      {
-        type: '',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Mehran Zangeneh',
-        ownerImg: 'teacher2.png',
-      },
-      {
-        type: '',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
-      },
-      {
-        type: '',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
-      },
-      {
-        type: '',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
-      },
-      {
-        type: '',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
-      },
-    ],
-    relatedList: [
-      {
-        class: 'learning',
-        header: 'Related educational content',
-        icon: 'learnfiles',
-        description: ' File های پاورپوینت، ویدئو، صوتی، متنی و ...',
-        contentItemList: [
-          {
-            title: 'Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature',
-            link: ''
-          },
-          {
-            title: 'Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
-            link: ''
-          },
-          {
-            title: 'Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation',
-            link: ''
-          },
-        ],
-      },
-      {
-        class: 'question',
-        header: 'Related Q&As',
-        icon: 'qa',
-        description: "Ask questions or answer other people's questions...",
-        contentItemList: [
-          {
-            title: 'Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature',
-            link: ''
-          },
-          {
-            title: 'Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
-            link: ''
-          },
-          {
-            title: 'Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation',
-            link: ''
-          },
-        ],
-      },
-      {
-        class: 'blog',
-        header: 'Related textbooks',
-        icon: 'blog',
-        contentItemList: [
-          {
-            title: 'Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature',
-            link: ''
-          },
-          {
-            title: 'Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
-            link: ''
-          },
-          {
-            title: 'Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation',
-            link: ''
-          },
-        ],
-      },
-      {
-        class: 'azmoon',
-        header: 'Related online tests',
-        icon: 'azmoon',
-        contentItemList: [
-          {
-            title: 'Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature',
-            link: ''
-          },
-          {
-            title: 'Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
-            link: ''
-          },
-          {
-            title: 'Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation',
-            link: ''
-          },
-        ],
-      },
-    ],
+    fullAnswer: '',
 
     copy_btn: 'Copy',
     download_loading: false,
-    selectedOption:'',
-    report_type_list:[
+    selectedOption: '',
+    report_type_list: [
       {
         value: 1,
         label: 'The selected option in the answer sheet is not correct.',
@@ -375,15 +283,17 @@ export default {
     ]
   }),
 
+  watch: {
 
+  },
   methods: {
     isCorrectAnswer(option) {
       // Check if the selected option is the correct answer
-      return this.selectedOption && option==this.contentData.true_answer;
+      return this.selectedOption && option == this.contentData.true_answer;
     },
     isIncorrectAnswer(option) {
       // Check if the selected option is incorrect
-      return this.selectedOption && option==this.selectedOption && option!=this.contentData.true_answer;
+      return this.selectedOption && option == this.selectedOption && option != this.contentData.true_answer;
 
 
     },
@@ -391,7 +301,38 @@ export default {
       this.$refs.crash_report.dialog = true;
       this.$refs.crash_report.form.id = this.$route.params.id;
       this.$refs.crash_report.form.type = "examTest";
+    },
+    renderMathJax() {
+      if (window.MathJax) {
+        window.MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$', '$'], ["\(", "\)"]],
+            displayMath: [['$$', '$$'], ["\[", "\]"]],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          // Center justify equations in code and markdown cells. Elsewhere
+          // we use CSS to left justify single line equations in code cells.
+          displayAlign: 'center',
+          "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: {automatic: true}
+          }
+        });
+        MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
+      }
+    },
+    showAnswer(){
+      this.selectedOption=this.contentData.true_answer;
+
+      setTimeout(()=>{
+        this.renderMathJax();
+      },100);
+    },
+    fireSelectedOption(){
+      this.fullAnswer=0;
     }
+
   }
 }
 </script>
@@ -432,15 +373,26 @@ p {
 
 .true-answer {
   background-color: #4caf50; /* Green background color */
-  color: white!important; /* White text color */
+  color: white !important; /* White text color */
   padding: 0.5rem 0.5rem 0.5rem 0;
   border-radius: 5px;
 }
 
 .false-answer {
   background-color: #f44336; /* Red background color */
-  color: white!important; /* White text color */
+  color: white !important; /* White text color */
   padding: 0.5rem 0.5rem 0.5rem 0;
   border-radius: 5px;
+}
+
+.answer {
+  align-items: center;
+  display: flex;
+  height: auto;
+  outline: none;
+}
+
+.answer-img {
+  max-height: 15rem;
 }
 </style>
