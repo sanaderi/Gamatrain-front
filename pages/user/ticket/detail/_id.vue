@@ -44,15 +44,15 @@
                               class="mr-3 sent-message">
                           <v-card-text >
                             <v-row>
-                              <v-col cols="12">
+                              <v-col cols="12" class="font-size-20">
                                 {{ item.message }}
                               </v-col>
-                              <v-col cols="12" class="py-0" v-if="item.file!=0">
-                                <a  class="v-btn--outlined pa-1 rounded"
-                                    x-small :href="item.file"
+                              <v-col cols="12" class="py-0 mt-2" v-if="item.file!=0">
+                                <a  class="v-btn--outlined pa-1 rounded font-size-16"
+                                    :href="item.file"
                                         download
                                         target="_blank" >
-                                  <v-icon x-small>
+                                  <v-icon small>
                                     mdi-download
                                   </v-icon>
                                   Download attach file
@@ -61,7 +61,7 @@
                             </v-row>
                           </v-card-text>
 
-                          <v-card-actions>
+                          <v-card-actions class="font-size-14 ml-2 mt-4">
                             {{$moment(item.subdate).format('MMM,DD YYYY h:mm A')}}
                           </v-card-actions>
                         </v-card>
@@ -85,15 +85,15 @@
                                 class="ml-3 received-message">
                           <v-card-text class="black--text">
                             <v-row>
-                              <v-col cols="12">
+                              <v-col cols="12" class="font-size-20">
                                 {{ item.message }}
                               </v-col>
-                              <v-col cols="12" class="py-0" v-if="item.file!=0">
-                                <a  class="v-btn--outlined pa-1 rounded"
-                                    x-small :href="item.file"
+                              <v-col cols="12" class="py-0 mt-2" v-if="item.file!=0">
+                                <a  class="v-btn--outlined pa-1 rounded font-size-16"
+                                    :href="item.file"
                                     download
                                     target="_blank" >
-                                  <v-icon x-small>
+                                  <v-icon small>
                                     mdi-download
                                   </v-icon>
                                   Download attach file
@@ -101,7 +101,7 @@
                               </v-col>
                             </v-row>
                           </v-card-text>
-                          <v-card-actions>
+                          <v-card-actions class="font-size-14 ml-2 mt-4">
                             {{$moment(item.subdate).format('MMM,DD YYYY h:mm A')}}
                           </v-card-actions>
                         </v-card>

@@ -154,8 +154,8 @@
                     <v-chip :to="`/search?type=azmoon&section=${contentData.section}`" link class="mr-1">
                       {{ contentData.section_title }}
                     </v-chip>
-                    <v-chip  :to="`/tutorials/${contentData.tutorial_id}`" link class="mr-1 orange white--text">
-                      {{ contentData.section_title }}
+                    <v-chip v-if="contentData.tutorial_id"  :to="`/tutorials/${contentData.tutorial_id}`" link class="mr-1 orange white--text">
+                      Tutorial of this topic
                     </v-chip>
                   </div>
                   <!--End helpful link-->
