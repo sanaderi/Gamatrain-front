@@ -37,7 +37,7 @@
                     <v-col>
                       <div v-for="(item, index) in ticketData.replies"
                            :key="index"
-                           :class="['d-flex flex-row align-center my-2',
+                           :class="['d-flex flex-row  my-2',
                             item.side == 'me' ? 'justify-end ': null]">
                         <v-card v-if="item.side == 'me'" flat
                                 color="#ffd08a"
@@ -396,10 +396,11 @@ export default {
   position: absolute;
   width: 0;
   height: 0;
-  left: -8px;
+  left: -10px;
   right: auto;
-  bottom: -4px;
-  border: 8px solid;
+  top: 20px;
+  bottom: 1px;
+  border: 12px solid;
   border-color: #e1e2e3 transparent transparent transparent;
 }
 .sent-message::after {

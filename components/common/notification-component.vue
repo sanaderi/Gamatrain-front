@@ -71,9 +71,9 @@
             </v-icon>
           </v-list-item-icon>
 
-          <v-list-item-content class="pt-2" >
+          <v-list-item-content class="pt-2">
             <v-list-item-title class="font-weight-bold">{{ item.title }}</v-list-item-title>
-            <v-list-item-subtitle >
+            <v-list-item-subtitle>
               <div v-html="item.body" class="font-size-14 mb-1 black--text"/>
               <div class="font-size-10">{{ item.subdate }}</div>
             </v-list-item-subtitle>
@@ -96,26 +96,30 @@ export default {
     return {
       notifications: [],
       getNoticeCalled: 0,//Flag for prevent repeat call getNotifications
-      loading:{
-        mark_read_all:false
+      loading: {
+        mark_read_all: false
       }
 
     }
   },
   mounted() {
-    this.getNotifications();
   },
   methods: {
     async getNotifications() {
       //Get notifications
-      await this.$axios.$get('/api/v1/notifications/unreads')
-        .then(response => {
-          this.notifications = response.data.list;
-        }).catch(err => {
-          console.log(err);
-        }).finally(() => {
-          this.getNoticeCalled++;
-        });
+      if (this.$auth.loggedIn)
+        await this.$axios.$get('/api/v1/notifications/unreads')
+          .then(response => {
+            this.notifications = response.data.list;
+          }).catch(err => {
+            if (err.response.status == 403)
+              this.$auth.logout();
+            else if (err.response.status == 400)
+              this.$toast.error(err.response.data.message);
+
+          }).finally(() => {
+            this.getNoticeCalled++;
+          });
       //End get notifications
     },
 
@@ -133,23 +137,23 @@ export default {
     },
 
     async markAllRead() {
-      this.loading.mark_read_all=true;
+      this.loading.mark_read_all = true;
       this.$axios.$get('/api/v1/notifications/readall')
         .then(response => {
-            this.getNotifications();
+          this.getNotifications();
         }).catch(err => {
-         this.$toast.error("An error occurred");
-      }).finally(()=>{
-        this.loading.mark_read_all=false;
+        this.$toast.error("An error occurred");
+      }).finally(() => {
+        this.loading.mark_read_all = false;
       });
     }
   }
 }
 </script>
 
-<style >
+<style>
 .unread-btn.v-btn.v-size--small {
-  font-size: 0.9rem!important;
+  font-size: 0.9rem !important;
   font-weight: 800;
 }
 

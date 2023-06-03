@@ -215,15 +215,15 @@
               <!--End logo section-->
 
               <v-spacer></v-spacer>
-              <notification-component class="d-block d-md-none"/>
+
+
+              <!--Mobile notification section-->
+              <notification-component ref="notification-section"/>
+
 
             </v-app-bar>
             <!--End mobile nav-->
-
-
           </div>
-
-
         </div>
       </v-container>
       <!--   End: navbar   -->
@@ -314,6 +314,11 @@ export default {
 
     };
   },
+  mounted() {
+    if (window.innerWidth<=960 && this.$auth.loggedIn){
+      this.$refs["notification-section"].getNotifications();
+    }
+  },
   async fetch() {
     await this.$axios.$get('/api/v1/admin/values')
       .then(response => {
@@ -332,8 +337,7 @@ export default {
       this.$refs.header_topbar.openRegisterDialog();
     }
   },
-}
-;
+};
 </script>
 
 
@@ -362,7 +366,6 @@ export default {
   line-height: 3rem !important;
   font-size: 2.8rem !important;
 }
-
 
 
 </style>

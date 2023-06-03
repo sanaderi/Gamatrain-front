@@ -64,7 +64,12 @@
                 </v-list>
               </v-menu>
 
-              <notification-component class="d-none d-md-block"/>
+
+              <!--Desktop version-->
+              <notification-component ref="notification-component"
+                class="d-none d-md-block"
+              />
+
 
             </div>
             <div class="d-flex align-center" v-else>
@@ -194,6 +199,9 @@ export default {
     }
   },
   mounted() {
+    if (window.innerWidth>960 && this.$auth.loggedIn){
+      this.$refs["notification-component"].getNotifications();
+    }
     if (this.$route.query.access === 'denied') {
       this.$refs.login_modal.login_dialog = true;
     }
