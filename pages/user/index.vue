@@ -250,12 +250,6 @@ export default {
     this.getUserInfo();
 
   },
-  beforeMount() {
-    if (this.$auth.user.group_id === '3') {
-      this.$router.push({path:'/test-maker'});
-    } else if (!(this.$auth.user.group_id === "5" || this.$auth.user.group_id === "6"))
-      this.$router.push({path:'/user/type'});
-  },
   data() {
     return {
       user_type: this.$auth.user.group_id,
