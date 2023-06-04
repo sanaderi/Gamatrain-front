@@ -44,7 +44,7 @@
           </v-col>
           <v-col md="6" lg="6" class="text-right">
             <span v-show="hotTopics.length">Hot topics: </span>
-            <v-chip v-show="hotTopics.length" :to="item.link"
+            <v-chip v-show="hotTopics.length" :to="`/${item.link}`"
                     v-for="item in hotTopics"
                     color="rgba(33, 33, 33, 0.08)">
               <v-chip small color="rgba(0, 0, 0, 0.16);">

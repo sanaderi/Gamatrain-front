@@ -61,7 +61,6 @@
 
       >
         <v-list-item
-          v-if="notifications.length"
           v-for="item in notifications"
           @click="openNotification(item.id)"
         >
@@ -79,7 +78,7 @@
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item v-else>
+        <v-list-item v-show="!notifications.length">
           <v-list-item-content class="mt-5 mx-auto">
             There are no new notifications
           </v-list-item-content>
