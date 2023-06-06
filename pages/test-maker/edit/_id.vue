@@ -451,7 +451,9 @@
                   <v-row ref="testListContent">
                     <v-col
                       v-show="test_list.length>0"
-                      v-for="item in test_list" cols="12">
+                      v-for="item in test_list"
+                      :key="item.id"
+                      cols="12">
                       <v-row class="mb-2">
                         <v-col cols="12">
                           <v-chip v-show="item.lesson_title">
@@ -649,7 +651,7 @@
                   Topics:
                 </v-chip>
               </v-col>
-              <v-col cols="4" v-for="item in topicTitleArr">
+              <v-col cols="4" v-for="(item,index) in topicTitleArr" :key="index">
                 {{ item }}
               </v-col>
               <v-col cols="12">
@@ -659,7 +661,9 @@
             <v-row>
               <v-col cols="12" v-if="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
-                  <v-row v-for="item in previewTestList">
+                  <v-row v-for="(item,index) in previewTestList"
+                  :key="index"
+                  >
                     <v-col cols="12">
                       <div id="test-question"
                            ref="mathJaxEl"
@@ -881,7 +885,7 @@
                   Topics:
                 </v-chip>
               </v-col>
-              <v-col cols="4" v-for="item in topicTitleArr">
+              <v-col cols="4" v-for="(item,index) in topicTitleArr" :key="index">
                 {{ item }}
               </v-col>
               <v-col cols="12">
@@ -891,7 +895,9 @@
             <v-row>
               <v-col cols="12" v-if="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
-                  <v-row v-for="item in previewTestList">
+                  <v-row v-for="(item,index) in previewTestList"
+                         :key="index"
+                  >
                     <v-col
                       cols="12">
                       <div id="test-question"

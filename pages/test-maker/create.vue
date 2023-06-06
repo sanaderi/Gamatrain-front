@@ -173,14 +173,14 @@
                   </validation-provider>
                 </v-col>
                 <v-col cols="12" md="4">
-                    <v-file-input
-                      dense
-                      v-model="file_original"
-                      @change="uploadFile('file_original')"
-                      accept="application/pdf"
-                      label="Source file"
-                      outlined
-                    />
+                  <v-file-input
+                    dense
+                    v-model="file_original"
+                    @change="uploadFile('file_original')"
+                    accept="application/pdf"
+                    label="Source file"
+                    outlined
+                  />
                 </v-col>
 
                 <v-col cols="12" md="4"
@@ -448,7 +448,9 @@
                   <v-row ref="testListContent">
                     <v-col
                       v-show="test_list.length>0"
-                      v-for="item in test_list" cols="12">
+                      v-for="item in test_list"
+                      :key="item.id"
+                      cols="12">
                       <v-row class="mb-2">
                         <v-col cols="12">
                           <v-chip v-show="item.lesson_title">
@@ -646,7 +648,7 @@
                   Topics:
                 </v-chip>
               </v-col>
-              <v-col cols="4" v-for="item in topicTitleArr">
+              <v-col cols="4" v-for="(item,index) in topicTitleArr" :key="index">
                 {{ item }}
               </v-col>
               <v-col cols="12">
@@ -656,7 +658,9 @@
             <v-row>
               <v-col cols="12" v-show="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
-                  <v-row v-for="item in previewTestList">
+                  <v-row v-for="(item,index) in previewTestList"
+                  :key="index"
+                  >
                     <v-col
                       cols="12">
                       <div id="test-question"
@@ -879,7 +883,7 @@
                   Topics:
                 </v-chip>
               </v-col>
-              <v-col cols="4" v-for="item in topicTitleArr">
+              <v-col cols="4" v-for="(item,index) in topicTitleArr" :key="index">
                 {{ item }}
               </v-col>
               <v-col cols="12">
@@ -889,7 +893,9 @@
             <v-row>
               <v-col cols="12" v-show="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
-                  <v-row v-for="item in previewTestList">
+                  <v-row v-for="(item,index) in previewTestList"
+                         :key="index"
+                  >
                     <v-col
                       cols="12">
                       <div id="test-question"
@@ -1205,16 +1211,14 @@ export default {
       this.getExamCurrentTests();
 
 
-
-
     //Check active tab from route and enable it
     if (this.$route.query && this.$route.query.active == 'test_list') {
       this.test_step = 2;
       this.testListSwitch = true;
-    }else if (this.$route.query && this.$route.query.active == 'add_test') {
+    } else if (this.$route.query && this.$route.query.active == 'add_test') {
       this.test_step = 2;
       this.testListSwitch = false;
-    }else{
+    } else {
       this.test_step = 1;
       this.testListSwitch = true;
     }
@@ -1227,10 +1231,10 @@ export default {
       if (val && val.active === 'test_list') {
         this.test_step = 2;
         this.testListSwitch = true;
-      }else if (this.$route.query && this.$route.query.active == 'add_test') {
+      } else if (this.$route.query && this.$route.query.active == 'add_test') {
         this.test_step = 2;
         this.testListSwitch = false;
-      }else{
+      } else {
         this.test_step = 1;
         this.testListSwitch = true;
       }

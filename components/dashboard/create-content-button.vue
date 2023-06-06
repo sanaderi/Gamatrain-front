@@ -3,7 +3,10 @@
   <v-row class="create_content_section">
     <v-col cols="6" md="3"
            class="px-2"
-           v-for="(item,index) in button_list" :class="`${item.class}`">
+           v-for="(item,index) in button_list"
+           :class="`${item.class}`"
+           :key="index"
+    >
       <v-card outlined :disabled="$auth.user.group_id==='6' && button_list[index].class!=='question_answer'">
         <v-card-text class="px-0 px-md-4">
           <v-row >

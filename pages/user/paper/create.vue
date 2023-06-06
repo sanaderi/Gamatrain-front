@@ -250,6 +250,7 @@
                     <v-col cols="12" v-if="extraAttr.length">
                       <v-row
                         v-for="(item,index) in extraAttr"
+                        :key="index"
                       >
                         <v-col cols="12" md="4">
                           <v-autocomplete :items="extra_type_list"

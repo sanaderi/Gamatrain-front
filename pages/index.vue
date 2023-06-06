@@ -140,9 +140,15 @@ export default {
     return {
       titleTemplate: "Gamatrain | %s",
       title: 'Learning together, earning together, building a brighter future',
+      meta: [
+        {
+          hid: `description`,
+          name: 'description',
+          content: 'Big training platform'
+        }
+      ]
     }
   },
-
   components: {
     MobileStatsCardComponent,
     DesktopStatsCardComponent,

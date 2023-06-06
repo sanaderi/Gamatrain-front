@@ -98,7 +98,8 @@
               </v-list-item>
               <div>
                 <v-btn
-                  v-for="item in social_media"
+                  v-for="(item,index) in social_media"
+                  :key="index"
                   icon
                   :href="item.link"
                   target="_blank"

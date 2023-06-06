@@ -9,7 +9,9 @@
                    :small="$vuetify.breakpoint.xs"
               :to="`${item.link}&state=${help_link_data.state}&section=${help_link_data.section}&base=${help_link_data.base}&course=${help_link_data.course}
                   &lesson=${help_link_data.lesson}`"
-              v-for="item in items"  class="side-help-icon mr-1" >
+              v-for="(item,index) in items"
+                   :key="index"
+                   class="side-help-icon mr-1" >
               <v-tooltip right>
                 <template v-slot:activator="{ on, attrs }">
                 <span v-bind="attrs"
@@ -48,6 +50,7 @@
                   <v-slide-item
                     class="mx-2 thumbnail_itm"
                     v-for="(image, index) in  images"
+                    :key="index"
                   >
                     <v-img
                       :class="carouselVal==index ? 'active_slide' : ''"

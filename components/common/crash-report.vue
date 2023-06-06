@@ -16,7 +16,8 @@
                 :error-messages="errors"
                 v-model="form.report_type">
                 <v-radio
-                  v-for="type in report_type_list"
+                  v-for="(type,index) in report_type_list"
+                  :key="index"
                   :label="type.label"
                   :value="type.value"
                 ></v-radio>

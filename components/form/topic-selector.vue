@@ -23,6 +23,7 @@
         <v-col cols="12" >
           <v-checkbox v-for="item in topicList"
                       v-model="topic"
+                      :key="item.id"
                       :value="item.id"
                       hide-details="true"
                       multiple

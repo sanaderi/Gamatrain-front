@@ -23,7 +23,9 @@
           <v-col cols="12" class="px-0 px-sm-4 px-md-4 text-center">
             <v-radio-group v-model="selected_pack" id="select_charge_package">
               <v-row>
-                <v-col cols="6" md="3" v-for="(item,index) in package_list">
+                <v-col cols="6" md="3" v-for="(item,index) in package_list"
+                :key="index"
+                >
                   <v-radio color="primary" :value="item.price" active-class="active_radio">
                     <template v-slot:label>
                       <v-card :color="item.color" class="radio_card ">
@@ -64,7 +66,6 @@
         </v-row>
         <!--End some notice-->
 
-
         <!--Payment gateway logo-->
         <v-row v-show="selected_pack">
           <v-col cols="12" class="text-center">
@@ -74,7 +75,9 @@
           </v-col>
           <v-col cols="12" id="payment-logo-list" class="d-flex justify-center align-center px-0 px-md-2">
             <v-radio-group v-model="selected_gateway" row>
-              <v-radio color="primary" v-for="(item,index) in gateway_list" :value="item.title"
+              <v-radio color="primary" v-for="(item,index) in gateway_list"
+                       :key="index"
+                       :value="item.title"
                        active-class="active_radio">
                 <template v-slot:label>
                   <div id="logo_holder">

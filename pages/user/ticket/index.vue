@@ -50,6 +50,7 @@
             class="spacer mt-6 "
             no-gutters
             v-for="(message,index) in messages"
+            :key="message.id"
           >
             <v-col
               cols="3"

@@ -43,10 +43,10 @@
             :id="`item-${item.id}`"
             class="bookmark-target"
             cols="12" v-show="contentData.tests.length>0"
-            v-for="(item,key) in contentData.tests"
+            v-for="(item,key) in contentData.tests" :key="item.id"
           >
             <div id="test-question"
-                  class="d-flex"
+                 class="d-flex"
                  ref="mathJaxEl"
                  v-html="`${key+1})&nbsp;${item.question}`"/>
             <img :src="item.q_file"/>

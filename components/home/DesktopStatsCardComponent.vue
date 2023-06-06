@@ -4,7 +4,7 @@
     :class="'grade-card grade-card' + (itm_index + 1)">
     <p v-show="stat.showMore" class="total-content">
       <nuxt-link
-        v-for="item in stat.lessons"
+        v-for="item in stat.lessons" :key="stat.id"
         :to="`/search?type=test&section=${stat.section}&base=${stat.base}&lesson=${stat.lesson}&sortby=best`"
         class="content grade-list-lessons"
       >
@@ -41,6 +41,7 @@
         <v-card flat min-height="40" color="transparent" class="d-inline-block">
           <nuxt-link
             v-for="(item,itm_index) in stat.lessons.slice(0,3)"
+            :key="stat.id"
             :to="`/search?type=test&section=${stat.section}&base=${stat.base}&lesson=${stat.lesson}&sortby=best`"
             class="content grade-list-lessons"
           >

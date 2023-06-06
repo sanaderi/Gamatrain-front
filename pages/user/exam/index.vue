@@ -123,7 +123,7 @@
                       </td>
                     </tr>
                     <tr v-show="page_loading">
-                      <td cols="2" class="text-center">
+                      <td colspan="2" class="text-center">
                         <v-progress-circular
                           :size="40"
                           :width="4"

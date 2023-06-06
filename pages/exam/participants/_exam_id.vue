@@ -57,7 +57,6 @@
                   v-model="filter.school"
                   item-text="title"
                   item-value="id"
-                  :error-messages="errors"
                   label="School"
                   outlined
                   clearable
@@ -113,7 +112,7 @@
                       </td>
                     </tr>
                     <tr v-show="page_loading">
-                      <td cols="4" class="text-center">
+                      <td colspan="4" class="text-center">
                         <v-progress-circular
                           :size="40"
                           :width="4"
@@ -271,7 +270,7 @@ export default {
         this.page_loading = true;
         this.$axios.$get(`/api/v1/exams/participants/${this.$route.params.exam_id}`,
           {
-            params: {
+          params: {
               perpage: 20,
               page: this.page,
               section: this.filter.level,
@@ -316,7 +315,7 @@ export default {
           this.page_loading = true;
           this.timer = setTimeout(() => {
             this.page++
-            this.getExams();
+            this.getParticipants();
           }, 800)
         }
       }

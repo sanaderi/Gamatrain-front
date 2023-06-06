@@ -250,24 +250,7 @@ export default {
         {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
       ],
       title: this.tutorialInfo.title,
-      meta: [
 
-        // {
-        //   hid: `description`,
-        //   name: 'description',
-        //   content: tutorial.Description !== null ? tutorial.Description.replace(/<[^>]+>/g, '').replace("\n", " ").substr(0, 300) + '...' : ''
-        // },
-        // {
-        //   hid: `keywords`,
-        //   name: 'keywords',
-        //   keywords: tutorial.Title
-        // },
-        // {
-        //   hid: 'og:title',
-        //   name: 'og:title',
-        //   content: car.Title,
-        // },
-      ]
     }
   },
 

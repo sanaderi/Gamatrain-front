@@ -15,7 +15,9 @@
         <v-tab
           @click="openLink(item)"
           :disabled="item.status"
-          v-for="item in items">
+          v-for="(item,index) in items"
+          :key="index"
+        >
 
           <span>{{ item.title }}</span>
           <v-btn icon>

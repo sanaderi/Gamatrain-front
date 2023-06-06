@@ -279,6 +279,7 @@
                   <v-col cols="12" class="px-0 pt-0 px-sm-3 pt-sm-3">
                     <v-row
                       v-for="answer in contentData.replies.list"
+                      :key="answer.id"
                     >
                       <!--Score action-->
                       <v-col cols="1" class="pr-0 d-none d-md-block ">

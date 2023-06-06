@@ -1,6 +1,9 @@
 <template>
    <div class="content-items">
-      <v-card  rounded class="mb-1 content-item" v-for="(item,key) in items" >
+      <v-card  rounded class="mb-1 content-item"
+               v-for="(item,key) in items"
+               :key="item.id"
+      >
         <v-card-text class="pb-0">
           <v-row class="justify-center">
             <v-col md="2" sm="2" cols="3" class="py-0 pr-0">

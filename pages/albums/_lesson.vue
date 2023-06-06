@@ -257,7 +257,9 @@
                 <v-divider class="d-none d-md-block"/>
 
                 <v-row class="mt-1 d-none d-md-block">
-                  <v-col v-for="(item,key) in contentData.price" cols="12" class="pb-0">
+                  <v-col v-for="(item,key) in contentData.price"
+                         :key="key"
+                         cols="12" class="pb-0">
                     <v-btn v-if="key==='participation'" block color="success">
                       Start | {{item.price>0 ? '$'+item.price : 'Free'}}
                     </v-btn>
@@ -292,7 +294,9 @@
     <v-card class="order-btn-holder d-block d-md-none">
       <v-card-text class="pb-0">
         <v-row class="px-10 text-center">
-          <v-col v-for="(item,key) in contentData.price" cols="12" class="pb-1 pt-0">
+          <v-col v-for="(item,key) in contentData.price"
+                 :key="key"
+                 cols="12" class="pb-1 pt-0">
             <v-btn v-if="key==='participation'" block  color="success">
               Start | {{item.price>0 ? '$'+item.price : 'Free'}}
             </v-btn>

@@ -12,8 +12,9 @@
       >
         <v-tab
           @click="openLink(item)"
-          v-for="item in items">
-
+          v-for="(item,index) in items"
+          :key="index"
+        >
           <span>{{ item.title }}</span>
           <v-btn icon>
             <v-icon>

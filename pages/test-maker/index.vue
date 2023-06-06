@@ -62,7 +62,9 @@
           </v-col>
           <v-col cols="12" md="3"
                  v-else
-                 v-for="album in album_list">
+                 v-for="(album,index) in album_list"
+                 :key="index"
+          >
             <v-card>
               <v-card-title class="text-h4">
                 <nuxt-link :to="`/albums/${album.lesson}`">
@@ -73,7 +75,17 @@
                 <v-row>
                   <v-col cols="7">
                     <nuxt-link :to="`/albums/${album.lesson}`">
-                      <v-img class="album-img" :src="album.lesson_pic"/>
+                      <v-img class="album-img"
+                             v-if="album.lesson_pic"
+                             @error="imgErrorHandler(album,index)"
+                             :src="album.lesson_pic"/>
+<!--                      <v-card v-else flat  class="album-no-img mx-auto  fill-height align-center justify-center"
+                      >
+                        <v-card-text class="px-0">
+                          <p class="font-weight-bold mb-3 mt-5">{{ album.lesson_title }}</p>
+                          <a href="https://gamatrain.com">Gamatrain.com</a>
+                        </v-card-text>
+                      </v-card>-->
                     </nuxt-link>
                   </v-col>
                   <v-col cols="5" class="d-flex align-center justify-center pr-0">
@@ -288,6 +300,9 @@ export default {
         }
       }
     },
+    imgErrorHandler(item,key){
+      this.album_list[key].lesson_pic='';
+    }
 
   }
 }

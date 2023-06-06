@@ -3,6 +3,7 @@
     <p v-show="stat.showMore" class="total-content">
       <nuxt-link
         v-for="item in stat.lessons"
+        :key="item.id"
         :to="`/search?type=test&section=${stat.section}&base=${stat.base}&lesson=${stat.lesson}&sortby=best`"
         class="content grade-list-lessons"
       >
@@ -37,6 +38,7 @@
         <p class="d-inline-block">
           <nuxt-link
             v-for="(item,itm_index) in stat.lessons.slice(0,3)"
+            :key="stat.id"
             :to="`/search?type=test&section=${stat.section}&base=${stat.base}&lesson=${stat.lesson}&sortby=best`"
             class="content grade-list-lessons"
           >
@@ -54,6 +56,7 @@
         <p v-if="stat.showMore" class="total-content">
           <nuxt-link
             v-for="item in stat.lessons"
+            :key="item.id"
             :to="`/search?type=test&section=${stat.section}&base=${stat.base}&lesson=${stat.lesson}&sortby=best`"
             class="content"
           >

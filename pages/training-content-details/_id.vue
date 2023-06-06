@@ -56,6 +56,7 @@
                         <v-tab
                           class="black--text"
                           v-for="(tab,i) in content_tabs"
+                          :key="i"
                         >
                           {{ tab.title }}
                         </v-tab>

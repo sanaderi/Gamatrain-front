@@ -62,6 +62,7 @@
       >
         <v-list-item
           v-for="item in notifications"
+          :key="item.id"
           @click="openNotification(item.id)"
         >
           <v-list-item-icon class="mr-2 mt-1">

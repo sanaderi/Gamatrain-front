@@ -93,6 +93,7 @@
                   >
                   </v-radio>
                   <v-radio v-for="item in filter.section_list"
+                           :key="item.id"
                            :label="item.title"
                            color="red"
                            :value="item.id"
@@ -133,6 +134,7 @@
                 >
                 </v-radio>
                 <v-radio v-for="item in filter.base_list"
+                         :key="item.id"
                          :label="item.title"
                          color="red"
                          :value="item.id"
@@ -174,6 +176,7 @@
                 >
                 </v-radio>
                 <v-radio v-for="item in filter.lesson_list"
+                         :key="item.id"
                          :label="item.title"
                          color="red"
                          :value="item.id"
@@ -214,6 +217,7 @@
                 </v-radio>
                 <v-radio
                   v-for="item in filter.topic_list"
+                  :key="item.id"
                   :label="item.title"
                   color="red"
                   :value="item.id"
@@ -257,6 +261,7 @@
                 </v-radio>
                 <v-radio
                   v-for="item in filter.file_type_list"
+                  :key="item.id"
                   :label="item.title"
                   color="red"
                   :value="item.id"

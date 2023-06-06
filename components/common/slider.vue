@@ -9,6 +9,7 @@
         <v-row class="stat-sec mx-auto">
           <v-col cols="2"
                  v-for="(item, index) in statList"
+                 :key="index"
                  class="d-flex justify-center align-center stat-holder mt-5">
                   <div
                     class="
