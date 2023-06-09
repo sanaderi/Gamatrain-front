@@ -60,12 +60,12 @@
               Oops! no data found
             </p>
           </v-col>
-          <v-col cols="12" md="3"
+          <v-col cols="12" sm="6" md="3"
                  v-else
                  v-for="(album,index) in album_list"
                  :key="index"
           >
-            <v-card>
+            <v-card class="album-card">
               <v-card-title class="text-h4">
                 <nuxt-link :to="`/albums/${album.lesson}`">
                   {{ album.lesson_title }} album
@@ -79,13 +79,15 @@
                              v-if="album.lesson_pic"
                              @error="imgErrorHandler(album,index)"
                              :src="album.lesson_pic"/>
-<!--                      <v-card v-else flat  class="album-no-img mx-auto  fill-height align-center justify-center"
+                      <v-card v-else flat
+                              class="album-no-img container mx-auto  fill-height
+                               align-center justify-center"
                       >
                         <v-card-text class="px-0">
                           <p class="font-weight-bold mb-3 mt-5">{{ album.lesson_title }}</p>
                           <a href="https://gamatrain.com">Gamatrain.com</a>
                         </v-card-text>
-                      </v-card>-->
+                      </v-card>
                     </nuxt-link>
                   </v-col>
                   <v-col cols="5" class="d-flex align-center justify-center pr-0">
@@ -251,7 +253,7 @@ export default {
       })
     },
     getAlbumList() {
-      if (this.all_files_loaded===false) {
+      if (this.all_files_loaded === false) {
         this.page_loading = true;
         this.$axios.$get('/api/v1/albums', {
           params: {
@@ -262,13 +264,13 @@ export default {
           }
         })
           .then(response => {
-            let result=response.data.list;
+            let result = response.data.list;
             for (var index in result) {
               if (this.album_list.findIndex(x => x.id === result[index].id) == -1)
                 this.album_list.push(result[index]);
             }
 
-            console.log("Length"+result.length);
+            console.log("Length" + result.length);
             if (result.length === 0)//For terminate auto load request
               this.all_files_loaded = true;
           }).catch(err => {
@@ -300,8 +302,8 @@ export default {
         }
       }
     },
-    imgErrorHandler(item,key){
-      this.album_list[key].lesson_pic='';
+    imgErrorHandler(item, key) {
+      this.album_list[key].lesson_pic = '';
     }
 
   }

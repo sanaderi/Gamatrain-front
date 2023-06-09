@@ -2127,25 +2127,26 @@ body {
   }
 
 
-  .album-no-img {
-    width: 13rem;
-    min-width: 13rem;
-    min-height: 16rem;
-    max-height: 16rem;
+  .album-card{
+    .album-no-img {
+      width: 100%;
+      aspect-ratio: 3/4;
 
-    padding: 0 4.4px 4.4px 4.4px;
-    text-align: center;
-    background-color: #f9f3f3 !important;
-    border-radius: 8px;
+      padding: 0 4.4px 4.4px 4.4px;
+      text-align: center;
+      background-color: #f9f3f3 !important;
+      border-radius: 8px;
 
-    p {
-      font-size: 1rem !important;
-    }
+      p {
+        font-size: 1rem !important;
+      }
 
-    a {
-      font-size: 1rem;
+      a {
+        font-size: 1rem;
+      }
     }
   }
+
 
 
 }
@@ -2176,23 +2177,25 @@ body {
     }
   }
 
-  .album-no-img {
-    width: 13rem;
-    min-width: 13rem;
-    min-height: 16rem;
-    max-height: 16rem;
+  .album-card{
+     min-height: 29rem;
 
-    padding: 0 4.4px 4.4px 4.4px;
-    text-align: center;
-    background-color: #f9f3f3 !important;
-    border-radius: 8px;
+    .album-no-img {
+      width: 100%;
+      aspect-ratio: 3/4;
 
-    p {
-      font-size: 1rem !important;
-    }
+      padding: 0 4.4px 4.4px 4.4px;
+      text-align: center;
+      background-color: #f9f3f3 !important;
+      border-radius: 8px;
 
-    a {
-      font-size: 1rem;
+      p {
+        font-size: 1rem !important;
+      }
+
+      a {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -2224,23 +2227,24 @@ body {
     }
   }
 
-  .album-no-img {
-    width: 12rem;
-    min-width: 12rem;
-    min-height: 22rem;
-    max-height: 22rem;
+  .album-card{
+     min-height: 30rem;
+    .album-no-img {
+      width: 100%;
+      aspect-ratio: 3/4;
 
-    padding: 0 4.4px 4.4px 4.4px;
-    text-align: center;
-    background-color: #f9f3f3 !important;
-    border-radius: 8px;
+      padding: 0 4.4px 4.4px 4.4px;
+      text-align: center;
+      background-color: #f9f3f3 !important;
+      border-radius: 8px;
 
-    p {
-      font-size: 1.6rem !important;
-    }
+      p {
+        font-size: 1.2rem !important;
+      }
 
-    a {
-      font-size: 1.4rem;
+      a {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -3908,6 +3912,8 @@ body {
   .album-card {
     .album-img {
       border-radius: 1rem;
+      width: 100%;
+      aspect-ratio: 3/4;
     }
 
     .price_label {

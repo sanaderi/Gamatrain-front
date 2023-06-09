@@ -417,6 +417,9 @@ export default {
         this.getPaperList();
       })
         .catch(e => {
+          if (e.response.status==400)
+            this.$toast.error(e.response.data.message);
+
           this.delete_paper_id = null;
           this.deleteConfirmDialog = false;
         }).finally(()=>{
