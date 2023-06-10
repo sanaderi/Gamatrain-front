@@ -247,7 +247,7 @@ export default {
   head() {
     return {
       script: [
-        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
+        {src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
       ],
       title: this.tutorialInfo.title,
 

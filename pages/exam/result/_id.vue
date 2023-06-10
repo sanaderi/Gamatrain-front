@@ -437,7 +437,7 @@ export default {
     return {
       title: 'Online exam result',
       script: [
-        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
+        {src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
       ],
     }
   },

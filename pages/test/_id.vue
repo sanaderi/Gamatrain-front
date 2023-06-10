@@ -195,7 +195,7 @@ export default {
     return {
       // title: this.$refs["test-question"].innerText
       script: [
-        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`, defer: true}
+        {src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`, defer: true}
       ],
     }
   },

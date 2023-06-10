@@ -45,11 +45,15 @@
             cols="12" v-show="contentData.tests.length>0"
             v-for="(item,key) in contentData.tests" :key="item.id"
           >
-            <div id="test-question"
-                 class="d-flex"
-                 ref="mathJaxEl"
-                 v-html="`${key+1})&nbsp;${item.question}`"/>
-            <img :src="item.q_file"/>
+            <div id="test-question">
+              <div  class="d-flex">
+                <div>{{ key + 1 }})&nbsp;</div>
+                <div
+                  ref="mathJaxEl"
+                  v-html="`${item.question}`"/>
+              </div>
+              <img :src="item.q_file"/>
+            </div>
 
             <v-radio-group @change="updateNotAnswerData(item.id)" v-model="examStats.answerData[item.id]">
               <v-radio value="1">
@@ -142,7 +146,7 @@ export default {
     return {
       title: 'Start online exam',
       script: [
-        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
+        {src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
       ],
     }
   },
