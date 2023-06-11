@@ -38,7 +38,6 @@ build/Release
 node_modules/
 jspm_packages/
 
-static/assets/packages/MathJax/
 
 # TypeScript v1 declaration files
 typings/
