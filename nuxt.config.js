@@ -1,6 +1,11 @@
 import colors from 'vuetify/es5/util/colors'
+import { defineNuxtConfig } from '@nuxt/bridge'
 
-export default {
+export default defineNuxtConfig({
+   bridge:{
+     meta: true
+   },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
 
   head: {
@@ -61,13 +66,13 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    "@nuxt/typescript-build",
+    // "@nuxt/typescript-build",
     'nuxt-leaflet',
     // https://go.nuxtjs.dev/vuetify
     ["@nuxtjs/vuetify"],
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
-    '@nuxtjs/pwa',
+    '@nuxtjs/pwa'
 
     // '@nuxtjs/onesignal',
   ],
@@ -196,7 +201,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ["vee-validate", "vue-chartjs"],
+    transpile: ["vee-validate", "vue-chartjs","ofetch","node-fetch-native","defu"],
   },
 
   pwa: {
@@ -213,4 +218,4 @@ export default {
     host: "0.0.0.0",
     port: 3002
   }
-};
+});
