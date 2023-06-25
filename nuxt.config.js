@@ -203,7 +203,7 @@ export default defineNuxtConfig({
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ["vee-validate", "vue-chartjs","ofetch","node-fetch-native","defu"],
+    transpile: ["vee-validate", "vue-chartjs","ofetch","node-fetch-native","defu","vuex-persist"],
   },
 
   pwa: {
