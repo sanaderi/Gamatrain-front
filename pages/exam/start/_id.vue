@@ -46,7 +46,7 @@
             v-for="(item,key) in contentData.tests" :key="item.id"
           >
             <div id="test-question">
-              <div  class="d-flex">
+              <div class="d-flex">
                 <div>{{ key + 1 }})&nbsp;</div>
                 <div
                   ref="mathJaxEl"
@@ -174,7 +174,6 @@ export default {
       submit_loading: false,
       answerForm: [],
 
-      allExamStats: [],
       examStats: {
         id: '',
         remainTime: 0,
@@ -187,39 +186,72 @@ export default {
     }
   },
   mounted() {
-    if (this.$cookies.get('allExamStats'))
-      this.allExamStats = this.$cookies.get('allExamStats');
-    this.examStats.id = this.contentData.exam.id;
+    // if (this.$cookies.get('allExamStats'))
+    //   this.allExamStats = this.$cookies.get('allExamStats');
 
-    var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
+    const index = this.allExamStats.findIndex(obj => obj.id === this.examStats.id);
+    console.log("hhhhhh" + index);
+    console.log(this.allExamStats[index]);
+    // this.initNotAnswered();
+    // console.log(this.examStats.notAnsweredArr)
+    // var payload={
+    //   id:this.examStats.id,
+    //   time:this.contentData.exam.azmoon_time*60,
+    //   notAnsweredArr:this.examStats.notAnsweredArr//When not exist already
+    // }
+    //   this.$store.commit('user/setCurrentExam', payload)
+
+    // console.log("test444" + index)
     if (index !== -1) {
-      this.examStats.remainTime = this.allExamStats[index].remainTime;
-      this.examStats.answerData = this.allExamStats[index].answerData;
-      this.examStats.nextNotAnswer = this.allExamStats[index].nextNotAnswer;
-      if (this.allExamStats[index].notAnsweredArr.length == 0
-        || this.allExamStats[index].notAnsweredArr == undefined)
-        this.initNotAnswered();
-      else
-        this.examStats.notAnsweredArr = this.allExamStats[index].notAnsweredArr;
-
-      this.examStats.pinQuestionsArr =
-        this.allExamStats[index].pinQuestionsArr != undefined
-          ? this.allExamStats[index].pinQuestionsArr : [];
+      //   this.examStats.remainTime = this.allExamStats[index].remainTime;
+      //   this.examStats.answerData = this.allExamStats[index].answerData;
+      //   this.examStats.nextNotAnswer = this.allExamStats[index].nextNotAnswer;
+      //   if (this.allExamStats[index].notAnsweredArr.length == 0
+      //     || this.allExamStats[index].notAnsweredArr == undefined)
+      //     this.initNotAnswered();
+      //   else
+      //     this.examStats.notAnsweredArr = this.allExamStats[index].notAnsweredArr;
+      //
+      //   this.examStats.pinQuestionsArr =
+      //     this.allExamStats[index].pinQuestionsArr != undefined
+      //       ? this.allExamStats[index].pinQuestionsArr : [];
     } else {
-      this.examStats.remainTime = this.contentData.exam.azmoon_time * 60;
-      this.initNotAnswered();
+      //   this.examStats.remainTime = this.contentData.exam.azmoon_time * 60;
+      //   this.initNotAnswered();
     }
 
     this.countDownTimer();
     this.renderMathJax();
 
   },
+
+
+  computed: {
+    // allExamStats() {
+    //   return this.$store.state.allExamStats2 || []
+    // },
+  },
   watch: {
     "examStats.answerData"(val) {
       this.updateLocalStorage();
+      if (val){
+        this.updateStats();
+        console.log(val);
+        console.log('has value');
+      }else{
+        console.log("no value");
+      }
+      console.log(this.$cookies.get('allExamStats'))
     }
   },
   methods: {
+    updateStats() {
+      const updatedData = this.allExamStats;
+      this.$store.commit('user/setExamStats', updatedData);
+
+      // You can also dispatch an action to update the state asynchronously if needed
+    },
+
     updateLocalStorage() {
       var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
       if (index === -1)
@@ -318,7 +350,7 @@ export default {
           this.updateLocalStorage();
         }, 1000)
       } else {
-        this.endExam();
+        // this.endExam();
       }
     },
 

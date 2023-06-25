@@ -58,6 +58,8 @@ export default defineNuxtConfig({
     {src: 'plugins/vue-emoji-picker', ssr: false},
     {src: 'plugins/img-cropper', ssr: false},
     {src: 'plugins/vuedraggable', ssr: false},
+    {src: 'plugins/vuex-persist.js'}
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
