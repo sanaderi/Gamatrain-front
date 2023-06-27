@@ -58,7 +58,7 @@ export default defineNuxtConfig({
     {src: 'plugins/vue-emoji-picker', ssr: false},
     {src: 'plugins/img-cropper', ssr: false},
     {src: 'plugins/vuedraggable', ssr: false},
-    {src: 'plugins/vuex-persist.js'}
+    {src: 'plugins/vuex-persist', ssr: false},
 
   ],
 
@@ -203,7 +203,7 @@ export default defineNuxtConfig({
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ["vee-validate", "vue-chartjs","ofetch","node-fetch-native","defu","vuex-persist"],
+    transpile: ["vee-validate", "vue-chartjs","ofetch","node-fetch-native","defu"],
   },
 
   pwa: {

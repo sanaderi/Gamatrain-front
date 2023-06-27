@@ -20,7 +20,7 @@
             </a>
           </v-col>
           <v-col cols="4">
-            <a :href="examStats.nextPin ? `#item-${examStats.nextPin}` : ''"
+            <a :href="examStats.nextPin ? `#item-${examStats.nextPin}` : '#'"
                @click="updateNextPin()">Pined question:
               <v-chip label color="teal" dark>
                 {{ examStats.pinQuestionsArr.length }}
@@ -174,6 +174,7 @@ export default {
       submit_loading: false,
       answerForm: [],
 
+      allExamStats: [],
       examStats: {
         id: '',
         remainTime: 0,
@@ -186,72 +187,39 @@ export default {
     }
   },
   mounted() {
-    // if (this.$cookies.get('allExamStats'))
-    //   this.allExamStats = this.$cookies.get('allExamStats');
+    if (localStorage.getItem('allExamStats'))
+      this.allExamStats = JSON.parse(localStorage.getItem('allExamStats'));
+    this.examStats.id = this.contentData.exam.id;
 
-    const index = this.allExamStats.findIndex(obj => obj.id === this.examStats.id);
-    console.log("hhhhhh" + index);
-    console.log(this.allExamStats[index]);
-    // this.initNotAnswered();
-    // console.log(this.examStats.notAnsweredArr)
-    // var payload={
-    //   id:this.examStats.id,
-    //   time:this.contentData.exam.azmoon_time*60,
-    //   notAnsweredArr:this.examStats.notAnsweredArr//When not exist already
-    // }
-    //   this.$store.commit('user/setCurrentExam', payload)
-
-    // console.log("test444" + index)
+    var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
     if (index !== -1) {
-      //   this.examStats.remainTime = this.allExamStats[index].remainTime;
-      //   this.examStats.answerData = this.allExamStats[index].answerData;
-      //   this.examStats.nextNotAnswer = this.allExamStats[index].nextNotAnswer;
-      //   if (this.allExamStats[index].notAnsweredArr.length == 0
-      //     || this.allExamStats[index].notAnsweredArr == undefined)
-      //     this.initNotAnswered();
-      //   else
-      //     this.examStats.notAnsweredArr = this.allExamStats[index].notAnsweredArr;
-      //
-      //   this.examStats.pinQuestionsArr =
-      //     this.allExamStats[index].pinQuestionsArr != undefined
-      //       ? this.allExamStats[index].pinQuestionsArr : [];
+      this.examStats.remainTime = this.allExamStats[index].remainTime;
+      this.examStats.answerData = this.allExamStats[index].answerData;
+      this.examStats.nextNotAnswer = this.allExamStats[index].nextNotAnswer;
+      if (this.allExamStats[index].notAnsweredArr.length == 0
+        || this.allExamStats[index].notAnsweredArr == undefined)
+        this.initNotAnswered();
+      else
+        this.examStats.notAnsweredArr = this.allExamStats[index].notAnsweredArr;
+
+      this.examStats.pinQuestionsArr =
+        this.allExamStats[index].pinQuestionsArr != undefined
+          ? this.allExamStats[index].pinQuestionsArr : [];
     } else {
-      //   this.examStats.remainTime = this.contentData.exam.azmoon_time * 60;
-      //   this.initNotAnswered();
+      this.examStats.remainTime = this.contentData.exam.azmoon_time * 60;
+      this.initNotAnswered();
     }
 
     this.countDownTimer();
     this.renderMathJax();
 
   },
-
-
-  computed: {
-    // allExamStats() {
-    //   return this.$store.state.allExamStats2 || []
-    // },
-  },
   watch: {
     "examStats.answerData"(val) {
       this.updateLocalStorage();
-      if (val){
-        this.updateStats();
-        console.log(val);
-        console.log('has value');
-      }else{
-        console.log("no value");
-      }
-      console.log(this.$cookies.get('allExamStats'))
     }
   },
   methods: {
-    updateStats() {
-      const updatedData = this.allExamStats;
-      this.$store.commit('user/setExamStats', updatedData);
-
-      // You can also dispatch an action to update the state asynchronously if needed
-    },
-
     updateLocalStorage() {
       var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
       if (index === -1)
@@ -259,7 +227,7 @@ export default {
       else {
         this.allExamStats[index] = this.examStats;
       }
-      this.$cookies.set('allExamStats', this.allExamStats);
+      localStorage.setItem('allExamStats', JSON.stringify(this.allExamStats));
     },
 
     initNotAnswered() {
@@ -293,13 +261,13 @@ export default {
       this.submit_loading = true;
 
 
-      //Delete from cookie
+      //Delete from local storage
       var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
       if (index !== -1) {
         this.$delete(this.allExamStats, index);
-        this.$cookies.set('allExamStats', this.allExamStats);
+        localStorage.setItem('allExamStats', JSON.stringify(this.allExamStats));
       }
-      //End delete from cookie
+      //End delete from local storage
 
       const querystring = require('querystring');
       this.$axios.$post(`/api/v1/exams/end/${this.contentData.exam.id}`,
@@ -350,7 +318,7 @@ export default {
           this.updateLocalStorage();
         }, 1000)
       } else {
-        // this.endExam();
+        this.endExam();
       }
     },
 
@@ -372,13 +340,20 @@ export default {
     //End convert seconds to readable HH:ii:ss format
 
     pinQuestion(question_id) {
-      this.examStats.pinQuestionsArr.push(question_id);
-
-      //Init next pin for first time
-      if (this.examStats.pinQuestionsArr.length === 1)
-        this.examStats.nextPin = question_id;
+      var index = this.examStats.pinQuestionsArr.findIndex(val => val == question_id);
+      if (index === -1){
+        this.examStats.pinQuestionsArr.push(question_id);
+        //Init next pin for first time
+        if (this.examStats.pinQuestionsArr.length === 1)
+          this.examStats.nextPin = question_id;
+      }
+      else{
+        this.examStats.pinQuestionsArr.splice(index,1);
+      }
 
       this.updateLocalStorage();
+
+
     },
 
     updateNextPin() {

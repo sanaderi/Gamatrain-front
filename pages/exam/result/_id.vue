@@ -512,7 +512,14 @@ export default {
     }
   },
   mounted() {
-
+    //Delete current exam from local storage
+    const allExamStats=JSON.parse(localStorage.getItem('allExamStats'));
+    var index = allExamStats.findIndex(x => x.id == this.contentData.exam.id);
+    if (index !== -1) {
+      this.$delete(allExamStats, index);
+      localStorage.setItem('allExamStats', JSON.stringify(allExamStats));
+    }
+    //End delete current exam from local storage
   },
   methods: {
     //Download file
