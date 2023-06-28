@@ -1,6 +1,11 @@
 import colors from 'vuetify/es5/util/colors'
+import { defineNuxtConfig } from '@nuxt/bridge'
 
-export default {
+export default defineNuxtConfig({
+   bridge:{
+     meta: true
+   },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
 
   head: {
@@ -26,9 +31,15 @@ export default {
       {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=PT+Sans&display=swap"},
     ],
     script: [
-      {src: 'https://accounts.google.com/gsi/client',defer:true,async:true},
+      {src: 'https://accounts.google.com/gsi/client', defer: true, async: true},
       // {src: './assets/js/jquery.js', body: true},
       // {src: './assets/js/video.min.js', body: true},
+    ],
+  },
+
+  generate: {
+    routes: [
+      '/'
     ],
   },
 
@@ -47,6 +58,8 @@ export default {
     {src: 'plugins/vue-emoji-picker', ssr: false},
     {src: 'plugins/img-cropper', ssr: false},
     {src: 'plugins/vuedraggable', ssr: false},
+    {src: 'plugins/vuex-persist', ssr: false},
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -55,13 +68,14 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    "@nuxt/typescript-build",
+    // "@nuxt/typescript-build",
     'nuxt-leaflet',
     // https://go.nuxtjs.dev/vuetify
     ["@nuxtjs/vuetify"],
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
-    '@nuxtjs/pwa',
+    '@nuxtjs/pwa'
+
     // '@nuxtjs/onesignal',
   ],
 
@@ -88,7 +102,7 @@ export default {
 
   axios: {
     proxy: false,
-    baseURL:process.env.API_BASE_URL,
+    baseURL: process.env.API_BASE_URL,
     headers: {}
   },
 
@@ -166,7 +180,7 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    defaultAssets:false,
+    defaultAssets: false,
     customVariables: ["~/assets/variables.scss"],
     theme: {
       dark: false,
@@ -189,14 +203,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ["vee-validate","vue-chartjs"],
+    transpile: ["vee-validate", "vue-chartjs","ofetch","node-fetch-native","defu"],
   },
 
   pwa: {
     manifest: {
       name: 'Gamatrain App',
-      short_name:'Gamatrain',
-      description:'Big training platform',
+      short_name: 'Gamatrain',
+      description: 'Big training platform',
       lang: 'en',
       useWebmanifestExtension: false
     }
@@ -206,4 +220,4 @@ export default {
     host: "0.0.0.0",
     port: 3002
   }
-};
+});
