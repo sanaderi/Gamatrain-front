@@ -20,7 +20,7 @@
             </a>
           </v-col>
           <v-col cols="4">
-            <a :href="examStats.nextPin ? `#item-${examStats.nextPin}` : ''"
+            <a :href="examStats.nextPin ? `#item-${examStats.nextPin}` : '#'"
                @click="updateNextPin()">Pined question:
               <v-chip label color="teal" dark>
                 {{ examStats.pinQuestionsArr.length }}
@@ -46,7 +46,7 @@
             v-for="(item,key) in contentData.tests" :key="item.id"
           >
             <div id="test-question">
-              <div  class="d-flex">
+              <div class="d-flex">
                 <div>{{ key + 1 }})&nbsp;</div>
                 <div
                   ref="mathJaxEl"
@@ -187,8 +187,8 @@ export default {
     }
   },
   mounted() {
-    if (this.$cookies.get('allExamStats'))
-      this.allExamStats = this.$cookies.get('allExamStats');
+    if (localStorage.getItem('allExamStats'))
+      this.allExamStats = JSON.parse(localStorage.getItem('allExamStats'));
     this.examStats.id = this.contentData.exam.id;
 
     var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
@@ -227,7 +227,7 @@ export default {
       else {
         this.allExamStats[index] = this.examStats;
       }
-      this.$cookies.set('allExamStats', this.allExamStats);
+      localStorage.setItem('allExamStats', JSON.stringify(this.allExamStats));
     },
 
     initNotAnswered() {
@@ -261,13 +261,13 @@ export default {
       this.submit_loading = true;
 
 
-      //Delete from cookie
+      //Delete from local storage
       var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
       if (index !== -1) {
         this.$delete(this.allExamStats, index);
-        this.$cookies.set('allExamStats', this.allExamStats);
+        localStorage.setItem('allExamStats', JSON.stringify(this.allExamStats));
       }
-      //End delete from cookie
+      //End delete from local storage
 
       const querystring = require('querystring');
       this.$axios.$post(`/api/v1/exams/end/${this.contentData.exam.id}`,
@@ -340,13 +340,20 @@ export default {
     //End convert seconds to readable HH:ii:ss format
 
     pinQuestion(question_id) {
-      this.examStats.pinQuestionsArr.push(question_id);
-
-      //Init next pin for first time
-      if (this.examStats.pinQuestionsArr.length === 1)
-        this.examStats.nextPin = question_id;
+      var index = this.examStats.pinQuestionsArr.findIndex(val => val == question_id);
+      if (index === -1){
+        this.examStats.pinQuestionsArr.push(question_id);
+        //Init next pin for first time
+        if (this.examStats.pinQuestionsArr.length === 1)
+          this.examStats.nextPin = question_id;
+      }
+      else{
+        this.examStats.pinQuestionsArr.splice(index,1);
+      }
 
       this.updateLocalStorage();
+
+
     },
 
     updateNextPin() {

@@ -286,13 +286,13 @@
                     </v-btn>
 
                     <v-btn v-else-if="key==='word'" block color="primary">
-                      Download WORD file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+                      WORD file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
                     </v-btn>
                     <v-btn
                       @click="startDownload()"
                       :loading="download_loading"
                       v-else-if="key==='pdf'" block color="error">
-                      Download PDF file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+                      PDF file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -323,10 +323,12 @@
                  cols="12" class="pb-1 pt-0">
             <v-btn v-show="!$auth.loggedIn"
                    @click="openAuthDialog('login')"
-                   v-if="key==='participation'" block color="success">
+                   v-if="key==='participation'"
+                   block color="success">
               Start | {{ item.price > 0 ? '$' + item.price : 'Free' }}
             </v-btn>
-            <v-btn v-show="$auth.loggedIn" :to="`/exam/start/${contentData.id}`" v-if="key==='participation'" block
+            <v-btn v-show="$auth.loggedIn"
+                   :to="`/exam/start/${contentData.id}`" v-if="key==='participation'" block
                    color="success">
               <span v-if="contentData.examUserData.status==1">
                  Show result
@@ -336,10 +338,10 @@
               </span>
             </v-btn>
             <v-btn v-else-if="key==='word'" block color="primary">
-              Download WORD file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+              WORD file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
             </v-btn>
             <v-btn v-else-if="key==='pdf'" block color="error">
-              Download PDF file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+              PDF file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
             </v-btn>
           </v-col>
 
