@@ -289,7 +289,8 @@ export default {
           if (response.data.list.length === 0)//For terminate auto load request
             this.all_files_loaded = true;
         }).catch(err => {
-          console.log(err);
+          if (err.response.status == 403)
+            this.$auth.logout();
         }).finally(() => {
             this.page_loading = false;
           }
@@ -416,6 +417,9 @@ export default {
         this.getPaperList();
       })
         .catch(e => {
+          if (e.response.status==400)
+            this.$toast.error(e.response.data.message);
+
           this.delete_paper_id = null;
           this.deleteConfirmDialog = false;
         }).finally(()=>{

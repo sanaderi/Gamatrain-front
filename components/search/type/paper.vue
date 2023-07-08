@@ -1,9 +1,10 @@
 <template>
     <div class="content-items">
-      <v-card rounded class="mb-1 content-item" v-for="item in items" :key="item.value">
+      <v-card rounded
+              class="mb-1 content-item" v-for="item in items" :key="item.value">
         <v-card-text class="pb-0">
           <v-row >
-            <v-col md="2" cols="3" class="py-4">
+            <v-col md="2" sm="2" cols="3" class="py-4">
               <div class="item-img">
                 <v-img v-if="item.lesson_pic"
                        :src="item.lesson_pic" :alt="item.lesson_title"
@@ -21,13 +22,13 @@
                     </v-row>
                   </template>
                 </v-img>
-                <v-card v-else class="book-no-img ">
+                <v-card v-else class="book-no-img mx-autofill-height align-center justify-center ">
                   <p class="font-weight-bold mb-3 mt-5">{{ item.lesson_title }}</p>
                   <a href="https://gamatrain.com">Gamatrain.com</a>
                 </v-card>
               </div>
             </v-col>
-            <v-col md="10" cols="9" class="px-0 pb-0 py-md-4">
+            <v-col md="10" sm="10" cols="9" class="px-0 pb-0 py-md-4">
               <v-card flat class="fill-height tutorial-content d-flex flex-column pl-3 pl-md-0 justify-space-between">
                 <v-card-text class="pa-0">
                   <div class="tutorial-title d-flex justify-space-between">
@@ -66,13 +67,13 @@
                   </div>
                 </v-card-text>
                 <!--Item card footer-->
-                <v-card-actions class="item-content-footer pb-2  d-none d-md-block">
+                <v-card-actions class="item-content-footer pb-2  d-none d-sm-block">
                   <v-row>
-                    <v-col cols="8" class="px-0">
+                    <v-col cols="9" class="px-0">
                       <div class="d-flex pt-3 pt-md-0">
                         <div class="item-content-user d-flex align-center">
                           <v-avatar size="2em">
-                            <img :src="require('~/assets/images/defaultAvatar1.jpg')"
+                            <img :src="item.avatar"
                                  alt="Avatar">
                           </v-avatar>
                           <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>
@@ -80,10 +81,10 @@
 
                         <div
                           class="item-content-last-update d-flex align-center mx-auto">
-                          <i class="fa-solid fa-sticky-note"></i>
+                          <i class="fa-solid fa-sticky-note fa-xl"></i>
                           <p class="mx-2">
-                    <span class="d-none d-md-inline">
-                      Test type:
+                    <span class="d-none d-sm-inline">
+                      Paper type:
                     </span>
                             <span class="date_string d-inline-block">
                       {{ item.test_type_title }}
@@ -92,9 +93,9 @@
                         </div>
                         <div
                           class="item-content-last-update d-flex align-center mx-auto">
-                          <i class="fa-solid fa-eye"></i>
+                          <i class="fa-solid fa-eye fa-xl"></i>
                           <p class="mx-2">
-                    <span class="d-none d-md-inline">
+                    <span class="d-none d-sm-inline">
                       Views:
                     </span>
                             <span class="date_string d-inline-block">
@@ -104,9 +105,9 @@
                         </div>
                         <div
                           class="item-content-last-update d-flex align-center mx-auto">
-                          <i class="fa-solid fa-calendar-days"></i>
+                          <i class="fa-solid fa-calendar-days fa-xl"></i>
                           <p class="mx-2">
-                    <span class="d-none d-md-inline">
+                    <span class="d-none d-sm-inline">
                       Last update:
                     </span>
                             <span class="date_string d-inline-block">
@@ -116,9 +117,8 @@
                         </div>
 
                       </div>
-
                     </v-col>
-                    <v-col cols="4" >
+                    <v-col cols="3" >
                       <div class="text-right align-right float-right d-flex align-content-center  " >
                         <nuxt-link icon :to="`/papers/${item.id}/${item.title_url}`">
                           <span v-show="item.q_file_word"  class="fa-solid fa-file-word fa-2xl blue--text "></span>
@@ -135,13 +135,13 @@
             </v-col>
           </v-row>
         </v-card-text>
-        <v-card-actions class="item-content-footer py-0 d-block d-md-none">
+        <v-card-actions class="item-content-footer py-0 d-block d-sm-none">
           <v-row>
             <v-col cols="10" class="py-0">
               <div class="d-flex pt-2">
                 <div class="item-content-user d-flex align-center">
                   <v-avatar size="1.28em">
-                    <img :src="require('~/assets/images/defaultAvatar1.jpg')"
+                    <img :src="item.avatar"
                          alt="Avatar">
                   </v-avatar>
                   <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>
@@ -151,8 +151,8 @@
                   class="item-content-last-update d-flex align-center mx-auto">
                   <i class="fa-solid fa-sticky-note"></i>
                   <p class="mx-2">
-                    <span class="d-none d-md-inline">
-                      Test type:
+                    <span class="d-none d-sm-inline">
+                      Paper type:
                     </span>
                     <span class="date_string d-inline-block">
                       {{ item.test_type_title }}
@@ -163,7 +163,7 @@
                   class="item-content-last-update d-flex align-center mx-auto">
                   <i class="fa-solid fa-eye"></i>
                   <p class="mx-2">
-                    <span class="d-none d-md-inline">
+                    <span class="d-none d-sm-inline">
                       Views:
                     </span>
                     <span class="date_string d-inline-block">
@@ -175,7 +175,7 @@
                   class="item-content-last-update d-flex align-center mx-auto">
                   <i class="fa-solid fa-calendar-days"></i>
                   <p class="mx-2">
-                    <span class="d-none d-md-inline">
+                    <span class="d-none d-sm-inline">
                       Last update:
                     </span>
                     <span class="date_string d-inline-block">

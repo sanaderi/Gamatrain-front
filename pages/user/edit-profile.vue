@@ -1,6 +1,6 @@
 <template>
 <div>
-  <p class="text-h4">Edit profile</p>
+  <p class="text-h4">Edit Profile</p>
 </div>
 </template>
 

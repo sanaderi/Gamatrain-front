@@ -192,7 +192,7 @@ export default {
     return {
       sidebar: false,
       dialog: false,
-      logo: "mainlogo4.png",
+      logo: "mainlogo-gamatrain.png",
       avatar: "dexter-morse.png",
       wallet: "کیف پول:",
       walletBalance: "2000 تومان",
@@ -247,8 +247,8 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            {title: "9th coordinated exams", link: ""},
-            {title: "6th coordinated exams", link: ""},
+            {title: "9th coordinated exam", link: ""},
+            {title: "6th coordinated exam", link: ""},
             {title: "12th Coordinated Exams", link: ""},
           ],
         }

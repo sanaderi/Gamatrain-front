@@ -1,10 +1,11 @@
 <template>
-  <v-card :class="'mx-auto feed-card ' + feed.class">
-    <v-list>
-      <v-subheader
-        v-if="feed.header"
-        class="d-none d-md-flex align-center feed-header"
-      >
+  <v-card min-height="680" :class="'feed-card ' + feed.class">
+    <v-list style="width: 100%!important;">
+      <nuxt-link :to="feed.more_link">
+        <v-subheader
+          v-if="feed.header"
+          class="d-none d-md-flex align-center feed-header"
+        >
         <span
           :class="
             'd-flex align-center me-2 icon icong-' +
@@ -13,62 +14,73 @@
             feed.class
           "
         ></span>
-        {{ feed.header }}
-      </v-subheader>
-
+          {{ feed.header }}
+        </v-subheader>
+      </nuxt-link>
       <v-list-item
         v-for="(item, index) in feed.contentItemList"
         :key="index"
-        class="feeds"
+        class="feed_item  align-self-start"
       >
-        <nuxt-link to="" class="pa-2">
-          <v-list-item-content class="pt-0 pr-1">
-            <p class="mb-1 feed-title">{{ item.title }}</p>
+        <v-card width="100%" flat class="d-inline-block ">
+          <v-list-item-content  class="pt-0 pr-1">
+            <nuxt-link v-html="item.title" :to="`${feed.main_link}/${item.id}`" class="pb-2 feed-title"/>
             <v-list-item-subtitle
               class="feed-subtitle d-flex justify-space-between"
             >
               <div class="d-flex align-center">
                 <v-list-item-avatar class="ma-0 ms-1 mr-3 avatar-parent">
                     <v-img
-                      :src="require('@/assets/images/' + item.avatar)"
+                      :src="item.avatar"
                     ></v-img>
                 </v-list-item-avatar>
-                <p>{{ item.name }}</p>
+                <span v-if="feed.main_link=='qa'">{{ item.first_name }} {{ item.last_name }}</span>
+                <nuxt-link v-if="feed.main_link=='multimedia' || feed.main_link=='papers' "
+                           :to="`/teacher/@${item.username}`">
+                  {{ item.first_name }} {{ item.last_name }}
+                </nuxt-link>
               </div>
               <div class="d-flex align-center">
                 <i class="fa-solid fa-calendar-days mx-3"></i>
-                <span class="d-flex align-center"> {{ item.date }} </span>
+                <span class="d-flex align-center"> {{ $moment(item.subdate).format("MMM DD") }} </span>
               </div>
             </v-list-item-subtitle>
           </v-list-item-content>
           <v-divider></v-divider>
-        </nuxt-link>
+        </v-card>
       </v-list-item>
       <!-- <v-divider></v-divider> -->
       <div
         class="d-flex justify-space-between align-center pt-2 feed-card-footer"
       >
-        <nuxt-link to="latest">
+        <nuxt-link :to="feed.more_link">
           <v-list-item>
-            <!-- <v-icon
-              class="mdi mdi-format-list-bulleted ms-1 footer-text"
-            ></v-icon> -->
             <span class="footer-text">More</span>
           </v-list-item>
         </nuxt-link>
-        <nuxt-link
-          v-if="
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            rounded
+            v-bind="attrs"
+            v-on="on"
+            :color="feed.add_link_color"
+            dark
+            v-if="
             feed.class == 'learning' ||
             feed.class == 'question' ||
-            feed.class == 'news'
+            feed.class == 'news' ||
+            feed.class == 'test'
           "
-          to=""
-          class="add-file"
-        >
-          <v-list-item class="d-flex justify-center">
+            min-width="20"
+            :to="feed.add_link"
+            class="add-file"
+          >
             <i class="fa-solid fa-plus"></i>
-          </v-list-item>
-        </nuxt-link>
+          </v-btn>
+          </template>
+          <span>{{ feed.add_link_title }}</span>
+        </v-tooltip>
       </div>
     </v-list>
   </v-card>
@@ -89,5 +101,10 @@ export default {
 .avatar-parent {
 
   border-radius: 0.8rem;
+}
+
+.feed_item{
+  min-height: 14rem!important;
+  max-height: 14rem!important;
 }
 </style>

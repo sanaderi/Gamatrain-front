@@ -56,7 +56,9 @@
                                   mdi-bookmark
                                 </v-icon>
                               </v-btn>
-                              <v-btn icon width="100%">
+                              <v-btn icon width="100%"
+                              @click="openCrashReportDialog(contentData.id,'question')"
+                              >
                                 <v-icon>
                                   mdi-alert-octagon-outline
                                 </v-icon>
@@ -102,8 +104,8 @@
                                       </nuxt-link>
                                       <div class="pa-3 pt-0">
                                         <p class="text-h6 ">
-                                          <strong v-if="contentData.first_name || contentData.last_name">
-                                            {{ contentData.first_name }} {{ contentData.last_name }}
+                                          <strong v-if="contentData.name">
+                                            {{ contentData.name }}
                                           </strong>
                                           <strong v-else>
                                             No name
@@ -230,7 +232,9 @@
                                           mdi-bookmark
                                         </v-icon>
                                       </v-btn>
-                                      <v-btn icon>
+                                      <v-btn icon
+                                             @click="openCrashReportDialog(contentData.id,'question')"
+                                      >
                                         <v-icon size="20">
                                           mdi-alert-octagon-outline
                                         </v-icon>
@@ -275,6 +279,7 @@
                   <v-col cols="12" class="px-0 pt-0 px-sm-3 pt-sm-3">
                     <v-row
                       v-for="answer in contentData.replies.list"
+                      :key="answer.id"
                     >
                       <!--Score action-->
                       <v-col cols="1" class="pr-0 d-none d-md-block ">
@@ -340,7 +345,9 @@
                               </v-btn>
 
 
-                              <v-btn icon width="100%">
+                              <v-btn icon width="100%"
+                                     @click="openCrashReportDialog(answer.id,'questionReply')"
+                              >
                                 <v-icon>
                                   mdi-alert-octagon-outline
                                 </v-icon>
@@ -375,8 +382,8 @@
                                       </nuxt-link>
                                       <div class="pa-3 pt-0">
                                         <p class="text-h6 ">
-                                          <strong v-if="answer.first_name || answer.last_name">
-                                            {{ answer.first_name }} {{ answer.last_name }}
+                                          <strong v-if="answer.name">
+                                            {{ answer.name }}
                                           </strong>
                                           <strong v-else>
                                             No name
@@ -488,6 +495,8 @@
                                     </div>
                                   </v-col>
                                   <v-col cols="5" md="6" class="px-0 pb-0 px-sm-3 pb-md-3 text-right d-flex">
+                                    <v-spacer/>
+
                                     <div class="d-none d-md-block">
                                       <v-spacer/>
                                       <v-btn text class="simple-btn">
@@ -501,6 +510,16 @@
                                           mdi-clock-time-five-outline
                                         </v-icon>
                                         {{ $moment(answer.subdate).format('HH:mm') }}
+                                      </v-btn>
+                                    </div>
+
+                                    <div class="d-inline d-md-none px-0">
+                                      <v-btn icon
+                                             @click="openCrashReportDialog(answer.id,'questionReply')"
+                                      >
+                                        <v-icon size="20">
+                                          mdi-alert-octagon-outline
+                                        </v-icon>
                                       </v-btn>
                                     </div>
                                   </v-col>
@@ -675,7 +694,7 @@
     </v-dialog>
     <!--End edit dialog-->
 
-    <!--Delete dialog-->
+    <!--Reply dialog-->
     <v-dialog
       v-model="dialog.delete_reply_form"
       max-width="290"
@@ -712,7 +731,9 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!--End delete dialog-->
+    <!--End Reply dialog-->
+
+    <crash-report ref="crash_report"/>
   </div>
 </template>
 <script>
@@ -725,11 +746,13 @@ import LatestTrainingContent from "@/components/details/latest-training-content"
 import RelatedQa from "@/components/details/related-qa";
 import RelatedOnlineExam from "@/components/details/related-online-exam";
 import {ValidationProvider, ValidationObserver} from "vee-validate";
+import CrashReport from "~/components/common/crash-report.vue";
 
 export default {
   name: "qa-details",
   auth: false,
   components: {
+    CrashReport,
     RelatedOnlineExam,
     RelatedQa,
     LatestTrainingContent,
@@ -954,7 +977,20 @@ export default {
         }).catch(err => {
         this.$toast.error("An error occured");
       })
+    },
+
+
+    //Crash report
+    openCrashReportDialog(id,type){
+      this.$refs.crash_report.dialog=true;
+      this.$refs.crash_report.form.type=type;
+
+      if (type=='questionReply')
+        this.$refs.crash_report.form.id=id;
+      else
+        this.$refs.crash_report.form.id=this.$route.params.id;
     }
+    //End crash report
   }
 }
 </script>

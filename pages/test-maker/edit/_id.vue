@@ -102,9 +102,10 @@
                 </v-col>
 
 
-                <v-col cols="12" md="12" v-if="topic_list && topic_list.length">
+                <v-col cols="12" md="12" >
                   <validation-provider v-slot="{errors}" name="topic" rules="required">
                     <topic-selector
+                      ref="topic-selector"
                       :selectedTopics="selected_topics"
                       :topic-list="topic_list" @selectTopic="selectTopic"/>
                   </validation-provider>
@@ -442,7 +443,7 @@
 
             <v-col cols="12">
               <v-card class="test-list overflow-y-auto" flat
-                      max-height="300"
+                      max-height="600"
                       ref="testList"
                       @scroll="onScroll"
               >
@@ -450,7 +451,9 @@
                   <v-row ref="testListContent">
                     <v-col
                       v-show="test_list.length>0"
-                      v-for="item in test_list" cols="12">
+                      v-for="item in test_list"
+                      :key="item.id"
+                      cols="12">
                       <v-row class="mb-2">
                         <v-col cols="12">
                           <v-chip v-show="item.lesson_title">
@@ -648,7 +651,7 @@
                   Topics:
                 </v-chip>
               </v-col>
-              <v-col cols="4" v-for="item in topicTitleArr">
+              <v-col cols="4" v-for="(item,index) in topicTitleArr" :key="index">
                 {{ item }}
               </v-col>
               <v-col cols="12">
@@ -658,7 +661,9 @@
             <v-row>
               <v-col cols="12" v-if="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
-                  <v-row v-for="item in previewTestList">
+                  <v-row v-for="(item,index) in previewTestList"
+                  :key="index"
+                  >
                     <v-col cols="12">
                       <div id="test-question"
                            ref="mathJaxEl"
@@ -819,7 +824,7 @@
 
                 <div class="d-flex mt-4 align-center justify-center">
                   <v-breadcrumbs :items="[{text:'Dashboard',href:'/user'},
-                                           {text:'My online exams',href:'/exams/results'}]">
+                                           {text:'My online exam',href:'/exam/results'}]">
                     <template v-slot:divider>
                       <v-icon>mdi-forward</v-icon>
                     </template>
@@ -880,7 +885,7 @@
                   Topics:
                 </v-chip>
               </v-col>
-              <v-col cols="4" v-for="item in topicTitleArr">
+              <v-col cols="4" v-for="(item,index) in topicTitleArr" :key="index">
                 {{ item }}
               </v-col>
               <v-col cols="12">
@@ -890,7 +895,9 @@
             <v-row>
               <v-col cols="12" v-if="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
-                  <v-row v-for="item in previewTestList">
+                  <v-row v-for="(item,index) in previewTestList"
+                         :key="index"
+                  >
                     <v-col
                       cols="12">
                       <div id="test-question"
@@ -1068,7 +1075,7 @@ export default {
     return {
       title: 'Update online exam',
       script: [
-        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`, defer: true}
+        {src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`, defer: true}
       ],
     }
   },
@@ -1172,7 +1179,7 @@ export default {
       test_loading: false,
       all_tests_loaded: false,
       tests: [],
-      test_share_link: `${process.env.BASE_URI}/exams/${this.$route.params.id}`,
+      test_share_link: `${process.env.BASE_URI}/exam/${this.$route.params.id}`,
       printPreviewDialog: false,
       confirmDeleteDialog: false,
       deleteLoading: false,
@@ -1285,7 +1292,11 @@ export default {
     "form.lesson"(val) {
       if (val) {
         this.getTypeList('topic', val);
+        this.$refs["topic-selector"].lesson_selected=true;
+      }else{
+        this.$refs["topic-selector"].lesson_selected=false;
       }
+
       this.filter.lesson = val;//Init second level filter
       this.$refs["create-form"].form.lesson = val;
 
@@ -1346,7 +1357,7 @@ export default {
           console.log(response);
           this.tests = response.data.tests.length ? response.data.tests : [];
           this.exam_code = response.data.code;
-          this.test_share_link = `${process.env.BASE_URI}/exams/${this.$route.params.id}`;
+          this.test_share_link = `${process.env.BASE_URI}/exam/${this.$route.params.id}`;
           this.form.section = response.data.section;
           this.form.base = response.data.base;
           this.form.lesson = response.data.lesson;
@@ -1706,7 +1717,7 @@ export default {
         .then(response => {
           this.$toast.success("Deleted successfully");
           this.$router.push({
-            path: '/user/exams'
+            path: '/user/exam'
           })
         }).catch(err => {
         this.$toast.error("An error occurred");

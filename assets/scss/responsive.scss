@@ -42,15 +42,6 @@ body {
         right: 1% !important;
       }
 
-      .v-window__container {
-        .v-window__prev {
-          right: 7.5% !important;
-        }
-
-        .v-window__next {
-          left: 86.5%;
-        }
-      }
     }
 
     @media screen and (max-width: 1600px) {
@@ -273,6 +264,13 @@ body {
       }
     }
 
+    .category{
+      .cat-title{
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
+
     @media (min-width: 960px) {}
 
     @media screen and (max-width: 900px) {
@@ -302,6 +300,8 @@ body {
           background: $gray10;
         }
 
+
+
         .cat-more-icon {
           color: $gray25;
           font-size: 4rem;
@@ -326,159 +326,8 @@ body {
           white-space: break-spaces;
         }
 
-        .test {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
 
-          .icon,
-          .v-list-item__title {
-            color: $category-test;
-          }
 
-          .p-icon {
-            background: $category-test;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .content {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-content;
-          }
-
-          .p-icon {
-            background: $category-content;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .faq {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-faq;
-          }
-
-          .p-icon {
-            background: $category-faq;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .exam {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-online-exam;
-          }
-
-          .p-icon {
-            background: $category-online-exam;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .textbook {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-textbook;
-          }
-
-          .p-icon {
-            background: $category-textbook;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .school {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-school;
-          }
-
-          .p-icon {
-            background: $category-school;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .tutor {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-tutor;
-          }
-
-          .p-icon {
-            background: $category-tutor;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
       }
 
       .category {
@@ -523,159 +372,9 @@ body {
           white-space: break-spaces;
         }
 
-        .test {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
 
-          .icon,
-          .v-list-item__title {
-            color: $category-test;
-          }
 
-          .p-icon {
-            background: $category-test;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
 
-          .icon {
-            color: $white;
-          }
-        }
-
-        .content {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-content;
-          }
-
-          .p-icon {
-            background: $category-content;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .faq {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-faq;
-          }
-
-          .p-icon {
-            background: $category-faq;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .exam {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-online-exam;
-          }
-
-          .p-icon {
-            background: $category-online-exam;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .textbook {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-textbook;
-          }
-
-          .p-icon {
-            background: $category-textbook;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .school {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-school;
-          }
-
-          .p-icon {
-            background: $category-school;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .tutor {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-tutor;
-          }
-
-          .p-icon {
-            background: $category-tutor;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
       }
 
       .container {
@@ -684,6 +383,21 @@ body {
 
       .feed-tab {
         margin-top: 2rem;
+
+        .iconlearning {
+          color: $green5;
+          font-size: 2rem;
+        }
+
+        .iconquestion {
+          color: $orange2;
+          font-size: 2rem;
+        }
+
+        .icontest {
+          color: $blue4;
+          font-size: 2rem;
+        }
       }
 
       .status {
@@ -940,159 +654,6 @@ body {
           white-space: break-spaces;
         }
 
-        .test {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-test;
-          }
-
-          .p-icon {
-            background: $category-test;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .content {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-content;
-          }
-
-          .p-icon {
-            background: $category-content;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .faq {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-faq;
-          }
-
-          .p-icon {
-            background: $category-faq;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .exam {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-online-exam;
-          }
-
-          .p-icon {
-            background: $category-online-exam;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .textbook {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-textbook;
-          }
-
-          .p-icon {
-            background: $category-textbook;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .school {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-school;
-          }
-
-          .p-icon {
-            background: $category-school;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
-
-        .tutor {
-          min-width: 33%;
-          display: flex;
-          justify-content: center;
-
-          .icon,
-          .v-list-item__title {
-            color: $category-tutor;
-          }
-
-          .p-icon {
-            background: $category-tutor;
-            border-radius: 10px;
-            width: 6rem;
-            height: 6rem;
-          }
-
-          .icon {
-            color: $white;
-          }
-        }
       }
 
       // start sample q

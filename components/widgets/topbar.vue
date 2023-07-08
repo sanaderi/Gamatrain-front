@@ -3,7 +3,23 @@
     <v-container class="align-center justify-space-between topbar-items">
       <v-row>
         <v-col md="4" lg="2">
-          <div class="align-center  pt-5">
+          <nuxt-link to="/" class="float-md-left pt-5">
+            <v-img
+              class="logo"
+              :src="require('@/assets/images/' + logo)"
+              max-width="150"
+            />
+          </nuxt-link>
+        </v-col>
+        <v-col md="5" lg="3">
+          <!--  Start:  Search and logo in header  -->
+          <search-box class="ml-lg-4 mt-4"/>
+          <v-spacer></v-spacer>
+          <!--  End:  Search and logo in header  -->
+        </v-col>
+        <v-col md="3" lg="7">
+          <v-spacer/>
+          <div class="float-md-right  pt-5">
             <div class="d-flex align-center" v-if="$auth.loggedIn">
 
               <v-menu
@@ -48,10 +64,13 @@
                 </v-list>
               </v-menu>
 
-              <nuxt-link to="/user"
-                         class="d-block align-center mr-3 ml-5 ">
-                <i class="fa-regular fa-bell fa-xl topbar-bell d-none d-sm-block"></i>
-              </nuxt-link>
+
+              <!--Desktop version-->
+              <notification-component ref="notification-component"
+                class="d-none d-md-block"
+              />
+
+
             </div>
             <div class="d-flex align-center" v-else>
               <v-btn plain @click="openLoginDialog">
@@ -66,21 +85,7 @@
             </div>
           </div>
         </v-col>
-        <v-col md="5" lg="3">
-          <!--  Start:  Search and logo in header  -->
-          <search-box class="ml-lg-4 mt-4"/>
-          <v-spacer></v-spacer>
-          <!--  End:  Search and logo in header  -->
-        </v-col>
-        <v-col md="3" lg="7">
-          <nuxt-link to="/" class="float-md-right pt-5">
-            <v-img
-              class="logo"
-              :src="require('@/assets/images/' + logo)"
-              max-width="150"
-            />
-          </nuxt-link>
-        </v-col>
+
       </v-row>
     </v-container>
 
@@ -111,12 +116,13 @@ import Login from "@/components/common/login";
 import Register from "@/components/common/register";
 import SearchBox from "@/components/common/search-box";
 import PassRecover from "@/components/common/pass-recover";
+import NotificationComponent from "~/components/common/notification-component.vue";
 
 export default {
   name: "top-bar",
   data() {
     return {
-      logo: "mainlogo4.png",
+      logo: "mainlogo-gamatrain.png",
       avatar: "dexter-morse.png",
       items: [
         {title: "Dashboard", icon: "mdi-view-dashboard"},
@@ -136,12 +142,12 @@ export default {
           link: '/user/ticket'
         },
         {
-          title: 'Edit profile',
+          title: 'Edit Profile',
           icon: 'mdi-account-outline',
           link: '/user/profile'
         },
         {
-          title: 'Edit pass',
+          title: 'Change Password',
           icon: 'mdi-key',
           link: '/user/edit-pass'
         },
@@ -152,6 +158,7 @@ export default {
     };
   },
   components: {
+    NotificationComponent,
     PassRecover,
     SearchBox,
     Register,
@@ -181,20 +188,24 @@ export default {
 
     //Handle auth form from all of section
     "$route.query.auth_form"(val) {
-      if (val === 'login'){
+      if (val === 'login') {
         this.$refs.login_modal.login_dialog = true;
-        this.$router.push({query:{}});
-      }else if (val=='register'){
+        this.$router.push({query: {}});
+      } else if (val == 'register') {
         this.$refs.register_modal.register_dialog = true;
-        this.$router.push({query:{}});
+        this.$router.push({query: {}});
       }
 
     }
   },
   mounted() {
+    if (window.innerWidth>960 && this.$auth.loggedIn){
+      this.$refs["notification-component"].getNotifications();
+    }
     if (this.$route.query.access === 'denied') {
       this.$refs.login_modal.login_dialog = true;
     }
+
   },
   methods: {
     openLoginDialog() {
@@ -203,7 +214,6 @@ export default {
     openRegisterDialog() {
       this.$refs.register_modal.register_dialog = true;
     },
-
   },
 
 };
@@ -213,4 +223,5 @@ export default {
   font-size: 1.2rem !important;
   padding: 1rem !important;
 }
+
 </style>

@@ -1,18 +1,23 @@
 import colors from 'vuetify/es5/util/colors'
+import { defineNuxtConfig } from '@nuxt/bridge'
 
-export default {
+export default defineNuxtConfig({
+   bridge:{
+     meta: true
+   },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
 
   head: {
-    titleTemplate: "%s | Gama",
-    title: "Sample tests | Online exams | Powerpoint | Tutorials | School | Tutor",
+    titleTemplate: "%s | Gamatrain",
+    title: "Learning together, earning together, building a brighter future",
     htmlAttrs: {
       lang: "en",
     },
     meta: [
       {charset: "utf-8"},
       {name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"},
-      {hid: "description", name: "description", content: ""},
+      {hid: "description", name: "description", content: "Big training platform"},
       {name: "format-detection", content: "telephone=no"},
     ],
     link: [
@@ -20,11 +25,21 @@ export default {
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"},
       {rel: "stylesheet", href: "/assets/css/video-js.css"},
       {rel: "stylesheet", href: "/assets/css/all.min.css"},
+      {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Merriweather&display=swap"},
+      {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap"},
+      {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"},
+      {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=PT+Sans&display=swap"},
     ],
     script: [
-      {src: 'https://accounts.google.com/gsi/client',defer:true,async:true},
+      {src: 'https://accounts.google.com/gsi/client', defer: true, async: true},
       // {src: './assets/js/jquery.js', body: true},
       // {src: './assets/js/video.min.js', body: true},
+    ],
+  },
+
+  generate: {
+    routes: [
+      '/'
     ],
   },
 
@@ -40,10 +55,11 @@ export default {
     {src: 'plugins/vee-validate.js', ssr: true},
     {src: 'plugins/axios.js'},
     {src: 'plugins/helper.js'},
-    {src: 'plugins/vuex-persist', ssr: false},
     {src: 'plugins/vue-emoji-picker', ssr: false},
     {src: 'plugins/img-cropper', ssr: false},
     {src: 'plugins/vuedraggable', ssr: false},
+    {src: 'plugins/vuex-persist', ssr: false},
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -52,13 +68,14 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    "@nuxt/typescript-build",
+    // "@nuxt/typescript-build",
     'nuxt-leaflet',
     // https://go.nuxtjs.dev/vuetify
     ["@nuxtjs/vuetify"],
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
-    '@nuxtjs/pwa',
+    '@nuxtjs/pwa'
+
     // '@nuxtjs/onesignal',
   ],
 
@@ -79,7 +96,8 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/toast',
     '@nuxtjs/auth-next',
-    '@nuxtjs/markdownit'
+    '@nuxtjs/markdownit',
+    'cookie-universal-nuxt'
   ],
 
   axios: {
@@ -162,7 +180,7 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    defaultAssets:false,
+    defaultAssets: false,
     customVariables: ["~/assets/variables.scss"],
     theme: {
       dark: false,
@@ -185,21 +203,21 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ["vee-validate","vue-chartjs"],
+    transpile: ["vee-validate", "vue-chartjs","ofetch","node-fetch-native","defu"],
   },
 
   pwa: {
     manifest: {
       name: 'Gamatrain App',
-      short_name:'Gamatrain',
-      description:'Big training platform',
+      short_name: 'Gamatrain',
+      description: 'Big training platform',
       lang: 'en',
       useWebmanifestExtension: false
     }
   },
 
   server: {
-    // host: "0.0.0.0",
+    host: "0.0.0.0",
     port: 3002
   }
-};
+});

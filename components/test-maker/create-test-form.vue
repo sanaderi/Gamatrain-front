@@ -3,10 +3,11 @@
     <embed v-if="file_original_path" :src="file_original_path" width="100%" height="200px;"
     />
     <v-card flat class="mt-3 ">
+      <!--Create test form-->
       <validation-observer ref="observer" v-slot="{invalid}">
         <form @submit.prevent="submitQuestion">
           <v-row>
-            <v-col cols="12" md="3" v-show="path_panel_expand">
+            <v-col cols="12" md="2" v-show="path_panel_expand">
               <validation-provider v-slot="{errors}" name="level" rules="required">
                 <v-autocomplete
                   dense
@@ -20,7 +21,7 @@
                 />
               </validation-provider>
             </v-col>
-            <v-col cols="12" md="3" v-show="path_panel_expand">
+            <v-col cols="12" md="2" v-show="path_panel_expand">
               <validation-provider v-slot="{errors}" name="grade" rules="required">
                 <v-autocomplete
                   dense
@@ -34,7 +35,7 @@
                 />
               </validation-provider>
             </v-col>
-            <v-col cols="12" md="3" v-show="path_panel_expand">
+            <v-col cols="12" md="2" v-show="path_panel_expand">
               <validation-provider v-slot="{errors}" name="lesson" rules="required">
                 <v-autocomplete
                   dense
@@ -48,8 +49,6 @@
                 />
               </validation-provider>
             </v-col>
-
-
             <v-col cols="2" md="1" class="pr-0" v-show="!path_panel_expand"
             >
               <v-tooltip bottom>
@@ -68,8 +67,8 @@
                 </span>
               </v-tooltip>
             </v-col>
-
-            <v-col :cols="path_panel_expand ? 12 : 10" :md="path_panel_expand ? 3 : 11">
+            <v-col :cols="path_panel_expand ? 12 : 10"
+                   :md="path_panel_expand ? 2 : 9">
               <v-autocomplete
                 dense
                 :items="topic_list"
@@ -87,7 +86,23 @@
               </v-autocomplete>
             </v-col>
 
+            <v-col cols="12" md="2" >
+              <validation-provider v-slot="{errors}" name="lesson" rules="required">
+                <v-autocomplete
+                  dense
+                  :items="typeList"
+                  item-value="value"
+                  item-text="title"
+                  v-model="form.type"
+                  :error-messages="errors"
+                  label="Type"
+                  outlined
+                />
+              </validation-provider>
+            </v-col>
 
+
+            <!--Question section-->
             <v-col cols="12" md="6" id="test-maker-question">
               <p>Question:</p>
               <client-only placeholder="loading...">
@@ -106,15 +121,18 @@
                   mdi-camera
                 </v-icon>
               </v-btn>
-
               <v-btn v-show="form.q_file_base64" @click="deleteFile('q_file')" icon class="img-clear-btn">
                 <v-icon color="red" small>
                   mdi-delete
                 </v-icon>
               </v-btn>
             </v-col>
-            <v-col cols="12" md="6">
-              <v-row>
+            <!--End question section-->
+
+            <v-col cols="12" md="6"
+                   v-if="['tf','fourchoice','twochoice'].includes(form.type)">
+              <!--Answer type-->
+              <v-row v-if="['fourchoice','twochoice'].includes(form.type)">
                 <v-col cols="12" class="d-flex align-center justify-center">
                   <p class="mr-3 mt-5">Choices type:</p>
                   <v-checkbox
@@ -133,11 +151,14 @@
                     hide-details
                   />
                 </v-col>
-
               </v-row>
+              <!--End answer type-->
+
+
+              <!--Test answer options-->
               <validation-provider v-slot="{errors}" name="true_answer" rules="required">
                 <v-radio-group v-model="form.true_answer" id="test-image-options">
-                  <v-row>
+                  <v-row v-if="['fourchoice','twochoice','tf'].includes(form.type)">
                     <v-col class="pb-0" cols="1">
                       <v-radio value="1"></v-radio>
                       <span class="answer_label">A</span>
@@ -173,7 +194,7 @@
                       </div>
                     </v-col>
                   </v-row>
-                  <v-row>
+                  <v-row v-if="['fourchoice','twochoice','tf'].includes(form.type)">
                     <v-col class="pb-0" cols="1">
                       <v-radio value="2"></v-radio>
                       <span class="answer_label">B</span>
@@ -209,7 +230,7 @@
                       </div>
                     </v-col>
                   </v-row>
-                  <v-row>
+                  <v-row v-if="form.type=='fourchoice'">
                     <v-col class="pb-0" cols="1">
                       <v-radio value="3"></v-radio>
                       <span class="answer_label">C</span>
@@ -245,7 +266,7 @@
                       </div>
                     </v-col>
                   </v-row>
-                  <v-row>
+                  <v-row v-if="form.type=='fourchoice'">
                     <v-col class="pb-0" cols="1">
                       <v-radio value="4"></v-radio>
                       <span class="answer_label">D</span>
@@ -284,10 +305,16 @@
                   </v-row>
                 </v-radio-group>
               </validation-provider>
+              <!--End test answer options-->
+
             </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" id="test-maker-answer">
+
+
+            <!--Solution section-->
+            <v-col cols="12"
+                   :md="['tf','fourchoice','twochoice'].includes(form.type) ? 12 : 6"
+                   :id="['tf','fourchoice','twochoice'].includes(form.type) ? 'test-maker-answer' : 'test-maker-answer-alternative'"
+            >
               <p>Solution:</p>
               <client-only placeholder="loading...">
                 <ckeditor-nuxt v-model="form.answer_full" :config="editorConfig"/>
@@ -314,6 +341,7 @@
                 </v-icon>
               </v-btn>
             </v-col>
+            <!--End solution section-->
           </v-row>
 
           <v-row>
@@ -330,12 +358,12 @@
                 <v-col cols="12" md="6">
                   <v-btn
                     @click="goToPreviewStep"
-                    :disabled="examTestListLenght<5"
+                    :disabled="examTestListLength<5"
                     lg color="teal" class="white--text" block>
-                    <span v-show="examTestListLenght<5">Add at least {{
-                        5 - examTestListLenght
+                    <span v-show="examTestListLength<5">Add at least {{
+                        5 - examTestListLength
                       }} more tests</span>
-                    <span v-show="examTestListLenght>=5">Next step</span>
+                    <span v-show="examTestListLength>=5">Next step</span>
                   </v-btn>
                 </v-col>
               </v-row>
@@ -372,7 +400,9 @@
                             @change="uploadFile('c_file')"
                             v-model="form_hidden_data.c_file" ref="c-input"/>
             </validation-provider>
-            <validation-provider v-slot="{errors}" name="d_file" :rules="photo_answer_rules">
+            <validation-provider v-slot="{errors}" name="d_file"
+                                 :rules="photo_answer_rules"
+            >
               <v-file-input class="d-none"
                             accept="image/png,image/webp,image/jpeg,image/jpg"
                             @change="uploadFile('d_file')"
@@ -382,6 +412,7 @@
           </div>
         </form>
       </validation-observer>
+      <!--End create test form-->
     </v-card>
 
 
@@ -480,6 +511,7 @@ export default {
         grade: '',
         lesson: '',
         topic: '',
+        type: 'fourchoice',
         direction: 'ltr',
         true_answer: '',
         question: '',
@@ -533,7 +565,15 @@ export default {
       text_answer_rules: 'required',
       photo_answer: false,
       photo_answer_rules: '',
-      examTestListLenght:0
+      examTestListLength: 0,
+      typeList: [
+        {value: "fourchoice", title: "Multiple choice(4)"},
+        {value: "twochoice", title: "Multiple choice(2)"},
+        {value: "descriptive", title: "Open-Ended"},
+        {value: "tf", title: "True/False"},
+        {value: "blank", title: "Blank"},
+        {value: "shortanswer", title: "Short answer"},
+      ]
     }
   },
   mounted() {
@@ -554,6 +594,16 @@ export default {
     },
     "form.lesson"(val) {
       this.getTypeList('topic', val);
+    },
+    "form.type"(val) {
+      if (val == 'tf'){
+        this.form.answer_a = 'True';
+        this.form.answer_b = 'False';
+      }else{
+        this.form.answer_a = '';
+        this.form.answer_b = '';
+      }
+
     },
   },
   methods: {
@@ -618,7 +668,6 @@ export default {
             this.path_panel_expand = false;
 
 
-
             //Edit mode or create exam progress
             if (this.$store.state.user.examId || this.examEditMode === true)
               this.$emit('update:updateTestList', response.data.id);
@@ -655,9 +704,11 @@ export default {
             this.$toast.error("An error occurred, try again")
           }
         }).catch(err => {
-        if (err.response.status === 400)
+        if (err.response.status == 400)
           this.$toast.error(err.response.data.message);
-        console.log(err);
+        else if (err.response.status == 403)
+          this.$auth.logout();
+        this.$toast.error(err.response.data.message);
       }).finally(() => {
         this.create_loading = false;
       })
@@ -772,14 +823,14 @@ export default {
           this.photo_answer = true;
           this.form.testImgAnswers = true;
           this.text_answer_rules = '';
-          this.photo_answer_rules = 'required';
+          // this.photo_answer_rules = 'required';
         }
       } else {
         if (this.photo_answer === true) {
           this.text_answer = false;
           this.form.testImgAnswers = true;
           this.text_answer_rules = '';
-          this.photo_answer_rules = 'required';
+          // this.photo_answer_rules = 'required';
         } else {
           this.text_answer = true;
           this.form.testImgAnswers = false;
@@ -804,7 +855,7 @@ export default {
 
           }).catch(err => {
         })
-      }else if(this.$route.params.id){
+      } else if (this.$route.params.id) {
         this.$axios.$get(`/api/v1/exams/info/${this.$route.params.id}`)
           .then(response => {
             if (response.data.file_original)

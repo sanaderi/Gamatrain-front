@@ -29,7 +29,7 @@
                       <validation-provider v-slot="{ errors }" name="request_identity" rules="required">
                         <v-text-field
                           dense
-                          label="Email or phone"
+                          label="Email"
                           :error-messages="errors"
                           v-model="identity"
                           outlined

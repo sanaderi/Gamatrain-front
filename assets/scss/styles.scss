@@ -3,18 +3,68 @@ html {
   font-size: 62.5% !important;
 }
 
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 0.8rem;
+  background: #cacdd3;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 body {
   overflow: initial !important;
   //direction: rtl;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif !important;
-  font-size: 14px;
+  font-size: 1.6rem;
   transition: 0.5s ease-in-out;
 
   p {
     font-size: 1.8rem
+  }
+
+  .font-size-10{
+    font-size: 1rem!important;
+  }
+
+  .font-size-11{
+    font-size: 1.1rem!important;
+  }
+
+  .font-size-12{
+    font-size: 1.2rem!important;
+  }
+  .font-size-14{
+    font-size: 1.4rem!important;
+  }
+
+  .font-size-15{
+    font-size: 1.5rem!important;
+  }
+
+  .font-size-16{
+    font-size: 1.6rem!important;
+  }
+  .font-size-18{
+    font-size: 18px!important;
+  }
+  .font-size-20{
+    font-size: 20px!important;
   }
 
   table {
@@ -39,7 +89,7 @@ body {
   }
 
   .dropdown-item {
-    margin: 2rem 0 !important;
+    padding: 0.8rem 1.8rem !important;
   }
 
   .v-item-active::before {
@@ -54,11 +104,29 @@ body {
   }
 
   .v-application {
-    font-family: sans-serif;
-
+    font-family: 'PT Sans','Merriweather','Lato','Montserrat', serif!important;
     .v-carousel__controls__item {
       color: $gray4 !important;
     }
+
+
+
+    .text-h1,
+    .text-h2,
+    .text-h3,
+    .text-h4,
+    .text-h5,
+    .text-h6,
+    .text-md-h1,
+    .text-md-h2,
+    .text-md-h3,
+    .text-md-h4,
+    .text-md-h5,
+    .text-md-h6,
+    {
+      font-family: 'PT Sans','Merriweather','Lato','Montserrat', serif!important;
+    }
+
 
 
     .v-carousel__controls__item .v-icon {
@@ -200,9 +268,7 @@ body {
       background-color: $search !important;
     }
 
-    .container {
-      max-width: 80%;
-    }
+
 
     .box {
       position: relative;
@@ -239,7 +305,6 @@ body {
       // border-bottom: 1px solid $gray1;
       .headermenu-item {
         font-weight: 400;
-        padding-bottom: 2rem;
       }
 
       //topbar
@@ -420,7 +485,7 @@ body {
           width: 150px !important;
           max-width: 150px !important;
           height: 6.8rem;
-          background: url(../images/mainlogo4.png);
+          background: url(../images/mainlogo-gamatrain.png);
           background-size: 100% 100%;
         }
       }
@@ -809,7 +874,7 @@ body {
     }
 
     .grade-card {
-      padding: 20px !important;
+      padding: 20px 20px 20px 20px !important;
       box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
       position: relative;
       margin-left: 1.5rem;
@@ -829,7 +894,8 @@ body {
       .grade-title {
         margin-left: 4.5rem;
         margin-bottom: 20px !important;
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+        font-weight: 800;
       }
 
       .grade__item-title .type {
@@ -1165,7 +1231,9 @@ body {
 
     .feed-tab-title {
       color: $gray45;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-transform: none!important;
     }
 
     .feed-name,
@@ -1236,7 +1304,7 @@ body {
         color: $gray4;
       }
 
-      height: 72.5rem;
+      min-height: 66rem!important;
 
       .feed-header {
         font-size: 1.5rem;
@@ -1251,13 +1319,13 @@ body {
 
     .feed-card {
       .v-subheader.feed-header {
-        font-size: $fontsize25;
-        font-weight: 700;
+        font-size: 1.6rem;
+        font-weight: 900;
         color: $gray45;
         width: 60%;
 
         .icon {
-          font-size: 2.5rem;
+          font-size: 3rem;
         }
       }
 
@@ -1269,9 +1337,13 @@ body {
         color: $orange2;
       }
 
-      .v-list-item p.feed-title {
-        font-size: $fontsize2;
-        font-weight: 400;
+      .icontest {
+        color: $blue4;
+      }
+
+      .v-list-item .feed-title {
+        font-size: 1.5rem!important;
+        font-weight: 500;
         line-height: 2 !important;
         color: $gray11;
         overflow: hidden;
@@ -1279,11 +1351,10 @@ body {
       }
 
       .v-list-item {
-        padding: 1rem !important;
       }
 
       .v-list-item__subtitle.feed-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: 400;
       }
 
@@ -1360,6 +1431,34 @@ body {
         }
       }
 
+      &.test {
+        box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+        rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+
+        .feed-header {
+          border-bottom: 3px solid $blue4;
+          margin: 1rem 0;
+        }
+
+        .footer-text {
+          color: $blue4;
+          font-size: $fontsize0;
+        }
+
+        .add-file {
+          .v-list-item {
+            background: $blue4;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 10px;
+          }
+
+          .theme--light i {
+            color: $white !important;
+          }
+        }
+      }
+
       &.news {
         box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
         rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
@@ -1393,25 +1492,23 @@ body {
       padding: 1rem 0;
     }
 
-    .stat-sec .v-icon.v-icon {
-      visibility: hidden;
-    }
 
     .stat-item {
-      margin-left: 5rem !important;
-      margin-right: 6rem;
-      min-width: 12rem;
+      min-width: 17rem;
 
       .stat-value {
         font-size: 2.4rem;
+        line-height: 3rem;
         font-weight: 400;
-        color: $gray4;
       }
 
       .stat-label {
         font-weight: 400;
         font-size: 2rem;
-        color: $gray4;
+        line-height: 2.4rem;
+        color: rgba(0, 0, 0, 0.6);
+        margin-top: 0.5rem;
+        margin-bottom: 0.8rem;
       }
 
       .stat-icon {
@@ -1492,11 +1589,12 @@ body {
       .footer-item {
         padding: 0.3rem 0;
         margin: 0.7rem 0;
-        font-size: 1.4rem;
+        font-size: 1.5rem!important;
+        font-weight: 400;
         color: $gray4;
 
         .about-footer {
-          font-size: $fontsize4;
+          font-size: 2rem!important;
           font-weight: 400;
           color: $gray45;
         }
@@ -2004,11 +2102,17 @@ body {
 
 //
 @media only screen and (max-width: 600px) {
+  .content-item{
+    min-height: 16rem!important;
+  }
 
   .book-no-img {
     width: 12rem;
-    height: 12rem;
-    padding: 4.4px;
+    min-width: 8rem;
+    min-height: 10.5rem;
+    max-height: 10.5rem;
+
+    padding: 0 4.4px 4.4px 4.4px;
     text-align: center;
     background-color: #f9f3f3 !important;
     border-radius: 8px;
@@ -2021,13 +2125,57 @@ body {
       font-size: 1rem;
     }
   }
+
+
+  .album-card{
+    .album-no-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+
+      padding: 0 4.4px 4.4px 4.4px;
+      text-align: center;
+      background-color: #f9f3f3 !important;
+      border-radius: 8px;
+
+      p {
+        font-size: 1rem !important;
+      }
+
+      a {
+        font-size: 1rem;
+      }
+    }
+
+    .price_label {
+
+      span{
+        font-size: 1.8rem;
+      }
+
+      .subscription_label {
+        font-size: 1.4rem!important;
+        color: gray;
+      }
+    }
+
+  }
+
+
+
 }
 
 @media only screen and (min-width: 600px) and (max-width: 960px) {
 
+  .content-item{
+    min-height: 17rem!important;
+  }
+
   .book-no-img {
     width: 12rem;
     height: 14rem;
+    min-width: 12rem;
+    min-height: 14.5rem;
+    max-height: 14.5rem;
     padding: 5px;
     text-align: center;
     background-color: #f9f3f3 !important;
@@ -2041,15 +2189,42 @@ body {
       font-size: 1.2rem;
     }
   }
+
+  .album-card{
+     min-height: 29rem;
+
+    .album-no-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+
+      padding: 0 4.4px 4.4px 4.4px;
+      text-align: center;
+      background-color: #f9f3f3 !important;
+      border-radius: 8px;
+
+      p {
+        font-size: 1rem !important;
+      }
+
+      a {
+        font-size: 1rem;
+      }
+    }
+  }
+
 }
 
 
 @media only screen and (min-width: 960px) {
 
+  .content-item{
+    min-height: 16rem!important;
+  }
+
   .book-no-img {
-    width: 12.5rem;
+    width: 12rem;
     height: 14rem !important;
-    min-height: 14rem !important;
+    min-height: 14.5rem !important;
     padding: 5px;
     margin: auto;
     text-align: center;
@@ -2064,6 +2239,28 @@ body {
       font-size: 1.4rem;
     }
   }
+
+  .album-card{
+     min-height: 30rem;
+    .album-no-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+
+      padding: 0 4.4px 4.4px 4.4px;
+      text-align: center;
+      background-color: #f9f3f3 !important;
+      border-radius: 8px;
+
+      p {
+        font-size: 1.2rem !important;
+      }
+
+      a {
+        font-size: 1rem;
+      }
+    }
+  }
+
 }
 
 // Start : Lesson page
@@ -2812,7 +3009,7 @@ body {
         .item-image {
           width: inherit;
           height: 100%;
-          max-height: 16.4rem;
+          max-height: 14.5rem;
           max-width: 12.2rem;
           min-width: 7.8rem;
           border-radius: 1rem;
@@ -3545,7 +3742,7 @@ body {
 }
 
 
-//Charge wallet
+//Top Up Wallet
 #charge-wallet {
   p {
     font-size: 2rem;
@@ -3614,7 +3811,7 @@ body {
   }
 }
 
-//End charge wallet
+//End Top Up Wallet
 
 
 //Test maker
@@ -3728,6 +3925,8 @@ body {
   .album-card {
     .album-img {
       border-radius: 1rem;
+      width: 100%;
+      aspect-ratio: 3/4;
     }
 
     .price_label {
@@ -3774,6 +3973,46 @@ body {
   }
 
   #test-maker-question {
+    position: relative;
+
+    .ck-editor__editable_inline {
+      height: 54.5rem !important;
+      max-height: 54.5rem !important;
+    }
+
+
+    @media only screen and (max-width: 960px) {
+      .ck-editor__editable_inline {
+        height: 20.5rem !important;
+        max-height: 20.5rem !important;
+      }
+    }
+
+
+    .image-input {
+      position: absolute;
+      bottom: 2.2rem;
+      right: 2.2rem;
+      width: 7rem;
+      height: 7rem;
+      border-radius: 5px;
+
+      i {
+        font-size: 9.2rem;
+        color: #A11333;
+      }
+    }
+
+    .img-clear-btn {
+      position: absolute;
+      bottom: 4.8rem;
+      right: 8.4rem;
+      border-radius: 5px;
+    }
+  }
+
+
+  #test-maker-answer-alternative {
     position: relative;
 
     .ck-editor__editable_inline {
@@ -3884,7 +4123,7 @@ body {
 
 //End create test
 
-//Create online exam
+//New Exam
 .test-list {
   #test-question {
     font-weight: bolder;
@@ -3895,6 +4134,7 @@ body {
 
     p {
       font-size: 1.8rem !important;
+      display: block!important;
     }
   }
 
@@ -3917,7 +4157,15 @@ body {
       left: -1rem;
       color: green;
     }
+
+
+    .false_answer {
+      position: absolute;
+      top: -1rem;
+      left: -1rem;
+      color: red;
+    }
   }
 }
 
-//End create online exam
+//End New Exam

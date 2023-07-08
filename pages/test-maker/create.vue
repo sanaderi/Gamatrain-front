@@ -4,7 +4,7 @@
       <v-col cols="6">
         <span class="icon icong-azmoon text-h3  teal--text"></span>
         <span class="text-h4 teal--text">
-            Create online exam
+            New Exam
         </span>
       </v-col>
       <v-col cols="6" id="tool-box" class="text-right">
@@ -102,9 +102,9 @@
                 </v-col>
 
 
-                <v-col cols="12" md="12" v-if="topic_list.length">
+                <v-col cols="12" md="12">
                   <validation-provider v-slot="{errors}" name="topic" rules="required">
-                    <topic-selector :topic-list="topic_list" @selectTopic="selectTopic"/>
+                    <topic-selector ref="topic-selector" :topic-list="topic_list" @selectTopic="selectTopic"/>
                   </validation-provider>
                 </v-col>
 
@@ -440,7 +440,7 @@
 
             <v-col cols="12">
               <v-card class="test-list overflow-y-auto" flat
-                      max-height="300"
+                      max-height="600"
                       ref="testList"
                       @scroll="onScroll"
               >
@@ -448,7 +448,9 @@
                   <v-row ref="testListContent">
                     <v-col
                       v-show="test_list.length>0"
-                      v-for="item in test_list" cols="12">
+                      v-for="item in test_list"
+                      :key="item.id"
+                      cols="12">
                       <v-row class="mb-2">
                         <v-col cols="12">
                           <v-chip v-show="item.lesson_title">
@@ -646,7 +648,7 @@
                   Topics:
                 </v-chip>
               </v-col>
-              <v-col cols="4" v-for="item in topicTitleArr">
+              <v-col cols="4" v-for="(item,index) in topicTitleArr" :key="index">
                 {{ item }}
               </v-col>
               <v-col cols="12">
@@ -656,7 +658,9 @@
             <v-row>
               <v-col cols="12" v-show="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
-                  <v-row v-for="item in previewTestList">
+                  <v-row v-for="(item,index) in previewTestList"
+                  :key="index"
+                  >
                     <v-col
                       cols="12">
                       <div id="test-question"
@@ -818,7 +822,7 @@
 
                 <div class="d-flex mt-4 align-center justify-center">
                   <v-breadcrumbs :items="[{text:'Dashboard',href:'/user'},
-                                           {text:'My online exams',href:'/exams/results'}]">
+                                           {text:'My online exam',href:'/exam/results'}]">
                     <template v-slot:divider>
                       <v-icon>mdi-forward</v-icon>
                     </template>
@@ -879,7 +883,7 @@
                   Topics:
                 </v-chip>
               </v-col>
-              <v-col cols="4" v-for="item in topicTitleArr">
+              <v-col cols="4" v-for="(item,index) in topicTitleArr" :key="index">
                 {{ item }}
               </v-col>
               <v-col cols="12">
@@ -889,7 +893,9 @@
             <v-row>
               <v-col cols="12" v-show="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
-                  <v-row v-for="item in previewTestList">
+                  <v-row v-for="(item,index) in previewTestList"
+                         :key="index"
+                  >
                     <v-col
                       cols="12">
                       <div id="test-question"
@@ -1055,7 +1061,6 @@
 <script>
 import {ValidationObserver, ValidationProvider} from "vee-validate";
 import TopicSelector from "@/components/form/topic-selector";
-import {min} from "vee-validate/dist/rules";
 import CreateTestForm from "@/components/test-maker/create-test-form";
 
 
@@ -1064,9 +1069,9 @@ export default {
   name: "test-maker",
   head() {
     return {
-      title: 'Create online exam',
+      title: 'New Exam',
       script: [
-        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`, defer: true}
+        {src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`, defer: true}
       ],
     }
   },
@@ -1176,7 +1181,7 @@ export default {
       previewTestList: [],
       topicTitleArr: [],
 
-      testListSwitch: false,
+      testListSwitch: true,
       lastCreatedTest: '',
 
 
@@ -1187,7 +1192,7 @@ export default {
       //End Delete exam test section
 
 
-      file_original: '',
+      file_original: null,
       file_original_path: ''
     }
 
@@ -1206,6 +1211,18 @@ export default {
       this.getExamCurrentTests();
 
 
+    //Check active tab from route and enable it
+    if (this.$route.query && this.$route.query.active == 'test_list') {
+      this.test_step = 2;
+      this.testListSwitch = true;
+    } else if (this.$route.query && this.$route.query.active == 'add_test') {
+      this.test_step = 2;
+      this.testListSwitch = false;
+    } else {
+      this.test_step = 1;
+      this.testListSwitch = true;
+    }
+
 
   },
 
@@ -1214,10 +1231,16 @@ export default {
       if (val && val.active === 'test_list') {
         this.test_step = 2;
         this.testListSwitch = true;
+      } else if (this.$route.query && this.$route.query.active == 'add_test') {
+        this.test_step = 2;
+        this.testListSwitch = false;
+      } else {
+        this.test_step = 1;
+        this.testListSwitch = true;
       }
     },
 
-    // "teaching_date"(val) {//Convert date to secounds
+    // "teaching_date"(val) {//Convert date to seconds
     //   this.form.start_date = this.teaching_time_seconds;
     //   this.teaching_date_time = (this.$moment(val).format('x') / 1000);
     //   this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
@@ -1284,7 +1307,13 @@ export default {
     "form.lesson"(val) {
       if (val) {
         this.getTypeList('topic', val);
+        this.$refs["topic-selector"].lesson_selected = true;
+      } else {
+        this.form.topic = [];
+        this.topic_list = [];
+        this.$refs["topic-selector"].lesson_selected = false;
       }
+
       this.filter.lesson = val;//Init second level filter
       this.$refs["create-form"].form.lesson = val;
 
@@ -1500,7 +1529,7 @@ export default {
             });
           }
 
-          this.$refs["create-form"].examTestListLenght=this.tests.length;
+          this.$refs["create-form"].examTestListLenght = this.tests.length;
 
 
           if (response.data.list.length === 0)//For terminate auto load request
@@ -1539,7 +1568,9 @@ export default {
 
     onScroll() {
       var scrollPosition = this.$refs.testList.$el.scrollTop;
-      let contentHeight = this.$refs.testListContent.clientHeight;
+      let contentHeight = 0;
+      if (this.$refs.testListContent)
+        contentHeight = this.$refs.testListContent.clientHeight;
 
       //Avoid the number of requests
       if (this.timer) {
@@ -1615,7 +1646,7 @@ export default {
       })
         .then(response => {
           this.previewTestList = response.data.list;
-          this.$refs["create-form"].examTestListLenght=this.tests.length;
+          this.$refs["create-form"].examTestListLenght = this.tests.length;
 
           if (this.previewTestList.length) {
             this.$nextTick(function () {
@@ -1636,11 +1667,11 @@ export default {
      */
     publishTest() {
       this.publish_loading = true;
-      var examId=this.exam_id;
+      var examId = this.exam_id;
       this.$axios.$put(`/api/v1/exams/publish/${examId}`)
         .then(response => {
           if (response.data.message === 'done') {
-            this.test_share_link = `${process.env.BASE_URI}/exams/${examId}`
+            this.test_share_link = `${process.env.BASE_URI}/exam/${examId}`
 
 
             this.exam_id = '';
@@ -1661,7 +1692,7 @@ export default {
             this.form.type = "";
             this.form.duration = 3;
             this.form.title = "";
-            this.form.file_original='';
+            this.form.file_original = '';
 
             //End reset form
 

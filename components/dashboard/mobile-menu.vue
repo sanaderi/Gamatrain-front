@@ -12,8 +12,9 @@
       >
         <v-tab
           @click="openLink(item)"
-          v-for="item in items">
-
+          v-for="(item,index) in items"
+          :key="index"
+        >
           <span>{{ item.title }}</span>
           <v-btn icon>
             <v-icon>
@@ -54,7 +55,7 @@ export default {
       active_tab: 0,
       items: [
         {
-          title: 'Add',
+          title: 'Contents',
           icon: 'mdi-plus-circle-outline',
           link: '',
           machine_name: 'add_content',
@@ -63,24 +64,24 @@ export default {
             {title: "Multimedia", link: "/user/multimedia", icon: 'icong-learnfiles', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
             {title: "Q & A", link: "/user/question", icon: 'icong-qa', icon_type: 'custom'}
           ]
-
         },
         {
-          title: "Online exam's",
+          title: "Online Exam",
           icon: 'mdi-laptop',
           link: '/test-maker',
           subMenuList: [
-            {title: "Test result", link: "/exams/results", icon: 'mdi-chart-timeline', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
-            {title: "Test maker", link: "/test-maker", icon: 'icong-azmoon', icon_type: 'custom'},
+            {title: "Results", link: "/exam/results", icon: 'mdi-chart-timeline', icon_type: 'custom'},
+            {title: "Exam maker", link: "/user/exam", icon: 'icong-azmoon', icon_type: 'custom'},
           ]
         },
         {
           title: 'Financial',
           icon: 'mdi-credit-card-outline',
           subMenuList: [
-            {title: "Charge wallet", icon: 'mdi-credit-card-plus-outline', link: "/user/charge-wallet"},
-            {title: "Participation link", icon: 'mdi-link', link: "/user/participation-link"},
-            {title: "Payment report", icon: 'mdi-chart-line', link: "/user/payment-report"},
+            {title: "Top Up Wallet", icon: 'mdi-credit-card-plus-outline', link: "/user/charge-wallet"},
+            {title: "Payments", icon: 'mdi-link', link: "/user/payments"},
+            {title: "Sell Report", icon: 'mdi-chart-line', link: "/user/sell-report"},
+            {title: "Withdrawal", icon: 'mdi-cash', link: "/user/withdrawal"},
           ],
         },
         {title: 'Messages', icon: 'mdi-email-outline', link: '/user/ticket'},
@@ -89,10 +90,10 @@ export default {
           icon: 'mdi-account-outline',
           link: '',
           subMenuList: [
-            {title: "Edit profile", link: "/user/profile", icon: 'mdi-account-outline'},
-            {title: "Identity confirmation", link: "/user/identity-confirmation", icon: ' mdi-card-account-details'},
-            {title: "Edit password", link: "/user/edit-pass", icon: 'mdi-key'},
-            {title: "Setting", link: "/user/setting", icon: 'mdi-account-cog-outline'},
+            {title: "Edit Profile", link: "/user/profile", icon: 'mdi-account-outline'},
+            {title: "Confirm Identity", link: "/user/identity-confirmation", icon: ' mdi-card-account-details'},
+            {title: "Change Password", link: "/user/edit-pass", icon: 'mdi-key'},
+            {title: "Settings", link: "/user/setting", icon: 'mdi-account-cog-outline'},
           ],
         },
         // {title: 'Notification', icon: 'mdi-bell-outline', link: '/'},

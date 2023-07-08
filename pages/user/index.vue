@@ -59,10 +59,12 @@
                             </div>
                           </v-col>
                           <v-col :cols="user_type==='5' ? 3 : 4" class="d-md-flex">
-                            <v-btn color="rgba(142, 11, 228, 0.1)" fab x-large>
+                            <v-btn color="rgba(142, 11, 228, 0.1)" fab x-large
+                            to="/user/ticket"
+                            >
                               <i class="fa-regular fa-envelope" style="color: #8E0BE4;"></i>
                             </v-btn>
-                            <div class="pa-3">
+                            <nuxt-link to="/user/ticket" class="pa-3">
                               <p class="text-h6">
                                 Msg
                               </p>
@@ -75,7 +77,7 @@
 
                               </p>
 
-                            </div>
+                            </nuxt-link>
                           </v-col>
                           <v-col :cols="user_type==='5' ? 3 : 4" class="d-md-flex">
                             <v-btn color="rgba(218, 222, 255, 1)" fab x-large>
@@ -218,7 +220,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <!--End exams section-->
+    <!--End exam section-->
   </div>
 </template>
 

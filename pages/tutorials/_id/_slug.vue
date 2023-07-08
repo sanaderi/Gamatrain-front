@@ -34,7 +34,7 @@
               <div class="visit mb-3">
                 <i class="fa-solid fa-eye mr-2"></i>Viewed: {{ tutorialInfo.views }}
               </div>
-              <div class="error-report">
+              <div class="error-report pointer" @click="openCrashReportDialog">
                 <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
               </div>
             </div>
@@ -71,7 +71,9 @@
                 <i class="fa-solid fa-eye mr-2"></i>{{ tutorialInfo.views }}
               </v-col>
               <v-col cols="4" class="error-report">
-                <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
+                <div class="error-report pointer" @click="openCrashReportDialog">
+                  <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
+                </div>
               </v-col>
             </v-row>
           </v-col>
@@ -196,6 +198,7 @@
 
     <!-- Sidebar -->
 
+    <crash-report ref="crash_report"/>
   </div>
 </template>
 <script>
@@ -205,11 +208,20 @@ import RelatedContent from "@/components/details/related-content";
 import LatestTrainingContent from "@/components/details/latest-training-content";
 import RelatedQa from "@/components/details/related-qa";
 import RelatedOnlineExam from "@/components/details/related-online-exam";
+import CrashReport from "~/components/common/crash-report.vue";
 
 export default {
   name: 'tutorial-details',
   auth: false,
-  components: {RelatedOnlineExam, RelatedQa, LatestTrainingContent, RelatedContent, category, TutorialMenu},
+  components: {
+    CrashReport,
+    RelatedOnlineExam,
+    RelatedQa,
+    LatestTrainingContent,
+    RelatedContent,
+    category,
+    TutorialMenu
+  },
 
   async asyncData({params, $axios}) {
     // This could also be an action dispatch
@@ -235,27 +247,10 @@ export default {
   head() {
     return {
       script: [
-        {src: `${process.env.FILE_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
+        {src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
       ],
       title: this.tutorialInfo.title,
-      meta: [
 
-        // {
-        //   hid: `description`,
-        //   name: 'description',
-        //   content: tutorial.Description !== null ? tutorial.Description.replace(/<[^>]+>/g, '').replace("\n", " ").substr(0, 300) + '...' : ''
-        // },
-        // {
-        //   hid: `keywords`,
-        //   name: 'keywords',
-        //   keywords: tutorial.Title
-        // },
-        // {
-        //   hid: 'og:title',
-        //   name: 'og:title',
-        //   content: car.Title,
-        // },
-      ]
     }
   },
 
@@ -392,6 +387,11 @@ export default {
         this.expandListMenu = false;
       else
         this.expandListMenu = true;
+    },
+
+    openCrashReportDialog() {
+      this.$refs.crash_report.dialog = true;
+      this.$refs.crash_report.form.type = "tutorial";
     }
 
   },

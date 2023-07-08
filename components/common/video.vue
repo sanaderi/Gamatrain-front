@@ -25,7 +25,7 @@
       </div>
     </v-carousel-item>
   </v-carousel>
-</template> 
+</template>
 <script>
 export default {
   props: {

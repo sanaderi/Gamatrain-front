@@ -54,7 +54,7 @@ export default {
     return {
       items: [
         {
-          title: 'Add',
+          title: 'Contents',
           icon: 'mdi-plus-circle-outline',
           machine_name: 'add_content',
           subMenuList: [
@@ -64,20 +64,21 @@ export default {
           ]
         },
         {
-          title: 'Online exam',
+          title: 'Online Exam',
           icon: 'mdi-laptop',
           subMenuList: [
-            {title: "Test result", link: "/exams/results", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? true : false)},
-            {title: "Test maker", link: "/test-maker", icon: 'icong-test', icon_type: 'custom'},
+            {title: "Results", link: "/exam/results", icon: 'icong-test', icon_type: 'custom'},
+            {title: "Exam maker", link: "/user/exam", icon: 'icong-test', icon_type: 'custom'},
           ]
         },
         {
           title: 'Financial',
           icon: 'mdi-credit-card-outline',
           subMenuList: [
-            {title: "Charge wallet", link: "/user/charge-wallet"},
-            {title: "Participation link", link: "/user/participation-link"},
-            {title: "Payment report", link: "/user/payment-report"},
+            {title: "Top Up Wallet", link: "/user/charge-wallet"},
+            {title: "Payments", link: "/user/payments"},
+            {title: "Sell Report", link: "/user/sell-report"},
+            {title: "Withdrawal", link: "/user/withdrawal"},
           ],
 
         },
@@ -87,10 +88,10 @@ export default {
           icon: 'mdi-account-outline',
           link: '',
           subMenuList: [
-            {title: "Edit profile", link: "/user/profile"},
-            {title: "Identity confirmation", link: "/user/identity-confirmation"},
-            {title: "Edit password", link: "/user/edit-pass"},
-            {title: "Setting", link: "/user/setting"},
+            {title: "Edit Profile", link: "/user/profile"},
+            {title: "Confirm Identity", link: "/user/identity-confirmation"},
+            {title: "Change Password", link: "/user/edit-pass"},
+            {title: "Settings", link: "/user/setting"},
           ],
         },
         // {title: 'Notification', icon: 'mdi-bell-outline'},

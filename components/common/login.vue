@@ -23,11 +23,11 @@
               <form @submit.prevent="submit">
                 <v-row>
                   <v-col cols="12">
-                    <validation-provider v-slot="{ errors }" name="Email or Phone" rules="required">
+                    <validation-provider v-slot="{ errors }" name="Email" rules="required">
                       <v-text-field
                         v-model="identity"
                         dense
-                        label="Email or Phone"
+                        label="Email"
                         :error-messages="errors"
                         required
                         outlined
@@ -176,6 +176,7 @@ export default {
         identity: this.identity,
         pass: this.password
       }), {
+        responseType:'text',
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }

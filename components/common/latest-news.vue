@@ -13,11 +13,10 @@
     <div class="d-flex flex-column pa-3">
       <div
         class="feed-box-item d-flex"
-        v-for="feed in thirdFeedBox"
-        :key="feed.value"
+        v-for="item in news"
       >
         <div class="feedBoxImg">
-          <img :src="require('@/assets/images/' + feed.img)" alt=""/>
+          <v-img max-width="100" max-height="100" contain min-height="70" :src="item.pic" :alt="item.title"/>
         </div>
         <div
           class="
@@ -29,16 +28,16 @@
                   "
         >
           <p>
-            {{ feed.para }}
+            {{ item.title }}
           </p>
           <div class="d-flex justify-space-between">
             <div class="feed-title">
               <i class="fa-solid fa-grip-vertical ml-2"></i>
-              {{ feed.title }}
+              {{ item.cat_title }}
             </div>
-            <div class="feed-date">
-              <i class="fa-solid fa-calendar-days ml-2"></i>
-              {{ feed.date }}
+            <div class="feed-date " >
+              <i class="fa-solid fa-calendar-days ml-2 "></i>
+              {{ $moment(item.subdate).format("MMM DD") }}
             </div>
           </div>
         </div>
@@ -46,7 +45,7 @@
       <v-divider></v-divider>
     </div>
     <div class="feed-footer d-flex align-center pa-3">
-      <nuxt-link to="" class="pb-0 feed-more mr-4"
+      <nuxt-link to="/" class="pb-0 feed-more mr-4"
       >More
       </nuxt-link
       >
@@ -60,38 +59,20 @@ export default {
   data(){
     return{
       thirdFeedBoxIcon: "News.png",
-      thirdFeedBox: [
-        {
-          img: "laptop.png",
-          para: "Lorem Epsom fake text with the production of incomprehensible simplicity from the printing industry and using...",
-          title: "Training",
-          date: "27 Jun",
-        },
-        {
-          img: "laptop.png",
-          para: "Lorem Epsom fake text with the production of incomprehensible simplicity from the printing industry and using...",
-          title: "Training",
-          date: "27 Jun",
-        },
-        {
-          img: "laptop.png",
-          para: "Lorem Epsom fake text with the production of incomprehensible simplicity from the printing industry and using...",
-          title: "Training",
-          date: "27 Jun",
-        },
-        {
-          img: "laptop.png",
-          para: "Lorem Epsom fake text with the production of incomprehensible simplicity from the printing industry and using...",
-          title: "Training",
-          date: "27 Jun",
-        },
-        {
-          img: "laptop.png",
-          para: "Lorem Epsom fake text with the production of incomprehensible simplicity from the printing industry and using...",
-          title: "Training",
-          date: "27 Jun",
-        },
-      ],
+      news:[]
+    }
+  },
+  mounted() {
+    this.getNews();
+  },
+  methods:{
+    async getNews(){
+      await this.$axios.$get('/api/v1/home/news')
+        .then(res=>{
+          this.news=res.data;
+        }).catch(err=>{
+          console.log(err);
+        });
     }
   }
 }

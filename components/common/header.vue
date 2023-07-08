@@ -4,10 +4,10 @@
       <topbar ref="header_topbar"></topbar>
 
       <!-- Desktop App bar in top page for menu list -->
-      <v-container class="d-none d-md-block"  >
-        <v-row >
-          <v-col md="6" lg="6" >
-            <v-toolbar-items >
+      <v-container class="d-none d-md-block">
+        <v-row>
+          <v-col md="6" lg="6">
+            <v-toolbar-items>
               <v-menu
                 v-for="(item, side) in menuItems"
                 :key="side"
@@ -17,7 +17,10 @@
                 class="main-menu"
               >
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn plain   v-bind="attrs" v-on="on" class="menu-item "
+                  <v-btn plain
+                         min-height="35"
+                         max-height="35"
+                         v-bind="attrs" v-on="on" class="menu-item pb-0 "
                   >
                     <nuxt-link :to="item.link" class="headermenu-item">
                       <span v-show="item.title=='Home'" class="fa-solid fa-house-chimney mx-1"/>
@@ -33,19 +36,22 @@
                     class="dropdown-item"
                     :to="subMenuItem.link"
                   >
-                      {{ subMenuItem.title }}
+                    {{ subMenuItem.title }}
                   </v-list-item>
                 </v-list>
               </v-menu>
             </v-toolbar-items>
           </v-col>
-          <v-col md="6" lg="6" class="text-right" >
-            <span>Most visited: </span>
-            <v-chip to="/" color="rgba(33, 33, 33, 0.08)">
+          <v-col md="6" lg="6" class="text-right">
+            <span v-show="hotTopics.length">Hot topics: </span>
+            <v-chip v-show="hotTopics.length" :to="`/${item.link}`"
+                    v-for="(item,index) in hotTopics"
+                    :key="index"
+                    color="rgba(33, 33, 33, 0.08)">
               <v-chip small color="rgba(0, 0, 0, 0.16);">
                 #
               </v-chip>
-              Test maker
+              {{ item.title }}
             </v-chip>
           </v-col>
         </v-row>
@@ -189,7 +195,6 @@
             <!-- End:  show sidebar menu in mobile -->
 
 
-
             <!--Mobile nav-->
             <v-app-bar class="d-block d-md-none mobile_bar" fixed>
               <!--   hamburgers-icon in mobile-->
@@ -205,23 +210,21 @@
                 <v-img
                   class="logo"
                   :src="require('@/assets/images/' + logo)"
-                  max-width="100"
+                  max-width="120"
                 />
               </nuxt-link>
               <!--End logo section-->
 
               <v-spacer></v-spacer>
-              <nuxt-link to="">
-                <i class="fa-regular fa-bell fa-2xl ml-4"></i>
-              </nuxt-link>
+
+
+              <!--Mobile notification section-->
+              <notification-component ref="notification-section"/>
+
 
             </v-app-bar>
             <!--End mobile nav-->
-
-
           </div>
-
-
         </div>
       </v-container>
       <!--   End: navbar   -->
@@ -230,16 +233,19 @@
 </template>
 <script>
 import topbar from "../widgets/topbar";
+import NotificationComponent from "~/components/common/notification-component.vue";
 
 export default {
+  name: "header-component",
   components: {
+    NotificationComponent,
     topbar,
   },
   data() {
     return {
       sidebar: false,
       dialog: false,
-      logo: "mainlogo4.png",
+      logo: "mainlogo-gamatrain.png",
       avatar: "dexter-morse.png",
       wallet: "کیف پول:",
       walletBalance: "2000 تومان",
@@ -248,6 +254,44 @@ export default {
           title: "Home",
           link: "/",
           icon: "",
+        },
+        {
+          title: "Olympiad",
+          link: "",
+          icon: "fa-angle-down",
+          subMenuList: [
+            {
+              title: "International Mathematical Olympiad",
+              link: "/search?type=test&section=6025&base=6026&lesson=6028"
+            },
+            {title: "International Physics Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6029"},
+            {title: "International Chemistry Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6030"},
+            {
+              title: "International Olympiad in Informatics",
+              link: "/search?type=test&section=6025&base=6026&lesson=6031"
+            },
+            {title: "International Biology Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6032"},
+          ],
+        },
+        {
+          title: "Books",
+          link: "",
+          icon: "fa-angle-down",
+          subMenuList: [
+            {title: "1st grade", link: "/search?type=test&section=1&base=13&test_type=314"},
+            {title: "2nd grade", link: "/search?type=test&section=1&base=14&test_type=314"},
+            {title: "3rd grade", link: "/search?type=test&section=1&base=15&test_type=314"},
+            {title: "4th grade", link: "/search?type=test&section=1&base=16&test_type=314"},
+            {title: "5th grade", link: "/search?type=test&section=1&base=17&test_type=314"},
+            {title: "6th grade", link: "/search?type=test&section=1&base=18&test_type=314"},
+            {title: "7th grade", link: "/search?type=test&section=2&base=19&test_type=314"},
+            {title: "8th grade", link: "/search?type=test&section=2&base=20&test_type=314"},
+            {title: "9th grade", link: "/search?type=test&section=2&base=21&test_type=314"},
+            {title: "IGCSE", link: "/search?type=test&section=3&base=22&test_type=314"},
+            {title: "O-Level", link: "/search?type=test&section=3&base=23&test_type=314"},
+            {title: "As Level", link: "/search?type=test&section=1463&base=1464&test_type=314"},
+            {title: "A Level", link: "/search?type=test&section=1463&base=4161&test_type=314"},
+          ],
         },
         {
           title: "Announcement",
@@ -259,46 +303,6 @@ export default {
             {title: "FAQs", link: "/faq"},
           ],
         },
-        {
-          title: "Olympiad",
-          link: "",
-          icon: "fa-angle-down",
-          subMenuList: [
-            {title: "International Mathematical Olympiad (IMO)", link: ""},
-            {title: "International Physics Olympiad (IPhO)", link: ""},
-            {title: "International Chemistry Olympiad (IChO)", link: ""},
-          ],
-        },
-        {
-          title: "High-level",
-          link: "",
-          icon: "fa-angle-down",
-          subMenuList: [
-            {title: "Fourth grade entrance exam", link: ""},
-            {title: "Fifth grade entrance exam", link: ""},
-            {title: "Sixth grade entrance exam", link: ""},
-          ],
-        },
-        {
-          title: "Books",
-          link: "",
-          icon: "fa-angle-down",
-          subMenuList: [
-            {title: "Primary school period", link: ""},
-            {title: "First year of high school", link: ""},
-            {title: "Second year of high school", link: ""},
-          ],
-        },
-        {
-          title: "Suggestions",
-          link: "",
-          icon: "fa-angle-down",
-          subMenuList: [
-            {title: "9th coordinated exams", link: ""},
-            {title: "6th coordinated exams", link: ""},
-            {title: "12th Coordinated Exams", link: ""},
-          ],
-        }
       ],
       selectedItem: 1,
       socialList: [
@@ -307,12 +311,29 @@ export default {
         {link: "instagram", icon: "fa-instagram"},
         {link: "Youtube", icon: "fa-youtube"},
       ],
+      hotTopics: {},
+
     };
+  },
+  mounted() {
+    if (window.innerWidth<=960 && this.$auth.loggedIn){
+      this.$refs["notification-section"].getNotifications();
+    }
+  },
+  async fetch() {
+    await this.$axios.$get('/api/v1/admin/values')
+      .then(response => {
+        if (response.data.mostVisitedTags.enable == "true")
+          this.hotTopics = response.data.mostVisitedTags.tags;
+      }).catch(err => {
+        console.log(err);
+      })
   },
   methods: {
     openLoginDialog() {
       this.$refs.header_topbar.openLoginDialog();
-    },
+    }
+    ,
     openRegisterDialog() {
       this.$refs.header_topbar.openRegisterDialog();
     }
@@ -341,4 +362,11 @@ export default {
 .mobile_bar .v-toolbar__content {
   padding: 0 1.4rem 0 0.5rem !important;
 }
+
+.mobile_bar .fa-bell {
+  line-height: 3rem !important;
+  font-size: 2.8rem !important;
+}
+
+
 </style>

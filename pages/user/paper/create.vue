@@ -59,8 +59,9 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="12" md="12" v-if="topic_list.length">
-                      <topic-selector :topic-list="topic_list"
+                    <v-col cols="12" md="12" >
+                      <topic-selector ref="topic-selector"  :topic-list="topic_list"
+
                                       @selectTopic="selectTopic"/>
                     </v-col>
                     <v-col cols="12" md="4">
@@ -249,6 +250,7 @@
                     <v-col cols="12" v-if="extraAttr.length">
                       <v-row
                         v-for="(item,index) in extraAttr"
+                        :key="index"
                       >
                         <v-col cols="12" md="4">
                           <v-autocomplete :items="extra_type_list"
@@ -458,12 +460,16 @@ export default {
         this.getTypeList('lesson', val);
     },
     "form.lesson"(val) {
-      if (val)
+      if (val){
         this.getTypeList('topic', val);
+        this.$refs["topic-selector"].lesson_selected=true;
+      }
       else {
         this.form.topic = [];
         this.topic_list = [];
+        this.$refs["topic-selector"].lesson_selected=false;
       }
+
     },
     "form.state"(val) {
       this.getTypeList('area', val);
@@ -581,7 +587,7 @@ export default {
         }
       }).catch(err => {
         if (err.response.status == 403)
-          this.$router.push({query: {auth_form: 'login'}});
+            this.$auth.logout();
         else if (err.response.status == 400)
           this.$toast.error(err.response.data.message);
       }).finally(() => {
@@ -651,7 +657,8 @@ export default {
         else if (file_name == 'file_extra')
           this.extraAttr[index].file = response.data[0].file.name;
       }).catch(err => {
-
+        if (err.response.status == 403)
+          this.$auth.logout();
       }).finally(() => {
         this.file_pdf_loading = false;
         this.file_word_loading = false;

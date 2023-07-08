@@ -1,57 +1,57 @@
 <template>
-  <v-card class="d-block tab-header sticky-scroll">
+  <v-card class="d-block tab-header sticky-scroll ">
     <v-tabs v-model="active_tab">
       <v-tab @click="openLink('test')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-sample" :content="content_statistics.test">
+        <v-badge bordered class="pa-1 mx-1  badge-sample" :content="content_statistics.test">
           <div class="nav-link sample-q-icon">
-            <span class="icon icong-test mr-1"></span>
+            <span class="icon icong-test "></span>
             Paper
           </div>
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('learnfiles')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-training" :content="content_statistics.learnfiles"
+        <v-badge bordered class="pa-1 mx-1  badge-training" :content="content_statistics.learnfiles"
                  color="#2E7D32">
           <div class="nav-link training-content-icon">
-            <span class="icon icong-learnfiles mr-1"></span>
+            <span class="icon icong-learnfiles"></span>
             Multimedia
           </div>
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('question')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-q" :content="content_statistics.question" color="#BF360C">
+        <v-badge bordered class="pa-1 mx-1  badge-q" :content="content_statistics.question" color="#BF360C">
           <div class="nav-link q-a-icon">
-            <span class="icon icong-qa mr-1 "></span>
+            <span class="icon icong-qa"></span>
             Q & A
           </div>
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('azmoon')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-online" :content="content_statistics.azmoon" color="#5600E8">
+        <v-badge bordered class="pa-1 mx-1  badge-online" :content="content_statistics.azmoon" color="#5600E8">
           <div class="nav-link exam-icon">
-            <span class="icon icong-azmoon mr-1"></span>
+            <span class="icon icong-azmoon"></span>
             Exam
           </div>
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('dars')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-tutorial" :content="content_statistics.tutorial"
+        <v-badge bordered class="pa-1 ml-1 mr-4  badge-tutorial" :content="content_statistics.tutorial"
                  color="#BD081C">
           <div class="nav-link tutorial-icon">
-            <span class="icon icong-blog mr-1"></span>
+            <span class="icon icong-blog"></span>
             Tutorial
           </div>
         </v-badge>
       </v-tab>
-      <v-tab @click="openLink('tutor')">
-        <v-badge bordered class="pa-1 mx-1 mx-md-10 badge-teachers"
-                 :content="content_statistics.tutor" color="#8E24AA">
-          <div class="nav-link teacher-icon">
-            <span class="icon icong-teacher mr-1"></span>
-            Tutor
-          </div>
-        </v-badge>
-      </v-tab>
+      <!--      <v-tab @click="openLink('tutor')">-->
+      <!--        <v-badge bordered class="pa-1 mx-1 badge-teachers"-->
+      <!--                 :content="content_statistics.tutor" color="#8E24AA">-->
+      <!--          <div class="nav-link teacher-icon">-->
+      <!--            <span class="icon icong-teacher"></span>-->
+      <!--            Tutor-->
+      <!--          </div>-->
+      <!--        </v-badge>-->
+      <!--      </v-tab>-->
     </v-tabs>
   </v-card>
 </template>
@@ -91,6 +91,22 @@ export default {
     // window.removeEventListener('scroll', this.testHeader);
   },
 
+  watch: {
+    "$route.query.type"(active_route) {
+      if (active_route === "test")
+        this.active_tab = 0;
+      else if (active_route === "learnfiles")
+        this.active_tab = 1;
+      else if (active_route === "question")
+        this.active_tab = 2;
+      else if (active_route === "azmoon")
+        this.active_tab = 3;
+      else if (active_route === "dars")
+        this.active_tab = 4;
+      else if (active_route === "tutor")
+        this.active_tab = 5;
+    }
+  },
   methods: {
     openLink(val) {
       const query = {type: val}
@@ -147,16 +163,20 @@ export default {
   text-transform: none !important;
   font-size: 1.2rem;
 }
+
 .tab-header .v-tab .nav-link {
   padding: 0.8rem 0.8rem 0.8rem 0;
+  display: flex;
+  align-items: center;
 }
 
 .tab-header .v-tab:before {
   background-color: transparent !important;
 }
-.tab-header .v-badge__wrapper{
-  right:1.5rem!important;
-  top:0rem!important;
+
+.tab-header .v-badge__wrapper {
+  right: 1.5rem !important;
+  top: 0rem !important;
 }
 
 .tab-header .v-tab--active .nav-link {
@@ -193,9 +213,9 @@ export default {
 }
 
 
-.tab-header .nav-link .icon {
-  display: none !important;
-}
+/*.tab-header .nav-link .icon {*/
+/*  display: none !important;*/
+/*}*/
 
 .tab-header .v-tab--active .nav-link .icon {
   display: block !important;
@@ -215,31 +235,36 @@ export default {
 .tab-header .v-tab:hover::before {
   opacity: 0;
 }
-.tab-header .v-badge__badge{
-  top:-0.6rem!important;
+
+.tab-header .v-badge__badge {
+  top: -0.2rem !important;
 }
 
 .sample-q-icon span {
   font-size: 2.5rem;
   padding-left: 1rem;
+  padding-right: 0.4rem;
   color: #2962ff;
 }
 
 .training-content-icon span {
   font-size: 2.5rem;
   padding-left: 1rem;
+  padding-right: 0.4rem;
   color: #2E7D32FF;
 }
 
 .q-a-icon span {
   font-size: 2.5rem;
   padding-left: 1rem;
+  padding-right: 0.4rem;
   color: #bf360c;
 }
 
 .exam-icon span {
   font-size: 2.5rem;
   padding-left: 1rem;
+  padding-right: 0.4rem;
   color: #5600e8;
 }
 
@@ -247,12 +272,14 @@ export default {
 .tutorial-icon span {
   font-size: 2.5rem;
   padding-left: 1rem;
+  padding-right: 0.4rem;
   color: #bd081c;
 }
 
 .teacher-icon span {
   font-size: 2.5rem;
   padding-left: 1rem;
+  padding-right: 0.4rem;
   color: #8e24aa;
 }
 

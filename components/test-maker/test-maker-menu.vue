@@ -15,7 +15,9 @@
         <v-tab
           @click="openLink(item)"
           :disabled="item.status"
-          v-for="item in items">
+          v-for="(item,index) in items"
+          :key="index"
+        >
 
           <span>{{ item.title }}</span>
           <v-btn icon>
@@ -61,14 +63,14 @@ export default {
           icon: 'mdi-format-list-checkbox',
           link: '',
           subMenuList: [
-            {title: "My tests", link: "/user/exams", icon: 'mdi-clipboard-list-outline', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
-            {title: "Album list", link: "/test-maker", icon: 'mdi-image-album', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
-            {title: "Test results", link: "/exams/results", icon: 'mdi-list-status', icon_type: 'custom'}
+            {title: "My Exams", link: "/user/exam", icon: 'mdi-clipboard-list-outline', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
+            {title: "Albums", link: "/test-maker", icon: 'mdi-image-album', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
+            {title: "Results", link: "/exam/results", icon: 'mdi-list-status', icon_type: 'custom'}
           ]
 
         },
         {
-          title: 'Create online exam',
+          title: 'New Exam',
           icon: 'mdi-plus-circle-outline',
           link: '/test-maker/create',
         },
@@ -77,13 +79,12 @@ export default {
           icon: 'mdi-list-box-outline',
           link: '/test-maker/create?active=test_list',
         },
-        //
-        // {
-        //   title: 'Add Test',
-        //   icon: 'mdi-plus-circle-outline',
-        //   link: '/test-maker/create-test',
-        //   status:(this.$auth && this.$auth.user.group_id === '6' ? true : false)
-        // },
+        {
+          title: 'Add New Test',
+          icon: 'mdi-plus-circle-outline',
+          link: '/test-maker/create?active=add_test',
+          // status:(this.$auth && this.$auth.user.group_id === '6' ? true : false)
+        },
 
       ],
       sheet: false,

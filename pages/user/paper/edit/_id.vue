@@ -63,9 +63,9 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <v-col cols="12" md="12" v-if="topic_list.length">
+                    <v-col cols="12" md="12" >
                       <!--                      <validation-provider name="topic" rules="required" v-slot="{errors}">-->
-                      <topic-selector :topic-list="topic_list"
+                      <topic-selector ref="topic-selector" :topic-list="topic_list"
                                       :selectedTopics="form.topics"
                                       @selectTopic="selectTopic"/>
                       <!--                      </validation-provider>-->
@@ -271,6 +271,7 @@
                     <v-col cols="12" v-if="extraAttr.length">
                       <v-row
                         v-for="(item,index) in extraAttr"
+                        :key="index"
                       >
                         <v-col cols="12" md="4">
                           <v-autocomplete :items="extra_type_list"
@@ -502,21 +503,30 @@ export default {
         this.grade_list = [];
         this.lesson_list = [];
         this.topic_list = [];
+        this.$refs["topic-selector"].lesson_selected=false;
+
 
         this.getTypeList('base', optionVal);
         if (this.form.area)
           this.getTypeList('school');
 
+        this.$refs["topic-selector"].lesson_selected=false;
+
       } else if (optionName == 'base') {
         this.form.lesson = '';
-        if (optionVal)
+        if (optionVal){
           this.getTypeList('lesson', optionVal);
+        }
+        this.$refs["topic-selector"].lesson_selected=false;
       } else if (optionName == 'lesson') {
-        if (optionVal)
+        if (optionVal){
           this.getTypeList('topic', optionVal);
+          this.$refs["topic-selector"].lesson_selected=true;
+        }
         else {
           this.form.topic = [];
           this.topic_list = [];
+          this.$refs["topic-selector"].lesson_selected=false;
         }
       } else if (optionName == 'state') {
         this.getTypeList('area', val);

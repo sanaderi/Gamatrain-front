@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!--Mobile filter-->
     <v-row justify="center" class="d-block d-md-none">
       <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition ">
@@ -19,15 +18,13 @@
                 filter
               </span>
             </v-slide-x-reverse-transition>
-
-
           </v-btn>
         </template>
         <v-card>
           <div style="position: sticky;top: 0;left: 0;right: 0;z-index: 10">
             <v-toolbar class="filter-btn-header">
               <v-toolbar-items>
-                <v-btn text @click="dialog = false">
+                <v-btn class="text-h5 font-weight-bold" text @click="dialog = false">
                   Search in content
                 </v-btn>
               </v-toolbar-items>
@@ -36,17 +33,13 @@
                 <v-icon>mdi-close</v-icon>
               </v-btn>
             </v-toolbar>
-            <div class="filter-btn-result my-4">
-              <p class="text-right mx-4 transparent" :class="result_count==0 ? 'red--text' : ''">Result :
-                {{ result_count }}</p>
-            </div>
           </div>
           <v-card-text>
             <search-filter ref="side_filter" class="mx-3"/>
           </v-card-text>
           <v-card-actions style="position: sticky;bottom: 0;left: 0;right: 0">
             <v-btn medium block class="filter-show-result mr-4" @click="dialog=!dialog">
-              show result
+              show result ({{ result_count }})
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -60,46 +53,52 @@
     <!--     End: mobile header-->
 
 
-    <!-- Start : sample-q -->
+    <!-- Start  -->
     <section class="search-page">
       <v-container>
         <v-row>
           <v-col lg="3" class="d-none d-md-block">
-            <div class="search-filter">
-              <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs"/>
-            </div>
+            <v-card flat color="#f5f5f5" style="position: sticky;top:1rem;">
+              <v-card-text>
+                <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs"/>
+              </v-card-text>
+            </v-card>
           </v-col>
+
+
           <v-col lg="9" md="9" sm="12" class="search-contents px-0">
-              <v-breadcrumbs :items="breadcrumbs" class="search-breadcrumb d-none d-md-block">
-                <template v-slot:divider>
-                  <v-icon>mdi-chevron-right</v-icon>
-                </template>
-              </v-breadcrumbs>
-              <!-- header desktop -->
-              <Tabs ref="content_tabs"/>
-              <!-- sample-q-items-desktop -->
-              <div class="text-center" v-if="page_loading===false && items.length===0">
-                Oops! no data found
-              </div>
-              <div v-else>
-                <Paper v-if="$route.query.type==='test'" :items="items"/>
-                <Multimedia v-else-if="$route.query.type==='learnfiles'" :items="items"/>
-                <QuestionAnswer v-else-if="$route.query.type==='question'" :items="items"/>
-                <Exam v-else-if="$route.query.type==='azmoon'" :items="items"/>
-                <Tutorial v-else-if="$route.query.type==='dars'" :items="items"/>
-                <Tutor v-else-if="$route.query.type==='tutor'" :items="items"/>
-              </div>
-          </v-col>
-        </v-row>
-        <v-row v-show="page_loading">
-          <v-col cols="12" class="text-center">
-            <v-progress-circular
-              :size="40"
-              :width="4"
-              class="mt-12 mb-12"
-              color="orange"
-              indeterminate
-            />
+            <v-breadcrumbs :items="breadcrumbs" class="search-breadcrumb d-none d-md-block">
+              <template v-slot:divider>
+                <v-icon>mdi-chevron-right</v-icon>
+              </template>
+            </v-breadcrumbs>
+
+            <!-- Search tabs -->
+            <Tabs style="position:sticky;top: 0;z-index: 5" ref="content_tabs"/>
+            <!-- End search tabs -->
+
+            <div class="text-center" v-if="page_loading===false && items.length===0">
+              Oops! no data found
+            </div>
+            <div v-else>
+              <Paper v-if="$route.query.type==='test'" :items="items"/>
+              <Multimedia v-else-if="$route.query.type==='learnfiles'" :items="items"/>
+              <QuestionAnswer v-else-if="$route.query.type==='question'" :items="items"/>
+              <Exam v-else-if="$route.query.type==='azmoon'" :items="items"/>
+              <Tutorial v-else-if="$route.query.type==='dars'" :items="items"/>
+              <Tutor v-else-if="$route.query.type==='tutor'" :items="items"/>
+            </div>
+            <v-row v-show="page_loading">
+              <v-col cols="12" class="text-center">
+                <v-progress-circular
+                  :size="40"
+                  :width="4"
+                  class="mt-12 mb-12"
+                  color="orange"
+                  indeterminate
+                />
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
 
@@ -360,7 +359,7 @@ export default {
     async getContentList() {
       if (!this.all_files_loaded) {
         this.page_loading = true;
-        let params={
+        let params = {
           type: this.$route.query.type,
           page: this.page,
           section: this.$route.query.section,
@@ -375,9 +374,9 @@ export default {
           a_file: this.$route.query.a_file,
         };
 
-        if (this.$route.query.type=='tutor'){
-          params.state=this.$route.query.state;
-          params.city=this.$route.query.city;
+        if (this.$route.query.type == 'tutor') {
+          params.state = this.$route.query.state;
+          params.city = this.$route.query.city;
         }
         await this.$axios.$get('/api/v1/search',
           {

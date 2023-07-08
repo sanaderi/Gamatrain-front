@@ -9,7 +9,9 @@
                    :small="$vuetify.breakpoint.xs"
               :to="`${item.link}&state=${help_link_data.state}&section=${help_link_data.section}&base=${help_link_data.base}&course=${help_link_data.course}
                   &lesson=${help_link_data.lesson}`"
-              v-for="item in items"  class="side-help-icon mr-1" >
+              v-for="(item,index) in items"
+                   :key="index"
+                   class="side-help-icon mr-1" >
               <v-tooltip right>
                 <template v-slot:activator="{ on, attrs }">
                 <span v-bind="attrs"
@@ -48,6 +50,7 @@
                   <v-slide-item
                     class="mx-2 thumbnail_itm"
                     v-for="(image, index) in  images"
+                    :key="index"
                   >
                     <v-img
                       :class="carouselVal==index ? 'active_slide' : ''"
@@ -83,13 +86,13 @@ export default {
       active_img: 1,
 
       items: [
-        { class: "exam", text: "Exam", icon: "azmoon",link:"/search?type=azmoon" },
-        { class: "test", text: "Paper", icon: "test",link:"/search?type=test" },
-        { class: "content", text: "Multimedia", icon: "learnfiles" ,link:"/search?type=learnfiles" },
-        { class: "faq", text: "Q & A", icon: "qa",link:"/search?type=question" },
-        { class: "textbook ", text: "Tutorial", icon: "blog" ,link:"/search?type=dars" },
-        { class: "school", text: "School", icon: "school" ,link:"/search?type=school" },
-        { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor" },
+        { class: "exam", text: "Related exam", icon: "azmoon",link:"/search?type=azmoon" },
+        { class: "test", text: "Related paper", icon: "test",link:"/search?type=test" },
+        { class: "content", text: "Related multimedia", icon: "learnfiles" ,link:"/search?type=learnfiles" },
+        { class: "faq", text: "Related Q & A", icon: "qa",link:"/search?type=question" },
+        { class: "textbook ", text: "Related tutorial", icon: "blog" ,link:"/search?type=dars" },
+        // { class: "school", text: "School", icon: "school" ,link:"/search?type=school" },
+        // { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor" },
       ],
     }
   },

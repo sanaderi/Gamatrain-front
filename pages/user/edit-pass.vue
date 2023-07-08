@@ -6,7 +6,7 @@
             <v-icon color="teal">
               mdi-key
             </v-icon>
-           Edit password
+           Change Password
           </span>
       </v-col>
     </v-row>
@@ -85,7 +85,12 @@ import {ValidationProvider, ValidationObserver} from "vee-validate";
 
 export default {
   layout: 'dashboard_layout',
-  name: "user-info",
+  name: "change-pass",
+  head(){
+    return{
+      title: "Change Password"
+    }
+  },
   role: "user_type",
   components: {
     ValidationObserver,

@@ -54,7 +54,7 @@
                                 <ul style="list-style-type: none"
                                     v-if="item.chapters">
                                   <li v-for="chapter in item.chapters">
-                                    {{chapter.title}}
+                                    {{ chapter.title }}
                                   </li>
                                 </ul>
                               </li>
@@ -103,7 +103,7 @@
                   <span v-else>
                     Your wallet charge is ${{ $auth.user.credit }}
                   </span>
-                  <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/credit?">(Charge wallet)</nuxt-link>
+                  <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)</nuxt-link>
                 </div>
                 <div class="font-weight-bold answer">
                   <span class="mdi mdi-checkbox-marked icon"></span>
@@ -153,8 +153,10 @@
                     Last update: {{ $moment(contentData.up_date).fromNow() }}
                   </v-col>
                   <v-col cols="12" class="pb-0">
-                    <i class="fa-solid fa-bug mr-1 icon"></i>
-                    Crash report
+                    <div @click="openCrashReportDialog" class="pointer">
+                      <i class="fa-solid fa-bug mr-1 icon"></i>
+                      Crash report
+                    </div>
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <!--Dialog for share-->
@@ -292,7 +294,7 @@
               </p>
               <span v-else>
                 Your wallet charge is ${{ $auth.user.credit }}
-                <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/credit?">(Charge wallet)</nuxt-link>
+                <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)</nuxt-link>
               </span>
             </div>
           </v-col>
@@ -432,6 +434,7 @@
     </section>
     <!-- End: Feed -->
 
+    <crash-report ref="crash_report"/>
 
   </div>
 </template>
@@ -445,11 +448,13 @@ import RelatedContent from "@/components/details/related-content";
 import LatestTrainingContent from "@/components/details/latest-training-content";
 import RelatedQa from "@/components/details/related-qa";
 import RelatedOnlineExam from "@/components/details/related-online-exam";
+import CrashReport from "~/components/common/crash-report.vue";
 
 export default {
   name: "multimedia-details",
   auth: false,
   components: {
+    CrashReport,
     RelatedOnlineExam,
     RelatedQa,
     LatestTrainingContent,
@@ -460,8 +465,8 @@ export default {
     LastViews,
     RelatedCardBox
   },
-  head(){
-    return{
+  head() {
+    return {
       title: this.contentData.title
     }
   },
@@ -734,8 +739,13 @@ export default {
       } else {
         this.openAuthDialog('login');
       }
-    }
+    },
     //End download file
+
+    openCrashReportDialog() {
+      this.$refs.crash_report.dialog = true;
+      this.$refs.crash_report.form.type = "file";
+    }
   }
 }
 </script>

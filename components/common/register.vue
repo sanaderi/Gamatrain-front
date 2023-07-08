@@ -29,7 +29,7 @@
                       <validation-provider v-slot="{ errors }" name="request_identity" rules="required">
                         <v-text-field
                           dense
-                          label="Email or phone"
+                          label="Email"
                           :error-messages="errors"
                           v-model="identity"
                           outlined
@@ -75,7 +75,13 @@
                   @finish="onFinish"
                 ></v-otp-input>
               </v-col>
+
               <v-col cols="12">
+                <v-divider class="mb-3"/>
+                <p class="text-h6 text-center pointer" @click="recheckEnteredIdentity">
+                  Your email is incorrect? recheck it.
+                </p>
+
                 <v-divider class="my-3 text-center "/>
                 <v-btn plain class="text-none  pointer" @click="sendOtpCodeAgain()" :disabled="sendOtpBtnStatus">
                   Send code again
@@ -243,6 +249,10 @@ export default {
     switchToLogin() {
       this.$emit("update:switchToLogin", 'login')
     },
+    recheckEnteredIdentity() {
+      this.otp_holder=false;
+      this.identity_holder=true;
+    },
     cancelRegister() {
       this.register_dialog = false;
       this.identity_holder = true;
@@ -263,7 +273,7 @@ export default {
         this.otp_holder = true;
         this.countDownTimer();
       }).catch(err => {
-        if (err.response.status == 400)
+        // if (err.response.status == 400)
           this.$toast.error(err.response.data.message);
       }).finally(() => {
         this.register_loading = false;
