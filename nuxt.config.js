@@ -1,11 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
-import { defineNuxtConfig } from '@nuxt/bridge'
 
-export default defineNuxtConfig({
-   bridge:{
-     meta: true
-   },
-
+export default{
   // Global page headers: https://go.nuxtjs.dev/config-head
 
   head: {
@@ -58,7 +53,6 @@ export default defineNuxtConfig({
     {src: 'plugins/vue-emoji-picker', ssr: false},
     {src: 'plugins/img-cropper', ssr: false},
     {src: 'plugins/vuedraggable', ssr: false},
-    {src: 'plugins/vuex-persist', ssr: false},
 
   ],
 
@@ -220,4 +214,4 @@ export default defineNuxtConfig({
     host: "0.0.0.0",
     port: 3002
   }
-});
+};
