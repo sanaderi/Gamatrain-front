@@ -15,10 +15,10 @@
               </v-col>
               <v-col cols="6" md="6" lg="6" xl="7" xxl="7">
                 <v-btn tile v-for="(link, i) in menuLink" :to="link.link" :key="i" :color="menuSetting.linkColor" text
-                  class="mx-2" >
-                    <v-icon class="mb-2 mr-1"  v-if="link.icon" color="#FFB300">
-                      {{ link.icon }}
-                    </v-icon>
+                  class="mx-2">
+                  <v-icon class="mb-2 mr-1" v-if="link.icon" color="#FFB300">
+                    {{ link.icon }}
+                  </v-icon>
                   {{ link.title }}
                 </v-btn>
               </v-col>
@@ -196,18 +196,11 @@
 
 
             <!--Mobile nav-->
-            <v-app-bar class="d-block d-md-none mobile_bar" fixed>
-              <!--   hamburgers-icon in mobile-->
-              <v-btn icon @click="sidebar = !sidebar">
-                <v-icon large>
-                  mdi-menu
-                </v-icon>
-              </v-btn>
-              <v-spacer></v-spacer>
+            <v-app-bar class="d-block d-md-none mobile_bar" fixed :color="menuSetting.bgColor">
 
               <!--Logo section-->
               <nuxt-link to="/">
-                <v-img class="logo" :src="require('@/assets/images/' + logo)" max-width="120" />
+                <v-img class="logo" :src="`/images/${menuSetting.logo}`" max-width="120" />
               </nuxt-link>
               <!--End logo section-->
 
@@ -215,7 +208,15 @@
 
 
               <!--Mobile notification section-->
-              <notification-component ref="notification-section" />
+              <!-- <notification-component ref="notification-section" /> -->
+              <!--   hamburgers-icon in mobile-->
+              <v-icon :color="menuSetting.linkColor" class="pa-2">
+                mdi-magnify
+              </v-icon>
+
+                <v-icon large @click="sidebar = !sidebar" class="pa-2"  :class="menuSetting.bgColor == '#fff' ? '' : 'white--text ' "  >
+                  mdi-menu
+                </v-icon>
 
 
             </v-app-bar>
@@ -240,6 +241,7 @@ export default {
     NotificationComponent,
     Login,
     Register,
+    PassRecover,
     SearchBox
   },
   props: {
@@ -351,7 +353,7 @@ export default {
           icon: 'mdi-wallet-giftcard'
         },
       ],
-      currentOpenDialog:''
+      currentOpenDialog: ''
 
     };
   },
@@ -403,10 +405,10 @@ export default {
     "$route.query.auth_form"(val) {
       if (val === 'login') {
         this.$refs.login_modal.login_dialog = true;
-        this.$router.push({query: {}});
+        this.$router.push({ query: {} });
       } else if (val == 'register') {
         this.$refs.register_modal.register_dialog = true;
-        this.$router.push({query: {}});
+        this.$router.push({ query: {} });
       }
 
     }

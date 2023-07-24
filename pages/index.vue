@@ -3,7 +3,7 @@
         <main-header :menuSetting="menuSetting" />
         <div class="mt-16 mt-md-0">
             <v-container fluid class="px-0 py-0">
-                <v-row>
+                <v-row class="d-none d-md-flex">
                     <v-col cols="12" sm="12" md="12">
                         <v-carousel id="main-slider" v-model="carousel_model" cycle delimiter-icon="mdi-square" height="430"
                             interval="10000" hide-delimiter-background :show-arrows="false">
@@ -61,7 +61,7 @@
                         </v-carousel>
                     </v-col>
                 </v-row>
-                <grade-explorer :stats="stats" />
+                <grade-explorer class="d-none d-md-block" :stats="stats" />
 
                 <level-guid-banner />
 
@@ -94,7 +94,7 @@
                                 <h2 class="title">Are you a student?</h2>
                             </v-col>
                             <v-col cols="6">
-                                <v-card>
+                                <v-card class="fill-height">
                                     <v-card-title>
                                         <v-icon color="primary" size="36">mdi-cloud-download</v-icon>
                                         &nbsp;Download
@@ -105,7 +105,7 @@
                                 </v-card>
                             </v-col>
                             <v-col cols="6">
-                                <v-card>
+                                <v-card class="fill-height">
                                     <v-card-title>
                                         <v-icon color="primary" size="36">mdi-text-box-edit</v-icon>
                                         &nbsp;Exam

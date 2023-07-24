@@ -11,24 +11,23 @@
                     </v-col>
                     <v-col cols="12">
                         <v-slide-group v-model="model" class="slider pa-4">
-                            <v-slide-group-item v-for="(item, n) in slideItmes" :key="n">
+                            <v-slide-item v-for="(item, n) in slideItmes" :key="n">
                                 <v-card @mouseover="toggleHover('enter', n)" @mouseleave="toggleHover('leave', n)"
                                     height="185" width="260" class="ma-1">
-                                    <v-img :src="`/images/${item.img}`">
-                                    </v-img>
+                                    <v-img :src="`/images/${item.img}`" />
                                     <v-card-title class="text-white">
                                         <span v-if="!isHovered[n]">
                                             {{ item.short_describe }}
                                         </span>
                                         <div v-else class="text-center">
-                                            <v-btn variant="text" size="small" color="primary">
+                                            <v-btn text size="small" color="primary">
                                                 read more</v-btn>
                                         </div>
                                     </v-card-title>
 
 
                                 </v-card>
-                            </v-slide-group-item>
+                            </v-slide-item>
                         </v-slide-group>
                     </v-col>
                 </v-row>
@@ -96,6 +95,7 @@ export default {
             if (action == 'leave')
                 this.isHovered[n] = false;
 
+
         }
     }
 }
@@ -113,8 +113,8 @@ export default {
         line-height: 2.4rem;
     }
 
-    .v-btn{
-        .v-btn__content{
+    .v-btn {
+        .v-btn__content {
             font-family: 'Helvetica Neue LT Std Bold';
 
         }

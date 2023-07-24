@@ -5,7 +5,8 @@
                 <v-row>
                     <v-col cols="2" class="pr-0">
                         <v-sheet class="text-right" id="stats-handler" @touchstart="handleTouchStart"
-                            @touchend="handleTouchEnd" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
+                            @mousemove="handleMouseMove" @touchend="handleTouchEnd" @mousedown="handleMouseDown"
+                            @mouseup="handleMouseUp">
                             <div v-for="(item, index) in stats">
                                 <v-btn @click="handleBtnClick(index)" class="my-0 white--text"
                                     :class="index == 5 ? 'rounded-pill active' : 'rounded-s-xl'"
@@ -59,7 +60,7 @@
                                                 Multimedia
                                             </nuxt-link>
                                             <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
-                                            <span class="stat">+{{ stats[5].files | numberFormat }}</span>
+                                            <div class="stat">+{{ stats[5].files | numberFormat }}</div>
                                         </div>
                                         <v-row class="d-md-none">
                                             <v-col cols="6">
@@ -86,7 +87,7 @@
                                                 Exam
                                             </nuxt-link>
                                             <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
-                                            <span class="stat">+{{ stats[5].exams | numberFormat }}</span>
+                                            <div class="stat">+{{ stats[5].exams | numberFormat }}</div>
                                         </div>
                                         <v-row class="d-md-none">
                                             <v-col cols="6">
@@ -113,7 +114,7 @@
                                                 Q & A
                                             </nuxt-link>
                                             <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
-                                            <span class="stat">+{{ stats[5].questions | numberFormat }}</span>
+                                            <div class="stat">+{{ stats[5].questions | numberFormat }}</div>
                                         </div>
                                         <v-row class="d-md-none">
                                             <v-col cols="6">
@@ -134,7 +135,7 @@
 
                                 </v-row>
 
-                                <v-divider class="d-none d-md-block mt-4 mb-6" />
+                                <v-divider class="d-none d-md-block mt-14 mb-6" />
                                 <v-row class="d-none d-md-flex">
                                     <v-col cols="6" md="6">
                                         <h4 class="section-title">Last questions</h4>
@@ -212,7 +213,6 @@
                         </v-card>
                     </v-col>
                 </v-row>
-
             </v-card-text>
         </v-card>
     </v-container>
@@ -310,7 +310,10 @@ export default {
             touchStartY: 0,
             questions: [],
             papers: [],
-            intervalId: null
+            intervalId: null,
+            isDragging: false,
+            deltaY: 0
+
         }
 
     },
@@ -355,36 +358,54 @@ export default {
         },
 
         handleMouseDown(event) {
+            this.isDragging = true;
+
             this.stopInterval(); // Clear the interval using the interval ID
             this.touchStartY = event.clientY;
         },
 
         handleMouseUp(event) {
+            this.isDragging = false;
+            this.touchStartY = 0;
+            this.deltaY = 0;
+        },
+        handleMouseMove(event) {
+            if (!this.isDragging) return;
+
+
+
             // Calculate the distance traveled during the touch move
-            const deltaY = event.clientY - this.touchStartY;
+            if (Math.abs(this.deltaY) > 8) {
+                this.touchStartY = event.clientY;
+            }
+            this.deltaY = event.clientY - this.touchStartY;
+            console.log(this.deltaY);
 
             // Based on the distance, determine the drag direction
-            if (deltaY > 0) {
+            if (this.deltaY > 0) {
                 // User dragged to the bottom
-                var pop_color = this.gradeColors.pop();
-                var pop_data = this.stats.pop();
-                this.gradeColors.unshift(pop_color);
-                this.stats.unshift(pop_data);
-            } else if (deltaY < 0) {
+                if (Math.abs(this.deltaY) == 8) {
+                    var pop_color = this.gradeColors.pop();
+                    var pop_data = this.stats.pop();
+                    this.gradeColors.unshift(pop_color);
+                    this.stats.unshift(pop_data);
+                    
+                }
+
+            } else if (this.deltaY < 0) {
                 // User dragged to the top
-                var splice_color = this.gradeColors.splice(0, 1);
+                if (Math.abs(this.deltaY)==5) {
+                    var splice_color = this.gradeColors.splice(0, 1);
 
-                var splice_data = this.stats.splice(0, 1);
-                console.log(splice_data);
+                    var splice_data = this.stats.splice(0, 1);
+                    console.log(splice_data);
 
-                this.gradeColors.push(...splice_color);
-                this.stats.push(...splice_data);
+                    this.gradeColors.push(...splice_color);
+                    this.stats.push(...splice_data);
+                   
+                }
             }
-
-
-            this.touchStartY = 0;
         },
-
 
 
         handleTouchStart(event) {
@@ -420,11 +441,9 @@ export default {
 
         handleAutoCycle() {
             this.intervalId = setInterval(() => {
-                console.log("hi");
                 var splice_color = this.gradeColors.splice(0, 1);
 
                 var splice_data = this.stats.splice(0, 1);
-                console.log(splice_data);
 
                 this.gradeColors.push(...splice_color);
                 this.stats.push(...splice_data);

@@ -28,7 +28,7 @@
 
 <script >
 export default {
-    name: "stats=banner",
+    name: "stats-banner",
     data() {
         return {
             stats: [
