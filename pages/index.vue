@@ -1,221 +1,609 @@
 <template>
-  <div class="home-page-content">
-    <v-divider></v-divider>
-    <!--     Start:mobile header-->
-    <search-box class="d-block d-md-none mx-3 my-2"/>
-    <!--     End: mobile header-->
-    <section>
-      <v-carousel hide-delimiters
-                  :show-arrows="false"
-                  class="index-banner d-none d-md-block">
-        <v-carousel-item
-          v-for="(item, index) in items"
-          cover
-          :key="'banner' + index"
-          :src="require('@/assets/images/' + item.src)"
-          reverse-transition="fade-transition"
-          transition="fade-transition"
-          class="banner"
-        ></v-carousel-item>
-      </v-carousel>
-    </section>
+    <v-app>
+        <main-header :menuSetting="menuSetting" />
+        <div class="mt-16 mt-md-0">
+            <v-container fluid class="px-0 py-0">
+                <v-row>
+                    <v-col cols="12" sm="12" md="12">
+                        <v-carousel id="main-slider" v-model="carousel_model" cycle delimiter-icon="mdi-square" height="430"
+                            interval="10000" hide-delimiter-background :show-arrows="false">
 
-    <Category/>
+                            <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                                <v-sheet :color="colors[i]" height="94%">
+                                    <v-container style="position: relative;">
+                                        <div class="d-flex white--text fill-height justify-center align-first mt-4">
+                                            <div>
+                                                <div class="slide-title "
+                                                    v-html="slide.title" />
+                                                <div class="slide-describe mt-6 d-none d-md-block" v-html="slide.text" />
+                                                <v-btn rounded class="mt-8 white--text font-weight-bold" size="x-large"
+                                                    color="primary">Read about
+                                                    it</v-btn>
+                                            </div>
+                                            <div style="width: 10%;"></div>
+                                            <div>
+                                                <v-img class="ml-14" :src="`/images/${slide.img}`"
+                                                 :height="slide.img_height"
+                                                    :width="slide.img_width" :alt="slide.title" />
+                                            </div>
 
-    <!--  Start: search grade  -->
-    <section class="d-none d-sm-block search-sec mb-4 ">
-      <v-card flat color="rgba(0,0,0,0.2)" rounded>
-        <v-card-text class="mt-0">
-          <search/>
-        </v-card-text>
-      </v-card>
-    </section>
-    <!--  End: search  -->
+                                        </div>
 
-    <!-- Start:grade list desktop -->
-    <section class="grades-list d-sm-flex d-none">
-      <v-container>
-        <v-row class="justify-space-between mx-0 grade-list">
-          <v-col
-            v-for="(stat, index) in stats"
-            :key="'DgradeList' + index"
-            cols="12"
-            md="3"
-            sm="4"
-            class="grade-card-body"
-          >
-            <desktop-stats-card-component
-              @lessonExpand="lessonExpandCard"
-              :stat="stat" :itm_index="index"/>
-          </v-col>
-        </v-row>
-      </v-container>
-    </section>
-    <!--  Start: Grades list mobile -->
+                                    </v-container>
+                                </v-sheet>
+                                <v-sheet height="6%">
+                                </v-sheet>
+                            </v-carousel-item>
+                            <v-card id="main-search" class="d-none d-md-block">
+                                <v-card-text>
+                                    <v-row class="text-center">
+                                        <v-col cols="7" id="main-search-keyword">
+                                            <v-text-field class="rounded-ts" label="Insert text" filled
+                                                dense></v-text-field>
+                                        </v-col>
+                                        <v-col cols="4" class="pl-0" id="keysearch-cate">
+                                            <v-autocomplete dense label="Select category"
+                                                :items="['Paper', 'Multimedia', 'Q&A', 'Exam', 'Tutorial']"
+                                                filled></v-autocomplete>
+                                        </v-col>
+                                        <v-col cols="1" class="pl-0">
+                                            <v-btn color="primary" class="white--text">
+                                                <v-icon>
+                                                    mdi-magnify
+                                                </v-icon>
+                                            </v-btn>
+                                        </v-col>
+                                    </v-row>
+                                </v-card-text>
 
-    <!-- Start:grade list mobile -->
-    <section class="grades-list d-sm-none d-flex">
-      <v-container>
-        <v-row class="justify-space-between mx-0 grade-list" v-if="showLess">
-          <v-col
-            cols="12"
-            md="3"
-            sm="6"
-            v-for="(stat, index) in stats.slice(0, 3)"
-            :key="index.value"
-            class="grade-card-body"
-          >
-            <mobile-stats-card-component
-              @lessonExpand="lessonExpandCard"
-              :stat="stat" :itm_index="index"/>
-          </v-col>
-        </v-row>
-        <v-row v-else class="justify-space-between mx-0 grade-list">
-          <v-col
-            v-for="(stat, index) in stats"
-            :key="index.value"
-            cols="12"
-            md="3"
-            sm="6"
-            class="grade-card-body"
-          >
-            <mobile-stats-card-component
-              @lessonExpand="lessonExpandCard"
-              :stat="stat" :itm_index="index"/>
-          </v-col>
-        </v-row>
-        <button
-          class="showmore d-flex justify-center mt-4 mb-12"
-          @click="showLess = !showLess"
-        >
-          <span v-if="showLess" class="showmore-span">
-            View more
-            <i class="fa-solid fa-chevron-down mx-2"></i>
-          </span>
-          <span v-else class="showless-span">
-            View less<i class="fa-solid fa-chevron-up mx-2"></i>
-          </span>
-        </button>
-      </v-container>
-    </section>
-    <!--  End: Grade list mobile  -->
+                            </v-card>
+
+                        </v-carousel>
+                    </v-col>
+                </v-row>
+                <grade-explorer :stats="stats" />
+
+                <level-guid-banner />
+
+                <!--Ai learn banner-->
+                <v-container class="mt-16">
+                    <v-row>
+                        <v-col id="ai-learn-banner" cols="12">
+                            <img id="img-top" alt="AI Learn" src="/images/ai-learn-bg1.png" />
+                            <h2 class="title">
+                                AI Learn
+                            </h2>
+                            <p class="describe">
+                                Discover Your Full Potential with AI-based Education
+                            </p>
+                            <v-btn color="primary" rounded class="white--text">
+                                Read about it
+                            </v-btn>
+                            <img id="img-bottom" alt="AI Learn" src="/images/ai-learn-bg2.png" />
+                        </v-col>
+                    </v-row>
+                </v-container>
+                <!--End ai learn banner-->
 
 
-    <!-- Start: Feedtabs respons -->
-    <FeedTab/>
-    <!-- End: Feedtabs respons -->
+                <!--Sudent help banner-->
+                <v-container id="student-help-container" fluid>
+                    <v-container>
+                        <v-row>
+                            <v-col cols="12">
+                                <h2 class="title">Are you a student?</h2>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-card>
+                                    <v-card-title>
+                                        <v-icon color="primary" size="36">mdi-cloud-download</v-icon>
+                                        &nbsp;Download
+                                    </v-card-title>
+                                    <v-card-text>
+                                        Empower Your Studies. Download Worksheets and Educational Materials.
+                                    </v-card-text>
+                                </v-card>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-card>
+                                    <v-card-title>
+                                        <v-icon color="primary" size="36">mdi-text-box-edit</v-icon>
+                                        &nbsp;Exam
+                                    </v-card-title>
+                                    <v-card-text>
+                                        You can test yourself with online tests and increase your preparation.
+                                    </v-card-text>
+                                </v-card>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-container>
 
 
-    <!--  Start: Main stats  -->
-    <Slider class="d-none d-md-block"/>
-    <!--  End: Main stats  -->
+                <!--School service banner-->
+                <v-container id="school-service-container">
+                    <v-row>
+                        <v-col cols="4">
+                            <v-img width="246" height="184" class="mx-auto" src="/images/school-service.png" />
+                        </v-col>
+                        <v-col cols="8">
+                            <h2 class="title">Find school service</h2>
+                            <p class="describe">
+                                You don't have to try the hardest ways anymore. Gamma has provided you with access to school
+                                information. Just
+                                filter and Gamma will find it for you.
+                            </p>
+                            <v-btn rounded color="primary">Search school</v-btn>
+                        </v-col>
+                    </v-row>
 
-    <!--  Start: Last views  -->
-    <!-- <section class="last-view-sec">
-      <v-container>
-        <last-views></last-views>
-      </v-container>
-    </section> -->
-    <!--  End: Last views   -->
-    <Scroll/>
-  </div>
+                </v-container>
+                <!--End school service banner-->
+
+
+                <!-- Stats container -->
+                <stats-banner />
+                <!-- End stats container -->
+
+
+                <!-- Blog container -->
+                <blog-container />
+                <!-- End blog container -->
+
+                <!--Earn money banner-->
+                <v-container fluid id="earn-money-container">
+                    <v-container>
+                        <v-row>
+                            <v-col cols="12" sm="12" md="8">
+                                <h2 class="describe text-center text-md-left">Why wait? Earn money with us in minutes with
+                                    just a few clicks!</h2>
+                            </v-col>
+                            <v-col cols="12" sm="12" md="4" class="text-center text-md-left">
+                                <v-btn height="36" color="primary" class="white--text">Earn money</v-btn>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-container>
+                <!--End earn money banner-->
+
+
+
+
+
+            </v-container>
+        </div>
+        <v-footer class="px-0 pb-0">
+            <main-footer />
+        </v-footer>
+    </v-app>
 </template>
-
+ 
 <script>
-import GardeCard from "./index/garde-card";
-import Search from "./index/search";
-import LastViews from "../components/common/last-views";
-import Category from "~/components/common/category.vue";
-import FeedTab from "../components/common/feedTab.vue";
-import Slider from "../components/common/slider.vue";
-import Scroll from "~/components/common/scroll.vue";
-import SearchBox from "@/components/common/search-box";
-import DesktopStatsCardComponent from "~/components/home/DesktopStatsCardComponent.vue";
-import MobileStatsCardComponent from "~/components/home/MobileStatsCardComponent.vue";
+import GradeExplorer from '~/components/home/grade-explorer.vue';
+import LevelGuidBanner from '~/components/home/level-guid-banner.vue';
+import BlogContainer from '~/components/home/blog-container.vue';
+import StatsBanner from '~/components/home/stats-banner.vue';
+import MainFooter from '../components/common/footer'
+import MainHeader from '../components/common/header'
 
 export default {
-  auth: false,
-  name: 'home_page',
-  head() {
-    return {
-      titleTemplate: "Gamatrain | %s",
-      title: 'Learning together, earning together, building a brighter future',
-      meta: [
-        {
-          hid: `description`,
-          name: 'description',
-          content: 'Big training platform'
+    layout: "home",
+    auth: false,
+    head() {
+        return {
+            titleTemplate: "Gamatrain | %s",
+            title: 'Learning together, earning together, building a brighter future'
+
         }
-      ]
+    },
+    components: {
+        MainHeader,
+        GradeExplorer,
+        LevelGuidBanner,
+        BlogContainer,
+        StatsBanner,
+        MainFooter
+    },
+
+
+    data() {
+        return {
+            test_schools: '',
+            less: true,
+            showLess: true,
+
+
+
+
+            carousel_model: 0,
+            colors: [
+                '#24292F',
+                '#0092A9'
+            ],
+
+
+            slides: [
+                {
+                    title: '<span class="pre-title">AI</span> System in Education',
+                    img: 'ai-robot.png',
+                    text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
+                    img_height: 400,
+                    img_width: 280,
+                }, {
+                    title: '<span class="text-h2 font-weight-bold">Answer & Question</span>',
+                    text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
+                    img: 'a-q.png',
+                    img_height: 320,
+                    img_width: 380,
+                }
+            ],
+            items: [
+                {
+                    src: "banner_home_2.jpg",
+                },
+                {
+                    src: "banner_home_2.jpg"
+                }
+            ]
+        }
+    },
+    computed: {
+        slideColor() {
+            if (this.colors && this.carousel_model) {
+                return this.colors[this.carousel_model];
+            }
+            return '#24292F'; // or some default value if colors or carousel_model is not available
+        },
+        menuSetting() {
+            return {
+                logo: 'gamatrain-logo.png',
+                bgColor: this.slideColor,
+                linkColor: '#fff'
+
+            }
+        }
+    },
+
+
+
+
+
+    //Load data
+    async asyncData({ params, $axios }) {
+        // This could also be an action dispatch
+        const response = await $axios.$get('/api/v1/home/stats');
+        var stats = response.data;
+
+        return { stats }
     }
-  },
-  components: {
-    MobileStatsCardComponent,
-    DesktopStatsCardComponent,
-    SearchBox,
-    LastViews,
-    Search,
-    GardeCard,
-    Category,
-    FeedTab,
-    Slider,
-    Scroll,
-  },
-  data: () => ({
-    test_schools: '',
-    less: true,
-    showLess: true,
+}
 
 
-    items: [
-      {
-        src: "banner_home_2.jpg",
-      },
-      {
-        src: "banner_home_2.jpg"
-      }
-    ],
-    value1: null,
-    value2: null,
-    value3: null,
-    stats: [],
-  }),
 
-  //Load data
-  async asyncData({params, $axios}) {
-    // This could also be an action dispatch
-    const response = await $axios.$get('/api/v1/home/stats');
-    var stats = [];
-
-    //Check data
-    if (response.status === 1) {
-      stats = response.data;
-      for (var i in stats) {
-        stats[i].showMore = false;
-      }
-    }
-
-    return {stats};
-  },
-
-  mounted() {
-  },
-  watch: {},
-  methods: {
-    lessonExpandCard: function (index) {
-      if (this.stats[index].showMore == true)
-        this.stats[index].showMore = false;
-      else
-        this.stats[index].showMore = true;
-
-    }
-  }
-};
 </script>
-
-<style>
+ 
+<style >
 /*Home page banner control background*/
-.index-banner .v-window__prev, .v-window__next {
-  background: none !important;
+.index-banner .v-window__prev,
+.v-window__next {
+    background: none !important;
+}
+
+.v-select__slot {
+    background: #fff !important;
+    border: transparent;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+#main-slider {
+    #main-search {
+        position: absolute;
+        bottom: 7.4rem;
+        width: 50%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        height: 8.8rem;
+        border-radius: 9rem;
+        background: rgba(0, 0, 0, 0.40);
+        backdrop-filter: blur(7.5px);
+
+
+        #keysearch-cate {
+            .v-input__slot {
+                background: #fff;
+                border-radius: 0.4rem;
+
+            }
+
+            .v-label {
+                color: rgba(0, 0, 0, 0.60);
+                font-size: 1.6rem;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 1.8rem;
+
+            }
+
+            .v-label.v-label--active {
+                color: rgba(0, 0, 0, 0.60) !important;
+
+            }
+        }
+
+        #main-search-keyword {
+
+            .v-input {
+                border-color: #fff;
+
+                .v-input__control {
+                    border-color: #fff;
+
+
+                    .v-input__slot {
+                        background-color: #fff !important;
+
+                        border: transparent;
+                        border-radius: 3rem 0.4rem 0.4rem 3rem;
+
+                        .v-label {
+                            color: rgba(0, 0, 0, 0.60);
+                            font-size: 1.6rem;
+                            font-style: normal;
+                            font-weight: 300;
+                            line-height: 1.8rem;
+
+                        }
+
+                        .v-label.v-label--active {
+                            color: rgba(0, 0, 0, 0.60) !important;
+
+                        }
+
+
+                    }
+
+                    .v-input__slot::before {
+                        border: transparent;
+                    }
+
+
+
+
+                }
+            }
+
+
+
+
+
+
+
+        }
+
+
+
+        .v-btn {
+            border-radius: 0.4rem 3rem 3rem 0.4rem;
+            height: 5.2rem;
+            width: 5rem;
+
+            .v-btn__content .v-icon {
+                display: block;
+            }
+        }
+
+    }
+
+    .pre-title {
+        color: #FFF;
+        font-family: 'Helvetica Neue LT Std Bold';
+        font-size: 5rem;
+        font-style: normal;
+        font-weight: 750;
+        line-height: 4.4rem;
+    }
+
+    .slide-title {
+        font-family: 'Helvetica Neue LT Std Bold' !important;
+        font-weight: 750;
+        font-size: 2.8rem !important;
+    }
+
+    .slide-describe {
+        margin-top: 2rem;
+        color: #FFF;
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 3.2rem;
+    }
+
+
+
+
+    .v-carousel__controls {
+        height: 5rem !important;
+    }
+
+    .v-carousel__controls .v-btn--icon {
+        background-color: #ebece9;
+        /* Background color of non-active ones */
+        height: 0.42rem;
+        /* Height you want */
+        width: 8rem;
+        /* Width you want */
+        border-radius: 0;
+        /* Remove default border radius */
+    }
+
+    .v-carousel__controls .v-btn--icon.v-btn--active {
+        background-color: #FFB300;
+        /* Colour for active one */
+    }
+
+    .v-carousel__controls .v-btn--icon:hover {
+        background-color: #FFB300;
+        /* You might also want to customise the hover effect */
+    }
+
+    .v-btn__content .v-icon {
+        display: none;
+    }
+}
+
+
+#ai-learn-banner {
+
+    border-radius: 1rem;
+    background-color: #24292F;
+    color: #FFFFFF;
+    text-align: center;
+    margin: 100px 0 100px 0;
+    padding: 48px 0 24px 0;
+    position: relative;
+
+    .title {
+        color: #FFF;
+        text-align: center;
+        font-family: 'Helvetica Neue LT Std Bold' !important;
+        font-size: 4.6rem !important;
+        font-style: normal;
+        font-weight: 750;
+        line-height: 4.4rem;
+        margin-bottom: 1.6rem;
+    }
+
+    .describe {
+        color: #FFF;
+        text-align: center;
+        font-family: 'Helvetica Neue LT Std';
+        font-size: 1.8rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 2.4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    #img-top {
+        position: absolute;
+        bottom: 17.2rem;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+
+    #img-bottom {
+        position: absolute;
+        top: 12.5rem;
+        left: 0;
+    }
+
+    .v-btn {
+        font-weight: 700;
+
+    }
+
+
+}
+
+
+#student-help-container {
+    margin-top: 6rem;
+    background: linear-gradient(135deg, #FFCB00 0%, #FFDF00 100%);
+
+    .title {
+        color: #24292F;
+        text-align: center;
+        font-family: 'Helvetica Neue LT Std Bold';
+        font-size: 2.8rem !important;
+        font-style: normal;
+        font-weight: 750;
+        line-height: 4.4rem;
+    }
+
+    .v-card {
+        border-radius: 0.625rem;
+        background: rgba(36, 41, 47, 0.70);
+        backdrop-filter: blur(0.46875rem);
+        color: white;
+
+        .v-card__title {
+            color: #FFF;
+            font-family: 'Helvetica Neue LT Std Bold';
+            font-size: 2.2rem !important;
+            font-style: normal;
+            font-weight: 750;
+            line-height: 4.4rem;
+        }
+
+        .v-card__text {
+            color: #FFF;
+            font-family: 'Helvetica Neue LT Std Md';
+            font-size: 1.8rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 2.4rem;
+        }
+    }
+}
+
+
+#school-service-container {
+    margin: 5rem auto 5rem auto;
+
+    .title {
+        color: #354053;
+        font-family: 'Helvetica Neue LT Std Bold';
+        font-size: 2.8rem !important;
+        font-style: normal;
+        font-weight: 750;
+        line-height: 4.4rem;
+    }
+
+    .describe {
+        color: #6E7781;
+        font-family: 'Helvetica Neue LT Std Md';
+        font-size: 1.8rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 3.2rem;
+    }
+
+    .v-btn {
+        margin-top: 2rem;
+        font-weight: 700;
+
+        .v-btn__content {
+            color: #24292F
+        }
+
+    }
+
+
+
+}
+
+#earn-money-container {
+    background: #24292F;
+
+    .v-btn {
+        .v-btn__content {
+            font-family: 'Helvetica Neue LT Std Md';
+            color: #24292F
+        }
+    }
+
+    .describe {
+        color: #F3F3FB;
+        font-size: 2.2rem;
+        font-family: 'Helvetica Neue LT Std Md';
+        font-style: normal;
+        font-weight: 500;
+        line-height: 2.4rem;
+    }
 }
 </style>
+ 

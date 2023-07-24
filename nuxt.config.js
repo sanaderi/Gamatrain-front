@@ -177,17 +177,31 @@ export default{
     defaultAssets: false,
     customVariables: ["~/assets/variables.scss"],
     theme: {
-      dark: false,
       themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+        light: {
+            background: '#FFFFFF',
+            surface: '#FFFFFF',
+            primary: '#FFB300',
+            'primary-darken-1': '#3700B3',
+            secondary: '#03DAC6',
+            'secondary-darken-1': '#018786',
+            error: '#B00020',
+            info: '#2196F3',
+            success: '#4CAF50',
+            warning: '#FB8C00',
         },
+        dark: {
+            background: colors.indigo.base,
+            surface: '#FFFFFF',
+            primary: colors.blue.darken4,
+            'primary-darken-1': '#3700B3',
+            secondary: '#03DAC6',
+            'secondary-darken-1': '#018786',
+            error: '#B00020',
+            info: colors.teal.lighten1,
+            success: '#4CAF50',
+            warning: '#FB8C00',
+        }
       },
     },
     icons: {

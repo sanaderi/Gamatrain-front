@@ -1,216 +1,175 @@
 <template>
-    <v-container fluid class="footer-holder mb-8">
-        <div class="footer-head d-flex justify-space-between align-center">
-          <v-list-item class="footer-item">
-            <nuxt-link
-              to="/"
-              class="d-md-flex align-center footer-item-link d-none"
-            >
-              <img
-                :src="require(`~/assets/images/mainlogo-gamatrain.png`)"
-                alt="Gamatrain"
-                width="128"
-              />
+  <v-container fluid class="px-0 pb-0">
+    <v-container id="footer">
+      <v-row>
+        <v-col cols="12" md="4" class="text-center text-md-left">
+          <v-img id="logo" alt="gamatrain" src="/images/gamatrain-logo-black.png" />
+          <div id="short-describe">
+            Our mission is to provide all training services to anyone and anywhere.Gamma is a 501(c)(3) nonprofit
+            organization.
+          </div>
+          <div>
+            <nuxt-link to="/"  class="v-btn" >
+              <v-icon>mdi-twitter</v-icon>
             </nuxt-link>
-          </v-list-item>
-        </div>
-        <v-row>
-          <v-col cols="12" md="5" sm="6" class="footer-items">
-            <v-list class="py-0">
-              <v-list-item class="footer-item">
-                <p class="about-footer footer-titles mt-3">About us</p>
-              </v-list-item>
+            <nuxt-link to="/"  class="v-btn">
+              <v-icon>
+                mdi-facebook
+              </v-icon>
+            </nuxt-link>
+            <nuxt-link to="/" class="v-btn">
+              <v-icon>
+                mdi-instagram
+              </v-icon>
+            </nuxt-link>
+          </div>
 
-              <v-list-item class="footer-item">
-                <p class="about-footer-para font-size-15">
-                  Since 2013, our team at GAMATrain has been working to improve global education system, specifically K-12 system. Our online education platform connects schools, teachers, students, and parents for better communication and knowledge sharing. GAMATrain’s ultimate goal is to promote fair and equal education opportunities around the world.
-                </p>
-              </v-list-item>
-            </v-list>
-          </v-col>
-          <v-col class="d-block footer-holder__links" cols="6" md="2" sm="6">
-            <v-list class="py-0">
-              <v-list-item class="footer-item">
-                <v-list-item class="footer-item">
-                  <p class="about-footer footer-titles">Services</p>
-                </v-list-item>
-              </v-list-item>
+        </v-col>
+        <v-col sm="3" md="2" class="d-none d-sm-block">
+          <div class="link-title">
+            We
+          </div>
+          <nuxt-link to="/about-us" class="footer-link">
+            About Us
+          </nuxt-link>
+          <nuxt-link to="/terms" class="footer-link">
+            Terms
+          </nuxt-link>
+          <nuxt-link to="/blog" class="footer-link">
+            Blog
+          </nuxt-link>
+        </v-col>
+        <v-col sm="3" md="2" class="d-none d-sm-block">
+          <div class="link-title">
+            Learning File
+          </div>
+          <nuxt-link to="/" class="footer-link">
+            Olympiad
+          </nuxt-link>
+          <nuxt-link to="/" class="footer-link">
+            Tallented
+          </nuxt-link>
+          <nuxt-link to="/" class="footer-link">
+            Answer/Question
+          </nuxt-link>
+        </v-col>
+        <v-col sm="3" md="2" class="d-none d-sm-block">
+          <div class="link-title">
+            Help Link
+          </div>
+          <nuxt-link to="/about-us" class="footer-link">
+            FAQ
+          </nuxt-link>
+          <nuxt-link to="/terms" class="footer-link">
+            Tools
+          </nuxt-link>
+          <nuxt-link to="/blog" class="footer-link">
+            School Finder
+          </nuxt-link>
+        </v-col>
+        <v-col sm="3" md="2" class="d-none d-sm-block">
+          <div class="link-title">
+            Virtual School
+          </div>
+          <nuxt-link to="/" class="footer-link">
+            Online Teach
+          </nuxt-link>
+          <nuxt-link to="/" class="footer-link">
+            Online Test
+          </nuxt-link>
+          <nuxt-link to="/" class="footer-link">
+            Test Maker
+          </nuxt-link>
+        </v-col>
 
-              <v-list-item class="footer-item">
-                <nuxt-link to="/search?type=test" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">Paper</span>
-                </nuxt-link>
-              </v-list-item>
-              <v-list-item class="footer-item">
-                <nuxt-link to="/search?type=learnfiles" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">
-                    Multimedia
-                  </span>
-                </nuxt-link>
-              </v-list-item>
-              <v-list-item class="footer-item">
-                <nuxt-link to="/search?type=question" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">Q & A</span>
-                </nuxt-link>
-              </v-list-item>
-              <v-list-item class="footer-item">
-                <nuxt-link to="/search?type=azmoon" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">Exam</span>
-                </nuxt-link>
-              </v-list-item>
-            </v-list>
-          </v-col>
-          <v-col class="d-block footer-holder__links" cols="6" md="2" sm="6">
-            <v-list class="py-0">
-              <v-list-item class="footer-item">
-                <v-list-item class="footer-item">
-                  <p class="about-footer footer-titles">Help</p>
-                </v-list-item>
-              </v-list-item>
-              <v-list-item class="footer-item">
-                <nuxt-link to="/contact-us" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">Contact Us</span>
-                </nuxt-link>
-              </v-list-item>
-              <v-list-item class="footer-item">
-                <nuxt-link to="/about-us" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">About Us</span>
-                </nuxt-link>
-              </v-list-item>
-              <v-list-item class="footer-item">
-                <nuxt-link to="/faq" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">FAQ's</span>
-                </nuxt-link>
-              </v-list-item>
-              <v-list-item class="footer-item">
-                <nuxt-link to="terms-and-conditions" class="d-flex align-center footer-item-link">
-                  <span class="mr-2 footer-item-title">Terms and Conditions</span>
-                </nuxt-link>
-              </v-list-item>
-            </v-list>
-          </v-col>
-          <v-col class="d-block footer-holder__links" cols="12" md="3" sm="6">
-            <v-list class="py-0">
-              <v-list-item class="footer-item">
-                <v-list-item class="footer-item">
-                  <p class="about-footer footer-titles">Follow us</p>
-                </v-list-item>
-              </v-list-item>
-              <div>
-                <v-btn
-                  v-for="(item,index) in social_media"
-                  :key="index"
-                  icon
-                  :href="item.link"
-                  target="_blank"
-                  color="primary" min-width="0" width="40" class="mx-2">
-                  <v-icon
-                    :class="item.class" :color="item.color"> {{item.icon}}</v-icon>
-                </v-btn>
-              </div>
-            </v-list>
-          </v-col>
-        </v-row>
+      </v-row>
     </v-container>
-<!--    <div class="footer-bar">-->
-<!--      <v-row>-->
-<!--        <v-col-->
-<!--          md="2"-->
-<!--          cols="4"-->
-<!--          class="d-flex justify-center footer-bar-item align-center">-->
-<!--          <nuxt-link to="/search?type=azmoon">-->
-<!--            Exam-->
-<!--          </nuxt-link>-->
-<!--        </v-col-->
-<!--        >-->
-<!--        <v-col-->
-<!--          md="2"-->
-<!--          cols="4"-->
-<!--          class="d-flex justify-center footer-bar-item align-center"-->
-<!--          >-->
-<!--          <nuxt-link to="/search?type=test">-->
-<!--            Paper-->
-<!--          </nuxt-link>-->
-<!--        </v-col-->
-<!--        >-->
-<!--        <v-col-->
-<!--          md="2"-->
-<!--          cols="4"-->
-<!--          class="d-flex justify-center footer-bar-item align-center"-->
-<!--          >-->
-<!--          <nuxt-link to="/search?type=learnfiles">-->
-<!--            Multimedia-->
-<!--          </nuxt-link>-->
-<!--        </v-col-->
-<!--        >-->
-<!--        <v-col-->
-<!--          md="2"-->
-<!--          cols="4"-->
-<!--          class="d-flex justify-center footer-bar-item align-center"-->
-<!--          >-->
-<!--          <nuxt-link to="/search?type=question">-->
-<!--            Q & A-->
-<!--          </nuxt-link>-->
-<!--        </v-col-->
-<!--        >-->
-<!--        <v-col-->
-<!--          md="2"-->
-<!--          cols="4"-->
-<!--          class="d-flex justify-center footer-bar-item align-center"-->
-<!--        >-->
-<!--          <nuxt-link to="/search?type=dars">-->
-<!--            Tutorial-->
-<!--          </nuxt-link>-->
-<!--        </v-col>-->
-<!--        <v-col-->
-<!--          md="2"-->
-<!--          cols="4"-->
-<!--          class="d-flex justify-center footer-bar-item align-center"-->
-<!--          >-->
-<!--          <nuxt-link to="/search?type=tutor">-->
-<!--            Tutor-->
-<!--          </nuxt-link>-->
-<!--        </v-col>-->
-<!--      </v-row>-->
-<!--    </div>-->
-
+    <v-container fluid id="footer-copy-right" class="px-0">
+      <v-row>
+        <v-col cols="12" class="pt-3 pb-1 text-center">
+          <span class="describe">All Right Reserved.Copyright @ 2023</span>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-container>
 </template>
 <script>
-export default {
-  data: () => ({
-    enamad: "enamad.png",
-    secondEnamad: "enamad2.png",
-    enamads: [
-      {
-        img: "enamad.png",
-      },
-      {
-        img: "enamad2.png",
-      },
-    ],
-    social_media: [
-      {
-        icon: "mdi-facebook",
-        link: "https://facebook.com/gamatrain",
-        color: "blue",
-        class:''
-      },{
-        icon: "mdi-instagram",
-        link: "https://www.instagram.com/gamatrain",
-        color: "#e291b9",
-        class:''
-      },{
-        icon: "mdi-linkedin",
-        link: "https://www.linkedin.com/company/gamatrain",
-        color: "#2588CB",
-        class:''
-      },{
-        icon: "mdi-send",
-        link: "https://t.me/gamatrain",
-        color: "#2588CB",
-        class:'mdi-rotate-315'
-      },
-    ],
-  }),
-};
+
 </script>
+
+
+
+<style>
+#footer {
+  margin-top: 4rem;
+
+  #logo {
+    width: 10.5996rem;
+    height: 3.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  #short-describe {
+    color: #6E7781;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2.4rem;
+    margin-bottom: 1.2rem;
+    font-family: 'Helvetica Neue LT Std Md';
+  }
+
+  .v-btn {
+    background-color: #FFB600;
+    height: 2rem!important;
+    width: 2rem!important;
+    border-radius: 0.3125rem;
+    margin: 0.1rem;
+
+    .v-icon {
+      font-size: 1.5rem;
+      color: #fff;
+
+    }
+  }
+
+  .link-title {
+    color: #424A53;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2.4rem;
+    font-family: 'Helvetica Neue LT Std Bold';
+
+
+  }
+
+  .footer-link {
+    display: block;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    color: #6E7781;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.92rem;
+  }
+}
+
+
+#footer-copy-right {
+  background: #24292F;
+  padding-bottom: 0;
+  margin-top: 4rem;
+
+  .describe {
+    color: #FFF;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    font-family: 'Helvetica Neue LT Std Md';
+    line-height: 1.92rem;
+  }
+}
+</style>

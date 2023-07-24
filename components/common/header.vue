@@ -1,62 +1,101 @@
 <template>
   <div>
     <header class="main-header">
-      <topbar ref="header_topbar"></topbar>
+      <!-- <topbar ref="header_topbar"></topbar> -->
 
-      <!-- Desktop App bar in top page for menu list -->
-      <v-container class="d-none d-md-block">
-        <v-row>
-          <v-col md="6" lg="6">
-            <v-toolbar-items>
-              <v-menu
-                v-for="(item, side) in menuItems"
-                :key="side"
-                open-on-hover
-                bottom
-                offset-y
-                class="main-menu"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn plain
-                         min-height="35"
-                         max-height="35"
-                         v-bind="attrs" v-on="on" class="menu-item pb-0 "
-                  >
-                    <nuxt-link :to="item.link" class="headermenu-item">
-                      <span v-show="item.title=='Home'" class="fa-solid fa-house-chimney mx-1"/>
-                      {{ item.title }}
-                      <span :class="'mr-1 fa-solid ' + item.icon"></span>
-                    </nuxt-link>
+      <!--Desktop menu-->
+      <div class="topbar d-none d-md-block">
+        <v-sheet id="main-menu" :color="menuSetting.bgColor">
+          <v-container>
+            <v-row>
+              <v-col cols="2" md="2" lg="2" xl="1" xxl="1" class=" text-left">
+                <nuxt-link to="/">
+                  <v-img alt="Gamatrain" width="120" height="30" :src="`/images/${menuSetting.logo}`" />
+                </nuxt-link>
+              </v-col>
+              <v-col cols="6" md="6" lg="6" xl="7" xxl="7">
+                <v-btn tile v-for="(link, i) in menuLink" :to="link.link" :key="i" :color="menuSetting.linkColor" text
+                  class="mx-2" >
+                    <v-icon class="mb-2 mr-1"  v-if="link.icon" color="#FFB300">
+                      {{ link.icon }}
+                    </v-icon>
+                  {{ link.title }}
+                </v-btn>
+              </v-col>
+              <v-col cols="4" class="text-right">
+                <div class="d-flex text-right" v-if="$auth.loggedIn">
+                  <v-spacer />
+                  <v-menu transition="slide-x-transition" offset-y min-width="150">
+                    <template v-slot:activator="{ props }">
+                      <div v-bind="props">
+                        <v-avatar size="32">
+                          <v-img :src="$auth.user.avatar" alt="user avatar" />
+                        </v-avatar>
+                        <span class="pointer pa-2 font-weight-bold "
+                          :class="menuSetting.bgColor == '#fff' ? '' : 'text-white'">{{ $auth.user.first_name }}</span>
+                      </div>
+                    </template>
+                    <v-list>
+                      <v-list-item v-for="(item, i) in user_profile_items" :key="i" :to="item.link">
+                        <v-list-item-title>
+                          <v-icon small>
+                            {{ item.icon }}
+                          </v-icon>
+                          {{ item.title }}
+                        </v-list-item-title>
+                      </v-list-item>
+                      <v-list-item class="pointer" @click="logout">
+
+                        <v-list-item-title>
+                          <v-icon small>
+                            mdi:mdi-logout
+                          </v-icon>
+                          Logout
+                        </v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+
+
+                  <!--Desktop version-->
+                  <common-notification-component ref="notificationComponent" class="d-none d-md-block" />
+
+                </div>
+                <div v-else>
+                  <v-btn color="white" text class="px-0" @click="openLoginDialog">
+                    Sign in
                   </v-btn>
-                </template>
-                <v-list :class="'dropdown-items dropdown-items'+ (side + 1)">
-                  <v-list-item
-                    v-for="(subMenuItem, side) in item.subMenuList"
-                    :key="side"
-                    class="dropdown-item"
-                    :to="subMenuItem.link"
-                  >
-                    {{ subMenuItem.title }}
-                  </v-list-item>
-                </v-list>
-              </v-menu>
-            </v-toolbar-items>
-          </v-col>
-          <v-col md="6" lg="6" class="text-right">
-            <span v-show="hotTopics.length">Hot topics: </span>
-            <v-chip v-show="hotTopics.length" :to="`/${item.link}`"
-                    v-for="(item,index) in hotTopics"
-                    :key="index"
-                    color="rgba(33, 33, 33, 0.08)">
-              <v-chip small color="rgba(0, 0, 0, 0.16);">
-                #
-              </v-chip>
-              {{ item.title }}
-            </v-chip>
-          </v-col>
-        </v-row>
-      </v-container>
-      <!-- End: Desktop app bar in top page for menu list -->
+                  <span class="white--text">/</span>
+                  <v-btn color="white" text class="px-0" @click="openRegisterDialog">
+                    Sign up
+                  </v-btn>
+                </div>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-sheet>
+
+
+
+        <div>
+          <!--Login component-->
+          <login ref="login_modal" :switchToRegister.sync="currentOpenDialog"
+            :switchToPassRecover.sync="currentOpenDialog" />
+          <!--End login component-->
+
+          <!--Register component-->
+          <register ref="register_modal" :switchToLogin.sync="currentOpenDialog" />
+          <!--End register component-->
+
+          <!--Recover password component-->
+          <pass-recover ref="pass_recover_modal" :switchToLogin.sync="currentOpenDialog"
+            :switchToRegister.sync="currentOpenDialog" />
+          <!--End recover password component-->
+
+
+        </div>
+      </div>
+      <!--End desktop menu-->
 
 
       <!--   Start: navbar   main-container -->
@@ -64,43 +103,29 @@
         <div class="d-flex align-center justify-space-between">
           <div class="d-flex align-center navbar-items">
             <!-- Start:  show sidebar menu in mobile -->
-            <v-navigation-drawer
-              v-model="sidebar"
-              app
-              class="hidden-md-and-up main-sidebar"
-            >
+            <v-navigation-drawer v-model="sidebar" app class="hidden-md-and-up main-sidebar">
               <!-- Start:  Menu items -->
               <v-list dense shaped class=" pl-1">
                 <!--Profile info-->
-                <div
-                  v-if="$auth.loggedIn"
-                  class="
+                <div v-if="$auth.loggedIn" class="
                     sidemenu-profile
                     d-flex
                     flex-column
                     justify-space-around
                     mb-5
-                  "
-                >
+                  ">
                   <nuxt-link to="/user">
                     <v-avatar size="40">
-                      <v-img
-                        :src="$loadAvatar.currentUser($auth)"
-                        alt="Avatar"
-                      />
+                      <v-img :src="$loadAvatar.currentUser($auth)" alt="Avatar" />
                     </v-avatar>
                   </nuxt-link>
 
                   <div class="profile-info">
-                    <nuxt-link
-                      :to="'/user'"
-                      class="profile-name">{{ $auth.user.first_name }} {{ $auth.user.last_name }}
+                    <nuxt-link :to="'/user'" class="profile-name">{{ $auth.user.first_name }} {{ $auth.user.last_name }}
                     </nuxt-link>
 
 
-                    <div
-                      class="profile-wallet d-flex justify-space-between mr-2"
-                    >
+                    <div class="profile-wallet d-flex justify-space-between mr-2">
                       <div class="d-flex">
                         <p class="wallet">Wallet: </p>
                         <p class="mx-3 wallet-balance">${{ $auth.user.credit }}</p>
@@ -127,37 +152,18 @@
 
 
                 <!--Mobile menu items-->
-                <div
-                  v-for="(item, side) in menuItems"
-                  :key="side"
-                >
-                  <v-list-item
-                    class="py-2"
-                    active-class="menu_active"
-                    v-if="!item.subMenuList"
-                    :to="item.link"
-                  >
-                    <v-list-item-title v-text="item.title" class="menu-title"/>
+                <div v-for="(item, side) in menuItems" :key="side">
+                  <v-list-item class="py-2" active-class="menu_active" v-if="!item.subMenuList" :to="item.link">
+                    <v-list-item-title v-text="item.title" class="menu-title" />
                   </v-list-item>
 
-                  <v-list-group
-                    v-else
-                    active-class="menu_group_active"
-                    :key="item.title"
-                    no-action
-                    :value="false"
-                  >
+                  <v-list-group v-else active-class="menu_group_active" :key="item.title" no-action :value="false">
                     <template v-slot:activator>
                       <v-list-item-title v-text="item.title" class="py-2"></v-list-item-title>
                     </template>
 
-                    <v-list-item
-                      class="pl-7 "
-                      active-class="menu_active"
-                      v-for="(subMenuItem, side) in item.subMenuList"
-                      :to="subMenuItem.link"
-                      :key="side.title"
-                    >
+                    <v-list-item class="pl-7 " active-class="menu_active" v-for="(subMenuItem, side) in item.subMenuList"
+                      :to="subMenuItem.link" :key="side.title">
                       <v-list-item-content class="py-2">
                         <v-list-item-title v-text="subMenuItem.title"></v-list-item-title>
                       </v-list-item-content>
@@ -178,15 +184,9 @@
               <!-- Start:  Social link -->
               <v-list dense>
                 <v-list-item-group class="d-flex justify-center align-center mt-5">
-                  <a
-                    v-for="(socialItem, i) in socialList"
-                    :key="i"
-                    :href="socialItem.link"
-                    class="d-flex justify-center align-center px-3"
-                  >
-                    <span
-                      :class="' side-icon fa-2xl fa-brands ' + socialItem.icon"
-                    ></span>
+                  <a v-for="(socialItem, i) in socialList" :key="i" :href="socialItem.link"
+                    class="d-flex justify-center align-center px-3">
+                    <span :class="' side-icon fa-2xl fa-brands ' + socialItem.icon"></span>
                   </a>
                 </v-list-item-group>
               </v-list>
@@ -207,11 +207,7 @@
 
               <!--Logo section-->
               <nuxt-link to="/">
-                <v-img
-                  class="logo"
-                  :src="require('@/assets/images/' + logo)"
-                  max-width="120"
-                />
+                <v-img class="logo" :src="require('@/assets/images/' + logo)" max-width="120" />
               </nuxt-link>
               <!--End logo section-->
 
@@ -219,7 +215,7 @@
 
 
               <!--Mobile notification section-->
-              <notification-component ref="notification-section"/>
+              <notification-component ref="notification-section" />
 
 
             </v-app-bar>
@@ -232,14 +228,29 @@
   </div>
 </template>
 <script>
-import topbar from "../widgets/topbar";
+import Login from "@/components/common/login";
+import Register from "@/components/common/register";
+import SearchBox from "@/components/common/search-box";
+import PassRecover from "@/components/common/pass-recover";
 import NotificationComponent from "~/components/common/notification-component.vue";
 
 export default {
   name: "header-component",
   components: {
     NotificationComponent,
-    topbar,
+    Login,
+    Register,
+    SearchBox
+  },
+  props: {
+    menuSetting: {
+      default: {
+        logo: 'gamatrain-logo-top-black.png',
+        bgColor: '#fff',
+        linkColor: '#424A53'
+
+      }
+    }
   },
   data() {
     return {
@@ -264,13 +275,13 @@ export default {
               title: "International Mathematical Olympiad",
               link: "/search?type=test&section=6025&base=6026&lesson=6028"
             },
-            {title: "International Physics Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6029"},
-            {title: "International Chemistry Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6030"},
+            { title: "International Physics Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6029" },
+            { title: "International Chemistry Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6030" },
             {
               title: "International Olympiad in Informatics",
               link: "/search?type=test&section=6025&base=6026&lesson=6031"
             },
-            {title: "International Biology Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6032"},
+            { title: "International Biology Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6032" },
           ],
         },
         {
@@ -278,19 +289,19 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            {title: "1st grade", link: "/search?type=test&section=1&base=13&test_type=314"},
-            {title: "2nd grade", link: "/search?type=test&section=1&base=14&test_type=314"},
-            {title: "3rd grade", link: "/search?type=test&section=1&base=15&test_type=314"},
-            {title: "4th grade", link: "/search?type=test&section=1&base=16&test_type=314"},
-            {title: "5th grade", link: "/search?type=test&section=1&base=17&test_type=314"},
-            {title: "6th grade", link: "/search?type=test&section=1&base=18&test_type=314"},
-            {title: "7th grade", link: "/search?type=test&section=2&base=19&test_type=314"},
-            {title: "8th grade", link: "/search?type=test&section=2&base=20&test_type=314"},
-            {title: "9th grade", link: "/search?type=test&section=2&base=21&test_type=314"},
-            {title: "IGCSE", link: "/search?type=test&section=3&base=22&test_type=314"},
-            {title: "O-Level", link: "/search?type=test&section=3&base=23&test_type=314"},
-            {title: "As Level", link: "/search?type=test&section=1463&base=1464&test_type=314"},
-            {title: "A Level", link: "/search?type=test&section=1463&base=4161&test_type=314"},
+            { title: "1st grade", link: "/search?type=test&section=1&base=13&test_type=314" },
+            { title: "2nd grade", link: "/search?type=test&section=1&base=14&test_type=314" },
+            { title: "3rd grade", link: "/search?type=test&section=1&base=15&test_type=314" },
+            { title: "4th grade", link: "/search?type=test&section=1&base=16&test_type=314" },
+            { title: "5th grade", link: "/search?type=test&section=1&base=17&test_type=314" },
+            { title: "6th grade", link: "/search?type=test&section=1&base=18&test_type=314" },
+            { title: "7th grade", link: "/search?type=test&section=2&base=19&test_type=314" },
+            { title: "8th grade", link: "/search?type=test&section=2&base=20&test_type=314" },
+            { title: "9th grade", link: "/search?type=test&section=2&base=21&test_type=314" },
+            { title: "IGCSE", link: "/search?type=test&section=3&base=22&test_type=314" },
+            { title: "O-Level", link: "/search?type=test&section=3&base=23&test_type=314" },
+            { title: "As Level", link: "/search?type=test&section=1463&base=1464&test_type=314" },
+            { title: "A Level", link: "/search?type=test&section=1463&base=4161&test_type=314" },
           ],
         },
         {
@@ -298,25 +309,54 @@ export default {
           link: "",
           icon: "fa-angle-down",
           subMenuList: [
-            {title: "Terms and Conditions", link: ""},
-            {title: "Privacy Policy", link: ""},
-            {title: "FAQs", link: "/faq"},
+            { title: "Terms and Conditions", link: "" },
+            { title: "Privacy Policy", link: "" },
+            { title: "FAQs", link: "/faq" },
           ],
         },
       ],
       selectedItem: 1,
       socialList: [
-        {link: "telegram", icon: "fa-telegram"},
-        {link: "twitter", icon: "fa-twitter"},
-        {link: "instagram", icon: "fa-instagram"},
-        {link: "Youtube", icon: "fa-youtube"},
+        { link: "telegram", icon: "fa-telegram" },
+        { link: "twitter", icon: "fa-twitter" },
+        { link: "instagram", icon: "fa-instagram" },
+        { link: "Youtube", icon: "fa-youtube" },
       ],
       hotTopics: {},
+
+      menuLink: [
+        {
+          title: 'Home',
+          link: '/',
+          icon: '',
+        },
+        {
+          title: 'About us',
+          link: '/about-us',
+          icon: ''
+        },
+        {
+          title: 'Services',
+          link: '/services',
+          icon: ''
+        },
+        {
+          title: 'FAQ',
+          link: '/faq',
+          icon: ''
+        },
+        {
+          title: 'Offers',
+          link: '/offers',
+          icon: 'mdi-wallet-giftcard'
+        },
+      ],
+      currentOpenDialog:''
 
     };
   },
   mounted() {
-    if (window.innerWidth<=960 && this.$auth.loggedIn){
+    if (window.innerWidth <= 960 && this.$auth.loggedIn) {
       this.$refs["notification-section"].getNotifications();
     }
   },
@@ -331,11 +371,44 @@ export default {
   },
   methods: {
     openLoginDialog() {
-      this.$refs.header_topbar.openLoginDialog();
-    }
-    ,
+      this.$refs.login_modal.login_dialog = true;
+    },
     openRegisterDialog() {
-      this.$refs.header_topbar.openRegisterDialog();
+      this.$refs.register_modal.register_dialog = true;
+    },
+  },
+  watch: {
+    currentOpenDialog(val) {
+      if (val === 'login') {
+        this.$refs.register_modal.register_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = false;
+        this.$refs.login_modal.login_dialog = true;
+      } else if (val === 'register') {
+        this.$refs.login_modal.login_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = false;
+        this.$refs.register_modal.register_dialog = true;
+      } else if (val === 'pass_recover') {
+        this.$refs.login_modal.login_dialog = false;
+        this.$refs.register_modal.register_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = true;
+      } else {
+        this.$refs.login_modal.login_dialog = false;
+        this.$refs.login_modal.register_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = false;
+      }
+
+    },
+
+    //Handle auth form from all of section
+    "$route.query.auth_form"(val) {
+      if (val === 'login') {
+        this.$refs.login_modal.login_dialog = true;
+        this.$router.push({query: {}});
+      } else if (val == 'register') {
+        this.$refs.register_modal.register_dialog = true;
+        this.$router.push({query: {}});
+      }
+
     }
   },
 };
@@ -343,6 +416,26 @@ export default {
 
 
 <style>
+#main-menu {
+  .v-btn {
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 700;
+    font-family: 'Helvetica Neue LT Std Md';
+    line-height: normal;
+
+
+  }
+
+  .v-btn--active {
+    border-bottom: 0.2rem solid #FFB300 !important;
+
+    .v-btn__overlay {
+      opacity: 0;
+    }
+  }
+}
+
 .menu-item:hover {
   border-bottom: 3px solid rgb(0, 139, 139);
 }
@@ -367,6 +460,4 @@ export default {
   line-height: 3rem !important;
   font-size: 2.8rem !important;
 }
-
-
 </style>
