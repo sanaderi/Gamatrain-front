@@ -177,6 +177,7 @@ export default{
     defaultAssets: false,
     customVariables: ["~/assets/variables.scss"],
     theme: {
+      defaultTheme: 'light',
       themes: {
         light: {
             background: '#FFFFFF',

@@ -423,7 +423,7 @@ export default {
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 700;
-    font-family: 'Helvetica Neue LT Std Md';
+    font-family: 'Helvetica Neue LT Std';
     line-height: normal;
 
 

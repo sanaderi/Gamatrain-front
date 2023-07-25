@@ -1,36 +1,34 @@
 <template>
     <v-app>
         <main-header :menuSetting="menuSetting" />
-        <v-container fluid class="px-0 py-0 mt-16 mt-md-0">
-            
-            <v-row class="d-none d-md-flex">
-                <v-col cols="12" sm="12" md="12">
-                    <v-carousel id="main-slider" v-model="carousel_model" cycle delimiter-icon="mdi-square" height="430"
-                        interval="10000" hide-delimiter-background :show-arrows="false">
+        <v-container fluid class="px-0 py-0 mt-10  mt-md-0">
+
+            <v-row>
+                <v-col cols="12" sm="12" md="12" class="pt-0 px-0 pt-sm-0">
+                    <v-carousel id="main-slider" v-model="carousel_model" cycle delimiter-icon="mdi-square" interval="10000"
+                        hide-delimiter-background :show-arrows="false">
 
                         <v-carousel-item v-for="(slide, i) in slides" :key="i">
-                            <v-sheet :color="colors[i]" height="94%">
-                                <v-container style="position: relative;">
-                                    <div class="d-flex white--text fill-height justify-center align-first mt-4">
-                                        <div>
+                            <v-sheet :color="colors[i]" class="section1">
+                                <v-container>
+                                    <v-row class="white--text mt-4  ">
+                                        <v-col md="7">
                                             <div class="slide-title " v-html="slide.title" />
                                             <div class="slide-describe mt-6 d-none d-md-block" v-html="slide.text" />
-                                            <v-btn rounded class="mt-8 white--text font-weight-bold" size="x-large"
-                                                color="primary">Read about
+                                            <v-btn rounded class="mt-8 white--text font-weight-bold d-none d-md-block"
+                                                size="x-large" color="primary">Read about
                                                 it</v-btn>
-                                        </div>
-                                        <div style="width: 10%;"></div>
-                                        <div>
-                                            <v-img class="ml-14" :src="`/images/${slide.img}`" :height="slide.img_height"
-                                                :width="slide.img_width" :alt="slide.title" />
-                                        </div>
+                                        </v-col>
+                                        <v-col md="5">
+                                            <img class="slide-img" :src="`/images/${slide.img}`" :alt="slide.title" />
+                                        </v-col>
 
-                                    </div>
-
+                                    </v-row>
                                 </v-container>
                             </v-sheet>
-                            <v-sheet height="6%">
+                            <v-sheet class="section2">
                             </v-sheet>
+
                         </v-carousel-item>
                         <v-card id="main-search" class="d-none d-md-block">
                             <v-card-text>
@@ -223,14 +221,10 @@ export default {
                     title: '<span class="pre-title">AI</span> System in Education',
                     img: 'ai-robot.png',
                     text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
-                    img_height: 400,
-                    img_width: 280,
                 }, {
-                    title: '<span class="text-h2 font-weight-bold">Answer & Question</span>',
+                    title: '<span class="text-h3 text-md-h2   font-weight-bold">Answer & Question</span>',
                     text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
                     img: 'a-q.png',
-                    img_height: 320,
-                    img_width: 380,
                 }
             ],
             items: [
@@ -292,8 +286,15 @@ export default {
     padding-right: 0;
 }
 
+.theme--dark.v-input input,
+.theme--dark.v-input textarea {
+    color: #000 !important;
+}
+
 
 #main-slider {
+    height: 49.28 !important;
+
     #main-search {
         position: absolute;
         bottom: 7.4rem;
@@ -305,6 +306,10 @@ export default {
         border-radius: 9rem;
         background: rgba(0, 0, 0, 0.40);
         backdrop-filter: blur(7.5px);
+
+        textarea {
+            color: #24292F !important
+        }
 
 
         #keysearch-cate {
@@ -333,6 +338,7 @@ export default {
 
             .v-input {
                 border-color: #fff;
+                color: #24292F !important;
 
                 .v-input__control {
                     border-color: #fff;
@@ -393,28 +399,42 @@ export default {
 
     }
 
-    .pre-title {
-        color: #FFF;
-        font-family: 'Helvetica Neue LT Std Bold';
-        font-size: 5rem;
-        font-style: normal;
-        font-weight: 750;
-        line-height: 4.4rem;
+    .section1 {
+        height: 95%;
+
+        .pre-title {
+            color: #FFF;
+            font-family: 'Helvetica Neue LT Std Bold';
+            font-size: 5rem;
+            font-style: normal;
+            font-weight: 750;
+            line-height: 4.4rem;
+        }
+
+        .slide-title {
+            font-family: 'Helvetica Neue LT Std Bold' !important;
+            font-weight: 750;
+            font-size: 2.8rem !important;
+        }
+
+        .slide-describe {
+            margin-top: 2rem;
+            color: #FFF;
+            font-size: 2rem;
+            font-style: normal;
+            font-weight: 300;
+            line-height: 3.2rem;
+        }
+
+        .slide-img {
+            width: 33rem;
+            float: right;
+
+        }
     }
 
-    .slide-title {
-        font-family: 'Helvetica Neue LT Std Bold' !important;
-        font-weight: 750;
-        font-size: 2.8rem !important;
-    }
-
-    .slide-describe {
-        margin-top: 2rem;
-        color: #FFF;
-        font-size: 2rem;
-        font-style: normal;
-        font-weight: 300;
-        line-height: 3.2rem;
+    .section2 {
+        height: 10%;
     }
 
 
@@ -599,6 +619,67 @@ export default {
         font-style: normal;
         font-weight: 500;
         line-height: 2.4rem;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    #main-slider {
+        height: 20rem !important;
+
+        .section1 {
+            height: 35%;
+
+            .container {
+                width: 90%;
+
+                .slide-img {
+                    width: 12rem;
+                    float: right;
+
+                }
+
+                .pre-title {
+                    color: #FFF;
+                    font-family: 'Helvetica Neue LT Std Bold';
+                    font-size: 4rem;
+                    font-style: normal;
+                    font-weight: 750;
+                    line-height: 4.4rem;
+                }
+
+                .slide-title {
+                    font-family: 'Helvetica Neue LT Std Bold' !important;
+                    font-weight: 750;
+                    font-size: 2.2rem !important;
+                }
+            }
+        }
+
+        .section2 {
+            height: 80%;
+        }
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 960px) {
+    #main-slider {
+
+        height: 28rem !important;
+
+        .section1 {
+            height: 51%;
+
+            .container {
+                width: 90%;
+
+                .slide-img {
+                    width: 17rem;
+                    float: right;
+
+                }
+            }
+        }
     }
 }
 </style>
