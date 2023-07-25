@@ -62,11 +62,11 @@
 
                 </div>
                 <div v-else>
-                  <v-btn color="white" text class="px-0" @click="openLoginDialog">
+                  <v-btn  :color="menuSetting.linkColor" text class="px-0" @click="openLoginDialog">
                     Sign in
                   </v-btn>
-                  <span class="white--text">/</span>
-                  <v-btn color="white" text class="px-0" @click="openRegisterDialog">
+                  <span :class="menuSetting.bgColor!='#fff' ? 'white--text' : 'black--text'">/</span>
+                  <v-btn :color="menuSetting.linkColor" text class="px-0" @click="openRegisterDialog">
                     Sign up
                   </v-btn>
                 </div>
@@ -210,7 +210,7 @@
               <!--Mobile notification section-->
               <!-- <notification-component ref="notification-section" /> -->
               <!--   hamburgers-icon in mobile-->
-              <v-icon :color="menuSetting.linkColor" class="pa-2">
+              <v-icon :color="menuSetting.linkColor" class="pa-23">
                 mdi-magnify
               </v-icon>
 

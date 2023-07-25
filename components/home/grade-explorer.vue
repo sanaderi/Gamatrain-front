@@ -1,18 +1,19 @@
 <template>
-    <v-container id="content-stats-container">
+    <v-container  id="content-stats-container">
         <v-card flat>
             <v-card-text>
                 <v-row>
-                    <v-col cols="2" class="pr-0">
+                    <v-col cols="2" sm="1" class="px-0">
                         <v-sheet class="text-right" id="stats-handler" @touchstart="handleTouchStart"
                             @mousemove="handleMouseMove" @touchend="handleTouchEnd" @mousedown="handleMouseDown"
                             @mouseup="handleMouseUp">
                             <div v-for="(item, index) in stats">
-                                <v-btn @click="handleBtnClick(index)" class="my-0 white--text"
+                                <v-btn @click="handleBtnClick(index)" class="my-0  white--text"
                                     :class="index == 5 ? 'rounded-pill active' : 'rounded-s-xl'"
-                                    v-if="shouldDisplayButton(index)" :height="gradeSizes[index].height"
-                                    :color="gradeColors[index]" :style="`font-size:${gradeSizes[index].fontSize}px`">
-                                    {{ item.base_title }}
+                                    v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
+                                    :style="`font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
+                                                                         min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
+                                    {{ gradeHandlerTitle(item.base_title) }}
                                 </v-btn>
                                 <div v-if="index == 5"
                                     :style="`height:${gradeSizes[index].height}px;width:${gradeSizes[index].width}px`" />
@@ -20,9 +21,9 @@
                             </div>
                         </v-sheet>
                     </v-col>
-                    <v-col cols="10" class="pl-0">
-                        <v-card height="566">
-                            <v-card-text class="pa-14">
+                    <v-col cols="10" sm="11" class="pl-0">
+                        <v-card id="grade-details-card">
+                            <v-card-text class="pa-8 pa-sm-10 pa-md-14">
                                 <v-row id="stats-details">
                                     <v-col cols="12" md="6">
                                         <div class="d-none d-md-block">
@@ -36,7 +37,7 @@
                                             <div class="stat">+{{ stats[5].tests | numberFormat }}</div>
                                         </div>
                                         <v-row class="d-md-none">
-                                            <v-col cols="6">
+                                            <v-col cols="6" class="pb-0">
                                                 <v-icon color="primary" size="32">mdi-file</v-icon>
 
                                                 <nuxt-link
@@ -44,10 +45,14 @@
                                                     class="label">
                                                     Paper
                                                 </nuxt-link>
+                                                <div class="date-holder "> {{ $moment(stats[5].last_update).format('MMM,DD YYYY')}}</div>
                                             </v-col>
-                                            <v-col cols="6" class="text-right">
+                                            <v-col cols="6" class="text-right pb-0">
                                                 <span class="stat">+{{ stats[5].tests | numberFormat }}</span>
-                                                <v-icon size="20" class="pl-4" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                                <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                            </v-col>
+                                            <v-col cols="12" class="pt-0">
+                                                <v-divider />
                                             </v-col>
                                         </v-row>
                                     </v-col>
@@ -63,7 +68,7 @@
                                             <div class="stat">+{{ stats[5].files | numberFormat }}</div>
                                         </div>
                                         <v-row class="d-md-none">
-                                            <v-col cols="6">
+                                            <v-col cols="6" class="pb-0">
                                                 <v-icon color="primary" size="32">mdi-multimedia</v-icon>
 
                                                 <nuxt-link
@@ -71,10 +76,14 @@
                                                     class="label">
                                                     Multimedia
                                                 </nuxt-link>
+                                                <div class="date-holder pb-0"> {{ $moment(stats[5].last_update).format('MMM,DD YYYY')}}</div>
                                             </v-col>
                                             <v-col cols="6" class="text-right">
                                                 <span class="stat">+{{ stats[5].files | numberFormat }}</span>
-                                                <v-icon size="20" class="pl-4" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                                <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                            </v-col>
+                                            <v-col cols="12" class="pt-0">
+                                                <v-divider />
                                             </v-col>
                                         </v-row>
                                     </v-col>
@@ -90,7 +99,7 @@
                                             <div class="stat">+{{ stats[5].exams | numberFormat }}</div>
                                         </div>
                                         <v-row class="d-md-none">
-                                            <v-col cols="6">
+                                            <v-col cols="6" class="pb-0">
                                                 <v-icon color="primary" size="32">mdi-text-box-edit</v-icon>
 
                                                 <nuxt-link
@@ -98,10 +107,14 @@
                                                     class="label">
                                                     Exam
                                                 </nuxt-link>
+                                                <div class="date-holder pb-0"> {{ $moment(stats[5].last_update).format('MMM,DD YYYY')}}</div>
                                             </v-col>
                                             <v-col cols="6" class="text-right">
                                                 <span class="stat">+{{ stats[5].exams | numberFormat }}</span>
-                                                <v-icon size="20" class="pl-4" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                                <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                            </v-col>
+                                            <v-col cols="12" class="pt-0">
+                                                <v-divider />
                                             </v-col>
                                         </v-row>
                                     </v-col>
@@ -117,7 +130,7 @@
                                             <div class="stat">+{{ stats[5].questions | numberFormat }}</div>
                                         </div>
                                         <v-row class="d-md-none">
-                                            <v-col cols="6">
+                                            <v-col cols="6" class="pb-0">
                                                 <v-icon color="primary" size="32">mdi-head-question-outline</v-icon>
 
                                                 <nuxt-link
@@ -125,10 +138,11 @@
                                                     class="label">
                                                     Q & A
                                                 </nuxt-link>
+                                                <div class="date-holder"> {{ $moment(stats[5].last_update).format('MMM,DD YYYY')}}</div>
                                             </v-col>
-                                            <v-col cols="6" class="text-right">
+                                            <v-col cols="6" class="text-right pb-0">
                                                 <span class="stat">+{{ stats[5].questions | numberFormat }}</span>
-                                                <v-icon size="20" class="pl-4" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                                <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
                                             </v-col>
                                         </v-row>
                                     </v-col>
@@ -141,12 +155,12 @@
                                         <h4 class="section-title">Last questions</h4>
                                         <v-card class="latest-card" flat v-for="item in questions.slice(0, 3)">
                                             <v-row>
-                                                <v-col cols="1">
+                                                <v-col cols="1" class="pb-0">
                                                     <v-avatar class="my-3" size="32" rounded="0">
                                                         <v-img :src="item.avatar"></v-img>
                                                     </v-avatar>
                                                 </v-col>
-                                                <v-col cols="11">
+                                                <v-col cols="11" class="pb-0">
                                                     <v-card-title>
                                                         <nuxt-link class="title" :to="`/qa/${item.id}`">{{
                                                             truncateLatestTitle(item.title)
@@ -177,12 +191,12 @@
                                         <h4 class="section-title">Last Uploaded File</h4>
                                         <v-card class="latest-card" flat v-for="item in papers.slice(0, 3)">
                                             <v-row>
-                                                <v-col cols="1">
+                                                <v-col cols="1" class="pb-0">
                                                     <v-avatar class="my-3" size="32" rounded="0">
                                                         <v-img :src="item.avatar"></v-img>
                                                     </v-avatar>
                                                 </v-col>
-                                                <v-col cols="11">
+                                                <v-col cols="11" class="pb-0">
                                                     <v-card-title>
                                                         <nuxt-link class="title" :to="`paper/${item.id}`">{{
                                                             truncateLatestTitle(item.title) }}</nuxt-link>
@@ -245,7 +259,132 @@ export default {
                 '#656565',
                 '#C3C1C1'
             ],
-            gradeSizes: [
+            gradeSizesXs: [
+                {
+                    width: 32,
+                    height: 32,
+                    fontSize: 10
+                },
+                {
+                    width: 32,
+                    height: 36,
+                    fontSize: 12
+                },
+                {
+                    width: 32,
+                    height: 36,
+                    fontSize: 14
+                },
+                {
+                    width: 36,
+                    height: 40,
+                    fontSize: 14
+                },
+
+                {
+                    width: 40,
+                    height: 44,
+                    fontSize: 16
+                },
+                {
+                    width: 77,
+                    height: 52,
+                    fontSize: 22
+                },
+                {
+                    width: 40,
+                    height: 40,
+                    fontSize: 14
+                },
+                {
+                    width: 36,
+                    height: 36,
+                    fontSize: 12
+                },
+                {
+                    width: 32,
+                    height: 32,
+                    fontSize: 10
+                },
+                {
+                    width: 24,
+                    height: 24,
+                    fontSize: 8
+                },
+                {
+                    width: 20,
+                    height: 20,
+                    fontSize: 7
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                }
+            ],
+            gradeSizesSm: [
+                {
+                    width: 24,
+                    height: 24,
+                    fontSize: 10
+                },
+                {
+                    width: 28,
+                    height: 32,
+                    fontSize: 10
+                },
+                {
+                    width: 32,
+                    height: 36,
+                    fontSize: 12
+                },
+                {
+                    width: 36,
+                    height: 40,
+                    fontSize: 14
+                },
+                {
+                    width: 40,
+                    height: 44,
+                    fontSize: 16
+                },
+                {
+                    width: 85,
+                    height: 52,
+                    fontSize: 22
+                },
+                {
+                    width: 44,
+                    height: 44,
+                    fontSize: 16
+                },
+                {
+                    width: 40,
+                    height: 40,
+                    fontSize: 14
+                },
+                {
+                    width: 36,
+                    height: 36,
+                    fontSize: 12
+                },
+                {
+                    width: 32,
+                    height: 32,
+                    fontSize: 10
+                },
+                {
+                    width: 24,
+                    height: 24,
+                    fontSize: 8
+                },
+                {
+                    width: 20,
+                    height: 20,
+                    fontSize: 6
+                },
+            ],
+            gradeSizesMd: [
                 {
                     width: 60,
                     height: 28,
@@ -305,7 +444,131 @@ export default {
                     width: 52,
                     height: 18,
                     fontSize: 8
+                }
+            ],
+            gradeSizesLg: [
+                {
+                    width: 60,
+                    height: 28,
+                    fontSize: 10
                 },
+                {
+                    width: 68,
+                    height: 38,
+                    fontSize: 12
+                },
+                {
+                    width: 76,
+                    height: 48,
+                    fontSize: 14
+                },
+                {
+                    width: 84,
+                    height: 56.6,
+                    fontSize: 16
+                },
+                {
+                    width: 92,
+                    height: 66,
+                    fontSize: 18
+                },
+                {
+                    width: 161,
+                    height: 75,
+                    fontSize: 28
+                },
+                {
+                    width: 92,
+                    height: 66,
+                    fontSize: 18
+                },
+                {
+                    width: 84,
+                    height: 56.6,
+                    fontSize: 16
+                },
+                {
+                    width: 76,
+                    height: 48,
+                    fontSize: 14
+                },
+                {
+                    width: 68,
+                    height: 38,
+                    fontSize: 12
+                },
+                {
+                    width: 60,
+                    height: 28,
+                    fontSize: 10
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                }
+            ],
+            gradeSizesXl: [
+                {
+                    width: 60,
+                    height: 28,
+                    fontSize: 10
+                },
+                {
+                    width: 68,
+                    height: 38,
+                    fontSize: 12
+                },
+                {
+                    width: 76,
+                    height: 48,
+                    fontSize: 14
+                },
+                {
+                    width: 84,
+                    height: 56.6,
+                    fontSize: 16
+                },
+                {
+                    width: 92,
+                    height: 66,
+                    fontSize: 18
+                },
+                {
+                    width: 161,
+                    height: 75,
+                    fontSize: 28
+                },
+                {
+                    width: 92,
+                    height: 66,
+                    fontSize: 18
+                },
+                {
+                    width: 84,
+                    height: 56.6,
+                    fontSize: 16
+                },
+                {
+                    width: 76,
+                    height: 48,
+                    fontSize: 14
+                },
+                {
+                    width: 68,
+                    height: 38,
+                    fontSize: 12
+                },
+                {
+                    width: 60,
+                    height: 28,
+                    fontSize: 10
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                }
             ],
             touchStartY: 0,
             questions: [],
@@ -313,7 +576,6 @@ export default {
             intervalId: null,
             isDragging: false,
             deltaY: 0
-
         }
 
     },
@@ -321,8 +583,8 @@ export default {
 
         shouldDisplayButton(index) {
             // Determine whether to display the button based on screen size and specific indexes
-            if (this.screenWidth === "xs" || this.screenWidth === "sm") {
-                return ![0, 1, 9, 10, 11].includes(index);
+            if (this.$vuetify.breakpoint.xs) {
+                return ![0, 1, 11].includes(index);
             } else {
                 return true;
             }
@@ -389,12 +651,12 @@ export default {
                     var pop_data = this.stats.pop();
                     this.gradeColors.unshift(pop_color);
                     this.stats.unshift(pop_data);
-                    
+
                 }
 
             } else if (this.deltaY < 0) {
                 // User dragged to the top
-                if (Math.abs(this.deltaY)==5) {
+                if (Math.abs(this.deltaY) == 5) {
                     var splice_color = this.gradeColors.splice(0, 1);
 
                     var splice_data = this.stats.splice(0, 1);
@@ -402,7 +664,7 @@ export default {
 
                     this.gradeColors.push(...splice_color);
                     this.stats.push(...splice_data);
-                   
+
                 }
             }
         },
@@ -482,14 +744,25 @@ export default {
         },
         getFullName(firstName, lastName) {
             return `${firstName} ${lastName}`
+        },
+        gradeHandlerTitle(title) {
+            if (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm)
+                return title.replace(" Grade", "");
+            else
+                return title;
         }
     },
+    computed: {
+        gradeSizes() {
+            if (this.$vuetify.breakpoint.xs)
+                return this.gradeSizesXs;
+            else if (this.$vuetify.breakpoint.sm)
+                return this.gradeSizesSm;
+            else
+                return this.gradeSizesMd;
+        }
 
-
-
-
-
-
+    },
 
 
     mounted() {
@@ -535,80 +808,87 @@ export default {
         }
     }
 
-    #stats-details {
-        height: 14.6rem;
 
-        .label {
-            padding-left: 1rem;
-            text-decoration: none;
-            font-family: 'Helvetica Neue LT Std Bold';
-            color: #424A53;
-            font-size: 2rem;
-            font-style: normal;
-            display: inline-block;
-            font-weight: 750;
-            line-height: 2rem;
-        }
-
-        .stat {
-            padding-left: 3rem;
-            color: #6E7781;
-            font-size: 1.8rem;
-            font-style: normal;
-            font-weight: 300;
-            line-height: 4.4rem;
-            /* 244.444% */
-        }
-    }
+    #grade-details-card {
+        height: 56.6rem;
+        border-radius: 0rem 2rem 2rem 0rem;
 
 
-    .section-title {
-        color: #6E7781;
-        font-family: Helvetica Neue LT Std Bold;
-        font-size: 2rem;
-        font-style: normal;
-        font-weight: 750;
-        line-height: 4.4rem;
-    }
+        #stats-details {
+            height: 14.6rem;
 
-    .latest-card {
-        .v-card-title {
-            .title {
-                color: #6E7781;
+            .label {
+                padding-left: 1rem;
                 text-decoration: none;
-                font-size: 1.2rem;
+                font-family: 'Helvetica Neue LT Std Bold';
+                color: #424A53;
+                font-size: 2rem;
                 font-style: normal;
-                font-weight: 500;
-                line-height: 2rem;
-            }
-        }
-
-
-
-        .v-img__img {
-            border-radius: 10rem;
-        }
-
-
-        .v-card-subtitle {
-
-
-            .owner-container {
-                text-align: left;
-                color: #AFB8C1;
-                font-size: 0.8rem;
-                font-style: normal;
-                font-weight: 500;
+                display: inline-block;
+                font-weight: 750;
                 line-height: 2rem;
             }
 
-            .subdate-container {
-                text-align: right !important;
+            .stat {
+                padding-left: 3rem;
                 color: #6E7781;
-                font-size: 0.8;
+                font-size: 1.8rem;
                 font-style: normal;
                 font-weight: 300;
-                line-height: 2rem;
+                line-height: 4.4rem;
+                /* 244.444% */
+            }
+        }
+
+
+        .section-title {
+            color: #6E7781;
+            font-family: Helvetica Neue LT Std Bold;
+            font-size: 2rem;
+            font-style: normal;
+            font-weight: 750;
+            line-height: 4.4rem;
+        }
+
+        .latest-card {
+            .v-card-title {
+                .title {
+                    color: #6E7781;
+                    text-decoration: none;
+                    font-size: 1.2rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 2rem;
+                }
+            }
+
+
+
+            .v-img__img {
+                border-radius: 10rem;
+            }
+
+
+            .v-card-subtitle {
+
+
+                .owner-container {
+                    text-align: left;
+                    color: #AFB8C1;
+                    font-size: 0.8rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 2rem;
+                }
+
+                .subdate-container {
+                    text-align: right !important;
+                    color: #6E7781;
+                    font-size: 0.8;
+                    font-style: normal;
+                    font-weight: 300;
+                    line-height: 2rem;
+                }
             }
         }
     }
@@ -618,4 +898,143 @@ export default {
 
 
 }
-</style>
+
+
+@media only screen and (max-width: 600px) {
+    #content-stats-container {
+        padding: 0.2rem;
+
+        .v-btn {
+            color: #FFF;
+            font-family: Helvetica Neue LT Std;
+            font-size: 1.6rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 4.4rem;
+        }
+
+        #stats-handler {
+            margin-top: 1rem;
+        }
+
+        #grade-details-card {
+            height: 35rem;
+            border-radius: 0rem 2rem 2rem 0rem;
+
+
+            #stats-details {
+                height: 28.4rem;
+
+                .v-icon.primary--text {
+                    font-size: 2rem !important;
+                }
+
+                .label {
+                    text-decoration: none;
+                    color: #424A53;
+                    text-align: center;
+                    font-family: 'Helvetica Neue LT Std Bold';
+                    font-size: 1.4rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 2rem;
+                }
+
+                .stat {
+                    color: #6E7781;
+                    font-size: 1.2rem;
+                    font-style: normal;
+                    font-weight: 300;
+                    line-height: 4.4rem;
+
+                }
+
+                .date-holder {
+                    margin-left: 3rem;
+                    color: #6E7781;
+                    font-size: 1rem;
+                    font-style: normal;
+                    font-weight: 300;
+                    line-height: 3.8rem;
+                }
+            }
+
+
+            .section-title {
+                color: #6E7781;
+                font-family: Helvetica Neue LT Std Bold;
+                font-size: 2rem;
+                font-style: normal;
+                font-weight: 750;
+                line-height: 4.4rem;
+            }
+
+            .latest-card {
+                .v-card-title {
+                    .title {
+                        color: #6E7781;
+                        text-decoration: none;
+                        font-size: 1.2rem;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 2rem;
+                    }
+                }
+
+
+
+                .v-img__img {
+                    border-radius: 10rem;
+                }
+
+
+                .v-card-subtitle {
+
+
+                    .owner-container {
+                        text-align: left;
+                        color: #AFB8C1;
+                        font-size: 0.8rem;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 2rem;
+                    }
+
+                    .subdate-container {
+                        text-align: right !important;
+                        color: #6E7781;
+                        font-size: 0.8;
+                        font-style: normal;
+                        font-weight: 300;
+                        line-height: 2rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 960px) {
+    #content-stats-container {
+
+        #grade-details-card {
+            height: 42.5rem;
+            border-radius: 0rem 2rem 2rem 0rem;
+
+            #stats-details {
+                
+                .date-holder {
+                    margin-left: 3rem;
+                    color: #6E7781;
+                    font-size: 1rem;
+                    font-style: normal;
+                    font-weight: 300;
+                    line-height: 4.4rem;
+                }
+            }
+
+        }
+
+        
+    }
+}</style>

@@ -1,18 +1,4 @@
-//
-//@media (min-width: 1904px){
-//.container {
-//  max-width: 1785px;
-//}}
-//
-//@media (min-width: 1264px){
-//.container {
-//  max-width: 1185px;
-//}}
-//
-//@media (min-width: 960px){
-//.container {
-//  max-width: 900px;
-//}}
+
 
 body {
   overflow-y: scroll;
@@ -20,10 +6,7 @@ body {
 
   .v-application {
     @media (min-width: 1904px) {
-      .container {
-        max-width: 80%;
-        width: 80%;
-      }
+      
 
       .video-carousel {
         width: 700px;
@@ -45,10 +28,7 @@ body {
     }
 
     @media screen and (max-width: 1600px) {
-      .container {
-        max-width: 90%;
-        width: 90%;
-      }
+     
 
       .feed {
         .last-files {
@@ -69,10 +49,7 @@ body {
     }
 
     @media (max-width: 1380px) {
-      .container {
-        max-width: 98%;
-        width: 98%;
-      }
+     
 
       .feed {
         .last-files {
@@ -377,9 +354,6 @@ body {
 
       }
 
-      .container {
-        padding: 0;
-      }
 
       .feed-tab {
         margin-top: 2rem;
@@ -504,14 +478,7 @@ body {
 
       //main header
       .main-header {
-        .logo-holder {
-          height: 5.5rem;
-
-          .logo {
-            width: 16.8rem;
-            height: 5.5rem;
-          }
-        }
+       
 
         .header-search {
           &.desktop-search {
@@ -1017,14 +984,8 @@ body {
         padding: 1rem !important;
       }
 
-      .logo-search-content {
-        padding: 1rem !important;
-      }
+      
 
-      .container {
-        max-width: 100%;
-        width: 100%;
-      }
 
       .mobile-res-search {
         width: 100% !important;
@@ -1037,16 +998,7 @@ body {
         height: 4rem;
       }
 
-      .main-header {
-        .logo-holder {
-          height: 4.4rem;
-
-          .logo {
-            width: 12rem;
-            height: 4.4rem;
-          }
-        }
-      }
+      
 
       .search-field {
         font-size: 1rem;

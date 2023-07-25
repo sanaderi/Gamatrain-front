@@ -1,177 +1,173 @@
 <template>
     <v-app>
         <main-header :menuSetting="menuSetting" />
-        <div class="mt-16 mt-md-0">
-            <v-container fluid class="px-0 py-0">
-                <v-row class="d-none d-md-flex">
-                    <v-col cols="12" sm="12" md="12">
-                        <v-carousel id="main-slider" v-model="carousel_model" cycle delimiter-icon="mdi-square" height="430"
-                            interval="10000" hide-delimiter-background :show-arrows="false">
+        <v-container fluid class="px-0 py-0 mt-16 mt-md-0">
+            
+            <v-row class="d-none d-md-flex">
+                <v-col cols="12" sm="12" md="12">
+                    <v-carousel id="main-slider" v-model="carousel_model" cycle delimiter-icon="mdi-square" height="430"
+                        interval="10000" hide-delimiter-background :show-arrows="false">
 
-                            <v-carousel-item v-for="(slide, i) in slides" :key="i">
-                                <v-sheet :color="colors[i]" height="94%">
-                                    <v-container style="position: relative;">
-                                        <div class="d-flex white--text fill-height justify-center align-first mt-4">
-                                            <div>
-                                                <div class="slide-title "
-                                                    v-html="slide.title" />
-                                                <div class="slide-describe mt-6 d-none d-md-block" v-html="slide.text" />
-                                                <v-btn rounded class="mt-8 white--text font-weight-bold" size="x-large"
-                                                    color="primary">Read about
-                                                    it</v-btn>
-                                            </div>
-                                            <div style="width: 10%;"></div>
-                                            <div>
-                                                <v-img class="ml-14" :src="`/images/${slide.img}`"
-                                                 :height="slide.img_height"
-                                                    :width="slide.img_width" :alt="slide.title" />
-                                            </div>
-
+                        <v-carousel-item v-for="(slide, i) in slides" :key="i">
+                            <v-sheet :color="colors[i]" height="94%">
+                                <v-container style="position: relative;">
+                                    <div class="d-flex white--text fill-height justify-center align-first mt-4">
+                                        <div>
+                                            <div class="slide-title " v-html="slide.title" />
+                                            <div class="slide-describe mt-6 d-none d-md-block" v-html="slide.text" />
+                                            <v-btn rounded class="mt-8 white--text font-weight-bold" size="x-large"
+                                                color="primary">Read about
+                                                it</v-btn>
+                                        </div>
+                                        <div style="width: 10%;"></div>
+                                        <div>
+                                            <v-img class="ml-14" :src="`/images/${slide.img}`" :height="slide.img_height"
+                                                :width="slide.img_width" :alt="slide.title" />
                                         </div>
 
-                                    </v-container>
-                                </v-sheet>
-                                <v-sheet height="6%">
-                                </v-sheet>
-                            </v-carousel-item>
-                            <v-card id="main-search" class="d-none d-md-block">
-                                <v-card-text>
-                                    <v-row class="text-center">
-                                        <v-col cols="7" id="main-search-keyword">
-                                            <v-text-field class="rounded-ts" label="Insert text" filled
-                                                dense></v-text-field>
-                                        </v-col>
-                                        <v-col cols="4" class="pl-0" id="keysearch-cate">
-                                            <v-autocomplete dense label="Select category"
-                                                :items="['Paper', 'Multimedia', 'Q&A', 'Exam', 'Tutorial']"
-                                                filled></v-autocomplete>
-                                        </v-col>
-                                        <v-col cols="1" class="pl-0">
-                                            <v-btn color="primary" class="white--text">
-                                                <v-icon>
-                                                    mdi-magnify
-                                                </v-icon>
-                                            </v-btn>
-                                        </v-col>
-                                    </v-row>
-                                </v-card-text>
+                                    </div>
 
-                            </v-card>
+                                </v-container>
+                            </v-sheet>
+                            <v-sheet height="6%">
+                            </v-sheet>
+                        </v-carousel-item>
+                        <v-card id="main-search" class="d-none d-md-block">
+                            <v-card-text>
+                                <v-row class="text-center">
+                                    <v-col cols="7" id="main-search-keyword">
+                                        <v-text-field class="rounded-ts" label="Insert text" filled dense></v-text-field>
+                                    </v-col>
+                                    <v-col cols="4" class="pl-0" id="keysearch-cate">
+                                        <v-autocomplete dense label="Select category"
+                                            :items="['Paper', 'Multimedia', 'Q&A', 'Exam', 'Tutorial']"
+                                            filled></v-autocomplete>
+                                    </v-col>
+                                    <v-col cols="1" class="pl-0">
+                                        <v-btn color="primary" class="white--text">
+                                            <v-icon>
+                                                mdi-magnify
+                                            </v-icon>
+                                        </v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-card-text>
 
-                        </v-carousel>
+                        </v-card>
+
+                    </v-carousel>
+                </v-col>
+            </v-row>
+            <grade-explorer :stats="stats" />
+
+            <level-guid-banner />
+
+            <!--Ai learn banner-->
+            <v-container class="mt-16">
+                <v-row>
+                    <v-col id="ai-learn-banner" cols="12">
+                        <img id="img-top" alt="AI Learn" src="/images/ai-learn-bg1.png" />
+                        <h2 class="title">
+                            AI Learn
+                        </h2>
+                        <p class="describe">
+                            Discover Your Full Potential with AI-based Education
+                        </p>
+                        <v-btn color="primary" rounded class="white--text">
+                            Read about it
+                        </v-btn>
+                        <img id="img-bottom" alt="AI Learn" src="/images/ai-learn-bg2.png" />
                     </v-col>
                 </v-row>
-                <grade-explorer class="d-none d-md-block" :stats="stats" />
+            </v-container>
+            <!--End ai learn banner-->
 
-                <level-guid-banner />
 
-                <!--Ai learn banner-->
-                <v-container class="mt-16">
+            <!--Sudent help banner-->
+            <v-container id="student-help-container" fluid>
+                <v-container>
                     <v-row>
-                        <v-col id="ai-learn-banner" cols="12">
-                            <img id="img-top" alt="AI Learn" src="/images/ai-learn-bg1.png" />
-                            <h2 class="title">
-                                AI Learn
-                            </h2>
-                            <p class="describe">
-                                Discover Your Full Potential with AI-based Education
-                            </p>
-                            <v-btn color="primary" rounded class="white--text">
-                                Read about it
-                            </v-btn>
-                            <img id="img-bottom" alt="AI Learn" src="/images/ai-learn-bg2.png" />
+                        <v-col cols="12">
+                            <h2 class="title">Are you a student?</h2>
+                        </v-col>
+                        <v-col cols="6">
+                            <v-card class="fill-height">
+                                <v-card-title>
+                                    <v-icon color="primary" size="36">mdi-cloud-download</v-icon>
+                                    &nbsp;Download
+                                </v-card-title>
+                                <v-card-text>
+                                    Empower Your Studies. Download Worksheets and Educational Materials.
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+                        <v-col cols="6">
+                            <v-card class="fill-height">
+                                <v-card-title>
+                                    <v-icon color="primary" size="36">mdi-text-box-edit</v-icon>
+                                    &nbsp;Exam
+                                </v-card-title>
+                                <v-card-text>
+                                    You can test yourself with online tests and increase your preparation.
+                                </v-card-text>
+                            </v-card>
                         </v-col>
                     </v-row>
                 </v-container>
-                <!--End ai learn banner-->
+            </v-container>
 
 
-                <!--Sudent help banner-->
-                <v-container id="student-help-container" fluid>
-                    <v-container>
-                        <v-row>
-                            <v-col cols="12">
-                                <h2 class="title">Are you a student?</h2>
-                            </v-col>
-                            <v-col cols="6">
-                                <v-card class="fill-height">
-                                    <v-card-title>
-                                        <v-icon color="primary" size="36">mdi-cloud-download</v-icon>
-                                        &nbsp;Download
-                                    </v-card-title>
-                                    <v-card-text>
-                                        Empower Your Studies. Download Worksheets and Educational Materials.
-                                    </v-card-text>
-                                </v-card>
-                            </v-col>
-                            <v-col cols="6">
-                                <v-card class="fill-height">
-                                    <v-card-title>
-                                        <v-icon color="primary" size="36">mdi-text-box-edit</v-icon>
-                                        &nbsp;Exam
-                                    </v-card-title>
-                                    <v-card-text>
-                                        You can test yourself with online tests and increase your preparation.
-                                    </v-card-text>
-                                </v-card>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-container>
-
-
-                <!--School service banner-->
-                <v-container id="school-service-container">
-                    <v-row>
-                        <v-col cols="4">
-                            <v-img width="246" height="184" class="mx-auto" src="/images/school-service.png" />
-                        </v-col>
-                        <v-col cols="8">
-                            <h2 class="title">Find school service</h2>
-                            <p class="describe">
-                                You don't have to try the hardest ways anymore. Gamma has provided you with access to school
-                                information. Just
-                                filter and Gamma will find it for you.
-                            </p>
-                            <v-btn rounded color="primary">Search school</v-btn>
-                        </v-col>
-                    </v-row>
-
-                </v-container>
-                <!--End school service banner-->
-
-
-                <!-- Stats container -->
-                <stats-banner />
-                <!-- End stats container -->
-
-
-                <!-- Blog container -->
-                <blog-container />
-                <!-- End blog container -->
-
-                <!--Earn money banner-->
-                <v-container fluid id="earn-money-container">
-                    <v-container>
-                        <v-row>
-                            <v-col cols="12" sm="12" md="8">
-                                <h2 class="describe text-center text-md-left">Why wait? Earn money with us in minutes with
-                                    just a few clicks!</h2>
-                            </v-col>
-                            <v-col cols="12" sm="12" md="4" class="text-center text-md-left">
-                                <v-btn height="36" color="primary" class="white--text">Earn money</v-btn>
-                            </v-col>
-                        </v-row>
-                    </v-container>
-                </v-container>
-                <!--End earn money banner-->
-
-
-
-
+            <!--School service banner-->
+            <v-container id="school-service-container">
+                <v-row>
+                    <v-col cols="4">
+                        <v-img width="246" height="184" class="mx-auto" src="/images/school-service.png" />
+                    </v-col>
+                    <v-col cols="8">
+                        <h2 class="title">Find school service</h2>
+                        <p class="describe">
+                            You don't have to try the hardest ways anymore. Gamma has provided you with access to school
+                            information. Just
+                            filter and Gamma will find it for you.
+                        </p>
+                        <v-btn rounded color="primary">Search school</v-btn>
+                    </v-col>
+                </v-row>
 
             </v-container>
-        </div>
+            <!--End school service banner-->
+
+
+            <!-- Stats container -->
+            <stats-banner />
+            <!-- End stats container -->
+
+
+            <!-- Blog container -->
+            <blog-container />
+            <!-- End blog container -->
+
+            <!--Earn money banner-->
+            <v-container fluid id="earn-money-container">
+                <v-container>
+                    <v-row>
+                        <v-col cols="12" sm="12" md="8">
+                            <h2 class="describe text-center text-md-left">Why wait? Earn money with us in minutes with
+                                just a few clicks!</h2>
+                        </v-col>
+                        <v-col cols="12" sm="12" md="4" class="text-center text-md-left">
+                            <v-btn height="36" color="primary" class="white--text">Earn money</v-btn>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-container>
+            <!--End earn money banner-->
+
+
+
+
+
+        </v-container>
         <v-footer class="px-0 pb-0">
             <main-footer />
         </v-footer>
