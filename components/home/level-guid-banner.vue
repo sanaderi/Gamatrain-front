@@ -16,7 +16,7 @@
 
                     <p class="img-caption">{{ slideArr[slideIndex].caption }}</p>
 
-                    <v-item-group v-model="slideIndex" class="paginate d-flex justify-sm-space-between ">
+                    <v-item-group v-model="slideIndex" class="paginate d-flex justify-space-between ">
                         <v-item v-for="n in 3" :key="n">
                             <template>
                                 <v-btn icon variant="text" @click="slideIndex = n - 1">

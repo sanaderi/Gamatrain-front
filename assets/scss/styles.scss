@@ -213,13 +213,8 @@ body {
       font-size: $fontsize2;
     }
 
-    .theme--light.v-text-field > .v-input__control > .v-input__slot::before {
-      display: none;
-    }
+    
 
-    .v-text-field > .v-input__control > .v-input__slot::after {
-      width: 0 !important;
-    }
 
     .v-btn.v-size--default {
       font-size: $fontsize2;
@@ -456,9 +451,7 @@ body {
           align-items: center;
           height: 3.5rem;
 
-          .v-input__slot {
-            margin-bottom: 0;
-          }
+       
 
 
 

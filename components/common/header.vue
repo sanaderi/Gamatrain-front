@@ -1,16 +1,14 @@
 <template>
   <div>
     <header class="main-header">
-      <!-- <topbar ref="header_topbar"></topbar> -->
-
       <!--Desktop menu-->
       <div class="topbar d-none d-md-block">
         <v-sheet id="main-menu" :color="menuSetting.bgColor">
           <v-container>
             <v-row>
-              <v-col cols="2" md="2" lg="2" xl="1" xxl="1" class=" text-left">
+              <v-col cols="2" md="2" lg="2" xl="1" xxl="1" class="text-left">
                 <nuxt-link to="/">
-                  <v-img alt="Gamatrain" width="120" height="30" :src="`/images/${menuSetting.logo}`" />
+                  <v-img alt="Gamatrain" id="main-logo" :src="`/images/${menuSetting.logo}`" />
                 </nuxt-link>
               </v-col>
               <v-col cols="6" md="6" lg="6" xl="7" xxl="7">
@@ -48,7 +46,7 @@
 
                         <v-list-item-title>
                           <v-icon small>
-                            mdi:mdi-logout
+                            mdi-logout
                           </v-icon>
                           Logout
                         </v-list-item-title>
@@ -62,10 +60,10 @@
 
                 </div>
                 <div v-else>
-                  <v-btn  :color="menuSetting.linkColor" text class="px-0" @click="openLoginDialog">
+                  <v-btn :color="menuSetting.linkColor" text class="px-0" @click="openLoginDialog">
                     Sign in
                   </v-btn>
-                  <span :class="menuSetting.bgColor!='#fff' ? 'white--text' : 'black--text'">/</span>
+                  <span :class="menuSetting.bgColor != '#fff' ? 'white--text' : 'black--text'">/</span>
                   <v-btn :color="menuSetting.linkColor" text class="px-0" @click="openRegisterDialog">
                     Sign up
                   </v-btn>
@@ -116,7 +114,7 @@
                   ">
                   <nuxt-link to="/user">
                     <v-avatar size="40">
-                      <v-img :src="$loadAvatar.currentUser($auth)" alt="Avatar" />
+                      <v-img :src="$auth.user.avatar" alt="Avatar" />
                     </v-avatar>
                   </nuxt-link>
 
@@ -200,7 +198,7 @@
 
               <!--Logo section-->
               <nuxt-link to="/">
-                <v-img class="logo" :src="`/images/${menuSetting.logo}`" max-width="120" />
+                <v-img id="main-logo" :src="`/images/${menuSetting.logo}`" />
               </nuxt-link>
               <!--End logo section-->
 
@@ -210,19 +208,72 @@
               <!--Mobile notification section-->
               <!-- <notification-component ref="notification-section" /> -->
               <!--   hamburgers-icon in mobile-->
-              <v-icon :color="menuSetting.linkColor" class="pa-23">
-                mdi-magnify
-              </v-icon>
 
-                <v-icon large @click="sidebar = !sidebar" class="pa-2"  :class="menuSetting.bgColor == '#fff' ? '' : 'white--text ' "  >
+
+              <div class="text-center">
+                <v-bottom-sheet v-model="mobileSearchSheet">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon v-bind="attrs" v-on="on" :color="menuSetting.linkColor" class="pa-23">
+                      mdi-magnify
+                    </v-icon>
+                  </template>
+                  <v-sheet class="mobile-search-sheet">
+                    <v-slide-group v-model="model" class="pa-4" active-class="active-item" show-arrows>
+                      <v-slide-item v-for="item in searchFilterItems" :key="n" v-slot="{ active, toggle }">
+                        <v-card :color="active ? undefined : 'white lighten-1'" class="ma-2 " height="7.6rem"
+                          width="7.6rem" @click="toggle">
+                          <v-row class="fill-height text-center" justify="center">
+                            <v-col cols="12">
+                              <div><v-icon>{{ item.icon }}</v-icon></div>
+                              <div class="title">{{ item.title }}</div>
+                            </v-col>
+                          </v-row>
+                        </v-card>
+                      </v-slide-item>
+                    </v-slide-group>
+                    <v-card flat>
+                      <v-card-text>
+                        <v-card>
+                          <v-card-text id="keyword-card">
+                            <v-row>
+                              <v-col cols="12">
+                                <v-text-field v-model="keyword" label="Search" append-icon="mdi-magnify"></v-text-field>
+                              </v-col>
+                              <v-col cols="12" md="4">
+
+                                <v-skeleton-loader 
+                                  type="table-heading, list-item-two-line, image, table-tfoot">
+                                </v-skeleton-loader>
+
+                                <v-skeleton-loader
+                                  type="table-heading, list-item-two-line, image, table-tfoot">
+                                </v-skeleton-loader>
+                              </v-col>
+                            </v-row>
+                          </v-card-text>
+                        </v-card>
+                      </v-card-text>
+
+                    </v-card>
+                  </v-sheet>
+                </v-bottom-sheet>
+              </div>
+
+              <v-badge dot overlap>
+                <v-icon large @click="sidebar = !sidebar" class="px-2" style="font-size: 3rem;"
+                  :class="menuSetting.bgColor == '#fff' ? '' : 'white--text '">
                   mdi-menu
                 </v-icon>
-
+              </v-badge>
 
             </v-app-bar>
             <!--End mobile nav-->
+
+
           </div>
         </div>
+
+
       </v-container>
       <!--   End: navbar   -->
     </header>
@@ -353,7 +404,35 @@ export default {
           icon: 'mdi-wallet-giftcard'
         },
       ],
-      currentOpenDialog: ''
+      currentOpenDialog: '',
+      mobileSearchSheet: false,
+      searchFilterItems: [
+        {
+          icon: 'mdi-file',
+          title: 'Paper',
+          key: 'paper'
+        },
+        {
+          icon: 'mdi-multimedia',
+          title: 'Multimedia',
+          key: 'multimedia'
+        },
+        {
+          icon: 'mdi-text-box-edit',
+          title: 'Exam',
+          key: 'exam'
+        },
+        {
+          icon: 'mdi-head-question-outline',
+          title: 'Q & A',
+          key: 'qa'
+        },
+        {
+          icon: 'mdi-cast-education',
+          title: 'Tutorial',
+          key: 'tutorial'
+        }
+      ]
 
     };
   },
@@ -418,48 +497,176 @@ export default {
 
 
 <style>
-#main-menu {
-  .v-btn {
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 700;
-    font-family: 'Helvetica Neue LT Std';
-    line-height: normal;
+.v-application .primary {
+  background-color: #FFB300 !important;
+  border-color: #FFB300 !important;
+}
+
+
+
+#main-header {
+  .menu-item:hover {
+    border-bottom: 3px solid rgb(0, 139, 139);
+  }
+
+
+  #main-menu {
+    .v-btn {
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 700;
+      font-family: 'Helvetica Neue LT Std';
+      line-height: normal;
+    }
+
+    .v-btn--active {
+      border-bottom: 0.2rem solid #FFB300 !important;
+
+      .v-btn__overlay {
+        opacity: 0;
+      }
+    }
 
 
   }
 
-  .v-btn--active {
-    border-bottom: 0.2rem solid #FFB300 !important;
+  .menu_active {
+    border-bottom: 4px solid white !important;
+    background-color: rgba(33, 186, 69, 0.1);
+    color: #21ba45 !important;
+  }
 
-    .v-btn__overlay {
-      opacity: 0;
+  .menu_group_active {
+    border-bottom: 4px solid white !important;
+    background-color: #e1e2e3;
+    color: #000 !important;
+  }
+
+  .mobile_bar .v-toolbar__content {
+    padding: 0 1.4rem 0 0.5rem !important;
+  }
+
+  .mobile_bar .fa-bell {
+    line-height: 3rem !important;
+    font-size: 2.8rem !important;
+  }
+
+
+}
+
+
+
+#main-logo {
+  width: 12.0827rem !important;
+  height: 3rem !important;
+}
+
+@media only screen and (max-width: 600px) {
+  #main-logo {
+    margin-left: 1.6rem !important;
+    width: 8.0551rem !important;
+    height: 2rem !important;
+  }
+
+  .mobile-search-sheet {
+    height: 70vh;
+    border-radius: 3rem 3rem 0 0;
+    justify-content: center;
+    align-items: center;
+
+    .active-item {
+      background: #FFB300;
+      color: #000;
+
+      .v-icon,
+      .title {
+        color: #fff;
+      }
+    }
+
+    .v-icon {
+      font-size: 2.4rem;
+      color: #FF9400;
+    }
+
+    .title {
+      margin-top: 0.2rem;
+      color: #424A53;
+      text-align: center;
+      font-size: 1.2rem;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 1.6rem;
+    }
+
+    #keyword-card {
+      .v-icon {
+        font-size: 2.4rem;
+        color: #000000;
+      }
+
+      .primary--text {
+        color: #000 !important;
+      }
     }
   }
+
+
 }
 
-.menu-item:hover {
-  border-bottom: 3px solid rgb(0, 139, 139);
-}
+@media only screen and (min-width: 600px) and (max-width: 960px) {
+  #main-logo {
+    margin-left: 3rem !important;
+    width: 1.6458rem;
+    height: 1.6511rem;
+  }
 
-.menu_active {
-  border-bottom: 4px solid white !important;
-  background-color: rgba(33, 186, 69, 0.1);
-  color: #21ba45 !important;
-}
+  .mobile-search-sheet {
+    height: 50vh;
+    border-radius: 3rem 3rem 0 0;
+    justify-content: center;
+    align-items: center;
 
-.menu_group_active {
-  border-bottom: 4px solid white !important;
-  background-color: #e1e2e3;
-  color: #000 !important;
-}
+    .active-item {
+      background: #FFB300;
+      color: #000;
 
-.mobile_bar .v-toolbar__content {
-  padding: 0 1.4rem 0 0.5rem !important;
-}
+      .v-icon,
+      .title {
+        color: #fff;
+      }
+    }
 
-.mobile_bar .fa-bell {
-  line-height: 3rem !important;
-  font-size: 2.8rem !important;
+    .v-icon {
+      font-size: 2.4rem;
+      color: #FF9400;
+    }
+
+    .title {
+      margin-top: 0.2rem;
+      color: #424A53;
+      text-align: center;
+      font-size: 1.2rem;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 1.6rem;
+    }
+
+    #keyword-card {
+      .v-icon {
+        font-size: 2.4rem;
+        color: #000000;
+      }
+
+      .primary--text {
+        color: #000 !important;
+      }
+    }
+  }
+
+  .v-badge__badge {
+    color: #FFB300 !important;
+
+  }
 }
 </style>

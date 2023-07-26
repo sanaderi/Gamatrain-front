@@ -1,5 +1,5 @@
 <template>
-    <v-container  id="content-stats-container">
+    <v-container id="content-stats-container">
         <v-card flat>
             <v-card-text>
                 <v-row>
@@ -12,7 +12,7 @@
                                     :class="index == 5 ? 'rounded-pill active' : 'rounded-s-xl'"
                                     v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
                                     :style="`font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
-                                                                         min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
+                                                                                                                                                                                     min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
                                     {{ gradeHandlerTitle(item.base_title) }}
                                 </v-btn>
                                 <div v-if="index == 5"
@@ -23,11 +23,12 @@
                     </v-col>
                     <v-col cols="10" sm="11" class="pl-0">
                         <v-card id="grade-details-card">
-                            <v-card-text class="pa-8 pa-sm-10 pa-md-14">
-                                <v-row id="stats-details">
-                                    <v-col cols="12" md="6">
+                            <v-card-text class="pa-3 pa-sm-10 pa-md-14">
+                                <div>
+                                    <v-row id="stats-details">
+                                    <v-col cols="12" md="6" class="pb-0 pb-sm-6">
                                         <div class="d-none d-md-block">
-                                            <v-icon color="primary" size="32">mdi-file</v-icon>
+                                            <v-icon class="stat-icon">mdi-file</v-icon>
                                             <nuxt-link
                                                 :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
                                                 class="label">
@@ -37,17 +38,17 @@
                                             <div class="stat">+{{ stats[5].tests | numberFormat }}</div>
                                         </div>
                                         <v-row class="d-md-none">
-                                            <v-col cols="6" class="pb-0">
-                                                <v-icon color="primary" size="32">mdi-file</v-icon>
+                                            <v-col cols="7" class="pa-0">
+                                                <v-icon class="stat-icon">mdi-file</v-icon>
 
                                                 <nuxt-link
                                                     :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
                                                     Paper
                                                 </nuxt-link>
-                                                <div class="date-holder "> {{ $moment(stats[5].last_update).format('MMM,DD YYYY')}}</div>
+                                                <div class="date-holder ">{{ $moment(stats[5].last_update).format('MMM,DD YYYY')}}</div>
                                             </v-col>
-                                            <v-col cols="6" class="text-right pb-0">
+                                            <v-col cols="5" class="text-right pa-0">
                                                 <span class="stat">+{{ stats[5].tests | numberFormat }}</span>
                                                 <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
                                             </v-col>
@@ -56,9 +57,9 @@
                                             </v-col>
                                         </v-row>
                                     </v-col>
-                                    <v-col cols="12" md="6">
+                                    <v-col cols="12" md="6" class="pb-0 pb-sm-6">
                                         <div class="d-none d-md-block">
-                                            <v-icon color="primary" size="32">mdi-multimedia</v-icon>
+                                            <v-icon class="stat-icon">mdi-multimedia</v-icon>
                                             <nuxt-link
                                                 :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
                                                 class="label">
@@ -68,17 +69,18 @@
                                             <div class="stat">+{{ stats[5].files | numberFormat }}</div>
                                         </div>
                                         <v-row class="d-md-none">
-                                            <v-col cols="6" class="pb-0">
-                                                <v-icon color="primary" size="32">mdi-multimedia</v-icon>
+                                            <v-col cols="7" class="pa-0">
+                                                <v-icon class="stat-icon">mdi-multimedia</v-icon>
 
                                                 <nuxt-link
                                                     :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
                                                     Multimedia
                                                 </nuxt-link>
-                                                <div class="date-holder pb-0"> {{ $moment(stats[5].last_update).format('MMM,DD YYYY')}}</div>
+                                                <div class="date-holder pb-0"> {{
+                                                    $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
                                             </v-col>
-                                            <v-col cols="6" class="text-right">
+                                            <v-col cols="5" class="text-right pa-0">
                                                 <span class="stat">+{{ stats[5].files | numberFormat }}</span>
                                                 <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
                                             </v-col>
@@ -87,9 +89,9 @@
                                             </v-col>
                                         </v-row>
                                     </v-col>
-                                    <v-col cols="12" md="6">
+                                    <v-col cols="12" md="6" class="pb-0 pb-sm-6">
                                         <div class="d-none d-md-block">
-                                            <v-icon color="primary" size="32">mdi-text-box-edit</v-icon>
+                                            <v-icon class="stat-icon" color="primary">mdi-text-box-edit</v-icon>
                                             <nuxt-link
                                                 :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
                                                 class="label">
@@ -99,17 +101,18 @@
                                             <div class="stat">+{{ stats[5].exams | numberFormat }}</div>
                                         </div>
                                         <v-row class="d-md-none">
-                                            <v-col cols="6" class="pb-0">
-                                                <v-icon color="primary" size="32">mdi-text-box-edit</v-icon>
+                                            <v-col cols="7" class="py-0 px-0">
+                                                <v-icon class="stat-icon" color="primary">mdi-text-box-edit</v-icon>
 
                                                 <nuxt-link
                                                     :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
                                                     Exam
                                                 </nuxt-link>
-                                                <div class="date-holder pb-0"> {{ $moment(stats[5].last_update).format('MMM,DD YYYY')}}</div>
+                                                <div class="date-holder pb-0"> {{
+                                                    $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
                                             </v-col>
-                                            <v-col cols="6" class="text-right">
+                                            <v-col cols="5" class="text-right py-0 px-0">
                                                 <span class="stat">+{{ stats[5].exams | numberFormat }}</span>
                                                 <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
                                             </v-col>
@@ -118,9 +121,9 @@
                                             </v-col>
                                         </v-row>
                                     </v-col>
-                                    <v-col cols="12" md="6">
+                                    <v-col cols="12" md="6" class="pb-0 pb-sm-6">
                                         <div class="d-none d-md-block">
-                                            <v-icon color="primary" size="32">mdi-head-question-outline</v-icon>
+                                            <v-icon class="stat-icon">mdi-head-question-outline</v-icon>
                                             <nuxt-link
                                                 :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
                                                 class="label">
@@ -130,8 +133,8 @@
                                             <div class="stat">+{{ stats[5].questions | numberFormat }}</div>
                                         </div>
                                         <v-row class="d-md-none">
-                                            <v-col cols="6" class="pb-0">
-                                                <v-icon color="primary" size="32">mdi-head-question-outline</v-icon>
+                                            <v-col cols="7" class="py-0 px-0">
+                                                <v-icon class="stat-icon">mdi-head-question-outline</v-icon>
 
                                                 <nuxt-link
                                                     :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
@@ -140,7 +143,7 @@
                                                 </nuxt-link>
                                                 <div class="date-holder"> {{ $moment(stats[5].last_update).format('MMM,DD YYYY')}}</div>
                                             </v-col>
-                                            <v-col cols="6" class="text-right pb-0">
+                                            <v-col cols="5" class="text-right py-0 px-0">
                                                 <span class="stat">+{{ stats[5].questions | numberFormat }}</span>
                                                 <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
                                             </v-col>
@@ -148,9 +151,13 @@
                                     </v-col>
 
                                 </v-row>
+                                </div>
 
-                                <v-divider class="d-none d-md-block mt-14 mb-6" />
-                                <v-row class="d-none d-md-flex">
+                                <v-divider class="d-none d-md-block" style="margin-top: 94px;margin-bottom: 9px;"/>
+
+                                
+                                <div class="d-none d-md-block">
+                                    <v-row >
                                     <v-col cols="6" md="6">
                                         <h4 class="section-title">Last questions</h4>
                                         <v-card class="latest-card" flat v-for="item in questions.slice(0, 3)">
@@ -223,6 +230,7 @@
                                         </v-card>
                                     </v-col>
                                 </v-row>
+                                </div>
                             </v-card-text>
                         </v-card>
                     </v-col>
@@ -794,7 +802,7 @@ export default {
 
         .active {
             position: absolute;
-            right: -3rem;
+            right: -4.6rem;
             font-weight: 750;
             z-index: 2;
         }
@@ -837,6 +845,13 @@ export default {
                 font-weight: 300;
                 line-height: 4.4rem;
                 /* 244.444% */
+            }
+
+
+            .stat-icon {
+                color: #FFB300 !important;
+                font-size: 3.2rem;
+
             }
         }
 
@@ -915,6 +930,9 @@ export default {
 
         #stats-handler {
             margin-top: 1rem;
+            .active {
+               right: -2rem;
+             }
         }
 
         #grade-details-card {
@@ -956,6 +974,10 @@ export default {
                     font-style: normal;
                     font-weight: 300;
                     line-height: 3.8rem;
+                }
+
+                .stat-icon {
+                    font-size: 2rem;
                 }
             }
 
@@ -1017,12 +1039,19 @@ export default {
 @media only screen and (min-width: 600px) and (max-width: 960px) {
     #content-stats-container {
 
+
+        #stats-handler {
+            .active {
+               right: -2rem;
+             }
+        }
+
         #grade-details-card {
             height: 42.5rem;
             border-radius: 0rem 2rem 2rem 0rem;
 
             #stats-details {
-                
+
                 .date-holder {
                     margin-left: 3rem;
                     color: #6E7781;
@@ -1031,10 +1060,15 @@ export default {
                     font-weight: 300;
                     line-height: 4.4rem;
                 }
+
+                .stat-icon {
+                    font-size: 2.4rem;
+                }
             }
 
         }
 
-        
+
     }
-}</style>
+}
+</style>

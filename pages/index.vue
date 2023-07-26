@@ -16,8 +16,16 @@
                                             <div class="slide-title " v-html="slide.title" />
                                             <div class="slide-describe mt-6 d-none d-md-block" v-html="slide.text" />
                                             <v-btn rounded class="mt-8 white--text font-weight-bold d-none d-md-block"
-                                                size="x-large" color="primary">Read about
-                                                it</v-btn>
+                                                size="x-large" color="#FFB300">Read about it</v-btn>
+
+                                            <v-btn text id="slide-register-btn" class="d-md-none">
+                                                Touch to register
+                                                <v-icon color="#FFB300">
+                                                    mdi-arrow-right-bold
+                                                </v-icon>
+                                            </v-btn>
+
+
                                         </v-col>
                                         <v-col md="5">
                                             <img class="slide-img" :src="`/images/${slide.img}`" :alt="slide.title" />
@@ -42,7 +50,7 @@
                                             filled></v-autocomplete>
                                     </v-col>
                                     <v-col cols="1" class="pl-0">
-                                        <v-btn color="primary" class="white--text">
+                                        <v-btn color="#FFB300" class="white--text">
                                             <v-icon>
                                                 mdi-magnify
                                             </v-icon>
@@ -71,7 +79,7 @@
                         <p class="describe">
                             Discover Your Full Potential with AI-based Education
                         </p>
-                        <v-btn color="primary" rounded class="white--text">
+                        <v-btn color="#FFB300" rounded class="white--text">
                             Read about it
                         </v-btn>
                         <img id="img-bottom" alt="AI Learn" src="/images/ai-learn-bg2.png" />
@@ -91,7 +99,7 @@
                         <v-col cols="6">
                             <v-card class="fill-height">
                                 <v-card-title>
-                                    <v-icon color="primary" size="36">mdi-cloud-download</v-icon>
+                                    <v-icon color="#FFB300" size="36">mdi-cloud-download</v-icon>
                                     &nbsp;Download
                                 </v-card-title>
                                 <v-card-text>
@@ -102,7 +110,7 @@
                         <v-col cols="6">
                             <v-card class="fill-height">
                                 <v-card-title>
-                                    <v-icon color="primary" size="36">mdi-text-box-edit</v-icon>
+                                    <v-icon color="#FFB300" size="36">mdi-text-box-edit</v-icon>
                                     &nbsp;Exam
                                 </v-card-title>
                                 <v-card-text>
@@ -118,17 +126,17 @@
             <!--School service banner-->
             <v-container id="school-service-container">
                 <v-row>
-                    <v-col cols="4">
+                    <v-col cols="12" sm="4">
                         <v-img width="246" height="184" class="mx-auto" src="/images/school-service.png" />
                     </v-col>
-                    <v-col cols="8">
+                    <v-col cols="12" sm="8">
                         <h2 class="title">Find school service</h2>
                         <p class="describe">
                             You don't have to try the hardest ways anymore. Gamma has provided you with access to school
                             information. Just
                             filter and Gamma will find it for you.
                         </p>
-                        <v-btn rounded color="primary">Search school</v-btn>
+                        <v-btn rounded color="#FFB300">Search school</v-btn>
                     </v-col>
                 </v-row>
 
@@ -154,7 +162,7 @@
                                 just a few clicks!</h2>
                         </v-col>
                         <v-col cols="12" sm="12" md="4" class="text-center text-md-left">
-                            <v-btn height="36" color="primary" class="white--text">Earn money</v-btn>
+                            <v-btn height="36" color="#FFB300" class="white--text">Earn money</v-btn>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -218,7 +226,7 @@ export default {
 
             slides: [
                 {
-                    title: '<span class="pre-title">AI</span> System in Education',
+                    title: '<span class="pre-title">AI</span> System <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education',
                     img: 'ai-robot.png',
                     text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
                 }, {
@@ -631,7 +639,7 @@ export default {
             height: 35%;
 
             .container {
-                width: 90%;
+                width: 100%;
 
                 .slide-img {
                     width: 12rem;
@@ -653,12 +661,45 @@ export default {
                     font-weight: 750;
                     font-size: 2.2rem !important;
                 }
+
+                #slide-register-btn {
+                    text-transform: none;
+                    color: #A5A6A7;
+                    font-size: 1.2rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 2.4rem;
+
+                    .v-icon {
+                        display: inline-flex !important;
+                        color: #FFB300 !important;
+                        font-size: 2.4rem;
+                        padding-left: 0.8rem;
+                    }
+                }
             }
         }
 
         .section2 {
             height: 80%;
         }
+    }
+
+
+    #ai-learn-banner {
+
+
+        #img-top {
+            position: absolute;
+            bottom: 19.5rem;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+
+    
+
+
     }
 }
 
@@ -671,12 +712,29 @@ export default {
             height: 51%;
 
             .container {
-                width: 90%;
+                width: 80%;
 
                 .slide-img {
                     width: 17rem;
                     float: right;
 
+                }
+
+                #slide-register-btn {
+                    margin-top: 3rem;
+                    text-transform: none;
+                    color: #A5A6A7;
+                    font-size: 1.6rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 2.4rem;
+
+                    .v-icon {
+                        display: inline-flex !important;
+                        color: #FFB300 !important;
+                        font-size: 4.8rem;
+                        padding-left: 3.4rem;
+                    }
                 }
             }
         }

@@ -177,15 +177,13 @@ export default{
     defaultAssets: false,
     customVariables: ["~/assets/variables.scss"],
     theme: {
-      defaultTheme: 'light',
+      light:true,
       themes: {
         light: {
             background: '#FFFFFF',
             surface: '#FFFFFF',
             primary: '#FFB300',
-            'primary-darken-1': '#3700B3',
             secondary: '#03DAC6',
-            'secondary-darken-1': '#018786',
             error: '#B00020',
             info: '#2196F3',
             success: '#4CAF50',
@@ -194,10 +192,8 @@ export default{
         dark: {
             background: colors.indigo.base,
             surface: '#FFFFFF',
-            primary: colors.blue.darken4,
-            'primary-darken-1': '#3700B3',
+            primary: '#FFB300',
             secondary: '#03DAC6',
-            'secondary-darken-1': '#018786',
             error: '#B00020',
             info: colors.teal.lighten1,
             success: '#4CAF50',
