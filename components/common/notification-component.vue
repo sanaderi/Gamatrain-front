@@ -20,6 +20,7 @@
         </v-chip>
         <v-icon
           size="28"
+          :color="menuSetting.linkColor"
           class="topbar-bell"
         >
           mdi-bell-outline
@@ -100,6 +101,16 @@ export default {
         mark_read_all: false
       }
 
+    }
+  },
+  props: {
+    menuSetting: {
+      type: Object,
+      default: () => ({
+        logo: 'gamatrain-logo-top-black.png',
+        bgColor: '#fff',
+        linkColor: '#424A53'
+      })
     }
   },
   mounted() {

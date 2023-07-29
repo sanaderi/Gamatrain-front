@@ -16,7 +16,7 @@
                                             <div class="slide-title " v-html="slide.title" />
                                             <div class="slide-describe mt-6 d-none d-md-block" v-html="slide.text" />
                                             <v-btn rounded class="mt-8 white--text font-weight-bold d-none d-md-block"
-                                                size="x-large" color="#FFB300">Read about it</v-btn>
+                                                x-large color="#FFB300">Read about it</v-btn>
 
                                             <v-btn text id="slide-register-btn" class="d-md-none">
                                                 Touch to register
@@ -44,7 +44,7 @@
                                     <v-col cols="7" id="main-search-keyword">
                                         <v-text-field class="rounded-ts" label="Insert text" filled dense></v-text-field>
                                     </v-col>
-                                    <v-col cols="4" class="pl-0" id="keysearch-cate">
+                                    <v-col cols="4" class="pl-0 " id="keysearch-cate">
                                         <v-autocomplete dense label="Select category"
                                             :items="['Paper', 'Multimedia', 'Q&A', 'Exam', 'Tutorial']"
                                             filled></v-autocomplete>
@@ -71,18 +71,20 @@
             <!--Ai learn banner-->
             <v-container class="mt-16">
                 <v-row>
-                    <v-col id="ai-learn-banner" cols="12">
+                    <v-col cols="12" id="ai-learn-banner" >
                         <img id="img-top" alt="AI Learn" src="/images/ai-learn-bg1.png" />
-                        <h2 class="title">
-                            AI Learn
-                        </h2>
-                        <p class="describe">
-                            Discover Your Full Potential with AI-based Education
-                        </p>
-                        <v-btn color="#FFB300" rounded class="white--text">
-                            Read about it
-                        </v-btn>
-                        <img id="img-bottom" alt="AI Learn" src="/images/ai-learn-bg2.png" />
+                        <v-card flat>
+                            <h2 class="title">
+                                AI Learn
+                            </h2>
+                            <p class="describe">
+                                Discover Your Full Potential with AI-based Education
+                            </p>
+                            <v-btn color="#FFB300" rounded class="white--text">
+                                Read about it
+                            </v-btn>
+                            <img id="img-bottom" alt="AI Learn" src="/images/ai-learn-bg2.png" />
+                        </v-card>
                     </v-col>
                 </v-row>
             </v-container>
@@ -136,7 +138,7 @@
                             information. Just
                             filter and Gamma will find it for you.
                         </p>
-                        <v-btn rounded color="#FFB300">Search school</v-btn>
+                        <v-btn rounded large color="#FFB300">Search school</v-btn>
                     </v-col>
                 </v-row>
 
@@ -306,11 +308,11 @@ export default {
     #main-search {
         position: absolute;
         bottom: 7.4rem;
-        width: 50%;
+        width: 78rem;
         left: 0;
         right: 0;
         margin: 0 auto;
-        height: 8.8rem;
+        height: 8.2rem;
         border-radius: 9rem;
         background: rgba(0, 0, 0, 0.40);
         backdrop-filter: blur(7.5px);
@@ -397,8 +399,9 @@ export default {
 
         .v-btn {
             border-radius: 0.4rem 3rem 3rem 0.4rem;
-            height: 5.2rem;
-            width: 5rem;
+            height: 5.2rem!important;
+            width: 5rem!important;
+            min-width: 4rem;
 
             .v-btn__content .v-icon {
                 display: block;
@@ -480,55 +483,69 @@ export default {
 
 
 #ai-learn-banner {
-
-    border-radius: 1rem;
-    background-color: #24292F;
-    color: #FFFFFF;
-    text-align: center;
-    margin: 100px 0 100px 0;
-    padding: 48px 0 24px 0;
     position: relative;
+    max-width: 73rem;
+    margin: 0 auto;
 
-    .title {
-        color: #FFF;
+    .v-card {
+        border-radius: 1rem;
+        background-color: #24292F;
+        color: #FFFFFF;
         text-align: center;
-        font-family: 'Helvetica Neue LT Std Bold' !important;
-        font-size: 4.6rem !important;
-        font-style: normal;
-        font-weight: 750;
-        line-height: 4.4rem;
-        margin-bottom: 1.6rem;
+        margin: 100px 0 100px 0;
+        padding: 48px 0 24px 0;
+        position: relative;
+
+        .title {
+            color: #FFF;
+            text-align: center;
+            font-family: 'Helvetica Neue LT Std Bold' !important;
+            font-size: 4.6rem !important;
+            font-style: normal;
+            font-weight: 750;
+            line-height: 4.4rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .describe {
+            color: #FFF;
+            text-align: center;
+            font-family: 'Helvetica Neue LT Std';
+            font-size: 1.8rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 2.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        #img-bottom {
+            position: absolute;
+            top: 12.5rem;
+            left: 0;
+        }
+
+        .v-btn {
+            padding-top: 0.3rem;
+            font-weight: 700;
+
+
+
+        }
     }
 
-    .describe {
-        color: #FFF;
-        text-align: center;
-        font-family: 'Helvetica Neue LT Std';
-        font-size: 1.8rem;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 2.4rem;
-        margin-bottom: 1.5rem;
-    }
+
 
     #img-top {
         position: absolute;
-        bottom: 17.2rem;
+        top: 2.4rem;
+        height: auto;
         left: 0;
         right: 0;
+        z-index: 1;
         margin: 0 auto;
     }
 
-    #img-bottom {
-        position: absolute;
-        top: 12.5rem;
-        left: 0;
-    }
 
-    .v-btn {
-        font-weight: 700;
-
-    }
 
 
 }
@@ -598,10 +615,17 @@ export default {
 
     .v-btn {
         margin-top: 2rem;
-        font-weight: 700;
+
+
 
         .v-btn__content {
-            color: #24292F
+            margin-top: 0.4rem;
+            color: #24292F;
+            font-size: 1.4rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 0.0125rem;
         }
 
     }
@@ -614,6 +638,7 @@ export default {
     background: #24292F;
 
     .v-btn {
+        padding-top: 0.3rem;
         .v-btn__content {
             font-family: 'Helvetica Neue LT Std Md';
             color: #24292F
@@ -686,21 +711,6 @@ export default {
     }
 
 
-    #ai-learn-banner {
-
-
-        #img-top {
-            position: absolute;
-            bottom: 19.5rem;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-        }
-
-    
-
-
-    }
 }
 
 @media only screen and (min-width: 600px) and (max-width: 960px) {
@@ -737,6 +747,32 @@ export default {
                     }
                 }
             }
+        }
+    }
+}
+
+@media only screen and (min-width: 960px) and (max-width: 1264px) {
+
+    #main-slider {
+        height: 49.28 !important;
+
+        #main-search {
+            width: 78rem;
+
+
+        }
+    }
+}
+
+@media only screen and (min-width: 1264px) and (max-width: 1904px) {
+
+    #main-slider {
+        height: 49.28 !important;
+
+        #main-search {
+            width: 78rem;
+
+
         }
     }
 }

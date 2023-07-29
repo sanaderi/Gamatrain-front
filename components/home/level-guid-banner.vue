@@ -8,10 +8,10 @@
                 <v-col cols="12">
                     <p class="slide-describe">{{ slideArr[slideIndex].describe }}</p>
                     <div class="img-holder">
-                        <v-expand-transition>
+                        <v-slide-x-transition>
                             <v-img :alt="slideArr[slideIndex].caption" v-if="expand"
                                 :src="`/images/${slideArr[slideIndex].img}`"></v-img>
-                        </v-expand-transition>
+                        </v-slide-x-transition>
                     </div>
 
                     <p class="img-caption">{{ slideArr[slideIndex].caption }}</p>
@@ -152,11 +152,13 @@ export default {
         .v-btn {
             width: 4.4rem;
             height: 4.4rem;
+            padding-top: 0.5rem;
             justify-content: center;
             background-color: #FFFFFF;
             color: #000000;
             font-weight: bold;
             margin: auto 0;
+            
 
 
         }

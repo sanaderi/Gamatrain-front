@@ -258,7 +258,6 @@ export default {
                 '#98CA57',
                 '#DADB42',
                 '#FCE300',
-                '#FCE300',
                 '#FEAA47',
                 '#FFA99F',
                 '#FE68B2',

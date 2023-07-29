@@ -12,20 +12,24 @@
                     <v-col cols="12">
                         <v-slide-group v-model="model" class="slider pa-4">
                             <v-slide-item v-for="(item, n) in slideItmes" :key="n">
-                                <v-card @mouseover="toggleHover('enter', n)" @mouseleave="toggleHover('leave', n)"
-                                    height="185" width="260" class="ma-1">
-                                    <v-img :src="`/images/${item.img}`" />
-                                    <v-card-title class="text-white">
-                                        <span v-if="!isHovered[n]">
-                                            {{ item.short_describe }}
-                                        </span>
-                                        <div v-else class="text-center">
-                                            <v-btn text size="small" color="primary">
-                                                read more</v-btn>
-                                        </div>
-                                    </v-card-title>
-
-
+                                <v-card flat width="260">
+                                    <v-card @mouseover="toggleHover('enter', n)" @mouseleave="toggleHover('leave', n)"
+                                        height="185" width="260" class="ma-1">
+                                        <v-img :src="`/images/${item.img}`" />
+                                        <v-card-title class="text-white">
+                                            <span v-if="!isHovered[n]">
+                                                {{ item.short_describe }}
+                                            </span>
+                                            <div v-else class="text-center">
+                                                <v-btn text size="small" color="primary">
+                                                    read more</v-btn>
+                                            </div>
+                                        </v-card-title>
+                                    </v-card>
+                                    <div class="describe">
+                                        we have a few fundamentalwe principles that ...
+                                        <nuxt-link to="/">Read more</nuxt-link>
+                                    </div>
                                 </v-card>
                             </v-slide-item>
                         </v-slide-group>
@@ -114,6 +118,7 @@ export default {
     }
 
     .v-btn {
+        padding-top: .5rem;
         .v-btn__content {
             font-family: 'Helvetica Neue LT Std Bold';
 
@@ -138,6 +143,25 @@ export default {
                 font-size: 1.8rem;
                 font-style: normal;
                 font-weight: 500;
+                line-height: 2.4rem;
+
+
+            }
+        }
+
+        .describe {
+            color: #6E7781;
+            font-size: 1.8rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 2.4rem;
+
+
+            .nuxt-link-exact-active {
+                color: #FFB600;
+                font-size: 1.4rem;
+                font-style: normal;
+                font-weight: 300;
                 line-height: 2.4rem;
             }
         }

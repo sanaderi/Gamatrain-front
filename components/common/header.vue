@@ -11,43 +11,58 @@
                   <v-img alt="Gamatrain" id="main-logo" :src="`/images/${menuSetting.logo}`" />
                 </nuxt-link>
               </v-col>
-              <v-col cols="6" md="6" lg="6" xl="7" xxl="7">
+              <v-col cols="6" md="7" lg="6" xl="7" xxl="7">
                 <v-btn tile v-for="(link, i) in menuLink" :to="link.link" :key="i" :color="menuSetting.linkColor" text
-                  class="mx-2">
+                  class="mx-2 mx-md-0 mx-lg-2">
                   <v-icon class="mb-2 mr-1" v-if="link.icon" color="#FFB300">
                     {{ link.icon }}
                   </v-icon>
                   {{ link.title }}
                 </v-btn>
               </v-col>
-              <v-col cols="4" class="text-right">
+              <v-col cols="4" md="3" class="text-right">
                 <div class="d-flex text-right" v-if="$auth.loggedIn">
                   <v-spacer />
                   <v-menu transition="slide-x-transition" offset-y min-width="150">
-                    <template v-slot:activator="{ props }">
-                      <div v-bind="props">
+                    <template v-slot:activator="{ on, attrs }">
+                      <div v-bind="attrs" v-on="on">
                         <v-avatar size="32">
                           <v-img :src="$auth.user.avatar" alt="user avatar" />
                         </v-avatar>
                         <span class="pointer pa-2 font-weight-bold "
-                          :class="menuSetting.bgColor == '#fff' ? '' : 'text-white'">{{ $auth.user.first_name }}</span>
+                          :class="menuSetting.bgColor == '#fff' ? '' : 'white--text'">
+                          <span v-if="$auth.user.first_name">
+                            {{ $auth.user.first_name }}
+                          </span>
+                          <span v-else-if="$auth.user.last_name">
+                            {{ $auth.user.last_name }}
+                          </span>
+                          <span v-else>
+                            No name
+                          </span>
+
+                        </span>
                       </div>
                     </template>
                     <v-list>
                       <v-list-item v-for="(item, i) in user_profile_items" :key="i" :to="item.link">
-                        <v-list-item-title>
+                        <v-list-item-icon class="mr-0">
                           <v-icon small>
                             {{ item.icon }}
                           </v-icon>
+                        </v-list-item-icon>
+                        <v-list-item-title>
                           {{ item.title }}
                         </v-list-item-title>
                       </v-list-item>
-                      <v-list-item class="pointer" @click="logout">
-
-                        <v-list-item-title>
+                      <v-list-item class="pointer " @click="$auth.logout()">
+                        <v-list-item-icon class="mr-0">
                           <v-icon small>
                             mdi-logout
                           </v-icon>
+                        </v-list-item-icon>
+                        <v-list-item-title>
+
                           Logout
                         </v-list-item-title>
                       </v-list-item>
@@ -56,11 +71,12 @@
 
 
                   <!--Desktop version-->
-                  <common-notification-component ref="notificationComponent" class="d-none d-md-block" />
+                  <common-notification-component :menuSetting="menuSetting" ref="notificationComponent"
+                    class="d-none d-md-block" />
 
                 </div>
                 <div v-else>
-                  <v-btn :color="menuSetting.linkColor" text class="px-0" @click="openLoginDialog">
+                  <v-btn :class="menuSetting.linkColor" text class="px-0" @click="openLoginDialog">
                     Sign in
                   </v-btn>
                   <span :class="menuSetting.bgColor != '#fff' ? 'white--text' : 'black--text'">/</span>
@@ -103,55 +119,67 @@
             <!-- Start:  show sidebar menu in mobile -->
             <v-navigation-drawer v-model="sidebar" app class="hidden-md-and-up main-sidebar">
               <!-- Start:  Menu items -->
-              <v-list dense shaped class=" pl-1">
+              <v-list dense shaped>
                 <!--Profile info-->
-                <div v-if="$auth.loggedIn" class="
-                    sidemenu-profile
-                    d-flex
-                    flex-column
-                    justify-space-around
-                    mb-5
-                  ">
-                  <nuxt-link to="/user">
-                    <v-avatar size="40">
-                      <v-img :src="$auth.user.avatar" alt="Avatar" />
-                    </v-avatar>
-                  </nuxt-link>
+                <v-list-group v-if="$auth.loggedIn" active-class="menu_group_active">
+                  <template v-slot:activator>
+                    <v-list-item-icon>
+                      <v-icon v-text="'mdi-account-outline'"></v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>
+                      <span v-if="$auth.user.first_name">{{ $auth.user.first_name }}</span>
+                      <span v-else-if="$auth.user.last_name">{{ $auth.user.last_name }}</span>
+                      <span v-else>No name</span>
+                    </v-list-item-title>
+                  </template>
 
-                  <div class="profile-info">
-                    <nuxt-link :to="'/user'" class="profile-name">{{ $auth.user.first_name }} {{ $auth.user.last_name }}
-                    </nuxt-link>
+                  <v-list-item class="pl-7 " v-for="(item, i) in user_profile_items" :key="i" link>
+                    <v-list-item-icon>
+                      <v-icon v-text="item.icon"></v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title v-text="item.title"></v-list-item-title>
+                  </v-list-item>
 
+                  <v-list-item class="pl-7 " @click="$auth.logout()">
+                    <v-list-item-icon>
+                      <v-icon v-text="'mdi-exit-to-app'"></v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title v-text="'Logout'"></v-list-item-title>
+                  </v-list-item>
+                </v-list-group>
+                <v-list-item v-if="$auth.loggedIn" @click="notificationListDialog = true">
 
-                    <div class="profile-wallet d-flex justify-space-between mr-2">
-                      <div class="d-flex">
-                        <p class="wallet">Wallet: </p>
-                        <p class="mx-3 wallet-balance">${{ $auth.user.credit }}</p>
-                      </div>
-                      <nuxt-link to="/user">
-                        <i class="fa-solid fa-angle-right ml-4 profile-wallet-arrow"></i>
-                      </nuxt-link>
-                    </div>
-                  </div>
-                </div>
-                <div v-else class="d-flex align-center">
-                  <v-btn plain @click="openLoginDialog">
-                    <i class="fa-solid fa-sign-in mr-1"></i>
-                    Login
-                  </v-btn>
-
-                  <v-btn plain @click="openRegisterDialog">
-                    <i class="fa-solid fa-user-plus mr-1"></i>
-                    Register
-                  </v-btn>
-                </div>
-                <v-divider class="mb-2"></v-divider>
+                  <v-list-item-icon>
+                    <v-badge overlap content="3">
+                      <v-icon v-text="'mdi-bell-outline'"></v-icon>
+                    </v-badge>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      Notification
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-list-item @click="openLoginDialog" v-if="!$auth.loggedIn">
+                  <v-list-item-icon>
+                    <v-icon v-text="'mdi-account-outline'"></v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <span class="primary--text">Sign in</span>
+                      / Sign up
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
                 <!--End Profile info-->
 
 
                 <!--Mobile menu items-->
                 <div v-for="(item, side) in menuItems" :key="side">
                   <v-list-item class="py-2" active-class="menu_active" v-if="!item.subMenuList" :to="item.link">
+                    <v-list-item-icon>
+                      <v-icon v-text="item.icon" :color="item.icon_color"></v-icon>
+                    </v-list-item-icon>
                     <v-list-item-title v-text="item.title" class="menu-title" />
                   </v-list-item>
 
@@ -168,27 +196,10 @@
                     </v-list-item>
                   </v-list-group>
                 </div>
-                <v-divider class="my-3"></v-divider>
-                <div v-if="$auth.loggedIn" @click="$auth.logout()" class="logout d-flex align-center my-4 ">
-                  <v-icon>mdi-logout</v-icon>
-                  <p class="logout-item mx-2">
-                    Logout
-                  </p>
-
-                </div>
               </v-list>
               <!-- End:  Menu items -->
 
-              <!-- Start:  Social link -->
-              <v-list dense>
-                <v-list-item-group class="d-flex justify-center align-center mt-5">
-                  <a v-for="(socialItem, i) in socialList" :key="i" :href="socialItem.link"
-                    class="d-flex justify-center align-center px-3">
-                    <span :class="' side-icon fa-2xl fa-brands ' + socialItem.icon"></span>
-                  </a>
-                </v-list-item-group>
-              </v-list>
-              <!-- End:  Social link  -->
+
             </v-navigation-drawer>
             <!-- End:  show sidebar menu in mobile -->
 
@@ -205,8 +216,7 @@
               <v-spacer></v-spacer>
 
 
-              <!--Mobile notification section-->
-              <!-- <notification-component ref="notification-section" /> -->
+
               <!--   hamburgers-icon in mobile-->
 
 
@@ -218,7 +228,7 @@
                     </v-icon>
                   </template>
                   <v-sheet class="mobile-search-sheet">
-                    <v-slide-group v-model="model" class="pa-4" active-class="active-item" show-arrows>
+                    <v-slide-group v-model="mobileSearchFilter" class="pa-4" active-class="active-item" show-arrows>
                       <v-slide-item v-for="item in searchFilterItems" :key="n" v-slot="{ active, toggle }">
                         <v-card :color="active ? undefined : 'white lighten-1'" class="ma-2 " height="7.6rem"
                           width="7.6rem" @click="toggle">
@@ -241,12 +251,10 @@
                               </v-col>
                               <v-col cols="12" md="4">
 
-                                <v-skeleton-loader 
-                                  type="table-heading, list-item-two-line, image, table-tfoot">
+                                <v-skeleton-loader type="table-heading, list-item-two-line, image, table-tfoot">
                                 </v-skeleton-loader>
 
-                                <v-skeleton-loader
-                                  type="table-heading, list-item-two-line, image, table-tfoot">
+                                <v-skeleton-loader type="table-heading, list-item-two-line, image, table-tfoot">
                                 </v-skeleton-loader>
                               </v-col>
                             </v-row>
@@ -277,6 +285,38 @@
       </v-container>
       <!--   End: navbar   -->
     </header>
+
+    <v-dialog v-model="notificationListDialog" fullscreen transition="dialog-bottom-transition" scrollable>
+      <v-card id="notificationListCard">
+        <v-card-text>
+          <v-toolbar flat>
+            <h2 class="main-title">Notifications</h2>
+            <v-spacer></v-spacer>
+
+            <v-btn icon @click="notificationListDialog = false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-toolbar>
+          <v-list three-line>
+            <template v-for="(item, index) in notificationItems">
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon v-text="item.icon"></v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <div class="date">{{ item.date }}</div>
+                  <v-list-item-title class="title" v-html="item.title"></v-list-item-title>
+                  <v-list-item-subtitle class="describe" v-html="item.describe"></v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+          </v-list>
+
+
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -297,12 +337,12 @@ export default {
   },
   props: {
     menuSetting: {
-      default: {
+      type: Object,
+      default: () => ({
         logo: 'gamatrain-logo-top-black.png',
         bgColor: '#fff',
         linkColor: '#424A53'
-
-      }
+      })
     }
   },
   data() {
@@ -315,57 +355,28 @@ export default {
       walletBalance: "2000 تومان",
       menuItems: [
         {
-          title: "Home",
-          link: "/",
-          icon: "",
+          title: "About us",
+          link: "/about-us",
+          icon: "mdi-account-multiple",
+          icon_color: ''
         },
         {
-          title: "Olympiad",
-          link: "",
-          icon: "fa-angle-down",
-          subMenuList: [
-            {
-              title: "International Mathematical Olympiad",
-              link: "/search?type=test&section=6025&base=6026&lesson=6028"
-            },
-            { title: "International Physics Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6029" },
-            { title: "International Chemistry Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6030" },
-            {
-              title: "International Olympiad in Informatics",
-              link: "/search?type=test&section=6025&base=6026&lesson=6031"
-            },
-            { title: "International Biology Olympiad", link: "/search?type=test&section=6025&base=6026&lesson=6032" },
-          ],
+          title: "Services",
+          link: "/services",
+          icon: "mdi-view-module",
+          icon_color: ''
         },
         {
-          title: "Books",
-          link: "",
-          icon: "fa-angle-down",
-          subMenuList: [
-            { title: "1st grade", link: "/search?type=test&section=1&base=13&test_type=314" },
-            { title: "2nd grade", link: "/search?type=test&section=1&base=14&test_type=314" },
-            { title: "3rd grade", link: "/search?type=test&section=1&base=15&test_type=314" },
-            { title: "4th grade", link: "/search?type=test&section=1&base=16&test_type=314" },
-            { title: "5th grade", link: "/search?type=test&section=1&base=17&test_type=314" },
-            { title: "6th grade", link: "/search?type=test&section=1&base=18&test_type=314" },
-            { title: "7th grade", link: "/search?type=test&section=2&base=19&test_type=314" },
-            { title: "8th grade", link: "/search?type=test&section=2&base=20&test_type=314" },
-            { title: "9th grade", link: "/search?type=test&section=2&base=21&test_type=314" },
-            { title: "IGCSE", link: "/search?type=test&section=3&base=22&test_type=314" },
-            { title: "O-Level", link: "/search?type=test&section=3&base=23&test_type=314" },
-            { title: "As Level", link: "/search?type=test&section=1463&base=1464&test_type=314" },
-            { title: "A Level", link: "/search?type=test&section=1463&base=4161&test_type=314" },
-          ],
+          title: "Faq",
+          link: "/faq",
+          icon: "mdi-information",
+          icon_color: ''
         },
         {
-          title: "Announcement",
-          link: "",
-          icon: "fa-angle-down",
-          subMenuList: [
-            { title: "Terms and Conditions", link: "" },
-            { title: "Privacy Policy", link: "" },
-            { title: "FAQs", link: "/faq" },
-          ],
+          title: "Offers",
+          link: "/offers",
+          icon: "mdi-wallet-giftcard",
+          icon_color: 'primary'
         },
       ],
       selectedItem: 1,
@@ -432,14 +443,55 @@ export default {
           title: 'Tutorial',
           key: 'tutorial'
         }
+      ],
+      mobileSearchFilter: '',
+      keyword: '',
+
+      user_profile_items: [
+        {
+          title: 'Dashboard',
+          icon: 'mdi-view-dashboard',
+          link: '/user'
+        },
+        {
+          title: 'Messages',
+          icon: 'mdi-email-outline',
+          link: '/user/ticket'
+        },
+        {
+          title: 'Edit Profile',
+          icon: 'mdi-account-outline',
+          link: '/user/profile'
+        },
+        {
+          title: 'Change Password',
+          icon: 'mdi-key',
+          link: '/user/edit-pass'
+        },
+
+      ],
+      notificationListDialog: false,
+      notificationItems: [
+        {
+          icon: 'mdi-table-furniture',
+          date: 'Today, 11:48 am',
+          title: 'Sample Question uploded',
+          describe: 'Satisfied course question sample has been uploaded for your level of education.'
+        },
+        {
+          icon: 'mdi-map-marker-check',
+          date: 'Today, 11:48 am',
+          title: 'Sample Question uploded',
+          describe: 'Satisfied course question sample has been uploaded for your level of education.'
+        },
       ]
 
     };
   },
   mounted() {
-    if (window.innerWidth <= 960 && this.$auth.loggedIn) {
-      this.$refs["notification-section"].getNotifications();
-    }
+    // if (window.innerWidth <= 960 && this.$auth.loggedIn) {
+    //   this.$refs["notification-section"].getNotifications();
+    // }
   },
   async fetch() {
     await this.$axios.$get('/api/v1/admin/values')
@@ -502,6 +554,10 @@ export default {
   border-color: #FFB300 !important;
 }
 
+.v-application .primary--text{
+  color:#FFB300!important;
+}
+
 
 
 #main-header {
@@ -532,8 +588,8 @@ export default {
 
   .menu_active {
     border-bottom: 4px solid white !important;
-    background-color: rgba(33, 186, 69, 0.1);
-    color: #21ba45 !important;
+    background-color: rgba(255, 179, 0, 0.1) !important;
+    color: #ffb300f3 !important;
   }
 
   .menu_group_active {
@@ -552,6 +608,52 @@ export default {
   }
 
 
+
+}
+
+
+#notificationListCard {
+  .main-title {
+    color: #424A53;
+    font-size: 1.6rem !important;
+    font-style: normal;
+    font-weight: 750;
+    line-height: 4.4rem;
+  }
+
+
+  .v-list-item__icon {
+    margin-right: 1rem;
+
+    .v-icon {
+      font-size: 2.4rem;
+      color: #FFB600 !important;
+    }
+  }
+
+
+  .title {
+    color: #424A53;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2rem;
+  }
+
+  .describe {
+    color: #6E7781;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 2rem;
+  }
+
+  .date {
+    color: #6E7781;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+  }
 }
 
 
@@ -559,7 +661,11 @@ export default {
 #main-logo {
   width: 12.0827rem !important;
   height: 3rem !important;
+
 }
+
+
+
 
 @media only screen and (max-width: 600px) {
   #main-logo {

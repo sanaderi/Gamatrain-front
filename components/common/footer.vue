@@ -9,10 +9,10 @@
             organization.
           </div>
           <div>
-            <nuxt-link to="/"  class="v-btn" >
+            <nuxt-link to="/" class="v-btn">
               <v-icon>mdi-twitter</v-icon>
             </nuxt-link>
-            <nuxt-link to="/"  class="v-btn">
+            <nuxt-link to="/" class="v-btn">
               <v-icon>
                 mdi-facebook
               </v-icon>
@@ -25,61 +25,27 @@
           </div>
 
         </v-col>
-        <v-col sm="3" md="2" class="d-none d-sm-block">
+        <v-col sm="3" md="2" class="d-none d-sm-block" v-for="(item, i) in footerLinks" :key="i">
           <div class="link-title">
-            We
+            {{ item.mainTitle }}
           </div>
-          <nuxt-link to="/about-us" class="footer-link">
-            About Us
-          </nuxt-link>
-          <nuxt-link to="/terms" class="footer-link">
-            Terms
-          </nuxt-link>
-          <nuxt-link to="/blog" class="footer-link">
-            Blog
+          <nuxt-link v-for="link in item.subMenu" :key="link.link" :to="link.link" class="footer-link">
+            {{ link.title }}
           </nuxt-link>
         </v-col>
-        <v-col sm="3" md="2" class="d-none d-sm-block">
-          <div class="link-title">
-            Learning File
-          </div>
-          <nuxt-link to="/" class="footer-link">
-            Olympiad
-          </nuxt-link>
-          <nuxt-link to="/" class="footer-link">
-            Tallented
-          </nuxt-link>
-          <nuxt-link to="/" class="footer-link">
-            Answer/Question
-          </nuxt-link>
-        </v-col>
-        <v-col sm="3" md="2" class="d-none d-sm-block">
-          <div class="link-title">
-            Help Link
-          </div>
-          <nuxt-link to="/about-us" class="footer-link">
-            FAQ
-          </nuxt-link>
-          <nuxt-link to="/terms" class="footer-link">
-            Tools
-          </nuxt-link>
-          <nuxt-link to="/blog" class="footer-link">
-            School Finder
-          </nuxt-link>
-        </v-col>
-        <v-col sm="3" md="2" class="d-none d-sm-block">
-          <div class="link-title">
-            Virtual School
-          </div>
-          <nuxt-link to="/" class="footer-link">
-            Online Teach
-          </nuxt-link>
-          <nuxt-link to="/" class="footer-link">
-            Online Test
-          </nuxt-link>
-          <nuxt-link to="/" class="footer-link">
-            Test Maker
-          </nuxt-link>
+
+
+        <v-col cols="12" class="d-block d-sm-none">
+          <v-expansion-panels focusable flat id="mobile-footer-panels">
+            <v-expansion-panel v-for="(item, i) in footerLinks" :key="i" style="border-bottom: 0.5px solid #424A53;">
+              <v-expansion-panel-header class="link-title">{{ item.mainTitle }}</v-expansion-panel-header>
+              <v-expansion-panel-content class="pt-4">
+                <nuxt-link v-for="link in item.subMenu" :key="link.link" :to="link.link" class="footer-link">
+                  {{ link.title }}
+                </nuxt-link>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
         </v-col>
 
       </v-row>
@@ -94,7 +60,82 @@
   </v-container>
 </template>
 <script>
-
+export default {
+  data() {
+    return {
+      footerLinks: [
+        {
+          mainTitle: 'We',
+          subMenu: [
+            {
+              title: 'About us',
+              link: '/about us'
+            },
+            {
+              title: 'Terms',
+              link: '/terms'
+            },
+            {
+              title: 'Blog',
+              link: '/blog'
+            }
+          ]
+        },
+        {
+          mainTitle: 'Learn Files',
+          subMenu: [
+            {
+              title: 'Olympiad',
+              link: '/olympiad'
+            },
+            {
+              title: 'Tallent',
+              link: '/tallent'
+            },
+            {
+              title: 'Answer/Question',
+              link: '/aq'
+            }
+          ]
+        },
+        {
+          mainTitle: 'Help link',
+          subMenu: [
+            {
+              title: 'Faq',
+              link: '/faq'
+            },
+            {
+              title: 'Tools',
+              link: '/tools'
+            },
+            {
+              title: 'School finder',
+              link: '/school-finder'
+            }
+          ]
+        },
+        {
+          mainTitle: 'Virtual school',
+          subMenu: [
+            {
+              title: 'Online teach',
+              link: '/teach'
+            },
+            {
+              title: 'Online test',
+              link: '/online-test'
+            },
+            {
+              title: 'Test maker',
+              link: '/test-maker'
+            }
+          ]
+        },
+      ]
+    }
+  }
+}
 </script>
 
 
@@ -121,8 +162,8 @@
 
   .v-btn {
     background-color: #FFB600;
-    height: 2rem!important;
-    width: 2rem!important;
+    height: 2rem !important;
+    width: 2rem !important;
     border-radius: 0.3125rem;
     margin: 0.1rem;
 
