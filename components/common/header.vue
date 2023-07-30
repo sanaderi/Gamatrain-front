@@ -229,7 +229,7 @@
                   </template>
                   <v-sheet class="mobile-search-sheet">
                     <v-slide-group v-model="mobileSearchFilter" class="pa-4" active-class="active-item" show-arrows>
-                      <v-slide-item v-for="item in searchFilterItems" :key="n" v-slot="{ active, toggle }">
+                      <v-slide-item v-for="(item,n) in searchFilterItems" :key="n" v-slot="{ active, toggle }">
                         <v-card :color="active ? undefined : 'white lighten-1'" class="ma-2 " height="7.6rem"
                           width="7.6rem" @click="toggle">
                           <v-row class="fill-height text-center" justify="center">
