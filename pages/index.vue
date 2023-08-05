@@ -9,29 +9,26 @@
                         hide-delimiter-background :show-arrows="false">
 
                         <v-carousel-item v-for="(slide, i) in slides" :key="i">
-                            <v-sheet :color="colors[i]" class="section1">
+                            <v-sheet class="section1" :id="slide.id">
                                 <v-container>
-                                    <v-row class="white--text mt-4  ">
-                                        <v-col md="7">
-                                            <div class="slide-title " v-html="slide.title" />
-                                            <div class="slide-describe mt-6 d-none d-md-block" v-html="slide.text" />
-                                            <v-btn rounded class="mt-8 white--text font-weight-bold d-none d-md-block"
-                                                x-large color="#FFB300">Read about it</v-btn>
+                                    <v-card flat>
+                                        <v-row class="white--text mt-4  ">
+                                            <v-col md="12">
+                                                <div class="slide-title " v-html="slide.title" />
+                                                <div class="slide-describe mt-6 d-none d-md-block" v-html="slide.text" />
+                                                <v-btn rounded class="mt-8 white--text font-weight-bold d-none d-md-block"
+                                                    x-large color="#FFB300">Read about it</v-btn>
 
-                                            <v-btn text id="slide-register-btn" class="d-md-none">
-                                                Touch to register
-                                                <v-icon color="#FFB300">
-                                                    mdi-arrow-right-bold
-                                                </v-icon>
-                                            </v-btn>
+                                                <v-btn text id="slide-register-btn" class="d-md-none">
+                                                    Touch to register
+                                                    <v-icon color="#FFB300">
+                                                        mdi-arrow-right-bold
+                                                    </v-icon>
+                                                </v-btn>
+                                            </v-col>
+                                        </v-row>
+                                    </v-card>
 
-
-                                        </v-col>
-                                        <v-col md="5">
-                                            <img class="slide-img" :src="`/images/${slide.img}`" :alt="slide.title" />
-                                        </v-col>
-
-                                    </v-row>
                                 </v-container>
                             </v-sheet>
                             <v-sheet class="section2">
@@ -42,10 +39,10 @@
                             <v-card-text>
                                 <v-row class="text-center">
                                     <v-col cols="7" id="main-search-keyword">
-                                        <v-text-field class="rounded-ts" label="Insert text" filled dense></v-text-field>
+                                        <v-text-field class="rounded-ts" label="Insert text" dense hide-details filled></v-text-field>
                                     </v-col>
                                     <v-col cols="4" class="pl-0 " id="keysearch-cate">
-                                        <v-autocomplete dense label="Select category"
+                                        <v-autocomplete hide-details dense label="Select category"
                                             :items="['Paper', 'Multimedia', 'Q&A', 'Exam', 'Tutorial']"
                                             filled></v-autocomplete>
                                     </v-col>
@@ -71,7 +68,7 @@
             <!--Ai learn banner-->
             <v-container class="mt-16">
                 <v-row>
-                    <v-col cols="12" id="ai-learn-banner" >
+                    <v-col cols="12" id="ai-learn-banner">
                         <img id="img-top" alt="AI Learn" src="/images/ai-learn-bg1.png" />
                         <v-card flat>
                             <h2 class="title">
@@ -231,10 +228,12 @@ export default {
                     title: '<span class="pre-title">AI</span> System <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education',
                     img: 'ai-robot.png',
                     text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
+                    id: 'ai-slide'
                 }, {
-                    title: '<span class="text-h3 text-md-h2   font-weight-bold">Answer & Question</span>',
+                    title: '<span class="text-h3 text-md-h2   font-weight-bold">Answer<span class="d-sm-none"><br>&nbsp&nbsp</span> & Question</span>',
                     text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
                     img: 'a-q.png',
+                    id: 'aq-slide'
                 }
             ],
             items: [
@@ -304,182 +303,215 @@ export default {
 
 #main-slider {
     height: 49.28 !important;
+}
 
-    #main-search {
-        position: absolute;
-        bottom: 7.4rem;
-        width: 78rem;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        height: 8.2rem;
-        border-radius: 9rem;
-        background: rgba(0, 0, 0, 0.40);
-        backdrop-filter: blur(7.5px);
+#main-slider #main-search {
+    position: absolute;
+    bottom: 12rem;
+    width: 78rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 8.2rem;
+    border-radius: 9rem;
+    background: rgba(0, 0, 0, 0.40);
+    backdrop-filter: blur(7.5px);
+}
 
-        textarea {
-            color: #24292F !important
-        }
+#main-slider #main-search textarea {
+    color: #24292F !important
+}
 
 
-        #keysearch-cate {
+#main-slider #main-search #keysearch-cate .v-input__slot {
+    background: #fff;
+    border-radius: 0.4rem;
+
+}
+
+#main-slider #main-search #keysearch-cate .v-label {
+    color: rgba(0, 0, 0, 0.60);
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.8rem;
+
+}
+
+#main-slider #main-search #keysearch-cate .v-label.v-label--active {
+    color: rgba(0, 0, 0, 0.60) !important;
+
+}
+
+
+#main-slider #main-search #main-search-keyword {
+
+    .v-input {
+        border-color: #fff;
+        color: #24292F !important;
+
+        .v-input__control {
+            border-color: #fff;
+
+
             .v-input__slot {
-                background: #fff;
-                border-radius: 0.4rem;
+                background-color: #fff !important;
 
-            }
+                border: transparent;
+                border-radius: 3rem 0.4rem 0.4rem 3rem;
 
-            .v-label {
-                color: rgba(0, 0, 0, 0.60);
-                font-size: 1.6rem;
-                font-style: normal;
-                font-weight: 300;
-                line-height: 1.8rem;
-
-            }
-
-            .v-label.v-label--active {
-                color: rgba(0, 0, 0, 0.60) !important;
-
-            }
-        }
-
-        #main-search-keyword {
-
-            .v-input {
-                border-color: #fff;
-                color: #24292F !important;
-
-                .v-input__control {
-                    border-color: #fff;
-
-
-                    .v-input__slot {
-                        background-color: #fff !important;
-
-                        border: transparent;
-                        border-radius: 3rem 0.4rem 0.4rem 3rem;
-
-                        .v-label {
-                            color: rgba(0, 0, 0, 0.60);
-                            font-size: 1.6rem;
-                            font-style: normal;
-                            font-weight: 300;
-                            line-height: 1.8rem;
-
-                        }
-
-                        .v-label.v-label--active {
-                            color: rgba(0, 0, 0, 0.60) !important;
-
-                        }
-
-
-                    }
-
-                    .v-input__slot::before {
-                        border: transparent;
-                    }
-
-
-
+                .v-label {
+                    color: rgba(0, 0, 0, 0.60);
+                    font-size: 1.6rem;
+                    font-style: normal;
+                    font-weight: 300;
+                    line-height: 1.8rem;
 
                 }
+
+                .v-label.v-label--active {
+                    color: rgba(0, 0, 0, 0.60) !important;
+
+                }
+
+
+            }
+
+            .v-input__slot::before {
+                border: transparent;
             }
 
 
 
 
-
-
-
-        }
-
-
-
-        .v-btn {
-            border-radius: 0.4rem 3rem 3rem 0.4rem;
-            height: 5.2rem!important;
-            width: 5rem!important;
-            min-width: 4rem;
-
-            .v-btn__content .v-icon {
-                display: block;
-            }
-        }
-
-    }
-
-    .section1 {
-        height: 95%;
-
-        .pre-title {
-            color: #FFF;
-            font-family: 'Helvetica Neue LT Std Bold';
-            font-size: 5rem;
-            font-style: normal;
-            font-weight: 750;
-            line-height: 4.4rem;
-        }
-
-        .slide-title {
-            font-family: 'Helvetica Neue LT Std Bold' !important;
-            font-weight: 750;
-            font-size: 2.8rem !important;
-        }
-
-        .slide-describe {
-            margin-top: 2rem;
-            color: #FFF;
-            font-size: 2rem;
-            font-style: normal;
-            font-weight: 300;
-            line-height: 3.2rem;
-        }
-
-        .slide-img {
-            width: 33rem;
-            float: right;
-
         }
     }
 
-    .section2 {
-        height: 10%;
-    }
 
 
 
 
-    .v-carousel__controls {
-        height: 5rem !important;
-    }
 
-    .v-carousel__controls .v-btn--icon {
-        background-color: #ebece9;
-        /* Background color of non-active ones */
-        height: 0.42rem;
-        /* Height you want */
-        width: 8rem;
-        /* Width you want */
-        border-radius: 0;
-        /* Remove default border radius */
-    }
 
-    .v-carousel__controls .v-btn--icon.v-btn--active {
-        background-color: #FFB300;
-        /* Colour for active one */
-    }
+}
 
-    .v-carousel__controls .v-btn--icon:hover {
-        background-color: #FFB300;
-        /* You might also want to customise the hover effect */
-    }
+
+
+#main-slider #main-search .v-btn {
+    border-radius: 0.4rem 3rem 3rem 0.4rem;
+    height: 5.2rem !important;
+    width: 5rem !important;
+    min-width: 4rem;
 
     .v-btn__content .v-icon {
-        display: none;
+        display: block;
     }
 }
+
+
+#main-slider .section1 {
+    height: 95%;
+
+    .pre-title {
+        color: #FFF;
+        font-family: 'Helvetica Neue LT Std Bold';
+        font-size: 5rem;
+        font-style: normal;
+        font-weight: 750;
+        line-height: 4.4rem;
+    }
+
+    .slide-title {
+        font-family: 'Helvetica Neue LT Std Bold' !important;
+        font-weight: 750;
+        font-size: 2.8rem !important;
+    }
+
+    .slide-describe {
+        margin-top: 2rem;
+        color: #FFF;
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 3.2rem;
+    }
+
+    .slide-img {
+        width: 33rem;
+        float: right;
+
+    }
+}
+
+#main-slider #ai-slide {
+    background: #24292F !important;
+    background-repeat: no-repeat;
+    background-size: 90%, 10%;
+    height: 40rem;
+}
+
+#main-slider #ai-slide .v-card {
+    height: 44rem;
+    background-color: transparent;
+    background-image: url('/images/ai-robot.png');
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 32.4rem 40.5rem;
+}
+
+#main-slider #aq-slide {
+    background: #0092A9;
+    background-repeat: no-repeat;
+    height: 40rem;
+}
+
+#main-slider #aq-slide .v-card {
+    height: 44rem;
+    background-color: transparent;
+    background-image: url('/images/a-q.png');
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: 32.4rem 30.36rem;
+}
+
+#main-slider .section2 {
+    height: 10%;
+}
+
+
+
+
+#main-slider .v-carousel__controls {
+    position: absolute;
+    top: 37.5rem;
+    /* height: 5rem !important; */
+}
+
+#main-slider .v-carousel__controls .v-btn--icon {
+    background-color: #ebece9;
+    /* Background color of non-active ones */
+    height: 0.42rem;
+    /* Height you want */
+    width: 8rem;
+    /* Width you want */
+    border-radius: 0;
+    /* Remove default border radius */
+}
+
+#main-slider .v-carousel__controls .v-btn--icon.v-btn--active {
+    background-color: #FFB300;
+    /* Colour for active one */
+}
+
+#main-slider .v-carousel__controls .v-btn--icon:hover {
+    background-color: #FFB300;
+    /* You might also want to customise the hover effect */
+}
+
+#main-slider .v-btn__content .v-icon {
+    display: none;
+}
+
 
 
 #ai-learn-banner {
@@ -639,6 +671,7 @@ export default {
 
     .v-btn {
         padding-top: 0.3rem;
+
         .v-btn__content {
             font-family: 'Helvetica Neue LT Std Md';
             color: #24292F
@@ -658,56 +691,95 @@ export default {
 
 @media only screen and (max-width: 600px) {
     #main-slider {
-        height: 20rem !important;
+        height: 18rem !important;
+    }
 
-        .section1 {
-            height: 35%;
+    #main-slider .section1 {
+        height: 35%;
 
-            .container {
-                width: 100%;
+        .container {
+            width: 100%;
 
-                .slide-img {
-                    width: 12rem;
-                    float: right;
+            .slide-img {
+                width: 12rem;
+                float: right;
 
-                }
+            }
 
-                .pre-title {
-                    color: #FFF;
-                    font-family: 'Helvetica Neue LT Std Bold';
-                    font-size: 4rem;
-                    font-style: normal;
-                    font-weight: 750;
-                    line-height: 4.4rem;
-                }
+            .pre-title {
+                color: #FFF;
+                font-family: 'Helvetica Neue LT Std Bold';
+                font-size: 4rem;
+                font-style: normal;
+                font-weight: 750;
+                line-height: 4.4rem;
+            }
 
-                .slide-title {
-                    font-family: 'Helvetica Neue LT Std Bold' !important;
-                    font-weight: 750;
-                    font-size: 2.2rem !important;
-                }
+            .slide-title {
+                font-family: 'Helvetica Neue LT Std Bold' !important;
+                font-weight: 750;
+                font-size: 2.2rem !important;
+            }
 
-                #slide-register-btn {
-                    text-transform: none;
-                    color: #A5A6A7;
-                    font-size: 1.2rem;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: 2.4rem;
+            #slide-register-btn {
+                text-transform: none;
+                color: #A5A6A7;
+                font-size: 1.2rem;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 2.4rem;
 
-                    .v-icon {
-                        display: inline-flex !important;
-                        color: #FFB300 !important;
-                        font-size: 2.4rem;
-                        padding-left: 0.8rem;
-                    }
+                .v-icon {
+                    display: inline-flex !important;
+                    color: #FFB300 !important;
+                    font-size: 2.4rem;
+                    padding-left: 0.8rem;
                 }
             }
         }
+    }
 
-        .section2 {
-            height: 80%;
-        }
+    #main-slider .section2 {
+        height: 80%;
+    }
+
+
+
+
+
+
+    #main-slider #ai-slide {
+        height: 15.5rem;
+    }
+
+    #main-slider #ai-slide .v-card {
+        height: 16rem;
+        background-position: right top;
+        background-size: 12rem 15.1rem;
+    }
+
+    #main-slider #aq-slide {
+        height: 15.5rem;
+    }
+
+    #main-slider #aq-slide .v-card {
+        height: 16rem;
+        background-size: 13.4rem 11.36rem;
+    }
+
+    #main-slider .v-carousel__controls {
+        position: absolute;
+        top: 13rem;
+    }
+
+
+    #main-slider .v-carousel__controls .v-btn--icon {
+        /* Background color of non-active ones */
+        height: 0.32rem;
+        /* Height you want */
+        width: 4rem;
+        /* Width you want */
+
     }
 
 
@@ -715,40 +787,66 @@ export default {
 
 @media only screen and (min-width: 600px) and (max-width: 960px) {
     #main-slider {
+        height: 24.8rem !important;
+    }
 
-        height: 28rem !important;
+    #main-slider .section1 {
+        height: 51%;
 
-        .section1 {
-            height: 51%;
+        .container {
+            width: 80%;
 
-            .container {
-                width: 80%;
+            .slide-img {
+                width: 17rem;
+                float: right;
 
-                .slide-img {
-                    width: 17rem;
-                    float: right;
+            }
 
-                }
+            #slide-register-btn {
+                margin-top: 3rem;
+                text-transform: none;
+                color: #A5A6A7;
+                font-size: 1.6rem;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 2.4rem;
 
-                #slide-register-btn {
-                    margin-top: 3rem;
-                    text-transform: none;
-                    color: #A5A6A7;
-                    font-size: 1.6rem;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: 2.4rem;
-
-                    .v-icon {
-                        display: inline-flex !important;
-                        color: #FFB300 !important;
-                        font-size: 4.8rem;
-                        padding-left: 3.4rem;
-                    }
+                .v-icon {
+                    display: inline-flex !important;
+                    color: #FFB300 !important;
+                    font-size: 4.8rem;
+                    padding-left: 3.4rem;
                 }
             }
         }
     }
+
+
+
+    #main-slider #ai-slide {
+        height: 21rem;
+    }
+
+    #main-slider #ai-slide .v-card {
+        height: 34rem;
+        background-position: right top;
+        background-size: 17.7rem 22.11rem;
+    }
+
+    #main-slider #aq-slide {
+        height: 21rem;
+    }
+
+    #main-slider #aq-slide .v-card {
+        height: 34rem;
+        background-size: 18.4rem 16.36rem;
+    }
+
+    #main-slider .v-carousel__controls {
+        position: absolute;
+        top: 18.5rem;
+    }
+
 }
 
 @media only screen and (min-width: 960px) and (max-width: 1264px) {

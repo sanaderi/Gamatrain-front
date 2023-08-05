@@ -6,12 +6,12 @@
         <v-sheet id="main-menu" :color="menuSetting.bgColor">
           <v-container>
             <v-row>
-              <v-col cols="2" md="2" lg="2" xl="1" xxl="1" class="text-left">
+              <v-col cols="2" md="2" lg="2" xl="2" class="text-left">
                 <nuxt-link to="/">
                   <v-img alt="Gamatrain" id="main-logo" :src="`/images/${menuSetting.logo}`" />
                 </nuxt-link>
               </v-col>
-              <v-col cols="6" md="7" lg="6" xl="7" xxl="7">
+              <v-col cols="6" md="7" lg="7" xl="7">
                 <v-btn tile v-for="(link, i) in menuLink" :to="link.link" :key="i" :color="menuSetting.linkColor" text
                   class="mx-2 mx-md-0 mx-lg-2">
                   <v-icon class="mb-2 mr-1" v-if="link.icon" color="#FFB300">
@@ -20,7 +20,7 @@
                   {{ link.title }}
                 </v-btn>
               </v-col>
-              <v-col cols="4" md="3" class="text-right">
+              <v-col cols="4" md="3" lg="3" xl="3" class="text-right">
                 <div class="d-flex text-right" v-if="$auth.loggedIn">
                   <v-spacer />
                   <v-menu transition="slide-x-transition" offset-y min-width="150">
@@ -76,7 +76,7 @@
 
                 </div>
                 <div v-else>
-                  <v-btn :class="menuSetting.linkColor" text class="px-0" @click="openLoginDialog">
+                  <v-btn color="primary" text class="px-0" @click="openLoginDialog">
                     Sign in
                   </v-btn>
                   <span :class="menuSetting.bgColor != '#fff' ? 'white--text' : 'black--text'">/</span>
@@ -117,7 +117,7 @@
         <div class="d-flex align-center justify-space-between">
           <div class="d-flex align-center navbar-items">
             <!-- Start:  show sidebar menu in mobile -->
-            <v-navigation-drawer v-model="sidebar" app class="hidden-md-and-up main-sidebar">
+            <v-navigation-drawer right v-model="sidebar" app class="hidden-md-and-up main-sidebar">
               <!-- Start:  Menu items -->
               <v-list dense shaped>
                 <!--Profile info-->
