@@ -3,7 +3,7 @@
     <v-container id="footer">
       <v-row>
         <v-col cols="12" md="4" class="text-center text-md-left">
-          <v-img id="logo" alt="gamatrain" src="/images/gamatrain-logo-black.png" />
+          <img id="logo" alt="gamatrain" src="/images/gamatrain-logo-black.svg" />
           <div id="short-describe">
             Our mission is to provide all training services to anyone and anywhere.Gamma is a 501(c)(3) nonprofit
             organization.

@@ -16,8 +16,8 @@
                                             <v-col md="12">
                                                 <div class="slide-title " v-html="slide.title" />
                                                 <div class="slide-describe mt-6 d-none d-md-block" v-html="slide.text" />
-                                                <v-btn rounded class="mt-8 white--text font-weight-bold d-none d-md-block"
-                                                    x-large color="#FFB300">Read about it</v-btn>
+                                                <v-btn rounded class="mt-8   d-none d-md-block" id="read-about-btn"
+                                                    x-large>Read about it</v-btn>
 
                                                 <v-btn text id="slide-register-btn" class="d-md-none">
                                                     Touch to register
@@ -39,7 +39,8 @@
                             <v-card-text>
                                 <v-row class="text-center">
                                     <v-col cols="7" id="main-search-keyword">
-                                        <v-text-field class="rounded-ts" label="Insert text" dense hide-details filled></v-text-field>
+                                        <v-text-field class="rounded-ts" label="Insert text" dense hide-details
+                                            filled></v-text-field>
                                     </v-col>
                                     <v-col cols="4" class="pl-0 " id="keysearch-cate">
                                         <v-autocomplete hide-details dense label="Select category"
@@ -95,7 +96,7 @@
                         <v-col cols="12">
                             <h2 class="title">Are you a student?</h2>
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="12" sm="6">
                             <v-card class="fill-height">
                                 <v-card-title>
                                     <v-icon color="#FFB300" size="36">mdi-cloud-download</v-icon>
@@ -106,7 +107,7 @@
                                 </v-card-text>
                             </v-card>
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="12" sm="6">
                             <v-card class="fill-height">
                                 <v-card-title>
                                     <v-icon color="#FFB300" size="36">mdi-text-box-edit</v-icon>
@@ -255,7 +256,7 @@ export default {
         },
         menuSetting() {
             return {
-                logo: 'gamatrain-logo.png',
+                logo: 'gamatrain-logo.svg',
                 bgColor: this.slideColor,
                 linkColor: '#fff'
 
@@ -441,6 +442,22 @@ export default {
         float: right;
 
     }
+
+    #read-about-btn {
+        background: #FFB600;
+
+        .v-btn__content {
+            color: #FFF !important;
+            font-size: 1.6rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 0.0143rem;
+            text-transform: uppercase;
+            padding-top: 0.5rem;
+        }
+
+    }
 }
 
 #main-slider #ai-slide {
@@ -585,12 +602,12 @@ export default {
 
 #student-help-container {
     margin-top: 6rem;
-    background: linear-gradient(135deg, #FFCB00 0%, #FFDF00 100%);
+    background: #FFB600;
 
     .title {
         color: #24292F;
         text-align: center;
-        font-family: 'Helvetica Neue LT Std Bold';
+        font-family: 'Helvetica Neue LT Std Bold' !important;
         font-size: 2.8rem !important;
         font-style: normal;
         font-weight: 750;
@@ -720,6 +737,11 @@ export default {
                 font-weight: 750;
                 font-size: 2.2rem !important;
             }
+
+
+
+
+
 
             #slide-register-btn {
                 text-transform: none;

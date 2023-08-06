@@ -3,16 +3,15 @@
         <v-card flat>
             <v-card-text>
                 <v-row>
-                    <v-col cols="2" sm="1" class="px-0">
-                        <v-sheet class="text-right" id="stats-handler" @touchstart="handleTouchStart"
-                            @mousemove="handleMouseMove" @touchend="handleTouchEnd" @mousedown="handleMouseDown"
-                            @mouseup="handleMouseUp">
+                    <v-col cols="2" sm="1" @touchend="handleTouchEnd" @touchmove="handleTouchMove" class="px-0">
+                        <v-sheet class="text-right" id="stats-handler" ref="statsHandler" @touchstart="handleTouchStart"
+                            @mousemove="handleMouseMove" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
                             <div v-for="(item, index) in stats">
                                 <v-btn @click="handleBtnClick(index)" class="my-0  white--text"
                                     :class="index == 5 ? 'rounded-pill active' : 'rounded-s-xl'"
                                     v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
                                     :style="`font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
                                     {{ gradeHandlerTitle(item.base_title) }}
                                 </v-btn>
                                 <div v-if="index == 5"
@@ -592,7 +591,6 @@ export default {
 
     },
     methods: {
-
         shouldDisplayButton(index) {
             // Determine whether to display the button based on screen size and specific indexes
             if (this.$vuetify.breakpoint.xs) {
@@ -601,8 +599,8 @@ export default {
                 return true;
             }
         },
-
         handleBtnClick(index) {
+            console.log("clicked");
             const deltaIndex = 5 - index;
             if (deltaIndex > 0) {
                 for (let i = 0; i < deltaIndex; i++) {
@@ -631,13 +629,13 @@ export default {
 
         },
 
-        handleMouseDown(event) {
-            this.isDragging = true;
 
+        handleMouseDown(event) {
+            event.preventDefault();
+            this.isDragging = true;
             this.stopInterval(); // Clear the interval using the interval ID
             this.touchStartY = event.clientY;
         },
-
         handleMouseUp(event) {
             this.isDragging = false;
             this.touchStartY = 0;
@@ -682,36 +680,67 @@ export default {
         },
 
 
+
+
         handleTouchStart(event) {
+            this.isDragging = true;
             this.stopInterval(); // Clear the interval using the interval ID
             this.touchStartY = event.touches[0].clientY;
+
+
         },
+
 
         handleTouchEnd(event) {
-            // Calculate the distance traveled during the touch move
-            const deltaY = event.changedTouches[0].clientY - this.touchStartY;
-            console.log(deltaY);
+            this.isDragging = false;
+            this.touchStartY = 0;
+            this.deltaY = 0;
 
-            // Based on the distance, determine the drag direction
-            if (deltaY > 0) {
-                // User dragged to the bottom
-                console.log('Dragged to the bottom');
-                var pop_color = this.gradeColors.pop();
-                var pop_data = this.stats.pop();
-                this.gradeColors.unshift(pop_color);
-                this.stats.unshift(pop_data);
-            } else if (deltaY < 0) {
-                // User dragged to the top
-                console.log('Dragged to the to top');
-                var splice_color = this.gradeColors.splice(0, 1);
-                var splice_data = this.stats.splice(0, 1);
-                this.gradeColors.push(...splice_color);
-                this.stats.push(...splice_data);
+        },
+
+        handleTouchMove(event) {
+            const statsHandler = this.$refs.statsHandler;
+            if (statsHandler)
+                event.preventDefault();
+
+            if (!this.isDragging) return;
+
+
+
+            // Calculate the distance traveled during the touch move
+            if (Math.abs(this.deltaY) > 2 && statsHandler) {
+                this.touchStartY = event.touches[0].clientY;
             }
 
+            if (statsHandler)
+                this.deltaY = event.touches[0].clientY - this.touchStartY;
 
-            this.touchStartY = 0;
+
+            // Based on the distance, determine the drag direction
+            if (this.deltaY > 0) {
+                // User dragged to the bottom
+                if (Math.abs(this.deltaY) > 1 && Math.abs(this.deltaY) < 1.5) {
+                    var pop_color = this.gradeColors.pop();
+                    var pop_data = this.stats.pop();
+                    this.gradeColors.unshift(pop_color);
+                    this.stats.unshift(pop_data);
+                }
+
+            } else if (this.deltaY < 0) {
+                // User dragged to the top
+                if (Math.abs(this.deltaY) > 1 && Math.abs(this.deltaY) < 1.5) {
+
+                    var splice_color = this.gradeColors.splice(0, 1);
+
+                    var splice_data = this.stats.splice(0, 1);
+
+                    this.gradeColors.push(...splice_color);
+                    this.stats.push(...splice_data);
+                }
+            }
         },
+
+
 
         handleAutoCycle() {
             this.intervalId = setInterval(() => {

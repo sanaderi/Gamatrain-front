@@ -107,7 +107,7 @@ export default {
     menuSetting: {
       type: Object,
       default: () => ({
-        logo: 'gamatrain-logo-top-black.png',
+        logo: 'gamatrain-logo-black.svg',
         bgColor: '#fff',
         linkColor: '#424A53'
       })

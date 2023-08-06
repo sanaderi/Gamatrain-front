@@ -77,7 +77,7 @@ export default {
     .title {
         color: #F3F3FB;
         font-size: 2.8rem!important;
-        font-family: 'Helvetica Neue LT Std Bold';
+        font-family: 'Helvetica Neue LT Std Bold'!important;
         font-style: normal;
         font-weight: 750;
         line-height: 2.75rem;
