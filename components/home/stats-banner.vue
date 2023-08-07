@@ -5,7 +5,8 @@
                 <v-col cols="12">
                     <h2 class="title">The best are here.</h2>
                     <v-row>
-                        <v-col cols="6" sm="4" md="2" v-for="item in stats" class="text-center">
+                        <v-col cols="6" sm="4" md="2" v-for="(item,index) in stats" 
+                        :key="index" class="text-center">
                             <v-icon color="#FFB300" size="48">
                                 {{ item.icon }}
                             </v-icon>

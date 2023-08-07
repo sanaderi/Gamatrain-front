@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <main_header />
-    <div class="mt-16 mt-md-0">
+    <div >
        <Nuxt />
     </div>
     <v-footer >

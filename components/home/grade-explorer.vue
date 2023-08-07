@@ -6,7 +6,7 @@
                     <v-col cols="2" sm="1" @touchend="handleTouchEnd" @touchmove="handleTouchMove" class="px-0">
                         <v-sheet class="text-right" id="stats-handler" ref="statsHandler" @touchstart="handleTouchStart"
                             @mousemove="handleMouseMove" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
-                            <div v-for="(item, index) in stats">
+                            <div v-for="(item, index) in stats" :key="index">
                                 <v-btn @click="handleBtnClick(index)" class="my-0  white--text"
                                     :class="index == 5 ? 'rounded-pill active' : 'rounded-s-xl'"
                                     v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
@@ -164,7 +164,7 @@
                                     <v-row>
                                         <v-col cols="6" md="6">
                                             <h4 class="section-title">Last questions</h4>
-                                            <v-card class="latest-card" flat v-for="item in questions.slice(0, 3)">
+                                            <v-card class="latest-card" flat v-for="item in questions.slice(0, 3)" :key="item.id">
                                                 <v-row>
                                                     <v-col cols="1" class="pb-0">
                                                         <v-avatar class="my-3" size="32" rounded="0">
@@ -200,7 +200,7 @@
                                         </v-col>
                                         <v-col cols="6" md="6">
                                             <h4 class="section-title">Last Uploaded File</h4>
-                                            <v-card class="latest-card" flat v-for="item in papers.slice(0, 3)">
+                                            <v-card class="latest-card" flat v-for="item in papers.slice(0, 3)" :key="item.id">
                                                 <v-row>
                                                     <v-col cols="1" class="pb-0">
                                                         <v-avatar class="my-3" size="32" rounded="0">

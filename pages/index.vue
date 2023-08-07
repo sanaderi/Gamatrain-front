@@ -1,11 +1,11 @@
 <template>
     <v-app>
-        <main-header :menuSetting="menuSetting" />
-        <v-container fluid class="px-0 py-0 mt-10  mt-md-0">
+        <main-header  />
+        <v-container fluid class="px-0 py-0   mt-md-0">
 
             <v-row>
                 <v-col cols="12" sm="12" md="12" class="pt-0 px-0 pt-sm-0">
-                    <v-carousel id="main-slider" v-model="carousel_model" cycle delimiter-icon="mdi-square" interval="10000"
+                    <v-carousel id="main-slider" v-model="carousel_model" cycle  delimiter-icon="mdi-square" interval="10000"
                         hide-delimiter-background :show-arrows="false">
 
                         <v-carousel-item v-for="(slide, i) in slides" :key="i">
@@ -254,14 +254,7 @@ export default {
             }
             return '#24292F'; // or some default value if colors or carousel_model is not available
         },
-        menuSetting() {
-            return {
-                logo: 'gamatrain-logo.svg',
-                bgColor: this.slideColor,
-                linkColor: '#fff'
-
-            }
-        }
+        
     },
 
 
@@ -308,7 +301,7 @@ export default {
 
 #main-slider #main-search {
     position: absolute;
-    bottom: 12rem;
+    bottom: 8rem;
     width: 78rem;
     left: 0;
     right: 0;
@@ -461,29 +454,31 @@ export default {
 }
 
 #main-slider #ai-slide {
+    padding-top: 6rem;
     background: #24292F !important;
     background-repeat: no-repeat;
     background-size: 90%, 10%;
-    height: 40rem;
+    height: 44rem;
 }
 
 #main-slider #ai-slide .v-card {
-    height: 44rem;
+    height: 42rem;
     background-color: transparent;
     background-image: url('/images/ai-robot.png');
     background-repeat: no-repeat;
-    background-position: right bottom;
+    background-position: right center;
     background-size: 32.4rem 40.5rem;
 }
 
 #main-slider #aq-slide {
-    background: #0092A9;
+    padding-top: 6rem;
+    background: linear-gradient(45deg, #0092A9 0%, #2BDDFF 100%);
     background-repeat: no-repeat;
-    height: 40rem;
+    height: 44rem;
 }
 
 #main-slider #aq-slide .v-card {
-    height: 44rem;
+    height: 42rem;
     background-color: transparent;
     background-image: url('/images/a-q.png');
     background-repeat: no-repeat;
@@ -500,7 +495,7 @@ export default {
 
 #main-slider .v-carousel__controls {
     position: absolute;
-    top: 37.5rem;
+    top: 41.4rem;
     /* height: 5rem !important; */
 }
 
@@ -708,7 +703,7 @@ export default {
 
 @media only screen and (max-width: 600px) {
     #main-slider {
-        height: 18rem !important;
+        height: 25rem !important;
     }
 
     #main-slider .section1 {
@@ -771,27 +766,27 @@ export default {
 
 
     #main-slider #ai-slide {
-        height: 15.5rem;
+        height: 21.5rem;
     }
 
     #main-slider #ai-slide .v-card {
-        height: 16rem;
+        height: 21.5rem;
         background-position: right top;
         background-size: 12rem 15.1rem;
     }
 
     #main-slider #aq-slide {
-        height: 15.5rem;
+        height: 21.5rem;
     }
 
     #main-slider #aq-slide .v-card {
-        height: 16rem;
+        height: 21.5rem;
         background-size: 13.4rem 11.36rem;
     }
 
     #main-slider .v-carousel__controls {
         position: absolute;
-        top: 13rem;
+        top: 19rem;
     }
 
 
@@ -809,7 +804,7 @@ export default {
 
 @media only screen and (min-width: 600px) and (max-width: 960px) {
     #main-slider {
-        height: 24.8rem !important;
+        height: 30.8rem !important;
     }
 
     #main-slider .section1 {
@@ -846,7 +841,7 @@ export default {
 
 
     #main-slider #ai-slide {
-        height: 21rem;
+        height: 27rem;
     }
 
     #main-slider #ai-slide .v-card {
@@ -856,7 +851,7 @@ export default {
     }
 
     #main-slider #aq-slide {
-        height: 21rem;
+        height: 27rem;
     }
 
     #main-slider #aq-slide .v-card {
@@ -866,7 +861,7 @@ export default {
 
     #main-slider .v-carousel__controls {
         position: absolute;
-        top: 18.5rem;
+        top: 24.5rem;
     }
 
 }

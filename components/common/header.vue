@@ -1,288 +1,279 @@
 <template>
   <div>
-    <header class="main-header">
+    <header id="main-header">
       <!--Desktop menu-->
-      <div class="topbar d-none d-md-block">
-        <v-sheet id="main-menu" :color="menuSetting.bgColor">
-          <v-container>
-            <v-row>
-              <v-col cols="2" md="2" lg="2" xl="2" class="text-left">
-                <nuxt-link to="/">
-                  <v-img alt="Gamatrain" id="main-logo" :src="`/images/${menuSetting.logo}`" />
-                </nuxt-link>
-              </v-col>
-              <v-col cols="6" md="7" lg="7" xl="7">
-                <v-btn tile v-for="(link, i) in menuLink" :to="link.link" :key="i" :color="menuSetting.linkColor" text
-                  class="mx-2 mx-md-0 mx-lg-2">
-                  <v-icon class="mb-2 mr-1" v-if="link.icon" color="#FFB300">
-                    {{ link.icon }}
-                  </v-icon>
-                  {{ link.title }}
-                </v-btn>
-              </v-col>
-              <v-col cols="4" md="3" lg="3" xl="3" class="text-right">
-                <div class="d-flex text-right" v-if="$auth.loggedIn">
-                  <v-spacer />
-                  <v-menu transition="slide-x-transition" offset-y min-width="150">
-                    <template v-slot:activator="{ on, attrs }">
-                      <div v-bind="attrs" v-on="on">
-                        <v-avatar size="32">
-                          <v-img :src="$auth.user.avatar" alt="user avatar" />
-                        </v-avatar>
-                        <span class="pointer pa-2 font-weight-bold "
-                          :class="menuSetting.bgColor == '#fff' ? '' : 'white--text'">
-                          <span v-if="$auth.user.first_name">
-                            {{ $auth.user.first_name }}
-                          </span>
-                          <span v-else-if="$auth.user.last_name">
-                            {{ $auth.user.last_name }}
-                          </span>
-                          <span v-else>
-                            No name
-                          </span>
-
+      <v-app-bar flat :fixed="menuSetting.fixedStatus" id="main-menu" :class="menuSetting.class"
+        class="d-none d-md-block">
+        <v-container>
+          <v-row>
+            <v-col cols="2" md="2" lg="2" xl="2" class="text-left">
+              <nuxt-link to="/">
+                <v-img alt="Gamatrain" id="main-logo" :src="`/images/${menuSetting.logo}`" />
+              </nuxt-link>
+            </v-col>
+            <v-col cols="6" md="7" lg="7" xl="7">
+              <v-btn tile v-for="(link, i) in menuLink" :to="link.link" :key="i" :color="menuSetting.linkColor" text
+                class="mx-2 mx-md-0 mx-lg-2">
+                <v-icon class="mb-2 mr-1" v-if="link.icon" color="#FFB300">
+                  {{ link.icon }}
+                </v-icon>
+                {{ link.title }}
+              </v-btn>
+            </v-col>
+            <v-col cols="4" md="3" lg="3" xl="3" class="text-right">
+              <div class="d-flex text-right" v-if="$auth.loggedIn">
+                <v-spacer />
+                <v-menu transition="slide-x-transition" offset-y min-width="150">
+                  <template v-slot:activator="{ on, attrs }">
+                    <div v-bind="attrs" v-on="on">
+                      <v-avatar size="32">
+                        <v-img :src="$auth.user.avatar" alt="user avatar" />
+                      </v-avatar>
+                      <span class="pointer pa-2 font-weight-bold "
+                        :class="menuSetting.bgColor == '#fff' ? '' : 'white--text'">
+                        <span v-if="$auth.user.first_name">
+                          {{ $auth.user.first_name }}
                         </span>
-                      </div>
-                    </template>
-                    <v-list>
-                      <v-list-item v-for="(item, i) in user_profile_items" :key="i" :to="item.link">
-                        <v-list-item-icon class="mr-0">
-                          <v-icon small>
-                            {{ item.icon }}
-                          </v-icon>
-                        </v-list-item-icon>
-                        <v-list-item-title>
-                          {{ item.title }}
-                        </v-list-item-title>
-                      </v-list-item>
-                      <v-list-item class="pointer " @click="$auth.logout()">
-                        <v-list-item-icon class="mr-0">
-                          <v-icon small>
-                            mdi-logout
-                          </v-icon>
-                        </v-list-item-icon>
-                        <v-list-item-title>
+                        <span v-else-if="$auth.user.last_name">
+                          {{ $auth.user.last_name }}
+                        </span>
+                        <span v-else>
+                          No name
+                        </span>
 
-                          Logout
-                        </v-list-item-title>
-                      </v-list-item>
-                    </v-list>
-                  </v-menu>
+                      </span>
+                    </div>
+                  </template>
+                  <v-list>
+                    <v-list-item v-for="(item, i) in user_profile_items" :key="i" :to="item.link">
+                      <v-list-item-icon class="mr-0">
+                        <v-icon small>
+                          {{ item.icon }}
+                        </v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-title>
+                        {{ item.title }}
+                      </v-list-item-title>
+                    </v-list-item>
+                    <v-list-item class="pointer " @click="$auth.logout()">
+                      <v-list-item-icon class="mr-0">
+                        <v-icon small>
+                          mdi-logout
+                        </v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-title>
 
-
-                  <!--Desktop version-->
-                  <common-notification-component :menuSetting="menuSetting" ref="notificationComponent"
-                    class="d-none d-md-block" />
-
-                </div>
-                <div v-else>
-                  <v-btn color="primary" text class="px-0" @click="openLoginDialog">
-                    Sign in
-                  </v-btn>
-                  <span :class="menuSetting.bgColor != '#fff' ? 'white--text' : 'black--text'">/</span>
-                  <v-btn :color="menuSetting.linkColor" text class="px-0" @click="openRegisterDialog">
-                    Sign up
-                  </v-btn>
-                </div>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-sheet>
+                        Logout
+                      </v-list-item-title>
+                    </v-list-item>
+                  </v-list>
+                </v-menu>
 
 
+                <!--Desktop version-->
+                <common-notification-component :menuSetting="menuSetting" ref="notificationComponent"
+                  class="d-none d-md-block" />
 
-        <div>
-          <!--Login component-->
-          <login ref="login_modal" :switchToRegister.sync="currentOpenDialog"
-            :switchToPassRecover.sync="currentOpenDialog" />
-          <!--End login component-->
+              </div>
+              <div v-else>
+                <v-btn color="primary" text class="px-0" @click="openLoginDialog">
+                  Sign in
+                </v-btn>
+                <span :class="menuSetting.bgColor != '#fff' ? 'white--text' : 'black--text'">/</span>
+                <v-btn :color="menuSetting.linkColor" text class="px-0" @click="openRegisterDialog">
+                  Sign up
+                </v-btn>
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-app-bar>
 
-          <!--Register component-->
-          <register ref="register_modal" :switchToLogin.sync="currentOpenDialog" />
-          <!--End register component-->
-
-          <!--Recover password component-->
-          <pass-recover ref="pass_recover_modal" :switchToLogin.sync="currentOpenDialog"
-            :switchToRegister.sync="currentOpenDialog" />
-          <!--End recover password component-->
 
 
-        </div>
+      <div>
+        <!--Login component-->
+        <login ref="login_modal" :switchToRegister.sync="currentOpenDialog"
+          :switchToPassRecover.sync="currentOpenDialog" />
+        <!--End login component-->
+
+        <!--Register component-->
+        <register ref="register_modal" :switchToLogin.sync="currentOpenDialog" />
+        <!--End register component-->
+
+        <!--Recover password component-->
+        <pass-recover ref="pass_recover_modal" :switchToLogin.sync="currentOpenDialog"
+          :switchToRegister.sync="currentOpenDialog" />
+        <!--End recover password component-->
+
+
       </div>
       <!--End desktop menu-->
 
 
-      <!--   Start: navbar   main-container -->
-      <v-container class="pa-0">
-        <div class="d-flex align-center justify-space-between">
-          <div class="d-flex align-center navbar-items">
-            <!-- Start:  show sidebar menu in mobile -->
-            <v-navigation-drawer right v-model="sidebar" app class="hidden-md-and-up main-sidebar">
-              <!-- Start:  Menu items -->
-              <v-list dense shaped>
-                <!--Profile info-->
-                <v-list-group v-if="$auth.loggedIn" active-class="menu_group_active">
-                  <template v-slot:activator>
-                    <v-list-item-icon>
-                      <v-icon v-text="'mdi-account-outline'"></v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-title>
-                      <span v-if="$auth.user.first_name">{{ $auth.user.first_name }}</span>
-                      <span v-else-if="$auth.user.last_name">{{ $auth.user.last_name }}</span>
-                      <span v-else>No name</span>
-                    </v-list-item-title>
-                  </template>
 
-                  <v-list-item class="pl-7 " v-for="(item, i) in user_profile_items" :key="i" link>
-                    <v-list-item-icon>
-                      <v-icon v-text="item.icon"></v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-title v-text="item.title"></v-list-item-title>
-                  </v-list-item>
+      <v-navigation-drawer right v-model="sidebar" app  class="hidden-md-and-up main-sidebar">
+        <!-- Start:  Menu items -->
+        <v-list dense shaped>
+          <!--Profile info-->
+          <v-list-group v-if="$auth.loggedIn" active-class="menu_group_active">
+            <template v-slot:activator>
+              <v-list-item-icon>
+                <v-icon v-text="'mdi-account-outline'"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>
+                <span v-if="$auth.user.first_name">{{ $auth.user.first_name }}</span>
+                <span v-else-if="$auth.user.last_name">{{ $auth.user.last_name }}</span>
+                <span v-else>No name</span>
+              </v-list-item-title>
+            </template>
 
-                  <v-list-item class="pl-7 " @click="$auth.logout()">
-                    <v-list-item-icon>
-                      <v-icon v-text="'mdi-exit-to-app'"></v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-title v-text="'Logout'"></v-list-item-title>
-                  </v-list-item>
-                </v-list-group>
-                <v-list-item v-if="$auth.loggedIn" @click="notificationListDialog = true">
+            <v-list-item class="pl-7 " v-for="(item, i) in user_profile_items" :key="i" link>
+              <v-list-item-icon>
+                <v-icon v-text="item.icon"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-title v-text="item.title"></v-list-item-title>
+            </v-list-item>
 
-                  <v-list-item-icon>
-                    <v-badge overlap content="3">
-                      <v-icon v-text="'mdi-bell-outline'"></v-icon>
-                    </v-badge>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      Notification
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list-item @click="openLoginDialog" v-if="!$auth.loggedIn">
-                  <v-list-item-icon>
-                    <v-icon v-text="'mdi-account-outline'"></v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      <span class="primary--text">Sign in</span>
-                      / Sign up
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-                <!--End Profile info-->
+            <v-list-item class="pl-7 " @click="$auth.logout()">
+              <v-list-item-icon>
+                <v-icon v-text="'mdi-exit-to-app'"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-title v-text="'Logout'"></v-list-item-title>
+            </v-list-item>
+          </v-list-group>
+          <v-list-item v-if="$auth.loggedIn" @click="notificationListDialog = true">
 
-
-                <!--Mobile menu items-->
-                <div v-for="(item, side) in menuItems" :key="side">
-                  <v-list-item class="py-2" active-class="menu_active" v-if="!item.subMenuList" :to="item.link">
-                    <v-list-item-icon>
-                      <v-icon v-text="item.icon" :color="item.icon_color"></v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-title v-text="item.title" class="menu-title" />
-                  </v-list-item>
-
-                  <v-list-group v-else active-class="menu_group_active" :key="item.title" no-action :value="false">
-                    <template v-slot:activator>
-                      <v-list-item-title v-text="item.title" class="py-2"></v-list-item-title>
-                    </template>
-
-                    <v-list-item class="pl-7 " active-class="menu_active" v-for="(subMenuItem, side) in item.subMenuList"
-                      :to="subMenuItem.link" :key="side.title">
-                      <v-list-item-content class="py-2">
-                        <v-list-item-title v-text="subMenuItem.title"></v-list-item-title>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list-group>
-                </div>
-              </v-list>
-              <!-- End:  Menu items -->
-
-
-            </v-navigation-drawer>
-            <!-- End:  show sidebar menu in mobile -->
-
-
-            <!--Mobile nav-->
-            <v-app-bar class="d-block d-md-none mobile_bar" fixed :color="menuSetting.bgColor">
-
-              <!--Logo section-->
-              <nuxt-link to="/">
-                <v-img id="main-logo" :src="`/images/${menuSetting.logo}`" />
-              </nuxt-link>
-              <!--End logo section-->
-
-              <v-spacer></v-spacer>
-
-
-
-              <!--   hamburgers-icon in mobile-->
-
-
-              <div class="text-center">
-                <v-bottom-sheet v-model="mobileSearchSheet">
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-icon v-bind="attrs" v-on="on" :color="menuSetting.linkColor" class="pa-23">
-                      mdi-magnify
-                    </v-icon>
-                  </template>
-                  <v-sheet class="mobile-search-sheet">
-                    <v-slide-group v-model="mobileSearchFilter" class="pa-4" active-class="active-item" show-arrows>
-                      <v-slide-item v-for="(item,n) in searchFilterItems" :key="n" v-slot="{ active, toggle }">
-                        <v-card :color="active ? undefined : 'white lighten-1'" class="ma-2 " height="7.6rem"
-                          width="7.6rem" @click="toggle">
-                          <v-row class="fill-height text-center" justify="center">
-                            <v-col cols="12">
-                              <div><v-icon>{{ item.icon }}</v-icon></div>
-                              <div class="title">{{ item.title }}</div>
-                            </v-col>
-                          </v-row>
-                        </v-card>
-                      </v-slide-item>
-                    </v-slide-group>
-                    <v-card flat>
-                      <v-card-text>
-                        <v-card>
-                          <v-card-text id="keyword-card">
-                            <v-row>
-                              <v-col cols="12">
-                                <v-text-field v-model="keyword" label="Search" append-icon="mdi-magnify"></v-text-field>
-                              </v-col>
-                              <v-col cols="12" md="4">
-
-                                <v-skeleton-loader type="table-heading, list-item-two-line, image, table-tfoot">
-                                </v-skeleton-loader>
-
-                                <v-skeleton-loader type="table-heading, list-item-two-line, image, table-tfoot">
-                                </v-skeleton-loader>
-                              </v-col>
-                            </v-row>
-                          </v-card-text>
-                        </v-card>
-                      </v-card-text>
-
-                    </v-card>
-                  </v-sheet>
-                </v-bottom-sheet>
-              </div>
-
-              <v-badge dot overlap>
-                <v-icon large @click="sidebar = !sidebar" class="px-2" style="font-size: 3rem;"
-                  :class="menuSetting.bgColor == '#fff' ? '' : 'white--text '">
-                  mdi-menu
-                </v-icon>
+            <v-list-item-icon>
+              <v-badge overlap content="3">
+                <v-icon v-text="'mdi-bell-outline'"></v-icon>
               </v-badge>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                Notification
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item @click="openLoginDialog" v-if="!$auth.loggedIn">
+            <v-list-item-icon>
+              <v-icon v-text="'mdi-account-outline'"></v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                <span class="primary--text">Sign in</span>
+                / Sign up
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <!--End Profile info-->
 
-            </v-app-bar>
-            <!--End mobile nav-->
 
+          <!--Mobile menu items-->
+          <div v-for="(item, side) in menuItems" :key="side">
+            <v-list-item class="py-2" active-class="menu_active" v-if="!item.subMenuList" :to="item.link">
+              <v-list-item-icon>
+                <v-icon v-text="item.icon" :color="item.icon_color"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-title v-text="item.title" class="menu-title" />
+            </v-list-item>
 
+            <v-list-group v-else active-class="menu_group_active" :key="item.title" no-action :value="false">
+              <template v-slot:activator>
+                <v-list-item-title v-text="item.title" class="py-2"></v-list-item-title>
+              </template>
+
+              <v-list-item class="pl-7 " active-class="menu_active" v-for="(subMenuItem, side) in item.subMenuList"
+                :to="subMenuItem.link" :key="side.title">
+                <v-list-item-content class="py-2">
+                  <v-list-item-title v-text="subMenuItem.title"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-group>
           </div>
+        </v-list>
+        <!-- End:  Menu items -->
+
+
+      </v-navigation-drawer>
+      <!-- End:  show sidebar menu in mobile -->
+
+      <!--   Start: navbar   main-container -->
+
+      <!--Mobile nav-->
+      <v-app-bar class="d-block d-md-none mobile_bar" fixed flat :class="menuSetting.class" >
+
+        <!--Logo section-->
+        <nuxt-link to="/">
+          <v-img id="main-logo" :src="`/images/${menuSetting.logo}`" />
+        </nuxt-link>
+        <!--End logo section-->
+
+        <v-spacer></v-spacer>
+
+
+
+        <!--   hamburgers-icon in mobile-->
+
+
+        <div class="text-center">
+          <v-bottom-sheet v-model="mobileSearchSheet">
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon v-bind="attrs" v-on="on" :color="menuSetting.linkColor" class="pa-23">
+                mdi-magnify
+              </v-icon>
+            </template>
+            <v-sheet class="mobile-search-sheet">
+              <v-slide-group v-model="mobileSearchFilter" class="pa-4" active-class="active-item" show-arrows>
+                <v-slide-item v-for="(item, n) in searchFilterItems" :key="n" v-slot="{ active, toggle }">
+                  <v-card :color="active ? undefined : 'white lighten-1'" class="ma-2 " height="7.6rem" width="7.6rem"
+                    @click="toggle">
+                    <v-row class="fill-height text-center" justify="center">
+                      <v-col cols="12">
+                        <div><v-icon>{{ item.icon }}</v-icon></div>
+                        <div class="title">{{ item.title }}</div>
+                      </v-col>
+                    </v-row>
+                  </v-card>
+                </v-slide-item>
+              </v-slide-group>
+              <v-card flat>
+                <v-card-text>
+                  <v-card>
+                    <v-card-text id="keyword-card">
+                      <v-row>
+                        <v-col cols="12">
+                          <v-text-field v-model="keyword" label="Search" append-icon="mdi-magnify"></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="4">
+
+                          <v-skeleton-loader type="table-heading, list-item-two-line, image, table-tfoot">
+                          </v-skeleton-loader>
+
+                          <v-skeleton-loader type="table-heading, list-item-two-line, image, table-tfoot">
+                          </v-skeleton-loader>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                  </v-card>
+                </v-card-text>
+
+              </v-card>
+            </v-sheet>
+          </v-bottom-sheet>
         </div>
 
+        <v-badge dot overlap>
+          <v-icon large @click="sidebar = !sidebar" class="px-2" style="font-size: 3rem;"
+            :class="menuSetting.bgColor == '#fff' ? '' : 'white--text '">
+            mdi-menu
+          </v-icon>
+        </v-badge>
 
-      </v-container>
+      </v-app-bar>
+      <!--End mobile nav-->
+
+
       <!--   End: navbar   -->
     </header>
 
@@ -334,16 +325,6 @@ export default {
     Register,
     PassRecover,
     SearchBox
-  },
-  props: {
-    menuSetting: {
-      type: Object,
-      default: () => ({
-        logo: 'gamatrain-logo-black.svg',
-        bgColor: '#fff',
-        linkColor: '#424A53'
-      })
-    }
   },
   data() {
     return {
@@ -484,7 +465,15 @@ export default {
           title: 'Sample Question uploded',
           describe: 'Satisfied course question sample has been uploaded for your level of education.'
         },
-      ]
+      ],
+
+      menuSetting: {
+        logo: 'gamatrain-logo-black.svg',
+        bgColor: '#fff',
+        fixedStatus: false,
+        linkColor: '#424A53',
+        class: ''
+      }
 
     };
   },
@@ -492,6 +481,22 @@ export default {
     // if (window.innerWidth <= 960 && this.$auth.loggedIn) {
     //   this.$refs["notification-section"].getNotifications();
     // }
+
+    if (this.$route.name == 'index' || this.$route.name == 'services') {
+      this.menuSetting = {
+        logo: 'gamatrain-logo.svg',
+        bgColor: '#000',
+        fixedStatus: true,
+        linkColor: '#fff',
+        class: 'transparentMenu'
+
+      }
+    }
+    window.addEventListener('scroll', this.handleScroll);
+
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   async fetch() {
     await this.$axios.$get('/api/v1/admin/values')
@@ -509,42 +514,85 @@ export default {
     openRegisterDialog() {
       this.$refs.register_modal.register_dialog = true;
     },
-  },
-  watch: {
-    currentOpenDialog(val) {
-      if (val === 'login') {
-        this.$refs.register_modal.register_dialog = false;
-        this.$refs.pass_recover_modal.pass_recover_dialog = false;
-        this.$refs.login_modal.login_dialog = true;
-      } else if (val === 'register') {
-        this.$refs.login_modal.login_dialog = false;
-        this.$refs.pass_recover_modal.pass_recover_dialog = false;
-        this.$refs.register_modal.register_dialog = true;
-      } else if (val === 'pass_recover') {
-        this.$refs.login_modal.login_dialog = false;
-        this.$refs.register_modal.register_dialog = false;
-        this.$refs.pass_recover_modal.pass_recover_dialog = true;
-      } else {
-        this.$refs.login_modal.login_dialog = false;
-        this.$refs.login_modal.register_dialog = false;
-        this.$refs.pass_recover_modal.pass_recover_dialog = false;
-      }
 
+    handleScroll() {
+      if (this.$route.name == 'index' || this.$route.name == 'services')  
+        if (window.scrollY > 60) {
+          this.menuSetting = {
+            logo: 'gamatrain-logo-black.svg',
+            bgColor: '#fff',
+            fixedStatus: true,
+            linkColor: '#424A53',
+            class: ''
+          }
+        } else {
+          this.menuSetting = {
+            logo: 'gamatrain-logo.svg',
+            bgColor: '#000',
+            fixedStatus: true,
+            linkColor: '#fff',
+            class: 'transparentMenu'
+
+          }
+        };
+      }
     },
+    watch: {
+      currentOpenDialog(val) {
+        if (val === 'login') {
+          this.$refs.register_modal.register_dialog = false;
+          this.$refs.pass_recover_modal.pass_recover_dialog = false;
+          this.$refs.login_modal.login_dialog = true;
+        } else if (val === 'register') {
+          this.$refs.login_modal.login_dialog = false;
+          this.$refs.pass_recover_modal.pass_recover_dialog = false;
+          this.$refs.register_modal.register_dialog = true;
+        } else if (val === 'pass_recover') {
+          this.$refs.login_modal.login_dialog = false;
+          this.$refs.register_modal.register_dialog = false;
+          this.$refs.pass_recover_modal.pass_recover_dialog = true;
+        } else {
+          this.$refs.login_modal.login_dialog = false;
+          this.$refs.login_modal.register_dialog = false;
+          this.$refs.pass_recover_modal.pass_recover_dialog = false;
+        }
 
-    //Handle auth form from all of section
-    "$route.query.auth_form"(val) {
-      if (val === 'login') {
-        this.$refs.login_modal.login_dialog = true;
-        this.$router.push({ query: {} });
-      } else if (val == 'register') {
-        this.$refs.register_modal.register_dialog = true;
-        this.$router.push({ query: {} });
+      },
+
+      //Handle auth form from all of section
+      "$route.query.auth_form"(val) {
+        if (val === 'login') {
+          this.$refs.login_modal.login_dialog = true;
+          this.$router.push({ query: {} });
+        } else if (val == 'register') {
+          this.$refs.register_modal.register_dialog = true;
+          this.$router.push({ query: {} });
+        }
+
+      },
+
+      "$route.name"(val) {
+        if (val == 'index' || val == 'services') {
+          this.menuSetting = {
+            logo: 'gamatrain-logo.svg',
+            bgColor: '#000',
+            fixedStatus: true,
+            linkColor: '#fff',
+            class: 'transparentMenu'
+
+          }
+        } else {
+          this.menuSetting = {
+            logo: 'gamatrain-logo-black.svg',
+            bgColor: '#fff',
+            fixedStatus: false,
+            linkColor: '#424A53',
+            class: ''
+          }
+        }
       }
-
-    }
-  },
-};
+    },
+  };
 </script>
 
 
@@ -554,10 +602,14 @@ export default {
   border-color: #FFB300 !important;
 }
 
-.v-application .primary--text{
-  color:#FFB300!important;
+.v-application .primary--text {
+  color: #FFB300 !important;
 }
 
+
+.transparentMenu {
+  background: transparent !important;
+}
 
 
 #main-header {
@@ -599,6 +651,7 @@ export default {
   }
 
   .mobile_bar .v-toolbar__content {
+    background: transparent;
     padding: 0 1.4rem 0 0.5rem !important;
   }
 

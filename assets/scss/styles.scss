@@ -302,28 +302,8 @@ body {
         font-weight: 400;
       }
 
-      //topbar
-      .topbar-bell {
-        color: $gray4;
-      }
+    
 
-      .topbar {
-        background-color: $white;
-        color: $black;
-        // border-bottom: 1px solid $gray1;
-
-        .icon {
-          font-size: $fontsize2;
-        }
-
-        a:hover {
-          color: $green2;
-        }
-
-        .topbar-items {
-          padding: 0.2rem 2rem;
-        }
-      }
 
       //navbar
       .navbar-items {
