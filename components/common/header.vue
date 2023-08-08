@@ -353,12 +353,12 @@ export default {
           icon: "mdi-information",
           icon_color: ''
         },
-        {
-          title: "Offers",
-          link: "/offers",
-          icon: "mdi-wallet-giftcard",
-          icon_color: 'primary'
-        },
+        // {
+        //   title: "Offers",
+        //   link: "/offers",
+        //   icon: "mdi-wallet-giftcard",
+        //   icon_color: 'primary'
+        // },
       ],
       selectedItem: 1,
       socialList: [
@@ -390,11 +390,11 @@ export default {
           link: '/faq',
           icon: ''
         },
-        {
-          title: 'Offers',
-          link: '/offers',
-          icon: 'mdi-wallet-giftcard'
-        },
+        // {
+        //   title: 'Offers',
+        //   link: '/offers',
+        //   icon: 'mdi-wallet-giftcard'
+        // },
       ],
       currentOpenDialog: '',
       mobileSearchSheet: false,

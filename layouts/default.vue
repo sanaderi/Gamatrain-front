@@ -4,7 +4,7 @@
     <div >
        <Nuxt />
     </div>
-    <v-footer >
+    <v-footer padless >
       <main_footer />
     </v-footer>
   </v-app>

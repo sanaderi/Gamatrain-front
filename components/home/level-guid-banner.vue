@@ -152,7 +152,6 @@ export default {
         .v-btn {
             width: 4.4rem;
             height: 4.4rem;
-            padding-top: 0.5rem;
             justify-content: center;
             background-color: #FFFFFF;
             color: #000000;

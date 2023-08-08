@@ -16,7 +16,9 @@
                                             <v-col md="12">
                                                 <div class="slide-title " v-html="slide.title" />
                                                 <div class="slide-describe mt-6 d-none d-md-block" v-html="slide.text" />
-                                                <v-btn rounded class="mt-8   d-none d-md-block" id="read-about-btn"
+                                                <v-btn rounded
+                                                :to="slide.link"
+                                                 class="mt-8   d-none d-md-inline-flex" id="read-about-btn"
                                                     x-large>Read about it</v-btn>
 
                                                 <v-btn text id="slide-register-btn" class="d-md-none">
@@ -78,7 +80,8 @@
                             <p class="describe">
                                 Discover Your Full Potential with AI-based Education
                             </p>
-                            <v-btn color="#FFB300" rounded class="white--text">
+                            <v-btn to="/smart-learning" color="#FFB300"
+                             rounded class="white--text">
                                 Read about it
                             </v-btn>
                             <img id="img-bottom" alt="AI Learn" src="/images/ai-learn-bg2.png" />
@@ -229,12 +232,15 @@ export default {
                     title: '<span class="pre-title">AI</span> System <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education',
                     img: 'ai-robot.png',
                     text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
-                    id: 'ai-slide'
+                    id: 'ai-slide',
+                    link:'/smart-learning'
                 }, {
-                    title: '<span class="text-h3 text-md-h2   font-weight-bold">Answer<span class="d-sm-none"><br>&nbsp&nbsp</span> & Question</span>',
+                    title: '<span class="text-h3 text-md-h2   font-weight-bold">Question<span class="d-sm-none"><br>&nbsp&nbsp</span> & Answer</span>',
                     text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
                     img: 'a-q.png',
-                    id: 'aq-slide'
+                    id: 'aq-slide',
+                    link:'/search?type=question'
+
                 }
             ],
             items: [
@@ -438,16 +444,16 @@ export default {
 
     #read-about-btn {
         background: #FFB600;
+        max-width: 16rem;
 
         .v-btn__content {
             color: #FFF !important;
             font-size: 1.6rem;
             font-style: normal;
             font-weight: 700;
-            line-height: normal;
+            line-height: 2rem;
             letter-spacing: 0.0143rem;
             text-transform: uppercase;
-            padding-top: 0.5rem;
         }
 
     }
@@ -569,7 +575,6 @@ export default {
         }
 
         .v-btn {
-            padding-top: 0.3rem;
             font-weight: 700;
 
 
