@@ -5,7 +5,7 @@
                 <v-row>
                     <v-col cols="12">
                         <div id="main-title-holder">
-                            <h1 class="gama-text-md-h1">Empowering<br> Smart Learning!</h1>
+                            <h1 class="gama-text-md-h1 gama-text-sm-h1">Empowering<br> Smart Learning!</h1>
                         </div>
                     </v-col>
 
@@ -15,15 +15,22 @@
         <v-container id="service-ai-unleashing">
             <v-row>
                 <v-col cols="12">
-                    <h2 class="gama-text-md-h4 mb-3">Unleashing the Power of AI in Education</h2>
-                    <p class="gama-text-md-h6 mb-3">Your Pathway to Smart Education Solutions.</p>
-                    <p>Unlock the Future of Education with GamaTrain.</p>
-                    <h3 class="gama-text-md-h4 mt-5 mb-3">Personalized Learning Powered by AI</h3>
-                    <p class="gama-text-md-body1">At GamaTrain, we believe in tailoring education to fit each student's
-                        unique needs. Our AI-powered
-                        platform analyzes individual learning styles, strengths, and areas for improvement to provide
-                        personalized learning paths. Say goodbye to one-size-fits-all education - welcome to a smart,
-                        adaptive learning experience.</p>
+                    <v-card flat>
+                        <v-card-text>
+                            <h2 class="gama-text-md-h4 gama-text-sm-h4 mb-3">Unleashing the Power of AI in Education</h2>
+                            <p class="gama-text-md-h6 gama-text-sm-h6  mb-3">Your Pathway to Smart Education Solutions.</p>
+                            <p class="gama-text-sm-subtitle1">Unlock the Future of Education with GamaTrain.</p>
+                            <h3 class="gama-text-md-h4 gama-text-sm-h4 mt-5 mb-3">Personalized Learning Powered by AI</h3>
+                            <p class="gama-text-md-body1 gama-text-sm-body1">At GamaTrain, we believe in tailoring education to fit each
+                                student's
+                                unique needs. Our AI-powered
+                                platform analyzes individual learning styles, strengths, and areas for improvement to
+                                provide
+                                personalized learning paths. Say goodbye to one-size-fits-all education - welcome to a
+                                smart,
+                                adaptive learning experience.</p>
+                        </v-card-text>
+                    </v-card>
                 </v-col>
             </v-row>
         </v-container>
@@ -348,4 +355,70 @@ export default {
     text-align: center;
 
 }
-</style>
+
+
+@media only screen and (max-width: 600px) {
+    #service-page-header {
+        height: 60rem;
+        background: url("/images/services-bg1.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        position: relative;
+
+        #main-title-holder {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            bottom: 10rem;
+            border-radius: 0.625rem;
+            background: rgba(0, 0, 0, 0.50);
+            backdrop-filter: blur(7.5px);
+            width: 73rem;
+            height: 16.6rem;
+            padding: 2.5rem 4.8rem 2.5rem 4.8rem;
+
+            >h1 {
+                color: #FFF;
+                text-align: center;
+            }
+        }
+
+
+    }
+}
+
+
+
+@media only screen and (min-width: 600px) and (max-width: 960px) {
+    #service-page-header {
+        height: 50rem;
+        background: url("/images/services-bg1.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        position: relative;
+
+        #main-title-holder {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            bottom: 10rem;
+            border-radius: 0.625rem;
+            background: rgba(0, 0, 0, 0.50);
+            backdrop-filter: blur(7.5px);
+            width: 73rem;
+            height: 16.6rem;
+            padding: 2.5rem 4.8rem 2.5rem 4.8rem;
+
+            >h1 {
+                color: #FFF;
+                text-align: center;
+            }
+        }
+
+
+    }
+}</style>

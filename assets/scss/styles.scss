@@ -9,131 +9,6 @@ html {
 
 
 
-//sm size
-.text-sm-h1 {
-  font-family: Inter-ExtraBold;
-  color: #000;
-  font-size: 4.6rem;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
-}
-
-.text-sm-h2 {
-  font-family: Inter-Bold;
-  color: #000;
-  font-size: 4rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-
-}
-
-.text-sm-h3 {
-  font-family: Inter-Meduim;
-  color: #000;
-  font-size: 3.2rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-
-.text-sm-h4 {
-  color: #000;
-  font-family: Inter-ExtraBold;
-  font-size: 2.6rem;
-  font-style: normal;
-  font-weight: 800;
-  line-height: normal;
-}
-
-.text-sm-h5 {
-  font-family: Inter-Meduim;
-  color: #000;
-  font-size: 2.2rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-.text-sm-h6 {
-  font-family: Inter-Meduim;
-  color: #000;
-  font-size: 1.8rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-
-.text-sm-subtitle1 {
-  font-family: Inter-Regular;
-  color: #000;
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-
-.text-sm-subtitle2 {
-  font-family: Inter-Meduim;
-  color: #000;
-  font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-.text-sm-body1 {
-  font-family: Inter-Regular;
-  color: #000;
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.text-sm-body2 {
-  font-family: Inter-Regular;
-  color: #000;
-  font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.text-sm-button {
-  font-family: Inter-Meduim;
-  color: #000;
-  font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-
-.text-sm-caption {
-  font-family: Inter-Light;
-  color: #000;
-  font-family: Inter;
-  font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-}
-
-.text-sm-overline {
-  font-family: Inter-Meduim;
-  color: #000;
-  font-size: 1.2rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
-//End md size
 
 
 
@@ -2304,6 +2179,131 @@ body {
 }
 
 @media only screen and (min-width: 600px) and (max-width: 960px) {
+  //sm size
+  .gama-text-sm-h1 {
+    font-family: Inter-ExtraBold;
+    color: #000;
+    font-size: 4.6rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  
+  .gama-text-sm-h2 {
+    font-family: Inter-Bold;
+    color: #000;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  
+  }
+  
+  .gama-text-sm-h3 {
+    font-family: Inter-Meduim;
+    color: #000;
+    font-size: 3.2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  
+  .gama-text-sm-h4 {
+    color: #000;
+    font-family: Inter-ExtraBold;
+    font-size: 2.6rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  
+  .gama-text-sm-h5 {
+    font-family: Inter-Meduim;
+    color: #000;
+    font-size: 2.2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .gama-text-sm-h6 {
+    font-family: Inter-Meduim;
+    color: #000;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  
+  .gama-text-sm-subtitle1 {
+    font-family: Inter-Regular;
+    color: #000;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  
+  .gama-text-sm-subtitle2 {
+    font-family: Inter-Meduim;
+    color: #000;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .gama-text-sm-body1 {
+    font-family: Inter-Regular;
+    color: #000;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .gama-text-sm-body2 {
+    font-family: Inter-Regular;
+    color: #000;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .gama-text-sm-button {
+    font-family: Inter-Meduim;
+    color: #000;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  
+  .gama-text-sm-caption {
+    font-family: Inter-Light;
+    color: #000;
+    font-family: Inter;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+  
+  .gama-text-sm-overline {
+    font-family: Inter-Meduim;
+    color: #000;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+
 
   .content-item {
     min-height: 17rem !important;
