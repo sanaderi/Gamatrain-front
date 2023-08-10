@@ -197,7 +197,7 @@ export default {
 <style scoped>
 #service-page-header {
     height: 51.2rem;
-    background: url("/images/services-bg1.png");
+    background: url("/images/services-bg1.webp");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
@@ -360,7 +360,6 @@ export default {
 @media only screen and (max-width: 600px) {
     #service-page-header {
         height: 60rem;
-        background: url("/images/services-bg1.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: 100%;
@@ -394,7 +393,6 @@ export default {
 @media only screen and (min-width: 600px) and (max-width: 960px) {
     #service-page-header {
         height: 50rem;
-        background: url("/images/services-bg1.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: 100%;
