@@ -108,6 +108,7 @@ export default {
 
 <style>
 #blog-list-container {
+    margin: 10rem auto 10rem auto;
     #main-title {
         color: #354053;
         font-family: 'Helvetica Neue LT Std Bold';
@@ -127,6 +128,8 @@ export default {
 
     .slider {
         .v-card {
+            margin-right: 1.25rem;
+            margin-left: 1.25rem;
             position: relative;
 
             .v-card__title {

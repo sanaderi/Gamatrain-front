@@ -11,7 +11,7 @@
                                     :class="index == 5 ? 'rounded-pill active' : 'rounded-s-xl'"
                                     v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
                                     :style="`font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
                                     {{ gradeHandlerTitle(item.base_title) }}
                                 </v-btn>
                                 <div v-if="index == 5"
@@ -164,18 +164,19 @@
                                     <v-row>
                                         <v-col cols="6" md="6">
                                             <h4 class="section-title">Last questions</h4>
-                                            <v-card class="latest-card" flat v-for="item in questions.slice(0, 3)" :key="item.id">
+                                            <v-card class="latest-card" flat v-for="item in questions.slice(0, 3)"
+                                                :key="item.id">
                                                 <v-row>
-                                                    <v-col cols="1" class="pb-0">
+                                                    <v-col cols="1">
                                                         <v-avatar class="my-3" size="32" rounded="0">
                                                             <v-img :src="item.avatar"></v-img>
                                                         </v-avatar>
                                                     </v-col>
-                                                    <v-col cols="11" class="pb-0">
+                                                    <v-col cols="11" >
                                                         <v-card-title>
-                                                            <nuxt-link class="title" :to="`/qa/${item.id}`">{{
-                                                                truncateLatestTitle(item.title)
-                                                            }}</nuxt-link>
+                                                            <nuxt-link class="title" :to="`/qa/${item.id}`">
+                                                                <span v-html="truncateLatestTitle(item.title)"></span>
+                                                            </nuxt-link>
                                                         </v-card-title>
 
                                                         <v-card-subtitle>
@@ -200,17 +201,19 @@
                                         </v-col>
                                         <v-col cols="6" md="6">
                                             <h4 class="section-title">Last Uploaded File</h4>
-                                            <v-card class="latest-card" flat v-for="item in papers.slice(0, 3)" :key="item.id">
+                                            <v-card class="latest-card" flat v-for="item in papers.slice(0, 3)"
+                                                :key="item.id">
                                                 <v-row>
-                                                    <v-col cols="1" class="pb-0">
+                                                    <v-col cols="1" >
                                                         <v-avatar class="my-3" size="32" rounded="0">
                                                             <v-img :src="item.avatar"></v-img>
                                                         </v-avatar>
                                                     </v-col>
-                                                    <v-col cols="11" class="pb-0">
+                                                    <v-col cols="11" >
                                                         <v-card-title>
-                                                            <nuxt-link class="title" :to="`paper/${item.id}`">{{
-                                                                truncateLatestTitle(item.title) }}</nuxt-link>
+                                                            <nuxt-link class="title" :to="`papers/${item.id}`">
+                                                            <span v-html="truncateLatestTitle(item.title)"></span>
+                                                            </nuxt-link>
                                                         </v-card-title>
 
                                                         <v-card-subtitle>
@@ -781,7 +784,8 @@ export default {
         },
 
         truncateLatestTitle(title) {
-            return title.length > 38 ? title.slice(0, 38) + '...' : title;
+            var cutLength=window.innerWidth<1280 ? 38 : 55;
+            return title.length > cutLength ? title.slice(0, cutLength) + '...' : title;
         },
         getFullName(firstName, lastName) {
             return `${firstName} ${lastName}`
@@ -916,29 +920,37 @@ export default {
 
 
 
-#content-stats-container #grade-details-card .latest-card .v-card-subtitle .owner-container {
-    text-align: left;
-    color: #AFB8C1;
-    font-size: 0.8rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 2rem;
+#content-stats-container {
+    #grade-details-card {
+        .latest-card {
+            .v-card__subtitle {
+                .owner-container {
+                    text-align: left;
+                    color: #AFB8C1;
+                    font-size: 1.2rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 2rem;
+                    padding-bottom: 0rem;
+                    padding-top: 0rem;
+                }
+
+                .subdate-container {
+                    text-align: right !important;
+                    color: #6E7781;
+                    font-size: 1.2rem;
+                    font-style: normal;
+                    font-weight: 300;
+                    line-height: 2rem;
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                    padding-top: 0;
+                
+                }
+            }
+        }
+    }
 }
-
-#content-stats-container #grade-details-card .latest-card .v-card-subtitle .subdate-container {
-    text-align: right !important;
-    color: #6E7781;
-    font-size: 0.8;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 2rem;
-}
-
-
-
-
-
-
 @media only screen and (max-width: 600px) {
     #content-stats-container {
         padding: 0.2rem;
@@ -1063,7 +1075,7 @@ export default {
 
 
 
-@media only screen and (min-width: 600px) and (max-width: 960px) {
+@media only screen and (min-width: 600px) and (max-width: 959px) {
     #content-stats-container {
 
 

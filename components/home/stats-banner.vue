@@ -71,6 +71,7 @@ export default {
 
 <style>
 #stats-container {
+    padding: 4.8rem 0 4.8rem 0;
     background: #24292F;
     color: #FFFFFF;
     text-align: center;

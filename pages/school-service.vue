@@ -7,7 +7,9 @@
                 <v-row>
                     <v-col cols="12">
                         <div id="main-title-holder">
-                            <h1 class="gama-text-h1 ">Empowering<br> Smart Learning!</h1>
+                            <h1 class="gama-text-h2 ">
+                                Find Your Perfect School with GamaTrain
+                            </h1>
                         </div>
                     </v-col>
 
@@ -16,23 +18,20 @@
         </v-container>
 
 
-        <v-container id="service-ai-unleashing">
+        <v-container id="service-find-school">
             <v-row>
                 <v-col cols="12">
                     <v-card flat>
                         <v-card-text>
-                            <h2 class="gama-text-h4 mb-3">Unleashing the Power of AI in Education</h2>
-                            <p class="gama-text-h6  mb-3">Your Pathway to Smart Education Solutions.</p>
-                            <p class="gama-text-subtitle1">Unlock the Future of Education with GamaTrain.</p>
-                            <h3 class="gama-text-h4  mt-5 mb-3">Personalized Learning Powered by AI</h3>
-                            <p class="gama-text-body1">At GamaTrain, we believe in tailoring education to fit each
-                                student's
-                                unique needs. Our AI-powered
-                                platform analyzes individual learning styles, strengths, and areas for improvement to
-                                provide
-                                personalized learning paths. Say goodbye to one-size-fits-all education - welcome to a
-                                smart,
-                                adaptive learning experience.</p>
+                            <h2 class="gama-text-h4">
+                                Discover Your Ideal Educational Institution with GamaTrain School Finder
+                            </h2>
+                            <p class="gama-text-body1">
+                                Welcome to GamaTrain School Finder, your one-stop solution for finding the perfect
+                                educational institution that suits your needs and aspirations. Whether you're searching for
+                                the best K-12 school for your child or looking to continue your higher education journey,
+                                GamaTrain has you covered.
+                            </p>
                         </v-card-text>
                     </v-card>
                 </v-col>
@@ -40,139 +39,143 @@
         </v-container>
 
 
-        <v-container fluid id="service-comprehensive-curriculum">
+        <v-container fluid id="service-informed-choices">
             <v-container>
                 <v-row>
                     <v-col cols="12" md="6" class="order-last order-md-first">
-                        <h2 class="gama-text-h4   white--text ">Comprehensive Curriculum and Materials</h2>
+                        <h2 class="gama-text-h4 white--text ">
+                            The Power of Informed Choices
+                        </h2>
                         <p class="gama-text-body1  white--text">
-                            GamaTrain's extensive library of educational materials covers a wide range of subjects and
-                            levels. From first grade to 12th grade advanced courses, we have meticulously crafted content to
-                            ensure students receive the highest quality of education. Our team of experts, educators, and AI
-                            specialists work together to bring you engaging and enriching study materials.
+                            Choosing the right school is a crucial decision that can significantly impact a student's
+                            academic and personal growth. GamaTrain School Finder empowers parents and students with
+                            comprehensive information about various educational institutions. Make an informed choice that
+                            aligns with your values, preferences, and educational goals.
                         </p>
                     </v-col>
                     <v-col cols="12" md="6">
-                        <v-img src="/images/comprehensive-curriculum.png" alt="Empowering Smart Learning!" />
+                        <v-img src="/images/service-informed-choices.png" alt="The Power of Informed Choices" />
                     </v-col>
 
                 </v-row>
             </v-container>
         </v-container>
 
-        <v-container id="service-smart-assistance">
+
+
+        <v-container id="service-extensive-database">
             <v-row>
                 <v-col cols="12" md="6">
-                    <v-img src="images/smart-assistance.svg" alt="24/7 Smart Assistance" />
-                </v-col>
-                <v-col cols="12" md="6">
-                    <h2 class="gama-text-h4 mb-2">
-                        24/7 Smart Assistance
-                    </h2>
-                    <p class="gama-text-body1">
-                        GamaTrain's extensive library of educational materials covers a wide range of subjects and levels.
-                        From first grade to 12th grade advanced courses, we have meticulously crafted content to ensure
-                        students receive the highest quality of education. Our team of experts, educators, and AI
-                        specialists work together to bring you engaging and enriching study materials.
-                    </p>
-                </v-col>
-            </v-row>
-        </v-container>
-
-
-        <v-container fluid id="service-progress-tracking">
-            <v-container>
-                <v-row>
-                    <v-col cols="12" md="6" class="order-last order-md-first">
-                        <h2 class="gama-text-h4">Real-Time Progress Tracking</h2>
-                        <p class="gama-text-body1">
-                            Stay on top of your academic growth with GamaTrain's real-time progress tracking. Our AI
-                            algorithms analyze your performance, identify areas for improvement, and celebrate your
-                            achievements. Be informed, stay motivated, and excel in your studies.
-                        </p>
-                    </v-col>
-                    <v-col cols="12" md="6">
-                        <v-img src="/images/progress-tracking.png" alt="Real-Time Progress Tracking" />
-                    </v-col>
-                </v-row>
-            </v-container>
-        </v-container>
-
-        <v-container id="service-smart-collaboration">
-            <v-row>
-                <v-col cols="12" md="6">
-                    <v-img src="/images/smart-assistance.png" alt="Smart Collaboration and Engagement" />
+                    <v-img src="images/service-extensive-database.png" alt="Extensive Database" />
                 </v-col>
                 <v-col cols="12" md="6">
                     <h2 class="gama-text-h4">
-                        Smart Collaboration and Engagement
+                        Extensive Database
                     </h2>
                     <p class="gama-text-body1">
-                        Stay on top of your academic growth with GamaTrain's real-time progress tracking. Our AI algorithms
-                        analyze your performance, identify areas for improvement, and celebrate your achievements. Be
-                        informed, stay motivated, and excel in your studies.
+                        Our vast and up-to-date database includes a diverse range of schools, colleges, and universities.
+                        From public to private institutions, boarding schools to day schools, and vocational training
+                        centers to top-tier universities, GamaTrain School Finder encompasses them all.
                     </p>
                 </v-col>
             </v-row>
         </v-container>
 
-        <v-container fluid id="service-content-sharing">
+
+        <v-container fluid id="service-friendly-interface">
             <v-container>
                 <v-row>
                     <v-col cols="12" md="6" class="order-last order-md-first">
                         <h2 class="gama-text-h4">
-                            Simplify Content Sharing and Elevate Education with AI Assistance.
+                            User-Friendly Interface
                         </h2>
                         <p class="gama-text-body1">
-                            At GamaTrain, we understand that educators play a pivotal role in shaping the future of our
-                            society. That’s why we’ve developed a cutting-edge AI-powered solution to streamline content
-                            sharing and provide expert review, making it easier for teachers to upload their educational
-                            materials and enhance the learning experience for students.
+                            Navigating through GamaTrain School Finder is a breeze. Our user-friendly interface allows you
+                            to filter your search based on location, curriculum, facilities, extracurricular activities, and
+                            more. Easily compare schools side by side to discover the perfect match.
                         </p>
                     </v-col>
                     <v-col cols="12" md="6">
-                        <v-img src="/images/content-sharing.png"
-                            alt="Simplify Content Sharing and Elevate Education with AI Assistance." />
+                        <v-img src="/images/service-friendly-interface.png" alt="User-Friendly Interface" />
                     </v-col>
                 </v-row>
             </v-container>
         </v-container>
 
-        <v-container id="service-content-upload">
+
+
+        <v-container id="service-detailed-insights">
             <v-row>
                 <v-col cols="12" md="6">
-                    <v-img src="/images/content-upload.png" alt="Seamless Content Upload" />
+                    <v-img src="/images/service-detailed-insights.png" alt="Detailed Insights" />
                 </v-col>
                 <v-col cols="12" md="6">
                     <h2 class="gama-text-h4">
-                        Seamless Content Upload
+                        Detailed Insights
                     </h2>
                     <p class="gama-text-body1">
-                        With GamaTrain’s AI-enhanced content sharing platform, uploading educational materials has never
-                        been easier. Teachers can effortlessly upload lesson plans, presentations, worksheets, and other
-                        resources with a few simple clicks. Our intuitive interface ensures a seamless experience, saving
-                        valuable time for educators to focus on what matters most - teaching.
+                        GamaTrain provides in-depth insights into each educational institution. Learn about their academic
+                        programs, faculty qualifications, student-to-teacher ratios, campus facilities, and extracurricular
+                        offerings. We believe transparency is key to making the right decision.
                     </p>
                 </v-col>
             </v-row>
         </v-container>
 
-        <v-container fluid id="service-content-review">
+        <v-container fluid id="service-real-reviews">
             <v-container>
                 <v-row>
                     <v-col cols="12" md="6" class="order-last order-md-first">
-                        <h2 class="gama-text-h4 mb-2">
-                            Intelligent Content Review
+                        <h2 class="gama-text-h4">
+                            Real Reviews from Real People
                         </h2>
                         <p class="gama-text-body1">
-                            GamaTrain’s AI-driven expert review takes content evaluation to a whole new level. Our advanced
-                            algorithms analyze uploaded materials for accuracy, relevance, and educational effectiveness.
-                            Teachers receive insightful feedback and suggestions to refine and optimize their content,
-                            fostering continuous improvement in their teaching practices.
+                            Gain valuable insights from real reviews written by students, parents, and alumni of the schools
+                            you're interested in. Honest feedback and firsthand experiences provide you with a genuine
+                            understanding of the institution's culture and atmosphere.
                         </p>
                     </v-col>
                     <v-col cols="12" md="6">
-                        <v-img src="/images/content-review.png" alt="Intelligent Content Review" />
+                        <v-img src="/images/service-real-reviews.png" alt="Real Reviews from Real People" />
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-container>
+
+        <v-container id="service-save-favorites">
+            <v-row>
+                <v-col cols="12" md="6">
+                    <v-img src="/images/service-save-favorites.png" alt="Save Favorites and Compare" />
+                </v-col>
+                <v-col cols="12" md="6">
+                    <h2 class="gama-text-h4">
+                        Save Favorites and Compare
+                    </h2>
+                    <p class="gama-text-body1">
+                        Found a school you love? Save it to your favorites for easy access later. Additionally, use our
+                        comparison feature to analyze multiple schools side by side, ensuring you make the best choice for
+                        your educational journey.
+                    </p>
+                </v-col>
+            </v-row>
+        </v-container>
+
+
+        <v-container fluid id="service-personalized">
+            <v-container>
+                <v-row>
+                    <v-col cols="12" md="6" class="order-last order-md-first">
+                        <h2 class="gama-text-h4">
+                            Personalized Recommendations
+                        </h2>
+                        <p class="gama-text-body1">
+                            Tell us about your preferences, interests, and academic goals, and let GamaTrain School Finder
+                            suggest educational institutions tailored to your unique needs. Our personalized recommendations
+                            save you time and effort, matching you with schools that align with your aspirations.
+                        </p>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                        <v-img src="/images/service-personalized.png" alt="Personalized Recommendations" />
                     </v-col>
                 </v-row>
             </v-container>
@@ -202,7 +205,7 @@ export default {
 <style scoped>
 #service-page-header {
     height: 60rem;
-    background: url("/images/ai-services-bg.webp");
+    background: url("/images/school-service-bg.webp");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 250%;
@@ -211,8 +214,8 @@ export default {
     .overlay {
         position: absolute;
         left: 0;
-        right:0;
-        top:0;
+        right: 0;
+        top: 0;
         height: 40%;
         background: linear-gradient(180deg, #000 0%, #000 0%, #000 0.33%, rgba(0, 0, 0, 0.00) 100%);
 
@@ -241,13 +244,17 @@ export default {
 }
 
 
-#service-ai-unleashing {
+#service-find-school {
     padding-top: 4.6rem;
     padding-bottom: 3.2rem;
 
+    .gama-text-h4 {
+        margin-bottom: 2.4rem;
+    }
+
 }
 
-#service-comprehensive-curriculum {
+#service-informed-choices {
     background: #24292F;
     height: 66rem;
     padding-top: 1.8rem;
@@ -268,7 +275,7 @@ export default {
 }
 
 
-#service-smart-assistance {
+#service-extensive-database {
     height: 54rem;
     padding-top: 4.8rem;
     padding-bottom: 4.8rem;
@@ -278,14 +285,16 @@ export default {
     }
 
     .v-image {
+        border-radius: 1rem;
         margin: auto auto;
-        width: 18rem;
-        height: 15rem;
+        width: 31.2rem;
+        height: 20rem;
+        border-radius: 1rem;
     }
 }
 
 
-#service-progress-tracking {
+#service-friendly-interface {
     height: 60rem;
     background: #F4F4F4;
     padding-top: 4.8rem;
@@ -299,13 +308,13 @@ export default {
     .v-image {
         margin: auto auto 2.4rem auto;
         width: 31.2rem;
-        height: 26rem;
+        height: 20rem;
         border-radius: 1rem;
     }
 
 }
 
-#service-smart-collaboration {
+#service-detailed-insights {
     height: 60rem;
     padding-top: 4.8rem;
     padding-bottom: 4.8rem;
@@ -323,7 +332,7 @@ export default {
 }
 
 
-#service-content-sharing {
+#service-real-reviews {
     height: 64rem;
     background: #F4F4F4;
     padding-top: 4.8rem;
@@ -341,7 +350,7 @@ export default {
     }
 }
 
-#service-content-upload {
+#service-save-favorites {
     height: 60rem;
     padding-top: 4.8rem;
     padding-bottom: 4.8rem;
@@ -359,7 +368,7 @@ export default {
     }
 }
 
-#service-content-review {
+#service-personalized {
     height: 60rem;
     background: #F4F4F4;
     padding-top: 4.8rem;
@@ -410,7 +419,7 @@ export default {
 
     }
 
-    #service-comprehensive-curriculum {
+    #service-informed-choices {
         background: #24292F;
         height: 51.6rem;
         padding-top: 4.8rem;
@@ -423,13 +432,13 @@ export default {
     }
 
 
-    #service-smart-assistance {
+    #service-extensive-database {
         height: 51.6rem;
 
     }
 
 
-    #service-progress-tracking {
+    #service-friendly-interface {
         height: 51.6rem;
 
 
@@ -438,7 +447,7 @@ export default {
         }
     }
 
-    #service-smart-collaboration {
+    #service-detailed-insights {
         height: 51.6rem;
 
         .gama-text-h4 {
@@ -447,7 +456,7 @@ export default {
     }
 
 
-    #service-content-sharing {
+    #service-real-reviews {
         height: 51.6rem;
 
         .gama-text-h4 {
@@ -456,7 +465,7 @@ export default {
 
     }
 
-    #service-content-upload {
+    #service-save-favorites {
         height: 51.6rem;
 
         .gama-text-h4 {
@@ -465,7 +474,7 @@ export default {
 
     }
 
-    #service-content-review {
+    #service-personalized {
         height: 51.6rem;
 
         .gama-text-h4 {
@@ -522,13 +531,13 @@ export default {
     }
 
 
-    #service-ai-unleashing {
+    #service-find-school {
         height: 46rem;
         padding-top: 10rem;
 
     }
 
-    #service-comprehensive-curriculum {
+    #service-informed-choices {
         background: #24292F;
         height: 46rem;
         padding-top: 10rem;
@@ -556,19 +565,19 @@ export default {
     }
 
 
-    #service-smart-assistance {
+    #service-extensive-database {
         height: 46rem;
         padding-top: 10rem;
         padding-bottom: 10rem;
 
         .v-image {
             margin: auto auto;
-            width: 31.2rem;
+            width: 40.6rem;
             height: 26rem;
         }
     }
 
-    #service-progress-tracking {
+    #service-friendly-interface {
         height: 46rem;
         background: #F4F4F4;
         padding-top: 10rem;
@@ -583,7 +592,7 @@ export default {
 
     }
 
-    #service-smart-collaboration {
+    #service-detailed-insights {
         height: 46rem;
         padding-top: 10rem;
         padding-bottom: 10rem;
@@ -597,7 +606,7 @@ export default {
     }
 
 
-    #service-content-sharing {
+    #service-real-reviews {
         height: 46rem;
         background: #F4F4F4;
         padding-top: 10rem;
@@ -611,7 +620,7 @@ export default {
         }
     }
 
-    #service-content-upload {
+    #service-save-favorites {
         height: 46rem;
         padding-top: 10rem;
         padding-bottom: 10rem;
@@ -624,7 +633,7 @@ export default {
         }
     }
 
-    #service-content-review {
+    #service-personalized {
         height: 46rem;
         background: #F4F4F4;
         padding-top: 10rem;
@@ -650,5 +659,4 @@ export default {
         }
 
     }
-}
-</style>
+}</style>

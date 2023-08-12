@@ -13,7 +13,7 @@ html {
 
 
 //xs size
-.text-xs-h1 {
+.gama-text-h1 {
   font-family: Inter-ExtraBold;
   color: #000;
   font-size: 4.2rem;
@@ -22,7 +22,7 @@ html {
   line-height: normal;
 }
 
-.text-xs-h2 {
+.gama-text-h2 {
   font-family: Inter-Bold;
   color: #000;
   font-size: 3.6rem;
@@ -32,7 +32,7 @@ html {
 
 }
 
-.text-xs-h3 {
+.gama-text-h3 {
   font-family: Inter-Meduim;
   color: #000;
   font-size: 2.8rem;
@@ -42,16 +42,16 @@ html {
 }
 
 
-.text-xs-h4 {
+.gama-text-h4 {
   font-family: Inter-ExtraBold;
   color: #000;
-  font-size: 2.4rem;
+  font-size: 2.4rem!important;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
 }
 
-.text-xs-h5 {
+.gama-text-h5 {
   font-family: Inter-Meduim;
   color: #000;
   font-size: 2.4rem;
@@ -60,7 +60,7 @@ html {
   line-height: normal;
 }
 
-.text-xs-h6 {
+.gama-text-h6 {
   font-family: Inter-Meduim;
   color: #000;
   font-size: 1.6rem;
@@ -70,7 +70,7 @@ html {
 }
 
 
-.text-xs-subtitle1 {
+.gama-text-subtitle1 {
   font-family: Inter-Regular;
   color: #000;
   font-size: 1.4rem;
@@ -80,7 +80,7 @@ html {
 }
 
 
-.text-xs-subtitle2 {
+.gama-text-subtitle2 {
   font-family: Inter-Meduim;
   color: #000;
   font-size: 1.2rem;
@@ -89,16 +89,16 @@ html {
   line-height: normal;
 }
 
-.text-xs-body1 {
+.gama-text-body1 {
   font-family: Inter-Regular;
   color: #000;
-  font-size: 1.4rem;
+  font-size: 1.4rem!important;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 2.4rem;
 }
 
-.text-xs-body2 {
+.gama-text-body2 {
   font-family: Inter-Regular;
   color: #000;
   font-size: 1.2rem;
@@ -107,7 +107,7 @@ html {
   line-height: normal;
 }
 
-.text-xs-button {
+.gama-text-button {
   font-family: Inter-Meduim;
   color: #000;
   font-size: 1.4rem;
@@ -117,7 +117,7 @@ html {
 }
 
 
-.text-xs-caption {
+.gama-text-caption {
   font-family: Inter-Light;
   color: #000;
   font-size: 1.2rem;
@@ -126,7 +126,7 @@ html {
   line-height: normal;
 }
 
-.text-xs-overline {
+.gama-text-overline {
   font-family: Inter-Meduim;
   color: #000;
   font-size: 1rem;
@@ -250,7 +250,7 @@ body {
 
 
 
-    
+
 
 
 
@@ -2178,9 +2178,10 @@ body {
 
 }
 
-@media only screen and (min-width: 600px) and (max-width: 960px) {
+@media only screen and (min-width:600px) {
+
   //sm size
-  .gama-text-sm-h1 {
+  .gama-text-h1 {
     font-family: Inter-ExtraBold;
     color: #000;
     font-size: 4.6rem;
@@ -2188,18 +2189,18 @@ body {
     font-weight: 800;
     line-height: normal;
   }
-  
-  .gama-text-sm-h2 {
+
+  .gama-text-h2 {
     font-family: Inter-Bold;
     color: #000;
     font-size: 4rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-  
+
   }
-  
-  .gama-text-sm-h3 {
+
+  .gama-text-h3 {
     font-family: Inter-Meduim;
     color: #000;
     font-size: 3.2rem;
@@ -2207,18 +2208,18 @@ body {
     font-weight: 500;
     line-height: normal;
   }
-  
-  
-  .gama-text-sm-h4 {
+
+
+  .gama-text-h4 {
     color: #000;
     font-family: Inter-ExtraBold;
-    font-size: 2.6rem;
+    font-size: 2.6rem!important;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
   }
-  
-  .gama-text-sm-h5 {
+
+  .gama-text-h5 {
     font-family: Inter-Meduim;
     color: #000;
     font-size: 2.2rem;
@@ -2226,8 +2227,8 @@ body {
     font-weight: 500;
     line-height: normal;
   }
-  
-  .gama-text-sm-h6 {
+
+  .gama-text-h6 {
     font-family: Inter-Meduim;
     color: #000;
     font-size: 1.8rem;
@@ -2235,9 +2236,9 @@ body {
     font-weight: 500;
     line-height: normal;
   }
-  
-  
-  .gama-text-sm-subtitle1 {
+
+
+  .gama-text-subtitle1 {
     font-family: Inter-Regular;
     color: #000;
     font-size: 1.6rem;
@@ -2245,9 +2246,9 @@ body {
     font-weight: 400;
     line-height: normal;
   }
-  
-  
-  .gama-text-sm-subtitle2 {
+
+
+  .gama-text-subtitle2 {
     font-family: Inter-Meduim;
     color: #000;
     font-size: 1.4rem;
@@ -2255,17 +2256,17 @@ body {
     font-weight: 500;
     line-height: normal;
   }
-  
-  .gama-text-sm-body1 {
+
+  .gama-text-body1 {
     font-family: Inter-Regular;
     color: #000;
-    font-size: 1.6rem;
+    font-size: 1.6rem!important;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    line-height: 2.4rem;
   }
-  
-  .gama-text-sm-body2 {
+
+  .gama-text-body2 {
     font-family: Inter-Regular;
     color: #000;
     font-size: 1.4rem;
@@ -2273,8 +2274,8 @@ body {
     font-weight: 400;
     line-height: normal;
   }
-  
-  .gama-text-sm-button {
+
+  .gama-text-button {
     font-family: Inter-Meduim;
     color: #000;
     font-size: 1.4rem;
@@ -2282,9 +2283,9 @@ body {
     font-weight: 500;
     line-height: normal;
   }
-  
-  
-  .gama-text-sm-caption {
+
+
+  .gama-text-caption {
     font-family: Inter-Light;
     color: #000;
     font-family: Inter;
@@ -2293,8 +2294,8 @@ body {
     font-weight: 300;
     line-height: normal;
   }
-  
-  .gama-text-sm-overline {
+
+  .gama-text-overline {
     font-family: Inter-Meduim;
     color: #000;
     font-size: 1.2rem;
@@ -2302,8 +2303,9 @@ body {
     font-weight: 500;
     line-height: normal;
   }
-  
+}
 
+@media only screen and (min-width: 600px) and (max-width: 960px) {
 
   .content-item {
     min-height: 17rem !important;
@@ -2355,7 +2357,7 @@ body {
 @media only screen and (min-width: 960px) {
 
   // md size
-  .gama-text-md-h1 {
+  .gama-text-h1 {
     color: #354053;
     font-family: Inter-ExtraBold !important;
     font-size: 5rem !important;
@@ -2364,7 +2366,7 @@ body {
     line-height: normal !important;
   }
 
-  .gama-text-md-h2 {
+  .gama-text-h2 {
     color: #354053;
     font-family: Inter-Bold;
     font-size: 4.4rem;
@@ -2373,7 +2375,7 @@ body {
     line-height: normal;
   }
 
-  .gama-text-md-h3 {
+  .gama-text-h3 {
     color: #354053;
     font-family: Inter-Meduim;
     font-size: 3.6rem;
@@ -2383,16 +2385,16 @@ body {
   }
 
 
-  .gama-text-md-h4 {
+  .gama-text-h4 {
     color: #354053;
     font-family: Inter-ExtraBold;
-    font-size: 3rem;
+    font-size: 3rem!important;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
   }
 
-  .gama-text-md-h5 {
+  .gama-text-h5 {
     color: #354053;
     font-family: Inter-Meduim;
     font-size: 2.4rem;
@@ -2401,7 +2403,7 @@ body {
     line-height: normal;
   }
 
-  .gama-text-md-h6 {
+  .gama-text-h6 {
     color: #354053;
     font-family: Inter-Meduim;
     font-size: 2rem;
@@ -2411,7 +2413,7 @@ body {
   }
 
 
-  .gama-text-md-subtitle1 {
+  .gama-text-subtitle1 {
     color: #354053;
     font-family: Inter-Regular;
     font-size: 1.6rem;
@@ -2421,7 +2423,7 @@ body {
   }
 
 
-  .gama-text-md-subtitle2 {
+  .gama-text-subtitle2 {
     color: #000;
     font-family: Inter-Meduim;
     font-size: 1.4rem;
@@ -2430,16 +2432,16 @@ body {
     line-height: normal;
   }
 
-  .gama-text-md-body1 {
+  .gama-text-body1 {
     color: #000;
     font-family: Inter-Regular;
-    font-size: 1.6rem;
+    font-size: 1.6rem!important;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    line-height: 2.8rem;
   }
 
-  .gama-text-md-body2 {
+  .gama-text-body2 {
     color: #000;
     font-family: Inter-Regular;
     font-size: 1.4rem;
@@ -2448,7 +2450,7 @@ body {
     line-height: normal;
   }
 
-  .gama-text-md-button {
+  .gama-text-button {
     color: #000;
     font-family: Inter-Meduim;
     font-size: 1.4rem;
@@ -2458,7 +2460,7 @@ body {
   }
 
 
-  .gama-text-md-caption {
+  .gama-text-caption {
     color: #000;
     font-family: Inter-Light;
     font-size: 1.4rem;
@@ -2467,7 +2469,7 @@ body {
     line-height: normal;
   }
 
-  .gama-text-md-overline {
+  .gama-text-overline {
     color: #000;
     font-family: Inter-Meduim;
     font-size: 1.4rem;

@@ -95,8 +95,10 @@ export default {
 
 <style >
 #level-guid-banner {
-
+    padding-top: 4.8rem;
+    padding-bottom: 4.8rem;
     background: #F6F8FA;
+
 
     .main-title {
         color: #354053;

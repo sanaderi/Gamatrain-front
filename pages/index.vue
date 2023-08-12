@@ -1,11 +1,11 @@
 <template>
     <v-app>
-        <main-header  />
+        <main-header />
         <v-container fluid class="px-0 py-0   mt-md-0">
 
             <v-row>
                 <v-col cols="12" sm="12" md="12" class="pt-0 px-0 pt-sm-0">
-                    <v-carousel id="main-slider" v-model="carousel_model" cycle  delimiter-icon="mdi-square" interval="10000"
+                    <v-carousel id="main-slider" v-model="carousel_model" cycle delimiter-icon="mdi-square" interval="10000"
                         hide-delimiter-background :show-arrows="false">
 
                         <v-carousel-item v-for="(slide, i) in slides" :key="i">
@@ -16,10 +16,8 @@
                                             <v-col md="12">
                                                 <div class="slide-title " v-html="slide.title" />
                                                 <div class="slide-describe mt-6 d-none d-md-block" v-html="slide.text" />
-                                                <v-btn rounded
-                                                :to="slide.link"
-                                                 class="mt-8   d-none d-md-inline-flex" id="read-about-btn"
-                                                    x-large>Read about it</v-btn>
+                                                <v-btn rounded :to="slide.link" class="mt-8   d-none d-md-inline-flex"
+                                                    id="read-about-btn" x-large>Read about it</v-btn>
 
                                                 <v-btn text id="slide-register-btn" class="d-md-none">
                                                     Touch to register
@@ -80,8 +78,7 @@
                             <p class="describe">
                                 Discover Your Full Potential with AI-based Education
                             </p>
-                            <v-btn to="/smart-learning" color="#FFB300"
-                             rounded class="white--text">
+                            <v-btn to="/smart-learning" color="#FFB300" rounded class="white--text">
                                 Read about it
                             </v-btn>
                             <img id="img-bottom" alt="AI Learn" src="/images/ai-learn-bg2.png" />
@@ -100,7 +97,7 @@
                             <h2 class="title">Are you a student?</h2>
                         </v-col>
                         <v-col cols="12" sm="6">
-                            <v-card class="fill-height">
+                            <v-card class="fill-height float-sm-right ">
                                 <v-card-title>
                                     <v-icon color="#FFB300" size="36">mdi-cloud-download</v-icon>
                                     &nbsp;Download
@@ -111,7 +108,7 @@
                             </v-card>
                         </v-col>
                         <v-col cols="12" sm="6">
-                            <v-card class="fill-height">
+                            <v-card class="fill-height float-sm-left">
                                 <v-card-title>
                                     <v-icon color="#FFB300" size="36">mdi-text-box-edit</v-icon>
                                     &nbsp;Exam
@@ -139,7 +136,7 @@
                             information. Just
                             filter and Gamma will find it for you.
                         </p>
-                        <v-btn rounded large color="#FFB300">Search school</v-btn>
+                        <v-btn to="/school-service" rounded large color="#FFB300">Search school</v-btn>
                     </v-col>
                 </v-row>
 
@@ -160,8 +157,8 @@
             <v-container fluid id="earn-money-container">
                 <v-container>
                     <v-row>
-                        <v-col cols="12" sm="12" md="8">
-                            <h2 class="describe text-center text-md-left">Why wait? Earn money with us in minutes with
+                        <v-col cols="12" sm="12" md="8" class="text-md-right">
+                            <h2 class="describe text-center ">Why wait? Earn money with us in minutes with
                                 just a few clicks!</h2>
                         </v-col>
                         <v-col cols="12" sm="12" md="4" class="text-center text-md-left">
@@ -233,13 +230,13 @@ export default {
                     img: 'ai-robot.png',
                     text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
                     id: 'ai-slide',
-                    link:'/smart-learning'
+                    link: '/smart-learning'
                 }, {
                     title: '<span class="text-h3 text-md-h2   font-weight-bold">Question<span class="d-sm-none"><br>&nbsp&nbsp</span> & Answer</span>',
                     text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
                     img: 'a-q.png',
                     id: 'aq-slide',
-                    link:'/search?type=question'
+                    link: '/search?type=question'
 
                 }
             ],
@@ -260,7 +257,7 @@ export default {
             }
             return '#24292F'; // or some default value if colors or carousel_model is not available
         },
-        
+
     },
 
 
@@ -447,7 +444,7 @@ export default {
         max-width: 16rem;
 
         .v-btn__content {
-            color: #FFF !important;
+            color: #24292F!important;
             font-size: 1.6rem;
             font-style: normal;
             font-weight: 700;
@@ -501,7 +498,7 @@ export default {
 
 #main-slider .v-carousel__controls {
     position: absolute;
-    top: 41.4rem;
+    top: 41.18rem;
     /* height: 5rem !important; */
 }
 
@@ -510,9 +507,11 @@ export default {
     /* Background color of non-active ones */
     height: 0.42rem;
     /* Height you want */
-    width: 8rem;
+    width: 10.3rem;
+    margin-right: 0.1rem !important;
+    margin-left: 0.1rem !important;
     /* Width you want */
-    border-radius: 0;
+    border-radius: 0.4rem;
     /* Remove default border radius */
 }
 
@@ -535,7 +534,7 @@ export default {
 #ai-learn-banner {
     position: relative;
     max-width: 73rem;
-    margin: 0 auto;
+    margin: 6.4rem auto 6.4rem auto;
 
     .v-card {
         border-radius: 1rem;
@@ -577,6 +576,10 @@ export default {
         .v-btn {
             font-weight: 700;
 
+            .v-btn__content{
+                color: #24292F;
+            }
+
 
 
         }
@@ -601,7 +604,8 @@ export default {
 
 
 #student-help-container {
-    margin-top: 6rem;
+    padding-top: 4.8rem;
+    padding-bottom: 4.8rem;
     background: #FFB600;
 
     .title {
@@ -619,6 +623,9 @@ export default {
         background: rgba(36, 41, 47, 0.70);
         backdrop-filter: blur(0.46875rem);
         color: white;
+        max-width: 35.3rem;
+        min-height: 17.6rem;
+        margin: auto;
 
         .v-card__title {
             color: #FFF;
@@ -642,7 +649,7 @@ export default {
 
 
 #school-service-container {
-    margin: 5rem auto 5rem auto;
+    margin: 10rem auto 10rem auto;
 
     .title {
         color: #354053;
@@ -668,7 +675,6 @@ export default {
 
 
         .v-btn__content {
-            margin-top: 0.4rem;
             color: #24292F;
             font-size: 1.4rem;
             font-style: normal;
@@ -684,6 +690,7 @@ export default {
 }
 
 #earn-money-container {
+    padding: 6.8rem 0 6.8rem 0;
     background: #24292F;
 
     .v-btn {
@@ -701,7 +708,7 @@ export default {
         font-family: 'Helvetica Neue LT Std Md';
         font-style: normal;
         font-weight: 500;
-        line-height: 2.4rem;
+        line-height: 3.4rem;
     }
 }
 
@@ -791,23 +798,25 @@ export default {
 
     #main-slider .v-carousel__controls {
         position: absolute;
-        top: 19rem;
+        top: 18.8rem;
     }
 
 
     #main-slider .v-carousel__controls .v-btn--icon {
         /* Background color of non-active ones */
-        height: 0.32rem;
+        height: 0.1rem;
         /* Height you want */
-        width: 4rem;
+        width: 2.90rem;
         /* Width you want */
+        margin-right: 0.05rem !important;
+        margin-left: 0.05rem !important;
 
     }
 
 
 }
 
-@media only screen and (min-width: 600px) and (max-width: 960px) {
+@media only screen and (min-width: 600px) and (max-width: 959px) {
     #main-slider {
         height: 30.8rem !important;
     }
@@ -866,7 +875,16 @@ export default {
 
     #main-slider .v-carousel__controls {
         position: absolute;
-        top: 24.5rem;
+        top: 24.2rem;
+    }
+
+    #main-slider .v-carousel__controls .v-btn--icon {
+        /* Background color of non-active ones */
+        height: 0.2rem;
+        /* Height you want */
+        width: 6.40rem;
+        /* Width you want */
+
     }
 
 }
