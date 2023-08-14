@@ -27,7 +27,7 @@
                                     <v-row id="stats-details">
                                         <v-col cols="12" md="6" class="pb-0 pb-sm-6">
                                             <div class="d-none d-md-block">
-                                                <v-icon class="stat-icon">mdi-file</v-icon>
+                                                <span class="stat-icon icon-paper"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
@@ -38,8 +38,7 @@
                                             </div>
                                             <v-row class="d-md-none">
                                                 <v-col cols="7" class="pa-0">
-                                                    <v-icon class="stat-icon">mdi-file</v-icon>
-
+                                                    <span class="stat-icon icon-paper"></span>
                                                     <nuxt-link
                                                         :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
                                                         class="label">
@@ -60,7 +59,7 @@
                                         </v-col>
                                         <v-col cols="12" md="6" class="pb-0 pb-sm-6">
                                             <div class="d-none d-md-block">
-                                                <v-icon class="stat-icon">mdi-multimedia</v-icon>
+                                                <span class="stat-icon icon-multimedia"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
@@ -71,8 +70,7 @@
                                             </div>
                                             <v-row class="d-md-none">
                                                 <v-col cols="7" class="pa-0">
-                                                    <v-icon class="stat-icon">mdi-multimedia</v-icon>
-
+                                                    <span class="stat-icon icon-multimedia"></span>
                                                     <nuxt-link
                                                         :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
                                                         class="label">
@@ -93,7 +91,7 @@
                                         </v-col>
                                         <v-col cols="12" md="6" class="pb-0 pb-sm-6">
                                             <div class="d-none d-md-block">
-                                                <v-icon class="stat-icon" color="primary">mdi-text-box-edit</v-icon>
+                                                <span class="stat-icon icon-exam"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
@@ -104,8 +102,7 @@
                                             </div>
                                             <v-row class="d-md-none">
                                                 <v-col cols="7" class="py-0 px-0">
-                                                    <v-icon class="stat-icon" color="primary">mdi-text-box-edit</v-icon>
-
+                                                    <span class="stat-icon icon-exam"></span>
                                                     <nuxt-link
                                                         :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
                                                         class="label">
@@ -126,7 +123,7 @@
                                         </v-col>
                                         <v-col cols="12" md="6" class="pb-0 pb-sm-6">
                                             <div class="d-none d-md-block">
-                                                <v-icon class="stat-icon">mdi-head-question-outline</v-icon>
+                                                <span class="stat-icon icon-q-a"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
@@ -137,8 +134,7 @@
                                             </div>
                                             <v-row class="d-md-none">
                                                 <v-col cols="7" class="py-0 px-0">
-                                                    <v-icon class="stat-icon">mdi-head-question-outline</v-icon>
-
+                                                    <span class="stat-icon icon-q-a"></span>
                                                     <nuxt-link
                                                         :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
                                                         class="label">
@@ -827,7 +823,13 @@ export default {
 <style>
 #content-stats-container .v-btn {
     text-transform: unset !important;
-    font-weight: 500;
+
+    .v-btn__content{
+        font-family: Inter-Regular!important;
+        font-weight: 500!important;
+    }
+
+
 }
 
 #content-stats-container #stats-handler {
@@ -865,7 +867,7 @@ export default {
 #content-stats-container #grade-details-card .label {
     padding-left: 1rem;
     text-decoration: none;
-    font-family: 'Helvetica Neue LT Std Bold';
+    font-family: 'Inter-Bold';
     color: #424A53;
     font-size: 2rem;
     font-style: normal;
@@ -893,7 +895,7 @@ export default {
 
 #content-stats-container #grade-details-card .section-title {
     color: #6E7781;
-    font-family: "Helvetica Neue LT Std Bold";
+    font-family: "Inter-Bold";
     font-size: 2rem;
     font-style: normal;
     font-weight: 750;
@@ -958,7 +960,7 @@ export default {
 
     #content-stats-container .v-btn {
         color: #FFF;
-        font-family: "Helvetica Neue LT Std";
+        font-family: "Inter-Regular";
         font-size: 1.6rem;
         font-style: normal;
         font-weight: 500;
@@ -990,7 +992,7 @@ export default {
             text-decoration: none;
             color: #424A53;
             text-align: center;
-            font-family: 'Helvetica Neue LT Std Bold';
+            font-family: 'Inter-Bold';
             font-size: 1.4rem;
             font-style: normal;
             font-weight: 500;
@@ -1023,7 +1025,7 @@ export default {
 
     #content-stats-container #grade-details-card .section-title {
         color: #6E7781;
-        font-family: Helvetica Neue LT Std Bold;
+        font-family: Inter-Bold;
         font-size: 2rem;
         font-style: normal;
         font-weight: 750;

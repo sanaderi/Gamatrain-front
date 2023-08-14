@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div id="main-category">
     <!--   Start: category  main-container Desktop -->
     <v-container class="d-sm-flex d-none py-0 ">
       <v-row class="justify-center align-center category box mt-0 pb-0">
@@ -18,7 +18,7 @@
               <v-list-item-icon
                 class="my-0 mx-auto  align-center justify-center p-icon"
               >
-                <span :class="'icon icong-' + item.icon"></span>
+                <span :class="item.icon" class="icon"></span>
               </v-list-item-icon>
               <v-list-item-content class="mx-auto">
                 <v-list-item-title
@@ -49,7 +49,7 @@
               <v-list-item-icon
                 class="ma-0 d-flex align-center justify-center p-icon"
               >
-                <span :class="'icon icong-' + item.icon"></span>
+                <span :class="item.icon" class="icon"></span>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title class="cat-title" v-text="item.text"></v-list-item-title>
@@ -84,7 +84,7 @@
                 <v-list-item-icon
                   class="ma-0 d-flex align-center justify-center p-icon"
                 >
-                  <span :class="'icon icong-' + item.icon"></span>
+                  <span :class="item.icon" class="icon"></span>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title v-text="item.text"></v-list-item-title>
@@ -119,14 +119,21 @@ export default {
     selectedItem: 1,
     showMore: false,
     items: [
-      { class: "exam", text: "Exam", icon: "azmoon",link:"/search?type=azmoon" },
-      { class: "test", text: "Paper", icon: "test",link:"/search?type=test" },
-      { class: "content", text: "Multimedia", icon: "learnfiles" ,link:"/search?type=learnfiles" },
-      { class: "faq", text: "Q & A", icon: "qa",link:"/search?type=question" },
-      { class: "textbook", text: "Tutorial", icon: "blog" ,link:"/search?type=dars" },
-      // { class: "school", text: "School", icon: "school" ,link:"/search?type=school",status:'disabled' },
-      // { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor",status:'disabled' },
+      { class: "exam", text: "Exam", icon: "icon-exam",link:"/search?type=azmoon" },
+      { class: "test", text: "Paper", icon: "icon-paper",link:"/search?type=test" },
+      { class: "content", text: "Multimedia", icon: "icon-multimedia" ,link:"/search?type=learnfiles" },
+      { class: "faq", text: "Q & A", icon: "icon-q-a",link:"/search?type=question" },
+      { class: "textbook", text: "Tutorial", icon: "icon icong-blog" ,link:"/search?type=dars" },
+      // { class: "school", text: "School", icon-school: "school" ,link:"/search?type=school",status:'disabled' },
+      // { class: "tutor", text: "Tutor", icon: "icon-teacher" ,link:"/search?type=tutor",status:'disabled' },
     ],
   }),
 };
 </script>
+
+
+<style >
+#main-category .icon{
+  color: #FFFFFF!important;
+}
+</style>

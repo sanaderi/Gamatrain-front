@@ -1,19 +1,21 @@
 <template>
-  <v-card class="d-block tab-header sticky-scroll ">
+  <v-card class="d-block tab-header sticky-scroll" id="search-top-filter">
     <v-tabs v-model="active_tab">
       <v-tab @click="openLink('test')">
-        <v-badge bordered class="pa-1 mx-1  badge-sample" :content="content_statistics.test">
+        <v-badge bordered class="pa-1 mx-1  badge-sample"
+        color="#2962ff"
+        :content="content_statistics.test">
           <div class="nav-link sample-q-icon">
-            <span class="icon icong-test "></span>
+            <span class="icon icon-paper "></span>
             Paper
           </div>
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('learnfiles')">
-        <v-badge bordered class="pa-1 mx-1  badge-training" :content="content_statistics.learnfiles"
-                 color="#2E7D32">
+        <v-badge bordered class="pa-1 mx-1  badge-training" 
+        :content="content_statistics.learnfiles" color="#2E7D32">
           <div class="nav-link training-content-icon">
-            <span class="icon icong-learnfiles"></span>
+            <span class="icon icon-multimedia"></span>
             Multimedia
           </div>
         </v-badge>
@@ -21,7 +23,7 @@
       <v-tab @click="openLink('question')">
         <v-badge bordered class="pa-1 mx-1  badge-q" :content="content_statistics.question" color="#BF360C">
           <div class="nav-link q-a-icon">
-            <span class="icon icong-qa"></span>
+            <span class="icon icon-q-a"></span>
             Q & A
           </div>
         </v-badge>
@@ -29,14 +31,13 @@
       <v-tab @click="openLink('azmoon')">
         <v-badge bordered class="pa-1 mx-1  badge-online" :content="content_statistics.azmoon" color="#5600E8">
           <div class="nav-link exam-icon">
-            <span class="icon icong-azmoon"></span>
+            <span class="icon icon-exam"></span>
             Exam
           </div>
         </v-badge>
       </v-tab>
       <v-tab @click="openLink('dars')">
-        <v-badge bordered class="pa-1 ml-1 mr-4  badge-tutorial" :content="content_statistics.tutorial"
-                 color="#BD081C">
+        <v-badge bordered class="pa-1 ml-1 mr-4  badge-tutorial" :content="content_statistics.tutorial" color="#BD081C">
           <div class="nav-link tutorial-icon">
             <span class="icon icong-blog"></span>
             Tutorial
@@ -109,7 +110,7 @@ export default {
   },
   methods: {
     openLink(val) {
-      const query = {type: val}
+      const query = { type: val }
       if (this.$route.query.section) {
         query.section = this.$route.query.section
       }
@@ -141,7 +142,7 @@ export default {
         query.a_file = 1;
       }
 
-      this.$router.replace({query: query})
+      this.$router.replace({ query: query })
     }
 
     // testHeader() {
@@ -157,6 +158,15 @@ export default {
 </script>
 
 <style>
+#search-top-filter {
+
+  .icon-paper,
+  .icon-multimedia,
+  .icon-q-a,
+  .icon-exam {
+    font-size: 3rem !important;
+  }
+}
 
 /*Remove default style for vuetify tabs and apply new style*/
 .tab-header .v-tab {
@@ -284,5 +294,4 @@ export default {
 }
 
 /*End Remove default style for vuetify tabs and apply new style*/
-
 </style>

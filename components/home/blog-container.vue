@@ -111,7 +111,7 @@ export default {
     margin: 10rem auto 10rem auto;
     #main-title {
         color: #354053;
-        font-family: 'Helvetica Neue LT Std Bold';
+        font-family: 'Inter-Bold';
         font-size: 2.8rem;
         font-style: normal;
         font-weight: 750;
@@ -121,7 +121,7 @@ export default {
     .v-btn {
         padding-top: .5rem;
         .v-btn__content {
-            font-family: 'Helvetica Neue LT Std Bold';
+            font-family: 'Inter-Bold';
 
         }
     }
@@ -140,7 +140,7 @@ export default {
                 bottom: 0;
                 right: 0;
                 left: 0;
-                font-family: 'Helvetica Neue LT Std Md';
+                font-family: 'Inter-Meduim';
                 margin: 0 auto;
                 color: #FFF;
                 font-size: 1.8rem;

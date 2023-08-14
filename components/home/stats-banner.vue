@@ -7,9 +7,7 @@
                     <v-row>
                         <v-col cols="6" sm="4" md="2" v-for="(item,index) in stats" 
                         :key="index" class="text-center">
-                            <v-icon color="#FFB300" size="48">
-                                {{ item.icon }}
-                            </v-icon>
+                            <span :class="item.icon" class="item-icon" ></span>
                             <div class="item-stat">
                                 +{{ item.stat | numberFormat }}
                             </div>
@@ -34,32 +32,32 @@ export default {
         return {
             stats: [
                 {
-                    icon: 'mdi-town-hall',
+                    icon: 'icon-school',
                     stat: '130000',
                     title: 'Schools'
                 },
                 {
-                    icon: 'mdi-human-male-board',
+                    icon: 'icon-teacher',
                     stat: '500000',
                     title: 'Teacher'
                 },
                 {
-                    icon: 'mdi-account-school',
+                    icon: 'icon-student',
                     stat: '3000000',
                     title: 'Student'
                 },
                 {
-                    icon: 'mdi-text-box-edit',
+                    icon: 'icon-exam',
                     stat: '7000',
                     title: 'Exam'
                 },
                 {
-                    icon: 'mdi-forum',
+                    icon: 'icon-q-a',
                     stat: '60000',
                     title: 'Answer & Question'
                 },
                 {
-                    icon: 'mdi-multimedia',
+                    icon: 'icon-multimedia',
                     stat: '37000',
                     title: 'Multimedia'
                 },
@@ -79,7 +77,7 @@ export default {
     .title {
         color: #F3F3FB;
         font-size: 2.8rem!important;
-        font-family: 'Helvetica Neue LT Std Bold'!important;
+        font-family: 'Inter-Bold'!important;
         font-style: normal;
         font-weight: 750;
         line-height: 2.75rem;
@@ -89,7 +87,7 @@ export default {
     .describe {
         color: #F3F3FB;
         opacity: 0.30000001192092896;
-        font-family: 'Helvetica Neue LT Std Md';
+        font-family: 'Inter-Meduim';
         font-size: 2.2rem;
         margin-top: 3.75rem;
         font-style: normal;
@@ -97,9 +95,14 @@ export default {
         line-height: 4.4rem;
     }
 
+    .item-icon{
+        font-size: 4.8rem;
+        color: #ffb600;
+    }
+
     .item-stat {
         color: #FFF;
-        font-family: 'Helvetica Neue LT Std Md';
+        font-family: 'Inter-Meduim';
         font-size: 2.2rem;
         font-style: normal;
         font-weight: 750;

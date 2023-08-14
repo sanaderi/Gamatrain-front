@@ -103,7 +103,7 @@ export default {
     .main-title {
         color: #354053;
         text-align: center;
-        font-family: 'Helvetica Neue LT Std Bold';
+        font-family: 'Inter-Bold';
         font-size: 2.8rem;
         font-style: normal;
         font-weight: 750;
@@ -114,7 +114,7 @@ export default {
         text-align: center;
         color: #6E7781;
         font-size: 1.8rem;
-        font-family: 'Helvetica Neue LT Std Md';
+        font-family: 'Inter-Meduim';
         font-style: normal;
         font-weight: 500;
         line-height: 3.2rem;
@@ -136,7 +136,7 @@ export default {
         color: #354053;
         text-align: center;
         font-size: 2.2rem;
-        font-family: 'Helvetica Neue LT Std Bold';
+        font-family: 'Inter-Bold';
         font-style: normal;
         font-weight: 750;
         line-height: 4.4rem;

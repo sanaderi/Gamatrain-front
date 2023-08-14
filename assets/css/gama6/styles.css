@@ -81,3 +81,59 @@
 .icong-test:before {
   content: "\6b";
 }
+
+
+
+
+
+
+
+/* Gamatrain icon */
+@font-face {
+  font-family: 'gamatrain';
+  src:  url('../../fonts/gamatrain/gamatrain.eot?3wd5o8');
+  src:  url('../../fonts/gamatrain/gamatrain.eot?3wd5o8#iefix') format('embedded-opentype'),
+    url('../../fonts/gamatrain/gamatrain.ttf?3wd5o8') format('truetype'),
+    url('../../fonts/gamatrain/gamatrain.woff?3wd5o8') format('woff'),
+    url('../../fonts/gamatrain/gamatrain.svg?3wd5o8#gamatrain') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'gamatrain' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-exam:before {
+  content: "\e900";
+}
+.icon-multimedia:before {
+  content: "\e901";
+}
+.icon-paper:before {
+  content: "\e902";
+}
+.icon-q-a:before {
+  content: "\e903";
+}
+.icon-school:before {
+  content: "\e904";
+}
+.icon-student:before {
+  content: "\e905";
+}
+.icon-teacher:before {
+  content: "\e906";
+}

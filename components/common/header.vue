@@ -29,7 +29,7 @@
                       <v-avatar size="32">
                         <v-img :src="$auth.user.avatar" alt="user avatar" />
                       </v-avatar>
-                      <span class="pointer pa-2 font-weight-bold "
+                      <v-btn text class="pointer pa-2 font-weight-bolder "
                         :class="menuSetting.bgColor == '#fff' ? '' : 'white--text'">
                         <span v-if="$auth.user.first_name">
                           {{ $auth.user.first_name }}
@@ -41,12 +41,12 @@
                           No name
                         </span>
 
-                      </span>
+                      </v-btn>
                     </div>
                   </template>
                   <v-list>
                     <v-list-item v-for="(item, i) in user_profile_items" :key="i" :to="item.link">
-                      <v-list-item-icon class="mr-0">
+                      <v-list-item-icon class="mr-0 nt">
                         <v-icon small>
                           {{ item.icon }}
                         </v-icon>
@@ -625,7 +625,7 @@ export default {
       font-size: 1.4rem;
       font-style: normal;
       font-weight: 700;
-      font-family: 'Helvetica Neue LT Std';
+      font-family: 'Inter-Regular';
       line-height: normal;
     }
 

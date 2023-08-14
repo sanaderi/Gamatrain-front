@@ -157,7 +157,7 @@ export default {
     font-weight: 500;
     line-height: 2.4rem;
     margin-bottom: 1.2rem;
-    font-family: 'Helvetica Neue LT Std Md';
+    font-family: 'Inter-Medium';
   }
 
   .v-btn {
@@ -181,7 +181,7 @@ export default {
     font-style: normal;
     font-weight: 700;
     line-height: 2.4rem;
-    font-family: 'Helvetica Neue LT Std Bold';
+    font-family: 'Inter-Bold';
 
 
   }
@@ -209,7 +209,7 @@ export default {
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 500;
-    font-family: 'Helvetica Neue LT Std Md';
+    font-family: 'Inter-Meduim';
     line-height: 1.92rem;
   }
 }
