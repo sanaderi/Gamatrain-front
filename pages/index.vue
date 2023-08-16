@@ -1,6 +1,6 @@
 <template>
     <v-container fluid class="px-0 py-0   mt-md-0">
-        <main-slider/>
+        <main-slider />
 
         <grade-explorer :stats="stats" />
 
@@ -37,10 +37,10 @@
                         <h2 class="title">Are you a student?</h2>
                     </v-col>
                     <v-col cols="12" sm="6">
-                        <v-card class="fill-height float-sm-right ">
+                        <v-card class="fill-height float-sm-right" to="/search?type=test">
                             <v-card-title>
                                 <v-icon color="#FFB300" size="36">mdi-cloud-download</v-icon>
-                                &nbsp;Download
+                                &nbsp;Educational Content
                             </v-card-title>
                             <v-card-text>
                                 Empower Your Studies. Download Worksheets and Educational Materials.
@@ -48,7 +48,7 @@
                         </v-card>
                     </v-col>
                     <v-col cols="12" sm="6">
-                        <v-card class="fill-height float-sm-left">
+                        <v-card class="fill-height float-sm-left" to="/search?type=azmoon">
                             <v-card-title>
                                 <span class="icon-exam"></span>
                                 &nbsp;Exam
@@ -150,7 +150,7 @@ export default {
 
 
 
-           
+
             items: [
                 {
                     src: "banner_home_2.jpg",
@@ -350,7 +350,7 @@ export default {
 
     .describe {
         color: #6E7781;
-        
+
     }
 
     .v-btn {
@@ -378,7 +378,6 @@ export default {
     background: #24292F;
 
     .v-btn {
-        padding-top: 0.3rem;
 
         .v-btn__content {
             font-family: 'Inter-Meduim';
@@ -395,7 +394,5 @@ export default {
         line-height: 3.4rem;
     }
 }
-
-
 </style>
  

@@ -483,7 +483,9 @@ export default {
     // }
 
     if (this.$route.name == 'index' || this.$route.name == 'smart-learning'
-     || this.$route.name == 'services' || this.$route.name == 'school-service') {
+     || this.$route.name == 'services' || this.$route.name == 'school-service' 
+     || this.$route.name == 'faq' 
+     ) {
       this.menuSetting = {
         logo: 'gamatrain-logo.svg',
         bgColor: '#000',
@@ -518,7 +520,9 @@ export default {
 
     handleScroll() {
       if (this.$route.name == 'index' || this.$route.name == 'smart-learning'
-       || this.$route.name == 'services' || this.$route.name == 'school-service')  
+       || this.$route.name == 'services' || this.$route.name == 'school-service'
+       || this.$route.name == 'faq' 
+       )  
         if (window.scrollY > 60) {
           this.menuSetting = {
             logo: 'gamatrain-logo-black.svg',
@@ -574,7 +578,9 @@ export default {
       },
 
       "$route.name"(val) {
-        if (val == 'index' || val == 'smart-learning' || val=='services' || val=='school-service') {
+        if (val == 'index' || val == 'smart-learning' || val=='services' || val=='school-service'
+        || val == 'faq' 
+        ) {
           this.menuSetting = {
             logo: 'gamatrain-logo.svg',
             bgColor: '#000',

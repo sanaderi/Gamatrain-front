@@ -1,12 +1,11 @@
 <template>
   <v-container fluid class="px-0 pb-0">
-    <v-container id="footer">
+    <v-container id="footer" class="px-sm-9 px-md-3">
       <v-row>
-        <v-col cols="12" md="4" class="text-center text-md-left">
+        <v-col cols="12" sm="6" md="6" class="text-center text-sm-left">
           <img id="logo" alt="gamatrain" src="/images/gamatrain-logo-black.svg" />
           <div id="short-describe">
-            Our mission is to provide all training services to anyone and anywhere.Gamma is a 501(c)(3) nonprofit
-            organization.
+            Our mission is to provide all training services to anyone and anywhere.
           </div>
           <div>
             <nuxt-link to="/" class="v-btn">
@@ -25,7 +24,7 @@
           </div>
 
         </v-col>
-        <v-col sm="3" md="2" class="d-none d-sm-block" v-for="(item, i) in footerLinks" :key="i">
+        <v-col sm="3" md="3" class="d-none d-sm-block" v-for="(item, i) in footerLinks" :key="i">
           <div class="link-title">
             {{ item.mainTitle }}
           </div>
@@ -69,69 +68,35 @@ export default {
           subMenu: [
             {
               title: 'About us',
-              link: '/about us'
+              link: '/about-us'
             },
             {
               title: 'Terms',
               link: '/terms'
             },
             {
-              title: 'Blog',
-              link: '/blog'
-            }
-          ]
-        },
-        {
-          mainTitle: 'Learn Files',
-          subMenu: [
-            {
-              title: 'Olympiad',
-              link: '/olympiad'
-            },
-            {
-              title: 'Tallent',
-              link: '/tallent'
-            },
-            {
-              title: 'Answer/Question',
-              link: '/aq'
-            }
-          ]
-        },
-        {
-          mainTitle: 'Help link',
-          subMenu: [
-            {
-              title: 'Faq',
+              title: 'FAQ',
               link: '/faq'
-            },
+            }
+          ]
+        },
+        {
+          mainTitle: 'Services',
+          subMenu: [
             {
-              title: 'Tools',
-              link: '/tools'
+              title: 'Paper',
+              link: '/search?type=test'
             },
             {
               title: 'School finder',
-              link: '/school-finder'
-            }
-          ]
-        },
-        {
-          mainTitle: 'Virtual school',
-          subMenu: [
-            {
-              title: 'Online teach',
-              link: '/teach'
+              link: '/school-service'
             },
             {
-              title: 'Online test',
-              link: '/online-test'
-            },
-            {
-              title: 'Test maker',
-              link: '/test-maker'
+              title: 'Exam',
+              link: '/search?type=azmoon'
             }
           ]
-        },
+        }
       ]
     }
   }
