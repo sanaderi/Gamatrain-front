@@ -22,8 +22,17 @@
         <v-container id="faq-data-container">
             <v-row>
                 <v-col cols="12">
-                    <v-text-field v-model="searchQuery" label="Search" append-icon="mdi-magnify"></v-text-field>
+                    <v-text-field he class="rounded-ts pr-0" dense outlined hide-details v-model="searchQuery"
+                        label="Search">
+                        <template slot="append-outer">
+                            <v-btn flat dense color="#FFB300" class="white--text">
+                                <v-icon>mdi-magnify</v-icon>
+                            </v-btn>
+
+                        </template>
+                    </v-text-field>
                 </v-col>
+
             </v-row>
 
             <v-row id="list-rows">
@@ -85,7 +94,7 @@ export default {
                 {
                     isExpanded: false,
                     question: 'What are your offers for schools?',
-                    answer: 'Technology experts, educators, and school administrators at all educational levels can become GamaTrain members. Once registered, schools gain access to a dedicated website that fulfills many virtual school needs and provides a diverse set of benefits for various subjects.'
+                    answer: '<p>Technology experts, educators, and school administrators at all educational levels can become GamaTrain members. Once registered, schools gain access to a dedicated website that fulfills many virtual school needs and provides a diverse set of benefits for various subjects.</p>'
                 },
                 {
                     isExpanded: false,
@@ -102,7 +111,7 @@ export default {
                 {
                     isExpanded: false,
                     question: 'How to access GamaTrain services?',
-                    answer: "Many of the GamaTrain website's features, including membership, downloading sample questions, test registration, and announcements, are available for free to all visitors. Teachers and schools can join the membership, gaining access to various educational tools and services based on their selected membership type. To create a personal page on the GamaTrain website, you can easily follow the registration process on the website. Anyone familiar with the internet or a school's IT specialist can assist you with this."
+                    answer: "<p>Many of the GamaTrain website's features, including membership, downloading sample questions, test registration, and announcements, are available for free to all visitors. Teachers and schools can join the membership, gaining access to various educational tools and services based on their selected membership type. To create a personal page on the GamaTrain website, you can easily follow the registration process on the website. Anyone familiar with the internet or a school's IT specialist can assist you with this.</p>"
                 },
                 {
                     isExpanded: false,
@@ -135,27 +144,27 @@ export default {
                 {
                     isExpanded: false,
                     question: 'Do I have to register to use services?',
-                    answer: 'No, many of the site features are available for free to all visitors, even without registration.'
+                    answer: '<p>No, many of the site features are available for free to all visitors, even without registration.</p>'
                 },
                 {
                     isExpanded: false,
                     question: 'How many exams can I submit?',
-                    answer: 'There is no limitation on the number of exams a teacher can submit.'
+                    answer: '<p>There is no limitation on the number of exams a teacher can submit.</p>'
                 },
                 {
                     isExpanded: false,
                     question: 'Can a user register multiple times?',
-                    answer: 'Yes, membership is based on email addresses, so you can register with different email addresses.'
+                    answer: '<p>Yes, membership is based on email addresses, so you can register with different email addresses.</p>'
                 },
                 {
                     isExpanded: false,
                     question: 'What are your special offerings ?',
-                    answer: 'The GamaTrain website offers a dedicated server with high speed and bandwidth, making your sample questions accessible to users without the need for external links. Additionally, by joining the site, you engage in healthy academic competition and can earn reasonable income from your educational activities.'
+                    answer: '<p>The GamaTrain website offers a dedicated server with high speed and bandwidth, making your sample questions accessible to users without the need for external links. Additionally, by joining the site, you engage in healthy academic competition and can earn reasonable income from your educational activities.</p>'
                 },
                 {
                     isExpanded: false,
                     question: 'How can I pay the membership fee?',
-                    answer: 'The premium membership fee can be paid online through the PayPal payment gateway soon, which supports various bank cards and ensures high security.'
+                    answer: '<p>The premium membership fee can be paid online through the PayPal payment gateway soon, which supports various bank cards and ensures high security.</p>'
                 }
             ]
         }
@@ -196,7 +205,7 @@ export default {
 
 <style >
 #faq-page-header {
-    height: 34rem;
+    height: 20rem;
     background: #24292F;
     position: relative;
 
@@ -206,12 +215,12 @@ export default {
         margin: auto;
         left: 0;
         right: 0;
-        top: 14.6rem;
+        top: 9.7rem;
         text-align: center;
 
         .gama-text-h1 {
             color: #FFB600;
-            margin-bottom: 1.6rem;
+            margin-bottom: 0.8rem;
         }
 
         .gama-text-subtitle2 {
@@ -222,26 +231,51 @@ export default {
 
 
 #faq-data-container {
+    margin-bottom: 1.5rem;
+
     .v-text-field {
         width: 42.8rem;
-        margin: auto;
+        min-height: auto;
+        height: 4rem !important;
+        border-radius:  3.8rem 0.4rem 0.4rem 3.8rem  ;
 
-        .v-input__control>.v-input__slot:before {
-            border-color: #FFB600;
-            height: 0.1rem;
+
+        margin: 1.6rem auto 1.6rem auto;
+
+
+        .v-input__control>.v-input__slot {
+            min-height: auto;
+            height: 4rem !important;
+
+
+            &:before {
+                border-style: none;
+
+            }
+
 
         }
 
-        .v-icon {
-            color: #FFB600;
-        }
+        .v-input__append-outer {
+                 margin: 0 0 0 0.8rem!important;
+                .v-btn {
+                    min-width: auto;
+                    width: 3.9rem!important;
+                    height: 3.9rem;
+                    border-radius: 0.4rem 3.8rem 3.8rem 0.4rem ;
 
+                    .v-icon{
+                        color: #000;
+                        font-size: 2.2rem;
+                    }
+                }
+            }
     }
 
     #list-rows {
 
         .v-expansion-panel-header {
-            padding: 2.5rem 0 2.5rem 0;
+            padding: 1.55rem 0 1.55rem 0;
             border-bottom: 1px solid rgba(36, 41, 47, 0.10);
 
             .gama-text-button {
@@ -275,9 +309,145 @@ export default {
 }
 
 
-@media only screen and (min-width: 600px) {}
+@media only screen and (min-width: 600px) {
+    #faq-page-header {
+        height: 26rem;
+
+
+        #main-title-holder {
+            top: 11.5rem;
+
+            .gama-text-h1 {
+                margin-bottom: 0.8rem;
+            }
+
+        }
+    }
+
+    #faq-data-container {
+
+        .v-text-field {
+            width: 42.8rem;
+            margin: 1.6rem auto 1.6rem auto;
+
+
+            .v-input__control>.v-input__slot:before {
+                border-color: #FFB600;
+                height: 0.1rem;
+
+            }
+
+            .v-icon {
+                color: #FFB600;
+            }
+
+        }
+
+        #list-rows {
+            width: 90%;
+            margin: auto;
+
+            .v-expansion-panel-header {
+                padding: 1.9rem 0 1.9rem 0;
+                border-bottom: 1px solid rgba(36, 41, 47, 0.10);
+
+                .gama-text-button {
+                    font-weight: 600;
+                    font-size: 1.8rem;
+                }
+            }
+
+            .v-expansion-panel-content__wrap {
+                padding: 2.4rem 0 0 0;
+
+                .gama-text-body2 {
+                    line-height: 2.2rem;
+
+                    >p {
+                        font-size: 1.6rem;
+                    }
+
+                    >ul {
+                        font-size: 1.6rem;
+                        margin-top: 1rem;
+
+                        >li {}
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+}
 
 
 
-@media only screen and (min-width: 960px) {}
+@media only screen and (min-width: 960px) {
+    #faq-page-header {
+        height: 34rem;
+        background: #24292F;
+        position: relative;
+
+
+        #main-title-holder {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 14.6rem;
+            text-align: center;
+
+            .gama-text-h1 {
+                color: #FFB600;
+                margin-bottom: 1.6rem;
+            }
+
+            .gama-text-subtitle2 {
+                color: #FFB600 !important;
+            }
+        }
+    }
+
+
+    #faq-data-container {
+        margin-bottom: 4.8rem;
+
+        .v-text-field {
+            width: 42.8rem;
+            margin: 2.4rem auto 8.1rem auto;
+
+
+            .v-input__control>.v-input__slot:before {
+                border-color: #FFB600;
+                height: 0.1rem;
+
+            }
+
+            .v-icon {
+                color: #FFB600;
+            }
+
+        }
+
+        #list-rows {
+
+            .v-expansion-panel-header {
+                padding: 2.5rem 0 2.5rem 0;
+
+            }
+
+            .v-expansion-panel-content__wrap {
+                padding: 2.4rem 0 0 0;
+
+
+            }
+
+        }
+
+    }
+
+}
 </style>
