@@ -25,7 +25,7 @@
                     <v-text-field he class="rounded-ts pr-0" dense outlined hide-details v-model="searchQuery"
                         label="Search">
                         <template slot="append-outer">
-                            <v-btn flat dense color="#FFB300" class="white--text">
+                            <v-btn  dense color="#FFB300" class="white--text">
                                 <v-icon>mdi-magnify</v-icon>
                             </v-btn>
 
