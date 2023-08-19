@@ -16,7 +16,7 @@
                                         <v-btn rounded :to="slide.link" class="mt-8   d-none d-md-inline-flex"
                                             id="read-about-btn" x-large>Read about it</v-btn>
 
-                                        <v-btn text id="slide-register-btn" class="d-md-none">
+                                        <v-btn @click="openAuthDialog('register')" text id="slide-register-btn" class="d-md-none">
                                             Touch to register
                                             <v-icon color="#FFB300">
                                                 mdi-arrow-right-bold
@@ -89,6 +89,11 @@ export default {
                 }
             ],
         }
+    },
+    methods: {
+        openAuthDialog(val) {
+            this.$router.push({ query: { auth_form: val } });
+        },
     }
 }
 </script>

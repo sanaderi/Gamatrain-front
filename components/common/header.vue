@@ -26,22 +26,12 @@
                 <v-menu transition="slide-x-transition" offset-y min-width="150">
                   <template v-slot:activator="{ on, attrs }">
                     <div v-bind="attrs" v-on="on">
-                      <v-avatar size="32">
+                      <v-avatar size="32" v-if="$auth.user.avatar">
                         <v-img :src="$auth.user.avatar" alt="user avatar" />
                       </v-avatar>
-                      <v-btn text class="pointer pa-2 font-weight-bolder "
-                        :class="menuSetting.bgColor == '#fff' ? '' : 'white--text'">
-                        <span v-if="$auth.user.first_name">
-                          {{ $auth.user.first_name }}
-                        </span>
-                        <span v-else-if="$auth.user.last_name">
-                          {{ $auth.user.last_name }}
-                        </span>
-                        <span v-else>
-                          No name
-                        </span>
-
-                      </v-btn>
+                      <v-icon v-else :color="menuSetting.linkColor">
+                        mdi-account
+                      </v-icon>
                     </div>
                   </template>
                   <v-list>
@@ -112,7 +102,7 @@
 
 
 
-      <v-navigation-drawer right v-model="sidebar" app  class="hidden-md-and-up main-sidebar">
+      <v-navigation-drawer v-model="sidebar" app class="hidden-md-and-up main-sidebar">
         <!-- Start:  Menu items -->
         <v-list dense shaped>
           <!--Profile info-->
@@ -201,8 +191,12 @@
       <!--   Start: navbar   main-container -->
 
       <!--Mobile nav-->
-      <v-app-bar class="d-block d-md-none mobile_bar" fixed flat :class="menuSetting.class" >
+      <v-app-bar class="d-block d-md-none mobile_bar" fixed flat :class="menuSetting.class">
 
+        <v-icon  @click="sidebar = !sidebar" class="px-2" 
+          :class="menuSetting.bgColor == '#fff' ? '' : 'white--text '">
+          mdi-menu
+        </v-icon>
         <!--Logo section-->
         <nuxt-link to="/">
           <v-img id="main-logo" :src="`/images/${menuSetting.logo}`" />
@@ -263,12 +257,47 @@
           </v-bottom-sheet>
         </div>
 
-        <v-badge dot overlap>
-          <v-icon large @click="sidebar = !sidebar" class="px-2" style="font-size: 3rem;"
-            :class="menuSetting.bgColor == '#fff' ? '' : 'white--text '">
-            mdi-menu
-          </v-icon>
-        </v-badge>
+        <v-btn v-if="!$auth.loggedIn" id="mobile-signin-btn" @click="openLoginDialog">
+          Sign in
+        </v-btn>
+        <common-notification-component v-if="$auth.loggedIn" :menuSetting="menuSetting" ref="notificationComponent"
+          class="d-block d-md-none" />
+        <v-menu v-if="$auth.loggedIn" transition="slide-x-transition" offset-y min-width="150">
+          <template v-slot:activator="{ on, attrs }">
+            <div v-bind="attrs" v-on="on">
+              <v-avatar v-if="$auth.user.avatar" class="ml-2">
+                <v-img :src="$auth.user.avatar" alt="user avatar" />
+              </v-avatar>
+              <v-icon v-else class="ml-2" :color="menuSetting.linkColor">
+                mdi-account
+              </v-icon>
+            </div>
+          </template>
+          <v-list>
+            <v-list-item v-for="(item, i) in user_profile_items" :key="i" :to="item.link">
+              <v-list-item-icon class="mr-0 nt">
+                <v-icon small>
+                  {{ item.icon }}
+                </v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>
+                {{ item.title }}
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item class="pointer " @click="$auth.logout()">
+              <v-list-item-icon class="mr-0">
+                <v-icon small>
+                  mdi-logout
+                </v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>
+
+                Logout
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
 
       </v-app-bar>
       <!--End mobile nav-->
@@ -483,9 +512,10 @@ export default {
     // }
 
     if (this.$route.name == 'index' || this.$route.name == 'smart-learning'
-     || this.$route.name == 'services' || this.$route.name == 'school-service' 
-     || this.$route.name == 'faq' 
-     ) {
+      || this.$route.name == 'services' || this.$route.name == 'school-service'
+      || this.$route.name == 'faq'
+      || this.$route.name == 'terms'
+    ) {
       this.menuSetting = {
         logo: 'gamatrain-logo.svg',
         bgColor: '#000',
@@ -520,9 +550,10 @@ export default {
 
     handleScroll() {
       if (this.$route.name == 'index' || this.$route.name == 'smart-learning'
-       || this.$route.name == 'services' || this.$route.name == 'school-service'
-       || this.$route.name == 'faq' 
-       )  
+        || this.$route.name == 'services' || this.$route.name == 'school-service'
+        || this.$route.name == 'faq'
+        || this.$route.name == 'terms'
+      )
         if (window.scrollY > 60) {
           this.menuSetting = {
             logo: 'gamatrain-logo-black.svg',
@@ -541,66 +572,67 @@ export default {
 
           }
         };
+    }
+  },
+  watch: {
+    currentOpenDialog(val) {
+      if (val === 'login') {
+        this.$refs.register_modal.register_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = false;
+        this.$refs.login_modal.login_dialog = true;
+      } else if (val === 'register') {
+        this.$refs.login_modal.login_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = false;
+        this.$refs.register_modal.register_dialog = true;
+      } else if (val === 'pass_recover') {
+        this.$refs.login_modal.login_dialog = false;
+        this.$refs.register_modal.register_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = true;
+      } else {
+        this.$refs.login_modal.login_dialog = false;
+        this.$refs.login_modal.register_dialog = false;
+        this.$refs.pass_recover_modal.pass_recover_dialog = false;
       }
+
     },
-    watch: {
-      currentOpenDialog(val) {
-        if (val === 'login') {
-          this.$refs.register_modal.register_dialog = false;
-          this.$refs.pass_recover_modal.pass_recover_dialog = false;
-          this.$refs.login_modal.login_dialog = true;
-        } else if (val === 'register') {
-          this.$refs.login_modal.login_dialog = false;
-          this.$refs.pass_recover_modal.pass_recover_dialog = false;
-          this.$refs.register_modal.register_dialog = true;
-        } else if (val === 'pass_recover') {
-          this.$refs.login_modal.login_dialog = false;
-          this.$refs.register_modal.register_dialog = false;
-          this.$refs.pass_recover_modal.pass_recover_dialog = true;
-        } else {
-          this.$refs.login_modal.login_dialog = false;
-          this.$refs.login_modal.register_dialog = false;
-          this.$refs.pass_recover_modal.pass_recover_dialog = false;
+
+    //Handle auth form from all of section
+    "$route.query.auth_form"(val) {
+      if (val === 'login') {
+        this.$refs.login_modal.login_dialog = true;
+        this.$router.push({ query: {} });
+      } else if (val == 'register') {
+        this.$refs.register_modal.register_dialog = true;
+        this.$router.push({ query: {} });
+      }
+
+    },
+
+    "$route.name"(val) {
+      if (val == 'index' || val == 'smart-learning' || val == 'services' || val == 'school-service'
+        || val == 'faq'
+        || val == 'terms'
+      ) {
+        this.menuSetting = {
+          logo: 'gamatrain-logo.svg',
+          bgColor: '#000',
+          fixedStatus: true,
+          linkColor: '#fff',
+          class: 'transparentMenu'
+
         }
-
-      },
-
-      //Handle auth form from all of section
-      "$route.query.auth_form"(val) {
-        if (val === 'login') {
-          this.$refs.login_modal.login_dialog = true;
-          this.$router.push({ query: {} });
-        } else if (val == 'register') {
-          this.$refs.register_modal.register_dialog = true;
-          this.$router.push({ query: {} });
-        }
-
-      },
-
-      "$route.name"(val) {
-        if (val == 'index' || val == 'smart-learning' || val=='services' || val=='school-service'
-        || val == 'faq' 
-        ) {
-          this.menuSetting = {
-            logo: 'gamatrain-logo.svg',
-            bgColor: '#000',
-            fixedStatus: true,
-            linkColor: '#fff',
-            class: 'transparentMenu'
-
-          }
-        } else {
-          this.menuSetting = {
-            logo: 'gamatrain-logo-black.svg',
-            bgColor: '#fff',
-            fixedStatus: false,
-            linkColor: '#424A53',
-            class: ''
-          }
+      } else {
+        this.menuSetting = {
+          logo: 'gamatrain-logo-black.svg',
+          bgColor: '#fff',
+          fixedStatus: false,
+          linkColor: '#424A53',
+          class: ''
         }
       }
-    },
-  };
+    }
+  },
+};
 </script>
 
 
@@ -623,6 +655,16 @@ export default {
 #main-header {
   .menu-item:hover {
     border-bottom: 3px solid rgb(0, 139, 139);
+  }
+
+  .v-icon {
+    font-size: 2.8rem;
+  }
+
+  .v-avatar {
+    min-width: 2.8rem;
+    width: 2.8rem;
+    height: 2.8rem;
   }
 
 
@@ -729,10 +771,41 @@ export default {
 
 
 @media only screen and (max-width: 600px) {
+  #main-header {
+    .v-icon {
+      font-size: 2rem;
+    }
+
+    .v-avatar {
+      min-width: 2rem!important;
+      width: 2rem!important;
+      height: 2rem!important;
+    }
+  }
+
   #main-logo {
     margin-left: 1.6rem !important;
     width: 8.0551rem !important;
     height: 2rem !important;
+  }
+
+  #mobile-signin-btn {
+    border-radius: 3rem;
+    background: #FFB600;
+    width: 6.4rem;
+    height: 2rem;
+    margin-left: 1.6rem;
+
+
+    .v-btn__content {
+      color: #24292F;
+      text-transform: none;
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
   }
 
   .mobile-search-sheet {
@@ -782,6 +855,18 @@ export default {
 }
 
 @media only screen and (min-width: 600px) and (max-width: 960px) {
+  #main-header {
+    .v-icon {
+      font-size: 2.4rem;
+    }
+
+    .v-avatar {
+      min-width: 2.4rem!important;
+      width: 2.4rem!important;
+      height: 2.4rem!important;
+    }
+  }
+
   #main-logo {
     margin-left: 3rem !important;
     width: 1.6458rem;
