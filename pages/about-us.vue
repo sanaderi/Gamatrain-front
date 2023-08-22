@@ -1,83 +1,179 @@
 <template>
-    <div id="about-us">
-        <v-container id="header">
+    <div>
+
+        <v-container fluid id="about-page-header">
+
+            <v-container>
+                <v-card id="map-card" flat>
+                    <v-row>
+                        <v-col cols="12">
+                            <div class="lottie-background" ref="lottieBackground">
+                                <div id="main-title-holder">
+                                    <h1 class="gama-text-h1 ">
+                                        About Us
+                                    </h1>
+                                    <p class="gama-text-subtitle2">
+                                        Learning Together, Earning Together Building a Brighter Future
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+                        </v-col>
+
+                    </v-row>
+                </v-card>
+
+            </v-container>
+
+
+        </v-container>
+
+        <v-container id="about-introduce-container">
             <v-row>
                 <v-col cols="12">
-                    <h1 class="gama-text-h4">About us</h1>
-                    <v-img src="/images/about-us-header.png" alt="About us" />
-                    <p class="gama-text-h6">To Gamatrain</p>
-                    <p class="text-left">
-                        The leading ed-tech platform for effortless and secure file sharing and collaboration. Our goal is
-                        to make learning and working together easier and more efficient for everyone.
+                    <h2 class="gama-text-h4">
+                        GamaTrain
+                    </h2>
+                    <p class="gama-text-body1">
+                        Welcome to GamaTrain, the EdTech startup revolutionizing education. Our platform offers innovative
+                        services like sample exams, online tests, tutoring, and more, enhancing the learning experience for
+                        teachers and students. Join us to shape the future of education!
                     </p>
                 </v-col>
             </v-row>
         </v-container>
 
-        <v-container fluid id="share-files">
-            <v-container>
-                <v-row>
-                    <v-col col="12" sm="12" md="8" class="order-last order-md-first">
-                        <h2 class="gama-text-h6">Share files</h2>
-                        <p class="gama-text-body1">
-                            At Gamatrain, we believe that technology has the power to transform education and empower
-                            learners and educators. That's why we have developed a cutting-edge platform that makes it easy
-                            for you to share files and collaborate with your peers, whether you're a student, educator, or
-                            professional.
-                            With Gamatrain, you can upload files of any type and size, organize them into folders, and share
-                            them with specific individuals or groups. Our platform is designed to make file sharing
-                            intuitive and effortless, so you can focus on what really matters - learning and collaborating.
-                        </p>
-                    </v-col>
-                    <v-col cols="12" sm="12" md="4">
-                        <v-img src="/images/about-us-share-files.png" />
-                    </v-col>
-                </v-row>
-            </v-container>
-        </v-container>
 
-
+        <!-- <v-container>
+            <v-row>
+                <v-col cols="12">
+                    <div class="progress-container">
+                        <div class="progress-bar" ref="progressBar"></div>
+                    </div>
+                </v-col>
+            </v-row>
+        </v-container> -->
     </div>
+
+
+
+    <!-- <v-img src="/images/about-us-header.png" alt="About us" /> -->
 </template>
 
 
 <script>
+import lottie from 'lottie-web';
+import mapAnimation from '../static/images/about-us-header.json'; // Adjust the path
+
 export default {
-    auth: false
+    auth: false,
+    mounted() {
+        this.initLottieAnimation();
+    },
+    methods: {
+        initLottieAnimation() {
+            const animationContainer = this.$refs.lottieBackground;
+            const animationInstance = lottie.loadAnimation({
+                container: animationContainer,
+                renderer: 'svg', // Use 'svg' or 'canvas' based on your preference
+                loop: true,
+                autoplay: true,
+                animationData: mapAnimation, // Pass the animation data directly
+            });
+            animationInstance.setSpeed(2); // Set the speed factor (0.5 is 50% of the original speed)
+
+        },
+    },
 }
 </script>
 
 
 <style scoped>
-#about-us {
-    #header {
-        margin-top: 10rem;
-        text-align: center;
-        padding-bottom: 6.4rem;
+.progress-container {
+    width: 50px;
+    height: 200px;
+    border: 4px solid #ccc;
+    position: relative;
+    overflow: hidden;
+}
 
-        .gama-text-h4 {
-            margin-bottom: 1.6rem;
+.progress-bar {
+    height: 200px;
+    width: 100%;
+    background-color: #3498db;
+    animation: progressAnimation 5s linear forwards;
+}
+
+@keyframes progressAnimation {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 100%;
+        background-color: #2ecc71;
+    }
+}
+
+
+#about-page-header {
+    height: 34rem;
+    background: #24292F;
+    position: relative;
+
+
+    #map-card {
+        background-color: transparent;
+        background-image: url('/images/about-us-header.svg');
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: 43rem 23rem;
+        height: 30rem;
+        position: relative;
+        display: grid;
+        place-items: center;
+
+        .lottie-background {
+            width: 40rem;
+            height: 38rem;
+            background-repeat: no-repeat;
         }
 
-
-        .gama-text-h6 {
-            margin-bottom: 4.8rem;
-        }
-
-        .v-image {
+        #main-title-holder {
+            position: absolute;
             margin: auto;
-            width: 56rem;
-            height: 40rem;
+            left: 0;
+            right: 0;
+            top: 11rem;
+            text-align: center;
+
+            .gama-text-h1 {
+                color: #FFB600;
+                margin-bottom: 0.8rem;
+            }
+
+            .gama-text-subtitle2 {
+                color: #FFB600 !important;
+            }
         }
     }
 }
 
-#share-files {
-    background: #F4F4F4;
 
-    .v-image {
-        width: 13.9442rem;
-        height: 12rem;
+#about-introduce-container{
+    text-align: center;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+
+    .gama-text-h4{
+        color: #24292F; 
+        margin-bottom: 4.8rem;
+    }
+    .gama-text-body1{
+        color: rgba(36, 41, 47, 0.80);
+        text-align: left;
     }
 }
 
@@ -85,5 +181,4 @@ export default {
 
 
 
-@media only screen and (min-width: 960px) {}
-</style>
+@media only screen and (min-width: 960px) {}</style>

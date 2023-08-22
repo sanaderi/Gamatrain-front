@@ -468,6 +468,7 @@ export default {
                     .v-list-item {
                         padding: 1.6rem;
 
+
                         .v-list-item__title {
                             color: #24292F;
                             font-family: Inter-Regular;
@@ -479,7 +480,7 @@ export default {
 
                     }
 
-                    
+
 
                     .active-title::before {
                         content: "";
@@ -490,6 +491,23 @@ export default {
                         background: #FFB600;
                         opacity: 1;
                     }
+
+                    .v-list-item::after {
+                        position: absolute;
+                        bottom: 0;
+                        content: "";
+                        display: block;
+                        width: 80%;
+                        height: 0.1rem;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                        border-radius: 0.4rem;
+                        background: #FFF;
+                        opacity: 1;
+                    }
+
+                    
                 }
 
 
