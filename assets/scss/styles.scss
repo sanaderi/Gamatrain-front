@@ -63,7 +63,7 @@ html {
 .gama-text-h6 {
   font-family: Inter-Meduim;
   color: #000;
-  font-size: 1.6rem;
+  font-size: 1.6rem!important;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -101,7 +101,7 @@ html {
 .gama-text-body2 {
   font-family: Inter-Regular;
   color: #000;
-  font-size: 1.2rem;
+  font-size: 1.2rem!important;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -2114,6 +2114,15 @@ body {
 }
 
 
+.container{
+  max-width: 128rem!important;
+}
+
+.container--fluid{
+  max-width: inherit!important;
+}
+
+
 //
 @media only screen and (max-width: 600px) {
   .content-item {
@@ -2231,7 +2240,7 @@ body {
   .gama-text-h6 {
     font-family: Inter-Meduim;
     color: #000;
-    font-size: 1.8rem;
+    font-size: 1.8rem!important;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -2406,7 +2415,7 @@ body {
   .gama-text-h6 {
     color: #354053;
     font-family: Inter-Meduim;
-    font-size: 2rem;
+    font-size: 2rem!important;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -2444,7 +2453,7 @@ body {
   .gama-text-body2 {
     color: #000;
     font-family: Inter-Regular;
-    font-size: 1.4rem;
+    font-size: 1.4rem!important;
     font-style: normal;
     font-weight: 400;
     line-height: normal;

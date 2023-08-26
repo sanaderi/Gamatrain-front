@@ -88,7 +88,7 @@ export default {
               link: '/search?type=test'
             },
             {
-              title: 'School finder',
+              title: 'School Finder',
               link: '/school-service'
             },
             {

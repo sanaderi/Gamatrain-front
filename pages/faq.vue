@@ -291,14 +291,16 @@ export default {
                 line-height: 2.2rem;
 
                 >p {
-                    font-size: 1.6rem;
+                    font-size: 1.6rem!important;
                 }
 
                 >ul {
                     font-size: 1.6rem;
                     margin-top: 1rem;
 
-                    >li {}
+                    >li {
+                        margin-bottom: 1rem;
+                    }
                 }
 
             }

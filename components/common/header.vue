@@ -870,6 +870,25 @@ export default {
     }
   }
 
+  #mobile-signin-btn {
+    border-radius: 3rem;
+    background: #FFB600;
+    width: 6.4rem;
+    height: 2rem;
+    margin-left: 1.6rem;
+
+
+    .v-btn__content {
+      color: #24292F;
+      text-transform: none;
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+  }
+
   #main-logo {
     margin-left: 3rem !important;
     width: 1.6458rem;
