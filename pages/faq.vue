@@ -57,6 +57,7 @@
 
 <script>
 export default {
+    layout:'gama-ds-default',
     auth: false,
     data() {
         return {

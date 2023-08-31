@@ -23,9 +23,10 @@
                 <v-col cols="12">
                     <v-card flat>
                         <v-card-text>
-                            <h2 class="gama-text-h4">Find Your Perfect School with GamaTrain</h2>
+                            <h2 class="gama-text-h4">Community Focused Traning</h2>
+                            <p class="gama-text-h6">Empowering Learning Through Community Engagement</p>
                             <p class="gama-text-body1">
-                                Empowering Learning Through Community Engagement At GamaTrain, we believe that learning is
+                                At GamaTrain, we believe that learning is
                                 not just an individual journey but a collective experience. Our community-focused training
                                 brings students, educators, and parents together in a supportive and interactive platform.
                                 Engage in discussions, share insights, and collaborate on projects, fostering a vibrant
@@ -45,8 +46,9 @@
                         <h2 class="gama-text-h4   white--text ">
                             AI-Based Personalized Learning
                         </h2>
+                        <p class="gama-text-h6 white--text">Your Personalized Pathway to Success</p>
                         <p class="gama-text-body1  white--text">
-                            Your Personalized Pathway to Success Experience the power of AI-driven personalized learning
+                            Experience the power of AI-driven personalized learning
                             with GamaTrain. Our cutting-edge algorithms analyze each student's strengths, weaknesses, and
                             learning style to create tailor-made study paths. From adaptive assessments to dynamically
                             adjusted content, our platform ensures students receive the precise support they need to excel
@@ -72,8 +74,9 @@
                     <h2 class="gama-text-h4">
                         Targeted Home Learning Tasks and Worksheets
                     </h2>
+                    <p class="gama-text-h6">Maximize Learning Opportunities Beyond the Classroom</p>
                     <p class="gama-text-body1">
-                        Maximize Learning Opportunities Beyond the Classroom With GamaTrain's targeted home learning tasks
+                        With GamaTrain's targeted home learning tasks
                         and worksheets, students can reinforce their classroom learning independently. Our carefully curated
                         resources cater to different subjects and grade levels, providing students with a wealth of practice
                         materials that enhance comprehension and retention.
@@ -88,8 +91,9 @@
                 <v-row>
                     <v-col cols="12" md="6" class="order-last order-md-first">
                         <h2 class="gama-text-h4">Online Tests</h2>
+                        <p class="gama-text-h6">Assess, Analyze, and Improve</p>
                         <p class="gama-text-body1">
-                            Assess, Analyze, and Improve GamaTrain's online tests offer a comprehensive assessment tool to
+                            GamaTrain's online tests offer a comprehensive assessment tool to
                             gauge students' knowledge and progress. Our platform provides detailed analysis and performance
                             insights, helping students identify areas for improvement and educators to tailor instruction
                             based on data-driven insights.
@@ -111,10 +115,13 @@
                 </v-col>
                 <v-col cols="12" md="6">
                     <h2 class="gama-text-h4">
-                        Interactive Tutorials
+                        Tutorials
                     </h2>
+                    <p class="gama-text-h6">
+                        Engaging and Immersive Learning Experiences
+                    </p>
                     <p class="gama-text-body1">
-                        Engaging and Immersive Learning Experiences Say goodbye to traditional lectures and hello to
+                        Say goodbye to traditional lectures and hello to
                         interactive tutorials! GamaTrain's engaging multimedia tutorials make learning enjoyable and
                         effective. Students can delve into visually appealing and interactive content, deepening their
                         understanding of complex topics and boosting knowledge retention.
@@ -130,8 +137,9 @@
                         <h2 class="gama-text-h4">
                             School Finder
                         </h2>
+                        <p class="gama-text-h6">Find Your Ideal Educational Institution</p>
                         <p class="gama-text-body1">
-                            Find Your Ideal Educational Institution Choosing the right school is crucial for a student's
+                            Choosing the right school is crucial for a student's
                             growth. With GamaTrain's school finder, parents and students can explore and compare various
                             educational institutions. Our comprehensive database provides insights into facilities, faculty,
                             extracurricular activities, and more, making the school selection process informed and
@@ -154,8 +162,9 @@
                     <h2 class="gama-text-h4">
                         Live Streaming
                     </h2>
+                    <p class="gama-text-h6">Real-Time Learning, Anytime, Anywhere</p>
                     <p class="gama-text-body1">
-                        Real-Time Learning, Anytime, Anywhere Experience the flexibility of live streaming with GamaTrain.
+                        Experience the flexibility of live streaming with GamaTrain.
                         Our platform enables students to attend real-time virtual classes, workshops, and webinars from the
                         comfort of their homes. Interact with educators and peers, participate in discussions, and access
                         expert-led sessions conveniently.
@@ -172,8 +181,11 @@
                         <h2 class="gama-text-h4">
                             Content Monetization
                         </h2>
+                        <p class="gama-text-h6">
+                            Empower Educators, Empower Education
+                        </p>
                         <p class="gama-text-body1">
-                            Empower Educators, Empower Education At GamaTrain, we value educators and their expertise. Our
+                            At GamaTrain, we value educators and their expertise. Our
                             content monetization program allows educators to share their knowledge and educational resources
                             while earning a fair income. Join our platform and contribute to the growth of the educational
                             community while getting recognized for your efforts.
@@ -189,9 +201,10 @@
         <v-container fluid id="service-education-future">
             <v-row>
                 <v-col cols="12" md="12">
-                    <p class="gama-text-h4">
+                    <p class="gama-text-h6">
                         Join the Future of Education Today!
                     </p>
+                    <v-btn href="mailto:contact@gamatrain.com">Contact Us</v-btn>
                 </v-col>
             </v-row>
         </v-container>
@@ -202,6 +215,7 @@
 
 <script>
 export default {
+    layout:'gama-ds-default',
     auth: false
 }
 </script>
@@ -393,13 +407,30 @@ export default {
 
 
 #service-education-future {
-    height: 8rem;
+    height: 11.9rem;
     background: #FFB600;
     text-align: center;
     padding: 0;
 
     .col-12 {
         padding: 1.1rem 6.5rem 1.1rem 6.5rem !important;
+
+    }
+
+    .v-btn {
+        margin-top: 2.4rem;
+        height: 2.8rem;
+        padding: 0.8rem 2rem;
+        justify-content: center;
+        border-radius: 3rem;
+        background: #24292F;
+        margin-bottom: 2.4rem;
+        text-transform: none;
+        color: #FFB600 !important;
+        font-size: 1.8rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
 
     }
 
@@ -489,13 +520,21 @@ export default {
 
 
     #service-education-future {
-        height: 8rem;
+        height: 12.2rem;
         background: #FFB600;
         text-align: center;
         padding: 0;
 
         .col-12 {
             padding: 2.5rem 0 2.5rem 0 !important;
+
+        }
+
+        .v-btn {
+            margin-top: 1.6rem;
+            height: 3.6rem;
+            padding: 0.4rem 1.6rem;
+          
 
         }
 
@@ -654,7 +693,7 @@ export default {
 
 
     #service-education-future {
-        height: 10rem;
+        height: 13.2rem;
         background: #FFB600;
         text-align: center;
 
@@ -663,5 +702,14 @@ export default {
 
         }
 
+        .v-btn {
+            margin-top: 1.6rem;
+            height: 4.4rem;
+            padding: 0.8rem 2rem;
+          
+
+        }
+
     }
-}</style>
+}
+</style>

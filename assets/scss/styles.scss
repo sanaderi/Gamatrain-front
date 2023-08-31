@@ -2114,15 +2114,55 @@ body {
 }
 
 
+//Set new design system
+
 .container{
-  max-width: 128rem!important;
+  max-width: 134rem!important;
 }
 
-.container--fluid{
-  max-width: inherit!important;
-}
+// .gama-d-none{
+//   display: none!important;
+// }
+// .gama-d-block{
+//   display: block!important;
+// }
+
+// @media only screen and (min-width:744px) {
+//   .container{
+//     max-width: 54.4rem!important;
+//   }
+
+//   .gama-d-tablet-none{
+//     display: none!important;
+//   }
+
+//   .gama-d-tablet-block{
+//     display: block!important;
+//   }
+// }
 
 
+// @media only screen and (min-width:1440px) {
+//   .container{
+//     max-width: 90.4rem!important;
+//   }
+  
+//   .gama-d-desktop-none{
+//     display: none!important;
+//   }
+  
+//   .gama-d-desktop-block{
+//     display: block!important;
+//   }
+// }
+
+  .container--fluid{
+    max-width: inherit!important;
+  }
+
+
+
+//End new design system
 //
 @media only screen and (max-width: 600px) {
   .content-item {
@@ -2188,6 +2228,8 @@ body {
 }
 
 @media only screen and (min-width:600px) {
+  
+  
 
   //sm size
   .gama-text-h1 {
@@ -2316,9 +2358,7 @@ body {
 
 @media only screen and (min-width: 600px) and (max-width: 960px) {
 
-  .content-item {
-    min-height: 17rem !important;
-  }
+  
 
   .book-no-img {
     width: 12rem;
@@ -2365,6 +2405,7 @@ body {
 
 @media only screen and (min-width: 960px) {
 
+  
   // md size
   .gama-text-h1 {
     color: #354053;

@@ -72,11 +72,11 @@
                 <v-col cols="12" sm="8">
                     <h2 class="title">Find school service</h2>
                     <p class="gama-text-body1 describe">
-                        You don't have to try the hardest ways anymore. Gamma has provided you with access to school
+                        You don't have to try the hardest ways anymore. GamaTrain has provided you with access to school
                         information. Just
-                        filter and Gamma will find it for you.
+                        filter and GamaTrain will find it for you.
                     </p>
-                    <v-btn to="/school-service" rounded large color="#FFB300">Search school</v-btn>
+                    <v-btn to="/school-service" rounded large color="#FFB300">Learn more</v-btn>
                 </v-col>
             </v-row>
 
@@ -97,11 +97,11 @@
         <v-container fluid id="earn-money-container">
             <v-container>
                 <v-row>
-                    <v-col cols="12" sm="12" md="8" class="text-md-right">
+                    <v-col cols="12" sm="12" md="12" class="text-md-right">
                         <h2 class="describe text-center ">Why wait? Earn money with us in minutes with
                             just a few clicks!</h2>
                     </v-col>
-                    <v-col cols="12" sm="12" md="4" class="text-center text-md-left">
+                    <v-col cols="12" sm="12" md="12" class="text-center ">
                         <v-btn height="36" color="#FFB300" class="white--text">Earn money</v-btn>
                     </v-col>
                 </v-row>

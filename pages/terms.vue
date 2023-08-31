@@ -196,7 +196,7 @@ export default {
                         "The GamaTrain website displays teachers' exams. The exams listed on the system may" +
                         "change or be" +
                         "updated continuously by teachers. In this regard, the GamaTrain website does not accept" +
-                        "any" +
+                        " any " +
                         "responsibility for the exams listed on the site, and the GamaTrain system merely" +
                         "displays exams" +
                         "registered by users." +

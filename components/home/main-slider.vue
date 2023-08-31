@@ -14,7 +14,7 @@
                                         <div class="slide-describe gama-text-body1 mt-6 d-none d-md-block"
                                             v-html="slide.text" />
                                         <v-btn rounded :to="slide.link" class="mt-8   d-none d-md-inline-flex"
-                                            id="read-about-btn" x-large>Read about it</v-btn>
+                                            id="read-about-btn" x-large>Learn more</v-btn>
 
                                         <v-btn @click="openAuthDialog('register')" text id="slide-register-btn" class="d-md-none">
                                             Touch to register
@@ -36,7 +36,7 @@
                     <v-card-text>
                         <v-row class="text-center">
                             <v-col cols="7" id="main-search-keyword">
-                                <v-text-field class="rounded-ts" label="Insert text" dense hide-details
+                                <v-text-field class="rounded-ts" label="Ex: Paper Summer Session" dense hide-details
                                     filled></v-text-field>
                             </v-col>
                             <v-col cols="4" class="pl-0 " id="keysearch-cate">
@@ -76,12 +76,12 @@ export default {
                 {
                     title: '<span class="gama-text-h1">AI</span> <span class=""gama-text-h2>System <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education</span>',
                     img: 'ai-robot.png',
-                    text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
+                    text: "Discover the future of education with our AI-powered learning platform,<br> revolutionizing the way you acquire knowledge and skills.",
                     id: 'ai-slide',
                     link: '/smart-learning'
                 }, {
                     title: '<span class="gama-text-h1 font-weight-bold">Question<span class="d-sm-none"><br>&nbsp&nbsp</span> & Answer</span>',
-                    text: "You don't have to try the hardest ways anymore.<br> Gamma has provided you with access to school.",
+                    text: "Q&A made easy. Connect with classmates and<br> teachers for quick answers to your questions.",
                     img: 'a-q.png',
                     id: 'aq-slide',
                     link: '/search?type=question'

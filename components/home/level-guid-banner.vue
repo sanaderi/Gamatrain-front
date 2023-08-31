@@ -36,22 +36,22 @@ export default {
     name: 'level-guid-banner',
     data() {
         return {
-            slideIndex: 1,
+            slideIndex: 0,
             expand: true,
             slideArr: [
                 {
                     img: 'guid-banner1.png',
-                    caption: 'Register now!',
-                    describe: "You don't have to try the hardest ways anymore. Gamma has provided you with access to school."
+                    caption: 'Join us today',
+                    describe: "Simple registration, big rewards"
                 },
                 {
                     img: 'guid-banner2.png',
-                    caption: 'Upload file!',
+                    caption: 'Upload file',
                     describe: 'Easily Upload Your Files and Share Your Knowledge'
                 },
                 {
                     img: 'guid-banner3.png',
-                    caption: 'Earn money!',
+                    caption: 'Earn money',
                     describe: 'Start earning money now by getting paid for your valuable content'
                 }
             ],
@@ -66,7 +66,7 @@ export default {
                 else
                     this.slideIndex++;
 
-            }, 6000);
+            }, 80000);
         },
         stopInterval() {
             clearInterval(this.intervalId); // Clear the interval using the interval ID

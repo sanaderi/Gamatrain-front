@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="about-us-page">
 
         <v-container fluid id="about-page-header">
             <div class="overlay"></div>
@@ -99,7 +99,7 @@
                     </v-col>
                     <v-col cols="12" md="4">
                         <v-slide-x-transition v-if="enableStep2Txt">
-                            <div  class="vision-step">
+                            <div class="vision-step">
                                 <h3 class="gama-text-h5">
                                     Moving Towards Green Economy
                                 </h3>
@@ -117,7 +117,7 @@
                     </v-col>
                     <v-col cols="12" md="4">
                         <v-slide-x-transition v-if="enableStep3Txt">
-                            <div  class="vision-step">
+                            <div class="vision-step">
                                 <h3 class="gama-text-h5">
                                     Decentralized Content Quality Moderation
                                 </h3>
@@ -326,7 +326,7 @@
                 <v-row>
                     <v-col cols="12">
                         <p class="gama-text-h6">Check out our current job openings and apply today!</p>
-                        <v-btn>Apply Now</v-btn>
+                        <v-btn href="mailto:contact@gamatrain.com">Contact Us</v-btn>
                     </v-col>
                 </v-row>
             </v-container>
@@ -346,6 +346,7 @@ import stepAnimation from '../static/images/about-vision-step.json'; // Adjust t
 import LottieAnimation from '~/components/common/lottie-animation.vue';
 
 export default {
+    layout:"gama-ds-default",
     auth: false,
     mounted() {
         // Initialize the Intersection Observer
@@ -371,28 +372,28 @@ export default {
 
             teamMembers: [
                 {
-                    id:1,
+                    id: 1,
                     fullName: 'Mohammad Salehi',
                     avatar: 'mohammad-salehi.jpeg',
                     role: 'DevOps',
                     bio: 'I enjoy of coding and solving hard problems.'
                 },
                 {
-                    id:2,
+                    id: 2,
                     fullName: 'Fahim Kavian',
                     avatar: 'avatar.svg',
                     role: 'UI/UX Designer',
                     bio: ''
                 },
                 {
-                    id:3,
+                    id: 3,
                     fullName: 'Ali Poorbazargan',
                     avatar: 'ali-poorbazargan.png',
                     role: 'CTO',
                     bio: 'With over 7 years of experience in full-stack web development, Ali has been the technical leader of Gama.ir and has been instrumental in designing and developing all aspects of the software, from infrastructure to the final products and user experiences. His expertise and leadership skills help the company stay ahead of the curve in the ever-evolving EdTech industry.'
                 },
                 {
-                    id:4,
+                    id: 4,
                     fullName: 'Ramin Naderi',
                     avatar: 'ramin-naderi.png',
                     role: 'Co-founder & CEO',
@@ -400,21 +401,21 @@ export default {
 
                 },
                 {
-                    id:5,
+                    id: 5,
                     fullName: 'Mehdi Zare',
                     avatar: 'mehdi-zare.png',
                     role: 'Marketing Manager',
                     bio: "Marketing Manager: With over seven years of expertise in marketing research, marketing strategy, content strategy, and business development, Mehdi is an experienced marketing manager who has previously worked for well-known Iranian startups and brands. His contributions enable GAMATrain to understand the market dynamics, identify growth opportunities, and develop effective marketing campaigns to improve user experience. He is committed to helping the company grow and achieve long-term success."
                 },
                 {
-                    id:6,
+                    id: 6,
                     fullName: 'Sadeq Naderi',
                     avatar: 'sadeq-naderi.png',
                     role: 'FrontEnd Developer',
                     bio: "Frontend Developer dedicated to crafting immersive and user-centric web applications. His expertise lies in harnessing a diverse array of frontend technologies, allowing him to consistently deliver polished, intuitive, and captivating user experiences that resonate with audiences. Always in pursuit of excellence, he strives to search for and implement the best strategies or techniques that elevate the quality of web applications. His commitment to continuous improvement drives him to explore innovative solutions that enhance user engagement and satisfaction."
                 },
                 {
-                    id:7,
+                    id: 7,
                     fullName: 'Amin Naderi',
                     avatar: 'avatar.svg',
                     role: 'Support',
@@ -423,7 +424,7 @@ export default {
 
             ],
             activeMember: 2,
-            tmpShowMemeber:1,
+            tmpShowMemeber: 1,
             intervalId: null,
 
 
@@ -599,12 +600,12 @@ export default {
         sliceTeamMember() {
             if (this.screenWidth < 960) {
                 this.activeMember = 1;
-                this.tmpShowMemeber=2;
+                this.tmpShowMemeber = 2;
                 return this.teamMembers.slice(2, 5);
             }
             else {
                 this.activeMember = 2;
-                this.tmpShowMemeber=1;
+                this.tmpShowMemeber = 1;
                 return this.teamMembers.slice(1, 6)
             }
         }
@@ -614,7 +615,7 @@ export default {
 </script>
 
 
-<style>
+<style >
 @keyframes step1ProgressAnimation {
     0% {
         width: 0;
@@ -765,7 +766,7 @@ export default {
         margin-bottom: 4.8rem;
     }
 
-    
+
 
     .step-holder {
         height: 21rem !important;
@@ -1099,6 +1100,7 @@ export default {
         margin-bottom: 2.4rem;
 
         .v-btn__content {
+            text-transform: none;
             color: #FFB600;
             font-size: 1.8rem;
             font-style: normal;
@@ -1967,11 +1969,9 @@ export default {
         }
 
         .v-btn {
-            height: 2.8rem;
-            padding: 0rem 1.245rem;
-            justify-content: center;
-            border-radius: 3rem;
-            background: #24292F;
+            height: 3.6rem;
+            padding: 0rem 1.6rem;
+            border-radius: 2rem;
             margin-bottom: 2.4rem;
 
             .v-btn__content {

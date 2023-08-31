@@ -54,7 +54,7 @@ export default {
                 {
                     icon: 'icon-q-a',
                     stat: '60000',
-                    title: 'Answer & Question'
+                    title: 'Q&A'
                 },
                 {
                     icon: 'icon-multimedia',

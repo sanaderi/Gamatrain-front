@@ -39,7 +39,7 @@
       <v-tab @click="openLink('dars')">
         <v-badge bordered class="pa-1 ml-1 mr-4  badge-tutorial" :content="content_statistics.tutorial" color="#BD081C">
           <div class="nav-link tutorial-icon">
-            <span class="icon icong-blog"></span>
+            <span class="icon icon-tutorial"></span>
             Tutorial
           </div>
         </v-badge>
