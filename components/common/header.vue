@@ -516,6 +516,7 @@ export default {
       || this.$route.name == 'faq'
       || this.$route.name == 'terms'
       || this.$route.name == 'about-us'
+      || this.$route.name == 'earn-money'
     ) {
       this.menuSetting = {
         logo: 'gamatrain-logo.svg',
@@ -555,6 +556,7 @@ export default {
         || this.$route.name == 'faq'
         || this.$route.name == 'terms'
         || this.$route.name == 'about-us'
+        || this.$route.name == 'earn-money'
       )
         if (window.scrollY > 60) {
           this.menuSetting = {
@@ -615,6 +617,7 @@ export default {
         || val == 'faq'
         || val == 'terms'
         || val == 'about-us'
+        || val == 'earn-money'
       ) {
         this.menuSetting = {
           logo: 'gamatrain-logo.svg',

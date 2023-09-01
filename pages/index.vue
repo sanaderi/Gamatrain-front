@@ -102,7 +102,7 @@
                             just a few clicks!</h2>
                     </v-col>
                     <v-col cols="12" sm="12" md="12" class="text-center ">
-                        <v-btn height="36" color="#FFB300" class="white--text">Earn money</v-btn>
+                        <v-btn to="/earn-money" height="36" color="#FFB300" class="white--text">Earn money</v-btn>
                     </v-col>
                 </v-row>
             </v-container>
