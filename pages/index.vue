@@ -4,7 +4,7 @@
 
         <grade-explorer :stats="stats" />
 
-        <level-guid-banner />
+        <level-guid-banner :slide-arr="slideArr" />
 
         <!--Ai learn banner-->
         <v-container class="mt-16">
@@ -157,6 +157,23 @@ export default {
                 },
                 {
                     src: "banner_home_2.jpg"
+                }
+            ],
+            slideArr: [
+                {
+                    img: 'guid-banner1.png',
+                    caption: 'Join us today',
+                    describe: "Simple registration, big rewards"
+                },
+                {
+                    img: 'guid-banner2.png',
+                    caption: 'Upload file',
+                    describe: 'Easily Upload Your Files and Share Your Knowledge'
+                },
+                {
+                    img: 'guid-banner3.png',
+                    caption: 'Earn money',
+                    describe: 'Start earning money now by getting paid for your valuable content'
                 }
             ]
         }

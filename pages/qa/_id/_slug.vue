@@ -264,8 +264,8 @@
                 <v-row>
                   <v-col cols="3" md="2">
                     <h2 class="text-h5 text-md-h4">
-                      {{ contentData.replies.list.lenght }}
-                      <span v-if="contentData.replies.list.lenght>1">Answers</span>
+                      {{ contentData.replies?.list.lenght }}
+                      <span v-if="contentData.replies?.list.lenght>1">Answers</span>
                       <span v-else>Answer</span>
                     </h2>
                   </v-col>
@@ -278,7 +278,7 @@
                 <v-row>
                   <v-col cols="12" class="px-0 pt-0 px-sm-3 pt-sm-3">
                     <v-row
-                      v-for="answer in contentData.replies.list"
+                      v-for="answer in contentData.replies?.list"
                       :key="answer.id"
                     >
                       <!--Score action-->
@@ -905,7 +905,7 @@ export default {
     reInit() {//When form submit (answer, vote and etc)
       this.$axios.$get(`/api/v1/questions/${this.$route.params.id}`)
         .then(response => {
-          this.contentData.replies.list = response.data.replies.list;
+          this.contentData.replies.list = response.data.replies.list ;
         }).catch(err => {
         console.log(err);
       });

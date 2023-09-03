@@ -32,11 +32,11 @@
         </v-container>
 
 
-        <v-conteiner id="content-monetization">
+        <v-conteiner id="earn-content-monetization">
             <v-row>
                 <v-col cols="12">
                     <v-card flat>
-                        <h2 class="gama-text-h4">Content Monetization</h2>
+                        <h2 class="gama-text-h4">Why Choose Our Content Monetization Service?</h2>
                         <div id="content-monetization-steps">
                             <div class="step">
                                 <div class="step-num">
@@ -56,7 +56,8 @@
 
                                 <div class="step-info">
                                     <h3 class="gama-text-h6">Share Your Expertise</h3>
-                                    <p class="gama-text-body2">Empower K-12 Students with Your Valuable Educational Content.</p>
+                                    <p class="gama-text-body2">Empower K-12 Students with Your Valuable Educational Content.
+                                    </p>
                                 </div>
                             </div>
 
@@ -88,28 +89,93 @@
         </v-conteiner>
 
 
+        <v-container fluid id="earn-how-work">
+            <v-container>
+                <h2 class="gama-text-h4">
+                    How It Works?
+                </h2>
+                <p class="gama-text-body1">
+                    So easy, just follow these steps
+                </p>
+            </v-container>
+
+            <LevelGuidBanner :slide-arr="slideArr" />
+
+        </v-container>
+
+
+
+
+        <v-container id="content-monetization">
+            <h2>
+                What Features and Benefits?
+            </h2>
+            <div>
+                <v-icon>mdi-eye</v-icon>
+                <h4>High Visibility</h4>
+                <p>Reach a Wide Audience of K-12 Students.</p>
+            </div>
+            <div>
+                <v-icon>mdi-account-circle</v-icon>
+                <h4>Personalized Branding</h4>
+                <p>Showcase Your Unique Teaching Style.</p>
+            </div>
+            <div>
+                <v-icon>mdi-security</v-icon>
+                <h4>Secure Transactions</h4>
+                <p>Trustworthy Payment Processing.</p>
+            </div>
+            <div>
+                <v-icon>mdi-chart-donut</v-icon>
+                <h4>Data Insights</h4>
+                <p>Understand Your Audience and Optimize Your Strategy.</p>
+            </div>
+            <div>
+                <v-icon>mdi-headset</v-icon>
+                <h4>Dedicated Support</h4>
+                <p>Our Team is Here to Assist You Every Step of the Way.</p>
+            </div>
+        </v-container>
     </div>
 </template>
 
 
 <script>
+import LevelGuidBanner from '~/components/home/level-guid-banner.vue';
+
 export default {
     layout: 'gama-ds-default',
     auth: false,
     data() {
         return {
-
-        }
+            slideArr: [
+                {
+                    img: 'guid-banner1.svg',
+                    caption: 'Sign Up',
+                    describe: "Register and Create Your Content Creator Profile"
+                },
+                {
+                    img: 'guid-banner2.svg',
+                    caption: 'Upload Your Content',
+                    describe: 'Share Your Lesson Plans, Study Guides, and More.'
+                },
+                {
+                    img: 'guid-banner3.svg',
+                    caption: 'Reach Students',
+                    describe: 'Gain Exposure through Our Platform and Network.'
+                },
+                {
+                    img: 'guid-banner4.svg',
+                    caption: 'Earn Big',
+                    describe: 'Reap the Rewards as Students Purchase Your Content.'
+                }
+            ]
+        };
     },
-    methods: {
-
-    },
-    watch: {
-
-    },
-    computed: {
-
-    }
+    methods: {},
+    watch: {},
+    computed: {},
+    components: { LevelGuidBanner }
 }
 </script>
 
@@ -148,6 +214,10 @@ export default {
 
 #earn-page-banner {
     height: 43.8rem;
+    background: url('/images/earn-banner-md.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
 
     .container {
         position: relative;
@@ -245,17 +315,19 @@ export default {
 
 }
 
-#content-monetization {
-
+#earn-content-monetization {
     text-align: center;
 
     .gama-text-h4 {
         text-align: center;
+        margin-bottom: 7.2rem;
     }
 
     #content-monetization-steps {
         width: 88rem;
         margin: auto auto;
+        padding-bottom: 10rem;
+
 
         .step {
             border-left: 6.4rem solid #24292F1A;
@@ -277,15 +349,13 @@ export default {
                 background: #F4F4F4;
                 padding: 2.4rem 1.6rem 1.6rem 1.6rem;
                 text-align: left;
-               
+
 
                 .gama-text-h6 {
                     margin-bottom: 0.8rem;
                 }
 
-                .gama-text-body2 {
-                    
-                }
+                .gama-text-body2 {}
 
             }
 
@@ -294,6 +364,20 @@ export default {
 
 
     }
+}
+
+
+#earn-how-work {
+    text-align: center;
+
+    .gama-text-h4 {
+        margin-bottom: 2.4rem;
+    }
+
+    .gama-text-body1 {
+        margin-bottom: 6.4rem;
+    }
+
 }
 
 
@@ -317,7 +401,7 @@ export default {
 
 
     #earn-page-banner {
-        height: 38.4rem;
+        height: 48.4rem;
 
         .container {
             position: relative;
