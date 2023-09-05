@@ -3,7 +3,9 @@
     <v-container id="footer" class="px-sm-9 px-md-3">
       <v-row>
         <v-col cols="12" sm="6" md="6" class="text-center text-sm-left">
-          <img id="logo" alt="gamatrain" src="/images/gamatrain-logo-black.svg" />
+          <nuxt-link to="/">
+            <img id="logo" alt="gamatrain" src="/images/gamatrain-logo-black.svg" />
+          </nuxt-link>
           <div id="short-describe">
             Our mission is to provide all training services to anyone and anywhere.
           </div>

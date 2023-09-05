@@ -34,57 +34,53 @@
 
         <v-conteiner id="earn-content-monetization">
             <v-row>
-                <v-col cols="12">
-                    <v-card flat>
-                        <h2 class="gama-text-h4">Why Choose Our Content Monetization Service?</h2>
-                        <div id="content-monetization-steps">
-                            <div class="step">
-                                <div class="step-num">
-                                    <h3 class="gama-text-h4">1</h3>
-                                </div>
-
-                                <div class="step-info">
-                                    <h3 class="gama-text-h6">Maximize Your Earnings</h3>
-                                    <p class="gama-text-body2">Earn the Highest Share of Sales in the Industry.</p>
-                                </div>
-                            </div>
-
-                            <div class="step">
-                                <div class="step-num">
-                                    <h3 class="gama-text-h4">2</h3>
-                                </div>
-
-                                <div class="step-info">
-                                    <h3 class="gama-text-h6">Share Your Expertise</h3>
-                                    <p class="gama-text-body2">Empower K-12 Students with Your Valuable Educational Content.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="step">
-                                <div class="step-num">
-                                    <h3 class="gama-text-h4">3</h3>
-                                </div>
-
-                                <div class="step-info">
-                                    <h3 class="gama-text-h6">Flexible Formats</h3>
-                                    <p class="gama-text-body2">Share Word, PDF, PowerPoint, and More.</p>
-                                </div>
-                            </div>
-                            <div class="step">
-                                <div class="step-num">
-                                    <h3 class="gama-text-h4">4</h3>
-                                </div>
-
-                                <div class="step-info">
-                                    <h3 class="gama-text-h6">Easy Setup</h3>
-                                    <p class="gama-text-body2">Quick and Hassle-Free Integration into Your Workflow.</p>
-                                </div>
-                            </div>
-
+                <h2 class="gama-text-h4 monetization-title">Why Choose Our Content Monetization Service?</h2>
+                <div id="content-monetization-steps">
+                    <div class="step">
+                        <div class="step-num">
+                            <h3 class="gama-text-h4">1</h3>
                         </div>
-                    </v-card>
-                </v-col>
+
+                        <div class="step-info">
+                            <h3 class="gama-text-h6">Maximize Your Earnings</h3>
+                            <p class="gama-text-body2">Earn the Highest Share of Sales in the Industry.</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-num">
+                            <h3 class="gama-text-h4">2</h3>
+                        </div>
+
+                        <div class="step-info">
+                            <h3 class="gama-text-h6">Share Your Expertise</h3>
+                            <p class="gama-text-body2">Empower K-12 Students with Your Valuable Educational Content.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-num">
+                            <h3 class="gama-text-h4">3</h3>
+                        </div>
+
+                        <div class="step-info">
+                            <h3 class="gama-text-h6">Flexible Formats</h3>
+                            <p class="gama-text-body2">Share Word, PDF, PowerPoint, and More.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">
+                            <h3 class="gama-text-h4">4</h3>
+                        </div>
+
+                        <div class="step-info">
+                            <h3 class="gama-text-h6">Easy Setup</h3>
+                            <p class="gama-text-body2">Quick and Hassle-Free Integration into Your Workflow.</p>
+                        </div>
+                    </div>
+
+                </div>
             </v-row>
         </v-conteiner>
 
@@ -99,42 +95,39 @@
                 </p>
             </v-container>
 
-            <LevelGuidBanner :slide-arr="slideArr" />
 
         </v-container>
 
+        <div id="earn-how-work-level">
+            <LevelGuidBanner :slide-arr="slideArr" />
+        </div>
 
 
 
-        <v-container id="content-monetization">
-            <h2>
-                What Features and Benefits?
-            </h2>
-            <div>
-                <v-icon>mdi-eye</v-icon>
-                <h4>High Visibility</h4>
-                <p>Reach a Wide Audience of K-12 Students.</p>
-            </div>
-            <div>
-                <v-icon>mdi-account-circle</v-icon>
-                <h4>Personalized Branding</h4>
-                <p>Showcase Your Unique Teaching Style.</p>
-            </div>
-            <div>
-                <v-icon>mdi-security</v-icon>
-                <h4>Secure Transactions</h4>
-                <p>Trustworthy Payment Processing.</p>
-            </div>
-            <div>
-                <v-icon>mdi-chart-donut</v-icon>
-                <h4>Data Insights</h4>
-                <p>Understand Your Audience and Optimize Your Strategy.</p>
-            </div>
-            <div>
-                <v-icon>mdi-headset</v-icon>
-                <h4>Dedicated Support</h4>
-                <p>Our Team is Here to Assist You Every Step of the Way.</p>
-            </div>
+        <v-container id="earn-features">
+            <v-row>
+                <v-card flat>
+                    <h2 class="gama-text-h4">
+                        What Features and Benefits?
+                    </h2>
+                    <div v-for="(item, index) in featureList" :key="index" class="feature-box">
+                        <h4 class="gama-text-h6"><v-icon>mdi-{{ item.icon }}</v-icon>{{ item.title }}</h4>
+                        <p class="gama-text-body1">{{ item.describe }}</p>
+                    </div>
+                </v-card>
+            </v-row>
+        </v-container>
+
+
+        <v-container fluid id="start-monetizing-job">
+            <v-container>
+                <v-row>
+                    <v-col cols="12">
+                        <p class="gama-text-h6">Join Our Community.Start Monetizing Your Content Now.</p>
+                        <button class="gama-lg-btn">Get Started Today!</button>
+                    </v-col>
+                </v-row>
+            </v-container>
         </v-container>
     </div>
 </template>
@@ -144,8 +137,12 @@
 import LevelGuidBanner from '~/components/home/level-guid-banner.vue';
 
 export default {
-    layout: 'gama-ds-default',
     auth: false,
+    head() {
+        return {
+            title: 'Earn money'
+        }
+    },
     data() {
         return {
             slideArr: [
@@ -169,6 +166,33 @@ export default {
                     caption: 'Earn Big',
                     describe: 'Reap the Rewards as Students Purchase Your Content.'
                 }
+            ],
+            featureList: [
+                {
+                    icon: 'eye',
+                    title: 'High Visibility',
+                    describe: 'Reach a Wide Audience of K-12 Students.',
+                },
+                {
+                    icon: 'account-circle',
+                    title: 'Personalized Branding',
+                    describe: 'Showcase Your Unique Teaching Style.',
+                },
+                {
+                    icon: 'security',
+                    title: 'Secure Transactions',
+                    describe: 'Trustworthy Payment Processing.',
+                },
+                {
+                    icon: 'chart-donut',
+                    title: 'Data Insights',
+                    describe: 'Understand Your Audience and Optimize Your Strategy.',
+                },
+                {
+                    icon: 'headset',
+                    title: 'Dedicated Support',
+                    describe: 'Our Team is Here to Assist You Every Step of the Way.',
+                },
             ]
         };
     },
@@ -182,6 +206,7 @@ export default {
 
 <style >
 #earn-page-header {
+    margin-bottom: 4.2rem;
     height: 20rem;
     background: #24292F;
     position: relative;
@@ -213,15 +238,17 @@ export default {
 
 
 #earn-page-banner {
-    height: 43.8rem;
-    background: url('/images/earn-banner-md.svg');
+    height: 44rem;
+    background: url('/images/earn-banner-xs.svg');
     background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: center;
+    background-size: 110% auto;
+    margin-bottom: 3.4rem;
+    background-position: center top;
 
     .container {
         position: relative;
-        height: 43.8rem;
+            height: 44rem;
+
 
 
         #mov-img {
@@ -318,15 +345,19 @@ export default {
 #earn-content-monetization {
     text-align: center;
 
-    .gama-text-h4 {
+    .monetization-title {
         text-align: center;
-        margin-bottom: 7.2rem;
+        width: 95vw;
+        margin: auto auto;
+        margin-bottom: 3rem;
+
+
     }
 
     #content-monetization-steps {
         width: 88rem;
         margin: auto auto;
-        padding-bottom: 10rem;
+        padding-bottom: 5.8rem;
 
 
         .step {
@@ -341,6 +372,11 @@ export default {
                 position: absolute;
                 right: 2.6rem;
                 top: 2.6rem;
+
+                .gama-text-h4 {
+                    text-align: center;
+                    margin-bottom: 3rem;
+                }
             }
 
             .step-info {
@@ -375,33 +411,339 @@ export default {
     }
 
     .gama-text-body1 {
-        margin-bottom: 6.4rem;
+        margin-bottom: 2.4rem;
     }
 
 }
 
+#earn-how-work-level {
+    margin-bottom: 4.8rem;
+}
+
+#earn-features {
+    text-align: center;
+    margin-bottom: 4.8rem;
+    padding: 2.6rem;
+
+    .v-card {
+        width: 100vw;
+        margin: auto;
+    }
 
 
+
+
+
+    .gama-text-h4 {
+        margin: auto;
+        margin-bottom: 2.4rem;
+    }
+
+    .feature-box {
+        display: block;
+        text-align: left;
+        max-width: 57.8rem;
+        height: fit-content;
+        width: 100%;
+        max-height: 13.2rem;
+        padding: 2.4rem 1.6rem 1.6rem 2.4rem;
+        border-radius: 0.6rem;
+        background: rgba(36, 41, 47, 0.05);
+        margin: auto auto 0.8rem auto !important;
+
+        .gama-text-h6 {
+            margin-bottom: 1.7rem;
+
+            .v-icon {
+                color: #FFB600;
+                font-size: 2rem;
+                margin-right: 0.8rem;
+                margin-bottom: 0.4rem;
+            }
+        }
+    }
+}
+
+#start-monetizing-job {
+    background: #24292F;
+    text-align: center;
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+
+    .gama-text-h6 {
+        color: #F3F3FB;
+        margin-bottom: 2.4rem;
+    }
+
+
+
+
+}
+
+
+@media (min-width: 438px) {
+    #earn-page-banner {
+        height: 60rem;
+    }
+}
+
+@media (min-width: 500px) {
+    #earn-page-banner {
+        height: 70rem;
+    }
+}
 
 @media (min-width: 600px) {
     #earn-page-header {
-        height: 26rem;
+        height: 24.2rem;
+        margin-bottom: 3.4rem;
+
+
+        #main-title-holder {
+            max-width: 71.2rem;
+            top: 11.8rem;
+        }
 
 
     }
+
+    #earn-page-banner {
+        height: 40rem;
+        
+        background: url('/images/earn-banner-sm.svg');
+        background-repeat: no-repeat;
+        background-size: 140% auto;
+        background-position: center top;
+
+        .container {
+            position: relative;
+            height: 50rem;
+            
+
+            #mov-img {
+                position: absolute;
+                top: 0;
+                opacity: 0;
+                left: 10.78rem;
+                animation-name: slideAndRotateMovTabletAnimation;
+                animation-duration: 2s;
+                /* Adjust the animation duration as needed */
+                animation-timing-function: ease;
+                /* Adjust the timing function as needed */
+                animation-fill-mode: forwards;
+                /* Keeps the final state of the animation */
+            }
+
+            #doc-img {
+                position: absolute;
+                top: 24.9rem;
+                left: -10rem;
+                animation-name: slideAndRotateDocTabletAnimation;
+                animation-duration: 2s;
+                /* Adjust the animation duration as needed */
+                animation-timing-function: ease;
+                /* Adjust the timing function as needed */
+                animation-fill-mode: forwards;
+                /* Keeps the final state of the animation */
+            }
+
+
+            #zip-img {
+                position: absolute;
+                bottom: -10rem;
+                left: -40rem;
+                animation-name: slideAndRotateZipTabletAnimation;
+                animation-duration: 2s;
+                /* Adjust the animation duration as needed */
+                animation-timing-function: ease;
+                /* Adjust the timing function as needed */
+                animation-fill-mode: forwards;
+                /* Keeps the final state of the animation */
+            }
+
+
+            #pdf-img {
+                position: absolute;
+                top: 12rem;
+                right: -60rem;
+                animation-name: slideAndRotatePdfTabletAnimation;
+                animation-duration: 2s;
+                /* Adjust the animation duration as needed */
+                animation-timing-function: ease;
+                /* Adjust the timing function as needed */
+                animation-fill-mode: forwards;
+                /* Keeps the final state of the animation */
+            }
+
+
+            #gif-img {
+                position: absolute;
+                top: 5.83rem;
+                right: -40rem;
+                animation-name: slideAndRotateGifTabletAnimation;
+                animation-duration: 2s;
+                /* Adjust the animation duration as needed */
+                animation-timing-function: ease;
+                /* Adjust the timing function as needed */
+                animation-fill-mode: forwards;
+                /* Keeps the final state of the animation */
+            }
+
+
+            #mp3-img {
+                position: absolute;
+                top: 20.81rem;
+                right: 15.46rem;
+                animation-name: slideAndRotateMp3TabletAnimation;
+                animation-duration: 2s;
+                /* Adjust the animation duration as needed */
+                animation-timing-function: ease;
+                /* Adjust the timing function as needed */
+                animation-fill-mode: forwards;
+                /* Keeps the final state of the animation */
+            }
+
+        }
+
+    }
+
+    #earn-content-monetization {
+        text-align: center;
+
+
+
+        #content-monetization-steps {
+            width: 100vw;
+            padding-left: 1.6rem;
+            padding-right: 1.6rem;
+            padding-bottom: 5.8rem;
+            margin: auto auto;
+
+
+
+            .step {
+                border-left: 6.4rem solid #24292F1A;
+                border-top: 1rem solid transparent;
+                border-bottom: 1rem solid transparent;
+                height: 10.7rem;
+                width: 0;
+                position: relative;
+
+                .step-num {
+                    position: absolute;
+                    right: 2.6rem;
+                    top: 2.6rem;
+                }
+
+                .step-info {
+                    width: 88vw;
+                    height: 8.6rem;
+                    background: #F4F4F4;
+                    padding: 2.4rem 1.6rem 1.6rem 1.6rem;
+                    text-align: left;
+
+
+                    .gama-text-h6 {
+                        margin-bottom: 0.8rem;
+                    }
+
+                    .gama-text-body2 {}
+
+                }
+
+
+            }
+
+
+        }
+    }
+
+
+
+
+    #earn-how-work-level {
+        margin-bottom: 4.8rem;
+    }
+
+    #earn-features {
+        text-align: center;
+        margin-bottom: 6.4rem;
+
+
+        .gama-text-h4 {
+            margin: auto;
+
+            margin-bottom: 2.4rem;
+        }
+
+        .feature-box {
+            text-align: left;
+            max-width: 57.8rem;
+            height: fit-content;
+            width: 100%;
+            max-height: 13.2rem;
+            padding: 2.4rem 1.6rem 1.6rem 2.4rem;
+            border-radius: 0.6rem;
+            background: rgba(36, 41, 47, 0.05);
+            margin: auto auto 0.8rem auto !important;
+
+            .gama-text-h6 {
+                margin-bottom: 1.7rem;
+
+                .v-icon {
+                    color: #FFB600;
+                    font-size: 2rem;
+                    margin-right: 0.8rem;
+                    margin-bottom: 0.4rem;
+                }
+            }
+        }
+    }
+
+    #start-monetizing-job {
+        background: #24292F;
+        text-align: center;
+        padding-top: 2.4rem;
+        padding-bottom: 2.4rem;
+
+        .gama-text-h6 {
+            color: #F3F3FB;
+            margin-bottom: 2.4rem;
+        }
+    }
+
+
 
 
 
 }
 
 
+@media (min-width: 750px) {
+    #earn-page-banner {
+        height: 45rem;
+    }
+}
+
+
+@media (min-width: 850px) {
+    #earn-page-banner {
+        height: 50rem;
+    }
+}
 
 @media only screen and (min-width: 960px) {
 
 
 
     #earn-page-banner {
-        height: 48.4rem;
+        background: url('/images/earn-banner-md.svg');
+        height: 34.4rem;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-size: 120% auto;
+        width: 100%;
+
 
         .container {
             position: relative;
@@ -494,6 +836,123 @@ export default {
         }
 
     }
+
+
+    #earn-content-monetization {
+        text-align: center;
+
+        .monetization-title {
+            text-align: center;
+            width: 95vw;
+            margin: auto auto;
+            margin-bottom: 3rem;
+
+
+        }
+
+        #content-monetization-steps {
+            width: 78vw;
+            margin: auto auto;
+            padding-bottom: 5.8rem;
+
+
+            .step {
+                border-left: 6.4rem solid #24292F1A;
+                border-top: 1rem solid transparent;
+                border-bottom: 1rem solid transparent;
+                height: 10.7rem;
+                width: 0;
+                position: relative;
+
+                .step-num {
+                    position: absolute;
+                    right: 2.6rem;
+                    top: 2.6rem;
+
+                    .gama-text-h4 {
+                        text-align: center;
+                        margin-bottom: 3rem;
+                    }
+                }
+
+                .step-info {
+                    width: 75vw;
+                    height: 8.6rem;
+                    background: #F4F4F4;
+                    padding: 2.4rem 1.6rem 1.6rem 1.6rem;
+                    text-align: left;
+
+
+                    .gama-text-h6 {
+                        margin-bottom: 0.8rem;
+                    }
+
+                    .gama-text-body2 {}
+
+                }
+
+
+            }
+
+
+        }
+    }
+
+    #earn-how-work {
+        margin-bottom: 2.4rem;
+
+    }
+
+    #earn-how-work-level {
+        margin-bottom: 10rem;
+    }
+}
+
+
+@media (min-width: 1100px) {
+    #earn-page-banner {
+        height: 40rem;
+    }
+}
+@media (min-width: 1100px) {
+    #earn-page-banner {
+        height: 45rem;
+    }
+}
+@media (min-width: 1560px) {
+    #earn-page-banner {
+        height: 60rem;
+    }
+}
+
+@media (min-width: 1920px) {
+    #earn-page-banner {
+        height: 65rem;
+    }
+}
+
+@media (min-width: 2200px) {
+    #earn-page-banner {
+        height: 70rem;
+    }
+}
+
+@media (min-width: 2400px) {
+    #earn-page-banner {
+        height: 75rem;
+    }
+}
+
+@media (min-width: 2500px) {
+    #earn-page-banner {
+        height: 80rem;
+    }
+}
+
+@media (min-width: 2800px) {
+    #earn-page-banner {
+        height: 90rem;
+    }
 }
 
 
@@ -508,8 +967,8 @@ export default {
 
     100% {
         opacity: 1;
-        top: 10.6rem;
-        right: 3.38rem;
+        top: 15.6rem;
+        left: 0.2rem;
         transform: translateY(-50%) rotate(-11deg);
         /* Rotate to 45 degrees */
     }
@@ -523,8 +982,8 @@ export default {
     }
 
     100% {
-        left: 2.85rem;
-        top: 19.2rem;
+        left: 0rem;
+        top: 24.2rem;
         transform: translateY(-50%) rotate(-45deg);
         /* Rotate to 45 degrees */
     }
@@ -539,8 +998,8 @@ export default {
     }
 
     100% {
-        top: 15.2rem;
-        left: 8.4rem;
+        top: 20.2rem;
+        left: 5.4rem;
         opacity: 1;
         transform: translateY(-50%) rotate(-28.7deg);
         /* Rotate to 45 degrees */
@@ -557,8 +1016,8 @@ export default {
     }
 
     100% {
-        top: 13.1rem;
-        right: 6.29rem;
+        top: 18.1rem;
+        right: 4.29rem;
         opacity: 1;
         transform: translateY(-50%) rotate(-11deg);
         /* Rotate to 45 degrees */
@@ -575,8 +1034,8 @@ export default {
     }
 
     100% {
-        top: 8.03rem;
-        right: 4.52rem;
+        top: 13.03rem;
+        right: 2.52rem;
         opacity: 1;
         transform: translateY(-50%) rotate(6.416deg);
         /* Rotate to 45 degrees */
@@ -592,8 +1051,8 @@ export default {
     }
 
     100% {
-        top: 17.5rem;
-        right: 1.88rem;
+        top: 22.5rem;
+        right: 0rem;
         transform: translateY(-50%) rotate(42.5deg);
         /* Rotate to 45 degrees */
     }
@@ -617,6 +1076,7 @@ export default {
     100% {
         opacity: 1;
         top: 10rem;
+        left: 8rem;
         transform: translateY(-50%) rotate(-11deg);
         /* Rotate to 45 degrees */
     }
@@ -630,8 +1090,10 @@ export default {
     }
 
     100% {
-        left: 12.75rem;
+        top: 18rem;
+        left: 10.75rem;
         transform: translateY(-50%) rotate(-45deg);
+
         /* Rotate to 45 degrees */
     }
 }
@@ -645,8 +1107,8 @@ export default {
     }
 
     100% {
-        bottom: 19.6rem;
-        left: 23.65rem;
+        top: 16.6rem;
+        left: 17.5rem;
         opacity: 1;
         transform: translateY(-50%) rotate(-28.7deg);
         /* Rotate to 45 degrees */
@@ -663,7 +1125,7 @@ export default {
     }
 
     100% {
-        right: 27rem;
+        right: 16rem;
         top: 12rem;
         opacity: 1;
         transform: translateY(-50%) rotate(-11deg);
@@ -682,7 +1144,7 @@ export default {
 
     100% {
         top: 5.83rem;
-        right: 13.12rem;
+        right: 10.12rem;
         opacity: 1;
         transform: translateY(-50%) rotate(6.416deg);
         /* Rotate to 45 degrees */
@@ -698,8 +1160,8 @@ export default {
     }
 
     100% {
-        top: 20.81rem;
-        right: 15.46rem;
+        top: 18.81rem;
+        right: 10.46rem;
         transform: translateY(-50%) rotate(42.5deg);
         /* Rotate to 45 degrees */
     }

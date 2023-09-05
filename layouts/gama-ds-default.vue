@@ -33,9 +33,15 @@ export default {
 </script>
 
 <style>
-#gama-ds-default .container {
-  max-width: 90.4rem !important;
+
+
+@media (min-width: 960px) {
+  #gama-ds-default .container {
+    max-width: 80% !important;
+    
+  }
 }
+
 
 #gama-ds-default .container--fluid {
   max-width: inherit !important;

@@ -80,6 +80,11 @@
 <script>
 export default {
     auth: false,
+    head(){
+        return{
+            title:'Terms'
+        }
+    },
     data() {
         return {
             searchQuery: '',

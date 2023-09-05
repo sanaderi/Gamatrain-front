@@ -348,6 +348,11 @@ import LottieAnimation from '~/components/common/lottie-animation.vue';
 export default {
     layout:"gama-ds-default",
     auth: false,
+    head(){
+        return{
+            title:'About us'
+        }
+    },
     mounted() {
         // Initialize the Intersection Observer
         this.initIntersectionObserver();

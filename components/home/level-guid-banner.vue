@@ -9,8 +9,8 @@
                     <p class="gama-text-body1">{{ slideArr[slideIndex].describe }}</p>
                     <div class="img-holder">
                         <v-slide-x-transition>
-                            <v-img :alt="slideArr[slideIndex].caption" v-if="expand"
-                                :src="`/images/${slideArr[slideIndex].img}`"></v-img>
+                            <img :alt="slideArr[slideIndex].caption" v-if="expand"
+                                :src="`/images/${slideArr[slideIndex].img}`" />
                         </v-slide-x-transition>
                     </div>
 
@@ -83,7 +83,7 @@ export default {
 
 <style >
 #level-guid-banner {
-    padding-top: 3.6rem;
+    padding-top: 2.4rem;
     padding-bottom: 2.4rem;
     height: 45rem;
     background: #F6F8FA;
@@ -112,6 +112,7 @@ export default {
     .img-holder {
         width: 19.3rem !important;
         height: 14.4rem !important;
+        text-align: center;
         margin: 1.6rem auto 5.8rem auto;
     }
 
@@ -168,11 +169,7 @@ export default {
 
         }
 
-        .v-img {
-            width: 19.3rem !important;
-            height: 14.4rem !important;
-            margin: 0 auto 0 auto;
-        }
+
 
 
 
@@ -180,6 +177,12 @@ export default {
             width: 19.3rem !important;
             height: 14.4rem !important;
             margin: 1.6rem auto 5.8rem auto;
+
+            &>img {
+                width: 19.3rem !important;
+                height: 14.4rem !important;
+                margin: 0 auto 0 auto;
+            }
         }
 
 
@@ -219,21 +222,24 @@ export default {
 @media(min-width: 960px) {
     #level-guid-banner {
         height: 47.7rem;
-      
 
 
-        .v-img {
-            width: 26rem !important;
-            height: 20rem !important;
-            margin: 0 auto 0 auto;
-        }
+
+
 
 
 
         .img-holder {
             width: 26rem !important;
             height: 20rem !important;
-            margin: 1.6rem auto 5.8rem auto;
+            margin: 1.6rem auto 2.6rem auto;
+
+            &>img {
+                width: 26rem !important;
+                height: 20rem !important;
+                margin: 0 auto 0 auto;
+
+            }
         }
 
 

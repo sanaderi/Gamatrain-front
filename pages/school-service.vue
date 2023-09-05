@@ -197,8 +197,12 @@
 
 <script>
 export default {
-    layout:'gama-ds-default',
-    auth: false
+    head() {
+        return {
+            title: 'School Service'
+        }
+    },
+     auth: false
 }
 </script>
 
@@ -660,4 +664,5 @@ export default {
         }
 
     }
-}</style>
+}
+</style>

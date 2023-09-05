@@ -194,7 +194,12 @@
 
 <script>
 export default {
-    auth: false
+    auth: false,
+    head(){
+        return{
+            title:'Smart learning'
+        }
+    },
 }
 </script>
 

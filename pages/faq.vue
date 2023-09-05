@@ -57,7 +57,11 @@
 
 <script>
 export default {
-    layout:'gama-ds-default',
+    head(){
+        return{
+            title:'FAQ'
+        }
+    },
     auth: false,
     data() {
         return {

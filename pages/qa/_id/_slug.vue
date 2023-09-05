@@ -593,7 +593,7 @@
                                 </template>
                               </v-text-field>
                             </validation-provider>
-                            <v-emoji-picker v-show="emoji_box" @select="selectEmoji"/>
+                            <v-emoji-picker v-show="emoji_box" @select="selectEmoji"></v-emoji-picker>
                           </v-col>
                         </v-row>
                       </form>
@@ -905,7 +905,7 @@ export default {
     reInit() {//When form submit (answer, vote and etc)
       this.$axios.$get(`/api/v1/questions/${this.$route.params.id}`)
         .then(response => {
-          this.contentData.replies.list = response.data.replies.list ;
+          this.contentData.replies.list = response.data.replies.list;
         }).catch(err => {
         console.log(err);
       });

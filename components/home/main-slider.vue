@@ -6,8 +6,8 @@
 
                 <v-carousel-item v-for="(slide, i) in slides" :key="i">
                     <v-sheet class="section1" :id="slide.id">
-                        <v-container class="pt-0 pt-sm-8 pt-md-8 ">
-                            <v-card flat>
+                        <v-container class="pt-0 pt-sm-8 pt-md-8  ">
+                            <v-card flat class="px-4 px-sm-1 px-md-16">
                                 <v-row class="white--text ">
                                     <v-col md="12">
                                         <div class="slide-title " v-html="slide.title" />

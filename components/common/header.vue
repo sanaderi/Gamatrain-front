@@ -6,19 +6,23 @@
         class="d-none d-md-block">
         <v-container>
           <v-row>
-            <v-col cols="2" md="2" lg="2" xl="2" class="text-left">
-              <nuxt-link to="/">
-                <v-img alt="Gamatrain" id="main-logo" :src="`/images/${menuSetting.logo}`" />
-              </nuxt-link>
-            </v-col>
-            <v-col cols="6" md="7" lg="7" xl="7">
-              <v-btn tile v-for="(link, i) in menuLink" :to="link.link" :key="i" :color="menuSetting.linkColor" text
-                class="mx-2 mx-md-0 mx-lg-2">
-                <v-icon class="mb-2 mr-1" v-if="link.icon" color="#FFB300">
-                  {{ link.icon }}
-                </v-icon>
-                {{ link.title }}
-              </v-btn>
+            <v-col cols="6" md="9" lg="9" xl="9">
+              <div class="d-flex">
+                <nuxt-link to="/">
+                  <v-img alt="Gamatrain" id="main-logo" :src="`/images/${menuSetting.logo}`" />
+                </nuxt-link>
+
+
+                <div>
+                  <v-btn tile v-for="(link, i) in menuLink" :to="link.link" :key="i" :color="menuSetting.linkColor" text
+                    class="mx-2 mx-md-0 mx-lg-2">
+                    <v-icon class="mb-2 mr-1" v-if="link.icon" color="#FFB300">
+                      {{ link.icon }}
+                    </v-icon>
+                    {{ link.title }}
+                  </v-btn>
+                </div>
+              </div>
             </v-col>
             <v-col cols="4" md="3" lg="3" xl="3" class="text-right">
               <div class="d-flex text-right" v-if="$auth.loggedIn">
@@ -193,8 +197,7 @@
       <!--Mobile nav-->
       <v-app-bar class="d-block d-md-none mobile_bar" fixed flat :class="menuSetting.class">
 
-        <v-icon  @click="sidebar = !sidebar" class="px-2" 
-          :class="menuSetting.bgColor == '#fff' ? '' : 'white--text '">
+        <v-icon @click="sidebar = !sidebar" class="px-2" :class="menuSetting.bgColor == '#fff' ? '' : 'white--text '">
           mdi-menu
         </v-icon>
         <!--Logo section-->
@@ -770,6 +773,8 @@ export default {
 #main-logo {
   width: 12.0827rem !important;
   height: 3rem !important;
+  margin-top: 0.4rem;
+  margin-right: 6.4rem;
 
 }
 
@@ -783,9 +788,9 @@ export default {
     }
 
     .v-avatar {
-      min-width: 2rem!important;
-      width: 2rem!important;
-      height: 2rem!important;
+      min-width: 2rem !important;
+      width: 2rem !important;
+      height: 2rem !important;
     }
   }
 
@@ -867,9 +872,9 @@ export default {
     }
 
     .v-avatar {
-      min-width: 2.4rem!important;
-      width: 2.4rem!important;
-      height: 2.4rem!important;
+      min-width: 2.4rem !important;
+      width: 2.4rem !important;
+      height: 2.4rem !important;
     }
   }
 

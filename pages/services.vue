@@ -215,7 +215,11 @@
 
 <script>
 export default {
-    layout:'gama-ds-default',
+    head(){
+        return{
+            title:'Services'
+        }
+    },
     auth: false
 }
 </script>
