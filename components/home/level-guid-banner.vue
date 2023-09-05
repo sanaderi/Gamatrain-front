@@ -101,11 +101,7 @@ export default {
 
     }
 
-    .v-img {
-        width: 19.3rem !important;
-        height: 14.4rem !important;
-        margin: 0 auto 0 auto;
-    }
+
 
 
 
@@ -114,6 +110,12 @@ export default {
         height: 14.4rem !important;
         text-align: center;
         margin: 1.6rem auto 5.8rem auto;
+
+        &>img {
+            width: 19.3rem !important;
+            height: 14.4rem !important;
+            margin: 0 auto 0 auto;
+        }
     }
 
 

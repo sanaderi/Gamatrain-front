@@ -239,6 +239,7 @@ export default {
 
 #earn-page-banner {
     height: 44rem;
+    overflow: hidden;
     background: url('/images/earn-banner-xs.svg');
     background-repeat: no-repeat;
     background-size: 110% auto;
@@ -356,6 +357,7 @@ export default {
 
     #content-monetization-steps {
         width: 88rem;
+        overflow-x: hidden;
         margin: auto auto;
         padding-bottom: 5.8rem;
 
