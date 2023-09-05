@@ -713,6 +713,39 @@ export default {
     }
 
 
+    #earn-features {
+        text-align: center;
+        margin-bottom: 6.4rem;
+
+
+        .gama-text-h4 {
+            margin: auto;
+
+            margin-bottom: 2.4rem;
+        }
+
+        .feature-box {
+            text-align: left;
+            max-width: 57.8rem;
+            height: fit-content;
+            width: 100%;
+            max-height: 13.2rem;
+            padding: 2.4rem 1.6rem 1.6rem 2.4rem;
+            border-radius: 0.6rem;
+            background: rgba(36, 41, 47, 0.05);
+            margin: auto auto 0.8rem auto !important;
+
+            .gama-text-h6 {
+                margin-bottom: 1.7rem;
+
+                .v-icon {
+                    font-size: 2.4rem;
+                }
+            }
+        }
+    }
+
+
 
 
 
@@ -905,6 +938,42 @@ export default {
 
     #earn-how-work-level {
         margin-bottom: 10rem;
+    }
+
+
+    #earn-features {
+        text-align: center;
+        margin-bottom: 6.4rem;
+
+
+        .gama-text-h4 {
+            margin: auto;
+
+            margin-bottom: 2.4rem;
+        }
+
+        .feature-box {
+            text-align: left;
+            max-width: 57.8rem;
+            height: fit-content;
+            width: 100%;
+            max-height: 13.2rem;
+            padding: 2.4rem 1.6rem 1.6rem 2.4rem;
+            border-radius: 0.6rem;
+            background: rgba(36, 41, 47, 0.05);
+            margin: auto auto 0.8rem auto !important;
+
+            .gama-text-h6 {
+                margin-bottom: 1.7rem;
+
+                .v-icon {
+                    color: #FFB600;
+                    font-size: 3.2rem;
+                    margin-right: 0.8rem;
+                    margin-bottom: 0.4rem;
+                }
+            }
+        }
     }
 }
 
