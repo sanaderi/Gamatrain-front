@@ -393,10 +393,7 @@ export default {
                     margin-bottom: 0.8rem;
                 }
 
-                .gama-text-body2 {
-                    overflow-x: scroll;
-
-                }
+               
 
             }
 

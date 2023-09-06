@@ -214,8 +214,7 @@ export default {
 }
 
 .v-select__slot {
-    background: #fff !important;
-    border: transparent;
+    /* border: transparent; */
     padding-left: 0;
     padding-right: 0;
 }

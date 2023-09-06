@@ -123,7 +123,7 @@ export default {
       { class: "test", text: "Paper", icon: "icon-paper",link:"/search?type=test" },
       { class: "content", text: "Multimedia", icon: "icon-multimedia" ,link:"/search?type=learnfiles" },
       { class: "faq", text: "Q & A", icon: "icon-q-a",link:"/search?type=question" },
-      { class: "textbook", text: "Tutorial", icon: "icon icong-blog" ,link:"/search?type=dars" },
+      { class: "textbook", text: "Tutorial", icon: "icon-tutorial" ,link:"/search?type=dars" },
       // { class: "school", text: "School", icon-school: "school" ,link:"/search?type=school",status:'disabled' },
       // { class: "tutor", text: "Tutor", icon: "icon-teacher" ,link:"/search?type=tutor",status:'disabled' },
     ],

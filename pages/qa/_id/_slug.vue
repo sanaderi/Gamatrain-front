@@ -2,7 +2,7 @@
   <div>
     <div class="qa-details-content">
       <!-- Start : Category -->
-      <category/>
+      <category />
       <!-- End:Category -->
 
       <!--  Start: breadcrumb  -->
@@ -11,7 +11,7 @@
           <div style="overflow-x:auto!important; ">
             <div style="min-width: max-content">
               <div class=" mt-0 py-0 header-path">
-                <breadcrumb :breads="breads"/>
+                <breadcrumb :breads="breads" />
               </div>
             </div>
           </div>
@@ -34,9 +34,7 @@
                         <v-card flat color="#F5F5F5" class="d-flex fill-height text-center" min-height="200">
                           <v-row>
                             <v-col cols="12">
-                              <v-btn icon x-large
-                                     @click="submitScore('question',contentData.id,'plus')"
-                              >
+                              <v-btn icon x-large @click="submitScore('question', contentData.id, 'plus')">
                                 <v-icon size="88">
                                   mdi-menu-up
                                 </v-icon>
@@ -44,9 +42,7 @@
                               <p class="text-h4">
                                 {{ contentData.score }}
                               </p>
-                              <v-btn icon x-large
-                                     @click="submitScore('question',contentData.id,'minus')"
-                              >
+                              <v-btn icon x-large @click="submitScore('question', contentData.id, 'minus')">
                                 <v-icon size="88">
                                   mdi-menu-down
                                 </v-icon>
@@ -56,26 +52,18 @@
                                   mdi-bookmark
                                 </v-icon>
                               </v-btn>
-                              <v-btn icon width="100%"
-                              @click="openCrashReportDialog(contentData.id,'question')"
-                              >
+                              <v-btn icon width="100%" @click="openCrashReportDialog(contentData.id, 'question')">
                                 <v-icon>
                                   mdi-alert-octagon-outline
                                 </v-icon>
                               </v-btn>
-                              <v-btn icon width="100%">
+                              <v-btn class="mb-4" icon width="100%">
                                 <v-icon>
                                   mdi-share-variant-outline
                                 </v-icon>
                               </v-btn>
                             </v-col>
-                            <v-col cols="12" align-self="end">
-                              <v-btn icon class="mb-4" width="100%">
-                                <v-icon>
-                                  mdi-reply
-                                </v-icon>
-                              </v-btn>
-                            </v-col>
+
                           </v-row>
                         </v-card>
                       </v-col>
@@ -94,8 +82,7 @@
                                   <v-col cols="10" class="pl-0 pl-sm-3">
                                     <div class="d-flex pb-0 pb-md-3">
                                       <nuxt-link to="/user/edit-profile">
-                                        <img width="40" height="40"
-                                             v-if="contentData.avatar" :src="contentData.avatar"/>
+                                        <img width="40" height="40" v-if="contentData.avatar" :src="contentData.avatar" />
                                         <v-btn v-else width="40" height="40" class="d-flex" outlined fab x-large>
                                           <v-icon>
                                             mdi-account-outline
@@ -112,34 +99,31 @@
                                           </strong>
                                         </p>
                                         <p class="text-h6">
-                               <span class="orange--text">
-                                 {{
-                                   findStatic(contentData.user_).qNum
-                                 }} Question{{ calcPluralNoun(findStatic(contentData.user_).qNum) }}
-                               </span>
+                                          <span class="orange--text">
+                                            {{
+                                              findStatic(contentData.user_).qNum
+                                            }} Question{{ calcPluralNoun(findStatic(contentData.user_).qNum) }}
+                                          </span>
                                           |
                                           <span class="green--text">
-                                 {{
+                                            {{
                                               findStatic(contentData.user_).aNum
                                             }} Answer{{ calcPluralNoun(findStatic(contentData.user_).aNum) }}
-                               </span>
+                                          </span>
                                           |
                                           <span class="blue--text">
-                                 {{
+                                            {{
                                               findStatic(contentData.user_).score
                                             }} Score{{ calcPluralNoun(findStatic(contentData.user_).score) }}
-                               </span>
+                                          </span>
                                         </p>
                                       </div>
                                     </div>
                                   </v-col>
 
                                   <v-col cols="2" class="text-right">
-                                    <v-btn :outlined="$vuetify.breakpoint.mdAndUp"
-                                           :icon="$vuetify.breakpoint.xs"
-                                           color="success"
-                                           :to="`/direct/${contentData.ownerIdentity}`"
-                                    >
+                                    <v-btn :outlined="$vuetify.breakpoint.mdAndUp" :icon="$vuetify.breakpoint.xs"
+                                      color="success" :to="`/direct/${contentData.ownerIdentity}`">
                                       <v-icon class="mr-1">
                                         mdi-message-reply-text
                                       </v-icon>
@@ -148,37 +132,31 @@
                                   </v-col>
                                 </v-row>
 
-                                <p class="mt-2 text-h5" v-html="contentData.question.replace(/\n/g, '<br />')"/>
+                                <p class="mt-2 text-h5" v-html="contentData.question.replace(/\n/g, '<br />')" />
                               </v-col>
 
                               <v-col cols="12" class="px-0 pb-0 px-sm-3 pb-sm-3" align-self="end">
                                 <v-row>
-                                  <v-col cols="7" md="6" class="px-0 pb-0 px-sm-3 pb-sm-3">
+                                  <v-col cols="7" md="8" class="px-0 pb-0 px-sm-3 pb-sm-3">
                                     <div class="d-none d-md-block">
-                                      <v-chip link class="mr-1">
-                                        <nuxt-link :to="`/search?type=question&section=${contentData.section}`">
-                                          {{ contentData.section_title }}
-                                        </nuxt-link>
+                                      <v-chip small :to="`/search?type=question&section=${contentData.section}`" link
+                                        class="mr-1">
+                                        {{ contentData.section_title }}
                                       </v-chip>
-                                      <v-chip link class="mr-1">
-                                        <nuxt-link
-                                          :to="`/search?type=question&section=${contentData.section}&base=${contentData.base}`">
-                                          {{ contentData.base_title }}
-                                        </nuxt-link>
+                                      <v-chip small link
+                                        :to="`/search?type=question&section=${contentData.section}&base=${contentData.base}`"
+                                        class="mr-1">
+                                        {{ contentData.base_title }}
                                       </v-chip>
-                                      <v-chip link class="ma-1">
-                                        <nuxt-link
-                                          :to="`/search?type=question&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`">
-                                          {{ contentData.lesson_title }}
-                                        </nuxt-link>
+                                      <v-chip small link class="ma-1"
+                                        :to="`/search?type=question&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`">
+                                        {{ contentData.lesson_title }}
                                       </v-chip>
                                     </div>
 
                                     <div class="d-flex d-md-none">
                                       <!--Score action sm and xs-->
-                                      <v-btn icon
-                                             @click="submitScore('question',contentData.id,'plus')"
-                                      >
+                                      <v-btn icon @click="submitScore('question', contentData.id, 'plus')">
                                         <v-icon size="40">
                                           mdi-menu-up
                                         </v-icon>
@@ -186,9 +164,7 @@
                                       <p class="pt-3">
                                         {{ contentData.score }}
                                       </p>
-                                      <v-btn icon
-                                             @click="submitScore('question',contentData.id,'minus')"
-                                      >
+                                      <v-btn icon @click="submitScore('question', contentData.id, 'minus')">
                                         <v-icon size="40">
                                           mdi-menu-down
                                         </v-icon>
@@ -206,12 +182,12 @@
                                           mdi-comment-plus
                                         </v-icon>
                                       </v-btn>
-                                      <v-spacer/>
+                                      <v-spacer />
                                     </div>
                                   </v-col>
-                                  <v-col cols="5" md="6" class="px-0 pb-0 text-right">
+                                  <v-col cols="5" md="4" class="px-0 pb-0 text-right">
                                     <div class="d-none d-md-block">
-                                      <v-spacer/>
+                                      <v-spacer />
                                       <v-btn text class="simple-btn">
                                         <v-icon class="mr-1">
                                           mdi-calendar-month
@@ -232,9 +208,7 @@
                                           mdi-bookmark
                                         </v-icon>
                                       </v-btn>
-                                      <v-btn icon
-                                             @click="openCrashReportDialog(contentData.id,'question')"
-                                      >
+                                      <v-btn icon @click="openCrashReportDialog(contentData.id, 'question')">
                                         <v-icon size="20">
                                           mdi-alert-octagon-outline
                                         </v-icon>
@@ -264,31 +238,26 @@
                 <v-row>
                   <v-col cols="3" md="2">
                     <h2 class="text-h5 text-md-h4">
-                      {{ contentData.replies?.list.lenght }}
-                      <span v-if="contentData.replies?.list.lenght>1">Answers</span>
+                      {{ answer_list.length }}
+                      <span v-if="answer_list.lenght > 1">Answers</span>
                       <span v-else>Answer</span>
                     </h2>
                   </v-col>
                   <v-col cols="9" md="10">
-                    <v-divider class="my-3"/>
+                    <v-divider class="my-3" />
                   </v-col>
                 </v-row>
 
                 <!--Answer section-->
                 <v-row>
                   <v-col cols="12" class="px-0 pt-0 px-sm-3 pt-sm-3">
-                    <v-row
-                      v-for="answer in contentData.replies?.list"
-                      :key="answer.id"
-                    >
+                    <v-row v-for="answer in answer_list" :key="answer.id">
                       <!--Score action-->
                       <v-col cols="1" class="pr-0 d-none d-md-block ">
                         <v-card flat color="#F5F5F5" class="mb-4 d-flex fill-height text-center" min-height="200">
                           <v-row>
                             <v-col cols="12">
-                              <v-btn icon x-large
-                                     @click="submitScore('reply',answer.id,'plus')"
-                              >
+                              <v-btn icon x-large @click="submitScore('reply', answer.id, 'plus')">
                                 <v-icon size="88">
                                   mdi-menu-up
                                 </v-icon>
@@ -296,9 +265,7 @@
                               <p class="text-h4">
                                 {{ answer.score }}
                               </p>
-                              <v-btn icon x-large
-                                     @click="submitScore('reply',answer.id,'minus')"
-                              >
+                              <v-btn icon x-large @click="submitScore('reply', answer.id, 'minus')">
                                 <v-icon size="88">
                                   mdi-menu-down
                                 </v-icon>
@@ -312,11 +279,9 @@
                               <!--Select correct answer-->
                               <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
-                                  <v-btn icon width="100%"
-                                         x-large
-                                         v-bind="attrs" v-on="on"
-                                         @click="selectCorrectAnswer(answer.id)"
-                                         v-if="contentData.owner==true && answer.selected==0">
+                                  <v-btn icon width="100%" x-large v-bind="attrs" v-on="on"
+                                    @click="selectCorrectAnswer(answer.id)"
+                                    v-if="contentData.owner == true && answer.selected == 0">
                                     <v-icon size="38" color="green">
                                       mdi-check
                                     </v-icon>
@@ -326,9 +291,8 @@
                               </v-tooltip>
 
                               <!--Edit button-->
-                              <v-btn icon width="100%"
-                                     @click="openEditReplyDialog(answer.id,answer.answer)"
-                                     v-if="answer.owner==true">
+                              <v-btn icon width="100%" @click="openEditReplyDialog(answer.id, answer.answer)"
+                                v-if="answer.owner == true">
                                 <v-icon>
                                   mdi-pencil
                                 </v-icon>
@@ -336,18 +300,15 @@
 
 
                               <!--Delete button -->
-                              <v-btn icon width="100%"
-                                     @click="openDeleteReplyConfirmDialog(answer.id)"
-                                     v-if="answer.owner==true">
+                              <v-btn icon width="100%" @click="openDeleteReplyConfirmDialog(answer.id)"
+                                v-if="answer.owner == true">
                                 <v-icon>
                                   mdi-delete
                                 </v-icon>
                               </v-btn>
 
 
-                              <v-btn icon width="100%"
-                                     @click="openCrashReportDialog(answer.id,'questionReply')"
-                              >
+                              <v-btn icon width="100%" @click="openCrashReportDialog(answer.id, 'questionReply')">
                                 <v-icon>
                                   mdi-alert-octagon-outline
                                 </v-icon>
@@ -364,7 +325,7 @@
                       <!--End score action-->
 
                       <v-col cols="12" md="11">
-                        <v-card :color="answer.selected==1 ? '#5EFF8126' : '#F5F5F5'" flat class="fill-height">
+                        <v-card :color="answer.selected == 1 ? '#5EFF8126' : '#F5F5F5'" flat class="fill-height">
                           <v-card-text class="d-flex fill-height">
                             <v-row>
                               <v-col cols="12" class="px-0 px-sm-3">
@@ -372,8 +333,7 @@
                                   <v-col cols="10" class="pl-0 pl-sm-3">
                                     <div class="d-flex pb-0">
                                       <nuxt-link to="/user/edit-profile">
-                                        <img width="40" height="40"
-                                             v-if="answer.avatar" :src="answer.avatar"/>
+                                        <img width="40" height="40" v-if="answer.avatar" :src="answer.avatar" />
                                         <v-btn v-else width="47" height="47" class="d-flex" outlined fab x-large>
                                           <v-icon>
                                             mdi-account-outline
@@ -390,32 +350,30 @@
                                           </strong>
                                         </p>
                                         <p class="text-h6">
-                               <span class="orange--text">
-                                 {{
-                                   findStatic(answer.user_).qNum
-                                 }} Question{{ calcPluralNoun(findStatic(answer.user_).qNum) }}
-                               </span>
+                                          <span class="orange--text">
+                                            {{
+                                              findStatic(answer.user_).qNum
+                                            }} Question{{ calcPluralNoun(findStatic(answer.user_).qNum) }}
+                                          </span>
                                           |
                                           <span class="green--text">
-                                 {{
+                                            {{
                                               findStatic(answer.user_).aNum
                                             }} Answer{{ calcPluralNoun(findStatic(answer.user_).aNum) }}
-                               </span>
+                                          </span>
                                           |
                                           <span class="blue--text">
-                                  {{
+                                            {{
                                               findStatic(answer.user_).score
                                             }} Score{{ calcPluralNoun(findStatic(answer.user_).score) }}
-                               </span>
+                                          </span>
                                         </p>
                                       </div>
                                     </div>
                                   </v-col>
                                   <v-col cols="2" class="text-right">
-                                    <v-btn :outlined="$vuetify.breakpoint.mdAndUp"
-                                           :icon="$vuetify.breakpoint.xs"
-                                           :to="`/direct/${answer.ownerIdentity}`"
-                                           color="success">
+                                    <v-btn :outlined="$vuetify.breakpoint.mdAndUp" :icon="$vuetify.breakpoint.xs"
+                                      :to="`/direct/${answer.ownerIdentity}`" color="success">
                                       <v-icon class="mr-1">
                                         mdi-message-reply-text
                                       </v-icon>
@@ -426,7 +384,7 @@
                               </v-col>
                               <v-col cols="12">
                                 <div>
-                                  <p class="mt-2 text-h5" v-html="answer.answer.replace(/\n/g, '<br />')"/>
+                                  <p class="mt-2 text-h5" v-html="answer.answer.replace(/\n/g, '<br />')" />
                                 </div>
                               </v-col>
 
@@ -434,8 +392,7 @@
                               <v-col cols="12" class="px-0 pb-0 px-sm-3 pb-sm-3" align-self="end">
                                 <v-row>
                                   <v-col cols="7" md="6" class="px-0 pb-0 px-sm-3 pb-sm-3">
-                                    <v-btn text disabled
-                                           plain class="pl-0 simple-btn d-none d-md-block">
+                                    <v-btn text disabled plain class="pl-0 simple-btn d-none d-md-block">
                                       <v-icon class="mr-1">
                                         mdi-comment-plus
                                       </v-icon>
@@ -443,7 +400,7 @@
                                     </v-btn>
                                     <div class="d-flex d-md-none">
                                       <!--Score action sm and xs-->
-                                      <v-btn icon @click="submitScore('reply',answer.id,'plus')">
+                                      <v-btn icon @click="submitScore('reply', answer.id, 'plus')">
                                         <v-icon size="40">
                                           mdi-menu-up
                                         </v-icon>
@@ -451,9 +408,7 @@
                                       <p class="pt-3">
                                         {{ answer.score }}
                                       </p>
-                                      <v-btn icon
-                                             @click="submitScore('reply',answer.id,'minus')"
-                                      >
+                                      <v-btn icon @click="submitScore('reply', answer.id, 'minus')">
                                         <v-icon size="40">
                                           mdi-menu-down
                                         </v-icon>
@@ -461,9 +416,8 @@
                                       <!--End score action sm and xs-->
 
                                       <p class="pt-3"> | </p>
-                                      <v-btn icon color="green"
-                                      @click="selectCorrectAnswer(answer.id)"
-                                             v-if="contentData.owner==true && answer.selected==0">
+                                      <v-btn icon color="green" @click="selectCorrectAnswer(answer.id)"
+                                        v-if="contentData.owner == true && answer.selected == 0">
                                         <v-icon size="20">
                                           mdi-check
                                         </v-icon>
@@ -473,9 +427,8 @@
                                           mdi-comment-plus
                                         </v-icon>
                                       </v-btn>
-                                      <v-btn icon
-                                             @click="openEditReplyDialog(answer.id,answer.answer)"
-                                             v-if="answer.owner==true">
+                                      <v-btn icon @click="openEditReplyDialog(answer.id, answer.answer)"
+                                        v-if="answer.owner == true">
                                         <v-icon size="20">
                                           mdi-pencil
                                         </v-icon>
@@ -483,22 +436,21 @@
 
 
                                       <!--Delete button -->
-                                      <v-btn icon
-                                             @click="openDeleteReplyConfirmDialog(answer.id)"
-                                             v-if="answer.owner==true">
+                                      <v-btn icon @click="openDeleteReplyConfirmDialog(answer.id)"
+                                        v-if="answer.owner == true">
                                         <v-icon size="20">
                                           mdi-delete
                                         </v-icon>
                                       </v-btn>
 
-                                      <v-spacer/>
+                                      <v-spacer />
                                     </div>
                                   </v-col>
                                   <v-col cols="5" md="6" class="px-0 pb-0 px-sm-3 pb-md-3 text-right d-flex">
-                                    <v-spacer/>
+                                    <v-spacer />
 
                                     <div class="d-none d-md-block">
-                                      <v-spacer/>
+                                      <v-spacer />
                                       <v-btn text class="simple-btn">
                                         <v-icon class="mr-1">
                                           mdi-calendar-month
@@ -514,9 +466,7 @@
                                     </div>
 
                                     <div class="d-inline d-md-none px-0">
-                                      <v-btn icon
-                                             @click="openCrashReportDialog(answer.id,'questionReply')"
-                                      >
+                                      <v-btn icon @click="openCrashReportDialog(answer.id, 'questionReply')">
                                         <v-icon size="20">
                                           mdi-alert-octagon-outline
                                         </v-icon>
@@ -543,32 +493,21 @@
                     </h2>
                   </v-col>
                   <v-col cols="8" md="10">
-                    <v-divider class="my-3"/>
+                    <v-divider class="my-3" />
                   </v-col>
                 </v-row>
                 <v-card color="#F5F5F5" flat>
                   <v-card-text>
-                    <validation-observer ref="observer" v-slot="{invalid}">
+                    <validation-observer ref="observer" v-slot="{ invalid }">
                       <form @submit.prevent="submitReply">
                         <v-row>
                           <v-col cols="12" class="px-0 px-sm-3">
-                            <validation-provider
-                              v-slot="{errors}"
-                              name="your_answer"
-                              rules="required|min:25">
-                              <v-text-field
-                                v-model="answer_form.answer"
-                                outlined
-                                :error-messages="errors"
-                                background-color="#ffffff"
-                                label="Your answer"
-                              >
+                            <validation-provider v-slot="{ errors }" name="your_answer" rules="required|min:25">
+                              <v-text-field v-model="answer_form.answer" outlined :error-messages="errors"
+                                background-color="#ffffff" label="Your answer">
                                 <template slot="append-outer">
-                                  <v-btn icon large
-                                         type="submit"
-                                         :disabled="invalid"
-                                         :loading="loading.reply_form"
-                                         v-if="answer_form.answer">
+                                  <v-btn icon large type="submit" :disabled="invalid" :loading="loading.reply_form"
+                                    v-if="answer_form.answer">
                                     <v-icon>
                                       mdi-send
                                     </v-icon>
@@ -580,7 +519,7 @@
                                   </v-btn>
                                 </template>
                                 <template slot="prepend">
-                                  <v-btn large icon @click="emoji_box=!emoji_box">
+                                  <v-btn large icon @click="emoji_box = !emoji_box">
                                     <v-icon>
                                       mdi-emoticon-excited-outline
                                     </v-icon>
@@ -613,7 +552,7 @@
                     <h2 class="text-h4 text-center">
                       Similar questions
                     </h2>
-                    <v-divider style="width: 80%" class="my-3 mx-auto"/>
+                    <v-divider style="width: 80%" class="my-3 mx-auto" />
                     <p class="text-center">
                       Opps! not found
                     </p>
@@ -629,37 +568,23 @@
     </div>
 
     <!--Edit dialog-->
-    <v-dialog
-      v-model="dialog.edit_reply_form"
-      max-width="480"
-    >
+    <v-dialog v-model="dialog.edit_reply_form" max-width="480">
       <v-card>
         <v-card-title class="text-h5">
           Edit your reply
         </v-card-title>
 
         <v-card-text>
-          <validation-observer ref="reply_observer" v-slot="{invalid}">
+          <validation-observer ref="reply_observer" v-slot="{ invalid }">
             <form @submit.prevent="updateReply">
               <v-row>
                 <v-col cols="12">
-                  <validation-provider
-                    v-slot="{errors}"
-                    name="your_answer"
-                    rules="required|min:25">
-                    <v-text-field
-                      v-model="edit_answer_form.answer"
-                      outlined
-                      :error-messages="errors"
-                      background-color="#ffffff"
-                      label="Your answer"
-                    >
+                  <validation-provider v-slot="{ errors }" name="your_answer" rules="required|min:25">
+                    <v-text-field v-model="edit_answer_form.answer" outlined :error-messages="errors"
+                      background-color="#ffffff" label="Your answer">
                       <template slot="append-outer">
-                        <v-btn icon large
-                               type="submit"
-                               :disabled="invalid"
-                               :loading="loading.edit_answer_form"
-                               v-if="edit_answer_form.answer">
+                        <v-btn icon large type="submit" :disabled="invalid" :loading="loading.edit_answer_form"
+                          v-if="edit_answer_form.answer">
                           <v-icon>
                             mdi-send
                           </v-icon>
@@ -671,7 +596,7 @@
                         </v-btn>
                       </template>
                       <template slot="prepend">
-                        <v-btn large icon @click="edit_emoji_box=!edit_emoji_box">
+                        <v-btn large icon @click="edit_emoji_box = !edit_emoji_box">
                           <v-icon>
                             mdi-emoticon-excited-outline
                           </v-icon>
@@ -684,7 +609,7 @@
                       </template>
                     </v-text-field>
                   </validation-provider>
-                  <v-emoji-picker v-show="edit_emoji_box" @select="selectEmoji"/>
+                  <v-emoji-picker v-show="edit_emoji_box" @select="selectEmoji" />
                 </v-col>
               </v-row>
             </form>
@@ -695,10 +620,7 @@
     <!--End edit dialog-->
 
     <!--Reply dialog-->
-    <v-dialog
-      v-model="dialog.delete_reply_form"
-      max-width="290"
-    >
+    <v-dialog v-model="dialog.delete_reply_form" max-width="290">
       <v-card>
         <v-card-title class="text-h5">
           Are you sure?
@@ -713,19 +635,11 @@
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn
-            text
-            @click="dialog.delete_reply_form = false"
-          >
+          <v-btn text @click="dialog.delete_reply_form = false">
             No
           </v-btn>
 
-          <v-btn
-            color="red darken-1"
-            text
-            :loading="loading.delete_reply_form"
-            @click="deleteReply()"
-          >
+          <v-btn color="red darken-1" text :loading="loading.delete_reply_form" @click="deleteReply()">
             Yes
           </v-btn>
         </v-card-actions>
@@ -733,7 +647,7 @@
     </v-dialog>
     <!--End Reply dialog-->
 
-    <crash-report ref="crash_report"/>
+    <crash-report ref="crash_report" />
   </div>
 </template>
 <script>
@@ -745,7 +659,7 @@ import RelatedContent from "@/components/details/related-content";
 import LatestTrainingContent from "@/components/details/latest-training-content";
 import RelatedQa from "@/components/details/related-qa";
 import RelatedOnlineExam from "@/components/details/related-online-exam";
-import {ValidationProvider, ValidationObserver} from "vee-validate";
+import { ValidationProvider, ValidationObserver } from "vee-validate";
 import CrashReport from "~/components/common/crash-report.vue";
 
 export default {
@@ -769,7 +683,7 @@ export default {
       title: this.contentData.title
     }
   },
-  async asyncData({params, $axios}) {
+  async asyncData({ params, $axios }) {
     // This could also be an action dispatch
     const content = await $axios.$get(`/api/v1/questions/${params.id}`);
     var contentData = [];
@@ -778,10 +692,11 @@ export default {
       contentData = content.data;
     }
 
-    return {contentData};
+    return { contentData };
   },
   mounted() {
     this.initBreadCrumb();
+    this.reInit();
   },
 
   data: () => ({
@@ -816,8 +731,10 @@ export default {
     },
 
     //Delete section
-    delete_reply_id: null
+    delete_reply_id: null,
     //End delete section
+
+    answer_list:[]
 
   }),
   methods: {
@@ -841,7 +758,7 @@ export default {
       );
     },
     openAuthDialog(val) {
-      this.$router.push({query: {auth_form: val}});
+      this.$router.push({ query: { auth_form: val } });
     },
 
     selectEmoji(emoji) {
@@ -851,7 +768,7 @@ export default {
       if (this.contentData.scores)
         return this.contentData.scores[user_id];
       else
-        return {aNum: 0, qNum: 0, score: 0};
+        return { aNum: 0, qNum: 0, score: 0 };
     },
     calcPluralNoun(num) {
       if (num > 1)
@@ -875,7 +792,9 @@ export default {
         this.answer_form.answer = '';
         this.$toast.success("Reply submit successfully");
       }).catch(err => {
-        console.log(err);
+        this.$toast.error(err.response.data.message);
+        if (err.response.status == 403)
+          this.$router.push({ query: { auth_form: 'login' } });
       }).finally(() => {
         this.loading.reply_form = false;
       })
@@ -903,12 +822,17 @@ export default {
       })
     },
     reInit() {//When form submit (answer, vote and etc)
-      this.$axios.$get(`/api/v1/questions/${this.$route.params.id}`)
+      this.$axios.$get(`/api/v1/questionReplies`, {
+        params:
+        {
+          question: this.$route.params.id
+        }
+      })
         .then(response => {
-          this.contentData.replies.list = response.data.replies.list;
+          this.answer_list = response.data.list;
         }).catch(err => {
-        console.log(err);
-      });
+          console.log(err);
+        });
 
     },
 
@@ -954,13 +878,13 @@ export default {
               if (content_type == 'question')
                 this.contentData.score = response.data.score;
               else {
-                var index = this.contentData.replies.list.findIndex(x => x.id == id);
-                this.contentData.replies.list[index].score = response.data.score;
+                var index = this.answer_list.findIndex(x => x.id == id);
+                this.answer_list[index].score = response.data.score;
               }
 
             }
           }).catch(err => {
-            this.$toast.error("An error occurred");
+           console.log(err);
           })
 
       } else {
@@ -975,20 +899,20 @@ export default {
           window.scrollTo(0, 0);
           this.reInit();
         }).catch(err => {
-        this.$toast.error("An error occured");
-      })
+          this.$toast.error("An error occured");
+        })
     },
 
 
     //Crash report
-    openCrashReportDialog(id,type){
-      this.$refs.crash_report.dialog=true;
-      this.$refs.crash_report.form.type=type;
+    openCrashReportDialog(id, type) {
+      this.$refs.crash_report.dialog = true;
+      this.$refs.crash_report.form.type = type;
 
-      if (type=='questionReply')
-        this.$refs.crash_report.form.id=id;
+      if (type == 'questionReply')
+        this.$refs.crash_report.form.id = id;
       else
-        this.$refs.crash_report.form.id=this.$route.params.id;
+        this.$refs.crash_report.form.id = this.$route.params.id;
     }
     //End crash report
   }
@@ -996,8 +920,8 @@ export default {
 </script>
 
 <style>
-
-.qa-details-content .v-text-field--outlined .v-input__prepend-outer, .v-text-field--outlined .v-input__append-outer {
+.qa-details-content .v-text-field--outlined .v-input__prepend-outer,
+.v-text-field--outlined .v-input__append-outer {
   margin-top: 6px !important;
 }
 </style>
