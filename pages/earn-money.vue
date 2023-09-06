@@ -43,7 +43,7 @@
 
                         <div class="step-info">
                             <h3 class="gama-text-h6">Maximize Your Earnings</h3>
-                            <p class="gama-text-body2">Earn the Highest Share of Sales in the Industry.</p>
+                            <div class="gama-text-body2">Earn the Highest Share of Sales in the Industry.</div>
                         </div>
                     </div>
 
@@ -382,10 +382,10 @@ export default {
             }
 
             .step-info {
-                width: 81.6rem;
+                width: 90vw;
                 height: 8.6rem;
                 background: #F4F4F4;
-                padding: 2.4rem 1.6rem 1.6rem 1.6rem;
+                padding: 1.6rem 1.6rem 1.6rem 1.6rem;
                 text-align: left;
 
 
@@ -393,7 +393,10 @@ export default {
                     margin-bottom: 0.8rem;
                 }
 
-                .gama-text-body2 {}
+                .gama-text-body2 {
+                    overflow-x: scroll;
+
+                }
 
             }
 
