@@ -3,7 +3,7 @@
     <header id="main-header">
       <!--Desktop menu-->
       <v-app-bar flat :fixed="menuSetting.fixedStatus" id="main-menu" :class="menuSetting.class"
-        class="d-none d-md-block">
+        class="d-none d-lg-block">
         <v-container>
           <v-row>
             <v-col cols="6" md="9" lg="9" xl="9">
@@ -29,14 +29,19 @@
                 <v-spacer />
                 <v-menu transition="slide-x-transition" offset-y min-width="150">
                   <template v-slot:activator="{ on, attrs }">
-                    <div v-bind="attrs" v-on="on">
+                    <div v-bind="attrs" v-on="on" class="d-flex">
+                      <div :id="menuSetting.bgColor == '#fff' ? 'header-username-dark' : 'header-username-light'">
+                        {{ userName }}
+                      </div>
                       <v-avatar size="32" v-if="$auth.user.avatar">
                         <v-img :src="$auth.user.avatar" alt="user avatar" />
                       </v-avatar>
                       <v-icon v-else :color="menuSetting.linkColor">
                         mdi-account
                       </v-icon>
+
                     </div>
+
                   </template>
                   <v-list>
                     <v-list-item v-for="(item, i) in user_profile_items" :key="i" :to="item.link">
@@ -66,7 +71,7 @@
 
                 <!--Desktop version-->
                 <common-notification-component :menuSetting="menuSetting" ref="notificationComponent"
-                  class="d-none d-md-block" />
+                  class="d-none d-lg-block" />
 
               </div>
               <div v-else>
@@ -195,7 +200,7 @@
       <!--   Start: navbar   main-container -->
 
       <!--Mobile nav-->
-      <v-app-bar class="d-block d-md-none mobile_bar" fixed flat :class="menuSetting.class">
+      <v-app-bar class="d-block d-lg-none mobile_bar" fixed flat :class="menuSetting.class">
 
         <v-icon @click="sidebar = !sidebar" class="px-2" :class="menuSetting.bgColor == '#fff' ? '' : 'white--text '">
           mdi-menu
@@ -264,7 +269,7 @@
           Sign in
         </v-btn>
         <common-notification-component v-if="$auth.loggedIn" :menuSetting="menuSetting" ref="notificationComponent"
-          class="d-block d-md-none" />
+          class="d-block d-lg-none" />
         <v-menu v-if="$auth.loggedIn" transition="slide-x-transition" offset-y min-width="150">
           <template v-slot:activator="{ on, attrs }">
             <div v-bind="attrs" v-on="on">
@@ -641,6 +646,16 @@ export default {
       }
     }
   },
+  computed: {
+    userName() {
+      if (this.$auth.user.first_name)
+        return this.$auth.user.first_name;
+      else if (this.$auth.user.last_name)
+        return this.$auth.user.last_name;
+      else
+        return 'No name';
+    }
+  }
 };
 </script>
 
@@ -675,6 +690,20 @@ export default {
     width: 2.8rem;
     height: 2.8rem;
   }
+
+  #header-username-light {
+    color: #fff;
+    margin-top: 0.2rem;
+    margin-right: 1rem;
+  }
+
+  #header-username-dark {
+    color: #000;
+    margin-top: 0.2rem;
+    margin-right: 1rem;
+  }
+
+
 
 
   #main-menu {

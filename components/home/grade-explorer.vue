@@ -1,17 +1,20 @@
 <template>
     <v-container id="content-stats-container">
+
         <v-card flat>
             <v-card-text>
                 <v-row>
-                    <v-col cols="2" sm="1" @touchend="handleTouchEnd" @touchmove="handleTouchMove" class="px-0">
-                        <v-sheet class="text-right" id="stats-handler" ref="statsHandler" @touchstart="handleTouchStart"
-                            @mousemove="handleMouseMove" @mousedown="handleMouseDown" @mouseup="handleMouseUp">
-                            <div v-for="(item, index) in stats" :key="index">
-                                <v-btn @click="handleBtnClick(index)" class="my-0  white--text"
-                                    :class="index == 5 ? 'rounded-pill active' : 'rounded-s-xl'"
-                                    v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
+                    <v-col cols="2" sm="1" class="px-0">
+                        <v-sheet class="text-right" id="stats-handler" ref="statsHandler">
+                            <div v-for="(item, index) in stats" :key="index" @touchstart="handleTouchStart(index)"
+                                @touchend="handleTouchEnd(index)" @touchmove="handleTouchMove" @mousemove="handleMouseMove"
+                                @mousedown="handleMouseDown(index)" @mouseup="handleMouseUp(index)" :ref="`handler${index}`"
+                                class="grade-btn">
+                                <v-btn @click="handleBtnClick(index)" class="my-0  white--text" :class="[index == 5 ? 'rounded-pill active' : 'rounded-s-xl',
+                                currentIndex == index ? 'handlerShadow' : '']" v-if="shouldDisplayButton(index)"
+                                    :color="gradeColors[index]"
                                     :style="`font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
                                     {{ gradeHandlerTitle(item.base_title) }}
                                 </v-btn>
                                 <div v-if="index == 5"
@@ -19,14 +22,15 @@
 
                             </div>
                         </v-sheet>
+
                     </v-col>
                     <v-col cols="10" sm="11" class="pl-0">
                         <v-card id="grade-details-card">
-                            <v-card-text class="pa-3 pa-sm-10 pa-md-14">
+                            <v-card-text class="pa-3 pa-sm-10 pa-lg-14">
                                 <div>
                                     <v-row id="stats-details">
-                                        <v-col cols="12" md="6" class="pb-0 pb-sm-6">
-                                            <div class="d-none d-md-block">
+                                        <v-col cols="12" lg="6" class="pb-0 pb-sm-6">
+                                            <div class="d-none d-lg-block">
                                                 <span class="stat-icon icon-paper"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
@@ -36,7 +40,7 @@
                                                 <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                                 <div class="stat">+{{ stats[5].tests | numberFormat }}</div>
                                             </div>
-                                            <v-row class="d-md-none">
+                                            <v-row class="d-lg-none">
                                                 <v-col cols="7" class="pa-0">
                                                     <span class="stat-icon icon-paper"></span>
                                                     <nuxt-link
@@ -57,8 +61,8 @@
                                                 </v-col>
                                             </v-row>
                                         </v-col>
-                                        <v-col cols="12" md="6" class="pb-0 pb-sm-6">
-                                            <div class="d-none d-md-block">
+                                        <v-col cols="12" lg="6" class="pb-0 pb-sm-6">
+                                            <div class="d-none d-lg-block">
                                                 <span class="stat-icon icon-multimedia"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
@@ -68,7 +72,7 @@
                                                 <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                                 <div class="stat">+{{ stats[5].files | numberFormat }}</div>
                                             </div>
-                                            <v-row class="d-md-none">
+                                            <v-row class="d-lg-none">
                                                 <v-col cols="7" class="pa-0">
                                                     <span class="stat-icon icon-multimedia"></span>
                                                     <nuxt-link
@@ -89,8 +93,8 @@
                                                 </v-col>
                                             </v-row>
                                         </v-col>
-                                        <v-col cols="12" md="6" class="pb-0 pb-sm-6">
-                                            <div class="d-none d-md-block">
+                                        <v-col cols="12" lg="6" class="pb-0 pb-sm-6">
+                                            <div class="d-none d-lg-block">
                                                 <span class="stat-icon icon-exam"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
@@ -100,7 +104,7 @@
                                                 <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                                 <div class="stat">+{{ stats[5].exams | numberFormat }}</div>
                                             </div>
-                                            <v-row class="d-md-none">
+                                            <v-row class="d-lg-none">
                                                 <v-col cols="7" class="py-0 px-0">
                                                     <span class="stat-icon icon-exam"></span>
                                                     <nuxt-link
@@ -121,8 +125,8 @@
                                                 </v-col>
                                             </v-row>
                                         </v-col>
-                                        <v-col cols="12" md="6" class="pb-0 pb-sm-6">
-                                            <div class="d-none d-md-block">
+                                        <v-col cols="12" lg="6" class="pb-0 pb-sm-6">
+                                            <div class="d-none d-lg-block">
                                                 <span class="stat-icon icon-q-a"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
@@ -132,7 +136,7 @@
                                                 <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                                 <div class="stat">+{{ stats[5].questions | numberFormat }}</div>
                                             </div>
-                                            <v-row class="d-md-none">
+                                            <v-row class="d-lg-none">
                                                 <v-col cols="7" class="py-0 px-0">
                                                     <span class="stat-icon icon-q-a"></span>
                                                     <nuxt-link
@@ -153,10 +157,10 @@
                                     </v-row>
                                 </div>
 
-                                <v-divider class="d-none d-md-block" style="margin-top: 94px;margin-bottom: 9px;" />
+                                <v-divider class="d-none d-lg-block" style="margin-top: 94px;margin-bottom: 9px;" />
 
 
-                                <div class="d-none d-md-block">
+                                <div class="d-none d-lg-block">
                                     <v-row>
                                         <v-col cols="6" md="6">
                                             <h4 class="section-title">Last questions</h4>
@@ -168,7 +172,7 @@
                                                             <v-img :src="item.avatar"></v-img>
                                                         </v-avatar>
                                                     </v-col>
-                                                    <v-col cols="11" >
+                                                    <v-col cols="11">
                                                         <v-card-title>
                                                             <nuxt-link class="title" :to="`/qa/${item.id}`">
                                                                 <span v-html="truncateLatestTitle(item.title)"></span>
@@ -200,15 +204,15 @@
                                             <v-card class="latest-card" flat v-for="item in papers.slice(0, 3)"
                                                 :key="item.id">
                                                 <v-row>
-                                                    <v-col cols="1" >
+                                                    <v-col cols="1">
                                                         <v-avatar class="my-3" size="32" rounded="0">
                                                             <v-img :src="item.avatar"></v-img>
                                                         </v-avatar>
                                                     </v-col>
-                                                    <v-col cols="11" >
+                                                    <v-col cols="11">
                                                         <v-card-title>
                                                             <nuxt-link class="title" :to="`papers/${item.id}`">
-                                                            <span v-html="truncateLatestTitle(item.title)"></span>
+                                                                <span v-html="truncateLatestTitle(item.title)"></span>
                                                             </nuxt-link>
                                                         </v-card-title>
 
@@ -250,7 +254,6 @@ export default {
         stats: {
             default: []
         }
-
     },
     data() {
         return {
@@ -269,6 +272,7 @@ export default {
                 '#656565',
                 '#C3C1C1'
             ],
+
             gradeSizesXs: [
                 {
                     width: 32,
@@ -580,12 +584,14 @@ export default {
                     fontSize: 8
                 }
             ],
-            touchStartY: 0,
             questions: [],
             papers: [],
             intervalId: null,
-            isDragging: false,
-            deltaY: 0
+
+            startIndex: -1,
+            currentIndex: -1,
+            isMouseDown: false
+
         }
 
     },
@@ -599,145 +605,163 @@ export default {
             }
         },
         handleBtnClick(index) {
-            console.log("clicked");
+            this.stopInterval(); // Clear the interval using the interval ID
+
             const deltaIndex = 5 - index;
             if (deltaIndex > 0) {
                 for (let i = 0; i < deltaIndex; i++) {
                     setTimeout(() => {
+                        this.currentIndex = index + i + 1;
                         var pop_color = this.gradeColors.pop();
                         var pop_data = this.stats.pop();
                         this.gradeColors.unshift(pop_color);
                         this.stats.unshift(pop_data);
-                    }, 100 * i + 1)
+                    }, 200 * i + 1)
                 }
             } else if (deltaIndex < 0) {
                 for (let i = 0; i > deltaIndex; i--) {
                     setTimeout(() => {
+                        this.currentIndex = index + i - 1;
                         var splice_color = this.gradeColors.splice(0, 1);
 
                         var splice_data = this.stats.splice(0, 1);
-                        console.log(splice_data);
 
                         this.gradeColors.push(...splice_color);
                         this.stats.push(...splice_data);
-                    }, 100 * Math.abs(i) + 1)
+                    }, 200 * Math.abs(i) + 1)
 
                 }
             }
-            this.stopInterval(); // Clear the interval using the interval ID
+
 
         },
 
 
-        handleMouseDown(event) {
-            event.preventDefault();
-            this.isDragging = true;
-            this.stopInterval(); // Clear the interval using the interval ID
-            this.touchStartY = event.clientY;
+        handleMouseDown(index) {
+            this.isMouseDown = true;
+            this.startIndex = index;
+            // event.preventDefault();
+            // this.stopInterval(); // Clear the interval using the interval ID
         },
         handleMouseUp(event) {
-            this.isDragging = false;
-            this.touchStartY = 0;
-            this.deltaY = 0;
+            this.isMouseDown = false;
+            this.startIndex = -1;
+            this.currentIndex = -1;
         },
         handleMouseMove(event) {
-            if (!this.isDragging) return;
+            if (this.isMouseDown) {
+                this.stopInterval();
+                event.preventDefault();
 
+                // Get the touch coordinates
+                const touchX = event.clientX;
+                const touchY = event.clientY;
 
+                // Loop through the buttons and check if the touch is over a button
+                for (let index = 0; index < this.stats.length; index++) {
+                    const buttonRef = this.$refs[`handler${index}`][0];
+                    const rect = buttonRef.getBoundingClientRect();
 
-            // Calculate the distance traveled during the touch move
-            if (Math.abs(this.deltaY) > 8) {
-                this.touchStartY = event.clientY;
-            }
-            this.deltaY = event.clientY - this.touchStartY;
-            console.log(this.deltaY);
+                    if (
+                        touchX >= rect.left &&
+                        touchX <= rect.right &&
+                        touchY >= rect.top &&
+                        touchY <= rect.bottom
+                    ) {
+                        this.currentIndex = index;
+                        // Set the index of the touched button
+                        if (index > this.startIndex) {
+                            var pop_color = this.gradeColors.pop();
+                            var pop_data = this.stats.pop();
+                            this.gradeColors.unshift(pop_color);
+                            this.stats.unshift(pop_data);
+                        } else if (index < this.startIndex) {
+                            console.log(index);
+                            var splice_color = this.gradeColors.splice(0, 1);
 
-            // Based on the distance, determine the drag direction
-            if (this.deltaY > 0) {
-                // User dragged to the bottom
-                if (Math.abs(this.deltaY) == 8) {
-                    var pop_color = this.gradeColors.pop();
-                    var pop_data = this.stats.pop();
-                    this.gradeColors.unshift(pop_color);
-                    this.stats.unshift(pop_data);
+                            var splice_data = this.stats.splice(0, 1);
 
+                            this.gradeColors.push(...splice_color);
+                            this.stats.push(...splice_data);
+                        }
+
+                        this.startIndex = index;
+                        return; // Stop checking once a button is found
+                    }
                 }
 
-            } else if (this.deltaY < 0) {
-                // User dragged to the top
-                if (Math.abs(this.deltaY) == 5) {
-                    var splice_color = this.gradeColors.splice(0, 1);
-
-                    var splice_data = this.stats.splice(0, 1);
-                    console.log(splice_data);
-
-                    this.gradeColors.push(...splice_color);
-                    this.stats.push(...splice_data);
-
-                }
+                // Reset the touchIndex if the touch is not over any button
+                this.startIndex = -1;
             }
         },
 
 
 
 
-        handleTouchStart(event) {
-            this.isDragging = true;
-            this.stopInterval(); // Clear the interval using the interval ID
-            this.touchStartY = event.touches[0].clientY;
+
+        handleTouchStart(index) {
+            this.startIndex = index;
+            // this.stopInterval(); // Clear the interval using the interval ID
+            // this.touchStartY = event.touches[0].clientY;
 
 
         },
 
 
         handleTouchEnd(event) {
-            this.isDragging = false;
-            this.touchStartY = 0;
-            this.deltaY = 0;
+            this.startIndex = -1;
+            this.currentIndex = -1;
+            // this.touchStartY = 0;
 
         },
 
         handleTouchMove(event) {
-            const statsHandler = this.$refs.statsHandler;
-            if (statsHandler)
-                event.preventDefault();
+            this.stopInterval();
+            event.preventDefault();
 
-            if (!this.isDragging) return;
+            // Get the touch coordinates
+            const touchX = event.touches[0].clientX;
+            const touchY = event.touches[0].clientY;
 
+            // Loop through the buttons and check if the touch is over a button
+            for (let index = 0; index < this.stats.length; index++) {
+                const buttonRef = this.$refs[`handler${index}`][0];
+                const rect = buttonRef.getBoundingClientRect();
 
+                if (
+                    touchX >= rect.left &&
+                    touchX <= rect.right &&
+                    touchY >= rect.top &&
+                    touchY <= rect.bottom
+                ) {
+                    this.currentIndex = index;
 
-            // Calculate the distance traveled during the touch move
-            if (Math.abs(this.deltaY) > 2 && statsHandler) {
-                this.touchStartY = event.touches[0].clientY;
+                    // Set the index of the touched button
+                    if (index > this.startIndex) {
+                        var pop_color = this.gradeColors.pop();
+                        var pop_data = this.stats.pop();
+                        this.gradeColors.unshift(pop_color);
+                        this.stats.unshift(pop_data);
+                    } else if (index < this.startIndex) {
+                        console.log(index);
+                        var splice_color = this.gradeColors.splice(0, 1);
+
+                        var splice_data = this.stats.splice(0, 1);
+
+                        this.gradeColors.push(...splice_color);
+                        this.stats.push(...splice_data);
+                    }
+
+                    this.startIndex = index;
+                    return; // Stop checking once a button is found
+                }
             }
 
-            if (statsHandler)
-                this.deltaY = event.touches[0].clientY - this.touchStartY;
-
-
-            // Based on the distance, determine the drag direction
-            if (this.deltaY > 0) {
-                // User dragged to the bottom
-                if (Math.abs(this.deltaY) > 1 && Math.abs(this.deltaY) < 1.5) {
-                    var pop_color = this.gradeColors.pop();
-                    var pop_data = this.stats.pop();
-                    this.gradeColors.unshift(pop_color);
-                    this.stats.unshift(pop_data);
-                }
-
-            } else if (this.deltaY < 0) {
-                // User dragged to the top
-                if (Math.abs(this.deltaY) > 1 && Math.abs(this.deltaY) < 1.5) {
-
-                    var splice_color = this.gradeColors.splice(0, 1);
-
-                    var splice_data = this.stats.splice(0, 1);
-
-                    this.gradeColors.push(...splice_color);
-                    this.stats.push(...splice_data);
-                }
-            }
+            // Reset the touchIndex if the touch is not over any button
+            this.startIndex = -1;
         },
+
+
 
 
 
@@ -780,14 +804,14 @@ export default {
         },
 
         truncateLatestTitle(title) {
-            var cutLength=window.innerWidth<1280 ? 38 : 55;
+            var cutLength = window.innerWidth < 1280 ? 38 : 55;
             return title.length > cutLength ? title.slice(0, cutLength) + '...' : title;
         },
         getFullName(firstName, lastName) {
             return `${firstName} ${lastName}`
         },
         gradeHandlerTitle(title) {
-            if (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm)
+            if (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md)
                 return title.replace(" Grade", "");
             else
                 return title;
@@ -797,10 +821,10 @@ export default {
         gradeSizes() {
             if (this.$vuetify.breakpoint.xs)
                 return this.gradeSizesXs;
-            else if (this.$vuetify.breakpoint.sm)
+            else if (this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md)
                 return this.gradeSizesSm;
             else
-                return this.gradeSizesMd;
+                return this.gradeSizesLg;
         }
 
     },
@@ -824,9 +848,9 @@ export default {
 #content-stats-container .v-btn {
     text-transform: unset !important;
 
-    .v-btn__content{
-        font-family: Inter-Regular!important;
-        font-weight: 500!important;
+    .v-btn__content {
+        font-family: Inter-Regular !important;
+        font-weight: 500 !important;
     }
 
 
@@ -834,6 +858,12 @@ export default {
 
 #content-stats-container #stats-handler {
     position: relative;
+    /* transition: top 0.5s ease; */
+}
+
+#content-stats-container #stats-handler .grade-btn {
+    /* flex: 0 0 100%; */
+    /* Ensure each slide takes up the full width */
 }
 
 
@@ -855,13 +885,13 @@ export default {
 
 
 #content-stats-container #grade-details-card {
-    height: 56.6rem;
+    height: 42.5rem;
     border-radius: 0rem 2rem 2rem 0rem;
 }
 
 
 #content-stats-container #grade-details-card #stats-details {
-    height: 14.6rem;
+    height: 28.4rem;
 }
 
 #content-stats-container #grade-details-card .label {
@@ -947,13 +977,20 @@ export default {
                     margin-bottom: 0;
                     padding-bottom: 0;
                     padding-top: 0;
-                
+
                 }
             }
         }
     }
 }
-@media only screen and (max-width: 600px) {
+
+#content-stats-container .handlerShadow {
+    box-shadow: rgba(0, 0, 0, 0.85) 0px 54px 55px, rgba(0, 0, 0, 0.85) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+
+
+@media (min-width: 600px) {
     #content-stats-container {
         padding: 0.2rem;
     }
@@ -967,16 +1004,15 @@ export default {
         line-height: 4.4rem;
     }
 
-    #content-stats-container #stats-handler {
-        margin-top: 1rem;
-    }
+    /* #content-stats-container #stats-handler {
+    } */
 
     #content-stats-container #stats-handler .active {
         right: -2rem;
     }
 
     #content-stats-container #grade-details-card {
-        height: 35rem;
+        height: 42.5rem;
         border-radius: 0rem 2rem 2rem 0rem;
     }
 
@@ -1077,7 +1113,9 @@ export default {
 
 
 
-@media only screen and (min-width: 600px) and (max-width: 959px) {
+
+
+@media (min-width: 1264px) {
     #content-stats-container {
 
 
@@ -1088,10 +1126,11 @@ export default {
         }
 
         #grade-details-card {
-            height: 42.5rem;
+            height: 56.6rem;
             border-radius: 0rem 2rem 2rem 0rem;
 
             #stats-details {
+                height: 14.6rem;
 
                 .date-holder {
                     margin-left: 3rem;

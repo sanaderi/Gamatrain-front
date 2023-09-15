@@ -143,10 +143,14 @@ export default{
           property: 'jwtToken',
           global: true,
         },
+        user: {
+          property: 'data',
+          autoFetch: true
+        },
         endpoints: {
           login: {url: '/api/v1/users/login', method: 'post'},
-          refresh: {url: '/api/v1/users/refresh_token', method: 'post'},
-          user: false,
+          // refresh: {url: '/api/v1/users/refresh_token', method: 'post'},
+          user: {url:'/api/v1/users/info', method: 'get'},
           logout: {url: '/api/v1/users/logout', method: 'get'}
         }
       }

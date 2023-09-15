@@ -39,8 +39,8 @@
                     <v-col cols="12" sm="6">
                         <v-card class="fill-height float-sm-right" to="/search?type=test">
                             <v-card-title>
-                                <v-icon color="#FFB300" size="36">mdi-cloud-download</v-icon>
-                                &nbsp;Educational Content
+                                <v-icon color="#FFB300" size="36" class="mr-2">mdi-cloud-download</v-icon>
+                                Educational Content
                             </v-card-title>
                             <v-card-text>
                                 Empower Your Studies. Download Worksheets and Educational Materials.
@@ -139,7 +139,7 @@ export default {
         BlogContainer,
         StatsBanner
     },
-
+    
 
     data() {
         return {

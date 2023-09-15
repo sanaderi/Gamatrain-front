@@ -54,7 +54,7 @@ export default {
                 else
                     this.slideIndex++;
 
-            }, 15000);
+            }, 8000);
         },
         stopInterval() {
             clearInterval(this.intervalId); // Clear the interval using the interval ID
@@ -71,7 +71,7 @@ export default {
         }
     },
     mounted() {
-        // this.handleAutoCycle();
+        this.handleAutoCycle();
     },
     beforeDestroy() {
         this.stopInterval();
