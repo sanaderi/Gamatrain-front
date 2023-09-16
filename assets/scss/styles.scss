@@ -138,13 +138,12 @@ html {
 //End xs size
 
 //Button style
-.gama-lg-btn {
+.gama-primary-btn {
   display: inline-flex;
   height: 2.8rem;
   padding: 0rem 1.2rem;
   justify-content: center;
   align-items: center;
-  flex-shrink: 0;
   border-radius: 3rem;
   background: #FFB600;
   color: #24292F;
@@ -2373,13 +2372,12 @@ body {
 
 
   //Button style
-  .gama-lg-btn {
+  .gama-primary-btn {
     display: inline-flex;
     height: 3.6rem;
     padding: 0.4rem 1.6rem;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
     border-radius: 3rem;
     background: #FFB600;
     color: #24292F;
@@ -2388,6 +2386,7 @@ body {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
   }
 
   //End button style
@@ -2440,7 +2439,7 @@ body {
 }
 
 
-@media only screen and (min-width: 960px) {
+@media only screen and (min-width: 1264px) {
 
 
   .container {
@@ -2578,13 +2577,12 @@ body {
 
 
   //Button style
-  .gama-lg-btn {
+  .gama-primary-btn {
     display: inline-flex;
     height: 4.4rem;
     padding: 0.8rem 2rem;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
     border-radius: 3rem;
     background: #FFB600;
     color: #24292F;
@@ -2593,11 +2591,18 @@ body {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
   }
 
   //End button style
 
 
+
+
+}
+
+
+@media only screen and (min-width: 960px) {
   .content-item {
     min-height: 16rem !important;
   }
@@ -2642,8 +2647,8 @@ body {
       }
     }
   }
-
 }
+
 
 // Start : Lesson page
 .lesson {

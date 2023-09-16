@@ -4,17 +4,18 @@
         <v-card flat>
             <v-card-text>
                 <v-row>
-                    <v-col cols="2" sm="1" class="px-0">
+                    <v-col cols="2" sm="2" class="px-0">
                         <v-sheet class="text-right" id="stats-handler" ref="statsHandler">
                             <div v-for="(item, index) in stats" :key="index" @touchstart="handleTouchStart(index)"
                                 @touchend="handleTouchEnd(index)" @touchmove="handleTouchMove" @mousemove="handleMouseMove"
                                 @mousedown="handleMouseDown(index)" @mouseup="handleMouseUp(index)" :ref="`handler${index}`"
                                 class="grade-btn">
                                 <v-btn @click="handleBtnClick(index)" class="my-0  white--text" :class="[index == 5 ? 'rounded-pill active' : 'rounded-s-xl',
-                                currentIndex == index ? 'handlerShadow' : '']" v-if="shouldDisplayButton(index)"
-                                    :color="gradeColors[index]"
+                                currentIndex == index ? 'handlerShadow' : '',
+                                `depth${index}`
+                                ]" v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
                                     :style="`font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
                                     {{ gradeHandlerTitle(item.base_title) }}
                                 </v-btn>
                                 <div v-if="index == 5"
@@ -24,221 +25,214 @@
                         </v-sheet>
 
                     </v-col>
-                    <v-col cols="10" sm="11" class="pl-0">
+                    <v-col cols="10" sm="10" class="pl-0">
                         <v-card id="grade-details-card">
-                            <v-card-text class="pa-3 pa-sm-10 pa-lg-14">
-                                <div>
-                                    <v-row id="stats-details">
-                                        <v-col cols="12" lg="6" class="pb-0 pb-sm-6">
-                                            <div class="d-none d-lg-block">
+                            <div>
+                                <v-row class="stats-details d-none d-lg-flex">
+                                    <v-col lg="6" class="pb-0 pb-sm-6">
+                                        <span class="stat-icon icon-paper"></span>
+                                        <nuxt-link
+                                            :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
+                                            class="label">
+                                            Paper
+                                        </nuxt-link>
+                                        <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                        <div class="stat">+{{ stats[5].tests | numberFormat }}</div>
+                                    </v-col>
+                                    <v-col lg="6" class="pb-0 pb-sm-6">
+                                        <span class="stat-icon icon-multimedia"></span>
+                                        <nuxt-link
+                                            :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
+                                            class="label">
+                                            Multimedia
+                                        </nuxt-link>
+                                        <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                        <div class="stat">+{{ stats[5].files | numberFormat }}</div>
+                                    </v-col>
+                                    <v-col lg="6" class="pb-0 pb-sm-6">
+                                        <span class="stat-icon icon-exam"></span>
+                                        <nuxt-link
+                                            :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
+                                            class="label">
+                                            Exam
+                                        </nuxt-link>
+                                        <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                        <div class="stat">+{{ stats[5].exams | numberFormat }}</div>
+
+                                    </v-col>
+                                    <v-col lg="6" class="pb-0 pb-sm-6">
+                                        <span class="stat-icon icon-q-a"></span>
+                                        <nuxt-link
+                                            :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
+                                            class="label">
+                                            Q & A
+                                        </nuxt-link>
+                                        <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                        <div class="stat">+{{ stats[5].questions | numberFormat }}</div>
+                                    </v-col>
+                                </v-row>
+
+
+                                <v-row class="stats-details d-flex d-lg-none">
+                                    <v-col cols="12">
+                                        <v-row>
+                                            <v-col cols="7" class="py-0">
                                                 <span class="stat-icon icon-paper"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
                                                     Paper
                                                 </nuxt-link>
-                                                <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
-                                                <div class="stat">+{{ stats[5].tests | numberFormat }}</div>
-                                            </div>
-                                            <v-row class="d-lg-none">
-                                                <v-col cols="7" class="pa-0">
-                                                    <span class="stat-icon icon-paper"></span>
-                                                    <nuxt-link
-                                                        :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
-                                                        class="label">
-                                                        Paper
-                                                    </nuxt-link>
-                                                    <div class="date-holder ">{{
-                                                        $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
-                                                </v-col>
-                                                <v-col cols="5" class="text-right pa-0">
-                                                    <span class="stat">+{{ stats[5].tests | numberFormat }}</span>
-                                                    <v-icon size="20" class="pl-sm-4"
-                                                        color="#D0D7DE">mdi-chevron-right</v-icon>
-                                                </v-col>
-                                                <v-col cols="12" class="pt-0">
-                                                    <v-divider />
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                        <v-col cols="12" lg="6" class="pb-0 pb-sm-6">
-                                            <div class="d-none d-lg-block">
+                                                <div class="date-holder ">{{
+                                                    $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
+                                            </v-col>
+                                            <v-col cols="5" class="text-right pt-0">
+                                                <span class="stat">+{{ stats[5].tests | numberFormat }}</span>
+                                                <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                            </v-col>
+                                            <v-col cols="12" class="pt-0">
+                                                <v-divider />
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col cols="7" class="py-0">
                                                 <span class="stat-icon icon-multimedia"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
                                                     Multimedia
                                                 </nuxt-link>
-                                                <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
-                                                <div class="stat">+{{ stats[5].files | numberFormat }}</div>
-                                            </div>
-                                            <v-row class="d-lg-none">
-                                                <v-col cols="7" class="pa-0">
-                                                    <span class="stat-icon icon-multimedia"></span>
-                                                    <nuxt-link
-                                                        :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
-                                                        class="label">
-                                                        Multimedia
-                                                    </nuxt-link>
-                                                    <div class="date-holder pb-0"> {{
-                                                        $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
-                                                </v-col>
-                                                <v-col cols="5" class="text-right pa-0">
-                                                    <span class="stat">+{{ stats[5].files | numberFormat }}</span>
-                                                    <v-icon size="20" class="pl-sm-4"
-                                                        color="#D0D7DE">mdi-chevron-right</v-icon>
-                                                </v-col>
-                                                <v-col cols="12" class="pt-0">
-                                                    <v-divider />
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                        <v-col cols="12" lg="6" class="pb-0 pb-sm-6">
-                                            <div class="d-none d-lg-block">
+                                                <div class="date-holder pb-0"> {{
+                                                    $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
+                                            </v-col>
+                                            <v-col cols="5" class="text-right pt-0">
+                                                <span class="stat">+{{ stats[5].files | numberFormat }}</span>
+                                                <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                            </v-col>
+                                            <v-col cols="12" class="pt-0">
+                                                <v-divider />
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col cols="7" class="py-0">
                                                 <span class="stat-icon icon-exam"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
                                                     Exam
                                                 </nuxt-link>
-                                                <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
-                                                <div class="stat">+{{ stats[5].exams | numberFormat }}</div>
-                                            </div>
-                                            <v-row class="d-lg-none">
-                                                <v-col cols="7" class="py-0 px-0">
-                                                    <span class="stat-icon icon-exam"></span>
-                                                    <nuxt-link
-                                                        :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
-                                                        class="label">
-                                                        Exam
-                                                    </nuxt-link>
-                                                    <div class="date-holder pb-0"> {{
-                                                        $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
-                                                </v-col>
-                                                <v-col cols="5" class="text-right py-0 px-0">
-                                                    <span class="stat">+{{ stats[5].exams | numberFormat }}</span>
-                                                    <v-icon size="20" class="pl-sm-4"
-                                                        color="#D0D7DE">mdi-chevron-right</v-icon>
-                                                </v-col>
-                                                <v-col cols="12" class="pt-0">
-                                                    <v-divider />
-                                                </v-col>
-                                            </v-row>
-                                        </v-col>
-                                        <v-col cols="12" lg="6" class="pb-0 pb-sm-6">
-                                            <div class="d-none d-lg-block">
+                                                <div class="date-holder pb-0"> {{
+                                                    $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
+                                            </v-col>
+                                            <v-col cols="5" class="text-right pt-0">
+                                                <span class="stat">+{{ stats[5].exams | numberFormat }}</span>
+                                                <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                            </v-col>
+                                            <v-col cols="12" class="pt-0">
+                                                <v-divider />
+                                            </v-col>
+                                        </v-row>
+
+                                        <v-row>
+                                            <v-col cols="7" class="py-0 ">
                                                 <span class="stat-icon icon-q-a"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
                                                     Q & A
                                                 </nuxt-link>
-                                                <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
-                                                <div class="stat">+{{ stats[5].questions | numberFormat }}</div>
-                                            </div>
-                                            <v-row class="d-lg-none">
-                                                <v-col cols="7" class="py-0 px-0">
-                                                    <span class="stat-icon icon-q-a"></span>
-                                                    <nuxt-link
-                                                        :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
-                                                        class="label">
-                                                        Q & A
-                                                    </nuxt-link>
-                                                    <div class="date-holder"> {{
-                                                        $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
+                                                <div class="date-holder"> {{
+                                                    $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
+                                            </v-col>
+                                            <v-col cols="5" class="text-right pt-0">
+                                                <span class="stat">+{{ stats[5].questions | numberFormat }}</span>
+                                                <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
+                                            </v-col>
+                                        </v-row>
+                                    </v-col>
+                                </v-row>
+                            </div>
+
+                            <v-divider class="d-none d-lg-block" style="margin-top: 94px;margin-bottom: 9px;" />
+
+
+                            <div class="d-none d-lg-block">
+                                <v-row>
+                                    <v-col cols="6" md="6">
+                                        <h4 class="section-title">Last questions</h4>
+                                        <v-card class="latest-card" flat v-for="item in questions.slice(0, 3)"
+                                            :key="item.id">
+                                            <v-row>
+                                                <v-col cols="1">
+                                                    <v-avatar class="my-3" size="32" rounded="0">
+                                                        <v-img :src="item.avatar"></v-img>
+                                                    </v-avatar>
                                                 </v-col>
-                                                <v-col cols="5" class="text-right py-0 px-0">
-                                                    <span class="stat">+{{ stats[5].questions | numberFormat }}</span>
-                                                    <v-icon size="20" class="pl-sm-4"
-                                                        color="#D0D7DE">mdi-chevron-right</v-icon>
+                                                <v-col cols="11">
+                                                    <v-card-title>
+                                                        <nuxt-link class="title" :to="`/qa/${item.id}`">
+                                                            <span v-html="truncateLatestTitle(item.title)"></span>
+                                                        </nuxt-link>
+                                                    </v-card-title>
+
+                                                    <v-card-subtitle>
+                                                        <v-row>
+                                                            <v-col cols="6" class="owner-container">
+                                                                By: {{ truncateFullName(getFullName(item.first_name,
+                                                                    item.last_name)) }}
+                                                            </v-col>
+                                                            <v-col cols="6" class="subdate-container">
+                                                                <v-icon size="12">mdi-calendar</v-icon>
+                                                                {{ $moment(item.subdate).format('MMM DD') }}
+                                                            </v-col>
+
+                                                        </v-row>
+                                                    </v-card-subtitle>
+
                                                 </v-col>
+
+
                                             </v-row>
-                                        </v-col>
-                                    </v-row>
-                                </div>
+                                        </v-card>
+                                    </v-col>
+                                    <v-col cols="6" md="6">
+                                        <h4 class="section-title">Last Uploaded File</h4>
+                                        <v-card class="latest-card" flat v-for="item in papers.slice(0, 3)" :key="item.id">
+                                            <v-row>
+                                                <v-col cols="1">
+                                                    <v-avatar class="my-3" size="32" rounded="0">
+                                                        <v-img :src="item.avatar"></v-img>
+                                                    </v-avatar>
+                                                </v-col>
+                                                <v-col cols="11">
+                                                    <v-card-title>
+                                                        <nuxt-link class="title" :to="`papers/${item.id}`">
+                                                            <span v-html="truncateLatestTitle(item.title)"></span>
+                                                        </nuxt-link>
+                                                    </v-card-title>
 
-                                <v-divider class="d-none d-lg-block" style="margin-top: 94px;margin-bottom: 9px;" />
+                                                    <v-card-subtitle>
+                                                        <v-row>
+                                                            <v-col cols="6" class="owner-container">
+                                                                By: {{ truncateFullName(getFullName(item.first_name,
+                                                                    item.last_name)) }}
+                                                            </v-col>
+                                                            <v-col cols="6" class="subdate-container">
+                                                                <v-icon size="12">mdi-calendar</v-icon>
+                                                                {{ $moment(item.subdate).format('MMM DD') }}
+                                                            </v-col>
 
+                                                        </v-row>
+                                                    </v-card-subtitle>
 
-                                <div class="d-none d-lg-block">
-                                    <v-row>
-                                        <v-col cols="6" md="6">
-                                            <h4 class="section-title">Last questions</h4>
-                                            <v-card class="latest-card" flat v-for="item in questions.slice(0, 3)"
-                                                :key="item.id">
-                                                <v-row>
-                                                    <v-col cols="1">
-                                                        <v-avatar class="my-3" size="32" rounded="0">
-                                                            <v-img :src="item.avatar"></v-img>
-                                                        </v-avatar>
-                                                    </v-col>
-                                                    <v-col cols="11">
-                                                        <v-card-title>
-                                                            <nuxt-link class="title" :to="`/qa/${item.id}`">
-                                                                <span v-html="truncateLatestTitle(item.title)"></span>
-                                                            </nuxt-link>
-                                                        </v-card-title>
-
-                                                        <v-card-subtitle>
-                                                            <v-row>
-                                                                <v-col cols="6" class="owner-container">
-                                                                    By: {{ truncateFullName(getFullName(item.first_name,
-                                                                        item.last_name)) }}
-                                                                </v-col>
-                                                                <v-col cols="6" class="subdate-container">
-                                                                    <v-icon size="12">mdi-calendar</v-icon>
-                                                                    {{ $moment(item.subdate).format('MMM DD') }}
-                                                                </v-col>
-
-                                                            </v-row>
-                                                        </v-card-subtitle>
-
-                                                    </v-col>
+                                                </v-col>
 
 
-                                                </v-row>
-                                            </v-card>
-                                        </v-col>
-                                        <v-col cols="6" md="6">
-                                            <h4 class="section-title">Last Uploaded File</h4>
-                                            <v-card class="latest-card" flat v-for="item in papers.slice(0, 3)"
-                                                :key="item.id">
-                                                <v-row>
-                                                    <v-col cols="1">
-                                                        <v-avatar class="my-3" size="32" rounded="0">
-                                                            <v-img :src="item.avatar"></v-img>
-                                                        </v-avatar>
-                                                    </v-col>
-                                                    <v-col cols="11">
-                                                        <v-card-title>
-                                                            <nuxt-link class="title" :to="`papers/${item.id}`">
-                                                                <span v-html="truncateLatestTitle(item.title)"></span>
-                                                            </nuxt-link>
-                                                        </v-card-title>
-
-                                                        <v-card-subtitle>
-                                                            <v-row>
-                                                                <v-col cols="6" class="owner-container">
-                                                                    By: {{ truncateFullName(getFullName(item.first_name,
-                                                                        item.last_name)) }}
-                                                                </v-col>
-                                                                <v-col cols="6" class="subdate-container">
-                                                                    <v-icon size="12">mdi-calendar</v-icon>
-                                                                    {{ $moment(item.subdate).format('MMM DD') }}
-                                                                </v-col>
-
-                                                            </v-row>
-                                                        </v-card-subtitle>
-
-                                                    </v-col>
-
-
-                                                </v-row>
-                                            </v-card>
-                                        </v-col>
-                                    </v-row>
-                                </div>
-                            </v-card-text>
+                                            </v-row>
+                                        </v-card>
+                                    </v-col>
+                                </v-row>
+                            </div>
                         </v-card>
                     </v-col>
                 </v-row>
@@ -590,7 +584,8 @@ export default {
 
             startIndex: -1,
             currentIndex: -1,
-            isMouseDown: false
+            isMouseDown: false,
+            easeSlide: ''
 
         }
 
@@ -669,6 +664,7 @@ export default {
                         touchY <= rect.bottom
                     ) {
                         this.currentIndex = index;
+
                         // Set the index of the touched button
                         if (index > this.startIndex) {
                             var pop_color = this.gradeColors.pop();
@@ -676,7 +672,6 @@ export default {
                             this.gradeColors.unshift(pop_color);
                             this.stats.unshift(pop_data);
                         } else if (index < this.startIndex) {
-                            console.log(index);
                             var splice_color = this.gradeColors.splice(0, 1);
 
                             var splice_data = this.stats.splice(0, 1);
@@ -684,6 +679,7 @@ export default {
                             this.gradeColors.push(...splice_color);
                             this.stats.push(...splice_data);
                         }
+
 
                         this.startIndex = index;
                         return; // Stop checking once a button is found
@@ -804,7 +800,7 @@ export default {
         },
 
         truncateLatestTitle(title) {
-            var cutLength = window.innerWidth < 1280 ? 38 : 55;
+            var cutLength = window.innerWidth < 1330 ? 32 : 38;
             return title.length > cutLength ? title.slice(0, cutLength) + '...' : title;
         },
         getFullName(firstName, lastName) {
@@ -858,18 +854,14 @@ export default {
 
 #content-stats-container #stats-handler {
     position: relative;
-    /* transition: top 0.5s ease; */
+    top: 1.2rem;
 }
 
-#content-stats-container #stats-handler .grade-btn {
-    /* flex: 0 0 100%; */
-    /* Ensure each slide takes up the full width */
-}
 
 
 #content-stats-container #stats-handler .active {
     position: absolute;
-    right: -4.6rem;
+    right: -1.6rem;
     font-weight: 750;
     z-index: 2;
 }
@@ -885,31 +877,45 @@ export default {
 
 
 #content-stats-container #grade-details-card {
-    height: 42.5rem;
+    height: 35rem;
+    padding: 1.6rem;
     border-radius: 0rem 2rem 2rem 0rem;
 }
 
+#content-stats-container #grade-details-card .v-card__text {
+    padding: 3rem !important;
+}
 
-#content-stats-container #grade-details-card #stats-details {
+
+
+
+#content-stats-container #grade-details-card .stats-details {
     height: 28.4rem;
 }
 
 #content-stats-container #grade-details-card .label {
-    padding-left: 1rem;
     text-decoration: none;
-    font-family: 'Inter-Bold';
     color: #424A53;
-    font-size: 2rem;
+    text-align: center;
+    font-family: Inter-Bold;
+    font-size: 1.4rem;
     font-style: normal;
-    display: inline-block;
-    font-weight: 750;
-    line-height: 2rem;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#content-stats-container #grade-details-card .date-holder {
+    margin-left: 2.4rem;
+    color: #6E7781;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 3.8rem;
 }
 
 #content-stats-container #grade-details-card .stat {
-    padding-left: 3rem;
     color: #6E7781;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 300;
     line-height: 4.4rem;
@@ -918,7 +924,7 @@ export default {
 
 #content-stats-container #grade-details-card .stat-icon {
     color: #FFB300 !important;
-    font-size: 3.2rem;
+    font-size: 2rem;
 }
 
 
@@ -989,10 +995,37 @@ export default {
 }
 
 
+#content-stats-container .depth1 {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 54px 55px;
+}
+
+#content-stats-container .depth2 {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 54px 55px;
+}
+
+#content-stats-container .depth3 {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 54px 55px;
+}
+
+#content-stats-container .depth4 {
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 54px 55px, rgba(0, 0, 0, 0.85) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+#content-stats-container .depth5 {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 54px 55px, rgba(0, 0, 0, 0.4) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+#content-stats-container .depth7 {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 54px 55px;
+}
+
+
+
 
 @media (min-width: 600px) {
+
     #content-stats-container {
-        padding: 0.2rem;
+        max-width: 90%;
     }
 
     #content-stats-container .v-btn {
@@ -1004,8 +1037,9 @@ export default {
         line-height: 4.4rem;
     }
 
-    /* #content-stats-container #stats-handler {
-    } */
+    #content-stats-container #stats-handler {
+        top: 0;
+    }
 
     #content-stats-container #stats-handler .active {
         right: -2rem;
@@ -1013,48 +1047,52 @@ export default {
 
     #content-stats-container #grade-details-card {
         height: 42.5rem;
+        width: 88.8%;
+        padding: 3rem;
         border-radius: 0rem 2rem 2rem 0rem;
     }
 
 
-    #content-stats-container #grade-details-card #stats-details {
+    #content-stats-container #grade-details-card .stats-details {
         height: 28.4rem;
 
-        .v-icon.primary--text {
-            font-size: 2rem !important;
-        }
+        .row {
+            height: 7.6rem;
 
-        .label {
-            text-decoration: none;
-            color: #424A53;
-            text-align: center;
-            font-family: 'Inter-Bold';
-            font-size: 1.4rem;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 2rem;
-        }
+            .v-icon.primary--text {
+                font-size: 2rem !important;
+            }
 
-        .stat {
-            color: #6E7781;
-            font-size: 1.2rem;
-            font-style: normal;
-            font-weight: 300;
-            line-height: 4.4rem;
+            .label {
+                color: #424A53;
+                font-family: Inter-Bold;
+                font-size: 1.4rem;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+            }
 
-        }
+            .stat {
+                color: #6E7781;
+                font-size: 1.4rem;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 4.4rem;
 
-        .date-holder {
-            margin-left: 3rem;
-            color: #6E7781;
-            font-size: 1rem;
-            font-style: normal;
-            font-weight: 300;
-            line-height: 3.8rem;
-        }
+            }
 
-        .stat-icon {
-            font-size: 2rem;
+            .date-holder {
+                margin-left: 3rem;
+                color: #6E7781;
+                font-size: 1.4rem;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 3.8rem;
+            }
+
+            .stat-icon {
+                font-size: 2.4rem;
+            }
         }
     }
 
@@ -1120,6 +1158,8 @@ export default {
 
 
         #stats-handler {
+            top: 0;
+
             .active {
                 right: -2rem;
             }
@@ -1127,10 +1167,20 @@ export default {
 
         #grade-details-card {
             height: 56.6rem;
+            padding: 5rem;
             border-radius: 0rem 2rem 2rem 0rem;
 
-            #stats-details {
+            .stats-details {
                 height: 14.6rem;
+
+                .label {
+                    color: #424A53;
+                    font-family: Inter-Bold;
+                    font-size: 1.8rem;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                }
 
                 .date-holder {
                     margin-left: 3rem;
@@ -1142,7 +1192,16 @@ export default {
                 }
 
                 .stat-icon {
-                    font-size: 2.4rem;
+                    font-size: 3.2rem;
+                }
+
+                .stat {
+                    color: #6e7781;
+                    font-size: 1.8rem;
+                    font-style: normal;
+                    font-weight: 300;
+                    line-height: 4.4rem;
+                    padding-left: 3rem;
                 }
             }
 

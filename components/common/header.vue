@@ -894,7 +894,7 @@ export default {
 
 }
 
-@media only screen and (min-width: 600px) and (max-width: 960px) {
+@media only screen and (min-width: 600px) and (max-width: 1264px) {
   #main-header {
     .v-icon {
       font-size: 2.4rem;
@@ -910,9 +910,9 @@ export default {
   #mobile-signin-btn {
     border-radius: 3rem;
     background: #FFB600;
-    width: 6.4rem;
-    height: 2rem;
+    height: 2.8rem;
     margin-left: 1.6rem;
+    padding: 0rem 1.2rem;
 
 
     .v-btn__content {

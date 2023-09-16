@@ -124,7 +124,7 @@
                 <v-row>
                     <v-col cols="12">
                         <p class="gama-text-h6">Join Our Community.Start Monetizing Your Content Now.</p>
-                        <button class="gama-lg-btn">Get Started Today!</button>
+                        <button class="gama-primary-btn">Get Started Today!</button>
                     </v-col>
                 </v-row>
             </v-container>

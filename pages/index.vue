@@ -353,6 +353,7 @@ export default {
 
 #school-service-container {
     margin: 10rem auto 10rem auto;
+    
 
     .title {
         color: #354053;
