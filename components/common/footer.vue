@@ -10,7 +10,7 @@
           <div id="short-describe ">
             Our mission is to provide all training services to anyone and anywhere.
           </div>
-          <div>
+          <div class="mt-4">
             <nuxt-link to="/" class="v-btn">
               <v-icon>mdi-twitter</v-icon>
             </nuxt-link>
