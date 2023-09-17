@@ -11,8 +11,7 @@
                                 @mousedown="handleMouseDown(index)" @mouseup="handleMouseUp(index)" :ref="`handler${index}`"
                                 class="grade-btn">
                                 <v-btn @click="handleBtnClick(index)" class="my-0  white--text" :class="[index == 5 ? 'rounded-pill active' : 'rounded-s-xl',
-                                currentIndex == index ? 'handlerShadow' : '',
-                                `depth${index}`
+                                currentIndex == index ? 'handlerShadow' : ''
                                 ]" v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
                                     :style="`font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
@@ -267,6 +266,69 @@ export default {
                 '#C3C1C1'
             ],
 
+            gradeSizes: [
+                {
+                    width: 32,
+                    height: 32,
+                    fontSize: 10
+                },
+                {
+                    width: 32,
+                    height: 36,
+                    fontSize: 12
+                },
+                {
+                    width: 32,
+                    height: 36,
+                    fontSize: 14
+                },
+                {
+                    width: 36,
+                    height: 40,
+                    fontSize: 14
+                },
+
+                {
+                    width: 40,
+                    height: 44,
+                    fontSize: 16
+                },
+                {
+                    width: 77,
+                    height: 52,
+                    fontSize: 22
+                },
+                {
+                    width: 40,
+                    height: 40,
+                    fontSize: 14
+                },
+                {
+                    width: 36,
+                    height: 36,
+                    fontSize: 12
+                },
+                {
+                    width: 32,
+                    height: 32,
+                    fontSize: 10
+                },
+                {
+                    width: 24,
+                    height: 24,
+                    fontSize: 8
+                },
+                {
+                    width: 20,
+                    height: 20,
+                    fontSize: 7
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                }
+            ],
             gradeSizesXs: [
                 {
                     width: 32,
@@ -814,14 +876,14 @@ export default {
         }
     },
     computed: {
-        gradeSizes() {
-            if (this.$vuetify.breakpoint.xs)
-                return this.gradeSizesXs;
-            else if (this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md)
-                return this.gradeSizesSm;
-            else
-                return this.gradeSizesLg;
-        }
+        // gradeSizes() {
+        //     if (this.$vuetify.breakpoint.xs)
+        //         return this.gradeSizesXs;
+        //     else if (this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md)
+        //         return this.gradeSizesSm;
+        //     else
+        //         return this.gradeSizesLg;
+        // }
 
     },
 
