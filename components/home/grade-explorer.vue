@@ -6,7 +6,7 @@
                 <v-row>
                     <v-col cols="2" sm="2" class="px-0">
                         <v-sheet class="text-right" id="stats-handler" ref="statsHandler">
-                            <div v-for="(item, index) in stats" :key="index" @touchstart="handleTouchStart(index)"
+                            <!-- <div v-for="(item, index) in stats" :key="index" @touchstart="handleTouchStart(index)"
                                 @touchend="handleTouchEnd(index)" @touchmove="handleTouchMove" @mousemove="handleMouseMove"
                                 @mousedown="handleMouseDown(index)" @mouseup="handleMouseUp(index)" :ref="`handler${index}`"
                                 class="grade-btn">
@@ -20,7 +20,7 @@
                                 <div v-if="index == 5"
                                     :style="`height:${gradeSizes[index].height}px;width:${gradeSizes[index].width}px`" />
 
-                            </div>
+                            </div> -->
                         </v-sheet>
 
                     </v-col>
