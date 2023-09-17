@@ -6,12 +6,13 @@
                 <v-row>
                     <v-col cols="2" sm="2" class="px-0">
                         <v-sheet class="text-right" id="stats-handler" ref="statsHandler">
-                            <!-- <div v-for="(item, index) in stats" :key="index" @touchstart="handleTouchStart(index)"
+                            <div v-for="(item, index) in stats" :key="index" @touchstart="handleTouchStart(index)"
                                 @touchend="handleTouchEnd(index)" @touchmove="handleTouchMove" @mousemove="handleMouseMove"
                                 @mousedown="handleMouseDown(index)" @mouseup="handleMouseUp(index)" :ref="`handler${index}`"
                                 class="grade-btn">
                                 <v-btn @click="handleBtnClick(index)" class="my-0  white--text" :class="[index == 5 ? 'rounded-pill active' : 'rounded-s-xl',
-                                currentIndex == index ? 'handlerShadow' : ''
+                                currentIndex == index ? 'handlerShadow' : '',
+                                `depth${index}`
                                 ]" v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
                                     :style="`font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
@@ -20,7 +21,7 @@
                                 <div v-if="index == 5"
                                     :style="`height:${gradeSizes[index].height}px;width:${gradeSizes[index].width}px`" />
 
-                            </div> -->
+                            </div>
                         </v-sheet>
 
                     </v-col>
@@ -266,7 +267,7 @@ export default {
                 '#C3C1C1'
             ],
 
-            gradeSizes: [
+            gradeSizesXs: [
                 {
                     width: 32,
                     height: 32,
@@ -327,64 +328,26 @@ export default {
                     width: 52,
                     height: 18,
                     fontSize: 8
-                }
-            ],
-            gradeSizesXs: [
-                {
-                    width: 32,
-                    height: 32,
-                    fontSize: 10
                 },
                 {
-                    width: 32,
-                    height: 36,
-                    fontSize: 12
-                },
-                {
-                    width: 32,
-                    height: 36,
-                    fontSize: 14
-                },
-                {
-                    width: 36,
-                    height: 40,
-                    fontSize: 14
-                },
-
-                {
-                    width: 40,
-                    height: 44,
-                    fontSize: 16
-                },
-                {
-                    width: 77,
-                    height: 52,
-                    fontSize: 22
-                },
-                {
-                    width: 40,
-                    height: 40,
-                    fontSize: 14
-                },
-                {
-                    width: 36,
-                    height: 36,
-                    fontSize: 12
-                },
-                {
-                    width: 32,
-                    height: 32,
-                    fontSize: 10
-                },
-                {
-                    width: 24,
-                    height: 24,
+                    width: 52,
+                    height: 18,
                     fontSize: 8
                 },
                 {
-                    width: 20,
-                    height: 20,
-                    fontSize: 7
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
                 },
                 {
                     width: 52,
@@ -453,6 +416,32 @@ export default {
                     height: 20,
                     fontSize: 6
                 },
+                ,
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                }
             ],
             gradeSizesMd: [
                 {
@@ -509,6 +498,56 @@ export default {
                     width: 60,
                     height: 28,
                     fontSize: 10
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
                 },
                 {
                     width: 52,
@@ -576,6 +615,31 @@ export default {
                     width: 52,
                     height: 18,
                     fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
                 }
             ],
             gradeSizesXl: [
@@ -638,6 +702,31 @@ export default {
                     width: 52,
                     height: 18,
                     fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
+                },
+                {
+                    width: 52,
+                    height: 18,
+                    fontSize: 8
                 }
             ],
             questions: [],
@@ -656,9 +745,9 @@ export default {
         shouldDisplayButton(index) {
             // Determine whether to display the button based on screen size and specific indexes
             if (this.$vuetify.breakpoint.xs) {
-                return ![0, 1, 11].includes(index);
+                return ![0, 1, 11,12,13,14,15,16].includes(index);
             } else {
-                return true;
+                return ![12,13,14,15,16].includes(index);
             }
         },
         handleBtnClick(index) {
@@ -876,14 +965,14 @@ export default {
         }
     },
     computed: {
-        // gradeSizes() {
-        //     if (this.$vuetify.breakpoint.xs)
-        //         return this.gradeSizesXs;
-        //     else if (this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md)
-        //         return this.gradeSizesSm;
-        //     else
-        //         return this.gradeSizesLg;
-        // }
+        gradeSizes() {
+            if (this.$vuetify.breakpoint.xs)
+                return this.gradeSizesXs;
+            else if (this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md)
+                return this.gradeSizesSm;
+            else
+                return this.gradeSizesLg;
+        }
 
     },
 
