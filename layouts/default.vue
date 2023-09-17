@@ -1,12 +1,10 @@
 <template>
   <v-app>
     <main_header />
-    <div >
-       <Nuxt />
+    <div>
+      <Nuxt />
     </div>
-    <v-footer padless >
-      <main_footer />
-    </v-footer>
+    <main_footer />
   </v-app>
 </template>
 
@@ -16,13 +14,13 @@ import category from '../components/common/category'
 import main_footer from '../components/common/footer'
 
 export default {
-  name:'default_layout',
+  name: 'default_layout',
   components: {
     main_header,
     category,
     main_footer
   },
-  data () {
+  data() {
     return {
 
     }

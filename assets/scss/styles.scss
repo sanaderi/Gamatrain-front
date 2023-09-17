@@ -16,7 +16,7 @@ html {
 .gama-text-h1 {
   font-family: Inter-ExtraBold;
   color: #000;
-  font-size: 4.2rem;
+  font-size: 3.4rem;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
@@ -25,7 +25,7 @@ html {
 .gama-text-h2 {
   font-family: Inter-Bold;
   color: #000;
-  font-size: 3.6rem;
+  font-size: 3rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -327,7 +327,7 @@ body {
       text-decoration: none;
 
       &:hover {
-        color: $green;
+        // color: $green;
       }
     }
 
@@ -2244,7 +2244,14 @@ body {
 
 @media only screen and (min-width:600px) {
 
+  .container {
+    max-width: 100% !important;
 
+  }
+
+  .container--fluid {
+    max-width: inherit !important;
+  }
 
   //sm size
   .gama-text-h1 {

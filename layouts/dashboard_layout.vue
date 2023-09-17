@@ -27,9 +27,7 @@
         </v-card>
       </v-container>
     </div>
-    <v-footer padless class="mt-2">
       <main_footer/>
-    </v-footer>
   </v-app>
 </template>
 

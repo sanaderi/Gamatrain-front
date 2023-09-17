@@ -1,7 +1,7 @@
 <template>
     <v-container id="blog-list-container">
-        <v-card flat class="mt-10">
-            <v-card-text class="px-0 px-sm-6">
+        <v-card flat class="mt-10 " >
+            <v-card-text class="px-0 px-sm-6 main-card">
                 <v-row>
                     <v-col cols="6">
                         <h2 id="main-title">Blog</h2>
@@ -14,8 +14,8 @@
                         </v-btn>
                     </v-col>
                     <v-col cols="12">
-                        <v-slide-group v-model="model" class="slider pa-sm-4">
-                            <v-slide-item v-for="(item, n) in slideItmes" :key="n">
+                        <v-slide-group v-model="model" class="slider py-sm-4" :show-arrows="$vuetify.breakpoint.lgAndUp">
+                            <v-slide-item v-for="(item, n) in slideItmes" :key="n" >
                                 <v-card flat>
                                     <v-card @mouseover="toggleHover('enter', n)" @mouseleave="toggleHover('leave', n)"
                                         class="ma-1">
@@ -132,6 +132,7 @@ export default {
 
     .seeAllBtn {
         padding-right: 0;
+
         .v-btn__content {
             text-transform: none;
             color: #6E7781;
@@ -210,6 +211,11 @@ export default {
 @media screen and (min-width:600px) {
     #blog-list-container {
 
+        .main-card {
+            padding-left: 1.3rem!important;
+            padding-right: 1.3rem!important;
+        }
+
         .slider {
             .v-card {
                 width: 25.6rem;
@@ -255,8 +261,13 @@ export default {
 }
 
 
-@media screen and (min-width:960px) {
+@media screen and (min-width:1264px) {
     #blog-list-container {
+
+        .main-card {
+            padding-left: 1.2rem!important;
+            padding-right: 1.2rem!important;
+        }
 
         .slider {
             .v-card {
@@ -267,6 +278,8 @@ export default {
 
                 .v-card {
                     height: 18.5rem;
+
+
 
                     .v-card__title {
                         font-size: 1.8rem;

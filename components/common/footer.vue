@@ -1,12 +1,13 @@
 <template>
-  <v-container fluid class="px-0 pb-0">
-    <v-container id="footer" class="px-sm-9 px-md-3">
+  <div>
+    <v-footer >
+    <v-container id="footer" >
       <v-row>
         <v-col cols="12" sm="6" md="6" class="text-center text-sm-left">
           <nuxt-link to="/">
             <img id="logo" alt="gamatrain" src="/images/gamatrain-logo-black.svg" />
           </nuxt-link>
-          <div id="short-describe">
+          <div id="short-describe ">
             Our mission is to provide all training services to anyone and anywhere.
           </div>
           <div>
@@ -51,14 +52,16 @@
 
       </v-row>
     </v-container>
-    <v-container fluid id="footer-copy-right" class="px-0">
+    
+  </v-footer>
+  <v-container fluid id="footer-copy-right">
       <v-row>
-        <v-col cols="12" class="pt-3 pb-1 text-center">
+        <v-col cols="12" class="pt-3 pb-1 text-center px-0">
           <span class="describe">All Right Reserved.Copyright @ 2023</span>
         </v-col>
       </v-row>
     </v-container>
-  </v-container>
+  </div>
 </template>
 <script>
 export default {
@@ -110,6 +113,7 @@ export default {
 <style>
 #footer {
   margin-top: 4rem;
+  padding-bottom: 5.2rem;
 
   #logo {
     width: 10.5996rem;
@@ -169,7 +173,6 @@ export default {
 #footer-copy-right {
   background: #24292F;
   padding-bottom: 0;
-  margin-top: 4rem;
 
   .describe {
     color: #FFF;

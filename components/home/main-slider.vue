@@ -7,7 +7,7 @@
                 <v-carousel-item v-for="(slide, i) in slides" :key="i">
                     <v-sheet class="section1" :id="slide.id">
                         <v-container class="pt-0 pt-sm-6 pt-lg-8  ">
-                            <v-card flat class="px-4 px-sm-1 px-md-16">
+                            <v-card flat class="px-4 px-sm-8 px-lg-12">
                                 <v-row class="white--text ">
                                     <v-col col="12">
                                         <div class="slide-title " v-html="slide.title" />
@@ -74,7 +74,7 @@ export default {
 
             slides: [
                 {
-                    title: '<span class="gama-text-h1">AI</span> <span class=""gama-text-h2>System <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education</span>',
+                    title: '<span class="gama-text-h1">AI</span> <span class="gama-text-h4">&nbspSystem <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education</span>',
                     img: 'ai-robot.png',
                     text: "Discover the future of education with our AI-powered learning platform,<br> revolutionizing the way you acquire knowledge and skills.",
                     id: 'ai-slide',
@@ -110,6 +110,10 @@ export default {
     .container {
         width: 100%;
 
+        .slide-title{
+            margin-top:3rem;
+        }
+
         .slide-img {
             width: 12rem;
             float: right;
@@ -118,15 +122,12 @@ export default {
 
 
         .gama-text-h1 {
-            font-size: 4.2rem !important;
             color: #FFF;
-
 
         }
 
-        .gama-text-h2 {
-            font-size: 2.4rem !important;
-
+        .gama-text-h4 {
+            color: #FFF;
         }
 
 
@@ -173,14 +174,14 @@ export default {
     height: 21.5rem;
     background-color: transparent;
     background-image: url('/images/ai-robot.png');
-    background-position: right top;
+    background-position: right 2.4rem;
     background-size: 15rem 18.1rem;
     background-repeat: no-repeat;
 }
 
 #main-slider #aq-slide {
     padding-top: 6rem;
-    height: 21.5rem;
+    height: 22rem;
     background: linear-gradient(45deg, #0092A9 0%, #2BDDFF 100%);
     background-repeat: no-repeat;
 }
@@ -191,7 +192,7 @@ export default {
     background-color: transparent;
     background-image: url('/images/a-q.png');
     background-repeat: no-repeat;
-    background-position: right top;
+    background-position: 95% top;
 }
 
 #main-slider .section2 {
@@ -240,7 +241,6 @@ export default {
         height: 51%;
 
         .container {
-            width: 80%;
 
             .slide-img {
                 width: 17rem;
@@ -275,7 +275,7 @@ export default {
 
     #main-slider #ai-slide .v-card {
         height: 34rem;
-        background-position: right top;
+        background-position: 98% top;
         background-size: 17.7rem 22.11rem;
     }
 
@@ -457,9 +457,9 @@ export default {
         }
 
         .slide-title {
-            font-family: 'Inter-Bold' !important;
-            font-weight: 750;
-            font-size: 2.8rem !important;
+            margin-top:2rem!important;
+            
+            
         }
 
         .slide-describe {

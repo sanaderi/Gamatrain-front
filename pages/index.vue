@@ -12,15 +12,15 @@
                 <v-col cols="12" id="ai-learn-banner">
                     <img id="img-top" alt="AI Learn" src="/images/ai-learn-bg1.png" />
                     <v-card flat>
-                        <h2 class="title">
+                        <h2 class="gama-text-h2">
                             AI Learn
                         </h2>
                         <p class="describe">
                             Discover Your Full Potential with AI-based Education
                         </p>
-                        <v-btn to="/smart-learning" color="#FFB300" rounded class="white--text">
+                        <nuxt-link to="/smart-learning" class="gama-primary-btn">
                             Read about it
-                        </v-btn>
+                        </nuxt-link>
                         <img id="img-bottom" alt="AI Learn" src="/images/ai-learn-bg2.png" />
                     </v-card>
                 </v-col>
@@ -34,7 +34,7 @@
             <v-container>
                 <v-row>
                     <v-col cols="12">
-                        <h2 class="title">Are you a student?</h2>
+                        <h2 class="gama-text-h4">Are you a student?</h2>
                     </v-col>
                     <v-col cols="12" sm="6">
                         <v-card class="fill-height float-sm-right" to="/search?type=test">
@@ -70,13 +70,13 @@
                     <v-img width="246" height="184" class="mx-auto" src="/images/school-service.png" />
                 </v-col>
                 <v-col cols="12" sm="8">
-                    <h2 class="title">Find school service</h2>
+                    <h2 class="gama-text-h4">Find school service</h2>
                     <p class="gama-text-body1 describe">
                         You don't have to try the hardest ways anymore. GamaTrain has provided you with access to school
                         information. Just
                         filter and GamaTrain will find it for you.
                     </p>
-                    <v-btn to="/school-service" rounded large color="#FFB300">Learn more</v-btn>
+                    <nuxt-link class="gama-primary-btn" to="/school-service" >Learn more</nuxt-link>
                 </v-col>
             </v-row>
 
@@ -139,7 +139,7 @@ export default {
         BlogContainer,
         StatsBanner
     },
-    
+
 
     data() {
         return {
@@ -161,21 +161,26 @@ export default {
             ],
             slideArr: [
                 {
-                    img: 'guid-banner1.png',
-                    caption: 'Join us today',
-                    describe: "Simple registration, big rewards"
+                    img: 'guid-banner1.svg',
+                    caption: 'Sign Up',
+                    describe: "Register and Create Your Content Creator Profile"
                 },
                 {
                     img: 'guid-banner2.png',
-                    caption: 'Upload file',
-                    describe: 'Easily Upload Your Files and Share Your Knowledge'
+                    caption: 'Upload Your Content',
+                    describe: 'Share Your Lesson Plans, Study Guides, and More.'
                 },
                 {
-                    img: 'guid-banner3.png',
-                    caption: 'Earn money',
-                    describe: 'Start earning money now by getting paid for your valuable content'
+                    img: 'guid-banner3.svg',
+                    caption: 'Reach Students',
+                    describe: 'Gain Exposure through Our Platform and Network.'
+                },
+                {
+                    img: 'guid-banner4.svg',
+                    caption: 'Earn Big',
+                    describe: 'Reap the Rewards as Students Purchase Your Content.'
                 }
-            ]
+            ],
         }
     },
     computed: {
@@ -238,18 +243,13 @@ export default {
         background-color: #24292F;
         color: #FFFFFF;
         text-align: center;
-        margin: 100px 0 100px 0;
+        margin: 100px auto 100px auto;
         padding: 48px 0 24px 0;
         position: relative;
 
-        .title {
+        .gama-text-h2 {
             color: #FFF;
             text-align: center;
-            font-family: 'Inter-Bold' !important;
-            font-size: 4.6rem !important;
-            font-style: normal;
-            font-weight: 750;
-            line-height: 4.4rem;
             margin-bottom: 1.6rem;
         }
 
@@ -270,15 +270,8 @@ export default {
             left: 0;
         }
 
-        .v-btn {
-            font-weight: 700;
-
-            .v-btn__content {
-                color: #24292F;
-            }
-
-
-
+        .gama-primary-btn{
+           color: #24292F;  
         }
     }
 
@@ -305,14 +298,10 @@ export default {
     padding-bottom: 4.8rem;
     background: #FFB600;
 
-    .title {
+    .gama-text-h4 {
         color: #24292F;
         text-align: center;
-        font-family: 'Inter-Bold' !important;
-        font-size: 2.8rem !important;
-        font-style: normal;
-        font-weight: 750;
-        line-height: 4.4rem;
+       
     }
 
     .v-card {
@@ -353,36 +342,22 @@ export default {
 
 #school-service-container {
     margin: 10rem auto 10rem auto;
-    
+    text-align: center;
 
-    .title {
+
+    .gama-text-h4 {
         color: #354053;
-        font-family: 'Inter-Bold';
-        font-size: 2.8rem !important;
-        font-style: normal;
-        font-weight: 750;
-        line-height: 4.4rem;
         margin-bottom: 2.4rem;
     }
 
-    .describe {
+    .gama-text-body1 {
         color: #6E7781;
+        text-align: left;
 
     }
 
-    .v-btn {
-        margin-top: 2rem;
-
-
-
-        .v-btn__content {
-            color: #24292F;
-            font-size: 1.4rem;
-            font-style: normal;
-            font-weight: 700;
-            line-height: normal;
-            letter-spacing: 0.0125rem;
-        }
+    .gama-primary-btn {
+        margin-top: 2.4rem;
 
     }
 
@@ -411,5 +386,45 @@ export default {
         line-height: 3.4rem;
     }
 }
+
+
+@media (min-width: 600px) {
+    #school-service-container {
+        margin: 10rem auto 10rem auto;
+        text-align: left;
+
+
+        .gama-text-h4 {
+            color: #354053;
+            margin-bottom: 2.4rem;
+        }
+
+        .gama-text-body1 {
+            color: #6E7781;
+
+        }
+
+        .v-btn {
+            margin-top: 2rem;
+
+
+
+            .v-btn__content {
+                color: #24292F;
+                font-size: 1.4rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                letter-spacing: 0.0125rem;
+            }
+
+        }
+
+
+
+    }
+}
+
+;
 </style>
  

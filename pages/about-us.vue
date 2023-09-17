@@ -346,7 +346,6 @@ import stepAnimation from '../static/images/about-vision-step.json'; // Adjust t
 import LottieAnimation from '~/components/common/lottie-animation.vue';
 
 export default {
-    layout:"gama-ds-default",
     auth: false,
     head(){
         return{

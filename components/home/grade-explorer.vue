@@ -8,15 +8,15 @@
                         <v-sheet class="text-right" id="stats-handler" ref="statsHandler">
                             <div v-for="(item, index) in stats" :key="index" @touchstart="handleTouchStart(index)"
                                 @touchend="handleTouchEnd(index)" @touchmove="handleTouchMove" @mousemove="handleMouseMove"
-                                @mousedown="handleMouseDown(index)" @mouseup="handleMouseUp(index)" :ref="`handler${index}`"
-                                class="grade-btn">
-                                <v-btn @click="handleBtnClick(index)" class="my-0  white--text" :class="[index == 5 ? 'rounded-pill active' : 'rounded-s-xl',
+                                @mousedown="handleMouseDown(index)" @mouseup="handleMouseUp(index)"
+                                :ref="`handler${index}`">
+                                <v-btn @click="handleBtnClick(index)" class="my-0  white--text grade-btn" :class="[index == 5 ? 'rounded-pill active' : 'rounded-s-xl',
                                 currentIndex == index ? 'handlerShadow' : '',
                                 `depth${index}`
                                 ]" v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
                                     :style="`font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
-                                    {{ gradeHandlerTitle(item.base_title) }}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
+                                    {{ truncateGradeTitle(gradeHandlerTitle(item.base_title)) }}
                                 </v-btn>
                                 <div v-if="index == 5"
                                     :style="`height:${gradeSizes[index].height}px;width:${gradeSizes[index].width}px`" />
@@ -30,44 +30,45 @@
                             <div>
                                 <v-row class="stats-details d-none d-lg-flex">
                                     <v-col lg="6" class="pb-0 pb-sm-6">
-                                        <span class="stat-icon icon-paper"></span>
                                         <nuxt-link
                                             :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
                                             class="label">
+                                            <span class="stat-icon icon-paper"></span>
                                             Paper
+
+                                            <v-icon class="stat-arrow" size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         </nuxt-link>
-                                        <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         <div class="stat">+{{ stats[5].tests | numberFormat }}</div>
                                     </v-col>
                                     <v-col lg="6" class="pb-0 pb-sm-6">
-                                        <span class="stat-icon icon-multimedia"></span>
                                         <nuxt-link
                                             :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
                                             class="label">
+                                            <span class="stat-icon icon-multimedia"></span>
                                             Multimedia
+                                            <v-icon class="stat-arrow" size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         </nuxt-link>
-                                        <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         <div class="stat">+{{ stats[5].files | numberFormat }}</div>
                                     </v-col>
                                     <v-col lg="6" class="pb-0 pb-sm-6">
-                                        <span class="stat-icon icon-exam"></span>
                                         <nuxt-link
                                             :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
                                             class="label">
+                                            <span class="stat-icon icon-exam"></span>
                                             Exam
+                                            <v-icon class="stat-arrow" size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         </nuxt-link>
-                                        <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         <div class="stat">+{{ stats[5].exams | numberFormat }}</div>
 
                                     </v-col>
                                     <v-col lg="6" class="pb-0 pb-sm-6">
-                                        <span class="stat-icon icon-q-a"></span>
                                         <nuxt-link
                                             :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
                                             class="label">
+                                            <span class="stat-icon icon-q-a"></span>
                                             Q & A
+                                            <v-icon class="stat-arrow" size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         </nuxt-link>
-                                        <v-icon size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         <div class="stat">+{{ stats[5].questions | numberFormat }}</div>
                                     </v-col>
                                 </v-row>
@@ -77,14 +78,13 @@
                                     <v-col cols="12">
                                         <v-row>
                                             <v-col cols="7" class="py-0">
-                                                <span class="stat-icon icon-paper"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
+                                                    <span class="stat-icon icon-paper"></span>
                                                     Paper
                                                 </nuxt-link>
-                                                <div class="date-holder ">{{
-                                                    $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
+                                                <div class="date-holder ">{{ showDate() }}</div>
                                             </v-col>
                                             <v-col cols="5" class="text-right pt-0">
                                                 <span class="stat">+{{ stats[5].tests | numberFormat }}</span>
@@ -96,14 +96,13 @@
                                         </v-row>
                                         <v-row>
                                             <v-col cols="7" class="py-0">
-                                                <span class="stat-icon icon-multimedia"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
+                                                    <span class="stat-icon icon-multimedia"></span>
                                                     Multimedia
                                                 </nuxt-link>
-                                                <div class="date-holder pb-0"> {{
-                                                    $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
+                                                <div class="date-holder pb-0"> {{ showDate() }}</div>
                                             </v-col>
                                             <v-col cols="5" class="text-right pt-0">
                                                 <span class="stat">+{{ stats[5].files | numberFormat }}</span>
@@ -115,14 +114,13 @@
                                         </v-row>
                                         <v-row>
                                             <v-col cols="7" class="py-0">
-                                                <span class="stat-icon icon-exam"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
+                                                    <span class="stat-icon icon-exam"></span>
                                                     Exam
                                                 </nuxt-link>
-                                                <div class="date-holder pb-0"> {{
-                                                    $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
+                                                <div class="date-holder pb-0"> {{ showDate() }}</div>
                                             </v-col>
                                             <v-col cols="5" class="text-right pt-0">
                                                 <span class="stat">+{{ stats[5].exams | numberFormat }}</span>
@@ -135,14 +133,13 @@
 
                                         <v-row>
                                             <v-col cols="7" class="py-0 ">
-                                                <span class="stat-icon icon-q-a"></span>
                                                 <nuxt-link
                                                     :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
                                                     class="label">
+                                                    <span class="stat-icon icon-q-a"></span>
                                                     Q & A
                                                 </nuxt-link>
-                                                <div class="date-holder"> {{
-                                                    $moment(stats[5].last_update).format('MMM,DD YYYY') }}</div>
+                                                <div class="date-holder"> {{ showDate() }}</div>
                                             </v-col>
                                             <v-col cols="5" class="text-right pt-0">
                                                 <span class="stat">+{{ stats[5].questions | numberFormat }}</span>
@@ -159,7 +156,7 @@
                             <div class="d-none d-lg-block">
                                 <v-row>
                                     <v-col cols="6" md="6">
-                                        <h4 class="section-title">Last questions</h4>
+                                        <h4 class="section-title gama-text-h5">Last questions</h4>
                                         <v-card class="latest-card" flat v-for="item in questions.slice(0, 3)"
                                             :key="item.id">
                                             <v-row>
@@ -196,7 +193,7 @@
                                         </v-card>
                                     </v-col>
                                     <v-col cols="6" md="6">
-                                        <h4 class="section-title">Last Uploaded File</h4>
+                                        <h4 class="section-title gama-text-h5">Last Uploaded File</h4>
                                         <v-card class="latest-card" flat v-for="item in papers.slice(0, 3)" :key="item.id">
                                             <v-row>
                                                 <v-col cols="1">
@@ -742,12 +739,16 @@ export default {
 
     },
     methods: {
+        showDate() {
+            if (this.$moment(this.stats[5].last_update).format('MMM,DD YYYY') !== 'Invalid date')
+                return this.$moment(this.stats[5].last_update).format('MMM,DD YYYY')
+        },
         shouldDisplayButton(index) {
             // Determine whether to display the button based on screen size and specific indexes
-            if (this.$vuetify.breakpoint.xs) {
-                return ![0, 1, 11,12,13,14,15,16].includes(index);
+            if (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md) {
+                return ![0, 1, 11, 12, 13, 14, 15, 16].includes(index);
             } else {
-                return ![12,13,14,15,16].includes(index);
+                return ![12, 13, 14, 15, 16].includes(index);
             }
         },
         handleBtnClick(index) {
@@ -954,6 +955,11 @@ export default {
             var cutLength = window.innerWidth < 1330 ? 32 : 38;
             return title.length > cutLength ? title.slice(0, cutLength) + '...' : title;
         },
+
+        truncateGradeTitle(title) {
+            var cutLength = (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md) ? 3 : 9;
+            return title.length > cutLength ? title.slice(0, cutLength) + '...' : title;
+        },
         getFullName(firstName, lastName) {
             return `${firstName} ${lastName}`
         },
@@ -1042,6 +1048,10 @@ export default {
 
 #content-stats-container #grade-details-card .stats-details {
     height: 28.4rem;
+
+    .row {
+        height: 7.6rem;
+    }
 }
 
 #content-stats-container #grade-details-card .label {
@@ -1053,6 +1063,8 @@ export default {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    position: relative;
+    margin-left: 3.2rem;
 }
 
 #content-stats-container #grade-details-card .date-holder {
@@ -1073,8 +1085,11 @@ export default {
 }
 
 
-#content-stats-container #grade-details-card .stat-icon {
+#content-stats-container #grade-details-card .label .stat-icon {
+    position: absolute;
     color: #FFB300 !important;
+    left: -2.5rem;
+    top: -0.2rem;
     font-size: 2rem;
 }
 
@@ -1082,11 +1097,8 @@ export default {
 
 #content-stats-container #grade-details-card .section-title {
     color: #6E7781;
-    font-family: "Inter-Bold";
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 750;
-    line-height: 4.4rem;
+    margin-bottom: 0.5rem;
+    
 }
 
 #content-stats-container #grade-details-card .latest-card .v-card-title .title {
@@ -1197,9 +1209,9 @@ export default {
     }
 
     #content-stats-container #grade-details-card {
-        height: 42.5rem;
+        height: 34.8rem;
         width: 88.8%;
-        padding: 3rem;
+        padding: 2.5rem 3rem 3rem 3rem;
         border-radius: 0rem 2rem 2rem 0rem;
     }
 
@@ -1243,6 +1255,8 @@ export default {
 
             .stat-icon {
                 font-size: 2.4rem;
+                left: -3rem;
+
             }
         }
     }
@@ -1250,10 +1264,7 @@ export default {
 
     #content-stats-container #grade-details-card .section-title {
         color: #6E7781;
-        font-family: Inter-Bold;
-        font-size: 2rem;
-        font-style: normal;
-        font-weight: 750;
+        
         line-height: 4.4rem;
     }
 
@@ -1322,7 +1333,7 @@ export default {
             border-radius: 0rem 2rem 2rem 0rem;
 
             .stats-details {
-                height: 14.6rem;
+                height: 16rem;
 
                 .label {
                     color: #424A53;
@@ -1331,6 +1342,15 @@ export default {
                     font-style: normal;
                     font-weight: 600;
                     line-height: normal;
+                    position: relative;
+                    padding-left: 3.6rem;
+
+                    .stat-icon {
+                        position: absolute;
+                        left: -0.2rem;
+                        top: -0.5rem;
+                        font-size: 3.2rem;
+                    }
                 }
 
                 .date-holder {
@@ -1342,9 +1362,7 @@ export default {
                     line-height: 4.4rem;
                 }
 
-                .stat-icon {
-                    font-size: 3.2rem;
-                }
+
 
                 .stat {
                     color: #6e7781;
@@ -1352,7 +1370,7 @@ export default {
                     font-style: normal;
                     font-weight: 300;
                     line-height: 4.4rem;
-                    padding-left: 3rem;
+                    margin-left: 6rem;
                 }
             }
 

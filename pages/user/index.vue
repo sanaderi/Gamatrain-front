@@ -4,7 +4,7 @@
     <v-row>
       <v-col cols="12" class="px-0 px-md-2">
         <v-card :flat="$vuetify.breakpoint.xs">
-          <v-card-text class="pa-0 px-sm-8 pa-md-3">
+          <v-card-text class="px-8 px-sm-8 pa-md-3">
             <v-row>
 
               <!--General info-->

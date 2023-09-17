@@ -3,7 +3,7 @@
         <v-container>
             <v-row>
                 <v-col cols="12">
-                    <h2 class="title">The best are here.</h2>
+                    <h2 class="gama-text-h4">The best are here.</h2>
                     <v-row>
                         <v-col cols="6" sm="4" md="2" v-for="(item,index) in stats" 
                         :key="index" class="text-center">
@@ -74,13 +74,8 @@ export default {
     color: #FFFFFF;
     text-align: center;
 
-    .title {
+    .gama-text-h4 {
         color: #F3F3FB;
-        font-size: 2.8rem!important;
-        font-family: 'Inter-Bold'!important;
-        font-style: normal;
-        font-weight: 750;
-        line-height: 2.75rem;
         margin-bottom: 4.4rem;
     }
 

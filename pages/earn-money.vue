@@ -152,7 +152,7 @@ export default {
                     describe: "Register and Create Your Content Creator Profile"
                 },
                 {
-                    img: 'guid-banner2.svg',
+                    img: 'guid-banner2.png',
                     caption: 'Upload Your Content',
                     describe: 'Share Your Lesson Plans, Study Guides, and More.'
                 },

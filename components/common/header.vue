@@ -30,7 +30,7 @@
                 <v-menu transition="slide-x-transition" offset-y min-width="150">
                   <template v-slot:activator="{ on, attrs }">
                     <div v-bind="attrs" v-on="on" class="d-flex">
-                      <div :id="menuSetting.bgColor == '#fff' ? 'header-username-dark' : 'header-username-light'">
+                      <div  :id="menuSetting.bgColor == '#fff' ? 'header-username-dark' : 'header-username-light'">
                         {{ userName }}
                       </div>
                       <v-avatar size="32" v-if="$auth.user.avatar">
@@ -111,7 +111,7 @@
 
 
 
-      <v-navigation-drawer v-model="sidebar" app class="hidden-md-and-up main-sidebar">
+      <v-navigation-drawer v-model="sidebar" app class="hidden-lg-and-up main-sidebar">
         <!-- Start:  Menu items -->
         <v-list dense shaped>
           <!--Profile info-->
@@ -694,12 +694,14 @@ export default {
   #header-username-light {
     color: #fff;
     margin-top: 0.2rem;
+    min-width: 6.2rem;
     margin-right: 1rem;
   }
 
   #header-username-dark {
     color: #000;
     margin-top: 0.2rem;
+    min-width: 6.2rem;
     margin-right: 1rem;
   }
 

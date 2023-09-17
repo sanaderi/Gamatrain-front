@@ -3,6 +3,11 @@
         <v-container>
             <v-row>
                 <v-col cols="12" class="text-center">
+                    <h2 class="gama-text-h4 black--text">
+                        Earn Money with GamaTrain
+                    </h2>
+                </v-col>
+                <v-col cols="12" class="text-center">
                     <h2 class="gama-text-h4">{{ slideArr[slideIndex].caption }}</h2>
                 </v-col>
                 <v-col cols="12">
@@ -85,19 +90,26 @@ export default {
 #level-guid-banner {
     padding-top: 2.4rem;
     padding-bottom: 2.4rem;
-    height: 45rem;
+    height: 46.3rem;
     background: #F6F8FA;
 
 
+    .black--text {
+        color: #24292F !important;
+        margin-bottom: 0.4rem;
+    }
+
     .gama-text-h4 {
-        color: #354053;
+        color: #FFB600;
         text-align: center;
+        margin-bottom: 0.4rem;
 
     }
 
     .gama-text-body1 {
         text-align: center;
         color: #6E7781;
+        margin-bottom: 0.4rem;
 
     }
 
@@ -155,12 +167,12 @@ export default {
     #level-guid-banner {
         padding-top: 3.6rem;
         padding-bottom: 2.4rem;
-        height: 45rem;
+        height: 51.8rem;
         background: #F6F8FA;
 
 
         .gama-text-h4 {
-            color: #354053;
+            color: #FFB600;
             text-align: center;
 
         }
@@ -221,13 +233,25 @@ export default {
 }
 
 
-@media(min-width: 960px) {
+@media(min-width: 1264px) {
     #level-guid-banner {
-        height: 47.7rem;
+        height: 64.2rem;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
 
 
 
+        .black--text {
+            margin-bottom: 3.2rem;
+        }
 
+        .gama-text-h4 {
+            margin-bottom: 3.2rem;
+        }
+
+        .gama-text-body1 {
+            margin-bottom: 3.2rem;
+        }
 
 
 
