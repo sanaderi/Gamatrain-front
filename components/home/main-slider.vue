@@ -1,22 +1,22 @@
 <template>
-    <v-row>
+   
         <v-col cols="12" sm="12" md="12" class="pt-0 px-0 pt-sm-0">
-            <v-carousel id="main-slider" v-model="carousel_model" delimiter-icon="mdi-square" interval="10000"
+            <v-carousel id="main-slider" v-model="carousel_model"   delimiter-icon="mdi-square" interval="5000"
                 hide-delimiter-background :show-arrows="false">
 
                 <v-carousel-item v-for="(slide, i) in slides" :key="i">
                     <v-sheet class="section1" :id="slide.id">
-                        <v-container class="pt-0 pt-sm-6 pt-lg-8  ">
-                            <v-card flat class="px-4 px-sm-8 px-lg-12">
+                        <v-container class="pt-0 pt-sm-6 pt-md-8  ">
+                            <v-card flat class="px-4 px-sm-8 px-md-12">
                                 <v-row class="white--text ">
                                     <v-col col="12">
                                         <div class="slide-title " v-html="slide.title" />
-                                        <div class="slide-describe gama-text-body1 mt-6 d-none d-lg-block"
+                                        <div class="slide-describe gama-text-body1 mt-6 d-none d-md-block"
                                             v-html="slide.text"></div>
-                                        <v-btn rounded :to="slide.link" class="mt-8   d-none d-lg-inline-flex"
+                                        <v-btn rounded :to="slide.link" class="d-none d-md-inline-flex"
                                             id="read-about-btn" x-large>Learn more</v-btn>
 
-                                        <v-btn :to="slide.link" text id="slide-register-btn" class="d-lg-none">
+                                        <v-btn :to="slide.link" text id="slide-register-btn" class="d-md-none">
                                             Learn more
                                             <v-icon color="#FFB300">
                                                 mdi-arrow-right-bold
@@ -32,7 +32,7 @@
                     </v-sheet>
 
                 </v-carousel-item>
-                <v-card id="main-search" class="d-none d-lg-block">
+                <v-card id="main-search" class="d-none d-md-block">
                     <v-card-text>
                         <v-row class="text-center">
                             <v-col cols="7" id="main-search-keyword">
@@ -57,7 +57,6 @@
 
             </v-carousel>
         </v-col>
-    </v-row>
 </template>
 
 <script>
@@ -138,9 +137,9 @@ export default {
         #slide-register-btn {
             text-transform: none;
             color: #A5A6A7;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-style: normal;
-            font-weight: 500;
+            font-weight: 400;
             line-height: 2.4rem;
 
             .v-icon {
@@ -148,6 +147,7 @@ export default {
                 color: #FFB300 !important;
                 font-size: 2.4rem;
                 padding-left: 0.8rem;
+                margin-top: 0.4rem;
             }
         }
     }
@@ -181,7 +181,7 @@ export default {
 
 #main-slider #aq-slide {
     padding-top: 6rem;
-    height: 22rem;
+    height: 21.5rem;
     background: linear-gradient(45deg, #0092A9 0%, #2BDDFF 100%);
     background-repeat: no-repeat;
 }
@@ -254,14 +254,15 @@ export default {
                 color: #A5A6A7;
                 font-size: 1.6rem;
                 font-style: normal;
-                font-weight: 500;
+                font-weight: 400;
                 line-height: 2.4rem;
 
                 .v-icon {
                     display: inline-flex !important;
                     color: #FFB300 !important;
-                    font-size: 4.8rem;
-                    padding-left: 3.4rem;
+                    font-size: 4.8rem!important;
+                    margin-top: 0.4rem;
+                    padding-left: 0.8rem;
                 }
             }
         }
@@ -304,7 +305,7 @@ export default {
 
 }
 
-@media (min-width: 1264px) {
+@media (min-width: 960px) {
 
     #main-slider {
         height: 50rem !important;
@@ -381,11 +382,15 @@ export default {
         color: #000 !important;
     }
 
-    #main-slider #main-search #main-search-keyword {
+    #main-slider #main-search #main-search-keyword input{
+        caret-color: black;
+    }
 
+    #main-slider #main-search #main-search-keyword {
         .v-input {
             border-color: #fff;
             color: transparent !important;
+            
 
 
 
@@ -461,6 +466,13 @@ export default {
 
         .slide-title {
             margin-top:2rem!important;
+
+
+            .gama-text-h4{
+                font-size: 4.4rem!important;
+                font-weight: 700!important;
+;
+            }
             
             
         }
@@ -479,6 +491,7 @@ export default {
         #read-about-btn {
             background: #FFB600;
             max-width: 16rem;
+            margin-top: 2.4rem;
 
             .v-btn__content {
                 color: #24292F !important;

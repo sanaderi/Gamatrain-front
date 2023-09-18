@@ -11,11 +11,10 @@
                                 @mousedown="handleMouseDown(index)" @mouseup="handleMouseUp(index)"
                                 :ref="`handler${index}`">
                                 <v-btn @click="handleBtnClick(index)" class="my-0  white--text grade-btn" :class="[index == 5 ? 'rounded-pill active' : 'rounded-s-xl',
-                                currentIndex == index ? 'handlerShadow' : '',
-                                `depth${index}`
+                                currentIndex == index ? 'handlerShadow' : ''
                                 ]" v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
                                     :style="`font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
                                     {{ truncateGradeTitle(gradeHandlerTitle(item.base_title)) }}
                                 </v-btn>
                                 <div v-if="index == 5"
@@ -28,8 +27,8 @@
                     <v-col cols="10" sm="10" class="pl-0">
                         <v-card id="grade-details-card">
                             <div>
-                                <v-row class="stats-details d-none d-lg-flex">
-                                    <v-col lg="6" class="pb-0 pb-sm-6">
+                                <v-row class="stats-details d-none d-md-flex">
+                                    <v-col md="6" class="pb-0 pb-sm-6">
                                         <nuxt-link
                                             :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
                                             class="label">
@@ -40,7 +39,7 @@
                                         </nuxt-link>
                                         <div class="stat">+{{ stats[5].tests | numberFormat }}</div>
                                     </v-col>
-                                    <v-col lg="6" class="pb-0 pb-sm-6">
+                                    <v-col md="6" class="pb-0 pb-sm-6">
                                         <nuxt-link
                                             :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
                                             class="label">
@@ -50,7 +49,7 @@
                                         </nuxt-link>
                                         <div class="stat">+{{ stats[5].files | numberFormat }}</div>
                                     </v-col>
-                                    <v-col lg="6" class="pb-0 pb-sm-6">
+                                    <v-col md="6" class="pb-0 pb-sm-6">
                                         <nuxt-link
                                             :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
                                             class="label">
@@ -61,7 +60,7 @@
                                         <div class="stat">+{{ stats[5].exams | numberFormat }}</div>
 
                                     </v-col>
-                                    <v-col lg="6" class="pb-0 pb-sm-6">
+                                    <v-col md="6" class="pb-0 pb-sm-6">
                                         <nuxt-link
                                             :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
                                             class="label">
@@ -74,7 +73,7 @@
                                 </v-row>
 
 
-                                <v-row class="stats-details d-flex d-lg-none">
+                                <v-row class="stats-details d-flex d-md-none">
                                     <v-col cols="12">
                                         <v-row>
                                             <v-col cols="7" class="py-0">
@@ -150,10 +149,10 @@
                                 </v-row>
                             </div>
 
-                            <v-divider class="d-none d-lg-block" style="margin-top: 94px;margin-bottom: 9px;" />
+                            <v-divider class="d-none d-md-block" style="margin-top: 94px;margin-bottom: 9px;" />
 
 
-                            <div class="d-none d-lg-block">
+                            <div class="d-none d-md-block">
                                 <v-row>
                                     <v-col cols="6" md="6">
                                         <h4 class="section-title gama-text-h5">Last questions</h4>
@@ -168,17 +167,17 @@
                                                 <v-col cols="11">
                                                     <v-card-title>
                                                         <nuxt-link class="title" :to="`/qa/${item.id}`">
-                                                            <span v-html="truncateLatestTitle(item.title)"></span>
+                                                            <span v-html="item.title"></span>
                                                         </nuxt-link>
                                                     </v-card-title>
 
                                                     <v-card-subtitle>
                                                         <v-row>
-                                                            <v-col cols="6" class="owner-container">
-                                                                By: {{ truncateFullName(getFullName(item.first_name,
-                                                                    item.last_name)) }}
+                                                            <v-col cols="8" class="owner-container">
+                                                                By: {{ getFullName(item.first_name,
+                                                                    item.last_name) }}
                                                             </v-col>
-                                                            <v-col cols="6" class="subdate-container">
+                                                            <v-col cols="4" class="subdate-container">
                                                                 <v-icon size="12">mdi-calendar</v-icon>
                                                                 {{ $moment(item.subdate).format('MMM DD') }}
                                                             </v-col>
@@ -204,17 +203,17 @@
                                                 <v-col cols="11">
                                                     <v-card-title>
                                                         <nuxt-link class="title" :to="`papers/${item.id}`">
-                                                            <span v-html="truncateLatestTitle(item.title)"></span>
+                                                            <span v-html="item.title"></span>
                                                         </nuxt-link>
                                                     </v-card-title>
 
                                                     <v-card-subtitle>
                                                         <v-row>
-                                                            <v-col cols="6" class="owner-container">
-                                                                By: {{ truncateFullName(getFullName(item.first_name,
-                                                                    item.last_name)) }}
+                                                            <v-col cols="8" class="owner-container">
+                                                                By: {{ getFullName(item.first_name,
+                                                                    item.last_name) }}
                                                             </v-col>
-                                                            <v-col cols="6" class="subdate-container">
+                                                            <v-col cols="4" class="subdate-container">
                                                                 <v-icon size="12">mdi-calendar</v-icon>
                                                                 {{ $moment(item.subdate).format('MMM DD') }}
                                                             </v-col>
@@ -745,7 +744,7 @@ export default {
         },
         shouldDisplayButton(index) {
             // Determine whether to display the button based on screen size and specific indexes
-            if (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md) {
+            if (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm) {
                 return ![0, 1, 11, 12, 13, 14, 15, 16].includes(index);
             } else {
                 return ![12, 13, 14, 15, 16].includes(index);
@@ -947,14 +946,9 @@ export default {
                 });
         },
 
-        truncateFullName(fullName) {
-            return fullName.length > 10 ? fullName.slice(0, 10) + '...' : fullName;
-        },
+        
 
-        truncateLatestTitle(title) {
-            var cutLength = window.innerWidth < 1330 ? 32 : 38;
-            return title.length > cutLength ? title.slice(0, cutLength) + '...' : title;
-        },
+       
 
         truncateGradeTitle(title) {
             var cutLength = (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md) ? 3 : 9;
@@ -974,10 +968,10 @@ export default {
         gradeSizes() {
             if (this.$vuetify.breakpoint.xs)
                 return this.gradeSizesXs;
-            else if (this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md)
+            else if (this.$vuetify.breakpoint.sm)
                 return this.gradeSizesSm;
             else
-                return this.gradeSizesLg;
+                return this.gradeSizesMd;
         }
 
     },
@@ -1070,7 +1064,7 @@ export default {
 #content-stats-container #grade-details-card .date-holder {
     margin-left: 2.4rem;
     color: #6E7781;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 300;
     line-height: 3.8rem;
@@ -1098,16 +1092,20 @@ export default {
 #content-stats-container #grade-details-card .section-title {
     color: #6E7781;
     margin-bottom: 0.5rem;
-    
+
 }
 
-#content-stats-container #grade-details-card .latest-card .v-card-title .title {
+#content-stats-container #grade-details-card .latest-card  .title {
     color: #6E7781;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.4rem!important;
     font-style: normal;
-    font-weight: 500;
-    line-height: 2rem;
+    font-weight: 300;
+    line-height: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    width: inherit;
+    text-overflow: ellipsis;
 }
 
 
@@ -1131,9 +1129,13 @@ export default {
                     font-size: 1.2rem;
                     font-style: normal;
                     font-weight: 500;
-                    line-height: 2rem;
+                    line-height: normal;
                     padding-bottom: 0rem;
-                    padding-top: 0rem;
+                    padding-top: 0.8rem;
+                    width: inherit;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
                 }
 
                 .subdate-container {
@@ -1142,10 +1144,10 @@ export default {
                     font-size: 1.2rem;
                     font-style: normal;
                     font-weight: 300;
-                    line-height: 2rem;
+                    line-height: normal;
                     margin-bottom: 0;
                     padding-bottom: 0;
-                    padding-top: 0;
+                    padding-top: 0.8rem;
 
                 }
             }
@@ -1264,7 +1266,7 @@ export default {
 
     #content-stats-container #grade-details-card .section-title {
         color: #6E7781;
-        
+
         line-height: 4.4rem;
     }
 
@@ -1315,7 +1317,7 @@ export default {
 
 
 
-@media (min-width: 1264px) {
+@media (min-width: 960px) {
     #content-stats-container {
 
 
@@ -1343,11 +1345,11 @@ export default {
                     font-weight: 600;
                     line-height: normal;
                     position: relative;
-                    padding-left: 3.6rem;
+                    margin-left: 3.6rem;
 
                     .stat-icon {
                         position: absolute;
-                        left: -0.2rem;
+                        left: -3.6rem;
                         top: -0.5rem;
                         font-size: 3.2rem;
                     }
@@ -1366,11 +1368,11 @@ export default {
 
                 .stat {
                     color: #6e7781;
-                    font-size: 1.8rem;
+                    font-size: 1.4rem;
                     font-style: normal;
                     font-weight: 300;
                     line-height: 4.4rem;
-                    margin-left: 6rem;
+                    margin-left: 3rem;
                 }
             }
 

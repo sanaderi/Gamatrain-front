@@ -1,6 +1,6 @@
 <template>
     <v-container id="blog-list-container">
-        <v-card flat class="mt-10 " >
+        <v-card flat  >
             <v-card-text class="px-0 px-sm-6 main-card">
                 <v-row>
                     <v-col cols="6">
@@ -112,7 +112,7 @@ export default {
 
 <style>
 #blog-list-container {
-    margin: 10rem auto 10rem auto;
+    margin: 2.4rem auto 2.4rem auto;
 
     #main-title {
         color: #354053;
@@ -261,8 +261,10 @@ export default {
 }
 
 
-@media screen and (min-width:1264px) {
+@media screen and (min-width:960px) {
     #blog-list-container {
+        margin: 8rem auto 8rem auto;
+
 
         .main-card {
             padding-left: 1.2rem!important;

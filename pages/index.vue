@@ -7,7 +7,7 @@
         <level-guid-banner :slide-arr="slideArr" />
 
         <!--Ai learn banner-->
-        <v-container class="mt-16">
+        <v-container>
             <v-row>
                 <v-col cols="12" id="ai-learn-banner">
                     <img id="img-top" alt="AI Learn" src="/images/ai-learn-bg1.png" />
@@ -15,7 +15,7 @@
                         <h2 class="gama-text-h2">
                             AI Learn
                         </h2>
-                        <p class="describe">
+                        <p class="gama-text-subtitle1">
                             Discover Your Full Potential with AI-based Education
                         </p>
                         <nuxt-link to="/smart-learning" class="gama-primary-btn">
@@ -76,7 +76,7 @@
                         information. Just
                         filter and GamaTrain will find it for you.
                     </p>
-                    <nuxt-link class="gama-primary-btn" to="/school-service" >Learn more</nuxt-link>
+                    <nuxt-link class="gama-primary-btn" to="/school-service">Learn more</nuxt-link>
                 </v-col>
             </v-row>
 
@@ -236,7 +236,7 @@ export default {
 #ai-learn-banner {
     position: relative;
     max-width: 73rem;
-    margin: 6.4rem auto 6.4rem auto;
+    margin: 0 auto 0 auto;
 
     .v-card {
         border-radius: 1rem;
@@ -244,8 +244,9 @@ export default {
         color: #FFFFFF;
         text-align: center;
         margin: 100px auto 100px auto;
-        padding: 48px 0 24px 0;
+        padding: 2.4rem 0 2.4rem 0;
         position: relative;
+        height: 17rem;
 
         .gama-text-h2 {
             color: #FFF;
@@ -253,25 +254,24 @@ export default {
             margin-bottom: 1.6rem;
         }
 
-        .describe {
+        .gama-text-subtitle1 {
             color: #FFF;
-            text-align: center;
-            font-family: 'Inter-Regular';
-            font-size: 1.8rem;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 2.4rem;
-            margin-bottom: 1.5rem;
+            width: 28.8rem;
+            margin: auto;
         }
 
         #img-bottom {
             position: absolute;
             top: 12.5rem;
+            width: 9.7rem;
+            height: 11.1rem;
+            flex-shrink: 0;
             left: 0;
         }
 
-        .gama-primary-btn{
-           color: #24292F;  
+        .gama-primary-btn {
+            margin-top: 1.5rem;
+            color: #24292F;
         }
     }
 
@@ -279,11 +279,13 @@ export default {
 
     #img-top {
         position: absolute;
-        top: 2.4rem;
+        top: 6.45rem;
         height: auto;
         left: 0;
         right: 0;
         z-index: 1;
+        width: 7.7333rem;
+        height: 6.4rem;
         margin: 0 auto;
     }
 
@@ -301,7 +303,7 @@ export default {
     .gama-text-h4 {
         color: #24292F;
         text-align: center;
-       
+
     }
 
     .v-card {
@@ -423,8 +425,95 @@ export default {
 
 
     }
+
+
+    #ai-learn-banner {
+
+
+        .v-card {
+            padding: 4.8rem 0 4.8rem 0;
+            height: 21.5rem;
+
+            .gama-text-h2 {
+                color: #FFF;
+                text-align: center;
+                margin-bottom: 1.6rem;
+            }
+
+            .gama-text-subtitle1 {
+                width: 40rem;
+            }
+
+            #img-bottom {
+                top: 13.8rem;
+                width: 12.8908rem;
+                height: 16.3rem;
+            }
+
+            .gama-primary-btn {
+                margin-top: 2.4rem;
+                color: #24292F;
+            }
+        }
+
+
+
+        #img-top {
+            top: 4.55rem;
+            width: 10.9367rem;
+            height: 9rem;
+        }
+
+
+
+
+    }
 }
 
-;
+
+@media (min-width: 960px) {
+    #ai-learn-banner {
+        margin: 8rem auto 8rem auto;
+
+
+        .v-card {
+            padding: 3.4rem 0 4.8rem 0;
+            height: 21.5rem;
+
+            .gama-text-h2 {
+                color: #FFF;
+                text-align: center;
+                margin-bottom: 1.6rem;
+            }
+
+            .gama-text-subtitle1 {
+                width: 50rem;
+            }
+
+            #img-bottom {
+                top: 13.8rem;
+                width: 15.0261rem;
+                height: 19rem;
+            }
+
+            .gama-primary-btn {
+                margin-top: 2.4rem;
+                color: #24292F;
+            }
+        }
+
+
+
+        #img-top {
+            top: 2.45rem;
+            width: 14.5823rem;
+            height: 12rem;
+        }
+
+
+
+
+    }
+}
 </style>
  
