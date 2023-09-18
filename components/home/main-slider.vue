@@ -1,7 +1,7 @@
 <template>
    
         <v-col cols="12" sm="12" md="12" class="pt-0 px-0 pt-sm-0">
-            <v-carousel id="main-slider" v-model="carousel_model"   delimiter-icon="mdi-square" interval="5000"
+            <v-carousel id="main-slider" v-model="carousel_model" cycle   delimiter-icon="mdi-square" interval="5000"
                 hide-delimiter-background :show-arrows="false">
 
                 <v-carousel-item v-for="(slide, i) in slides" :key="i">
