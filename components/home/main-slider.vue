@@ -40,7 +40,7 @@
                                     filled></v-text-field>
                             </v-col>
                             <v-col cols="4" class="pl-0 " id="keysearch-cate">
-                                <v-autocomplete hide-details dense label="Select category"
+                                <v-autocomplete hide-details dense label="Select category" 
                                     :items="['Paper', 'Multimedia', 'Q&A', 'Exam', 'Tutorial']" filled></v-autocomplete>
                             </v-col>
                             <v-col cols="1" class="pl-0">
@@ -327,11 +327,12 @@ export default {
         color: #24292F !important
     }
 
-
+    
 
     #main-slider #main-search #keysearch-cate .v-input {
         background: #fff;
         border-radius: 0.4rem;
+        height: 5.2rem!important;
 
     }
 
@@ -358,6 +359,8 @@ export default {
             }
         }
     }
+
+    
 
     #main-slider #main-search #keysearch-cate .v-label {
         color: rgba(0, 0, 0, 0.60);
