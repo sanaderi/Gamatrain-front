@@ -1,7 +1,7 @@
 <template>
-   
+    <div id="slider-container">
         <v-col cols="12" sm="12" md="12" class="pt-0 px-0 pt-sm-0">
-            <v-carousel id="main-slider" v-model="carousel_model" cycle   delimiter-icon="mdi-square" interval="5000"
+            <v-carousel id="main-slider" v-model="carousel_model" cycle delimiter-icon="mdi-square" interval="5000"
                 hide-delimiter-background :show-arrows="false">
 
                 <v-carousel-item v-for="(slide, i) in slides" :key="i">
@@ -12,9 +12,10 @@
                                     <v-col col="12">
                                         <div class="slide-title " v-html="slide.title" />
                                         <div class="slide-describe gama-text-body1 mt-6 d-none d-md-block"
-                                            v-html="slide.text"></div>
-                                        <v-btn rounded :to="slide.link" class="d-none d-md-inline-flex"
-                                            id="read-about-btn" x-large>Learn more</v-btn>
+                                            v-html="slide.text">
+                                        </div>
+                                        <v-btn rounded :to="slide.link" class="d-none d-md-inline-flex" id="read-about-btn"
+                                            x-large>Learn more</v-btn>
 
                                         <v-btn :to="slide.link" text id="slide-register-btn" class="d-md-none">
                                             Learn more
@@ -36,11 +37,17 @@
                     <v-card-text>
                         <v-row class="text-center">
                             <v-col cols="7" id="main-search-keyword">
-                                <v-text-field class="rounded-ts" label="Ex: Paper Summer Session" dense hide-details
-                                    filled></v-text-field>
+                                <v-text-field v-model="searchKey" class="rounded-ts" label="Ex: Paper Summer Session" dense
+                                    hide-details filled>
+                                    <template slot="append">
+                                        <v-icon v-if="searchResultsSection" @click="searchResultsSection = false">
+                                            mdi-close-circle
+                                        </v-icon>
+                                    </template>
+                                </v-text-field>
                             </v-col>
                             <v-col cols="4" class="pl-0 " id="keysearch-cate">
-                                <v-autocomplete hide-details dense label="Select category" 
+                                <v-autocomplete hide-details dense v-model="searchCate" label="Select category"
                                     :items="['Paper', 'Multimedia', 'Q&A', 'Exam', 'Tutorial']" filled></v-autocomplete>
                             </v-col>
                             <v-col cols="1" class="pl-0">
@@ -51,12 +58,98 @@
                                 </v-btn>
                             </v-col>
                         </v-row>
+
+
                     </v-card-text>
 
                 </v-card>
 
+
             </v-carousel>
+
         </v-col>
+        <div id="search-result-container" v-if="searchResultsSection">
+            <div id="search-result" ref="searchResult" @scroll="checkSearchScroll">
+                <div id="result-stat">
+                    <span class="gama-text-overline">
+                        Search result
+                    </span>
+                    <span class="gama-text-button">
+                        {{ searchCount }}
+                    </span>
+                </div>
+                <div v-if="searchLoading==false && searchCount>0">
+                    <v-row class="list-item" v-for="(item, index) in searchResults" :key="index">
+                        <v-col cols="1" class="pr-1">
+                            <div v-if="item.type == 'gama_tests'" class="avatar paper-avatar">
+                                <span class="icon icon-paper"></span>
+                            </div>
+                            <div v-else-if="item.type == 'gama_learnfiles'" class="avatar multimedia-avatar">
+                                <span class="icon icon-multimedia"></span>
+                            </div>
+                            <div v-else-if="item.type == 'gama_azmoons'" class="avatar exam-avatar">
+                                <span class="icon icon-exam"></span>
+                            </div>
+                            <div v-else-if="item.type == 'gama_questions'" class="avatar qa-avatar">
+                                <span class="icon icon-q-a"></span>
+                            </div>
+                            <div v-else-if="item.type == 'gama_dars'" class="avatar tutorial-avatar">
+                                <span class="icon icon-tutorial"></span>
+                            </div>
+                            <div v-else-if="item.type == 'gama_teachers'" class="avatar teacher-avatar">
+                                <span class="icon icon-teacher"></span>
+                            </div>
+                            <div v-else-if="item.type == 'gama_schools'" class="avatar school-avatar">
+                                <span class="icon icon-school"></span>
+                            </div>
+                            <div v-else-if="item.type == 'gama_live'" class="avatar live-avatar">
+                                <span class="icon icon-live"></span>
+                            </div>
+                            <div v-else-if="item.type == 'gama_students'" class="avatar student-avatar">
+                                <span class="icon icon-live"></span>
+                            </div>
+
+                        </v-col>
+                        <v-col cols="11">
+                            <div class="gama-text-button">{{ item.title }}</div>
+                            <div class="chip-container">
+                                <div class="chip" v-if="item.lesson_title">
+                                    {{ item.lesson_title }}
+                                </div>
+                                <div class="chip" v-if="item.section_title">
+                                    {{ item.section_title }}
+                                </div>
+                                <div class="chip" v-if="item.base_title">
+                                    {{ item.base_title }}
+                                </div>
+                            </div>
+
+                        </v-col>
+
+                    </v-row>
+                    <v-row v-if="allDataLoaded==false" class="list-item" v-for="i in 3">
+                        <v-col cols="12">
+                            <v-skeleton-loader type="list-item-avatar"></v-skeleton-loader>
+                        </v-col>
+                    </v-row>
+                </div>
+                <div v-else-if="searchCount==0 && searchLoading==false" class="text-center">
+                    <span class="gama-text-button">
+                        Opps! no data found
+                    </span>
+                </div>
+                <div v-else>
+                    <v-row class="list-item" v-for="i in 3">
+                        <v-col cols="12">
+                            <v-skeleton-loader type="list-item-avatar"></v-skeleton-loader>
+                        </v-col>
+                    </v-row>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -69,8 +162,8 @@ export default {
                 '#24292F',
                 '#0092A9'
             ],
-
-
+            searchResults: [],
+            searchCount: '...',
             slides: [
                 {
                     title: '<span class="gama-text-h1">AI</span> <span class="gama-text-h4">&nbspSystem <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education</span>',
@@ -87,12 +180,74 @@ export default {
 
                 }
             ],
+            searchKey: '',
+            searchCate: '',
+            searchLoading: true,
+            pageNum: 1,
+            timer: 0,
+            searchResultsSection: false,
+            allDataLoaded: false
+        }
+    },
+    watch: {
+        searchKey(val) {
+            if (val.trim() === '') {
+                this.searchResultsSection = false;
+            }
+            else{
+                this.searchResultsSection = true;
+            }
+            this.pageNum = 1;
+            this.allDataLoaded =false; 
+            this.searchResults = [];
+            this.search();
         }
     },
     methods: {
         openAuthDialog(val) {
             this.$router.push({ query: { auth_form: val } });
         },
+        checkSearchScroll() {
+            const scrollableDiv = this.$refs.searchResult;
+            if (this.isScrollAtBottom(scrollableDiv)) {
+                this.pageNum++;
+                this.search();
+            }
+
+        },
+        isScrollAtBottom(element) {
+            return (
+                element.scrollHeight - element.scrollTop <= element.clientHeight + 300
+            );
+        },
+        search() {
+            this.searchLoading = true;
+            if (this.timer) {
+                clearTimeout(this.timer);
+                this.timer = null;
+            }
+
+            this.timer = setTimeout(() => {
+                if (this.searchKey && this.allDataLoaded == false)
+                    this.$axios.$get('/api/v1/search/text', {
+                        params: {
+                            query: this.searchKey,
+                            page: this.pageNum
+                        }
+                    })
+                        .then(response => {
+                            this.searchCount = response.data.num;
+                            this.searchResults.push(...response.data.list);
+
+                            if (response.data.list.length === 0)
+                                this.allDataLoaded = true;
+                        }).catch(err => {
+                            console.log(err);
+                        }).finally(() => {
+                            this.searchLoading = false;
+                        })
+            }, 800);
+        }
     }
 }
 </script>
@@ -103,14 +258,18 @@ export default {
     height: 25rem !important;
 }
 
+#search-result-container {
+    display: none;
+}
+
 #main-slider .section1 {
     height: 35%;
 
     .container {
         width: 100%;
 
-        .slide-title{
-            margin-top:3rem;
+        .slide-title {
+            margin-top: 3rem;
         }
 
         .slide-img {
@@ -234,7 +393,7 @@ export default {
 
 @media (min-width: 600px) {
     #main-slider {
-        height: 30.8rem!important;
+        height: 30.8rem !important;
     }
 
     #main-slider .section1 {
@@ -260,7 +419,7 @@ export default {
                 .v-icon {
                     display: inline-flex !important;
                     color: #FFB300 !important;
-                    font-size: 4.8rem!important;
+                    font-size: 4.8rem !important;
                     margin-top: 0.4rem;
                     padding-left: 0.8rem;
                 }
@@ -307,6 +466,11 @@ export default {
 
 @media (min-width: 960px) {
 
+    #slider-container {
+        position: relative;
+        height: 50rem !important;
+    }
+
     #main-slider {
         height: 50rem !important;
     }
@@ -328,14 +492,174 @@ export default {
         color: #24292F !important
     }
 
-    
+
 
     #main-slider #main-search #keysearch-cate .v-input {
         background: #fff;
         border-radius: 0.4rem;
-        height: 5.2rem!important;
+        height: 5.2rem !important;
 
     }
+
+    #main-slider #main-search #main-search-keyword .v-input .v-icon {
+        color: rgba(36, 41, 47, 0.3);
+        font-size: 2.4rem !important;
+    }
+
+
+
+    #slider-container #search-result-container {
+        display: block;
+        position: absolute;
+        top: 41.8rem;
+        left: 0;
+        right: 0;
+        margin: auto;
+        z-index: 4;
+        width: 74rem;
+        min-height: 39.7rem;
+        height: 39.7rem;
+        overflow: hidden;
+        border-radius: 2rem;
+        background: #fff;
+        box-shadow: 0px 9px 46px 8px rgba(0, 0, 0, 0.12), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 11px 15px -7px rgba(0, 0, 0, 0.20);
+    }
+
+    #slider-container #search-result-container #search-result {
+        max-height: 39.7rem;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        position: relative;
+
+        #result-stat {
+            padding: 1.6rem;
+            text-align: right;
+            position: sticky;
+            background: #fff;
+            top: 0;
+
+            .gama-text-button {
+                color: #57B947;
+                text-align: right;
+            }
+
+            .gama-text-overline {
+                color: rgba(36, 41, 47, 0.30);
+                margin-right: 0.22rem;
+            }
+        }
+
+        .list-item {
+            height: 11.9rem;
+            padding: 1.6rem;
+
+            .gama-text-button {
+                color: rgba(36, 41, 47, 0.80);
+                margin-bottom: 1.7rem;
+                white-space: nowrap;
+                width: inherit;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+
+
+            .avatar {
+                width: 4.8rem;
+                height: 4.8rem;
+                border-radius: 2.6rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .icon {
+                    font-size: 3.2rem;
+                    color: #FFFFFF
+                }
+            }
+
+            .paper-avatar {
+                background: #01C8C8;
+            }
+
+            .multimedia-avatar {
+                background: #8800B8;
+            }
+
+            .exam-avatar {
+                background: #7B61FF;
+
+            }
+
+            .qa-avatar {
+                background: #FF50A6;
+
+            }
+
+            .tutorial-avatar {
+                background: #2A91FF;
+
+            }
+
+            .student-avatar {
+                background: #FF9400;
+            }
+
+            .teacher-avatar {
+                background: #1CB423;
+
+            }
+
+            .school-avatar {
+                background: #A15801;
+
+            }
+
+            .live-avatar {
+                background: #FF0000;
+
+            }
+
+
+            .chip-container {
+                display: flex;
+
+                .chip {
+                    height: 3.5rem;
+                    padding: 0.8rem 1.6rem 0.8rem 1.6rem;
+                    width: max-content;
+                    border-radius: 2rem;
+                    background: rgba(36, 41, 47, 0.05);
+                    margin-right: 0.8rem;
+
+                    color: rgba(36, 41, 47, 0.80);
+                    font-family: Inter-Regular;
+                    font-size: 1.6rem;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                    max-width: 18.4rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+
+
+            .v-skeleton-loader__list-item-avatar {
+                background: transparent;
+            }
+
+        }
+
+        .list-item:nth-child(even) {
+            background: rgba(36, 41, 47, 0.05);
+        }
+
+
+
+    }
+
 
     #main-slider {
         #main-search {
@@ -361,7 +685,7 @@ export default {
         }
     }
 
-    
+
 
     #main-slider #main-search #keysearch-cate .v-label {
         color: rgba(0, 0, 0, 0.60);
@@ -382,7 +706,7 @@ export default {
         color: #000 !important;
     }
 
-    #main-slider #main-search #main-search-keyword input{
+    #main-slider #main-search #main-search-keyword input {
         caret-color: black;
     }
 
@@ -390,7 +714,7 @@ export default {
         .v-input {
             border-color: #fff;
             color: transparent !important;
-            
+
 
 
 
@@ -465,16 +789,16 @@ export default {
         }
 
         .slide-title {
-            margin-top:2rem!important;
+            margin-top: 2rem !important;
 
 
-            .gama-text-h4{
-                font-size: 4.4rem!important;
-                font-weight: 700!important;
-;
+            .gama-text-h4 {
+                font-size: 4.4rem !important;
+                font-weight: 700 !important;
+                ;
             }
-            
-            
+
+
         }
 
         .slide-describe {
