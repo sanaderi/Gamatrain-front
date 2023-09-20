@@ -1151,13 +1151,13 @@ export default {
     display: block;
     margin: auto;
     z-index: 4;
-    min-height: 39.7rem;
-    height: 39.7rem;
+    min-height: 40vh;
+    height: 40vh;
     overflow: hidden;
 
 
     #search-result {
-      max-height: 39.7rem;
+      max-height: 40vh;
       overflow-x: hidden;
       overflow-y: scroll;
       position: relative;
