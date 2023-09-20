@@ -262,7 +262,7 @@
                       </v-col>
                       <v-col cols="12" class="pt-0">
                         <div id="mobile-search-result-container" v-if="searchResultsSection">
-                          <div id="search-result" ref="searchResult" @scroll="checkSearchScroll">
+                          <div id="search-result" ref="mobileSearchResult" @scroll="checkSearchScroll">
                             <div id="result-stat">
                               <span class="gama-text-overline">
                                 Search result
@@ -704,7 +704,7 @@ export default {
 
     //Search section
     checkSearchScroll() {
-      const scrollableDiv = this.$refs.searchResult;
+      const scrollableDiv = this.$refs.mobileSearchResult;
       if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false) {
         this.pageNum++;
         this.search();
@@ -712,8 +712,10 @@ export default {
 
     },
     isScrollAtBottom(element) {
+      console.log(element.clientHeight);
+      console.log(element.scrollHeight - element.scrollTop);
       return (
-        element.scrollHeight - element.scrollTop == element.clientHeight
+        element.scrollHeight - element.scrollTop <= element.clientHeight
       );
     },
     search() {
