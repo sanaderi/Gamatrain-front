@@ -202,7 +202,7 @@
                                                 </v-col>
                                                 <v-col cols="11">
                                                     <v-card-title>
-                                                        <nuxt-link class="title" :to="`papers/${item.id}`">
+                                                        <nuxt-link class="title" :to="`paper/${item.id}`">
                                                             <span v-html="item.title"></span>
                                                         </nuxt-link>
                                                     </v-card-title>

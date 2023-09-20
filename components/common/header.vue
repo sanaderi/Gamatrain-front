@@ -30,7 +30,7 @@
                 <v-menu transition="slide-x-transition" offset-y min-width="150">
                   <template v-slot:activator="{ on, attrs }">
                     <div v-bind="attrs" v-on="on" class="d-flex">
-                      <div  :id="menuSetting.bgColor == '#fff' ? 'header-username-dark' : 'header-username-light'">
+                      <div :id="menuSetting.bgColor == '#fff' ? 'header-username-dark' : 'header-username-light'">
                         {{ userName }}
                       </div>
                       <v-avatar size="32" v-if="$auth.user.avatar">
@@ -225,40 +225,136 @@
                 mdi-magnify
               </v-icon>
             </template>
-            <v-sheet class="mobile-search-sheet">
-              <v-slide-group v-model="mobileSearchFilter" class="pa-4" active-class="active-item" show-arrows>
-                <v-slide-item v-for="(item, n) in searchFilterItems" :key="n" v-slot="{ active, toggle }">
-                  <v-card :color="active ? undefined : 'white lighten-1'" class="ma-2 " height="7.6rem" width="7.6rem"
-                    @click="toggle">
-                    <v-row class="fill-height text-center" justify="center">
-                      <v-col cols="12">
-                        <div><v-icon>{{ item.icon }}</v-icon></div>
-                        <div class="title">{{ item.title }}</div>
-                      </v-col>
-                    </v-row>
-                  </v-card>
+            <v-sheet id="mobile-search-sheet">
+              <div id="search-sheet-handler"></div>
+              <v-slide-group id="search-cate-slide" center-active class="pt-4" show-arrows>
+                <v-slide-item v-for="(item, n) in searchFilterItems" class="slide-item"
+                  :class="mobileSearchFilter == item.key ? 'active-item' : ''" :key="n">
+                  <div @click="setActiveFilter(item.key)">
+                    <div :class="`active-avatar active-${item.key}-avatar`">
+                      <div :class="`avatar ${item.key}-avatar`">
+                        <span :class="`icon icon-${item.key}`"></span>
+                      </div>
+                    </div>
+                    <div class="gama-text-caption">{{ item.title }}</div>
+                  </div>
                 </v-slide-item>
               </v-slide-group>
               <v-card flat>
-                <v-card-text>
-                  <v-card>
-                    <v-card-text id="keyword-card">
-                      <v-row>
-                        <v-col cols="12">
-                          <v-text-field v-model="keyword" label="Search" append-icon="mdi-magnify"></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="4">
+                <v-card flat>
+                  <div id="keyword-card">
+                    <v-row>
+                      <v-col cols="12" class="pb-0 px-6">
+                        <v-text-field ref="mobileKeywordInput" class="rounded-ts pr-0" dense outlined hide-details
+                          v-model="searchKey" label="Ex: Paper Summer Session">
+                          <template slot="append">
+                            <v-icon v-if="searchResultsSection" @click="closeSearch()">
+                              mdi-close-circle
+                            </v-icon>
+                          </template>
+                          <template slot="append-outer">
+                            <v-btn dense color="#FFB300" class="white--text">
+                              <v-icon>mdi-magnify</v-icon>
+                            </v-btn>
 
-                          <v-skeleton-loader type="table-heading, list-item-two-line, image, table-tfoot">
-                          </v-skeleton-loader>
+                          </template>
+                        </v-text-field>
+                      </v-col>
+                      <v-col cols="12" class="pt-0">
+                        <div id="mobile-search-result-container" v-if="searchResultsSection">
+                          <div id="search-result" ref="searchResult" @scroll="checkSearchScroll">
+                            <div id="result-stat">
+                              <span class="gama-text-overline">
+                                Search result
+                              </span>
+                              <span class="gama-text-button">
+                                {{ searchCount }}
+                              </span>
+                            </div>
+                            <div v-if="searchCount > 0">
+                              <v-row class="list-item" v-for="(item, index) in searchResults" :key="index">
+                                <v-col cols="1" >
+                                  <nuxt-link :to="`/${calcPath(item.type)}/${item.id}`">
 
-                          <v-skeleton-loader type="table-heading, list-item-two-line, image, table-tfoot">
-                          </v-skeleton-loader>
-                        </v-col>
-                      </v-row>
-                    </v-card-text>
-                  </v-card>
-                </v-card-text>
+                                    <div v-if="item.type == 'gama_tests'" class="avatar paper-avatar">
+                                      <span class="icon icon-paper"></span>
+                                    </div>
+                                    <div v-else-if="item.type == 'gama_learnfiles'" class="avatar multimedia-avatar">
+                                      <span class="icon icon-multimedia"></span>
+                                    </div>
+                                    <div v-else-if="item.type == 'gama_azmoons'" class="avatar exam-avatar">
+                                      <span class="icon icon-exam"></span>
+                                    </div>
+                                    <div v-else-if="item.type == 'gama_questions'" class="avatar qa-avatar">
+                                      <span class="icon icon-q-a"></span>
+                                    </div>
+                                    <div v-else-if="item.type == 'gama_dars'" class="avatar tutorial-avatar">
+                                      <span class="icon icon-tutorial"></span>
+                                    </div>
+                                    <div v-else-if="item.type == 'gama_teachers'" class="avatar teacher-avatar">
+                                      <span class="icon icon-teacher"></span>
+                                    </div>
+                                    <div v-else-if="item.type == 'gama_schools'" class="avatar school-avatar">
+                                      <span class="icon icon-school"></span>
+                                    </div>
+                                    <div v-else-if="item.type == 'gama_live'" class="avatar live-avatar">
+                                      <span class="icon icon-live"></span>
+                                    </div>
+                                    <div v-else-if="item.type == 'gama_students'" class="avatar student-avatar">
+                                      <span class="icon icon-live"></span>
+                                    </div>
+                                  </nuxt-link>
+
+                                </v-col>
+                                <v-col cols="11">
+                                  <div class="gama-text-button ml-2">
+                                    <nuxt-link :to="`/${calcPath(item.type)}/${item.id}`">{{ item.title }}</nuxt-link>
+                                  </div>
+                                  <div class="chip-container ml-2">
+                                    <div class="chip" v-if="item.lesson_title">
+                                      <nuxt-link
+                                        :to="`/search?type=test&section=${item.section}&base=${item.base}&lesson=${item.lesson}`">{{
+                                          item.lesson_title }}</nuxt-link>
+                                    </div>
+                                    <div class="chip" v-if="item.base_title">
+                                      <nuxt-link :to="`/search?type=test&section=${item.section}&base=${item.base}`">{{
+                                        item.base_title }}</nuxt-link>
+                                    </div>
+                                    <div class="chip" v-if="item.section_title">
+                                      <nuxt-link :to="`/search?type=test&section=${item.section}`">{{ item.section_title
+                                      }}</nuxt-link>
+                                    </div>
+                                  </div>
+
+                                </v-col>
+
+                              </v-row>
+                              <v-row v-if="allDataLoaded == false" class="list-item">
+                                <v-col cols="12">
+                                  <v-skeleton-loader type="list-item-avatar"></v-skeleton-loader>
+                                </v-col>
+                              </v-row>
+                            </div>
+                            <div v-else-if="searchCount == 0 && searchLoading == false" class="text-center">
+                              <span class="gama-text-button">
+                                Opps! no data found
+                              </span>
+                            </div>
+                            <div v-else>
+                              <v-row class="list-item" v-for="i in 3">
+                                <v-col cols="12">
+                                  <v-skeleton-loader type="list-item-avatar"></v-skeleton-loader>
+                                </v-col>
+                              </v-row>
+                            </div>
+
+
+                          </div>
+                        </div>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </v-card>
 
               </v-card>
             </v-sheet>
@@ -437,32 +533,35 @@ export default {
       mobileSearchSheet: false,
       searchFilterItems: [
         {
-          icon: 'mdi-file',
           title: 'Paper',
           key: 'paper'
         },
         {
-          icon: 'mdi-multimedia',
           title: 'Multimedia',
           key: 'multimedia'
         },
         {
-          icon: 'mdi-text-box-edit',
           title: 'Exam',
           key: 'exam'
         },
         {
-          icon: 'mdi-head-question-outline',
           title: 'Q & A',
-          key: 'qa'
+          key: 'q-a'
         },
         {
-          icon: 'mdi-cast-education',
           title: 'Tutorial',
           key: 'tutorial'
+        },
+        {
+          title: 'Teacher',
+          key: 'teacher'
+        },
+        {
+          title: 'Student',
+          key: 'student'
         }
       ],
-      mobileSearchFilter: '',
+      mobileSearchFilter: 'exam',
       keyword: '',
 
       user_profile_items: [
@@ -510,10 +609,24 @@ export default {
         fixedStatus: false,
         linkColor: '#424A53',
         class: ''
-      }
+      },
+
+
+      //Search section
+      searchResults: [],
+      searchCount: '...',
+      searchKey: '',
+      searchCate: '',
+      searchLoading: true,
+      pageNum: 1,
+      timer: 0,
+      searchResultsSection: false,
+      allDataLoaded: false
+      //End search section
 
     };
   },
+
   mounted() {
     // if (window.innerWidth <= 960 && this.$auth.loggedIn) {
     //   this.$refs["notification-section"].getNotifications();
@@ -584,7 +697,80 @@ export default {
 
           }
         };
+    },
+    setActiveFilter(val) {
+      this.mobileSearchFilter = val;
+    },
+
+    //Search section
+    checkSearchScroll() {
+      const scrollableDiv = this.$refs.searchResult;
+      if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false) {
+        this.pageNum++;
+        this.search();
+      }
+
+    },
+    isScrollAtBottom(element) {
+      return (
+        element.scrollHeight - element.scrollTop == element.clientHeight
+      );
+    },
+    search() {
+      this.searchLoading = true;
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+
+      this.timer = setTimeout(() => {
+        if (this.searchKey && this.allDataLoaded == false)
+          this.$axios.$get('/api/v1/search/text', {
+            params: {
+              query: this.searchKey,
+              page: this.pageNum
+            }
+          })
+            .then(response => {
+              this.searchCount = response.data.num;
+              this.searchResults.push(...response.data.list);
+
+              if (response.data.list.length === 0)
+                this.allDataLoaded = true;
+            }).catch(err => {
+              console.log(err);
+            }).finally(() => {
+              this.searchLoading = false;
+            })
+      }, 800);
+    },
+    closeSearch() {
+      this.searchResultsSection = false;
+      this.searchKey = '';
+      this.$refs.mobileKeywordInput.blur();
+    },
+    calcPath(type) {
+      if (type == 'gama_tests')
+        return 'paper';
+      else if (type == 'gama_learnfiles')
+        return 'multimedia';
+      else if (type == 'gama_azmoons')
+        return 'exams';
+      else if (type == 'gama_questions')
+        return 'qa';
+      else if (type == 'gama_dars')
+        return 'tutorial';
+      else if (type == 'gama_teachers')
+        return 'teacher';
+      else if (type == 'gama_schools')
+        return 'school';
+      else if (type == 'gama_live')
+        return 'live';
+      else if (type == 'gama_students')
+        return 'student';
+
     }
+    //End search section
   },
   watch: {
     currentOpenDialog(val) {
@@ -621,6 +807,8 @@ export default {
     },
 
     "$route.name"(val) {
+      this.mobileSearchSheet = false;
+
       if (val == 'index' || val == 'smart-learning' || val == 'services' || val == 'school-service'
         || val == 'faq'
         || val == 'terms'
@@ -644,6 +832,20 @@ export default {
           class: ''
         }
       }
+    },
+
+    searchKey(val) {
+      if (val.trim() === '') {
+        this.searchResultsSection = false;
+      }
+      else {
+        this.searchResultsSection = true;
+      }
+      this.pageNum = 1;
+      this.searchCount = '...';
+      this.allDataLoaded = false;
+      this.searchResults = [];
+      this.search();
     }
   },
   computed: {
@@ -670,200 +872,228 @@ export default {
   color: #FFB300 !important;
 }
 
-
 .transparentMenu {
   background: transparent !important;
 }
 
-
 #main-header {
-  .menu-item:hover {
-    border-bottom: 3px solid rgb(0, 139, 139);
-  }
-
   .v-icon {
-    font-size: 2.8rem;
+    font-size: 2rem;
   }
 
   .v-avatar {
-    min-width: 2.8rem;
-    width: 2.8rem;
-    height: 2.8rem;
-  }
-
-  #header-username-light {
-    color: #fff;
-    margin-top: 0.2rem;
-    min-width: 6.2rem;
-    margin-right: 1rem;
-  }
-
-  #header-username-dark {
-    color: #000;
-    margin-top: 0.2rem;
-    min-width: 6.2rem;
-    margin-right: 1rem;
-  }
-
-
-
-
-  #main-menu {
-    .v-btn {
-      font-size: 1.4rem;
-      font-style: normal;
-      font-weight: 700;
-      font-family: 'Inter-Regular';
-      line-height: normal;
-    }
-
-    .v-btn--active {
-      border-bottom: 0.2rem solid #FFB300 !important;
-
-      .v-btn__overlay {
-        opacity: 0;
-      }
-    }
-
-
-  }
-
-  .menu_active {
-    border-bottom: 4px solid white !important;
-    background-color: rgba(255, 179, 0, 0.1) !important;
-    color: #ffb300f3 !important;
-  }
-
-  .menu_group_active {
-    border-bottom: 4px solid white !important;
-    background-color: #e1e2e3;
-    color: #000 !important;
-  }
-
-  .mobile_bar .v-toolbar__content {
-    background: transparent;
-    padding: 0 1.4rem 0 0.5rem !important;
-  }
-
-  .mobile_bar .fa-bell {
-    line-height: 3rem !important;
-    font-size: 2.8rem !important;
-  }
-
-
-
-}
-
-
-#notificationListCard {
-  .main-title {
-    color: #424A53;
-    font-size: 1.6rem !important;
-    font-style: normal;
-    font-weight: 750;
-    line-height: 4.4rem;
-  }
-
-
-  .v-list-item__icon {
-    margin-right: 1rem;
-
-    .v-icon {
-      font-size: 2.4rem;
-      color: #FFB600 !important;
-    }
-  }
-
-
-  .title {
-    color: #424A53;
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 2rem;
-  }
-
-  .describe {
-    color: #6E7781;
-    font-size: 1.2rem;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 2rem;
-  }
-
-  .date {
-    color: #6E7781;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 500;
-  }
-}
-
-
-
-#main-logo {
-  width: 12.0827rem !important;
-  height: 3rem !important;
-  margin-top: 0.4rem;
-  margin-right: 6.4rem;
-
-}
-
-
-
-
-@media only screen and (max-width: 600px) {
-  #main-header {
-    .v-icon {
-      font-size: 2rem;
-    }
-
-    .v-avatar {
-      min-width: 2rem !important;
-      width: 2rem !important;
-      height: 2rem !important;
-    }
-  }
-
-  #main-logo {
-    margin-left: 1.6rem !important;
-    width: 8.0551rem !important;
+    min-width: 2rem !important;
+    width: 2rem !important;
     height: 2rem !important;
   }
+}
 
-  #mobile-signin-btn {
-    border-radius: 3rem;
-    background: #FFB600;
-    width: 6.4rem;
-    height: 2rem;
-    margin-left: 1.6rem;
+#main-logo {
+  margin-left: 1.6rem !important;
+  width: 8.0551rem !important;
+  height: 2rem !important;
+}
+
+#mobile-signin-btn {
+  border-radius: 3rem;
+  background: #FFB600;
+  width: 6.4rem;
+  height: 2rem;
+  margin-left: 1.6rem;
 
 
-    .v-btn__content {
-      color: #24292F;
-      text-transform: none;
-      font-size: 1.4rem;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
+  .v-btn__content {
+    color: #24292F;
+    text-transform: none;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+}
+
+#mobile-search-sheet {
+  height: 70vh;
+  border-radius: 3rem 3rem 0 0;
+  justify-content: center;
+  align-items: center;
+  background: #F6F8FA;
+  position: relative;
+  padding-top: 5.6rem;
+
+  #search-sheet-handler {
+    position: absolute;
+    width: 3.2rem;
+    height: 0.4rem;
+    border-radius: 10rem;
+    opacity: 0.4;
+    top: 1.6rem;
+    left: 0;
+    right: 0;
+    background: var(--m-3-sys-light-outline, #79747E);
+    margin: auto auto;
+  }
+
+
+
+
+  #search-cate-slide {
+    .slide-item {
+      margin-right: 2.4rem;
+      margin-left: 2.4rem;
+
+      .avatar {
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: 2.6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1.2rem auto 0.8rem auto;
+
+        .icon {
+          font-size: 2.13rem;
+          color: #FFFFFF
+        }
+      }
+
+      .paper-avatar {
+        background: #01C8C8;
+      }
+
+      .multimedia-avatar {
+        background: #8800B8;
+      }
+
+      .exam-avatar {
+        background: #7B61FF;
+
+      }
+
+      .q-a-avatar {
+        background: #FF50A6;
+
+      }
+
+      .tutorial-avatar {
+        background: #2A91FF;
+
+      }
+
+      .student-avatar {
+        background: #FF9400;
+      }
+
+      .teacher-avatar {
+        background: #1CB423;
+
+      }
+
+      .school-avatar {
+        background: #A15801;
+
+      }
+
+      .live-avatar {
+        background: #FF0000;
+
+      }
+
+      .gama-text-caption {
+        color: rgba(36, 41, 47, 0.50);
+
+      }
+    }
+
+    .active-item {
+      margin-right: 2.1rem;
+      margin-left: 2.1rem;
+
+
+
+      .avatar {
+        width: 4.8rem;
+        height: 4.8rem;
+        border-radius: 2.6rem;
+        margin: auto auto;
+
+
+        .icon {
+          font-size: 3.2rem;
+        }
+      }
+
+
+      .active-avatar {
+        width: 5.6rem;
+        height: 5.6rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 0.8rem auto;
+
+      }
+
+
+      .active-paper-avatar {
+        background: #BBE9BD;
+      }
+
+      .active-multimedia-avatar {
+        background: #DCB3EA;
+      }
+
+      .active-exam-avatar {
+        background: #D8D0FF
+      }
+
+      .active-q-a-avatar {
+        background: #FFCBE4;
+      }
+
+      .active-tutorial-avatar {
+        background: #C0DEFF;
+
+      }
+
+      .active-student-avatar {
+        background: #FFDFB3;
+      }
+
+      .active-teacher-avatar {
+        background: #1CB4234D
+      }
+
+      .active-school-avatar {
+        background: #E3CDB3;
+      }
+
+      .active-live-avatar {
+        background: #FFB3B3
+      }
+
+
+
+      .gama-text-caption {
+        color: rgba(36, 41, 47, 0.80);
+        text-align: center;
+        font-family: Inter-Regular;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 2.4rem;
+      }
     }
 
   }
 
-  .mobile-search-sheet {
-    height: 70vh;
-    border-radius: 3rem 3rem 0 0;
-    justify-content: center;
-    align-items: center;
+  .v-card {
+    background: transparent;
 
-    .active-item {
-      background: #FFB300;
-      color: #000;
-
-      .v-icon,
-      .title {
-        color: #fff;
-      }
+    .v-skeleton-loader__list-item-avatar {
+      background: transparent;
     }
 
     .v-icon {
@@ -871,32 +1101,201 @@ export default {
       color: #FF9400;
     }
 
-    .title {
-      margin-top: 0.2rem;
-      color: #424A53;
-      text-align: center;
-      font-size: 1.2rem;
-      font-style: normal;
-      font-weight: 300;
-      line-height: 1.6rem;
-    }
+
 
     #keyword-card {
-      .v-icon {
-        font-size: 2.4rem;
-        color: #000000;
-      }
+      .v-text-field {
+        width: 42.8rem;
+        min-height: auto;
+        height: 4rem !important;
+        border-radius: 3.8rem 0.4rem 0.4rem 3.8rem;
 
-      .primary--text {
-        color: #000 !important;
+
+        margin: 1.6rem auto 1.6rem auto;
+
+
+        .v-input__control>.v-input__slot {
+          min-height: auto;
+          height: 4rem !important;
+
+
+          &:before {
+            border-style: none;
+
+          }
+
+
+        }
+
+        .v-input__append-outer {
+          margin: 0 0 0 0.8rem !important;
+
+          .v-btn {
+            min-width: auto;
+            width: 3.9rem !important;
+            height: 3.9rem;
+            border-radius: 0.4rem 3.8rem 3.8rem 0.4rem;
+
+            .v-icon {
+              color: #000;
+              font-size: 2.2rem;
+            }
+          }
+        }
       }
     }
   }
 
 
+  #mobile-search-result-container {
+    display: block;
+    margin: auto;
+    z-index: 4;
+    min-height: 39.7rem;
+    height: 39.7rem;
+    overflow: hidden;
+
+
+    #search-result {
+      max-height: 39.7rem;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      position: relative;
+
+      #result-stat {
+        padding: 1.6rem;
+        text-align: right;
+        position: sticky;
+        background: #F6F8FA;
+        top: 0;
+
+        .gama-text-button {
+          color: #57B947;
+          text-align: right;
+        }
+
+        .gama-text-overline {
+          color: rgba(36, 41, 47, 0.30);
+          margin-right: 0.22rem;
+        }
+      }
+
+      .list-item {
+        height: 11.9rem;
+        padding: 1.6rem;
+
+        .gama-text-button {
+          color: rgba(36, 41, 47, 0.80);
+          margin-bottom: 1.7rem;
+          white-space: nowrap;
+          width: inherit;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+
+
+        .avatar {
+          width: 3.2rem;
+          height: 3.2rem;
+          border-radius: 2.6rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .icon {
+            font-size: 2.13rem;
+            color: #FFFFFF
+          }
+        }
+
+        .paper-avatar {
+          background: #01C8C8;
+        }
+
+        .multimedia-avatar {
+          background: #8800B8;
+        }
+
+        .exam-avatar {
+          background: #7B61FF;
+
+        }
+
+        .qa-avatar {
+          background: #FF50A6;
+
+        }
+
+        .tutorial-avatar {
+          background: #2A91FF;
+
+        }
+
+        .student-avatar {
+          background: #FF9400;
+        }
+
+        .teacher-avatar {
+          background: #1CB423;
+
+        }
+
+        .school-avatar {
+          background: #A15801;
+
+        }
+
+        .live-avatar {
+          background: #FF0000;
+
+        }
+
+
+        .chip-container {
+          display: flex;
+
+          .chip {
+            height: 2.4rem;
+            padding: 0.2rem 0.8rem 0.2rem 0.8rem;
+            width: max-content;
+            border-radius: 2rem;
+            background: rgba(36, 41, 47, 0.05);
+            margin-right: 0.8rem;
+
+            color: rgba(36, 41, 47, 0.80);
+            font-family: Inter-Regular;
+            font-size: 1.2rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 2rem;
+            max-width: 18.4rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+
+
+        .v-skeleton-loader__list-item-avatar {
+          background: transparent;
+        }
+
+      }
+
+      .list-item:nth-child(even) {
+        background: rgba(36, 41, 47, 0.05);
+      }
+
+
+
+    }
+  }
 }
 
-@media only screen and (min-width: 600px) and (max-width: 1264px) {
+
+
+@media (min-width: 600px) {
   #main-header {
     .v-icon {
       font-size: 2.4rem;
@@ -934,21 +1333,15 @@ export default {
     height: 1.6511rem;
   }
 
-  .mobile-search-sheet {
+  #mobile-search-sheet {
     height: 50vh;
     border-radius: 3rem 3rem 0 0;
     justify-content: center;
     align-items: center;
 
-    .active-item {
-      background: #FFB300;
-      color: #000;
 
-      .v-icon,
-      .title {
-        color: #fff;
-      }
-    }
+
+
 
     .v-icon {
       font-size: 2.4rem;
@@ -979,6 +1372,142 @@ export default {
 
   .v-badge__badge {
     color: #FFB300 !important;
+
+  }
+}
+
+
+@media (min-width: 960px) {
+  #main-header {
+    .menu-item:hover {
+      border-bottom: 3px solid rgb(0, 139, 139);
+    }
+
+    .v-icon {
+      font-size: 2.8rem;
+    }
+
+    .v-avatar {
+      min-width: 2.8rem;
+      width: 2.8rem;
+      height: 2.8rem;
+    }
+
+    #header-username-light {
+      color: #fff;
+      margin-top: 0.2rem;
+      min-width: 6.2rem;
+      margin-right: 1rem;
+    }
+
+    #header-username-dark {
+      color: #000;
+      margin-top: 0.2rem;
+      min-width: 6.2rem;
+      margin-right: 1rem;
+    }
+
+
+
+
+    #main-menu {
+      .v-btn {
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 700;
+        font-family: 'Inter-Regular';
+        line-height: normal;
+      }
+
+      .v-btn--active {
+        border-bottom: 0.2rem solid #FFB300 !important;
+
+        .v-btn__overlay {
+          opacity: 0;
+        }
+      }
+
+
+    }
+
+    .menu_active {
+      border-bottom: 4px solid white !important;
+      background-color: rgba(255, 179, 0, 0.1) !important;
+      color: #ffb300f3 !important;
+    }
+
+    .menu_group_active {
+      border-bottom: 4px solid white !important;
+      background-color: #e1e2e3;
+      color: #000 !important;
+    }
+
+    .mobile_bar .v-toolbar__content {
+      background: transparent;
+      padding: 0 1.4rem 0 0.5rem !important;
+    }
+
+    .mobile_bar .fa-bell {
+      line-height: 3rem !important;
+      font-size: 2.8rem !important;
+    }
+
+
+
+  }
+
+
+  #notificationListCard {
+    .main-title {
+      color: #424A53;
+      font-size: 1.6rem !important;
+      font-style: normal;
+      font-weight: 750;
+      line-height: 4.4rem;
+    }
+
+
+    .v-list-item__icon {
+      margin-right: 1rem;
+
+      .v-icon {
+        font-size: 2.4rem;
+        color: #FFB600 !important;
+      }
+    }
+
+
+    .title {
+      color: #424A53;
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 2rem;
+    }
+
+    .describe {
+      color: #6E7781;
+      font-size: 1.2rem;
+      font-style: normal;
+      font-weight: 300;
+      line-height: 2rem;
+    }
+
+    .date {
+      color: #6E7781;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 500;
+    }
+  }
+
+
+
+  #main-logo {
+    width: 12.0827rem !important;
+    height: 3rem !important;
+    margin-top: 0.4rem;
+    margin-right: 6.4rem;
 
   }
 }

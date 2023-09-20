@@ -103,7 +103,7 @@
                   >
                     <td>{{ item.id }}</td>
                     <td class="text-center" style="max-width: 20rem">
-                      <a :href="`/papers/${item.id}/${item.title}`" target="_blank">
+                      <a :href="`/paper/${item.id}/${item.title}`" target="_blank">
                         {{item.title}}
                       </a>
                     </td>
@@ -123,7 +123,7 @@
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn icon color="green"
-                                 :to="`/papers/${item.id}`"
+                                 :to="`/paper/${item.id}`"
                                  target="_blank"
                                  small v-bind="attrs" v-on="on">
                             <v-icon small>

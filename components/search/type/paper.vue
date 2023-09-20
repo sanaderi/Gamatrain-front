@@ -32,13 +32,13 @@
               <v-card flat class="fill-height tutorial-content d-flex flex-column pl-3 pl-md-0 justify-space-between">
                 <v-card-text class="pa-0">
                   <div class="tutorial-title d-flex justify-space-between">
-                    <nuxt-link :to="`/papers/${item.id}/${item.title_url}`"
+                    <nuxt-link :to="`/paper/${item.id}/${item.title_url}`"
                                class="text-h6 text-md-h5 font-weight-bold">
                       {{ item.title }}
                     </nuxt-link>
                   </div>
                   <p class="item-content-subtitle my-2 d-none d-sm-block">
-                    <nuxt-link :to="`/papers/${item.id}/${item.title_url}`">
+                    <nuxt-link :to="`/paper/${item.id}/${item.title_url}`">
                       {{ item.description.substr(0, 120) }}...
                     </nuxt-link>
                   </p>
@@ -120,10 +120,10 @@
                     </v-col>
                     <v-col cols="3" >
                       <div class="text-right align-right float-right d-flex align-content-center  " >
-                        <nuxt-link icon :to="`/papers/${item.id}/${item.title_url}`">
+                        <nuxt-link icon :to="`/paper/${item.id}/${item.title_url}`">
                           <span v-show="item.q_file_word"  class="fa-solid fa-file-word fa-2xl blue--text "></span>
                         </nuxt-link>
-                        <nuxt-link icon :to="`/papers/${item.id}/${item.title_url}`">
+                        <nuxt-link icon :to="`/paper/${item.id}/${item.title_url}`">
                           <span v-show="item.q_file" class="fa-solid fa-file-pdf fa-2xl red--text pl-1"></span>
                         </nuxt-link>
                       </div>
@@ -189,10 +189,10 @@
             </v-col>
             <v-col cols="2" class="py-2">
               <div class="text-right align-right float-right d-flex ">
-                <nuxt-link icon :to="`/papers/${item.id}/${item.title_url}`">
+                <nuxt-link icon :to="`/paper/${item.id}/${item.title_url}`">
                   <span v-show="item.q_file_word"  class="fa-solid fa-file-word fa-lg  blue--text "></span>
                 </nuxt-link>
-                <nuxt-link icon :to="`/papers/${item.id}/${item.title_url}`">
+                <nuxt-link icon :to="`/paper/${item.id}/${item.title_url}`">
                   <span v-show="item.q_file" class="fa-solid fa-file-pdf fa-lg red--text pl-1"></span>
                 </nuxt-link>
               </div>

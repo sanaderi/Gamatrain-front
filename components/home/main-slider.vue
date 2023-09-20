@@ -37,10 +37,10 @@
                     <v-card-text>
                         <v-row class="text-center">
                             <v-col cols="7" id="main-search-keyword">
-                                <v-text-field v-model="searchKey" class="rounded-ts" label="Ex: Paper Summer Session" dense
-                                    hide-details filled>
+                                <v-text-field ref="keywordInput" v-model="searchKey" class="rounded-ts"
+                                    label="Ex: Paper Summer Session" dense hide-details filled>
                                     <template slot="append">
-                                        <v-icon v-if="searchResultsSection" @click="searchResultsSection = false">
+                                        <v-icon v-if="searchResultsSection" @click="closeSearch()">
                                             mdi-close-circle
                                         </v-icon>
                                     </template>
@@ -78,62 +78,70 @@
                         {{ searchCount }}
                     </span>
                 </div>
-                <div v-if="searchLoading==false && searchCount>0">
+                <div v-if="searchCount > 0">
                     <v-row class="list-item" v-for="(item, index) in searchResults" :key="index">
                         <v-col cols="1" class="pr-1">
-                            <div v-if="item.type == 'gama_tests'" class="avatar paper-avatar">
-                                <span class="icon icon-paper"></span>
-                            </div>
-                            <div v-else-if="item.type == 'gama_learnfiles'" class="avatar multimedia-avatar">
-                                <span class="icon icon-multimedia"></span>
-                            </div>
-                            <div v-else-if="item.type == 'gama_azmoons'" class="avatar exam-avatar">
-                                <span class="icon icon-exam"></span>
-                            </div>
-                            <div v-else-if="item.type == 'gama_questions'" class="avatar qa-avatar">
-                                <span class="icon icon-q-a"></span>
-                            </div>
-                            <div v-else-if="item.type == 'gama_dars'" class="avatar tutorial-avatar">
-                                <span class="icon icon-tutorial"></span>
-                            </div>
-                            <div v-else-if="item.type == 'gama_teachers'" class="avatar teacher-avatar">
-                                <span class="icon icon-teacher"></span>
-                            </div>
-                            <div v-else-if="item.type == 'gama_schools'" class="avatar school-avatar">
-                                <span class="icon icon-school"></span>
-                            </div>
-                            <div v-else-if="item.type == 'gama_live'" class="avatar live-avatar">
-                                <span class="icon icon-live"></span>
-                            </div>
-                            <div v-else-if="item.type == 'gama_students'" class="avatar student-avatar">
-                                <span class="icon icon-live"></span>
-                            </div>
+                            <nuxt-link :to="`/${calcPath(item.type)}/${item.id}`">
+                                <div v-if="item.type == 'gama_tests'" class="avatar paper-avatar">
+                                    <span class="icon icon-paper"></span>
+                                </div>
+                                <div v-else-if="item.type == 'gama_learnfiles'" class="avatar multimedia-avatar">
+                                    <span class="icon icon-multimedia"></span>
+                                </div>
+                                <div v-else-if="item.type == 'gama_azmoons'" class="avatar exam-avatar">
+                                    <span class="icon icon-exam"></span>
+                                </div>
+                                <div v-else-if="item.type == 'gama_questions'" class="avatar qa-avatar">
+                                    <span class="icon icon-q-a"></span>
+                                </div>
+                                <div v-else-if="item.type == 'gama_dars'" class="avatar tutorial-avatar">
+                                    <span class="icon icon-tutorial"></span>
+                                </div>
+                                <div v-else-if="item.type == 'gama_teachers'" class="avatar teacher-avatar">
+                                    <span class="icon icon-teacher"></span>
+                                </div>
+                                <div v-else-if="item.type == 'gama_schools'" class="avatar school-avatar">
+                                    <span class="icon icon-school"></span>
+                                </div>
+                                <div v-else-if="item.type == 'gama_live'" class="avatar live-avatar">
+                                    <span class="icon icon-live"></span>
+                                </div>
+                                <div v-else-if="item.type == 'gama_students'" class="avatar student-avatar">
+                                    <span class="icon icon-live"></span>
+                                </div>
+                            </nuxt-link>
 
                         </v-col>
                         <v-col cols="11">
-                            <div class="gama-text-button">{{ item.title }}</div>
+                            <div class="gama-text-button">
+                                <nuxt-link :to="`/${calcPath(item.type)}/${item.id}`">{{ item.title }}</nuxt-link>
+                            </div>
                             <div class="chip-container">
                                 <div class="chip" v-if="item.lesson_title">
-                                    {{ item.lesson_title }}
-                                </div>
-                                <div class="chip" v-if="item.section_title">
-                                    {{ item.section_title }}
+                                    <nuxt-link
+                                        :to="`/search?type=test&section=${item.section}&base=${item.base}&lesson=${item.lesson}`">{{
+                                            item.lesson_title }}</nuxt-link>
                                 </div>
                                 <div class="chip" v-if="item.base_title">
-                                    {{ item.base_title }}
+                                    <nuxt-link :to="`/search?type=test&section=${item.section}&base=${item.base}`">{{
+                                        item.base_title }}</nuxt-link>
+                                </div>
+                                <div class="chip" v-if="item.section_title">
+                                    <nuxt-link :to="`/search?type=test&section=${item.section}`">{{ item.section_title
+                                    }}</nuxt-link>
                                 </div>
                             </div>
 
                         </v-col>
 
                     </v-row>
-                    <v-row v-if="allDataLoaded==false" class="list-item" v-for="i in 3">
+                    <v-row v-if="allDataLoaded == false" class="list-item">
                         <v-col cols="12">
                             <v-skeleton-loader type="list-item-avatar"></v-skeleton-loader>
                         </v-col>
                     </v-row>
                 </div>
-                <div v-else-if="searchCount==0 && searchLoading==false" class="text-center">
+                <div v-else-if="searchCount == 0 && searchLoading == false" class="text-center">
                     <span class="gama-text-button">
                         Opps! no data found
                     </span>
@@ -145,7 +153,7 @@
                         </v-col>
                     </v-row>
                 </div>
-                
+
 
             </div>
         </div>
@@ -162,8 +170,7 @@ export default {
                 '#24292F',
                 '#0092A9'
             ],
-            searchResults: [],
-            searchCount: '...',
+
             slides: [
                 {
                     title: '<span class="gama-text-h1">AI</span> <span class="gama-text-h4">&nbspSystem <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education</span>',
@@ -180,6 +187,10 @@ export default {
 
                 }
             ],
+
+            //Search section
+            searchResults: [],
+            searchCount: '...',
             searchKey: '',
             searchCate: '',
             searchLoading: true,
@@ -187,6 +198,7 @@ export default {
             timer: 0,
             searchResultsSection: false,
             allDataLoaded: false
+            //End search section
         }
     },
     watch: {
@@ -194,11 +206,12 @@ export default {
             if (val.trim() === '') {
                 this.searchResultsSection = false;
             }
-            else{
+            else {
                 this.searchResultsSection = true;
             }
             this.pageNum = 1;
-            this.allDataLoaded =false; 
+            this.searchCount = '...';
+            this.allDataLoaded = false;
             this.searchResults = [];
             this.search();
         }
@@ -209,7 +222,7 @@ export default {
         },
         checkSearchScroll() {
             const scrollableDiv = this.$refs.searchResult;
-            if (this.isScrollAtBottom(scrollableDiv)) {
+            if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false) {
                 this.pageNum++;
                 this.search();
             }
@@ -217,7 +230,7 @@ export default {
         },
         isScrollAtBottom(element) {
             return (
-                element.scrollHeight - element.scrollTop <= element.clientHeight + 300
+                element.scrollHeight - element.scrollTop == element.clientHeight
             );
         },
         search() {
@@ -247,6 +260,32 @@ export default {
                             this.searchLoading = false;
                         })
             }, 800);
+        },
+        closeSearch() {
+            this.searchResultsSection = false;
+            this.searchKey = '';
+            this.$refs.keywordInput.blur();
+        },
+        calcPath(type) {
+            if (type == 'gama_tests')
+                return 'paper';
+            else if (type == 'gama_learnfiles')
+                return 'multimedia';
+            else if (type == 'gama_azmoons')
+                return 'exams';
+            else if (type == 'gama_questions')
+                return 'qa';
+            else if (type == 'gama_dars')
+                return 'tutorial';
+            else if (type == 'gama_teachers')
+                return 'teacher';
+            else if (type == 'gama_schools')
+                return 'school';
+            else if (type == 'gama_live')
+                return 'live';
+            else if (type == 'gama_students')
+                return 'student';
+
         }
     }
 }

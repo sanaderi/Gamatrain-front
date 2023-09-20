@@ -22,7 +22,7 @@
         <v-container id="faq-data-container">
             <v-row>
                 <v-col cols="12">
-                    <v-text-field he class="rounded-ts pr-0" dense outlined hide-details v-model="searchQuery"
+                    <v-text-field  class="rounded-ts pr-0" dense outlined hide-details v-model="searchQuery"
                         label="Search">
                         <template slot="append-outer">
                             <v-btn  dense color="#FFB300" class="white--text">

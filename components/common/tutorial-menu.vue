@@ -27,7 +27,7 @@
         <!--If tutorials length is one is a link-->
         <nuxt-link
           v-if="item.tutorials && item.tutorials.length==1"
-          :to="`/tutorials/${item.tutorials[0].id}/${item.title}`" class="v-treeview-node__label">
+          :to="`/tutorial/${item.tutorials[0].id}/${item.title}`" class="v-treeview-node__label">
           {{item.title}}
         </nuxt-link>
         <div v-else>
@@ -128,7 +128,7 @@ export default {
     openLink(id, title, tutorials) {
       if (tutorials.length == 1)
         this.$router.push({
-          path: `/tutorials/${tutorials[0].id}/${title}`
+          path: `/tutorial/${tutorials[0].id}/${title}`
         })
     },
     initOpenMenu(){
