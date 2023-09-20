@@ -712,8 +712,7 @@ export default {
 
     },
     isScrollAtBottom(element) {
-      console.log(element.clientHeight);
-      console.log(element.scrollHeight - element.scrollTop);
+      
       return (
         element.scrollHeight - element.scrollTop <= element.clientHeight
       );
