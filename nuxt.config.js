@@ -11,6 +11,7 @@ export default{
     },
     meta: [
       {charset: "utf-8"},
+      {"http-equiv": "Content-Type"},
       {name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"},
       {hid: "description", name: "description", content: "Big training platform"},
       {name: "format-detection", content: "telephone=no"},
@@ -18,7 +19,6 @@ export default{
     link: [
       {rel: "stylesheet", href: "/assets/css/fontawesome.min.css"},
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"},
-      {rel: "stylesheet", href: "/assets/css/video-js.css"},
       {rel: "stylesheet", href: "/assets/css/all.min.css"},
       {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Merriweather&display=swap"},
       {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap"},
@@ -28,7 +28,6 @@ export default{
     script: [
       {src: 'https://accounts.google.com/gsi/client', defer: true, async: true},
       // {src: './assets/js/jquery.js', body: true},
-      // {src: './assets/js/video.min.js', body: true},
     ],
   },
 

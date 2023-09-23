@@ -13,12 +13,15 @@
                             <v-icon>mdi-chevron-right</v-icon>
                         </v-btn>
                     </v-col>
-                    <v-col cols="12">
+                    <v-col cols="12" >
                         <v-slide-group v-model="model" class="slider py-sm-4" :show-arrows="$vuetify.breakpoint.lgAndUp">
-                            <v-slide-item v-if="isLoading" v-for="i in 10">
-                                <v-skeleton-loader class="mx-auto slide-loading"  type="card"></v-skeleton-loader>
-                            </v-slide-item>
-                            
+                            <div class="d-flex" v-if="isLoading">
+                                <v-slide-item v-for="i in 10" :key="i">
+                                    <v-skeleton-loader class="mx-auto slide-loading" type="card"></v-skeleton-loader>
+                                </v-slide-item>
+                            </div>
+
+
                             <v-slide-item v-else v-for="(item, n) in slideItmes" :key="n">
                                 <v-card flat :to="`/blog/${item.id}/${item.title}`">
                                     <v-card @mouseover="toggleHover('enter', n)" @mouseleave="toggleHover('leave', n)"
@@ -57,7 +60,10 @@ export default {
             model: null,
             isHovered: [],
             slideItmes: [],
-            isLoading:false
+            isLoading: false,
+            isDragging: false,
+            startX: 0,
+            currentX: 0
         }
     },
     mounted() {
@@ -73,16 +79,17 @@ export default {
 
         },
         loadBlog() {
-            this.isLoading=true;
+            this.isLoading = true;
             this.$axios.$get('/api/v1/home/news')
                 .then(response => {
                     this.slideItmes = response.data;
                 }).catch(err => {
                     console.log(err);
-                }).finally(()=>{
-                    this.isLoading=false;
+                }).finally(() => {
+                    this.isLoading = false;
                 })
-        }
+        },
+      
     }
 }
 
@@ -132,12 +139,13 @@ export default {
     }
 
     .slider {
-        .slide-loading{
+        .slide-loading {
             width: 21.9rem;
-            margin-right: 1.6rem!important;
+            margin-right: 1.6rem !important;
             position: relative;
-            border-radius: 0.6rem; 
+            border-radius: 0.6rem;
         }
+
         .v-card {
             width: 21.9rem;
             height: 19.9rem;
@@ -182,6 +190,7 @@ export default {
             max-width: 23rem;
             text-align: left;
             color: #6E7781;
+
 
 
             &>a {

@@ -98,11 +98,11 @@
             <v-container>
                 <v-row>
                     <v-col cols="12" sm="12" md="12" class="text-md-right">
-                        <h2 class="describe text-center ">Why wait? Earn money with us in minutes with
+                        <h2 class="gama-text-h6 text-center ">Why wait? Earn money with us in minutes with
                             just a few clicks!</h2>
                     </v-col>
                     <v-col cols="12" sm="12" md="12" class="text-center ">
-                        <v-btn to="/earn-money" height="36" color="#FFB300" class="white--text">Earn money</v-btn>
+                        <nuxt-link to="/earn-money" class="gama-primary-btn">Earn money</nuxt-link>
                     </v-col>
                 </v-row>
             </v-container>
@@ -379,13 +379,8 @@ export default {
         }
     }
 
-    .describe {
+    .gama-text-h6 {
         color: #F3F3FB;
-        font-size: 2.2rem;
-        font-family: 'Inter-Meduim';
-        font-style: normal;
-        font-weight: 500;
-        line-height: 3.4rem;
     }
 }
 

@@ -166,18 +166,18 @@
                                                 </v-col>
                                                 <v-col cols="11">
                                                     <v-card-title>
-                                                        <nuxt-link class="title" :to="`/qa/${item.id}`">
+                                                        <nuxt-link class="gama-text-caption" :to="`/qa/${item.id}`">
                                                             <span v-html="item.title"></span>
                                                         </nuxt-link>
                                                     </v-card-title>
 
                                                     <v-card-subtitle>
                                                         <v-row>
-                                                            <v-col cols="8" class="owner-container">
+                                                            <v-col cols="8" class="owner-container gama-text-overline">
                                                                 By: {{ getFullName(item.first_name,
                                                                     item.last_name) }}
                                                             </v-col>
-                                                            <v-col cols="4" class="subdate-container">
+                                                            <v-col cols="4" class="subdate-container gama-text-overline">
                                                                 <v-icon size="12">mdi-calendar</v-icon>
                                                                 {{ $moment(item.subdate).format('MMM DD') }}
                                                             </v-col>
@@ -202,18 +202,18 @@
                                                 </v-col>
                                                 <v-col cols="11">
                                                     <v-card-title>
-                                                        <nuxt-link class="title" :to="`paper/${item.id}`">
+                                                        <nuxt-link class="gama-text-caption" :to="`paper/${item.id}`">
                                                             <span v-html="item.title"></span>
                                                         </nuxt-link>
                                                     </v-card-title>
 
                                                     <v-card-subtitle>
                                                         <v-row>
-                                                            <v-col cols="8" class="owner-container">
+                                                            <v-col cols="8" class="owner-container gama-text-overline">
                                                                 By: {{ getFullName(item.first_name,
                                                                     item.last_name) }}
                                                             </v-col>
-                                                            <v-col cols="4" class="subdate-container">
+                                                            <v-col cols="4" class="subdate-container gama-text-overline">
                                                                 <v-icon size="12">mdi-calendar</v-icon>
                                                                 {{ $moment(item.subdate).format('MMM DD') }}
                                                             </v-col>
@@ -1095,13 +1095,9 @@ export default {
 
 }
 
-#content-stats-container #grade-details-card .latest-card  .title {
+#content-stats-container #grade-details-card .latest-card  .gama-text-caption {
     color: #6E7781;
     text-decoration: none;
-    font-size: 1.4rem!important;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
     overflow: hidden;
     white-space: nowrap;
     width: inherit;
@@ -1126,10 +1122,6 @@ export default {
                 .owner-container {
                     text-align: left;
                     color: #AFB8C1;
-                    font-size: 1.2rem;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: normal;
                     padding-bottom: 0rem;
                     padding-top: 0.8rem;
                     width: inherit;
@@ -1141,10 +1133,6 @@ export default {
                 .subdate-container {
                     text-align: right !important;
                     color: #6E7781;
-                    font-size: 1.2rem;
-                    font-style: normal;
-                    font-weight: 300;
-                    line-height: normal;
                     margin-bottom: 0;
                     padding-bottom: 0;
                     padding-top: 0.8rem;
@@ -1295,19 +1283,11 @@ export default {
             .owner-container {
                 text-align: left;
                 color: #AFB8C1;
-                font-size: 0.8rem;
-                font-style: normal;
-                font-weight: 500;
-                line-height: 2rem;
             }
 
             .subdate-container {
                 text-align: right !important;
                 color: #6E7781;
-                font-size: 0.8;
-                font-style: normal;
-                font-weight: 300;
-                line-height: 2rem;
             }
         }
     }

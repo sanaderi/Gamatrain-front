@@ -13,7 +13,7 @@
                 </nuxt-link>
 
 
-                <div>
+                <div class="pt-1">
                   <v-btn tile v-for="(link, i) in menuLink" :to="link.link" :key="i" :color="menuSetting.linkColor" text
                     class="mx-2 mx-md-0 mx-lg-2">
                     <v-icon class="mb-2 mr-1" v-if="link.icon" color="#FFB300">
@@ -24,13 +24,13 @@
                 </div>
               </div>
             </v-col>
-            <v-col cols="4" md="3" lg="3" xl="3" class="text-right">
+            <v-col cols="4" md="3" lg="3" xl="3" class="text-right mt-md-1">
               <div class="d-flex text-right" v-if="$auth.loggedIn">
                 <v-spacer />
                 <v-menu transition="slide-x-transition" offset-y min-width="150">
                   <template v-slot:activator="{ on, attrs }">
                     <div v-bind="attrs" v-on="on" class="d-flex">
-                      <div :id="menuSetting.bgColor == '#fff' ? 'header-username-dark' : 'header-username-light'">
+                      <div class="gama-text-subtitle1" :id="menuSetting.bgColor == '#fff' ? 'header-username-dark' : 'header-username-light'">
                         {{ userName }}
                       </div>
                       <v-avatar size="32" v-if="$auth.user.avatar">
@@ -75,13 +75,9 @@
 
               </div>
               <div v-else>
-                <v-btn color="primary" text class="px-0" @click="openLoginDialog">
+                <button class="gama-primary-btn" @click="openLoginDialog">
                   Sign in
-                </v-btn>
-                <span :class="menuSetting.bgColor != '#fff' ? 'white--text' : 'black--text'">/</span>
-                <v-btn :color="menuSetting.linkColor" text class="px-0" @click="openRegisterDialog">
-                  Sign up
-                </v-btn>
+                </button>
               </div>
             </v-col>
           </v-row>
@@ -1412,12 +1408,16 @@ export default {
 
 
     #main-menu {
+      padding-bottom: 0.4rem;
+      height: 6.4rem!important;
+     
       .v-btn {
-        font-size: 1.4rem;
+        font-size: 1.8rem;
         font-style: normal;
-        font-weight: 700;
+        font-weight: 400;
         font-family: 'Inter-Regular';
         line-height: normal;
+        padding-bottom: 1rem!important;
       }
 
       .v-btn--active {
