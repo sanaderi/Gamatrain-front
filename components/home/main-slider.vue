@@ -6,7 +6,7 @@
 
                 <v-carousel-item v-for="(slide, i) in slides" :key="i">
                     <v-sheet class="section1" :id="slide.id">
-                        <v-container class="pt-0 pt-sm-6 pt-md-8  ">
+                        <v-container class="pt-0 pt-sm-6 pt-md-6 pt-lg-8  ">
                             <v-card flat class="px-4 px-sm-8 px-md-12">
                                 <v-row class="white--text ">
                                     <v-col col="12">
@@ -439,6 +439,7 @@ export default {
         height: 51%;
 
         .container {
+            width: 100%;
 
             .slide-img {
                 width: 17rem;
@@ -512,6 +513,13 @@ export default {
 
     #main-slider {
         height: 50rem !important;
+    }
+
+    #main-slider .section1 {
+         .container{
+            width: 100%;
+
+         }
     }
 
     #main-slider #main-search {
@@ -941,6 +949,15 @@ export default {
 
     #main-slider .v-btn__content .v-icon {
         display: none;
+    }
+}
+
+@media (min-width: 1264px){
+    #main-slider .section1 {
+         .container{
+            width: 78%;
+
+         }
     }
 }
 </style>

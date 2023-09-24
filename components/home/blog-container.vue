@@ -98,7 +98,7 @@ export default {
 <style>
 #blog-list-container {
     margin: 2.4rem auto 2.4rem auto;
-    min-height: 40rem;
+    height: 33rem;
 
     #main-title {
         color: #354053;
@@ -204,6 +204,8 @@ export default {
 
 @media screen and (min-width:600px) {
     #blog-list-container {
+        height: 37rem;
+
 
         .main-card {
             padding-left: 1.3rem !important;
@@ -244,7 +246,9 @@ export default {
 
 @media screen and (min-width:960px) {
     #blog-list-container {
-        margin: 8rem auto 8rem auto;
+        margin: 7.8rem auto 8rem auto;
+        height: 35.6rem;
+
 
 
         .main-card {

@@ -1148,34 +1148,8 @@ export default {
 }
 
 #content-stats-container .handlerShadow {
-    box-shadow: rgba(0, 0, 0, 0.85) 0px 54px 55px, rgba(0, 0, 0, 0.85) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.15) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px;
 }
-
-
-#content-stats-container .depth1 {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 54px 55px;
-}
-
-#content-stats-container .depth2 {
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 54px 55px;
-}
-
-#content-stats-container .depth3 {
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 54px 55px;
-}
-
-#content-stats-container .depth4 {
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 54px 55px, rgba(0, 0, 0, 0.85) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-
-#content-stats-container .depth5 {
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 54px 55px, rgba(0, 0, 0, 0.4) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-
-#content-stats-container .depth7 {
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 54px 55px;
-}
-
 
 
 
@@ -1309,7 +1283,7 @@ export default {
             top: 0;
 
             .active {
-                right: -2rem;
+                right: -3.6rem;
             }
         }
 

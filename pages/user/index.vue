@@ -9,7 +9,7 @@
 
               <!--General info-->
               <v-col cols="12">
-                <general-info-dashboard ref="general_info"/>
+                <general-info-dashboard ref="general_info" />
               </v-col>
               <!--End general info-->
 
@@ -22,7 +22,7 @@
                       <v-col md="2" class="d-none d-md-block"></v-col>
                       <v-col cols="12" md="8">
                         <v-row>
-                          <v-col :cols="user_type==='5' ? 3 : 4" :class="user_type==='5' ? 'd-md-flex' : 'd-none'">
+                          <v-col :cols="user_type === '5' ? 3 : 4" :class="user_type === '5' ? 'd-md-flex' : 'd-none'">
                             <v-btn color="#DFF4EE" fab x-large>
                               <i class="fa-solid fa-dollar" style="color: teal"></i>
                             </v-btn>
@@ -33,7 +33,8 @@
                               <p class="text-h6 text-md-h5 ">
                                 <strong>
                                   ${{
-                                    (this.user_info.user && this.user_info.user.cash ? Math.ceil(this.user_info.user.cash) : 0) | numberFormat
+                                    (this.user_info.user && this.user_info.user.cash ? Math.ceil(this.user_info.user.cash) :
+                                      0) | numberFormat
                                   }}
                                 </strong>
 
@@ -41,7 +42,7 @@
 
                             </div>
                           </v-col>
-                          <v-col :cols="user_type==='5' ? 3 : 4" class="d-md-flex">
+                          <v-col :cols="user_type === '5' ? 3 : 4" class="d-md-flex">
                             <v-btn color="#D4F4EE" fab x-large>
                               <i class="fa-solid fa-wallet" style="color: #00D2AE;"></i>
                             </v-btn>
@@ -58,10 +59,8 @@
 
                             </div>
                           </v-col>
-                          <v-col :cols="user_type==='5' ? 3 : 4" class="d-md-flex">
-                            <v-btn color="rgba(142, 11, 228, 0.1)" fab x-large
-                            to="/user/ticket"
-                            >
+                          <v-col :cols="user_type === '5' ? 3 : 4" class="d-md-flex">
+                            <v-btn color="rgba(142, 11, 228, 0.1)" fab x-large to="/user/ticket">
                               <i class="fa-regular fa-envelope" style="color: #8E0BE4;"></i>
                             </v-btn>
                             <nuxt-link to="/user/ticket" class="pa-3">
@@ -71,7 +70,8 @@
                               <p class="text-h5 ">
                                 <strong>
                                   {{
-                                    user_info.unreadMessages && user_info.unreadMessages.total ? user_info.unreadMessages.total : 0
+                                    user_info.unreadMessages && user_info.unreadMessages.total ?
+                                    user_info.unreadMessages.total : 0
                                   }}
                                 </strong>
 
@@ -79,7 +79,7 @@
 
                             </nuxt-link>
                           </v-col>
-                          <v-col :cols="user_type==='5' ? 3 : 4" class="d-md-flex">
+                          <v-col :cols="user_type === '5' ? 3 : 4" class="d-md-flex">
                             <v-btn color="rgba(218, 222, 255, 1)" fab x-large>
                               <i class="fa-regular fa-star" style="color: #0B62E4;"></i>
                             </v-btn>
@@ -120,7 +120,7 @@
             </v-row>
 
             <!--Content type-->
-            <create-content-button ref="create-content-section"/>
+            <create-content-button ref="create-content-section" />
             <!--End content type-->
           </v-card-text>
         </v-card>
@@ -129,7 +129,7 @@
     <!--End profile section-->
 
     <!--Exams section-->
-    <v-row v-if="user_type==='6'">
+    <v-row v-if="user_type === '6'">
       <v-col cols="12" class="px-0 px-sm-2">
         <v-card>
           <v-card-title class="text-h4">
@@ -169,48 +169,47 @@
                 <v-simple-table class="exams_table">
                   <template v-slot:default>
                     <thead>
-                    <tr>
-                      <th class="text-left text-h5">
-                        Course name
-                      </th>
-                      <th class="text-center teal--text text-h5">
-                        <i class="fa-regular fa-circle-check fa-xl green--text d-block d-md-none"></i>
-                        <span class="d-none d-md-block">
-                                Participated
-                                </span>
-                      </th>
-                      <th class="text-center orange--text text-h5">
-                        <i class="fa-regular fa-times-circle fa-xl red--text d-block d-md-none"></i>
-                        <span class="d-none d-md-block">
-                                  Not Participated
-                                </span>
-                      </th>
-                    </tr>
+                      <tr>
+                        <th class="text-left text-h5">
+                          Course name
+                        </th>
+                        <th class="text-center teal--text text-h5">
+                          <i class="fa-regular fa-circle-check fa-xl green--text d-block d-md-none"></i>
+                          <span class="d-none d-md-block">
+                            Participated
+                          </span>
+                        </th>
+                        <th class="text-center orange--text text-h5">
+                          <i class="fa-regular fa-times-circle fa-xl red--text d-block d-md-none"></i>
+                          <span class="d-none d-md-block">
+                            Not Participated
+                          </span>
+                        </th>
+                      </tr>
                     </thead>
                     <tbody>
-                    <tr
-                      v-for="item in exams"
-                      :key="item.id"
-                    >
-                      <td>{{ item.title }}</td>
-                      <td class="text-center">{{ item.participated }}</td>
-                      <td class="text-center">{{ item.total - item.participated }}</td>
-                    </tr>
+                      <tr v-for="item in exams" :key="item.id">
+                        <td>{{ item.title }}</td>
+                        <td class="text-center">{{ item.participated }}</td>
+                        <td class="text-center">{{ item.total - item.participated }}</td>
+                      </tr>
                     </tbody>
                     <tfoot>
-                    <tr bgcolor="#E5FBF7">
-                      <td>Total</td>
-                      <td class="text-center">
-                        {{
-                          user_info.examSuggestions && user_info.examSuggestions.participated ? user_info.examSuggestions.participated : ''
-                        }}
-                      </td>
-                      <td class="text-center">
-                        {{
-                          user_info.examSuggestions && user_info.examSuggestions.total ? user_info.examSuggestions.total : ''
-                        }}
-                      </td>
-                    </tr>
+                      <tr bgcolor="#E5FBF7">
+                        <td>Total</td>
+                        <td class="text-center">
+                          {{
+                            user_info.examSuggestions && user_info.examSuggestions.participated ?
+                            user_info.examSuggestions.participated : ''
+                          }}
+                        </td>
+                        <td class="text-center">
+                          {{
+                            user_info.examSuggestions && user_info.examSuggestions.total ? user_info.examSuggestions.total :
+                            ''
+                          }}
+                        </td>
+                      </tr>
                     </tfoot>
                   </template>
                 </v-simple-table>
@@ -248,7 +247,6 @@ export default {
   },
   created() {
     this.getUserInfo();
-
   },
   data() {
     return {
@@ -259,9 +257,9 @@ export default {
     }
   },
   methods: {
-    getUserInfo() {
+    async getUserInfo() {
       var apiUrl = '/api/v1/students/dashboard';
-      if (this.user_type === '5')
+      if (this.user_type == '5')
         apiUrl = '/api/v1/teachers/dashboard';
 
       this.$axios.$get(apiUrl)
@@ -285,10 +283,10 @@ export default {
 
 
         }).catch(err => {
-        if (err.response.status == 403)
-          this.$auth.logout();
-        this.$toast.error(err.response.data.message);
-      });
+          if (err.response.status == 403)
+            this.$auth.logout();
+          this.$toast.error(err.response.data.message);
+        });
 
     },
     initContentStats(stats) {//Init create content box statistics
@@ -335,5 +333,4 @@ export default {
 /*  background: #bf360c;*/
 /*  border-radius: 5px;*/
 /*}*/
-
 </style>
