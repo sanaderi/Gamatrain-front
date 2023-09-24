@@ -149,7 +149,7 @@
                                 </v-row>
                             </div>
 
-                            <v-divider class="d-none d-md-block" style="margin-top: 94px;margin-bottom: 9px;" />
+                            <v-divider class="d-none d-md-block" style="margin-top: 94px;margin-bottom: 1.2rem;" />
 
 
                             <div class="d-none d-md-block">
@@ -1093,6 +1093,10 @@ export default {
     color: #6E7781;
     margin-bottom: 0.5rem;
 
+}
+
+#content-stats-container #grade-details-card .latest-card .col{
+    padding-top: 0.3rem;
 }
 
 #content-stats-container #grade-details-card .latest-card  .gama-text-caption {
