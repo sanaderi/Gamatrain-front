@@ -33,7 +33,7 @@
                                             </span>
                                             <div v-else class="text-center">
                                                 <v-btn text size="small" color="primary">
-                                                    read more</v-btn>
+                                                    read more </v-btn>
                                             </div>
                                         </v-card-title>
                                     </v-card>
@@ -223,7 +223,7 @@ export default {
         .slider {
             .v-card {
                 width: 25.6rem;
-                height: 22.7rem;
+                height: 23.7rem;
                 margin-right: 1.6rem;
 
 
@@ -272,7 +272,7 @@ export default {
         .slider {
             .v-card {
                 width: 26.1rem;
-                height: 22.7rem;
+                height: 23.7rem;
                 margin-right: 1.6rem;
 
 
@@ -282,13 +282,11 @@ export default {
 
 
                     .v-card__title {
-                        font-size: 1.8rem;
-                        font-style: normal;
-                        font-weight: 600;
-                        line-height: 1.8rem;
-                        padding-top: .8rem !important;
-                        padding-bottom: .8rem;
                         line-height: normal;
+
+                        .gama-text-button {
+                            font-size: 1.4rem;
+                        }
 
 
                     }
@@ -299,6 +297,30 @@ export default {
                 max-width: 22rem;
             }
 
+
+        }
+    }
+}
+
+
+@media screen and (min-width:1264px) {
+    #blog-list-container {
+
+
+
+
+        .slider {
+            .v-card {
+                .v-card {
+                    .v-card__title {
+                        .gama-text-button {
+                            font-size: 1.8rem;
+                        }
+
+
+                    }
+                }
+            }
 
         }
     }
