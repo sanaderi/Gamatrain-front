@@ -20,10 +20,6 @@ export default{
       {rel: "stylesheet", href: "/assets/css/fontawesome.min.css"},
       {rel: "icon", type: "image/x-icon", href: "/favicon.ico"},
       {rel: "stylesheet", href: "/assets/css/all.min.css"},
-      {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Merriweather&display=swap"},
-      {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap"},
-      {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"},
-      {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=PT+Sans&display=swap"},
     ],
     script: [
       {src: 'https://accounts.google.com/gsi/client', defer: true, async: true},
