@@ -9,11 +9,11 @@
             <v-col cols="6" md="9" lg="9" xl="9">
               <div class="d-flex">
                 <nuxt-link to="/">
-                  <v-img alt="Gamatrain" id="main-logo" :src="`/images/${menuSetting.logo}`" />
+                  <img alt="Gamatrain" id="main-logo" :src="`/images/${menuSetting.logo}`" />
                 </nuxt-link>
 
 
-                <div class="pt-1">
+                <div class="pt-2">
                   <v-btn tile v-for="(link, i) in menuLink" :to="link.link" :key="i" :color="menuSetting.linkColor" text
                     class="mx-2 mx-md-0 mx-lg-2">
                     <v-icon class="mb-2 mr-1" v-if="link.icon" color="#FFB300">
@@ -1076,7 +1076,7 @@ export default {
       .gama-text-caption {
         color: rgba(36, 41, 47, 0.80);
         text-align: center;
-        font-family: Inter-Regular;
+        font-family: Inter;
         font-size: 1.4rem;
         font-style: normal;
         font-weight: 400;
@@ -1261,7 +1261,7 @@ export default {
             margin-right: 0.8rem;
 
             color: rgba(36, 41, 47, 0.80);
-            font-family: Inter-Regular;
+            font-family: Inter;
             font-size: 1.2rem;
             font-style: normal;
             font-weight: 400;
@@ -1415,9 +1415,9 @@ export default {
         font-size: 1.8rem;
         font-style: normal;
         font-weight: 400;
-        font-family: 'Inter-Regular';
+        font-family: 'Inter';
         line-height: normal;
-        padding-bottom: 1rem!important;
+        padding-bottom: 0.1rem!important;
       }
 
       .v-btn--active {
@@ -1506,9 +1506,10 @@ export default {
 
   #main-logo {
     width: 12.0827rem !important;
-    height: 3rem !important;
-    margin-top: 0.4rem;
+    height: 3.2rem !important;
+    margin-top: 0.6rem;
     margin-right: 6.4rem;
+    margin-left: 0!important;
 
   }
 }

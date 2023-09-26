@@ -317,7 +317,7 @@ export default {
 
         .v-card__title {
             color: #FFF;
-            font-family: 'Inter-Bold';
+            font-family: 'Inter';
             font-size: 2.2rem !important;
             font-style: normal;
             font-weight: 750;
@@ -332,7 +332,7 @@ export default {
 
         .v-card__text {
             color: #FFF;
-            font-family: 'Inter-Md';
+            font-family: 'Inter';
             font-size: 1.8rem;
             font-style: normal;
             font-weight: 500;
@@ -374,7 +374,7 @@ export default {
     .v-btn {
 
         .v-btn__content {
-            font-family: 'Inter-Meduim';
+            font-family: 'Inter';
             color: #24292F
         }
     }

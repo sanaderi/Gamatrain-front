@@ -680,7 +680,7 @@ export default {
                     margin-right: 0.8rem;
 
                     color: rgba(36, 41, 47, 0.80);
-                    font-family: Inter-Regular;
+                    font-family: Inter;
                     font-size: 1.6rem;
                     font-style: normal;
                     font-weight: 400;

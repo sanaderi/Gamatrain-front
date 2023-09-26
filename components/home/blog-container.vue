@@ -13,7 +13,7 @@
                             <v-icon>mdi-chevron-right</v-icon>
                         </v-btn>
                     </v-col>
-                    <v-col cols="12" >
+                    <v-col cols="12">
                         <v-slide-group v-model="model" class="slider py-sm-4" :show-arrows="$vuetify.breakpoint.lgAndUp">
                             <div class="d-flex" v-if="isLoading">
                                 <v-slide-item v-for="i in 10" :key="i">
@@ -89,7 +89,7 @@ export default {
                     this.isLoading = false;
                 })
         },
-      
+
     }
 }
 
@@ -102,7 +102,7 @@ export default {
 
     #main-title {
         color: #354053;
-        font-family: 'Inter-Bold';
+        font-family: 'Inter';
         font-size: 2.8rem;
         font-style: normal;
         font-weight: 750;
@@ -111,7 +111,7 @@ export default {
 
     .v-btn {
         .v-btn__content {
-            font-family: 'Inter-Bold';
+            font-family: 'Inter';
 
         }
     }
@@ -122,7 +122,7 @@ export default {
         .v-btn__content {
             text-transform: none;
             color: #6E7781;
-            font-family: Inter-Regular;
+            font-family: Inter;
             font-size: 1.4rem;
             font-style: normal;
             font-weight: 300;
@@ -165,7 +165,7 @@ export default {
                     bottom: 0;
                     right: 0;
                     left: 0;
-                    font-family: 'Inter-Meduim';
+                    font-family: 'Inter';
                     margin: 0 auto;
                     color: #FFF;
                     padding-top: .6rem !important;
@@ -186,8 +186,8 @@ export default {
         }
 
         .gama-text-subtitle2 {
-            margin: auto;
-            max-width: 23rem;
+            margin: auto auto;
+            max-width: 18.2rem;
             text-align: left;
             color: #6E7781;
 
@@ -239,6 +239,11 @@ export default {
             }
 
 
+            .gama-text-subtitle2 {
+                max-width: 21.4rem;
+            }
+
+
         }
     }
 }
@@ -280,6 +285,10 @@ export default {
 
                     }
                 }
+            }
+
+            .gama-text-subtitle2 {
+                max-width: 22rem;
             }
 
 

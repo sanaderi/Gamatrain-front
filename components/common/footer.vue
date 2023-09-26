@@ -128,7 +128,7 @@ export default {
     font-weight: 500;
     line-height: 2.4rem;
     margin-bottom: 1.2rem;
-    font-family: 'Inter-Medium';
+    font-family: 'Inter';
   }
 
   .v-btn {
@@ -152,7 +152,7 @@ export default {
     font-style: normal;
     font-weight: 700;
     line-height: 2.4rem;
-    font-family: 'Inter-Bold';
+    font-family: 'Inter';
 
 
   }
@@ -179,7 +179,7 @@ export default {
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 500;
-    font-family: 'Inter-Meduim';
+    font-family: 'Inter';
     line-height: 1.92rem;
   }
 }

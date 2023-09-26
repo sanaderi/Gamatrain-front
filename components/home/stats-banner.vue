@@ -308,7 +308,7 @@ export default {
     .describe {
         color: #F3F3FB;
         opacity: 0.30000001192092896;
-        font-family: 'Inter-Meduim';
+        font-family: 'Inter';
         font-size: 2.2rem;
         margin-top: 3.75rem;
         font-style: normal;
@@ -323,7 +323,7 @@ export default {
 
     .item-stat {
         color: #FFF;
-        font-family: 'Inter-Meduim';
+        font-family: 'Inter';
         font-size: 2.2rem;
         font-style: normal;
         font-weight: 750;

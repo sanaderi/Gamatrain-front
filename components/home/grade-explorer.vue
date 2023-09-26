@@ -996,7 +996,7 @@ export default {
     text-transform: unset !important;
 
     .v-btn__content {
-        font-family: Inter-Regular !important;
+        font-family: Inter !important;
         font-weight: 500 !important;
     }
 
@@ -1052,7 +1052,7 @@ export default {
     text-decoration: none;
     color: #424A53;
     text-align: center;
-    font-family: Inter-Bold;
+    font-family: Inter;
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 700;
@@ -1161,7 +1161,7 @@ export default {
 
     #content-stats-container .v-btn {
         color: #FFF;
-        font-family: "Inter-Regular";
+        font-family: "Inter";
         font-size: 1.6rem;
         font-style: normal;
         font-weight: 500;
@@ -1196,7 +1196,7 @@ export default {
 
             .label {
                 color: #424A53;
-                font-family: Inter-Bold;
+                font-family: Inter;
                 font-size: 1.4rem;
                 font-style: normal;
                 font-weight: 600;
@@ -1297,7 +1297,7 @@ export default {
 
                 .label {
                     color: #424A53;
-                    font-family: Inter-Bold;
+                    font-family: Inter;
                     font-size: 1.8rem;
                     font-style: normal;
                     font-weight: 600;

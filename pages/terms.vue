@@ -365,7 +365,7 @@ export default {
 
                     .v-list-item__title {
                         color: #24292F;
-                        font-family: Inter-Regular;
+                        font-family: Inter;
                         font-size: 2rem;
                         font-style: normal;
                         font-weight: 500;
@@ -476,7 +476,7 @@ export default {
 
                         .v-list-item__title {
                             color: #24292F;
-                            font-family: Inter-Regular;
+                            font-family: Inter;
                             font-size: 2.4rem;
                             font-style: normal;
                             font-weight: 500;
@@ -621,7 +621,7 @@ export default {
 
                         .v-list-item__title {
                             color: #24292F;
-                            font-family: Inter-Regular;
+                            font-family: Inter;
                             font-size: 2.4rem;
                             font-style: normal;
                             font-weight: 500;
