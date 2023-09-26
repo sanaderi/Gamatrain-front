@@ -203,7 +203,7 @@
         </v-icon>
         <!--Logo section-->
         <nuxt-link to="/">
-          <v-img id="main-logo" :src="`/images/${menuSetting.logo}`" />
+          <img id="main-logo" :src="`/images/${menuSetting.logo}`" />
         </nuxt-link>
         <!--End logo section-->
 
@@ -1504,6 +1504,11 @@ export default {
 
 
 
+  
+}
+
+
+@media (min-width: 1264px) {
   #main-logo {
     width: 12.0827rem !important;
     height: 3.2rem !important;

@@ -38,7 +38,7 @@
                                         </v-card-title>
                                     </v-card>
                                     <div class="gama-text-subtitle2">
-                                        <span v-html="item.body"></span>
+                                        <span v-html="truncateBody(item.body)"></span>
                                         <nuxt-link :to="`/blog/${item.id}/${item.title}`">Read more</nuxt-link>
                                     </div>
                                 </v-card>
@@ -88,6 +88,14 @@ export default {
                 }).finally(() => {
                     this.isLoading = false;
                 })
+        },
+        truncateBody(text) {
+            var cutLength = 45;
+            if (this.$vuetify.breakpoint.sm)
+                cutLength = 42;
+            else if (this.$vuetify.breakpoint.xs)
+                cutLength = 38;
+            return text.length > cutLength ? text.slice(0, cutLength) + '...' : text;
         },
 
     }
