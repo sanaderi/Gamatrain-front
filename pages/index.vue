@@ -38,22 +38,22 @@
                     </v-col>
                     <v-col cols="12" sm="6">
                         <v-card class="fill-height float-sm-right" to="/search?type=test">
-                            <v-card-title>
-                                <v-icon color="#FFB300" size="36" class="mr-2">mdi-cloud-download</v-icon>
+                            <v-card-title class="gama-text-h6">
+                                <v-icon class="icon mr-2">mdi-cloud-download</v-icon>
                                 Educational Content
                             </v-card-title>
-                            <v-card-text>
+                            <v-card-text class="gama-text-body2">
                                 Empower Your Studies. Download Worksheets and Educational Materials.
                             </v-card-text>
                         </v-card>
                     </v-col>
                     <v-col cols="12" sm="6">
                         <v-card class="fill-height float-sm-left" to="/search?type=azmoon">
-                            <v-card-title>
-                                <span class="icon-exam"></span>
+                            <v-card-title class="gama-text-h6">
+                                <span class="icon icon-exam"></span>
                                 &nbsp;Exam
                             </v-card-title>
-                            <v-card-text>
+                            <v-card-text class="gama-text-body2">
                                 You can test yourself with online tests and increase your preparation.
                             </v-card-text>
                         </v-card>
@@ -296,8 +296,8 @@ export default {
 
 
 #student-help-container {
-    padding-top: 4.8rem;
-    padding-bottom: 4.8rem;
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
     background: #FFB600;
 
     .gama-text-h4 {
@@ -307,36 +307,26 @@ export default {
     }
 
     .v-card {
-        border-radius: 0.625rem;
+        border-radius: 1rem;
         background: rgba(36, 41, 47, 0.70);
         backdrop-filter: blur(0.46875rem);
         color: white;
         max-width: 35.3rem;
-        min-height: 17.6rem;
+        min-height: 10.4rem;
         margin: auto;
 
         .v-card__title {
             color: #FFF;
-            font-family: 'Inter';
-            font-size: 2.2rem !important;
-            font-style: normal;
-            font-weight: 750;
-            line-height: 4.4rem;
+            padding-bottom: 0.8rem;
 
-
-            .icon-exam {
-                font-size: 3.6rem;
+            .icon {
+                font-size: 2.4rem;
                 color: #FFB600;
             }
         }
 
         .v-card__text {
             color: #FFF;
-            font-family: 'Inter';
-            font-size: 1.8rem;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 2.4rem;
         }
     }
 }
@@ -463,6 +453,27 @@ export default {
 
 
     }
+
+
+    #student-help-container {
+        padding-top: 3.6rem;
+        padding-bottom: 3.6rem;
+
+
+
+        .v-card {
+            min-height: 14.2rem;
+            margin: auto;
+
+            .v-card__title {
+                .icon {
+                    font-size: 4.8rem;
+                }
+            }
+
+
+        }
+    }
 }
 
 
@@ -508,6 +519,24 @@ export default {
 
 
 
+    }
+
+
+    #student-help-container {
+        .v-card {
+            max-width: 47.1rem;
+            min-height: 14.2rem;
+            margin: auto;
+
+            .v-card__title {
+                padding-bottom: 1.6rem;
+                .icon {
+                    font-size: 4.8rem;
+                }
+            }
+
+
+        }
     }
 }
 </style>

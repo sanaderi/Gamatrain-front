@@ -7,7 +7,7 @@
           <nuxt-link to="/">
             <img id="logo" alt="gamatrain" src="/images/gamatrain-logo-black.svg" />
           </nuxt-link>
-          <div id="short-describe ">
+          <div id="short-describe" class="gama-text-body2">
             Our mission is to provide all training services to anyone and anywhere.
           </div>
           <div class="mt-4">
@@ -28,10 +28,10 @@
 
         </v-col>
         <v-col sm="3" md="3" class="d-none d-sm-block" v-for="(item, i) in footerLinks" :key="i">
-          <div class="link-title">
+          <div class="link-title gama-text-button">
             {{ item.mainTitle }}
           </div>
-          <nuxt-link v-for="link in item.subMenu" :key="link.link" :to="link.link" class="footer-link">
+          <nuxt-link v-for="link in item.subMenu" :key="link.link" :to="link.link" class="footer-link gama-text-body2">
             {{ link.title }}
           </nuxt-link>
         </v-col>
@@ -40,9 +40,9 @@
         <v-col cols="12" class="d-block d-sm-none">
           <v-expansion-panels focusable flat id="mobile-footer-panels">
             <v-expansion-panel v-for="(item, i) in footerLinks" :key="i" style="border-bottom: 0.5px solid #424A53;">
-              <v-expansion-panel-header class="link-title">{{ item.mainTitle }}</v-expansion-panel-header>
+              <v-expansion-panel-header class="link-title gama-text-button">{{ item.mainTitle }}</v-expansion-panel-header>
               <v-expansion-panel-content class="pt-4">
-                <nuxt-link v-for="link in item.subMenu" :key="link.link" :to="link.link" class="footer-link">
+                <nuxt-link v-for="link in item.subMenu" :key="link.link" :to="link.link" class="footer-link gama-text-body2">
                   {{ link.title }}
                 </nuxt-link>
               </v-expansion-panel-content>
@@ -57,7 +57,7 @@
   <v-container fluid id="footer-copy-right">
       <v-row>
         <v-col cols="12" class="pt-3 pb-1 text-center px-0">
-          <span class="describe">All Right Reserved.Copyright @ 2023</span>
+          <span class="describe gama-text-overline">All Right Reserved.Copyright @ 2023</span>
         </v-col>
       </v-row>
     </v-container>
@@ -123,12 +123,7 @@ export default {
 
   #short-describe {
     color: #6E7781;
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 2.4rem;
     margin-bottom: 1.2rem;
-    font-family: 'Inter';
   }
 
   .v-btn {
@@ -148,11 +143,6 @@ export default {
   .link-title {
     color: #424A53;
     margin-bottom: 1rem;
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 2.4rem;
-    font-family: 'Inter';
 
 
   }
@@ -162,10 +152,6 @@ export default {
     text-decoration: none;
     margin-bottom: 1rem;
     color: #6E7781;
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.92rem;
   }
 }
 
@@ -176,11 +162,6 @@ export default {
 
   .describe {
     color: #FFF;
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 500;
-    font-family: 'Inter';
-    line-height: 1.92rem;
   }
 }
 </style>

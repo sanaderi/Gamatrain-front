@@ -736,7 +736,7 @@ export default {
 
     #main-slider #main-search #keysearch-cate .v-label {
         color: rgba(0, 0, 0, 0.60);
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         font-style: normal;
         font-weight: 300;
         line-height: 1.8rem;
@@ -777,7 +777,7 @@ export default {
 
                     .v-label {
                         color: rgba(0, 0, 0, 0.60);
-                        font-size: 1.6rem;
+                        font-size: 1.4rem;
                         font-style: normal;
                         font-weight: 300;
                         line-height: 1.8rem;

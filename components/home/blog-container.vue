@@ -4,10 +4,10 @@
             <v-card-text class="px-0 px-sm-6 main-card">
                 <v-row>
                     <v-col cols="6">
-                        <h2 id="main-title">Blog</h2>
+                        <h2 class="gama-text-h4" id="main-title ">Blog</h2>
                     </v-col>
                     <v-col cols="6" class="text-right">
-                        <v-btn rounded outlined size="small" class="d-none d-md-inline">Go to blog</v-btn>
+                        <nuxt-link to="/blog-list"  class="gama-default-btn d-none d-md-inline">Go to blog</nuxt-link>
                         <v-btn text class="d-inline d-md-none seeAllBtn">
                             See all
                             <v-icon>mdi-chevron-right</v-icon>
@@ -110,11 +110,6 @@ export default {
 
     #main-title {
         color: #354053;
-        font-family: 'Inter';
-        font-size: 2.8rem;
-        font-style: normal;
-        font-weight: 750;
-        line-height: 2.4rem;
     }
 
     .v-btn {

@@ -14,7 +14,7 @@ html {
 
 //xs size
 .gama-text-h1 {
-  font-family: Inter,sans-serif;
+  font-family: Inter, sans-serif;
   color: #000;
   font-size: 3.4rem;
   font-style: normal;
@@ -23,7 +23,7 @@ html {
 }
 
 .gama-text-h2 {
-  font-family: Inter,sans-serif;
+  font-family: Inter, sans-serif;
   color: #000;
   font-size: 3rem;
   font-style: normal;
@@ -33,7 +33,7 @@ html {
 }
 
 .gama-text-h3 {
-  font-family: Inter,sans-serif;
+  font-family: Inter, sans-serif;
   color: #000;
   font-size: 2.8rem;
   font-style: normal;
@@ -43,7 +43,7 @@ html {
 
 
 .gama-text-h4 {
-  font-family: Inter,sans-serif!important;
+  font-family: Inter, sans-serif !important;
   color: #000;
   font-size: 2.4rem !important;
   font-style: normal !important;
@@ -52,28 +52,28 @@ html {
 }
 
 .gama-text-h5 {
-  font-family: Inter,sans-serif!important;
+  font-family: Inter, sans-serif !important;
   color: #000;
-  font-size: 2.4rem;
+  font-size: 2.4rem !important;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
 }
 
 .gama-text-h6 {
-  font-family: Inter,sans-serif!important;
+  font-family: Inter, sans-serif !important;
   color: #000;
   font-size: 1.6rem !important;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: normal !important;
 }
 
 
 .gama-text-subtitle1 {
-  font-family: Inter,sans-serif;
+  font-family: Inter, sans-serif;
   color: #000;
-  font-size: 1.4rem!important;
+  font-size: 1.4rem !important;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -81,7 +81,7 @@ html {
 
 
 .gama-text-subtitle2 {
-  font-family: Inter,sans-serif;
+  font-family: Inter, sans-serif;
   color: #000;
   font-size: 1.2rem;
   font-style: normal;
@@ -90,7 +90,7 @@ html {
 }
 
 .gama-text-body1 {
-  font-family: Inter,sans-serif!important;
+  font-family: Inter, sans-serif !important;
   color: #000;
   font-size: 1.4rem !important;
   font-style: normal;
@@ -99,26 +99,26 @@ html {
 }
 
 .gama-text-body2 {
-  font-family: Inter,sans-serif!important;
+  font-family: Inter, sans-serif !important;
   color: #000;
   font-size: 1.2rem !important;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 2rem !important;
 }
 
 .gama-text-button {
-  font-family: Inter,sans-serif!important;
+  font-family: Inter, sans-serif !important;
   color: #000;
-  font-size: 1.4rem;
-  font-style: normal;
-  font-weight: 700;
+  font-size: 1.4rem!important;
+  font-style: normal!important;
+  font-weight: 600!important;
   line-height: normal;
 }
 
 
 .gama-text-caption {
-  font-family: Inter,sans-serif!important;
+  font-family: Inter, sans-serif !important;
   color: #000;
   font-size: 1.2rem;
   font-style: normal;
@@ -127,7 +127,7 @@ html {
 }
 
 .gama-text-overline {
-  font-family: Inter,sans-serif!important;
+  font-family: Inter, sans-serif !important;
   color: #000;
   font-size: 1rem;
   font-style: normal;
@@ -147,7 +147,24 @@ html {
   border-radius: 3rem;
   background: #FFB600;
   color: #24292F;
-  font-family: Inter,sans-serif!important;
+  font-family: Inter, sans-serif !important;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+
+.gama-default-btn {
+  display: inline-flex;
+  height: 2.8rem;
+  padding: 0rem 1.2rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3rem;
+  background: #FFB600;
+  color: #24292F;
+  font-family: Inter, sans-serif !important;
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 700;
@@ -2255,7 +2272,7 @@ body {
 
   //sm size
   .gama-text-h1 {
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     color: #000;
     font-size: 4.6rem;
     font-style: normal;
@@ -2264,7 +2281,7 @@ body {
   }
 
   .gama-text-h2 {
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     color: #000;
     font-size: 4rem;
     font-style: normal;
@@ -2274,7 +2291,7 @@ body {
   }
 
   .gama-text-h3 {
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     color: #000;
     font-size: 3.2rem;
     font-style: normal;
@@ -2293,7 +2310,7 @@ body {
   }
 
   .gama-text-h5 {
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     color: #000;
     font-size: 2.2rem;
     font-style: normal;
@@ -2302,19 +2319,19 @@ body {
   }
 
   .gama-text-h6 {
-    font-family: 'Inter',sans-serif!important;
+    font-family: 'Inter', sans-serif !important;
     color: #000;
     font-size: 1.8rem !important;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 500 !important;
     line-height: normal;
   }
 
 
   .gama-text-subtitle1 {
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     color: #000;
-    font-size: 1.6rem!important;
+    font-size: 1.6rem !important;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -2322,7 +2339,7 @@ body {
 
 
   .gama-text-subtitle2 {
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     color: #000;
     font-size: 1.4rem;
     font-style: normal;
@@ -2331,7 +2348,7 @@ body {
   }
 
   .gama-text-body1 {
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     color: #000;
     font-size: 1.6rem !important;
     font-style: normal;
@@ -2340,16 +2357,16 @@ body {
   }
 
   .gama-text-body2 {
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     color: #000;
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    font-size: 1.4rem !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 2.2rem !important;
   }
 
   .gama-text-button {
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     color: #000;
     font-size: 1.4rem;
     font-style: normal;
@@ -2359,7 +2376,7 @@ body {
 
 
   .gama-text-caption {
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     color: #000;
     font-size: 1.4rem;
     font-style: normal;
@@ -2368,7 +2385,7 @@ body {
   }
 
   .gama-text-overline {
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     color: #000;
     font-size: 1.2rem;
     font-style: normal;
@@ -2387,7 +2404,25 @@ body {
     border-radius: 3rem;
     background: #FFB600;
     color: #24292F;
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+  }
+
+
+  .gama-default-btn {
+    display: inline-flex;
+    height: 3.6rem;
+    padding: 0.4rem 1.6rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3rem;
+    background: #FFFFFF;
+    color: #24292F;
+    font-family: Inter, sans-serif !important;
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 600;
@@ -2450,7 +2485,7 @@ body {
   // md size
   .gama-text-h1 {
     color: #354053;
-    font-family: Inter,sans-serif !important;
+    font-family: Inter, sans-serif !important;
     font-size: 5rem !important;
     font-style: normal !important;
     font-weight: 800 !important;
@@ -2459,7 +2494,7 @@ body {
 
   .gama-text-h2 {
     color: #354053;
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     font-size: 4.4rem;
     font-style: normal;
     font-weight: 700;
@@ -2468,7 +2503,7 @@ body {
 
   .gama-text-h3 {
     color: #354053;
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     font-size: 3.6rem;
     font-style: normal;
     font-weight: 500;
@@ -2487,7 +2522,7 @@ body {
 
   .gama-text-h5 {
     color: #354053;
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     font-size: 2.4rem;
     font-style: normal;
     font-weight: 500;
@@ -2496,18 +2531,18 @@ body {
 
   .gama-text-h6 {
     color: #354053;
-    font-family: 'Inter',sans-serif!important;
+    font-family: 'Inter', sans-serif !important;
     font-size: 2rem !important;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 600 !important;
     line-height: normal;
   }
 
 
   .gama-text-subtitle1 {
     color: #354053;
-    font-family: Inter,sans-serif!important;
-    font-size: 1.8rem!important;
+    font-family: Inter, sans-serif !important;
+    font-size: 1.8rem !important;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -2516,7 +2551,7 @@ body {
 
   .gama-text-subtitle2 {
     color: #000;
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 500;
@@ -2525,7 +2560,7 @@ body {
 
   .gama-text-body1 {
     color: #000;
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     font-size: 2rem !important;
     font-style: normal;
     font-weight: 400;
@@ -2534,26 +2569,26 @@ body {
 
   .gama-text-body2 {
     color: #000;
-    font-family: Inter,sans-serif!important;
-    font-size: 1.4rem !important;
+    font-family: Inter, sans-serif !important;
+    font-size: 1.6rem !important;
     font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    font-weight: 400 !important;
+    line-height: normal !important;
   }
 
   .gama-text-button {
     color: #000;
-    font-family: Inter,sans-serif!important;
-    font-size: 1.8rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+    font-family: Inter, sans-serif !important;
+    font-size: 1.8rem!important;
+    font-style: normal!important;
+    font-weight: 600!important;
+    line-height: normal!important;
   }
 
 
   .gama-text-caption {
     color: #000;
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 300;
@@ -2562,7 +2597,7 @@ body {
 
   .gama-text-overline {
     color: #000;
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     font-size: 1.2rem;
     font-style: normal;
     font-weight: 500;
@@ -2582,11 +2617,30 @@ body {
     border-radius: 3rem;
     background: #FFB600;
     color: #24292F;
-    font-family: Inter,sans-serif!important;
+    font-family: Inter, sans-serif !important;
     font-size: 1.8rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
+  }
+
+
+  .gama-default-btn {
+    display: inline-flex;
+    height: 4.4rem;
+    padding: 0.8rem 2rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3rem;
+    background: #FFFFFF;
+    color: #24292F;
+    font-family: Inter, sans-serif !important;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border: 1px solid #24292F;
 
   }
 

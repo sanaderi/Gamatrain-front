@@ -5,20 +5,20 @@
             <v-card-text>
                 <v-row>
                     <v-col cols="2" sm="2" class="px-0">
-                        <v-sheet class="text-right" id="stats-handler" ref="statsHandler">
+                        <v-sheet v-if="stats.length <= 16" class="text-right" id="stats-handler" ref="statsHandler">
                             <div v-for="(item, index) in stats" :key="index" @touchstart="handleTouchStart(index)"
                                 @touchend="handleTouchEnd(index)" @touchmove="handleTouchMove" @mousemove="handleMouseMove"
                                 @mousedown="handleMouseDown(index)" @mouseup="handleMouseUp(index)"
                                 :ref="`handler${index}`">
-                                <v-btn @click="handleBtnClick(index)" class="my-0  white--text grade-btn" :class="[index == 5 ? 'rounded-pill active' : 'rounded-s-xl',
+                                <v-btn @click="handleBtnClick(index)" class="my-0  white--text grade-btn" :class="[index == 7 ? 'rounded-pill active' : 'rounded-s-xl',
                                 currentIndex == index ? 'handlerShadow' : ''
                                 ]" v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
-                                    :style="`font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
+                                    :style="`font-weight:600;font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
                                     {{ truncateGradeTitle(gradeHandlerTitle(item.base_title)) }}
                                 </v-btn>
-                                <div v-if="index == 5"
-                                    :style="`height:${gradeSizes[index].height}px;width:${gradeSizes[index].width}px`" />
+                                <div v-if="index == 7"
+                                    :style="`font-size:${gradeSizes[index].fontSize}px;height:${gradeSizes[index].height}px;width:${gradeSizes[index].width}px`" />
 
                             </div>
                         </v-sheet>
@@ -30,45 +30,45 @@
                                 <v-row class="stats-details d-none d-md-flex">
                                     <v-col md="6" class="pb-0 pb-sm-6">
                                         <nuxt-link
-                                            :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
+                                            :to="`/search?type=test&section=${stats[7].section}&base=${stats[7].base}`"
                                             class="label">
                                             <span class="stat-icon icon-paper"></span>
                                             Paper
 
                                             <v-icon class="stat-arrow" size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         </nuxt-link>
-                                        <div class="stat">+{{ stats[5].tests | numberFormat }}</div>
+                                        <div class="stat">+{{ stats[7].tests | numberFormat }}</div>
                                     </v-col>
                                     <v-col md="6" class="pb-0 pb-sm-6">
                                         <nuxt-link
-                                            :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
+                                            :to="`/search?type=learnfiles&section=${stats[7].section}&base=${stats[7].base}`"
                                             class="label">
                                             <span class="stat-icon icon-multimedia"></span>
                                             Multimedia
                                             <v-icon class="stat-arrow" size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         </nuxt-link>
-                                        <div class="stat">+{{ stats[5].files | numberFormat }}</div>
+                                        <div class="stat">+{{ stats[7].files | numberFormat }}</div>
                                     </v-col>
                                     <v-col md="6" class="pb-0 pb-sm-6">
                                         <nuxt-link
-                                            :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
+                                            :to="`/search?type=azmoon&section=${stats[7].section}&base=${stats[7].base}`"
                                             class="label">
                                             <span class="stat-icon icon-exam"></span>
                                             Exam
                                             <v-icon class="stat-arrow" size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         </nuxt-link>
-                                        <div class="stat">+{{ stats[5].exams | numberFormat }}</div>
+                                        <div class="stat">+{{ stats[7].exams | numberFormat }}</div>
 
                                     </v-col>
                                     <v-col md="6" class="pb-0 pb-sm-6">
                                         <nuxt-link
-                                            :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
+                                            :to="`/search?type=question&section=${stats[7].section}&base=${stats[7].base}`"
                                             class="label">
                                             <span class="stat-icon icon-q-a"></span>
                                             Q & A
                                             <v-icon class="stat-arrow" size="20" color="#D0D7DE">mdi-chevron-right</v-icon>
                                         </nuxt-link>
-                                        <div class="stat">+{{ stats[5].questions | numberFormat }}</div>
+                                        <div class="stat">+{{ stats[7].questions | numberFormat }}</div>
                                     </v-col>
                                 </v-row>
 
@@ -78,7 +78,7 @@
                                         <v-row>
                                             <v-col cols="7" class="py-0">
                                                 <nuxt-link
-                                                    :to="`/search?type=test&section=${stats[5].section}&base=${stats[5].base}`"
+                                                    :to="`/search?type=test&section=${stats[7].section}&base=${stats[7].base}`"
                                                     class="label">
                                                     <span class="stat-icon icon-paper"></span>
                                                     Paper
@@ -86,7 +86,7 @@
                                                 <div class="date-holder ">{{ showDate() }}</div>
                                             </v-col>
                                             <v-col cols="5" class="text-right pt-0">
-                                                <span class="stat">+{{ stats[5].tests | numberFormat }}</span>
+                                                <span class="stat">+{{ stats[7].tests | numberFormat }}</span>
                                                 <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
                                             </v-col>
                                             <v-col cols="12" class="pt-0">
@@ -96,7 +96,7 @@
                                         <v-row>
                                             <v-col cols="7" class="py-0">
                                                 <nuxt-link
-                                                    :to="`/search?type=learnfiles&section=${stats[5].section}&base=${stats[5].base}`"
+                                                    :to="`/search?type=learnfiles&section=${stats[7].section}&base=${stats[7].base}`"
                                                     class="label">
                                                     <span class="stat-icon icon-multimedia"></span>
                                                     Multimedia
@@ -104,7 +104,7 @@
                                                 <div class="date-holder pb-0"> {{ showDate() }}</div>
                                             </v-col>
                                             <v-col cols="5" class="text-right pt-0">
-                                                <span class="stat">+{{ stats[5].files | numberFormat }}</span>
+                                                <span class="stat">+{{ stats[7].files | numberFormat }}</span>
                                                 <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
                                             </v-col>
                                             <v-col cols="12" class="pt-0">
@@ -114,7 +114,7 @@
                                         <v-row>
                                             <v-col cols="7" class="py-0">
                                                 <nuxt-link
-                                                    :to="`/search?type=azmoon&section=${stats[5].section}&base=${stats[5].base}`"
+                                                    :to="`/search?type=azmoon&section=${stats[7].section}&base=${stats[7].base}`"
                                                     class="label">
                                                     <span class="stat-icon icon-exam"></span>
                                                     Exam
@@ -122,7 +122,7 @@
                                                 <div class="date-holder pb-0"> {{ showDate() }}</div>
                                             </v-col>
                                             <v-col cols="5" class="text-right pt-0">
-                                                <span class="stat">+{{ stats[5].exams | numberFormat }}</span>
+                                                <span class="stat">+{{ stats[7].exams | numberFormat }}</span>
                                                 <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
                                             </v-col>
                                             <v-col cols="12" class="pt-0">
@@ -133,7 +133,7 @@
                                         <v-row>
                                             <v-col cols="7" class="py-0 ">
                                                 <nuxt-link
-                                                    :to="`/search?type=question&section=${stats[5].section}&base=${stats[5].base}`"
+                                                    :to="`/search?type=question&section=${stats[7].section}&base=${stats[7].base}`"
                                                     class="label">
                                                     <span class="stat-icon icon-q-a"></span>
                                                     Q & A
@@ -141,7 +141,7 @@
                                                 <div class="date-holder"> {{ showDate() }}</div>
                                             </v-col>
                                             <v-col cols="5" class="text-right pt-0">
-                                                <span class="stat">+{{ stats[5].questions | numberFormat }}</span>
+                                                <span class="stat">+{{ stats[7].questions | numberFormat }}</span>
                                                 <v-icon size="20" class="pl-sm-4" color="#D0D7DE">mdi-chevron-right</v-icon>
                                             </v-col>
                                         </v-row>
@@ -249,18 +249,22 @@ export default {
         return {
             statsSlideVal: 6,
             gradeColors: [
-                '#2093BF',
-                '#20BFA2',
-                '#98CA57',
-                '#DADB42',
-                '#FCE300',
-                '#FEAA47',
-                '#FFA99F',
-                '#FE68B2',
-                '#CF1E93',
-                '#A10492',
-                '#656565',
-                '#C3C1C1'
+                '#FF6498',
+                '#FD7DD2',
+                '#FF4DFF',
+                '#C24DFF',
+                '#8649FF',
+                '#4C4AFF',
+                '#4A87FF',
+                '#4AC2FF',
+                '#42EDEE',
+                '#49F182',
+                '#43E343',
+                '#76E43D',
+                '#E9E90A',
+                '#EEB23A',
+                '#F8864B',
+                '#FC4F4E'
             ],
 
             gradeSizesXs: [
@@ -271,74 +275,69 @@ export default {
                 },
                 {
                     width: 32,
-                    height: 36,
+                    height: 32,
+                    fontSize: 10
+                },
+                {
+                    width: 41,
+                    height: 20,
+                    fontSize: 10
+                },
+                {
+                    width: 46,
+                    height: 23,
                     fontSize: 12
-                },
-                {
-                    width: 32,
-                    height: 36,
-                    fontSize: 14
-                },
-                {
-                    width: 36,
-                    height: 40,
-                    fontSize: 14
                 },
 
                 {
-                    width: 40,
-                    height: 44,
-                    fontSize: 16
-                },
-                {
-                    width: 77,
-                    height: 52,
-                    fontSize: 22
-                },
-                {
-                    width: 40,
-                    height: 40,
+                    width: 50,
+                    height: 25,
                     fontSize: 14
                 },
                 {
-                    width: 36,
-                    height: 36,
+                    width: 55,
+                    height: 31,
+                    fontSize: 16
+                },
+                {
+                    width: 60,
+                    height: 34,
+                    fontSize: 22
+                },
+                {
+                    width: 101,
+                    height: 46,
+                    fontSize: 22
+                },
+                {
+                    width: 64,
+                    height: 38,
+                    fontSize: 20
+                },
+                {
+                    width: 60,
+                    height: 34,
+                    fontSize: 18
+                },
+                {
+                    width: 55,
+                    height: 32,
+                    fontSize: 16
+                },
+                {
+                    width: 50,
+                    height: 25,
+                    fontSize: 14
+                },
+                {
+                    width: 46,
+                    height: 23,
                     fontSize: 12
                 },
                 {
-                    width: 32,
-                    height: 32,
+                    width: 41,
+                    height: 19,
                     fontSize: 10
-                },
-                {
-                    width: 24,
-                    height: 24,
-                    fontSize: 8
-                },
-                {
-                    width: 20,
-                    height: 20,
-                    fontSize: 7
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
                 },
                 {
                     width: 52,
@@ -350,87 +349,82 @@ export default {
                     height: 18,
                     fontSize: 8
                 }
+
             ],
             gradeSizesSm: [
                 {
-                    width: 24,
-                    height: 24,
-                    fontSize: 10
+                    width: 35,
+                    height: 17,
+                    fontSize: 8
                 },
                 {
-                    width: 28,
-                    height: 32,
-                    fontSize: 10
-                },
-                {
-                    width: 32,
-                    height: 36,
-                    fontSize: 12
-                },
-                {
-                    width: 36,
-                    height: 40,
-                    fontSize: 14
+                    width: 35,
+                    height: 17,
+                    fontSize: 8
                 },
                 {
                     width: 40,
-                    height: 44,
-                    fontSize: 16
-                },
-                {
-                    width: 85,
-                    height: 52,
-                    fontSize: 22
+                    height: 19,
+                    fontSize: 10
                 },
                 {
                     width: 44,
-                    height: 44,
-                    fontSize: 16
-                },
-                {
-                    width: 40,
-                    height: 40,
-                    fontSize: 14
-                },
-                {
-                    width: 36,
-                    height: 36,
+                    height: 22,
                     fontSize: 12
                 },
                 {
-                    width: 32,
-                    height: 32,
+                    width: 49,
+                    height: 26,
+                    fontSize: 14
+                },
+                {
+                    width: 54,
+                    height: 30  ,
+                    fontSize: 16
+                },
+                {
+                    width: 59,
+                    height: 33,
+                    fontSize: 18
+                },
+                {
+                    width: 107,
+                    height: 46,
+                    fontSize: 22
+                },
+                {
+                    width: 62,
+                    height: 37,
+                    fontSize: 20
+                },
+                {
+                    width: 59,
+                    height: 33,
+                    fontSize: 18
+                },
+                {
+                    width: 54,
+                    height: 31,
+                    fontSize: 16
+                },
+                {
+                    width: 49,
+                    height: 26,
+                    fontSize: 14
+                },
+                {
+                    width: 44,
+                    height: 22,
+                    fontSize: 12
+                },
+                {
+                    width: 40,
+                    height: 18,
                     fontSize: 10
                 },
                 {
-                    width: 24,
-                    height: 24,
-                    fontSize: 8
-                },
-                {
-                    width: 20,
-                    height: 20,
-                    fontSize: 6
-                },
-                ,
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
+                    width: 35,
+                    height: 17,
                     fontSize: 8
                 },
                 {
@@ -438,116 +432,87 @@ export default {
                     height: 18,
                     fontSize: 8
                 }
+               
             ],
             gradeSizesMd: [
                 {
-                    width: 60,
-                    height: 28,
+                    width: 70,
+                    height: 18.04,
+                    fontSize: 8
+                },
+                {
+                    width: 80,
+                    height: 22.55,
                     fontSize: 10
                 },
                 {
-                    width: 68,
-                    height: 38,
+                    width: 90,
+                    height: 27.06,
                     fontSize: 12
                 },
                 {
-                    width: 76,
-                    height: 48,
+                    width: 100,
+                    height: 31.57,
                     fontSize: 14
                 },
                 {
-                    width: 84,
-                    height: 56.6,
+                    width: 110,
+                    height: 36.08,
                     fontSize: 16
                 },
                 {
-                    width: 92,
-                    height: 66,
+                    width: 120,
+                    height: 42.845,
                     fontSize: 18
                 },
                 {
-                    width: 161,
-                    height: 75,
-                    fontSize: 28
+                    width: 130,
+                    height: 47.355,
+                    fontSize: 20
                 },
                 {
-                    width: 92,
-                    height: 66,
+                    width: 180,
+                    height: 64,
+                    fontSize: 24
+                },
+                {
+                    width: 140,
+                    height: 51.865,
+                    fontSize: 22
+                },
+                {
+                    width: 130,
+                    height: 47.355,
+                    fontSize: 20
+                },
+                {
+                    width: 120,
+                    height: 42.845,
                     fontSize: 18
                 },
                 {
-                    width: 84,
-                    height: 56.6,
+                    width: 110,
+                    height: 36.08,
                     fontSize: 16
                 },
                 {
-                    width: 76,
-                    height: 48,
-                    fontSize: 14
+                    width: 100,
+                    height: 31.57,
+                    fontSize: 16
                 },
                 {
-                    width: 68,
-                    height: 38,
+                    width: 90,
+                    height: 27.06,
                     fontSize: 12
                 },
                 {
-                    width: 60,
-                    height: 28,
+                    width: 80,
+                    height: 22.55,
                     fontSize: 10
                 },
                 {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
-                    fontSize: 8
-                },
-                {
-                    width: 52,
-                    height: 18,
+                    width: 70,
+                    height: 18.04,
                     fontSize: 8
                 }
             ],
@@ -739,16 +704,18 @@ export default {
     },
     methods: {
         showDate() {
-            if (this.$moment(this.stats[5].last_update).format('MMM,DD YYYY') !== 'Invalid date')
-                return this.$moment(this.stats[5].last_update).format('MMM,DD YYYY')
+            if (this.$moment(this.stats[7].last_update).format('MMM,DD YYYY') !== 'Invalid date')
+                return this.$moment(this.stats[7].last_update).format('MMM,DD YYYY')
         },
         shouldDisplayButton(index) {
             // Determine whether to display the button based on screen size and specific indexes
-            if (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm) {
-                return ![0, 1, 11, 12, 13, 14, 15, 16].includes(index);
-            } else {
-                return ![12, 13, 14, 15, 16].includes(index);
-            }
+            if (this.$vuetify.breakpoint.xs)
+                return ![0, 1, 14, 15].includes(index);
+            else if (this.$vuetify.breakpoint.sm)
+                return ![0, 15].includes(index);
+            else
+                return true;
+
         },
         handleBtnClick(index) {
             this.stopInterval(); // Clear the interval using the interval ID
@@ -946,9 +913,9 @@ export default {
                 });
         },
 
-        
 
-       
+
+
 
         truncateGradeTitle(title) {
             var cutLength = (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md) ? 3 : 9;
@@ -1005,7 +972,6 @@ export default {
 
 #content-stats-container #stats-handler {
     position: relative;
-    top: 1.2rem;
 }
 
 
@@ -1092,14 +1058,15 @@ export default {
 #content-stats-container #grade-details-card .section-title {
     color: #6E7781;
     margin-bottom: 0.5rem;
+    opacity: 0.5;
 
 }
 
-#content-stats-container #grade-details-card .latest-card .col{
+#content-stats-container #grade-details-card .latest-card .col {
     padding-top: 0.3rem;
 }
 
-#content-stats-container #grade-details-card .latest-card  .gama-text-caption {
+#content-stats-container #grade-details-card .latest-card .gama-text-caption {
     color: #6E7781;
     text-decoration: none;
     overflow: hidden;
@@ -1177,7 +1144,7 @@ export default {
     }
 
     #content-stats-container #grade-details-card {
-        height: 34.8rem;
+        height: 37.6rem;
         width: 88.8%;
         padding: 2.5rem 3rem 3rem 3rem;
         border-radius: 0rem 2rem 2rem 0rem;
@@ -1283,7 +1250,7 @@ export default {
             top: 0;
 
             .active {
-                right: -3.6rem;
+                right: -2.6rem;
             }
         }
 
