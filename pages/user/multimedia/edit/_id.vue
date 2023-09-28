@@ -26,7 +26,7 @@
                           :error-messages="errors"
                           item-text="title"
                           item-value="id"
-                          label="Level"
+                          label="Curriculum"
                           outlined
                         />
                       </validation-provider>
@@ -57,7 +57,7 @@
                           v-model="form.lesson"
                           @change="changeOption('lesson',$event)"
                           :error-messages="errors"
-                          label="Lesson"
+                          label="Subject"
                           outlined
                         />
                       </validation-provider>

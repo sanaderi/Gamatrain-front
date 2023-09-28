@@ -14,8 +14,8 @@
                                 currentIndex == index ? 'handlerShadow' : ''
                                 ]" v-if="shouldDisplayButton(index)" :color="gradeColors[index]"
                                     :style="`font-weight:600;font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
-                                    {{ truncateGradeTitle(gradeHandlerTitle(item.base_title)) }}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`">
+                                    {{ truncateGradeTitle(gradeHandlerTitle(item.base_title), index) }}
                                 </v-btn>
                                 <div v-if="index == 7"
                                     :style="`font-size:${gradeSizes[index].fontSize}px;height:${gradeSizes[index].height}px;width:${gradeSizes[index].width}px`" />
@@ -379,7 +379,7 @@ export default {
                 },
                 {
                     width: 54,
-                    height: 30  ,
+                    height: 30,
                     fontSize: 16
                 },
                 {
@@ -432,7 +432,7 @@ export default {
                     height: 18,
                     fontSize: 8
                 }
-               
+
             ],
             gradeSizesMd: [
                 {
@@ -720,7 +720,7 @@ export default {
         handleBtnClick(index) {
             this.stopInterval(); // Clear the interval using the interval ID
 
-            const deltaIndex = 5 - index;
+            const deltaIndex = 7 - index;
             if (deltaIndex > 0) {
                 for (let i = 0; i < deltaIndex; i++) {
                     setTimeout(() => {
@@ -917,8 +917,18 @@ export default {
 
 
 
-        truncateGradeTitle(title) {
-            var cutLength = (this.$vuetify.breakpoint.xs || this.$vuetify.breakpoint.sm || this.$vuetify.breakpoint.md) ? 3 : 9;
+        truncateGradeTitle(title, index) {
+            var cutLength = 3;
+            if (this.$vuetify.breakpoint.xs)
+                cutLength = 3;
+            else if (this.$vuetify.breakpoint.sm)
+                cutLength = 3;
+            else if (this.$vuetify.breakpoint.md)
+                cutLength = 3;
+            else
+                cutLength = 9;
+            if (index == 7)
+                cutLength = cutLength + 2;
             return title.length > cutLength ? title.slice(0, cutLength) + '...' : title;
         },
         getFullName(firstName, lastName) {

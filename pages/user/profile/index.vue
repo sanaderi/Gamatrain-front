@@ -183,7 +183,7 @@
                 :error-messages="errors"
                 item-text="title"
                 item-value="id"
-                label="Level"
+                label="Curriculum"
                 outlined
               />
             </validation-provider>

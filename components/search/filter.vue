@@ -75,7 +75,7 @@
     <v-expansion-panels flat v-model="panel">
       <v-expansion-panel>
         <v-expansion-panel-header color="#f5f5f5" class="px-0 font-size-16 font-weight-bold">
-          Level
+          Curriculum
         </v-expansion-panel-header>
         <v-expansion-panel-content  color="#f5f5f5">
             <v-row>
@@ -153,7 +153,7 @@
       <v-expansion-panel :disabled="!filter.lesson_list.length">
         <v-expansion-panel-header
           color="#f5f5f5"
-          class="px-0 font-weight-bold font-size-16">Lesson</v-expansion-panel-header>
+          class="px-0 font-weight-bold font-size-16">Subject</v-expansion-panel-header>
         <v-expansion-panel-content
           color="#f5f5f5"
         >

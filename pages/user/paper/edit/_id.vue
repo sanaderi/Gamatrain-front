@@ -27,7 +27,7 @@
                           @change="changeOption('section',$event)"
                           item-text="title"
                           item-value="id"
-                          label="Level"
+                          label="Curriculum"
                           outlined
                         />
                       </validation-provider>
@@ -58,7 +58,7 @@
                           @change="changeOption('lesson',$event)"
                           v-model="form.lesson"
                           :error-messages="errors"
-                          label="Lesson"
+                          label="Subject"
                           outlined
                         />
                       </validation-provider>

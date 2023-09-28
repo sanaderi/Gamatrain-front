@@ -20,7 +20,7 @@
             :items="level_list"
             item-text="title"
             item-value="id"
-            label="Level"
+            label="Curriculum"
             outlined
             @change="filterChanged('level')"
           />
@@ -46,7 +46,7 @@
             item-text="title"
             v-model="filter.lesson"
             clearable
-            label="Lesson"
+            label="Subject"
             outlined
             @change="filterChanged('lesson')"
           />
