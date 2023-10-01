@@ -347,9 +347,9 @@ import LottieAnimation from '~/components/common/lottie-animation.vue';
 
 export default {
     auth: false,
-    head(){
-        return{
-            title:'About us'
+    head() {
+        return {
+            title: 'About us'
         }
     },
     mounted() {
@@ -379,15 +379,18 @@ export default {
                     id: 1,
                     fullName: 'Mohammad Salehi',
                     avatar: 'mohammad-salehi.jpeg',
-                    role: 'DevOps',
-                    bio: 'I enjoy of coding and solving hard problems.'
+                    role: 'DevOps Engineer',
+                    bio: "Sadegh Salehi is a dedicated and passionate DevOps engineer at GamaTrain startup. With over ten years of experience in system administration and DevOps engineering he joined the team and immediately set to work optimizing performance by setting up a robust Database Cluster. His commitment to finding the best solutions, rather than the easiest ones, shines through in his work." +
+                        "One notable achievement was overcoming the challenge of handling millions of records and aggregating them for every student's new exam. Through efficient communication and teamwork, Sadegh and his colleagues implemented a groundbreaking solution: a privately implemented binary tree database." +
+                        "As a valuable member of the company, Sadegh continues to contribute during peak times, such as student exam periods, where the team handles millions of requests. His dedication and problem-solving skills make him an integral part of the GamaTrain startup's success."
                 },
                 {
                     id: 2,
                     fullName: 'Fahim Kavian',
-                    avatar: 'avatar.svg',
-                    role: 'UI/UX Designer',
-                    bio: ''
+                    avatar: 'fahim-kavian.jpeg',
+                    role: 'UI/UX Director',
+                    bio: "Fahim Kavian, as the UI/UX Director at GamaTrain, brings a wealth of valuable experience to the team. Her diverse background in UI, Motion, Visual, 3D, and Logo Design from freelancing and past roles enables her to tackle design challenges from multiple angles. Fahim's track record of enhancing user experiences and increasing user satisfaction, as seen in her work at Wallebi and Kartak, demonstrates her ability to drive results." +
+                        "Additionally, Fahim's proficiency in simplifying complex registration processes and implementing gamification strategies that boost user engagement make her an asset in optimizing GamaTrain's user interfaces. Her history of effectively improving speed and reliability in digital processes, as evidenced by her contributions to the crypto wallet industry, aligns perfectly with GamaTrain's goals of providing efficient and user-friendly solutions. Fahim Kavian's past experiences make her a key player in elevating GamaTrain's UI/UX to new heights."
                 },
                 {
                     id: 3,
@@ -1294,13 +1297,14 @@ export default {
 
     #about-commitment-container {
         background: #24292F;
-        min-height: 44.1rem;
+        min-height: 47rem;
         text-align: center;
-        padding-top: 4.8rem;
+        padding-top: 3.6rem;
+        padding-bottom: 4.8rem;
 
         .gama-text-h4 {
             color: #FFB600 !important;
-            margin-bottom: 4.8rem;
+            margin-bottom: 3.2rem;
         }
 
 
@@ -1332,7 +1336,8 @@ export default {
                     .gama-text-subtitle2 {
                         color: #FFB600;
                         text-align: left;
-                        margin-bottom: 4.8rem;
+                        margin: auto;
+                        max-width: 51.2rem;
                     }
 
                 }
@@ -1341,6 +1346,7 @@ export default {
 
             .v-tabs {
                 max-height: 4.8rem !important;
+                margin-top: 2.4rem;
 
                 .v-icon {
                     font-size: 3.2rem;
@@ -1732,9 +1738,10 @@ export default {
 
     #about-commitment-container {
         background: #24292F;
-        min-height: 48.8rem;
+        min-height: 50.8rem;
         text-align: center;
-        padding-top: 10rem;
+        padding-top: 5.2rem;
+        padding-bottom: 5.2rem;
 
         .gama-text-h4 {
             color: #FFB600 !important;
@@ -1763,13 +1770,14 @@ export default {
 
                     .gama-text-h5 {
                         color: #FFB600;
-                        margin-bottom: 2.6rem;
+                        margin-bottom: 2.4rem;
                     }
 
                     .gama-text-subtitle2 {
                         color: #FFB600;
                         text-align: left;
-                        margin-bottom: 5.6rem;
+                        max-width: 57.8rem;
+                        margin: auto;
                     }
 
                 }
@@ -1777,6 +1785,7 @@ export default {
             }
 
             .v-tabs {
+                margin-top: 2.8rem;
                 .v-icon {
                     font-size: 3.2rem;
                     color: #FFB600;

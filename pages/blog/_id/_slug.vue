@@ -18,8 +18,8 @@
                     <div id="general-data-footer">
                         <div>
                             <div id="autor-holder">
-                                <img :src="require('assets/images/avatar.png')" />
-                                <span class="gama-text-overline">Alison Babaras</span>
+                                <img :src="contentData.avatar" />
+                                <span class="gama-text-overline">{{ contentData.first_name }} {{ contentData.last_name }}</span>
                             </div>
                             <div id="date-holder">
                                 <v-icon @click="share()" class="pr-6">
@@ -107,6 +107,7 @@ export default {
 
 <style>
 #blog {
+    max-width: 72rem!important;
     #general-data-holder {
         /* margin-top: 5.6rem; */
         padding-bottom: 8.7rem;
@@ -509,7 +510,6 @@ export default {
 
 @media (min-width: 960px) {
     #blog {
-        max-width: 80% !important;
 
         #general-data-holder {
             padding-bottom: 23rem;
@@ -691,7 +691,6 @@ export default {
 @media (min-width: 1264px) {
     #blog {
         margin-top: 0;
-        width: 56%;
     }
 }
 
