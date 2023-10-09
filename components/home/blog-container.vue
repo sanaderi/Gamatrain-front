@@ -8,7 +8,7 @@
                     </v-col>
                     <v-col cols="6" class="text-right">
                         <nuxt-link to="/blog-list"  class="gama-default-btn d-none d-md-inline">Go to blog</nuxt-link>
-                        <v-btn text class="d-inline d-md-none seeAllBtn">
+                        <v-btn to="/blog-list" text class="d-inline d-md-none seeAllBtn">
                             See all
                             <v-icon>mdi-chevron-right</v-icon>
                         </v-btn>
@@ -121,6 +121,7 @@ export default {
 
     .seeAllBtn {
         padding-right: 0;
+        float:right;
 
         .v-btn__content {
             text-transform: none;
