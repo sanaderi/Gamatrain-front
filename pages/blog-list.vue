@@ -1,12 +1,68 @@
 <template>
   <v-container id="blog-list-page">
-    <div id="featured-blog">
+    <!-- Featued blog section -->
+    <v-row class="d-none d-md-flex" id="desktop-featured-blog">
+       <v-col cols="9" id="preview-section">
+          <v-skeleton-loader v-if="isLoading" class="mx-auto slide-loading" type="image"></v-skeleton-loader>
+          <v-card v-else-if="featuredItems[0]" flat :to="`/blog/${featuredItems[slideIndex].id}/${featuredItems[0].title}`" class="ma-1">
+            <v-slide-x-transition>
+
+                                    <v-card v-if="expand"
+                                        >
+                                        <v-img :src="featuredItems[slideIndex].pic" />
+                                        <v-card-title>
+                                            <span class="gama-text-h6" >
+                                             {{ featuredItems[slideIndex].title }}
+                                     </span>
+                                            
+                    </v-card-title>
+
+          </v-card>
+          </v-slide-x-transition>
+
+         </v-card>
+       </v-col>
+       <v-col cols="3" id="list-section">
+        <h2 class="gama-text-button">
+          Featured Post
+        </h2>
+        <div v-if="isLoading">
+          <v-row class="featured-item" v-for="i in 5">
+          <div class="d-flex">
+            <div>
+              <v-skeleton-loader type="image"></v-skeleton-loader>
+            </div>
+            <div class="text-loader-section">
+              <v-skeleton-loader
+                type="card-heading"
+              ></v-skeleton-loader>
+            </div>
+          </div>
+         </v-row>
+        </div>
+        <div v-else v-for="(item, n) in featuredItems" :key="n" class="featured-item">
+          <nuxt-link :to="`/blog/${item.id}`">
+            <v-img  :src="item.pic" />
+          </nuxt-link>
+
+            <div class="item-text">
+              <nuxt-link :to="`/blog/${item.id}`">
+              <h2 class="gama-text-caption">{{ item.title }}</h2>
+            </nuxt-link>
+
+            </div>
+          </div>
+       
+       </v-col>
+      
+    </v-row>
+    <div class="d-block d-md-none" id="featured-blog">
       <v-row>
                     <v-col cols="12">
                         <v-slide-group v-model="featureVal" class="slider py-sm-4" :show-arrows="$vuetify.breakpoint.lgAndUp">
                             <div class="d-flex" v-if="isLoading">
                                 <v-slide-item v-for="i in 10" :key="i">
-                                    <v-skeleton-loader class="mx-auto slide-loading" type="card"></v-skeleton-loader>
+                                    <v-skeleton-loader class="mx-auto slide-loading" type="image"></v-skeleton-loader>
                                 </v-slide-item>
                             </div>
 
@@ -30,10 +86,11 @@
                     </v-col>
                 </v-row>
     </div>
+    <!-- End featured blog section -->
     
-
+     <!-- Search section -->
      <v-row id="blog-search">
-          <v-col cols="12">
+          <v-col cols="12" class="pb-0">
                     <v-text-field  class="rounded-ts pr-0" dense outlined hide-details v-model="searchQuery"
                         label="Search">
                         <template slot="append-outer">
@@ -45,10 +102,70 @@
                     </v-text-field>
           </v-col>
      </v-row>
+     <!-- Search section -->
+
+
+     <!-- Category section -->
+     <v-row justify="space-around" id="category-section">
+    <v-col
+      cols="12"
+    >
+      <v-card
+        flat
+        class="pb-4 px-1"
+      >
+        <v-chip-group
+          mandatory
+          active-class="active-cate"
+        >
+         <v-chip
+            :x-small="$vuetify.breakpoint.xs"
+            :large="$vuetify.breakpoint.mdAndUp"
+            :key="0"
+            @click="catVal=0"
+          >
+            All
+          </v-chip>
+          <v-chip
+            :x-small="$vuetify.breakpoint.xs"
+            :large="$vuetify.breakpoint.mdAndUp"
+            v-for="cat in blogCats"
+            :key="cat.id"
+            @click="catVal=cat.id"
+          >
+            {{ cat.title }}
+          </v-chip>
+        </v-chip-group>
+      </v-card>
+    </v-col>
+  </v-row>
+     <!-- End Category section -->
+
+
+
+    <!-- Blog list section -->
     <div id="blog-list-section">
       <div v-if="blogList.length">
         <v-row class="blog-item"  v-for="(item, index) in blogList" :key="index">
-        <v-col cols="10">
+        
+        <v-col cols="9" class="mobile-item d-block d-sm-none">
+          <v-card flat :to="`/blog/${item.id}/${item.title}`">
+                                    <v-card 
+                                        class="ma-1">
+                                        <v-img :src="item.pic" />
+                                        <v-card-title>
+                                            <span class="gama-text-button" >
+                                                {{ item.title }}
+                                            </span>
+                                        </v-card-title>
+                                    </v-card>
+                                    <div class="gama-text-subtitle2">
+                                        <span v-html="truncateBody(item.body)"></span>
+                                        <nuxt-link :to="`/blog/${item.id}/${item.title}`">Read more</nuxt-link>
+                                    </div>
+                                </v-card>
+        </v-col>
+        <v-col cols="10" sm="10" class="d-none d-sm-block">
           <div class="d-flex">
           <nuxt-link :to="`/blog/${item.id}`">
             <v-img  :src="item.pic" />
@@ -57,13 +174,15 @@
             <div class="item-text">
               <nuxt-link :to="`/blog/${item.id}`">
               <h2 class="gama-text-button">{{ item.title }}</h2>
-              <p class="gama-text-subtitle2" v-html="item.body"></p>
+              <span class="gama-text-subtitle2" v-html="truncateBody(item.body)"></span>
+              <nuxt-link class="gama-text-subtitle2 read-more" :to="`/blog/${item.id}/${item.title}`">Read more</nuxt-link>
+              
             </nuxt-link>
 
             </div>
           </div>
         </v-col>
-        <v-col cols="2">
+        <v-col cols="3" sm=2>
           <div class="date-holder-container">
             <div class="date-holder">
               <div>
@@ -90,7 +209,7 @@
       </nuxt-link>
       <v-row class="blog-item" v-if="allDataLoaded == false && this.paginateStatus==false && this.blogList.length>2">
         <v-col cols="12">
-          <div class="d-flex">
+          <div class="d-none d-sm-flex">
             <div>
               <v-skeleton-loader type="image"></v-skeleton-loader>
             </div>
@@ -100,6 +219,9 @@
               ></v-skeleton-loader>
             </div>
           </div>
+          <div class="d-flex d-sm-none mobile-item">
+                <v-skeleton-loader class="mx-auto slide-loading" type="image"></v-skeleton-loader>
+           </div>
         </v-col>
       </v-row>
     </div>
@@ -109,7 +231,7 @@
     <div v-else>
       <v-row class="blog-item" v-for="i in 3">
         <v-col cols="12">
-          <div class="d-flex">
+          <div class="d-none d-sm-flex">
             <div>
               <v-skeleton-loader type="image"></v-skeleton-loader>
             </div>
@@ -118,6 +240,9 @@
                 type="card-heading,list-item-two-line"
               ></v-skeleton-loader>
             </div>
+          </div>
+          <div class="d-flex d-sm-none mobile-item">
+            <v-skeleton-loader class="mx-auto slide-loading" type="image"></v-skeleton-loader>
           </div>
         </v-col>
       </v-row>
@@ -134,6 +259,7 @@
 
     <div ref="loaderSection"></div>
     </div>
+    <!-- End blog list section -->
 
   </v-container>
 </template>
@@ -170,6 +296,13 @@ export default {
       paginateStatus: false,
       enablePaginateStatus: 10,
 
+      catVal:0,
+      blogCats:[],
+
+      intervalId: null, // Store the interval ID
+      slideIndex:0,
+      expand:true
+
       
  };
   },
@@ -205,14 +338,32 @@ export default {
       this.getBlogList();
     }, 800);
 
-    }
+    },
+
+     catVal(){
+      this.allDataLoaded=false;
+      this.paginateStatus=false;
+      this.printedYearArr=[];
+      this.pageNum=1;
+      this.blogList=[];
+      this.getBlogList();
+     },
+     slideIndex(val) {
+            this.expand = false;
+
+            setTimeout(() => {
+                this.expand = true;
+            }, 100)
+     }
   },
 
   mounted() {
     this.setupScrollListener();
     this.getFeaturedBlog(); //Get featured blog list
-    // this.getCate(); //Get category list
+    this.getCate(); //Get category list
     this.getBlogList(); //Get first blog list
+    this.handleAutoCycle();
+
   },
   methods: {
     getCate() {
@@ -223,7 +374,7 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          this.blogCats=response.data;
         })
         .catch((err) => {
           console.log(err);
@@ -267,7 +418,11 @@ export default {
     getBlogList() {
       var params = {};
       this.blogLoading = true;
+
       params.title=this.searchQuery;
+      if(this.catVal!=0){
+        params.cat=this.catVal;
+      }
       params.page = this.pageNum;
       params.perpage = this.pageSize;
       this.$axios
@@ -306,7 +461,30 @@ export default {
             if (this.pageNum > this.enablePaginateStatus) this.paginateStatus = true;
         });
     },
+    truncateBody(text) {
+            var cutLength = 200;
+            if (this.$vuetify.breakpoint.sm)
+                cutLength = 142;
+            else if (this.$vuetify.breakpoint.xs)
+                cutLength = 38;
+            return text.length > cutLength ? text.slice(0, cutLength) + '...' : text;
+    },
+    handleAutoCycle() {
+            this.intervalId = setInterval(() => {
+                if (this.slideIndex == (this.featuredItems.length - 1))
+                    this.slideIndex = 0;
+                else
+                    this.slideIndex++;
+
+            }, 5000);
+   },
+   stopInterval() {
+            clearInterval(this.intervalId); // Clear the interval using the interval ID
+   }
   },
+  beforeDestroy() {
+        this.stopInterval();
+    }
 };
 </script>
 
@@ -350,8 +528,8 @@ export default {
       position: relative;
 
       .date-holder {
-        width: 8.2rem;
-        height: 8.2rem;
+        width: 5.6rem;
+        height: 5.6rem;
         border-radius: 0.4rem;
         background: #ebebeb;
         display: flex;
@@ -362,6 +540,7 @@ export default {
 
         .gama-text-button {
           color: #24292f;
+          margin-bottom:0.4rem;
         }
 
         .gama-text-overline {
@@ -378,7 +557,7 @@ export default {
         margin: auto auto;
         transform: translateX(-50%);
         width: 1px;
-        height: 21.5rem;
+        height: 25.5rem;
         background-color: #ebebeb;
         z-index: 1;
       }
@@ -392,7 +571,7 @@ export default {
         margin: auto auto;
         transform: translateX(-50%);
         width: 2px;
-        height: 11.5rem;
+        height: 15.5rem;
         background-color: #fff;
         z-index: 1;
       }
@@ -432,6 +611,79 @@ export default {
         }
       }
     }
+
+
+    .mobile-item{
+        .slide-loading {
+
+          .v-skeleton-loader__image{
+            min-width: 24rem;
+            height:18rem;
+            position: relative;
+            border-radius: 0.6rem;
+           }
+        }
+
+        .v-card {
+            width: 24rem;
+            height: 18rem;
+            margin: auto auto;
+            position: relative;
+            border-radius: 0.6rem;
+
+
+            .v-card {
+                width: 24rem;
+                height: 18rem;
+
+                .v-card__title {
+                    border-radius: 0px 0px 6px 6px;
+                    background: rgba(36, 41, 47, 0.70);
+                    backdrop-filter: blur(7.5px);
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    left: 0;
+                    font-family: 'Inter';
+                    margin: 0 auto;
+                    color: #FFF;
+                    padding-top: .6rem !important;
+                    padding-bottom: .6rem;
+                    height: 4.9rem;
+                    max-height: 4.9rem;
+
+                    .gama-text-button {
+                        color: #FFF;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
+                }
+
+                .v-image{
+                  min-width: 24rem;
+                  height: 18rem;
+                }
+            }
+        }
+
+        .gama-text-subtitle2 {
+            margin: auto auto;
+            max-width: 18.2rem;
+            text-align: left;
+            color: #6E7781;
+
+
+
+            &>a {
+                color: #FFB600;
+
+            }
+        }
+    
+    }
   }
 
 
@@ -442,10 +694,14 @@ export default {
 
     .slider {
         .slide-loading {
-            width: 21.9rem;
+
+          .v-skeleton-loader__image{
+            width: 24rem;
+            height:18rem;
             margin-right: 1.6rem !important;
             position: relative;
             border-radius: 0.6rem;
+          }
         }
 
         .v-card {
@@ -553,6 +809,18 @@ export default {
             }
     }
   }
+
+  #category-section{
+    .v-chip{
+      padding: 0.8rem 2rem;
+      color: rgba(255, 255, 255, 0.87);
+      background: #A7B1C2!important;
+    }
+
+    .active-cate{
+      background: #FFB600!important;
+    }
+  }
 }
 
 
@@ -581,6 +849,9 @@ export default {
 
       .gama-text-subtitle2 {
         color: #6e7781;
+      }
+      .read-more{
+        color: #FFB600;
       }
     }
 
@@ -689,11 +960,13 @@ export default {
 
     .slider {
         .slide-loading {
+          .v-skeleton-loader__image{
             width: 34.8rem;
             height: 26.1rem;
             margin-right: 1.6rem !important;
             position: relative;
             border-radius: 0.6rem;
+          }
         }
 
         .v-card {
@@ -738,6 +1011,7 @@ export default {
 
 @media (min-width:960px){
   #blog-list-page {
+    
    
   .blog-item {
     padding-left:1.2rem;
@@ -766,6 +1040,10 @@ export default {
       .gama-text-subtitle2 {
         color: #6e7781;
       }
+
+      .read-more{
+        color: #FFB600;
+      }
     }
 
     .text-loader-section {
@@ -792,6 +1070,7 @@ export default {
 
         .gama-text-button {
           color: #24292f;
+          margin-bottom:1.4rem;
         }
 
         .gama-text-overline {
@@ -865,49 +1144,113 @@ export default {
   }
 
 
-  #featured-blog{
-    margin: 5rem auto 2.4rem auto;
-    height: 28.1rem;
+  #desktop-featured-blog{
+    margin: 0.7rem auto 6.4rem auto;
+    height: 50rem;
+
+    #list-section{
+      .gama-text-button{
+        color: #7F8A9C;
+        margin-bottom:1.6rem;
+
+      }
+      .featured-item{
+        margin-bottom:0.8rem;
+        display:flex;
+
+        .v-skeleton-loader__image{
+          width: 11.6rem;
+          height: 8.7rem;
+          margin-left:0.8rem;
+          border-radius: 0.6rem;
+        }
+        .v-skeleton-loader__card-heading{
+          width:15.2rem;
+          max-width:15.2rem;
+        }
+
+        .v-image{
+          width: 11.6rem;
+          height: 8.7rem;
+          border-radius: 0.6rem;
+      }
+
+      .item-text{
+        padding:0.8rem;
+
+        .gama-text-caption{
+          color: #24292F;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+        }
+      }
+      }
+    }
+
+    #preview-section{
+      border-radius: 1rem;
+      .v-skeleton-loader__image{
+          height:50rem;
+          min-height:50rem;
+          max-height:50rem;
+          border-radius:1rem;
+        }
+      .v-card{
+        height: 50rem;
+        max-height: 50rem;
+        min-height: 50rem;
+        
+        border-radius: 1rem;
+
+        
+
+        .v-card{
+          border-radius:1rem;
+
+        .v-card__title {
+                    border-radius: 0px 0px 6px 6px;
+                    background: rgba(36, 41, 47, 0.70);
+                    backdrop-filter: blur(7.5px);
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    left: 0;
+                    font-family: 'Inter';
+                    margin: 0 auto;
+                    color: #FFF;
+                    padding-top: .6rem !important;
+                    padding-bottom: .6rem;
+                    height: 6.4rem;
+                    max-height: 6.4rem;
+                    border-radius:0 0 1rem 1rem;
+
+                    .gama-text-h6 {
+                        color: #FFF;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
+                }
+
+        .v-image{
+          max-height: 50rem;
+          min-height: 50rem;
+          border-radius:1rem;
+          
+
+        }
+        }
+
+      }
+    }
 
    
 
-    .slider {
-        .slide-loading {
-            width: 34.8rem;
-            height: 26.1rem;
-            margin-right: 1.6rem !important;
-            position: relative;
-            border-radius: 0.6rem;
-        }
-
-        .v-card {
-            width: 34.8rem;
-             height: 26.1rem;
-            max-height: 26.1rem;
-            
-
-
-            .v-card {
-              height: 26.1rem;
-
-
-                .v-card__title {
-                    padding-top: 1.16rem !important;
-                    padding-bottom: 1.16rem;
-                    height: 7.25rem;
-                    max-height: 7.25rem;
-
-                  
-                }
-
-              .v-image{
-                width: 34.8rem;
-                 height: 26.1rem;
-              }  
-            }
-        }
-
-    }
   }
 
   #blog-search{
@@ -917,6 +1260,13 @@ export default {
 
     }
   }
+  }
+}
+
+@media(min-width:1264px){
+  #blog-list-page{
+    width:72%;
+    max-width:72%;
   }
 }
 </style>
