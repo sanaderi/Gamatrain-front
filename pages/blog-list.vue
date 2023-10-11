@@ -40,7 +40,7 @@
           </div>
          </v-row>
         </div>
-        <div v-else v-for="(item, n) in featuredItems" :key="n" class="featured-item">
+        <div v-else v-for="(item, n) in featuredItems.slice(0,5)" :key="n" class="featured-item">
           <nuxt-link :to="`/blog/${item.id}`">
             <v-img  :src="item.pic" />
           </nuxt-link>
