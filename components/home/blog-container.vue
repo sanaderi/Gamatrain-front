@@ -7,8 +7,8 @@
                         <h2 class="gama-text-h4" id="main-title ">Blog</h2>
                     </v-col>
                     <v-col cols="6" class="text-right">
-                        <nuxt-link to="/blog-list"  class="gama-default-btn d-none d-md-inline">Go to blog</nuxt-link>
-                        <v-btn to="/blog-list" text class="d-inline d-md-none seeAllBtn">
+                        <nuxt-link to="/blog"  class="gama-default-btn d-none d-md-inline">Go to blog</nuxt-link>
+                        <v-btn to="/blog" text class="d-inline d-md-none seeAllBtn">
                             See all
                             <v-icon>mdi-chevron-right</v-icon>
                         </v-btn>
@@ -23,7 +23,7 @@
 
 
                             <v-slide-item v-else v-for="(item, n) in slideItmes" :key="n">
-                                <v-card flat :to="`/blog/${item.id}/${item.title}`">
+                                <v-card flat :to="`/blog/${item.id}/${$slugGenerator.convert(item.title)}`">
                                     <v-card @mouseover="toggleHover('enter', n)" @mouseleave="toggleHover('leave', n)"
                                         class="ma-1">
                                         <v-img :src="item.pic" />
@@ -39,7 +39,7 @@
                                     </v-card>
                                     <div class="gama-text-subtitle2">
                                         <span v-html="truncateBody(item.body)"></span>
-                                        <nuxt-link :to="`/blog/${item.id}/${item.title}`">Read more</nuxt-link>
+                                        <nuxt-link :to="`/blog/${item.id}/${$slugGenerator.convert(item.title)}`">Read more</nuxt-link>
                                     </div>
                                 </v-card>
                             </v-slide-item>
@@ -60,7 +60,7 @@ export default {
             model: null,
             isHovered: [],
             slideItmes: [],
-            isLoading: false,
+            isLoading: true,
             isDragging: false,
             startX: 0,
             currentX: 0

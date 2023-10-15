@@ -10,32 +10,36 @@
             <v-chip
               :x-small="$vuetify.breakpoint.xs"
               :small="$vuetify.breakpoint.sm"
-              to="/blog-list"
+              :to="`/blog?cat=${contentData.cat}`"
             >
               {{ contentData.cat_title }}
             </v-chip>
 
-            <v-img id="blog-img" :src="contentData.pic" :alt="contentData.title" />
+            <img id="blog-img" :src="contentData.pic" :alt="contentData.title" />
+            <figcaption id="general-data-footer">
+                <div id="autor-holder">
+                  <img :src="contentData.avatar" />
+                  <span class="gama-text-overline"
+                    >{{ contentData.first_name }} {{ contentData.last_name }}</span
+                  >
+                </div>
+                <div id="date-holder">
+                  <v-icon @click="share()" class="pr-6"> mdi-share-variant </v-icon>
+                  <v-icon> mdi-calendar-blank-outline </v-icon>
+                  <span class="gama-text-overline">
+                    {{ $moment(contentData.subdate).format("YYYY-MM-DD") }}
+                  </span>
+                </div>
+            </figcaption>
           </div>
         </div>
+        
+        
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
         <div id="blog-body">
-          <div id="general-data-footer">
-            <div>
-              <div id="autor-holder">
-                <img :src="contentData.avatar" />
-                <span class="gama-text-overline"
-                  >{{ contentData.first_name }} {{ contentData.last_name }}</span
-                >
-              </div>
-              <div id="date-holder">
-                <v-icon @click="share()" class="pr-6"> mdi-share-variant </v-icon>
-                <v-icon> mdi-calendar-blank-outline </v-icon>
-                <span class="gama-text-overline">
-                  {{ $moment(contentData.subdate).format("YYYY-MM-DD") }}
-                </span>
-              </div>
-            </div>
-          </div>
           <div id="blog-describe" v-html="contentData.body"></div>
 
           <div id="blog-tags" v-if="contentData.tags">
@@ -116,8 +120,9 @@ export default {
 
     #general-data {
       min-height: 25rem;
+      max-height: 25rem;
       flex-shrink: 0;
-      padding: 3.2rem 2.4rem 14.2rem 1.4rem;
+      padding: 3.2rem 1.2rem 4.2rem 1.2rem;
       border-radius: 1rem;
       background: rgba(167, 177, 194, 0.1);
       position: relative;
@@ -136,10 +141,8 @@ export default {
       }
 
       #blog-img {
-        height: 23.4rem;
-        width: 92.85%;
-        position: absolute;
-        bottom: -8.5rem;
+        height: auto;
+        width: 100%;
         left: 0;
         right: 0;
         margin: auto;
@@ -149,7 +152,7 @@ export default {
   }
 
   #general-data-footer {
-    padding: 0.8rem 2.4rem 2.9rem 2.4rem;
+    padding: 0.8rem .2rem 2.9rem .2rem;
     width: 100%;
     height: 4.4rem;
     margin-bottom: 3.4rem;
@@ -320,10 +323,11 @@ export default {
 @media (min-width: 600px) {
   #blog {
     #general-data-holder {
-      padding-bottom: 36rem;
+      padding-bottom: 16rem;
 
       #general-data {
-        min-height: 22rem;
+        min-height: 34rem;
+        max-height: 34rem;
         flex-shrink: 0;
         padding: 2.4rem 1.2rem 17.4rem 1.2rem;
         border-radius: 1rem;
@@ -341,12 +345,8 @@ export default {
         }
 
         #blog-img {
-          height: 50.9rem;
-          width: 95.96%;
-          position: absolute;
-          bottom: -36.5rem;
-          left: 0;
-          right: 0;
+          height: auto;
+          width: 100%;
           margin: auto;
           border-radius: 1rem;
         }
@@ -354,7 +354,7 @@ export default {
     }
 
     #general-data-footer {
-      padding: 0.8rem 1.6rem 2.9rem 1.6rem;
+      padding: 0.8rem 0.2rem 2.9rem 0.2rem;
 
       width: 100%;
       height: 4.4rem;
@@ -391,7 +391,8 @@ export default {
     #blog-describe {
       margin-bottom: 6.4rem;
       width: 98%;
-      margin: auto auto 6.4rem auto;
+      display:block;
+      margin: auto auto 6.8rem auto;
 
       > h2 {
         font-family: Inter;
@@ -509,11 +510,12 @@ export default {
 @media (min-width: 960px) {
   #blog {
     #general-data-holder {
-      padding-bottom: 23rem;
+      padding-bottom: 18rem;
 
       #general-data {
-        min-height: 49rem;
-        padding: 4.8rem 1.6rem 34.1rem 1.6rem;
+        min-height: 44rem;
+        max-height: 44rem;
+        padding: 4.8rem 1.6rem 4.8rem 1.6rem;
 
         .gama-text-h1 {
           color: #24292f;
@@ -537,15 +539,15 @@ export default {
         }
 
         #blog-img {
-          width: 95.96%;
-          height: 57.1rem;
+          width: 100%;
+          height: auto;
           bottom: -23rem;
         }
       }
     }
 
     #general-data-footer {
-      padding: 1.6rem 1rem 2.9rem 1rem;
+      padding: 0.8rem 0 2.9rem 0;
 
       width: 97%;
       margin: auto auto 6.4rem auto;

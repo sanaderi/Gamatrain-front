@@ -10,6 +10,13 @@ const loadImg = {
   }
 }
 
+const slugGenerator={
+  name:'slugGenerator',
+  convert(title){
+    return title.replace(/ /g, '-').toLowerCase();
+  }
+}
+
 
 const loadAvatar= {
   name:'loadAvatar',
@@ -92,6 +99,7 @@ export default ({ $auth,app}, inject) => {
   inject('loadAvatar', loadAvatar);
   inject('testLevel',testLevel);
   inject('timeAgo',timeAgo);
+  inject('slugGenerator',slugGenerator);
   // inject('encodeURI',encodeURI);
   // inject('urlencodeFormData',urlencodeFormData);
 
