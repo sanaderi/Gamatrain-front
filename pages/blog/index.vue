@@ -391,7 +391,7 @@
       },
       getFeaturedBlog(){
         var params = {
-          featured:0
+          featured:1
         };
         this.$axios.$get("/api/v1/blogs/search", { params })
         .then(response=>{
@@ -1286,7 +1286,7 @@
 
           .active-img{
             opacity: 1!important;
-            transition: opacity 1s;        
+            transition: opacity 1s ease;        
 
           }
           }

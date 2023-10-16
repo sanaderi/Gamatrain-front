@@ -8,7 +8,60 @@ html {
 
 
 
+//Customize vuetify button
+.v-btn:not(.v-btn--round).v-size--large.gama-btn {
+  .v-btn__content {
+    color: #24292F;
+    font-family: Inter;
+    font-size: 2rem!important;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+}
 
+.v-btn:not(.v-btn--round).v-size--default.gama-btn {
+  .v-btn__content {
+    color: #24292F;
+    font-family: Inter;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+}
+
+.v-btn:not(.v-btn--round).v-size--small.gama-btn {
+  .v-btn__content {
+    color: #24292F;
+    font-family: Inter;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+}
+
+
+
+.v-btn:not(.v-btn--round).v-size--x-small.gama-btn {
+  .v-btn__content {
+    color: #24292F;
+    font-family: Inter;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+}
+
+
+
+//End customize vuetify button
 
 
 
@@ -23,12 +76,12 @@ html {
 }
 
 .gama-text-h2 {
-  font-family: Inter, sans-serif!important;
+  font-family: Inter, sans-serif !important;
   color: #000;
-  font-size: 3rem!important;
-  font-style: normal!important;
-  font-weight: 700!important;
-  line-height: normal!important;
+  font-size: 3rem !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: normal !important;
 
 }
 
@@ -110,9 +163,9 @@ html {
 .gama-text-button {
   font-family: Inter, sans-serif !important;
   color: #000;
-  font-size: 1.4rem!important;
-  font-style: normal!important;
-  font-weight: 600!important;
+  font-size: 1.4rem !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
   line-height: normal;
 }
 
@@ -2283,10 +2336,10 @@ body {
   .gama-text-h2 {
     font-family: Inter, sans-serif !important;
     color: #000;
-    font-size: 4rem!important;
-    font-style: normal!important;
-    font-weight: 700!important;
-    line-height: normal!important;
+    font-size: 4rem !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    line-height: normal !important;
 
   }
 
@@ -2495,10 +2548,10 @@ body {
   .gama-text-h2 {
     color: #354053;
     font-family: Inter, sans-serif !important;
-    font-size: 4.4rem!important;
-    font-style: normal!important;
-    font-weight: 700!important;
-    line-height: normal!important;
+    font-size: 4.4rem !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    line-height: normal !important;
   }
 
   .gama-text-h3 {
@@ -2579,10 +2632,10 @@ body {
   .gama-text-button {
     color: #000;
     font-family: Inter, sans-serif !important;
-    font-size: 1.8rem!important;
-    font-style: normal!important;
-    font-weight: 600!important;
-    line-height: normal!important;
+    font-size: 1.8rem !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    line-height: normal !important;
   }
 
 

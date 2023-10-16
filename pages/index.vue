@@ -18,9 +18,12 @@
                         <p class="gama-text-subtitle1">
                             Discover Your Full Potential with AI-based Education
                         </p>
-                        <nuxt-link to="/smart-learning" class="gama-primary-btn">
+                        <v-btn
+                          :large="$vuetify.breakpoint.mdAndUp"
+                          :small="$vuetify.breakpoint.xs"
+                         to="/smart-learning" rounded class="primary gama-btn">
                             Read about it
-                        </nuxt-link>
+                        </v-btn>
                         <img id="img-bottom" alt="AI Learn" src="/images/ai-learn-bg2.png" />
                     </v-card>
                 </v-col>
@@ -76,7 +79,10 @@
                         information. Just
                         filter and GamaTrain will find it for you.
                     </p>
-                    <nuxt-link class="gama-primary-btn" to="/school-service">Learn more</nuxt-link>
+                    <v-btn
+                     :large="$vuetify.breakpoint.mdAndUp"
+                     :small="$vuetify.breakpoint.xs"
+                     rounded class="primary gama-btn" to="/school-service">Learn more</v-btn>
                 </v-col>
             </v-row>
 
@@ -102,7 +108,10 @@
                             just a few clicks!</h2>
                     </v-col>
                     <v-col cols="12" sm="12" md="12" class="text-center ">
-                        <nuxt-link to="/earn-money" class="gama-primary-btn">Earn money</nuxt-link>
+                        <v-btn rounded
+                         :large="$vuetify.breakpoint.mdAndUp"
+                         :small="$vuetify.breakpoint.xs"
+                         to="/earn-money" class="primary gama-btn">Earn money</v-btn>
                     </v-col>
                 </v-row>
             </v-container>
@@ -269,7 +278,7 @@ export default {
             left: 0;
         }
 
-        .gama-primary-btn {
+        .gama-btn {
             margin-top: 1.5rem;
             color: #24292F;
         }
@@ -348,7 +357,7 @@ export default {
 
     }
 
-    .gama-primary-btn {
+    .gama-btn {
         margin-top: 2.4rem;
 
     }
@@ -395,16 +404,6 @@ export default {
             margin-top: 2rem;
 
 
-
-            .v-btn__content {
-                color: #24292F;
-                font-size: 1.4rem;
-                font-style: normal;
-                font-weight: 700;
-                line-height: normal;
-                letter-spacing: 0.0125rem;
-            }
-
         }
 
 
@@ -435,7 +434,7 @@ export default {
                 height: 16.3rem;
             }
 
-            .gama-primary-btn {
+            .gama-btn {
                 margin-top: 2.4rem;
                 color: #24292F;
             }
@@ -502,7 +501,7 @@ export default {
                 height: 19rem;
             }
 
-            .gama-primary-btn {
+            .gama-btn {
                 margin-top: 2.4rem;
                 color: #24292F;
             }
