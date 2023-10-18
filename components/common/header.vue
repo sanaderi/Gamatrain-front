@@ -1403,9 +1403,7 @@ export default {
     }
   }
 
-  .v-badge__badge {
-    color: #ffb300 !important;
-  }
+
 }
 
 @media (min-width: 960px) {

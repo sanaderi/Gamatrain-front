@@ -62,13 +62,13 @@ export default {
     return {
       active_tab: 0,
       content_statistics: {
-        azmoon: '',
-        dars: '',
-        learnfiles: '',
-        question: '',
-        test: '',
-        tutor: '',
-        tutorial: '',
+        azmoon: '--',
+        dars: '--',
+        learnfiles: '--',
+        question: '--',
+        test: '--',
+        tutor: '--',
+        tutorial: '--',
       }
     }
   },

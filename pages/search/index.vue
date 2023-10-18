@@ -2,26 +2,35 @@
   <div>
     <!--Mobile filter-->
     <v-row justify="center" class="d-block d-md-none">
-      <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition ">
+      <v-dialog
+        v-model="dialog"
+        fullscreen
+        hide-overlay
+        transition="dialog-bottom-transition "
+      >
         <template v-slot:activator="{ on, attrs }">
-          <v-btn v-bind="attrs" v-on="on"
-                 class="d-block d-md-none"
-                 min-width="40"
-                 fixed bottom right style="z-index:10 "
-                 x-large color="teal" dark rounded
+          <v-btn
+            v-bind="attrs"
+            v-on="on"
+            class="d-block d-md-none"
+            min-width="40"
+            fixed
+            bottom
+            right
+            style="z-index: 10"
+            x-large
+            color="teal"
+            dark
+            rounded
           >
-            <v-icon>
-              mdi-filter
-            </v-icon>
+            <v-icon> mdi-filter </v-icon>
             <v-slide-x-reverse-transition>
-              <span v-show="expandFilterMenu" class="text-h6">
-                filter
-              </span>
+              <span v-show="expandFilterMenu" class="text-h6"> filter </span>
             </v-slide-x-reverse-transition>
           </v-btn>
         </template>
         <v-card>
-          <div style="position: sticky;top: 0;left: 0;right: 0;z-index: 10">
+          <div style="position: sticky; top: 0; left: 0; right: 0; z-index: 10">
             <v-toolbar class="filter-btn-header">
               <v-toolbar-items>
                 <v-btn class="text-h5 font-weight-bold" text @click="dialog = false">
@@ -35,10 +44,10 @@
             </v-toolbar>
           </div>
           <v-card-text>
-            <search-filter ref="side_filter" class="mx-3"/>
+            <search-filter ref="side_filter" class="mx-3" />
           </v-card-text>
-          <v-card-actions style="position: sticky;bottom: 0;left: 0;right: 0">
-            <v-btn medium block class="filter-show-result mr-4" @click="dialog=!dialog">
+          <v-card-actions style="position: sticky; bottom: 0; left: 0; right: 0">
+            <v-btn medium block class="filter-show-result mr-4" @click="dialog = !dialog">
               show result ({{ result_count }})
             </v-btn>
           </v-card-actions>
@@ -46,47 +55,50 @@
       </v-dialog>
     </v-row>
 
-
     <v-divider></v-divider>
     <!--     Start:mobile header-->
-    <search-box class="d-block d-md-none mx-3 my-2"/>
+    <search-box class="d-block d-md-none mx-3 my-2" />
     <!--     End: mobile header-->
-
 
     <!-- Start  -->
     <section class="search-page">
       <v-container>
         <v-row>
-          <v-col lg="3" class="d-none d-md-block">
-            <v-card flat color="#f5f5f5" style="position: sticky;top:1rem;">
+          <v-col md="3" lg="3" class="d-none d-md-block">
+            <v-card flat color="#f5f5f5" style="position: sticky; top: 1rem">
               <v-card-text>
-                <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs"/>
+                <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs" />
               </v-card-text>
             </v-card>
           </v-col>
 
-
           <v-col lg="9" md="9" sm="12" class="search-contents px-0">
-            <v-breadcrumbs :items="breadcrumbs" class="search-breadcrumb d-none d-md-block">
+            <v-breadcrumbs
+              :items="breadcrumbs"
+              class="search-breadcrumb d-none d-md-block"
+            >
               <template v-slot:divider>
                 <v-icon>mdi-chevron-right</v-icon>
               </template>
             </v-breadcrumbs>
 
             <!-- Search tabs -->
-            <Tabs style="position:sticky;top: 0;z-index: 5" ref="content_tabs"/>
+            <Tabs style="position: sticky; top: 0; z-index: 5" ref="content_tabs" />
             <!-- End search tabs -->
 
-            <div class="text-center" v-if="page_loading===false && items.length===0">
+            <div class="text-center" v-if="page_loading === false && items.length === 0">
               Oops! no data found
             </div>
             <div v-else>
-              <Paper v-if="$route.query.type==='test'" :items="items"/>
-              <Multimedia v-else-if="$route.query.type==='learnfiles'" :items="items"/>
-              <QuestionAnswer v-else-if="$route.query.type==='question'" :items="items"/>
-              <Exam v-else-if="$route.query.type==='azmoon'" :items="items"/>
-              <Tutorial v-else-if="$route.query.type==='dars'" :items="items"/>
-              <Tutor v-else-if="$route.query.type==='tutor'" :items="items"/>
+              <Paper v-if="$route.query.type === 'test'" :items="items" />
+              <Multimedia v-else-if="$route.query.type === 'learnfiles'" :items="items" />
+              <QuestionAnswer
+                v-else-if="$route.query.type === 'question'"
+                :items="items"
+              />
+              <Exam v-else-if="$route.query.type === 'azmoon'" :items="items" />
+              <Tutorial v-else-if="$route.query.type === 'dars'" :items="items" />
+              <Tutor v-else-if="$route.query.type === 'tutor'" :items="items" />
             </div>
             <v-row v-show="page_loading">
               <v-col cols="12" class="text-center">
@@ -101,13 +113,10 @@
             </v-row>
           </v-col>
         </v-row>
-
       </v-container>
     </section>
   </div>
-
 </template>
-
 
 <script>
 import Tabs from "@/components/common/tabs.vue";
@@ -124,7 +133,7 @@ import searchBox from "@/components/common/search-box";
 export default {
   auth: false,
   name: "searchPage",
-  layout: 'search_layout',
+  layout: "search_layout",
 
   components: {
     Tutor,
@@ -136,31 +145,24 @@ export default {
     Multimedia,
     Paper,
     Tutorial,
-    searchBox
+    searchBox,
   },
 
-  async asyncData({query}) {
-    var page_title = '';
-    if (query.type === 'learnfiles')
-      page_title = 'Multimedia';
-    else if (query.type === 'test')
-      page_title = 'Papers';
-    else if (query.type === 'question')
-      page_title = 'Q & A';
-    else if (query.type === 'azmoon')
-      page_title = 'Online exam';
-    else if (query.type === 'dars')
-      page_title = 'Tutorial';
-    else if (query.type === 'tutor')
-      page_title = 'Teacher';
+  async asyncData({ query }) {
+    var page_title = "";
+    if (query.type === "learnfiles") page_title = "Multimedia";
+    else if (query.type === "test") page_title = "Papers";
+    else if (query.type === "question") page_title = "Q & A";
+    else if (query.type === "azmoon") page_title = "Online exam";
+    else if (query.type === "dars") page_title = "Tutorial";
+    else if (query.type === "tutor") page_title = "Teacher";
 
-    return {page_title};
-
+    return { page_title };
   },
   head() {
     return {
       title: this.page_title,
-    }
+    };
   },
   data() {
     return {
@@ -176,23 +178,27 @@ export default {
 
       all_files_loaded: false,
 
-      expandFilterMenu: true
-    }
+      expandFilterMenu: true,
+    };
   },
 
-
   mounted() {
-    this.getContentList();
+    if (!this.$route.query.type) {
+      const query = { type: "test" };
+      this.page_title="Papers";
+      this.$router.replace({ query: query });
+      this.getContentList();
+    } else this.getContentList();
   },
 
   created() {
     if (process.client) {
-      window.addEventListener('scroll', this.scroll);
+      window.addEventListener("scroll", this.scroll);
     }
   },
   destroyed() {
     if (process.client) {
-      window.removeEventListener('scroll', this.scroll);
+      window.removeEventListener("scroll", this.scroll);
     }
   },
 
@@ -202,23 +208,16 @@ export default {
       this.items = [];
       this.all_files_loaded = false;
 
-      if (this.$route.query.type === 'learnfiles')
-        this.page_title = 'Multimedia';
-      else if (this.$route.query.type === 'test')
-        this.page_title = 'Paper';
-      else if (this.$route.query.type === 'question')
-        this.page_title = 'Q & A';
-      else if (this.$route.query.type === 'azmoon')
-        this.page_title = 'Online exam';
-      else if (this.$route.query.type === 'dars')
-        this.page_title = 'Tutorial';
-      else if (this.$route.query.type === 'tutor')
-        this.page_title = 'Teacher';
+      if (this.$route.query.type === "learnfiles") this.page_title = "Multimedia";
+      else if (this.$route.query.type === "test") this.page_title = "Paper";
+      else if (this.$route.query.type === "question") this.page_title = "Q & A";
+      else if (this.$route.query.type === "azmoon") this.page_title = "Online exam";
+      else if (this.$route.query.type === "dars") this.page_title = "Tutorial";
+      else if (this.$route.query.type === "tutor") this.page_title = "Teacher";
 
       this.$refs.side_filter.setBreadcrumbInfo();
 
       this.getContentList();
-
     },
     "$route.query.section"(val) {
       this.page = 1;
@@ -226,30 +225,22 @@ export default {
       this.all_files_loaded = false;
 
       //Fire when click on tag in content card, set section value on side filter
-      if (val > 0)
-        this.$refs.side_filter.section_val = val;
-      else
-        this.$refs.side_filter.section_val = 0;
+      if (val > 0) this.$refs.side_filter.section_val = val;
+      else this.$refs.side_filter.section_val = 0;
       //End fire when click on tag in content card, set section value on side filter
-
 
       this.$refs.side_filter.setBreadcrumbInfo();
       this.getContentList();
-
     },
     "$route.query.base"(val) {
       this.page = 1;
       this.items = [];
       this.all_files_loaded = false;
 
-
       //Fire when click on tag in content card, set base value on side filter
-      if (val > 0)
-        this.$refs.side_filter.base_val = val;
-      else
-        this.$refs.side_filter.base_val = 0;
+      if (val > 0) this.$refs.side_filter.base_val = val;
+      else this.$refs.side_filter.base_val = 0;
       //Fire when click on tag in content card, set base value on side filter
-
 
       this.$refs.side_filter.setBreadcrumbInfo();
 
@@ -260,14 +251,10 @@ export default {
       this.items = [];
       this.all_files_loaded = false;
 
-
       //Fire when click on tag in content card, set lesson value on side filter
-      if (val > 0)
-        this.$refs.side_filter.lesson_val = val;
-      else
-        this.$refs.side_filter.lesson_val = 0;
+      if (val > 0) this.$refs.side_filter.lesson_val = val;
+      else this.$refs.side_filter.lesson_val = 0;
       //End click on tag in content card
-
 
       //Set breadcrumbs info
       this.$refs.side_filter.setBreadcrumbInfo();
@@ -336,7 +323,6 @@ export default {
       //End fire when click on tag in content card, set state value on side filter
 
       this.getContentList();
-
     },
     "$route.query.city"(val) {
       this.page = 1;
@@ -344,15 +330,12 @@ export default {
       this.all_files_loaded = false;
 
       //Fire when click on tag in content card, set city value on side filter
-      if (val > 0)
-        this.$refs.side_filter.city_val = val;
-      else
-        this.$refs.side_filter.city_val = 0;
+      if (val > 0) this.$refs.side_filter.city_val = val;
+      else this.$refs.side_filter.city_val = 0;
       //End fire when click on tag in content card, set section value on side filter
 
       this.getContentList();
     },
-
   },
   methods: {
     // Get content list
@@ -374,40 +357,47 @@ export default {
           a_file: this.$route.query.a_file,
         };
 
-        if (this.$route.query.type == 'tutor') {
+        if (this.$route.query.type == "tutor") {
           params.state = this.$route.query.state;
           params.city = this.$route.query.city;
         }
-        await this.$axios.$get('/api/v1/search',
-          {
-            params: params
-          }).then(response => {
-          this.items.push(...response.data.list);
-          this.result_count = response.data.num;
-          this.$refs.content_tabs.content_statistics = response.data.types_stats;
-          if (response.data.list.length === 0)//For terminate auto load request
-            this.all_files_loaded = true;
-        }).catch(err => {
-
-        }).finally(() => {
-          this.page_loading = false;
-        });
+        await this.$axios
+          .$get("/api/v1/search", {
+            params: params,
+          })
+          .then((response) => {
+            this.items.push(...response.data.list);
+            this.result_count = response.data.num;
+            this.$refs.content_tabs.content_statistics = response.data.types_stats;
+            if (response.data.list.length === 0)
+              //For terminate auto load request
+              this.all_files_loaded = true;
+          })
+          .catch((err) => {})
+          .finally(() => {
+            this.page_loading = false;
+          });
       }
     },
-    scroll() {//For infinite loading
+    scroll() {
+      //For infinite loading
 
       //Section for control filter menu button on mobile device
-      if (window.scrollY > 1000)
-        this.expandFilterMenu = false;
-      else
-        this.expandFilterMenu = true;
+      if (window.scrollY > 1000) this.expandFilterMenu = false;
+      else this.expandFilterMenu = true;
       //End section for control filter menu button on mobile device
-
 
       window.onscroll = () => {
         //Scroll position
-        var scrollPosition = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop) + window.innerHeight + 50;
-        let bottomOfWindow = scrollPosition >= document.documentElement.offsetHeight
+        var scrollPosition =
+          Math.max(
+            window.pageYOffset,
+            document.documentElement.scrollTop,
+            document.body.scrollTop
+          ) +
+          window.innerHeight +
+          50;
+        let bottomOfWindow = scrollPosition >= document.documentElement.offsetHeight;
 
         //Avoid the number of requests
         if (this.timer) {
@@ -419,19 +409,14 @@ export default {
         if (bottomOfWindow && this.all_files_loaded === false) {
           this.page_loading = true;
           this.timer = setTimeout(() => {
-            this.page++
+            this.page++;
             this.getContentList();
-          }, 800)
+          }, 800);
         }
-      }
+      };
     },
-
-
-  }
-
-}
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <div
-      class="content-search"
-    >
+  <div id="search-page-filter">
+    <div class="content-search">
       <!--Selected filter, user can disable any filter from here-->
-      <div v-if="enabledAppliedFilter()">
-        <p class="my-2 mb-md-2 font-size-16 font-weight-bold black--text">Applied filter</p>
-        <v-divider class="mb-1"/>
+      <div v-if="enabledAppliedFilter()" id="chip-container">
+        <p class="my-2 mb-md-2 font-size-16 font-weight-bold black--text">
+          Applied filter
+        </p>
+        <v-divider class="mb-1" />
         <v-chip
           v-if="applied_filter.select_section_title"
           class="mt-1"
@@ -15,7 +15,9 @@
           outlined
           @click:close="section_val = 0"
         >
-          {{ applied_filter.select_section_title }}
+          <span>
+            {{ applied_filter.select_section_title }}
+          </span>
         </v-chip>
         <v-chip
           v-if="applied_filter.select_base_title"
@@ -25,7 +27,9 @@
           outlined
           @click:close="base_val = 0"
         >
-          {{ applied_filter.select_base_title }}
+          <span>
+            {{ applied_filter.select_base_title }}
+          </span>
         </v-chip>
         <v-chip
           v-if="applied_filter.select_lesson_title"
@@ -35,7 +39,9 @@
           outlined
           @click:close="lesson_val = 0"
         >
-          {{ applied_filter.select_lesson_title }}
+          <span>
+            {{ applied_filter.select_lesson_title }}
+          </span>
         </v-chip>
         <v-chip
           v-if="applied_filter.select_topic_title"
@@ -45,7 +51,9 @@
           outlined
           @click:close="topic_val = 0"
         >
-          {{ applied_filter.select_topic_title }}
+          <span>
+            {{ applied_filter.select_topic_title }}
+          </span>
         </v-chip>
         <v-chip
           v-if="applied_filter.select_file_type_title"
@@ -55,7 +63,9 @@
           outlined
           @click:close="file_type_val = 0"
         >
-          {{ applied_filter.select_file_type_title }}
+          <span>
+            {{ applied_filter.select_file_type_title }}
+          </span>
         </v-chip>
         <v-chip
           v-if="applied_filter.select_test_level_title"
@@ -65,402 +75,344 @@
           outlined
           @click:close="test_level_val = 0"
         >
-          {{ applied_filter.select_test_level_title }}
+          <span>
+            {{ applied_filter.select_test_level_title }}
+          </span>
         </v-chip>
 
-        <v-divider class="my-3"/>
+        <v-divider class="my-3" />
       </div>
       <!--End select filter  -->
 
-    <v-expansion-panels flat v-model="panel">
-      <v-expansion-panel>
-        <v-expansion-panel-header color="#f5f5f5" class="px-0 font-size-16 font-weight-bold">
-          Curriculum
-        </v-expansion-panel-header>
-        <v-expansion-panel-content  color="#f5f5f5">
+      <v-expansion-panels flat v-model="panel">
+        <v-expansion-panel>
+          <v-expansion-panel-header
+            color="#f5f5f5"
+            class="px-0 font-size-16 font-weight-bold"
+          >
+            Curriculum
+          </v-expansion-panel-header>
+          <v-expansion-panel-content color="#f5f5f5">
             <v-row>
-              <v-col
-                cols="12" class="content-box">
-                <v-radio-group
-                  v-model="section_val"
-                  class="mt-0 pr-0"
-                  column
-                >
+              <v-col cols="12" class="content-box">
+                <v-radio-group v-model="section_val" class="mt-0 pr-0" column>
+                  <v-radio label="All" color="red" :value="0"> </v-radio>
                   <v-radio
-                    label="All"
+                    v-for="item in filter.section_list"
+                    :key="item.id"
+                    :label="item.title"
                     color="red"
-                    :value="0"
+                    :value="item.id"
                   >
                   </v-radio>
-                  <v-radio v-for="item in filter.section_list"
-                           :key="item.id"
-                           :label="item.title"
-                           color="red"
-                           :value="item.id"
-                  >
-                  </v-radio>
-
                 </v-radio-group>
               </v-col>
             </v-row>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
 
-      <!--Grade filter-->
-      <v-expansion-panel :disabled="!filter.base_list.length">
-        <v-expansion-panel-header
-          color="#f5f5f5"
-          class="px-0 font-weight-bold font-size-16"
-        >Grade</v-expansion-panel-header>
-        <v-expansion-panel-content
-          color="#f5f5f5"
-        >
-          <v-row
-            align="center"
-            justify="center"
+        <!--Grade filter-->
+        <v-expansion-panel :disabled="!filter.base_list.length">
+          <v-expansion-panel-header
+            color="#f5f5f5"
+            class="px-0 font-weight-bold font-size-16"
+            >Grade</v-expansion-panel-header
           >
-            <v-col cols="12"
-                   class="content-box" >
-              <v-radio-group
-                v-model="base_val"
-                @change="changeBaseVal"
-                class="mt-0 pr-0"
-                column
-              >
-                <v-radio
-                  label="All"
-                  color="red"
-                  :value="0"
+          <v-expansion-panel-content color="#f5f5f5">
+            <v-row align="center" justify="center">
+              <v-col cols="12" class="content-box">
+                <v-radio-group
+                  v-model="base_val"
+                  @change="changeBaseVal()"
+                  class="mt-0 pr-0"
+                  column
                 >
-                </v-radio>
-                <v-radio v-for="item in filter.base_list"
-                         :key="item.id"
-                         :label="item.title"
-                         color="red"
-                         :value="item.id"
-                >
-                </v-radio>
+                  <v-radio label="All" color="red" :value="0"> </v-radio>
+                  <v-radio
+                    v-for="item in filter.base_list"
+                    :key="item.id"
+                    :label="item.title"
+                    color="red"
+                    :value="item.id"
+                  >
+                  </v-radio>
+                </v-radio-group>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
 
-              </v-radio-group>
-            </v-col>
-
-
-          </v-row>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-
-      <!--Lesson filter-->
-      <v-expansion-panel :disabled="!filter.lesson_list.length">
-        <v-expansion-panel-header
-          color="#f5f5f5"
-          class="px-0 font-weight-bold font-size-16">Subject</v-expansion-panel-header>
-        <v-expansion-panel-content
-          color="#f5f5f5"
-        >
-          <v-row
-            align="center"
-            justify="center"
+        <!--Lesson filter-->
+        <v-expansion-panel :disabled="!filter.lesson_list.length">
+          <v-expansion-panel-header
+            color="#f5f5f5"
+            class="px-0 font-weight-bold font-size-16"
+            >Subject</v-expansion-panel-header
           >
-            <v-col cols="12"
-                   class="content-box">
-              <v-radio-group
-                @change="changeLessonVal"
-                v-model="lesson_val"
-                class="mt-0 pr-0"
-                column
-              >
-                <v-radio
-                  label="All"
-                  color="red"
-                  :value="0"
+          <v-expansion-panel-content color="#f5f5f5">
+            <v-row align="center" justify="center">
+              <v-col cols="12" class="content-box">
+                <v-radio-group
+                  @change="changeLessonVal"
+                  v-model="lesson_val"
+                  class="mt-0 pr-0"
+                  column
                 >
-                </v-radio>
-                <v-radio v-for="item in filter.lesson_list"
-                         :key="item.id"
-                         :label="item.title"
-                         color="red"
-                         :value="item.id"
-                >
-                </v-radio>
+                  <v-radio label="All" color="red" :value="0"> </v-radio>
+                  <v-radio
+                    v-for="item in filter.lesson_list"
+                    :key="item.id"
+                    :label="item.title"
+                    color="red"
+                    :value="item.id"
+                  >
+                  </v-radio>
+                </v-radio-group>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
 
-              </v-radio-group>
-            </v-col>
-          </v-row>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-
-      <!--Topic filter-->
-      <v-expansion-panel :disabled="!filter.topic_list.length">
-        <v-expansion-panel-header
-          color="#f5f5f5"
-          class="px-0 font-weight-bold font-size-16">Topic</v-expansion-panel-header>
-        <v-expansion-panel-content
-          color="#f5f5f5"
-        >
-          <v-row
-            align="center"
-            justify="center"
+        <!--Topic filter-->
+        <v-expansion-panel :disabled="!filter.topic_list.length">
+          <v-expansion-panel-header
+            color="#f5f5f5"
+            class="px-0 font-weight-bold font-size-16"
+            >Topic</v-expansion-panel-header
           >
-            <v-col cols="12" class="content-box"
-            >
-              <v-radio-group
-                @change="changeTopicVal"
-                v-model="topic_val"
-                class="mt-0 pr-0"
-                column
-              >
-                <v-radio
-                  label="All"
-                  color="red"
-                  :value="0"
+          <v-expansion-panel-content color="#f5f5f5">
+            <v-row align="center" justify="center">
+              <v-col cols="12" class="content-box">
+                <v-radio-group
+                  @change="changeTopicVal"
+                  v-model="topic_val"
+                  class="mt-0 pr-0"
+                  column
                 >
-                </v-radio>
-                <v-radio
-                  v-for="item in filter.topic_list"
-                  :key="item.id"
-                  :label="item.title"
-                  color="red"
-                  :value="item.id"
-                >
-                </v-radio>
+                  <v-radio label="All" color="red" :value="0"> </v-radio>
+                  <v-radio
+                    v-for="item in filter.topic_list"
+                    :key="item.id"
+                    :label="item.title"
+                    color="red"
+                    :value="item.id"
+                  >
+                  </v-radio>
+                </v-radio-group>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
 
-              </v-radio-group>
-            </v-col>
-
-
-          </v-row>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-
-      <!--File type filter-->
-      <v-expansion-panel v-show="filter.file_type_list.length>0">
-        <v-expansion-panel-header
-          color="#f5f5f5"
-          class="px-0 font-size-16 font-weight-bold">
-          {{ $route.query.type === 'test' ? 'Paper' : 'Multimedia' }} Type</v-expansion-panel-header>
-        <v-expansion-panel-content
-          color="#f5f5f5"
-        >
-          <v-row
-            align="center"
-            justify="center"
+        <!--File type filter-->
+        <v-expansion-panel v-show="filter.file_type_list.length > 0">
+          <v-expansion-panel-header
+            color="#f5f5f5"
+            class="px-0 font-size-16 font-weight-bold"
           >
-            <v-col cols="12" class="content-box"
-            >
-              <v-radio-group
-                @change="changeFileTypeVal"
-                v-model="file_type_val"
-                class="mt-0 pr-0"
-                column
-              >
-                <v-radio
-                  label="All"
-                  color="red"
-                  :value="0"
+            {{ $route.query.type === "test" ? "Paper" : "Multimedia" }}
+            Type</v-expansion-panel-header
+          >
+          <v-expansion-panel-content color="#f5f5f5">
+            <v-row align="center" justify="center">
+              <v-col cols="12" class="content-box">
+                <v-radio-group
+                  @change="changeFileTypeVal"
+                  v-model="file_type_val"
+                  class="mt-0 pr-0"
+                  column
                 >
-                </v-radio>
-                <v-radio
-                  v-for="item in filter.file_type_list"
-                  :key="item.id"
-                  :label="item.title"
-                  color="red"
-                  :value="item.id"
-                >
-                </v-radio>
+                  <v-radio label="All" color="red" :value="0"> </v-radio>
+                  <v-radio
+                    v-for="item in filter.file_type_list"
+                    :key="item.id"
+                    :label="item.title"
+                    color="red"
+                    :value="item.id"
+                  >
+                  </v-radio>
+                </v-radio-group>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
 
-              </v-radio-group>
-            </v-col>
+        <!--Test level filter-->
+        <!--      <v-expansion-panel v-show="filter.test_level_list.length>0 && $route.query.type==='test'">-->
+        <!--        <v-expansion-panel-header-->
+        <!--          color="#f5f5f5"-->
+        <!--          class="font-weight-bold font-size-16">-->
+        <!--          Difficulty level-->
+        <!--        </v-expansion-panel-header>-->
+        <!--        <v-expansion-panel-content-->
+        <!--          color="#f5f5f5"-->
+        <!--        >-->
+        <!--          <v-row-->
+        <!--            align="center"-->
+        <!--            justify="center"-->
+        <!--          >-->
+        <!--            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">-->
+        <!--              <v-radio-group-->
+        <!--                v-model="test_level_val"-->
+        <!--                class="mt-0 pr-0"-->
+        <!--                column-->
+        <!--              >-->
+        <!--                <v-radio-->
+        <!--                  label="All"-->
+        <!--                  color="red"-->
+        <!--                  :value="0"-->
+        <!--                >-->
+        <!--                </v-radio>-->
+        <!--                <v-radio-->
+        <!--                  v-for="item in filter.test_level_list"-->
+        <!--                  :label="item.title"-->
+        <!--                  color="red"-->
+        <!--                  :value="item.id"-->
+        <!--                >-->
+        <!--                </v-radio>-->
 
+        <!--              </v-radio-group>-->
+        <!--            </v-col>-->
 
-          </v-row>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
+        <!--          </v-row>-->
+        <!--        </v-expansion-panel-content>-->
+        <!--      </v-expansion-panel>-->
 
-      <!--Test level filter-->
-<!--      <v-expansion-panel v-show="filter.test_level_list.length>0 && $route.query.type==='test'">-->
-<!--        <v-expansion-panel-header-->
-<!--          color="#f5f5f5"-->
-<!--          class="font-weight-bold font-size-16">-->
-<!--          Difficulty level-->
-<!--        </v-expansion-panel-header>-->
-<!--        <v-expansion-panel-content-->
-<!--          color="#f5f5f5"-->
-<!--        >-->
-<!--          <v-row-->
-<!--            align="center"-->
-<!--            justify="center"-->
-<!--          >-->
-<!--            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">-->
-<!--              <v-radio-group-->
-<!--                v-model="test_level_val"-->
-<!--                class="mt-0 pr-0"-->
-<!--                column-->
-<!--              >-->
-<!--                <v-radio-->
-<!--                  label="All"-->
-<!--                  color="red"-->
-<!--                  :value="0"-->
-<!--                >-->
-<!--                </v-radio>-->
-<!--                <v-radio-->
-<!--                  v-for="item in filter.test_level_list"-->
-<!--                  :label="item.title"-->
-<!--                  color="red"-->
-<!--                  :value="item.id"-->
-<!--                >-->
-<!--                </v-radio>-->
+        <!--Test feature-->
+        <!--      <v-expansion-panel  v-show="$route.query.type==='test'">-->
+        <!--        <v-expansion-panel-header-->
+        <!--          color="#f5f5f5"-->
+        <!--          class="font-weight-bold font-size-16">-->
+        <!--          Test features-->
+        <!--        </v-expansion-panel-header>-->
+        <!--        <v-expansion-panel-content color="#f5f5f5">-->
+        <!--          <v-row-->
+        <!--            align="center"-->
+        <!--            justify="center"-->
+        <!--          >-->
+        <!--            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">-->
+        <!--              <v-checkbox v-for="item in filter.test_feature_filter"-->
+        <!--                          class="my-0" style="height: 4rem"-->
+        <!--                          @change="changeTestFeature(item.value,item.checkbox)"-->
+        <!--                          :hide-details="true"-->
+        <!--                          color="red"-->
+        <!--                          v-model="item.checkbox"-->
+        <!--                          :label="item.label"-->
+        <!--              />-->
+        <!--            </v-col>-->
 
-<!--              </v-radio-group>-->
-<!--            </v-col>-->
+        <!--          </v-row>-->
+        <!--        </v-expansion-panel-content>-->
+        <!--      </v-expansion-panel>-->
 
+        <!--State-->
+        <!--      <v-expansion-panel v-show="$route.query.type==='tutor'">-->
+        <!--        <v-expansion-panel-header-->
+        <!--          color="#f5f5f5"-->
+        <!--          class="font-weight-bold font-size-16">-->
+        <!--          State-->
+        <!--        </v-expansion-panel-header>-->
+        <!--        <v-expansion-panel-content-->
+        <!--          color="#f5f5f5"-->
+        <!--        >-->
+        <!--          <v-row-->
+        <!--            align="center"-->
+        <!--            justify="center"-->
+        <!--          >-->
+        <!--            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">-->
+        <!--              <v-radio-group-->
+        <!--                v-model="state_val"-->
+        <!--                @change="changeStateVal"-->
+        <!--                class="mt-0 pr-0"-->
+        <!--                column-->
+        <!--              >-->
+        <!--                <v-radio-->
+        <!--                  label="All"-->
+        <!--                  color="red"-->
+        <!--                  value="0"-->
+        <!--                >-->
+        <!--                </v-radio>-->
+        <!--                <v-radio-->
+        <!--                  v-for="item in filter.state_list"-->
+        <!--                  :label="item.title"-->
+        <!--                  color="red"-->
+        <!--                  :value="item.id"-->
+        <!--                >-->
+        <!--                </v-radio>-->
 
-<!--          </v-row>-->
-<!--        </v-expansion-panel-content>-->
-<!--      </v-expansion-panel>-->
+        <!--              </v-radio-group>-->
+        <!--            </v-col>-->
 
+        <!--          </v-row>-->
+        <!--        </v-expansion-panel-content>-->
+        <!--      </v-expansion-panel>-->
 
-      <!--Test feature-->
-<!--      <v-expansion-panel  v-show="$route.query.type==='test'">-->
-<!--        <v-expansion-panel-header-->
-<!--          color="#f5f5f5"-->
-<!--          class="font-weight-bold font-size-16">-->
-<!--          Test features-->
-<!--        </v-expansion-panel-header>-->
-<!--        <v-expansion-panel-content color="#f5f5f5">-->
-<!--          <v-row-->
-<!--            align="center"-->
-<!--            justify="center"-->
-<!--          >-->
-<!--            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">-->
-<!--              <v-checkbox v-for="item in filter.test_feature_filter"-->
-<!--                          class="my-0" style="height: 4rem"-->
-<!--                          @change="changeTestFeature(item.value,item.checkbox)"-->
-<!--                          :hide-details="true"-->
-<!--                          color="red"-->
-<!--                          v-model="item.checkbox"-->
-<!--                          :label="item.label"-->
-<!--              />-->
-<!--            </v-col>-->
+        <!--City-->
+        <!--      <v-expansion-panel v-show="filter.city_list.length>0 && $route.query.type==='tutor'">-->
+        <!--        <v-expansion-panel-header-->
+        <!--          color="#f5f5f5"-->
+        <!--          class="font-size-16 font-weight-bold">-->
+        <!--          City-->
+        <!--        </v-expansion-panel-header>-->
+        <!--        <v-expansion-panel-content-->
+        <!--          color="#f5f5f5"-->
+        <!--        >-->
+        <!--          <v-row-->
+        <!--            align="center"-->
+        <!--            justify="center"-->
+        <!--          >-->
+        <!--            <v-col cols="12" class="pt-0 pr-0 m-0" >-->
+        <!--              <v-radio-group-->
+        <!--                v-model="city_val"-->
+        <!--                class="mt-0 pr-0"-->
+        <!--                column-->
+        <!--              >-->
+        <!--                <v-radio-->
+        <!--                  label="All"-->
+        <!--                  color="red"-->
+        <!--                  :value="0"-->
+        <!--                >-->
+        <!--                </v-radio>-->
+        <!--                <v-radio-->
+        <!--                  v-for="item in filter.city_list"-->
+        <!--                  :label="item.title"-->
+        <!--                  color="red"-->
+        <!--                  :value="item.id"-->
+        <!--                >-->
+        <!--                </v-radio>-->
 
+        <!--              </v-radio-group>-->
+        <!--            </v-col>-->
 
-<!--          </v-row>-->
-<!--        </v-expansion-panel-content>-->
-<!--      </v-expansion-panel>-->
-
-      <!--State-->
-<!--      <v-expansion-panel v-show="$route.query.type==='tutor'">-->
-<!--        <v-expansion-panel-header-->
-<!--          color="#f5f5f5"-->
-<!--          class="font-weight-bold font-size-16">-->
-<!--          State-->
-<!--        </v-expansion-panel-header>-->
-<!--        <v-expansion-panel-content-->
-<!--          color="#f5f5f5"-->
-<!--        >-->
-<!--          <v-row-->
-<!--            align="center"-->
-<!--            justify="center"-->
-<!--          >-->
-<!--            <v-col cols="12" class="pt-0 pr-0 m-0" style="height: 100%">-->
-<!--              <v-radio-group-->
-<!--                v-model="state_val"-->
-<!--                @change="changeStateVal"-->
-<!--                class="mt-0 pr-0"-->
-<!--                column-->
-<!--              >-->
-<!--                <v-radio-->
-<!--                  label="All"-->
-<!--                  color="red"-->
-<!--                  value="0"-->
-<!--                >-->
-<!--                </v-radio>-->
-<!--                <v-radio-->
-<!--                  v-for="item in filter.state_list"-->
-<!--                  :label="item.title"-->
-<!--                  color="red"-->
-<!--                  :value="item.id"-->
-<!--                >-->
-<!--                </v-radio>-->
-
-<!--              </v-radio-group>-->
-<!--            </v-col>-->
-
-
-<!--          </v-row>-->
-<!--        </v-expansion-panel-content>-->
-<!--      </v-expansion-panel>-->
-
-
-      <!--City-->
-<!--      <v-expansion-panel v-show="filter.city_list.length>0 && $route.query.type==='tutor'">-->
-<!--        <v-expansion-panel-header-->
-<!--          color="#f5f5f5"-->
-<!--          class="font-size-16 font-weight-bold">-->
-<!--          City-->
-<!--        </v-expansion-panel-header>-->
-<!--        <v-expansion-panel-content-->
-<!--          color="#f5f5f5"-->
-<!--        >-->
-<!--          <v-row-->
-<!--            align="center"-->
-<!--            justify="center"-->
-<!--          >-->
-<!--            <v-col cols="12" class="pt-0 pr-0 m-0" >-->
-<!--              <v-radio-group-->
-<!--                v-model="city_val"-->
-<!--                class="mt-0 pr-0"-->
-<!--                column-->
-<!--              >-->
-<!--                <v-radio-->
-<!--                  label="All"-->
-<!--                  color="red"-->
-<!--                  :value="0"-->
-<!--                >-->
-<!--                </v-radio>-->
-<!--                <v-radio-->
-<!--                  v-for="item in filter.city_list"-->
-<!--                  :label="item.title"-->
-<!--                  color="red"-->
-<!--                  :value="item.id"-->
-<!--                >-->
-<!--                </v-radio>-->
-
-<!--              </v-radio-group>-->
-<!--            </v-col>-->
-
-
-<!--          </v-row>-->
-<!--        </v-expansion-panel-content>-->
-<!--      </v-expansion-panel>-->
-    </v-expansion-panels>
-
+        <!--          </v-row>-->
+        <!--        </v-expansion-panel-content>-->
+        <!--      </v-expansion-panel>-->
+      </v-expansion-panels>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "search-filter",
   props: {
     brandId: {
       default: 0,
-      type: Number
+      type: Number,
     },
     cateId: {
       default: 0,
-      type: Number
+      type: Number,
     },
   },
   data() {
     return {
-      panel:0,
+      panel: 0,
       checkbox: 1,
       scrollInvoked: 0,
 
       section_loading: false,
       section_val: this.$route.query.section ? this.$route.query.section : 0,
-
 
       base_val: 0,
       lesson_val: 0,
@@ -474,16 +426,15 @@ export default {
       free_checkbox_val: false,
       answer_checkbox_val: false,
 
-
       applied_filter: {
-        select_section_title: '',
-        select_base_title: '',
-        select_lesson_title: '',
-        select_topic_title: '',
-        select_file_type_title: '',
-        select_test_level_title: '',
-        select_state_title: '',
-        select_city_title: '',
+        select_section_title: "",
+        select_base_title: "",
+        select_lesson_title: "",
+        select_topic_title: "",
+        select_file_type_title: "",
+        select_test_level_title: "",
+        select_state_title: "",
+        select_city_title: "",
       },
 
       filter: {
@@ -494,63 +445,60 @@ export default {
         file_type_list: [],
         test_level_list: [
           {
-            id: '1',
-            title: 'Simple'
+            id: "1",
+            title: "Simple",
           },
           {
-            id: '2',
-            title: 'Medium'
+            id: "2",
+            title: "Medium",
           },
           {
-            id: '3',
-            title: 'Hard'
+            id: "3",
+            title: "Hard",
           },
         ],
         test_feature_filter: [
           {
-            checkbox: (this.$route.query.word === '1' ? true : false),
+            checkbox: this.$route.query.word === "1" ? true : false,
             label: "Word",
-            value: 'word'
+            value: "word",
           },
           {
-            checkbox: (this.$route.query.pdf === '1' ? true : false),
+            checkbox: this.$route.query.pdf === "1" ? true : false,
             label: "Pdf",
-            value: "pdf"
+            value: "pdf",
           },
           {
-            checkbox: (this.$route.query.free === '1' ? true : false),
+            checkbox: this.$route.query.free === "1" ? true : false,
             label: "Free",
-            value: "free"
+            value: "free",
           },
           {
-            checkbox: (this.$route.query.a_file === '1' ? true : false),
+            checkbox: this.$route.query.a_file === "1" ? true : false,
             label: "By answer",
-            value: "a_file"
+            value: "a_file",
           },
         ],
         state_list: [],
         city_list: [],
       },
 
-      breadcrumbs: []
-
-    }
+      breadcrumbs: [],
+    };
   },
   created() {
     var params = {
-      type: 'section'
+      type: "section",
     };
-    this.getFilterList(params, 'section');
+    this.getFilterList(params, "section");
 
-    if (this.$route.query.type === 'tutor')
-      this.getFilterList({type: 'state'}, 'state');
+    if (this.$route.query.type === "tutor")
+      this.getFilterList({ type: "state" }, "state");
 
     this.setBreadcrumbInfo();
 
     //Get sample exam test type
-    if (this.$route.query.type === 'test')
-      this.getFileType();
-
+    if (this.$route.query.type === "test") this.getFileType();
 
     if (this.$route.query.level > 0) {
       this.test_level_val = this.$route.query.level;
@@ -559,7 +507,7 @@ export default {
   watch: {
     "$route.query.type"(val) {
       this.filter.file_type_list = [];
-      if (this.$route.query.type === 'test' || this.$route.query.type=='learnfiles')
+      if (this.$route.query.type === "test" || this.$route.query.type == "learnfiles")
         this.getFileType();
     },
     section_val(val) {
@@ -574,78 +522,51 @@ export default {
       this.filter.city_list = [];
 
       //Reset related tags
-      this.applied_filter.select_section_title = '';
-      this.applied_filter.select_base_title = '';
-      this.applied_filter.select_lesson_title = '';
-      this.applied_filter.select_topic_title = '';
+      this.applied_filter.select_section_title = "";
+      this.applied_filter.select_base_title = "";
+      this.applied_filter.select_lesson_title = "";
+      this.applied_filter.select_topic_title = "";
       //End reset related tags
 
       this.updateQueryParams();
       this.setBreadcrumbInfo();
 
-
       if (val > 0) {
-        this.applied_filter.select_section_title = this.filter.section_list.find(x => x.id === val).title;
+        this.applied_filter.select_section_title = this.filter.section_list.find(
+          (x) => x.id === val
+        ).title;
         //Load base list
         var params = {
-          type: 'base',
-          section_id: val
-        }
-        this.getFilterList(params, 'base');
-
+          type: "base",
+          section_id: val,
+        };
+        this.getFilterList(params, "base");
       } else {
         this.applied_filter.select_section_title = "";
       }
-
     },
     base_val(val) {
-      if (val === 0) {
-        //Rest other related filter
-        this.lesson_val = 0;
-        this.topic_val = 0;
-
-        this.applied_filter.select_base_title = '';
-      } else {
-        if (this.filter.lesson_list.length === 0) {
-          var params = {
-            type: 'lesson',
-            base_id: this.base_val
-          }
-
-          this.getFilterList(params, 'lesson');
-
-
-        }
-      }
+      this.changeBaseVal();
     },
     lesson_val(val) {
-      if (val === 0) {
-        //Rest other related filter
-        this.topic_val = 0;
-
-        this.applied_filter.select_lesson_title = '';
-      } else {
-        this.changeLessonVal();
-      }
+      this.changeLessonVal();
     },
     test_level_val(val) {
       if (val > 0) {
-        this.applied_filter.select_test_level_title = this.filter.test_level_list
-          .find(x => x.id === val).title;
+        this.applied_filter.select_test_level_title = this.filter.test_level_list.find(
+          (x) => x.id === val
+        ).title;
         this.updateQueryParams();
       } else {
         this.applied_filter.select_test_level_title = "";
       }
-
-
     },
-    file_type_val(val){
-      if (val==0){
-        this.applied_filter.select_file_type_title='';
+    file_type_val(val) {
+      if (val == 0) {
+        this.applied_filter.select_file_type_title = "";
         this.updateQueryParams();
       }
     },
-
 
     state_val(val) {
       this.filter.city_list = [];
@@ -653,14 +574,15 @@ export default {
       this.updateQueryParams();
       // this.setBreadcrumbInfo();
       if (this.state_val > 0) {
-        this.applied_filter.select_state_title = this.filter.state_list.find(x => x.id === this.state_val).title;
+        this.applied_filter.select_state_title = this.filter.state_list.find(
+          (x) => x.id === this.state_val
+        ).title;
         //Load city list
         var params = {
-          type: 'city',
-          state_id: val
-        }
-        this.getFilterList(params, 'city');
-
+          type: "city",
+          state_id: val,
+        };
+        this.getFilterList(params, "city");
       } else {
         this.applied_filter.select_state_title = "";
       }
@@ -668,127 +590,136 @@ export default {
     city_val(val) {
       this.updateQueryParams();
       if (val > 0 && this.filter.city_list.length) {
-        this.applied_filter.select_city_title = this.filter.city_list.find(x => x.id === val).title;
+        this.applied_filter.select_city_title = this.filter.city_list.find(
+          (x) => x.id === val
+        ).title;
       } else {
         this.applied_filter.select_city_title = "";
       }
-
-    }
-
-
+    },
   },
   methods: {
     onScroll() {
-      this.scrollInvoked++
+      this.scrollInvoked++;
     },
     getFilterList(params, type) {
-      this.$axios.$get('/api/v1/types/list', {
-        params
-      }).then(res => {
-        var data = {};
-        if (type === 'section') {
-          this.filter.section_list = res.data;
+      this.$axios
+        .$get("/api/v1/types/list", {
+          params,
+        })
+        .then((res) => {
+          var data = {};
+          if (type === "section") {
+            this.filter.section_list = res.data;
 
-          //Initiate loading filter
-          if (this.$route.query.section > 0) {
-            data = {
-              type: 'base',
-              section_id: this.$route.query.section
+            //Initiate loading filter
+            if (this.$route.query.section > 0) {
+              data = {
+                type: "base",
+                section_id: this.$route.query.section,
+              };
+              this.getFilterList(data, "base");
+              this.base_val = this.$route.query.base;
+
+              this.applied_filter.select_section_title = this.filter.section_list.find(
+                (x) => x.id === this.section_val
+              ).title;
+
+              //Set breadcrumbs info
+              this.setBreadcrumbInfo();
             }
-            this.getFilterList(data, 'base');
-            this.base_val = this.$route.query.base;
+            //
+          } else if (type === "base") {
+            this.filter.base_list = res.data;
 
-            this.applied_filter.select_section_title = this.filter.section_list.find(x => x.id === this.section_val).title;
+            //Get lesson data
+            if (this.$route.query.base > 0) {
+              data = {
+                type: "lesson",
+                base_id: this.$route.query.base,
+              };
+              this.getFilterList(data, "lesson");
 
-            //Set breadcrumbs info
-            this.setBreadcrumbInfo();
+              //Set lesson val
+              this.lesson_val = this.$route.query.lesson;
 
-          }
-          //
-        } else if (type === 'base') {
-          this.filter.base_list = res.data;
+              //Enable tag
+              this.applied_filter.select_base_title = this.filter.base_list.find(
+                (x) => x.id === this.base_val
+              ).title;
 
-          //Get lesson data
-          if (this.$route.query.base > 0) {
-            data = {
-              type: 'lesson',
-              base_id: this.$route.query.base
+              //Set breadcrumbs info
+              this.setBreadcrumbInfo();
             }
-            this.getFilterList(data, 'lesson');
+          } else if (type === "lesson") {
+            this.filter.lesson_list = res.data;
 
-            //Set lesson val
-            this.lesson_val = this.$route.query.lesson;
+            //Get lesson data
+            if (this.$route.query.lesson > 0) {
+              data = {
+                type: "topic",
+                lesson_id: this.$route.query.lesson,
+              };
+              this.getFilterList(data, "topic");
+
+              //Set topic val
+              this.topic_val = this.$route.query.topic;
+
+              //Enable tag
+              this.applied_filter.select_lesson_title = this.filter.lesson_list.find(
+                (x) => x.id === this.$route.query.lesson
+              ).title;
+
+              //Set breadcrumbs info
+              this.setBreadcrumbInfo();
+            }
+          } else if (type === "topic") {
+            this.filter.topic_list = res.data;
 
             //Enable tag
-            this.applied_filter.select_base_title = this.filter.base_list.find(x => x.id === this.base_val).title;
-
-            //Set breadcrumbs info
-            this.setBreadcrumbInfo();
-
-          }
-        } else if (type === 'lesson') {
-          this.filter.lesson_list = res.data;
-
-          //Get lesson data
-          if (this.$route.query.lesson > 0) {
-            data = {
-              type: 'topic',
-              lesson_id: this.$route.query.lesson
-            }
-            this.getFilterList(data, 'topic');
-
-            //Set topic val
-            this.topic_val = this.$route.query.topic;
+            if (this.$route.query.topic > 0)
+              this.applied_filter.select_topic_title = this.filter.topic_list.find(
+                (x) => x.id === this.topic_val
+              ).title;
+          } else if (type === "state") {
+            this.filter.state_list = res.data;
 
             //Enable tag
-            this.applied_filter.select_lesson_title = this.filter.lesson_list.find(x => x.id === this.$route.query.lesson).title;
+            if (this.$route.query.state > 0) {
+              this.state_val = this.$route.query.state;
+              this.applied_filter.select_state_title = this.filter.state_list.find(
+                (x) => x.id === this.state_val
+              ).title;
+            }
+            if (this.$route.query.city > 0) this.city_val = this.$route.query.city;
+          } else if (type === "city") {
+            this.filter.city_list = res.data;
 
-            //Set breadcrumbs info
-            this.setBreadcrumbInfo();
+            //Enable tag
+            if (this.city_val > 0 && this.filter.city_list.length)
+              this.applied_filter.select_city_title = this.filter.city_list.find(
+                (x) => x.id === this.city_val
+              ).title;
           }
-        } else if (type === 'topic') {
-          this.filter.topic_list = res.data;
-
-          //Enable tag
-          if (this.$route.query.topic > 0)
-            this.applied_filter.select_topic_title = this.filter.topic_list.find(x => x.id === this.topic_val).title;
-        } else if (type === 'state') {
-          this.filter.state_list = res.data;
-
-          //Enable tag
-          if (this.$route.query.state > 0) {
-            this.state_val = this.$route.query.state;
-            this.applied_filter.select_state_title = this.filter.state_list.find(x => x.id === this.state_val).title;
-          }
-          if (this.$route.query.city > 0)
-            this.city_val = this.$route.query.city;
-
-        } else if (type === 'city') {
-          this.filter.city_list = res.data;
-
-          //Enable tag
-          if (this.city_val > 0 && this.filter.city_list.length)
-            this.applied_filter.select_city_title = this.filter.city_list.find(x => x.id === this.city_val).title;
-        }
-
-
-      }).catch(err => {
-        this.$toast.error(err);
-      })
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
 
     //Check user selected at least one filter
     enabledAppliedFilter() {
-      if (this.applied_filter.select_base_title !== '' || this.applied_filter.select_section_title !== ''
-        || this.applied_filter.select_lesson_title !== '' || this.applied_filter.select_topic_title !== ''
-        || this.applied_filter.select_file_type_title !== ''
-        || this.applied_filter.select_test_level_title !== ''
+      if (
+        this.applied_filter.select_base_title !== "" ||
+        this.applied_filter.select_section_title !== "" ||
+        this.applied_filter.select_lesson_title !== "" ||
+        this.applied_filter.select_topic_title !== "" ||
+        this.applied_filter.select_file_type_title !== "" ||
+        this.applied_filter.select_test_level_title !== ""
       )
         return true;
-      else
-        return false;
+      else return false;
     },
-
 
     //Change base val option
     changeBaseVal() {
@@ -796,26 +727,27 @@ export default {
       this.filter.lesson_list = [];
 
       //Reset related tags
-      this.applied_filter.select_base_title = '';
-      this.applied_filter.select_lesson_title = '';
-      this.applied_filter.select_topic_title = '';
+      this.applied_filter.select_base_title = "";
+      this.applied_filter.select_lesson_title = "";
+      this.applied_filter.select_topic_title = "";
       //End reset related tags
-
 
       this.updateQueryParams();
       if (this.base_val > 0) {
         var params = {
-          type: 'lesson',
-          base_id: this.base_val
-        }
+          type: "lesson",
+          base_id: this.base_val,
+        };
 
-        this.getFilterList(params, 'lesson');
+        this.getFilterList(params, "lesson");
 
         //Enable base title tag
-        this.applied_filter.select_base_title = this.filter.base_list.find(x => x.id === this.base_val).title;
+        if (this.filter.base_list.length > 0)
+          this.applied_filter.select_base_title = this.filter.base_list.find(
+            (x) => x.id === this.base_val
+          ).title;
       } else {
         this.applied_filter.select_base_title = "";
-
       }
     },
 
@@ -825,43 +757,43 @@ export default {
       this.filter.topic_list = [];
 
       //Reset related tags
-      this.applied_filter.select_lesson_title = '';
-      this.applied_filter.select_topic_title = '';
+      this.applied_filter.select_lesson_title = "";
+      this.applied_filter.select_topic_title = "";
       //End reset related tags
 
       this.updateQueryParams();
       if (this.lesson_val > 0) {
         var params = {
-          type: 'topic',
-          lesson_id: this.lesson_val
-        }
+          type: "topic",
+          lesson_id: this.lesson_val,
+        };
 
-        this.getFilterList(params, 'topic');
+        this.getFilterList(params, "topic");
 
         //Enable lesson title tag
-        // this.applied_filter.select_lesson_title = this.filter.lesson_list.find(x => x.id === this.lesson_val).title;
+        if (this.filter.lesson_list.length > 0)
+          this.applied_filter.select_lesson_title = this.filter.lesson_list.find(
+            (x) => x.id == this.lesson_val
+          ).title;
       } else {
         this.applied_filter.select_topic_title = "";
-
       }
     },
-
 
     //Change topic val option
     changeTopicVal() {
       //Reset related tags
-      this.applied_filter.select_topic_title = '';
+      this.applied_filter.select_topic_title = "";
       //End reset related tags
 
       this.updateQueryParams();
       //Enable topic title tag
 
       if (this.topic_val > 0)
-        this.applied_filter.select_topic_title = this.filter.topic_list.find(x => x.id === this.topic_val).title;
-      else
-        this.applied_filter.select_topic_title = "";
-
-
+        this.applied_filter.select_topic_title = this.filter.topic_list.find(
+          (x) => x.id === this.topic_val
+        ).title;
+      else this.applied_filter.select_topic_title = "";
     },
     //Change topic val option
 
@@ -871,13 +803,11 @@ export default {
       //Enable topic title tag
 
       if (this.file_type_val > 0)
-        this.applied_filter.select_file_type_title = this.filter.file_type_list.find(x => x.id === this.file_type_val).title;
-      else
-        this.applied_filter.select_file_type_title = "";
-
-
+        this.applied_filter.select_file_type_title = this.filter.file_type_list.find(
+          (x) => x.id === this.file_type_val
+        ).title;
+      else this.applied_filter.select_file_type_title = "";
     },
-
 
     changeStateVal() {
       this.city_val = 0;
@@ -886,14 +816,15 @@ export default {
       this.updateQueryParams();
       // this.setBreadcrumbInfo();
       if (this.state_val > 0) {
-        this.applied_filter.select_state_title = this.filter.state_list.find(x => x.id === this.state_val).title;
+        this.applied_filter.select_state_title = this.filter.state_list.find(
+          (x) => x.id === this.state_val
+        ).title;
         //Load city list
         var params = {
-          type: 'city',
-          state_id: val
-        }
-        this.getFilterList(params, 'city');
-
+          type: "city",
+          state_id: val,
+        };
+        this.getFilterList(params, "city");
       } else {
         this.applied_filter.select_state_title = "";
       }
@@ -901,9 +832,9 @@ export default {
 
     //Update router query params
     updateQueryParams() {
-      const query = {type: this.$route.query.type}
+      const query = { type: this.$route.query.type };
       if (this.section_val !== 0) {
-        query.section = this.section_val
+        query.section = this.section_val;
       }
       if (this.base_val !== 0) {
         query.base = this.base_val;
@@ -939,9 +870,9 @@ export default {
         query.city = this.city_val;
       }
       // Handle more query parameters here ...
-      this.$router.replace({query: query}).catch(err => {
+      this.$router.replace({ query: query }).catch((err) => {
         //Do noting
-      })
+      });
     },
 
     //set breadcrumbs
@@ -951,143 +882,133 @@ export default {
       //Type breadcrumb
       var active_tab = this.$route.query.type;
       var breadcrumb_item = {
-        text: '',
+        text: "",
         disabled: false,
         href: `/search?type=${active_tab}`,
       };
-      if (active_tab === "test")
-        breadcrumb_item.text = "Sample test"
-      else if (active_tab === "learnfiles")
-        breadcrumb_item.text = "Multimedia"
-      else if (active_tab === "question")
-        breadcrumb_item.text = 'Q & A';
-      else if (active_tab === "azmoon")
-        breadcrumb_item.text = 'Exam';
-      else if (active_tab === "dars")
-        breadcrumb_item.text = 'Tutorial';
-      else if (active_tab === "tutor")
-        breadcrumb_item.text = 'Tutor';
+      if (active_tab === "test") breadcrumb_item.text = "Sample test";
+      else if (active_tab === "learnfiles") breadcrumb_item.text = "Multimedia";
+      else if (active_tab === "question") breadcrumb_item.text = "Q & A";
+      else if (active_tab === "azmoon") breadcrumb_item.text = "Exam";
+      else if (active_tab === "dars") breadcrumb_item.text = "Tutorial";
+      else if (active_tab === "tutor") breadcrumb_item.text = "Tutor";
 
       this.breadcrumbs.push(breadcrumb_item);
 
       //Grade section
       if (this.applied_filter.select_section_title) {
-        this.breadcrumbs.push(
-          {
-            text: this.applied_filter.select_section_title,
-            disabled: false,
-            href: `/search?type=${active_tab}&section=${this.section_val}`
-          }
-        );
+        this.breadcrumbs.push({
+          text: this.applied_filter.select_section_title,
+          disabled: false,
+          href: `/search?type=${active_tab}&section=${this.section_val}`,
+        });
       }
 
       //Base section
       if (this.applied_filter.select_base_title) {
-        this.breadcrumbs.push(
-          {
-            text: this.applied_filter.select_base_title,
-            disabled: false,
-            href: `/search?type=${active_tab}&section=${this.section_val}&base=${this.base_val}`
-          }
-        );
+        this.breadcrumbs.push({
+          text: this.applied_filter.select_base_title,
+          disabled: false,
+          href: `/search?type=${active_tab}&section=${this.section_val}&base=${this.base_val}`,
+        });
       }
 
       //Lesson section
       if (this.applied_filter.select_lesson_title) {
-        this.breadcrumbs.push(
-          {
-            text: this.applied_filter.select_lesson_title,
-            disabled: false,
-            href: `/search?type=${active_tab}&section=${this.section_val}&base=${this.base_val}&lesson=${this.lesson_val}`
-          }
-        );
+        this.breadcrumbs.push({
+          text: this.applied_filter.select_lesson_title,
+          disabled: false,
+          href: `/search?type=${active_tab}&section=${this.section_val}&base=${this.base_val}&lesson=${this.lesson_val}`,
+        });
       }
-
 
       //Emit to parent
 
-      this.$emit('update:setBreadCrumbs', this.breadcrumbs);
-
-
+      this.$emit("update:setBreadCrumbs", this.breadcrumbs);
     },
 
     //Get file type
     getFileType() {
-      this.$axios.$get('/api/v1/types/list',
-        {
+      this.$axios
+        .$get("/api/v1/types/list", {
           params: {
-            type: this.$route.query.type=='test' ? 'test_type' : 'file_type'
-          }
+            type: this.$route.query.type == "test" ? "test_type" : "file_type",
+          },
         })
-        .then(res => {
+        .then((res) => {
           this.filter.file_type_list = res.data;
 
           if (this.$route.query.test_type > 0) {
             this.file_type_val = this.$route.query.test_type;
-            this.applied_filter.select_file_type_title = this.filter.file_type_list.find(x => x.id === this.file_type_val).title;
+            this.applied_filter.select_file_type_title = this.filter.file_type_list.find(
+              (x) => x.id === this.file_type_val
+            ).title;
           }
-        }).catch(err => {
-        this.$toast.error(err);
-      })
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
 
     //Test feature type
     changeTestFeature(type, val) {
       //Word option
-      if (type === 'word')
-        if (val === true)
-          this.word_checkbox_val = 1;
-        else
-          this.word_checkbox_val = 0;
+      if (type === "word")
+        if (val === true) this.word_checkbox_val = 1;
+        else this.word_checkbox_val = 0;
 
       //Pdf option
-      if (type === 'pdf')
-        if (val === true)
-          this.pdf_checkbox_val = 1;
-        else
-          this.pdf_checkbox_val = 0;
+      if (type === "pdf")
+        if (val === true) this.pdf_checkbox_val = 1;
+        else this.pdf_checkbox_val = 0;
 
       //Free option
-      if (type === 'free')
-        if (val === true)
-          this.free_checkbox_val = 1;
-        else
-          this.free_checkbox_val = 0;
-
+      if (type === "free")
+        if (val === true) this.free_checkbox_val = 1;
+        else this.free_checkbox_val = 0;
 
       //By answer option
-      if (type === 'a_file')
-        if (val === true)
-          this.answer_checkbox_val = 1;
-        else
-          this.answer_checkbox_val = 0;
-
+      if (type === "a_file")
+        if (val === true) this.answer_checkbox_val = 1;
+        else this.answer_checkbox_val = 0;
 
       this.updateQueryParams();
-
-
-    }
-
-
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
-@media screen and (max-width:600px) {
-  .content-search .v-expansion-panel-header,.v-expansion-panel-content{
-    background: #fff!important;
+@media screen and (max-width: 600px) {
+  .content-search .v-expansion-panel-header,
+  .v-expansion-panel-content {
+    background: #fff !important;
   }
 }
 
-.content-search .v-expansion-panel-content__wrap{
-   padding: 0 0 0 0.6rem!important;
+.content-search .v-expansion-panel-content__wrap {
+  padding: 0 0 0 0.6rem !important;
 }
-.content-search .v-expansion-panel-content__wrap .content-box{
-   max-height: 20rem;
+.content-search .v-expansion-panel-content__wrap .content-box {
+  max-height: 20rem;
   overflow-y: auto;
   margin: 0;
   padding-top: 0;
   padding-right: 0;
+}
+
+@media (min-width: 960px) {
+  #search-page-filter {
+    #chip-container {
+      .v-chip {
+        .v-chip__content span {
+          width: inherit;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
 }
 </style>
