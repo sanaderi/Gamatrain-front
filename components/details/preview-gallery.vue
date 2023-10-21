@@ -1,22 +1,24 @@
 <template>
   <div>
-    <section class="product-gallery rounded-lg  ">
+    <section id="details-gallery-portrate" class="rounded-lg">
       <div class="card-carousel">
-        <v-row justify="center" >
+        <v-row justify="center">
           <!--Mobile side section-->
           <v-col cols="12" class="pr-0 d-flex d-md-none">
-            <v-btn icon
-                   small
+            <v-btn
+              icon
+              small
               :to="`${item.link}&state=${help_link_data.state}&section=${help_link_data.section}&base=${help_link_data.base}&course=${help_link_data.course}
                   &lesson=${help_link_data.lesson}`"
-              v-for="(item,index) in items" :key="index"  class="side-help-icon mr-1" >
+              v-for="(item, index) in items"
+              :key="index"
+              class="side-help-icon mr-1"
+            >
               <v-tooltip right>
                 <template v-slot:activator="{ on, attrs }">
-                <span v-bind="attrs"
-                      v-on="on" :class="' icon icong-' + item.icon"/>
-
+                  <span v-bind="attrs" v-on="on" :class="' icon icong-' + item.icon" />
                 </template>
-                <span>{{item.text}}</span>
+                <span>{{ item.text }}</span>
               </v-tooltip>
             </v-btn>
           </v-col>
@@ -25,54 +27,48 @@
           <!--Desktop side section-->
           <v-col cols="2" class="pr-0 d-none d-md-block">
             <nuxt-link
-                  :to="`${item.link}&state=${help_link_data.state}&section=${help_link_data.section}&base=${help_link_data.base}&course=${help_link_data.course}
+              :to="`${item.link}&state=${help_link_data.state}&section=${help_link_data.section}&base=${help_link_data.base}&course=${help_link_data.course}
                   &lesson=${help_link_data.lesson}`"
-                       v-for="(item,index) in items" :key="index"  class="side-help-icon" >
+              v-for="(item, index) in items"
+              :key="index"
+              class="side-help-icon"
+            >
               <v-tooltip right>
                 <template v-slot:activator="{ on, attrs }">
-                <span v-bind="attrs"
-                      v-on="on" :class="' icon icong-' + item.icon"/>
-
+                  <span v-bind="attrs" v-on="on" :class="' icon icong-' + item.icon" />
                 </template>
-                <span>{{item.text}}</span>
+                <span>{{ item.text }}</span>
               </v-tooltip>
             </nuxt-link>
           </v-col>
           <!--End desktop side section-->
 
-          <v-col cols="12" md="10"  class="pl-1 " >
+          <v-col cols="12" md="10" class="pl-1">
             <div class="mx-8 mx-md-0">
               <v-carousel
-                height="386"
+                id="product-carousel"
                 :show-arrows="false"
-                :hide-delimiters="(images.length>1 ? false : true)"
+                :hide-delimiters="images.length > 1 ? false : true"
                 v-model="carouselVal"
               >
-                <v-carousel-item
-                  v-for="(image, index) in images"
-                  :key="index"
-                  :src="image"
-                />
+                <v-carousel-item v-for="(image, index) in images" :key="index">
+                  <img :src="image" class="carousel-img" />
+                </v-carousel-item>
               </v-carousel>
-              <div class="thumbnails" v-if="images.length>1">
-                <v-slide-group
-                  center-active
-                  class="pa-4"
-                  active-class="success"
-                >
+              <div class="thumbnails" v-if="images.length > 1">
+                <v-slide-group center-active class="pa-4" active-class="success">
                   <v-slide-item
                     class="mx-2 thumbnail_itm"
-                    v-for="(image, index) in  images"
+                    v-for="(image, index) in images"
                     :key="index"
                   >
-                    <v-img
-                      :class="carouselVal==index ? 'active_slide' : ''"
+                    <img
+                      :class="carouselVal == index ? 'active_slide' : ''"
                       @click="changeSlide(index)"
-                      :src="image"/>
-
+                      :src="image"
+                    />
                   </v-slide-item>
                 </v-slide-group>
-
               </div>
             </div>
           </v-col>
@@ -89,39 +85,70 @@ export default {
     return {
       carouselVal: null,
       images: [],
-      help_link_data:{
-        state:'',
-        section:'',
-        base:'',
-        course:'',
-        lesson:''
+      help_link_data: {
+        state: "",
+        section: "",
+        base: "",
+        course: "",
+        lesson: "",
       },
 
       active_img: 1,
 
       items: [
-        { class: "exam", text: "Related exam", icon: "azmoon",link:"/search?type=azmoon" },
-        { class: "test", text: "Related paper", icon: "test",link:"/search?type=test" },
-        { class: "content", text: "Related multimedia", icon: "learnfiles" ,link:"/search?type=learnfiles" },
-        { class: "faq", text: "Related Q & A", icon: "qa",link:"/search?type=question" },
-        { class: "textbook ", text: "Related tutorial", icon: "blog" ,link:"/search?type=dars" },
+        {
+          class: "exam",
+          text: "Related exam",
+          icon: "azmoon",
+          link: "/search?type=azmoon",
+        },
+        { class: "test", text: "Related paper", icon: "test", link: "/search?type=test" },
+        {
+          class: "content",
+          text: "Related multimedia",
+          icon: "learnfiles",
+          link: "/search?type=learnfiles",
+        },
+        {
+          class: "faq",
+          text: "Related Q & A",
+          icon: "qa",
+          link: "/search?type=question",
+        },
+        {
+          class: "textbook ",
+          text: "Related tutorial",
+          icon: "blog",
+          link: "/search?type=dars",
+        },
         // { class: "school", text: "School", icon: "school" ,link:"/search?type=school" },
         // { class: "tutor", text: "Tutor", icon: "teacher" ,link:"/search?type=tutor" },
       ],
-    }
+    };
   },
   methods: {
     changeSlide(index) {
       this.carouselVal = index;
     },
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.product-gallery {
-}
+#details-gallery-portrate {
+  #product-carousel {
+    width: 22.2rem;
+    height: 28rem !important;
 
+    margin: auto auto;
+    .carousel-img {
+      max-width: 22.2rem;
+      width: 100%;
+      height: auto;
+      border-radius: 1.2rem;
+    }
+  }
+}
 
 .thumbnails {
   display: flex;
@@ -158,17 +185,141 @@ export default {
   border-radius: 5px;
 }
 
-.side-help-icon{
+.side-help-icon {
   padding: 0.6rem;
   display: block;
   max-width: 4rem;
   border-radius: 10px;
   margin-bottom: 1rem;
   text-align: center;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
-.side-help-icon .icon{
+.side-help-icon .icon {
   font-size: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  #details-gallery-portrate {
+    #product-carousel {
+      width: 29rem;
+      height: 36rem !important;
+
+      margin: auto auto;
+      .carousel-img {
+        max-width: 29rem;
+        width: 100%;
+        height: auto;
+        border-radius: 1.2rem;
+      }
+    }
+  }
+}
+
+@media (min-width:1264px){
+  #details-gallery-portrate {
+    #product-carousel {
+      width: 29rem;
+      height: 24rem !important;
+
+      margin: auto auto;
+      .carousel-img {
+        max-width: 29rem;
+        width: 100%;
+        height: auto;
+        border-radius: 1.2rem;
+      }
+    }
+  }
+}
+
+@media (min-width:1310px){
+  #details-gallery-portrate {
+    #product-carousel {
+      height: 25.4rem !important;
+
+    }
+  }
+}
+
+@media (min-width:1368px){
+  #details-gallery-portrate {
+    #product-carousel {
+      height: 26.5rem !important;
+
+    }
+  }
+}
+
+
+@media (min-width:1428px){
+  #details-gallery-portrate {
+    #product-carousel {
+      height: 28rem !important;
+
+    }
+  }
+}
+
+
+@media (min-width:1488px){
+  #details-gallery-portrate {
+    #product-carousel {
+      height: 29.2rem !important;
+
+    }
+  }
+}
+
+
+
+
+@media (min-width:1546px){
+  #details-gallery-portrate {
+    #product-carousel {
+      height: 30.2rem !important;
+
+    }
+  }
+}
+
+
+@media (min-width:1606px){
+  #details-gallery-portrate {
+    #product-carousel {
+      height: 31.2rem !important;
+
+    }
+  }
+}
+
+
+
+@media (min-width:1666px){
+  #details-gallery-portrate {
+    #product-carousel {
+      height: 32.2rem !important;
+
+    }
+  }
+}
+
+
+@media (min-width:1714px){
+  #details-gallery-portrate {
+    #product-carousel {
+      height: 33.2rem !important;
+
+    }
+  }
+}
+
+@media (min-width:1714px){
+  #details-gallery-portrate {
+    #product-carousel {
+      height: 34.4rem !important;
+
+    }
+  }
 }
 </style>

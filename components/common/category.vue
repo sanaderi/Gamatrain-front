@@ -116,6 +116,9 @@ export default {
 }
 
 @media (min-width: 960px){
+  
+}
+@media (min-width: 1264px){
   #main-category {
     margin-top: 0;
   }

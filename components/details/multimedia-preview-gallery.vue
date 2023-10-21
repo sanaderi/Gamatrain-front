@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="12" class="product-gallery rounded-lg  ">
+    <v-col cols="12" id="details-gallery-landscape" class="product-gallery rounded-lg  ">
       <div class="card-carousel">
         <v-row justify="center" >
           <!--Side section-->

@@ -19,23 +19,23 @@
       <v-container class="py-0">
         <div class="detail mt-md-8">
           <v-row>
-            <v-col cols="12" md="3">
+            <v-col cols="12"  lg="3">
               <!--Show gallery of preview and book first page-->
               <preview-gallery ref="preview_gallery"/>
               <!--Show gallery of preview and book first page-->
             </v-col>
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="8" lg="6">
               <!--  Description   -->
               <div class="d-flex mb-4">
                 <div class="w-100">
                   <div class="d-flex align-center justify-space-between header">
-                    <h1 class="text-h5 font-weight-bold">
+                    <h1 class="gama-text-h3 font-weight-bold">
                       {{ contentData.title }}
                     </h1>
                   </div>
                   <div class="description-holder my-4">
                     <!--Description-->
-                    <p v-html="contentData.description"></p>
+                    <p class="gama-text-body1" v-html="contentData.description"></p>
                     <!--End description-->
                   </div>
 
@@ -68,7 +68,7 @@
               <!--   Download Btn and Description  -->
               <div class="text-center download-sec">
                 <div class="d-none d-md-block mb-4">
-                  <p v-if="!$auth.loggedIn">
+                  <p v-if="!$auth.loggedIn" class="gama-text-body1">
                     <span class="mdi mdi-bell icon"></span>
                     <span @click="openAuthDialog('login')" class="login">Login</span>
                     <span  @click="openAuthDialog('register')" class="register">
@@ -76,22 +76,22 @@
                     </span>
                     to download and charge your wallet.
                   </p>
-                  <span v-else>
+                  <span v-else class="gama-text-body1">
                     Your wallet charge is ${{$auth.user.credit}}
                   </span>
                   <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)</nuxt-link>
                 </div>
-                <div class="font-weight-bold answer">
+                <div class="font-weight-bold answer gama-text-body1">
                   <span class="mdi mdi-checkbox-marked icon"></span>
                   <span> The key answer sheet is at the end of the exam file.</span>
                 </div>
               </div>
               <!--   fileCopyRight  -->
-              <div class="d-none d-md-block text-center file-copy-right">
-                <p class="">It is forbidden to republish the contents in cyber space.</p>
+              <div class="d-none d-md-block text-center  ">
+                <p class="gama-text-body1 file-copy-right">It is forbidden to republish the contents in cyber space.</p>
               </div>
             </v-col>
-            <v-col md="3">
+            <v-col md="4" lg="3">
               <v-card flat  class="content_main_info">
                 <v-row class=" align-center">
                   <v-col cols="3">
@@ -251,7 +251,7 @@
               </v-card>
               <v-row>
                 <v-col cols="12" class="text-center">
-                  <p class="mt-2  ">
+                  <p class="mt-2 gama-text-body1 ">
                     <i class="fa-solid fa-exclamation-circle mr-1 icon"></i>
                     Republishing is prohibited in cyber space.</p>
                 </v-col>
@@ -797,6 +797,7 @@ export default {
   bottom: 0!important;
   z-index: 2!important;
   border-top:0.1rem solid #e1e2e3;
+  width:100%
 }
 
 .order-btn-holder .v-btn{
