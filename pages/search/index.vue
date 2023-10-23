@@ -55,13 +55,8 @@
       </v-dialog>
     </v-row>
 
-    <v-divider></v-divider>
-    <!--     Start:mobile header-->
-    <search-box class="d-block d-md-none mx-3 my-2" />
-    <!--     End: mobile header-->
-
     <!-- Start  -->
-    <section class="search-page">
+    <section class="search-page mt-md-16 mt-lg-0">
       <v-container>
         <v-row>
           <v-col md="3" lg="3" class="d-none d-md-block">
@@ -167,7 +162,7 @@ export default {
   data() {
     return {
       breadcrumbs: [],
-      page_loading: false,
+      page_loading: true,
       page: 1,
 
       items: [],
@@ -185,7 +180,7 @@ export default {
   mounted() {
     if (!this.$route.query.type) {
       const query = { type: "test" };
-      this.page_title="Papers";
+      this.page_title = "Papers";
       this.$router.replace({ query: query });
       this.getContentList();
     } else this.getContentList();
@@ -419,4 +414,62 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.content-items {
+  .content-item {
+    min-height: 23rem !important;
+    .img-holder {
+      min-width: 12rem;
+      float: left;
+
+      .book-no-img {
+        padding-top: 3rem;
+        min-height: 14rem !important;
+      }
+    }
+
+    .content-holder {
+      float: right;
+    }
+
+    .item-content-footer {
+       padding-left:1.5rem;
+       padding-right:1.5rem;
+      .gama-text-overline {
+        color: #afb8c1;
+      }
+    }
+  }
+}
+@media (min-width: 600px) {
+  .content-items {
+    .content-item {
+      min-height: 18.5rem !important;
+
+      .item-content-title {
+        color: #263238;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box !important;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+      .item-content-subtitle {
+        overflow: hidden;
+        line-height: 1.8rem;
+        text-overflow: ellipsis;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        min-height:2.8rem;
+      }
+
+      .item-content-footer {
+        .gama-text-overline {
+          color: #afb8c1;
+        }
+      }
+    }
+  }
+}
+</style>

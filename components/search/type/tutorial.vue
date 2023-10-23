@@ -1,18 +1,21 @@
 <template>
   <div class="content-items">
-    <v-card rounded class="mb-1 content-item" v-for="(item,key) in items"
-            :key="item.id"
-    >
+    <v-card rounded class="mb-1 content-item" v-for="(item, key) in items" :key="item.id">
       <v-card-text class="pb-0">
-        <v-row class="justify-center">
-          <v-col md="2" sm="2" cols="3" class="py-0 pr-0">
+        <div class="d-flex">
+          <div class="py-4 img-holder">
             <div class="item-img">
-              <v-img v-if="item.lesson_pic"
-                     @error="imgErrorHandler(item,key)"
-                     :src="item.lesson_pic" :alt="item.lesson_title"
-                     class="item-image">
+              <v-img
+                v-if="item.lesson_pic"
+                @error="imgErrorHandler(item, key)"
+                :src="item.lesson_pic"
+                :alt="item.lesson_title"
+                class="item-image"
+              >
               </v-img>
-              <v-card v-else class="book-no-img mx-auto  fill-height align-center justify-center"
+              <v-card
+                v-else
+                class="book-no-img mx-auto fill-height align-center justify-center"
               >
                 <v-card-text class="px-0">
                   <p class="font-weight-bold mb-3 mt-5">{{ item.lesson_title }}</p>
@@ -20,26 +23,35 @@
                 </v-card-text>
               </v-card>
             </div>
-          </v-col>
-          <v-col md="10" sm="10" cols="9" class="px-0 pb-0 py-md-4">
-            <v-card flat class="tutorial-content d-flex flex-column pl-3 pl-md-0 justify-space-between">
+          </div>
+          <div class="content-holder py-4">
+            <v-card
+              flat
+              class="tutorial-content d-flex flex-column pl-3 justify-space-between"
+            >
               <v-card-text class="pa-0">
-                <div class="tutorial-title d-flex justify-space-between">
-                  <nuxt-link :to="`/tutorial/${item.id}/${item.title_url}`"
-                             class="text-h6 text-md-h5 font-weight-bold">
+                <div
+                  class="item-content-title gama-text-button d-flex justify-space-between"
+                >
+                  <nuxt-link
+                    :to="`/tutorial/${item.id}/${item.title_url}`"
+                    class="font-weight-bold"
+                  >
                     {{ item.title }}
                   </nuxt-link>
                 </div>
-                <p class="item-content-subtitle my-2 d-none d-sm-block">
-                  <nuxt-link :to="`/tutorial/${item.id}/${item.title_url}`">
-                    {{ item.description.substr(0, 120) }}...
-                  </nuxt-link>
-                </p>
+                <nuxt-link
+                  class="item-content-subtitle gama-text-caption my-2 d-none d-sm-block"
+                  :to="`/tutorial/${item.id}/${item.title_url}`"
+                >
+                  {{ item.description }}
+                </nuxt-link>
                 <div class="mt-3">
-                  <v-chip class="mr-1 mb-1"
-                          :x-small="$vuetify.breakpoint.xs"
-                          :small="!$vuetify.breakpoint.xs"
-                          :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}&lesson=${item.lesson}`"
+                  <v-chip
+                    class="mr-1 mb-1"
+                    :x-small="$vuetify.breakpoint.xs"
+                    :small="!$vuetify.breakpoint.xs"
+                    :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}&lesson=${item.lesson}`"
                   >
                     {{ item.lesson_title }}
                   </v-chip>
@@ -54,57 +66,60 @@
                   <v-chip
                     :x-small="$vuetify.breakpoint.xs"
                     :small="!$vuetify.breakpoint.xs"
-                    class="mr-1 mb-1" :to="`/search?type=${$route.query.type}&section=${item.section}`">
+                    class="mr-1 mb-1"
+                    :to="`/search?type=${$route.query.type}&section=${item.section}`"
+                  >
                     {{ item.section_title }}
                   </v-chip>
                 </div>
               </v-card-text>
               <!--Item card footer-->
-              <v-card-actions class="item-content-footer pb-2  d-none d-sm-block">
+              <v-card-actions class="item-content-footer pb-2 d-none d-sm-block">
                 <v-row>
                   <v-col cols="8" class="px-0">
                     <div class="d-flex pt-3 pt-md-0">
-                      <!--                        <div class="item-content-user d-flex align-center">-->
+                      <!--                        <div class="item-content-user gama-text-overline d-flex align-center">-->
                       <!--                          <v-avatar size="2em">-->
                       <!--                            <img :src="item.avatar"-->
                       <!--                                 alt="Avatar">-->
                       <!--                          </v-avatar>-->
                       <!--                          <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>-->
                       <!--                        </div>-->
-                      <div
-                        class="item-content-last-update d-flex ml-3">
+                      <div class="item-content-last-update gama-text-overline d-flex ml-3">
                         <i class="fa-solid fa-eye fa-xl"></i>
-                        <p class="mx-2">
-                    <span class="d-none d-sm-inline">
-                      Views:
-                    </span>
+                        <span class="mx-2">
+                          <span class="d-none d-sm-inline"> Views: </span>
                           <span class="date_string d-inline-block">
-                      {{ item.views }}
-                    </span>
-                        </p>
+                            {{ item.views }}
+                          </span>
+                        </span>
                       </div>
-                      <div
-                        class="item-content-last-update d-flex align-center mx-auto">
+                      <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
                         <i class="fa-solid fa-calendar-days fa-xl"></i>
-                        <p class="mx-2">
-                    <span class="d-none d-sm-inline">
-                      Last update:
-                    </span>
+                        <span class="mx-2">
+                          <span class="d-none d-lg-inline"> Last update: </span>
                           <span class="date_string d-inline-block">
-                      {{ $moment(item.up_date).fromNow() }}
-                    </span>
-                        </p>
+                            {{ $moment(item.up_date).fromNow() }}
+                          </span>
+                        </span>
                       </div>
                     </div>
-
                   </v-col>
                   <v-col cols="4">
-                    <div class="text-right align-right float-right d-flex align-content-center  ">
+                    <div
+                      class="text-right align-right float-right d-flex align-content-center"
+                    >
                       <nuxt-link icon :to="`/tutorial/${item.id}/${item.title_url}`">
-                        <span v-show="item.q_file_word" class="fa-solid fa-file-word fa-2xl blue--text "></span>
+                        <span
+                          v-show="item.q_file_word"
+                          class="fa-solid fa-file-word fa-2xl blue--text"
+                        ></span>
                       </nuxt-link>
                       <nuxt-link icon :to="`/tutorial/${item.id}/${item.title_url}`">
-                        <span v-show="item.q_file" class="fa-solid fa-file-pdf fa-2xl red--text pl-1"></span>
+                        <span
+                          v-show="item.q_file"
+                          class="fa-solid fa-file-pdf fa-2xl red--text pl-1"
+                        ></span>
                       </nuxt-link>
                     </div>
                   </v-col>
@@ -112,8 +127,8 @@
               </v-card-actions>
               <!--End item card footer-->
             </v-card>
-          </v-col>
-        </v-row>
+          </div>
+        </div>
       </v-card-text>
       <v-card-actions class="item-content-footer pt-0 d-block d-sm-none">
         <v-row>
@@ -126,32 +141,25 @@
               <!--                  </v-avatar>-->
               <!--                  <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>-->
               <!--                </div>-->
-              <div
-                class="item-content-last-update d-flex  mx-auto">
+              <div class="item-content-last-update gama-text-overline d-flex mx-auto">
                 <i class="fa-solid fa-eye"></i>
-                <p class="mx-2">
-                    <span class="d-none d-sm-inline">
-                      Views:
-                    </span>
+                <span class="mx-2">
+                  <span class="d-none d-sm-inline"> Views: </span>
                   <span class="date_string d-inline-block">
-                      {{ item.views }}
-                    </span>
-                </p>
+                    {{ item.views }}
+                  </span>
+                </span>
               </div>
-              <div
-                class="item-content-last-update d-flex align-center mx-auto">
+              <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
                 <i class="fa-solid fa-calendar-days"></i>
-                <p class="mx-2">
-                    <span class="d-none d-sm-inline">
-                      Last update:
-                    </span>
+                <span class="mx-2">
+                  <span class="d-none d-sm-inline"> Last update: </span>
                   <span class="date_string d-inline-block">
-                      {{ $moment(item.up_date).fromNow() }}
-                    </span>
-                </p>
+                    {{ $moment(item.up_date).fromNow() }}
+                  </span>
+                </span>
               </div>
             </div>
-
           </v-col>
         </v-row>
       </v-card-actions>
@@ -164,22 +172,19 @@ import TabsContentFooter from "~/components/common/tabs-content-footer.vue";
 
 export default {
   name: "tutorial-list",
-  components: {TabsContentFooter},
+  components: { TabsContentFooter },
   props: ["items"],
   data() {
-    return {}
+    return {};
   },
-  mounted() {
-  },
+  mounted() {},
   watch: {},
   methods: {
     imgErrorHandler(item, key) {
-      this.items[key].lesson_pic = '';
-    }
-  }
-}
+      this.items[key].lesson_pic = "";
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

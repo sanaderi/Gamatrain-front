@@ -3524,14 +3524,12 @@ body {
         }
 
         .item-content-footer {
-          p {
-            font-size: 1.4rem !important;
-          }
+          
 
           @media screen and (max-width: 600px) {
-            p {
-              font-size: 1rem !important;
-            }
+            // p {
+            //   font-size: 1rem !important;
+            // }
           }
 
         }
