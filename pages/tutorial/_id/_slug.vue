@@ -41,8 +41,8 @@
           </v-col>
           <v-col md="9" cols="12" class="lessons-title">
             <div class="d-flex flex-column text-center lesson-content">
-              <p class="lesson-title mb-4">{{ lesson.title }}</p>
-              <p class="lesson-subtitle">{{ lesson.topic_title }}</p>
+              <p class="lesson-title gama-text-h5 mb-4">{{ lesson.title }}</p>
+              <p class="lesson-subtitle gama-text-h6">{{ lesson.topic_title }}</p>
             </div>
           </v-col>
         </v-row>
@@ -56,8 +56,8 @@
         <v-row>
           <v-col cols="12">
             <div class="d-flex flex-column text-center lesson-content">
-              <p class="lesson-title mb-4">{{ lesson.title }}</p>
-              <p class="lesson-subtitle">{{ lesson.topic_title }}</p>
+              <p class="lesson-title gama-text-h5 mb-4">{{ lesson.title }}</p>
+              <p class="lesson-subtitle gama-text-6">{{ lesson.topic_title }}</p>
             </div>
           </v-col>
           <v-col cols="12" class="lesson-details">

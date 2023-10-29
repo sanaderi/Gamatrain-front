@@ -253,7 +253,7 @@
         <!--   hamburgers-icon in mobile-->
 
         <div class="text-center">
-          <v-bottom-sheet v-model="mobileSearchSheet">
+          <v-bottom-sheet v-model="mobileSearchSheet"  >
             <template v-slot:activator="{ on, attrs }">
               <v-icon
                 v-bind="attrs"
@@ -264,8 +264,12 @@
                 mdi-magnify
               </v-icon>
             </template>
-            <v-sheet id="mobile-search-sheet">
-              <div id="search-sheet-handler"></div>
+            <v-sheet id="mobile-search-sheet"
+             :height="`${mobileSearchSheetConfig.sheetHeight}vh`" >
+              <div id="search-sheet-handler" 
+              @touchstart="startDrag" @touchend="endDrag" @touchmove="handleDrag"
+
+              ></div>
               <v-slide-group
                 id="search-cate-slide"
                 center-active
@@ -645,6 +649,11 @@ export default {
       ],
       currentOpenDialog: "",
       mobileSearchSheet: false,
+      mobileSearchSheetConfig: {
+        isDragging:false,
+        startDragY:0,
+        sheetHeight:70
+      },
       searchFilterItems: [
         {
           title: "Paper",
@@ -887,6 +896,35 @@ export default {
       else if (type == "gama_live") return "live";
       else if (type == "gama_students") return "student";
     },
+
+    startDrag(e) {
+        this.mobileSearchSheetConfig.isDragging = true;
+        this.mobileSearchSheetConfig.startDragY = e.touches[0].clientY;
+    },
+    handleDrag(e) {
+      if (this.mobileSearchSheetConfig.isDragging) {
+        e.preventDefault();
+      
+        const currentY = e.touches[0].clientY;
+        const dragDistance = this.mobileSearchSheetConfig.startDragY - currentY;
+        const viewportHeight = window.innerHeight;
+
+
+        const currentHeight = this.mobileSearchSheetConfig.sheetHeight;
+        const newHeightVH = currentHeight + (dragDistance / viewportHeight * 100);
+
+        // Limit the newHeightVH to reasonable values
+        const newHeight= Math.min(Math.max(newHeightVH, 10), 100); // 10vh to 100vh
+
+        
+        this.mobileSearchSheetConfig.sheetHeight=newHeight;
+        this.mobileSearchSheetConfig.startDragY = currentY;
+
+      }
+    },
+    endDrag(e) {
+      this.mobileSearchSheetConfig.isDragging = false;
+    },
     //End search section
   },
   watch: {
@@ -1030,7 +1068,7 @@ export default {
     left: 0;
     right: 0;
     background: var(--m-3-sys-light-outline, #79747e);
-    margin: auto auto;
+    margin: 0rem auto 4rem auto;
   }
 
   #search-cate-slide {

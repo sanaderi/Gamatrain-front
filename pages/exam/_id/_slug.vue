@@ -29,13 +29,13 @@
               <div class="d-flex mb-4">
                 <div class="w-100">
                   <div class="d-flex align-center justify-space-between header">
-                    <h1 class="detail-title">
+                    <h1 class="detail-title gama-text-h5">
                       {{ contentData.title }}
                     </h1>
                   </div>
                   <div class="description-holder my-4">
                     <!--Topics-->
-                    <p>
+                    <p class="gama-text-body2">
                       <i class="fa-solid fa-list ml-1 icon"></i>
                       Topics:
                     </p>
@@ -49,7 +49,7 @@
                     <!--End topics-->
 
                     <!--Question number-->
-                    <p class="mt-1">
+                    <p class="mt-1 gama-text-body2">
                       <i class="fa-solid fa-question ml-1 icon"></i>
                       Questions: {{ contentData.tests_num }}
                     </p>
@@ -57,7 +57,7 @@
 
 
                     <!--Difficulty level-->
-                    <p class="mt-1">
+                    <p class="mt-1 gama-text-body2">
                       <i class="fa-solid fa-temperature-three-quarters ml-1 icon"></i>
                       Difficulty level: {{ contentData.level }}
                     </p>
@@ -65,14 +65,14 @@
 
 
                     <!--Start date-->
-                    <p class="mt-1">
+                    <p class="mt-1 gama-text-body2">
                       <i class="fa-solid fa-circle-play"></i>
                       Start: {{ contentData.start_date ? contentData.start_date : '-' }}
                     </p>
                     <!--End start date-->
 
                     <!--End date-->
-                    <p class="mt-1">
+                    <p class="mt-1 gama-text-body2">
                       <i class="fa-solid fa-circle-stop"></i>
                       End: {{ contentData.end_date ? contentData.end_date : '-' }}
                     </p>
@@ -80,7 +80,7 @@
 
 
                     <!--Duration-->
-                    <p class="mt-1">
+                    <p class="mt-1 gama-text-body2">
                       <i class="fa-solid fa-clock"></i>
                       Duration: {{ contentData.azmoon_time }} minutes
                     </p>
@@ -119,8 +119,8 @@
               </div>
               <!--   Download Btn and Description  -->
               <div class="text-center download-sec">
-                <div class="d-none d-md-block mb-4">
-                  <p v-if="!$auth.loggedIn">
+                <div class="d-none d-md-block mb-4 ">
+                  <p v-if="!$auth.loggedIn" class="gama-text-body2">
                     <span class="mdi mdi-bell icon"></span>
                     <span @click="openAuthDialog('login')" class="login">Login</span>
                     <span @click="openAuthDialog('register')" class="register">
@@ -128,20 +128,20 @@
                     </span>
                     to download and charge your wallet.
                   </p>
-                  <span v-else>
+                  <span v-else class="gama-text-body2">
                     Your wallet charge is ${{ $auth.user.credit }}
                   </span>
                   <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)
                   </nuxt-link>
                 </div>
-                <div class="font-weight-bold answer">
+                <div class="font-weight-bold answer gama-text-body2">
                   <span class="mdi mdi-checkbox-marked icon"></span>
                   <span> The key answer sheet is at the end of the exam file.</span>
                 </div>
               </div>
               <!--   fileCopyRight  -->
-              <div class="d-none d-md-block text-center file-copy-right">
-                <p class="">It is forbidden to republish the contents in cyber space.</p>
+              <div class="d-none d-md-block text-center file-copy-right gama-text-body2">
+                <span >It is forbidden to republish the contents in cyber space.</span>
               </div>
             </v-col>
             <v-col md="3">
@@ -300,7 +300,7 @@
               </v-card>
               <v-row>
                 <v-col cols="12" class="text-center">
-                  <p class="mt-2  ">
+                  <p class="mt-2  gama-text-overline">
                     <i class="fa-solid fa-exclamation-circle mr-1 icon"></i>
                     Republishing is prohibited in cyber space.</p>
                 </v-col>

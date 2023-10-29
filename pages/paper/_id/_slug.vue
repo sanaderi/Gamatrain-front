@@ -29,13 +29,13 @@
               <div class="d-flex mb-4">
                 <div class="w-100">
                   <div class="d-flex align-center justify-space-between header">
-                    <h1 class="gama-text-h3 font-weight-bold">
+                    <h1 class="gama-text-h5 ">
                       {{ contentData.title }}
                     </h1>
                   </div>
                   <div class="description-holder my-4">
                     <!--Description-->
-                    <p class="gama-text-body1" v-html="contentData.description"></p>
+                    <span class="gama-text-body2" v-html="contentData.description"></span>
                     <!--End description-->
                   </div>
 
@@ -68,7 +68,7 @@
               <!--   Download Btn and Description  -->
               <div class="text-center download-sec">
                 <div class="d-none d-md-block mb-4">
-                  <p v-if="!$auth.loggedIn" class="gama-text-body1">
+                  <p v-if="!$auth.loggedIn" class="gama-text-body2">
                     <span class="mdi mdi-bell icon"></span>
                     <span @click="openAuthDialog('login')" class="login">Login</span>
                     <span  @click="openAuthDialog('register')" class="register">
@@ -76,19 +76,19 @@
                     </span>
                     to download and charge your wallet.
                   </p>
-                  <span v-else class="gama-text-body1">
+                  <span v-else class="gama-text-body2">
                     Your wallet charge is ${{$auth.user.credit}}
                   </span>
                   <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)</nuxt-link>
                 </div>
-                <div class="font-weight-bold answer gama-text-body1">
+                <div class="font-weight-bold answer gama-text-body2">
                   <span class="mdi mdi-checkbox-marked icon"></span>
                   <span> The key answer sheet is at the end of the exam file.</span>
                 </div>
               </div>
               <!--   fileCopyRight  -->
               <div class="d-none d-md-block text-center  ">
-                <p class="gama-text-body1 file-copy-right">It is forbidden to republish the contents in cyber space.</p>
+                <p class="gama-text-body2 file-copy-right">It is forbidden to republish the contents in cyber space.</p>
               </div>
             </v-col>
             <v-col md="4" lg="3">
@@ -251,7 +251,7 @@
               </v-card>
               <v-row>
                 <v-col cols="12" class="text-center">
-                  <p class="mt-2 gama-text-body1 ">
+                  <p class="mt-2 gama-text-overline ">
                     <i class="fa-solid fa-exclamation-circle mr-1 icon"></i>
                     Republishing is prohibited in cyber space.</p>
                 </v-col>

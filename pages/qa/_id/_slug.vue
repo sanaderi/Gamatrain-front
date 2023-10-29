@@ -113,7 +113,7 @@
                                           </strong>
                                           <strong v-else> No name </strong>
                                         </p>
-                                        <p class="gama-text-button">
+                                        <p class="text-h6">
                                           <span class="orange--text">
                                             {{ findStatic(contentData.user_).qNum }}
                                             Question{{
