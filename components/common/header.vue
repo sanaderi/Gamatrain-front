@@ -253,7 +253,7 @@
         <!--   hamburgers-icon in mobile-->
 
         <div class="text-center">
-          <v-bottom-sheet v-model="mobileSearchSheet"  >
+          <v-bottom-sheet v-model="mobileSearchSheet">
             <template v-slot:activator="{ on, attrs }">
               <v-icon
                 v-bind="attrs"
@@ -264,12 +264,18 @@
                 mdi-magnify
               </v-icon>
             </template>
-            <v-sheet id="mobile-search-sheet"
-             :height="`${mobileSearchSheetConfig.sheetHeight}vh`" >
-              <div id="search-sheet-handler" 
-              @touchstart="startDrag" @touchend="endDrag" @touchmove="handleDrag"
-
-              ></div>
+            <v-sheet
+              id="mobile-search-sheet"
+              :height="`${mobileSearchSheetConfig.sheetHeight}vh`"
+            >
+              <div
+                id="search-sheet-handler-holder"
+                @touchstart="startDrag"
+                @touchend="endDrag"
+                @touchmove="handleDrag"
+              >
+                <div id="search-sheet-handler"></div>
+              </div>
               <v-slide-group
                 id="search-cate-slide"
                 center-active
@@ -650,9 +656,9 @@ export default {
       currentOpenDialog: "",
       mobileSearchSheet: false,
       mobileSearchSheetConfig: {
-        isDragging:false,
-        startDragY:0,
-        sheetHeight:70
+        isDragging: false,
+        startDragY: 0,
+        sheetHeight: 70,
       },
       searchFilterItems: [
         {
@@ -765,22 +771,22 @@ export default {
       this.$route.name == "earn-money"
     ) {
       if (window.scrollY > 60) {
-          this.menuSetting = {
-            logo: "gamatrain-logo-black.svg",
-            bgColor: "#fff",
-            fixedStatus: true,
-            linkColor: "#424A53",
-            class: "",
-          };
-        } else {
-          this.menuSetting = {
-            logo: "gamatrain-logo.svg",
-            bgColor: "#000",
-            fixedStatus: true,
-            linkColor: "#fff",
-            class: "transparentMenu",
-          };
-        }
+        this.menuSetting = {
+          logo: "gamatrain-logo-black.svg",
+          bgColor: "#fff",
+          fixedStatus: true,
+          linkColor: "#424A53",
+          class: "",
+        };
+      } else {
+        this.menuSetting = {
+          logo: "gamatrain-logo.svg",
+          bgColor: "#000",
+          fixedStatus: true,
+          linkColor: "#fff",
+          class: "transparentMenu",
+        };
+      }
     }
     window.addEventListener("scroll", this.handleScroll);
   },
@@ -898,32 +904,30 @@ export default {
     },
 
     startDrag(e) {
-        this.mobileSearchSheetConfig.isDragging = true;
-        this.mobileSearchSheetConfig.startDragY = e.touches[0].clientY;
+      this.mobileSearchSheetConfig.isDragging = true;
+      this.mobileSearchSheetConfig.startDragY = e.touches[0].clientY;
     },
     handleDrag(e) {
       if (this.mobileSearchSheetConfig.isDragging) {
         e.preventDefault();
-      
+
         const currentY = e.touches[0].clientY;
         const dragDistance = this.mobileSearchSheetConfig.startDragY - currentY;
         const viewportHeight = window.innerHeight;
 
-
         const currentHeight = this.mobileSearchSheetConfig.sheetHeight;
-        const newHeightVH = currentHeight + (dragDistance / viewportHeight * 100);
+        const newHeightVH = currentHeight + (dragDistance / viewportHeight) * 100;
 
         // Limit the newHeightVH to reasonable values
-        const newHeight= Math.min(Math.max(newHeightVH, 10), 100); // 10vh to 100vh
+        const newHeight = Math.min(Math.max(newHeightVH, 10), 100); // 10vh to 100vh
 
-        
-        this.mobileSearchSheetConfig.sheetHeight=newHeight;
+        this.mobileSearchSheetConfig.sheetHeight = newHeight;
         this.mobileSearchSheetConfig.startDragY = currentY;
-
       }
     },
     endDrag(e) {
       this.mobileSearchSheetConfig.isDragging = false;
+      if (this.mobileSearchSheetConfig.sheetHeight < 30) this.mobileSearchSheet = false;
     },
     //End search section
   },
@@ -1002,6 +1006,10 @@ export default {
       this.searchResults = [];
       this.search();
     },
+    mobileSearchSheet(val){
+      if(val==true)
+       this.mobileSearchSheetConfig.sheetHeight=70;
+    }
   },
   computed: {
     userName() {
@@ -1058,17 +1066,29 @@ export default {
   position: relative;
   padding-top: 5.6rem;
 
-  #search-sheet-handler {
+  #search-sheet-handler-holder {
     position: absolute;
-    width: 3.2rem;
-    height: 0.4rem;
+    width: 100%;
+    height: 6.4rem;
     border-radius: 10rem;
     opacity: 0.4;
-    top: 1.6rem;
+    top: 0;
     left: 0;
     right: 0;
-    background: var(--m-3-sys-light-outline, #79747e);
-    margin: 0rem auto 4rem auto;
+    background: transparent;
+    margin: auto;
+    #search-sheet-handler {
+      position: absolute;
+      width: 3.2rem;
+      height: 0.4rem;
+      border-radius: 10rem;
+      opacity: 0.4;
+      top: 1.6rem;
+      left: 0;
+      right: 0;
+      background: var(--m-3-sys-light-outline, #79747e);
+      margin: auto;
+    }
   }
 
   #search-cate-slide {
@@ -1440,8 +1460,6 @@ export default {
       }
     }
   }
-
-
 }
 
 @media (min-width: 960px) {
@@ -1475,6 +1493,7 @@ export default {
     }
 
     #main-menu {
+      z-index:402;
       padding-bottom: 0.4rem;
       height: 6.4rem !important;
 
