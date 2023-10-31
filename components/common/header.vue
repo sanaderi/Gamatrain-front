@@ -1493,7 +1493,7 @@ export default {
     }
 
     #main-menu {
-      z-index:402;
+      z-index:1001;
       padding-bottom: 0.4rem;
       height: 6.4rem !important;
 

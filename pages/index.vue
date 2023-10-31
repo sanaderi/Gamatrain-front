@@ -79,10 +79,14 @@
                         information. Just
                         filter and GamaTrain will find it for you.
                     </p>
+                    <!-- <v-btn
+                     :large="$vuetify.breakpoint.mdAndUp"
+                     :small="$vuetify.breakpoint.xs"
+                     rounded class="primary gama-btn" to="/school-service">Learn more</v-btn> -->
                     <v-btn
                      :large="$vuetify.breakpoint.mdAndUp"
                      :small="$vuetify.breakpoint.xs"
-                     rounded class="primary gama-btn" to="/school-service">Learn more</v-btn>
+                     rounded class="primary gama-btn"  to="/school">School service</v-btn>
                 </v-col>
             </v-row>
 
