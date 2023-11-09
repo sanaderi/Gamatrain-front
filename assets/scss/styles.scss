@@ -452,9 +452,6 @@ body {
       width: 40px !important;
     }
 
-    .v-list-item {
-      min-height: unset;
-    }
 
     .pointer {
       cursor: pointer;
@@ -2746,6 +2743,9 @@ body {
       }
     }
   }
+
+
+  
 }
 
 @media only screen and (min-width: 1264px) {

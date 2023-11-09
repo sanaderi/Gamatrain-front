@@ -251,8 +251,8 @@ export default {
                         .then(response => {
                             this.searchCount = response.data.num;
                             this.searchResults.push(...response.data.list);
-
-                            if (response.data.list.length === 0)
+                            
+                            if (response.data.list.length < 20)//20 is lenght of item per page
                                 this.allDataLoaded = true;
                         }).catch(err => {
                             console.log(err);
@@ -577,6 +577,7 @@ export default {
         overflow-x: hidden;
         overflow-y: scroll;
         position: relative;
+        height:100%;
 
         #result-stat {
             padding: 1.6rem;
