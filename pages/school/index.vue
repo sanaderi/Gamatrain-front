@@ -1,6 +1,6 @@
 <template>
   <div id="school-list">
-    <schoolListFilter />
+    <schoolListFilter ref="schoolFilter"/>
     <div id="map-wrap">
       <client-only>
         <l-map
@@ -255,6 +255,7 @@ export default {
               },
             })
             .then((response) => {
+              this.$refs.schoolFilter.resultCount=response.data.num;
               this.schoolList.push(...response.data.list);
 
               if (response.data.list.length === 0) this.allDataLoaded = true;

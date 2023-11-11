@@ -1,85 +1,274 @@
 <template>
-  <v-toolbar flat id="desktop-school-filter" class="d-none d-lg-block">
-    <v-container>
-      <v-row>
-        <v-col cols="6" md="4" lg="4" xl="4" class="pt-md-0">
-          <div class="d-flex">
-            <div>
-              <v-text-field
-                prepend-inner-icon="mdi-magnify"
-                id="search-field"
-                hide-details
-                label="Search anything..."
-                filled
-                v-model="filterForm.keyword"
-                rounded
-              >
-                <template v-slot:append>
-                  <v-btn large class="primary" id="search-btn" rounded> Search </v-btn>
-                </template>
-              </v-text-field>
+  <div>
+    <v-toolbar flat id="desktop-school-filter" class="d-none d-lg-block">
+      <v-container class="py-0">
+        <v-row>
+          <v-col cols="5" md="4" lg="4" xl="4" class="pt-md-0">
+            <div class="d-flex">
+              <div>
+                <v-text-field
+                  prepend-inner-icon="mdi-magnify"
+                  id="search-field"
+                  hide-details
+                  label="Search anything..."
+                  filled
+                  v-model="filterForm.keyword"
+                  rounded
+                >
+                  <template v-slot:append>
+                    <v-btn large class="primary" id="search-btn" rounded> Search </v-btn>
+                  </template>
+                </v-text-field>
+              </div>
             </div>
-          </div>
-        </v-col>
+          </v-col>
 
-        <v-col cols="6">
-          <v-menu offset-y>
-            <template v-slot:activator="{ on, attrs }">
+          <v-col cols="7" md="8" class="pb-0">
+            <div class="d-flex">
+              <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    :class="{ 'menu-opened': menuOpened }"
+                    color="surface"
+                    class="text-capitalize text-h4 menu-btn"
+                    @click="desktopFilter=false"
+                    plain
+                    dark
+                    v-bind="attrs"
+                    v-on="on"
+                    >Curriculum
+                    <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
+                  </v-btn>
+                </template>
+                <v-list class="school-filter-list">
+                  <v-list-item
+                    v-for="(item, index) in filter.curriculumList"
+                    :key="index"
+                    @click="updateFilter('curriculum', item.id)"
+                  >
+                    <v-list-item-title class="text-h5">{{
+                      item.title
+                    }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+              <div :class="{ 'menu-opened': menuOpened }" class="vertical-line"></div>
+
+              <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    color="surface"
+                    class="text-capitalize text-h4"
+                    plain
+                    @click="desktopFilter=false"
+                    dark
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    Tuition fee&nbsp;<span style="color: #667085; text-transform: none"
+                      >to</span
+                    >&nbsp;${{ filterForm.tuition_fee | numberFormat }}
+
+                    <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
+                  </v-btn>
+                </template>
+                <v-card class="school-filter-list" width="400">
+                  <v-card-text class="pt-5 pb-0">
+                    <v-slider
+                      dense
+                      v-model="filterForm.tuition_fee"
+                      max="50000"
+                      min="0"
+                    ></v-slider>
+                  </v-card-text>
+                </v-card>
+              </v-menu>
+              <div class="vertical-line"></div>
+
               <v-btn
                 color="surface"
                 class="text-capitalize text-h4"
                 plain
                 dark
-                v-bind="attrs"
-                v-on="on"
-                >Curriculum
-                <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
-                </v-btn
+                @click="desktopFilter = !desktopFilter"
               >
-            </template>
-            <v-list>
-              <v-list-item
-                v-for="(item, index) in filter.curriculumList"
-                :key="index"
-                @click="updateFilter('curriculum', item.id)"
-              >
-                <v-list-item-title class="text-h5">{{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-
-          <v-menu offset-y>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                color="surface"
-                class="text-capitalize text-h4"
-                plain
-                dark
-                v-bind="attrs"
-                v-on="on"
-              >
-                Tuition fee&nbsp;<span style="color: #667085; text-transform: none"
-                  >to</span
-                >&nbsp;${{ filterForm.tuition_fee | numberFormat }}
-
+                <v-icon right dark size="24"> mdi-filter </v-icon>
+                &nbsp; Filter
                 <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
               </v-btn>
-            </template>
-            <v-card width="400">
-              <v-card-text class="pt-5 pb-0">
-                <v-slider
-                  dense
-                  v-model="filterForm.tuition_fee"
-                  max="50000"
-                  min="0"
-                ></v-slider>
-              </v-card-text>
-            </v-card>
-          </v-menu>
-        </v-col>
-      </v-row>
+              <div class="vertical-line"></div>
+
+              <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    color="surface"
+                    class="text-capitalize text-h4"
+                    plain
+                    @click="desktopFilter=false"
+                    dark
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    <v-icon right dark size="24"> mdi-filter-variant </v-icon>
+                    &nbsp; Sort
+                    <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
+                  </v-btn>
+                </template>
+                <v-list class="school-filter-list">
+                  <v-list-item
+                    v-for="(item, index) in sortList"
+                    :key="index"
+                    @click="updateFilter('curriculum', item.id)"
+                  >
+                    <v-list-item-title class="text-h5">{{
+                      item.title
+                    }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+              <div class="vertical-line"></div>
+
+              <v-btn class="text-h6 text-capitalize" plain dark>
+                Search result &nbsp;
+                <span class="white--text">
+                  {{ resultCount }}
+                </span>
+              </v-btn>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-toolbar>
+
+    <v-container fluid id="desktop-school-more-filter" v-if="desktopFilter">
+      <v-card width="100vw" class="pt-4">
+        <v-container>
+          <v-row>
+            <v-col cols="4">
+              <v-autocomplete
+                v-model="filterForm.country"
+                :items="filter.countryList"
+                item-text="name"
+                item-value="id"
+                label="Country"
+                outlined
+                rounded
+              ></v-autocomplete>
+            </v-col>
+            <v-col cols="4">
+              <v-autocomplete
+                v-model="filterForm.state"
+                :items="filter.stateList"
+                item-text="title"
+                item-value="id"
+                label="State"
+                outlined
+                rounded
+              ></v-autocomplete>
+            </v-col>
+            <v-col cols="4">
+              <v-autocomplete
+                v-model="filterForm.city"
+                :items="filter.cityList"
+                item-text="title"
+                item-value="id"
+                label="City"
+                outlined
+                rounded
+              ></v-autocomplete>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="3">
+              <p class="text-h4">School type</p>
+              <div class="pl-8">
+                <v-checkbox
+                  v-model="filterForm.school_type"
+                  label="Public"
+                  value="public"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="filterForm.school_type"
+                  label="Private"
+                  value="private"
+                ></v-checkbox>
+              </div>
+            </v-col>
+            <v-col cols="3">
+              <p class="text-h4">Religion</p>
+              <div class="pl-8">
+                <v-checkbox
+                  v-model="filterForm.religion"
+                  label="Catholic"
+                  value="catholic"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="filterForm.religion"
+                  label="Christian"
+                  value="christian"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="filterForm.religion"
+                  label="Jewish"
+                  value="jewish"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="filterForm.religion"
+                  label="Islamic"
+                  value="islamic"
+                ></v-checkbox>
+              </div>
+            </v-col>
+            <v-col cols="3">
+              <p class="text-h4">Boarding types</p>
+              <div class="pl-8">
+                <v-checkbox
+                  v-model="filterForm.boarding_types"
+                  label="Online"
+                  value="online"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="filterForm.boarding_types"
+                  label="Special education"
+                  value="special_education"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="filterForm.boarding_types"
+                  label="Montessori"
+                  value="montessori"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="filterForm.boarding_types"
+                  label="Therapeutic"
+                  value="therapeutic"
+                ></v-checkbox>
+              </div>
+            </v-col>
+            <v-col cols="3">
+              <p class="text-h4">Coed status</p>
+              <div class="pl-8">
+                <v-checkbox
+                  v-model="filterForm.coed_status"
+                  label="All Girl"
+                  value="all_girl"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="filterForm.coed_status"
+                  label="All Boy"
+                  value="all_boy"
+                ></v-checkbox>
+                <v-checkbox
+                  v-model="filterForm.coed_status"
+                  label="Coeducational"
+                  value="coeducational"
+                ></v-checkbox>
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card>
     </v-container>
-  </v-toolbar>
+  </div>
 </template>
 
 <script>
@@ -87,27 +276,96 @@ export default {
   name: "schoolListFilter",
   data() {
     return {
+      desktopFilter: false,
+      resultCount: "--",
       filter: {
         curriculumList: [],
+        countryList: [],
+        stateList: [],
+        cityList: [],
       },
+      sortList: [
+        {
+          value: "mostScore",
+          title: "Most score",
+        },
+        {
+          value: "mostActive",
+          title: "Most active",
+        },
+        {
+          value: "updateDate",
+          title: "Update date",
+        },
+        {
+          value: "tuitionFee",
+          title: "Tuition fee",
+        },
+      ],
       filterForm: {
         keyword: "",
         curriculum: "",
         tuition_fee: 0,
+        country: 0,
+        state: 0,
+        city: 0,
+        school_type: [],
+        religion: [],
+        boarding_types: [],
+        coed_status: [],
       },
+      menuOpened: false,
     };
   },
   created() {
     var params = {
       type: "section",
     };
+    this.getFilterList({ type: "countries" }, "countries");
     this.getFilterList(params, "section");
+
+    //Init filter value
+    if (this.$route.query.country) this.filterForm.country = this.$route.query.country;
+    if (this.$route.query.state) this.filterForm.state = this.$route.query.state;
+    if (this.$route.query.city) this.filterForm.city = this.$route.query.city;
+    if (this.$route.query.school_type)
+      this.filterForm.school_type = this.$route.query.school_type;
+    this.filterForm.city = this.$route.query.city;
+    if (this.$route.query.religion) this.filterForm.religion = this.$route.query.religion;
+    if (this.$route.query.boarding_types)
+      this.filterForm.boarding_types = this.$route.query.boarding_types;
+    if (this.$route.query.coed_status)
+      this.filterForm.coed_status = this.$route.query.coed_status;
+    //End init filter value
   },
   watch: {
     "filterForm.keyword"(val) {
       this.updateQueryParams();
     },
     "filterForm.tuition_fee"(val) {
+      this.updateQueryParams();
+    },
+    "filterForm.country"(val) {
+      this.updateQueryParams();
+      this.getFilterList({ type: "state", country_id: this.filterForm.country }, "state");
+    },
+    "filterForm.state"(val) {
+      this.updateQueryParams();
+      this.getFilterList({ type: "city", state_id: this.filterForm.state }, "city");
+    },
+    "filterForm.city"(val) {
+      this.updateQueryParams();
+    },
+    "filterForm.school_type"(val) {
+      this.updateQueryParams();
+    },
+    "filterForm.religion"(val) {
+      this.updateQueryParams();
+    },
+    "filterForm.boarding_types"(val) {
+      this.updateQueryParams();
+    },
+    "filterForm.coed_status"(val) {
       this.updateQueryParams();
     },
   },
@@ -119,7 +377,13 @@ export default {
         })
         .then((res) => {
           var data = {};
-          if (type == "section") {
+          if (type == "countries") {
+            this.filter.countryList = res.data;
+          } else if (type == "state") {
+            this.filter.stateList = res.data;
+          } else if (type == "city") {
+            this.filter.cityList = res.data;
+          } else if (type == "section") {
             this.filter.curriculumList = res.data;
 
             //Initiate loading filter
@@ -232,14 +496,46 @@ export default {
         query.curriculum = this.filterForm.curriculum;
       }
 
-      if (this.filterForm.tuition_fee>0) {
+      if (this.filterForm.tuition_fee > 0) {
         query.tuition_fee = this.filterForm.tuition_fee;
+      }
+
+      if (this.filterForm.country > 0) {
+        query.country = this.filterForm.country;
+      }
+
+      if (this.filterForm.state > 0) {
+        query.state = this.filterForm.state;
+      }
+
+      if (this.filterForm.city > 0) {
+        query.city = this.filterForm.city;
+      }
+
+      if (this.filterForm.school_type && this.filterForm.school_type.length > 0) {
+        query.school_type = this.filterForm.school_type;
+      }
+
+      if (this.filterForm.religion && this.filterForm.religion.length > 0) {
+        query.religion = this.filterForm.religion;
+      }
+
+      if (this.filterForm.boarding_types && this.filterForm.boarding_types.length > 0) {
+        query.boarding_types = this.filterForm.boarding_types;
+      }
+
+      if (this.filterForm.coed_status && this.filterForm.coed_status.length > 0) {
+        query.coed_status = this.filterForm.coed_status;
       }
 
       // Handle more query parameters here ...
       this.$router.replace({ query: query }).catch((err) => {
         //Do noting
       });
+    },
+
+    toggleActiveClass() {
+      this.menuOpened = !this.menuOpened;
     },
   },
 };
@@ -253,7 +549,6 @@ export default {
   height: 7rem !important;
   background: var(--primary-grey-800, #1d2939);
   box-shadow: 5px 9px 24px 0px rgba(16, 24, 40, 0.05);
-
   .v-text-field--rounded {
     .v-input__control {
       .v-input__slot {
@@ -279,5 +574,44 @@ export default {
       }
     }
   }
+}
+
+#desktop-school-more-filter {
+  position: absolute;
+  top: 7.4rem;
+  z-index: 1100;
+  padding: 0;
+  background: var(--primary-grey-50, #f9fafb);
+}
+
+.school-filter-list {
+  margin-top: 1.6rem;
+
+}
+
+.menu-btn {
+  /* height: 5rem !important; */
+  .v-btn__content {
+    padding-right: 1.6rem;
+  }
+} 
+
+/* .menu-opened {
+  border-radius: 10px 10px 0 0;
+  background-color: #fff !important; /* Change color when opened */
+  /* .v-btn__content { */
+    /* color: #000; */
+  /* } */
+/* } */ 
+
+/* .menu-opened.vertical-line {
+  display: none;
+} */
+
+.vertical-line {
+  background: var(--primary-grey-400, #98a2b3);
+  width: 0.05rem;
+  height: 3.6rem;
+  /* margin-left: 1.6rem; */
 }
 </style>
