@@ -152,6 +152,7 @@
                 item-value="id"
                 label="Country"
                 outlined
+                clearable
                 rounded
               ></v-autocomplete>
             </v-col>
@@ -164,6 +165,7 @@
                 label="State"
                 outlined
                 rounded
+                clearable
               ></v-autocomplete>
             </v-col>
             <v-col cols="4">
@@ -175,6 +177,7 @@
                 label="City"
                 outlined
                 rounded
+                clearable
               ></v-autocomplete>
             </v-col>
           </v-row>
@@ -346,12 +349,18 @@ export default {
       this.updateQueryParams();
     },
     "filterForm.country"(val) {
+      this.filter.stateList=[];
+      this.filter.cityList=[];
+      this.filterForm.state='';
+      this.filterForm.city='';
       this.updateQueryParams();
-      this.getFilterList({ type: "state", country_id: this.filterForm.country }, "state");
+      this.getFilterList({ type: "states", country_id: this.filterForm.country }, "states");
     },
     "filterForm.state"(val) {
+      this.filter.cityList=[];
+      this.filterForm.city='';
       this.updateQueryParams();
-      this.getFilterList({ type: "city", state_id: this.filterForm.state }, "city");
+      this.getFilterList({ type: "cities", state_id: this.filterForm.state }, "cities");
     },
     "filterForm.city"(val) {
       this.updateQueryParams();
@@ -379,9 +388,9 @@ export default {
           var data = {};
           if (type == "countries") {
             this.filter.countryList = res.data;
-          } else if (type == "state") {
+          } else if (type == "states") {
             this.filter.stateList = res.data;
-          } else if (type == "city") {
+          } else if (type == "cities") {
             this.filter.cityList = res.data;
           } else if (type == "section") {
             this.filter.curriculumList = res.data;

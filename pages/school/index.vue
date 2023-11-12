@@ -62,7 +62,19 @@
       </v-container>
       <div id="data-list">
         <v-container id="school-list-container">
-          <div v-if="schoolList.length">
+          <div v-if="schoolLoading">
+            <v-card class="list-item" v-for="i in 5" :key="i">
+              <div class="item-info">
+                <div class="main-data">
+                  <v-skeleton-loader
+                    type="card-heading, list-item-two-line"
+                  ></v-skeleton-loader>
+                </div>
+                <div></div>
+              </div>
+            </v-card>
+          </div>
+          <div v-else-if="schoolList.length">
             <v-card
               rounded
               v-for="item in schoolList"
@@ -116,16 +128,7 @@
             </v-card>
           </div>
           <div v-else>
-            <v-card class="list-item" v-for="i in 5" :key="i">
-              <div class="item-info">
-                <div class="main-data">
-                  <v-skeleton-loader
-                    type="card-heading, list-item-two-line"
-                  ></v-skeleton-loader>
-                </div>
-                <div></div>
-              </div>
-            </v-card>
+              Opps! no data found
           </div>
         </v-container>
       </div>
@@ -176,6 +179,14 @@ export default {
           title: "test2",
         },
       ],
+      filter:{
+        keyword:'',
+        curriculum:'',
+        tuition_fee:'',
+        country:'',
+        state:'',
+        city:''
+      }
 
     
     };
@@ -199,6 +210,50 @@ export default {
   },
   beforeDestroy() {
     document.body.classList.remove("disable-scroll");
+  },
+  watch:{
+    "$route.query.keyword"(val){
+      this.filter.keyword=val;
+      this.pageNum=1;
+      this.schoolList=[];
+      this.allDataLoaded=false;
+      this.getSchoolList();
+    },
+    "$route.query.curriculum"(val){
+       this.filter.curriculum=val;
+       this.pageNum=1;
+       this.schoolList=[];
+       this.allDataLoaded=false;
+       this.getSchoolList();
+    },
+
+    "$route.query.tuition_fee"(val){
+       this.filter.tuition_fee=val;
+       this.pageNum=1;
+       this.schoolList=[];
+       this.allDataLoaded=false;
+       this.getSchoolList();
+    },
+    "$route.query.country"(val){
+       this.filter.country=val;
+       this.pageNum=1;
+       this.schoolList=[];
+       this.allDataLoaded=false;
+       this.getSchoolList();
+    },
+    "$route.query.state"(val){
+       this.filter.state=val;
+       this.pageNum=1;
+       this.schoolList=[];
+       this.allDataLoaded=false;
+       this.getSchoolList();
+    },
+    "$route.query.city"(val){
+       this.filter.city=val;
+       this.pageNum=1;
+       this.allDataLoaded=false;
+       this.getSchoolList();
+    },
   },
 
 
@@ -252,6 +307,13 @@ export default {
             .$get("/api/v1/schools/search", {
               params: {
                 page: this.pageNum,
+                name:this.filter.keyword,
+                section:this.filter.curriculum,
+                tuition_fee:this.filter.tuition_fee,
+                country:this.filter.country,
+                state:this.filter.state,
+                city:this.filter.city,
+
               },
             })
             .then((response) => {
