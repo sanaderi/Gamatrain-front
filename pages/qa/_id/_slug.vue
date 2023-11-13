@@ -675,7 +675,7 @@
               <v-col cols="3" id="similar-question" class="d-none d-md-block">
                 <v-card color="#F5F5F5" class="fill-height" flat>
                   <v-card-text>
-                    <h2 class="text-h4 text-center">Similar questions</h2>
+                    <h2 class="text-h4 text-center">Related questions</h2>
                     <v-divider style="width: 80%" class="my-3 mx-auto" />
                     <div v-if="loading.similar_questions">
                       <v-skeleton-loader
@@ -690,7 +690,7 @@
                     <ul v-else>
                       
                       <li
-                        v-for="question in similarQuestions"
+                        v-for="question in similarQuestions.slice(0,10)"
                         :key="question.id"
                         class="question-item gama-text-caption"
                       >

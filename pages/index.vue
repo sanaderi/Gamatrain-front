@@ -86,7 +86,7 @@
                     <v-btn
                      :large="$vuetify.breakpoint.mdAndUp"
                      :small="$vuetify.breakpoint.xs"
-                     rounded class="primary gama-btn"  to="/school">School service</v-btn>
+                     rounded class="primary gama-btn"  to="/school">School finder</v-btn>
                 </v-col>
             </v-row>
 

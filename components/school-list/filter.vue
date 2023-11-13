@@ -14,9 +14,18 @@
                   filled
                   v-model="filterForm.keyword"
                   rounded
+                  autocomplete="off"
                 >
                   <template v-slot:append>
-                    <v-btn large class="primary" id="search-btn" rounded> Search </v-btn>
+                    <v-btn
+                      large
+                      class="primary"
+                      :loading="searchLoading"
+                      id="search-btn"
+                      rounded
+                    >
+                      Search
+                    </v-btn>
                   </template>
                 </v-text-field>
               </div>
@@ -31,13 +40,15 @@
                     :class="{ 'menu-opened': menuOpened }"
                     color="surface"
                     class="text-capitalize text-h4 menu-btn"
-                    @click="desktopFilter=false"
+                    @click="desktopFilter = false"
                     plain
                     dark
                     v-bind="attrs"
                     v-on="on"
                     >Curriculum
-                    <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
+                    <v-icon right dark color="primary" large>
+                      mdi-chevron-down
+                    </v-icon>
                   </v-btn>
                 </template>
                 <v-list class="school-filter-list">
@@ -52,7 +63,10 @@
                   </v-list-item>
                 </v-list>
               </v-menu>
-              <div :class="{ 'menu-opened': menuOpened }" class="vertical-line"></div>
+              <div
+                :class="{ 'menu-opened': menuOpened }"
+                class="vertical-line"
+              ></div>
 
               <v-menu offset-y>
                 <template v-slot:activator="{ on, attrs }">
@@ -60,16 +74,19 @@
                     color="surface"
                     class="text-capitalize text-h4"
                     plain
-                    @click="desktopFilter=false"
+                    @click="desktopFilter = false"
                     dark
                     v-bind="attrs"
                     v-on="on"
                   >
-                    Tuition fee&nbsp;<span style="color: #667085; text-transform: none"
+                    Tuition fee&nbsp;<span
+                      style="color: #667085; text-transform: none"
                       >to</span
                     >&nbsp;${{ filterForm.tuition_fee | numberFormat }}
 
-                    <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
+                    <v-icon right dark color="primary" large>
+                      mdi-chevron-down
+                    </v-icon>
                   </v-btn>
                 </template>
                 <v-card class="school-filter-list" width="400">
@@ -94,7 +111,9 @@
               >
                 <v-icon right dark size="24"> mdi-filter </v-icon>
                 &nbsp; Filter
-                <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
+                <v-icon right dark color="primary" large>
+                  mdi-chevron-down
+                </v-icon>
               </v-btn>
               <div class="vertical-line"></div>
 
@@ -104,14 +123,16 @@
                     color="surface"
                     class="text-capitalize text-h4"
                     plain
-                    @click="desktopFilter=false"
+                    @click="desktopFilter = false"
                     dark
                     v-bind="attrs"
                     v-on="on"
                   >
                     <v-icon right dark size="24"> mdi-filter-variant </v-icon>
                     &nbsp; Sort
-                    <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
+                    <v-icon right dark color="primary" large>
+                      mdi-chevron-down
+                    </v-icon>
                   </v-btn>
                 </template>
                 <v-list class="school-filter-list">
@@ -154,6 +175,7 @@
                 outlined
                 clearable
                 rounded
+                @change="countryChange()"
               ></v-autocomplete>
             </v-col>
             <v-col cols="4">
@@ -166,6 +188,7 @@
                 outlined
                 rounded
                 clearable
+                @change="stateChange()"
               ></v-autocomplete>
             </v-col>
             <v-col cols="4">
@@ -186,14 +209,10 @@
               <p class="text-h4">School type</p>
               <div class="pl-8">
                 <v-checkbox
+                  v-for="(item, index) in filter.schoolTypeList"
                   v-model="filterForm.school_type"
-                  label="Public"
-                  value="public"
-                ></v-checkbox>
-                <v-checkbox
-                  v-model="filterForm.school_type"
-                  label="Private"
-                  value="private"
+                  :label="item.title"
+                  :value="item.id"
                 ></v-checkbox>
               </div>
             </v-col>
@@ -201,24 +220,10 @@
               <p class="text-h4">Religion</p>
               <div class="pl-8">
                 <v-checkbox
+                  v-for="(item, index) in filter.religionList"
                   v-model="filterForm.religion"
-                  label="Catholic"
-                  value="catholic"
-                ></v-checkbox>
-                <v-checkbox
-                  v-model="filterForm.religion"
-                  label="Christian"
-                  value="christian"
-                ></v-checkbox>
-                <v-checkbox
-                  v-model="filterForm.religion"
-                  label="Jewish"
-                  value="jewish"
-                ></v-checkbox>
-                <v-checkbox
-                  v-model="filterForm.religion"
-                  label="Islamic"
-                  value="islamic"
+                  :label="item.title"
+                  :value="item.id"
                 ></v-checkbox>
               </div>
             </v-col>
@@ -226,24 +231,10 @@
               <p class="text-h4">Boarding types</p>
               <div class="pl-8">
                 <v-checkbox
-                  v-model="filterForm.boarding_types"
-                  label="Online"
-                  value="online"
-                ></v-checkbox>
-                <v-checkbox
-                  v-model="filterForm.boarding_types"
-                  label="Special education"
-                  value="special_education"
-                ></v-checkbox>
-                <v-checkbox
-                  v-model="filterForm.boarding_types"
-                  label="Montessori"
-                  value="montessori"
-                ></v-checkbox>
-                <v-checkbox
-                  v-model="filterForm.boarding_types"
-                  label="Therapeutic"
-                  value="therapeutic"
+                  v-for="(item, index) in filter.boardingTypeList"
+                  v-model="filterForm.boarding_type"
+                  :label="item.title"
+                  :value="item.id"
                 ></v-checkbox>
               </div>
             </v-col>
@@ -251,19 +242,10 @@
               <p class="text-h4">Coed status</p>
               <div class="pl-8">
                 <v-checkbox
+                  v-for="(item, index) in filter.coedStatusList"
                   v-model="filterForm.coed_status"
-                  label="All Girl"
-                  value="all_girl"
-                ></v-checkbox>
-                <v-checkbox
-                  v-model="filterForm.coed_status"
-                  label="All Boy"
-                  value="all_boy"
-                ></v-checkbox>
-                <v-checkbox
-                  v-model="filterForm.coed_status"
-                  label="Coeducational"
-                  value="coeducational"
+                  :label="item.title"
+                  :value="item.id"
                 ></v-checkbox>
               </div>
             </v-col>
@@ -286,6 +268,10 @@ export default {
         countryList: [],
         stateList: [],
         cityList: [],
+        schoolTypeList: [],
+        boardingTypeList: [],
+        coedStatusList: [],
+        religionList: [],
       },
       sortList: [
         {
@@ -314,10 +300,11 @@ export default {
         city: 0,
         school_type: [],
         religion: [],
-        boarding_types: [],
+        boarding_type: [],
         coed_status: [],
       },
       menuOpened: false,
+      searchLoading: false,
     };
   },
   created() {
@@ -326,17 +313,38 @@ export default {
     };
     this.getFilterList({ type: "countries" }, "countries");
     this.getFilterList(params, "section");
+    this.getFilterList({ type: "school_type" }, "school_type");
+    this.getFilterList({ type: "boarding_type" }, "boarding_type");
+    this.getFilterList({ type: "coed_status" }, "coed_status");
+    this.getFilterList({ type: "religion" }, "religion");
 
     //Init filter value
-    if (this.$route.query.country) this.filterForm.country = this.$route.query.country;
-    if (this.$route.query.state) this.filterForm.state = this.$route.query.state;
+    if (this.$route.query.keyword)
+      this.filterForm.keyword = this.$route.query.keyword;
+    if (this.$route.query.curriculum)
+      this.filterForm.curriculum = this.$route.query.curriculum;
+    if (this.$route.query.country){
+      this.filterForm.country = this.$route.query.country;
+      this.getFilterList(
+        { type: "states", country_id: this.filterForm.country },
+        "states"
+      );
+    }
+    if (this.$route.query.state){
+      this.filterForm.state = this.$route.query.state;
+      this.getFilterList(
+        { type: "cities", state_id: this.filterForm.state },
+        "cities"
+      );
+    }
     if (this.$route.query.city) this.filterForm.city = this.$route.query.city;
     if (this.$route.query.school_type)
       this.filterForm.school_type = this.$route.query.school_type;
     this.filterForm.city = this.$route.query.city;
-    if (this.$route.query.religion) this.filterForm.religion = this.$route.query.religion;
-    if (this.$route.query.boarding_types)
-      this.filterForm.boarding_types = this.$route.query.boarding_types;
+    if (this.$route.query.religion)
+      this.filterForm.religion = this.$route.query.religion;
+    if (this.$route.query.boarding_type)
+      this.filterForm.boarding_type = this.$route.query.boarding_type;
     if (this.$route.query.coed_status)
       this.filterForm.coed_status = this.$route.query.coed_status;
     //End init filter value
@@ -348,20 +356,6 @@ export default {
     "filterForm.tuition_fee"(val) {
       this.updateQueryParams();
     },
-    "filterForm.country"(val) {
-      this.filter.stateList=[];
-      this.filter.cityList=[];
-      this.filterForm.state='';
-      this.filterForm.city='';
-      this.updateQueryParams();
-      this.getFilterList({ type: "states", country_id: this.filterForm.country }, "states");
-    },
-    "filterForm.state"(val) {
-      this.filter.cityList=[];
-      this.filterForm.city='';
-      this.updateQueryParams();
-      this.getFilterList({ type: "cities", state_id: this.filterForm.state }, "cities");
-    },
     "filterForm.city"(val) {
       this.updateQueryParams();
     },
@@ -371,7 +365,7 @@ export default {
     "filterForm.religion"(val) {
       this.updateQueryParams();
     },
-    "filterForm.boarding_types"(val) {
+    "filterForm.boarding_type"(val) {
       this.updateQueryParams();
     },
     "filterForm.coed_status"(val) {
@@ -388,101 +382,28 @@ export default {
           var data = {};
           if (type == "countries") {
             this.filter.countryList = res.data;
+            this.$parent.filterLoadedStatus.country = true;
           } else if (type == "states") {
             this.filter.stateList = res.data;
+            this.$parent.filterLoadedStatus.state = true;
           } else if (type == "cities") {
             this.filter.cityList = res.data;
+            this.$parent.filterLoadedStatus.city = true;
+          } else if (type == "school_type") {
+            this.filter.schoolTypeList = res.data;
+            this.$parent.filterLoadedStatus.school_type = true;
+          } else if (type == "boarding_type") {
+            this.filter.boardingTypeList = res.data;
+            this.$parent.filterLoadedStatus.boarding_type = true;
+          } else if (type == "coed_status") {
+            this.filter.coedStatusList = res.data;
+            this.$parent.filterLoadedStatus.coed_status = true;
+          } else if (type == "religion") {
+            this.filter.religionList = res.data;
+            this.$parent.filterLoadedStatus.religion = true;
           } else if (type == "section") {
             this.filter.curriculumList = res.data;
-
-            //Initiate loading filter
-            if (this.$route.query.section > 0) {
-              data = {
-                type: "base",
-                section_id: this.$route.query.section,
-              };
-              this.getFilterList(data, "base");
-              this.base_val = this.$route.query.base;
-
-              this.applied_filter.select_section_title = this.filter.section_list.find(
-                (x) => x.id === this.section_val
-              ).title;
-
-              //Set breadcrumbs info
-              this.setBreadcrumbInfo();
-            }
-            //
-          } else if (type === "base") {
-            this.filter.base_list = res.data;
-
-            //Get lesson data
-            if (this.$route.query.base > 0) {
-              data = {
-                type: "lesson",
-                base_id: this.$route.query.base,
-              };
-              this.getFilterList(data, "lesson");
-
-              //Set lesson val
-              this.lesson_val = this.$route.query.lesson;
-
-              //Enable tag
-              this.applied_filter.select_base_title = this.filter.base_list.find(
-                (x) => x.id === this.base_val
-              ).title;
-
-              //Set breadcrumbs info
-              this.setBreadcrumbInfo();
-            }
-          } else if (type === "lesson") {
-            this.filter.lesson_list = res.data;
-
-            //Get lesson data
-            if (this.$route.query.lesson > 0) {
-              data = {
-                type: "topic",
-                lesson_id: this.$route.query.lesson,
-              };
-              this.getFilterList(data, "topic");
-
-              //Set topic val
-              this.topic_val = this.$route.query.topic;
-
-              //Enable tag
-              this.applied_filter.select_lesson_title = this.filter.lesson_list.find(
-                (x) => x.id === this.$route.query.lesson
-              ).title;
-
-              //Set breadcrumbs info
-              this.setBreadcrumbInfo();
-            }
-          } else if (type === "topic") {
-            this.filter.topic_list = res.data;
-
-            //Enable tag
-            if (this.$route.query.topic > 0)
-              this.applied_filter.select_topic_title = this.filter.topic_list.find(
-                (x) => x.id === this.topic_val
-              ).title;
-          } else if (type === "state") {
-            this.filter.state_list = res.data;
-
-            //Enable tag
-            if (this.$route.query.state > 0) {
-              this.state_val = this.$route.query.state;
-              this.applied_filter.select_state_title = this.filter.state_list.find(
-                (x) => x.id === this.state_val
-              ).title;
-            }
-            if (this.$route.query.city > 0) this.city_val = this.$route.query.city;
-          } else if (type === "city") {
-            this.filter.city_list = res.data;
-
-            //Enable tag
-            if (this.city_val > 0 && this.filter.city_list.length)
-              this.applied_filter.select_city_title = this.filter.city_list.find(
-                (x) => x.id === this.city_val
-              ).title;
+            this.$parent.filterLoadedStatus.curriculum = true;
           }
         })
         .catch((err) => {
@@ -499,7 +420,8 @@ export default {
     //Update router query params
     updateQueryParams() {
       const query = {};
-      if (this.filterForm.keyword != "") query.keyword = this.filterForm.keyword;
+      if (this.filterForm.keyword != "")
+        query.keyword = this.filterForm.keyword;
 
       if (this.filterForm.curriculum != "") {
         query.curriculum = this.filterForm.curriculum;
@@ -521,7 +443,10 @@ export default {
         query.city = this.filterForm.city;
       }
 
-      if (this.filterForm.school_type && this.filterForm.school_type.length > 0) {
+      if (
+        this.filterForm.school_type &&
+        this.filterForm.school_type.length > 0
+      ) {
         query.school_type = this.filterForm.school_type;
       }
 
@@ -529,23 +454,51 @@ export default {
         query.religion = this.filterForm.religion;
       }
 
-      if (this.filterForm.boarding_types && this.filterForm.boarding_types.length > 0) {
-        query.boarding_types = this.filterForm.boarding_types;
+      if (
+        this.filterForm.boarding_type &&
+        this.filterForm.boarding_type.length > 0
+      ) {
+        query.boarding_type = this.filterForm.boarding_type;
       }
 
-      if (this.filterForm.coed_status && this.filterForm.coed_status.length > 0) {
+      if (
+        this.filterForm.coed_status &&
+        this.filterForm.coed_status.length > 0
+      ) {
         query.coed_status = this.filterForm.coed_status;
       }
 
+
       // Handle more query parameters here ...
       this.$router.replace({ query: query }).catch((err) => {
-        //Do noting
+        console.log(err);
       });
     },
 
     toggleActiveClass() {
       this.menuOpened = !this.menuOpened;
     },
+
+    countryChange(){
+      this.filter.stateList = [];
+      this.filter.cityList = [];
+      this.filterForm.state = "";
+      this.filterForm.city = "";
+      this.updateQueryParams();
+      this.getFilterList(
+        { type: "states", country_id: this.filterForm.country },
+        "states"
+      );
+    },
+    stateChange(){
+      this.filter.cityList = [];
+      this.filterForm.city = "";
+      this.updateQueryParams();
+      this.getFilterList(
+        { type: "cities", state_id: this.filterForm.state },
+        "cities"
+      );
+    }
   },
 };
 </script>
@@ -595,7 +548,6 @@ export default {
 
 .school-filter-list {
   margin-top: 1.6rem;
-
 }
 
 .menu-btn {
@@ -603,15 +555,15 @@ export default {
   .v-btn__content {
     padding-right: 1.6rem;
   }
-} 
+}
 
 /* .menu-opened {
   border-radius: 10px 10px 0 0;
   background-color: #fff !important; /* Change color when opened */
-  /* .v-btn__content { */
-    /* color: #000; */
-  /* } */
-/* } */ 
+/* .v-btn__content { */
+/* color: #000; */
+/* } */
+/* } */
 
 /* .menu-opened.vertical-line {
   display: none;

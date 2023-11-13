@@ -1,6 +1,6 @@
 <template>
   <div id="school-list">
-    <schoolListFilter ref="schoolFilter"/>
+    <schoolListFilter ref="schoolFilter" />
     <div id="map-wrap">
       <client-only>
         <l-map
@@ -42,8 +42,90 @@
       <v-container id="action-section">
         <v-row>
           <v-col cols="9">
-            <v-chip small close outlined> Elamentry </v-chip>
-            <v-chip small close outlined> Traditional </v-chip>
+            <v-chip
+              small
+              close
+              outlined
+              v-if="$route.query.keyword"
+              @click:close="closeFilter('keyword')"
+            >
+              {{ $route.query.keyword }}
+            </v-chip>
+            <v-chip
+              small
+              close
+              outlined
+              v-if="$route.query.curriculum && filterLoadedStatus.curriculum"
+              @click:close="closeFilter('curriculum')"
+            >
+              {{ findTitle("curriculum", $route.query.curriculum) }}
+            </v-chip>
+            <v-chip
+              small
+              close
+              outlined
+              v-if="$route.query.tuition_fee"
+              @click:close="closeFilter('tuition_fee')"
+            >
+              Tuition fee above: ${{ $route.query.tuition_fee }}
+            </v-chip>
+            <v-chip
+              small
+              close
+              outlined
+              v-if="$route.query.country && filterLoadedStatus.country"
+              @click:close="closeFilter('country')"
+            >
+              {{ findTitle("country", $route.query.country) }}
+            </v-chip>
+            <v-chip
+              small
+              close
+              outlined
+              v-if="$route.query.state && filterLoadedStatus.state"
+              @click:close="closeFilter('state')"
+            >
+              {{ findTitle("state", $route.query.state) }}
+            </v-chip>
+            <v-chip
+              small
+              close
+              outlined
+              v-if="$route.query.city && filterLoadedStatus.city"
+              @click:close="closeFilter('city')"
+            >
+              {{ findTitle("city", $route.query.city) }}
+            </v-chip>
+            <v-chip
+              small
+              close
+              outlined
+              v-if="$route.query.school_type && filterLoadedStatus.school_type"
+              v-for="(item,index) in $route.query.school_type"
+              @click:close="closeFilter('school_type',item)"
+            >
+              {{ findTitle("school_type", item)  }}
+            </v-chip>
+            <v-chip
+              small
+              close
+              outlined
+              v-if="$route.query.religion && filterLoadedStatus.religion"
+              v-for="(item,index) in $route.query.religion"
+              @click:close="closeFilter('religion',item)"
+            >
+              {{ findTitle("religion", item)  }}
+            </v-chip>
+            <v-chip
+              small
+              close
+              outlined
+              v-if="$route.query.boarding_type && filterLoadedStatus.boarding_type"
+              v-for="(item,index) in $route.query.boarding_type"
+              @click:close="closeFilter('boarding_type',item)"
+            >
+              {{ findTitle("boarding_type", item)  }}
+            </v-chip>
           </v-col>
           <v-col cols="3" class="text-right">
             <v-btn
@@ -127,9 +209,7 @@
               </v-card-text>
             </v-card>
           </div>
-          <div v-else>
-              Opps! no data found
-          </div>
+          <div v-else>Opps! no data found</div>
         </v-container>
       </div>
     </div>
@@ -179,16 +259,28 @@ export default {
           title: "test2",
         },
       ],
-      filter:{
-        keyword:'',
-        curriculum:'',
-        tuition_fee:'',
-        country:'',
-        state:'',
-        city:''
-      }
-
-    
+      filter: {
+        keyword: "",
+        curriculum: "",
+        tuition_fee: "",
+        country: "",
+        state: "",
+        city: "",
+        school_type: "",
+        religion: "",
+        boarding_type: "",
+        coed_status: "",
+      },
+      filterLoadedStatus: {
+        curriculum: false,
+        country: false,
+        state: false,
+        city: false,
+        school_type:false,
+        religion:false,
+        boarding_type:false,
+        coed_status:false,
+      },
     };
   },
   mounted() {
@@ -211,52 +303,88 @@ export default {
   beforeDestroy() {
     document.body.classList.remove("disable-scroll");
   },
-  watch:{
-    "$route.query.keyword"(val){
-      this.filter.keyword=val;
-      this.pageNum=1;
-      this.schoolList=[];
-      this.allDataLoaded=false;
+  watch: {
+    "$route.query.keyword"(val) {
+      this.filter.keyword = val;
+      this.$refs.schoolFilter.searchLoading = true;
+      this.pageNum = 1;
+      this.schoolList = [];
+      this.allDataLoaded = false;
       this.getSchoolList();
     },
-    "$route.query.curriculum"(val){
-       this.filter.curriculum=val;
-       this.pageNum=1;
-       this.schoolList=[];
-       this.allDataLoaded=false;
-       this.getSchoolList();
+    "$route.query.curriculum"(val) {
+      this.filter.curriculum = val;
+      this.pageNum = 1;
+      this.schoolList = [];
+      this.allDataLoaded = false;
+      this.getSchoolList();
     },
 
-    "$route.query.tuition_fee"(val){
-       this.filter.tuition_fee=val;
-       this.pageNum=1;
-       this.schoolList=[];
-       this.allDataLoaded=false;
-       this.getSchoolList();
+    "$route.query.tuition_fee"(val) {
+      this.filter.tuition_fee = val;
+      this.pageNum = 1;
+      this.schoolList = [];
+      this.allDataLoaded = false;
+      this.getSchoolList();
     },
-    "$route.query.country"(val){
-       this.filter.country=val;
-       this.pageNum=1;
-       this.schoolList=[];
-       this.allDataLoaded=false;
-       this.getSchoolList();
+    "$route.query.country"(val) {
+      this.filter.country = val;
+      this.pageNum = 1;
+      this.schoolList = [];
+      this.allDataLoaded = false;
+      this.getSchoolList();
     },
-    "$route.query.state"(val){
-       this.filter.state=val;
-       this.pageNum=1;
-       this.schoolList=[];
-       this.allDataLoaded=false;
-       this.getSchoolList();
+    "$route.query.state"(val) {
+      this.filter.state = val;
+      this.pageNum = 1;
+      this.schoolList = [];
+      this.allDataLoaded = false;
+      this.getSchoolList();
     },
-    "$route.query.city"(val){
-       this.filter.city=val;
-       this.pageNum=1;
-       this.allDataLoaded=false;
-       this.getSchoolList();
+    "$route.query.city"(val) {
+      this.filter.city = val;
+      this.pageNum = 1;
+      this.schoolList = [];
+      this.allDataLoaded = false;
+      this.getSchoolList();
+    },
+    "$route.query.school_type"(val) {
+      if (val) this.filter.school_type = val.toString();
+      else this.filter.school_type = "";
+
+      this.pageNum = 1;
+      this.schoolList = [];
+      this.allDataLoaded = false;
+      this.getSchoolList();
+    },
+    "$route.query.religion"(val) {
+      if (val) this.filter.religion = val.toString();
+      else this.filter.religion = "";
+
+      this.pageNum = 1;
+      this.schoolList = [];
+      this.allDataLoaded = false;
+      this.getSchoolList();
+    },
+    "$route.query.boarding_type"(val) {
+      if (val) this.filter.boarding_type = val.toString();
+      else this.filter.boarding_type = "";
+
+      this.pageNum = 1;
+      this.schoolList = [];
+      this.allDataLoaded = false;
+      this.getSchoolList();
+    },
+    "$route.query.coed_status"(val) {
+      if (val) this.filter.coed_status = val.toString();
+      else this.filter.coed_status = "";
+
+      this.pageNum = 1;
+      this.schoolList = [];
+      this.allDataLoaded = false;
+      this.getSchoolList();
     },
   },
-
-
 
   methods: {
     onMoveEnd(event) {
@@ -307,17 +435,20 @@ export default {
             .$get("/api/v1/schools/search", {
               params: {
                 page: this.pageNum,
-                name:this.filter.keyword,
-                section:this.filter.curriculum,
-                tuition_fee:this.filter.tuition_fee,
-                country:this.filter.country,
-                state:this.filter.state,
-                city:this.filter.city,
-
+                name: this.$route.query.keyword,
+                section: this.$route.query.curriculum,
+                tuition_fee: this.filter.tuition_fee,
+                country: this.$route.query.country,
+                state: this.$route.query.state,
+                city: this.$route.query.city,
+                school_type: this.$route.query.school_type,
+                religion: this.$route.query.religion,
+                boarding_type: this.$route.query.boarding_type,
+                sex: this.$route.query.coed_status,
               },
             })
             .then((response) => {
-              this.$refs.schoolFilter.resultCount=response.data.num;
+              this.$refs.schoolFilter.resultCount = response.data.num;
               this.schoolList.push(...response.data.list);
 
               if (response.data.list.length === 0) this.allDataLoaded = true;
@@ -327,6 +458,7 @@ export default {
             })
             .finally(() => {
               this.schoolLoading = false;
+              this.$refs.schoolFilter.searchLoading = false;
             });
       }, 800);
     },
@@ -340,8 +472,65 @@ export default {
     isScrollAtBottom(element) {
       return element.scrollHeight - element.scrollTop == element.clientHeight;
     },
+    closeFilter(filter_name,other_data=null) {
+      if (filter_name == "keyword")
+        this.$refs.schoolFilter.filterForm.keyword = "";
+      else if (filter_name == "curriculum")
+        this.$refs.schoolFilter.updateFilter("curriculum", "");
+      else if (filter_name == "tuition_fee")
+        this.$refs.schoolFilter.filterForm.tuition_fee = 0;
+      else if (filter_name == "country") {
+        this.$refs.schoolFilter.filterForm.country = 0;
+        this.$refs.schoolFilter.filterForm.state = 0;
+        this.$refs.schoolFilter.filterForm.city = 0;
+        this.$refs.schoolFilter.filter.stateList = [];
+        this.$refs.schoolFilter.filter.cityList = [];
+        this.$refs.schoolFilter.updateQueryParams();
+      } else if (filter_name == "state") {
+        this.$refs.schoolFilter.filterForm.state = 0;
+        this.$refs.schoolFilter.filterForm.city = 0;
+        this.$refs.schoolFilter.filter.cityList = [];
+        this.$refs.schoolFilter.updateQueryParams();
+      } else if (filter_name == "city") {
+        this.$refs.schoolFilter.filterForm.city = 0;
+        this.$refs.schoolFilter.updateQueryParams();
+      }else if(filter_name=="school_type"){
+        var index=this.$refs.schoolFilter.filterForm.school_type.findIndex(x=>x==other_data);
+        this.$refs.schoolFilter.filterForm.school_type.splice(index,1);
+      }else if(filter_name=="religion"){
+        var index=this.$refs.schoolFilter.filterForm.religion.findIndex(x=>x==other_data);
+        this.$refs.schoolFilter.filterForm.religion.splice(index,1);
+      }
+    },
+    findTitle(type, id) {
+      var title = "";
+      if (type == "curriculum")
+        title = this.$refs.schoolFilter.filter.curriculumList.find(
+          (x) => x.id == id
+        ).title;
+      else if (type == "country")
+        title = this.$refs.schoolFilter.filter.countryList.find(
+          (x) => x.id == id
+        ).name;
+      else if (type == "state")
+        title = this.$refs.schoolFilter.filter.stateList.find(
+          (x) => x.id == id
+        ).title;
+      else if (type == "city")
+        title = this.$refs.schoolFilter.filter.cityList.find(
+          (x) => x.id == id
+        ).title;
+      else if (type == "school_type")
+        title = this.$refs.schoolFilter.filter.schoolTypeList.find(
+          (x) => x.id == id
+        ).title;
+      else if (type == "religion")
+        title = this.$refs.schoolFilter.filter.religionList.find(
+          (x) => x.id == id
+        ).title;
 
-    
+      return title;
+    },
   },
 };
 </script>
@@ -351,8 +540,6 @@ export default {
   position: relative;
   height: 100vh;
   overflow: hidden;
-
-  
 
   #map-wrap {
     height: 100vh;
@@ -487,8 +674,6 @@ export default {
   overflow: hidden !important;
   height: 100vh;
 }
-
-
 
 .menuable__content__active {
   z-index: 1100 !important;
