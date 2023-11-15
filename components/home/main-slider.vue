@@ -1,7 +1,7 @@
 <template>
     <div id="slider-container">
         <v-col cols="12" sm="12" md="12" class="pt-0 px-0 pt-sm-0">
-            <v-carousel id="main-slider" v-model="carousel_model" cycle delimiter-icon="mdi-square" interval="5000"
+            <v-carousel id="main-slider" v-model="carousel_model" cycle  delimiter-icon="mdi-square" interval="5000"
                 hide-delimiter-background :show-arrows="false">
 
                 <v-carousel-item v-for="(slide, i) in slides" :key="i">
@@ -178,7 +178,15 @@ export default {
                     text: "Discover the future of education with our AI-powered learning platform,<br> revolutionizing the way you acquire knowledge and skills.",
                     id: 'ai-slide',
                     link: '/smart-learning'
-                }, {
+                },
+                {
+                    title: '<span class="gama-text-h1">School finder</span>',
+                    img: 'school-finder.png',
+                    text: "Discover the future of education with our AI-powered learning platform,<br> revolutionizing the way you acquire knowledge and skills.",
+                    id: 'school-finder-slide',
+                    link: '/school'
+                },
+                {
                     title: '<span class="gama-text-h1 font-weight-bold">Question<span class="d-sm-none"><br>&nbsp&nbsp</span> & Answer</span>',
                     text: "Q&A made easy. Connect with classmates and<br> teachers for quick answers to your questions.",
                     img: 'a-q.png',
@@ -359,6 +367,22 @@ export default {
 
 
 
+#main-slider #school-finder-slide {
+    padding-top: 6rem;
+    background: linear-gradient(83deg, #465568 0.59%, #86AFD7 100%);
+    background-repeat: no-repeat;
+    height: 21.5rem;
+}
+
+#main-slider #school-finder-slide .v-card {
+    height: 21.5rem;
+    background-color: transparent;
+    background-image: url('/images/school-finder.png');
+    background-position: right 2.4rem;
+    background-size: 15rem 18.1rem;
+    background-repeat: no-repeat;
+}
+
 
 #main-slider #ai-slide {
     padding-top: 6rem;
@@ -468,6 +492,16 @@ export default {
     }
 
 
+
+    #main-slider #school-finder-slide {
+        height: 27rem;
+    }
+
+    #main-slider #school-finder-slide .v-card {
+        height: 34rem;
+        background-position: 98% top;
+        background-size: 17.7rem 22.11rem;
+    }
 
     #main-slider #ai-slide {
         height: 27rem;
@@ -876,6 +910,23 @@ export default {
             }
 
         }
+    }
+
+
+     #main-slider #school-finder-slide {
+        padding-top: 6rem;
+        background: linear-gradient(83deg, #465568 0.59%, #86AFD7 100%);
+        background-repeat: no-repeat;
+        height: 44rem;
+    }
+
+    #main-slider #school-finder-slide .v-card {
+        height: 42rem;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        background-size: 32.4rem 40.5rem;
+        z-index: 1;
     }
 
     #main-slider #ai-slide {

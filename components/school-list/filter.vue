@@ -32,17 +32,14 @@
             </div>
           </v-col>
 
-          <v-col cols="7" md="8" class="pb-0">
+          <v-col cols="7" md="8" class="pb-0" id="menu-section">
             <div class="d-flex">
               <v-menu offset-y>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     :class="{ 'menu-opened': menuOpened }"
-                    color="surface"
                     class="text-capitalize text-h4 menu-btn"
                     @click="desktopFilter = false"
-                    plain
-                    dark
                     v-bind="attrs"
                     v-on="on"
                     >Curriculum
@@ -71,11 +68,8 @@
               <v-menu offset-y>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    color="surface"
-                    class="text-capitalize text-h4"
-                    plain
+                    class="text-transform-none text-h4"
                     @click="desktopFilter = false"
-                    dark
                     v-bind="attrs"
                     v-on="on"
                   >
@@ -103,10 +97,7 @@
               <div class="vertical-line"></div>
 
               <v-btn
-                color="surface"
                 class="text-capitalize text-h4"
-                plain
-                dark
                 @click="desktopFilter = !desktopFilter"
               >
                 <v-icon right dark size="24"> mdi-filter </v-icon>
@@ -120,11 +111,8 @@
               <v-menu offset-y>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    color="surface"
                     class="text-capitalize text-h4"
-                    plain
                     @click="desktopFilter = false"
-                    dark
                     v-bind="attrs"
                     v-on="on"
                   >
@@ -139,7 +127,7 @@
                   <v-list-item
                     v-for="(item, index) in sortList"
                     :key="index"
-                    @click="updateFilter('curriculum', item.id)"
+                    @click="updateFilter('sort', item.id)"
                   >
                     <v-list-item-title class="text-h5">{{
                       item.title
@@ -149,8 +137,8 @@
               </v-menu>
               <div class="vertical-line"></div>
 
-              <v-btn class="text-h6 text-capitalize" plain dark>
-                Search result &nbsp;
+              <v-btn class="text-h6 text-capitalize " >
+                <span class="gray--text">Search result</span> &nbsp;
                 <span class="white--text">
                   {{ resultCount }}
                 </span>
@@ -275,19 +263,19 @@ export default {
       },
       sortList: [
         {
-          value: "mostScore",
+          id: 1,
           title: "Most score",
         },
         {
-          value: "mostActive",
+          id: 2,
           title: "Most active",
         },
         {
-          value: "updateDate",
+          id: 3,
           title: "Update date",
         },
         {
-          value: "tuitionFee",
+          id: 4,
           title: "Tuition fee",
         },
       ],
@@ -323,14 +311,14 @@ export default {
       this.filterForm.keyword = this.$route.query.keyword;
     if (this.$route.query.curriculum)
       this.filterForm.curriculum = this.$route.query.curriculum;
-    if (this.$route.query.country){
+    if (this.$route.query.country) {
       this.filterForm.country = this.$route.query.country;
       this.getFilterList(
         { type: "states", country_id: this.filterForm.country },
         "states"
       );
     }
-    if (this.$route.query.state){
+    if (this.$route.query.state) {
       this.filterForm.state = this.$route.query.state;
       this.getFilterList(
         { type: "cities", state_id: this.filterForm.state },
@@ -344,10 +332,16 @@ export default {
     if (this.$route.query.religion)
       this.filterForm.religion = this.$route.query.religion;
     if (this.$route.query.boarding_type)
-      this.filterForm.boarding_type = this.$route.query.boarding_type;
+      this.filterForm.boarding_type = Array.isArray(
+        this.$route.query.boarding_type
+      )
+        ? this.$route.query.boarding_type
+        : [this.$route.query.boarding_type];
     if (this.$route.query.coed_status)
       this.filterForm.coed_status = this.$route.query.coed_status;
     //End init filter value
+
+    this.$parent.filterLoadedStatus.sort = true;
   },
   watch: {
     "filterForm.keyword"(val) {
@@ -413,6 +407,7 @@ export default {
 
     updateFilter(type, value) {
       if (type == "curriculum") this.filterForm.curriculum = value;
+      if (type == "sort") this.filterForm.sort = value;
 
       this.updateQueryParams();
     },
@@ -425,6 +420,10 @@ export default {
 
       if (this.filterForm.curriculum != "") {
         query.curriculum = this.filterForm.curriculum;
+      }
+
+      if (this.filterForm.sort != "") {
+        query.sort = this.filterForm.sort;
       }
 
       if (this.filterForm.tuition_fee > 0) {
@@ -468,7 +467,6 @@ export default {
         query.coed_status = this.filterForm.coed_status;
       }
 
-
       // Handle more query parameters here ...
       this.$router.replace({ query: query }).catch((err) => {
         console.log(err);
@@ -479,7 +477,7 @@ export default {
       this.menuOpened = !this.menuOpened;
     },
 
-    countryChange(){
+    countryChange() {
       this.filter.stateList = [];
       this.filter.cityList = [];
       this.filterForm.state = "";
@@ -490,7 +488,7 @@ export default {
         "states"
       );
     },
-    stateChange(){
+    stateChange() {
       this.filter.cityList = [];
       this.filterForm.city = "";
       this.updateQueryParams();
@@ -498,7 +496,7 @@ export default {
         { type: "cities", state_id: this.filterForm.state },
         "cities"
       );
-    }
+    },
   },
 };
 </script>
@@ -535,6 +533,23 @@ export default {
         }
       }
     }
+  }
+
+  #menu-section {
+    .v-btn--is-elevated {
+      box-shadow: none !important;
+    }
+    .v-btn {
+      background: transparent;
+
+      .v-btn__content {
+        color: #fff;
+      }
+    }
+
+    .v-btn::before { background: none }
+
+
   }
 }
 

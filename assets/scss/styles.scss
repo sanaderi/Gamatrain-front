@@ -9,6 +9,17 @@ html {
 
 
 //Customize vuetify button
+.v-btn__content {
+  font-family: Inter;
+}
+
+.gray--text{
+  color:#98a2b3!important;
+}
+
+.text-transform-none{
+  text-transform: none!important;
+}
 .v-btn:not(.v-btn--round).v-size--large.gama-btn {
   .v-btn__content {
     color: #24292F;

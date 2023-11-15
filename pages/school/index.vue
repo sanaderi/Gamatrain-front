@@ -18,9 +18,7 @@
           ></l-marker>
         </l-map>
       </client-only>
-    </div>
-
-    <v-container>
+      <v-container>
       <v-btn
         id="list-view-btn"
         x-large
@@ -32,6 +30,9 @@
         List view
       </v-btn>
     </v-container>
+    </div>
+
+    
 
     <div
       id="data-list-holder"
@@ -101,30 +102,51 @@
               close
               outlined
               v-if="$route.query.school_type && filterLoadedStatus.school_type"
-              v-for="(item,index) in $route.query.school_type"
-              @click:close="closeFilter('school_type',item)"
+              v-for="(item, index) in $route.query.school_type"
+              @click:close="closeFilter('school_type', item)"
             >
-              {{ findTitle("school_type", item)  }}
+              {{ findTitle("school_type", item) }}
             </v-chip>
             <v-chip
               small
               close
               outlined
               v-if="$route.query.religion && filterLoadedStatus.religion"
-              v-for="(item,index) in $route.query.religion"
-              @click:close="closeFilter('religion',item)"
+              v-for="(item, index) in $route.query.religion"
+              @click:close="closeFilter('religion', item)"
             >
-              {{ findTitle("religion", item)  }}
+              {{ findTitle("religion", item) }}
             </v-chip>
             <v-chip
               small
               close
               outlined
-              v-if="$route.query.boarding_type && filterLoadedStatus.boarding_type"
-              v-for="(item,index) in $route.query.boarding_type"
-              @click:close="closeFilter('boarding_type',item)"
+              v-if="
+                $route.query.boarding_type && filterLoadedStatus.boarding_type
+              "
+              v-for="(item, index) in boardingTypeArray"
+              @click:close="closeFilter('boarding_type', item)"
             >
-              {{ findTitle("boarding_type", item)  }}
+              {{ findTitle("boarding_type", item) }}
+            </v-chip>
+            <v-chip
+              small
+              close
+              outlined
+              v-if="$route.query.coed_status && filterLoadedStatus.coed_status"
+              v-for="(item, index) in coedStatusArray"
+              @click:close="closeFilter('coed_status', item)"
+            >
+              {{ findTitle("coed_status", item) }}
+            </v-chip>
+            <v-chip
+              small
+              close
+              outlined
+              v-if="$route.query.sort && filterLoadedStatus.sort"
+              @click:close="closeFilter('sort')"
+            >
+              {{ findTitle("sort", $route.query.sort) }}
             </v-chip>
           </v-col>
           <v-col cols="3" class="text-right">
@@ -276,10 +298,11 @@ export default {
         country: false,
         state: false,
         city: false,
-        school_type:false,
-        religion:false,
-        boarding_type:false,
-        coed_status:false,
+        school_type: false,
+        religion: false,
+        boarding_type: false,
+        coed_status: false,
+        sort: false,
       },
     };
   },
@@ -305,12 +328,19 @@ export default {
   },
   watch: {
     "$route.query.keyword"(val) {
-      this.filter.keyword = val;
-      this.$refs.schoolFilter.searchLoading = true;
-      this.pageNum = 1;
-      this.schoolList = [];
-      this.allDataLoaded = false;
-      this.getSchoolList();
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+
+      this.timer = setTimeout(() => {
+        this.filter.keyword = val;
+        this.$refs.schoolFilter.searchLoading = true;
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.allDataLoaded = false;
+        this.getSchoolList();
+      }, 800);
     },
     "$route.query.curriculum"(val) {
       this.filter.curriculum = val;
@@ -384,6 +414,13 @@ export default {
       this.allDataLoaded = false;
       this.getSchoolList();
     },
+    "$route.query.sort"(val) {
+      this.filter.sort = val;
+      this.pageNum = 1;
+      this.schoolList = [];
+      this.allDataLoaded = false;
+      this.getSchoolList();
+    },
   },
 
   methods: {
@@ -424,43 +461,39 @@ export default {
 
     getSchoolList() {
       this.schoolLoading = true;
-      if (this.timer) {
-        clearTimeout(this.timer);
-        this.timer = null;
-      }
 
-      this.timer = setTimeout(() => {
-        if (this.allDataLoaded == false)
-          this.$axios
-            .$get("/api/v1/schools/search", {
-              params: {
-                page: this.pageNum,
-                name: this.$route.query.keyword,
-                section: this.$route.query.curriculum,
-                tuition_fee: this.filter.tuition_fee,
-                country: this.$route.query.country,
-                state: this.$route.query.state,
-                city: this.$route.query.city,
-                school_type: this.$route.query.school_type,
-                religion: this.$route.query.religion,
-                boarding_type: this.$route.query.boarding_type,
-                sex: this.$route.query.coed_status,
-              },
-            })
-            .then((response) => {
-              this.$refs.schoolFilter.resultCount = response.data.num;
-              this.schoolList.push(...response.data.list);
+      if (this.allDataLoaded == false)
+        this.$axios
+          .$get("/api/v1/schools/search", {
+            params: {
+              page: this.pageNum,
+              name: this.$route.query.keyword,
+              section: this.$route.query.curriculum,
+              tuition_fee: this.$route.query.tuition_fee,
+              country: this.$route.query.country,
+              state: this.$route.query.state,
+              city: this.$route.query.city,
+              school_type: this.$route.query.school_type,
+              religion: this.$route.query.religion,
+              boarding_type: this.$route.query.boarding_type,
+              coed_status: this.$route.query.coed_status,
+              sort: this.$route.query.sort,
+            },
+          })
+          .then((response) => {
+            this.$refs.schoolFilter.resultCount = response.data.num;
+            this.schoolList.push(...response.data.list);
 
-              if (response.data.list.length === 0) this.allDataLoaded = true;
-            })
-            .catch((err) => {
-              console.error(err);
-            })
-            .finally(() => {
-              this.schoolLoading = false;
-              this.$refs.schoolFilter.searchLoading = false;
-            });
-      }, 800);
+            if (response.data.list.length === 0) this.allDataLoaded = true;
+          })
+          .catch((err) => {
+            console.error(err);
+          })
+          .finally(() => {
+            this.schoolLoading = false;
+            this.$refs.schoolFilter.searchLoading = false;
+          });
+
     },
     checkSchoolScroll() {
       const scrollableDiv = this.$refs.schoolListSection;
@@ -472,11 +505,13 @@ export default {
     isScrollAtBottom(element) {
       return element.scrollHeight - element.scrollTop == element.clientHeight;
     },
-    closeFilter(filter_name,other_data=null) {
+    closeFilter(filter_name, other_data = null) {
       if (filter_name == "keyword")
         this.$refs.schoolFilter.filterForm.keyword = "";
       else if (filter_name == "curriculum")
         this.$refs.schoolFilter.updateFilter("curriculum", "");
+      else if (filter_name == "sort")
+        this.$refs.schoolFilter.updateFilter("sort", "");
       else if (filter_name == "tuition_fee")
         this.$refs.schoolFilter.filterForm.tuition_fee = 0;
       else if (filter_name == "country") {
@@ -494,12 +529,26 @@ export default {
       } else if (filter_name == "city") {
         this.$refs.schoolFilter.filterForm.city = 0;
         this.$refs.schoolFilter.updateQueryParams();
-      }else if(filter_name=="school_type"){
-        var index=this.$refs.schoolFilter.filterForm.school_type.findIndex(x=>x==other_data);
-        this.$refs.schoolFilter.filterForm.school_type.splice(index,1);
-      }else if(filter_name=="religion"){
-        var index=this.$refs.schoolFilter.filterForm.religion.findIndex(x=>x==other_data);
-        this.$refs.schoolFilter.filterForm.religion.splice(index,1);
+      } else if (filter_name == "school_type") {
+        var index = this.$refs.schoolFilter.filterForm.school_type.findIndex(
+          (x) => x == other_data
+        );
+        this.$refs.schoolFilter.filterForm.school_type.splice(index, 1);
+      } else if (filter_name == "religion") {
+        var index = this.$refs.schoolFilter.filterForm.religion.findIndex(
+          (x) => x == other_data
+        );
+        this.$refs.schoolFilter.filterForm.religion.splice(index, 1);
+      } else if (filter_name == "boarding_type") {
+        var index = this.$refs.schoolFilter.filterForm.boarding_type.findIndex(
+          (x) => x == other_data
+        );
+        this.$refs.schoolFilter.filterForm.boarding_type.splice(index, 1);
+      } else if (filter_name == "coed_status") {
+        var index = this.$refs.schoolFilter.filterForm.coed_status.findIndex(
+          (x) => x == other_data
+        );
+        this.$refs.schoolFilter.filterForm.coed_status.splice(index, 1);
       }
     },
     findTitle(type, id) {
@@ -508,7 +557,9 @@ export default {
         title = this.$refs.schoolFilter.filter.curriculumList.find(
           (x) => x.id == id
         ).title;
-      else if (type == "country")
+      if (type == "sort") {
+        title = this.$refs.schoolFilter.sortList.find((x) => x.id == id).title;
+      } else if (type == "country")
         title = this.$refs.schoolFilter.filter.countryList.find(
           (x) => x.id == id
         ).name;
@@ -528,8 +579,40 @@ export default {
         title = this.$refs.schoolFilter.filter.religionList.find(
           (x) => x.id == id
         ).title;
+      else if (type == "boarding_type")
+        title = this.$refs.schoolFilter.filter.boardingTypeList.find(
+          (x) => x.id == id
+        ).title;
+      else if (type == "coed_status")
+        title = this.$refs.schoolFilter.filter.coedStatusList.find(
+          (x) => x.id == id
+        ).title;
 
       return title;
+    },
+  },
+  computed: {
+    boardingTypeArray() {
+      const boardingType = this.$route.query.boarding_type;
+
+      if (Array.isArray(boardingType)) {
+        return boardingType; // If it's already an array, return it as is
+      } else if (typeof boardingType === "string") {
+        return [boardingType]; // If it's a string, convert it to an array
+      } else {
+        return []; // If it's neither a string nor an array, return an empty array
+      }
+    },
+    coedStatusArray() {
+      const coedStatus = this.$route.query.coed_status;
+
+      if (Array.isArray(coedStatus)) {
+        return coedStatus; // If it's already an array, return it as is
+      } else if (typeof coedStatus === "string") {
+        return [coedStatus]; // If it's a string, convert it to an array
+      } else {
+        return []; // If it's neither a string nor an array, return an empty array
+      }
     },
   },
 };
@@ -542,7 +625,7 @@ export default {
   overflow: hidden;
 
   #map-wrap {
-    height: 100vh;
+    height: 85vh;
   }
 
   .container {
