@@ -38,7 +38,7 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     :class="{ 'menu-opened': menuOpened }"
-                    class="text-capitalize text-h4 menu-btn"
+                    class="text-capitalize gtext-t4 font-weight-medium menu-btn"
                     @click="desktopFilter = false"
                     v-bind="attrs"
                     v-on="on"
@@ -68,7 +68,7 @@
               <v-menu offset-y>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    class="text-transform-none text-h4"
+                    class="text-transform-none gtext-t4 font-weight-medium"
                     @click="desktopFilter = false"
                     v-bind="attrs"
                     v-on="on"
@@ -97,11 +97,11 @@
               <div class="vertical-line"></div>
 
               <v-btn
-                class="text-capitalize text-h4"
+                class="text-capitalize gtext-t4 font-weight-medium"
                 @click="desktopFilter = !desktopFilter"
               >
                 <v-icon right dark size="24"> mdi-filter </v-icon>
-                &nbsp; Filter
+                &nbsp;&nbsp;&nbsp; Filter
                 <v-icon right dark color="primary" large>
                   mdi-chevron-down
                 </v-icon>
@@ -111,14 +111,14 @@
               <v-menu offset-y>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    class="text-capitalize text-h4"
+                    class="text-capitalize gtext-t4 font-weight-medium"
                     @click="desktopFilter = false"
                     v-bind="attrs"
                     v-on="on"
                   >
                     <v-icon right dark size="24"> mdi-filter-variant </v-icon>
-                    &nbsp; Sort
-                    <v-icon right dark color="primary" large>
+                    &nbsp;&nbsp;&nbsp; Sort
+                    <v-icon size="24" right dark color="primary" >
                       mdi-chevron-down
                     </v-icon>
                   </v-btn>
@@ -137,7 +137,7 @@
               </v-menu>
               <div class="vertical-line"></div>
 
-              <v-btn class="text-h6 text-capitalize " >
+              <v-btn class="gtext-t4 font-weight-regular text-capitalize " >
                 <span class="gray--text">Search result</span> &nbsp;
                 <span class="white--text">
                   {{ resultCount }}
@@ -194,7 +194,7 @@
           </v-row>
           <v-row>
             <v-col cols="3">
-              <p class="text-h4">School type</p>
+              <p class="gtext-t4 font-weight-medium">School type</p>
               <div class="pl-8">
                 <v-checkbox
                   v-for="(item, index) in filter.schoolTypeList"
@@ -205,7 +205,7 @@
               </div>
             </v-col>
             <v-col cols="3">
-              <p class="text-h4">Religion</p>
+              <p class="gtext-t4 font-weight-medium">Religion</p>
               <div class="pl-8">
                 <v-checkbox
                   v-for="(item, index) in filter.religionList"
@@ -216,7 +216,7 @@
               </div>
             </v-col>
             <v-col cols="3">
-              <p class="text-h4">Boarding types</p>
+              <p class="gtext-t4 font-weight-medium">Boarding types</p>
               <div class="pl-8">
                 <v-checkbox
                   v-for="(item, index) in filter.boardingTypeList"
@@ -227,7 +227,7 @@
               </div>
             </v-col>
             <v-col cols="3">
-              <p class="text-h4">Coed status</p>
+              <p class="gtext-t4 font-weight-medium">Coed status</p>
               <div class="pl-8">
                 <v-checkbox
                   v-for="(item, index) in filter.coedStatusList"

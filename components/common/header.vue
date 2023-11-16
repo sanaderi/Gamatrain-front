@@ -29,7 +29,7 @@
                     :key="i"
                     :color="menuSetting.linkColor"
                     text
-                    class="mx-2 mx-md-0 mx-lg-2"
+                    class="mx-2 mx-md-0 mx-lg-2 text-transform-none gtext-t4"
                   >
                     <v-icon class="mb-2 mr-1" v-if="link.icon" color="#FFB300">
                       {{ link.icon }}
@@ -93,7 +93,7 @@
                 />
               </div>
               <div v-else>
-                <v-btn rounded class="primary gama-btn" large @click="openLoginDialog">
+                <v-btn rounded class="primary text-transform-none black--text" large @click="openLoginDialog">
                   Sign in
                 </v-btn>
               </div>

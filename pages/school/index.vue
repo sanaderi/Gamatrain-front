@@ -3,12 +3,7 @@
     <schoolListFilter ref="schoolFilter" />
     <div id="map-wrap">
       <client-only>
-        <l-map
-          ref="schoolMap"
-          :zoom="map.zoom"
-          :center="map.center"
-          @moveend="onMoveEnd"
-        >
+        <l-map ref="schoolMap" :zoom="map.zoom" :center="map.center" @moveend="onMoveEnd">
           <l-tile-layer :url="map.url"></l-tile-layer>
           <l-marker
             v-for="marker in map.markers"
@@ -19,20 +14,20 @@
         </l-map>
       </client-only>
       <v-container>
-      <v-btn
-        id="list-view-btn"
-        x-large
-        rounded
-        color="scoundary"
-        @click="isExpanded = true"
-      >
-        <v-icon>mdi-menu</v-icon>
-        List view
-      </v-btn>
-    </v-container>
+        <v-btn
+          id="list-view-btn"
+          x-large
+          class="text-transform-none gtext-t4 font-weight-medium"
+          rounded
+          color="scoundary"
+          @click="isExpanded = true"
+        >
+          <v-icon>mdi-menu</v-icon>
+          &nbsp;
+          List view
+        </v-btn>
+      </v-container>
     </div>
-
-    
 
     <div
       id="data-list-holder"
@@ -42,7 +37,7 @@
     >
       <v-container id="action-section">
         <v-row>
-          <v-col cols="9">
+          <v-col cols="9" class="pt-9">
             <v-chip
               small
               close
@@ -121,9 +116,7 @@
               small
               close
               outlined
-              v-if="
-                $route.query.boarding_type && filterLoadedStatus.boarding_type
-              "
+              v-if="$route.query.boarding_type && filterLoadedStatus.boarding_type"
               v-for="(item, index) in boardingTypeArray"
               @click:close="closeFilter('boarding_type', item)"
             >
@@ -155,12 +148,14 @@
               x-large
               rounded
               color="#12B76A"
+              class="text-transform-none gtext-h4 font-weight-medium"
               dark
               @click="isExpanded = false"
             >
-              <v-icon>mdi-menu</v-icon>
+              <v-icon size="16">mdi-map-marker</v-icon>&nbsp;
               Map view
             </v-btn>
+
           </v-col>
         </v-row>
       </v-container>
@@ -179,16 +174,11 @@
             </v-card>
           </div>
           <div v-else-if="schoolList.length">
-            <v-card
-              rounded
-              v-for="item in schoolList"
-              :key="item.id"
-              class="list-item"
-            >
+            <v-card rounded v-for="item in schoolList" :key="item.id" class="list-item">
               <v-card-text>
                 <div class="item-info">
                   <div class="main-data">
-                    <h2 class="text-h4 mb-4">
+                    <h2 class="gtext-t4 font-weight-semibold mb-4">
                       {{ item.name }}
                     </h2>
 
@@ -196,7 +186,7 @@
               
              </v-chip> -->
 
-                    <v-chip class="primary" small>
+                    <v-chip class="list-chip gtext-t5 font-weight-medium" small>
                       {{ item.school_type_title }}
                     </v-chip>
 
@@ -493,7 +483,6 @@ export default {
             this.schoolLoading = false;
             this.$refs.schoolFilter.searchLoading = false;
           });
-
     },
     checkSchoolScroll() {
       const scrollableDiv = this.$refs.schoolListSection;
@@ -506,12 +495,10 @@ export default {
       return element.scrollHeight - element.scrollTop == element.clientHeight;
     },
     closeFilter(filter_name, other_data = null) {
-      if (filter_name == "keyword")
-        this.$refs.schoolFilter.filterForm.keyword = "";
+      if (filter_name == "keyword") this.$refs.schoolFilter.filterForm.keyword = "";
       else if (filter_name == "curriculum")
         this.$refs.schoolFilter.updateFilter("curriculum", "");
-      else if (filter_name == "sort")
-        this.$refs.schoolFilter.updateFilter("sort", "");
+      else if (filter_name == "sort") this.$refs.schoolFilter.updateFilter("sort", "");
       else if (filter_name == "tuition_fee")
         this.$refs.schoolFilter.filterForm.tuition_fee = 0;
       else if (filter_name == "country") {
@@ -554,39 +541,27 @@ export default {
     findTitle(type, id) {
       var title = "";
       if (type == "curriculum")
-        title = this.$refs.schoolFilter.filter.curriculumList.find(
-          (x) => x.id == id
-        ).title;
+        title = this.$refs.schoolFilter.filter.curriculumList.find((x) => x.id == id)
+          .title;
       if (type == "sort") {
         title = this.$refs.schoolFilter.sortList.find((x) => x.id == id).title;
       } else if (type == "country")
-        title = this.$refs.schoolFilter.filter.countryList.find(
-          (x) => x.id == id
-        ).name;
+        title = this.$refs.schoolFilter.filter.countryList.find((x) => x.id == id).name;
       else if (type == "state")
-        title = this.$refs.schoolFilter.filter.stateList.find(
-          (x) => x.id == id
-        ).title;
+        title = this.$refs.schoolFilter.filter.stateList.find((x) => x.id == id).title;
       else if (type == "city")
-        title = this.$refs.schoolFilter.filter.cityList.find(
-          (x) => x.id == id
-        ).title;
+        title = this.$refs.schoolFilter.filter.cityList.find((x) => x.id == id).title;
       else if (type == "school_type")
-        title = this.$refs.schoolFilter.filter.schoolTypeList.find(
-          (x) => x.id == id
-        ).title;
+        title = this.$refs.schoolFilter.filter.schoolTypeList.find((x) => x.id == id)
+          .title;
       else if (type == "religion")
-        title = this.$refs.schoolFilter.filter.religionList.find(
-          (x) => x.id == id
-        ).title;
+        title = this.$refs.schoolFilter.filter.religionList.find((x) => x.id == id).title;
       else if (type == "boarding_type")
-        title = this.$refs.schoolFilter.filter.boardingTypeList.find(
-          (x) => x.id == id
-        ).title;
+        title = this.$refs.schoolFilter.filter.boardingTypeList.find((x) => x.id == id)
+          .title;
       else if (type == "coed_status")
-        title = this.$refs.schoolFilter.filter.coedStatusList.find(
-          (x) => x.id == id
-        ).title;
+        title = this.$refs.schoolFilter.filter.coedStatusList.find((x) => x.id == id)
+          .title;
 
       return title;
     },
@@ -678,6 +653,11 @@ export default {
 
             .main-data {
               min-height: 8rem;
+
+              .list-chip{
+                background: var(--primary-warning-50, #FFFAEB)!important;
+                color: var(--primary-yellow-gama-500, #FFB600)!important;
+              }
             }
             .main-data h2 {
               white-space: nowrap;

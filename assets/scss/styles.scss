@@ -26,7 +26,6 @@ html {
     font-family: Inter;
     font-size: 2rem!important;
     font-style: normal;
-    font-weight: 800;
     line-height: normal;
     text-transform: capitalize;
   }
@@ -77,6 +76,25 @@ html {
 
 
 //xs size
+.gtext-t4{
+  font-family: Inter, sans-serif;
+  font-size: 1.6rem;
+  line-height: 3rem;
+  font-weight: 400;
+}
+.gtext-t5{
+  font-family: Inter, sans-serif;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  font-weight: 400;
+}
+
+
+.font-weight-semibold{
+  font-weight: 600!important;
+}
+
+
 .gama-text-h1 {
   font-family: Inter, sans-serif;
   color: #000;
