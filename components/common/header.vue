@@ -1527,6 +1527,9 @@ export default {
       color: #000 !important;
     }
 
+    .mobile_bar{
+      z-index: 1005!important;
+    }
     .mobile_bar .v-toolbar__content {
       background: transparent;
       padding: 0 1.4rem 0 0.5rem !important;

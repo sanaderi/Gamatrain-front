@@ -7,15 +7,27 @@ html {
 
 
 
+//Colors class
+.gray--text{
+  color:#98a2b3!important;
+}
+
+.primary-gray-300{
+  color: var(--primary-grey-300, #D0D5DD);
+}
+
+.primary-gray-600{
+  color: var(--primary-grey-600, #475467);
+}
+//End colors class
+
 
 //Customize vuetify button
 .v-btn__content {
   font-family: Inter;
 }
 
-.gray--text{
-  color:#98a2b3!important;
-}
+
 
 .text-transform-none{
   text-transform: none!important;
@@ -86,6 +98,13 @@ html {
   font-family: Inter, sans-serif;
   font-size: 1.4rem;
   line-height: 2.4rem;
+  font-weight: 400;
+}
+
+.gtext-t6{
+  font-family: Inter, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
   font-weight: 400;
 }
 

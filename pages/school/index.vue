@@ -3,7 +3,12 @@
     <schoolListFilter ref="schoolFilter" />
     <div id="map-wrap">
       <client-only>
-        <l-map ref="schoolMap" :zoom="map.zoom" :center="map.center" @moveend="onMoveEnd">
+        <l-map
+          ref="schoolMap"
+          :zoom="map.zoom"
+          :center="map.center"
+          @moveend="onMoveEnd"
+        >
           <l-tile-layer :url="map.url"></l-tile-layer>
           <l-marker
             v-for="marker in map.markers"
@@ -23,8 +28,7 @@
           @click="isExpanded = true"
         >
           <v-icon>mdi-menu</v-icon>
-          &nbsp;
-          List view
+          &nbsp; List view
         </v-btn>
       </v-container>
     </div>
@@ -35,6 +39,7 @@
       ref="schoolListSection"
       @scroll="checkSchoolScroll"
     >
+      <!-- Action section -->
       <v-container id="action-section">
         <v-row>
           <v-col cols="9" class="pt-9">
@@ -116,7 +121,9 @@
               small
               close
               outlined
-              v-if="$route.query.boarding_type && filterLoadedStatus.boarding_type"
+              v-if="
+                $route.query.boarding_type && filterLoadedStatus.boarding_type
+              "
               v-for="(item, index) in boardingTypeArray"
               @click:close="closeFilter('boarding_type', item)"
             >
@@ -152,16 +159,117 @@
               dark
               @click="isExpanded = false"
             >
-              <v-icon size="16">mdi-map-marker</v-icon>&nbsp;
-              Map view
+              <v-icon size="16">mdi-map-marker</v-icon>&nbsp; Map view
             </v-btn>
-
           </v-col>
         </v-row>
       </v-container>
+      <!-- Action section -->
+
+      <!-- Data list -->
       <div id="data-list">
         <v-container id="school-list-container">
-          <div v-if="schoolLoading">
+          <div v-if="resultCount>0">
+            <v-card
+              rounded
+              v-for="item in schoolList"
+              :key="item.id"
+              class="list-item"
+            >
+              <v-card-text>
+                <div class="item-info">
+                  <div class="main-data d-flex">
+                    <div>
+                      <h2 class="gtext-t4 font-weight-semibold mb-4">
+                        {{ item.name }}
+                      </h2>
+
+                      <!-- <v-chip class="primary">
+              
+             </v-chip> -->
+
+                      <v-chip
+                        v-if="item.school_type_title"
+                        class="list-chip gtext-t5 font-weight-medium"
+                        small
+                      >
+                        {{ item.school_type_title }}
+                      </v-chip>
+
+                      <!-- <v-chip class="primary">
+              
+             </v-chip>
+
+             <v-chip class="primary">
+              
+             </v-chip> -->
+                    </div>
+                    <div class="item-img" v-if="!isExpanded">
+                      <img :src="require('assets/images/default-school.png')" />
+                    </div>
+                  </div>
+                  <v-divider class="mb-3" />
+                  <div class="item-footer">
+                    <div class="float-left">
+                      <v-btn :disabled="!item.location" icon>
+                        <v-icon> mdi-map-marker </v-icon>
+                      </v-btn>
+                      <v-btn :disabled="!item.phone1" icon>
+                        <v-icon> mdi-phone </v-icon>
+                      </v-btn>
+                      <v-btn :disabled="!item.address" icon>
+                        <v-icon> mdi-email </v-icon>
+                      </v-btn>
+                      <v-btn :disabled="!item.site" icon>
+                        <v-icon> mdi-web </v-icon>
+                      </v-btn>
+                    </div>
+
+                    <div class="float-right d-flex mt-1">
+                      <div
+                        class="rate-section gtext-t6 font-weight-semibold mr-1"
+                      >
+                        4.2
+                        <v-icon color="primary"> mdi-star </v-icon>
+                      </div>
+                      <div class="gtext-t6 primary-gray-300">
+                        Update:
+                        <span class="primary-gray-600">{{
+                          $moment(item.up_date).format("YYYY-MM-DD")
+                        }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="item-img" v-if="isExpanded">
+                  <img
+                    class="float-right"
+                    :src="require('assets/images/default-school.png')"
+                  />
+                </div>
+              </v-card-text>
+            </v-card>
+
+            <v-card class="list-item" v-if="!allDataLoaded" >
+              <div class="item-info">
+                <div class="main-data">
+                  <v-skeleton-loader
+                    type="card-heading, list-item-two-line"
+                  ></v-skeleton-loader>
+                </div>
+                <div></div>
+              </div>
+            </v-card>
+            
+            
+          </div>
+          <div v-else-if="resultCount == 0 && schoolLoading == false">
+            <span class="gtext-t4">
+                        Opps! no data found
+                    </span>
+          </div>
+          <div v-else>
             <v-card class="list-item" v-for="i in 5" :key="i">
               <div class="item-info">
                 <div class="main-data">
@@ -173,57 +281,9 @@
               </div>
             </v-card>
           </div>
-          <div v-else-if="schoolList.length">
-            <v-card rounded v-for="item in schoolList" :key="item.id" class="list-item">
-              <v-card-text>
-                <div class="item-info">
-                  <div class="main-data">
-                    <h2 class="gtext-t4 font-weight-semibold mb-4">
-                      {{ item.name }}
-                    </h2>
-
-                    <!-- <v-chip class="primary">
-              
-             </v-chip> -->
-
-                    <v-chip class="list-chip gtext-t5 font-weight-medium" small>
-                      {{ item.school_type_title }}
-                    </v-chip>
-
-                    <!-- <v-chip class="primary">
-              
-             </v-chip>
-
-             <v-chip class="primary">
-              
-             </v-chip> -->
-                  </div>
-                  <v-divider class="mb-3" />
-                  <div>
-                    <v-btn disabled icon>
-                      <v-icon> mdi-map-marker </v-icon>
-                    </v-btn>
-                    <v-btn icon>
-                      <v-icon> mdi-phone </v-icon>
-                    </v-btn>
-                    <v-btn icon>
-                      <v-icon> mdi-email </v-icon>
-                    </v-btn>
-                    <v-btn icon>
-                      <v-icon> mdi-web </v-icon>
-                    </v-btn>
-                  </div>
-                </div>
-
-                <div class="item-img">
-                  <img :src="require('assets/images/default-school.png')" />
-                </div>
-              </v-card-text>
-            </v-card>
-          </div>
-          <div v-else>Opps! no data found</div>
         </v-container>
       </div>
+      <!-- End data list -->
     </div>
   </div>
 </template>
@@ -262,6 +322,7 @@ export default {
       schoolList: [],
       pageNum: 1,
       allDataLoaded: [],
+      resultCount:'--',
       timer: 0,
       gradeLevelList: [
         {
@@ -471,7 +532,8 @@ export default {
             },
           })
           .then((response) => {
-            this.$refs.schoolFilter.resultCount = response.data.num;
+            this.resultCount=response.data.num;
+            this.$refs.schoolFilter.resultCount = this.resultCount;
             this.schoolList.push(...response.data.list);
 
             if (response.data.list.length === 0) this.allDataLoaded = true;
@@ -495,10 +557,12 @@ export default {
       return element.scrollHeight - element.scrollTop == element.clientHeight;
     },
     closeFilter(filter_name, other_data = null) {
-      if (filter_name == "keyword") this.$refs.schoolFilter.filterForm.keyword = "";
+      if (filter_name == "keyword")
+        this.$refs.schoolFilter.filterForm.keyword = "";
       else if (filter_name == "curriculum")
         this.$refs.schoolFilter.updateFilter("curriculum", "");
-      else if (filter_name == "sort") this.$refs.schoolFilter.updateFilter("sort", "");
+      else if (filter_name == "sort")
+        this.$refs.schoolFilter.updateFilter("sort", "");
       else if (filter_name == "tuition_fee")
         this.$refs.schoolFilter.filterForm.tuition_fee = 0;
       else if (filter_name == "country") {
@@ -541,27 +605,39 @@ export default {
     findTitle(type, id) {
       var title = "";
       if (type == "curriculum")
-        title = this.$refs.schoolFilter.filter.curriculumList.find((x) => x.id == id)
-          .title;
+        title = this.$refs.schoolFilter.filter.curriculumList.find(
+          (x) => x.id == id
+        ).title;
       if (type == "sort") {
         title = this.$refs.schoolFilter.sortList.find((x) => x.id == id).title;
       } else if (type == "country")
-        title = this.$refs.schoolFilter.filter.countryList.find((x) => x.id == id).name;
+        title = this.$refs.schoolFilter.filter.countryList.find(
+          (x) => x.id == id
+        ).name;
       else if (type == "state")
-        title = this.$refs.schoolFilter.filter.stateList.find((x) => x.id == id).title;
+        title = this.$refs.schoolFilter.filter.stateList.find(
+          (x) => x.id == id
+        ).title;
       else if (type == "city")
-        title = this.$refs.schoolFilter.filter.cityList.find((x) => x.id == id).title;
+        title = this.$refs.schoolFilter.filter.cityList.find(
+          (x) => x.id == id
+        ).title;
       else if (type == "school_type")
-        title = this.$refs.schoolFilter.filter.schoolTypeList.find((x) => x.id == id)
-          .title;
+        title = this.$refs.schoolFilter.filter.schoolTypeList.find(
+          (x) => x.id == id
+        ).title;
       else if (type == "religion")
-        title = this.$refs.schoolFilter.filter.religionList.find((x) => x.id == id).title;
+        title = this.$refs.schoolFilter.filter.religionList.find(
+          (x) => x.id == id
+        ).title;
       else if (type == "boarding_type")
-        title = this.$refs.schoolFilter.filter.boardingTypeList.find((x) => x.id == id)
-          .title;
+        title = this.$refs.schoolFilter.filter.boardingTypeList.find(
+          (x) => x.id == id
+        ).title;
       else if (type == "coed_status")
-        title = this.$refs.schoolFilter.filter.coedStatusList.find((x) => x.id == id)
-          .title;
+        title = this.$refs.schoolFilter.filter.coedStatusList.find(
+          (x) => x.id == id
+        ).title;
 
       return title;
     },
@@ -618,7 +694,8 @@ export default {
     z-index: 1000;
     top: 13.88rem;
     right: 0;
-    width: 20vw;
+    min-width: 40rem;
+    width: 40rem;
     background: var(--primary-grey-100, #f2f4f7);
     box-shadow: 5px 9px 24px 0px rgba(16, 24, 40, 0.05);
     height: 100vh;
@@ -647,16 +724,17 @@ export default {
 
           .item-info {
             float: left;
-            width: 65.5%;
-            max-width: 65.5%;
+            width: 100%;
+            max-width: 100%;
             overflow: hidden;
 
             .main-data {
               min-height: 8rem;
+              justify-content: space-between;
 
-              .list-chip{
-                background: var(--primary-warning-50, #FFFAEB)!important;
-                color: var(--primary-yellow-gama-500, #FFB600)!important;
+              .list-chip {
+                background: var(--primary-warning-50, #fffaeb) !important;
+                color: var(--primary-yellow-gama-500, #ffb600) !important;
               }
             }
             .main-data h2 {
@@ -664,10 +742,15 @@ export default {
               text-overflow: ellipsis;
               overflow: hidden;
             }
+
+            .item-footer .v-icon {
+              font-size: 2rem !important;
+            }
           }
 
           .item-img {
             float: right;
+            justify-content: flex-end;
             width: 34.5%;
           }
 
@@ -705,11 +788,16 @@ export default {
             .main-data {
               min-height: 8rem;
             }
+
+            .item-footer .v-icon {
+              font-size: 2.4rem !important;
+            }
           }
 
           .item-img {
             float: right;
             width: 14.5%;
+            justify-content: flex-end;
           }
 
           .item-img img {
