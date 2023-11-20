@@ -155,5 +155,8 @@ export default {
 #school-list {
   direction: rtl;
 }
+
+
 </style>
+
   

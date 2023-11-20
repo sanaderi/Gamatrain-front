@@ -88,7 +88,14 @@
             بروزرسانی
           </v-btn>
 
-          <v-btn color="error" class="mr-4" :loading="delete_loading" @click="destroySchool"> حذف </v-btn>
+          <v-btn
+            color="error"
+            class="mr-4"
+            :loading="delete_loading"
+            @click="destroySchool"
+          >
+            حذف
+          </v-btn>
         </div>
       </v-form>
     </div>
@@ -1532,7 +1539,7 @@ export default {
       form: {
         schoolTitle: "",
       },
-      delete_loading:false
+      delete_loading: false,
     };
   },
   mounted() {
@@ -1557,11 +1564,9 @@ export default {
       await this.$axios
         .$put("/test_api/school_update", this.form)
         .then((response) => {
-          
-            this.$toast.success("Page updated successfully");
-            this.$router.replace(`/school-list/edit/${response.Id}`);
-
-          
+          this.$toast.success("Page updated successfully");
+          if (response == -1) this.$router.replace(`/school-list`);
+          else this.$router.replace(`/school-list/edit/${response.Id}`);
         })
         .catch((err) => {
           this.$toast.error("An error occurred during page creation.");
@@ -1573,14 +1578,19 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
-    destroySchool(){
-      this.$axios.$delete(`/test_api/school_destroy/${this.form.Id}/${this.$auth.user.id}`)
-       .then(response=>{
-          this.$router.replace(`/school-list/edit/${response.Id}`);
-       }).catch(err=>{
-        console.log(err);
-       })
-    }
+    destroySchool() {
+      this.$axios
+        .$delete(
+          `/test_api/school_destroy/${this.form.Id}/${this.form.regionTitle}/${this.$auth.user.id}`
+        )
+        .then((response) => {
+          if (response == -1) this.$router.replace(`/school-list`);
+          else this.$router.replace(`/school-list/edit/${response.Id}`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>
@@ -1588,8 +1598,16 @@ export default {
 <style scoped>
 #school-list-edit {
   direction: rtl;
-  font-family: 'B Nazanin'!important;
+  font-family: "B Nazanin" !important;
   font-weight: 900;
-  font-size: large!important;
+  font-size: large !important;
+}
+
+.v-footer {
+  display: none!important;;
+}
+
+#footer-copy-right {
+  display: none!important;
 }
 </style>

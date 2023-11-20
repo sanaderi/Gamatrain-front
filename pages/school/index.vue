@@ -155,7 +155,7 @@
               x-large
               rounded
               color="#12B76A"
-              class="text-transform-none gtext-h4 font-weight-medium"
+              class="text-transform-none gtext-t4 font-weight-medium"
               dark
               @click="isExpanded = false"
             >
@@ -230,7 +230,7 @@
                         class="rate-section gtext-t6 font-weight-semibold mr-1"
                       >
                         4.2
-                        <v-icon color="primary"> mdi-star </v-icon>
+                        <v-icon color="primary" > mdi-star </v-icon>
                       </div>
                       <div class="gtext-t6 primary-gray-300">
                         Update:
