@@ -13,6 +13,10 @@ html {
 }
 
 .primary-gray-300{
+  color: var(--primary-grey-100, #F2F4F7);
+}
+
+.primary-gray-300{
   color: var(--primary-grey-300, #D0D5DD);
 }
 
@@ -21,6 +25,17 @@ html {
 }
 //End colors class
 
+
+//Width class
+.w-50{
+  width: 50%!important;
+}
+.w-60{
+  width: 60%!important;
+}
+.w-70{
+  width: 70%!important;
+}
 
 //Customize vuetify button
 .v-btn__content {
@@ -107,6 +122,16 @@ html {
   line-height: 1.8rem;
   font-weight: 400;
 }
+
+
+.gtext-h5{
+  font-family: Inter, sans-serif!important;
+  font-size: 2.5rem!important;
+  line-height: 4.2rem!important;
+  font-weight: 400;
+}
+
+
 
 
 .font-weight-semibold{

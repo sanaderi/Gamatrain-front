@@ -105,7 +105,6 @@
 <script>
 export default {
   layout: "admin",
-  auth: false,
   name: "edit_school",
   data() {
     return {
@@ -1584,6 +1583,7 @@ export default {
           `/test_api/school_destroy/${this.form.Id}/${this.form.regionTitle}/${this.$auth.user.id}`
         )
         .then((response) => {
+
           if (response == -1) this.$router.replace(`/school-list`);
           else this.$router.replace(`/school-list/edit/${response.Id}`);
         })

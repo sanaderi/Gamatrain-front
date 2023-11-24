@@ -42,7 +42,11 @@
             <v-col cols="4" md="3" lg="3" xl="3" class="text-right mt-md-1">
               <div class="d-flex text-right" v-if="$auth.loggedIn">
                 <v-spacer />
-                <v-menu transition="slide-x-transition" offset-y min-width="150">
+                <v-menu
+                  transition="slide-x-transition"
+                  offset-y
+                  min-width="150"
+                >
                   <template v-slot:activator="{ on, attrs }">
                     <div v-bind="attrs" v-on="on" class="d-flex">
                       <div
@@ -58,7 +62,9 @@
                       <v-avatar size="32" v-if="$auth.user.avatar">
                         <v-img :src="$auth.user.avatar" alt="user avatar" />
                       </v-avatar>
-                      <v-icon v-else :color="menuSetting.linkColor"> mdi-account </v-icon>
+                      <v-icon v-else :color="menuSetting.linkColor">
+                        mdi-account
+                      </v-icon>
                     </div>
                   </template>
                   <v-list>
@@ -93,7 +99,12 @@
                 />
               </div>
               <div v-else>
-                <v-btn rounded class="primary text-transform-none black--text" large @click="openLoginDialog">
+                <v-btn
+                  rounded
+                  class="primary text-transform-none black--text"
+                  large
+                  @click="openLoginDialog"
+                >
                   Sign in
                 </v-btn>
               </div>
@@ -112,7 +123,10 @@
         <!--End login component-->
 
         <!--Register component-->
-        <register ref="register_modal" :switchToLogin.sync="currentOpenDialog" />
+        <register
+          ref="register_modal"
+          :switchToLogin.sync="currentOpenDialog"
+        />
         <!--End register component-->
 
         <!--Recover password component-->
@@ -125,7 +139,11 @@
       </div>
       <!--End desktop menu-->
 
-      <v-navigation-drawer v-model="sidebar" app class="hidden-lg-and-up main-sidebar">
+      <v-navigation-drawer
+        v-model="sidebar"
+        app
+        class="hidden-lg-and-up main-sidebar"
+      >
         <!-- Start:  Menu items -->
         <v-list dense shaped>
           <!--Profile info-->
@@ -135,8 +153,12 @@
                 <v-icon v-text="'mdi-account-outline'"></v-icon>
               </v-list-item-icon>
               <v-list-item-title>
-                <span v-if="$auth.user.first_name">{{ $auth.user.first_name }}</span>
-                <span v-else-if="$auth.user.last_name">{{ $auth.user.last_name }}</span>
+                <span v-if="$auth.user.first_name">{{
+                  $auth.user.first_name
+                }}</span>
+                <span v-else-if="$auth.user.last_name">{{
+                  $auth.user.last_name
+                }}</span>
                 <span v-else>No name</span>
               </v-list-item-title>
             </template>
@@ -160,7 +182,10 @@
               <v-list-item-title v-text="'Logout'"></v-list-item-title>
             </v-list-item>
           </v-list-group>
-          <v-list-item v-if="$auth.loggedIn" @click="notificationListDialog = true">
+          <v-list-item
+            v-if="$auth.loggedIn"
+            @click="notificationListDialog = true"
+          >
             <v-list-item-icon>
               <v-badge overlap content="3">
                 <v-icon v-text="'mdi-bell-outline'"></v-icon>
@@ -205,7 +230,10 @@
               :value="false"
             >
               <template v-slot:activator>
-                <v-list-item-title v-text="item.title" class="py-2"></v-list-item-title>
+                <v-list-item-title
+                  v-text="item.title"
+                  class="py-2"
+                ></v-list-item-title>
               </template>
 
               <v-list-item
@@ -216,7 +244,9 @@
                 :key="side.title"
               >
                 <v-list-item-content class="py-2">
-                  <v-list-item-title v-text="subMenuItem.title"></v-list-item-title>
+                  <v-list-item-title
+                    v-text="subMenuItem.title"
+                  ></v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list-group>
@@ -313,7 +343,10 @@
                           label="Ex: Paper Summer Session"
                         >
                           <template slot="append">
-                            <v-icon v-if="searchResultsSection" @click="closeSearch()">
+                            <v-icon
+                              v-if="searchResultsSection"
+                              @click="closeSearch()"
+                            >
                               mdi-close-circle
                             </v-icon>
                           </template>
@@ -335,7 +368,9 @@
                             @scroll="checkSearchScroll"
                           >
                             <div id="result-stat">
-                              <span class="gama-text-overline"> Search result </span>
+                              <span class="gama-text-overline">
+                                Search result
+                              </span>
                               <span class="gama-text-button">
                                 {{ searchCount }}
                               </span>
@@ -347,7 +382,9 @@
                                 :key="index"
                               >
                                 <v-col cols="1">
-                                  <nuxt-link :to="`/${calcPath(item.type)}/${item.id}`">
+                                  <nuxt-link
+                                    :to="`/${calcPath(item.type)}/${item.id}`"
+                                  >
                                     <div
                                       v-if="item.type == 'gama_tests'"
                                       class="avatar paper-avatar"
@@ -433,7 +470,10 @@
                                   </div>
                                 </v-col>
                               </v-row>
-                              <v-row v-if="allDataLoaded == false" class="list-item">
+                              <v-row
+                                v-if="allDataLoaded == false"
+                                class="list-item"
+                              >
                                 <v-col cols="12">
                                   <v-skeleton-loader
                                     type="list-item-avatar"
@@ -442,10 +482,14 @@
                               </v-row>
                             </div>
                             <div
-                              v-else-if="searchCount == 0 && searchLoading == false"
+                              v-else-if="
+                                searchCount == 0 && searchLoading == false
+                              "
                               class="text-center"
                             >
-                              <span class="gama-text-button"> Opps! no data found </span>
+                              <span class="gama-text-button">
+                                Opps! no data found
+                              </span>
                             </div>
                             <div v-else>
                               <v-row class="list-item" v-for="i in 3">
@@ -501,7 +545,11 @@
             </div>
           </template>
           <v-list>
-            <v-list-item v-for="(item, i) in user_profile_items" :key="i" :to="item.link">
+            <v-list-item
+              v-for="(item, i) in user_profile_items"
+              :key="i"
+              :to="item.link"
+            >
               <v-list-item-icon class="mr-0 nt">
                 <v-icon small>
                   {{ item.icon }}
@@ -916,7 +964,8 @@ export default {
         const viewportHeight = window.innerHeight;
 
         const currentHeight = this.mobileSearchSheetConfig.sheetHeight;
-        const newHeightVH = currentHeight + (dragDistance / viewportHeight) * 100;
+        const newHeightVH =
+          currentHeight + (dragDistance / viewportHeight) * 100;
 
         // Limit the newHeightVH to reasonable values
         const newHeight = Math.min(Math.max(newHeightVH, 10), 100); // 10vh to 100vh
@@ -927,7 +976,8 @@ export default {
     },
     endDrag(e) {
       this.mobileSearchSheetConfig.isDragging = false;
-      if (this.mobileSearchSheetConfig.sheetHeight < 30) this.mobileSearchSheet = false;
+      if (this.mobileSearchSheetConfig.sheetHeight < 30)
+        this.mobileSearchSheet = false;
     },
     //End search section
   },
@@ -1006,10 +1056,9 @@ export default {
       this.searchResults = [];
       this.search();
     },
-    mobileSearchSheet(val){
-      if(val==true)
-       this.mobileSearchSheetConfig.sheetHeight=70;
-    }
+    mobileSearchSheet(val) {
+      if (val == true) this.mobileSearchSheetConfig.sheetHeight = 70;
+    },
   },
   computed: {
     userName() {
@@ -1046,6 +1095,15 @@ export default {
     height: 2rem !important;
   }
 }
+
+.mobile_bar {
+  z-index: 1005 !important;
+}
+
+.main-sidebar{
+  z-index: 1006!important;
+}
+
 
 #main-logo {
   margin-left: 1.6rem !important;
@@ -1493,7 +1551,7 @@ export default {
     }
 
     #main-menu {
-      z-index:1001;
+      z-index: 1001;
       padding-bottom: 0.4rem;
       height: 6.4rem !important;
 
@@ -1527,9 +1585,7 @@ export default {
       color: #000 !important;
     }
 
-    .mobile_bar{
-      z-index: 1005!important;
-    }
+   
     .mobile_bar .v-toolbar__content {
       background: transparent;
       padding: 0 1.4rem 0 0.5rem !important;
