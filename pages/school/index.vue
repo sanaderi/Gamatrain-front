@@ -1,6 +1,6 @@
 <template>
   <div id="school-list">
-    <schoolListFilter ref="schoolFilter" />
+    <schoolListFilter ref="schoolFilter" v-if="$vuetify.breakpoint.lgAndUp" />
     <div id="map-wrap">
       <client-only>
         <l-map ref="schoolMap" :zoom="map.zoom" :center="map.center" @moveend="onMoveEnd">
@@ -28,7 +28,7 @@
       </v-container>
 
       <!-- Sm and md screen section -->
-    <div  id="mobile-school-list-container"  class="d-block d-lg-none" :style="`height:${mobileDataSheetConfig.sheetHeight}vh`">
+    <div  id="mobile-school-list-container" v-if="$vuetify.breakpoint.mdAndDown"  class="d-block d-lg-none" :style="`height:${mobileDataSheetConfig.sheetHeight}vh`">
       <v-sheet id="school-list-sheet" >
         <div
           id="mobile-school-handler-holder"
@@ -51,7 +51,7 @@
                       ref="mobileSchoolListSection"
                       @scroll="checkMobileSchoolScroll"
                     >
-                      <mobileListFilter />
+                      <schoolListFilter ref="schoolFilter" />
                       <v-row>
                         <v-col cols="8" class="pl-7">
                           <v-chip
@@ -349,7 +349,6 @@
 <script>
 import schoolListFilter from "@/components/school-list/filter";
 import schoolDataList from "@/components/school-list/data-list";
-import mobileListFilter from "@/components/school-list/mobile-filter";
 export default {
   auth: false,
   name: "school-list",
@@ -361,7 +360,6 @@ export default {
   components: {
     schoolListFilter,
     schoolDataList,
-    mobileListFilter,
   },
   data() {
     return {
@@ -598,7 +596,6 @@ export default {
 
     getSchoolList() {
       this.schoolLoading = true;
-
       if (this.allDataLoaded == false)
         this.$axios
           .$get("/api/v1/schools/search", {
@@ -620,6 +617,7 @@ export default {
           .then((response) => {
             this.resultCount = response.data.num;
             this.$refs.schoolFilter.resultCount = this.resultCount;
+
             this.schoolList.push(...response.data.list);
 
             if (response.data.list.length === 0) this.allDataLoaded = true;
@@ -817,7 +815,7 @@ export default {
   overflow: hidden;
 
   #map-wrap {
-    margin-top: 6rem;
+    margin-top: -2rem;
     height: 85vh;
     position: relative;
   }
