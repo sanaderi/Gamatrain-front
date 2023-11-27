@@ -3,7 +3,14 @@
     <schoolListFilter ref="schoolFilter" v-if="$vuetify.breakpoint.lgAndUp" />
     <div id="map-wrap">
       <client-only>
-        <l-map ref="schoolMap" :zoom="map.zoom" :center="map.center" @moveend="onMoveEnd">
+        <l-map
+          ref="schoolMap"
+          :zoom="map.zoom"
+          :min-zoom="map.minZoom"
+          :center="map.center"
+          @moveend="onMoveEnd"
+          @update:zoom="onZoomChange"
+        >
           <l-tile-layer :url="map.url"></l-tile-layer>
           <l-marker
             v-for="marker in map.markers"
@@ -28,179 +35,184 @@
       </v-container>
 
       <!-- Sm and md screen section -->
-    <div  id="mobile-school-list-container" v-if="$vuetify.breakpoint.mdAndDown"  class="d-block d-lg-none" :style="`height:${mobileDataSheetConfig.sheetHeight}vh`">
-      <v-sheet id="school-list-sheet" >
-        <div
-          id="mobile-school-handler-holder"
-          @touchstart="startDrag"
-          @touchend="endDrag"
-          @touchmove="handleDrag"
-        >
-          <div id="mobile-school-handler"></div>
-        </div>
+      <div
+        id="mobile-school-list-container"
+        v-if="$vuetify.breakpoint.mdAndDown"
+        class="d-block d-lg-none"
+        :style="`height:${mobileDataSheetConfig.sheetHeight}vh`"
+      >
+        <v-sheet id="school-list-sheet">
+          <div
+            id="mobile-school-handler-holder"
+            @touchstart="startDrag"
+            @touchend="endDrag"
+            @touchmove="handleDrag"
+          >
+            <div id="mobile-school-handler"></div>
+          </div>
 
-        <v-card flat>
           <v-card flat>
-            <div id="keyword-card">
-              <v-row>
-                <v-col cols="12" class="pt-0">
-                  <div id="mobile-search-result-container">
-                    <div
-                      id="search-result"
-                      :style="`height:${mobileDataSheetConfig.sheetHeight}vh`"
-                      ref="mobileSchoolListSection"
-                      @scroll="checkMobileSchoolScroll"
-                    >
-                      <schoolListFilter ref="schoolFilter" />
-                      <v-row>
-                        <v-col cols="8" class="pl-7">
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.keyword"
-                            @click:close="closeFilter('keyword')"
-                          >
-                            {{ $route.query.keyword }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="
-                              $route.query.curriculum && filterLoadedStatus.curriculum
-                            "
-                            @click:close="closeFilter('curriculum')"
-                          >
-                            {{ findTitle("curriculum", $route.query.curriculum) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.tuition_fee"
-                            @click:close="closeFilter('tuition_fee')"
-                          >
-                            Tuition fee above: ${{ $route.query.tuition_fee }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.country && filterLoadedStatus.country"
-                            @click:close="closeFilter('country')"
-                          >
-                            {{ findTitle("country", $route.query.country) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.state && filterLoadedStatus.state"
-                            @click:close="closeFilter('state')"
-                          >
-                            {{ findTitle("state", $route.query.state) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.city && filterLoadedStatus.city"
-                            @click:close="closeFilter('city')"
-                          >
-                            {{ findTitle("city", $route.query.city) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="
-                              $route.query.school_type && filterLoadedStatus.school_type
-                            "
-                            v-for="(item, index) in $route.query.school_type"
-                            @click:close="closeFilter('school_type', item)"
-                          >
-                            {{ findTitle("school_type", item) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.religion && filterLoadedStatus.religion"
-                            v-for="(item, index) in $route.query.religion"
-                            @click:close="closeFilter('religion', item)"
-                          >
-                            {{ findTitle("religion", item) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="
-                              $route.query.boarding_type &&
-                              filterLoadedStatus.boarding_type
-                            "
-                            v-for="(item, index) in boardingTypeArray"
-                            @click:close="closeFilter('boarding_type', item)"
-                          >
-                            {{ findTitle("boarding_type", item) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="
-                              $route.query.coed_status && filterLoadedStatus.coed_status
-                            "
-                            v-for="(item, index) in coedStatusArray"
-                            @click:close="closeFilter('coed_status', item)"
-                          >
-                            {{ findTitle("coed_status", item) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.sort && filterLoadedStatus.sort"
-                            @click:close="closeFilter('sort')"
-                          >
-                            {{ findTitle("sort", $route.query.sort) }}
-                          </v-chip>
-                        </v-col>
-                        <v-col cols="4" class="text-right">
-                          <div id="result-stat " class="mr-4">
-                            <span class="gama-text-overline"> Search result </span>
-                            <span class="gama-text-button">
-                              {{ resultCount }}
-                            </span>
-                          </div>
-                        </v-col>
-                      </v-row>
-                      <schoolDataList
-                        :schoolList="schoolList"
-                        :resultCount="resultCount"
-                      />
+            <v-card flat>
+              <div id="keyword-card">
+                <v-row>
+                  <v-col cols="12" class="pt-0">
+                    <div id="mobile-search-result-container">
+                      <div
+                        id="search-result"
+                        :style="`height:${mobileDataSheetConfig.sheetHeight}vh`"
+                        ref="mobileSchoolListSection"
+                        @scroll="checkMobileSchoolScroll"
+                      >
+                        <schoolListFilter ref="schoolFilter" />
+                        <v-row>
+                          <v-col cols="8" class="pl-7">
+                            <v-chip
+                              small
+                              close
+                              outlined
+                              class="mb-1"
+                              v-if="$route.query.keyword"
+                              @click:close="closeFilter('keyword')"
+                            >
+                              {{ $route.query.keyword }}
+                            </v-chip>
+                            <v-chip
+                              small
+                              close
+                              outlined
+                              class="mb-1"
+                              v-if="
+                                $route.query.curriculum && filterLoadedStatus.curriculum
+                              "
+                              @click:close="closeFilter('curriculum')"
+                            >
+                              {{ findTitle("curriculum", $route.query.curriculum) }}
+                            </v-chip>
+                            <v-chip
+                              small
+                              close
+                              outlined
+                              class="mb-1"
+                              v-if="$route.query.tuition_fee"
+                              @click:close="closeFilter('tuition_fee')"
+                            >
+                              Tuition fee above: ${{ $route.query.tuition_fee }}
+                            </v-chip>
+                            <v-chip
+                              small
+                              close
+                              outlined
+                              class="mb-1"
+                              v-if="$route.query.country && filterLoadedStatus.country"
+                              @click:close="closeFilter('country')"
+                            >
+                              {{ findTitle("country", $route.query.country) }}
+                            </v-chip>
+                            <v-chip
+                              small
+                              close
+                              outlined
+                              class="mb-1"
+                              v-if="$route.query.state && filterLoadedStatus.state"
+                              @click:close="closeFilter('state')"
+                            >
+                              {{ findTitle("state", $route.query.state) }}
+                            </v-chip>
+                            <v-chip
+                              small
+                              close
+                              outlined
+                              class="mb-1"
+                              v-if="$route.query.city && filterLoadedStatus.city"
+                              @click:close="closeFilter('city')"
+                            >
+                              {{ findTitle("city", $route.query.city) }}
+                            </v-chip>
+                            <v-chip
+                              small
+                              close
+                              outlined
+                              class="mb-1"
+                              v-if="
+                                $route.query.school_type && filterLoadedStatus.school_type
+                              "
+                              v-for="(item, index) in $route.query.school_type"
+                              @click:close="closeFilter('school_type', item)"
+                            >
+                              {{ findTitle("school_type", item) }}
+                            </v-chip>
+                            <v-chip
+                              small
+                              close
+                              outlined
+                              class="mb-1"
+                              v-if="$route.query.religion && filterLoadedStatus.religion"
+                              v-for="(item, index) in $route.query.religion"
+                              @click:close="closeFilter('religion', item)"
+                            >
+                              {{ findTitle("religion", item) }}
+                            </v-chip>
+                            <v-chip
+                              small
+                              close
+                              outlined
+                              class="mb-1"
+                              v-if="
+                                $route.query.boarding_type &&
+                                filterLoadedStatus.boarding_type
+                              "
+                              v-for="(item, index) in boardingTypeArray"
+                              @click:close="closeFilter('boarding_type', item)"
+                            >
+                              {{ findTitle("boarding_type", item) }}
+                            </v-chip>
+                            <v-chip
+                              small
+                              close
+                              outlined
+                              class="mb-1"
+                              v-if="
+                                $route.query.coed_status && filterLoadedStatus.coed_status
+                              "
+                              v-for="(item, index) in coedStatusArray"
+                              @click:close="closeFilter('coed_status', item)"
+                            >
+                              {{ findTitle("coed_status", item) }}
+                            </v-chip>
+                            <v-chip
+                              small
+                              close
+                              outlined
+                              class="mb-1"
+                              v-if="$route.query.sort && filterLoadedStatus.sort"
+                              @click:close="closeFilter('sort')"
+                            >
+                              {{ findTitle("sort", $route.query.sort) }}
+                            </v-chip>
+                          </v-col>
+                          <v-col cols="4" class="text-right">
+                            <div id="result-stat " class="mr-4">
+                              <span class="gama-text-overline"> Search result </span>
+                              <span class="gama-text-button">
+                                {{ resultCount }}
+                              </span>
+                            </div>
+                          </v-col>
+                        </v-row>
+                        <schoolDataList
+                          :schoolList="schoolList"
+                          :resultCount="resultCount"
+                        />
+                      </div>
                     </div>
-                  </div>
-                </v-col>
-              </v-row>
-            </div>
+                  </v-col>
+                </v-row>
+              </div>
+            </v-card>
           </v-card>
-        </v-card>
-      </v-sheet>
-    </div>
-    <!-- End sm and md screen section -->
+        </v-sheet>
+      </div>
+      <!-- End sm and md screen section -->
     </div>
 
     <!-- Large screen section -->
@@ -341,8 +353,6 @@
       <!-- End data list -->
     </div>
     <!-- End large screen section -->
-
-    
   </div>
 </template>
 
@@ -363,17 +373,13 @@ export default {
   },
   data() {
     return {
-      isExpanded: true,
+      isExpanded: false,
       map: {
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        zoom: 14,
-        center: [0, 0], // Initial map center coordinates
-        markers: [
-          //Marker list
-          { latLng: [51.505, -0.09] },
-          { latLng: [51.51, -0.1] },
-          { latLng: [51.49, -0.1] },
-        ],
+        zoom: 5,
+        minZoom: 5,
+        center: [39.90063873634048, -83.44667778604482], // Initial map center coordinates
+        markers: [],
         object: null,
         boundingBox: {},
         schoolIcon: null,
@@ -402,6 +408,8 @@ export default {
         religion: "",
         boarding_type: "",
         coed_status: "",
+        distance: 15,
+        center: [],
       },
       filterLoadedStatus: {
         curriculum: false,
@@ -425,6 +433,8 @@ export default {
       screenWidth: 0,
 
       schoolList: [],
+      currentZoom: 5,
+      geoSearch: true,
     };
   },
   mounted() {
@@ -561,18 +571,34 @@ export default {
     },
     onMoveEnd(event) {
       const bounds = event.target.getBounds();
-      const ne = bounds.getNorthEast();
-      const sw = bounds.getSouthWest(); // // Perform a new search based on the current map center
-
-      this.map.boundingBox = {
-        northEast: { lat: ne.lat, lng: ne.lng },
-        southWest: { lat: sw.lat, lng: sw.lng },
-      };
-
-      this.performGeoSearch();
+      const center = event.target.getCenter(); //Center of map
+      this.filter.center = [center.lat, center.lng]; //Update filter
+      const ne = bounds.getNorthEast(); //Corner of map
+      this.calcDistance(center, ne);
+      this.$refs.schoolFilter.filterForm.center = this.filter.center;
+      this.$refs.schoolFilter.filterForm.distance = this.filter.distance;
+      this.$refs.schoolFilter.updateQueryParams();
     },
-    performGeoSearch() {
-      //Code for perform geo search
+    onZoomChange(newZoom) {
+      // console.log(newZoom);
+    },
+    calcDistance(center, ne) {
+      // Calculate the distance using Haversine formula
+      const R = 6371; // Earth radius in kilometers
+      const lat1 = center.lat * (Math.PI / 180);
+      const lon1 = center.lng * (Math.PI / 180);
+      const lat2 = ne.lat * (Math.PI / 180);
+      const lon2 = ne.lng * (Math.PI / 180);
+
+      const dlat = lat2 - lat1;
+      const dlon = lon2 - lon1;
+
+      const a =
+        Math.sin(dlat / 2) ** 2 +
+        Math.cos(lat1) * Math.cos(lat2) * Math.sin(dlon / 2) ** 2;
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+      this.filter.distance = R * c; //retrun distance
     },
     getUserLocation() {
       if ("geolocation" in navigator) {
@@ -612,15 +638,33 @@ export default {
               boarding_type: this.$route.query.boarding_type,
               coed_status: this.$route.query.coed_status,
               sort: this.$route.query.sort,
+              distance: this.$route.query.distance
+                ? this.$route.query.distance
+                : this.filter.distance,
+              center: this.$route.query.center
+                ? this.$route.query.center
+                : this.map.center.join(","),
             },
           })
           .then((response) => {
             this.resultCount = response.data.num;
             this.$refs.schoolFilter.resultCount = this.resultCount;
 
-            this.schoolList.push(...response.data.list);
-
-            if (response.data.list.length === 0) this.allDataLoaded = true;
+            if (this.geoSearch) {
+              this.schoolList = response.data.list;
+            } else {
+              //If user not in geoloaction and now active geo mode. we set data on map for it and center for map
+              var newPlaceData = response.data.list
+                .filter((obj) => obj.lat !== undefined && obj.lng !== undefined) // Filter out objects with undefined lat or lng
+                .map((obj) => ({
+                  latLng: [obj.lat, obj.lng],
+                }));
+              this.schoolList.push(...response.data.list);
+              if (newPlaceData.length) {
+                this.map.markers.push(...newPlaceData);
+              }
+              if (response.data.list.length === 0) this.allDataLoaded = true;
+            }
           })
           .catch((err) => {
             console.error(err);
@@ -631,10 +675,12 @@ export default {
           });
     },
     checkSchoolScroll() {
-      const scrollableDiv = this.$refs.schoolListSection;
-      if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false) {
-        this.pageNum++;
-        this.getSchoolList();
+      if (!this.geoSearch) {
+        const scrollableDiv = this.$refs.schoolListSection;
+        if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false) {
+          this.pageNum++;
+          this.getSchoolList();
+        }
       }
     },
     checkMobileSchoolScroll() {

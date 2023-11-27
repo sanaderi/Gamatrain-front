@@ -433,6 +433,8 @@ export default {
         boardingTypeList: [],
         coedStatusList: [],
         religionList: [],
+        center: [],
+        distance: 10,
       },
       sortList: [
         {
@@ -653,6 +655,15 @@ export default {
 
       if (this.filterForm.coed_status && this.filterForm.coed_status.length > 0) {
         query.coed_status = this.filterForm.coed_status;
+      }
+
+      if (this.filterForm.distance != "") {
+        query.distance = this.filterForm.distance;
+      }
+
+
+      if (this.filterForm.center!=undefined && this.filterForm.center.length) {
+        query.center = this.filterForm.center.join(",");
       }
 
       // Handle more query parameters here ...
