@@ -376,8 +376,8 @@ export default {
       isExpanded: false,
       map: {
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        zoom: 5,
-        minZoom: 5,
+        zoom: 17,
+        minZoom: 2,
         center: [39.90063873634048, -83.44667778604482], // Initial map center coordinates
         markers: [],
         object: null,
@@ -459,6 +459,8 @@ export default {
     if (this.screenWidth < 1264) this.schoolSheet = true;
     window.addEventListener("resize", this.handleResize); //
     //End handle show/hide mobile sheet base on size
+
+    this.grabLocation("town","semirom");
   },
   beforeDestroy() {
     document.body.classList.remove("disable-scroll");
@@ -572,6 +574,7 @@ export default {
     onMoveEnd(event) {
       const bounds = event.target.getBounds();
       const center = event.target.getCenter(); //Center of map
+      console.log(center);
       this.filter.center = [center.lat, center.lng]; //Update filter
       const ne = bounds.getNorthEast(); //Corner of map
       this.calcDistance(center, ne);
@@ -793,6 +796,27 @@ export default {
       else if (this.mobileDataSheetConfig.sheetHeight > 75)
         this.mobileDataSheetConfig.sheetHeight = 75;
     },
+    grabLocation(type,title) {
+      this.$axios
+        .$get("https://nominatim.openstreetmap.org/search", {
+          params: {
+            q: title,
+            format: "json",
+          },
+        })
+        .then((response) => {
+          if(response){
+            var itm=response.find(x=>x.addresstype==type);
+            console.log("test");
+            console.log([itm.lat,itm.lon]);
+          }
+          console.log("-1");
+
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
   },
   computed: {
     boardingTypeArray() {
@@ -917,6 +941,7 @@ export default {
               white-space: nowrap;
               text-overflow: ellipsis;
               overflow: hidden;
+              max-width: 22.6rem;
             }
 
             .item-footer .v-icon {
@@ -1023,6 +1048,7 @@ export default {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
+                max-width: 22.6rem;
               }
 
               .item-footer .v-icon {
@@ -1069,6 +1095,13 @@ export default {
 
               .main-data {
                 min-height: 8rem;
+              }
+
+              .main-data h2 {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                max-width: 82.6rem;
               }
 
               .item-footer .v-icon {

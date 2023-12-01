@@ -4,14 +4,15 @@
       <h1>لیست مدارس</h1>
       <v-divider />
       <v-row class="mt-3">
-        <!--      <v-col cols="10">-->
-        <!--        <v-text-field-->
-        <!--          v-model="search"-->
-        <!--          label="Search"-->
-        <!--          class="mx-4"-->
-        <!--          @keyup="searchData()"-->
-        <!--        ></v-text-field>-->
-        <!--      </v-col>-->
+        <v-col cols="4">
+          <v-text-field
+            v-model="region"
+            label="ناحیه"
+            class="mx-4"
+            :loading="table_loading"
+            @keyup="searchData()"
+          ></v-text-field>
+        </v-col>
       </v-row>
 
       <v-simple-table>
@@ -95,14 +96,14 @@
     </div>
   </v-container>
 </template>
-  
-  <script>
+
+<script>
 export default {
   layout: "admin",
   name: "school-mange",
   head() {
     return {
-      title:'لیست مدارس'
+      title: "لیست مدارس",
     };
   },
   data() {
@@ -116,6 +117,9 @@ export default {
       delete_item: null,
 
       school_list: {},
+      region: "",
+      timer: 0,
+
     };
   },
   watch: {
@@ -128,12 +132,24 @@ export default {
     this.getList();
   },
   methods: {
+    searchData() {
+      this.table_loading = true;
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+
+      this.timer = setTimeout(() => {
+        this.getList();
+      }, 1000);
+    },
     getList() {
       this.table_loading = true;
       this.$axios
         .$get("/test_api/school_list", {
           params: {
             page: this.page,
+            region: this.region,
           },
         })
         .then((response) => {
@@ -150,13 +166,9 @@ export default {
   },
 };
 </script>
-  
-  <style scoped>
+
+<style scoped>
 #school-list {
   direction: rtl;
 }
-
-
 </style>
-
-  
