@@ -60,7 +60,6 @@
 
                 <div class="float-right d-flex mt-1">
                   <div class="rate-section gtext-t6 font-weight-semibold mr-1">
-                    {{ item.score }}
                     <v-icon color="primary"> mdi-star </v-icon>
                   </div>
                   <div class="gtext-t6 primary-gray-300">
@@ -93,7 +92,7 @@
           </div>
         </v-card>
       </div>
-      <div v-else-if="resultCount == 0 && $parent.schoolLoading == false">
+      <div v-else-if="resultCount == 0 && schoolLoading == false">
         <span class="gtext-t4"> Opps! no data found </span>
       </div>
       <div v-else>
@@ -117,6 +116,7 @@ export default {
   name: "school-data-list",
   props: {
     schoolList: [],
+    schoolLoading:true,
     resultCount: 0,
   },
   data() {

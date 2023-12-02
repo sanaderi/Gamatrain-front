@@ -44,15 +44,15 @@
                       @click="desktopFilter = false"
                       v-bind="attrs"
                       v-on="on"
-                      >Curriculum
+                      >Stage
                       <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
                     </v-btn>
                   </template>
                   <v-list class="school-filter-list">
                     <v-list-item
-                      v-for="(item, index) in filter.curriculumList"
+                      v-for="(item, index) in filter.stageList"
                       :key="index"
-                      @click="updateFilter('curriculum', item.id)"
+                      @click="updateFilter('stage', item.id)"
                     >
                       <v-list-item-title class="text-h5">{{
                         item.title
@@ -119,7 +119,7 @@
                     <v-list-item
                       v-for="(item, index) in sortList"
                       :key="index"
-                      @click="updateFilter('sort', item.id)"
+                      @click="updateFilter('sort', item.value)"
                     >
                       <v-list-item-title class="text-h5">{{
                         item.title
@@ -397,8 +397,8 @@
                 <v-list id="sortSheetList">
                   <v-list-item
                     v-for="item in sortList"
-                    :key="item.id"
-                    @click="updateFilter('sort', item.id)"
+                    :key="item.value"
+                    @click="updateFilter('sort', item.value)"
                   >
                     <v-list-item-title class="gtext-t4">{{
                       item.title
@@ -419,13 +419,16 @@
 <script>
 import gomboBox from "../common/gombo-box.vue";
 export default {
+  props: {
+    sortList: [],
+  },
   name: "schoolListFilter",
   data() {
     return {
       desktopFilter: false,
       resultCount: "--",
       filter: {
-        curriculumList: [],
+        stageList: [],
         countryList: [],
         stateList: [],
         cityList: [],
@@ -436,27 +439,10 @@ export default {
         center: [],
         distance: 10,
       },
-      sortList: [
-        {
-          id: 1,
-          title: "Most score",
-        },
-        {
-          id: 2,
-          title: "Most active",
-        },
-        {
-          id: 3,
-          title: "Update date",
-        },
-        {
-          id: 4,
-          title: "Tuition fee",
-        },
-      ],
+
       filterForm: {
         keyword: "",
-        curriculum: "",
+        stage: "",
         tuition_fee: 0,
         country: "",
         state: "",
@@ -472,6 +458,17 @@ export default {
       // Mobile section
       sortSheet: false,
       filterDialog: false,
+      filterLoadedStatus: {
+        stage: false,
+        country: false,
+        state: false,
+        city: false,
+        school_type: false,
+        religion: false,
+        boarding_type: false,
+        coed_status: false,
+        sort: false,
+      },
     };
   },
   created() {
@@ -487,8 +484,9 @@ export default {
 
     //Init filter value
     if (this.$route.query.keyword) this.filterForm.keyword = this.$route.query.keyword;
-    if (this.$route.query.curriculum)
-      this.filterForm.curriculum = this.$route.query.curriculum;
+    if (this.$route.query.stage) this.filterForm.stage = this.$route.query.stage;
+    if (this.$route.query.tuition_fee)
+      this.filterForm.tuition_fee = this.$route.query.tuition_fee;
     if (this.$route.query.country) {
       this.filterForm.country = this.$route.query.country;
       this.getFilterList(
@@ -501,19 +499,31 @@ export default {
       this.getFilterList({ type: "cities", state_id: this.filterForm.state }, "cities");
     }
     if (this.$route.query.city) this.filterForm.city = this.$route.query.city;
+
     if (this.$route.query.school_type)
-      this.filterForm.school_type = Array.isArray(this.$route.query.school_type);
+      this.filterForm.school_type = Array.isArray(this.$route.query.school_type)
+        ? this.$route.query.school_type
+        : [this.$route.query.school_type];
+
     this.filterForm.city = this.$route.query.city;
-    if (this.$route.query.religion) this.filterForm.religion = this.$route.query.religion;
+
+    if (this.$route.query.religion)
+      this.filterForm.religion = Array.isArray(this.$route.query.religion)
+        ? this.$route.query.religion
+        : [this.$route.query.religion];
+
     if (this.$route.query.boarding_type)
       this.filterForm.boarding_type = Array.isArray(this.$route.query.boarding_type)
         ? this.$route.query.boarding_type
         : [this.$route.query.boarding_type];
     if (this.$route.query.coed_status)
-      this.filterForm.coed_status = this.$route.query.coed_status;
-    //End init filter value
+    this.filterForm.coed_status = Array.isArray(this.$route.query.coed_status)
+        ? this.$route.query.coed_status
+        : [this.$route.query.coed_status];
 
-    // this.$parent.filterLoadedStatus.sort = true;
+
+    if (this.$route.query.sort) this.filterForm.sort = this.$route.query.sort;
+    //End init filter value
   },
   watch: {
     "filterForm.keyword"(val) {
@@ -551,54 +561,30 @@ export default {
           var data = {};
           if (type == "countries") {
             this.filter.countryList = res.data;
-            // console.log(this.filter.countryList);
-            if (
-              this.$parent.filterLoadedStatus &&
-              this.$parent.filterLoadedStatus.country
-            )
-              this.$parent.filterLoadedStatus.country = true;
+            this.filterLoadedStatus.country = true;
           } else if (type == "states") {
             this.filter.stateList = res.data;
-            this.$parent.filterLoadedStatus.state = true;
+            this.filterLoadedStatus.state = true;
           } else if (type == "cities") {
             this.filter.cityList = res.data;
-            this.$parent.filterLoadedStatus.city = true;
+            this.filterLoadedStatus.city = true;
           } else if (type == "school_type") {
             this.filter.schoolTypeList = res.data;
-            if (
-              this.$parent.filterLoadedStatus &&
-              this.$parent.filterLoadedStatus.school_type
-            )
-              this.$parent.filterLoadedStatus.school_type = true;
+            this.filterLoadedStatus.school_type = true;
           } else if (type == "boarding_type") {
             this.filter.boardingTypeList = res.data;
-            if (
-              this.$parent.filterLoadedStatus &&
-              this.$parent.filterLoadedStatus.boarding_type
-            )
-              this.$parent.filterLoadedStatus.boarding_type = true;
+            this.filterLoadedStatus.boarding_type = true;
           } else if (type == "coed_status") {
             this.filter.coedStatusList = res.data;
-            if (
-              this.$parent.filterLoadedStatus &&
-              this.$parent.filterLoadedStatus.coed_status
-            )
-              this.$parent.filterLoadedStatus.coed_status = true;
+            this.filterLoadedStatus.coed_status = true;
           } else if (type == "religion") {
             this.filter.religionList = res.data;
-            if (
-              this.$parent.filterLoadedStatus &&
-              this.$parent.filterLoadedStatus.religion
-            )
-              this.$parent.filterLoadedStatus.religion = true;
+            this.filterLoadedStatus.religion = true;
           } else if (type == "section") {
-            this.filter.curriculumList = res.data;
-            if (
-              this.$parent.filterLoadedStatus &&
-              this.$parent.filterLoadedStatus.curriculum
-            )
-              this.$parent.filterLoadedStatus.curriculum = true;
+            this.filter.stageList = res.data;
+            this.filterLoadedStatus.stage = true;
           }
+          this.$emit("loadedStatus", this.filterLoadedStatus);
         })
         .catch((err) => {
           console.error(err);
@@ -606,8 +592,11 @@ export default {
     },
 
     updateFilter(type, value) {
-      if (type == "curriculum") this.filterForm.curriculum = value;
-      if (type == "sort") this.filterForm.sort = value;
+      if (type == "stage") this.filterForm.stage = value;
+      if (type == "sort"){
+        this.sortSheet=false;
+        this.filterForm.sort = value; 
+      } 
 
       this.updateQueryParams();
     },
@@ -617,8 +606,8 @@ export default {
       const query = {};
       if (this.filterForm.keyword != "") query.keyword = this.filterForm.keyword;
 
-      if (this.filterForm.curriculum != "") {
-        query.curriculum = this.filterForm.curriculum;
+      if (this.filterForm.stage != "") {
+        query.stage = this.filterForm.stage;
       }
 
       if (this.filterForm.sort != "") {
@@ -661,8 +650,7 @@ export default {
         query.distance = this.filterForm.distance;
       }
 
-
-      if (this.filterForm.center!=undefined && this.filterForm.center.length) {
+      if (this.filterForm.center != undefined && this.filterForm.center.length) {
         query.center = this.filterForm.center.join(",");
       }
 

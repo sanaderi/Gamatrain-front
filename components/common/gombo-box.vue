@@ -14,50 +14,54 @@
     <v-overlay v-if="sheet" @click="sheet = false"> </v-overlay>
     <v-card light class="gombo-box-list" v-if="sheet">
       <v-row>
-        <v-col cols="12" class="px-5">
-          <v-list v-if="items.length">
-            <v-subheader class="gtext-h5">{{ label }}</v-subheader>
-            <v-text-field
-              prepend-inner-icon="mdi-magnify"
-              id="search-field"
-              hide-details
-              label="Search anything..."
-              dense
-              outlined
-              v-model="keyword"
-              rounded
-              autocomplete="off"
-            >
-              <template v-slot:append>
-                <v-btn
-                  large
-                  class="primary"
-                  :loading="searchLoading"
-                  id="search-btn"
-                  rounded
-                >
-                  Search
-                </v-btn>
-              </template>
-            </v-text-field>
-            <v-list-item
-              class="pointer"
-              v-for="(item, index) in filteredItems"
-              :key="index"
-            >
-              <v-list-item-title
-                class="gtext-t5"
-                @click="setValue(item[itemValue], item[itemTitle])"
-                >{{ item[itemTitle] }}</v-list-item-title
+        <v-col cols="12">
+          <div class="px-5 mt-4">
+            <v-list v-if="items.length">
+              <v-subheader class="gtext-h5">{{ label }}</v-subheader>
+              <v-text-field
+                prepend-inner-icon="mdi-magnify"
+                id="search-field"
+                hide-details
+                label="Search anything..."
+                dense
+                outlined
+                v-model="keyword"
+                rounded
+                autocomplete="off"
               >
-            </v-list-item>
-          </v-list>
-          <div v-else class="text-center pt-8">
-            <v-progress-circular
-              indeterminate
-              :width="3"
-              color="primary"
-            ></v-progress-circular>
+                <template v-slot:append>
+                  <v-btn
+                    large
+                    class="primary"
+                    :loading="searchLoading"
+                    id="search-btn"
+                    rounded
+                  >
+                    Search
+                  </v-btn>
+                </template>
+              </v-text-field>
+              <div class="data-list">
+                <v-list-item
+                  class="pointer"
+                  v-for="(item, index) in filteredItems"
+                  :key="index"
+                >
+                  <v-list-item-title
+                    class="gtext-t5"
+                    @click="setValue(item[itemValue], item[itemTitle])"
+                    >{{ item[itemTitle] }}</v-list-item-title
+                  >
+                </v-list-item>
+              </div>
+            </v-list>
+            <div v-else class="text-center pt-8">
+              <v-progress-circular
+                indeterminate
+                :width="3"
+                color="primary"
+              ></v-progress-circular>
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -95,9 +99,9 @@ export default {
       immediate: true,
       handler(newValue) {
         if (newValue.length > 0) {
-        const foundObj = this.items.find((x) => x[this.itemValue] == this.value);
+          const foundObj = this.items.find((x) => x[this.itemValue] == this.value);
           if (foundObj) this.inputText = foundObj[this.itemTitle];
-          else this.inputText="";
+          else this.inputText = "";
         }
       },
     },
@@ -137,6 +141,13 @@ export default {
   right: 0;
   width: 100%;
   box-shadow: 2px -6px 24px 0px rgba(16, 24, 40, 0.05);
+}
+
+.gombo-box .gombo-box-list .data-list {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-top: 2rem;
+  height: 30rem;
 }
 
 .gombo-box .v-text-field--rounded {

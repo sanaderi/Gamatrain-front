@@ -1,6 +1,11 @@
 <template>
   <div id="school-list">
-    <schoolListFilter ref="schoolFilter" v-if="$vuetify.breakpoint.lgAndUp" />
+    <schoolListFilter
+      ref="schoolFilter"
+      @loadedStatus="updateFilterLoadedStatus"
+      :sort-list="sortList"
+      v-if="$vuetify.breakpoint.lgAndUp"
+    />
     <div id="map-wrap">
       <client-only>
         <l-map
@@ -63,7 +68,11 @@
                         ref="mobileSchoolListSection"
                         @scroll="checkMobileSchoolScroll"
                       >
-                        <schoolListFilter ref="schoolFilter" />
+                        <schoolListFilter
+                          ref="schoolFilter"
+                          @loadedStatus="updateFilterLoadedStatus"
+                          :sort-list="sortList"
+                        />
                         <v-row>
                           <v-col cols="8" class="pl-7">
                             <v-chip
@@ -81,12 +90,10 @@
                               close
                               outlined
                               class="mb-1"
-                              v-if="
-                                $route.query.curriculum && filterLoadedStatus.curriculum
-                              "
-                              @click:close="closeFilter('curriculum')"
+                              v-if="$route.query.stage && filterLoadedStatus.stage"
+                              @click:close="closeFilter('stage')"
                             >
-                              {{ findTitle("curriculum", $route.query.curriculum) }}
+                              {{ findTitle("stage", $route.query.stage) }}
                             </v-chip>
                             <v-chip
                               small
@@ -145,7 +152,7 @@
                               small
                               close
                               outlined
-                              class="mb-1"
+                              class="mb-1 mr-1"
                               v-if="$route.query.religion && filterLoadedStatus.religion"
                               v-for="(item, index) in $route.query.religion"
                               @click:close="closeFilter('religion', item)"
@@ -156,7 +163,7 @@
                               small
                               close
                               outlined
-                              class="mb-1"
+                              class="mb-1 mr-1"
                               v-if="
                                 $route.query.boarding_type &&
                                 filterLoadedStatus.boarding_type
@@ -170,7 +177,7 @@
                               small
                               close
                               outlined
-                              class="mb-1"
+                              class="mb-1 mr-1"
                               v-if="
                                 $route.query.coed_status && filterLoadedStatus.coed_status
                               "
@@ -183,8 +190,8 @@
                               small
                               close
                               outlined
-                              class="mb-1"
-                              v-if="$route.query.sort && filterLoadedStatus.sort"
+                              class="mb-1 mr-1"
+                              v-if="$route.query.sort"
                               @click:close="closeFilter('sort')"
                             >
                               {{ findTitle("sort", $route.query.sort) }}
@@ -200,6 +207,7 @@
                           </v-col>
                         </v-row>
                         <schoolDataList
+                          :schoolLoading="schoolLoading"
                           :schoolList="schoolList"
                           :resultCount="resultCount"
                         />
@@ -233,6 +241,7 @@
               outlined
               v-if="$route.query.keyword"
               @click:close="closeFilter('keyword')"
+              class="mb-1"
             >
               {{ $route.query.keyword }}
             </v-chip>
@@ -240,10 +249,11 @@
               small
               close
               outlined
-              v-if="$route.query.curriculum && filterLoadedStatus.curriculum"
-              @click:close="closeFilter('curriculum')"
+              v-if="$route.query.stage && filterLoadedStatus.stage"
+              @click:close="closeFilter('stage')"
+              class="mb-1"
             >
-              {{ findTitle("curriculum", $route.query.curriculum) }}
+              {{ findTitle("stage", $route.query.stage) }}
             </v-chip>
             <v-chip
               small
@@ -251,6 +261,7 @@
               outlined
               v-if="$route.query.tuition_fee"
               @click:close="closeFilter('tuition_fee')"
+              class="mb-1"
             >
               Tuition fee above: ${{ $route.query.tuition_fee }}
             </v-chip>
@@ -260,6 +271,7 @@
               outlined
               v-if="$route.query.country && filterLoadedStatus.country"
               @click:close="closeFilter('country')"
+              class="mb-1"
             >
               {{ findTitle("country", $route.query.country) }}
             </v-chip>
@@ -267,6 +279,7 @@
               small
               close
               outlined
+              class="mb-1"
               v-if="$route.query.state && filterLoadedStatus.state"
               @click:close="closeFilter('state')"
             >
@@ -276,6 +289,7 @@
               small
               close
               outlined
+              class="mb-1"
               v-if="$route.query.city && filterLoadedStatus.city"
               @click:close="closeFilter('city')"
             >
@@ -285,6 +299,7 @@
               small
               close
               outlined
+              class="mr-1 mb-1"
               v-if="$route.query.school_type && filterLoadedStatus.school_type"
               v-for="(item, index) in $route.query.school_type"
               @click:close="closeFilter('school_type', item)"
@@ -295,6 +310,7 @@
               small
               close
               outlined
+              class="mr-1 mb-1"
               v-if="$route.query.religion && filterLoadedStatus.religion"
               v-for="(item, index) in $route.query.religion"
               @click:close="closeFilter('religion', item)"
@@ -304,6 +320,7 @@
             <v-chip
               small
               close
+              class="mr-1 mb-1"
               outlined
               v-if="$route.query.boarding_type && filterLoadedStatus.boarding_type"
               v-for="(item, index) in boardingTypeArray"
@@ -315,6 +332,7 @@
               small
               close
               outlined
+              class="mr-1 mb-1"
               v-if="$route.query.coed_status && filterLoadedStatus.coed_status"
               v-for="(item, index) in coedStatusArray"
               @click:close="closeFilter('coed_status', item)"
@@ -325,7 +343,8 @@
               small
               close
               outlined
-              v-if="$route.query.sort && filterLoadedStatus.sort"
+              class="mr-1 mb-1"
+              v-if="$route.query.sort"
               @click:close="closeFilter('sort')"
             >
               {{ findTitle("sort", $route.query.sort) }}
@@ -349,7 +368,7 @@
       <!-- Action section -->
 
       <!-- Data list -->
-      <schoolDataList :schoolList="schoolList" :resultCount="resultCount" />
+      <schoolDataList :schoolLoading="schoolLoading" :schoolList="schoolList" :resultCount="resultCount" />
       <!-- End data list -->
     </div>
     <!-- End large screen section -->
@@ -373,7 +392,7 @@ export default {
   },
   data() {
     return {
-      isExpanded: false,
+      isExpanded: true,
       map: {
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         zoom: 17,
@@ -399,7 +418,7 @@ export default {
       ],
       filter: {
         keyword: "",
-        curriculum: "",
+        stage: "",
         tuition_fee: "",
         country: "",
         state: "",
@@ -412,7 +431,7 @@ export default {
         center: [],
       },
       filterLoadedStatus: {
-        curriculum: false,
+        stage: false,
         country: false,
         state: false,
         city: false,
@@ -434,7 +453,30 @@ export default {
 
       schoolList: [],
       currentZoom: 5,
-      geoSearch: true,
+      geoSearch: false,
+
+      sortList: [
+        {
+          value: "scoreDesc",
+          title: "Most score",
+        },
+        {
+          value: "viewsDesc",
+          title: "Most active",
+        },
+        {
+          value: "updateDesc",
+          title: "Update date",
+        },
+        {
+          value: "tuitionAsc",
+          title: "Least tuition fee",
+        },
+        {
+          value: "tuitionDesc",
+          title: "Most tuition fee",
+        },
+      ],
     };
   },
   mounted() {
@@ -460,7 +502,7 @@ export default {
     window.addEventListener("resize", this.handleResize); //
     //End handle show/hide mobile sheet base on size
 
-    this.grabLocation("town","semirom");
+    // this.grabLocation("town", "semirom");
   },
   beforeDestroy() {
     document.body.classList.remove("disable-scroll");
@@ -486,8 +528,8 @@ export default {
         this.getSchoolList();
       }, 800);
     },
-    "$route.query.curriculum"(val) {
-      this.filter.curriculum = val;
+    "$route.query.stage"(val) {
+      this.filter.stage = val;
       this.pageNum = 1;
       this.schoolList = [];
       this.allDataLoaded = false;
@@ -565,6 +607,16 @@ export default {
       this.allDataLoaded = false;
       this.getSchoolList();
     },
+    isExpanded(val) {
+      if (val) {
+        this.geoSearch = false;
+        this.$refs.schoolFilter.filterForm.distance = "";
+        this.$refs.schoolFilter.filterForm.center = [];
+        this.$refs.schoolFilter.updateQueryParams();
+      } else {
+        this.geoSearch = true;
+      }
+    },
   },
 
   methods: {
@@ -572,15 +624,16 @@ export default {
       this.screenWidth = window.innerWidth;
     },
     onMoveEnd(event) {
-      const bounds = event.target.getBounds();
-      const center = event.target.getCenter(); //Center of map
-      console.log(center);
-      this.filter.center = [center.lat, center.lng]; //Update filter
-      const ne = bounds.getNorthEast(); //Corner of map
-      this.calcDistance(center, ne);
-      this.$refs.schoolFilter.filterForm.center = this.filter.center;
-      this.$refs.schoolFilter.filterForm.distance = this.filter.distance;
-      this.$refs.schoolFilter.updateQueryParams();
+      if (!this.isExpanded) {
+        const bounds = event.target.getBounds();
+        const center = event.target.getCenter(); //Center of map
+        this.filter.center = [center.lat, center.lng]; //Update filter
+        const ne = bounds.getNorthEast(); //Corner of map
+        this.calcDistance(center, ne);
+        this.$refs.schoolFilter.filterForm.center = this.filter.center;
+        this.$refs.schoolFilter.filterForm.distance = this.filter.distance;
+        this.$refs.schoolFilter.updateQueryParams();
+      }
     },
     onZoomChange(newZoom) {
       // console.log(newZoom);
@@ -631,7 +684,7 @@ export default {
             params: {
               page: this.pageNum,
               name: this.$route.query.keyword,
-              section: this.$route.query.curriculum,
+              section: this.$route.query.stage,
               tuition_fee: this.$route.query.tuition_fee,
               country: this.$route.query.country,
               state: this.$route.query.state,
@@ -641,10 +694,14 @@ export default {
               boarding_type: this.$route.query.boarding_type,
               coed_status: this.$route.query.coed_status,
               sort: this.$route.query.sort,
-              distance: this.$route.query.distance
+              distance: this.isExpanded
+                ? ""
+                : this.$route.query.distance
                 ? this.$route.query.distance
                 : this.filter.distance,
-              center: this.$route.query.center
+              center: this.isExpanded
+                ? []
+                : this.$route.query.center
                 ? this.$route.query.center
                 : this.map.center.join(","),
             },
@@ -698,8 +755,7 @@ export default {
     },
     closeFilter(filter_name, other_data = null) {
       if (filter_name == "keyword") this.$refs.schoolFilter.filterForm.keyword = "";
-      else if (filter_name == "curriculum")
-        this.$refs.schoolFilter.updateFilter("curriculum", "");
+      else if (filter_name == "stage") this.$refs.schoolFilter.updateFilter("stage", "");
       else if (filter_name == "sort") this.$refs.schoolFilter.updateFilter("sort", "");
       else if (filter_name == "tuition_fee")
         this.$refs.schoolFilter.filterForm.tuition_fee = 0;
@@ -742,11 +798,10 @@ export default {
     },
     findTitle(type, id) {
       var title = "";
-      if (type == "curriculum")
-        title = this.$refs.schoolFilter.filter.curriculumList.find((x) => x.id == id)
-          .title;
+      if (type == "stage")
+        title = this.$refs.schoolFilter.filter.stageList.find((x) => x.id == id).title;
       if (type == "sort") {
-        title = this.$refs.schoolFilter.sortList.find((x) => x.id == id).title;
+        title = this.sortList.find((x) => x.value == id).title;
       } else if (type == "country")
         title = this.$refs.schoolFilter.filter.countryList.find((x) => x.id == id).name;
       else if (type == "state")
@@ -756,7 +811,7 @@ export default {
       else if (type == "school_type")
         title = this.$refs.schoolFilter.filter.schoolTypeList.find((x) => x.id == id)
           .title;
-      else if (type == "religion")
+      else if (type == "religion" && this.$refs.schoolFilter.filter.religionList)
         title = this.$refs.schoolFilter.filter.religionList.find((x) => x.id == id).title;
       else if (type == "boarding_type")
         title = this.$refs.schoolFilter.filter.boardingTypeList.find((x) => x.id == id)
@@ -796,7 +851,7 @@ export default {
       else if (this.mobileDataSheetConfig.sheetHeight > 75)
         this.mobileDataSheetConfig.sheetHeight = 75;
     },
-    grabLocation(type,title) {
+    grabLocation(type, title) {
       this.$axios
         .$get("https://nominatim.openstreetmap.org/search", {
           params: {
@@ -805,17 +860,18 @@ export default {
           },
         })
         .then((response) => {
-          if(response){
-            var itm=response.find(x=>x.addresstype==type);
-            console.log("test");
-            console.log([itm.lat,itm.lon]);
+          if (response) {
+            var itm = response.find((x) => x.addresstype == type);
+            console.log([itm.lat, itm.lon]);
           }
           console.log("-1");
-
         })
         .catch((err) => {
           console.error(err);
         });
+    },
+    updateFilterLoadedStatus(value) {
+      this.filterLoadedStatus = value;
     },
   },
   computed: {
