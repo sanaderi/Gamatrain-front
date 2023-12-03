@@ -457,6 +457,11 @@ body {
     //   color: white !important;
     //  }
 
+
+    .w-50 {
+      width: 50%;
+    }
+
     .w-100 {
       width: 100%;
     }
@@ -2391,6 +2396,14 @@ body {
 
   .container--fluid {
     max-width: inherit !important;
+  }
+
+  .w-sm-50{
+    width: 50%!important;
+  }
+
+  .w-sm-100{
+    width: 100%;
   }
 
   //sm size

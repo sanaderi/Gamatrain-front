@@ -413,6 +413,40 @@
       </v-row>
     </div>
     <!-- End mobile section -->
+
+    <!-- Location picker dialog -->
+    <v-row justify="center">
+      <v-card v-if="locationPickerDialog" id="locationPickerDialog" class="text-center">
+        <img :src="require('@/assets/images/earth.png')" />
+
+        <p class="gtext-t4">Select Your Location First</p>
+        <p class="gtext-t6">A lot of schools from all over the world are here</p>
+
+        <v-row class="w-sm-50 w-100  mx-auto mt-10">
+          <v-col cols="12">
+            <gomboBox
+              label="Country"
+              @change="countryChange()"
+              :items="filter.countryList"
+              itemTitle="name"
+              v-model="filterForm.country"
+            />
+          </v-col>
+          <v-col cols="12">
+            <gomboBox
+              label="State"
+              @change="stateChange()"
+              :items="filter.stateList"
+              v-model="filterForm.state"
+            />
+          </v-col>
+          <v-col cols="12" >
+            <gomboBox label="City" :items="filter.cityList" v-model="filterForm.city" />
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-row>
+    <!-- End location picker dialog -->
   </div>
 </template>
 
@@ -425,6 +459,7 @@ export default {
   name: "schoolListFilter",
   data() {
     return {
+      locationPickerDialog: false,
       desktopFilter: false,
       resultCount: "--",
       filter: {
@@ -517,10 +552,9 @@ export default {
         ? this.$route.query.boarding_type
         : [this.$route.query.boarding_type];
     if (this.$route.query.coed_status)
-    this.filterForm.coed_status = Array.isArray(this.$route.query.coed_status)
+      this.filterForm.coed_status = Array.isArray(this.$route.query.coed_status)
         ? this.$route.query.coed_status
         : [this.$route.query.coed_status];
-
 
     if (this.$route.query.sort) this.filterForm.sort = this.$route.query.sort;
     //End init filter value
@@ -593,10 +627,10 @@ export default {
 
     updateFilter(type, value) {
       if (type == "stage") this.filterForm.stage = value;
-      if (type == "sort"){
-        this.sortSheet=false;
-        this.filterForm.sort = value; 
-      } 
+      if (type == "sort") {
+        this.sortSheet = false;
+        this.filterForm.sort = value;
+      }
 
       this.updateQueryParams();
     },
@@ -725,6 +759,19 @@ export default {
   z-index: 1200 !important;
 }
 
+#locationPickerDialog {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1200;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+}
+
 #filter-card {
   .v-card__actions {
     position: absolute;
@@ -745,7 +792,7 @@ export default {
     margin-top: 0.58rem;
     padding-top: 0.8rem;
     padding-bottom: 0.4rem;
-    height: 7rem !important;
+    height: 9.4rem !important;
     background: var(--primary-grey-800, #1d2939);
     box-shadow: 5px 9px 24px 0px rgba(16, 24, 40, 0.05);
     .v-text-field--rounded {

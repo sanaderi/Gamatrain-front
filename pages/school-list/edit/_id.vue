@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <h1 class="text-center">{{ form.schoolTitle }}</h1>
     <div id="school-list-edit" class="mt-4">
       <v-form ref="form" lazy-validation>
         <v-row>
@@ -106,6 +107,11 @@
 export default {
   layout: "admin",
   name: "edit_school",
+  head(){
+    return{
+      title:this.form.schoolTitle
+    } 
+  },
   data() {
     return {
       update_loading: false,

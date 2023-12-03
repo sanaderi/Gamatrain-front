@@ -148,6 +148,7 @@ export default {
   overflow-x: hidden;
   margin-top: 2rem;
   height: 30rem;
+  text-align: left;
 }
 
 .gombo-box .v-text-field--rounded {

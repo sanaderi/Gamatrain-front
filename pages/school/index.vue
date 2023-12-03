@@ -44,7 +44,7 @@
         id="mobile-school-list-container"
         v-if="$vuetify.breakpoint.mdAndDown"
         class="d-block d-lg-none"
-        :style="`height:${mobileDataSheetConfig.sheetHeight}vh`"
+        :style="`height:${mobileDataSheetConfig.sheetHeight}%`"
       >
         <v-sheet id="school-list-sheet">
           <div
@@ -62,155 +62,160 @@
                 <v-row>
                   <v-col cols="12" class="pt-0">
                     <div id="mobile-search-result-container">
+                      <schoolListFilter
+                        ref="schoolFilter"
+                        @loadedStatus="updateFilterLoadedStatus"
+                        :sort-list="sortList"
+                      />
+                      <!-- Chip section -->
+                      <v-row v-if="mobileDataSheetConfig.sheetHeight > 25">
+                        <v-col cols="8" class="pl-7">
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1"
+                            v-if="$route.query.keyword"
+                            @click:close="closeFilter('keyword')"
+                          >
+                            {{ $route.query.keyword }}
+                          </v-chip>
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1"
+                            v-if="$route.query.stage && filterLoadedStatus.stage"
+                            @click:close="closeFilter('stage')"
+                          >
+                            {{ findTitle("stage", $route.query.stage) }}
+                          </v-chip>
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1"
+                            v-if="$route.query.tuition_fee"
+                            @click:close="closeFilter('tuition_fee')"
+                          >
+                            Tuition fee above: ${{ $route.query.tuition_fee }}
+                          </v-chip>
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1"
+                            v-if="$route.query.country && filterLoadedStatus.country"
+                            @click:close="closeFilter('country')"
+                          >
+                            {{ findTitle("country", $route.query.country) }}
+                          </v-chip>
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1"
+                            v-if="$route.query.state && filterLoadedStatus.state"
+                            @click:close="closeFilter('state')"
+                          >
+                            {{ findTitle("state", $route.query.state) }}
+                          </v-chip>
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1"
+                            v-if="$route.query.city && filterLoadedStatus.city"
+                            @click:close="closeFilter('city')"
+                          >
+                            {{ findTitle("city", $route.query.city) }}
+                          </v-chip>
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1"
+                            v-if="
+                              $route.query.school_type && filterLoadedStatus.school_type
+                            "
+                            v-for="(item, index) in $route.query.school_type"
+                            @click:close="closeFilter('school_type', item)"
+                          >
+                            {{ findTitle("school_type", item) }}
+                          </v-chip>
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1 mr-1"
+                            v-if="$route.query.religion && filterLoadedStatus.religion"
+                            v-for="(item, index) in $route.query.religion"
+                            @click:close="closeFilter('religion', item)"
+                          >
+                            {{ findTitle("religion", item) }}
+                          </v-chip>
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1 mr-1"
+                            v-if="
+                              $route.query.boarding_type &&
+                              filterLoadedStatus.boarding_type
+                            "
+                            v-for="(item, index) in boardingTypeArray"
+                            @click:close="closeFilter('boarding_type', item)"
+                          >
+                            {{ findTitle("boarding_type", item) }}
+                          </v-chip>
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1 mr-1"
+                            v-if="
+                              $route.query.coed_status && filterLoadedStatus.coed_status
+                            "
+                            v-for="(item, index) in coedStatusArray"
+                            @click:close="closeFilter('coed_status', item)"
+                          >
+                            {{ findTitle("coed_status", item) }}
+                          </v-chip>
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1 mr-1"
+                            v-if="$route.query.sort"
+                            @click:close="closeFilter('sort')"
+                          >
+                            {{ findTitle("sort", $route.query.sort) }}
+                          </v-chip>
+                        </v-col>
+                        <v-col cols="4" class="text-right">
+                          <div id="result-stat " class="mr-4">
+                            <span class="gama-text-overline"> Search result </span>
+                            <span class="gama-text-button">
+                              {{ resultCount }}
+                            </span>
+                          </div>
+                        </v-col>
+                      </v-row>
+                      <!-- end chip section -->
                       <div
+                        v-if="mobileDataSheetConfig.sheetHeight > 25"
                         id="search-result"
-                        :style="`height:${mobileDataSheetConfig.sheetHeight}vh`"
+                        :style="`height:${mobileDataSheetConfig.sheetHeight}%`"
                         ref="mobileSchoolListSection"
                         @scroll="checkMobileSchoolScroll"
                       >
-                        <schoolListFilter
-                          ref="schoolFilter"
-                          @loadedStatus="updateFilterLoadedStatus"
-                          :sort-list="sortList"
-                        />
-                        <v-row>
-                          <v-col cols="8" class="pl-7">
-                            <v-chip
-                              small
-                              close
-                              outlined
-                              class="mb-1"
-                              v-if="$route.query.keyword"
-                              @click:close="closeFilter('keyword')"
-                            >
-                              {{ $route.query.keyword }}
-                            </v-chip>
-                            <v-chip
-                              small
-                              close
-                              outlined
-                              class="mb-1"
-                              v-if="$route.query.stage && filterLoadedStatus.stage"
-                              @click:close="closeFilter('stage')"
-                            >
-                              {{ findTitle("stage", $route.query.stage) }}
-                            </v-chip>
-                            <v-chip
-                              small
-                              close
-                              outlined
-                              class="mb-1"
-                              v-if="$route.query.tuition_fee"
-                              @click:close="closeFilter('tuition_fee')"
-                            >
-                              Tuition fee above: ${{ $route.query.tuition_fee }}
-                            </v-chip>
-                            <v-chip
-                              small
-                              close
-                              outlined
-                              class="mb-1"
-                              v-if="$route.query.country && filterLoadedStatus.country"
-                              @click:close="closeFilter('country')"
-                            >
-                              {{ findTitle("country", $route.query.country) }}
-                            </v-chip>
-                            <v-chip
-                              small
-                              close
-                              outlined
-                              class="mb-1"
-                              v-if="$route.query.state && filterLoadedStatus.state"
-                              @click:close="closeFilter('state')"
-                            >
-                              {{ findTitle("state", $route.query.state) }}
-                            </v-chip>
-                            <v-chip
-                              small
-                              close
-                              outlined
-                              class="mb-1"
-                              v-if="$route.query.city && filterLoadedStatus.city"
-                              @click:close="closeFilter('city')"
-                            >
-                              {{ findTitle("city", $route.query.city) }}
-                            </v-chip>
-                            <v-chip
-                              small
-                              close
-                              outlined
-                              class="mb-1"
-                              v-if="
-                                $route.query.school_type && filterLoadedStatus.school_type
-                              "
-                              v-for="(item, index) in $route.query.school_type"
-                              @click:close="closeFilter('school_type', item)"
-                            >
-                              {{ findTitle("school_type", item) }}
-                            </v-chip>
-                            <v-chip
-                              small
-                              close
-                              outlined
-                              class="mb-1 mr-1"
-                              v-if="$route.query.religion && filterLoadedStatus.religion"
-                              v-for="(item, index) in $route.query.religion"
-                              @click:close="closeFilter('religion', item)"
-                            >
-                              {{ findTitle("religion", item) }}
-                            </v-chip>
-                            <v-chip
-                              small
-                              close
-                              outlined
-                              class="mb-1 mr-1"
-                              v-if="
-                                $route.query.boarding_type &&
-                                filterLoadedStatus.boarding_type
-                              "
-                              v-for="(item, index) in boardingTypeArray"
-                              @click:close="closeFilter('boarding_type', item)"
-                            >
-                              {{ findTitle("boarding_type", item) }}
-                            </v-chip>
-                            <v-chip
-                              small
-                              close
-                              outlined
-                              class="mb-1 mr-1"
-                              v-if="
-                                $route.query.coed_status && filterLoadedStatus.coed_status
-                              "
-                              v-for="(item, index) in coedStatusArray"
-                              @click:close="closeFilter('coed_status', item)"
-                            >
-                              {{ findTitle("coed_status", item) }}
-                            </v-chip>
-                            <v-chip
-                              small
-                              close
-                              outlined
-                              class="mb-1 mr-1"
-                              v-if="$route.query.sort"
-                              @click:close="closeFilter('sort')"
-                            >
-                              {{ findTitle("sort", $route.query.sort) }}
-                            </v-chip>
-                          </v-col>
-                          <v-col cols="4" class="text-right">
-                            <div id="result-stat " class="mr-4">
-                              <span class="gama-text-overline"> Search result </span>
-                              <span class="gama-text-button">
-                                {{ resultCount }}
-                              </span>
-                            </div>
-                          </v-col>
-                        </v-row>
+                        <!-- School list section -->
                         <schoolDataList
                           :schoolLoading="schoolLoading"
                           :schoolList="schoolList"
                           :resultCount="resultCount"
                         />
+                        <!-- End school list section -->
                       </div>
                     </div>
                   </v-col>
@@ -368,7 +373,11 @@
       <!-- Action section -->
 
       <!-- Data list -->
-      <schoolDataList :schoolLoading="schoolLoading" :schoolList="schoolList" :resultCount="resultCount" />
+      <schoolDataList
+        :schoolLoading="schoolLoading"
+        :schoolList="schoolList"
+        :resultCount="resultCount"
+      />
       <!-- End data list -->
     </div>
     <!-- End large screen section -->
@@ -447,7 +456,7 @@ export default {
       mobileDataSheetConfig: {
         isDragging: false,
         startDragY: 0,
-        sheetHeight: 75,
+        sheetHeight: 90,
       },
       screenWidth: 0,
 
@@ -823,6 +832,7 @@ export default {
       return title;
     },
     startDrag(e) {
+      e.preventDefault();
       this.mobileDataSheetConfig.isDragging = true;
       this.mobileDataSheetConfig.startDragY = e.touches[0].clientY;
     },
@@ -846,10 +856,14 @@ export default {
     },
     endDrag(e) {
       this.mobileDataSheetConfig.isDragging = false;
-      if (this.mobileDataSheetConfig.sheetHeight < 30)
-        this.mobileDataSheetConfig.sheetHeight = 25;
-      else if (this.mobileDataSheetConfig.sheetHeight > 75)
-        this.mobileDataSheetConfig.sheetHeight = 75;
+      if (this.mobileDataSheetConfig.sheetHeight < 50) {
+        if (window.innerHeight >= 766) this.mobileDataSheetConfig.sheetHeight = 12;
+        if (window.innerHeight >= 744) this.mobileDataSheetConfig.sheetHeight = 15;
+        if (window.innerHeight >= 718) this.mobileDataSheetConfig.sheetHeight = 20;
+        else if (window.innerHeight >= 464) this.mobileDataSheetConfig.sheetHeight = 30;
+        else this.mobileDataSheetConfig.sheetHeight = 45;
+      } else if (this.mobileDataSheetConfig.sheetHeight > 50)
+        this.mobileDataSheetConfig.sheetHeight = 90;
     },
     grabLocation(type, title) {
       this.$axios
@@ -902,6 +916,9 @@ export default {
 </script>
 
 <style>
+.leaflet-control-zoom {
+  display: none !important; /* Hide the zoom control */
+}
 #school-list-sheet {
   border-radius: 3rem 3rem 0 0;
   justify-content: center;
@@ -941,8 +958,8 @@ export default {
   overflow: hidden;
 
   #map-wrap {
-    margin-top: -2rem;
-    height: 85vh;
+    margin-top: 5.4rem;
+    height: 98vh;
     position: relative;
   }
 
@@ -1032,6 +1049,9 @@ export default {
 }
 
 @media (min-width: 1264px) {
+  .leaflet-control-zoom {
+    display: block !important; /* Hide the zoom control */
+  }
   #school-list {
     position: relative;
     height: 100vh;
@@ -1061,10 +1081,8 @@ export default {
       width: 40rem;
       background: var(--primary-grey-100, #f2f4f7);
       box-shadow: 5px 9px 24px 0px rgba(16, 24, 40, 0.05);
-      height: 100vh;
+      height: 86vh;
       transition: width 0.5s;
-
-      height: 100vh;
       overflow: auto;
 
       #action-section {
