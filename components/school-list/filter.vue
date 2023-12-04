@@ -70,9 +70,10 @@
                       v-bind="attrs"
                       v-on="on"
                     >
-                      Tuition fee&nbsp;<span style="color: #667085; text-transform: none"
+                      Tuition fee
+                      <!-- &nbsp;<span style="color: #667085; text-transform: none"
                         >to</span
-                      >&nbsp;${{ filterForm.tuition_fee | numberFormat }}
+                      >&nbsp;${{ filterForm.tuition_fee | numberFormat }} -->
 
                       <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
                     </v-btn>
@@ -92,7 +93,7 @@
 
                 <v-btn
                   class="text-capitalize gtext-t4 font-weight-medium"
-                  @click="desktopFilter = !desktopFilter"
+                  @click="openDesktopFilter"
                 >
                   <v-icon right dark size="24"> mdi-filter </v-icon>
                   &nbsp;&nbsp;&nbsp; Filter
@@ -141,7 +142,12 @@
         </v-container>
       </v-toolbar>
 
-      <v-container fluid id="desktop-school-more-filter" v-if="desktopFilter">
+      <v-container
+        ref="desktopFilter"
+        fluid
+        id="desktop-school-more-filter"
+        v-if="desktopFilter"
+      >
         <v-card width="100vw" class="pt-4">
           <v-container>
             <v-row>
@@ -422,7 +428,7 @@
         <p class="gtext-t4">Select Your Location First</p>
         <p class="gtext-t6">A lot of schools from all over the world are here</p>
 
-        <v-row class="w-sm-50 w-100  mx-auto mt-10">
+        <v-row class="w-sm-50 w-100 mx-auto mt-10">
           <v-col cols="12">
             <gomboBox
               label="Country"
@@ -440,7 +446,7 @@
               v-model="filterForm.state"
             />
           </v-col>
-          <v-col cols="12" >
+          <v-col cols="12">
             <gomboBox label="City" :items="filter.cityList" v-model="filterForm.city" />
           </v-col>
         </v-row>
@@ -531,7 +537,14 @@ export default {
     }
     if (this.$route.query.state) {
       this.filterForm.state = this.$route.query.state;
-      this.getFilterList({ type: "cities", state_id: this.filterForm.state }, "cities");
+      this.getFilterList(
+        {
+          type: "cities",
+          country_id: this.filterForm.country,
+          state_id: this.filterForm.state,
+        },
+        "cities"
+      );
     }
     if (this.$route.query.city) this.filterForm.city = this.$route.query.city;
 
@@ -567,7 +580,18 @@ export default {
       this.updateQueryParams();
     },
     "filterForm.city"(val) {
+      document.removeEventListener("click", this.handleClickOutside);
       this.updateQueryParams();
+
+      setTimeout(() => {
+        if (this.desktopFilter) {
+          // Add click event listener to close the div when clicking outside
+          document.addEventListener("click", this.handleClickOutside);
+        } else {
+          // Remove click event listener when the div is closed
+          document.removeEventListener("click", this.handleClickOutside);
+        }
+      }, 100);
     },
     "filterForm.school_type"(val) {
       this.updateQueryParams();
@@ -699,22 +723,83 @@ export default {
     },
 
     countryChange() {
+      document.removeEventListener("click", this.handleClickOutside);
+
       this.filter.stateList = [];
       this.filter.cityList = [];
       this.filterForm.state = "";
       this.filterForm.city = "";
       this.updateQueryParams();
-      this.getFilterList(
-        { type: "states", country_id: this.filterForm.country },
-        "states"
-      );
+      if (this.filterForm.country) {
+        this.getFilterList(
+          { type: "states", country_id: this.filterForm.country },
+          "states"
+        );
+      }
+
+      setTimeout(() => {
+        if (this.desktopFilter) {
+          // Add click event listener to close the div when clicking outside
+          document.addEventListener("click", this.handleClickOutside);
+        } else {
+          // Remove click event listener when the div is closed
+          document.removeEventListener("click", this.handleClickOutside);
+        }
+      }, 100);
     },
     stateChange() {
+      document.removeEventListener("click", this.handleClickOutside);
+
       this.filter.cityList = [];
       this.filterForm.city = "";
       this.updateQueryParams();
-      this.getFilterList({ type: "cities", state_id: this.filterForm.state }, "cities");
+      if (this.filterForm.state) {
+        this.getFilterList(
+          {
+            type: "cities",
+            country_id: this.filterForm.country,
+            state_id: this.filterForm.state,
+          },
+          "cities"
+        );
+      }
+
+      setTimeout(() => {
+        if (this.desktopFilter) {
+          // Add click event listener to close the div when clicking outside
+          document.addEventListener("click", this.handleClickOutside);
+        } else {
+          // Remove click event listener when the div is closed
+          document.removeEventListener("click", this.handleClickOutside);
+        }
+      }, 100);
     },
+
+    openDesktopFilter() {
+      this.desktopFilter = !this.desktopFilter;
+
+      setTimeout(() => {
+        if (this.desktopFilter) {
+          // Add click event listener to close the div when clicking outside
+          document.addEventListener("click", this.handleClickOutside);
+        } else {
+          // Remove click event listener when the div is closed
+          document.removeEventListener("click", this.handleClickOutside);
+        }
+      }, 100);
+    },
+    handleClickOutside(event) {
+      // Close the div if the click is outside of the div
+      const div = this.$refs.desktopFilter;
+      if (div && !div.contains(event.target)) {
+        this.desktopFilter = false;
+        document.removeEventListener("click", this.handleClickOutside);
+      }
+    },
+  },
+  beforeDestroy() {
+    // Remove the click event listener when the component is destroyed
+    document.removeEventListener("click", this.handleClickOutside);
   },
 };
 </script>
@@ -788,6 +873,9 @@ export default {
 }
 
 @media (min-width: 1264px) {
+  .v-list-item__title {
+    font-size: 1.6rem;
+  }
   #desktop-school-filter {
     margin-top: 0.58rem;
     padding-top: 0.8rem;

@@ -81,7 +81,7 @@
           </v-card-text>
         </v-card>
 
-        <v-card class="list-item" v-if="!$parent.allDataLoaded">
+        <v-card class="list-item" v-if="!allDataLoaded">
           <div class="item-info">
             <div class="main-data">
               <v-skeleton-loader
@@ -118,6 +118,7 @@ export default {
     schoolList: [],
     schoolLoading:true,
     resultCount: 0,
+    allDataLoaded:false
   },
   data() {
     return {};

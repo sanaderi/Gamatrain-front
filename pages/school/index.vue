@@ -44,7 +44,7 @@
         id="mobile-school-list-container"
         v-if="$vuetify.breakpoint.mdAndDown"
         class="d-block d-lg-none"
-        :style="`height:${mobileDataSheetConfig.sheetHeight}%`"
+        :style="`height:${mobileDataSheetConfig.sheetHeight}rem`"
       >
         <v-sheet id="school-list-sheet">
           <div
@@ -68,7 +68,7 @@
                         :sort-list="sortList"
                       />
                       <!-- Chip section -->
-                      <v-row v-if="mobileDataSheetConfig.sheetHeight > 25">
+                      <v-row v-if="mobileDataSheetConfig.sheetHeight >= 15">
                         <v-col cols="8" class="pl-7">
                           <v-chip
                             small
@@ -203,9 +203,9 @@
                       </v-row>
                       <!-- end chip section -->
                       <div
-                        v-if="mobileDataSheetConfig.sheetHeight > 25"
+                        v-if="mobileDataSheetConfig.sheetHeight >= 15"
                         id="search-result"
-                        :style="`height:${mobileDataSheetConfig.sheetHeight}%`"
+                        :style="`height:${mobileDataSheetConfig.sheetHeight - 18}rem`"
                         ref="mobileSchoolListSection"
                         @scroll="checkMobileSchoolScroll"
                       >
@@ -214,6 +214,7 @@
                           :schoolLoading="schoolLoading"
                           :schoolList="schoolList"
                           :resultCount="resultCount"
+                          :allDataLoaded="allDataLoaded"
                         />
                         <!-- End school list section -->
                       </div>
@@ -377,6 +378,7 @@
         :schoolLoading="schoolLoading"
         :schoolList="schoolList"
         :resultCount="resultCount"
+        :allDataLoaded="allDataLoaded"
       />
       <!-- End data list -->
     </div>
@@ -414,8 +416,9 @@ export default {
       },
       schoolLoading: true,
       pageNum: 1,
-      allDataLoaded: [],
+      allDataLoaded: false,
       resultCount: "--",
+      loadingData:false,
       timer: 0,
       gradeLevelList: [
         {
@@ -456,7 +459,9 @@ export default {
       mobileDataSheetConfig: {
         isDragging: false,
         startDragY: 0,
-        sheetHeight: 90,
+        sheetHeight: 20,
+        expanded: true,
+        dragSide: "top",
       },
       screenWidth: 0,
 
@@ -490,6 +495,10 @@ export default {
   },
   mounted() {
     document.body.classList.add("disable-scroll");
+
+    if (process.client) {
+      this.mobileDataSheetConfig.sheetHeight = window.innerHeight / 10 - 4.6; //4.6 is distance from top
+    }
 
     this.map.schoolIcon = L.icon({
       iconUrl: "/images/school-marker.png", // Replace with school marker icon
@@ -685,7 +694,7 @@ export default {
       }
     },
 
-    getSchoolList() {
+    async getSchoolList() {
       this.schoolLoading = true;
       if (this.allDataLoaded == false)
         this.$axios
@@ -719,6 +728,9 @@ export default {
             this.resultCount = response.data.num;
             this.$refs.schoolFilter.resultCount = this.resultCount;
 
+            this.loadingData = false;
+
+
             if (this.geoSearch) {
               this.schoolList = response.data.list;
             } else {
@@ -743,24 +755,26 @@ export default {
             this.$refs.schoolFilter.searchLoading = false;
           });
     },
-    checkSchoolScroll() {
+    async checkSchoolScroll() {
       if (!this.geoSearch) {
         const scrollableDiv = this.$refs.schoolListSection;
-        if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false) {
+        if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false  && !this.loadingData) {
           this.pageNum++;
-          this.getSchoolList();
+          this.loadingData = true; // Set loading flag
+          await this.getSchoolList();
         }
       }
     },
-    checkMobileSchoolScroll() {
+    async checkMobileSchoolScroll() {
       const scrollableDiv = this.$refs.mobileSchoolListSection;
-      if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false) {
+      if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false && !this.loadingData) {
         this.pageNum++;
-        this.getSchoolList();
+        this.loadingData = true; // Set loading flag
+        await this.getSchoolList();
       }
     },
     isScrollAtBottom(element) {
-      return element.scrollHeight - element.scrollTop == element.clientHeight;
+      return (element.scrollHeight - element.scrollTop-150) <= element.clientHeight;
     },
     closeFilter(filter_name, other_data = null) {
       if (filter_name == "keyword") this.$refs.schoolFilter.filterForm.keyword = "";
@@ -842,13 +856,12 @@ export default {
 
         const currentY = e.touches[0].clientY;
         const dragDistance = this.mobileDataSheetConfig.startDragY - currentY;
-        const viewportHeight = window.innerHeight;
 
         const currentHeight = this.mobileDataSheetConfig.sheetHeight;
-        const newHeightVH = currentHeight + (dragDistance / viewportHeight) * 100;
+        const newHeight = currentHeight + dragDistance / 10;
 
-        // Limit the newHeightVH to reasonable values
-        const newHeight = Math.min(Math.max(newHeightVH, 10), 100); // 10vh to 100vh
+        if (newHeight > currentHeight) this.mobileDataSheetConfig.dragSide = "top";
+        else this.mobileDataSheetConfig.dragSide = "bottom";
 
         this.mobileDataSheetConfig.sheetHeight = newHeight;
         this.mobileDataSheetConfig.startDragY = currentY;
@@ -856,14 +869,11 @@ export default {
     },
     endDrag(e) {
       this.mobileDataSheetConfig.isDragging = false;
-      if (this.mobileDataSheetConfig.sheetHeight < 50) {
-        if (window.innerHeight >= 766) this.mobileDataSheetConfig.sheetHeight = 12;
-        if (window.innerHeight >= 744) this.mobileDataSheetConfig.sheetHeight = 15;
-        if (window.innerHeight >= 718) this.mobileDataSheetConfig.sheetHeight = 20;
-        else if (window.innerHeight >= 464) this.mobileDataSheetConfig.sheetHeight = 30;
-        else this.mobileDataSheetConfig.sheetHeight = 45;
-      } else if (this.mobileDataSheetConfig.sheetHeight > 50)
-        this.mobileDataSheetConfig.sheetHeight = 90;
+      if (this.mobileDataSheetConfig.dragSide == "bottom") {
+        //10 is for rem and 4 is for divide 1
+        this.mobileDataSheetConfig.sheetHeight = 15;
+      } else if (this.mobileDataSheetConfig.dragSide == "top")
+        this.mobileDataSheetConfig.sheetHeight = window.innerHeight / 10 - 4.6;
     },
     grabLocation(type, title) {
       this.$axios
@@ -1014,7 +1024,7 @@ export default {
               white-space: nowrap;
               text-overflow: ellipsis;
               overflow: hidden;
-              max-width: 22.6rem;
+              max-width: 20.6rem;
             }
 
             .item-footer .v-icon {
