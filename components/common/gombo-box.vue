@@ -6,9 +6,10 @@
       rounded
       readonly
       outlined
+      hide-details
       append-icon="mdi-menu-down"
       v-model="inputText"
-      dense
+      :dense="dense"
     ></v-text-field>
 
     <v-overlay v-if="sheet" @click="sheet = false"> </v-overlay>
@@ -92,6 +93,7 @@ export default {
       dataLoading: true,
       keyword: "",
       inputText: "",
+      dense:false
     };
   },
   watch: {
@@ -158,7 +160,8 @@ export default {
       background: var(--White, #fff) !important;
 
       .v-input__append-inner {
-        margin-top: 0.4rem !important;
+        margin:auto !important;
+        padding-right: 1rem;
 
         #search-btn {
           height: 3rem !important;

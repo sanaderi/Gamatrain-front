@@ -4,6 +4,7 @@
       ref="schoolFilter"
       @loadedStatus="updateFilterLoadedStatus"
       :sort-list="sortList"
+      @requestUserLoaction="getUserLocation()"
       v-if="$vuetify.breakpoint.lgAndUp"
     />
     <div id="map-wrap">
@@ -66,6 +67,7 @@
                         ref="schoolFilter"
                         @loadedStatus="updateFilterLoadedStatus"
                         :sort-list="sortList"
+                        @requestUserLoaction="getUserLocation()"
                       />
                       <!-- Chip section -->
                       <v-row v-if="mobileDataSheetConfig.sheetHeight >= 15">
@@ -505,12 +507,12 @@ export default {
       iconSize: [64, 64], // Adjust the size as needed
       iconAnchor: [16, 32], // Adjust the anchor point as needed
     });
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.map.center = [51.505, -0.09];
-        this.getUserLocation();
-      }, 1000);
-    });
+    // this.$nextTick(() => {
+    //   setTimeout(() => {
+    //     this.map.center = [51.505, -0.09];
+    //     this.getUserLocation();
+    //   }, 1000);
+    // });
 
     this.getSchoolList();
 
@@ -684,8 +686,11 @@ export default {
 
             // Update the map's center with the user's location
             this.map.center = [userLat, userLng];
+            this.isExpanded=false;
+
           },
           (error) => {
+
             console.error("Error getting user location:", error);
           }
         );
@@ -986,8 +991,8 @@ export default {
   #mobile-school-list-container {
     z-index: 1000 !important;
     width: 100%;
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    bottom: -4.6rem;
   }
 }
 

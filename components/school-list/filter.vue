@@ -423,12 +423,12 @@
     <!-- Location picker dialog -->
     <v-row justify="center">
       <v-card v-if="locationPickerDialog" id="locationPickerDialog" class="text-center">
-        <img :src="require('@/assets/images/earth.png')" />
+        <img class="rotating-image" :src="require('@/assets/images/earth.png')" />
 
         <p class="gtext-t4">Select Your Location First</p>
         <p class="gtext-t6">A lot of schools from all over the world are here</p>
 
-        <v-row class="w-sm-50 w-100 mx-auto mt-10">
+        <v-row class="w-md-30 w-sm-50 w-100 mx-auto mt-2 mt-md-10">
           <v-col cols="12">
             <gomboBox
               label="Country"
@@ -449,6 +449,36 @@
           <v-col cols="12">
             <gomboBox label="City" :items="filter.cityList" v-model="filterForm.city" />
           </v-col>
+
+          <v-col cols="12">
+            <v-btn
+              :disabled="!filterForm.city"
+              @click="locationPickerDialog = false"
+              class="primary text-transform-none gtext-t4 primary-gray-800"
+              rounded
+              block
+              x-large
+              >Show Schools</v-btn
+            >
+          </v-col>
+
+          <v-col cols="12">
+            <div class="seprator-section">
+              <div class="seprator-word primary-gray-200 gtext-t4">Or</div>
+            </div>
+          </v-col>
+
+          <v-col cols="12">
+            <div
+              class="d-flex justify-content-center pointer"
+              @click="requestUserLoaction()"
+            >
+              <div class="my-location">
+                <v-icon size="14.4">mdi-crosshairs-gps</v-icon>
+              </div>
+              <div class="gtext-t5 ml-2">Find Schools Near You</div>
+            </div>
+          </v-col>
         </v-row>
       </v-card>
     </v-row>
@@ -465,7 +495,7 @@ export default {
   name: "schoolListFilter",
   data() {
     return {
-      locationPickerDialog: false,
+      locationPickerDialog: true,
       desktopFilter: false,
       resultCount: "--",
       filter: {
@@ -604,6 +634,9 @@ export default {
     },
     "filterForm.coed_status"(val) {
       this.updateQueryParams();
+    },
+    "$route.query.distance"(val) {
+      this.locationPickerDialog = false;
     },
   },
   components: {
@@ -796,6 +829,9 @@ export default {
         document.removeEventListener("click", this.handleClickOutside);
       }
     },
+    requestUserLoaction() {
+      this.$emit("requestUserLoaction");
+    },
   },
   beforeDestroy() {
     // Remove the click event listener when the component is destroyed
@@ -855,6 +891,31 @@ export default {
   z-index: 1200;
   padding-top: 10rem;
   padding-bottom: 10rem;
+
+  .seprator-section {
+    margin-top: 3.2rem;
+    width: 100%;
+    height: 0.1rem;
+    background: #e4e7ec;
+    position: relative;
+
+    .seprator-word {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -1.5rem;
+      margin: auto auto;
+      background: #fff;
+      width: 3rem;
+    }
+  }
+
+  .my-location {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: #ffb600;
+  }
 }
 
 #filter-card {
@@ -964,5 +1025,18 @@ export default {
     height: 3.6rem;
     /* margin-left: 1.6rem; */
   }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rotating-image {
+  animation: rotate 50s linear infinite;
 }
 </style>
