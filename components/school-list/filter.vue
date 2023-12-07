@@ -7,7 +7,7 @@
           <v-row>
             <v-col cols="5" md="4" lg="4" xl="4" class="pt-md-0">
               <div class="d-flex">
-                <div>
+                <div class="px-1">
                   <v-text-field
                     prepend-inner-icon="mdi-magnify"
                     id="search-field"
@@ -79,13 +79,24 @@
                     </v-btn>
                   </template>
                   <v-card class="school-filter-list" width="400">
-                    <v-card-text class="pt-5 pb-0">
+                    <v-card-text class="pt-5 pb-0 pl-8 pr-8">
+                      <p class="gtext-t4 font-weight-semibold primary-gray-700">
+                        Maximum tuition fee
+                      </p>
+                      <p class="gtext-t6 primary-gray-700">Move the handle</p>
                       <v-slider
                         dense
                         v-model="filterForm.tuition_fee"
                         max="50000"
                         min="0"
-                      ></v-slider>
+                        step="1000"
+                        thumb-size="20"
+                        :thumb-label="true"
+                      >
+                        <template #thumb-label="{ value }">
+                          ${{ value | numberFormat }}
+                        </template>
+                      </v-slider>
                     </v-card-text>
                   </v-card>
                 </v-menu>
@@ -289,7 +300,9 @@
                 </template>
                 <v-card id="filter-card">
                   <v-toolbar color="#fff">
-                    <v-toolbar-title class="gtext-h5">Filter</v-toolbar-title>
+                    <v-toolbar-title class="gtext-h5 primary-gray-600"
+                      >Filter</v-toolbar-title
+                    >
                     <v-spacer></v-spacer>
                     <v-toolbar-items>
                       <v-btn icon @click="filterDialog = false">
@@ -299,6 +312,133 @@
                   </v-toolbar>
                   <v-card-text>
                     <v-row class="my-8">
+                      <v-col cols="12">
+                        <!-- Chip section -->
+                        <v-chip
+                          small
+                          close
+                          outlined
+                          class="mb-1"
+                          v-if="$route.query.keyword"
+                          @click:close="closeFilter('keyword')"
+                        >
+                          {{ $route.query.keyword }}
+                        </v-chip>
+                        <v-chip
+                          small
+                          close
+                          outlined
+                          class="mb-1"
+                          v-if="$route.query.stage && filterLoadedStatus.stage"
+                          @click:close="closeFilter('stage')"
+                        >
+                          {{ findTitle("stage", $route.query.stage) }}
+                        </v-chip>
+                        <v-chip
+                          small
+                          close
+                          outlined
+                          class="mb-1"
+                          v-if="$route.query.tuition_fee"
+                          @click:close="closeFilter('tuition_fee')"
+                        >
+                          Tuition fee above: ${{
+                            $route.query.tuition_fee | numberFormat
+                          }}
+                        </v-chip>
+                        <v-chip
+                          small
+                          close
+                          outlined
+                          class="mb-1"
+                          v-if="$route.query.country && filterLoadedStatus.country"
+                          @click:close="closeFilter('country')"
+                        >
+                          {{ findTitle("country", $route.query.country) }}
+                        </v-chip>
+                        <v-chip
+                          small
+                          close
+                          outlined
+                          class="mb-1"
+                          v-if="$route.query.state && filterLoadedStatus.state"
+                          @click:close="closeFilter('state')"
+                        >
+                          {{ findTitle("state", $route.query.state) }}
+                        </v-chip>
+                        <v-chip
+                          small
+                          close
+                          outlined
+                          class="mb-1"
+                          v-if="$route.query.city && filterLoadedStatus.city"
+                          @click:close="closeFilter('city')"
+                        >
+                          {{ findTitle("city", $route.query.city) }}
+                        </v-chip>
+                        <v-chip
+                          small
+                          close
+                          outlined
+                          class="mb-1"
+                          v-if="
+                            $route.query.school_type && filterLoadedStatus.school_type
+                          "
+                          v-for="(item, index) in $route.query.school_type"
+                          @click:close="closeFilter('school_type', item)"
+                        >
+                          {{ findTitle("school_type", item) }}
+                        </v-chip>
+                        <v-chip
+                          small
+                          close
+                          outlined
+                          class="mb-1 mr-1"
+                          v-if="$route.query.religion && filterLoadedStatus.religion"
+                          v-for="(item, index) in $route.query.religion"
+                          @click:close="closeFilter('religion', item)"
+                        >
+                          {{ findTitle("religion", item) }}
+                        </v-chip>
+                        <v-chip
+                          small
+                          close
+                          outlined
+                          class="mb-1 mr-1"
+                          v-if="
+                            $route.query.boarding_type && filterLoadedStatus.boarding_type
+                          "
+                          v-for="(item, index) in boardingTypeArray"
+                          @click:close="closeFilter('boarding_type', item)"
+                        >
+                          {{ findTitle("boarding_type", item) }}
+                        </v-chip>
+                        <v-chip
+                          small
+                          close
+                          outlined
+                          class="mb-1 mr-1"
+                          v-if="
+                            $route.query.coed_status && filterLoadedStatus.coed_status
+                          "
+                          v-for="(item, index) in coedStatusArray"
+                          @click:close="closeFilter('coed_status', item)"
+                        >
+                          {{ findTitle("coed_status", item) }}
+                        </v-chip>
+                        <v-chip
+                          small
+                          close
+                          outlined
+                          class="mb-1 mr-1"
+                          v-if="$route.query.sort"
+                          @click:close="closeFilter('sort')"
+                        >
+                          {{ findTitle("sort", $route.query.sort) }}
+                        </v-chip>
+
+                        <!-- end chip section -->
+                      </v-col>
                       <v-col cols="12" sm="4">
                         <gomboBox
                           label="Country"
@@ -314,6 +454,7 @@
                           @change="stateChange()"
                           :items="filter.stateList"
                           v-model="filterForm.state"
+                          :disabled="checkDisabledStatus('state')"
                         />
                       </v-col>
                       <v-col cols="12" sm="4">
@@ -321,71 +462,140 @@
                           label="City"
                           :items="filter.cityList"
                           v-model="filterForm.city"
+                          :disabled="checkDisabledStatus('city')"
                         />
                       </v-col>
 
                       <v-col cols="12" sm="4">
-                        <p class="gtext-t4 font-weight-medium">School type</p>
+                        <p class="gtext-t4 font-weight-medium primary-gray-900">Stage</p>
+                        <div class="pl-8">
+                          <v-radio-group v-model="filterForm.stage">
+                            <v-radio
+                              v-for="(item, index) in filter.stageList"
+                              :value="item.id"
+                              :key="index"
+                              @click="updateFilter('stage', item.id)"
+                            >
+                              <template #label>
+                                <span class="gtext-t4 primary-gray-900">{{
+                                  item.title
+                                }}</span>
+                              </template>
+                            </v-radio>
+                          </v-radio-group>
+                        </div>
+                      </v-col>
+                      <v-col cols="12" sm="4">
+                        <p class="gtext-t4 font-weight-medium primary-gray-900">
+                          School type
+                        </p>
                         <div class="pl-8">
                           <v-checkbox
                             v-for="(item, index) in filter.schoolTypeList"
                             v-model="filterForm.school_type"
-                            :label="item.title"
                             :value="item.id"
-                          ></v-checkbox>
+                          >
+                            <template #label>
+                              <span class="gtext-t4 primary-gray-900">{{
+                                item.title
+                              }}</span>
+                            </template>
+                          </v-checkbox>
                         </div>
                       </v-col>
                       <v-col cols="12" sm="4">
-                        <p class="gtext-t4 font-weight-medium">Religion</p>
+                        <p class="gtext-t4 font-weight-medium primary-gray-900">
+                          Religion
+                        </p>
                         <div class="pl-8">
                           <v-checkbox
                             v-for="(item, index) in filter.religionList"
                             v-model="filterForm.religion"
-                            :label="item.title"
                             :value="item.id"
-                          ></v-checkbox>
+                          >
+                            <template #label>
+                              <span class="gtext-t4 primary-gray-900">{{
+                                item.title
+                              }}</span>
+                            </template>
+                          </v-checkbox>
                         </div>
                       </v-col>
                       <v-col cols="12" sm="4">
-                        <p class="gtext-t4 font-weight-medium">Boarding types</p>
+                        <p class="gtext-t4 font-weight-medium primary-gray-900">
+                          Boarding types
+                        </p>
                         <div class="pl-8">
                           <v-checkbox
                             v-for="(item, index) in filter.boardingTypeList"
                             v-model="filterForm.boarding_type"
-                            :label="item.title"
                             :value="item.id"
-                          ></v-checkbox>
+                          >
+                            <template #label>
+                              <span class="gtext-t4 primary-gray-900">{{
+                                item.title
+                              }}</span>
+                            </template>
+                          </v-checkbox>
                         </div>
                       </v-col>
                       <v-col cols="12" sm="4">
-                        <p class="gtext-t4 font-weight-medium">Coed status</p>
+                        <p class="gtext-t4 font-weight-medium primary-gray-900">
+                          Coed status
+                        </p>
                         <div class="pl-8">
                           <v-checkbox
                             v-for="(item, index) in filter.coedStatusList"
                             v-model="filterForm.coed_status"
-                            :label="item.title"
                             :value="item.id"
-                          ></v-checkbox>
+                          >
+                            <template #label>
+                              <span class="gtext-t4 primary-gray-900">{{
+                                item.title
+                              }}</span>
+                            </template>
+                          </v-checkbox>
+                        </div>
+                      </v-col>
+                      <v-col cols="12">
+                        <div class="d-flex">
+                          <p class="gtext-t4 primary-gray-900">Tuition fee</p>
+                          <v-slider
+                            dense
+                            v-model="filterForm.tuition_fee"
+                            max="50000"
+                            min="0"
+                            step="1000"
+                            thumb-size="20"
+                            thumb-label="always"
+                          >
+                            <template #thumb-label="{ value }">
+                              ${{ value | numberFormat }}
+                            </template>
+                          </v-slider>
                         </div>
                       </v-col>
                     </v-row>
                   </v-card-text>
 
-                  <v-card-actions>
-                    <v-btn
-                      class="text-transform-none cancel-btn"
-                      text
-                      @click="filterDialog = false"
-                    >
-                      Cancel
-                    </v-btn>
-                    <v-btn
-                      class="primary text-transform-none apply-btn"
-                      rounded
-                      @click="filterDialog = false"
-                    >
-                      Apply filter
-                    </v-btn>
+                  <v-card-actions id="filter-action">
+                    <div class="mx-auto">
+                      <v-btn
+                        class="text-transform-none primary-gray-800 gtext-t4 cancel-btn"
+                        text
+                        @click="filterDialog = false"
+                      >
+                        Cancel
+                      </v-btn>
+                      <v-btn
+                        class="primary text-transform-none apply-btn primary-gray-800 gtext-t4"
+                        rounded
+                        large
+                        @click="filterDialog = false"
+                      >
+                        Apply filter
+                      </v-btn>
+                    </div>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -491,11 +701,13 @@ import gomboBox from "../common/gombo-box.vue";
 export default {
   props: {
     sortList: [],
+    boardingTypeArray: [],
+    coedStatusArray: [],
   },
   name: "schoolListFilter",
   data() {
     return {
-      locationPickerDialog: true,
+      locationPickerDialog: false,
       desktopFilter: false,
       resultCount: "--",
       filter: {
@@ -780,6 +992,61 @@ export default {
         }
       }, 100);
     },
+    findTitle(type, id) {
+      var title = "";
+      if (type == "stage") title = this.filter.stageList.find((x) => x.id == id).title;
+      if (type == "sort") {
+        title = this.sortList.find((x) => x.value == id).title;
+      } else if (type == "country")
+        title = this.filter.countryList.find((x) => x.id == id).name;
+      else if (type == "state")
+        title = this.filter.stateList.find((x) => x.id == id).title;
+      else if (type == "city") title = this.filter.cityList.find((x) => x.id == id).title;
+      else if (type == "school_type")
+        title = this.filter.schoolTypeList.find((x) => x.id == id).title;
+      else if (type == "religion" && this.filter.religionList)
+        title = this.filter.religionList.find((x) => x.id == id).title;
+      else if (type == "boarding_type")
+        title = this.filter.boardingTypeList.find((x) => x.id == id).title;
+      else if (type == "coed_status")
+        title = this.filter.coedStatusList.find((x) => x.id == id).title;
+
+      return title;
+    },
+    closeFilter(filter_name, other_data = null) {
+      if (filter_name == "keyword") this.filterForm.keyword = "";
+      else if (filter_name == "stage") this.updateFilter("stage", "");
+      else if (filter_name == "sort") this.updateFilter("sort", "");
+      else if (filter_name == "tuition_fee") this.filterForm.tuition_fee = 0;
+      else if (filter_name == "country") {
+        this.filterForm.country = 0;
+        this.filterForm.state = 0;
+        this.filterForm.city = 0;
+        this.filter.stateList = [];
+        this.filter.cityList = [];
+        this.updateQueryParams();
+      } else if (filter_name == "state") {
+        this.filterForm.state = 0;
+        this.filterForm.city = 0;
+        this.filter.cityList = [];
+        this.updateQueryParams();
+      } else if (filter_name == "city") {
+        this.filterForm.city = 0;
+        this.updateQueryParams();
+      } else if (filter_name == "school_type") {
+        var index = this.school_type.findIndex((x) => x == other_data);
+        this.filterForm.school_type.splice(index, 1);
+      } else if (filter_name == "religion") {
+        var index = this.filterForm.religion.findIndex((x) => x == other_data);
+        this.filterForm.religion.splice(index, 1);
+      } else if (filter_name == "boarding_type") {
+        var index = this.filterForm.boarding_type.findIndex((x) => x == other_data);
+        this.filterForm.boarding_type.splice(index, 1);
+      } else if (filter_name == "coed_status") {
+        var index = this.filterForm.coed_status.findIndex((x) => x == other_data);
+        this.filterForm.coed_status.splice(index, 1);
+      }
+    },
     stateChange() {
       document.removeEventListener("click", this.handleClickOutside);
 
@@ -831,6 +1098,14 @@ export default {
     },
     requestUserLoaction() {
       this.$emit("requestUserLoaction");
+    },
+    checkDisabledStatus(field_name) {
+      if (field_name == "state")
+        if (this.filterForm.country == "") return true;
+        else return false;
+      else if (field_name == "city")
+        if (this.filterForm.state == "") return true;
+        else return false;
     },
   },
   beforeDestroy() {
@@ -919,17 +1194,69 @@ export default {
 }
 
 #filter-card {
+  overflow-x: hidden;
   .v-card__actions {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     text-align: center;
+    background: #fff;
+    width: 100%;
+    height: 6rem;
 
     .cancel-btn {
-      width: 20vw;
+      width: 8rem;
     }
     .apply-btn {
-      width: 60vw;
+      width: 22rem;
     }
+  }
+
+  .v-slider--horizontal .v-slider__track-container {
+    height: 6px;
+    border-radius: 5px;
+
+    .v-slider__track-background {
+      background: #d0d5dd !important;
+    }
+  }
+
+  .v-slider__thumb-label::before {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid currentColor;
+    bottom: -6px;
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    color: #ffb600;
+  }
+  .v-slider__thumb-label {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.75rem !important;
+    min-width: 9.4rem !important;
+    height: 3.4rem !important;
+    border-radius: 4px !important;
+    padding: 6px !important;
+    position: absolute !important;
+    user-select: none !important;
+    transform: none !important;
+    bottom: 1rem;
+    left: -4.7rem;
+
+    /* transition: 0.2s cubic-bezier(0.4, 0, 1, 1) !important; */
+  }
+
+  .v-slider__thumb-label div {
+    transform: none !important;
+    color: #000;
+    font-family: Inter;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 2.2rem;
   }
 }
 
@@ -998,6 +1325,54 @@ export default {
 
   .school-filter-list {
     margin-top: 1.6rem;
+
+    .v-slider--horizontal .v-slider__track-container {
+      height: 6px;
+      border-radius: 5px;
+
+      .v-slider__track-background {
+        background: #d0d5dd !important;
+      }
+    }
+
+    .v-slider__thumb-label::before {
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid currentColor;
+      bottom: -6px;
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      color: #ffb600;
+    }
+    .v-slider__thumb-label {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 0.75rem !important;
+      min-width: 9.4rem !important;
+      height: 3.4rem !important;
+      border-radius: 4px !important;
+      padding: 6px !important;
+      position: absolute !important;
+      user-select: none !important;
+      transform: none !important;
+      bottom: 1rem;
+      left: -4.7rem;
+
+      /* transition: 0.2s cubic-bezier(0.4, 0, 1, 1) !important; */
+    }
+
+    .v-slider__thumb-label div {
+      transform: none !important;
+      color: #000;
+      font-family: Inter;
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 2.2rem;
+    }
   }
 
   .menu-btn {

@@ -62,139 +62,18 @@
               <div id="keyword-card">
                 <v-row>
                   <v-col cols="12" class="pt-0">
-                    <div id="mobile-search-result-container">
+                    <div id="mobile-search-result-container" class="px-2">
                       <schoolListFilter
                         ref="schoolFilter"
                         @loadedStatus="updateFilterLoadedStatus"
                         :sort-list="sortList"
+                        :boarding-type-array="boardingTypeArray"
+                        :coed-status-array="coedStatusArray"
                         @requestUserLoaction="getUserLocation()"
                       />
                       <!-- Chip section -->
                       <v-row v-if="mobileDataSheetConfig.sheetHeight >= 15">
-                        <v-col cols="8" class="pl-7">
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.keyword"
-                            @click:close="closeFilter('keyword')"
-                          >
-                            {{ $route.query.keyword }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.stage && filterLoadedStatus.stage"
-                            @click:close="closeFilter('stage')"
-                          >
-                            {{ findTitle("stage", $route.query.stage) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.tuition_fee"
-                            @click:close="closeFilter('tuition_fee')"
-                          >
-                            Tuition fee above: ${{ $route.query.tuition_fee }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.country && filterLoadedStatus.country"
-                            @click:close="closeFilter('country')"
-                          >
-                            {{ findTitle("country", $route.query.country) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.state && filterLoadedStatus.state"
-                            @click:close="closeFilter('state')"
-                          >
-                            {{ findTitle("state", $route.query.state) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="$route.query.city && filterLoadedStatus.city"
-                            @click:close="closeFilter('city')"
-                          >
-                            {{ findTitle("city", $route.query.city) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1"
-                            v-if="
-                              $route.query.school_type && filterLoadedStatus.school_type
-                            "
-                            v-for="(item, index) in $route.query.school_type"
-                            @click:close="closeFilter('school_type', item)"
-                          >
-                            {{ findTitle("school_type", item) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1 mr-1"
-                            v-if="$route.query.religion && filterLoadedStatus.religion"
-                            v-for="(item, index) in $route.query.religion"
-                            @click:close="closeFilter('religion', item)"
-                          >
-                            {{ findTitle("religion", item) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1 mr-1"
-                            v-if="
-                              $route.query.boarding_type &&
-                              filterLoadedStatus.boarding_type
-                            "
-                            v-for="(item, index) in boardingTypeArray"
-                            @click:close="closeFilter('boarding_type', item)"
-                          >
-                            {{ findTitle("boarding_type", item) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1 mr-1"
-                            v-if="
-                              $route.query.coed_status && filterLoadedStatus.coed_status
-                            "
-                            v-for="(item, index) in coedStatusArray"
-                            @click:close="closeFilter('coed_status', item)"
-                          >
-                            {{ findTitle("coed_status", item) }}
-                          </v-chip>
-                          <v-chip
-                            small
-                            close
-                            outlined
-                            class="mb-1 mr-1"
-                            v-if="$route.query.sort"
-                            @click:close="closeFilter('sort')"
-                          >
-                            {{ findTitle("sort", $route.query.sort) }}
-                          </v-chip>
-                        </v-col>
-                        <v-col cols="4" class="text-right">
+                        <v-col cols="12" class="text-right">
                           <div id="result-stat " class="mr-4">
                             <span class="gama-text-overline"> Search result </span>
                             <span class="gama-text-button">
@@ -271,7 +150,7 @@
               @click:close="closeFilter('tuition_fee')"
               class="mb-1"
             >
-              Tuition fee above: ${{ $route.query.tuition_fee }}
+              Tuition fee above: ${{ $route.query.tuition_fee | numberFormat }}
             </v-chip>
             <v-chip
               small
@@ -420,7 +299,7 @@ export default {
       pageNum: 1,
       allDataLoaded: false,
       resultCount: "--",
-      loadingData:false,
+      loadingData: false,
       timer: 0,
       gradeLevelList: [
         {
@@ -686,11 +565,9 @@ export default {
 
             // Update the map's center with the user's location
             this.map.center = [userLat, userLng];
-            this.isExpanded=false;
-
+            this.isExpanded = false;
           },
           (error) => {
-
             console.error("Error getting user location:", error);
           }
         );
@@ -735,7 +612,6 @@ export default {
 
             this.loadingData = false;
 
-
             if (this.geoSearch) {
               this.schoolList = response.data.list;
             } else {
@@ -763,7 +639,11 @@ export default {
     async checkSchoolScroll() {
       if (!this.geoSearch) {
         const scrollableDiv = this.$refs.schoolListSection;
-        if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false  && !this.loadingData) {
+        if (
+          this.isScrollAtBottom(scrollableDiv) &&
+          this.allDataLoaded == false &&
+          !this.loadingData
+        ) {
           this.pageNum++;
           this.loadingData = true; // Set loading flag
           await this.getSchoolList();
@@ -772,14 +652,18 @@ export default {
     },
     async checkMobileSchoolScroll() {
       const scrollableDiv = this.$refs.mobileSchoolListSection;
-      if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false && !this.loadingData) {
+      if (
+        this.isScrollAtBottom(scrollableDiv) &&
+        this.allDataLoaded == false &&
+        !this.loadingData
+      ) {
         this.pageNum++;
         this.loadingData = true; // Set loading flag
         await this.getSchoolList();
       }
     },
     isScrollAtBottom(element) {
-      return (element.scrollHeight - element.scrollTop-150) <= element.clientHeight;
+      return element.scrollHeight - element.scrollTop - 150 <= element.clientHeight;
     },
     closeFilter(filter_name, other_data = null) {
       if (filter_name == "keyword") this.$refs.schoolFilter.filterForm.keyword = "";

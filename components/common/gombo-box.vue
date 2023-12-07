@@ -2,7 +2,6 @@
   <div class="gombo-box">
     <v-text-field
       @click="getList()"
-      :label="label"
       rounded
       readonly
       outlined
@@ -10,7 +9,14 @@
       append-icon="mdi-menu-down"
       v-model="inputText"
       :dense="dense"
-    ></v-text-field>
+      :disabled="disabled"
+      clearable
+      class="gombo-box-input"
+    >
+      <template #label>
+        <span class="primary-gray-700 font-weight-medium">{{ label }}</span>
+      </template>
+    </v-text-field>
 
     <v-overlay v-if="sheet" @click="sheet = false"> </v-overlay>
     <v-card light class="gombo-box-list" v-if="sheet">
@@ -84,6 +90,8 @@ export default {
       type: String,
       default: "id",
     },
+    disabled: false,
+    searchLoading:false
   },
   name: "gomboBox",
   mounted() {},
@@ -93,7 +101,7 @@ export default {
       dataLoading: true,
       keyword: "",
       inputText: "",
-      dense:false
+      dense: false,
     };
   },
   watch: {
@@ -160,7 +168,7 @@ export default {
       background: var(--White, #fff) !important;
 
       .v-input__append-inner {
-        margin:auto !important;
+        margin: auto !important;
         padding-right: 1rem;
 
         #search-btn {
@@ -180,4 +188,26 @@ export default {
     }
   }
 }
+
+.gombo-box .gombo-box-input input {
+  color: #344054;
+  font-family: Inter;
+  font-size: 1.6rem!important;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.6rem;
+}
+
+/* @media (min-width: 1264px) {
+  .gombo-box {
+    position: relative;
+
+
+    .gombo-box-list {
+      position: absolute;
+      height: 40rem;
+      top:6rem;
+    }
+  }
+} */
 </style>
