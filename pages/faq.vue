@@ -57,11 +57,44 @@
 
 <script>
 export default {
-    head(){
-        return{
-            title:'FAQ'
-        }
-    },
+    head() {
+    return {
+      titleTemplate: "%s",
+      title: "GamaTrain FAQ: Your Comprehensive Guide to Our Learning Platform",
+
+      meta: [
+        {
+          hid: "apple-mobile-web-app-title",
+          name: "apple-mobile-web-app-title",
+          content:
+            "GamaTrain FAQ: Your Comprehensive Guide to Our Learning Platform",
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content:
+            "GamaTrain FAQ: Your Comprehensive Guide to Our Learning Platform",
+        },
+        {
+          hid: "og:site_name",
+          name: "og:site_name",
+          content: "GamaTrain",
+        },
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "Find answers to your frequently asked questions about GamaTrain, covering topics from account management to learning resources and exam preparation.",
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content:
+            "Find answers to your frequently asked questions about GamaTrain, covering topics from account management to learning resources and exam preparation.",
+        },
+      ],
+    };
+  },
     auth: false,
     data() {
         return {

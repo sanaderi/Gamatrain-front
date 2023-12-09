@@ -5,7 +5,7 @@ export default{
 
   head: {
     titleTemplate: "%s | Gamatrain",
-    title: "Learning together, earning together, building a brighter future",
+    title: "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
     htmlAttrs: {
       lang: "en",
     },
@@ -13,8 +13,23 @@ export default{
       {charset: "utf-8"},
       {"http-equiv": "Content-Type"},
       {name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"},
-      {hid: "description", name: "description", content: "Big training platform"},
+      {hid: "description", name: "description", content: "Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences."},
       {name: "format-detection", content: "telephone=no"},
+      {
+        hid: "apple-mobile-web-app-title",
+        name: "apple-mobile-web-app-title",
+        content: "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
+      },
+      {
+        hid: "og:title",
+        name: "og:title",
+        content: "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
+      },
+      {
+        hid: "og:site_name",
+        name: "og:site_name",
+        content: "GamaTrain",
+      },
     ],
     link: [
       {rel: "stylesheet", href: "/assets/css/fontawesome.min.css"},
@@ -219,7 +234,7 @@ export default{
     manifest: {
       name: 'Gamatrain App',
       short_name: 'Gamatrain',
-      description: 'Big training platform',
+      description: 'Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences.',
       lang: 'en',
       useWebmanifestExtension: false
     }

@@ -267,10 +267,39 @@
     auth: false,
     name: "blog-list",
     head() {
-      return {
-        title: "Blog list",
-      };
-    },
+    return {
+      titleTemplate: "%s",
+      title: "GamaTrain Blog: Exploring the Latest Insights in K12 Education",
+
+      meta: [
+        {
+          hid: "apple-mobile-web-app-title",
+          name: "apple-mobile-web-app-title",
+          content: "GamaTrain Blog: Exploring the Latest Insights in K12 Education",
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content: "GamaTrain Blog: Exploring the Latest Insights in K12 Education",
+        },
+        {
+          hid: "og:site_name",
+          name: "og:site_name",
+          content: "GamaTrain",
+        },
+        {
+          hid: "description",
+          name: "description",
+          content: "Stay informed and inspired with GamaTrain's insightful blog, featuring thought-provoking articles on the latest trends and best practices in K12 education.",
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content: "Stay informed and inspired with GamaTrain's insightful blog, featuring thought-provoking articles on the latest trends and best practices in K12 education.",
+        },
+      ],
+    };
+  },
     data() {
       return {
         featuredItems:[],

@@ -145,18 +145,68 @@ export default {
 
   async asyncData({ query }) {
     var page_title = "";
-    if (query.type === "learnfiles") page_title = "Multimedia";
-    else if (query.type === "test") page_title = "Papers";
-    else if (query.type === "question") page_title = "Q & A";
-    else if (query.type === "azmoon") page_title = "Online exam";
-    else if (query.type === "dars") page_title = "Tutorial";
-    else if (query.type === "tutor") page_title = "Teacher";
+    var page_describe = "";
+    if (query.type === "learnfiles") {
+      page_title =
+        "Engage with Interactive Lessons: GamaTrain's Multimedia Educational Content";
+      page_describe =
+        "Elevate your learning experience with GamaTrain's captivating multimedia content, including PowerPoint presentations, informative videos, and diverse educational materials.";
+    } else if (query.type === "test") {
+      page_title =
+        "GamaTrain's Online Docs and Texts: Dive into a Sea of Educational Resources";
+      page_describe =
+        "Enhance your learning with GamaTrain's extensive collection of online documents and texts, carefully curated to enrich your academic journey.";
+    } else if (query.type === "question") {
+      page_title = "Seek Clarification, Expand Your Understanding: GamaTrain's Q&A Forum";
+      page_describe =
+        "Engage in active learning and gain deeper insights through GamaTrain's interactive Q&A platform, where you can pose questions and seek support from fellow learners and experts.";
+    } else if (query.type === "azmoon") {
+      page_title = "Prepare for Success with GamaTrain's Online Exams";
+      page_describe =
+        "Hone your skills and assess your knowledge with GamaTrain's online exams, designed to enhance your exam preparation and boost your confidence.";
+    } else if (query.type === "dars") {
+      page_title = "Master Concepts, Enhance Learning: GamaTrain's Online Tutorials";
+      page_describe =
+        "Complement your studies with GamaTrain's comprehensive online tutorials, providing step-by-step guidance and practice opportunities to refine your understanding.";
+    } else if (query.type === "tutor") {
+      page_title = "Teacher";
+      page_describe = "Teacher";
+    }
 
-    return { page_title };
+    return { page_title, page_describe };
   },
   head() {
     return {
+      titleTemplate: "%s",
       title: this.page_title,
+
+      meta: [
+        {
+          hid: "apple-mobile-web-app-title",
+          name: "apple-mobile-web-app-title",
+          content: this.page_title,
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content: this.page_title,
+        },
+        {
+          hid: "og:site_name",
+          name: "og:site_name",
+          content: "GamaTrain",
+        },
+        {
+          hid: "description",
+          name: "description",
+          content: this.page_describe,
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content: this.page_describe,
+        },
+      ],
     };
   },
   data() {
@@ -203,12 +253,36 @@ export default {
       this.items = [];
       this.all_files_loaded = false;
 
-      if (this.$route.query.type === "learnfiles") this.page_title = "Multimedia";
-      else if (this.$route.query.type === "test") this.page_title = "Paper";
-      else if (this.$route.query.type === "question") this.page_title = "Q & A";
-      else if (this.$route.query.type === "azmoon") this.page_title = "Online exam";
-      else if (this.$route.query.type === "dars") this.page_title = "Tutorial";
-      else if (this.$route.query.type === "tutor") this.page_title = "Teacher";
+      if (this.$route.query.type === "learnfiles") {
+        this.page_title =
+          "Engage with Interactive Lessons: GamaTrain's Multimedia Educational Content";
+        this.page_describe =
+          "Elevate your learning experience with GamaTrain's captivating multimedia content, including PowerPoint presentations, informative videos, and diverse educational materials.";
+      } else if (this.$route.query.type === "test") {
+        this.page_title =
+          "GamaTrain's Online Docs and Texts: Dive into a Sea of Educational Resources";
+        this.page_describe =
+          "Enhance your learning with GamaTrain's extensive collection of online documents and texts, carefully curated to enrich your academic journey.";
+      } else if (this.$route.query.type === "question") {
+        {
+          this.page_title =
+            "Seek Clarification, Expand Your Understanding: GamaTrain's Q&A Forum";
+          this.page_describe =
+            "Engage in active learning and gain deeper insights through GamaTrain's interactive Q&A platform, where you can pose questions and seek support from fellow learners and experts.";
+        }
+      } else if (this.$route.query.type === "azmoon") {
+        this.page_title = "Prepare for Success with GamaTrain's Online Exams";
+        this.page_describe =
+          "Hone your skills and assess your knowledge with GamaTrain's online exams, designed to enhance your exam preparation and boost your confidence.";
+      } else if (this.$route.query.type === "dars") {
+        this.page_title =
+          "Master Concepts, Enhance Learning: GamaTrain's Online Tutorials";
+        this.page_describe =
+          "Complement your studies with GamaTrain's comprehensive online tutorials, providing step-by-step guidance and practice opportunities to refine your understanding.";
+      } else if (this.$route.query.type === "tutor") {
+        page_title = "Teacher";
+        page_describe = "Teacher";
+      }
 
       this.$refs.side_filter.setBreadcrumbInfo();
 
@@ -433,8 +507,8 @@ export default {
     }
 
     .item-content-footer {
-       padding-left:1.5rem;
-       padding-right:1.5rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
       .gama-text-overline {
         color: #afb8c1;
       }
@@ -461,7 +535,7 @@ export default {
         display: -webkit-box !important;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        min-height:2.8rem;
+        min-height: 2.8rem;
       }
 
       .item-content-footer {
