@@ -275,7 +275,41 @@ export default {
   name: "school-list",
   head() {
     return {
-      title: "School finder",
+      titleTemplate: "%s",
+      title:
+        "School Finder: Your Path to Ideal Education - Find Schools Near You - GamaTrain",
+
+      meta: [
+        {
+          hid: "apple-mobile-web-app-title",
+          name: "apple-mobile-web-app-title",
+          content:
+            "School Finder: Your Path to Ideal Education - Find Schools Near You - GamaTrain",
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content:
+            "School Finder: Your Path to Ideal Education - Find Schools Near You - GamaTrain",
+        },
+        {
+          hid: "og:site_name",
+          name: "og:site_name",
+          content: "GamaTrain",
+        },
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "Explore tailored K12 schools effortlessly with GamaTrain's School Finder. Find the perfect school for your unique needs and set the course for academic success.",
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content:
+            "Explore tailored K12 schools effortlessly with GamaTrain's School Finder. Find the perfect school for your unique needs and set the course for academic success.",
+        },
+      ],
     };
   },
   components: {
@@ -287,7 +321,7 @@ export default {
       isExpanded: true,
       map: {
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        zoom: 17,
+        zoom: 4,
         minZoom: 2,
         center: [39.90063873634048, -83.44667778604482], // Initial map center coordinates
         markers: [],
@@ -297,6 +331,7 @@ export default {
       },
       schoolLoading: true,
       pageNum: 1,
+      perPage: 10,
       allDataLoaded: false,
       resultCount: "--",
       loadingData: false,
@@ -353,7 +388,7 @@ export default {
       sortList: [
         {
           value: "scoreDesc",
-          title: "Most score",
+          title: "Highest score",
         },
         {
           value: "viewsDesc",
@@ -365,11 +400,11 @@ export default {
         },
         {
           value: "tuitionAsc",
-          title: "Least tuition fee",
+          title: "Tuition Fee (Highest First)",
         },
         {
           value: "tuitionDesc",
-          title: "Most tuition fee",
+          title: "Tuition Fee (Lowest First)",
         },
       ],
     };
@@ -429,82 +464,112 @@ export default {
     },
     "$route.query.stage"(val) {
       this.filter.stage = val;
-      this.pageNum = 1;
-      this.schoolList = [];
-      this.allDataLoaded = false;
-      this.getSchoolList();
+
+      if (!this.schoolLoading) {
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.allDataLoaded = false;
+        this.getSchoolList();
+      }
     },
 
     "$route.query.tuition_fee"(val) {
-      this.filter.tuition_fee = val;
-      this.pageNum = 1;
-      this.schoolList = [];
-      this.allDataLoaded = false;
-      this.getSchoolList();
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+
+      this.timer = setTimeout(() => {
+        this.filter.tuition_fee = val;
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.allDataLoaded = false;
+        this.getSchoolList();
+      }, 800);
     },
     "$route.query.country"(val) {
       this.filter.country = val;
-      this.pageNum = 1;
-      this.schoolList = [];
-      this.allDataLoaded = false;
-      this.getSchoolList();
+
+      if (!this.schoolLoading) {
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.allDataLoaded = false;
+        this.getSchoolList();
+      }
     },
     "$route.query.state"(val) {
       this.filter.state = val;
-      this.pageNum = 1;
-      this.schoolList = [];
-      this.allDataLoaded = false;
-      this.getSchoolList();
+
+      if (!this.schoolLoading) {
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.allDataLoaded = false;
+        this.getSchoolList();
+      }
     },
     "$route.query.city"(val) {
       this.filter.city = val;
-      this.pageNum = 1;
-      this.schoolList = [];
-      this.allDataLoaded = false;
-      this.getSchoolList();
+
+      if (!this.schoolLoading) {
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.allDataLoaded = false;
+        this.getSchoolList();
+      }
     },
     "$route.query.school_type"(val) {
       if (val) this.filter.school_type = val.toString();
       else this.filter.school_type = "";
 
-      this.pageNum = 1;
-      this.schoolList = [];
-      this.allDataLoaded = false;
-      this.getSchoolList();
+      if (!this.schoolLoading) {
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.allDataLoaded = false;
+        this.getSchoolList();
+      }
     },
     "$route.query.religion"(val) {
       if (val) this.filter.religion = val.toString();
       else this.filter.religion = "";
 
-      this.pageNum = 1;
-      this.schoolList = [];
-      this.allDataLoaded = false;
-      this.getSchoolList();
+      if (!this.schoolLoading) {
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.allDataLoaded = false;
+        this.getSchoolList();
+      }
     },
     "$route.query.boarding_type"(val) {
       if (val) this.filter.boarding_type = val.toString();
       else this.filter.boarding_type = "";
 
-      this.pageNum = 1;
-      this.schoolList = [];
-      this.allDataLoaded = false;
-      this.getSchoolList();
+      if (!this.schoolLoading) {
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.allDataLoaded = false;
+        this.getSchoolList();
+      }
     },
     "$route.query.coed_status"(val) {
       if (val) this.filter.coed_status = val.toString();
       else this.filter.coed_status = "";
 
-      this.pageNum = 1;
-      this.schoolList = [];
-      this.allDataLoaded = false;
-      this.getSchoolList();
+      if (!this.schoolLoading) {
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.allDataLoaded = false;
+        this.getSchoolList();
+      }
     },
     "$route.query.sort"(val) {
       this.filter.sort = val;
-      this.pageNum = 1;
-      this.schoolList = [];
-      this.allDataLoaded = false;
-      this.getSchoolList();
+
+      if (!this.schoolLoading) {
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.allDataLoaded = false;
+        this.getSchoolList();
+      }
     },
     isExpanded(val) {
       if (val) {
@@ -514,6 +579,12 @@ export default {
         this.$refs.schoolFilter.updateQueryParams();
       } else {
         this.geoSearch = true;
+      }
+      if (!this.schoolLoading) {
+        this.allDataLoaded = false;
+        this.pageNum = 1;
+        this.schoolList = [];
+        this.getSchoolList();
       }
     },
   },
@@ -532,6 +603,13 @@ export default {
         this.$refs.schoolFilter.filterForm.center = this.filter.center;
         this.$refs.schoolFilter.filterForm.distance = this.filter.distance;
         this.$refs.schoolFilter.updateQueryParams();
+
+        if (!this.schoolLoading) {
+          this.allDataLoaded = false;
+          this.pageNum = 1;
+          this.schoolList = [];
+          this.getSchoolList();
+        }
       }
     },
     onZoomChange(newZoom) {
@@ -553,7 +631,14 @@ export default {
         Math.cos(lat1) * Math.cos(lat2) * Math.sin(dlon / 2) ** 2;
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-      this.filter.distance = R * c; //retrun distance
+      this.filter.distance = this.formatNumber(R * c); //retrun distance
+    },
+    formatNumber(number) {
+      //Remove latest zero from number to avoid error from api side
+      const roundedNumber = parseFloat(number.toFixed(6));
+      const formattedString = roundedNumber.toString();
+      const trimmedString = formattedString.replace(/\.?0+$/, ""); // Remove trailing zeros
+      return parseFloat(trimmedString);
     },
     getUserLocation() {
       if ("geolocation" in navigator) {
@@ -614,6 +699,16 @@ export default {
 
             if (this.geoSearch) {
               this.schoolList = response.data.list;
+              var newPlaceData = response.data.list
+                .filter((obj) => obj.lat !== undefined && obj.lng !== undefined) // Filter out objects with undefined lat or lng
+                .map((obj) => ({
+                  latLng: [obj.lat, obj.lng],
+                }));
+              if (newPlaceData.length) {
+                this.map.markers.push(...newPlaceData);
+              }
+
+              this.allDataLoaded = true;
             } else {
               //If user not in geoloaction and now active geo mode. we set data on map for it and center for map
               var newPlaceData = response.data.list
@@ -625,8 +720,9 @@ export default {
               if (newPlaceData.length) {
                 this.map.markers.push(...newPlaceData);
               }
-              if (response.data.list.length === 0) this.allDataLoaded = true;
             }
+
+            if (response.data.list.length < this.perPage) this.allDataLoaded = true;
           })
           .catch((err) => {
             console.error(err);
@@ -761,8 +857,11 @@ export default {
       if (this.mobileDataSheetConfig.dragSide == "bottom") {
         //10 is for rem and 4 is for divide 1
         this.mobileDataSheetConfig.sheetHeight = 15;
+        this.isExpanded=false;
       } else if (this.mobileDataSheetConfig.dragSide == "top")
         this.mobileDataSheetConfig.sheetHeight = window.innerHeight / 10 - 4.6;
+        this.isExpanded=true;
+
     },
     grabLocation(type, title) {
       this.$axios

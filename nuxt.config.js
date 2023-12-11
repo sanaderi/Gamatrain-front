@@ -1,6 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
 
-export default{
+export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
 
   head: {
@@ -10,11 +10,11 @@ export default{
       lang: "en",
     },
     meta: [
-      {charset: "utf-8"},
-      {"http-equiv": "Content-Type"},
-      {name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"},
-      {hid: "description", name: "description", content: "Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences."},
-      {name: "format-detection", content: "telephone=no"},
+      { charset: "utf-8" },
+      { "http-equiv": "Content-Type" },
+      { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" },
+      { hid: "description", name: "description", content: "Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences." },
+      { name: "format-detection", content: "telephone=no" },
       {
         hid: "apple-mobile-web-app-title",
         name: "apple-mobile-web-app-title",
@@ -32,14 +32,18 @@ export default{
       },
     ],
     link: [
-      {rel: "stylesheet", href: "/assets/css/fontawesome.min.css"},
-      {rel: "icon", type: "image/x-icon", href: "/favicon.ico"},
-      {rel: "stylesheet", href: "/assets/css/all.min.css"},
+      { rel: "stylesheet", href: "/assets/css/fontawesome.min.css" },
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href:'/favicon-dark.ico',
+      },
+      { rel: "stylesheet", href: "/assets/css/all.min.css" },
       // {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"},
-      
+
     ],
     script: [
-      {src: 'https://accounts.google.com/gsi/client', defer: true, async: true},
+      { src: 'https://accounts.google.com/gsi/client', defer: true, async: true },
       // {src: './assets/js/jquery.js', body: true},
     ],
   },
@@ -60,12 +64,12 @@ export default{
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    {src: 'plugins/vee-validate.js', ssr: true},
-    {src: 'plugins/axios.js'},
-    {src: 'plugins/helper.js'},
-    {src: 'plugins/vue-emoji-picker', ssr: false},
-    {src: 'plugins/img-cropper', ssr: false},
-    {src: 'plugins/vuedraggable', ssr: false},
+    { src: 'plugins/vee-validate.js', ssr: true },
+    { src: 'plugins/axios.js' },
+    { src: 'plugins/helper.js' },
+    { src: 'plugins/vue-emoji-picker', ssr: false },
+    { src: 'plugins/img-cropper', ssr: false },
+    { src: 'plugins/vuedraggable', ssr: false },
 
   ],
 
@@ -116,17 +120,17 @@ export default{
   proxy: {
     '/api/v1/': {
       target: process.env.API_BASE_URL,
-      pathRewrite: {'^/api/v1/': '/api/v1/'},
+      pathRewrite: { '^/api/v1/': '/api/v1/' },
       secure: false,
       changeOrigin: true
     },
     '/uploads/': {
       target: process.env.API_BASE_URL,
-      pathRewrite: {'^/uploads': '/uploads'},
+      pathRewrite: { '^/uploads': '/uploads' },
       secure: false,
       changeOrigin: true
     },
-    '/test_api/': {target: 'https://trade.smart-ledger.ir', pathRewrite: {'^/test_api/': '/api/'}, changeOrigin: true}
+    '/test_api/': { target: 'https://trade.smart-ledger.ir', pathRewrite: { '^/test_api/': '/api/' }, changeOrigin: true }
 
   },
 
@@ -162,10 +166,10 @@ export default{
           autoFetch: true
         },
         endpoints: {
-          login: {url: '/api/v1/users/login', method: 'post'},
+          login: { url: '/api/v1/users/login', method: 'post' },
           // refresh: {url: '/api/v1/users/refresh_token', method: 'post'},
-          user: {url:'/api/v1/users/info', method: 'get'},
-          logout: {url: '/api/v1/users/logout', method: 'get'}
+          user: { url: '/api/v1/users/info', method: 'get' },
+          logout: { url: '/api/v1/users/logout', method: 'get' }
         }
       }
     },
@@ -196,27 +200,27 @@ export default{
     defaultAssets: false,
     customVariables: ["~/assets/variables.scss"],
     theme: {
-      light:true,
+      light: true,
       themes: {
         light: {
-            background: '#FFFFFF',
-            surface: '#FFFFFF',
-            primary: '#FFB300',
-            secondary: '#03DAC6',
-            error: '#B00020',
-            info: '#2196F3',
-            success: '#4CAF50',
-            warning: '#FB8C00',
+          background: '#FFFFFF',
+          surface: '#FFFFFF',
+          primary: '#FFB300',
+          secondary: '#03DAC6',
+          error: '#B00020',
+          info: '#2196F3',
+          success: '#4CAF50',
+          warning: '#FB8C00',
         },
         dark: {
-            background: colors.indigo.base,
-            surface: '#FFFFFF',
-            primary: '#FFB300',
-            secondary: '#03DAC6',
-            error: '#B00020',
-            info: colors.teal.lighten1,
-            success: '#4CAF50',
-            warning: '#FB8C00',
+          background: colors.indigo.base,
+          surface: '#FFFFFF',
+          primary: '#FFB300',
+          secondary: '#03DAC6',
+          error: '#B00020',
+          info: colors.teal.lighten1,
+          success: '#4CAF50',
+          warning: '#FB8C00',
         }
       },
     },
@@ -227,7 +231,7 @@ export default{
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ["vee-validate", "vue-chartjs","ofetch","node-fetch-native","defu"],
+    transpile: ["vee-validate", "vue-chartjs", "ofetch", "node-fetch-native", "defu"],
   },
 
   pwa: {

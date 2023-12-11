@@ -277,27 +277,13 @@
                 </template>
               </v-text-field>
             </div>
+
             <div class="float-right" id="filterSection">
               <!-- Filter section -->
-              <v-dialog
-                v-model="filterDialog"
-                fullscreen
-                hide-overlay
-                transition="dialog-bottom-transition"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    small
-                    fab
-                    color="#F2F4F7"
-                    v-bind="attrs"
-                    v-on="on"
-                    elevation="0"
-                    class="mr-2"
-                  >
-                    <v-icon> mdi-filter </v-icon>
-                  </v-btn>
-                </template>
+              <v-btn @click="filterDialog=true" small fab color="#F2F4F7" elevation="0" class="mr-2">
+                <v-icon> mdi-filter </v-icon>
+              </v-btn>
+              <div v-if="filterDialog" id="filter-dialog">
                 <v-card id="filter-card">
                   <v-toolbar color="#fff">
                     <v-toolbar-title class="gtext-h5 primary-gray-600"
@@ -598,7 +584,7 @@
                     </div>
                   </v-card-actions>
                 </v-card>
-              </v-dialog>
+              </div>
 
               <!-- Sort section -->
               <v-bottom-sheet
@@ -610,7 +596,9 @@
                     <v-icon> mdi-filter-variant </v-icon>
                   </v-btn>
                 </template>
+
                 <v-list id="sortSheetList">
+                  <p class="primary-gray-600 gtext-h5 mt-2 mb-2 px-4">Sort by</p>
                   <v-list-item
                     v-for="item in sortList"
                     :key="item.value"
@@ -1119,7 +1107,6 @@ export default {
 #mobile-school-filter {
   width: 100%;
   justify-content: space-between;
-  background: red;
 
   .v-text-field--rounded {
     .v-input__control {
@@ -1147,12 +1134,19 @@ export default {
       }
     }
   }
+
+  #filter-dialog{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right:0;
+    left: 0;
+    z-index: 1200;
+    overflow-y: scroll;
+  }
 }
 #sortSheetList {
   border-radius: 3.2rem 3.2rem 0 0rem;
-}
-.v-dialog__content {
-  z-index: 1200 !important;
 }
 
 #locationPickerDialog {

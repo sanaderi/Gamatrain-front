@@ -60,6 +60,7 @@
 
                 <div class="float-right d-flex mt-1">
                   <div class="rate-section gtext-t6 font-weight-semibold mr-1">
+                    {{ item.score }}
                     <v-icon color="primary"> mdi-star </v-icon>
                   </div>
                   <div class="gtext-t6 primary-gray-300">
