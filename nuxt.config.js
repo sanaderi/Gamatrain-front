@@ -70,6 +70,7 @@ export default {
     { src: 'plugins/vue-emoji-picker', ssr: false },
     { src: 'plugins/img-cropper', ssr: false },
     { src: 'plugins/vuedraggable', ssr: false },
+    { src: 'plugins/aframe.js', ssr: false, mode: 'client' },
 
   ],
 

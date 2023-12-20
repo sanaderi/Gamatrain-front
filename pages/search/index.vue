@@ -148,12 +148,12 @@ export default {
     var page_describe = "";
     if (query.type === "learnfiles") {
       page_title =
-        "Engage with Interactive Lessons: GamaTrain's Multimedia Educational Content";
+        "Multimedia Interactive Educational Content; PowerPoint, Video, Class Voice, GamaTrain";
       page_describe =
         "Elevate your learning experience with GamaTrain's captivating multimedia content, including PowerPoint presentations, informative videos, and diverse educational materials.";
     } else if (query.type === "test") {
       page_title =
-        "GamaTrain's Online Docs and Texts: Dive into a Sea of Educational Resources";
+        "Educational Resources | K12 Education Papers and Materials";
       page_describe =
         "Enhance your learning with GamaTrain's extensive collection of online documents and texts, carefully curated to enrich your academic journey.";
     } else if (query.type === "question") {
@@ -161,7 +161,7 @@ export default {
       page_describe =
         "Engage in active learning and gain deeper insights through GamaTrain's interactive Q&A platform, where you can pose questions and seek support from fellow learners and experts.";
     } else if (query.type === "azmoon") {
-      page_title = "Prepare for Success with GamaTrain's Online Exams";
+      page_title = "Online Exams , Free Exams for Improving Education";
       page_describe =
         "Hone your skills and assess your knowledge with GamaTrain's online exams, designed to enhance your exam preparation and boost your confidence.";
     } else if (query.type === "dars") {
@@ -177,7 +177,6 @@ export default {
   },
   head() {
     return {
-      titleTemplate: "%s",
       title: this.page_title,
 
       meta: [
@@ -255,12 +254,12 @@ export default {
 
       if (this.$route.query.type === "learnfiles") {
         this.page_title =
-          "Engage with Interactive Lessons: GamaTrain's Multimedia Educational Content";
+          "Multimedia Interactive Educational Content; PowerPoint, Video, Class Voice, GamaTrain";
         this.page_describe =
           "Elevate your learning experience with GamaTrain's captivating multimedia content, including PowerPoint presentations, informative videos, and diverse educational materials.";
       } else if (this.$route.query.type === "test") {
         this.page_title =
-          "GamaTrain's Online Docs and Texts: Dive into a Sea of Educational Resources";
+          "Educational Resources | K12 Education Papers and Materials";
         this.page_describe =
           "Enhance your learning with GamaTrain's extensive collection of online documents and texts, carefully curated to enrich your academic journey.";
       } else if (this.$route.query.type === "question") {
@@ -271,7 +270,7 @@ export default {
             "Engage in active learning and gain deeper insights through GamaTrain's interactive Q&A platform, where you can pose questions and seek support from fellow learners and experts.";
         }
       } else if (this.$route.query.type === "azmoon") {
-        this.page_title = "Prepare for Success with GamaTrain's Online Exams";
+        this.page_title = "Online Exams , Free Exams for Improving Education";
         this.page_describe =
           "Hone your skills and assess your knowledge with GamaTrain's online exams, designed to enhance your exam preparation and boost your confidence.";
       } else if (this.$route.query.type === "dars") {

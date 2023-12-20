@@ -269,18 +269,18 @@
     head() {
     return {
       titleTemplate: "%s",
-      title: "GamaTrain Blog: Exploring the Latest Insights in K12 Education",
+      title: "Exploring the Latest Insights in K12 Education | GamaTrain Blog",
 
       meta: [
         {
           hid: "apple-mobile-web-app-title",
           name: "apple-mobile-web-app-title",
-          content: "GamaTrain Blog: Exploring the Latest Insights in K12 Education",
+          content: "Exploring the Latest Insights in K12 Education | GamaTrain Blog",
         },
         {
           hid: "og:title",
           name: "og:title",
-          content: "GamaTrain Blog: Exploring the Latest Insights in K12 Education",
+          content: "Exploring the Latest Insights in K12 Education | GamaTrain Blog",
         },
         {
           hid: "og:site_name",

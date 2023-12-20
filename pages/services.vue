@@ -203,19 +203,18 @@
 export default {
   head() {
     return {
-      titleTemplate: "%s",
-      title: "Enhance K12 Learning with GamaTrain's Comprehensive Educational Services",
+      title: "Comprehensive Educational Services",
 
       meta: [
         {
           hid: "apple-mobile-web-app-title",
           name: "apple-mobile-web-app-title",
-          content: "Enhance K12 Learning with GamaTrain's Comprehensive Educational Services",
+          content: "Comprehensive Educational Services",
         },
         {
           hid: "og:title",
           name: "og:title",
-          content: "Enhance K12 Learning with GamaTrain's Comprehensive Educational Services",
+          content: "Comprehensive Educational Services",
         },
         {
           hid: "og:site_name",

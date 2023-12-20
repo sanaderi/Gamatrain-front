@@ -349,18 +349,18 @@ export default {
   head() {
     return {
       titleTemplate: "%s",
-      title: "GamaTrain: Meet the Team Dedicated to Transforming K12 Education",
+      title: "About GamaTrain | Meet the Team Dedicated to Transforming K12 Education",
 
       meta: [
         {
           hid: "apple-mobile-web-app-title",
           name: "apple-mobile-web-app-title",
-          content: "GamaTrain: Meet the Team Dedicated to Transforming K12 Education",
+          content: "About GamaTrain | Meet the Team Dedicated to Transforming K12 Education",
         },
         {
           hid: "og:title",
           name: "og:title",
-          content: "GamaTrain: Meet the Team Dedicated to Transforming K12 Education",
+          content: "About GamaTrain | Meet the Team Dedicated to Transforming K12 Education",
         },
         {
           hid: "og:site_name",

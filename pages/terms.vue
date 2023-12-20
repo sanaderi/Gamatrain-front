@@ -73,21 +73,21 @@ export default {
   auth: false,
   head() {
     return {
-      titleTemplate: "%s",
-      title: "GamaTrain's Terms and Conditions: Understanding Our Commitment to You",
+      titleTemplate:"%s",
+      title: "Terms and Conditions: Understanding Our Commitment to You",
 
       meta: [
         {
           hid: "apple-mobile-web-app-title",
           name: "apple-mobile-web-app-title",
           content:
-            "GamaTrain's Terms and Conditions: Understanding Our Commitment to You",
+            "Terms and Conditions: Understanding Our Commitment to You",
         },
         {
           hid: "og:title",
           name: "og:title",
           content:
-            "GamaTrain's Terms and Conditions: Understanding Our Commitment to You",
+            "Terms and Conditions: Understanding Our Commitment to You",
         },
         {
           hid: "og:site_name",
@@ -483,7 +483,7 @@ export default {
             opacity: 1;
           }
 
-          .v-list-item::after {
+          /* .v-list-item::after {
             position: absolute;
             bottom: 0;
             content: "";
@@ -496,7 +496,7 @@ export default {
             border-radius: 0.4rem;
             background: #fff;
             opacity: 1;
-          }
+          } */
         }
       }
     }

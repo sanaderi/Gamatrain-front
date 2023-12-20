@@ -22,7 +22,7 @@ html {
 }
 
 .primary-gray-300{
-  color: var(--primary-grey-300, #D0D5DD);
+  color: var(--primary-grey-300, #D0D5DD)!important;
 }
 
 .primary-gray-600{
@@ -31,11 +31,19 @@ html {
 .primary-gray-800{
   color: var(--primary-grey-800, #1D2939)!important;
 }
+.bg-primary-gray-800{
+  background: var(--primary-grey-800, #1D2939)!important;
+}
 .primary-gray-700{
   color: var(--primary-grey-700, #344054)!important;
 }
 .primary-gray-900{
   color:var(--primary-grey-900, #101828)!important;
+}
+
+
+.primary-blue-500{
+  color: var(--Primary-Blue-500, #2E90FA);
 }
 //End colors class
 
@@ -156,6 +164,10 @@ html {
 
 .font-weight-semibold{
   font-weight: 600!important;
+}
+
+.font-weight-heavy{
+  font-weight: 800!important;
 }
 
 
