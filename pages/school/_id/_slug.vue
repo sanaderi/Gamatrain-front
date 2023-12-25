@@ -141,16 +141,17 @@
 
     <!-- End general data section -->
 
+    <!-- Users score -->
     <v-row class="mt-16">
       <v-col cols="4">
         <h3 class="gtext-h5 primary-gray-600 mb-15">Users score</h3>
         <div class="d-flex">
-          <img src="/images/score.png" alt="Users score" class="mr-8" />
+          <img src="/images/score.png" id="score-img" alt="Users score" class="mr-8" />
           <div class="mt-10">
             <div class="gtext-t6 primary-gray-400 mb-10">
               Total comments <span class="primary-gray-800 font-weight-heavy">650</span>
             </div>
-            <div class="mb-4">
+            <div>
               <v-rating
                 v-model="rating"
                 background-color="orange lighten-3"
@@ -161,15 +162,243 @@
               ></v-rating>
             </div>
             <div class="gtext-t6 primary-gray-400">
-              Average score &nbsp;<span class="primary-gray-900 gtext-t4 font-weight-medium">3.2</span
+              Average score &nbsp;<span
+                class="primary-gray-900 gtext-t4 font-weight-medium"
+                >3.2</span
               ><span>&nbsp;/&nbsp;5</span>
             </div>
           </div>
         </div>
-        <div class="my-12"><v-btn block class="bg-primary-gray-800 white--text text-transform-none gtext-t4 font-weight-medium" rounded x-large>Leave comment</v-btn></div>
-
+        <div class="mt-10 mb-12">
+          <v-btn
+            block
+            class="bg-primary-gray-800 white--text text-transform-none gtext-t4 font-weight-medium"
+            rounded
+            x-large
+            >Leave comment</v-btn
+          >
+        </div>
       </v-col>
-      <v-col cols="8"></v-col>
+      <v-col cols="8">
+        <ul id="score-results">
+          <li class="d-flex mb-4">
+            <div class="bullet"></div>
+            <div class="gtext-t4 font-weight-medium score-title">Classes quality</div>
+            <v-progress-linear
+              color="success"
+              rounded
+              value="15"
+              height="8"
+              class="mt-3"
+            ></v-progress-linear>
+
+            <div class="gtext-t4 font-weight-medium rate-title">Poor</div>
+          </li>
+          <li class="d-flex mb-4">
+            <div class="bullet"></div>
+            <div class="gtext-t4 font-weight-medium score-title">Education</div>
+            <v-progress-linear
+              color="success"
+              rounded
+              value="70"
+              height="8"
+              class="mt-3"
+            ></v-progress-linear>
+
+            <div class="gtext-t4 font-weight-medium rate-title">Good</div>
+          </li>
+          <li class="d-flex mb-4">
+            <div class="bullet"></div>
+            <div class="gtext-t4 font-weight-medium score-title">IT training</div>
+            <v-progress-linear
+              color="success"
+              rounded
+              value="48"
+              height="8"
+              class="mt-3"
+            ></v-progress-linear>
+
+            <div class="gtext-t4 font-weight-medium rate-title">Average</div>
+          </li>
+          <li class="d-flex mb-4">
+            <div class="bullet"></div>
+            <div class="gtext-t4 font-weight-medium score-title">Safe and happy</div>
+            <v-progress-linear
+              color="success"
+              rounded
+              value="50"
+              height="8"
+              class="mt-3"
+            ></v-progress-linear>
+
+            <div class="gtext-t4 font-weight-medium rate-title">Average</div>
+          </li>
+          <li class="d-flex mb-4">
+            <div class="bullet"></div>
+            <div class="gtext-t4 font-weight-medium score-title">Behavior</div>
+            <v-progress-linear
+              color="success"
+              rounded
+              value="60"
+              height="8"
+              class="mt-3"
+            ></v-progress-linear>
+
+            <div class="gtext-t4 font-weight-medium rate-title">Good</div>
+          </li>
+          <li class="d-flex mb-4">
+            <div class="bullet"></div>
+            <div class="gtext-t4 font-weight-medium score-title">Tuition ratio</div>
+            <v-progress-linear
+              color="success"
+              rounded
+              value="80"
+              height="8"
+              class="mt-3"
+            ></v-progress-linear>
+
+            <div class="gtext-t4 font-weight-medium rate-title">Good</div>
+          </li>
+          <li class="d-flex mb-4">
+            <div class="bullet"></div>
+            <div class="gtext-t4 font-weight-medium score-title">Facilities</div>
+            <v-progress-linear
+              color="success"
+              rounded
+              value="90"
+              height="8"
+              class="mt-3"
+            ></v-progress-linear>
+
+            <div class="gtext-t4 font-weight-medium rate-title">Good</div>
+          </li>
+          <li class="d-flex">
+            <div class="bullet"></div>
+            <div class="gtext-t4 font-weight-medium score-title">Artistic activities</div>
+            <v-progress-linear
+              color="success"
+              rounded
+              value="10"
+              height="8"
+              class="mt-3"
+            ></v-progress-linear>
+
+            <div class="gtext-t4 font-weight-medium rate-title">Poor</div>
+          </li>
+        </ul>
+      </v-col>
+    </v-row>
+    <!-- End users score -->
+
+    <v-row>
+      <v-col cols="12">
+        <h3 class="gtext-h5 primary-gray-600">Recent comments</h3>
+      </v-col>
+      <v-col cols="9">
+        <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
+          <v-card-text>
+            <div class="comment-card-header">
+              <div class="d-flex float-left">
+                <v-avatar size="60">
+                  <img class="profile-avatar" src="/images/profile-pic-ex1.png" />
+                </v-avatar>
+                <div class="ml-2">
+                  <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
+                  <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
+                </div>
+              </div>
+              <div class="float-right">
+                <v-rating
+                  :value="2"
+                  background-color="orange lighten-3"
+                  color="orange"
+                  half-increments
+                  size="24"
+                  readonly
+                ></v-rating>
+              </div>
+            </div>
+            <v-divider class="mb-5" />
+            <div class="gtext-t2 primary-gray-700 mb-6">
+              “The vows and named is his origin myself any is making. Might times was
+              again. he have own produce.”
+            </div>
+            <div class="pb-8">
+              <div class="float-left">
+                <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                  <v-icon size="14"> mdi-thumb-down </v-icon>
+                </v-btn>
+                <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                  <v-icon size="14"> mdi-thumb-up </v-icon>
+                </v-btn>
+                <v-btn class="bg-primary-blue-500 white--text" fab x-small>
+                  <v-icon size="14"> mdi-forum </v-icon>
+                </v-btn>
+              </div>
+              <div class="float-right gtext-t5">2023/11/23</div>
+            </div>
+          </v-card-text>
+        </v-card>
+        <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
+          <v-card-text>
+            <div class="comment-card-header">
+              <div class="d-flex float-left">
+                <v-avatar size="60">
+                  <img class="profile-avatar" src="/images/profile-pic-ex2.jpeg" />
+                </v-avatar>
+                <div class="ml-2">
+                  <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
+                  <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
+                </div>
+              </div>
+              <div class="float-right">
+                <v-rating
+                  :value="3.4"
+                  background-color="orange lighten-3"
+                  color="orange"
+                  half-increments
+                  size="24"
+                  readonly
+                ></v-rating>
+              </div>
+            </div>
+            <v-divider class="mb-5" />
+            <div class="gtext-t2 primary-gray-700 mb-6">
+              “The vows and named is his origin myself any is making. Might times was
+              again. he have own produce.”
+            </div>
+            <div class="pb-8">
+              <div class="float-left">
+                <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                  <v-icon size="14"> mdi-thumb-down </v-icon>
+                </v-btn>
+                <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                  <v-icon size="14"> mdi-thumb-up </v-icon>
+                </v-btn>
+                <v-btn class="bg-primary-blue-500 white--text" fab x-small>
+                  <v-icon size="14"> mdi-forum </v-icon>
+                </v-btn>
+              </div>
+              <div class="float-right gtext-t5">2023/11/23</div>
+            </div>
+          </v-card-text>
+        </v-card>
+
+        <div class="text-center mt-14">
+          <v-btn
+            rounded
+            class="text-transform-none gtext-t4 font-weight-medium"
+            color="white"
+            x-large
+            >Load more</v-btn
+          >
+        </div>
+      </v-col>
+      <v-col cols="3" class="pl-15">
+        <div id="advert-section">
+          <div class="vertical-text">Advertising</div>
+        </div>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -189,13 +418,11 @@ export default {
         object: null,
         boundingBox: {},
         schoolIcon: null,
-
-        rating: 4,
       },
+      rating: 3.5,
     };
   },
   mounted() {
-    this.rating = 3.5;
     this.map.schoolIcon = L.icon({
       iconUrl: "/images/school-marker.png", // Replace with school marker icon
       iconSize: [64, 64], // Adjust the size as needed
@@ -279,5 +506,59 @@ export default {
       margin-left: 0.4rem;
     }
   }
+}
+
+#score-img {
+  width: 16rem;
+  height: 16rem;
+}
+#score-results {
+  .score-title {
+    width: 20rem;
+    margin-right: 1rem;
+  }
+  .rate-title {
+    width: 14rem;
+    text-align: right;
+  }
+
+  .bullet {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 0.4rem;
+    background: #12b76a;
+    margin-top: 1.2rem;
+    margin-right: 0.8rem;
+  }
+}
+
+.comment-card {
+  .comment-card-header {
+    height: 8rem;
+  }
+}
+
+#advert-section {
+  width: 100%;
+  height: 84.4rem;
+  float: right;
+  flex-shrink: 0;
+  border-radius: 0.6rem;
+  background: var(--Primary-Grey-100, #f2f4f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vertical-text {
+  transform: rotate(-90deg);
+  color: var(--Primary-Grey-500, #667085);
+  text-align: center;
+  font-family: Inter;
+  font-size: 5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 9.6rem; /* 192% */
+  letter-spacing: 1.95rem;
 }
 </style>

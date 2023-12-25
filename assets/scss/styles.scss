@@ -53,8 +53,28 @@ html {
 .bg-white{
   background: #fff;
 }
+.bg-primary-gray-100{
+  background: #F2F4F7!important;
+}
+.bg-primary-gray-200{
+  background: #E4E7EC!important;
+}
+.bg-primary-gray-700{
+  background: var(--Primary-Grey-700, #344054)!important;
+}
 .bg-primary-gray-800{
   background: var(--primary-grey-800, #1D2939)!important;
+}
+.bg-primary-success-50{
+  background: var(--Primary-Success-50, #ECFDF3)!important;
+}
+.bg-primary-success-500{
+  background: var(--Primary-Success-500, #12B76A)!important;
+}
+
+
+.bg-primary-blue-500{
+  background: var(--Primary-Blue-500, #2E90FA)!important;
 }
 //End background color
 
@@ -141,6 +161,27 @@ html {
 
 
 //xs size
+.gtext-t1{
+  font-family: Inter, sans-serif;
+  font-size: 2.2rem!important;
+  line-height: 3.4rem;
+  font-weight: 400;
+}
+
+.gtext-t2{
+  font-family: Inter, sans-serif;
+  font-size: 2rem!important;
+  line-height: 3.2rem;
+  font-weight: 400;
+}
+
+.gtext-t3{
+  font-family: Inter, sans-serif;
+  font-size: 1.8rem!important;
+  line-height: 3rem;
+  font-weight: 400;
+}
+
 .gtext-t4{
   font-family: Inter, sans-serif;
   font-size: 1.6rem!important;

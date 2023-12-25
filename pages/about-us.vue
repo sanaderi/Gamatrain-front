@@ -213,7 +213,7 @@
 
         <v-card flat>
           <v-tabs-items v-model="activeCommitment">
-            <v-tab-item v-for="(item, index) in commitmentList" :value="'tab-' + index">
+            <v-tab-item v-for="(item, index) in commitmentList" :key="index" :value="'tab-' + index">
               <v-card flat id="commitment-card">
                 <v-card-text>
                   <v-icon>mdi-{{ item.icon }}</v-icon>
@@ -232,7 +232,7 @@
             centered
             icons-and-text
           >
-            <v-tab :href="`#tab-${index}`" v-for="(item, index) in commitmentList">
+            <v-tab :href="`#tab-${index}`" v-for="(item, index) in commitmentList" :key="index">
               <v-icon>mdi-{{ item.icon }}</v-icon>
             </v-tab>
           </v-tabs>
