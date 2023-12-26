@@ -290,6 +290,7 @@
     </v-row>
     <!-- End users score -->
 
+    <!-- Recent comments -->
     <v-row>
       <v-col cols="12">
         <h3 class="gtext-h5 primary-gray-600">Recent comments</h3>
@@ -400,6 +401,172 @@
         </div>
       </v-col>
     </v-row>
+    <!-- End recent comments -->
+
+    <!-- Similar schools -->
+    <v-row id="similar-schools">
+      <v-col cols="12">
+        <h3 class="gtext-h5 primary-gray-600">Similar schools</h3>
+      </v-col>
+      <v-col cols="12">
+        <v-slide-group
+          class="slider py-sm-4"
+          :show-arrows="$vuetify.breakpoint.lgAndUp"
+        
+        >
+          <!-- <div class="d-flex" v-if="isLoading">
+                <v-slide-item v-for="i in 10" :key="i">
+                  <v-skeleton-loader
+                    class="mx-auto slide-loading"
+                    type="card"
+                  ></v-skeleton-loader>
+                </v-slide-item>
+              </div> -->
+
+          <v-slide-item >
+            <v-card rounded class="list-item " :to="`/school/`">
+              <v-card-text>
+                <div class="item-info">
+                  <div class="main-data">
+                    <div class="float-left">
+                      <h2 class="gtext-t4 font-weight-semibold mb-4">
+                        School name School nament
+                      </h2>
+
+                      <!-- <v-chip class="primary">
+              
+             </v-chip> -->
+
+                      <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                        Pre-K
+                      </v-chip>
+
+                      <!-- <v-chip class="primary">
+              
+             </v-chip>
+
+             <v-chip class="primary">
+              
+             </v-chip> -->
+                    </div>
+                    <div class="item-img float-right">
+                      <img :src="require('assets/images/default-school.png')" />
+                    </div>
+                  </div>
+                  <v-divider class="mb-3" />
+                  <div class="item-footer">
+                    <div class="float-left">
+                      <v-btn icon>
+                        <v-icon> mdi-map-marker </v-icon>
+                      </v-btn>
+
+                      <!-- <v-btn :disabled="!item.location" icon>
+                    <v-icon> mdi-map-marker </v-icon>
+                  </v-btn>
+                  <v-btn :disabled="!item.phone1" icon>
+                    <v-icon> mdi-phone </v-icon>
+                  </v-btn>
+                  <v-btn :disabled="!item.address" icon>
+                    <v-icon> mdi-email </v-icon>
+                  </v-btn>
+                  <v-btn :disabled="!item.site" icon>
+                    <v-icon> mdi-web </v-icon>
+                  </v-btn> -->
+                    </div>
+
+                    <div class="float-right d-flex mt-1">
+                      <div class="rate-section gtext-t6 font-weight-semibold mr-1">
+                        <!-- {{ item.score }} -->
+                        4
+                        <v-icon color="primary"> mdi-star </v-icon>
+                      </div>
+                      <div class="gtext-t6 primary-gray-300">
+                        Update:
+                        <span class="primary-gray-600">
+                          2023/11/23
+                          <!-- {{$moment(item.up_date).format("YYYY-MM-DD")}} -->
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-slide-item>
+          <v-slide-item>
+            <v-card rounded class="list-item" :to="`/school/`">
+              <v-card-text>
+                <div class="item-info">
+                  <div class="main-data">
+                    <div class="float-left">
+                      <h2 class="gtext-t4 font-weight-semibold mb-4">
+                        School name School nament
+                      </h2>
+
+                      <!-- <v-chip class="primary">
+              
+             </v-chip> -->
+
+                      <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                        Pre-K
+                      </v-chip>
+
+                      <!-- <v-chip class="primary">
+              
+             </v-chip>
+
+             <v-chip class="primary">
+              
+             </v-chip> -->
+                    </div>
+                    <div class="item-img float-right">
+                      <img :src="require('assets/images/default-school.png')" />
+                    </div>
+                  </div>
+                  <v-divider class="mb-3" />
+                  <div class="item-footer">
+                    <div class="float-left">
+                      <v-btn icon>
+                        <v-icon> mdi-map-marker </v-icon>
+                      </v-btn>
+
+                      <!-- <v-btn :disabled="!item.location" icon>
+                    <v-icon> mdi-map-marker </v-icon>
+                  </v-btn>
+                  <v-btn :disabled="!item.phone1" icon>
+                    <v-icon> mdi-phone </v-icon>
+                  </v-btn>
+                  <v-btn :disabled="!item.address" icon>
+                    <v-icon> mdi-email </v-icon>
+                  </v-btn>
+                  <v-btn :disabled="!item.site" icon>
+                    <v-icon> mdi-web </v-icon>
+                  </v-btn> -->
+                    </div>
+
+                    <div class="float-right d-flex mt-1">
+                      <div class="rate-section gtext-t6 font-weight-semibold mr-1">
+                        <!-- {{ item.score }} -->
+                        4
+                        <v-icon color="primary"> mdi-star </v-icon>
+                      </div>
+                      <div class="gtext-t6 primary-gray-300">
+                        Update:
+                        <span class="primary-gray-600">
+                          2023/11/23
+                          <!-- {{$moment(item.up_date).format("YYYY-MM-DD")}} -->
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-slide-item>
+        </v-slide-group>
+      </v-col>
+    </v-row>
+    <!-- End similar schools -->
   </v-container>
 </template>
 
@@ -560,5 +727,26 @@ export default {
   font-weight: 400;
   line-height: 9.6rem; /* 192% */
   letter-spacing: 1.95rem;
+}
+
+#similar-schools {
+  .list-item {
+    height: 15rem;
+    margin-bottom: 2rem;
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+    .item-info {
+      .main-data {
+        height: 8rem;
+
+        .item-img img {
+          width: 10.7rem;
+          height: 8.1rem;
+          flex-shrink: 0;
+          border-radius: 0.4rem;
+        }
+      }
+    }
+  }
 }
 </style>
