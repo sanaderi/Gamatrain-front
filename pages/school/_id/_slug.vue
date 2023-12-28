@@ -1,10 +1,44 @@
 <template>
   <v-container id="shcool-details">
-    <v-row>
-      <v-col cols="4">
+    <v-row class="d-flex d-md-none">
+      <div class="top-slide-container">
+        <img
+          id="schoolDetailsImg"
+          :class="topSlideClass.image"
+          src="/images/school-default.png"
+          alt="School image"
+        />
+        <client-only>
+          <l-map
+            ref="schoolMap"
+            :zoom="map.zoom"
+            :min-zoom="map.minZoom"
+            :center="map.center"
+            :class="topSlideClass.map"
+            id="schoolDetailsMap"
+          >
+            <l-tile-layer :url="map.url"></l-tile-layer>
+            <l-marker
+              @click="$router.push(`/school/1`)"
+              :lat-lng="map.latLng"
+              :icon="map.schoolIcon"
+            ></l-marker>
+          </l-map>
+        </client-only>
+
+        <client-only>
+          <a-scene embedded id="schoolDetailsVr" :class="topSlideClass.tour">
+            <a-sky src="/images/school-vr.png"></a-sky>
+          </a-scene>
+        </client-only>
+      </div>
+    </v-row>
+
+    <v-row class="d-none d-md-flex">
+      <v-col cols="12" md="4">
         <img id="schoolDetailsImg" src="/images/school-default.png" alt="School image" />
       </v-col>
-      <v-col cols="4">
+      <v-col cols="12" md="4">
         <client-only>
           <l-map
             ref="schoolMap"
@@ -22,7 +56,7 @@
           </l-map>
         </client-only>
       </v-col>
-      <v-col cols="4">
+      <v-col cols="12" md="4">
         <div>
           <client-only>
             <a-scene embedded id="schoolDetailsVr">
@@ -33,388 +67,432 @@
       </v-col>
     </v-row>
 
-    <!-- General data section -->
-    <v-row>
-      <v-col cols="8">
-        <h1 class="gtext-h4">North Carolina School of Science and Mathematics</h1>
-      </v-col>
-      <v-col cols="4">
-        <div class="float-right d-flex mt-1">
-          <v-icon size="20" class="primary-gray-300">mdi-heart</v-icon>
-          <div class="rate-section gtext-t4 font-weight-semibold ml-4">
-            3.1
-            <v-icon size="20" color="primary"> mdi-star </v-icon>
-          </div>
-        </div>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col cols="8">
-        <div class="d-flex">
-          <div>
-            <v-chip class="list-chip gtext-t5 font-weight-medium" small> Pre-K </v-chip>
-            <v-chip class="list-chip gtext-t5 font-weight-medium" small> Private </v-chip>
-            <v-chip class="list-chip gtext-t5 font-weight-medium" small> Online </v-chip>
-            <v-chip class="list-chip gtext-t5 font-weight-medium" small> Islamic </v-chip>
-          </div>
-          <v-spacer />
-
-          <div class="gtext-t4 primary-blue-500">You enter</div>
-        </div>
-
-        <div class="d-flex mt-11 mb-9">
-          <div class="gtext-h5 primary-gray-600">Tuition fee</div>
-          <v-spacer />
-          <div class="gtext-t2 font-weight-heavy primary-gray-800">
-            <span class="gtext-t6">$</span>
-            {{ "1200" | numberFormat }}
-          </div>
-        </div>
-        <div class="d-flex">
-          <div class="gtext-h5 primary-gray-600">
-            <div class="mb-4">Facilities</div>
-            <div>
-              <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
-                <v-icon size="24"> mdi-bus </v-icon>
+    <!-- Data container -->
+    <v-row class="data-container">
+      <v-col cols="12">
+        <v-row>
+          <v-col cols="12" class="text-center d-block d-md-none">
+            <v-btn-toggle
+              v-model="slideToggler"
+              rounded
+              active-class="bg-white"
+              @change="changeSlide"
+            >
+              <v-btn small class="text-transform-none gtext-t5" value="image">
+                Image
               </v-btn>
-              <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
-                <v-icon size="24"> mdi-food </v-icon>
+              <v-btn small class="text-transform-none gtext-t5" value="map"> Map </v-btn>
+              <v-btn small class="text-transform-none gtext-t5" value="tour">
+                Tour
               </v-btn>
-              <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
-                <v-icon size="24"> mdi-basketball </v-icon>
-              </v-btn>
-              <v-btn
-                class="bg-primary-gray-800 white--text"
-                disabled
-                height="56"
-                width="56"
+            </v-btn-toggle>
+          </v-col>
+        </v-row>
+
+        <!-- General data section -->
+        <v-row>
+          <v-col cols="9" md="8">
+            <h1 class="gtext-h4 gtext-sm-h4 gtext-lg-h4">
+              North Carolina School of Science and Mathematics
+            </h1>
+          </v-col>
+          <v-col cols="3" md="4">
+            <div class="float-right d-flex mt-1">
+              <v-icon size="20" class="d-none d-md-block primary-gray-300"
+                >mdi-heart</v-icon
               >
-                <v-icon size="24"> mdi-wifi-arrow-down </v-icon>
-              </v-btn>
+              <div class="rate-section gtext-t4 font-weight-semibold ml-4">
+                3.1
+                <v-icon size="20" color="primary"> mdi-star </v-icon>
+              </div>
             </div>
-          </div>
-          <v-spacer />
-          <div class="gtext-t4 primary-blue-500 align-self-center">You enter</div>
-        </div>
-      </v-col>
-      <v-col cols="4" id="main-info-section">
-        <div class="d-flex info-itm">
-          <div class="info-sign">
-            <v-icon color="primary"> mdi-web </v-icon>
-          </div>
-          <div class="info-data">
-            <a :href="normalizeURL('www.schoolcitycenterstablesg.com')" target="_blenk">
-              www.schoolcitycenterstablesg.com
-            </a>
-          </div>
-        </div>
+          </v-col>
+        </v-row>
 
-        <div class="d-flex info-itm">
-          <div class="info-sign">
-            <v-icon color="primary"> mdi-email </v-icon>
-          </div>
-          <div class="info-data">
-            <a href="mailto:info@schoolcitycenterstablesg.com">
-              info@schoolcitycenterstablesg.com
-            </a>
-          </div>
-        </div>
+        <v-row>
+          <v-col cols="12" md="8">
+            <div class="d-flex">
+              <div>
+                <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                  Pre-K
+                </v-chip>
+                <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                  Private
+                </v-chip>
+                <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                  Online
+                </v-chip>
+                <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                  Islamic
+                </v-chip>
+              </div>
+              <v-spacer />
 
-        <div class="d-flex info-itm">
-          <div class="info-sign">
-            <v-icon color="primary"> mdi-phone </v-icon>
-          </div>
-          <div class="info-data">
-            <a href="tel:+98 123 000 45 67"> +98 123 000 45 67 </a>
-          </div>
-        </div>
-
-        <div class="d-flex info-itm">
-          <div class="info-sign">
-            <v-icon size="20" color="primary"> mdi-map-marker </v-icon>
-          </div>
-          <div class="info-data">20 Mine ST,Center,...,NH 033</div>
-        </div>
-      </v-col>
-    </v-row>
-
-    <!-- End general data section -->
-
-    <!-- Users score -->
-    <v-row class="mt-16">
-      <v-col cols="4">
-        <h3 class="gtext-h5 primary-gray-600 mb-15">Users score</h3>
-        <div class="d-flex">
-          <img src="/images/score.png" id="score-img" alt="Users score" class="mr-8" />
-          <div class="mt-10">
-            <div class="gtext-t6 primary-gray-400 mb-10">
-              Total comments <span class="primary-gray-800 font-weight-heavy">650</span>
+              <div class="gtext-t4 primary-blue-500">You enter</div>
             </div>
-            <div>
-              <v-rating
-                v-model="rating"
-                background-color="orange lighten-3"
-                color="orange"
-                half-increments
-                hover
-                size="24"
-              ></v-rating>
+
+            <div class="d-flex mt-11 mb-9">
+              <div class="gtext-h5 primary-gray-600">Tuition fee</div>
+              <v-spacer />
+              <div class="gtext-t2 font-weight-heavy primary-gray-800">
+                <span class="gtext-t6">$</span>
+                {{ "1200" | numberFormat }}
+              </div>
             </div>
-            <div class="gtext-t6 primary-gray-400">
-              Average score &nbsp;<span
-                class="primary-gray-900 gtext-t4 font-weight-medium"
-                >3.2</span
-              ><span>&nbsp;/&nbsp;5</span>
-            </div>
-          </div>
-        </div>
-        <div class="mt-10 mb-12">
-          <v-btn
-            block
-            class="bg-primary-gray-800 white--text text-transform-none gtext-t4 font-weight-medium"
-            rounded
-            x-large
-            >Leave comment</v-btn
-          >
-        </div>
-      </v-col>
-      <v-col cols="8">
-        <ul id="score-results">
-          <li class="d-flex mb-4">
-            <div class="bullet"></div>
-            <div class="gtext-t4 font-weight-medium score-title">Classes quality</div>
-            <v-progress-linear
-              color="success"
-              rounded
-              value="15"
-              height="8"
-              class="mt-3"
-            ></v-progress-linear>
-
-            <div class="gtext-t4 font-weight-medium rate-title">Poor</div>
-          </li>
-          <li class="d-flex mb-4">
-            <div class="bullet"></div>
-            <div class="gtext-t4 font-weight-medium score-title">Education</div>
-            <v-progress-linear
-              color="success"
-              rounded
-              value="70"
-              height="8"
-              class="mt-3"
-            ></v-progress-linear>
-
-            <div class="gtext-t4 font-weight-medium rate-title">Good</div>
-          </li>
-          <li class="d-flex mb-4">
-            <div class="bullet"></div>
-            <div class="gtext-t4 font-weight-medium score-title">IT training</div>
-            <v-progress-linear
-              color="success"
-              rounded
-              value="48"
-              height="8"
-              class="mt-3"
-            ></v-progress-linear>
-
-            <div class="gtext-t4 font-weight-medium rate-title">Average</div>
-          </li>
-          <li class="d-flex mb-4">
-            <div class="bullet"></div>
-            <div class="gtext-t4 font-weight-medium score-title">Safe and happy</div>
-            <v-progress-linear
-              color="success"
-              rounded
-              value="50"
-              height="8"
-              class="mt-3"
-            ></v-progress-linear>
-
-            <div class="gtext-t4 font-weight-medium rate-title">Average</div>
-          </li>
-          <li class="d-flex mb-4">
-            <div class="bullet"></div>
-            <div class="gtext-t4 font-weight-medium score-title">Behavior</div>
-            <v-progress-linear
-              color="success"
-              rounded
-              value="60"
-              height="8"
-              class="mt-3"
-            ></v-progress-linear>
-
-            <div class="gtext-t4 font-weight-medium rate-title">Good</div>
-          </li>
-          <li class="d-flex mb-4">
-            <div class="bullet"></div>
-            <div class="gtext-t4 font-weight-medium score-title">Tuition ratio</div>
-            <v-progress-linear
-              color="success"
-              rounded
-              value="80"
-              height="8"
-              class="mt-3"
-            ></v-progress-linear>
-
-            <div class="gtext-t4 font-weight-medium rate-title">Good</div>
-          </li>
-          <li class="d-flex mb-4">
-            <div class="bullet"></div>
-            <div class="gtext-t4 font-weight-medium score-title">Facilities</div>
-            <v-progress-linear
-              color="success"
-              rounded
-              value="90"
-              height="8"
-              class="mt-3"
-            ></v-progress-linear>
-
-            <div class="gtext-t4 font-weight-medium rate-title">Good</div>
-          </li>
-          <li class="d-flex">
-            <div class="bullet"></div>
-            <div class="gtext-t4 font-weight-medium score-title">Artistic activities</div>
-            <v-progress-linear
-              color="success"
-              rounded
-              value="10"
-              height="8"
-              class="mt-3"
-            ></v-progress-linear>
-
-            <div class="gtext-t4 font-weight-medium rate-title">Poor</div>
-          </li>
-        </ul>
-      </v-col>
-    </v-row>
-    <!-- End users score -->
-
-    <!-- Recent comments -->
-    <v-row>
-      <v-col cols="12">
-        <h3 class="gtext-h5 primary-gray-600">Recent comments</h3>
-      </v-col>
-      <v-col cols="9">
-        <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
-          <v-card-text>
-            <div class="comment-card-header">
-              <div class="d-flex float-left">
-                <v-avatar size="60">
-                  <img class="profile-avatar" src="/images/profile-pic-ex1.png" />
-                </v-avatar>
-                <div class="ml-2">
-                  <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
-                  <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
+            <div class="d-flex">
+              <div class="gtext-h5 primary-gray-600">
+                <div class="mb-4">Facilities</div>
+                <div>
+                  <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
+                    <v-icon size="24"> mdi-bus </v-icon>
+                  </v-btn>
+                  <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
+                    <v-icon size="24"> mdi-food </v-icon>
+                  </v-btn>
+                  <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
+                    <v-icon size="24"> mdi-basketball </v-icon>
+                  </v-btn>
+                  <v-btn
+                    class="bg-primary-gray-800 white--text"
+                    disabled
+                    height="56"
+                    width="56"
+                  >
+                    <v-icon size="24"> mdi-wifi-arrow-down </v-icon>
+                  </v-btn>
                 </div>
               </div>
-              <div class="float-right">
-                <v-rating
-                  :value="2"
-                  background-color="orange lighten-3"
-                  color="orange"
-                  half-increments
-                  size="24"
-                  readonly
-                ></v-rating>
+              <v-spacer />
+              <div class="gtext-t4 primary-blue-500 align-self-center">You enter</div>
+            </div>
+          </v-col>
+          <v-col cols="12" md="4" id="main-info-section">
+            <div class="d-flex info-itm ml-md-6">
+              <div class="info-sign">
+                <v-icon color="primary"> mdi-web </v-icon>
+              </div>
+              <div class="info-data">
+                <a
+                  :href="normalizeURL('www.schoolcitycenterstablesg.com')"
+                  target="_blenk"
+                >
+                  www.schoolcitycenterstablesg.com
+                </a>
               </div>
             </div>
-            <v-divider class="mb-5" />
-            <div class="gtext-t2 primary-gray-700 mb-6">
-              “The vows and named is his origin myself any is making. Might times was
-              again. he have own produce.”
-            </div>
-            <div class="pb-8">
-              <div class="float-left">
-                <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
-                  <v-icon size="14"> mdi-thumb-down </v-icon>
-                </v-btn>
-                <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
-                  <v-icon size="14"> mdi-thumb-up </v-icon>
-                </v-btn>
-                <v-btn class="bg-primary-blue-500 white--text" fab x-small>
-                  <v-icon size="14"> mdi-forum </v-icon>
-                </v-btn>
+
+            <div class="d-flex info-itm ml-md-6">
+              <div class="info-sign">
+                <v-icon color="primary"> mdi-email </v-icon>
               </div>
-              <div class="float-right gtext-t5">2023/11/23</div>
+              <div class="info-data">
+                <a href="mailto:info@schoolcitycenterstablesg.com">
+                  info@schoolcitycenterstablesg.com
+                </a>
+              </div>
             </div>
-          </v-card-text>
-        </v-card>
-        <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
-          <v-card-text>
-            <div class="comment-card-header">
-              <div class="d-flex float-left">
-                <v-avatar size="60">
-                  <img class="profile-avatar" src="/images/profile-pic-ex2.jpeg" />
-                </v-avatar>
-                <div class="ml-2">
-                  <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
-                  <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
+
+            <div class="d-flex info-itm ml-md-6">
+              <div class="info-sign">
+                <v-icon color="primary"> mdi-phone </v-icon>
+              </div>
+              <div class="info-data">
+                <a href="tel:+98 123 000 45 67"> +98 123 000 45 67 </a>
+              </div>
+            </div>
+
+            <div class="d-flex info-itm ml-md-6">
+              <div class="info-sign">
+                <v-icon size="20" color="primary"> mdi-map-marker </v-icon>
+              </div>
+              <div class="info-data">20 Mine ST,Center,...,NH 033</div>
+            </div>
+          </v-col>
+        </v-row>
+
+        <!-- End general data section -->
+
+        <!-- Users score -->
+        <v-row class="mt-16">
+          <v-col cols="12" md="4">
+            <h3 class="gtext-h5 primary-gray-600 mb-15">Users score</h3>
+            <div class="d-flex">
+              <img
+                src="/images/score.png"
+                id="score-img"
+                alt="Users score"
+                class="mr-8"
+              />
+              <div class="mt-10">
+                <div class="gtext-t6 primary-gray-400 mb-10">
+                  Total comments
+                  <span class="primary-gray-800 font-weight-heavy">650</span>
+                </div>
+                <div>
+                  <v-rating
+                    v-model="rating"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    half-increments
+                    hover
+                    size="24"
+                  ></v-rating>
+                </div>
+                <div class="gtext-t6 primary-gray-400">
+                  Average score &nbsp;<span
+                    class="primary-gray-900 gtext-t4 font-weight-medium"
+                    >3.2</span
+                  ><span>&nbsp;/&nbsp;5</span>
                 </div>
               </div>
-              <div class="float-right">
-                <v-rating
-                  :value="3.4"
-                  background-color="orange lighten-3"
-                  color="orange"
-                  half-increments
-                  size="24"
-                  readonly
-                ></v-rating>
-              </div>
             </div>
-            <v-divider class="mb-5" />
-            <div class="gtext-t2 primary-gray-700 mb-6">
-              “The vows and named is his origin myself any is making. Might times was
-              again. he have own produce.”
+            <div class="mt-10 mb-12">
+              <v-btn
+                block
+                class="bg-primary-gray-800 white--text text-transform-none gtext-t4 font-weight-medium"
+                rounded
+                x-large
+                >Leave comment</v-btn
+              >
             </div>
-            <div class="pb-8">
-              <div class="float-left">
-                <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
-                  <v-icon size="14"> mdi-thumb-down </v-icon>
-                </v-btn>
-                <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
-                  <v-icon size="14"> mdi-thumb-up </v-icon>
-                </v-btn>
-                <v-btn class="bg-primary-blue-500 white--text" fab x-small>
-                  <v-icon size="14"> mdi-forum </v-icon>
-                </v-btn>
-              </div>
-              <div class="float-right gtext-t5">2023/11/23</div>
-            </div>
-          </v-card-text>
-        </v-card>
+          </v-col>
+          <v-col cols="12" md="8">
+            <ul id="score-results">
+              <li class="d-flex mb-4">
+                <div class="bullet"></div>
+                <div class="gtext-t4 font-weight-medium score-title">Classes quality</div>
+                <v-progress-linear
+                  color="success"
+                  rounded
+                  value="15"
+                  height="8"
+                  class="mt-3"
+                ></v-progress-linear>
 
-        <div class="text-center mt-14">
-          <v-btn
-            rounded
-            class="text-transform-none gtext-t4 font-weight-medium"
-            color="white"
-            x-large
-            >Load more</v-btn
-          >
-        </div>
-      </v-col>
-      <v-col cols="3" class="pl-15">
-        <div id="advert-section">
-          <div class="vertical-text">Advertising</div>
-        </div>
-      </v-col>
-    </v-row>
-    <!-- End recent comments -->
+                <div class="gtext-t4 font-weight-medium rate-title">Poor</div>
+              </li>
+              <li class="d-flex mb-4">
+                <div class="bullet"></div>
+                <div class="gtext-t4 font-weight-medium score-title">Education</div>
+                <v-progress-linear
+                  color="success"
+                  rounded
+                  value="70"
+                  height="8"
+                  class="mt-3"
+                ></v-progress-linear>
 
-    <!-- Similar schools -->
-    <v-row id="similar-schools">
-      <v-col cols="12">
-        <h3 class="gtext-h5 primary-gray-600">Similar schools</h3>
-      </v-col>
-      <v-col cols="12">
-        <v-slide-group
-          class="slider py-sm-4"
-          :show-arrows="$vuetify.breakpoint.lgAndUp"
-        
-        >
-          <!-- <div class="d-flex" v-if="isLoading">
+                <div class="gtext-t4 font-weight-medium rate-title">Good</div>
+              </li>
+              <li class="d-flex mb-4">
+                <div class="bullet"></div>
+                <div class="gtext-t4 font-weight-medium score-title">IT training</div>
+                <v-progress-linear
+                  color="success"
+                  rounded
+                  value="48"
+                  height="8"
+                  class="mt-3"
+                ></v-progress-linear>
+
+                <div class="gtext-t4 font-weight-medium rate-title">Average</div>
+              </li>
+              <li class="d-flex mb-4">
+                <div class="bullet"></div>
+                <div class="gtext-t4 font-weight-medium score-title">Safe and happy</div>
+                <v-progress-linear
+                  color="success"
+                  rounded
+                  value="50"
+                  height="8"
+                  class="mt-3"
+                ></v-progress-linear>
+
+                <div class="gtext-t4 font-weight-medium rate-title">Average</div>
+              </li>
+              <li class="d-flex mb-4">
+                <div class="bullet"></div>
+                <div class="gtext-t4 font-weight-medium score-title">Behavior</div>
+                <v-progress-linear
+                  color="success"
+                  rounded
+                  value="60"
+                  height="8"
+                  class="mt-3"
+                ></v-progress-linear>
+
+                <div class="gtext-t4 font-weight-medium rate-title">Good</div>
+              </li>
+              <li class="d-flex mb-4">
+                <div class="bullet"></div>
+                <div class="gtext-t4 font-weight-medium score-title">Tuition ratio</div>
+                <v-progress-linear
+                  color="success"
+                  rounded
+                  value="80"
+                  height="8"
+                  class="mt-3"
+                ></v-progress-linear>
+
+                <div class="gtext-t4 font-weight-medium rate-title">Good</div>
+              </li>
+              <li class="d-flex mb-4">
+                <div class="bullet"></div>
+                <div class="gtext-t4 font-weight-medium score-title">Facilities</div>
+                <v-progress-linear
+                  color="success"
+                  rounded
+                  value="90"
+                  height="8"
+                  class="mt-3"
+                ></v-progress-linear>
+
+                <div class="gtext-t4 font-weight-medium rate-title">Good</div>
+              </li>
+              <li class="d-flex">
+                <div class="bullet"></div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Artistic activities
+                </div>
+                <v-progress-linear
+                  color="success"
+                  rounded
+                  value="10"
+                  height="8"
+                  class="mt-3"
+                ></v-progress-linear>
+
+                <div class="gtext-t4 font-weight-medium rate-title">Poor</div>
+              </li>
+            </ul>
+          </v-col>
+        </v-row>
+        <!-- End users score -->
+
+        <!-- Recent comments -->
+        <v-row>
+          <v-col cols="12">
+            <h3 class="gtext-h5 primary-gray-600">Recent comments</h3>
+          </v-col>
+          <v-col cols="12" md="9">
+            <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
+              <v-card-text>
+                <div class="comment-card-header">
+                  <div class="d-flex float-left">
+                    <v-avatar size="60">
+                      <img class="profile-avatar" src="/images/profile-pic-ex1.png" />
+                    </v-avatar>
+                    <div class="ml-2">
+                      <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
+                      <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
+                    </div>
+                  </div>
+                  <div class="float-right">
+                    <v-rating
+                      :value="2"
+                      background-color="orange lighten-3"
+                      color="orange"
+                      half-increments
+                      size="24"
+                      readonly
+                    ></v-rating>
+                  </div>
+                </div>
+                <v-divider class="mb-5" />
+                <div class="gtext-t2 primary-gray-700 mb-6">
+                  “The vows and named is his origin myself any is making. Might times was
+                  again. he have own produce.”
+                </div>
+                <div class="pb-8">
+                  <div class="float-left">
+                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                      <v-icon size="14"> mdi-thumb-down </v-icon>
+                    </v-btn>
+                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                      <v-icon size="14"> mdi-thumb-up </v-icon>
+                    </v-btn>
+                    <v-btn class="bg-primary-blue-500 white--text" fab x-small>
+                      <v-icon size="14"> mdi-forum </v-icon>
+                    </v-btn>
+                  </div>
+                  <div class="float-right gtext-t5">2023/11/23</div>
+                </div>
+              </v-card-text>
+            </v-card>
+            <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
+              <v-card-text>
+                <div class="comment-card-header">
+                  <div class="d-flex float-left">
+                    <v-avatar size="60">
+                      <img class="profile-avatar" src="/images/profile-pic-ex2.jpeg" />
+                    </v-avatar>
+                    <div class="ml-2">
+                      <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
+                      <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
+                    </div>
+                  </div>
+                  <div class="float-right">
+                    <v-rating
+                      :value="3.4"
+                      background-color="orange lighten-3"
+                      color="orange"
+                      half-increments
+                      size="24"
+                      readonly
+                    ></v-rating>
+                  </div>
+                </div>
+                <v-divider class="mb-5" />
+                <div class="gtext-t2 primary-gray-700 mb-6">
+                  “The vows and named is his origin myself any is making. Might times was
+                  again. he have own produce.”
+                </div>
+                <div class="pb-8">
+                  <div class="float-left">
+                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                      <v-icon size="14"> mdi-thumb-down </v-icon>
+                    </v-btn>
+                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                      <v-icon size="14"> mdi-thumb-up </v-icon>
+                    </v-btn>
+                    <v-btn class="bg-primary-blue-500 white--text" fab x-small>
+                      <v-icon size="14"> mdi-forum </v-icon>
+                    </v-btn>
+                  </div>
+                  <div class="float-right gtext-t5">2023/11/23</div>
+                </div>
+              </v-card-text>
+            </v-card>
+
+            <div class="text-center mt-14">
+              <v-btn
+                rounded
+                class="text-transform-none gtext-t4 font-weight-medium"
+                color="white"
+                x-large
+                >Load more</v-btn
+              >
+            </div>
+          </v-col>
+          <v-col cols="12" md="3" class="d-none d-md-block pl-15">
+            <div id="advert-section">
+              <div class="vertical-text">Advertising</div>
+            </div>
+          </v-col>
+        </v-row>
+        <!-- End recent comments -->
+
+        <!-- Similar schools -->
+        <v-row id="similar-schools">
+          <v-col cols="12">
+            <h3 class="gtext-h5 primary-gray-600">Similar schools</h3>
+          </v-col>
+          <v-col cols="12">
+            <v-slide-group
+              class="slider py-sm-4"
+              :show-arrows="$vuetify.breakpoint.lgAndUp"
+            >
+              <!-- <div class="d-flex" v-if="isLoading">
                 <v-slide-item v-for="i in 10" :key="i">
                   <v-skeleton-loader
                     class="mx-auto slide-loading"
@@ -423,44 +501,44 @@
                 </v-slide-item>
               </div> -->
 
-          <v-slide-item >
-            <v-card rounded class="list-item " :to="`/school/`">
-              <v-card-text>
-                <div class="item-info">
-                  <div class="main-data">
-                    <div class="float-left">
-                      <h2 class="gtext-t4 font-weight-semibold mb-4">
-                        School name School nament
-                      </h2>
+              <v-slide-item>
+                <v-card rounded class="list-item" :to="`/school/`">
+                  <v-card-text>
+                    <div class="item-info">
+                      <div class="main-data">
+                        <div class="float-left">
+                          <h2 class="gtext-t4 font-weight-semibold mb-4">
+                            School name School nament
+                          </h2>
 
-                      <!-- <v-chip class="primary">
+                          <!-- <v-chip class="primary">
               
              </v-chip> -->
 
-                      <v-chip class="list-chip gtext-t5 font-weight-medium" small>
-                        Pre-K
-                      </v-chip>
+                          <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                            Pre-K
+                          </v-chip>
 
-                      <!-- <v-chip class="primary">
+                          <!-- <v-chip class="primary">
               
              </v-chip>
 
              <v-chip class="primary">
               
              </v-chip> -->
-                    </div>
-                    <div class="item-img float-right">
-                      <img :src="require('assets/images/default-school.png')" />
-                    </div>
-                  </div>
-                  <v-divider class="mb-3" />
-                  <div class="item-footer">
-                    <div class="float-left">
-                      <v-btn icon>
-                        <v-icon> mdi-map-marker </v-icon>
-                      </v-btn>
+                        </div>
+                        <div class="item-img float-right">
+                          <img :src="require('assets/images/default-school.png')" />
+                        </div>
+                      </div>
+                      <v-divider class="mb-3" />
+                      <div class="item-footer">
+                        <div class="float-left">
+                          <v-btn icon>
+                            <v-icon> mdi-map-marker </v-icon>
+                          </v-btn>
 
-                      <!-- <v-btn :disabled="!item.location" icon>
+                          <!-- <v-btn :disabled="!item.location" icon>
                     <v-icon> mdi-map-marker </v-icon>
                   </v-btn>
                   <v-btn :disabled="!item.phone1" icon>
@@ -472,65 +550,65 @@
                   <v-btn :disabled="!item.site" icon>
                     <v-icon> mdi-web </v-icon>
                   </v-btn> -->
-                    </div>
+                        </div>
 
-                    <div class="float-right d-flex mt-1">
-                      <div class="rate-section gtext-t6 font-weight-semibold mr-1">
-                        <!-- {{ item.score }} -->
-                        4
-                        <v-icon color="primary"> mdi-star </v-icon>
-                      </div>
-                      <div class="gtext-t6 primary-gray-300">
-                        Update:
-                        <span class="primary-gray-600">
-                          2023/11/23
-                          <!-- {{$moment(item.up_date).format("YYYY-MM-DD")}} -->
-                        </span>
+                        <div class="float-right d-flex mt-1">
+                          <div class="rate-section gtext-t6 font-weight-semibold mr-1">
+                            <!-- {{ item.score }} -->
+                            4
+                            <v-icon color="primary"> mdi-star </v-icon>
+                          </div>
+                          <div class="gtext-t6 primary-gray-300">
+                            Update:
+                            <span class="primary-gray-600">
+                              2023/11/23
+                              <!-- {{$moment(item.up_date).format("YYYY-MM-DD")}} -->
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-slide-item>
-          <v-slide-item>
-            <v-card rounded class="list-item" :to="`/school/`">
-              <v-card-text>
-                <div class="item-info">
-                  <div class="main-data">
-                    <div class="float-left">
-                      <h2 class="gtext-t4 font-weight-semibold mb-4">
-                        School name School nament
-                      </h2>
+                  </v-card-text>
+                </v-card>
+              </v-slide-item>
+              <v-slide-item>
+                <v-card rounded class="list-item" :to="`/school/`">
+                  <v-card-text>
+                    <div class="item-info">
+                      <div class="main-data">
+                        <div class="float-left">
+                          <h2 class="gtext-t4 font-weight-semibold mb-4">
+                            School name School nament
+                          </h2>
 
-                      <!-- <v-chip class="primary">
+                          <!-- <v-chip class="primary">
               
              </v-chip> -->
 
-                      <v-chip class="list-chip gtext-t5 font-weight-medium" small>
-                        Pre-K
-                      </v-chip>
+                          <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                            Pre-K
+                          </v-chip>
 
-                      <!-- <v-chip class="primary">
+                          <!-- <v-chip class="primary">
               
              </v-chip>
 
              <v-chip class="primary">
               
              </v-chip> -->
-                    </div>
-                    <div class="item-img float-right">
-                      <img :src="require('assets/images/default-school.png')" />
-                    </div>
-                  </div>
-                  <v-divider class="mb-3" />
-                  <div class="item-footer">
-                    <div class="float-left">
-                      <v-btn icon>
-                        <v-icon> mdi-map-marker </v-icon>
-                      </v-btn>
+                        </div>
+                        <div class="item-img float-right">
+                          <img :src="require('assets/images/default-school.png')" />
+                        </div>
+                      </div>
+                      <v-divider class="mb-3" />
+                      <div class="item-footer">
+                        <div class="float-left">
+                          <v-btn icon>
+                            <v-icon> mdi-map-marker </v-icon>
+                          </v-btn>
 
-                      <!-- <v-btn :disabled="!item.location" icon>
+                          <!-- <v-btn :disabled="!item.location" icon>
                     <v-icon> mdi-map-marker </v-icon>
                   </v-btn>
                   <v-btn :disabled="!item.phone1" icon>
@@ -542,31 +620,34 @@
                   <v-btn :disabled="!item.site" icon>
                     <v-icon> mdi-web </v-icon>
                   </v-btn> -->
-                    </div>
+                        </div>
 
-                    <div class="float-right d-flex mt-1">
-                      <div class="rate-section gtext-t6 font-weight-semibold mr-1">
-                        <!-- {{ item.score }} -->
-                        4
-                        <v-icon color="primary"> mdi-star </v-icon>
-                      </div>
-                      <div class="gtext-t6 primary-gray-300">
-                        Update:
-                        <span class="primary-gray-600">
-                          2023/11/23
-                          <!-- {{$moment(item.up_date).format("YYYY-MM-DD")}} -->
-                        </span>
+                        <div class="float-right d-flex mt-1">
+                          <div class="rate-section gtext-t6 font-weight-semibold mr-1">
+                            <!-- {{ item.score }} -->
+                            4
+                            <v-icon color="primary"> mdi-star </v-icon>
+                          </div>
+                          <div class="gtext-t6 primary-gray-300">
+                            Update:
+                            <span class="primary-gray-600">
+                              2023/11/23
+                              <!-- {{$moment(item.up_date).format("YYYY-MM-DD")}} -->
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-slide-item>
-        </v-slide-group>
+                  </v-card-text>
+                </v-card>
+              </v-slide-item>
+            </v-slide-group>
+          </v-col>
+        </v-row>
+        <!-- End similar schools -->
       </v-col>
     </v-row>
-    <!-- End similar schools -->
+    <!-- End data container -->
   </v-container>
 </template>
 
@@ -587,6 +668,12 @@ export default {
         schoolIcon: null,
       },
       rating: 3.5,
+      slideToggler: "map",
+      topSlideClass: {
+        image: "center-image",
+        map: "under-image-left",
+        tour: "under-image-right",
+      },
     };
   },
   mounted() {
@@ -606,14 +693,87 @@ export default {
       // If it already has a protocol, leave it as is
       return url;
     },
-    onLoad() {
-      alert("hh");
+    changeSlide() {
+      if (this.slideToggler == "map") {
+        this.topSlideClass.image = "under-image-left";
+        this.topSlideClass.map = "center-image";
+        this.topSlideClass.tour = "under-image-right";
+      } else if (this.slideToggler == "image") {
+        this.topSlideClass.image = "center-image";
+        this.topSlideClass.map = "under-image-right";
+        this.topSlideClass.tour = "under-image-left";
+      } else if (this.slideToggler == "tour") {
+        this.topSlideClass.image = "";
+        this.topSlideClass.map = "under-image-left";
+        this.topSlideClass.tour = "center-image";
+      }
+
+      const rootElement = this.$el;
+
+      // Finding an element with a specific class
+      const targetElement = rootElement.querySelector(".center-image");
+
+      // Manipulating the found element (for example, changing its color)
+      // if (targetElement) {
+      //   targetElement.style.opacity = "1";
+      // }
     },
   },
 };
 </script>
 
 <style scoped>
+.top-slide-container {
+  position: fixed;
+  margin-top: 5.4rem;
+  margin-bottom: 2rem;
+  width: 100vw;
+  height: 26.4rem;
+  max-height: 26.4rem;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.data-container {
+  position: relative;
+  z-index: 1;
+  margin-top: 30rem;
+  background: #fff;
+  border-top-left-radius: 3.2rem;
+  border-top-right-radius: 3.2rem;
+}
+
+.center-image {
+  position: absolute;
+  top: 0;
+  left: 0 !important;
+  margin: auto;
+  z-index: 2;
+  right: 0 !important;
+  width: 80% !important;
+  max-height: 26.4rem;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.under-image-left,
+.under-image-right {
+  position: absolute;
+  top: 0;
+  max-height: 26.4rem;
+}
+
+.under-image-left {
+  left: -50%;
+  z-index: 1;
+}
+
+.under-image-right {
+  right: -50%;
+  z-index: 1;
+}
+
 #schoolDetailsImg {
   height: 28.1rem;
   max-height: 28.1rem;
@@ -645,7 +805,6 @@ export default {
 #main-info-section {
   .info-itm {
     margin-bottom: 0.8rem;
-    margin-left: 2.4rem;
     .info-sign {
       width: 5.6rem;
       min-width: 5.6rem;
@@ -747,6 +906,12 @@ export default {
         }
       }
     }
+  }
+}
+
+@media (min-width: 1264px) {
+  .data-container {
+    margin-top: 1rem;
   }
 }
 </style>

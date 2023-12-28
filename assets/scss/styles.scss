@@ -8,91 +8,105 @@ html {
 
 
 //Colors class
-.gray--text{
-  color:#98a2b3!important;
+.gray--text {
+  color: #98a2b3 !important;
 }
 
 
-.primary-gray-100{
+.primary-gray-100 {
   color: var(--primary-grey-100, #F2F4F7);
 }
 
-.primary-gray-200{
-  color:  #E4E7EC;
+.primary-gray-200 {
+  color: #E4E7EC;
 }
 
-.primary-gray-300{
-  color: var(--primary-grey-300, #D0D5DD)!important;
+.primary-gray-300 {
+  color: var(--primary-grey-300, #D0D5DD) !important;
 }
-.primary-gray-400{
+
+.primary-gray-400 {
   color: var(--Primary-Grey-400, #98A2B3);
 }
 
-.primary-gray-600{
+.primary-gray-600 {
   color: var(--primary-grey-600, #475467);
 }
-.primary-gray-800{
-  color: var(--primary-grey-800, #1D2939)!important;
+
+.primary-gray-800 {
+  color: var(--primary-grey-800, #1D2939) !important;
 }
 
-.primary-gray-700{
-  color: var(--primary-grey-700, #344054)!important;
+.primary-gray-700 {
+  color: var(--primary-grey-700, #344054) !important;
 }
-.primary-gray-900{
-  color:var(--primary-grey-900, #101828)!important;
+
+.primary-gray-900 {
+  color: var(--primary-grey-900, #101828) !important;
 }
 
 
-.primary-blue-500{
+.primary-blue-500 {
   color: var(--Primary-Blue-500, #2E90FA);
 }
+
 //End colors class
 
 
 //Background color
-.bg-white{
-  background: #fff;
+.bg-white {
+  background: #fff!important;
 }
-.bg-primary-gray-100{
-  background: #F2F4F7!important;
+
+.bg-primary-gray-100 {
+  background: #F2F4F7 !important;
 }
-.bg-primary-gray-200{
-  background: #E4E7EC!important;
+
+.bg-primary-gray-200 {
+  background: #E4E7EC !important;
 }
-.bg-primary-gray-700{
-  background: var(--Primary-Grey-700, #344054)!important;
+
+.bg-primary-gray-700 {
+  background: var(--Primary-Grey-700, #344054) !important;
 }
-.bg-primary-gray-800{
-  background: var(--primary-grey-800, #1D2939)!important;
+
+.bg-primary-gray-800 {
+  background: var(--primary-grey-800, #1D2939) !important;
 }
-.bg-primary-success-50{
-  background: var(--Primary-Success-50, #ECFDF3)!important;
+
+.bg-primary-success-50 {
+  background: var(--Primary-Success-50, #ECFDF3) !important;
 }
-.bg-primary-success-500{
-  background: var(--Primary-Success-500, #12B76A)!important;
+
+.bg-primary-success-500 {
+  background: var(--Primary-Success-500, #12B76A) !important;
 }
 
 
-.bg-primary-blue-500{
-  background: var(--Primary-Blue-500, #2E90FA)!important;
+.bg-primary-blue-500 {
+  background: var(--Primary-Blue-500, #2E90FA) !important;
 }
+
 //End background color
 
 //Width class
-.w-50{
-  width: 50%!important;
+.w-50 {
+  width: 50% !important;
 }
-.w-60{
-  width: 60%!important;
+
+.w-60 {
+  width: 60% !important;
 }
-.w-70{
-  width: 70%!important;
+
+.w-70 {
+  width: 70% !important;
 }
 
 //Alignment
-.justify-content-center{
+.justify-content-center {
   justify-content: center;
 }
+
 //
 
 //Customize vuetify button
@@ -102,14 +116,15 @@ html {
 
 
 
-.text-transform-none{
-  text-transform: none!important;
+.text-transform-none {
+  text-transform: none !important;
 }
+
 .v-btn:not(.v-btn--round).v-size--large.gama-btn {
   .v-btn__content {
     color: #24292F;
     font-family: Inter;
-    font-size: 2rem!important;
+    font-size: 2rem !important;
     font-style: normal;
     line-height: normal;
     text-transform: capitalize;
@@ -161,41 +176,42 @@ html {
 
 
 //xs size
-.gtext-t1{
+.gtext-t1 {
   font-family: Inter, sans-serif;
-  font-size: 2.2rem!important;
+  font-size: 2.2rem !important;
   line-height: 3.4rem;
   font-weight: 400;
 }
 
-.gtext-t2{
+.gtext-t2 {
   font-family: Inter, sans-serif;
-  font-size: 2rem!important;
+  font-size: 2rem !important;
   line-height: 3.2rem;
   font-weight: 400;
 }
 
-.gtext-t3{
+.gtext-t3 {
   font-family: Inter, sans-serif;
-  font-size: 1.8rem!important;
+  font-size: 1.8rem !important;
   line-height: 3rem;
   font-weight: 400;
 }
 
-.gtext-t4{
+.gtext-t4 {
   font-family: Inter, sans-serif;
-  font-size: 1.6rem!important;
+  font-size: 1.6rem !important;
   line-height: 3rem;
   font-weight: 400;
 }
-.gtext-t5{
-  font-family: Inter, sans-serif!important;
-  font-size: 1.4rem!important;
-  line-height: 2.4rem!important;
+
+.gtext-t5 {
+  font-family: Inter, sans-serif !important;
+  font-size: 1.4rem !important;
+  line-height: 2.4rem !important;
   font-weight: 400;
 }
 
-.gtext-t6{
+.gtext-t6 {
   font-family: Inter, sans-serif;
   font-size: 1.2rem;
   line-height: 1.8rem;
@@ -203,24 +219,34 @@ html {
 }
 
 
-.gtext-h5{
-  font-family: Inter, sans-serif!important;
-  font-size: 2.5rem!important;
-  line-height: 4.2rem!important;
+.gtext-h4 {
+  font-family: Inter, sans-serif !important;;
+  font-size: 2.4rem!important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 4rem !important;
+  letter-spacing: 0.025rem;
+}
+
+.gtext-h5 {
+  font-family: Inter, sans-serif !important;
+  font-size: 2.5rem !important;
+  line-height: 4.2rem !important;
   font-weight: 400;
 }
 
 
 
-.font-weight-medium{
-  font-weight: 500!important;
-}
-.font-weight-semibold{
-  font-weight: 600!important;
+.font-weight-medium {
+  font-weight: 500 !important;
 }
 
-.font-weight-heavy{
-  font-weight: 800!important;
+.font-weight-semibold {
+  font-weight: 600 !important;
+}
+
+.font-weight-heavy {
+  font-weight: 800 !important;
 }
 
 
@@ -2483,18 +2509,19 @@ body {
     max-width: inherit !important;
   }
 
-  .w-sm-20{
-    width: 20%!important;
-  }
-  .w-sm-40{
-    width: 40%!important;
+  .w-sm-20 {
+    width: 20% !important;
   }
 
-  .w-sm-50{
-    width: 50%!important;
+  .w-sm-40 {
+    width: 40% !important;
   }
 
-  .w-sm-100{
+  .w-sm-50 {
+    width: 50% !important;
+  }
+
+  .w-sm-100 {
     width: 100%;
   }
 
@@ -2659,6 +2686,20 @@ body {
   }
 
   //End button style
+}
+
+@media (min-width:600px){
+
+  //sm typegraphy
+  .gtext-sm-h4 {
+    font-family: Inter, sans-serif !important;;
+    font-size: 2.6rem!important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 4rem !important;
+    letter-spacing: 0.025rem;
+  }
+  //End sm typography
 }
 
 @media only screen and (min-width: 600px) and (max-width: 960px) {
@@ -2874,14 +2915,16 @@ body {
 
   //End button style
 
-  .w-md-20{
-    width: 20%!important;
+  .w-md-20 {
+    width: 20% !important;
   }
-  .w-md-30{
-    width: 30%!important;
+
+  .w-md-30 {
+    width: 30% !important;
   }
-  .w-md-40{
-    width: 40%!important;
+
+  .w-md-40 {
+    width: 40% !important;
   }
 
 
@@ -2933,7 +2976,7 @@ body {
   }
 
 
-  
+
 }
 
 @media only screen and (min-width: 1264px) {
@@ -2947,6 +2990,19 @@ body {
   .container--fluid {
     max-width: inherit !important;
   }
+
+
+  //lg typegraphy
+  .gtext-lg-h4 {
+    font-family: Inter, sans-serif !important;;
+    font-size: 3rem!important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 4rem !important;
+    letter-spacing: 0.025rem;
+  }
+
+  //End lg typography
 
 
 
@@ -3712,7 +3768,7 @@ body {
         }
 
         .item-content-footer {
-          
+
 
           @media screen and (max-width: 600px) {
             // p {
