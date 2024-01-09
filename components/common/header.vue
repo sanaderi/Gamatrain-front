@@ -2,6 +2,7 @@
   <div>
     <header id="main-header">
       <!--Desktop menu-->
+      
       <v-app-bar
         flat
         :fixed="menuSetting.fixedStatus"
@@ -9,7 +10,8 @@
         :class="menuSetting.class"
         class="d-none d-lg-block"
       >
-        <v-container>
+      
+        <v-container class="px-0">
           <v-row>
             <v-col cols="6" md="9" lg="9" xl="9">
               <div class="d-flex">

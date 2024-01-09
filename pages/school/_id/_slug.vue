@@ -1,10 +1,11 @@
 <template>
-  <v-container id="shcool-details">
+  <v-container id="school-details">
     <v-row class="d-flex d-md-none">
       <div class="top-slide-container">
         <img
           id="schoolDetailsImg"
           :class="topSlideClass.image"
+          @click="galleryDialog = true"
           src="/images/school-default.png"
           alt="School image"
         />
@@ -36,7 +37,12 @@
 
     <v-row class="d-none d-md-flex">
       <v-col cols="12" md="4">
-        <img id="schoolDetailsImg" src="/images/school-default.png" alt="School image" />
+        <img
+          @click="galleryDialog = true"
+          class="pointer schoolDetailsImg"
+          src="/images/school-default.png"
+          alt="School image"
+        />
       </v-col>
       <v-col cols="12" md="4">
         <client-only>
@@ -70,9 +76,16 @@
     <!-- Data container -->
     <v-row class="data-container">
       <v-col cols="12">
-        <v-row>
-          <v-col cols="12" class="text-center d-block d-md-none">
+        <v-row class="mt-6 d-flex d-md-none">
+          <v-col cols="3" class="text-left d-block d-md-none">
+            <div class="text-center">
+              <div class="gtext-t6 primary-gray-400">Update:</div>
+              <div class="gtext-t6 primary-gray-500">2023/11/23</div>
+            </div>
+          </v-col>
+          <v-col cols="6" class="text-center d-block d-md-none">
             <v-btn-toggle
+              style="order: 2"
               v-model="slideToggler"
               rounded
               active-class="bg-white"
@@ -81,27 +94,35 @@
               <v-btn small class="text-transform-none gtext-t5" value="image">
                 Image
               </v-btn>
-              <v-btn small class="text-transform-none gtext-t5" value="map"> Map </v-btn>
+              <v-btn small class="text-transform-none gtext-t5" value="map">
+                Map
+              </v-btn>
               <v-btn small class="text-transform-none gtext-t5" value="tour">
                 Tour
               </v-btn>
             </v-btn-toggle>
           </v-col>
+          <v-col cols="3" class="text-right d-block d-md-none">
+            <div class="rate-section gtext-t4 font-weight-semibold ml-4">
+              3.1
+              <v-icon size="20" color="primary"> mdi-star </v-icon>
+            </div>
+          </v-col>
         </v-row>
 
         <!-- General data section -->
         <v-row>
-          <v-col cols="9" md="8">
+          <v-col cols="11" md="8">
             <h1 class="gtext-h4 gtext-sm-h4 gtext-lg-h4">
               North Carolina School of Science and Mathematics
             </h1>
           </v-col>
-          <v-col cols="3" md="4">
+          <v-col cols="1" md="4">
             <div class="float-right d-flex mt-1">
-              <v-icon size="20" class="d-none d-md-block primary-gray-300"
-                >mdi-heart</v-icon
+              <v-icon size="20" class="primary-gray-300">mdi-heart</v-icon>
+              <div
+                class="d-none d-md-block rate-section gtext-t4 font-weight-semibold ml-4"
               >
-              <div class="rate-section gtext-t4 font-weight-semibold ml-4">
                 3.1
                 <v-icon size="20" color="primary"> mdi-star </v-icon>
               </div>
@@ -132,8 +153,12 @@
             </div>
 
             <div class="d-flex mt-11 mb-9">
-              <div class="gtext-h5 primary-gray-600">Tuition fee</div>
+              <div class="gtext-h5 gtext-md-h5 primary-gray-600">
+                Tuition fee
+              </div>
               <v-spacer />
+              <!-- <div class="gtext-t4 primary-blue-500">You enter</div> -->
+
               <div class="gtext-t2 font-weight-heavy primary-gray-800">
                 <span class="gtext-t6">$</span>
                 {{ "1200" | numberFormat }}
@@ -143,13 +168,28 @@
               <div class="gtext-h5 primary-gray-600">
                 <div class="mb-4">Facilities</div>
                 <div>
-                  <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
+                  <v-btn
+                    class="bg-primary-gray-800 white--text"
+                    height="56"
+                    width="56"
+                    @click="facilitiesDialog=true"
+                  >
                     <v-icon size="24"> mdi-bus </v-icon>
                   </v-btn>
-                  <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
+                  <v-btn
+                    class="bg-primary-gray-800 white--text"
+                    height="56"
+                    width="56"
+                    @click="facilitiesDialog=true"
+                  >
                     <v-icon size="24"> mdi-food </v-icon>
                   </v-btn>
-                  <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
+                  <v-btn
+                    class="bg-primary-gray-800 white--text"
+                    height="56"
+                    width="56"
+                    @click="facilitiesDialog=true"
+                  >
                     <v-icon size="24"> mdi-basketball </v-icon>
                   </v-btn>
                   <v-btn
@@ -157,13 +197,16 @@
                     disabled
                     height="56"
                     width="56"
+                    @click="facilitiesDialog=true"
                   >
                     <v-icon size="24"> mdi-wifi-arrow-down </v-icon>
                   </v-btn>
                 </div>
               </div>
               <v-spacer />
-              <div class="gtext-t4 primary-blue-500 align-self-center">You enter</div>
+              <div class="gtext-t4 primary-blue-500 align-self-center">
+                You enter
+              </div>
             </div>
           </v-col>
           <v-col cols="12" md="4" id="main-info-section">
@@ -252,6 +295,7 @@
                 class="bg-primary-gray-800 white--text text-transform-none gtext-t4 font-weight-medium"
                 rounded
                 x-large
+                @click="leaveCommentDialog = true"
                 >Leave comment</v-btn
               >
             </div>
@@ -260,7 +304,9 @@
             <ul id="score-results">
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Classes quality</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Classes quality
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -273,7 +319,9 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Education</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Education
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -286,7 +334,9 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">IT training</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  IT training
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -295,11 +345,15 @@
                   class="mt-3"
                 ></v-progress-linear>
 
-                <div class="gtext-t4 font-weight-medium rate-title">Average</div>
+                <div class="gtext-t4 font-weight-medium rate-title">
+                  Average
+                </div>
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Safe and happy</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Safe and happy
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -308,11 +362,15 @@
                   class="mt-3"
                 ></v-progress-linear>
 
-                <div class="gtext-t4 font-weight-medium rate-title">Average</div>
+                <div class="gtext-t4 font-weight-medium rate-title">
+                  Average
+                </div>
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Behavior</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Behavior
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -325,7 +383,9 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Tuition ratio</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Tuition ratio
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -338,7 +398,9 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Facilities</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Facilities
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -375,15 +437,23 @@
             <h3 class="gtext-h5 primary-gray-600">Recent comments</h3>
           </v-col>
           <v-col cols="12" md="9">
-            <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
+            <v-card
+              class="comment-card primary-gray-100 pt-4 mb-3"
+              elevation="1"
+            >
               <v-card-text>
                 <div class="comment-card-header">
                   <div class="d-flex float-left">
                     <v-avatar size="60">
-                      <img class="profile-avatar" src="/images/profile-pic-ex1.png" />
+                      <img
+                        class="profile-avatar"
+                        src="/images/profile-pic-ex1.png"
+                      />
                     </v-avatar>
                     <div class="ml-2">
-                      <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
+                      <div class="gtext-t3 primary-gray-500">
+                        Teacher, Blackven
+                      </div>
                       <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
                     </div>
                   </div>
@@ -400,15 +470,23 @@
                 </div>
                 <v-divider class="mb-5" />
                 <div class="gtext-t2 primary-gray-700 mb-6">
-                  “The vows and named is his origin myself any is making. Might times was
-                  again. he have own produce.”
+                  “The vows and named is his origin myself any is making. Might
+                  times was again. he have own produce.”
                 </div>
                 <div class="pb-8">
                   <div class="float-left">
-                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                    <v-btn
+                      class="bg-primary-gray-700 white--text mr-6"
+                      fab
+                      x-small
+                    >
                       <v-icon size="14"> mdi-thumb-down </v-icon>
                     </v-btn>
-                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                    <v-btn
+                      class="bg-primary-gray-700 white--text mr-6"
+                      fab
+                      x-small
+                    >
                       <v-icon size="14"> mdi-thumb-up </v-icon>
                     </v-btn>
                     <v-btn class="bg-primary-blue-500 white--text" fab x-small>
@@ -419,15 +497,23 @@
                 </div>
               </v-card-text>
             </v-card>
-            <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
+            <v-card
+              class="comment-card primary-gray-100 pt-4 mb-3"
+              elevation="1"
+            >
               <v-card-text>
                 <div class="comment-card-header">
                   <div class="d-flex float-left">
                     <v-avatar size="60">
-                      <img class="profile-avatar" src="/images/profile-pic-ex2.jpeg" />
+                      <img
+                        class="profile-avatar"
+                        src="/images/profile-pic-ex2.jpeg"
+                      />
                     </v-avatar>
                     <div class="ml-2">
-                      <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
+                      <div class="gtext-t3 primary-gray-500">
+                        Teacher, Blackven
+                      </div>
                       <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
                     </div>
                   </div>
@@ -444,15 +530,23 @@
                 </div>
                 <v-divider class="mb-5" />
                 <div class="gtext-t2 primary-gray-700 mb-6">
-                  “The vows and named is his origin myself any is making. Might times was
-                  again. he have own produce.”
+                  “The vows and named is his origin myself any is making. Might
+                  times was again. he have own produce.”
                 </div>
                 <div class="pb-8">
                   <div class="float-left">
-                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                    <v-btn
+                      class="bg-primary-gray-700 white--text mr-6"
+                      fab
+                      x-small
+                    >
                       <v-icon size="14"> mdi-thumb-down </v-icon>
                     </v-btn>
-                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                    <v-btn
+                      class="bg-primary-gray-700 white--text mr-6"
+                      fab
+                      x-small
+                    >
                       <v-icon size="14"> mdi-thumb-up </v-icon>
                     </v-btn>
                     <v-btn class="bg-primary-blue-500 white--text" fab x-small>
@@ -515,7 +609,10 @@
               
              </v-chip> -->
 
-                          <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                          <v-chip
+                            class="list-chip gtext-t5 font-weight-medium"
+                            small
+                          >
                             Pre-K
                           </v-chip>
 
@@ -528,7 +625,9 @@
              </v-chip> -->
                         </div>
                         <div class="item-img float-right">
-                          <img :src="require('assets/images/default-school.png')" />
+                          <img
+                            :src="require('assets/images/default-school.png')"
+                          />
                         </div>
                       </div>
                       <v-divider class="mb-3" />
@@ -553,7 +652,9 @@
                         </div>
 
                         <div class="float-right d-flex mt-1">
-                          <div class="rate-section gtext-t6 font-weight-semibold mr-1">
+                          <div
+                            class="rate-section gtext-t6 font-weight-semibold mr-1"
+                          >
                             <!-- {{ item.score }} -->
                             4
                             <v-icon color="primary"> mdi-star </v-icon>
@@ -585,7 +686,10 @@
               
              </v-chip> -->
 
-                          <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                          <v-chip
+                            class="list-chip gtext-t5 font-weight-medium"
+                            small
+                          >
                             Pre-K
                           </v-chip>
 
@@ -598,7 +702,9 @@
              </v-chip> -->
                         </div>
                         <div class="item-img float-right">
-                          <img :src="require('assets/images/default-school.png')" />
+                          <img
+                            :src="require('assets/images/default-school.png')"
+                          />
                         </div>
                       </div>
                       <v-divider class="mb-3" />
@@ -623,7 +729,9 @@
                         </div>
 
                         <div class="float-right d-flex mt-1">
-                          <div class="rate-section gtext-t6 font-weight-semibold mr-1">
+                          <div
+                            class="rate-section gtext-t6 font-weight-semibold mr-1"
+                          >
                             <!-- {{ item.score }} -->
                             4
                             <v-icon color="primary"> mdi-star </v-icon>
@@ -648,6 +756,365 @@
       </v-col>
     </v-row>
     <!-- End data container -->
+
+    <!-- Leave comment dialog -->
+    <v-dialog
+      transition="dialog-bottom-transition"
+      v-model="leaveCommentDialog"
+      :fullscreen="$vuetify.breakpoint.xs"
+      max-width="924"
+      style="z-index: 20001"
+    >
+      <v-card>
+        <v-card-text class="py-6 py-md-8 px-6 px-md-12">
+          <div class="d-flex">
+            <div class="gtext-h5 priamry-gray-700">Leave a comment</div>
+            <v-spacer></v-spacer>
+            <v-btn icon
+              ><v-icon size="20" @click="leaveCommentDialog = false"
+                >mdi-close</v-icon
+              ></v-btn
+            >
+          </div>
+          <v-divider class="mb-12 mt-4" />
+          <v-row>
+            <v-col cols="12" md="6">
+              <ul id="score-form">
+                <li class="d-flex mb-4">
+                  <div class="bullet"></div>
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
+                    Classes quality
+                  </div>
+                  <v-rating
+                    v-model="commentForm.classes_quality"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    half-increments
+                    hover
+                    size="24"
+                  ></v-rating>
+                </li>
+                <li class="d-flex mb-4">
+                  <div class="bullet"></div>
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
+                    Education
+                  </div>
+                  <v-rating
+                    v-model="commentForm.education"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    half-increments
+                    hover
+                    size="24"
+                  ></v-rating>
+                </li>
+                <li class="d-flex mb-4">
+                  <div class="bullet"></div>
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
+                    IT training
+                  </div>
+                  <v-rating
+                    v-model="commentForm.it_training"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    half-increments
+                    hover
+                    size="24"
+                  ></v-rating>
+                </li>
+                <li class="d-flex mb-4">
+                  <div class="bullet"></div>
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
+                    Safe and happy
+                  </div>
+                  <v-rating
+                    v-model="commentForm.safe_and_happy"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    half-increments
+                    hover
+                    size="24"
+                  ></v-rating>
+                </li>
+                <li class="d-flex mb-4">
+                  <div class="bullet"></div>
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
+                    Behavior
+                  </div>
+                  <v-rating
+                    v-model="commentForm.behavior"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    half-increments
+                    hover
+                    size="24"
+                  ></v-rating>
+                </li>
+                <li class="d-flex mb-4">
+                  <div class="bullet"></div>
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
+                    Tuition ratio
+                  </div>
+                  <v-rating
+                    v-model="commentForm.tuition_ratio"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    half-increments
+                    hover
+                    size="24"
+                  ></v-rating>
+                </li>
+                <li class="d-flex mb-4">
+                  <div class="bullet"></div>
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
+                    Facilities
+                  </div>
+                  <v-rating
+                    v-model="commentForm.facilities"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    half-increments
+                    hover
+                    size="24"
+                  ></v-rating>
+                </li>
+                <li class="d-flex">
+                  <div class="bullet"></div>
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
+                    Artistic activities
+                  </div>
+                  <v-rating
+                    v-model="commentForm.artistic_activities"
+                    background-color="orange lighten-3"
+                    color="orange"
+                    half-increments
+                    hover
+                    size="24"
+                  ></v-rating>
+                </li>
+              </ul>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-textarea
+                placeholder="Type your comment"
+                v-model="commentForm.comment"
+                outlined
+                :rows="$vuetify.breakpoint.xs ? 10 : 22"
+              >
+              </v-textarea>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions class="justify-center pb-13">
+          <v-btn
+            class="primary black--text text-transform-none gtext-t4 font-weight-medium"
+            rounded
+            width="100%"
+            max-width="400"
+            x-large
+            >Submit</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- End leave comment dialog -->
+
+    <!-- Gallery dialog -->
+    <v-dialog
+      transition="dialog-bottom-transition"
+      v-model="galleryDialog"
+      :fullscreen="$vuetify.breakpoint.xs"
+      max-width="720"
+      style="z-index: 20001"
+    >
+      <v-card>
+        <v-card-text class="py-6 py-md-8 px-6 px-md-8">
+          <div class="d-flex">
+            <div class="gtext-h5 priamry-gray-700">School images</div>
+            <v-spacer></v-spacer>
+            <v-btn icon
+              ><v-icon size="20" @click="galleryDialog = false"
+                >mdi-close</v-icon
+              ></v-btn
+            >
+          </div>
+          <v-divider class="mb-12 mt-4" />
+          <v-row>
+            <v-col cols="12" md="7">
+              <img
+                class="schoolDetailsImg"
+                src="/images/school-default.png"
+                alt="School image"
+              />
+              <div class="text-center gtext-t5 font-weight-heavy mt-6">
+                3/<span class="gray--text">12</span>
+              </div>
+            </v-col>
+            <v-col cols="12" md="5">
+              <v-row>
+                <v-col cols="4" class="pl-0">
+                  <img
+                    class="schoolThumbImg"
+                    src="/images/school-default.png"
+                    alt="School image"
+                  />
+                </v-col>
+                <v-col cols="4" class="pl-0">
+                  <img
+                    class="schoolThumbImg"
+                    src="/images/school-default.png"
+                    alt="School image"
+                  />
+                </v-col>
+                <v-col cols="4" class="pl-0">
+                  <img
+                    class="schoolThumbImg"
+                    src="/images/school-default.png"
+                    alt="School image"
+                  />
+                </v-col>
+                <v-col cols="4" class="pl-0">
+                  <img
+                    class="schoolThumbImg"
+                    src="/images/school-default.png"
+                    alt="School image"
+                  />
+                </v-col>
+                <v-col
+                  cols="4"
+                  align="center"
+                  justify="center"
+                  class="fill-height"
+                >
+                  <v-btn color="primary" fab depressed>
+                    <v-icon size="48"> mdi-plus </v-icon>
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions class="justify-center pb-13">
+          <v-btn
+            class="primary black--text text-transform-none gtext-t4 font-weight-medium"
+            rounded
+            width="100%"
+            max-width="400"
+            x-large
+            >Save</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- End gallery dialog -->
+
+    <!-- Select facilites dialog -->
+    <v-dialog
+      transition="dialog-bottom-transition"
+      v-model="facilitiesDialog"
+      :fullscreen="$vuetify.breakpoint.xs"
+      max-width="720"
+      style="z-index: 20001"
+    >
+      <v-card>
+        <v-card-text class="py-6 py-md-8 px-6 px-md-8">
+          <div class="d-flex">
+            <div class="gtext-h5 priamry-gray-700">Facilities</div>
+            <v-spacer></v-spacer>
+            <v-btn icon
+              ><v-icon size="20" @click="facilitiesDialog = false"
+                >mdi-close</v-icon
+              ></v-btn
+            >
+          </div>
+          <v-divider class="mb-12 mt-4" />
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-btn
+                class="bg-primary-gray-800 white--text"
+                height="56"
+                width="56"
+              >
+                <v-icon size="24"> mdi-bus </v-icon>
+              </v-btn>
+              <span class="gtext-t4 ml-4 font-weight-medium">School bus</span>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-btn
+                class="bg-primary-gray-800 white--text"
+                height="56"
+                width="56"
+              >
+                <v-icon size="24"> mdi-food </v-icon>
+              </v-btn>
+              <span class="gtext-t4 ml-4 font-weight-medium">Restaurant</span>
+
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-btn
+                class="bg-primary-gray-800 white--text"
+                height="56"
+                width="56"
+              >
+                <v-icon size="24"> mdi-coffee </v-icon>
+              </v-btn>
+              <span class="gtext-t4 ml-4 font-weight-medium">Coffee Shop</span>
+
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-btn
+                class="bg-primary-gray-800 white--text"
+                height="56"
+                width="56"
+              >
+                <v-icon size="24"> mdi-basketball </v-icon>
+              </v-btn>
+              <span class="gtext-t4 ml-4 font-weight-medium">Gym</span>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-btn
+                class="bg-primary-gray-800 white--text"
+                disabled
+                height="56"
+                width="56"
+              >
+                <v-icon size="24"> mdi-wifi-arrow-down </v-icon>
+              </v-btn>
+              <span class="gtext-t4 ml-4 font-weight-medium">Wifi</span>
+            </v-col>
+            <v-col cols="12" md="6"> </v-col>
+            <v-col cols="12" md="6"> </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions class="justify-center pb-13">
+          <v-btn
+            class="primary black--text text-transform-none gtext-t4 font-weight-medium"
+            rounded
+            width="100%"
+            max-width="400"
+            x-large
+            >Save</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- End select facilites dialog -->
   </v-container>
 </template>
 
@@ -673,6 +1140,13 @@ export default {
         image: "center-image",
         map: "under-image-left",
         tour: "under-image-right",
+      },
+      leaveCommentDialog: false,
+      galleryDialog: false,
+      facilitiesDialog: false,
+
+      commentForm: {
+        classes_quality: 0,
       },
     };
   },
@@ -774,11 +1248,18 @@ export default {
   z-index: 1;
 }
 
-#schoolDetailsImg {
+.schoolDetailsImg {
   height: 28.1rem;
   max-height: 28.1rem;
   width: 100%;
   border-radius: 0.6rem;
+}
+
+.schoolThumbImg {
+  width: 100%;
+  height: 6.4247rem;
+  max-height: 6.4247rem;
+  border-radius: 0.4rem;
 }
 
 #schoolDetailsVr {
@@ -853,6 +1334,23 @@ export default {
     height: 0.8rem;
     border-radius: 0.4rem;
     background: #12b76a;
+    margin-top: 1.2rem;
+    margin-right: 0.8rem;
+  }
+}
+
+#score-form {
+  padding: 0;
+  .score-title {
+    width: 15rem;
+    margin-right: 1rem;
+  }
+
+  .bullet {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 0.4rem;
+    background: #ffb600;
     margin-top: 1.2rem;
     margin-right: 0.8rem;
   }

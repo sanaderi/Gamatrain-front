@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-footer>
-      <v-container id="footer">
+      <v-container id="footer" class="px-0">
         <v-row>
           <v-col cols="12" sm="6" md="6" class="text-center text-sm-left">
             <nuxt-link to="/">

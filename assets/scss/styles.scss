@@ -55,7 +55,7 @@ html {
 
 //Background color
 .bg-white {
-  background: #fff!important;
+  background: #fff !important;
 }
 
 .bg-primary-gray-100 {
@@ -220,8 +220,9 @@ html {
 
 
 .gtext-h4 {
-  font-family: Inter, sans-serif !important;;
-  font-size: 2.4rem!important;
+  font-family: Inter, sans-serif !important;
+  ;
+  font-size: 2.4rem !important;
   font-style: normal;
   font-weight: 400;
   line-height: 4rem !important;
@@ -230,8 +231,8 @@ html {
 
 .gtext-h5 {
   font-family: Inter, sans-serif !important;
-  font-size: 2.5rem !important;
-  line-height: 4.2rem !important;
+  font-size: 2rem !important;
+  line-height: 3.2rem !important;
   font-weight: 400;
 }
 
@@ -2688,17 +2689,26 @@ body {
   //End button style
 }
 
-@media (min-width:600px){
+@media (min-width:600px) {
 
   //sm typegraphy
   .gtext-sm-h4 {
-    font-family: Inter, sans-serif !important;;
-    font-size: 2.6rem!important;
+    font-family: Inter, sans-serif !important;
+    font-size: 2.6rem !important;
     font-style: normal;
     font-weight: 400;
     line-height: 4rem !important;
     letter-spacing: 0.025rem;
   }
+
+  .gtext-sm-h5 {
+    font-family: Inter, sans-serif !important;
+    font-size: 2.3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 3.2rem!important;
+  }
+
   //End sm typography
 }
 
@@ -2994,12 +3004,20 @@ body {
 
   //lg typegraphy
   .gtext-lg-h4 {
-    font-family: Inter, sans-serif !important;;
-    font-size: 3rem!important;
+    font-family: Inter, sans-serif !important;
+    font-size: 3rem !important;
     font-style: normal;
     font-weight: 400;
     line-height: 4rem !important;
     letter-spacing: 0.025rem;
+  }
+
+  .gtext-lg-h5 {
+    font-family: Inter, sans-serif !important;
+    font-size: 2.5rem!important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 3.2rem!important;
   }
 
   //End lg typography

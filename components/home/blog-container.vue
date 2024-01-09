@@ -1,9 +1,9 @@
 <template>
   <v-container id="blog-list-container">
     <v-card flat>
-      <v-card-text class="px-0 px-sm-6 main-card">
+      <div class="main-card">
         <v-row>
-          <v-col cols="6">
+          <v-col cols="6" class="px-md-0">
             <h2 class="gama-text-h4" id="main-title ">Blog</h2>
           </v-col>
           <v-col cols="6" class="text-right">
@@ -15,7 +15,7 @@
               <v-icon>mdi-chevron-right</v-icon>
             </v-btn>
           </v-col>
-          <v-col cols="12">
+          <v-col cols="12" class="px-md-0">
             <v-slide-group
               v-model="model"
               class="slider py-sm-4"
@@ -62,7 +62,7 @@
             </v-slide-group>
           </v-col>
         </v-row>
-      </v-card-text>
+      </div>
     </v-card>
   </v-container>
 </template>
