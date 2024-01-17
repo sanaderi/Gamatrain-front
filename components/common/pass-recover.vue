@@ -2,6 +2,7 @@
   <v-dialog
     v-model="pass_recover_dialog"
     max-width="300px"
+    style="z-index: 20001"
   >
     <v-card>
       <v-card-title>

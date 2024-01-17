@@ -1,5 +1,6 @@
 <template>
   <v-container id="school-details">
+    
     <v-row class="d-flex d-md-none">
       <div class="top-slide-container">
         <img
@@ -16,6 +17,7 @@
             :min-zoom="map.minZoom"
             :center="map.center"
             :class="topSlideClass.map"
+            @click="selectLocationDialog = true"
             id="schoolDetailsMap"
           >
             <l-tile-layer :url="map.url"></l-tile-layer>
@@ -52,6 +54,7 @@
             :min-zoom="map.minZoom"
             :center="map.center"
             id="schoolDetailsMap"
+            @click="selectLocationDialog = true"
           >
             <l-tile-layer :url="map.url"></l-tile-layer>
             <l-marker
@@ -94,9 +97,7 @@
               <v-btn small class="text-transform-none gtext-t5" value="image">
                 Image
               </v-btn>
-              <v-btn small class="text-transform-none gtext-t5" value="map">
-                Map
-              </v-btn>
+              <v-btn small class="text-transform-none gtext-t5" value="map"> Map </v-btn>
               <v-btn small class="text-transform-none gtext-t5" value="tour">
                 Tour
               </v-btn>
@@ -104,7 +105,7 @@
           </v-col>
           <v-col cols="3" class="text-right d-block d-md-none">
             <div class="rate-section gtext-t4 font-weight-semibold ml-4">
-              3.1
+              {{ contentData.score }}
               <v-icon size="20" color="primary"> mdi-star </v-icon>
             </div>
           </v-col>
@@ -114,7 +115,7 @@
         <v-row>
           <v-col cols="11" md="8">
             <h1 class="gtext-h4 gtext-sm-h4 gtext-lg-h4">
-              North Carolina School of Science and Mathematics
+              {{ contentData.name }}
             </h1>
           </v-col>
           <v-col cols="1" md="4">
@@ -123,7 +124,7 @@
               <div
                 class="d-none d-md-block rate-section gtext-t4 font-weight-semibold ml-4"
               >
-                3.1
+                {{ contentData.score }}
                 <v-icon size="20" color="primary"> mdi-star </v-icon>
               </div>
             </div>
@@ -153,58 +154,57 @@
             </div>
 
             <div class="d-flex mt-11 mb-9">
-              <div class="gtext-h5 gtext-md-h5 primary-gray-600">
-                Tuition fee
-              </div>
+              <div class="gtext-h5 gtext-md-h5 primary-gray-600">Tuition fee</div>
               <v-spacer />
               <!-- <div class="gtext-t4 primary-blue-500">You enter</div> -->
 
               <div class="gtext-t2 font-weight-heavy primary-gray-800">
                 <span class="gtext-t6">$</span>
-                {{ "1200" | numberFormat }}
+                {{ contentData.tuition_fee | numberFormat }}
               </div>
             </div>
             <div class="d-flex">
               <div class="gtext-h5 primary-gray-600">
                 <div class="mb-4">Facilities</div>
                 <div>
-                  <v-btn
-                    class="bg-primary-gray-800 white--text"
-                    height="56"
-                    width="56"
-                    @click="facilitiesDialog=true"
-                  >
+                  <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
                     <v-icon size="24"> mdi-bus </v-icon>
                   </v-btn>
-                  <v-btn
-                    class="bg-primary-gray-800 white--text"
-                    height="56"
-                    width="56"
-                    @click="facilitiesDialog=true"
-                  >
+                  <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
                     <v-icon size="24"> mdi-food </v-icon>
                   </v-btn>
                   <v-btn
                     class="bg-primary-gray-800 white--text"
+                    :disabled="contentData.sport_hall == '0'"
                     height="56"
                     width="56"
-                    @click="facilitiesDialog=true"
                   >
                     <v-icon size="24"> mdi-basketball </v-icon>
                   </v-btn>
                   <v-btn
                     class="bg-primary-gray-800 white--text"
-                    disabled
+                    :disabled="contentData.dorm == '0'"
                     height="56"
                     width="56"
-                    @click="facilitiesDialog=true"
                   >
-                    <v-icon size="24"> mdi-wifi-arrow-down </v-icon>
+                    <v-icon size="24"> mdi-bed </v-icon>
+                  </v-btn>
+
+                  <v-btn
+                    class="bg-primary-gray-800 white--text"
+                    :disabled="contentData.smart_class == '0'"
+                    height="56"
+                    width="56"
+                  >
+                    <v-icon size="24"> mdi-tablet-cellphone </v-icon>
                   </v-btn>
                 </div>
               </div>
               <v-spacer />
-              <div class="gtext-t4 primary-blue-500 align-self-center">
+              <div
+                @click="facilitiesDialog = true"
+                class="gtext-t4 primary-blue-500 align-self-center pointer"
+              >
                 You enter
               </div>
             </div>
@@ -215,11 +215,8 @@
                 <v-icon color="primary"> mdi-web </v-icon>
               </div>
               <div class="info-data">
-                <a
-                  :href="normalizeURL('www.schoolcitycenterstablesg.com')"
-                  target="_blenk"
-                >
-                  www.schoolcitycenterstablesg.com
+                <a :href="normalizeURL(contentData.site)" target="_blenk">
+                  {{ contentData.site }}
                 </a>
               </div>
             </div>
@@ -229,8 +226,8 @@
                 <v-icon color="primary"> mdi-email </v-icon>
               </div>
               <div class="info-data">
-                <a href="mailto:info@schoolcitycenterstablesg.com">
-                  info@schoolcitycenterstablesg.com
+                <a :href="`mailto:${contentData.email}`">
+                  {{ contentData.email }}
                 </a>
               </div>
             </div>
@@ -240,7 +237,7 @@
                 <v-icon color="primary"> mdi-phone </v-icon>
               </div>
               <div class="info-data">
-                <a href="tel:+98 123 000 45 67"> +98 123 000 45 67 </a>
+                <a :href="`tel: ${contentData.phone1}`"> {{ contentData.phone1 }} </a>
               </div>
             </div>
 
@@ -248,7 +245,17 @@
               <div class="info-sign">
                 <v-icon size="20" color="primary"> mdi-map-marker </v-icon>
               </div>
-              <div class="info-data">20 Mine ST,Center,...,NH 033</div>
+              <div class="info-data">
+                {{ contentData.address }}
+
+                <v-text-field placeholder="Enter address" class="d-none">
+                  <template slot="append-outer">
+                    <v-btn color="success" fab depressed x-small>
+                      <v-icon> mdi-check </v-icon>
+                    </v-btn>
+                  </template>
+                </v-text-field>
+              </div>
             </div>
           </v-col>
         </v-row>
@@ -304,9 +311,7 @@
             <ul id="score-results">
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">
-                  Classes quality
-                </div>
+                <div class="gtext-t4 font-weight-medium score-title">Classes quality</div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -319,9 +324,7 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">
-                  Education
-                </div>
+                <div class="gtext-t4 font-weight-medium score-title">Education</div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -334,9 +337,7 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">
-                  IT training
-                </div>
+                <div class="gtext-t4 font-weight-medium score-title">IT training</div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -345,15 +346,11 @@
                   class="mt-3"
                 ></v-progress-linear>
 
-                <div class="gtext-t4 font-weight-medium rate-title">
-                  Average
-                </div>
+                <div class="gtext-t4 font-weight-medium rate-title">Average</div>
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">
-                  Safe and happy
-                </div>
+                <div class="gtext-t4 font-weight-medium score-title">Safe and happy</div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -362,15 +359,11 @@
                   class="mt-3"
                 ></v-progress-linear>
 
-                <div class="gtext-t4 font-weight-medium rate-title">
-                  Average
-                </div>
+                <div class="gtext-t4 font-weight-medium rate-title">Average</div>
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">
-                  Behavior
-                </div>
+                <div class="gtext-t4 font-weight-medium score-title">Behavior</div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -383,9 +376,7 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">
-                  Tuition ratio
-                </div>
+                <div class="gtext-t4 font-weight-medium score-title">Tuition ratio</div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -398,9 +389,7 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">
-                  Facilities
-                </div>
+                <div class="gtext-t4 font-weight-medium score-title">Facilities</div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -437,23 +426,15 @@
             <h3 class="gtext-h5 primary-gray-600">Recent comments</h3>
           </v-col>
           <v-col cols="12" md="9">
-            <v-card
-              class="comment-card primary-gray-100 pt-4 mb-3"
-              elevation="1"
-            >
+            <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
               <v-card-text>
                 <div class="comment-card-header">
                   <div class="d-flex float-left">
                     <v-avatar size="60">
-                      <img
-                        class="profile-avatar"
-                        src="/images/profile-pic-ex1.png"
-                      />
+                      <img class="profile-avatar" src="/images/profile-pic-ex1.png" />
                     </v-avatar>
                     <div class="ml-2">
-                      <div class="gtext-t3 primary-gray-500">
-                        Teacher, Blackven
-                      </div>
+                      <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
                       <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
                     </div>
                   </div>
@@ -470,23 +451,15 @@
                 </div>
                 <v-divider class="mb-5" />
                 <div class="gtext-t2 primary-gray-700 mb-6">
-                  “The vows and named is his origin myself any is making. Might
-                  times was again. he have own produce.”
+                  “The vows and named is his origin myself any is making. Might times was
+                  again. he have own produce.”
                 </div>
                 <div class="pb-8">
                   <div class="float-left">
-                    <v-btn
-                      class="bg-primary-gray-700 white--text mr-6"
-                      fab
-                      x-small
-                    >
+                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
                       <v-icon size="14"> mdi-thumb-down </v-icon>
                     </v-btn>
-                    <v-btn
-                      class="bg-primary-gray-700 white--text mr-6"
-                      fab
-                      x-small
-                    >
+                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
                       <v-icon size="14"> mdi-thumb-up </v-icon>
                     </v-btn>
                     <v-btn class="bg-primary-blue-500 white--text" fab x-small>
@@ -497,23 +470,15 @@
                 </div>
               </v-card-text>
             </v-card>
-            <v-card
-              class="comment-card primary-gray-100 pt-4 mb-3"
-              elevation="1"
-            >
+            <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
               <v-card-text>
                 <div class="comment-card-header">
                   <div class="d-flex float-left">
                     <v-avatar size="60">
-                      <img
-                        class="profile-avatar"
-                        src="/images/profile-pic-ex2.jpeg"
-                      />
+                      <img class="profile-avatar" src="/images/profile-pic-ex2.jpeg" />
                     </v-avatar>
                     <div class="ml-2">
-                      <div class="gtext-t3 primary-gray-500">
-                        Teacher, Blackven
-                      </div>
+                      <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
                       <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
                     </div>
                   </div>
@@ -530,23 +495,15 @@
                 </div>
                 <v-divider class="mb-5" />
                 <div class="gtext-t2 primary-gray-700 mb-6">
-                  “The vows and named is his origin myself any is making. Might
-                  times was again. he have own produce.”
+                  “The vows and named is his origin myself any is making. Might times was
+                  again. he have own produce.”
                 </div>
                 <div class="pb-8">
                   <div class="float-left">
-                    <v-btn
-                      class="bg-primary-gray-700 white--text mr-6"
-                      fab
-                      x-small
-                    >
+                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
                       <v-icon size="14"> mdi-thumb-down </v-icon>
                     </v-btn>
-                    <v-btn
-                      class="bg-primary-gray-700 white--text mr-6"
-                      fab
-                      x-small
-                    >
+                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
                       <v-icon size="14"> mdi-thumb-up </v-icon>
                     </v-btn>
                     <v-btn class="bg-primary-blue-500 white--text" fab x-small>
@@ -609,10 +566,7 @@
               
              </v-chip> -->
 
-                          <v-chip
-                            class="list-chip gtext-t5 font-weight-medium"
-                            small
-                          >
+                          <v-chip class="list-chip gtext-t5 font-weight-medium" small>
                             Pre-K
                           </v-chip>
 
@@ -625,9 +579,7 @@
              </v-chip> -->
                         </div>
                         <div class="item-img float-right">
-                          <img
-                            :src="require('assets/images/default-school.png')"
-                          />
+                          <img :src="require('assets/images/default-school.png')" />
                         </div>
                       </div>
                       <v-divider class="mb-3" />
@@ -652,9 +604,7 @@
                         </div>
 
                         <div class="float-right d-flex mt-1">
-                          <div
-                            class="rate-section gtext-t6 font-weight-semibold mr-1"
-                          >
+                          <div class="rate-section gtext-t6 font-weight-semibold mr-1">
                             <!-- {{ item.score }} -->
                             4
                             <v-icon color="primary"> mdi-star </v-icon>
@@ -686,10 +636,7 @@
               
              </v-chip> -->
 
-                          <v-chip
-                            class="list-chip gtext-t5 font-weight-medium"
-                            small
-                          >
+                          <v-chip class="list-chip gtext-t5 font-weight-medium" small>
                             Pre-K
                           </v-chip>
 
@@ -702,9 +649,7 @@
              </v-chip> -->
                         </div>
                         <div class="item-img float-right">
-                          <img
-                            :src="require('assets/images/default-school.png')"
-                          />
+                          <img :src="require('assets/images/default-school.png')" />
                         </div>
                       </div>
                       <v-divider class="mb-3" />
@@ -729,9 +674,7 @@
                         </div>
 
                         <div class="float-right d-flex mt-1">
-                          <div
-                            class="rate-section gtext-t6 font-weight-semibold mr-1"
-                          >
+                          <div class="rate-section gtext-t6 font-weight-semibold mr-1">
                             <!-- {{ item.score }} -->
                             4
                             <v-icon color="primary"> mdi-star </v-icon>
@@ -782,9 +725,7 @@
               <ul id="score-form">
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div
-                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
-                  >
+                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
                     Classes quality
                   </div>
                   <v-rating
@@ -798,9 +739,7 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div
-                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
-                  >
+                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
                     Education
                   </div>
                   <v-rating
@@ -814,9 +753,7 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div
-                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
-                  >
+                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
                     IT training
                   </div>
                   <v-rating
@@ -830,9 +767,7 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div
-                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
-                  >
+                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
                     Safe and happy
                   </div>
                   <v-rating
@@ -846,9 +781,7 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div
-                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
-                  >
+                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
                     Behavior
                   </div>
                   <v-rating
@@ -862,9 +795,7 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div
-                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
-                  >
+                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
                     Tuition ratio
                   </div>
                   <v-rating
@@ -878,9 +809,7 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div
-                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
-                  >
+                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
                     Facilities
                   </div>
                   <v-rating
@@ -894,9 +823,7 @@
                 </li>
                 <li class="d-flex">
                   <div class="bullet"></div>
-                  <div
-                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
-                  >
+                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
                     Artistic activities
                   </div>
                   <v-rating
@@ -949,9 +876,7 @@
             <div class="gtext-h5 priamry-gray-700">School images</div>
             <v-spacer></v-spacer>
             <v-btn icon
-              ><v-icon size="20" @click="galleryDialog = false"
-                >mdi-close</v-icon
-              ></v-btn
+              ><v-icon size="20" @click="galleryDialog = false">mdi-close</v-icon></v-btn
             >
           </div>
           <v-divider class="mb-12 mt-4" />
@@ -996,12 +921,7 @@
                     alt="School image"
                   />
                 </v-col>
-                <v-col
-                  cols="4"
-                  align="center"
-                  justify="center"
-                  class="fill-height"
-                >
+                <v-col cols="4" align="center" justify="center" class="fill-height">
                   <v-btn color="primary" fab depressed>
                     <v-icon size="48"> mdi-plus </v-icon>
                   </v-btn>
@@ -1023,6 +943,66 @@
       </v-card>
     </v-dialog>
     <!-- End gallery dialog -->
+
+    <!-- Select Location dialog -->
+    <v-dialog
+      transition="dialog-bottom-transition"
+      v-model="selectLocationDialog"
+      :fullscreen="$vuetify.breakpoint.xs"
+      max-width="720"
+      style="z-index: 20001"
+    >
+      <v-card>
+        <v-card-text class="pt-6 pt-md-8 px-6 px-md-8">
+          <div class="d-flex">
+            <div class="gtext-h5 priamry-gray-700">Location</div>
+            <v-spacer></v-spacer>
+            <v-btn icon
+              ><v-icon size="20" @click="selectLocationDialog = false"
+                >mdi-close</v-icon
+              ></v-btn
+            >
+          </div>
+        </v-card-text>
+
+        <div id="locationPickerMapContainer">
+          <client-only>
+            <l-map
+              ref="editSchoolMap"
+              zoom="2"
+              :center="map.center"
+              @click="selectLocationDialog = true"
+              id="mapSection"
+              @move="updateMarkerPosition"
+            >
+              <l-tile-layer :url="map.url"></l-tile-layer>
+              <l-marker
+                ref="editMapMarker"
+                :lat-lng="map.center"
+                :icon="map.schoolIcon"
+              ></l-marker>
+            </l-map>
+          </client-only>
+          <locationSearch
+            id="searchSection"
+            @locationSelected="goToSearchLocation"
+            rounded
+            label="Search anything"
+          />
+        </div>
+        <v-card-actions class="justify-center pb-13">
+          <v-btn
+            class="primary black--text text-transform-none gtext-t4 font-weight-medium"
+            rounded
+            width="100%"
+            max-width="400"
+            x-large
+            >Save</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- End select location dialog -->
 
     <!-- Select facilites dialog -->
     <v-dialog
@@ -1046,59 +1026,56 @@
           <v-divider class="mb-12 mt-4" />
           <v-row>
             <v-col cols="12" md="6">
-              <v-btn
-                class="bg-primary-gray-800 white--text"
-                height="56"
-                width="56"
-              >
+              <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
                 <v-icon size="24"> mdi-bus </v-icon>
               </v-btn>
               <span class="gtext-t4 ml-4 font-weight-medium">School bus</span>
             </v-col>
             <v-col cols="12" md="6">
-              <v-btn
-                class="bg-primary-gray-800 white--text"
-                height="56"
-                width="56"
-              >
+              <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
                 <v-icon size="24"> mdi-food </v-icon>
               </v-btn>
               <span class="gtext-t4 ml-4 font-weight-medium">Restaurant</span>
-
             </v-col>
             <v-col cols="12" md="6">
-              <v-btn
-                class="bg-primary-gray-800 white--text"
-                height="56"
-                width="56"
-              >
+              <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
                 <v-icon size="24"> mdi-coffee </v-icon>
               </v-btn>
               <span class="gtext-t4 ml-4 font-weight-medium">Coffee Shop</span>
-
             </v-col>
             <v-col cols="12" md="6">
               <v-btn
                 class="bg-primary-gray-800 white--text"
+                :disabled="contentData.sport_hall == '0'"
                 height="56"
                 width="56"
               >
                 <v-icon size="24"> mdi-basketball </v-icon>
               </v-btn>
-              <span class="gtext-t4 ml-4 font-weight-medium">Gym</span>
+              <span class="gtext-t4 ml-4 font-weight-medium">Sport hall</span>
             </v-col>
             <v-col cols="12" md="6">
               <v-btn
                 class="bg-primary-gray-800 white--text"
-                disabled
+                :disabled="contentData.dorm == '0'"
                 height="56"
                 width="56"
               >
-                <v-icon size="24"> mdi-wifi-arrow-down </v-icon>
+                <v-icon size="24"> mdi-bed </v-icon>
               </v-btn>
-              <span class="gtext-t4 ml-4 font-weight-medium">Wifi</span>
+              <span class="gtext-t4 ml-4 font-weight-medium">Dorm</span>
             </v-col>
-            <v-col cols="12" md="6"> </v-col>
+            <v-col cols="12" md="6">
+              <v-btn
+                class="bg-primary-gray-800 white--text"
+                :disabled="contentData.smart_class == '0'"
+                height="56"
+                width="56"
+              >
+                <v-icon size="24"> mdi-tablet-cellphone </v-icon>
+              </v-btn>
+              <span class="gtext-t4 ml-4 font-weight-medium">Smart class</span>
+            </v-col>
             <v-col cols="12" md="6"> </v-col>
           </v-row>
         </v-card-text>
@@ -1119,6 +1096,8 @@
 </template>
 
 <script>
+import locationSearch from "@/components/Form/LocationSearch";
+
 export default {
   name: "school-details",
   auth: false,
@@ -1128,12 +1107,13 @@ export default {
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         zoom: 10,
         minZoom: 2,
-        center: [39.90063873634048, -83.44667778604482], // Initial map center coordinates
-        latLng: [39.90063873634048, -83.44667778604482],
+        center: [0, 0], // Initial map center coordinates
+        latLng: [0, 0],
         object: null,
         boundingBox: {},
         schoolIcon: null,
       },
+
       rating: 3.5,
       slideToggler: "map",
       topSlideClass: {
@@ -1148,7 +1128,22 @@ export default {
       commentForm: {
         classes_quality: 0,
       },
+      selectLocationDialog: false,
     };
+  },
+  components: {
+    locationSearch,
+  },
+  async asyncData({ params, $axios }) {
+    const content = await $axios.$get(`/api/v1/schools/${params.id}`);
+    var contentData = [];
+
+    //Check data exist
+    if (content.status === 1) {
+      contentData = content.data;
+    }
+
+    return { contentData };
   },
   mounted() {
     this.map.schoolIcon = L.icon({
@@ -1156,6 +1151,9 @@ export default {
       iconSize: [64, 64], // Adjust the size as needed
       iconAnchor: [16, 32], // Adjust the anchor point as needed
     });
+
+    this.map.center = [this.contentData.lat, this.contentData.lng];
+    this.map.latLng = [this.contentData.lat, this.contentData.lng];
   },
   methods: {
     normalizeURL(url) {
@@ -1192,6 +1190,57 @@ export default {
       //   targetElement.style.opacity = "1";
       // }
     },
+
+    updateMarkerPosition() {
+      // Get the map and marker references
+      const map = this.$refs.editSchoolMap.mapObject;
+      const marker = this.$refs.editMapMarker.mapObject;
+
+      // Get the new center coordinates
+      const newCenter = map.getCenter();
+
+      // Update the marker position to the new center
+      marker.setLatLng(newCenter);
+    },
+    goToSearchLocation(val) {
+      const map = this.$refs.editSchoolMap.mapObject;
+      map.setView([val[0], val[1]], 12);
+
+      setTimeout(() => {
+        window.dispatchEvent(new Event("resize"));
+      }, 100);
+    },
+
+    // async grabSchoolData() {
+    //   var data = [
+    //     "351566474",
+    //     "351905808",
+    //     "352507131",
+    //     "353889079",
+    //     "353889079",
+    //     "353889079",
+    //     "353889079",
+    //     "353889079",
+    //     "353889079",
+    //   ];
+    //   for (var i = 0; i <= 1000; i++) {
+    //     this.$axios
+    //       .get(`https://nominatim.openstreetmap.org/lookup?format=json&osm_ids=N352507131`)
+    //       .then((response) => {
+    //         console.log("done")
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+
+    //       await this.delay(1000); // 1000 milliseconds = 1 second
+
+    //   }
+    // },
+
+    // delay(ms) {
+    //   return new Promise(resolve => setTimeout(resolve, ms));
+    // },
   },
 };
 </script>
@@ -1404,6 +1453,27 @@ export default {
         }
       }
     }
+  }
+}
+
+#locationPickerMapContainer {
+  position: relative;
+  overflow-x: hidden;
+
+  #mapSection {
+    width: 100%;
+    height: 44rem;
+  }
+
+  #searchSection {
+    position: absolute;
+    top: 1.6rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 200002;
+    background: #fff;
+    max-width: 30rem;
   }
 }
 
