@@ -1,15 +1,21 @@
 <template>
   <v-container id="school-details">
-    
     <v-row class="d-flex d-md-none">
       <div class="top-slide-container">
         <img
-          id="schoolDetailsImg"
+          v-if="contentData.pic"
+          class="schoolDetailsImg"
           :class="topSlideClass.image"
           @click="galleryDialog = true"
           src="/images/school-default.png"
           alt="School image"
         />
+        <div v-else class="enter-img-holder pointer" :class="topSlideClass.image" @click="galleryDialog = true">
+          <div class="text-center">
+            <v-icon size="48" class="primary-gray-300 mb-10">mdi-panorama-outline</v-icon>
+            <p class="gtext-t4 primary-blue-500">You enter</p>
+          </div>
+        </div>
         <client-only>
           <l-map
             ref="schoolMap"
@@ -40,11 +46,18 @@
     <v-row class="d-none d-md-flex">
       <v-col cols="12" md="4">
         <img
+          v-if="contentData.pic"
           @click="galleryDialog = true"
           class="pointer schoolDetailsImg"
           src="/images/school-default.png"
           alt="School image"
         />
+        <div v-else class="enter-img-holder pointer" @click="galleryDialog = true">
+          <div class="text-center">
+            <v-icon size="48" class="primary-gray-300 mb-10">mdi-panorama-outline</v-icon>
+            <p class="gtext-t4 primary-blue-500">You enter</p>
+          </div>
+        </div>
       </v-col>
       <v-col cols="12" md="4">
         <client-only>
@@ -54,25 +67,33 @@
             :min-zoom="map.minZoom"
             :center="map.center"
             id="schoolDetailsMap"
-            @click="selectLocationDialog = true"
+            @click="openLocationDialog"
           >
             <l-tile-layer :url="map.url"></l-tile-layer>
-            <l-marker
-              @click="$router.push(`/school/1`)"
-              :lat-lng="map.latLng"
-              :icon="map.schoolIcon"
-            ></l-marker>
+            <l-marker :lat-lng="map.latLng" :icon="map.schoolIcon"></l-marker>
           </l-map>
         </client-only>
       </v-col>
       <v-col cols="12" md="4">
-        <div>
+        <div v-if="contentData.tour">
           <client-only>
             <a-scene embedded id="schoolDetailsVr">
               <a-sky src="/images/school-vr.png"></a-sky>
             </a-scene>
           </client-only>
         </div>
+        <div v-else class="enter-img-holder pointer" @click="openTourImgInput">
+          <div class="text-center">
+            <v-icon size="48" class="primary-gray-300 mb-10">mdi-rotate-360</v-icon>
+            <p class="gtext-t4 primary-blue-500">You enter</p>
+          </div>
+        </div>
+        <v-file-input
+          class="d-none"
+          v-model="tourImg"
+          ref="tourImgRef"
+          hide-details
+        ></v-file-input>
       </v-col>
     </v-row>
 
@@ -83,7 +104,7 @@
           <v-col cols="3" class="text-left d-block d-md-none">
             <div class="text-center">
               <div class="gtext-t6 primary-gray-400">Update:</div>
-              <div class="gtext-t6 primary-gray-500">2023/11/23</div>
+              <div class="gtext-t6 primary-gray-500">{{ $moment(contentData.up_date).format("YYYY/MM/DD") }}</div>
             </div>
           </v-col>
           <v-col cols="6" class="text-center d-block d-md-none">
@@ -135,17 +156,53 @@
           <v-col cols="12" md="8">
             <div class="d-flex">
               <div>
-                <v-chip class="list-chip gtext-t5 font-weight-medium" small>
-                  Pre-K
+                <v-chip
+                  :to="`/school?school_type=${contentData.school_type}`"
+                  v-if="contentData.school_type_title"
+                  class="list-chip gtext-t5 font-weight-medium"
+                  small
+                >
+                  {{ contentData.school_type_title }}
                 </v-chip>
-                <v-chip class="list-chip gtext-t5 font-weight-medium" small>
-                  Private
+                <v-chip
+                  :to="`/school?section=${contentData.section}`"
+                  v-if="contentData.section_title"
+                  class="list-chip gtext-t5 font-weight-medium"
+                  small
+                >
+                  {{ contentData.section_title }}
                 </v-chip>
-                <v-chip class="list-chip gtext-t5 font-weight-medium" small>
-                  Online
+                <v-chip
+                  :to="`/school?coed_status=${contentData.sex}`"
+                  v-if="contentData.sex_title"
+                  class="list-chip gtext-t5 font-weight-medium"
+                  small
+                >
+                  {{ contentData.sex_title }}
                 </v-chip>
-                <v-chip class="list-chip gtext-t5 font-weight-medium" small>
-                  Islamic
+                <v-chip
+                  :to="`/school?country=${contentData.country}`"
+                  v-if="contentData.country_title"
+                  class="list-chip gtext-t5 font-weight-medium"
+                  small
+                >
+                  {{ contentData.country_title }}
+                </v-chip>
+                <v-chip
+                  :to="`/school?country=${contentData.country}&state=${contentData.state_}`"
+                  v-if="contentData.state_title"
+                  class="list-chip gtext-t5 font-weight-medium"
+                  small
+                >
+                  {{ contentData.state_title }}
+                </v-chip>
+                <v-chip
+                  :to="`/school?country=${contentData.country}&state=${contentData.state_}&city=${contentData.city_}`"
+                  v-if="contentData.city_title"
+                  class="list-chip gtext-t5 font-weight-medium"
+                  small
+                >
+                  {{ contentData.city_title }}
                 </v-chip>
               </div>
               <v-spacer />
@@ -167,12 +224,6 @@
               <div class="gtext-h5 primary-gray-600">
                 <div class="mb-4">Facilities</div>
                 <div>
-                  <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
-                    <v-icon size="24"> mdi-bus </v-icon>
-                  </v-btn>
-                  <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
-                    <v-icon size="24"> mdi-food </v-icon>
-                  </v-btn>
                   <v-btn
                     class="bg-primary-gray-800 white--text"
                     :disabled="contentData.sport_hall == '0'"
@@ -612,8 +663,7 @@
                           <div class="gtext-t6 primary-gray-300">
                             Update:
                             <span class="primary-gray-600">
-                              2023/11/23
-                              <!-- {{$moment(item.up_date).format("YYYY-MM-DD")}} -->
+                              {{ $moment(contentData.up_date).format("YYYY/MM/DD") }}
                             </span>
                           </div>
                         </div>
@@ -682,8 +732,7 @@
                           <div class="gtext-t6 primary-gray-300">
                             Update:
                             <span class="primary-gray-600">
-                              2023/11/23
-                              <!-- {{$moment(item.up_date).format("YYYY-MM-DD")}} -->
+                              {{ $moment(contentData.up_date).format("YYYY/MM/DD") }}
                             </span>
                           </div>
                         </div>
@@ -883,38 +932,26 @@
           <v-row>
             <v-col cols="12" md="7">
               <img
+                v-if="contentData.pic"
                 class="schoolDetailsImg"
                 src="/images/school-default.png"
                 alt="School image"
               />
+              <div v-else class="enter-img-holder pointer" @click="galleryDialog = true">
+                <div class="text-center">
+                  <v-icon size="48" class="primary-gray-300 mb-10"
+                    >mdi-panorama-outline</v-icon
+                  >
+                  <p class="gtext-t4 primary-blue-500">No image</p>
+                </div>
+              </div>
               <div class="text-center gtext-t5 font-weight-heavy mt-6">
-                3/<span class="gray--text">12</span>
+                0/<span class="gray--text">0</span>
               </div>
             </v-col>
             <v-col cols="12" md="5">
               <v-row>
-                <v-col cols="4" class="pl-0">
-                  <img
-                    class="schoolThumbImg"
-                    src="/images/school-default.png"
-                    alt="School image"
-                  />
-                </v-col>
-                <v-col cols="4" class="pl-0">
-                  <img
-                    class="schoolThumbImg"
-                    src="/images/school-default.png"
-                    alt="School image"
-                  />
-                </v-col>
-                <v-col cols="4" class="pl-0">
-                  <img
-                    class="schoolThumbImg"
-                    src="/images/school-default.png"
-                    alt="School image"
-                  />
-                </v-col>
-                <v-col cols="4" class="pl-0">
+                <v-col v-if="contentData.pic" cols="4" class="pl-0" v-for="item in 5">
                   <img
                     class="schoolThumbImg"
                     src="/images/school-default.png"
@@ -922,9 +959,15 @@
                   />
                 </v-col>
                 <v-col cols="4" align="center" justify="center" class="fill-height">
-                  <v-btn color="primary" fab depressed>
+                  <v-btn color="primary" fab depressed @click="openImgInput">
                     <v-icon size="48"> mdi-plus </v-icon>
                   </v-btn>
+                  <v-file-input
+                    class="d-none"
+                    v-model="imgInput"
+                    ref="imgInputRef"
+                    hide-details
+                  ></v-file-input>
                 </v-col>
               </v-row>
             </v-col>
@@ -969,9 +1012,8 @@
           <client-only>
             <l-map
               ref="editSchoolMap"
-              zoom="2"
+              :zoom="2"
               :center="map.center"
-              @click="selectLocationDialog = true"
               id="mapSection"
               @move="updateMarkerPosition"
             >
@@ -1025,24 +1067,6 @@
           </div>
           <v-divider class="mb-12 mt-4" />
           <v-row>
-            <v-col cols="12" md="6">
-              <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
-                <v-icon size="24"> mdi-bus </v-icon>
-              </v-btn>
-              <span class="gtext-t4 ml-4 font-weight-medium">School bus</span>
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
-                <v-icon size="24"> mdi-food </v-icon>
-              </v-btn>
-              <span class="gtext-t4 ml-4 font-weight-medium">Restaurant</span>
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-btn class="bg-primary-gray-800 white--text" height="56" width="56">
-                <v-icon size="24"> mdi-coffee </v-icon>
-              </v-btn>
-              <span class="gtext-t4 ml-4 font-weight-medium">Coffee Shop</span>
-            </v-col>
             <v-col cols="12" md="6">
               <v-btn
                 class="bg-primary-gray-800 white--text"
@@ -1129,6 +1153,8 @@ export default {
         classes_quality: 0,
       },
       selectLocationDialog: false,
+      imgInput:null,
+      tourImg:null
     };
   },
   components: {
@@ -1210,6 +1236,21 @@ export default {
         window.dispatchEvent(new Event("resize"));
       }, 100);
     },
+    openLocationDialog() {
+      this.selectLocationDialog = true;
+
+      setTimeout(() => {
+        const map = this.$refs.editSchoolMap.mapObject;
+        map.setView(this.map.center, 12);
+        window.dispatchEvent(new Event("resize"));
+      }, 500);
+    },
+    openTourImgInput() {
+      this.$refs.tourImgRef.$el.querySelector("input").click();
+    },
+    openImgInput() {
+      this.$refs.imgInputRef.$el.querySelector("input").click();
+    },
 
     // async grabSchoolData() {
     //   var data = [
@@ -1288,12 +1329,12 @@ export default {
 }
 
 .under-image-left {
-  left: -50%;
+  left: -45%;
   z-index: 1;
 }
 
 .under-image-right {
-  right: -50%;
+  right: -45%;
   z-index: 1;
 }
 
@@ -1302,6 +1343,16 @@ export default {
   max-height: 28.1rem;
   width: 100%;
   border-radius: 0.6rem;
+}
+
+.enter-img-holder {
+  background: #f2f4f7;
+  height: 28.1rem;
+  width:100%;
+  border-radius: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .schoolThumbImg {
