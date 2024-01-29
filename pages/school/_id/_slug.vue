@@ -10,10 +10,19 @@
           src="/images/school-default.png"
           alt="School image"
         />
-        <div v-else class="enter-img-holder pointer" :class="topSlideClass.image" @click="galleryDialog = true">
+        <div
+          v-else
+          class="enter-img-holder pointer"
+          :class="topSlideClass.image"
+          @click="galleryDialog = true"
+        >
           <div class="text-center">
-            <v-icon size="48" class="primary-gray-300 mb-10">mdi-panorama-outline</v-icon>
-            <p class="gtext-t4 primary-blue-500">You enter</p>
+            <v-icon
+              :size="$vuetify.breakpoint.mdAndUp ? 48 : 24"
+              class="primary-gray-300 mb-2 mb-md-10"
+              >mdi-panorama-outline</v-icon
+            >
+            <p class="gtext-t6 gtext-md-t4 primary-blue-500">You enter</p>
           </div>
         </div>
         <client-only>
@@ -35,11 +44,28 @@
           </l-map>
         </client-only>
 
-        <client-only>
-          <a-scene embedded id="schoolDetailsVr" :class="topSlideClass.tour">
-            <a-sky src="/images/school-vr.png"></a-sky>
-          </a-scene>
-        </client-only>
+        <div v-if="contentData.tour">
+          <client-only>
+            <a-scene embedded id="schoolDetailsVr" :class="topSlideClass.tour">
+              <a-sky src="/images/school-vr.png"></a-sky>
+            </a-scene>
+          </client-only>
+        </div>
+        <div
+          v-else
+          class="enter-img-holder pointer"
+          :class="topSlideClass.tour"
+          @click="openTourImgInput"
+        >
+          <div class="text-center">
+            <v-icon
+              :size="$vuetify.breakpoint.mdAndUp ? 48 : 24"
+              class="primary-gray-300 mb-2 mb-md-10"
+              >mdi-rotate-360</v-icon
+            >
+            <p class="gtext-t6 gtext-md-t4 primary-blue-500">You enter</p>
+          </div>
+        </div>
       </div>
     </v-row>
 
@@ -104,7 +130,9 @@
           <v-col cols="3" class="text-left d-block d-md-none">
             <div class="text-center">
               <div class="gtext-t6 primary-gray-400">Update:</div>
-              <div class="gtext-t6 primary-gray-500">{{ $moment(contentData.up_date).format("YYYY/MM/DD") }}</div>
+              <div class="gtext-t6 primary-gray-500">
+                {{ $moment(contentData.up_date).format("YYYY/MM/DD") }}
+              </div>
             </div>
           </v-col>
           <v-col cols="6" class="text-center d-block d-md-none">
@@ -137,6 +165,15 @@
           <v-col cols="11" md="8">
             <h1 class="gtext-h4 gtext-sm-h4 gtext-lg-h4">
               {{ contentData.name }}
+              <span v-show="contentData.school_type_title">,
+                 {{ contentData.school_type_title }}
+              </span>
+              <span v-show="contentData.section_title">
+                , {{ contentData.section_title }}
+              </span>
+              <span v-show="contentData.area_title">
+                , {{ contentData.area_title }}
+              </span>
             </h1>
           </v-col>
           <v-col cols="1" md="4">
@@ -155,7 +192,7 @@
         <v-row>
           <v-col cols="12" md="8">
             <div class="d-flex">
-              <div>
+              <v-sheet class="chips-container" v-scroll-x>
                 <v-chip
                   :to="`/school?school_type=${contentData.school_type}`"
                   v-if="contentData.school_type_title"
@@ -204,7 +241,7 @@
                 >
                   {{ contentData.city_title }}
                 </v-chip>
-              </div>
+              </v-sheet>
               <v-spacer />
 
               <div class="gtext-t4 primary-blue-500">You enter</div>
@@ -266,9 +303,33 @@
                 <v-icon color="primary"> mdi-web </v-icon>
               </div>
               <div class="info-data">
-                <a :href="normalizeURL(contentData.site)" target="_blenk">
+                <a
+                  v-show="contentData.site"
+                  :href="normalizeURL(contentData.site)"
+                  target="_blank"
+                >
                   {{ contentData.site }}
                 </a>
+                <span
+                  v-show="!(contentData.site || generalDataEditMode.website)"
+                  @click="editGeneralInfo('website')"
+                  class="gtext-t4 primary-blue-500 align-self-center pointer"
+                >
+                  You enter
+                </span>
+
+                <v-text-field
+                  v-if="generalDataEditMode.website"
+                  placeholder="Enter address"
+                >
+                  <template slot="append-outer">
+                    <v-btn color="success"
+                    @click="updateGeneralInfo('website')"
+                     fab depressed x-small>
+                      <v-icon> mdi-check </v-icon>
+                    </v-btn>
+                  </template>
+                </v-text-field>
               </div>
             </div>
 
@@ -277,9 +338,15 @@
                 <v-icon color="primary"> mdi-email </v-icon>
               </div>
               <div class="info-data">
-                <a :href="`mailto:${contentData.email}`">
+                <a v-show="contentData.email" :href="`mailto:${contentData.email}`">
                   {{ contentData.email }}
                 </a>
+                <span
+                  v-show="!contentData.email"
+                  class="gtext-t4 primary-blue-500 align-self-center pointer"
+                >
+                  You enter
+                </span>
               </div>
             </div>
 
@@ -288,7 +355,15 @@
                 <v-icon color="primary"> mdi-phone </v-icon>
               </div>
               <div class="info-data">
-                <a :href="`tel: ${contentData.phone1}`"> {{ contentData.phone1 }} </a>
+                <a v-show="contentData.phone1" :href="`tel: ${contentData.phone1}`">
+                  {{ contentData.phone1 }}
+                </a>
+                <span
+                  v-show="!contentData.phone1"
+                  class="gtext-t4 primary-blue-500 align-self-center pointer"
+                >
+                  You enter
+                </span>
               </div>
             </div>
 
@@ -297,7 +372,13 @@
                 <v-icon size="20" color="primary"> mdi-map-marker </v-icon>
               </div>
               <div class="info-data">
-                {{ contentData.address }}
+                <span v-show="contentData.address">{{ contentData.address }}</span>
+                <span
+                  v-show="!contentData.address"
+                  class="gtext-t4 primary-blue-500 align-self-center pointer"
+                >
+                  You enter
+                </span>
 
                 <v-text-field placeholder="Enter address" class="d-none">
                   <template slot="append-outer">
@@ -477,21 +558,28 @@
             <h3 class="gtext-h5 primary-gray-600">Recent comments</h3>
           </v-col>
           <v-col cols="12" md="9">
-            <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
+            <v-card
+              v-for="comment in commentList"
+              :key="comment.id"
+              class="comment-card primary-gray-100 pt-4 mb-3"
+              elevation="1"
+            >
               <v-card-text>
                 <div class="comment-card-header">
                   <div class="d-flex float-left">
                     <v-avatar size="60">
-                      <img class="profile-avatar" src="/images/profile-pic-ex1.png" />
+                      <img class="profile-avatar" :src="comment.avatar" />
                     </v-avatar>
                     <div class="ml-2">
                       <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
-                      <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
+                      <div class="gtext-t2 primary-gray-900">
+                        {{ comment.first_name }} {{ comment.last_name }}
+                      </div>
                     </div>
                   </div>
                   <div class="float-right">
                     <v-rating
-                      :value="2"
+                      :value="comment.score"
                       background-color="orange lighten-3"
                       color="orange"
                       half-increments
@@ -501,54 +589,7 @@
                   </div>
                 </div>
                 <v-divider class="mb-5" />
-                <div class="gtext-t2 primary-gray-700 mb-6">
-                  “The vows and named is his origin myself any is making. Might times was
-                  again. he have own produce.”
-                </div>
-                <div class="pb-8">
-                  <div class="float-left">
-                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
-                      <v-icon size="14"> mdi-thumb-down </v-icon>
-                    </v-btn>
-                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
-                      <v-icon size="14"> mdi-thumb-up </v-icon>
-                    </v-btn>
-                    <v-btn class="bg-primary-blue-500 white--text" fab x-small>
-                      <v-icon size="14"> mdi-forum </v-icon>
-                    </v-btn>
-                  </div>
-                  <div class="float-right gtext-t5">2023/11/23</div>
-                </div>
-              </v-card-text>
-            </v-card>
-            <v-card class="comment-card primary-gray-100 pt-4 mb-3" elevation="1">
-              <v-card-text>
-                <div class="comment-card-header">
-                  <div class="d-flex float-left">
-                    <v-avatar size="60">
-                      <img class="profile-avatar" src="/images/profile-pic-ex2.jpeg" />
-                    </v-avatar>
-                    <div class="ml-2">
-                      <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
-                      <div class="gtext-t2 primary-gray-900">Salena Gomez</div>
-                    </div>
-                  </div>
-                  <div class="float-right">
-                    <v-rating
-                      :value="3.4"
-                      background-color="orange lighten-3"
-                      color="orange"
-                      half-increments
-                      size="24"
-                      readonly
-                    ></v-rating>
-                  </div>
-                </div>
-                <v-divider class="mb-5" />
-                <div class="gtext-t2 primary-gray-700 mb-6">
-                  “The vows and named is his origin myself any is making. Might times was
-                  again. he have own produce.”
-                </div>
+                <div class="gtext-t2 primary-gray-700 mb-6">“{{ comment.comment }}”</div>
                 <div class="pb-8">
                   <div class="float-left">
                     <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
@@ -904,6 +945,9 @@
             width="100%"
             max-width="400"
             x-large
+            :disabled="!commentForm.comment"
+            :loading="loading.submitComment"
+            @click="submitComment"
             >Submit</v-btn
           >
         </v-card-actions>
@@ -1150,11 +1194,22 @@ export default {
       facilitiesDialog: false,
 
       commentForm: {
+        comment: "",
         classes_quality: 0,
       },
       selectLocationDialog: false,
-      imgInput:null,
-      tourImg:null
+      imgInput: null,
+      tourImg: null,
+
+      loading: {
+        submitComment: false,
+      },
+
+      commentList: [],
+
+      generalDataEditMode: {
+        website: false,
+      },
     };
   },
   components: {
@@ -1180,6 +1235,9 @@ export default {
 
     this.map.center = [this.contentData.lat, this.contentData.lng];
     this.map.latLng = [this.contentData.lat, this.contentData.lng];
+
+    //Load comments
+    this.loadComments();
   },
   methods: {
     normalizeURL(url) {
@@ -1201,7 +1259,7 @@ export default {
         this.topSlideClass.map = "under-image-right";
         this.topSlideClass.tour = "under-image-left";
       } else if (this.slideToggler == "tour") {
-        this.topSlideClass.image = "";
+        this.topSlideClass.image = "under-image-right";
         this.topSlideClass.map = "under-image-left";
         this.topSlideClass.tour = "center-image";
       }
@@ -1251,37 +1309,42 @@ export default {
     openImgInput() {
       this.$refs.imgInputRef.$el.querySelector("input").click();
     },
+    submitComment() {
+      this.loading.submitComment = true;
+      const querystring = require("querystring");
 
-    // async grabSchoolData() {
-    //   var data = [
-    //     "351566474",
-    //     "351905808",
-    //     "352507131",
-    //     "353889079",
-    //     "353889079",
-    //     "353889079",
-    //     "353889079",
-    //     "353889079",
-    //     "353889079",
-    //   ];
-    //   for (var i = 0; i <= 1000; i++) {
-    //     this.$axios
-    //       .get(`https://nominatim.openstreetmap.org/lookup?format=json&osm_ids=N352507131`)
-    //       .then((response) => {
-    //         console.log("done")
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-
-    //       await this.delay(1000); // 1000 milliseconds = 1 second
-
-    //   }
-    // },
-
-    // delay(ms) {
-    //   return new Promise(resolve => setTimeout(resolve, ms));
-    // },
+      this.$axios
+        .post(
+          `/api/v1/schools/${this.$route.params.id}/comments`,
+          querystring.stringify(this.commentForm)
+        )
+        .then((response) => {
+          this.$toast.success("Your comment has been successfully submitted");
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.loading.submitComment = false;
+          this.leaveCommentDialog = false;
+        });
+    },
+    loadComments() {
+      this.$axios
+        .get(`/api/v1/schools/${this.$route.params.id}/comments`)
+        .then((response) => {
+          this.commentList = response.data.data.list;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    editGeneralInfo(value) {
+      if (value == "website") this.generalDataEditMode.website = true;
+    },
+    updateGeneralInfo(value) {
+      if (value == "website") this.generalDataEditMode.website = false;
+    },
   },
 };
 </script>
@@ -1312,7 +1375,7 @@ export default {
   top: 0;
   left: 0 !important;
   margin: auto;
-  z-index: 2;
+  z-index: 3;
   right: 0 !important;
   width: 80% !important;
   max-height: 26.4rem;
@@ -1321,21 +1384,35 @@ export default {
   transition: opacity 0.5s ease-in-out;
 }
 
+.center-image.enter-img-holder {
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+}
+
 .under-image-left,
 .under-image-right {
   position: absolute;
   top: 0;
   max-height: 26.4rem;
+  width: 80% !important;
 }
 
 .under-image-left {
-  left: -45%;
+  left: -35%;
   z-index: 1;
 }
 
+.under-image-left.enter-img-holder p {
+  max-width: 2rem;
+}
+
 .under-image-right {
-  right: -45%;
-  z-index: 1;
+  right: -35%;
+  z-index: 2;
+}
+
+.under-image-right.enter-img-holder p {
+  max-width: 2rem;
 }
 
 .schoolDetailsImg {
@@ -1348,7 +1425,7 @@ export default {
 .enter-img-holder {
   background: #f2f4f7;
   height: 28.1rem;
-  width:100%;
+  width: 100%;
   border-radius: 0.6rem;
   display: flex;
   justify-content: center;
@@ -1528,9 +1605,36 @@ export default {
   }
 }
 
-@media (min-width: 1264px) {
+.chips-container {
+  white-space: nowrap;
+  overflow-x: auto;
+  width: 75%;
+  padding-top: 0.4rem;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: transparent transparent; /* Firefox */
+}
+
+/* Webkit (Chrome, Safari) */
+.chips-container::-webkit-scrollbar {
+  width: 5px; /* Adjust width as needed */
+}
+
+.chips-container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.chips-container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+@media (min-width: 960px) {
   .data-container {
     margin-top: 1rem;
+  }
+
+  .chips-container {
+    white-space: normal;
+    width: 80%;
   }
 }
 </style>
