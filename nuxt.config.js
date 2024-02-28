@@ -71,6 +71,8 @@ export default {
     { src: 'plugins/img-cropper', ssr: false },
     { src: 'plugins/vuedraggable', ssr: false },
     { src: 'plugins/aframe.js', ssr: false, mode: 'client' },
+    { src: 'plugins/gtag.js',mode:"client"},
+
 
   ],
 

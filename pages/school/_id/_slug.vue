@@ -165,8 +165,9 @@
           <v-col cols="11" md="8">
             <h1 class="gtext-h4 gtext-sm-h4 gtext-lg-h4">
               {{ contentData.name }}
-              <span v-show="contentData.school_type_title">,
-                 {{ contentData.school_type_title }}
+              <span v-show="contentData.school_type_title"
+                >,
+                {{ contentData.school_type_title }}
               </span>
               <span v-show="contentData.section_title">
                 , {{ contentData.section_title }}
@@ -318,14 +319,15 @@
                   You enter
                 </span>
 
-                <v-text-field
-                  v-if="generalDataEditMode.website"
-                  placeholder="Enter address"
-                >
+                <v-text-field v-if="generalDataEditMode.website" placeholder="Website">
                   <template slot="append-outer">
-                    <v-btn color="success"
-                    @click="updateGeneralInfo('website')"
-                     fab depressed x-small>
+                    <v-btn
+                      color="success"
+                      @click="updateGeneralInfo('website')"
+                      fab
+                      depressed
+                      x-small
+                    >
                       <v-icon> mdi-check </v-icon>
                     </v-btn>
                   </template>
@@ -342,11 +344,25 @@
                   {{ contentData.email }}
                 </a>
                 <span
-                  v-show="!contentData.email"
+                  v-show="!(contentData.email || generalDataEditMode.email)"
+                  @click="editGeneralInfo('email')"
                   class="gtext-t4 primary-blue-500 align-self-center pointer"
                 >
                   You enter
                 </span>
+                <v-text-field v-if="generalDataEditMode.email" placeholder="Email">
+                  <template slot="append-outer">
+                    <v-btn
+                      color="success"
+                      @click="updateGeneralInfo('email')"
+                      fab
+                      depressed
+                      x-small
+                    >
+                      <v-icon> mdi-check </v-icon>
+                    </v-btn>
+                  </template>
+                </v-text-field>
               </div>
             </div>
 
@@ -359,11 +375,25 @@
                   {{ contentData.phone1 }}
                 </a>
                 <span
-                  v-show="!contentData.phone1"
+                  @click="editGeneralInfo('phone')"
+                  v-show="!(contentData.phone1 || generalDataEditMode.phone1)"
                   class="gtext-t4 primary-blue-500 align-self-center pointer"
                 >
                   You enter
                 </span>
+                <v-text-field v-if="generalDataEditMode.phone1" placeholder="Phone">
+                  <template slot="append-outer">
+                    <v-btn
+                      color="success"
+                      @click="updateGeneralInfo('phone')"
+                      fab
+                      depressed
+                      x-small
+                    >
+                      <v-icon> mdi-check </v-icon>
+                    </v-btn>
+                  </template>
+                </v-text-field>
               </div>
             </div>
 
@@ -374,15 +404,22 @@
               <div class="info-data">
                 <span v-show="contentData.address">{{ contentData.address }}</span>
                 <span
-                  v-show="!contentData.address"
+                  @click="editGeneralInfo('address')"
+                  v-show="!(contentData.address || generalDataEditMode.address)"
                   class="gtext-t4 primary-blue-500 align-self-center pointer"
                 >
                   You enter
                 </span>
 
-                <v-text-field placeholder="Enter address" class="d-none">
+                <v-text-field  v-if="generalDataEditMode.address" placeholder="Enter address">
                   <template slot="append-outer">
-                    <v-btn color="success" fab depressed x-small>
+                    <v-btn
+                      color="success"
+                      @click="updateGeneralInfo('address')"
+                      fab
+                      depressed
+                      x-small
+                    >
                       <v-icon> mdi-check </v-icon>
                     </v-btn>
                   </template>
@@ -1209,6 +1246,9 @@ export default {
 
       generalDataEditMode: {
         website: false,
+        email: false,
+        phone1: false,
+        address:false
       },
     };
   },
@@ -1341,9 +1381,15 @@ export default {
     },
     editGeneralInfo(value) {
       if (value == "website") this.generalDataEditMode.website = true;
+      else if (value == "email") this.generalDataEditMode.email = true;
+      else if (value == "phone") this.generalDataEditMode.phone1 = true;
+      else if (value == "address") this.generalDataEditMode.address = true;
     },
     updateGeneralInfo(value) {
       if (value == "website") this.generalDataEditMode.website = false;
+      else if (value == "email") this.generalDataEditMode.email = false;
+      else if (value == "phone") this.generalDataEditMode.phone1 = false;
+      else if (value == "address") this.generalDataEditMode.address = false;
     },
   },
 };

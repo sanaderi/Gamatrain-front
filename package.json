@@ -39,7 +39,8 @@
     "vue-mathjax": "^0.1.1",
     "vuedraggable": "^2.24.3",
     "vueperslides": "^2.15.2",
-    "vuetify": "^2.5.5"
+    "vuetify": "^2.5.5",
+    "vue-gtag": "^1.7.1"
   },
   "devDependencies": {
     "@mdi/font": "^7.1.96",
