@@ -23,7 +23,7 @@ export default async (req, res, next) => {
   
   async function fetchDataFromServer() {
     // Fetch paginated data from the third-party server
-    const itemsPerPage = 100; // Adjust as per your pagination logic
+    const itemsPerPage = 50; // Adjust as per your pagination logic
     let currentPage = 1;
     let allData = [];
 
@@ -42,7 +42,7 @@ export default async (req, res, next) => {
 
       // Break the loop if no more data available
       // if (data.length < itemsPerPage) {
-      if (currentPage > 10) {
+      if (currentPage > 20) {
         break;
       }
 
@@ -65,7 +65,7 @@ export default async (req, res, next) => {
     data.forEach(item => { 
       xml += `<url>
           <loc>https://gamatrain.com/qa/${item.id}</loc>
-          <lastmod>${item.up_date}</lastmod>
+          <lastmod>${formatDate(item.up_date)}</lastmod>
           <changefreq>weekly</changefreq>
           <priority>0.8</priority>
       </url>`;
@@ -77,4 +77,14 @@ export default async (req, res, next) => {
   function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+
+
+// Function to format the date as YYYY-MM-DD
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
   
