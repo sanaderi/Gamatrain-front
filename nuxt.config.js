@@ -111,7 +111,7 @@ export default {
     '@nuxtjs/toast',
     '@nuxtjs/auth-next',
     '@nuxtjs/markdownit',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
   ],
 
   axios: {
@@ -232,6 +232,8 @@ export default {
     }
   },
 
+
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ["vee-validate", "vue-chartjs", "ofetch", "node-fetch-native", "defu"],
@@ -250,5 +252,9 @@ export default {
   server: {
     host: "0.0.0.0",
     port: 3002
-  }
+  },
+
+  serverMiddleware: [
+    '~/serverMiddleware/data-to-xml.js',
+  ],
 };

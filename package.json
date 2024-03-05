@@ -26,6 +26,7 @@
     "cookie-universal-nuxt": "^2.2.2",
     "core-js": "^3.15.1",
     "file-saver": "^2.0.5",
+    "install": "^0.13.0",
     "lottie-web": "^5.12.2",
     "nuxt": "^2.15.7",
     "nuxt-leaflet": "^0.0.27",
@@ -36,11 +37,11 @@
     "vue-advanced-cropper": "^1.11.5",
     "vue-chartjs": "^4.1.1",
     "vue-core-video-player": "^0.2.0",
+    "vue-gtag": "^1.7.1",
     "vue-mathjax": "^0.1.1",
     "vuedraggable": "^2.24.3",
     "vueperslides": "^2.15.2",
-    "vuetify": "^2.5.5",
-    "vue-gtag": "^1.7.1"
+    "vuetify": "^2.5.5"
   },
   "devDependencies": {
     "@mdi/font": "^7.1.96",
