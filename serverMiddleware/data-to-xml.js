@@ -59,7 +59,7 @@ export default async (req, res, next) => {
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
     xml+=`<url>
     <loc>https://gamatrain.com/search?type=question</loc>
-    <lastmod>2023-11-14 17:02:24</lastmod>
+    <lastmod>2023-11-14</lastmod>
     <priority>1.00</priority>
     </url>`;
     data.forEach(item => { 
