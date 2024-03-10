@@ -233,7 +233,7 @@ export default {
     };
   },
 
-  async asyncData({ params, $axios,error }) {
+  async asyncData({ params, $axios, error }) {
     try {
       const content = await $axios.$get(`/api/v1/examTests/${params.id}`, {
         params: {

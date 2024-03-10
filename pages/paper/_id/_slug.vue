@@ -542,7 +542,7 @@ export default {
       title: this.contentData.title,
     };
   },
-  async asyncData({ params, $axios,redirect }) {
+  async asyncData({req, params, $axios, redirect }) {
     // This could also be an action dispatch
     try {
       const content = await $axios.$get(`/api/v1/tests/${params.id}`);
@@ -556,7 +556,7 @@ export default {
       return { contentData };
     } catch (e) {
       if (e.response && e.response.status === 404) {
-        redirect('/search?type=test');
+        redirect("/search?type=test");
       }
     }
   },

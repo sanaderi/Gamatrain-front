@@ -3,21 +3,26 @@
     <!--Start: menu button-->
     <v-btn
       class="d-block d-md-none"
-      fixed bottom right style="z-index:10 "
+      fixed
+      bottom
+      right
+      style="z-index: 10"
       min-width="40"
-      x-large color="teal" dark rounded @click.stop="drawer = !drawer">
-      <v-icon>
-        mdi-format-list-numbered
-      </v-icon>
+      x-large
+      color="teal"
+      dark
+      rounded
+      @click.stop="drawer = !drawer"
+    >
+      <v-icon> mdi-format-list-numbered </v-icon>
       <v-slide-x-reverse-transition>
         <span v-show="expandListMenu" class="text-h6">&nbsp;List</span>
       </v-slide-x-reverse-transition>
     </v-btn>
     <!--End: menu button-->
 
-
     <!-- Start : Category -->
-    <category/>
+    <category />
     <!-- End:Category -->
 
     <!-- Start:Lesson title -->
@@ -29,7 +34,7 @@
             <div class="d-flex flex-column details-content">
               <div class="last-update mb-3">
                 <i class="fa-solid fa-calendar-days mr-2"></i>Last update:
-                {{ tutorialInfo.up_date.split(' ')[0] }}
+                {{ tutorialInfo.up_date.split(" ")[0] }}
               </div>
               <div class="visit mb-3">
                 <i class="fa-solid fa-eye mr-2"></i>Viewed: {{ tutorialInfo.views }}
@@ -49,7 +54,6 @@
       </v-container>
     </section>
 
-
     <!-- Mobile -->
     <section class="lesson d-block d-md-none">
       <v-container class="lesson-section">
@@ -61,11 +65,11 @@
             </div>
           </v-col>
           <v-col cols="12" class="lesson-details">
-            <v-divider/>
+            <v-divider />
             <v-row>
               <v-col cols="5" class="last-update">
                 <i class="fa-solid fa-calendar-days mr-2"></i>
-                {{ tutorialInfo.up_date.split(' ')[0] }}
+                {{ tutorialInfo.up_date.split(" ")[0] }}
               </v-col>
               <v-col cols="3" class="visit">
                 <i class="fa-solid fa-eye mr-2"></i>{{ tutorialInfo.views }}
@@ -81,7 +85,6 @@
       </v-container>
     </section>
     <!-- End: Lesson title -->
-
 
     <!-- Start : Card -->
     <!--    <section class="cards">-->
@@ -147,26 +150,32 @@
     <!-- End: Cart -->
     <!-- Start : Book -->
     <v-container>
-
       <section class="book">
         <v-row>
           <v-col md="3" class="d-none d-md-block">
-            <div class="cataloge pa-2 ">
+            <div class="cataloge pa-2">
               <div class="cataloge-content">
-                <TutorialMenu :lessonTree="lessonTree"/>
+                <TutorialMenu :lessonTree="lessonTree" />
               </div>
             </div>
           </v-col>
           <v-col cols="12" md="9" class="pa-0 pa-md-3">
             <div class="book-contents pa-3 pa-md-6">
-              <v-navigation-drawer v-model="drawer" style="z-index: 10"
-                                   class="sidebar-nav pa-5" width="320">
-                <TutorialMenu :lessonTree="lessonTree"/>
+              <v-navigation-drawer
+                v-model="drawer"
+                style="z-index: 10"
+                class="sidebar-nav pa-5"
+                width="320"
+              >
+                <TutorialMenu :lessonTree="lessonTree" />
               </v-navigation-drawer>
               <div class="book-content">
-                <div class="bookText e-mathjax" ref="mathJaxEl" v-html="tutorialInfo.content"/>
+                <div
+                  class="bookText e-mathjax"
+                  ref="mathJaxEl"
+                  v-html="tutorialInfo.content"
+                />
               </div>
-
             </div>
           </v-col>
         </v-row>
@@ -198,7 +207,7 @@
 
     <!-- Sidebar -->
 
-    <crash-report ref="crash_report"/>
+    <crash-report ref="crash_report" />
   </div>
 </template>
 <script>
@@ -211,7 +220,7 @@ import RelatedOnlineExam from "@/components/details/related-online-exam";
 import CrashReport from "~/components/common/crash-report.vue";
 
 export default {
-  name: 'tutorial-details',
+  name: "tutorial-details",
   auth: false,
   components: {
     CrashReport,
@@ -220,38 +229,40 @@ export default {
     LatestTrainingContent,
     RelatedContent,
     category,
-    TutorialMenu
+    TutorialMenu,
   },
 
-  async asyncData({params, $axios}) {
-    // This could also be an action dispatch
-    const tutorialData = await $axios.$get(`/api/v1/tutorials/${params.id}`);
+  async asyncData({ params, $axios,redirect }) {
+    try {
+      // This could also be an action dispatch
+      const tutorialData = await $axios.$get(`/api/v1/tutorials/${params.id}`);
 
+      //Tutorial data
+      var tutorialInfo = tutorialData.data;
 
-    //Tutorial data
-    var tutorialInfo = tutorialData.data;
+      //Get lesson tree
+      const tutorialLessonTree = await $axios.$get(
+        `/api/v1/tutorials/lessonTree/${tutorialInfo.lesson}`
+      );
+      var lessonTree = tutorialLessonTree.data;
 
-    //Get lesson tree
-    const tutorialLessonTree = await $axios.$get(`/api/v1/tutorials/lessonTree/${tutorialInfo.lesson}`);
-    var lessonTree = tutorialLessonTree.data;
+      //Get and order title to display
+      var lessonInfo = tutorialInfo.title.split("|");
+      var lesson = { title: lessonInfo[0], topic_title: lessonInfo[1] };
 
-
-    //Get and order title to display
-    var lessonInfo = tutorialInfo.title.split('|');
-    var lesson = {title: lessonInfo[0], topic_title: lessonInfo[1]};
-
-
-    return {tutorialInfo, lessonTree, lesson};
+      return { tutorialInfo, lessonTree, lesson };
+    } catch (e) {
+      if (e.response && e.response.status === 404) {
+        redirect("/search?type=dars");
+      }
+    }
   },
 
   head() {
     return {
-      script: [
-        {src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
-      ],
+      script: [{ src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML` }],
       title: this.tutorialInfo.title,
-
-    }
+    };
   },
 
   data() {
@@ -264,7 +275,7 @@ export default {
         },
         {
           lessonName: "Speech 2 : Nervous system structure",
-        }
+        },
       ],
       bookmark: "bookmark.png",
       drawer: false,
@@ -290,9 +301,9 @@ export default {
       card: {
         img: "dexter-morse1.png",
         img2: "book.png",
-        videoTitle: "Video of the complete educational course, the seventh mathematics of the first year of high school",
-        bookTitle:
-          "Exam test bank album, Math 7th first period of high school",
+        videoTitle:
+          "Video of the complete educational course, the seventh mathematics of the first year of high school",
+        bookTitle: "Exam test bank album, Math 7th first period of high school",
         testNumber: "2717",
         videoTeacher: "Arian Etemdi",
         durition: " 8 Hour (26 File)",
@@ -302,18 +313,21 @@ export default {
       },
       book: {
         catalogeTitle: "Biology (2)",
-        learnmoreText: "Inflammation of the meninges is called meningitis and its symptoms are headache, fever and dry neck. Meningitis is caused by viral or bacterial infections."
-
+        learnmoreText:
+          "Inflammation of the meninges is called meningitis and its symptoms are headache, fever and dry neck. Meningitis is caused by viral or bacterial infections.",
       },
       bookContent: [
         {
-          bookText: "In the past, you learned that the nervous system has two central and peripheral parts (Figure 11). Why do you think this device is called central and peripheral?",
+          bookText:
+            "In the past, you learned that the nervous system has two central and peripheral parts (Figure 11). Why do you think this device is called central and peripheral?",
           bookPic: "9_1.png",
-          picSub: "Figure 11- Central nervous system (yellow color) and peripheral (blue color)",
+          picSub:
+            "Figure 11- Central nervous system (yellow color) and peripheral (blue color)",
         },
         {
           bookTitle: "Central nervous system",
-          bookText: "The central nervous system includes the brain and the spinal cord, which are the centers for monitoring the body's activities. This device interprets the information received from the environment and inside the body and responds to them. Brain and spinal cord from two parts ",
+          bookText:
+            "The central nervous system includes the brain and the spinal cord, which are the centers for monitoring the body's activities. This device interprets the information received from the environment and inside the body and responds to them. Brain and spinal cord from two parts ",
           bookPic: "9_2.png",
           picSub: "Figure 12- Transverse section of the brain and spinal cord",
         },
@@ -324,12 +338,11 @@ export default {
       input: null,
       nonce: 0,
     };
-
   },
 
   computed: {
     timeline() {
-      return this.events.slice().reverse()
+      return this.events.slice().reverse();
     },
   },
   mounted() {
@@ -337,65 +350,70 @@ export default {
   },
   created() {
     if (process.client) {
-      window.addEventListener('scroll', this.handleScroll);
+      window.addEventListener("scroll", this.handleScroll);
     }
   },
   destroyed() {
     if (process.client) {
-      window.removeEventListener('scroll', this.handleScroll);
+      window.removeEventListener("scroll", this.handleScroll);
     }
   },
   methods: {
     comment() {
-      const time = (new Date()).toTimeString()
+      const time = new Date().toTimeString();
       this.events.push({
         id: this.nonce++,
         text: this.input,
         time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
-          return ` ${contents.split(' ').map(v => v.charAt(0)).join('')}`
+          return ` ${contents
+            .split(" ")
+            .map((v) => v.charAt(0))
+            .join("")}`;
         }),
-      })
+      });
 
-      this.input = null
+      this.input = null;
     },
     renderMathJax() {
       if (window.MathJax) {
         window.MathJax.Hub.Config({
           tex2jax: {
-            inlineMath: [['$', '$'], ["\(", "\)"]],
-            displayMath: [['$$', '$$'], ["\[", "\]"]],
+            inlineMath: [
+              ["$", "$"],
+              ["\(", "\)"],
+            ],
+            displayMath: [
+              ["$$", "$$"],
+              ["\[", "\]"],
+            ],
             processEscapes: true,
-            processEnvironments: true
+            processEnvironments: true,
           },
           // Center justify equations in code and markdown cells. Elsewhere
           // we use CSS to left justify single line equations in code cells.
-          displayAlign: 'center',
+          displayAlign: "center",
           "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: {automatic: true},
+            styles: { ".MathJax_Display": { margin: 0 } },
+            linebreaks: { automatic: true },
             availableFonts: ["Asana Math"],
             preferredFont: "Asana Math",
             webFont: "Asana Math-Web",
-            imageFont: null
-          }
+            imageFont: null,
+          },
         });
         window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
       }
     },
     handleScroll() {
-      if (window.scrollY > 1000)
-        this.expandListMenu = false;
-      else
-        this.expandListMenu = true;
+      if (window.scrollY > 1000) this.expandListMenu = false;
+      else this.expandListMenu = true;
     },
 
     openCrashReportDialog() {
       this.$refs.crash_report.dialog = true;
       this.$refs.crash_report.form.type = "tutorial";
-    }
-
+    },
   },
-
 };
 </script>
 
@@ -424,7 +442,6 @@ export default {
   margin-left: 0.1rem !important;
 }
 
-
 /*Message style section*/
 .bookText .message {
   padding: 15px !important;
@@ -439,7 +456,6 @@ export default {
   margin-bottom: 12px;
 }
 
-
 .bookText .ui.message.red {
   background-color: #fff !important;
   color: red;
@@ -451,7 +467,6 @@ export default {
   color: blue;
   box-shadow: 0 0 0 1px blue inset, 0 0 0 0 transparent;
 }
-
 
 .bookText .ui.message.green {
   background-color: #fff !important;
@@ -466,7 +481,6 @@ export default {
 }
 
 /*End message style section*/
-
 
 /*Segment section*/
 .bookText .ui.segment.red {
@@ -491,7 +505,6 @@ export default {
   background: transparent !important;
 }
 
-
 .bookText .ui.segment.green {
   background-color: #fff !important;
   color: #000000;
@@ -502,7 +515,6 @@ export default {
   color: red !important;
   background: transparent !important;
 }
-
 
 .bookText .ui.segment.brown {
   background-color: #fff !important;
@@ -517,16 +529,15 @@ export default {
 
 /*End section section*/
 
-
 .bookText .ui.table {
   width: 100%;
   background: #fff;
   margin: 1em 0;
-  border: 1px solid rgba(34, 36, 38, .15);
+  border: 1px solid rgba(34, 36, 38, 0.15);
   box-shadow: none;
   border-radius: 0.28571429rem;
   text-align: left;
-  color: rgba(0, 0, 0, .87);
+  color: rgba(0, 0, 0, 0.87);
   border-collapse: separate;
   border-spacing: 0;
 }
@@ -537,7 +548,6 @@ export default {
 }
 
 /*End tutorial details table style*/
-
 
 /*Tutorial details image caption*/
 .bookText figcaption {
@@ -555,5 +565,4 @@ export default {
     flex-direction: column;
   }
 }
-
 </style>
