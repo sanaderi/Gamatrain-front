@@ -7,7 +7,6 @@ export default async (req, res, next) => {
   if (url.startsWith('/sitemap')) {
     // Example: Set content type to XML
     res.setHeader('Content-Type', 'application/xml');
-    console.log("OK");
 
     // Extract the content type from the URL
     const contentType = url.substring(url.lastIndexOf('/') + 1);
@@ -47,16 +46,19 @@ async function fetchDataFromServer(contentType) {
       apiUrl = 'https://core.gamatrain.com/api/v1/search?type=test'; // Adjust API URL for papers
       break;
     case 'qa':
-      apiUrl = 'https://core.gamatrain.com/api/v1/search?type=question'; // Adjust API URL for papers
+      apiUrl = 'https://core.gamatrain.com/api/v1/search?type=question'; // Adjust API URL for qa
       break;
     case 'multimedia':
-      apiUrl = 'https://core.gamatrain.com/api/v1/search?type=learnfiles'; // Adjust API URL for schools
+      apiUrl = 'https://core.gamatrain.com/api/v1/search?type=learnfiles'; // Adjust API URL for multimedia
       break;
     case 'exam':
-      apiUrl = 'https://core.gamatrain.com/api/v1/search?type=azmoon'; // Adjust API URL for schools
+      apiUrl = 'https://core.gamatrain.com/api/v1/search?type=azmoon'; // Adjust API URL for exam
       break;
     case 'tutorial':
-      apiUrl = 'https://core.gamatrain.com/api/v1/search?type=dars'; // Adjust API URL for schools
+      apiUrl = 'https://core.gamatrain.com/api/v1/search?type=dars'; // Adjust API URL for tutorial
+      break;
+    case 'blog':
+      apiUrl = 'https://core.gamatrain.com/api/v1/blogs/search'; // Adjust API URL for blog
       break;
     default:
       // Return empty array for unknown content type
@@ -67,12 +69,14 @@ async function fetchDataFromServer(contentType) {
 
     // Fetch data for all pages
     while (true) {
-      const response = await axios.get(
-        `${apiUrl}&page=${currentPage}&perpage=${itemsPerPage}`
-      );
+      console.log("OK1");
+      let finalUrl= `${apiUrl}&page=${currentPage}&perpage=${itemsPerPage}`;
+      if(contentType=='blog')
+        finalUrl=`${apiUrl}?page=${currentPage}&perpage=${itemsPerPage}`
+      const response = await axios.get(finalUrl);
+      console.log("OK");
       const data = response.data.data.list;
       console.log(data);
-
       // Add fetched data to the array
       allData = [...allData, ...data];
 
@@ -87,7 +91,7 @@ async function fetchDataFromServer(contentType) {
       currentPage++;
     }
 
-
+   console.log(allData);
     return allData;
 
  
@@ -98,7 +102,7 @@ function convertDataToXML(data, contentType) {
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
   data.forEach(item => {
     xml += `<url>
-            <loc>https://gamatrain.com/${contentType}/${item.id}/${item.title.trim().replace(/ (?!$)/g, '-').toLowerCase()}</loc>
+            <loc>https://gamatrain.com/${contentType}/${item.id}/${item.title.trim().replace(/ (?!$)/g, '-').replace(/\//g, '-').toLowerCase()}</loc>
             <lastmod>${formatDate(item.up_date)}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.8</priority>
@@ -111,7 +115,6 @@ function convertDataToXML(data, contentType) {
 
 
 function generateDefaultSitemap() {
-  console.log("tt");
   const simpleUrls = [
     'https://gamatrain.com',
     'https://gamatrain.com/about-us',

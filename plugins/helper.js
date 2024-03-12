@@ -13,7 +13,7 @@ const loadImg = {
 const slugGenerator={
   name:'slugGenerator',
   convert(title){
-    return title.trim().replace(/ (?!$)/g, '-').toLowerCase();
+    return title.trim().replace(/ (?!$)/g, '-').replace(/\//g, '-').toLowerCase();
   }
 }
 
