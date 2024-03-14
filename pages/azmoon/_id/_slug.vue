@@ -9,7 +9,7 @@ export default {
   auth: false,
 
   async asyncData({ redirect,params }) {
-    redirect(301,`/tutorial/${params.id}/${params.slug}`);
+    redirect(301,`/exam/${params.id}/${params.slug}`);
   },
 };
 </script>

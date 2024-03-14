@@ -69,14 +69,11 @@ async function fetchDataFromServer(contentType) {
 
     // Fetch data for all pages
     while (true) {
-      console.log("OK1");
       let finalUrl= `${apiUrl}&page=${currentPage}&perpage=${itemsPerPage}`;
       if(contentType=='blog')
         finalUrl=`${apiUrl}?page=${currentPage}&perpage=${itemsPerPage}`
       const response = await axios.get(finalUrl);
-      console.log("OK");
       const data = response.data.data.list;
-      console.log(data);
       // Add fetched data to the array
       allData = [...allData, ...data];
 

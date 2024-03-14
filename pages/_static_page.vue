@@ -24,7 +24,7 @@ export default {
 
       const page_info = await $axios.$get(`/api/v1/pages/${param}`);
 
-    if (page_info.length === 0)
+    if (!page_info.data.title)
       error({statusCode: 404, message: 'Page not found'})
     else {
       const pageData = page_info.data;
