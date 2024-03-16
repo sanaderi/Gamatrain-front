@@ -88,7 +88,6 @@ async function fetchDataFromServer(contentType) {
       currentPage++;
     }
 
-   console.log(allData);
     return allData;
 
  
@@ -96,10 +95,14 @@ async function fetchDataFromServer(contentType) {
 }
 
 function convertDataToXML(data, contentType) {
+  let title='';
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
   data.forEach(item => {
+    title=item.title_url;
+    if(contentType=='blog')
+     title=item.title.trim().replace(/ (?!$)/g, '-').replace(/\//g, '-').toLowerCase();
     xml += `<url>
-            <loc>https://gamatrain.com/${contentType}/${item.id}/${item.title.trim().replace(/ (?!$)/g, '-').replace(/\//g, '-').toLowerCase()}</loc>
+            <loc>https://gamatrain.com/${contentType}/${item.id}/${title}</loc>
             <lastmod>${formatDate(item.up_date)}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.8</priority>
