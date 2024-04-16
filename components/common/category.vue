@@ -113,9 +113,7 @@ export default {
 
 .category.box{
     max-height: 30rem;
-    .card{
-      max-height: 20rem;
-    }
+    
   }
 
 @media (min-width:600px) {
