@@ -108,17 +108,17 @@
                             class="ma-1">
                         {{ contentData.lesson_title }}
                     </v-chip>
-                    <v-chip class="ma-1"
+                    <!-- <v-chip class="ma-1"
                             v-show="contentData.edu_month_title">
                       {{ contentData.edu_month_title }}
-                    </v-chip>
+                    </v-chip> -->
 
 
                   </div>
                 </div>
               </div>
               <!--   Download Btn and Description  -->
-              <div class="text-center download-sec">
+              <div v-if="!isFree" class="text-center download-sec">
                 <div class="d-none d-md-block mb-4 ">
                   <p v-if="!$auth.loggedIn" class="gama-text-body2">
                     <span class="mdi mdi-bell icon"></span>
@@ -134,15 +134,15 @@
                   <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)
                   </nuxt-link>
                 </div>
-                <div class="font-weight-bold answer gama-text-body2">
+                <!-- <div class="font-weight-bold answer gama-text-body2">
                   <span class="mdi mdi-checkbox-marked icon"></span>
                   <span> The key answer sheet is at the end of the exam file.</span>
-                </div>
+                </div> -->
               </div>
               <!--   fileCopyRight  -->
-              <div class="d-none d-md-block text-center file-copy-right gama-text-body2">
+              <!-- <div class="d-none d-md-block text-center file-copy-right gama-text-body2">
                 <span >It is forbidden to republish the contents in cyber space.</span>
-              </div>
+              </div> -->
             </v-col>
             <v-col md="3">
               <v-card flat class="content_main_info">
@@ -270,7 +270,7 @@
                     <v-btn v-show="!$auth.loggedIn"
                            @click="openAuthDialog('login')"
                            v-if="key==='participation'" block color="success">
-                      Start | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+                      Start Exam{{ item.price > 0 ? ' | $' + item.price : '' }}
                     </v-btn>
 
                     <!--For authenticated user-->
@@ -281,30 +281,30 @@
                         Show result
                       </span>
                       <span v-else>
-                        Start | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+                        Start Exam{{ item.price > 0 ? ' | $' + item.price : '' }}
                       </span>
                     </v-btn>
 
                     <v-btn v-else-if="key==='word'" block color="primary">
-                      WORD file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+                      Download WORD{{ item.price > 0 ? ' | $' + item.price : '' }}
                     </v-btn>
                     <v-btn
                       @click="startDownload()"
                       :loading="download_loading"
                       v-else-if="key==='pdf'" block color="error">
-                      PDF file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+                      Download PDF{{ item.price > 0 ? ' | $' + item.price : '' }}
                     </v-btn>
                   </v-col>
                 </v-row>
 
               </v-card>
-              <v-row>
+              <!-- <v-row>
                 <v-col cols="12" class="text-center">
                   <p class="mt-2  gama-text-overline">
                     <i class="fa-solid fa-exclamation-circle mr-1 icon"></i>
                     Republishing is prohibited in cyber space.</p>
                 </v-col>
-              </v-row>
+              </v-row> -->
             </v-col>
           </v-row>
 
@@ -325,7 +325,7 @@
                    @click="openAuthDialog('login')"
                    v-if="key==='participation'"
                    block color="success">
-              Start | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+              Start Exam{{ item.price > 0 ? ' | $' + item.price : '' }}
             </v-btn>
             <v-btn v-show="$auth.loggedIn"
                    :to="`/exam/start/${contentData.id}`" v-if="key==='participation'" block
@@ -334,19 +334,19 @@
                  Show result
               </span>
               <span v-else>
-                 Start | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+                 Start Exam{{ item.price > 0 ? ' | $' + item.price : '' }}
               </span>
             </v-btn>
             <v-btn v-else-if="key==='word'" block color="primary">
-              WORD file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+              Download WORD{{ item.price > 0 ? ' | $' + item.price : '' }}
             </v-btn>
             <v-btn v-else-if="key==='pdf'" block color="error">
-              PDF file | {{ item.price > 0 ? '$' + item.price : 'Free' }}
+              Download PDF{{ item.price > 0 ? ' | $' + item.price : '' }}
             </v-btn>
           </v-col>
 
-          <v-col cols="12">
-            <div class="mb-4">
+          <v-col  cols="12">
+            <div v-if="!isFree" class="mb-4">
               <p v-if="!$auth.loggedIn">
                 <span class="mdi mdi-bell icon"></span>
                 <span @click="openAuthDialog('login')" class="login blue--text">Login</span>
@@ -802,7 +802,15 @@ export default {
     openCrashReportDialog() {
       this.$refs.crash_report.dialog = true;
       this.$refs.crash_report.form.type = "test";
-    }
+    },
+    isFree() {
+      if (
+        this.contentData.participation.price > 0 &&
+        this.contentData.files.pdf.price > 0
+      )
+        return false;
+      else return true;
+    },
   }
 }
 </script>

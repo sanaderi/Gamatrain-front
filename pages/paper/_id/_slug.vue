@@ -70,7 +70,7 @@
               </div>
               <!--   Download Btn and Description  -->
               <div class="text-center download-sec">
-                <div class="d-none d-md-block mb-4">
+                <div class="d-none d-md-block mb-4" v-if="isFree == false">
                   <p v-if="!$auth.loggedIn" class="gama-text-body2">
                     <span class="mdi mdi-bell icon"></span>
                     <span @click="openAuthDialog('login')" class="login">Login</span>
@@ -80,7 +80,7 @@
                     to download and charge your wallet.
                   </p>
                   <span v-else class="gama-text-body2">
-                    Your wallet charge is ${{ $auth.user.credit }}
+                    Your wallet charge is ${{ $auth.user && $auth.user.credit }}
                   </span>
                   <nuxt-link
                     class="blue--text"
@@ -89,17 +89,17 @@
                     >(Top Up Wallet)</nuxt-link
                   >
                 </div>
-                <div class="font-weight-bold answer gama-text-body2">
+                <!-- <div class="font-weight-bold answer gama-text-body2">
                   <span class="mdi mdi-checkbox-marked icon"></span>
                   <span> The key answer sheet is at the end of the exam file.</span>
-                </div>
+                </div> -->
               </div>
               <!--   fileCopyRight  -->
-              <div class="d-none d-md-block text-center">
+              <!-- <div class="d-none d-md-block text-center">
                 <p class="gama-text-body2 file-copy-right">
                   It is forbidden to republish the contents in cyber space.
                 </p>
-              </div>
+              </div> -->
             </v-col>
             <v-col md="4" lg="3">
               <v-card flat class="content_main_info">
@@ -225,11 +225,11 @@
                         color="primary"
                         class="mb-2"
                       >
-                        Question Word file |
+                        Download Question Doc
                         {{
                           contentData.files.word.price > 0
-                            ? "$" + contentData.files.word.price
-                            : "Free"
+                            ? "| $" + contentData.files.word.price
+                            : ""
                         }}
                       </v-btn>
                     </div>
@@ -240,11 +240,11 @@
                         block
                         color="error"
                       >
-                        Question PDF file |
+                        Download Question
                         {{
                           contentData.files.word.price > 0
-                            ? "$" + contentData.files.word.price
-                            : "Free"
+                            ? "| $" + contentData.files.word.price
+                            : ""
                         }}
                       </v-btn>
                     </div>
@@ -256,11 +256,11 @@
                         block
                         color="error"
                       >
-                        Answer PDF file |
+                        Download Answer
                         {{
                           contentData.files.word.price > 0
-                            ? "$" + contentData.files.word.price
-                            : "Free"
+                            ? "| $" + contentData.files.word.price
+                            : ""
                         }}
                       </v-btn>
                       <v-btn
@@ -270,25 +270,25 @@
                         color="primary"
                         class="mb-2"
                       >
-                        Answer Word file |
+                        Download Answer Doc
                         {{
                           contentData.files.word.price > 0
-                            ? "$" + contentData.files.word.price
-                            : "Free"
+                            ? "| $" + contentData.files.word.price
+                            : ""
                         }}
                       </v-btn>
                     </div>
                   </v-col>
                 </v-row>
               </v-card>
-              <v-row>
+              <!-- <v-row>
                 <v-col cols="12" class="text-center">
                   <p class="mt-2 gama-text-overline">
                     <i class="fa-solid fa-exclamation-circle mr-1 icon"></i>
                     Republishing is prohibited in cyber space.
                   </p>
                 </v-col>
-              </v-row>
+              </v-row> -->
             </v-col>
           </v-row>
         </div>
@@ -302,21 +302,21 @@
           <v-col cols="12" class="pb-1 pt-0">
             <div v-if="contentData.files.word.exist == true">
               <v-btn @click="startDownload('q_word')" block color="primary" class="mb-2">
-                Question Word file |
+                Download Question Doc
                 {{
                   contentData.files.word.price > 0
-                    ? "$" + contentData.files.word.price
-                    : "Free"
+                    ? "| $" + contentData.files.word.price
+                    : ""
                 }}
               </v-btn>
             </div>
             <div v-if="contentData.files.pdf.exist == true">
               <v-btn @click="startDownload('q_pdf')" class="mb-2" block color="error">
-                Question PDF file |
+                Download Question
                 {{
                   contentData.files.word.price > 0
-                    ? "$" + contentData.files.word.price
-                    : "Free"
+                    ? "| $" + contentData.files.word.price
+                    : ""
                 }}
               </v-btn>
             </div>
@@ -328,11 +328,11 @@
                 block
                 color="error"
               >
-                Answer PDF file |
+                Download Answer
                 {{
                   contentData.files.word.price > 0
-                    ? "$" + contentData.files.word.price
-                    : "Free"
+                    ? "| $" + contentData.files.word.price
+                    : ""
                 }}
               </v-btn>
               <v-btn
@@ -342,18 +342,18 @@
                 color="primary"
                 class="mb-2"
               >
-                Answer Word file |
+                Download Answer Doc
                 {{
                   contentData.files.word.price > 0
-                    ? "$" + contentData.files.word.price
-                    : "Free"
+                    ? "| $" + contentData.files.word.price
+                    : ""
                 }}
               </v-btn>
             </div>
           </v-col>
 
           <v-col cols="12">
-            <div class="mb-4">
+            <div class="mb-4" v-if="isFree == false">
               <p v-if="!$auth.loggedIn">
                 <span class="mdi mdi-bell icon"></span>
                 <span @click="openAuthDialog('login')" class="login blue--text"
@@ -365,7 +365,7 @@
                 <span>to download and charge.</span>
               </p>
               <span v-else>
-                Your wallet charge is ${{ $auth.user.credit }}
+                Your wallet charge is ${{ $auth.user && $auth.user.credit }}
                 <nuxt-link
                   class="blue--text"
                   v-if="$auth.loggedIn"
@@ -513,7 +513,7 @@
 <script>
 import Breadcrumb from "../../../components/widgets/breadcrumb";
 import LastViews from "@/components/common/last-views";
-import RelatedCardBox from "./components/related-card-box";
+import RelatedCardBox from "@/components/paper/related-card-box.vue";
 import Category from "@/components/common/category";
 import PreviewGallery from "@/components/details/preview-gallery";
 import RelatedContent from "@/components/details/related-content";
@@ -542,7 +542,7 @@ export default {
       title: this.contentData.title,
     };
   },
-  async asyncData({req, params, $axios, redirect }) {
+  async asyncData({ req, params, $axios, redirect }) {
     // This could also be an action dispatch
     try {
       const content = await $axios.$get(`/api/v1/tests/${params.id}`);
@@ -812,46 +812,56 @@ export default {
     //Download file
 
     startDownload(type) {
-      if (this.$auth.loggedIn) {
-        this.download_loading = true;
-        let apiUrl = "";
-        if (type === "q_word")
-          apiUrl = `/api/v1/tests/download/${this.$route.params.id}/word`;
-        if (type === "q_pdf")
-          apiUrl = `/api/v1/tests/download/${this.$route.params.id}/pdf`;
-        if (type === "a_file")
-          apiUrl = `/api/v1/tests/download/${this.$route.params.id}/answer`;
-        this.$axios
-          .$get(apiUrl)
-          .then((response) => {
-            var FileSaver = require("file-saver");
-            FileSaver.saveAs(response.data.url, response.data.name);
-          })
-          .catch((err) => {
-            if (err.response.status == 400) {
-              if (
-                err.response.data.status == 0 &&
-                err.response.data.error == "creditNotEnough"
-              ) {
-                this.$toast.info("No enough credit");
-              }
-            } else if (err.response.status == 403) {
-              this.$router.push({ query: { auth_form: "login" } });
+      //if (this.$auth.loggedIn) {
+      this.download_loading = true;
+      let apiUrl = "";
+      if (type === "q_word")
+        apiUrl = `/api/v1/tests/download/${this.$route.params.id}/word`;
+      if (type === "q_pdf")
+        apiUrl = `/api/v1/tests/download/${this.$route.params.id}/pdf`;
+      if (type === "a_file")
+        apiUrl = `/api/v1/tests/download/${this.$route.params.id}/answer`;
+      this.$axios
+        .$get(apiUrl)
+        .then((response) => {
+          var FileSaver = require("file-saver");
+          FileSaver.saveAs(response.data.url, response.data.name);
+        })
+        .catch((err) => {
+          if (err.response.status == 400) {
+            if (
+              err.response.data.status == 0 &&
+              err.response.data.error == "creditNotEnough"
+            ) {
+              this.$toast.info("No enough credit");
             }
-            console.log(err);
-          })
-          .finally(() => {
-            this.download_loading = false;
-          });
-      } else {
-        this.openAuthDialog("login");
-      }
+          } else if (err.response.status == 403) {
+            this.openAuthDialog("login");
+            // this.$router.push({ query: { auth_form: "login" } });
+          }
+          console.log(err);
+        })
+        .finally(() => {
+          this.download_loading = false;
+        });
+      // } else {
+      //   this.openAuthDialog("login");
+      // }
     },
     //End download file
 
     openCrashReportDialog() {
       this.$refs.crash_report.dialog = true;
       this.$refs.crash_report.form.type = "test";
+    },
+    isFree() {
+      if (
+        this.contentData.files.answer.price > 0 &&
+        this.contentData.files.pdf.price > 0 &&
+        this.contentData.files.word.price > 0
+      )
+        return false;
+      else return true;
     },
   },
 };

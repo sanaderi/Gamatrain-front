@@ -87,10 +87,10 @@ export default {
     selectedItem: 1,
     showMore: false,
     items: [
-      { class: "exam", text: "Exam", icon: "icon-exam", link: "/search?type=azmoon" },
       { class: "test", text: "Paper", icon: "icon-paper", link: "/search?type=test" },
       { class: "content", text: "Multimedia", icon: "icon-multimedia", link: "/search?type=learnfiles" },
       { class: "faq", text: "Q & A", icon: "icon-q-a", link: "/search?type=question" },
+      { class: "exam", text: "Exam", icon: "icon-exam", link: "/search?type=azmoon" },
       { class: "textbook", text: "Tutorial", icon: "icon-tutorial", link: "/search?type=dars" },
       // { class: "school", text: "School", icon-school: "school" ,link:"/search?type=school",status:'disabled' },
       // { class: "tutor", text: "Tutor", icon: "icon-teacher" ,link:"/search?type=tutor",status:'disabled' },
@@ -101,6 +101,8 @@ export default {
 
 
 <style >
+
+
 #main-category {
   margin-top: 4rem;
 }
@@ -109,6 +111,13 @@ export default {
   color: #FFFFFF !important;
 }
 
+.category.box{
+    max-height: 30rem;
+    .card{
+      max-height: 20rem;
+    }
+  }
+
 @media (min-width:600px) {
   #main-category {
     margin-top: 6rem;
@@ -116,7 +125,9 @@ export default {
 }
 
 @media (min-width: 960px){
-  
+  .category.box{
+    max-height: 13rem;;
+  }
 }
 @media (min-width: 1264px){
   #main-category {

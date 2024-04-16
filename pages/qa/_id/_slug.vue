@@ -25,6 +25,19 @@
           <div class="detail my-md-8">
             <v-row>
               <v-col cols="12" md="9" class="pt-0 px-sm-3 pt-sm-3">
+                <!-- Ask question button -->
+                <div class="text-left d-block d-md-none">
+                  <v-btn
+                    rounded
+                    outlined
+                    small
+                    @click="openQuestionForm()"
+                    class="primary gama-text-body2 mb-2 mx-auto text-transform-none mb-6"
+                  >
+                    Ask Question
+                  </v-btn>
+                </div>
+                <!-- End ask question button -->
                 <!--Question section-->
                 <v-row>
                   <v-col cols="12" class="pt-0 px-sm-3 pt-sm-3">
@@ -33,7 +46,7 @@
                       <v-col cols="1" class="pr-0 d-none d-md-block">
                         <v-card
                           flat
-                          color="#F5F5F5"
+                          color="#EEEEEE"
                           class="d-flex fill-height text-center"
                           min-height="200"
                         >
@@ -76,11 +89,11 @@
                       <!--End score action-->
 
                       <v-col cols="12" md="11">
-                        <v-card color="#F5F5F5" flat class="fill-height">
+                        <v-card color="#EEEEEE" flat class="fill-height">
                           <v-card-text class="d-flex fill-height">
                             <v-row>
-                              <v-col cols="12" class=" px-sm-3">
-                                <h1 class="gama-text-h5   mb-2">
+                              <v-col cols="12" class="px-sm-3">
+                                <h1 class="gama-text-h5 mb-2">
                                   {{ contentData.title }}
                                 </h1>
 
@@ -115,29 +128,23 @@
                                         </p>
                                         <p class="text-h6">
                                           <span class="orange--text">
-                                            {{ findStatic(contentData.user_).qNum }}
+                                            {{ contentData.stats.qNum }}
                                             Question{{
-                                              calcPluralNoun(
-                                                findStatic(contentData.user_).qNum
-                                              )
+                                              calcPluralNoun(contentData.stats.qNum)
                                             }}
                                           </span>
                                           |
                                           <span class="green--text">
-                                            {{ findStatic(contentData.user_).aNum }}
+                                            {{ contentData.stats.aNum }}
                                             Answer{{
-                                              calcPluralNoun(
-                                                findStatic(contentData.user_).aNum
-                                              )
+                                              calcPluralNoun(contentData.stats.aNum)
                                             }}
                                           </span>
                                           |
                                           <span class="blue--text">
-                                            {{ findStatic(contentData.user_).score }}
+                                            {{ contentData.stats.score }}
                                             Score{{
-                                              calcPluralNoun(
-                                                findStatic(contentData.user_).score
-                                              )
+                                              calcPluralNoun(contentData.stats.score)
                                             }}
                                           </span>
                                         </p>
@@ -161,22 +168,14 @@
                                 </v-row>
 
                                 <p
-                                  class="mt-2 gama-text-body2"
+                                  class="mt-2 gama-text-body1"
                                   v-html="contentData.question.replace(/\n/g, '<br />')"
                                 />
                               </v-col>
 
-                              <v-col
-                                cols="12"
-                                class="px-sm-3 pb-sm-3"
-                                align-self="end"
-                              >
+                              <v-col cols="12" class="px-sm-3 pb-sm-3" align-self="end">
                                 <v-row>
-                                  <v-col
-                                    cols="7"
-                                    md="8"
-                                    class=" pb-sm-0 px-sm-3 pb-sm-3"
-                                  >
+                                  <v-col cols="7" md="8" class="pb-sm-0 px-sm-3 pb-sm-3">
                                     <div class="d-none d-md-block">
                                       <v-chip
                                         small
@@ -237,7 +236,11 @@
                                       <v-spacer />
                                     </div>
                                   </v-col>
-                                  <v-col cols="5" md="4" class="px-sm-0 pb-sm-0 text-right">
+                                  <v-col
+                                    cols="5"
+                                    md="4"
+                                    class="px-sm-0 pb-sm-0 text-right"
+                                  >
                                     <div class="d-none d-md-block">
                                       <v-spacer />
                                       <v-btn text class="simple-btn">
@@ -292,7 +295,7 @@
                   <v-col cols="3" md="2">
                     <h2 class="text-h5 text-md-h4">
                       {{ answer_list.length }}
-                      <span v-if="answer_list.lenght > 1">Answers</span>
+                      <span v-if="answer_list.length > 1">Answers</span>
                       <span v-else>Answer</span>
                     </h2>
                   </v-col>
@@ -303,13 +306,13 @@
 
                 <!--Answer section-->
                 <v-row>
-                  <v-col cols="12" class=" pt-0 px-sm-3 pt-sm-3">
+                  <v-col cols="12" class="pt-0 px-sm-3 pt-sm-3">
                     <v-row v-for="answer in answer_list" :key="answer.id">
                       <!--Score action-->
                       <v-col cols="1" class="pr-0 d-none d-md-block">
                         <v-card
                           flat
-                          color="#F5F5F5"
+                          color="#FAFAFA"
                           class="mb-4 d-flex fill-height text-center"
                           min-height="200"
                         >
@@ -394,13 +397,13 @@
 
                       <v-col cols="12" md="11">
                         <v-card
-                          :color="answer.selected == 1 ? '#5EFF8126' : '#F5F5F5'"
+                          :color="answer.selected == 1 ? '#5EFF8126' : '#FAFAFA'"
                           flat
                           class="fill-height"
                         >
                           <v-card-text class="d-flex fill-height">
                             <v-row>
-                              <v-col cols="12" class=" px-sm-3">
+                              <v-col cols="12" class="px-sm-3">
                                 <v-row>
                                   <v-col cols="10" class="pl-0 pl-sm-3">
                                     <div class="d-flex pbs-sm-0">
@@ -432,26 +435,20 @@
                                         </p>
                                         <p class="text-h6">
                                           <span class="orange--text">
-                                            {{ findStatic(answer.user_).qNum }} Question{{
-                                              calcPluralNoun(
-                                                findStatic(answer.user_).qNum
-                                              )
+                                            {{ answer.stats.qNum }} Question{{
+                                              calcPluralNoun(answer.stats.qNum)
                                             }}
                                           </span>
                                           |
                                           <span class="green--text">
-                                            {{ findStatic(answer.user_).aNum }} Answer{{
-                                              calcPluralNoun(
-                                                findStatic(answer.user_).aNum
-                                              )
+                                            {{ answer.stats.aNum }} Answer{{
+                                              calcPluralNoun(answer.stats.aNum)
                                             }}
                                           </span>
                                           |
                                           <span class="blue--text">
-                                            {{ findStatic(answer.user_).score }} Score{{
-                                              calcPluralNoun(
-                                                findStatic(answer.user_).score
-                                              )
+                                            {{ answer.stats.score }} Score{{
+                                              calcPluralNoun(answer.stats.score)
                                             }}
                                           </span>
                                         </p>
@@ -476,23 +473,15 @@
                               <v-col cols="12">
                                 <div>
                                   <p
-                                    class="mt-2 gama-text-body2"
+                                    class="mt-2 gama-text-body1"
                                     v-html="answer.answer.replace(/\n/g, '<br />')"
                                   />
                                 </div>
                               </v-col>
 
-                              <v-col
-                                cols="12"
-                                class="px-sm-3 pb-sm-3"
-                                align-self="end"
-                              >
+                              <v-col cols="12" class="px-sm-3 pb-sm-3" align-self="end">
                                 <v-row>
-                                  <v-col
-                                    cols="7"
-                                    md="6"
-                                    class="px-sm-3 pb-sm-3"
-                                  >
+                                  <v-col cols="7" md="6" class="px-sm-3 pb-sm-3">
                                     <v-btn
                                       text
                                       disabled
@@ -615,20 +604,22 @@
                     <v-divider class="my-3" />
                   </v-col>
                 </v-row>
-                <v-card color="#F5F5F5" flat>
+                <v-card color="#FFF" flat>
                   <v-card-text>
                     <validation-observer ref="observer" v-slot="{ invalid }">
                       <form @submit.prevent="submitReply">
                         <v-row>
-                          <v-col cols="12" class=" px-sm-3">
+                          <v-col cols="12" class="px-sm-3">
                             <validation-provider
                               v-slot="{ errors }"
                               name="your_answer"
                               rules="required|min:25"
                             >
-                              <v-text-field
+                              <v-textarea
                                 v-model="answer_form.answer"
                                 outlined
+                                :height="textAreaHeight"
+                                @click="increaseTextAreaHeight"
                                 :error-messages="errors"
                                 background-color="#ffffff"
                                 label="Your answer"
@@ -656,7 +647,7 @@
                                     <v-icon> mdi-paperclip </v-icon>
                                   </v-btn>
                                 </template>
-                              </v-text-field>
+                              </v-textarea>
                             </validation-provider>
                             <v-emoji-picker
                               v-show="emoji_box"
@@ -673,14 +664,25 @@
 
               <!--Similar questions-->
               <v-col cols="3" id="similar-question" class="d-none d-md-block">
-                <v-card color="#F5F5F5" class="fill-height" flat>
+                <div class="text-right">
+                  <v-btn
+                    rounded
+                    outlined
+                    large
+                    :small="$vuetify.breakpoint.xs"
+                    @click="openQuestionForm()"
+                    class="primary gama-text-body2 mb-2 mx-auto text-transform-none mx-auto"
+                  >
+                    Ask Question
+                  </v-btn>
+                </div>
+                <v-card color="#F5F5F5" flat>
                   <v-card-text>
                     <h2 class="text-h4 text-center">Related questions</h2>
                     <v-divider style="width: 80%" class="my-3 mx-auto" />
                     <div v-if="loading.similar_questions">
                       <v-skeleton-loader
                         v-for="i in 10"
-                        v-bind="attrs"
                         type="list-item"
                       ></v-skeleton-loader>
                     </div>
@@ -688,27 +690,27 @@
                       Opps! not found
                     </p>
                     <ul v-else>
-                      
                       <li
-                        v-for="question in similarQuestions.slice(0,10)"
+                        v-for="question in similarQuestions.slice(0, 10)"
                         :key="question.id"
-                        class="question-item gama-text-caption"
+                        class="question-item blue--text gama-text-body2"
                       >
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on, attrs }">
-                            <nuxt-link
-                              :to="`/qa/${question.id}/${$slugGenerator.convert(
-                                question.title
-                              )}`"
-                            >
-                              <span v-bind="attrs" v-on="on">
-                                {{ question.title }}
-                              </span>
-                            </nuxt-link>
-                          </template>
+                        <nuxt-link
+                          :to="`/qa/${question.id}/${$slugGenerator.convert(
+                            question.title
+                          )}`"
+                        >
+                          <span v-bind="attrs" v-on="on">
+                            {{ question.title }}
+                          </span>
+                        </nuxt-link>
+                      </li>
 
-                          <span>{{ question.title }}</span>
-                        </v-tooltip>
+                      <li
+                        @click="openQuestionForm()"
+                        class="question-item pointer gama-text-body2 primary--text mb-0"
+                      >
+                        Ask question
                       </li>
                     </ul>
                   </v-card-text>
@@ -860,6 +862,7 @@ export default {
   },
 
   data: () => ({
+    textAreaHeight: 10,
     rating: 4.5,
     contentData: [],
     breads: [
@@ -899,6 +902,9 @@ export default {
     similarQuestions: [],
   }),
   methods: {
+    increaseTextAreaHeight() {
+      this.textAreaHeight = 100;
+    },
     initBreadCrumb() {
       this.breads.push(
         {
@@ -920,6 +926,11 @@ export default {
     },
     openAuthDialog(val) {
       this.$router.push({ query: { auth_form: val } });
+    },
+
+    openQuestionForm() {
+      if (this.$auth.loggedIn) this.$router.push({ path: "/user/question/create" });
+      else this.openAuthDialog("login");
     },
 
     selectEmoji(emoji) {
@@ -1104,24 +1115,17 @@ export default {
 }
 
 #qa-details-content {
-  margin-bottom:2rem;
+  margin-bottom: 2rem;
   #similar-question {
     .question-item {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      margin-bottom: 1rem;
-      list-style-position: inside;
+      list-style-type: none;
+      margin-bottom: 2rem;
       font-weight: 400;
     }
 
-    .question-item::marker {
-      color: #ff9400 !important;
-    }
-
-    .v-skeleton-loader__list-item{
-      background:transparent!important;
-      height:1.8rem!important;
+    .v-skeleton-loader__list-item {
+      background: transparent !important;
+      height: 1.8rem !important;
       margin-bottom: 1rem;
     }
   }
