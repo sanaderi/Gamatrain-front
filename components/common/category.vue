@@ -1,80 +1,29 @@
 <template>
-  <div id="main-category">
+  <div id="main-category ">
     <!--   Start: category  main-container Desktop -->
-    <v-container class="d-sm-flex d-none py-0 ">
-      <v-row class="justify-center align-center category box mt-0 pb-0">
-        <v-col cols="1" sm="2" md="2" v-for="(item, category) in items" :key="category" :class="item.class"
-          class="card text-center pb-0">
-          <nuxt-link :to="item.link">
-            <v-list-item class="d-flex flex-column  pa-0">
-              <v-list-item-icon class="my-0 mx-auto  align-center justify-center p-icon">
-                <span :class="item.icon" class="icon"></span>
-              </v-list-item-icon>
-              <v-list-item-content class="mx-auto">
-                <v-list-item-title class="mx-auto cat-title" v-text="item.text"></v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </nuxt-link>
-        </v-col>
-      </v-row>
-    </v-container>
-    <!--   End: category    -->
-
-
-    <!--   Start: category  main-container Mobile -->
-    <v-container class="py-0 d-sm-none d-flex">
-      <v-row class="justify-center align-center category box">
-        <v-col v-for="(item, category) in items.slice(0, 5)" :key="category" :class="item.class" class="card" xs="3"
-          v-show="!showMore">
-          <nuxt-link :to="item.link">
-            <v-list-item class="d-flex flex-column mx-7">
-              <v-list-item-icon class="ma-0 d-flex align-center justify-center p-icon">
-                <span :class="item.icon" class="icon"></span>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title class="cat-title" v-text="item.text"></v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </nuxt-link>
-        </v-col>
-        <v-col xs="3" class="d-flex justify-center pa-0 ml-2">
-          <!--          <button-->
-          <!--            class="category-showmore"-->
-          <!--            @click="showMore = !showMore"-->
-          <!--            v-show="!showMore"-->
-          <!--          >-->
-          <!--            <nuxt-link to="">-->
-          <!--              <div class="category-more d-flex justify-center align-center ">-->
-          <!--                <i class="fa-solid fa-ellipsis cat-more-icon"></i>-->
-          <!--              </div>-->
-          <!--              <p class="mb-0 mr-1 cat-more-p">more</p>-->
-          <!--            </nuxt-link>-->
-          <!--          </button>-->
-        </v-col>
-        <div v-if="showMore" class="d-flex flex-wrap">
-          <v-col v-for="(item, category) in items.slice(0, 7)" :key="category" :class="item.class" class="card" xs="3">
-            <nuxt-link :to="item.link">
-              <v-list-item class="d-flex flex-column mx-7">
-                <v-list-item-icon class="ma-0 d-flex align-center justify-center p-icon">
-                  <span :class="item.icon" class="icon"></span>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.text"></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </nuxt-link>
-          </v-col>
-          <v-col xs="3" class="d-flex justify-start pa-0 ml-2">
-            <button class="category-showmore" @click="showMore = !showMore" v-show="showMore">
-              <nuxt-link to="">
-                <div class="category-more d-flex justify-center align-center mr-8">
-                  <i class="fa-solid fa-ellipsis cat-more-icon"></i>
+    <v-container id="main-category-container">
+      <v-row>
+        <v-col cols="12">
+          <v-sheet class="category-sheet mx-auto">
+            <v-slide-group multiple show-arrows>
+              <v-slide-item v-for="(item, category) in items" :key="category">
+                <div class="category-itm-content">
+                  <v-btn
+                    class="category-btn"
+                    :to="item.link"
+                    :color="item.color"
+                    depressed
+                  >
+                    <span :class="item.icon" class="icon white--text"></span>
+                  </v-btn>
+                  <div :style="`color:${item.color}`" class="category-text">
+                    {{ item.text }}
+                  </div>
                 </div>
-                <p class="mb-0 mr-8 cat-more-p">less</p>
-              </nuxt-link>
-            </button>
-          </v-col>
-        </div>
+              </v-slide-item>
+            </v-slide-group>
+          </v-sheet>
+        </v-col>
       </v-row>
     </v-container>
     <!--   End: category    -->
@@ -87,49 +36,189 @@ export default {
     selectedItem: 1,
     showMore: false,
     items: [
-      { class: "test", text: "Paper", icon: "icon-paper", link: "/search?type=test" },
-      { class: "content", text: "Multimedia", icon: "icon-multimedia", link: "/search?type=learnfiles" },
-      { class: "faq", text: "Q & A", icon: "icon-q-a", link: "/search?type=question" },
-      { class: "exam", text: "Exam", icon: "icon-exam", link: "/search?type=azmoon" },
-      { class: "textbook", text: "Tutorial", icon: "icon-tutorial", link: "/search?type=dars" },
-      // { class: "school", text: "School", icon-school: "school" ,link:"/search?type=school",status:'disabled' },
-      // { class: "tutor", text: "Tutor", icon: "icon-teacher" ,link:"/search?type=tutor",status:'disabled' },
+      {
+        class: "test",
+        color: "#01579b",
+        text: "Paper",
+        icon: "icon-paper",
+        link: "/search?type=test",
+      },
+      {
+        class: "content",
+        color: "#2e7d32",
+        text: "Multimedia",
+        icon: "icon-multimedia",
+        link: "/search?type=learnfiles",
+      },
+      {
+        class: "faq",
+        color: "#bf360c",
+        text: "Q & A",
+        icon: "icon-q-a",
+        link: "/search?type=question",
+      },
+      {
+        class: "exam",
+        color: "#5600e8",
+        text: "Exam",
+        icon: "icon-exam",
+        link: "/search?type=azmoon",
+      },
+      {
+        class: "textbook",
+        color: "#bd081c",
+        text: "Tutorial",
+        icon: "icon-tutorial",
+        link: "/search?type=dars",
+      },
+      {
+        class: "school",
+        color: "#a5673f",
+        text: "School",
+        icon: "icon-school",
+        link: "/school",
+        status: "disabled",
+      },
+      // {
+      //   class: "tutor",
+      //   color:"#8e24aa",
+      //   text: "Tutor",
+      //   icon: "icon-teacher",
+      //   link: "/search?type=tutor",
+      //   status: "disabled",
+      // },
     ],
   }),
 };
 </script>
 
+<style>
+#main-category-container {
+  margin-top: 6rem;
+  width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
 
-<style >
+  .category-sheet {
+    max-width: 100%;
+  }
 
+  .category-itm-content {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    text-align: center;
+  }
 
-#main-category {
-  margin-top: 4rem;
+  .category-btn {
+    border-radius: 15%;
+    height: 4rem;
+    min-width: 4rem !important;
+    width: 4rem !important;
+  }
+
+  .category-text {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-top: 0.5rem;
+  }
+
+  .icon {
+    font-size: 2.5rem !important;
+  }
 }
 
 #main-category .icon {
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
-.category.box{
-    max-height: 30rem;
-    
-  }
+@media (min-width: 600px) {
+  #main-category-container {
+    width: 55rem;
 
-@media (min-width:600px) {
-  #main-category {
-    margin-top: 6rem;
+
+    .category-itm-content {
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+      text-align: center;
+    }
+
+    .category-btn {
+      border-radius: 15%;
+      height: 5rem !important;
+      width: 5rem !important;
+    }
+
+    .category-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    .icon {
+      font-size: 3.5rem !important;
+    }
   }
 }
 
-@media (min-width: 960px){
-  .category.box{
-    max-height: 13rem;;
+@media (min-width: 960px) {
+  #main-category-container {
+    margin-top: 8rem;
+    width: 80rem;
+
+    .category-sheet {
+      max-width: 90%;
+    }
+
+    .category-itm-content {
+      margin-left: 2rem;
+      margin-right: 2rem;
+      text-align: center;
+    }
+
+    .category-btn {
+      border-radius: 15%;
+      height: 6rem !important;
+      width: 6rem !important;
+    }
+
+    .category-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    .icon {
+      font-size: 3.5rem !important;
+    }
   }
 }
-@media (min-width: 1264px){
-  #main-category {
-    margin-top: 0;
+@media (min-width: 1264px) {
+  #main-category-container {
+    margin-top: 2rem;
+    max-width: 80rem;
+    width: 80rem;
+
+    .category-itm-content {
+      margin-left: 2rem;
+      margin-right: 2rem;
+      text-align: center;
+    }
+
+    .category-btn {
+      border-radius: 15%;
+      height: 6rem;
+      width: 6rem;
+    }
+
+    .category-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    .icon {
+      font-size: 3.5rem !important;
+    }
   }
 }
 </style>
