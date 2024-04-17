@@ -93,7 +93,7 @@
                           <v-card-text class="d-flex fill-height">
                             <v-row>
                               <v-col cols="12" class="px-sm-3">
-                                <h1 class="gama-text-h5 mb-2">
+                                <h1 class="gama-text-h6 mb-2">
                                   {{ contentData.title }}
                                 </h1>
 
@@ -120,32 +120,33 @@
                                         </v-btn>
                                       </nuxt-link>
                                       <div class="pa-3 pt-0">
-                                        <p class="gama-text-button">
-                                          <strong v-if="contentData.name">
+                                        <p class="gama-text-h6">
+                                          <span v-if="contentData.name">
                                             {{ contentData.name }}
-                                          </strong>
-                                          <strong v-else> No name </strong>
+                                          </span>
+                                          <span v-else> No name </span>
                                         </p>
                                         <p class="text-h6">
-                                          <span class="orange--text">
+                                          <span v-show="contentData.stats.qNum>0">
+                                            <span class="orange--text">
                                             {{ contentData.stats.qNum }}
-                                            Question{{
-                                              calcPluralNoun(contentData.stats.qNum)
-                                            }}
+                                            Qn
                                           </span>
                                           |
-                                          <span class="green--text">
+                                          </span>
+                                          
+                                            <span class="green--text" v-show="contentData.stats.aNum>0">
                                             {{ contentData.stats.aNum }}
-                                            Answer{{
-                                              calcPluralNoun(contentData.stats.aNum)
-                                            }}
+                                            Ans
                                           </span>
+                                          <span v-show="contentData.stats.aNum>0 || contentData.stats.score>0">
                                           |
-                                          <span class="blue--text">
+                                          </span>
+                                          <span v-show="contentData.stats.score>0">
+                                            <span class="blue--text">
                                             {{ contentData.stats.score }}
-                                            Score{{
-                                              calcPluralNoun(contentData.stats.score)
-                                            }}
+                                            Score
+                                          </span>
                                           </span>
                                         </p>
                                       </div>
@@ -169,6 +170,7 @@
 
                                 <p
                                   class="mt-2 gama-text-body1"
+                                  ref="mathJaxEl"
                                   v-html="contentData.question.replace(/\n/g, '<br />')"
                                 />
                               </v-col>
@@ -403,7 +405,7 @@
                         >
                           <v-card-text class="d-flex fill-height">
                             <v-row>
-                              <v-col cols="12" class="px-sm-3">
+                              <v-col cols="12" class="px-sm-3 pb-0">
                                 <v-row>
                                   <v-col cols="10" class="pl-0 pl-sm-3">
                                     <div class="d-flex pbs-sm-0">
@@ -434,22 +436,19 @@
                                           <strong v-else> No name </strong>
                                         </p>
                                         <p class="text-h6">
-                                          <span class="orange--text">
-                                            {{ answer.stats.qNum }} Question{{
-                                              calcPluralNoun(answer.stats.qNum)
-                                            }}
-                                          </span>
+                                          <span v-show="answer.stats.qNum>0">
+                                            <span class="orange--text">
+                                              {{ answer.stats.qNum }} Qn
+                                            </span>
                                           |
-                                          <span class="green--text">
-                                            {{ answer.stats.aNum }} Answer{{
-                                              calcPluralNoun(answer.stats.aNum)
-                                            }}
                                           </span>
-                                          |
-                                          <span class="blue--text">
-                                            {{ answer.stats.score }} Score{{
-                                              calcPluralNoun(answer.stats.score)
-                                            }}
+                                          
+                                          <span class="green--text" v-show="answer.stats.aNum>0">
+                                            {{ answer.stats.aNum }} Ans </span>
+                                          <span v-show="answer.stats.score>0 || answer.stats.aNum>0"> |
+                                          </span >
+                                          <span class="blue--text" v-show="answer.stats.score">
+                                            {{ answer.stats.score }} Score
                                           </span>
                                         </p>
                                       </div>
@@ -470,10 +469,11 @@
                                   </v-col>
                                 </v-row>
                               </v-col>
-                              <v-col cols="12">
+                              <v-col cols="12" class="pt-0">
                                 <div>
                                   <p
                                     class="mt-2 gama-text-body1"
+                                    ref="mathJaxEl"
                                     v-html="answer.answer.replace(/\n/g, '<br />')"
                                   />
                                 </div>
@@ -841,6 +841,7 @@ export default {
   },
   head() {
     return {
+      script: [{ src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML` }],
       title: this.contentData.title,
     };
   },
@@ -859,6 +860,10 @@ export default {
     this.initBreadCrumb();
     this.reInit();
     this.getSimilarQuestions();
+
+    setTimeout(()=>{
+      this.renderMathJax();
+    },2000);
   },
 
   data: () => ({
@@ -1079,6 +1084,40 @@ export default {
         .catch((err) => {
           this.$toast.error("An error occured");
         });
+    },
+
+    renderMathJax() {
+      if (window.MathJax) {
+        window.MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [
+              ["$", "$"],
+              ["\(", "\)"],
+              ["\\(", "\\)"],
+              ["\\", "\\"],
+              ["(\\(", "\\))"],
+            ],
+            displayMath: [
+              ["$$", "$$"],
+              ["\[", "\]"],
+            ],
+            processEscapes: true,
+            processEnvironments: true,
+          },
+          // Center justify equations in code and markdown cells. Elsewhere
+          // we use CSS to left justify single line equations in code cells.
+          displayAlign: "center",
+          "HTML-CSS": {
+            styles: { ".MathJax_Display": { margin: 0 } },
+            linebreaks: { automatic: true },
+            availableFonts: ["Asana Math"],
+            preferredFont: "Asana Math",
+            webFont: "Asana Math-Web",
+            imageFont: null,
+          },
+        });
+        window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
+      }
     },
 
     //Crash report
