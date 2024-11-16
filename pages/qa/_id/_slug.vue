@@ -55,7 +55,13 @@
                               <v-btn
                                 icon
                                 x-large
-                                @click="submitScore('question', contentData.id, 'plus')"
+                                @click="
+                                  submitScore(
+                                    'question',
+                                    contentData.id,
+                                    'plus'
+                                  )
+                                "
                               >
                                 <v-icon size="88"> mdi-menu-up </v-icon>
                               </v-btn>
@@ -65,7 +71,13 @@
                               <v-btn
                                 icon
                                 x-large
-                                @click="submitScore('question', contentData.id, 'minus')"
+                                @click="
+                                  submitScore(
+                                    'question',
+                                    contentData.id,
+                                    'minus'
+                                  )
+                                "
                               >
                                 <v-icon size="88"> mdi-menu-down </v-icon>
                               </v-btn>
@@ -75,7 +87,12 @@
                               <v-btn
                                 icon
                                 width="100%"
-                                @click="openCrashReportDialog(contentData.id, 'question')"
+                                @click="
+                                  openCrashReportDialog(
+                                    contentData.id,
+                                    'question'
+                                  )
+                                "
                               >
                                 <v-icon> mdi-alert-octagon-outline </v-icon>
                               </v-btn>
@@ -127,26 +144,38 @@
                                           <span v-else> No name </span>
                                         </p>
                                         <p class="text-h6">
-                                          <span v-show="contentData.stats.qNum>0">
+                                          <span
+                                            v-show="contentData.stats.qNum > 0"
+                                          >
                                             <span class="orange--text">
-                                            {{ contentData.stats.qNum }}
-                                            Qn
+                                              {{ contentData.stats.qNum }}
+                                              Qn
+                                            </span>
+                                            |
                                           </span>
-                                          |
-                                          </span>
-                                          
-                                            <span class="green--text" v-show="contentData.stats.aNum>0">
+
+                                          <span
+                                            class="green--text"
+                                            v-show="contentData.stats.aNum > 0"
+                                          >
                                             {{ contentData.stats.aNum }}
                                             Ans
                                           </span>
-                                          <span v-show="contentData.stats.aNum>0 || contentData.stats.score>0">
-                                          |
+                                          <span
+                                            v-show="
+                                              contentData.stats.aNum > 0 ||
+                                              contentData.stats.score > 0
+                                            "
+                                          >
+                                            |
                                           </span>
-                                          <span v-show="contentData.stats.score>0">
+                                          <span
+                                            v-show="contentData.stats.score > 0"
+                                          >
                                             <span class="blue--text">
-                                            {{ contentData.stats.score }}
-                                            Score
-                                          </span>
+                                              {{ contentData.stats.score }}
+                                              Score
+                                            </span>
                                           </span>
                                         </p>
                                       </div>
@@ -163,7 +192,9 @@
                                       <v-icon class="mr-1">
                                         mdi-message-reply-text
                                       </v-icon>
-                                      <span class="d-none d-md-inline">Chat</span>
+                                      <span class="d-none d-md-inline"
+                                        >Chat</span
+                                      >
                                     </v-btn>
                                   </v-col>
                                 </v-row>
@@ -171,13 +202,26 @@
                                 <p
                                   class="mt-2 gama-text-body1"
                                   ref="mathJaxEl"
-                                  v-html="contentData.question.replace(/\n/g, '<br />')"
+                                  v-html="
+                                    contentData.question.replace(
+                                      /\n/g,
+                                      '<br />'
+                                    )
+                                  "
                                 />
                               </v-col>
 
-                              <v-col cols="12" class="px-sm-3 pb-sm-3" align-self="end">
+                              <v-col
+                                cols="12"
+                                class="px-sm-3 pb-sm-3"
+                                align-self="end"
+                              >
                                 <v-row>
-                                  <v-col cols="7" md="8" class="pb-sm-0 px-sm-3 pb-sm-3">
+                                  <v-col
+                                    cols="7"
+                                    md="8"
+                                    class="pb-sm-0 px-sm-3 pb-sm-3"
+                                  >
                                     <div class="d-none d-md-block">
                                       <v-chip
                                         small
@@ -210,7 +254,11 @@
                                       <v-btn
                                         icon
                                         @click="
-                                          submitScore('question', contentData.id, 'plus')
+                                          submitScore(
+                                            'question',
+                                            contentData.id,
+                                            'plus'
+                                          )
                                         "
                                       >
                                         <v-icon size="40"> mdi-menu-up </v-icon>
@@ -221,10 +269,16 @@
                                       <v-btn
                                         icon
                                         @click="
-                                          submitScore('question', contentData.id, 'minus')
+                                          submitScore(
+                                            'question',
+                                            contentData.id,
+                                            'minus'
+                                          )
                                         "
                                       >
-                                        <v-icon size="40"> mdi-menu-down </v-icon>
+                                        <v-icon size="40">
+                                          mdi-menu-down
+                                        </v-icon>
                                       </v-btn>
                                       <!--End score action sm and xs-->
 
@@ -233,7 +287,9 @@
                                         <v-icon size="20"> mdi-reply </v-icon>
                                       </v-btn>
                                       <v-btn icon>
-                                        <v-icon size="20"> mdi-comment-plus </v-icon>
+                                        <v-icon size="20">
+                                          mdi-comment-plus
+                                        </v-icon>
                                       </v-btn>
                                       <v-spacer />
                                     </div>
@@ -246,20 +302,30 @@
                                     <div class="d-none d-md-block">
                                       <v-spacer />
                                       <v-btn text class="simple-btn">
-                                        <v-icon class="mr-1"> mdi-calendar-month </v-icon>
-                                        {{ $moment(contentData.subdate).fromNow() }}
+                                        <v-icon class="mr-1">
+                                          mdi-calendar-month
+                                        </v-icon>
+                                        {{
+                                          $moment(contentData.subdate).fromNow()
+                                        }}
                                       </v-btn>
                                       <v-btn text class="simple-btn">
                                         <v-icon class="mr-1">
                                           mdi-clock-time-five-outline
                                         </v-icon>
-                                        {{ $moment(contentData.subdate).format("HH:mm") }}
+                                        {{
+                                          $moment(contentData.subdate).format(
+                                            "HH:mm"
+                                          )
+                                        }}
                                       </v-btn>
                                     </div>
 
                                     <div class="d-inline d-md-none px-sm-0">
                                       <v-btn icon>
-                                        <v-icon size="20"> mdi-bookmark </v-icon>
+                                        <v-icon size="20">
+                                          mdi-bookmark
+                                        </v-icon>
                                       </v-btn>
                                       <v-btn
                                         icon
@@ -333,7 +399,9 @@
                               <v-btn
                                 icon
                                 x-large
-                                @click="submitScore('reply', answer.id, 'minus')"
+                                @click="
+                                  submitScore('reply', answer.id, 'minus')
+                                "
                               >
                                 <v-icon size="88"> mdi-menu-down </v-icon>
                               </v-btn>
@@ -352,10 +420,13 @@
                                     v-on="on"
                                     @click="selectCorrectAnswer(answer.id)"
                                     v-if="
-                                      contentData.owner == true && answer.selected == 0
+                                      contentData.owner == true &&
+                                      answer.selected == 0
                                     "
                                   >
-                                    <v-icon size="38" color="green"> mdi-check </v-icon>
+                                    <v-icon size="38" color="green">
+                                      mdi-check
+                                    </v-icon>
                                   </v-btn>
                                 </template>
                                 <span>Select correct answer</span>
@@ -365,7 +436,9 @@
                               <v-btn
                                 icon
                                 width="100%"
-                                @click="openEditReplyDialog(answer.id, answer.answer)"
+                                @click="
+                                  openEditReplyDialog(answer.id, answer.answer)
+                                "
                                 v-if="answer.owner == true"
                               >
                                 <v-icon> mdi-pencil </v-icon>
@@ -384,7 +457,12 @@
                               <v-btn
                                 icon
                                 width="100%"
-                                @click="openCrashReportDialog(answer.id, 'questionReply')"
+                                @click="
+                                  openCrashReportDialog(
+                                    answer.id,
+                                    'questionReply'
+                                  )
+                                "
                               >
                                 <v-icon> mdi-alert-octagon-outline </v-icon>
                               </v-btn>
@@ -399,7 +477,9 @@
 
                       <v-col cols="12" md="11">
                         <v-card
-                          :color="answer.selected == 1 ? '#5EFF8126' : '#FAFAFA'"
+                          :color="
+                            answer.selected == 1 ? '#5EFF8126' : '#FAFAFA'
+                          "
                           flat
                           class="fill-height"
                         >
@@ -436,18 +516,31 @@
                                           <strong v-else> No name </strong>
                                         </p>
                                         <p class="text-h6">
-                                          <span v-show="answer.stats.qNum>0">
+                                          <span v-show="answer.stats.qNum > 0">
                                             <span class="orange--text">
                                               {{ answer.stats.qNum }} Qn
                                             </span>
-                                          |
+                                            |
                                           </span>
-                                          
-                                          <span class="green--text" v-show="answer.stats.aNum>0">
-                                            {{ answer.stats.aNum }} Ans </span>
-                                          <span v-show="answer.stats.score>0 || answer.stats.aNum>0"> |
-                                          </span >
-                                          <span class="blue--text" v-show="answer.stats.score">
+
+                                          <span
+                                            class="green--text"
+                                            v-show="answer.stats.aNum > 0"
+                                          >
+                                            {{ answer.stats.aNum }} Ans
+                                          </span>
+                                          <span
+                                            v-show="
+                                              answer.stats.score > 0 ||
+                                              answer.stats.aNum > 0
+                                            "
+                                          >
+                                            |
+                                          </span>
+                                          <span
+                                            class="blue--text"
+                                            v-show="answer.stats.score"
+                                          >
                                             {{ answer.stats.score }} Score
                                           </span>
                                         </p>
@@ -464,7 +557,9 @@
                                       <v-icon class="mr-1">
                                         mdi-message-reply-text
                                       </v-icon>
-                                      <span class="d-none d-md-inline">Chat</span>
+                                      <span class="d-none d-md-inline"
+                                        >Chat</span
+                                      >
                                     </v-btn>
                                   </v-col>
                                 </v-row>
@@ -474,28 +569,46 @@
                                   <p
                                     class="mt-2 gama-text-body1"
                                     ref="mathJaxEl"
-                                    v-html="answer.answer.replace(/\n/g, '<br />')"
+                                    v-html="
+                                      answer.answer.replace(/\n/g, '<br />')
+                                    "
                                   />
                                 </div>
                               </v-col>
 
-                              <v-col cols="12" class="px-sm-3 pb-sm-3" align-self="end">
+                              <v-col
+                                cols="12"
+                                class="px-sm-3 pb-sm-3"
+                                align-self="end"
+                              >
                                 <v-row>
-                                  <v-col cols="7" md="6" class="px-sm-3 pb-sm-3">
+                                  <v-col
+                                    cols="7"
+                                    md="6"
+                                    class="px-sm-3 pb-sm-3"
+                                  >
                                     <v-btn
                                       text
                                       disabled
                                       plain
                                       class="pl-0 simple-btn d-none d-md-block"
                                     >
-                                      <v-icon class="mr-1"> mdi-comment-plus </v-icon>
+                                      <v-icon class="mr-1">
+                                        mdi-comment-plus
+                                      </v-icon>
                                       Add comment
                                     </v-btn>
                                     <div class="d-flex d-md-none">
                                       <!--Score action sm and xs-->
                                       <v-btn
                                         icon
-                                        @click="submitScore('reply', answer.id, 'plus')"
+                                        @click="
+                                          submitScore(
+                                            'reply',
+                                            answer.id,
+                                            'plus'
+                                          )
+                                        "
                                       >
                                         <v-icon size="40"> mdi-menu-up </v-icon>
                                       </v-btn>
@@ -504,9 +617,17 @@
                                       </p>
                                       <v-btn
                                         icon
-                                        @click="submitScore('reply', answer.id, 'minus')"
+                                        @click="
+                                          submitScore(
+                                            'reply',
+                                            answer.id,
+                                            'minus'
+                                          )
+                                        "
                                       >
-                                        <v-icon size="40"> mdi-menu-down </v-icon>
+                                        <v-icon size="40">
+                                          mdi-menu-down
+                                        </v-icon>
                                       </v-btn>
                                       <!--End score action sm and xs-->
 
@@ -523,12 +644,17 @@
                                         <v-icon size="20"> mdi-check </v-icon>
                                       </v-btn>
                                       <v-btn icon disabled>
-                                        <v-icon size="20"> mdi-comment-plus </v-icon>
+                                        <v-icon size="20">
+                                          mdi-comment-plus
+                                        </v-icon>
                                       </v-btn>
                                       <v-btn
                                         icon
                                         @click="
-                                          openEditReplyDialog(answer.id, answer.answer)
+                                          openEditReplyDialog(
+                                            answer.id,
+                                            answer.answer
+                                          )
                                         "
                                         v-if="answer.owner == true"
                                       >
@@ -538,7 +664,11 @@
                                       <!--Delete button -->
                                       <v-btn
                                         icon
-                                        @click="openDeleteReplyConfirmDialog(answer.id)"
+                                        @click="
+                                          openDeleteReplyConfirmDialog(
+                                            answer.id
+                                          )
+                                        "
                                         v-if="answer.owner == true"
                                       >
                                         <v-icon size="20"> mdi-delete </v-icon>
@@ -557,14 +687,20 @@
                                     <div class="d-none d-md-block">
                                       <v-spacer />
                                       <v-btn text class="simple-btn">
-                                        <v-icon class="mr-1"> mdi-calendar-month </v-icon>
+                                        <v-icon class="mr-1">
+                                          mdi-calendar-month
+                                        </v-icon>
                                         {{ $moment(answer.subdate).fromNow() }}
                                       </v-btn>
                                       <v-btn text class="simple-btn">
                                         <v-icon class="mr-1">
                                           mdi-clock-time-five-outline
                                         </v-icon>
-                                        {{ $moment(answer.subdate).format("HH:mm") }}
+                                        {{
+                                          $moment(answer.subdate).format(
+                                            "HH:mm"
+                                          )
+                                        }}
                                       </v-btn>
                                     </div>
 
@@ -640,8 +776,14 @@
                                   </v-btn>
                                 </template>
                                 <template slot="prepend">
-                                  <v-btn large icon @click="emoji_box = !emoji_box">
-                                    <v-icon> mdi-emoticon-excited-outline </v-icon>
+                                  <v-btn
+                                    large
+                                    icon
+                                    @click="emoji_box = !emoji_box"
+                                  >
+                                    <v-icon>
+                                      mdi-emoticon-excited-outline
+                                    </v-icon>
                                   </v-btn>
                                   <v-btn large icon disabled>
                                     <v-icon> mdi-paperclip </v-icon>
@@ -686,7 +828,10 @@
                         type="list-item"
                       ></v-skeleton-loader>
                     </div>
-                    <p v-else-if="similarQuestions.num == 0" class="text-center">
+                    <p
+                      v-else-if="similarQuestions.num == 0"
+                      class="text-center"
+                    >
                       Opps! not found
                     </p>
                     <ul v-else>
@@ -762,7 +907,11 @@
                         </v-btn>
                       </template>
                       <template slot="prepend">
-                        <v-btn large icon @click="edit_emoji_box = !edit_emoji_box">
+                        <v-btn
+                          large
+                          icon
+                          @click="edit_emoji_box = !edit_emoji_box"
+                        >
                           <v-icon> mdi-emoticon-excited-outline </v-icon>
                         </v-btn>
                         <v-btn large icon disabled>
@@ -771,7 +920,10 @@
                       </template>
                     </v-text-field>
                   </validation-provider>
-                  <v-emoji-picker v-show="edit_emoji_box" @select="selectEmoji" />
+                  <v-emoji-picker
+                    v-show="edit_emoji_box"
+                    @select="selectEmoji"
+                  />
                 </v-col>
               </v-row>
             </form>
@@ -841,7 +993,9 @@ export default {
   },
   head() {
     return {
-      script: [{ src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML` }],
+      script: [
+        { src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML` },
+      ],
       title: this.contentData.title,
     };
   },
@@ -861,9 +1015,9 @@ export default {
     this.reInit();
     this.getSimilarQuestions();
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.renderMathJax();
-    },2000);
+    }, 2000);
   },
 
   data: () => ({
@@ -934,7 +1088,8 @@ export default {
     },
 
     openQuestionForm() {
-      if (this.$auth.loggedIn) this.$router.push({ path: "/user/question/create" });
+      if (this.$auth.loggedIn)
+        this.$router.push({ path: "/user/question/create" });
       else this.openAuthDialog("login");
     },
 
@@ -955,11 +1110,15 @@ export default {
       this.answer_form.id = this.$route.params.id;
 
       this.$axios
-        .$post("/api/v1/questionReplies", querystring.stringify(this.answer_form), {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        })
+        .$post(
+          "/api/v1/questionReplies",
+          querystring.stringify(this.answer_form),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        )
         .then((response) => {
           this.reInit();
           this.answer_form.answer = "";
@@ -1051,7 +1210,8 @@ export default {
     async submitScore(content_type, id, type) {
       if (this.$auth.loggedIn) {
         var api = `/api/v1/questions/score/${id}/${type}`;
-        if (content_type == "reply") api = `/api/v1/questionReplies/score/${id}/${type}`;
+        if (content_type == "reply")
+          api = `/api/v1/questionReplies/score/${id}/${type}`;
 
         await this.$axios
           .$post(api)
@@ -1116,7 +1276,11 @@ export default {
             imageFont: null,
           },
         });
-        window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
+        window.MathJax.Hub.Queue([
+          "Typeset",
+          window.MathJax.Hub,
+          this.$refs.mathJaxEl,
+        ]);
       }
     },
 
