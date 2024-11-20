@@ -268,6 +268,39 @@
                       </validation-provider>
                     </v-col>
 
+                    <v-col cols="12" md="4">
+                      <validation-provider v-slot="{validate,errors}"
+                                           name="file_answer"
+                                           ref="file_answer_provider"
+                                           rules="mimes:application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                      >
+                        <v-file-input
+                          dense
+                          v-model="file_answer"
+                          label="Answer file"
+                          :prepend-icon="null"
+                          :loading="file_answer_loading"
+                          color="blue"
+                          accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                          @change="uploadFile('file_answer',$event)"
+                          prepend-inner-icon="mdi-file"
+                          append-icon="mdi-folder-open"
+                          outlined
+                          :error-messages="errors"
+                        >
+                          <template slot="append-outer">
+                            <v-btn small icon
+                                   @click="startDownload('a_file')"
+                                   v-show="paperData.files.answer.exist">
+                              <v-icon>
+                                mdi-download
+                              </v-icon>
+                            </v-btn>
+                          </template>
+                        </v-file-input>
+                      </validation-provider>
+                    </v-col>
+
                     <v-col cols="12" v-if="extraAttr.length">
                       <v-row
                         v-for="(item,index) in extraAttr"
@@ -390,9 +423,11 @@ export default {
       //File section
       file_pdf: null,
       file_word: null,
+      file_answer: null,
 
       file_pdf_loading: false,
       file_word_loading: false,
+      file_answer_loading: false,
       file_extra_loading: false,
       //End file section
 
@@ -687,6 +722,14 @@ export default {
         formData.append('file', value);
         this.file_word_loading = true;
         this.loading.form=true;
+      } else if (file_name == 'file_answer') {
+        const {valid} = await this.$refs.file_answer_provider.validate(value);
+        if (!valid)
+          return;
+
+        formData.append('file', value);
+        this.file_answer_loading = true;
+        this.loading.form=true;
       } else if (file_name == 'file_extra') {
         formData.append('file', value);
         // this.file_extra_loading = true;
@@ -705,6 +748,8 @@ export default {
           this.form.file_pdf = response.data[0].file.name;
         else if (file_name == 'file_word')
           this.form.file_word = response.data[0].file.name;
+        else if (file_name == 'file_answer')
+          this.form.file_answer = response.data[0].file.name;
         else if (file_name == 'file_extra')
           this.extraAttr[index].file = response.data[0].file.name;
       }).catch(err => {
@@ -712,6 +757,7 @@ export default {
       }).finally(() => {
         this.file_pdf_loading = false;
         this.file_word_loading = false;
+        this.file_answer_loading = false;
         this.loading.form=false;
       })
       // }
