@@ -62,7 +62,9 @@
                     <v-chip class="ma-1">
                       {{ contentData.edu_month_title }}
                     </v-chip>
-                    <v-chip class="ma-1">
+                    <v-chip
+                     :to="`/search?type=test&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}&edu_year=${contentData.edu_year}`"
+                     class="ma-1">
                       {{ contentData.edu_year }}
                     </v-chip>
                   </div>

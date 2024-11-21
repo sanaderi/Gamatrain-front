@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--Mobile filter-->
-    <v-row justify="center" class="d-block d-md-none">
+    <v-row justify="center" class="d-block d-md-none" v-if="$vuetify.breakpoint.smAndDown">
       <v-dialog
         v-model="dialog"
         fullscreen
@@ -62,7 +62,7 @@
           <v-col md="3" lg="3" class="d-none d-md-block">
             <v-card flat color="#f5f5f5" style="position: sticky; top: 1rem">
               <v-card-text>
-                <search-filter ref="side_filter" :setBreadCrumbs.sync="breadcrumbs" />
+                <search-filter   ref="side_filter" :setBreadCrumbs.sync="breadcrumbs" />
               </v-card-text>
             </v-card>
           </v-col>

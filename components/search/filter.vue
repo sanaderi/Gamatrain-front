@@ -425,6 +425,7 @@ export default {
       pdf_checkbox_val: false,
       free_checkbox_val: false,
       answer_checkbox_val: false,
+      loadtime:true,
 
       applied_filter: {
         select_section_title: "",
@@ -543,6 +544,7 @@ export default {
         this.getFilterList(params, "base");
       } else {
         this.applied_filter.select_section_title = "";
+        this.loadtime=false
       }
     },
     base_val(val) {
@@ -598,6 +600,7 @@ export default {
       }
     },
   },
+
   methods: {
     onScroll() {
       this.scrollInvoked++;
@@ -748,6 +751,8 @@ export default {
           ).title;
       } else {
         this.applied_filter.select_base_title = "";
+        this.loadtime=false
+
       }
     },
 
@@ -777,6 +782,8 @@ export default {
           ).title;
       } else {
         this.applied_filter.select_topic_title = "";
+         this.loadtime=false
+
       }
     },
 
@@ -793,7 +800,11 @@ export default {
         this.applied_filter.select_topic_title = this.filter.topic_list.find(
           (x) => x.id === this.topic_val
         ).title;
-      else this.applied_filter.select_topic_title = "";
+      else {
+this.applied_filter.select_topic_title = "";
+                this.loadtime=false
+
+      }
     },
     //Change topic val option
 
@@ -832,6 +843,7 @@ export default {
 
     //Update router query params
     updateQueryParams() {
+      if (this.loadtime) return;
       const query = { type: this.$route.query.type };
       if (this.section_val !== 0) {
         query.section = this.section_val;
