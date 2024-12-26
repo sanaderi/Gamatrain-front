@@ -4,20 +4,22 @@
       <v-row>
         <v-col cols="12" class="pl-5">
           <span class="icon icong-learnfiles text-h3 teal--text"></span>
-          <span class="text-h4 teal--text">
-            Multimedia submission form
-          </span>
+          <span class="text-h4 teal--text"> Multimedia submission form </span>
         </v-col>
       </v-row>
       <v-card class="mt-3">
         <v-card-text class="px-0 px-sm-8 px-md-4">
           <v-card-text>
             <v-card flat class="mt-3">
-              <validation-observer ref="observer" v-slot="{invalid}">
+              <validation-observer ref="observer" v-slot="{ invalid }">
                 <form @submit.prevent="submitContent">
                   <v-row>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="level" rules="required">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="level"
+                        rules="required"
+                      >
                         <v-autocomplete
                           dense
                           v-model="form.section"
@@ -31,7 +33,11 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="grade" rules="required">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="grade"
+                        rules="required"
+                      >
                         <v-autocomplete
                           dense
                           v-model="form.base"
@@ -45,8 +51,11 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="lesson"
-                                           rules="required">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="lesson"
+                        rules="required"
+                      >
                         <v-autocomplete
                           dense
                           :items="lesson_list"
@@ -60,12 +69,24 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="topic" rules="required">
-                        <topic-selector ref="topic-selector" :topic-list="topic_list" @selectTopic="selectTopic"/>
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="topic"
+                        rules="required"
+                      >
+                        <topic-selector
+                          ref="topic-selector"
+                          :topic-list="topic_list"
+                          @selectTopic="selectTopic"
+                        />
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="title" rules="required">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="title"
+                        rules="required"
+                      >
                         <v-text-field
                           dense
                           v-model="form.title"
@@ -76,8 +97,11 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="description"
-                                           rules="required|min:70">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="description"
+                        rules="required|min:70"
+                      >
                         <v-textarea
                           dense
                           v-model="form.description"
@@ -148,9 +172,12 @@
                     <!--                        label="Duration(min)"/>-->
                     <!--                    </v-col>-->
 
-
                     <v-col cols="12" md="4">
-                      <validation-provider v-slot="{errors}" name="content_type" rules="required">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="content_type"
+                        rules="required"
+                      >
                         <v-autocomplete
                           dense
                           :items="content_type_list"
@@ -165,7 +192,8 @@
                     </v-col>
                     <v-col cols="12" md="4">
                       <validation-provider
-                        v-slot="{validate,errors}" name="multimedia_file"
+                        v-slot="{ validate, errors }"
+                        name="multimedia_file"
                         rules="required|mimes:video/*,audio/*,application/exe,application/zip,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats,officedocument.presentationml.presentation"
                         ref="file_provider"
                       >
@@ -177,7 +205,7 @@
                           color="red"
                           v-model="multimedia_file"
                           accept=".mp4,.avi,.m4a,.mpg,.flv,.docx,.pptx,.pdf,.exe,.apk,.mp3,.wave,.acc,.swf,.gif,.zip"
-                          @change="uploadFile('file',$event)"
+                          @change="uploadFile('file', $event)"
                           prepend-inner-icon="mdi-play-box"
                           append-icon="mdi-folder-open"
                           outlined
@@ -185,9 +213,8 @@
                       </validation-provider>
                     </v-col>
 
-
                     <v-col cols="12">
-                      <v-divider class="my-3"/>
+                      <v-divider class="my-3" />
 
                       <p class="text-h5">Content cover</p>
                       <p class="text-h6">
@@ -195,13 +222,30 @@
                       </p>
                     </v-col>
                     <v-col cols="12" md="4">
-                      <v-text-field type="number" min="1" label="From page" dense outlined v-model="form.from_page"/>
+                      <v-text-field
+                        type="number"
+                        min="1"
+                        label="From page"
+                        dense
+                        outlined
+                        v-model="form.from_page"
+                      />
                     </v-col>
                     <v-col cols="12" md="4">
-                      <v-text-field type="number" min="1" label="To page" dense outlined v-model="form.to_page"/>
+                      <v-text-field
+                        type="number"
+                        min="1"
+                        label="To page"
+                        dense
+                        outlined
+                        v-model="form.to_page"
+                      />
                     </v-col>
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}" name="word_question_answer_file">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="word_question_answer_file"
+                      >
                         <v-checkbox
                           dense
                           v-model="form.free_available"
@@ -212,20 +256,28 @@
                     </v-col>
 
                     <v-col cols="12" md="6" class="pb-0">
-                      <v-btn type="submit"
-                             :disabled="invalid"
-                             :loading="loading.form"
-                             lg color="success" block>
+                      <v-btn
+                        type="submit"
+                        :disabled="invalid"
+                        :loading="loading.form"
+                        lg
+                        color="success"
+                        block
+                      >
                         Submit
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
-                      <v-btn lg outlined color="error" to="/user/multimedia" block>
+                      <v-btn
+                        lg
+                        outlined
+                        color="error"
+                        to="/user/multimedia"
+                        block
+                      >
                         Discard
                       </v-btn>
                     </v-col>
-
-
                   </v-row>
                 </form>
               </validation-observer>
@@ -238,33 +290,32 @@
 </template>
 
 <script>
-
-import {ValidationObserver, ValidationProvider} from "vee-validate";
+import { ValidationObserver, ValidationProvider } from "vee-validate";
 import TopicSelector from "@/components/form/topic-selector";
 
 export default {
-  layout: 'dashboard_layout',
+  layout: "dashboard_layout",
   name: "add-multimedia",
   data() {
     return {
       form: {
-        level: '',
-        grade: '',
-        lesson: '',
+        section: "",
+        base: "",
+        lesson: "",
         topics: [],
-        content_type: '',
+        content_type: "",
         // online_teaching:false,
         // date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
         // teaching_time:null,
-        from_page: '',
-        to_page: '',
+        from_page: "",
+        to_page: "",
         free_agreement: 0,
-        title: '',
-        description: '',
-        file: ''
+        title: "",
+        description: "",
+        file: "",
       },
 
-      multimedia_file:null,
+      multimedia_file: null,
 
       // timepicker_menu:false,
       section_list: [],
@@ -274,274 +325,280 @@ export default {
       topic_list: [],
       content_type_list: [],
       answer_status_list: [
-        {id: 0, title: "Has answer"},
-        {id: 1, title: "Has key answer"},
-        {id: 2, title: "Has descriptive answer"},
+        { id: 0, title: "Has answer" },
+        { id: 1, title: "Has key answer" },
+        { id: 2, title: "Has descriptive answer" },
       ],
       test_level_list: [
         {
-          id: '1',
-          title: 'Simple'
+          id: "1",
+          title: "Simple",
         },
         {
-          id: '2',
-          title: 'Medium'
+          id: "2",
+          title: "Medium",
         },
         {
-          id: '3',
-          title: 'Hard'
+          id: "3",
+          title: "Hard",
         },
       ],
-      year_list: [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013],
+      year_list: [
+        2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013,
+      ],
       month_list: [
-        {id: 1, title: "January"},
-        {id: 2, title: "February"},
-        {id: 3, title: "March"},
-        {id: 4, title: "April"},
-        {id: 5, title: "May"},
-        {id: 6, title: "June"},
-        {id: 7, title: "July"},
-        {id: 8, title: "August"},
-        {id: 9, title: "September"},
-        {id: 10, title: "October"},
-        {id: 11, title: "November"},
-        {id: 12, title: "December"},
+        { id: 1, title: "January" },
+        { id: 2, title: "February" },
+        { id: 3, title: "March" },
+        { id: 4, title: "April" },
+        { id: 5, title: "May" },
+        { id: 6, title: "June" },
+        { id: 7, title: "July" },
+        { id: 8, title: "August" },
+        { id: 9, title: "September" },
+        { id: 10, title: "October" },
+        { id: 11, title: "November" },
+        { id: 12, title: "December" },
       ],
       state_list: [],
       area_list: [],
       school_list: [],
 
-
       //Handle loading object
-      loading:{
-        file:false,//Upload file
-        form:false,//Submit multimedia form
-      }
-    }
+      loading: {
+        file: false, //Upload file
+        form: false, //Submit multimedia form
+      },
+    };
   },
   head() {
     return {
-      title: 'Multimedia submission'
-    }
+      title: "Multimedia submission",
+    };
   },
   components: {
     TopicSelector,
     ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
   },
   mounted() {
-    this.getTypeList('section');
-    this.getTypeList('content_type')
-    this.getTypeList('state')
+    this.getTypeList("section");
+    this.getTypeList("content_type");
+    this.getTypeList("state");
   },
   watch: {
     "form.section"(val) {
-      this.form.grade = '';
-      this.form.lesson = '';
+      this.$store.commit("user/setCurriculum", val);
+
+      this.form.grade = "";
+      this.form.lesson = "";
       this.form.topics = [];
       this.grade_list = [];
       this.lesson_list = [];
       this.topic_list = [];
 
-      this.getTypeList('base', val);
-      if (this.form.area)
-        this.getTypeList('school');
+      this.getTypeList("base", val);
+      if (this.form.area) this.getTypeList("school");
     },
     "form.base"(val) {
-      this.form.lesson = '';
-      if (val)
-        this.getTypeList('lesson', val);
+      this.$store.commit("user/setGrade", val);
+
+      this.form.lesson = "";
+      if (val) this.getTypeList("lesson", val);
     },
     "form.lesson"(val) {
-      if (val){
-        this.getTypeList('topic', val);
-        this.$refs["topic-selector"].lesson_selected=true;
-      }
-      else {
+      this.$store.commit("user/setSubject", val);
+
+      if (val) {
+        this.getTypeList("topic", val);
+        this.$refs["topic-selector"].lesson_selected = true;
+      } else {
         this.form.topic = [];
         this.topic_list = [];
-        this.$refs["topic-selector"].lesson_selected=false;
+        this.$refs["topic-selector"].lesson_selected = false;
       }
     },
 
     "form.state"(val) {
-      this.getTypeList('area', val);
+      this.getTypeList("area", val);
     },
     "form.area"(val) {
-      this.getTypeList('school');
+      this.getTypeList("school");
     },
     "form.free_agreement"(val) {
-      if (val == true)
-        this.form.free_agreement = 1
-      else
-        this.form.free_agreement = 0;
-    }
+      if (val == true) this.form.free_agreement = 1;
+      else this.form.free_agreement = 0;
+    },
   },
   methods: {
-    getTypeList(type, parent = '') {
+    getTypeList(type, parent = "") {
       var params = {
-        type: type
-      }
-      if (type === 'base')
-        params.section_id = parent;
-      if (type === 'lesson') {
+        type: type,
+      };
+      if (type === "base") params.section_id = parent;
+      if (type === "lesson") {
         params.base_id = parent;
       }
-      if (type === 'topic') {
+      if (type === "topic") {
         params.lesson_id = parent;
       }
-      if (type === 'area') {
+      if (type === "area") {
         params.state_id = parent;
       }
 
-      if (type === 'school') {
+      if (type === "school") {
         params.section_id = this.form.level;
         params.area_id = this.form.area;
       }
 
-
-      this.$axios.$get('/api/v1/types/list', {
-        params
-      }).then(res => {
-        var data = {};
-        if (type === 'section') {
-          this.section_list = res.data;
-        } else if (type === 'base') {
-          this.grade_list = res.data;
-
-        } else if (type === 'lesson') {
-          this.lesson_list = res.data;
-
-        } else if (type === 'topic') {
-          this.topic_list = res.data;
-        } else if (type === 'content_type') {
-          this.content_type_list = res.data;
-        } else if (type === 'state') {
-          this.state_list = res.data;
-        } else if (type === 'area') {
-          this.area_list = res.data;
-        } else if (type === 'school') {
-          this.school_list = res.data;
-        }
-
-
-      }).catch(err => {
-        this.$toast.error(err);
-      })
+      this.$axios
+        .$get("/api/v1/types/list", {
+          params,
+        })
+        .then((res) => {
+          var data = {};
+          if (type === "section") {
+            this.section_list = res.data;
+            this.form.section = this.$store.state.user.lastSelectedCurriculum
+              ? this.$store.state.user.lastSelectedCurriculum
+              : "";
+          } else if (type === "base") {
+            this.grade_list = res.data;
+            this.form.base = this.$store.state.user.lastSelectedGrade
+              ? this.$store.state.user.lastSelectedGrade
+              : "";
+          } else if (type === "lesson") {
+            this.lesson_list = res.data;
+            this.form.lesson = this.$store.state.user.lastSelectedSubject
+              ? this.$store.state.user.lastSelectedSubject
+              : "";
+          } else if (type === "topic") {
+            this.topic_list = res.data;
+          } else if (type === "content_type") {
+            this.content_type_list = res.data;
+          } else if (type === "state") {
+            this.state_list = res.data;
+          } else if (type === "area") {
+            this.area_list = res.data;
+          } else if (type === "school") {
+            this.school_list = res.data;
+          }
+        })
+        .catch((err) => {
+          this.$toast.error(err);
+        });
     },
-
 
     submitContent() {
       this.submit_loading = true;
       //Arrange to form data
       let formData = new FormData();
       for (let key in this.form) {
-        if (!(key == 'topics'))
-          formData.append(key, this.form[key]);
+        if (!(key == "topics")) formData.append(key, this.form[key]);
       }
 
       if (this.form.topics.length)
         for (let key in this.form.topics)
-          formData.append('topics[]', this.form.topics[key]);
+          formData.append("topics[]", this.form.topics[key]);
 
       //End arrange to form data
 
-      this.$axios.$post('/api/v1/files',
-        this.urlencodeFormData(formData),
-        {
+      this.$axios
+        .$post("/api/v1/files", this.urlencodeFormData(formData), {
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        })
+        .then((response) => {
+          if (response.data.id == 0 && response.data.repeated)
+            this.$toast.info("The multimedia is duplicated");
+          else {
+            this.$toast.success("Submit successfully");
+            this.$router.push({
+              path: "/user/multimedia",
+            });
           }
-        }).then(response => {
-        if (response.data.id == 0 && response.data.repeated)
-          this.$toast.info("The multimedia is duplicated");
-        else {
-          this.$toast.success("Submit successfully");
-          this.$router.push({
-            path: "/user/multimedia"
-          })
-        }
-      }).catch(err => {
-        if (err.response.status == 403)
-          this.$router.push({query: {auth_form: 'login'}});
-        else if (err.response.status == 400)
-          this.$toast.error(err.response.data.message);
-      }).finally(() => {
-        this.submit_loading = false;
-      });
+        })
+        .catch((err) => {
+          if (err.response.status == 403)
+            this.$router.push({ query: { auth_form: "login" } });
+          else if (err.response.status == 400)
+            this.$toast.error(err.response.data.message);
+        })
+        .finally(() => {
+          this.submit_loading = false;
+        });
     },
 
     //Convert form data from multipart to urlencode
     urlencodeFormData(fd) {
-      var s = '';
+      var s = "";
 
       for (var pair of fd.entries()) {
-        if (typeof pair[1] == 'string') {
-          s += (s ? '&' : '') + this.encode(pair[0]) + '=' + this.encode(pair[1]);
+        if (typeof pair[1] == "string") {
+          s +=
+            (s ? "&" : "") + this.encode(pair[0]) + "=" + this.encode(pair[1]);
         }
       }
       return s;
     },
     encode(s) {
-      return encodeURIComponent(s).replace(/%20/g, '+');
+      return encodeURIComponent(s).replace(/%20/g, "+");
     },
     //End convert form data from multipart to urlencode
-
 
     selectTopic(event) {
       this.form.topics = event;
     },
 
     async uploadFile(file_name, value) {
-      if (!value)
-        return;
+      if (!value) return;
 
       const { valid } = await this.$refs.file_provider.validate(value);
 
-      if (valid){
-        this.loading.file=true;
-        if (!value)//Check empty request
+      if (valid) {
+        this.loading.file = true;
+        if (!value)
+          //Check empty request
           return;
         let formData = new FormData();
-        formData.append('file', value);
+        formData.append("file", value);
 
-        this.$axios.$post('/api/v1/upload',
-          formData,
-          {
+        this.$axios
+          .$post("/api/v1/upload", formData, {
             headers: {
-              'accept': '*/*',
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-        ).then(response => {
-          this.form.file = response.data[0].file.name;
-        }).catch(err => {
-          this.$toast.error("An error occurred");
-        }).finally(() => {
-          this.loading.file = false;
-        })
+              accept: "*/*",
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            this.form.file = response.data[0].file.name;
+          })
+          .catch((err) => {
+            this.$toast.error("An error occurred");
+          })
+          .finally(() => {
+            this.loading.file = false;
+          });
       }
-
 
       // }
     },
-
-  }
-
-}
+  },
+};
 </script>
 
 <style>
 .submission-notice {
   line-height: 2rem;
-  background-color: #FFEFE5 !important;
+  background-color: #ffefe5 !important;
 }
 
 .submission-notice .v-alert__icon.v-icon {
   color: white !important;
   padding: 2rem;
   border-radius: 0.5rem;
-  background-color: #FF6600;
+  background-color: #ff6600;
 }
 
 .notice_item {
@@ -559,9 +616,8 @@ export default {
 .notice_item li:before {
   font-family: "Font Awesome 5 Free";
   font-size: 2rem;
-  color: #FFC700FF;
+  color: #ffc700ff;
   content: "\f0a4";
   font-weight: 900;
 }
-
 </style>

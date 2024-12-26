@@ -1,14 +1,7 @@
 <template>
   <v-list dense>
-    <div
-      v-for="(item, side) in items"
-      :key="item.title"
-    >
-      <v-list-item
-        v-show="!item.subMenuList"
-        link
-        :to="item.link"
-      >
+    <div v-for="(item, side) in items" :key="item.title">
+      <v-list-item v-show="!item.subMenuList" link :to="item.link">
         <v-list-item-icon class="mr-2">
           <v-icon v-text="item.icon"></v-icon>
         </v-list-item-icon>
@@ -27,11 +20,14 @@
           <v-list-item-icon class="mr-2">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
-          <v-list-item-title v-text="item.title" class="py-2"></v-list-item-title>
+          <v-list-item-title
+            v-text="item.title"
+            class="py-2"
+          ></v-list-item-title>
         </template>
 
         <v-list-item
-          class="pl-7 "
+          class="pl-7"
           active-class="menu_active"
           v-for="(subMenuItem, side) in item.subMenuList"
           :to="subMenuItem.link"
@@ -54,55 +50,78 @@ export default {
     return {
       items: [
         {
-          title: 'Contents',
-          icon: 'mdi-plus-circle-outline',
-          machine_name: 'add_content',
+          title: "Contents",
+          icon: "mdi-plus-circle-outline",
+          machine_name: "add_content",
           subMenuList: [
-            {title: "Paper", link: "/user/paper", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id == '5' ? false : true)},
-            {title: "Multimedia", link: "/user/multimedia", icon: 'icong-test', icon_type: 'custom',status:(this.$auth.user.group_id === '5' ? false : true)},
-            {title: "Q & A", link: "/user/question", icon: 'icong-test', icon_type: 'custom'}
-          ]
-        },
-        {
-          title: 'Online Exam',
-          icon: 'mdi-laptop',
-          subMenuList: [
-            {title: "Results", link: "/exam/results", icon: 'icong-test', icon_type: 'custom'},
-            {title: "Exam maker", link: "/user/exam", icon: 'icong-test', icon_type: 'custom'},
-          ]
-        },
-        {
-          title: 'Financial',
-          icon: 'mdi-credit-card-outline',
-          subMenuList: [
-            {title: "Top Up Wallet", link: "/user/charge-wallet"},
-            {title: "Payments", link: "/user/payments"},
-            {title: "Sell Report", link: "/user/sell-report"},
-            {title: "Withdrawal", link: "/user/withdrawal"},
+            {
+              title: "Paper",
+              link: "/user/paper",
+              icon: "icong-test",
+              icon_type: "custom",
+              status: this.$auth.user.group_id == "5" ? false : true,
+            },
+            {
+              title: "Multimedia",
+              link: "/user/multimedia",
+              icon: "icong-test",
+              icon_type: "custom",
+              status: this.$auth.user.group_id == "5" ? false : true,
+            },
+            {
+              title: "Q & A",
+              link: "/user/question",
+              icon: "icong-test",
+              icon_type: "custom",
+            },
           ],
-
         },
-        {title: 'Messages', icon: 'mdi-email-outline',link:'/user/ticket'},
         {
-          title: 'Profile',
-          icon: 'mdi-account-outline',
-          link: '',
+          title: "Online Exam",
+          icon: "mdi-laptop",
           subMenuList: [
-            {title: "Edit Profile", link: "/user/profile"},
-            {title: "Confirm Identity", link: "/user/identity-confirmation"},
-            {title: "Change Password", link: "/user/edit-pass"},
-            {title: "Settings", link: "/user/setting"},
+            {
+              title: "Results",
+              link: "/exam/results",
+              icon: "icong-test",
+              icon_type: "custom",
+            },
+            {
+              title: "Exam maker",
+              link: "/user/exam",
+              icon: "icong-test",
+              icon_type: "custom",
+            },
+          ],
+        },
+        {
+          title: "Financial",
+          icon: "mdi-credit-card-outline",
+          subMenuList: [
+            { title: "Top Up Wallet", link: "/user/charge-wallet" },
+            { title: "Payments", link: "/user/payments" },
+            { title: "Sell Report", link: "/user/sell-report" },
+            { title: "Withdrawal", link: "/user/withdrawal" },
+          ],
+        },
+        { title: "Messages", icon: "mdi-email-outline", link: "/user/ticket" },
+        {
+          title: "Profile",
+          icon: "mdi-account-outline",
+          link: "",
+          subMenuList: [
+            { title: "Edit Profile", link: "/user/profile" },
+            { title: "Confirm Identity", link: "/user/identity-confirmation" },
+            { title: "Change Password", link: "/user/edit-pass" },
+            { title: "Settings", link: "/user/setting" },
           ],
         },
         // {title: 'Notification', icon: 'mdi-bell-outline'},
       ],
-    }
+    };
   },
-  beforeMount() {
-  }
-}
+  beforeMount() {},
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
