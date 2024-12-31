@@ -1,7 +1,11 @@
 <template>
   <div>
     <!--Mobile filter-->
-    <v-row justify="center" class="d-block d-md-none" v-if="$vuetify.breakpoint.smAndDown">
+    <v-row
+      justify="center"
+      class="d-block d-md-none"
+      v-if="$vuetify.breakpoint.smAndDown"
+    >
       <v-dialog
         v-model="dialog"
         fullscreen
@@ -33,7 +37,11 @@
           <div style="position: sticky; top: 0; left: 0; right: 0; z-index: 10">
             <v-toolbar class="filter-btn-header">
               <v-toolbar-items>
-                <v-btn class="text-h5 font-weight-bold" text @click="dialog = false">
+                <v-btn
+                  class="text-h5 font-weight-bold"
+                  text
+                  @click="dialog = false"
+                >
                   Search in content
                 </v-btn>
               </v-toolbar-items>
@@ -46,8 +54,15 @@
           <v-card-text>
             <search-filter ref="side_filter" class="mx-3" />
           </v-card-text>
-          <v-card-actions style="position: sticky; bottom: 0; left: 0; right: 0">
-            <v-btn medium block class="filter-show-result mr-4" @click="dialog = !dialog">
+          <v-card-actions
+            style="position: sticky; bottom: 0; left: 0; right: 0"
+          >
+            <v-btn
+              medium
+              block
+              class="filter-show-result mr-4"
+              @click="dialog = !dialog"
+            >
               show result ({{ result_count }})
             </v-btn>
           </v-card-actions>
@@ -62,7 +77,10 @@
           <v-col md="3" lg="3" class="d-none d-md-block">
             <v-card flat color="#f5f5f5" style="position: sticky; top: 1rem">
               <v-card-text>
-                <search-filter   ref="side_filter" :setBreadCrumbs.sync="breadcrumbs" />
+                <search-filter
+                  ref="side_filter"
+                  :setBreadCrumbs.sync="breadcrumbs"
+                />
               </v-card-text>
             </v-card>
           </v-col>
@@ -78,21 +96,33 @@
             </v-breadcrumbs>
 
             <!-- Search tabs -->
-            <Tabs style="position: sticky; top: 0; z-index: 5" ref="content_tabs" />
+            <Tabs
+              style="position: sticky; top: 0; z-index: 5"
+              ref="content_tabs"
+            />
             <!-- End search tabs -->
 
-            <div class="text-center" v-if="page_loading === false && items.length === 0">
+            <div
+              class="text-center"
+              v-if="page_loading === false && items.length === 0"
+            >
               Oops! no data found
             </div>
             <div v-else>
               <Paper v-if="$route.query.type === 'test'" :items="items" />
-              <Multimedia v-else-if="$route.query.type === 'learnfiles'" :items="items" />
+              <Multimedia
+                v-else-if="$route.query.type === 'learnfiles'"
+                :items="items"
+              />
               <QuestionAnswer
                 v-else-if="$route.query.type === 'question'"
                 :items="items"
               />
               <Exam v-else-if="$route.query.type === 'azmoon'" :items="items" />
-              <Tutorial v-else-if="$route.query.type === 'dars'" :items="items" />
+              <Tutorial
+                v-else-if="$route.query.type === 'dars'"
+                :items="items"
+              />
               <Tutor v-else-if="$route.query.type === 'tutor'" :items="items" />
             </div>
             <v-row v-show="page_loading">
@@ -143,29 +173,85 @@ export default {
     searchBox,
   },
 
-  async asyncData({ query }) {
+  async asyncData({ query, $axios }) {
     var page_title = "";
     var page_describe = "";
-    if (query.type === "learnfiles") {
-      page_title =
-        "Multimedia Interactive Educational Content; PowerPoint, Video, Class Voice, GamaTrain";
-      page_describe =
-        "Elevate your learning experience with GamaTrain's captivating multimedia content, including PowerPoint presentations, informative videos, and diverse educational materials.";
-    } else if (query.type === "test") {
-      page_title =
-        "Educational Resources | K12 Education Papers and Materials";
+    var params = {
+      type: "section",
+    };
+    let boardTitle = "";
+    let gradeTitle = "";
+    let subjectTitle = "";
+    let paperTypeTitle = "";
+    let multimediaTypeTitle = "";
+    if (query.section) {
+      const boardList = await $axios.$get(`/api/v1/types/list`, { params });
+      const boardIndex = boardList.data.findIndex(
+        (x) => x.id === query.section
+      );
+      boardTitle = boardList.data[boardIndex].title;
+    }
+
+    if (query.base) {
+      params.type = "base";
+      params.section_id = query.section;
+      const gradeList = await $axios.$get(`/api/v1/types/list`, { params });
+      const gradeIndex = gradeList.data.findIndex((x) => x.id === query.base);
+      gradeTitle = gradeList.data[gradeIndex].title;
+    }
+
+    if (query.lesson) {
+      params.type = "lesson";
+      params.base_id = query.base;
+      const subjectList = await $axios.$get(`/api/v1/types/list`, { params });
+      const subjectIndex = subjectList.data.findIndex(
+        (x) => x.id === query.lesson
+      );
+      subjectTitle = subjectList.data[subjectIndex].title;
+    }
+
+    if (query.type == "test" && query.test_type) {
+      params.type = "test_type";
+      const paperTypeList = await $axios.$get(`/api/v1/types/list`, { params });
+      const paperTypeIndex = paperTypeList.data.findIndex(
+        (x) => x.id == query.test_type
+      );
+      paperTypeTitle = paperTypeList.data[paperTypeIndex]?.title;
+    }
+
+    if (query.type === "learnfiles" && query.file_type) {
+      params.type = "file_type";
+      const multimediaTypeList = await $axios.$get(`/api/v1/types/list`, {
+        params,
+      });
+      const multimediaTypeIndex = multimediaTypeList.data.findIndex(
+        (x) => x.id == query.file_type
+      );
+      multimediaTypeTitle = multimediaTypeList.data[multimediaTypeIndex].title;
+    }
+
+    if (query.type === "test") {
+      page_title = boardTitle
+        ? `${boardTitle} ${gradeTitle} ${subjectTitle} ${paperTypeTitle}`
+        : "Educational Resources | K12 Education Papers and Materials";
       page_describe =
         "Enhance your learning with GamaTrain's extensive collection of online documents and texts, carefully curated to enrich your academic journey.";
+    } else if (query.type === "learnfiles") {
+      page_title = boardTitle
+        ? `${boardTitle} ${gradeTitle} ${subjectTitle} ${multimediaTypeTitle}`
+        : "Multimedia Interactive Educational Content; PowerPoint, Video, Class Voice, GamaTrain";
+      page_describe =
+        "Elevate your learning experience with GamaTrain's captivating multimedia content, including PowerPoint presentations, informative videos, and diverse educational materials.";
     } else if (query.type === "question") {
-      page_title = "Seek Clarification, Expand Your Understanding: GamaTrain's Q&A Forum";
+      page_title = `${boardTitle} ${gradeTitle} ${subjectTitle} Forum`;
       page_describe =
         "Engage in active learning and gain deeper insights through GamaTrain's interactive Q&A platform, where you can pose questions and seek support from fellow learners and experts.";
     } else if (query.type === "azmoon") {
-      page_title = "Online Exams , Free Exams for Improving Education";
+      page_title = `${boardTitle} ${gradeTitle} ${subjectTitle} Online test`;
       page_describe =
         "Hone your skills and assess your knowledge with GamaTrain's online exams, designed to enhance your exam preparation and boost your confidence.";
     } else if (query.type === "dars") {
-      page_title = "Master Concepts, Enhance Learning: GamaTrain's Online Tutorials";
+      page_title = `${boardTitle} ${gradeTitle} ${subjectTitle} Textbook`;
       page_describe =
         "Complement your studies with GamaTrain's comprehensive online tutorials, providing step-by-step guidance and practice opportunities to refine your understanding.";
     } else if (query.type === "tutor") {
@@ -436,7 +522,8 @@ export default {
           .then((response) => {
             this.items.push(...response.data.list);
             this.result_count = response.data.num;
-            this.$refs.content_tabs.content_statistics = response.data.types_stats;
+            this.$refs.content_tabs.content_statistics =
+              response.data.types_stats;
             if (response.data.list.length === 0)
               //For terminate auto load request
               this.all_files_loaded = true;
@@ -465,7 +552,8 @@ export default {
           ) +
           window.innerHeight +
           50;
-        let bottomOfWindow = scrollPosition >= document.documentElement.offsetHeight;
+        let bottomOfWindow =
+          scrollPosition >= document.documentElement.offsetHeight;
 
         //Avoid the number of requests
         if (this.timer) {

@@ -90,7 +90,7 @@
             color="#f5f5f5"
             class="px-0 font-size-16 font-weight-bold"
           >
-            Curriculum
+            Board
           </v-expansion-panel-header>
           <v-expansion-panel-content color="#f5f5f5">
             <v-row>
@@ -425,7 +425,7 @@ export default {
       pdf_checkbox_val: false,
       free_checkbox_val: false,
       answer_checkbox_val: false,
-      loadtime:true,
+      loadtime: true,
 
       applied_filter: {
         select_section_title: "",
@@ -508,7 +508,10 @@ export default {
   watch: {
     "$route.query.type"(val) {
       this.filter.file_type_list = [];
-      if (this.$route.query.type === "test" || this.$route.query.type == "learnfiles")
+      if (
+        this.$route.query.type === "test" ||
+        this.$route.query.type == "learnfiles"
+      )
         this.getFileType();
     },
     section_val(val) {
@@ -533,9 +536,8 @@ export default {
       this.setBreadcrumbInfo();
 
       if (val > 0) {
-        this.applied_filter.select_section_title = this.filter.section_list.find(
-          (x) => x.id === val
-        ).title;
+        this.applied_filter.select_section_title =
+          this.filter.section_list.find((x) => x.id === val).title;
         //Load base list
         var params = {
           type: "base",
@@ -544,7 +546,7 @@ export default {
         this.getFilterList(params, "base");
       } else {
         this.applied_filter.select_section_title = "";
-        this.loadtime=false
+        this.loadtime = false;
       }
     },
     base_val(val) {
@@ -555,9 +557,8 @@ export default {
     },
     test_level_val(val) {
       if (val > 0) {
-        this.applied_filter.select_test_level_title = this.filter.test_level_list.find(
-          (x) => x.id === val
-        ).title;
+        this.applied_filter.select_test_level_title =
+          this.filter.test_level_list.find((x) => x.id === val).title;
         this.updateQueryParams();
       } else {
         this.applied_filter.select_test_level_title = "";
@@ -624,9 +625,10 @@ export default {
               this.getFilterList(data, "base");
               this.base_val = this.$route.query.base;
 
-              this.applied_filter.select_section_title = this.filter.section_list.find(
-                (x) => x.id === this.section_val
-              ).title;
+              this.applied_filter.select_section_title =
+                this.filter.section_list.find(
+                  (x) => x.id === this.section_val
+                ).title;
 
               //Set breadcrumbs info
               this.setBreadcrumbInfo();
@@ -647,9 +649,8 @@ export default {
               this.lesson_val = this.$route.query.lesson;
 
               //Enable tag
-              this.applied_filter.select_base_title = this.filter.base_list.find(
-                (x) => x.id === this.base_val
-              ).title;
+              this.applied_filter.select_base_title =
+                this.filter.base_list.find((x) => x.id === this.base_val).title;
 
               //Set breadcrumbs info
               this.setBreadcrumbInfo();
@@ -669,9 +670,10 @@ export default {
               this.topic_val = this.$route.query.topic;
 
               //Enable tag
-              this.applied_filter.select_lesson_title = this.filter.lesson_list.find(
-                (x) => x.id === this.$route.query.lesson
-              ).title;
+              this.applied_filter.select_lesson_title =
+                this.filter.lesson_list.find(
+                  (x) => x.id === this.$route.query.lesson
+                ).title;
 
               //Set breadcrumbs info
               this.setBreadcrumbInfo();
@@ -681,28 +683,30 @@ export default {
 
             //Enable tag
             if (this.$route.query.topic > 0)
-              this.applied_filter.select_topic_title = this.filter.topic_list.find(
-                (x) => x.id === this.topic_val
-              ).title;
+              this.applied_filter.select_topic_title =
+                this.filter.topic_list.find(
+                  (x) => x.id === this.topic_val
+                ).title;
           } else if (type === "state") {
             this.filter.state_list = res.data;
 
             //Enable tag
             if (this.$route.query.state > 0) {
               this.state_val = this.$route.query.state;
-              this.applied_filter.select_state_title = this.filter.state_list.find(
-                (x) => x.id === this.state_val
-              ).title;
+              this.applied_filter.select_state_title =
+                this.filter.state_list.find(
+                  (x) => x.id === this.state_val
+                ).title;
             }
-            if (this.$route.query.city > 0) this.city_val = this.$route.query.city;
+            if (this.$route.query.city > 0)
+              this.city_val = this.$route.query.city;
           } else if (type === "city") {
             this.filter.city_list = res.data;
 
             //Enable tag
             if (this.city_val > 0 && this.filter.city_list.length)
-              this.applied_filter.select_city_title = this.filter.city_list.find(
-                (x) => x.id === this.city_val
-              ).title;
+              this.applied_filter.select_city_title =
+                this.filter.city_list.find((x) => x.id === this.city_val).title;
           }
         })
         .catch((err) => {
@@ -751,8 +755,7 @@ export default {
           ).title;
       } else {
         this.applied_filter.select_base_title = "";
-        this.loadtime=false
-
+        this.loadtime = false;
       }
     },
 
@@ -777,13 +780,11 @@ export default {
 
         //Enable lesson title tag
         if (this.filter.lesson_list.length > 0)
-          this.applied_filter.select_lesson_title = this.filter.lesson_list.find(
-            (x) => x.id == this.lesson_val
-          ).title;
+          this.applied_filter.select_lesson_title =
+            this.filter.lesson_list.find((x) => x.id == this.lesson_val).title;
       } else {
         this.applied_filter.select_topic_title = "";
-         this.loadtime=false
-
+        this.loadtime = false;
       }
     },
 
@@ -801,9 +802,8 @@ export default {
           (x) => x.id === this.topic_val
         ).title;
       else {
-this.applied_filter.select_topic_title = "";
-                this.loadtime=false
-
+        this.applied_filter.select_topic_title = "";
+        this.loadtime = false;
       }
     },
     //Change topic val option
@@ -814,9 +814,10 @@ this.applied_filter.select_topic_title = "";
       //Enable topic title tag
 
       if (this.file_type_val > 0)
-        this.applied_filter.select_file_type_title = this.filter.file_type_list.find(
-          (x) => x.id === this.file_type_val
-        ).title;
+        this.applied_filter.select_file_type_title =
+          this.filter.file_type_list.find(
+            (x) => x.id === this.file_type_val
+          ).title;
       else this.applied_filter.select_file_type_title = "";
     },
 
@@ -952,9 +953,10 @@ this.applied_filter.select_topic_title = "";
 
           if (this.$route.query.test_type > 0) {
             this.file_type_val = this.$route.query.test_type;
-            this.applied_filter.select_file_type_title = this.filter.file_type_list.find(
-              (x) => x.id === this.file_type_val
-            ).title;
+            this.applied_filter.select_file_type_title =
+              this.filter.file_type_list.find(
+                (x) => x.id === this.file_type_val
+              ).title;
           }
         })
         .catch((err) => {
