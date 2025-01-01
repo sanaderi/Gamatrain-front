@@ -29,19 +29,87 @@
               <div class="d-flex mb-4">
                 <div class="w-100">
                   <div class="d-flex align-center justify-space-between header">
-                    <h1 class="gama-text-h5">
+                    <h1 class="gama-text-h5" v-show="editMode.title == false">
                       {{ contentData.title }}
+                      <v-btn
+                        v-if="$auth.user.id == contentData.user_"
+                        @click="editMode.title = true"
+                        fab
+                        depressed
+                        x-small
+                      >
+                        <v-icon> mdi-pencil </v-icon>
+                      </v-btn>
                     </h1>
+
+                    <div>
+                      <v-text-field
+                        v-if="editMode.title"
+                        width="100%"
+                        placeholder="Title"
+                        v-model="contentData.title"
+                      >
+                        <template slot="append-outer">
+                          <v-btn
+                            color="success"
+                            @click="updateDetails()"
+                            fab
+                            depressed
+                            :loading="editMode.title_loading"
+                            x-small
+                          >
+                            <v-icon> mdi-check </v-icon>
+                          </v-btn>
+                        </template>
+                      </v-text-field>
+                    </div>
                   </div>
                   <div class="description-holder my-4">
                     <!--Description-->
-                    <span class="gama-text-body2" v-html="contentData.description"></span>
+                    <span
+                      v-show="editMode.describe == false"
+                      class="gama-text-body2"
+                      v-html="contentData.description"
+                    />
+                    <v-btn
+                      v-if="$auth.user.id == contentData.user_"
+                      v-show="editMode.describe == false"
+                      @click="editMode.describe = true"
+                      fab
+                      depressed
+                      x-small
+                    >
+                      <v-icon> mdi-pencil </v-icon>
+                    </v-btn>
+                    <div>
+                      <v-textarea
+                        v-if="editMode.describe"
+                        width="100%"
+                        placeholder="Title"
+                        v-model="contentData.description"
+                      >
+                        <template slot="append-outer">
+                          <v-btn
+                            color="success"
+                            @click="updateDetails()"
+                            fab
+                            depressed
+                            :loading="editMode.describe_loading"
+                            x-small
+                          >
+                            <v-icon> mdi-check </v-icon>
+                          </v-btn>
+                        </template>
+                      </v-textarea>
+                    </div>
                     <!--End description-->
                   </div>
 
                   <div class="label-holder">
                     <v-chip link class="mr-1">
-                      <nuxt-link :to="`/search?type=test&section=${contentData.section}`">
+                      <nuxt-link
+                        :to="`/search?type=test&section=${contentData.section}`"
+                      >
                         {{ contentData.section_title }}
                       </nuxt-link>
                     </v-chip>
@@ -63,8 +131,9 @@
                       {{ contentData.edu_month_title }}
                     </v-chip>
                     <v-chip
-                     :to="`/search?type=test&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}&edu_year=${contentData.edu_year}`"
-                     class="ma-1">
+                      :to="`/search?type=test&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}&edu_year=${contentData.edu_year}`"
+                      class="ma-1"
+                    >
                       {{ contentData.edu_year }}
                     </v-chip>
                   </div>
@@ -75,7 +144,9 @@
                 <div class="d-none d-md-block mb-4" v-if="isFree == false">
                   <p v-if="!$auth.loggedIn" class="gama-text-body2">
                     <span class="mdi mdi-bell icon"></span>
-                    <span @click="openAuthDialog('login')" class="login">Login</span>
+                    <span @click="openAuthDialog('login')" class="login"
+                      >Login</span
+                    >
                     <span @click="openAuthDialog('register')" class="register">
                       (register)
                     </span>
@@ -191,14 +262,18 @@
                                   class="white--text"
                                   @click="shareSocial('telegram')"
                                 >
-                                  <i class="fab fa-telegram-plane mr-1 icon"></i>
+                                  <i
+                                    class="fab fa-telegram-plane mr-1 icon"
+                                  ></i>
                                   Telegram
                                 </v-btn>
                               </v-col>
                             </v-row>
                           </v-card-text>
                           <v-card-actions class="justify-end">
-                            <v-btn text @click="dialog.value = false">close </v-btn>
+                            <v-btn text @click="dialog.value = false"
+                              >close
+                            </v-btn>
                           </v-card-actions>
                         </v-card>
                       </template>
@@ -303,7 +378,12 @@
         <v-row class="px-10 text-center">
           <v-col cols="12" class="pb-1 pt-0">
             <div v-if="contentData.files.word.exist == true">
-              <v-btn @click="startDownload('q_word')" block color="primary" class="mb-2">
+              <v-btn
+                @click="startDownload('q_word')"
+                block
+                color="primary"
+                class="mb-2"
+              >
                 Download Question Doc
                 {{
                   contentData.files.word.price > 0
@@ -313,7 +393,12 @@
               </v-btn>
             </div>
             <div v-if="contentData.files.pdf.exist == true">
-              <v-btn @click="startDownload('q_pdf')" class="mb-2" block color="error">
+              <v-btn
+                @click="startDownload('q_pdf')"
+                class="mb-2"
+                block
+                color="error"
+              >
                 Download Question
                 {{
                   contentData.files.word.price > 0
@@ -361,7 +446,10 @@
                 <span @click="openAuthDialog('login')" class="login blue--text"
                   >Login</span
                 >
-                <span @click="openAuthDialog('register')" class="register blue--text">
+                <span
+                  @click="openAuthDialog('register')"
+                  class="register blue--text"
+                >
                   (register)
                 </span>
                 <span>to download and charge.</span>
@@ -593,10 +681,17 @@ export default {
         href: "/search?type=test",
       },
     ],
+    editMode: {
+      title: false,
+      describe: false,
+      title_loading: false,
+      describe_loading: false,
+    },
     detail: {
       poster: "poster1.jpg",
       linkPoster: "",
-      title: "A collection of 120 test questions for lessons 6 to 9 on (3) 12th",
+      title:
+        "A collection of 120 test questions for lessons 6 to 9 on (3) 12th",
       rate: 5,
       previewImage: "test1.png",
       labels: [
@@ -616,7 +711,8 @@ export default {
       {
         type: "azmoon",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -624,7 +720,8 @@ export default {
       {
         type: "azmoon",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -632,7 +729,8 @@ export default {
       {
         type: "azmoon",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -640,7 +738,8 @@ export default {
       {
         type: "",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Mehran Zangeneh",
         ownerImg: "teacher2.png",
@@ -648,7 +747,8 @@ export default {
       {
         type: "",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -656,7 +756,8 @@ export default {
       {
         type: "",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -664,7 +765,8 @@ export default {
       {
         type: "",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -672,7 +774,8 @@ export default {
       {
         type: "",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -805,7 +908,9 @@ export default {
     },
     shareSocial(social_name) {
       if (social_name == "whatsapp")
-        window.open(`https://api.whatsapp.com/send?text=${window.location.href}`);
+        window.open(
+          `https://api.whatsapp.com/send?text=${window.location.href}`
+        );
       else if (social_name == "telegram")
         window.open(
           `https://telegram.me/share/url?url=${window.location.href}&text=${this.contentData.title}`
@@ -864,6 +969,60 @@ export default {
       )
         return false;
       else return true;
+    },
+    //Convert form data from multipart to urlencode
+    urlencodeFormData(fd) {
+      var s = "";
+
+      for (var pair of fd.entries()) {
+        if (typeof pair[1] == "string") {
+          s +=
+            (s ? "&" : "") + this.encode(pair[0]) + "=" + this.encode(pair[1]);
+        }
+      }
+      return s;
+    },
+    encode(s) {
+      return encodeURIComponent(s).replace(/%20/g, "+");
+    },
+
+    updateDetails() {
+      //Arrange to form data
+      this.editMode.title_loading = true;
+      let formData = new FormData();
+      formData.append("title", this.contentData.title);
+      formData.append("description", this.contentData.description);
+
+      //End arrange to form data
+
+      this.$axios
+        .$put(
+          `/api/v1/tests/${this.$route.params.id}`,
+          this.urlencodeFormData(formData),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        )
+        .then((response) => {
+          if (response.data.id == 0 && response.data.repeated)
+            this.$toast.info("The paper is duplicated");
+          else {
+            this.$toast.success("Updated successfully");
+          }
+        })
+        .catch((err) => {
+          if (err.response.status == 403)
+            this.$router.push({ query: { auth_form: "login" } });
+          else if (err.response.status == 400)
+            this.$toast.error(err.response.data.message);
+        })
+        .finally(() => {
+          this.editMode.title = false;
+          this.editMode.describe = false;
+          this.editMode.title_loading = false;
+        });
     },
   },
 };

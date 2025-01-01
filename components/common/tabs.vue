@@ -36,7 +36,7 @@
         >
           <div class="nav-link q-a-icon">
             <span class="icon icon-q-a"></span>
-            QuizHub
+            Forum
           </div>
         </v-badge>
       </v-tab>
@@ -49,7 +49,7 @@
         >
           <div class="nav-link exam-icon">
             <span class="icon icon-exam"></span>
-            Exam
+            QuizHub
           </div>
         </v-badge>
       </v-tab>

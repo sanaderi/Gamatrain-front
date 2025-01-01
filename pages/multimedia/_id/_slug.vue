@@ -29,19 +29,56 @@
               <div class="d-flex mb-4">
                 <div class="w-100">
                   <div class="d-flex align-center justify-space-between header">
-                    <h1 class="gama-text-h5 font-weight-bold">
+                    <h1
+                      class="gama-text-h5 font-weight-bold"
+                      v-show="editMode.title == false"
+                    >
                       {{ contentData.title }}
+                      <v-btn
+                        @click="editMode.title = true"
+                        fab
+                        v-if="$auth.user.id == contentData.user_"
+                        depressed
+                        x-small
+                      >
+                        <v-icon> mdi-pencil </v-icon>
+                      </v-btn>
                     </h1>
+                    <div>
+                      <v-text-field
+                        v-if="editMode.title"
+                        width="100%"
+                        placeholder="Title"
+                        v-model="contentData.title"
+                      >
+                        <template slot="append-outer">
+                          <v-btn
+                            color="success"
+                            @click="updateDetails()"
+                            fab
+                            depressed
+                            :loading="editMode.title_loading"
+                            x-small
+                          >
+                            <v-icon> mdi-check </v-icon>
+                          </v-btn>
+                        </template>
+                      </v-text-field>
+                    </div>
                   </div>
                   <div class="description-holder my-4">
                     <!--Description-->
                     <div class="description-tabs">
                       <v-tabs v-model="description_tab" color="teal">
                         <v-tab key="tab-description"
-                          ><span class="gama-text-caption">Description</span></v-tab
+                          ><span class="gama-text-caption"
+                            >Description</span
+                          ></v-tab
                         >
                         <v-tab key="tab-chapters"
-                          ><span class="gama-text-caption">Book chapters</span></v-tab
+                          ><span class="gama-text-caption"
+                            >Book chapters</span
+                          ></v-tab
                         >
                       </v-tabs>
                     </div>
@@ -50,8 +87,40 @@
                         <v-tab-item key="tab-description">
                           <span
                             class="gama-text-body2"
+                            v-show="editMode.describe == false"
                             v-html="contentData.description"
-                          ></span>
+                          />
+                          <v-btn
+                            v-if="$auth.user.id == contentData.user_"
+                            v-show="editMode.describe == false"
+                            @click="editMode.describe = true"
+                            fab
+                            depressed
+                            x-small
+                          >
+                            <v-icon> mdi-pencil </v-icon>
+                          </v-btn>
+                          <div>
+                            <v-textarea
+                              v-if="editMode.describe"
+                              width="100%"
+                              placeholder="Title"
+                              v-model="contentData.description"
+                            >
+                              <template slot="append-outer">
+                                <v-btn
+                                  color="success"
+                                  @click="updateDetails()"
+                                  fab
+                                  depressed
+                                  :loading="editMode.describe_loading"
+                                  x-small
+                                >
+                                  <v-icon> mdi-check </v-icon>
+                                </v-btn>
+                              </template>
+                            </v-textarea>
+                          </div>
                         </v-tab-item>
                         <v-tab-item key="tab-chapters" class="pa-0">
                           <div
@@ -62,7 +131,10 @@
                             <ul class="pl-0" style="list-style-type: none">
                               <li v-for="item in contentData.collectionList">
                                 <strong>{{ item.title }}</strong>
-                                <ul style="list-style-type: none" v-if="item.chapters">
+                                <ul
+                                  style="list-style-type: none"
+                                  v-if="item.chapters"
+                                >
                                   <li v-for="chapter in item.chapters">
                                     {{ chapter.title }}
                                   </li>
@@ -103,16 +175,23 @@
               </div>
               <!--   Download Btn and Description  -->
               <div class="text-center download-sec">
-                <div v-if="!isFree" class="d-none d-md-block mb-4 gama-text-body2">
+                <div
+                  v-if="!isFree"
+                  class="d-none d-md-block mb-4 gama-text-body2"
+                >
                   <span v-if="!$auth.loggedIn">
                     <span class="mdi mdi-bell icon"></span>
-                    <span @click="openAuthDialog('login')" class="login">Login</span>
+                    <span @click="openAuthDialog('login')" class="login"
+                      >Login</span
+                    >
                     <span @click="openAuthDialog('register')" class="register">
                       (register)
                     </span>
                     to download and charge your wallet.
                   </span>
-                  <span v-else> Your wallet charge is ${{ $auth.user.credit }} </span>
+                  <span v-else>
+                    Your wallet charge is ${{ $auth.user.credit }}
+                  </span>
                   <nuxt-link
                     class="blue--text"
                     v-if="$auth.loggedIn"
@@ -218,14 +297,18 @@
                                   class="white--text"
                                   @click="shareSocial('telegram')"
                                 >
-                                  <i class="fab fa-telegram-plane mr-1 icon"></i>
+                                  <i
+                                    class="fab fa-telegram-plane mr-1 icon"
+                                  ></i>
                                   Telegram
                                 </v-btn>
                               </v-col>
                             </v-row>
                           </v-card-text>
                           <v-card-actions class="justify-end">
-                            <v-btn text @click="dialog.value = false">close </v-btn>
+                            <v-btn text @click="dialog.value = false"
+                              >close
+                            </v-btn>
                           </v-card-actions>
                         </v-card>
                       </template>
@@ -293,7 +376,9 @@
                 class="mb-2"
               >
                 Download PPTX{{
-                  contentData.files.price > 0 ? " | $" + contentData.files.price : ""
+                  contentData.files.price > 0
+                    ? " | $" + contentData.files.price
+                    : ""
                 }}
               </v-btn>
             </div>
@@ -306,7 +391,10 @@
                 <span @click="openAuthDialog('login')" class="login blue--text"
                   >Login</span
                 >
-                <span @click="openAuthDialog('register')" class="register blue--text">
+                <span
+                  @click="openAuthDialog('register')"
+                  class="register blue--text"
+                >
                   (register)
                 </span>
                 <span>to download and charge.</span>
@@ -524,6 +612,12 @@ export default {
     sell_btn: true,
     rating: 4.5,
     contentData: [],
+    editMode: {
+      title: false,
+      describe: false,
+      title_loading: false,
+      describe_loading: false,
+    },
     breads: [
       {
         text: "Multimedia",
@@ -534,7 +628,8 @@ export default {
     detail: {
       poster: "poster1.jpg",
       linkPoster: "",
-      title: "A collection of 120 test questions for lessons 6 to 9 on (3) 12th",
+      title:
+        "A collection of 120 test questions for lessons 6 to 9 on (3) 12th",
       rate: 5,
       previewImage: "test1.png",
       labels: [
@@ -554,7 +649,8 @@ export default {
       {
         type: "azmoon",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -562,7 +658,8 @@ export default {
       {
         type: "azmoon",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -570,7 +667,8 @@ export default {
       {
         type: "azmoon",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -578,7 +676,8 @@ export default {
       {
         type: "",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Mehran Zangeneh",
         ownerImg: "teacher2.png",
@@ -586,7 +685,8 @@ export default {
       {
         type: "",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -594,7 +694,8 @@ export default {
       {
         type: "",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -602,7 +703,8 @@ export default {
       {
         type: "",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -610,7 +712,8 @@ export default {
       {
         type: "",
         img: "test2.png",
-        description: "The series of tests of the twelfth history book Lessons 1 to 12",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
         pages: "222",
         owner: "Gama management team",
         ownerImg: "gamaadmin.png",
@@ -743,7 +846,9 @@ export default {
     },
     shareSocial(social_name) {
       if (social_name == "whatsapp")
-        window.open(`https://api.whatsapp.com/send?text=${window.location.href}`);
+        window.open(
+          `https://api.whatsapp.com/send?text=${window.location.href}`
+        );
       else if (social_name == "telegram")
         window.open(
           `https://telegram.me/share/url?url=${window.location.href}&text=${this.contentData.title}`
@@ -792,6 +897,59 @@ export default {
     isFree() {
       if (this.contentData.files.price > 0) return false;
       else return true;
+    },
+    //Convert form data from multipart to urlencode
+    urlencodeFormData(fd) {
+      var s = "";
+
+      for (var pair of fd.entries()) {
+        if (typeof pair[1] == "string") {
+          s +=
+            (s ? "&" : "") + this.encode(pair[0]) + "=" + this.encode(pair[1]);
+        }
+      }
+      return s;
+    },
+    encode(s) {
+      return encodeURIComponent(s).replace(/%20/g, "+");
+    },
+    updateDetails() {
+      //Arrange to form data
+      this.editMode.title_loading = true;
+      let formData = new FormData();
+      formData.append("title", this.contentData.title);
+      formData.append("description", this.contentData.description);
+
+      //End arrange to form data
+
+      this.$axios
+        .$put(
+          `/api/v1/files/${this.$route.params.id}`,
+          this.urlencodeFormData(formData),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        )
+        .then((response) => {
+          if (response.data.id == 0 && response.data.repeated)
+            this.$toast.info("The multimedia is duplicated");
+          else {
+            this.$toast.success("Updated successfully");
+          }
+        })
+        .catch((err) => {
+          if (err.response.status == 403)
+            this.$router.push({ query: { auth_form: "login" } });
+          else if (err.response.status == 400)
+            this.$toast.error(err.response.data.message);
+        })
+        .finally(() => {
+          this.editMode.title = false;
+          this.editMode.describe = false;
+          this.editMode.title_loading = false;
+        });
     },
   },
 };
