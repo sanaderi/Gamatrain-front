@@ -33,7 +33,12 @@
                   :style="`font-weight:600;font-size:${gradeSizes[index].fontSize}px;width:${gradeSizes[index].width}px!important;
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              min-width:${gradeSizes[index].width}px!important;height:${gradeSizes[index].height}px`"
                 >
-                  {{ truncateGradeTitle(gradeHandlerTitle(item.base_title), index) }}
+                  {{
+                    truncateGradeTitle(
+                      gradeHandlerTitle(item.base_title),
+                      index
+                    )
+                  }}
                 </v-btn>
                 <div
                   v-if="index == 7"
@@ -97,7 +102,9 @@
                         >mdi-chevron-right</v-icon
                       >
                     </nuxt-link>
-                    <div class="stat">+{{ stats[7].questions | numberFormat }}</div>
+                    <div class="stat">
+                      +{{ stats[7].questions | numberFormat }}
+                    </div>
                   </v-col>
                 </v-row>
 
@@ -115,7 +122,9 @@
                         <div class="date-holder">{{ showDate() }}</div>
                       </v-col>
                       <v-col cols="5" class="text-right pt-0">
-                        <span class="stat">+{{ stats[7].tests | numberFormat }}</span>
+                        <span class="stat"
+                          >+{{ stats[7].tests | numberFormat }}</span
+                        >
                         <v-icon size="20" class="pl-sm-4" color="#D0D7DE"
                           >mdi-chevron-right</v-icon
                         >
@@ -136,7 +145,9 @@
                         <div class="date-holder pb-0">{{ showDate() }}</div>
                       </v-col>
                       <v-col cols="5" class="text-right pt-0">
-                        <span class="stat">+{{ stats[7].files | numberFormat }}</span>
+                        <span class="stat"
+                          >+{{ stats[7].files | numberFormat }}</span
+                        >
                         <v-icon size="20" class="pl-sm-4" color="#D0D7DE"
                           >mdi-chevron-right</v-icon
                         >
@@ -157,7 +168,9 @@
                         <div class="date-holder pb-0">{{ showDate() }}</div>
                       </v-col>
                       <v-col cols="5" class="text-right pt-0">
-                        <span class="stat">+{{ stats[7].exams | numberFormat }}</span>
+                        <span class="stat"
+                          >+{{ stats[7].exams | numberFormat }}</span
+                        >
                         <v-icon size="20" class="pl-sm-4" color="#D0D7DE"
                           >mdi-chevron-right</v-icon
                         >
@@ -179,7 +192,9 @@
                         <div class="date-holder">{{ showDate() }}</div>
                       </v-col>
                       <v-col cols="5" class="text-right pt-0">
-                        <span class="stat">+{{ stats[7].questions | numberFormat }}</span>
+                        <span class="stat"
+                          >+{{ stats[7].questions | numberFormat }}</span
+                        >
                         <v-icon size="20" class="pl-sm-4" color="#D0D7DE"
                           >mdi-chevron-right</v-icon
                         >
@@ -200,8 +215,10 @@
                     <h4 class="section-title gama-text-h5">Last questions</h4>
                     <div v-if="questionLoading">
                       <v-row class="latest-card" v-for="i in 3">
-                        <v-col cols="12" >
-                          <v-skeleton-loader type="list-item-avatar"></v-skeleton-loader>
+                        <v-col cols="12">
+                          <v-skeleton-loader
+                            type="list-item-avatar"
+                          ></v-skeleton-loader>
                         </v-col>
                       </v-row>
                     </div>
@@ -220,15 +237,24 @@
                         </v-col>
                         <v-col cols="11">
                           <v-card-title>
-                            <nuxt-link class="gama-text-caption" :to="`/qa/${item.id}`">
+                            <nuxt-link
+                              class="gama-text-caption"
+                              :to="`/qa/${item.id}`"
+                            >
                               <span v-html="item.title"></span>
                             </nuxt-link>
                           </v-card-title>
 
                           <v-card-subtitle>
                             <v-row>
-                              <v-col cols="8" class="owner-container gama-text-overline">
-                                By: {{ getFullName(item.first_name, item.last_name) }}
+                              <v-col
+                                cols="8"
+                                class="owner-container gama-text-overline"
+                              >
+                                By:
+                                {{
+                                  getFullName(item.first_name, item.last_name)
+                                }}
                               </v-col>
                               <v-col
                                 cols="4"
@@ -244,11 +270,15 @@
                     </v-card>
                   </v-col>
                   <v-col cols="6" md="6">
-                    <h4 class="section-title gama-text-h5">Last Uploaded File</h4>
+                    <h4 class="section-title gama-text-h5">
+                      Last Uploaded File
+                    </h4>
                     <div v-if="paperLoading">
                       <v-row class="latest-card" v-for="i in 3">
-                        <v-col cols="12" >
-                          <v-skeleton-loader type="list-item-avatar"></v-skeleton-loader>
+                        <v-col cols="12">
+                          <v-skeleton-loader
+                            type="list-item-avatar"
+                          ></v-skeleton-loader>
                         </v-col>
                       </v-row>
                     </div>
@@ -267,15 +297,24 @@
                         </v-col>
                         <v-col cols="11">
                           <v-card-title>
-                            <nuxt-link class="gama-text-caption" :to="`paper/${item.id}`">
+                            <nuxt-link
+                              class="gama-text-caption"
+                              :to="`paper/${item.id}`"
+                            >
                               <span v-html="item.title"></span>
                             </nuxt-link>
                           </v-card-title>
 
                           <v-card-subtitle>
                             <v-row>
-                              <v-col cols="8" class="owner-container gama-text-overline">
-                                By: {{ getFullName(item.first_name, item.last_name) }}
+                              <v-col
+                                cols="8"
+                                class="owner-container gama-text-overline"
+                              >
+                                By:
+                                {{
+                                  getFullName(item.first_name, item.last_name)
+                                }}
                               </v-col>
                               <v-col
                                 cols="4"
@@ -752,9 +791,9 @@ export default {
         },
       ],
       questions: [],
-      questionLoading:true,
+      questionLoading: true,
       papers: [],
-      paperLoading:true,
+      paperLoading: true,
       intervalId: null,
 
       startIndex: -1,
@@ -766,7 +805,8 @@ export default {
   methods: {
     showDate() {
       if (
-        this.$moment(this.stats[7].last_update).format("MMM,DD YYYY") !== "Invalid date"
+        this.$moment(this.stats[7].last_update).format("MMM,DD YYYY") !==
+        "Invalid date"
       )
         return this.$moment(this.stats[7].last_update).format("MMM,DD YYYY");
     },
@@ -944,8 +984,9 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-        }).finally(()=>{
-            this.questionLoading=false;
+        })
+        .finally(() => {
+          this.questionLoading = false;
         });
     },
 
@@ -957,8 +998,9 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-        }).finally(()=>{
-            this.paperLoading=false;
+        })
+        .finally(() => {
+          this.paperLoading = false;
         });
     },
 
@@ -969,7 +1011,9 @@ export default {
       else if (this.$vuetify.breakpoint.md) cutLength = 3;
       else cutLength = 9;
       if (index == 7) cutLength = cutLength + 2;
-      return title.length > cutLength ? title.slice(0, cutLength) + "..." : title;
+      return title.length > cutLength
+        ? title.slice(0, cutLength) + "..."
+        : title;
     },
     getFullName(firstName, lastName) {
       return `${firstName} ${lastName}`;
@@ -993,7 +1037,13 @@ export default {
   },
 
   mounted() {
-    this.handleAutoCycle();
+    //this.handleAutoCycle();
+
+    //tmp to shift until any group have content
+    var splice_data = this.stats.splice(0, 5);
+    this.stats.push(...splice_data);
+    //end tmp
+
     this.getQuestions();
     this.getPapers();
   },
@@ -1135,13 +1185,13 @@ export default {
         }
       }
 
-      .v-skeleton-loader__list-item-avatar{
-        padding-left:0;
-        padding-right:0;
+      .v-skeleton-loader__list-item-avatar {
+        padding-left: 0;
+        padding-right: 0;
 
-        .v-skeleton-loader__avatar{
-            width:3.2rem;
-            height:3.2rem;
+        .v-skeleton-loader__avatar {
+          width: 3.2rem;
+          height: 3.2rem;
         }
       }
     }
@@ -1149,8 +1199,8 @@ export default {
 }
 
 #content-stats-container .handlerShadow {
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.15) 0px -12px 30px,
-    rgba(0, 0, 0, 0.12) 0px 4px 6px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.15) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px;
 }
 
 @media (min-width: 600px) {

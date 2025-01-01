@@ -25,7 +25,11 @@
             >
               Read about it
             </v-btn>
-            <img id="img-bottom" alt="AI Learn" src="/images/ai-learn-bg2.png" />
+            <img
+              id="img-bottom"
+              alt="AI Learn"
+              src="/images/ai-learn-bg2.png"
+            />
           </v-card>
         </v-col>
       </v-row>
@@ -46,7 +50,8 @@
                 Educational Content
               </v-card-title>
               <v-card-text class="gama-text-body2">
-                Empower Your Studies. Download Worksheets and Educational Materials.
+                Empower Your Studies. Download Worksheets and Educational
+                Materials.
               </v-card-text>
             </v-card>
           </v-col>
@@ -57,7 +62,8 @@
                 &nbsp;Exam
               </v-card-title>
               <v-card-text class="gama-text-body2">
-                You can test yourself with online tests and increase your preparation.
+                You can test yourself with online tests and increase your
+                preparation.
               </v-card-text>
             </v-card>
           </v-col>
@@ -79,9 +85,9 @@
         <v-col cols="12" sm="8">
           <h2 class="gama-text-h4">Find school service</h2>
           <p class="gama-text-body1 describe">
-            You don't have to try the hardest ways anymore. GamaTrain has provided you
-            with access to school information. Just filter and GamaTrain will find it for
-            you.
+            You don't have to try the hardest ways anymore. GamaTrain has
+            provided you with access to school information. Just filter and
+            GamaTrain will find it for you.
           </p>
           <!-- <v-btn
                      :large="$vuetify.breakpoint.mdAndUp"
