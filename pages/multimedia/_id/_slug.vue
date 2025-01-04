@@ -88,6 +88,7 @@
                       <v-tabs-items v-model="description_tab">
                         <v-tab-item key="tab-description">
                           <span
+                            style="white-space: pre"
                             class="gama-text-body2"
                             v-show="editMode.describe == false"
                             v-html="contentData.description"
