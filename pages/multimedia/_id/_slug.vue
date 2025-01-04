@@ -44,27 +44,29 @@
                         <v-icon> mdi-pencil </v-icon>
                       </v-btn>
                     </h1>
-                    <div>
-                      <v-text-field
-                        v-if="editMode.title"
-                        width="100%"
-                        placeholder="Title"
-                        v-model="contentData.title"
-                      >
-                        <template slot="append-outer">
-                          <v-btn
-                            color="success"
-                            @click="updateDetails()"
-                            fab
-                            depressed
-                            :loading="editMode.title_loading"
-                            x-small
-                          >
-                            <v-icon> mdi-check </v-icon>
-                          </v-btn>
-                        </template>
-                      </v-text-field>
-                    </div>
+                  </div>
+
+                  <div class="w-100">
+                    <v-textarea
+                      v-if="editMode.title"
+                      width="100%"
+                      rows="3"
+                      placeholder="Title"
+                      v-model="contentData.title"
+                    >
+                      <template slot="append-outer">
+                        <v-btn
+                          color="success"
+                          @click="updateDetails()"
+                          fab
+                          depressed
+                          :loading="editMode.title_loading"
+                          x-small
+                        >
+                          <v-icon> mdi-check </v-icon>
+                        </v-btn>
+                      </template>
+                    </v-textarea>
                   </div>
                   <div class="description-holder my-4">
                     <!--Description-->
@@ -104,6 +106,7 @@
                             <v-textarea
                               v-if="editMode.describe"
                               width="100%"
+                              rows="18"
                               placeholder="Title"
                               v-model="contentData.description"
                             >

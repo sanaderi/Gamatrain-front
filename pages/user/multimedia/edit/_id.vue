@@ -411,7 +411,7 @@ export default {
           }
         }).then(response => {
         if (response.data.id == 0 && response.data.repeated)
-          this.$toast.info("Th  e multimedia is duplicated");
+          this.$toast.info("The multimedia is duplicated");
         else {
           this.$toast.success("Updated successfully");
           this.$router.push({
