@@ -205,10 +205,12 @@
                                   class="mt-2 gama-text-body1"
                                   ref="mathJaxEl"
                                   v-html="
-                                    contentData.question.replace(
-                                      /\n/g,
-                                      '<br />'
-                                    )
+                                    contentData.question
+                                      ? contentData.question.replace(
+                                          /\n/g,
+                                          '<br />'
+                                        )
+                                      : ''
                                   "
                                 />
                               </v-col>
