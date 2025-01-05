@@ -825,6 +825,7 @@
                     <div v-if="loading.similar_questions">
                       <v-skeleton-loader
                         v-for="i in 10"
+                        :key="i"
                         type="list-item"
                       ></v-skeleton-loader>
                     </div>
@@ -845,7 +846,7 @@
                             question.title
                           )}`"
                         >
-                          <span v-bind="attrs" v-on="on">
+                          <span>
                             {{ question.title }}
                           </span>
                         </nuxt-link>
