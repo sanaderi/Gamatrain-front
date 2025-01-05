@@ -145,10 +145,10 @@
                                         </p>
                                         <p class="text-h6">
                                           <span
-                                            v-show="contentData.stats.qNum > 0"
+                                            v-show="contentData.stats?.qNum > 0"
                                           >
                                             <span class="orange--text">
-                                              {{ contentData.stats.qNum }}
+                                              {{ contentData.stats?.qNum }}
                                               Qn
                                             </span>
                                             |
@@ -156,24 +156,26 @@
 
                                           <span
                                             class="green--text"
-                                            v-show="contentData.stats.aNum > 0"
+                                            v-show="contentData.stats?.aNum > 0"
                                           >
-                                            {{ contentData.stats.aNum }}
+                                            {{ contentData.stats?.aNum }}
                                             Ans
                                           </span>
                                           <span
                                             v-show="
-                                              contentData.stats.aNum > 0 ||
-                                              contentData.stats.score > 0
+                                              contentData.stats?.aNum > 0 ||
+                                              contentData.stats?.score > 0
                                             "
                                           >
                                             |
                                           </span>
                                           <span
-                                            v-show="contentData.stats.score > 0"
+                                            v-show="
+                                              contentData.stats?.score > 0
+                                            "
                                           >
                                             <span class="blue--text">
-                                              {{ contentData.stats.score }}
+                                              {{ contentData.stats?.score }}
                                               Score
                                             </span>
                                           </span>
@@ -516,32 +518,32 @@
                                           <strong v-else> No name </strong>
                                         </p>
                                         <p class="text-h6">
-                                          <span v-show="answer.stats.qNum > 0">
+                                          <span v-show="answer.stats?.qNum > 0">
                                             <span class="orange--text">
-                                              {{ answer.stats.qNum }} Qn
+                                              {{ answer.stats?.qNum }} Qn
                                             </span>
                                             |
                                           </span>
 
                                           <span
                                             class="green--text"
-                                            v-show="answer.stats.aNum > 0"
+                                            v-show="answer.stats?.aNum > 0"
                                           >
-                                            {{ answer.stats.aNum }} Ans
+                                            {{ answer.stats?.aNum }} Ans
                                           </span>
                                           <span
                                             v-show="
-                                              answer.stats.score > 0 ||
-                                              answer.stats.aNum > 0
+                                              answer.stats?.score > 0 ||
+                                              answer.stats?.aNum > 0
                                             "
                                           >
                                             |
                                           </span>
                                           <span
                                             class="blue--text"
-                                            v-show="answer.stats.score"
+                                            v-show="answer.stats?.score"
                                           >
-                                            {{ answer.stats.score }} Score
+                                            {{ answer.stats?.score }} Score
                                           </span>
                                         </p>
                                       </div>
