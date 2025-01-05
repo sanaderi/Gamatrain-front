@@ -1005,15 +1005,22 @@ export default {
     };
   },
   async asyncData({ params, $axios }) {
-    // This could also be an action dispatch
-    const content = await $axios.$get(`/api/v1/questions/${params.id}`);
-    var contentData = [];
-    //Check data exist
-    if (content.status === 1) {
-      contentData = content.data;
-    }
+    try {
+      // Fetch the data from the API
+      const content = await $axios.$get(`/api/v1/questions/${params.id}`);
 
-    return { contentData };
+      // Check if the content's status is 1, and return contentData only if the condition is met
+      if (content.status === 1) {
+        return { contentData: content.data };
+      }
+
+      // If the condition is not met, return an empty contentData
+      return { contentData: [] };
+    } catch (error) {
+      // Handle errors and return default data
+      console.error("Error fetching content:", error);
+      return { contentData: [] };
+    }
   },
   mounted() {
     this.initBreadCrumb();
