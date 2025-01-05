@@ -637,14 +637,7 @@ export default {
     // This could also be an action dispatch
     try {
       const content = await $axios.$get(`/api/v1/tests/${params.id}`);
-      var contentData = [];
-
-      //Check data exist
-      if (content.status === 1) {
-        contentData = content.data;
-      }
-
-      return { contentData };
+      return { contentData: content.data };
     } catch (e) {
       if (e.response && e.response.status === 404) {
         redirect("/search?type=test");
