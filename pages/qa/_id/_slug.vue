@@ -66,7 +66,7 @@
                                 <v-icon size="88"> mdi-menu-up </v-icon>
                               </v-btn>
                               <p class="text-h4">
-                                {{ contentData.score }}
+                                {{ contentData?.score }}
                               </p>
                               <v-btn
                                 icon
@@ -111,7 +111,7 @@
                             <v-row>
                               <v-col cols="12" class="px-sm-3">
                                 <h1 class="gama-text-h6 mb-2">
-                                  {{ contentData.title }}
+                                  {{ contentData?.title }}
                                 </h1>
 
                                 <v-row>
@@ -122,7 +122,7 @@
                                           width="40"
                                           height="40"
                                           v-if="contentData.avatar"
-                                          :src="contentData.avatar"
+                                          :src="contentData?.avatar"
                                         />
                                         <v-btn
                                           v-else
@@ -139,7 +139,7 @@
                                       <div class="pa-3 pt-0">
                                         <p class="gama-text-h6">
                                           <span v-if="contentData.name">
-                                            {{ contentData.name }}
+                                            {{ contentData?.name }}
                                           </span>
                                           <span v-else> No name </span>
                                         </p>
@@ -268,7 +268,7 @@
                                         <v-icon size="40"> mdi-menu-up </v-icon>
                                       </v-btn>
                                       <p class="pt-3">
-                                        {{ contentData.score }}
+                                        {{ contentData?.score }}
                                       </p>
                                       <v-btn
                                         icon
@@ -398,7 +398,7 @@
                                 <v-icon size="88"> mdi-menu-up </v-icon>
                               </v-btn>
                               <p class="text-h4">
-                                {{ answer.score }}
+                                {{ answer?.score }}
                               </p>
                               <v-btn
                                 icon
