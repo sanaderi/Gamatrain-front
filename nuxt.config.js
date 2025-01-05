@@ -1,29 +1,41 @@
-import colors from 'vuetify/es5/util/colors'
+import colors from "vuetify/es5/util/colors";
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
 
   head: {
     titleTemplate: "%s | Gamatrain",
-    title: "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
+    title:
+      "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
     htmlAttrs: {
       lang: "en",
     },
     meta: [
       { charset: "utf-8" },
       { "http-equiv": "Content-Type" },
-      { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" },
-      { hid: "description", name: "description", content: "Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences." },
+      {
+        name: "viewport",
+        content:
+          "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;",
+      },
+      {
+        hid: "description",
+        name: "description",
+        content:
+          "Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences.",
+      },
       { name: "format-detection", content: "telephone=no" },
       {
         hid: "apple-mobile-web-app-title",
         name: "apple-mobile-web-app-title",
-        content: "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
+        content:
+          "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
       },
       {
         hid: "og:title",
         name: "og:title",
-        content: "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
+        content:
+          "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
       },
       {
         hid: "og:site_name",
@@ -36,44 +48,42 @@ export default {
       {
         rel: "icon",
         type: "image/x-icon",
-        href:'/favicon-dark.ico',
+        href: "/favicon-dark.ico",
       },
       { rel: "stylesheet", href: "/assets/css/all.min.css" },
       // {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"},
-
     ],
     script: [
-      { src: 'https://accounts.google.com/gsi/client', defer: true, async: true },
+      {
+        src: "https://accounts.google.com/gsi/client",
+        defer: true,
+        async: true,
+      },
       // {src: './assets/js/jquery.js', body: true},
     ],
   },
 
   generate: {
-    routes: [
-      '/'
-    ],
+    routes: ["/"],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "@/assets/scss/app.scss",
-    '@mdi/font/css/materialdesignicons.min.css',
-    "@/assets/css/gama6/styles.css"
-
+    "@mdi/font/css/materialdesignicons.min.css",
+    "@/assets/css/gama6/styles.css",
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: 'plugins/vee-validate.js', ssr: true },
-    { src: 'plugins/axios.js' },
-    { src: 'plugins/helper.js' },
-    { src: 'plugins/vue-emoji-picker', ssr: false },
-    { src: 'plugins/img-cropper', ssr: false },
-    { src: 'plugins/vuedraggable', ssr: false },
-    { src: 'plugins/aframe.js', ssr: false, mode: 'client' },
-    { src: 'plugins/gtag.js',mode:"client"},
-
-
+    { src: "plugins/vee-validate.js", ssr: true },
+    { src: "plugins/axios.js" },
+    { src: "plugins/helper.js" },
+    { src: "plugins/vue-emoji-picker", ssr: false },
+    { src: "plugins/img-cropper", ssr: false },
+    { src: "plugins/vuedraggable", ssr: false },
+    // { src: 'plugins/aframe.js', ssr: false, mode: 'client' },
+    { src: "plugins/gtag.js", mode: "client" },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -83,12 +93,12 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     // "@nuxt/typescript-build",
-    'nuxt-leaflet',
+    "nuxt-leaflet",
     // https://go.nuxtjs.dev/vuetify
     ["@nuxtjs/vuetify"],
-    '@nuxtjs/dotenv',
-    '@nuxtjs/moment',
-    '@nuxtjs/pwa'
+    "@nuxtjs/dotenv",
+    "@nuxtjs/moment",
+    "@nuxtjs/pwa",
 
     // '@nuxtjs/onesignal',
   ],
@@ -103,43 +113,44 @@ export default {
   //   }
   // },
 
-
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    'nuxt-material-design-icons',
-    '@nuxtjs/axios',
-    '@nuxtjs/toast',
-    '@nuxtjs/auth-next',
-    '@nuxtjs/markdownit',
-    'cookie-universal-nuxt',
+    "nuxt-material-design-icons",
+    "@nuxtjs/axios",
+    "@nuxtjs/toast",
+    "@nuxtjs/auth-next",
+    "@nuxtjs/markdownit",
+    "cookie-universal-nuxt",
   ],
 
   axios: {
     proxy: true,
     baseUrl: process.env.API_BASE_URL,
-    headers: {}
+    headers: {},
   },
 
   proxy: {
-    '/api/v1/': {
+    "/api/v1/": {
       target: process.env.API_BASE_URL,
-      pathRewrite: { '^/api/v1/': '/api/v1/' },
+      pathRewrite: { "^/api/v1/": "/api/v1/" },
       secure: false,
-      changeOrigin: true
+      changeOrigin: true,
     },
-    '/uploads/': {
+    "/uploads/": {
       target: process.env.API_BASE_URL,
-      pathRewrite: { '^/uploads': '/uploads' },
+      pathRewrite: { "^/uploads": "/uploads" },
       secure: false,
-      changeOrigin: true
+      changeOrigin: true,
     },
-    '/test_api/': { target: 'https://trade.smart-ledger.ir', pathRewrite: { '^/test_api/': '/api/' }, changeOrigin: true }
-
+    "/test_api/": {
+      target: "https://trade.smart-ledger.ir",
+      pathRewrite: { "^/test_api/": "/api/" },
+      changeOrigin: true,
+    },
   },
 
-
   router: {
-    middleware: ['auth','redirect']
+    middleware: ["auth", "redirect"],
   },
 
   auth: {
@@ -161,41 +172,42 @@ export default {
       // },
       local: {
         token: {
-          property: 'jwtToken',
+          property: "jwtToken",
           global: true,
         },
         user: {
-          property: 'data',
-          autoFetch: true
+          property: "data",
+          autoFetch: true,
         },
         endpoints: {
-          login: { url: '/api/v1/users/login', method: 'post' },
+          login: { url: "/api/v1/users/login", method: "post" },
           // refresh: {url: '/api/v1/users/refresh_token', method: 'post'},
-          user: { url: '/api/v1/users/info', method: 'get' },
-          logout: { url: '/api/v1/users/logout', method: 'get' }
-        }
-      }
+          user: { url: "/api/v1/users/info", method: "get" },
+          logout: { url: "/api/v1/users/logout", method: "get" },
+        },
+      },
     },
     redirect: {
-      login: '/?access=denied',
-      logout: '/',
+      login: "/?access=denied",
+      logout: "/",
       callback: false,
-      home: '/'
-    }
+      home: "/",
+    },
   },
 
   toast: {
-    position: 'top-center',
+    position: "top-center",
     duration: 3000,
-    register: [ // Register custom toasts
+    register: [
+      // Register custom toasts
       {
-        name: 'my-error',
-        message: 'Oops...Something went wrong',
+        name: "my-error",
+        message: "Oops...Something went wrong",
         options: {
-          type: 'error'
-        }
-      }
-    ]
+          type: "error",
+        },
+      },
+    ],
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -206,55 +218,58 @@ export default {
       light: true,
       themes: {
         light: {
-          background: '#FFFFFF',
-          surface: '#FFFFFF',
-          primary: '#FFB300',
-          secondary: '#03DAC6',
-          error: '#B00020',
-          info: '#2196F3',
-          success: '#4CAF50',
-          warning: '#FB8C00',
+          background: "#FFFFFF",
+          surface: "#FFFFFF",
+          primary: "#FFB300",
+          secondary: "#03DAC6",
+          error: "#B00020",
+          info: "#2196F3",
+          success: "#4CAF50",
+          warning: "#FB8C00",
         },
         dark: {
           background: colors.indigo.base,
-          surface: '#FFFFFF',
-          primary: '#FFB300',
-          secondary: '#03DAC6',
-          error: '#B00020',
+          surface: "#FFFFFF",
+          primary: "#FFB300",
+          secondary: "#03DAC6",
+          error: "#B00020",
           info: colors.teal.lighten1,
-          success: '#4CAF50',
-          warning: '#FB8C00',
-        }
+          success: "#4CAF50",
+          warning: "#FB8C00",
+        },
       },
     },
     icons: {
-      iconfont: 'mdi',
-    }
+      iconfont: "mdi",
+    },
   },
-
-
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ["vee-validate", "vue-chartjs", "ofetch", "node-fetch-native", "defu"],
+    transpile: [
+      "vee-validate",
+      "vue-chartjs",
+      "ofetch",
+      "node-fetch-native",
+      "defu",
+    ],
   },
 
   pwa: {
     manifest: {
-      name: 'Gamatrain App',
-      short_name: 'Gamatrain',
-      description: 'Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences.',
-      lang: 'en',
-      useWebmanifestExtension: false
-    }
+      name: "Gamatrain App",
+      short_name: "Gamatrain",
+      description:
+        "Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences.",
+      lang: "en",
+      useWebmanifestExtension: false,
+    },
   },
 
   server: {
     host: "0.0.0.0",
-    port: 3002
+    port: 3002,
   },
 
-  serverMiddleware: [
-    '~/serverMiddleware/data-to-xml.js',
-  ],
+  serverMiddleware: ["~/serverMiddleware/data-to-xml.js"],
 };

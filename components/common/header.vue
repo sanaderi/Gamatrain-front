@@ -2,7 +2,7 @@
   <div>
     <header id="main-header">
       <!--Desktop menu-->
-      
+
       <v-app-bar
         flat
         :fixed="menuSetting.fixedStatus"
@@ -10,7 +10,6 @@
         :class="menuSetting.class"
         class="d-none d-lg-block"
       >
-      
         <v-container class="px-0">
           <v-row>
             <v-col cols="6" md="9" lg="9" xl="9">
@@ -494,7 +493,7 @@
                               </span>
                             </div>
                             <div v-else>
-                              <v-row class="list-item" v-for="i in 3">
+                              <v-row class="list-item" v-for="i in 3" :key="i">
                                 <v-col cols="12">
                                   <v-skeleton-loader
                                     type="list-item-avatar"
@@ -593,9 +592,9 @@
           </v-toolbar>
           <v-list three-line>
             <template v-for="(item, index) in notificationItems">
-              <v-list-item>
+              <v-list-item :key="index">
                 <v-list-item-icon>
-                  <v-icon v-text="item.icon"></v-icon>
+                  <v-icon :icon="item.icon"></v-icon>
                 </v-list-item-icon>
 
                 <v-list-item-content>
@@ -1102,10 +1101,9 @@ export default {
   z-index: 1005 !important;
 }
 
-.main-sidebar{
-  z-index: 1006!important;
+.main-sidebar {
+  z-index: 1006 !important;
 }
-
 
 #main-logo {
   margin-left: 1.6rem !important;
@@ -1587,7 +1585,6 @@ export default {
       color: #000 !important;
     }
 
-   
     .mobile_bar .v-toolbar__content {
       background: transparent;
       padding: 0 1.4rem 0 0.5rem !important;

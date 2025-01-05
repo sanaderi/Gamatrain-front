@@ -32,7 +32,7 @@
                     <h1 class="gama-text-h5" v-show="editMode.title == false">
                       {{ contentData.title }}
                       <v-btn
-                        v-if="$auth.user.id == contentData.user_"
+                        v-if="$auth.user?.id == contentData.user_"
                         @click="editMode.title = true"
                         fab
                         depressed
@@ -72,7 +72,7 @@
                       v-html="contentData.description"
                     />
                     <v-btn
-                      v-if="$auth.user.id == contentData.user_"
+                      v-if="$auth.user?.id == contentData.user_"
                       v-show="editMode.describe == false"
                       @click="editMode.describe = true"
                       fab
@@ -633,8 +633,10 @@ export default {
       title: this.contentData.title,
     };
   },
-  async asyncData({ req, params, $axios, redirect }) {
+  async asyncData({ params, $axios, redirect }) {
     // This could also be an action dispatch
+    console.log(params);
+    console.log(params.id);
     try {
       const content = await $axios.$get(`/api/v1/tests/${params.id}`);
       return { contentData: content.data };

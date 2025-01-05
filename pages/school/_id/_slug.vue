@@ -78,9 +78,15 @@
           src="/images/school-default.png"
           alt="School image"
         />
-        <div v-else class="enter-img-holder pointer" @click="galleryDialog = true">
+        <div
+          v-else
+          class="enter-img-holder pointer"
+          @click="galleryDialog = true"
+        >
           <div class="text-center">
-            <v-icon size="48" class="primary-gray-300 mb-10">mdi-panorama-outline</v-icon>
+            <v-icon size="48" class="primary-gray-300 mb-10"
+              >mdi-panorama-outline</v-icon
+            >
             <p class="gtext-t4 primary-blue-500">You enter</p>
           </div>
         </div>
@@ -110,7 +116,9 @@
         </div>
         <div v-else class="enter-img-holder pointer" @click="openTourImgInput">
           <div class="text-center">
-            <v-icon size="48" class="primary-gray-300 mb-10">mdi-rotate-360</v-icon>
+            <v-icon size="48" class="primary-gray-300 mb-10"
+              >mdi-rotate-360</v-icon
+            >
             <p class="gtext-t4 primary-blue-500">You enter</p>
           </div>
         </div>
@@ -146,7 +154,9 @@
               <v-btn small class="text-transform-none gtext-t5" value="image">
                 Image
               </v-btn>
-              <v-btn small class="text-transform-none gtext-t5" value="map"> Map </v-btn>
+              <v-btn small class="text-transform-none gtext-t5" value="map">
+                Map
+              </v-btn>
               <v-btn small class="text-transform-none gtext-t5" value="tour">
                 Tour
               </v-btn>
@@ -249,7 +259,9 @@
             </div>
 
             <div class="d-flex mt-11 mb-9">
-              <div class="gtext-h5 gtext-md-h5 primary-gray-600">Tuition fee</div>
+              <div class="gtext-h5 gtext-md-h5 primary-gray-600">
+                Tuition fee
+              </div>
               <v-spacer />
               <!-- <div class="gtext-t4 primary-blue-500">You enter</div> -->
 
@@ -319,7 +331,10 @@
                   You enter
                 </span>
 
-                <v-text-field v-if="generalDataEditMode.website" placeholder="Website">
+                <v-text-field
+                  v-if="generalDataEditMode.website"
+                  placeholder="Website"
+                >
                   <template slot="append-outer">
                     <v-btn
                       color="success"
@@ -340,7 +355,10 @@
                 <v-icon color="primary"> mdi-email </v-icon>
               </div>
               <div class="info-data">
-                <a v-show="contentData.email" :href="`mailto:${contentData.email}`">
+                <a
+                  v-show="contentData.email"
+                  :href="`mailto:${contentData.email}`"
+                >
                   {{ contentData.email }}
                 </a>
                 <span
@@ -350,7 +368,10 @@
                 >
                   You enter
                 </span>
-                <v-text-field v-if="generalDataEditMode.email" placeholder="Email">
+                <v-text-field
+                  v-if="generalDataEditMode.email"
+                  placeholder="Email"
+                >
                   <template slot="append-outer">
                     <v-btn
                       color="success"
@@ -371,7 +392,10 @@
                 <v-icon color="primary"> mdi-phone </v-icon>
               </div>
               <div class="info-data">
-                <a v-show="contentData.phone1" :href="`tel: ${contentData.phone1}`">
+                <a
+                  v-show="contentData.phone1"
+                  :href="`tel: ${contentData.phone1}`"
+                >
                   {{ contentData.phone1 }}
                 </a>
                 <span
@@ -381,7 +405,10 @@
                 >
                   You enter
                 </span>
-                <v-text-field v-if="generalDataEditMode.phone1" placeholder="Phone">
+                <v-text-field
+                  v-if="generalDataEditMode.phone1"
+                  placeholder="Phone"
+                >
                   <template slot="append-outer">
                     <v-btn
                       color="success"
@@ -402,7 +429,9 @@
                 <v-icon size="20" color="primary"> mdi-map-marker </v-icon>
               </div>
               <div class="info-data">
-                <span v-show="contentData.address">{{ contentData.address }}</span>
+                <span v-show="contentData.address">{{
+                  contentData.address
+                }}</span>
                 <span
                   @click="editGeneralInfo('address')"
                   v-show="!(contentData.address || generalDataEditMode.address)"
@@ -411,7 +440,10 @@
                   You enter
                 </span>
 
-                <v-text-field  v-if="generalDataEditMode.address" placeholder="Enter address">
+                <v-text-field
+                  v-if="generalDataEditMode.address"
+                  placeholder="Enter address"
+                >
                   <template slot="append-outer">
                     <v-btn
                       color="success"
@@ -480,7 +512,9 @@
             <ul id="score-results">
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Classes quality</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Classes quality
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -493,7 +527,9 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Education</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Education
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -506,7 +542,9 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">IT training</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  IT training
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -515,11 +553,15 @@
                   class="mt-3"
                 ></v-progress-linear>
 
-                <div class="gtext-t4 font-weight-medium rate-title">Average</div>
+                <div class="gtext-t4 font-weight-medium rate-title">
+                  Average
+                </div>
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Safe and happy</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Safe and happy
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -528,11 +570,15 @@
                   class="mt-3"
                 ></v-progress-linear>
 
-                <div class="gtext-t4 font-weight-medium rate-title">Average</div>
+                <div class="gtext-t4 font-weight-medium rate-title">
+                  Average
+                </div>
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Behavior</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Behavior
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -545,7 +591,9 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Tuition ratio</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Tuition ratio
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -558,7 +606,9 @@
               </li>
               <li class="d-flex mb-4">
                 <div class="bullet"></div>
-                <div class="gtext-t4 font-weight-medium score-title">Facilities</div>
+                <div class="gtext-t4 font-weight-medium score-title">
+                  Facilities
+                </div>
                 <v-progress-linear
                   color="success"
                   rounded
@@ -608,7 +658,9 @@
                       <img class="profile-avatar" :src="comment.avatar" />
                     </v-avatar>
                     <div class="ml-2">
-                      <div class="gtext-t3 primary-gray-500">Teacher, Blackven</div>
+                      <div class="gtext-t3 primary-gray-500">
+                        Teacher, Blackven
+                      </div>
                       <div class="gtext-t2 primary-gray-900">
                         {{ comment.first_name }} {{ comment.last_name }}
                       </div>
@@ -626,13 +678,23 @@
                   </div>
                 </div>
                 <v-divider class="mb-5" />
-                <div class="gtext-t2 primary-gray-700 mb-6">“{{ comment.comment }}”</div>
+                <div class="gtext-t2 primary-gray-700 mb-6">
+                  “{{ comment.comment }}”
+                </div>
                 <div class="pb-8">
                   <div class="float-left">
-                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                    <v-btn
+                      class="bg-primary-gray-700 white--text mr-6"
+                      fab
+                      x-small
+                    >
                       <v-icon size="14"> mdi-thumb-down </v-icon>
                     </v-btn>
-                    <v-btn class="bg-primary-gray-700 white--text mr-6" fab x-small>
+                    <v-btn
+                      class="bg-primary-gray-700 white--text mr-6"
+                      fab
+                      x-small
+                    >
                       <v-icon size="14"> mdi-thumb-up </v-icon>
                     </v-btn>
                     <v-btn class="bg-primary-blue-500 white--text" fab x-small>
@@ -692,23 +754,28 @@
                           </h2>
 
                           <!-- <v-chip class="primary">
-              
+
              </v-chip> -->
 
-                          <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                          <v-chip
+                            class="list-chip gtext-t5 font-weight-medium"
+                            small
+                          >
                             Pre-K
                           </v-chip>
 
                           <!-- <v-chip class="primary">
-              
+
              </v-chip>
 
              <v-chip class="primary">
-              
+
              </v-chip> -->
                         </div>
                         <div class="item-img float-right">
-                          <img :src="require('assets/images/default-school.png')" />
+                          <img
+                            :src="require('assets/images/default-school.png')"
+                          />
                         </div>
                       </div>
                       <v-divider class="mb-3" />
@@ -733,7 +800,9 @@
                         </div>
 
                         <div class="float-right d-flex mt-1">
-                          <div class="rate-section gtext-t6 font-weight-semibold mr-1">
+                          <div
+                            class="rate-section gtext-t6 font-weight-semibold mr-1"
+                          >
                             <!-- {{ item.score }} -->
                             4
                             <v-icon color="primary"> mdi-star </v-icon>
@@ -741,7 +810,11 @@
                           <div class="gtext-t6 primary-gray-300">
                             Update:
                             <span class="primary-gray-600">
-                              {{ $moment(contentData.up_date).format("YYYY/MM/DD") }}
+                              {{
+                                $moment(contentData.up_date).format(
+                                  "YYYY/MM/DD"
+                                )
+                              }}
                             </span>
                           </div>
                         </div>
@@ -761,23 +834,28 @@
                           </h2>
 
                           <!-- <v-chip class="primary">
-              
+
              </v-chip> -->
 
-                          <v-chip class="list-chip gtext-t5 font-weight-medium" small>
+                          <v-chip
+                            class="list-chip gtext-t5 font-weight-medium"
+                            small
+                          >
                             Pre-K
                           </v-chip>
 
                           <!-- <v-chip class="primary">
-              
+
              </v-chip>
 
              <v-chip class="primary">
-              
+
              </v-chip> -->
                         </div>
                         <div class="item-img float-right">
-                          <img :src="require('assets/images/default-school.png')" />
+                          <img
+                            :src="require('assets/images/default-school.png')"
+                          />
                         </div>
                       </div>
                       <v-divider class="mb-3" />
@@ -802,7 +880,9 @@
                         </div>
 
                         <div class="float-right d-flex mt-1">
-                          <div class="rate-section gtext-t6 font-weight-semibold mr-1">
+                          <div
+                            class="rate-section gtext-t6 font-weight-semibold mr-1"
+                          >
                             <!-- {{ item.score }} -->
                             4
                             <v-icon color="primary"> mdi-star </v-icon>
@@ -810,7 +890,11 @@
                           <div class="gtext-t6 primary-gray-300">
                             Update:
                             <span class="primary-gray-600">
-                              {{ $moment(contentData.up_date).format("YYYY/MM/DD") }}
+                              {{
+                                $moment(contentData.up_date).format(
+                                  "YYYY/MM/DD"
+                                )
+                              }}
                             </span>
                           </div>
                         </div>
@@ -852,7 +936,9 @@
               <ul id="score-form">
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
                     Classes quality
                   </div>
                   <v-rating
@@ -866,7 +952,9 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
                     Education
                   </div>
                   <v-rating
@@ -880,7 +968,9 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
                     IT training
                   </div>
                   <v-rating
@@ -894,7 +984,9 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
                     Safe and happy
                   </div>
                   <v-rating
@@ -908,7 +1000,9 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
                     Behavior
                   </div>
                   <v-rating
@@ -922,7 +1016,9 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
                     Tuition ratio
                   </div>
                   <v-rating
@@ -936,7 +1032,9 @@
                 </li>
                 <li class="d-flex mb-4">
                   <div class="bullet"></div>
-                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
                     Facilities
                   </div>
                   <v-rating
@@ -950,7 +1048,9 @@
                 </li>
                 <li class="d-flex">
                   <div class="bullet"></div>
-                  <div class="gtext-t4 font-weight-medium primary-gray-700 score-title">
+                  <div
+                    class="gtext-t4 font-weight-medium primary-gray-700 score-title"
+                  >
                     Artistic activities
                   </div>
                   <v-rating
@@ -1006,7 +1106,9 @@
             <div class="gtext-h5 priamry-gray-700">School images</div>
             <v-spacer></v-spacer>
             <v-btn icon
-              ><v-icon size="20" @click="galleryDialog = false">mdi-close</v-icon></v-btn
+              ><v-icon size="20" @click="galleryDialog = false"
+                >mdi-close</v-icon
+              ></v-btn
             >
           </div>
           <v-divider class="mb-12 mt-4" />
@@ -1018,7 +1120,11 @@
                 src="/images/school-default.png"
                 alt="School image"
               />
-              <div v-else class="enter-img-holder pointer" @click="galleryDialog = true">
+              <div
+                v-else
+                class="enter-img-holder pointer"
+                @click="galleryDialog = true"
+              >
                 <div class="text-center">
                   <v-icon size="48" class="primary-gray-300 mb-10"
                     >mdi-panorama-outline</v-icon
@@ -1032,14 +1138,25 @@
             </v-col>
             <v-col cols="12" md="5">
               <v-row>
-                <v-col v-if="contentData.pic" cols="4" class="pl-0" v-for="item in 5">
+                <v-col
+                  v-if="contentData.pic"
+                  cols="4"
+                  class="pl-0"
+                  v-for="item in 5"
+                  :key="item"
+                >
                   <img
                     class="schoolThumbImg"
                     src="/images/school-default.png"
                     alt="School image"
                   />
                 </v-col>
-                <v-col cols="4" align="center" justify="center" class="fill-height">
+                <v-col
+                  cols="4"
+                  align="center"
+                  justify="center"
+                  class="fill-height"
+                >
                   <v-btn color="primary" fab depressed @click="openImgInput">
                     <v-icon size="48"> mdi-plus </v-icon>
                   </v-btn>
@@ -1248,7 +1365,7 @@ export default {
         website: false,
         email: false,
         phone1: false,
-        address:false
+        address: false,
       },
     };
   },
