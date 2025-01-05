@@ -637,7 +637,6 @@ export default {
     // This could also be an action dispatch
     try {
       const content = await $axios.$get(`/api/v1/tests/${params.id}`);
-
       return { contentData: content.data };
     } catch (e) {
       if (e.response && e.response.status === 404) {
