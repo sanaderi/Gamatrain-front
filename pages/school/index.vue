@@ -19,7 +19,8 @@
         >
           <l-tile-layer :url="map.url"></l-tile-layer>
           <l-marker
-            v-for="marker in map.markers"
+            v-for="(marker, index) in map.markers"
+            :key="index"
             @click="$router.push(`/school/1`)"
             :lat-lng="marker.latLng"
             :icon="map.schoolIcon"
@@ -75,7 +76,9 @@
                       <v-row v-if="mobileDataSheetConfig.sheetHeight >= 15">
                         <v-col cols="12" class="text-right">
                           <div id="result-stat " class="mr-4">
-                            <span class="gama-text-overline"> Search result </span>
+                            <span class="gama-text-overline">
+                              Search result
+                            </span>
                             <span class="gama-text-button">
                               {{ resultCount }}
                             </span>
@@ -86,7 +89,9 @@
                       <div
                         v-if="mobileDataSheetConfig.sheetHeight >= 15"
                         id="search-result"
-                        :style="`height:${mobileDataSheetConfig.sheetHeight - 18}rem`"
+                        :style="`height:${
+                          mobileDataSheetConfig.sheetHeight - 18
+                        }rem`"
                         ref="mobileSchoolListSection"
                         @scroll="checkMobileSchoolScroll"
                       >
@@ -209,7 +214,9 @@
               close
               class="mr-1 mb-1"
               outlined
-              v-if="$route.query.boarding_type && filterLoadedStatus.boarding_type"
+              v-if="
+                $route.query.boarding_type && filterLoadedStatus.boarding_type
+              "
               v-for="(item, index) in boardingTypeArray"
               @click:close="closeFilter('boarding_type', item)"
             >
@@ -722,7 +729,8 @@ export default {
               }
             }
 
-            if (response.data.list.length < this.perPage) this.allDataLoaded = true;
+            if (response.data.list.length < this.perPage)
+              this.allDataLoaded = true;
           })
           .catch((err) => {
             console.error(err);
@@ -759,12 +767,17 @@ export default {
       }
     },
     isScrollAtBottom(element) {
-      return element.scrollHeight - element.scrollTop - 150 <= element.clientHeight;
+      return (
+        element.scrollHeight - element.scrollTop - 150 <= element.clientHeight
+      );
     },
     closeFilter(filter_name, other_data = null) {
-      if (filter_name == "keyword") this.$refs.schoolFilter.filterForm.keyword = "";
-      else if (filter_name == "stage") this.$refs.schoolFilter.updateFilter("stage", "");
-      else if (filter_name == "sort") this.$refs.schoolFilter.updateFilter("sort", "");
+      if (filter_name == "keyword")
+        this.$refs.schoolFilter.filterForm.keyword = "";
+      else if (filter_name == "stage")
+        this.$refs.schoolFilter.updateFilter("stage", "");
+      else if (filter_name == "sort")
+        this.$refs.schoolFilter.updateFilter("sort", "");
       else if (filter_name == "tuition_fee")
         this.$refs.schoolFilter.filterForm.tuition_fee = 0;
       else if (filter_name == "country") {
@@ -807,26 +820,42 @@ export default {
     findTitle(type, id) {
       var title = "";
       if (type == "stage")
-        title = this.$refs.schoolFilter.filter.stageList.find((x) => x.id == id).title;
+        title = this.$refs.schoolFilter.filter.stageList.find(
+          (x) => x.id == id
+        ).title;
       if (type == "sort") {
         title = this.sortList.find((x) => x.value == id).title;
       } else if (type == "country")
-        title = this.$refs.schoolFilter.filter.countryList.find((x) => x.id == id).name;
+        title = this.$refs.schoolFilter.filter.countryList.find(
+          (x) => x.id == id
+        ).name;
       else if (type == "state")
-        title = this.$refs.schoolFilter.filter.stateList.find((x) => x.id == id).title;
+        title = this.$refs.schoolFilter.filter.stateList.find(
+          (x) => x.id == id
+        ).title;
       else if (type == "city")
-        title = this.$refs.schoolFilter.filter.cityList.find((x) => x.id == id).title;
+        title = this.$refs.schoolFilter.filter.cityList.find(
+          (x) => x.id == id
+        ).title;
       else if (type == "school_type")
-        title = this.$refs.schoolFilter.filter.schoolTypeList.find((x) => x.id == id)
-          .title;
-      else if (type == "religion" && this.$refs.schoolFilter.filter.religionList)
-        title = this.$refs.schoolFilter.filter.religionList.find((x) => x.id == id).title;
+        title = this.$refs.schoolFilter.filter.schoolTypeList.find(
+          (x) => x.id == id
+        ).title;
+      else if (
+        type == "religion" &&
+        this.$refs.schoolFilter.filter.religionList
+      )
+        title = this.$refs.schoolFilter.filter.religionList.find(
+          (x) => x.id == id
+        ).title;
       else if (type == "boarding_type")
-        title = this.$refs.schoolFilter.filter.boardingTypeList.find((x) => x.id == id)
-          .title;
+        title = this.$refs.schoolFilter.filter.boardingTypeList.find(
+          (x) => x.id == id
+        ).title;
       else if (type == "coed_status")
-        title = this.$refs.schoolFilter.filter.coedStatusList.find((x) => x.id == id)
-          .title;
+        title = this.$refs.schoolFilter.filter.coedStatusList.find(
+          (x) => x.id == id
+        ).title;
 
       return title;
     },
@@ -845,7 +874,8 @@ export default {
         const currentHeight = this.mobileDataSheetConfig.sheetHeight;
         const newHeight = currentHeight + dragDistance / 10;
 
-        if (newHeight > currentHeight) this.mobileDataSheetConfig.dragSide = "top";
+        if (newHeight > currentHeight)
+          this.mobileDataSheetConfig.dragSide = "top";
         else this.mobileDataSheetConfig.dragSide = "bottom";
 
         this.mobileDataSheetConfig.sheetHeight = newHeight;
@@ -857,11 +887,10 @@ export default {
       if (this.mobileDataSheetConfig.dragSide == "bottom") {
         //10 is for rem and 4 is for divide 1
         this.mobileDataSheetConfig.sheetHeight = 15;
-        this.isExpanded=false;
+        this.isExpanded = false;
       } else if (this.mobileDataSheetConfig.dragSide == "top")
         this.mobileDataSheetConfig.sheetHeight = window.innerHeight / 10 - 4.6;
-        this.isExpanded=true;
-
+      this.isExpanded = true;
     },
     grabLocation(type, title) {
       this.$axios

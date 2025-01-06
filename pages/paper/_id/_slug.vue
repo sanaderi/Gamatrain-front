@@ -66,10 +66,13 @@
                   <div class="description-holder my-4">
                     <!--Description-->
                     <span
-                      style="white-space: pre"
                       v-show="editMode.describe == false"
                       class="gama-text-body2"
-                      v-html="contentData.description"
+                      v-html="
+                        contentData.description
+                          ? contentData.description.replace(/\n/g, '<br />')
+                          : ''
+                      "
                     />
                     <v-btn
                       v-if="$auth.user?.id == contentData.user_"

@@ -10,7 +10,7 @@
         >
           <div class="nav-link sample-q-icon">
             <span class="icon icon-paper"></span>
-            Paper
+            Past Papers
           </div>
         </v-badge>
       </v-tab>

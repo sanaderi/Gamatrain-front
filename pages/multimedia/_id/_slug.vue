@@ -37,7 +37,7 @@
                       <v-btn
                         @click="editMode.title = true"
                         fab
-                        v-if="$auth.user.id == contentData.user_"
+                        v-if="$auth.user?.id == contentData.user_"
                         depressed
                         x-small
                       >
@@ -88,13 +88,19 @@
                       <v-tabs-items v-model="description_tab">
                         <v-tab-item key="tab-description">
                           <span
-                            style="white-space: pre"
                             class="gama-text-body2"
                             v-show="editMode.describe == false"
-                            v-html="contentData.description"
+                            v-html="
+                              contentData.description
+                                ? contentData.description.replace(
+                                    /\n/g,
+                                    '<br />'
+                                  )
+                                : ''
+                            "
                           />
                           <v-btn
-                            v-if="$auth.user.id == contentData.user_"
+                            v-if="$auth.user?.id == contentData.user_"
                             v-show="editMode.describe == false"
                             @click="editMode.describe = true"
                             fab
@@ -194,7 +200,7 @@
                     to download and charge your wallet.
                   </span>
                   <span v-else>
-                    Your wallet charge is ${{ $auth.user.credit }}
+                    Your wallet charge is ${{ $auth.user?.credit }}
                   </span>
                   <nuxt-link
                     class="blue--text"
@@ -404,7 +410,7 @@
                 <span>to download and charge.</span>
               </p>
               <span v-else>
-                Your wallet charge is ${{ $auth.user.credit }}
+                Your wallet charge is ${{ $auth.user?.credit }}
                 <nuxt-link
                   class="blue--text"
                   v-if="$auth.loggedIn"
