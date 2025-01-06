@@ -1005,15 +1005,15 @@ export default {
     };
   },
   async asyncData({ params, $axios }) {
-    try {
-      // Fetch the data from the API
-      const content = await $axios.$get(`/api/v1/questions/${params.id}`);
-      return { contentData: content.data };
-    } catch (error) {
-      // Handle errors and return default data
-      console.error("Error fetching content:", error);
-      return { contentData: [] };
+    // Fetch the data from the API
+    const content = await $axios.$get(`/api/v1/questions/${params.id}`);
+    var contentData = [];
+    //Check data exist
+    if (content.status === 1) {
+      contentData = content.data;
     }
+
+    return { contentData };
   },
   mounted() {
     this.initBreadCrumb();
