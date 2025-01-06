@@ -45,7 +45,9 @@
                       v-bind="attrs"
                       v-on="on"
                       >Stage
-                      <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
+                      <v-icon right dark color="primary" large>
+                        mdi-chevron-down
+                      </v-icon>
                     </v-btn>
                   </template>
                   <v-list class="school-filter-list">
@@ -60,7 +62,10 @@
                     </v-list-item>
                   </v-list>
                 </v-menu>
-                <div :class="{ 'menu-opened': menuOpened }" class="vertical-line"></div>
+                <div
+                  :class="{ 'menu-opened': menuOpened }"
+                  class="vertical-line"
+                ></div>
 
                 <v-menu offset-y>
                   <template v-slot:activator="{ on, attrs }">
@@ -75,7 +80,9 @@
                         >to</span
                       >&nbsp;${{ filterForm.tuition_fee | numberFormat }} -->
 
-                      <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
+                      <v-icon right dark color="primary" large>
+                        mdi-chevron-down
+                      </v-icon>
                     </v-btn>
                   </template>
                   <v-card class="school-filter-list" width="400">
@@ -108,7 +115,9 @@
                 >
                   <v-icon right dark size="24"> mdi-filter </v-icon>
                   &nbsp;&nbsp;&nbsp; Filter
-                  <v-icon right dark color="primary" large> mdi-chevron-down </v-icon>
+                  <v-icon right dark color="primary" large>
+                    mdi-chevron-down
+                  </v-icon>
                 </v-btn>
                 <div class="vertical-line"></div>
 
@@ -229,6 +238,7 @@
                 <div class="pl-8">
                   <v-checkbox
                     v-for="(item, index) in filter.boardingTypeList"
+                    :key="index"
                     v-model="filterForm.boarding_type"
                     :label="item.title"
                     :value="item.id"
@@ -271,7 +281,12 @@
                 autocomplete="off"
               >
                 <template v-slot:append>
-                  <v-btn class="primary" :loading="searchLoading" id="search-btn" rounded>
+                  <v-btn
+                    class="primary"
+                    :loading="searchLoading"
+                    id="search-btn"
+                    rounded
+                  >
                     Search
                   </v-btn>
                 </template>
@@ -280,7 +295,14 @@
 
             <div class="float-right" id="filterSection">
               <!-- Filter section -->
-              <v-btn @click="filterDialog=true" small fab color="#F2F4F7" elevation="0" class="mr-2">
+              <v-btn
+                @click="filterDialog = true"
+                small
+                fab
+                color="#F2F4F7"
+                elevation="0"
+                class="mr-2"
+              >
                 <v-icon> mdi-filter </v-icon>
               </v-btn>
               <div v-if="filterDialog" id="filter-dialog">
@@ -337,7 +359,9 @@
                           close
                           outlined
                           class="mb-1"
-                          v-if="$route.query.country && filterLoadedStatus.country"
+                          v-if="
+                            $route.query.country && filterLoadedStatus.country
+                          "
                           @click:close="closeFilter('country')"
                         >
                           {{ findTitle("country", $route.query.country) }}
@@ -368,7 +392,8 @@
                           outlined
                           class="mb-1"
                           v-if="
-                            $route.query.school_type && filterLoadedStatus.school_type
+                            $route.query.school_type &&
+                            filterLoadedStatus.school_type
                           "
                           v-for="(item, index) in $route.query.school_type"
                           @click:close="closeFilter('school_type', item)"
@@ -380,7 +405,9 @@
                           close
                           outlined
                           class="mb-1 mr-1"
-                          v-if="$route.query.religion && filterLoadedStatus.religion"
+                          v-if="
+                            $route.query.religion && filterLoadedStatus.religion
+                          "
                           v-for="(item, index) in $route.query.religion"
                           @click:close="closeFilter('religion', item)"
                         >
@@ -392,7 +419,8 @@
                           outlined
                           class="mb-1 mr-1"
                           v-if="
-                            $route.query.boarding_type && filterLoadedStatus.boarding_type
+                            $route.query.boarding_type &&
+                            filterLoadedStatus.boarding_type
                           "
                           v-for="(item, index) in boardingTypeArray"
                           @click:close="closeFilter('boarding_type', item)"
@@ -405,7 +433,8 @@
                           outlined
                           class="mb-1 mr-1"
                           v-if="
-                            $route.query.coed_status && filterLoadedStatus.coed_status
+                            $route.query.coed_status &&
+                            filterLoadedStatus.coed_status
                           "
                           v-for="(item, index) in coedStatusArray"
                           @click:close="closeFilter('coed_status', item)"
@@ -453,7 +482,9 @@
                       </v-col>
 
                       <v-col cols="12" sm="4">
-                        <p class="gtext-t4 font-weight-medium primary-gray-900">Stage</p>
+                        <p class="gtext-t4 font-weight-medium primary-gray-900">
+                          Stage
+                        </p>
                         <div class="pl-8">
                           <v-radio-group v-model="filterForm.stage">
                             <v-radio
@@ -514,6 +545,7 @@
                         <div class="pl-8">
                           <v-checkbox
                             v-for="(item, index) in filter.boardingTypeList"
+                            :key="index"
                             v-model="filterForm.boarding_type"
                             :value="item.id"
                           >
@@ -592,13 +624,22 @@
                 style="border-radius: 0rem 3.2rem 3.2rem 0rem"
               >
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn small fab color="#F2F4F7" elevation="0" v-bind="attrs" v-on="on">
+                  <v-btn
+                    small
+                    fab
+                    color="#F2F4F7"
+                    elevation="0"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
                     <v-icon> mdi-filter-variant </v-icon>
                   </v-btn>
                 </template>
 
                 <v-list id="sortSheetList">
-                  <p class="primary-gray-600 gtext-h5 mt-2 mb-2 px-4">Sort by</p>
+                  <p class="primary-gray-600 gtext-h5 mt-2 mb-2 px-4">
+                    Sort by
+                  </p>
                   <v-list-item
                     v-for="item in sortList"
                     :key="item.value"
@@ -620,11 +661,20 @@
 
     <!-- Location picker dialog -->
     <v-row justify="center">
-      <v-card v-if="locationPickerDialog" id="locationPickerDialog" class="text-center">
-        <img class="rotating-image" :src="require('@/assets/images/earth.png')" />
+      <v-card
+        v-if="locationPickerDialog"
+        id="locationPickerDialog"
+        class="text-center"
+      >
+        <img
+          class="rotating-image"
+          :src="require('@/assets/images/earth.png')"
+        />
 
         <p class="gtext-t4">Select Your Location First</p>
-        <p class="gtext-t6">A lot of schools from all over the world are here</p>
+        <p class="gtext-t6">
+          A lot of schools from all over the world are here
+        </p>
 
         <v-row class="w-md-30 w-sm-50 w-100 mx-auto mt-2 mt-md-10">
           <v-col cols="12">
@@ -645,7 +695,11 @@
             />
           </v-col>
           <v-col cols="12">
-            <gomboBox label="City" :items="filter.cityList" v-model="filterForm.city" />
+            <gomboBox
+              label="City"
+              :items="filter.cityList"
+              v-model="filterForm.city"
+            />
           </v-col>
 
           <v-col cols="12">
@@ -754,8 +808,10 @@ export default {
     this.getFilterList({ type: "religion" }, "religion");
 
     //Init filter value
-    if (this.$route.query.keyword) this.filterForm.keyword = this.$route.query.keyword;
-    if (this.$route.query.stage) this.filterForm.stage = this.$route.query.stage;
+    if (this.$route.query.keyword)
+      this.filterForm.keyword = this.$route.query.keyword;
+    if (this.$route.query.stage)
+      this.filterForm.stage = this.$route.query.stage;
     if (this.$route.query.tuition_fee)
       this.filterForm.tuition_fee = this.$route.query.tuition_fee;
     if (this.$route.query.country) {
@@ -791,7 +847,9 @@ export default {
         : [this.$route.query.religion];
 
     if (this.$route.query.boarding_type)
-      this.filterForm.boarding_type = Array.isArray(this.$route.query.boarding_type)
+      this.filterForm.boarding_type = Array.isArray(
+        this.$route.query.boarding_type
+      )
         ? this.$route.query.boarding_type
         : [this.$route.query.boarding_type];
     if (this.$route.query.coed_status)
@@ -895,7 +953,8 @@ export default {
     //Update router query params
     updateQueryParams() {
       const query = {};
-      if (this.filterForm.keyword != "") query.keyword = this.filterForm.keyword;
+      if (this.filterForm.keyword != "")
+        query.keyword = this.filterForm.keyword;
 
       if (this.filterForm.stage != "") {
         query.stage = this.filterForm.stage;
@@ -921,7 +980,10 @@ export default {
         query.city = this.filterForm.city;
       }
 
-      if (this.filterForm.school_type && this.filterForm.school_type.length > 0) {
+      if (
+        this.filterForm.school_type &&
+        this.filterForm.school_type.length > 0
+      ) {
         query.school_type = this.filterForm.school_type;
       }
 
@@ -929,11 +991,17 @@ export default {
         query.religion = this.filterForm.religion;
       }
 
-      if (this.filterForm.boarding_type && this.filterForm.boarding_type.length > 0) {
+      if (
+        this.filterForm.boarding_type &&
+        this.filterForm.boarding_type.length > 0
+      ) {
         query.boarding_type = this.filterForm.boarding_type;
       }
 
-      if (this.filterForm.coed_status && this.filterForm.coed_status.length > 0) {
+      if (
+        this.filterForm.coed_status &&
+        this.filterForm.coed_status.length > 0
+      ) {
         query.coed_status = this.filterForm.coed_status;
       }
 
@@ -941,7 +1009,10 @@ export default {
         query.distance = this.filterForm.distance;
       }
 
-      if (this.filterForm.center != undefined && this.filterForm.center.length) {
+      if (
+        this.filterForm.center != undefined &&
+        this.filterForm.center.length
+      ) {
         query.center = this.filterForm.center.join(",");
       }
 
@@ -982,14 +1053,16 @@ export default {
     },
     findTitle(type, id) {
       var title = "";
-      if (type == "stage") title = this.filter.stageList.find((x) => x.id == id).title;
+      if (type == "stage")
+        title = this.filter.stageList.find((x) => x.id == id).title;
       if (type == "sort") {
         title = this.sortList.find((x) => x.value == id).title;
       } else if (type == "country")
         title = this.filter.countryList.find((x) => x.id == id).name;
       else if (type == "state")
         title = this.filter.stateList.find((x) => x.id == id).title;
-      else if (type == "city") title = this.filter.cityList.find((x) => x.id == id).title;
+      else if (type == "city")
+        title = this.filter.cityList.find((x) => x.id == id).title;
       else if (type == "school_type")
         title = this.filter.schoolTypeList.find((x) => x.id == id).title;
       else if (type == "religion" && this.filter.religionList)
@@ -1028,10 +1101,14 @@ export default {
         var index = this.filterForm.religion.findIndex((x) => x == other_data);
         this.filterForm.religion.splice(index, 1);
       } else if (filter_name == "boarding_type") {
-        var index = this.filterForm.boarding_type.findIndex((x) => x == other_data);
+        var index = this.filterForm.boarding_type.findIndex(
+          (x) => x == other_data
+        );
         this.filterForm.boarding_type.splice(index, 1);
       } else if (filter_name == "coed_status") {
-        var index = this.filterForm.coed_status.findIndex((x) => x == other_data);
+        var index = this.filterForm.coed_status.findIndex(
+          (x) => x == other_data
+        );
         this.filterForm.coed_status.splice(index, 1);
       }
     },
@@ -1135,11 +1212,11 @@ export default {
     }
   }
 
-  #filter-dialog{
+  #filter-dialog {
     position: fixed;
     top: 0;
     bottom: 0;
-    right:0;
+    right: 0;
     left: 0;
     z-index: 1200;
     overflow-y: scroll;

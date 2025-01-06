@@ -180,43 +180,60 @@ export default {
       type: "section",
     };
     let boardTitle = "";
+    let boardList = {};
     let gradeTitle = "";
+    let gradeList = {};
     let subjectTitle = "";
+    let subjectList = "";
     let paperTypeTitle = "";
+    let paperTypeList = {};
+    let topicList = {};
     let multimediaTypeTitle = "";
+    boardList = await $axios.$get(`/api/v1/types/list`, { params });
     if (query.section) {
-      const boardList = await $axios.$get(`/api/v1/types/list`, { params });
       const boardIndex = boardList.data.findIndex(
         (x) => x.id === query.section
       );
       boardTitle = boardList.data[boardIndex].title;
+
+      //Also list base list for filter
+      params.type = "base";
+      params.section_id = query.section;
+      gradeList = await $axios.$get(`/api/v1/types/list`, { params });
     }
 
     if (query.base) {
-      params.type = "base";
-      params.section_id = query.section;
-      const gradeList = await $axios.$get(`/api/v1/types/list`, { params });
       const gradeIndex = gradeList.data.findIndex((x) => x.id === query.base);
       gradeTitle = gradeList.data[gradeIndex].title;
+
+      //Also list subject list for filter
+      params.type = "lesson";
+      params.base_id = query.base;
+      subjectList = await $axios.$get(`/api/v1/types/list`, { params });
     }
 
     if (query.lesson) {
-      params.type = "lesson";
-      params.base_id = query.base;
-      const subjectList = await $axios.$get(`/api/v1/types/list`, { params });
       const subjectIndex = subjectList.data.findIndex(
         (x) => x.id === query.lesson
       );
       subjectTitle = subjectList.data[subjectIndex].title;
+
+      //Also list topic list for filter
+      params.type = "topic";
+      params.lesson_id = query.lesson;
+      topicList = await $axios.$get(`/api/v1/types/list`, { params });
     }
 
-    if (query.type == "test" && query.test_type) {
+    if (query.type == "test") {
       params.type = "test_type";
-      const paperTypeList = await $axios.$get(`/api/v1/types/list`, { params });
-      const paperTypeIndex = paperTypeList.data.findIndex(
-        (x) => x.id == query.test_type
-      );
-      paperTypeTitle = paperTypeList.data[paperTypeIndex]?.title;
+      paperTypeList = await $axios.$get(`/api/v1/types/list`, { params });
+
+      if (query.test_type) {
+        const paperTypeIndex = paperTypeList.data.findIndex(
+          (x) => x.id == query.test_type
+        );
+        paperTypeTitle = paperTypeList.data[paperTypeIndex]?.title;
+      }
     }
 
     if (query.type === "learnfiles" && query.file_type) {
@@ -259,7 +276,15 @@ export default {
       page_describe = "Teacher";
     }
 
-    return { page_title, page_describe };
+    return {
+      page_title,
+      page_describe,
+      boardList,
+      gradeList,
+      paperTypeList,
+      subjectList,
+      topicList,
+    };
   },
   head() {
     return {
@@ -313,6 +338,20 @@ export default {
   },
 
   mounted() {
+    if (this.$refs.side_filter) {
+      this.$refs.side_filter.setFilter("board", this.boardList?.data);
+      if (this.$route.query.section)
+        this.$refs.side_filter.setFilter("grade", this.gradeList?.data);
+      if (this.$route.query.base)
+        this.$refs.side_filter.setFilter("subject", this.subjectList?.data);
+      if (this.$route.query.lesson)
+        this.$refs.side_filter.setFilter("topic", this.topicList?.data);
+      if (this.$route.query.type == "test")
+        this.$refs.side_filter.setFilter(
+          "paper_type",
+          this.paperTypeList?.data
+        );
+    }
     if (!this.$route.query.type) {
       const query = { type: "test" };
       this.page_title = "Papers";

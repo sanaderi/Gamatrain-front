@@ -414,18 +414,22 @@ export default {
       section_loading: false,
       section_val: this.$route.query.section ? this.$route.query.section : 0,
 
-      base_val: 0,
-      lesson_val: 0,
-      topic_val: 0,
-      file_type_val: 0,
-      test_level_val: 0,
+      base_val: this.$route.query.base ? this.$route.query.base : 0,
+      lesson_val: this.$route.query.lesson ? this.$route.query.lesson : 0,
+      topic_val: this.$route.query.topic ? this.$route.query.topic : 0,
+      file_type_val: this.$route.query.test_type
+        ? this.$route.query.test_type
+        : 0,
+      test_level_val: this.$route.query.test_level_val
+        ? this.$route.query.test_level_val
+        : 0,
       state_val: 0,
       city_val: 0,
       word_checkbox_val: false,
       pdf_checkbox_val: false,
       free_checkbox_val: false,
       answer_checkbox_val: false,
-      loadtime: true,
+      loadtime: false,
 
       applied_filter: {
         select_section_title: "",
@@ -488,18 +492,10 @@ export default {
     };
   },
   created() {
-    var params = {
-      type: "section",
-    };
-    this.getFilterList(params, "section");
-
     if (this.$route.query.type === "tutor")
       this.getFilterList({ type: "state" }, "state");
 
     this.setBreadcrumbInfo();
-
-    //Get sample exam test type
-    if (this.$route.query.type === "test") this.getFileType();
 
     if (this.$route.query.level > 0) {
       this.test_level_val = this.$route.query.level;
@@ -622,6 +618,7 @@ export default {
                 type: "base",
                 section_id: this.$route.query.section,
               };
+
               this.getFilterList(data, "base");
               this.base_val = this.$route.query.base;
 
@@ -845,6 +842,7 @@ export default {
     //Update router query params
     updateQueryParams() {
       if (this.loadtime) return;
+
       const query = { type: this.$route.query.type };
       if (this.section_val !== 0) {
         query.section = this.section_val;
@@ -938,6 +936,13 @@ export default {
       //Emit to parent
 
       this.$emit("update:setBreadCrumbs", this.breadcrumbs);
+    },
+    setFilter(type, list) {
+      if (type == "board") this.filter.section_list = list;
+      if (type == "grade") this.filter.base_list = list;
+      if (type == "subject") this.filter.lesson_list = list;
+      if (type == "topic") this.filter.topic_list = list;
+      if (type == "paper_type") this.filter.file_type_list = list;
     },
 
     //Get file type
