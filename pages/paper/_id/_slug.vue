@@ -579,25 +579,33 @@
       </v-row>
     </v-container>
 
-    <!-- Start : Sample Test -->
-    <!--    <related-content/>-->
-    <!-- End : Sample test -->
+    <!-- Start : Past Papers -->
+    <related-content
+      class="mt-8"
+      :board="contentData.section"
+      :grade="contentData.base"
+      :subject="contentData.lesson"
+    />
+    <!-- End : Past Papers -->
     <!-- Start: Feed -->
     <section class="feed">
-      <!--      <v-container class="pa-4 pa-md-12 pt-10">-->
-      <!--        <v-row>-->
-      <!--          <v-col cols="12" md="6">-->
-      <!--            <latest-training-content/>-->
-      <!--          </v-col>-->
+      <!-- <v-container class="pa-4 pa-md-12 pt-10">
+        <v-row>
+          <v-col cols="12" md="6">
+            <latest-training-content />
+          </v-col>
 
-      <!--          <v-col cols="12" md="6" class="related-ask-test py-0 d-flex flex-column justify-space-between">-->
-      <!--            <related-qa/>-->
+          <v-col
+            cols="12"
+            md="6"
+            class="related-ask-test py-0 d-flex flex-column justify-space-between"
+          >
+            <related-qa />
 
-      <!--            <related-online-exam/>-->
-      <!--          </v-col>-->
-
-      <!--        </v-row>-->
-      <!--      </v-container>-->
+            <related-online-exam />
+          </v-col>
+        </v-row>
+      </v-container> -->
     </section>
     <!-- End: Feed -->
 
@@ -638,8 +646,6 @@ export default {
   },
   async asyncData({ params, $axios, redirect }) {
     // This could also be an action dispatch
-    console.log(params);
-    console.log(params.id);
     try {
       const content = await $axios.$get(`/api/v1/tests/${params.id}`);
       return { contentData: content.data };
