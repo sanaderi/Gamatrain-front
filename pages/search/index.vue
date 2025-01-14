@@ -12,27 +12,6 @@
         hide-overlay
         transition="dialog-bottom-transition "
       >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            v-bind="attrs"
-            v-on="on"
-            class="d-block d-md-none"
-            min-width="40"
-            fixed
-            bottom
-            right
-            style="z-index: 10"
-            x-large
-            color="teal"
-            dark
-            rounded
-          >
-            <v-icon> mdi-filter </v-icon>
-            <v-slide-x-reverse-transition>
-              <span v-show="expandFilterMenu" class="text-h6"> filter </span>
-            </v-slide-x-reverse-transition>
-          </v-btn>
-        </template>
         <v-card>
           <div style="position: sticky; top: 0; left: 0; right: 0; z-index: 10">
             <v-toolbar class="filter-btn-header">
@@ -52,7 +31,11 @@
             </v-toolbar>
           </div>
           <v-card-text>
-            <search-filter ref="side_filter" class="mx-3" />
+            <search-filter
+              ref="side_filter"
+              class="mx-3"
+              :setBreadCrumbs.sync="breadcrumbs"
+            />
           </v-card-text>
           <v-card-actions
             style="position: sticky; bottom: 0; left: 0; right: 0"
@@ -68,6 +51,24 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+      <v-btn
+        @click="openDialog()"
+        class="d-block d-md-none"
+        min-width="40"
+        fixed
+        bottom
+        right
+        style="z-index: 10"
+        x-large
+        color="teal"
+        dark
+        rounded
+      >
+        <v-icon> mdi-filter </v-icon>
+        <v-slide-x-reverse-transition>
+          <span v-show="expandFilterMenu" class="text-h6"> filter </span>
+        </v-slide-x-reverse-transition>
+      </v-btn>
     </v-row>
 
     <!-- Start  -->
@@ -572,6 +573,23 @@ export default {
             this.page_loading = false;
           });
       }
+    },
+    openDialog() {
+      if (this.$refs.side_filter) {
+        this.$refs.side_filter.setFilter("board", this.boardList?.data);
+        if (this.$route.query.section)
+          this.$refs.side_filter.setFilter("grade", this.gradeList?.data);
+        if (this.$route.query.base)
+          this.$refs.side_filter.setFilter("subject", this.subjectList?.data);
+        if (this.$route.query.lesson)
+          this.$refs.side_filter.setFilter("topic", this.topicList?.data);
+        if (this.$route.query.type == "test")
+          this.$refs.side_filter.setFilter(
+            "paper_type",
+            this.paperTypeList?.data
+          );
+      }
+      this.dialog = true;
     },
     scroll() {
       //For infinite loading

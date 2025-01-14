@@ -711,7 +711,7 @@ export default {
       },
       searchFilterItems: [
         {
-          title: "Paper",
+          title: "Past Papers",
           key: "paper",
         },
         {
@@ -719,11 +719,11 @@ export default {
           key: "multimedia",
         },
         {
-          title: "Exam",
+          title: "QuizHub",
           key: "exam",
         },
         {
-          title: "Q & A",
+          title: "Forum",
           key: "q-a",
         },
         {
