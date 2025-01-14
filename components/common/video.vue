@@ -7,19 +7,19 @@
         @mouseover="showPlayBtn(index)"
         @mouseleave="hidePlayBtn(index)"
       >
-        <video
+        <!-- <video
           :id="'video' + unique + index"
           :poster="require('@/assets/images/' + item.img)"
           :src="require('assets/video/' + item.vid)"
           class="video"
           width="100%">
-        </video>
+        </video> -->
         <div v-show="show" class="buttons">
           <button
             :id="'pausePlay' + unique + index"
             class="play"
-            @click="play(index)">
-          </button>
+            @click="play(index)"
+          ></button>
         </div>
         <div class="shadow"></div>
       </div>
@@ -30,27 +30,27 @@
 export default {
   props: {
     videos: Array,
-    unique: String
+    unique: String,
   },
   data() {
     return {
-      show: true
-    }
+      show: true,
+    };
   },
   components: {
     // VideoPlayer,
   },
   methods: {
     play(index) {
-      let btn = document.getElementById('pausePlay' + this.unique + index)
-      let vid = document.getElementById('video' + this.unique + index)
+      let btn = document.getElementById("pausePlay" + this.unique + index);
+      let vid = document.getElementById("video" + this.unique + index);
 
-      if(!vid || !btn) {
+      if (!vid || !btn) {
         return;
       }
 
       if (vid.paused) {
-        btn.className = "pause"
+        btn.className = "pause";
         vid.play();
       } else {
         btn.className = "play";
@@ -58,21 +58,21 @@ export default {
       }
     },
     showPlayBtn() {
-      this.show= true
+      this.show = true;
     },
     hidePlayBtn(index) {
-      let vid = document.getElementById('video' + this.unique + index)
+      let vid = document.getElementById("video" + this.unique + index);
 
-      if(!vid) {
+      if (!vid) {
         return;
       }
 
       if (!vid.paused) {
-        this.show = false
+        this.show = false;
       } else {
-        this.show = true
+        this.show = true;
       }
-    }
+    },
   },
 };
 </script>
