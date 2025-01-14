@@ -122,7 +122,7 @@ export default {
   ],
 
   axios: {
-    proxy: false,
+    proxy: true,
     baseUrl: process.env.API_BASE_URL,
     headers: {},
   },
@@ -138,11 +138,6 @@ export default {
       target: process.env.API_BASE_URL,
       pathRewrite: { "^/uploads": "/uploads" },
       secure: false,
-      changeOrigin: true,
-    },
-    "/test_api/": {
-      target: "https://trade.smart-ledger.ir",
-      pathRewrite: { "^/test_api/": "/api/" },
       changeOrigin: true,
     },
   },
