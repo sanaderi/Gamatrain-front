@@ -492,6 +492,7 @@ export default {
     };
   },
   created() {
+    console.log("created");
     if (this.$route.query.type === "tutor")
       this.getFilterList({ type: "state" }, "state");
 

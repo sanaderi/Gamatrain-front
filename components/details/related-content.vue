@@ -144,7 +144,7 @@
           </div>
         </v-col>
         <v-col cols="12" md="6">
-          <h4 class="section-title gama-text-h5 mb-4">Related Last Papers</h4>
+          <h4 class="section-title gama-text-h5 mb-4">Related Past Papers</h4>
           <div v-if="loading">
             <v-row class="latest-card" v-for="i in 3" :key="i">
               <v-col cols="12">
@@ -231,22 +231,27 @@ export default {
       type: String | null,
       default: null,
     },
+    test_type: {
+      type: String | null,
+      default: null,
+    },
   },
   mounted() {
-    this.getContentList("test");
-    this.getContentList("question");
+    this.getContentList("test", 6);
+    this.getContentList("question", 5);
   },
   methods: {
-    async getContentList(type) {
+    async getContentList(type, perpage) {
       this.loading = true;
       let params = {
         type,
         page: 1,
-        perpage: 10,
+        perpage,
         sortby: "subdateasc",
         section: this.board,
         base: this.grade,
         lesson: this.subject,
+        test_type: this.test_type,
       };
 
       await this.$axios

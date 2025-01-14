@@ -585,7 +585,9 @@
       :board="contentData.section"
       :grade="contentData.base"
       :subject="contentData.lesson"
+      :test_type="contentData.test_type"
     />
+
     <!-- End : Past Papers -->
     <!-- Start: Feed -->
     <section class="feed">

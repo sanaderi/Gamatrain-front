@@ -1,39 +1,41 @@
 <template>
-  <div class="d-inline-flex ">
+  <div class="d-inline-flex">
     <v-carousel height="60" hide-delimiters cycle :show-arrows="false">
       <v-carousel-item>
         <div class="px-3 text-center question">
-
-           <span class="counter">
-               {{ statistics.question && statistics.question.total ? statistics.question.total : 0 }}
+          <span class="counter">
+            {{
+              statistics.question && statistics.question.total
+                ? statistics.question.total
+                : 0
+            }}
           </span>
 
-
-          <p class="text-h6  ">
-            Question's
-          </p>
-
+          <p class="text-h6">Question's</p>
         </div>
       </v-carousel-item>
       <v-carousel-item>
         <div class="px-3 text-center question-inbox">
-        <span class="counter">
-          {{ statistics.question && statistics.question.unreadReplies ? statistics.question.unreadReplies : 0 }}
-        </span>
-          <p class="text-h6 ">
-            Inbox
-          </p>
+          <span class="counter">
+            {{
+              statistics.question && statistics.question.unreadReplies
+                ? statistics.question.unreadReplies
+                : 0
+            }}
+          </span>
+          <p class="text-h6">Inbox</p>
         </div>
       </v-carousel-item>
       <v-carousel-item>
         <div class="px-3 text-center question-outbox">
-          <span class="counter ">
-             {{ statistics.questionReply && statistics.questionReply.total ? statistics.questionReply.total : 0 }}
+          <span class="counter">
+            {{
+              statistics.questionReply && statistics.questionReply.total
+                ? statistics.questionReply.total
+                : 0
+            }}
           </span>
-          <p class="text-h6 ">
-            Outbox
-          </p>
-
+          <p class="text-h6">Outbox</p>
         </div>
       </v-carousel-item>
     </v-carousel>
@@ -56,7 +58,6 @@
     <!--               {{statistics.question && statistics.question.total ? statistics.question.total : 0}}-->
     <!--          </span>-->
     <!--      </v-btn>-->
-
 
     <!--      <p class="text-h6 mt-1 white&#45;&#45;text">-->
     <!--        Question's-->
@@ -100,23 +101,19 @@ export default {
   name: "question-statistics",
   data() {
     return {
-      statistics: ''
-    }
-  }
-}
+      statistics: "",
+    };
+  },
+};
 </script>
 
 <style scoped>
-
-
 .group-icon {
   font-size: 5rem;
 }
 
-
-
 .question {
-  color: #FF9800
+  color: #ff9800;
 }
 
 .question-inbox {
@@ -124,6 +121,6 @@ export default {
 }
 
 .question-outbox {
-  color: #00D2AE
+  color: #00d2ae;
 }
 </style>
