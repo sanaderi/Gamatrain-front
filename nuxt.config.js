@@ -122,7 +122,7 @@ export default {
   ],
 
   axios: {
-    proxy: true,
+    proxy: false,
     baseUrl: process.env.API_BASE_URL,
     headers: {},
   },
@@ -271,5 +271,5 @@ export default {
     port: 3002,
   },
 
-  serverMiddleware: ["~/serverMiddleware/data-to-xml.js"],
+  // serverMiddleware: ["~/serverMiddleware/data-to-xml.js"],
 };
