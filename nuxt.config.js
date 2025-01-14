@@ -115,12 +115,10 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    "nuxt-material-design-icons",
     "@nuxtjs/axios",
     "@nuxtjs/toast",
     "@nuxtjs/auth-next",
     "@nuxtjs/markdownit",
-    "cookie-universal-nuxt",
   ],
 
   axios: {
@@ -246,7 +244,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    // analyze: true,
+    analyze: true,
 
     transpile: [
       "vee-validate",
