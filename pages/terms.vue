@@ -42,6 +42,7 @@
                 <v-list-item
                   active-class="active-title"
                   v-for="(item, index) in termsSection"
+                  :key="index"
                   :to="`#${item.id}`"
                 >
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -53,7 +54,7 @@
         <v-col cols="12" md="9">
           <v-card flat class="mx-auto">
             <v-card-text>
-              <div v-for="item in termsSection">
+              <div v-for="(item, index) in termsSection" :key="index">
                 <div :id="item.id" class="py-8"></div>
                 <h2 class="gama-text-h4">
                   {{ item.title }}
@@ -73,21 +74,19 @@ export default {
   auth: false,
   head() {
     return {
-      titleTemplate:"%s",
+      titleTemplate: "%s",
       title: "Terms and Conditions: Understanding Our Commitment to You",
 
       meta: [
         {
           hid: "apple-mobile-web-app-title",
           name: "apple-mobile-web-app-title",
-          content:
-            "Terms and Conditions: Understanding Our Commitment to You",
+          content: "Terms and Conditions: Understanding Our Commitment to You",
         },
         {
           hid: "og:title",
           name: "og:title",
-          content:
-            "Terms and Conditions: Understanding Our Commitment to You",
+          content: "Terms and Conditions: Understanding Our Commitment to You",
         },
         {
           hid: "og:site_name",
@@ -288,7 +287,9 @@ export default {
         return this.termsSection;
       }
       const query = this.searchQuery.toLowerCase();
-      return this.termsSection.filter((item) => item.title.toLowerCase().includes(query));
+      return this.termsSection.filter((item) =>
+        item.title.toLowerCase().includes(query)
+      );
     },
   },
 };

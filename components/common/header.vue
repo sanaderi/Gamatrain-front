@@ -638,8 +638,6 @@ export default {
       dialog: false,
       logo: "mainlogo-gamatrain.png",
       avatar: "dexter-morse.png",
-      wallet: "کیف پول:",
-      walletBalance: "2000 تومان",
       menuItems: [
         {
           title: "About us",

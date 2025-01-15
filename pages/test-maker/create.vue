@@ -2,21 +2,27 @@
   <v-container class="test-maker">
     <v-row class="mt-4">
       <v-col cols="6">
-        <span class="icon icong-azmoon text-h3  teal--text"></span>
-        <span class="text-h4 teal--text">
-            New Exam
-        </span>
+        <span class="icon icong-azmoon text-h3 teal--text"></span>
+        <span class="text-h4 teal--text"> New Exam </span>
       </v-col>
       <v-col cols="6" id="tool-box" class="text-right">
-        <v-btn outlined color="error" :disabled="!exam_id" fab small @click="confirmDeleteDialog=true">
-          <v-icon>
-            mdi-delete
-          </v-icon>
+        <v-btn
+          outlined
+          color="error"
+          :disabled="!exam_id"
+          fab
+          small
+          @click="confirmDeleteDialog = true"
+        >
+          <v-icon> mdi-delete </v-icon>
         </v-btn>
-        <v-btn outlined fab small @click="printPreviewDialog=!printPreviewDialog">
-          <v-icon>
-            mdi-printer-eye
-          </v-icon>
+        <v-btn
+          outlined
+          fab
+          small
+          @click="printPreviewDialog = !printPreviewDialog"
+        >
+          <v-icon> mdi-printer-eye </v-icon>
         </v-btn>
 
         <!--        <v-btn fab small color="error">-->
@@ -27,28 +33,27 @@
       </v-col>
     </v-row>
 
-    <v-stepper
-      flat
-      v-model="test_step"
-      vertical
-      class="mb-16"
-    >
+    <v-stepper flat v-model="test_step" vertical class="mb-16">
       <v-stepper-step
         :complete="test_step > 1"
         step="1"
         class="pointer"
-        @click="test_step=1"
+        @click="test_step = 1"
         color="teal"
       >
         <p>Header</p>
       </v-stepper-step>
       <v-stepper-content step="1">
         <v-card flat class="mt-3 pb-10">
-          <validation-observer ref="observer" v-slot="{invalid}">
+          <validation-observer ref="observer" v-slot="{ invalid }">
             <form @submit.prevent="submitQuestion">
               <v-row>
                 <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="level" rules="required">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="level"
+                    rules="required"
+                  >
                     <v-autocomplete
                       dense
                       v-model="form.section"
@@ -62,7 +67,11 @@
                   </validation-provider>
                 </v-col>
                 <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="grade" rules="required">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="grade"
+                    rules="required"
+                  >
                     <v-autocomplete
                       dense
                       v-model="form.base"
@@ -87,7 +96,11 @@
                 <!--                      </validation-provider>-->
                 <!--                    </v-col>-->
                 <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="lesson" rules="required">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="lesson"
+                    rules="required"
+                  >
                     <v-autocomplete
                       dense
                       :items="lesson_list"
@@ -101,16 +114,26 @@
                   </validation-provider>
                 </v-col>
 
-
                 <v-col cols="12" md="12">
-                  <validation-provider v-slot="{errors}" name="topic" rules="required">
-                    <topic-selector ref="topic-selector" :topic-list="topic_list" @selectTopic="selectTopic"/>
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="topic"
+                    rules="required"
+                  >
+                    <topic-selector
+                      ref="topic-selector"
+                      :topic-list="topic_list"
+                      @selectTopic="selectTopic"
+                    />
                   </validation-provider>
                 </v-col>
 
-
                 <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="test_type" rules="required">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="test_type"
+                    rules="required"
+                  >
                     <v-autocomplete
                       dense
                       :items="test_type_list"
@@ -123,7 +146,6 @@
                     />
                   </validation-provider>
                 </v-col>
-
 
                 <!--                <v-col cols="12" md="4">-->
                 <!--                  <validation-provider v-slot="{errors}" name="test_level" rules="required">-->
@@ -156,9 +178,12 @@
                 <!--                  </validation-provider>-->
                 <!--                </v-col>-->
 
-
                 <v-col cols="12" md="4">
-                  <validation-provider v-slot="{errors}" name="test_duration" rules="required">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="test_duration"
+                    rules="required"
+                  >
                     <v-text-field
                       dense
                       v-model="form.duration"
@@ -183,8 +208,15 @@
                   />
                 </v-col>
 
-                <v-col cols="12" md="4"
-                       v-if="form.holding_level===1 || form.holding_level===2 || form.holding_level===3">
+                <v-col
+                  cols="12"
+                  md="4"
+                  v-if="
+                    form.holding_level === 1 ||
+                    form.holding_level === 2 ||
+                    form.holding_level === 3
+                  "
+                >
                   <v-autocomplete
                     dense
                     :items="state_list"
@@ -196,7 +228,11 @@
                   />
                 </v-col>
 
-                <v-col cols="12" md="4" v-if="form.holding_level===1 || form.holding_level===2">
+                <v-col
+                  cols="12"
+                  md="4"
+                  v-if="form.holding_level === 1 || form.holding_level === 2"
+                >
                   <v-autocomplete
                     dense
                     :items="area_list"
@@ -207,7 +243,11 @@
                     outlined
                   />
                 </v-col>
-                <v-col cols="12" md="4" v-if="form.section && form.area && form.holding_level===1">
+                <v-col
+                  cols="12"
+                  md="4"
+                  v-if="form.section && form.area && form.holding_level === 1"
+                >
                   <v-autocomplete
                     dense
                     :items="school_list"
@@ -220,7 +260,11 @@
                 </v-col>
 
                 <v-col cols="12" md="12">
-                  <validation-provider v-slot="{errors}" name="title" rules="required">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="title"
+                    rules="required"
+                  >
                     <v-text-field
                       dense
                       v-model="form.title"
@@ -231,7 +275,6 @@
                   </validation-provider>
                 </v-col>
 
-
                 <!--                <v-col cols="12" md="4">-->
                 <!--                  <v-checkbox-->
                 <!--                    dense-->
@@ -239,7 +282,6 @@
                 <!--                    label="Negative point"-->
                 <!--                  />-->
                 <!--                </v-col>-->
-
 
                 <!--                <v-col cols="12" md="4">-->
                 <!--                  <v-checkbox-->
@@ -294,14 +336,18 @@
                 <!--                  </v-menu>-->
                 <!--                </v-col>-->
 
-
                 <v-col cols="12">
                   <v-row>
                     <v-col cols="12" md="6" class="pb-0">
-                      <v-btn type="submit"
-                             :loading="submit_loading"
-                             :disabled="invalid"
-                             lg color="teal" class="white--text" block>
+                      <v-btn
+                        type="submit"
+                        :loading="submit_loading"
+                        :disabled="invalid"
+                        lg
+                        color="teal"
+                        class="white--text"
+                        block
+                      >
                         Next step
                       </v-btn>
                     </v-col>
@@ -312,19 +358,15 @@
                     </v-col>
                   </v-row>
                 </v-col>
-
-
               </v-row>
             </form>
           </validation-observer>
         </v-card>
-
       </v-stepper-content>
-
 
       <v-stepper-step
         :complete="test_step > 2"
-        @click="test_step=2"
+        @click="test_step = 2"
         step="2"
         class="pointer"
         color="teal"
@@ -344,8 +386,10 @@
           </v-row>
           <v-row v-show="!testListSwitch">
             <v-col cols="12">
-              <create-test-form ref="create-form" :goToPreviewStep.sync="test_step"
-                                :updateTestList.sync="lastCreatedTest"
+              <create-test-form
+                ref="create-form"
+                :goToPreviewStep.sync="test_step"
+                :updateTestList.sync="lastCreatedTest"
               />
             </v-col>
           </v-row>
@@ -410,7 +454,10 @@
                 outlined
               >
                 <template v-slot:item="data">
-                  <p :class="data.item.season ? 'topic_season' : ''" class="py-2">
+                  <p
+                    :class="data.item.season ? 'topic_season' : ''"
+                    class="py-2"
+                  >
                     {{ data.item.title }}
                   </p>
                 </template>
@@ -439,18 +486,21 @@
             </v-col>
 
             <v-col cols="12">
-              <v-card class="test-list overflow-y-auto" flat
-                      max-height="600"
-                      ref="testList"
-                      @scroll="onScroll"
+              <v-card
+                class="test-list overflow-y-auto"
+                flat
+                max-height="600"
+                ref="testList"
+                @scroll="onScroll"
               >
                 <v-card-text>
                   <v-row ref="testListContent">
                     <v-col
-                      v-show="test_list.length>0"
+                      v-show="test_list.length > 0"
                       v-for="item in test_list"
                       :key="item.id"
-                      cols="12">
+                      cols="12"
+                    >
                       <v-row class="mb-2">
                         <v-col cols="12">
                           <v-chip v-show="item.lesson_title">
@@ -459,43 +509,58 @@
                           <v-chip v-show="item.topics_title">
                             {{ item.topics_title }}
                           </v-chip>
-                          <v-chip outlined
-                                  color="success"
-                                  v-show="item.level==='1'">
+                          <v-chip
+                            outlined
+                            color="success"
+                            v-show="item.level === '1'"
+                          >
                             Simple
                           </v-chip>
-                          <v-chip outlined
-                                  color="primary"
-                                  v-show="item.level==='2'"
+                          <v-chip
+                            outlined
+                            color="primary"
+                            v-show="item.level === '2'"
                           >
                             Middle
                           </v-chip>
-                          <v-chip outlined
-                                  color="error"
-                                  v-show="item.level==='3'"
+                          <v-chip
+                            outlined
+                            color="error"
+                            v-show="item.level === '3'"
                           >
                             Hard
                           </v-chip>
                         </v-col>
                       </v-row>
-                      <div id="test-question"
-                           ref="mathJaxEl"
-                           v-html="item.question"/>
-                      <img :src="item.q_file"/>
+                      <div
+                        id="test-question"
+                        ref="mathJaxEl"
+                        v-html="item.question"
+                      />
+                      <img :src="item.q_file" />
 
                       <div class="answer">
-                        <v-icon v-show="item.true_answer=='1'" class="true_answer" large>
+                        <v-icon
+                          v-show="item.true_answer == '1'"
+                          class="true_answer"
+                          large
+                        >
                           mdi-check
                         </v-icon>
                         <span>1)</span>
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_a"
-                          v-html="item.answer_a"></span>
-                        <img v-show="item.a_file" :src="item.a_file"/>
+                          v-html="item.answer_a"
+                        ></span>
+                        <img v-show="item.a_file" :src="item.a_file" />
                       </div>
                       <div class="answer">
-                        <v-icon v-show="item.true_answer=='2'" large class="true_answer">
+                        <v-icon
+                          v-show="item.true_answer == '2'"
+                          large
+                          class="true_answer"
+                        >
                           mdi-check
                         </v-icon>
 
@@ -503,11 +568,16 @@
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_b"
-                          v-html="item.answer_b"></span>
-                        <img v-show="item.b_file" :src="item.b_file"/>
+                          v-html="item.answer_b"
+                        ></span>
+                        <img v-show="item.b_file" :src="item.b_file" />
                       </div>
-                      <div class="answer ">
-                        <v-icon v-show="item.true_answer=='3'" large class="true_answer">
+                      <div class="answer">
+                        <v-icon
+                          v-show="item.true_answer == '3'"
+                          large
+                          class="true_answer"
+                        >
                           mdi-check
                         </v-icon>
 
@@ -515,77 +585,83 @@
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_c"
-                          v-html="item.answer_c"></span>
-                        <img v-show="item.c_file" :src="item.c_file"/>
+                          v-html="item.answer_c"
+                        ></span>
+                        <img v-show="item.c_file" :src="item.c_file" />
                       </div>
                       <div class="answer">
-                        <v-icon class="true_answer" v-show="item.true_answer=='4'" large>
+                        <v-icon
+                          class="true_answer"
+                          v-show="item.true_answer == '4'"
+                          large
+                        >
                           mdi-check
                         </v-icon>
                         <span>4)</span>
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_d"
-                          v-html="item.answer_d"/>
-                        <img v-show="item.d_file" :src="item.d_file"/>
+                          v-html="item.answer_d"
+                        />
+                        <img v-show="item.d_file" :src="item.d_file" />
                       </div>
                       <v-row>
                         <v-col cols="6">
-                          <v-btn icon
-                                 :to="`/test-maker/create-test/edit/${item.id}`"
-                                 v-show="item.owner==true">
-                            <v-icon>
-                              mdi-pencil
-                            </v-icon>
-                          </v-btn>
-                          <v-btn icon v-show="item.owner==true"
-                                 @click="openTestDeleteConfirmDialog(item.id)"
+                          <v-btn
+                            icon
+                            :to="`/test-maker/create-test/edit/${item.id}`"
+                            v-show="item.owner == true"
                           >
-                            <v-icon color="error">
-                              mdi-delete
-                            </v-icon>
+                            <v-icon> mdi-pencil </v-icon>
+                          </v-btn>
+                          <v-btn
+                            icon
+                            v-show="item.owner == true"
+                            @click="openTestDeleteConfirmDialog(item.id)"
+                          >
+                            <v-icon color="error"> mdi-delete </v-icon>
                           </v-btn>
                           <v-btn icon>
-                            <v-icon color="blue">
-                              mdi-bullhorn-outline
-                            </v-icon>
+                            <v-icon color="blue"> mdi-bullhorn-outline </v-icon>
                           </v-btn>
                           <v-btn icon>
-                            <v-icon color="green">
-                              mdi-eye
-                            </v-icon>
+                            <v-icon color="green"> mdi-eye </v-icon>
                           </v-btn>
                           <v-btn icon>
-                            <v-icon color="red">
-                              mdi-video
-                            </v-icon>
+                            <v-icon color="red"> mdi-video </v-icon>
                           </v-btn>
                         </v-col>
                         <v-col cols="6" class="text-right">
-                          <v-btn color="blue" dark small
-                                 v-show="!tests.find(x=>x==item.id)"
-                                 @click="applyTest(item,'add')"
+                          <v-btn
+                            color="blue"
+                            dark
+                            small
+                            v-show="!tests.find((x) => x == item.id)"
+                            @click="applyTest(item, 'add')"
                           >
-                            <v-icon small dark>
-                              mdi-plus
-                            </v-icon>
+                            <v-icon small dark> mdi-plus </v-icon>
                             Add
                           </v-btn>
-                          <v-btn color="red" dark small
-                                 v-show="tests.find(x=>x==item.id)"
-                                 @click="applyTest(item,'remove')"
+                          <v-btn
+                            color="red"
+                            dark
+                            small
+                            v-show="tests.find((x) => x == item.id)"
+                            @click="applyTest(item, 'remove')"
                           >
-                            <v-icon small dark>
-                              mdi-minus
-                            </v-icon>
+                            <v-icon small dark> mdi-minus </v-icon>
                             Delete
                           </v-btn>
                         </v-col>
                       </v-row>
-                      <v-divider class="mt-3"/>
+                      <v-divider class="mt-3" />
                     </v-col>
 
-                    <v-col v-show="!all_tests_loaded" cols="12" class="text-center">
+                    <v-col
+                      v-show="!all_tests_loaded"
+                      cols="12"
+                      class="text-center"
+                    >
                       <v-progress-circular
                         :size="40"
                         :width="4"
@@ -602,12 +678,19 @@
             <v-col cols="12">
               <v-row>
                 <v-col cols="12" md="6" class="pb-0">
-                  <v-btn @click="test_step=3"
-                         :disabled="tests.length<5"
-                         :loading="publish_loading"
-                         lg color="teal" class="white--text" block>
-                    <span v-show="tests.length<5">Add at least {{ 5 - tests.length }} more tests</span>
-                    <span v-show="tests.length>=5">Next step</span>
+                  <v-btn
+                    @click="test_step = 3"
+                    :disabled="tests.length < 5"
+                    :loading="publish_loading"
+                    lg
+                    color="teal"
+                    class="white--text"
+                    block
+                  >
+                    <span v-show="tests.length < 5"
+                      >Add at least {{ 5 - tests.length }} more tests</span
+                    >
+                    <span v-show="tests.length >= 5">Next step</span>
                   </v-btn>
                 </v-col>
                 <v-col cols="12" md="6">
@@ -617,16 +700,13 @@
                 </v-col>
               </v-row>
             </v-col>
-
-
           </v-row>
         </v-card>
       </v-stepper-content>
 
-
       <v-stepper-step
         :complete="test_step > 3"
-        @click="test_step=3"
+        @click="test_step = 3"
         color="teal"
         class="pointer"
         step="3"
@@ -644,108 +724,115 @@
               <v-col cols="4">Duration: {{ form.duration }}</v-col>
               <v-col cols="4">Level: {{ calcLevel(form.level) }}</v-col>
               <v-col cols="12">
-                <v-chip label color="error">
-                  Topics:
-                </v-chip>
+                <v-chip label color="error"> Topics: </v-chip>
               </v-col>
-              <v-col cols="4" v-for="(item,index) in topicTitleArr" :key="index">
+              <v-col
+                cols="4"
+                v-for="(item, index) in topicTitleArr"
+                :key="index"
+              >
                 {{ item }}
               </v-col>
               <v-col cols="12">
-                <v-divider/>
+                <v-divider />
               </v-col>
             </v-row>
             <v-row>
               <v-col cols="12" v-show="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
-                  <v-row v-for="(item,index) in previewTestList"
-                  :key="index"
-                  >
-                    <v-col
-                      cols="12">
-                      <div id="test-question"
-                           ref="mathJaxEl"
-                           v-html="item.question"/>
-                      <img :src="item.q_file"/>
+                  <v-row v-for="(item, index) in previewTestList" :key="index">
+                    <v-col cols="12">
+                      <div
+                        id="test-question"
+                        ref="mathJaxEl"
+                        v-html="item.question"
+                      />
+                      <img :src="item.q_file" />
 
                       <div class="answer">
                         <span>1)</span>
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_a"
-                          v-html="item.answer_a"></span>
-                        <img v-show="item.a_file" :src="item.a_file"/>
+                          v-html="item.answer_a"
+                        ></span>
+                        <img v-show="item.a_file" :src="item.a_file" />
                       </div>
                       <div class="answer">
                         <span>2)</span>
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_b"
-                          v-html="item.answer_b"></span>
-                        <img v-show="item.b_file" :src="item.b_file"/>
+                          v-html="item.answer_b"
+                        ></span>
+                        <img v-show="item.b_file" :src="item.b_file" />
                       </div>
-                      <div class="answer ">
+                      <div class="answer">
                         <span>3)</span>
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_c"
-                          v-html="item.answer_c"></span>
-                        <img v-show="item.c_file" :src="item.c_file"/>
+                          v-html="item.answer_c"
+                        ></span>
+                        <img v-show="item.c_file" :src="item.c_file" />
                       </div>
                       <p class="answer">
                         <span>4)</span>
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_d"
-                          v-html="item.answer_d"/>
-                        <img v-show="item.d_file" :src="item.d_file"/>
+                          v-html="item.answer_d"
+                        />
+                        <img v-show="item.d_file" :src="item.d_file" />
                       </p>
                       <v-row>
                         <v-col cols="6">
                           <v-btn icon fab color="blue">
-                            <v-icon>
-                              mdi-cursor-move
-                            </v-icon>
+                            <v-icon> mdi-cursor-move </v-icon>
                           </v-btn>
                         </v-col>
                         <v-col cols="6" class="text-right">
-                          <v-btn small
-                                 v-show="item.owner==true"
-                                 :to="`/test-maker/create-test/edit/${item.id}`">
-                            <v-icon small dark>
-                              mdi-pencil
-                            </v-icon>
+                          <v-btn
+                            small
+                            v-show="item.owner == true"
+                            :to="`/test-maker/create-test/edit/${item.id}`"
+                          >
+                            <v-icon small dark> mdi-pencil </v-icon>
                             Edit
                           </v-btn>
-                          <v-btn color="blue" dark small
-                                 v-show="!tests.find(x=>x==item.id)"
-                                 @click="applyTest(item,'add')"
+                          <v-btn
+                            color="blue"
+                            dark
+                            small
+                            v-show="!tests.find((x) => x == item.id)"
+                            @click="applyTest(item, 'add')"
                           >
-                            <v-icon small dark>
-                              mdi-plus
-                            </v-icon>
+                            <v-icon small dark> mdi-plus </v-icon>
                             Add
                           </v-btn>
-                          <v-btn color="red" dark small
-                                 v-show="tests.find(x=>x==item.id)"
-                                 @click="applyTest(item,'remove')"
+                          <v-btn
+                            color="red"
+                            dark
+                            small
+                            v-show="tests.find((x) => x == item.id)"
+                            @click="applyTest(item, 'remove')"
                           >
-                            <v-icon small dark>
-                              mdi-minus
-                            </v-icon>
+                            <v-icon small dark> mdi-minus </v-icon>
                             Delete
                           </v-btn>
                         </v-col>
                       </v-row>
-                      <v-divider class="mt-3"/>
+                      <v-divider class="mt-3" />
                     </v-col>
                   </v-row>
                 </draggable>
               </v-col>
-              <v-col v-show="!previewTestList.length" cols="12" class="text-center">
-                <p>
-                  Oops! no data found
-                </p>
+              <v-col
+                v-show="!previewTestList.length"
+                cols="12"
+                class="text-center"
+              >
+                <p>Oops! no data found</p>
               </v-col>
             </v-row>
 
@@ -754,12 +841,19 @@
               <v-col cols="12">
                 <v-row>
                   <v-col cols="12" md="6" class="pb-0">
-                    <v-btn @click="publishTest"
-                           :disabled="tests.length<5"
-                           :loading="publish_loading"
-                           lg color="teal" class="white--text" block>
-                      <span v-show="tests.length<5">Add at least {{ 5 - tests.length }} more tests</span>
-                      <span v-show="tests.length>=5">Publish</span>
+                    <v-btn
+                      @click="publishTest"
+                      :disabled="tests.length < 5"
+                      :loading="publish_loading"
+                      lg
+                      color="teal"
+                      class="white--text"
+                      block
+                    >
+                      <span v-show="tests.length < 5"
+                        >Add at least {{ 5 - tests.length }} more tests</span
+                      >
+                      <span v-show="tests.length >= 5">Publish</span>
                     </v-btn>
                   </v-col>
                   <v-col cols="12" md="6">
@@ -774,7 +868,6 @@
           </v-card-text>
         </v-card>
       </v-stepper-content>
-
 
       <v-stepper-step
         :complete="test_step > 4"
@@ -792,9 +885,7 @@
                 <p class="font-weight-bold teal--text mb-3">
                   Your test is ready to use!
                 </p>
-                <p>
-                  Send below link to your students or friends.
-                </p>
+                <p>Send below link to your students or friends.</p>
 
                 <div class="d-flex mt-4 align-center justify-center">
                   <v-text-field
@@ -808,36 +899,35 @@
                   >
                     <template slot="append">
                       <v-btn icon @click="copyUrl" class="mb-1">
-                        <v-icon>
-                          mdi-content-copy
-                        </v-icon>
+                        <v-icon> mdi-content-copy </v-icon>
                       </v-btn>
                     </template>
                   </v-text-field>
                 </div>
 
                 <p class="mt-3">
-                  To view the results of the participants, go to the following path:
+                  To view the results of the participants, go to the following
+                  path:
                 </p>
 
                 <div class="d-flex mt-4 align-center justify-center">
-                  <v-breadcrumbs :items="[{text:'Dashboard',href:'/user'},
-                                           {text:'My online exam',href:'/exam/results'}]">
+                  <v-breadcrumbs
+                    :items="[
+                      { text: 'Dashboard', href: '/user' },
+                      { text: 'My online exam', href: '/exam/results' },
+                    ]"
+                  >
                     <template v-slot:divider>
                       <v-icon>mdi-forward</v-icon>
                     </template>
                   </v-breadcrumbs>
-
                 </div>
               </v-col>
             </v-row>
-
           </v-card-text>
         </v-card>
       </v-stepper-content>
-
     </v-stepper>
-
 
     <v-row justify="center">
       <v-dialog
@@ -847,26 +937,13 @@
         transition="dialog-bottom-transition"
       >
         <v-card class="test-list">
-          <v-toolbar
-            dark
-            color="teal"
-          >
-            <v-btn
-              icon
-              dark
-              @click="printPreviewDialog = false"
-            >
+          <v-toolbar dark color="teal">
+            <v-btn icon dark @click="printPreviewDialog = false">
               <v-icon>mdi-close</v-icon>
             </v-btn>
             <v-spacer></v-spacer>
             <v-toolbar-items>
-              <v-btn
-                dark
-                text
-                @click="printPreviewDialog = false"
-              >
-                Ok
-              </v-btn>
+              <v-btn dark text @click="printPreviewDialog = false"> Ok </v-btn>
             </v-toolbar-items>
           </v-toolbar>
 
@@ -879,100 +956,107 @@
               <v-col cols="4">Duration: {{ form.duration }}</v-col>
               <v-col cols="4">Level: {{ calcLevel(form.level) }}</v-col>
               <v-col cols="12">
-                <v-chip label color="error">
-                  Topics:
-                </v-chip>
+                <v-chip label color="error"> Topics: </v-chip>
               </v-col>
-              <v-col cols="4" v-for="(item,index) in topicTitleArr" :key="index">
+              <v-col
+                cols="4"
+                v-for="(item, index) in topicTitleArr"
+                :key="index"
+              >
                 {{ item }}
               </v-col>
               <v-col cols="12">
-                <v-divider/>
+                <v-divider />
               </v-col>
             </v-row>
             <v-row>
               <v-col cols="12" v-show="previewTestList.length">
                 <draggable v-model="previewTestList" @end="previewDragEnd">
-                  <v-row v-for="(item,index) in previewTestList"
-                         :key="index"
-                  >
-                    <v-col
-                      cols="12">
-                      <div id="test-question"
-                           ref="mathJaxEl"
-                           v-html="item.question"/>
-                      <img :src="item.q_file"/>
+                  <v-row v-for="(item, index) in previewTestList" :key="index">
+                    <v-col cols="12">
+                      <div
+                        id="test-question"
+                        ref="mathJaxEl"
+                        v-html="item.question"
+                      />
+                      <img :src="item.q_file" />
 
                       <div class="answer">
                         <span>1)</span>
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_a"
-                          v-html="item.answer_a"></span>
-                        <img v-show="item.a_file" :src="item.a_file"/>
+                          v-html="item.answer_a"
+                        ></span>
+                        <img v-show="item.a_file" :src="item.a_file" />
                       </div>
                       <div class="answer">
                         <span>2)</span>
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_b"
-                          v-html="item.answer_b"></span>
-                        <img v-show="item.b_file" :src="item.b_file"/>
+                          v-html="item.answer_b"
+                        ></span>
+                        <img v-show="item.b_file" :src="item.b_file" />
                       </div>
-                      <div class="answer ">
+                      <div class="answer">
                         <span>3)</span>
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_c"
-                          v-html="item.answer_c"></span>
-                        <img v-show="item.c_file" :src="item.c_file"/>
+                          v-html="item.answer_c"
+                        ></span>
+                        <img v-show="item.c_file" :src="item.c_file" />
                       </div>
                       <p class="answer">
                         <span>4)</span>
                         <span
                           ref="mathJaxEl"
                           v-show="item.answer_d"
-                          v-html="item.answer_d"/>
-                        <img v-show="item.d_file" :src="item.d_file"/>
+                          v-html="item.answer_d"
+                        />
+                        <img v-show="item.d_file" :src="item.d_file" />
                       </p>
                       <v-row>
                         <v-col cols="6">
                           <v-btn icon fab color="blue">
-                            <v-icon>
-                              mdi-cursor-move
-                            </v-icon>
+                            <v-icon> mdi-cursor-move </v-icon>
                           </v-btn>
                         </v-col>
                         <v-col cols="6" class="text-right">
-                          <v-btn color="blue" dark small
-                                 v-show="!tests.find(x=>x==item.id)"
-                                 @click="applyTest(item,'add')"
+                          <v-btn
+                            color="blue"
+                            dark
+                            small
+                            v-show="!tests.find((x) => x == item.id)"
+                            @click="applyTest(item, 'add')"
                           >
-                            <v-icon small dark>
-                              mdi-plus
-                            </v-icon>
+                            <v-icon small dark> mdi-plus </v-icon>
                             Add
                           </v-btn>
-                          <v-btn color="red" dark small
-                                 v-show="tests.find(x=>x==item.id)"
-                                 @click="applyTest(item,'remove')"
+                          <v-btn
+                            color="red"
+                            dark
+                            small
+                            v-show="tests.find((x) => x == item.id)"
+                            @click="applyTest(item, 'remove')"
                           >
-                            <v-icon small dark>
-                              mdi-minus
-                            </v-icon>
+                            <v-icon small dark> mdi-minus </v-icon>
                             Delete
                           </v-btn>
                         </v-col>
                       </v-row>
-                      <v-divider class="mt-3"/>
+                      <v-divider class="mt-3" />
                     </v-col>
                   </v-row>
                 </draggable>
               </v-col>
-              <v-col v-show="!previewTestList.length" cols="12" class="text-center">
-                <p>
-                  Oops! no data found
-                </p>
+              <v-col
+                v-show="!previewTestList.length"
+                cols="12"
+                class="text-center"
+              >
+                <p>Oops! no data found</p>
               </v-col>
             </v-row>
           </v-card-text>
@@ -981,11 +1065,7 @@
     </v-row>
 
     <v-row>
-      <v-dialog
-        v-model="confirmDeleteDialog"
-        persistent
-        max-width="290"
-      >
+      <v-dialog v-model="confirmDeleteDialog" persistent max-width="290">
         <v-card>
           <v-card-title class="text-h5">
             Are you sure of deleting the online exam?
@@ -1015,32 +1095,19 @@
       </v-dialog>
     </v-row>
 
-
     <!--Delete exam test confirm dialog-->
-    <v-dialog
-      v-model="deleteTestConfirmDialog"
-      max-width="290"
-    >
+    <v-dialog v-model="deleteTestConfirmDialog" max-width="290">
       <v-card>
-        <v-card-title class="text-h5">
-          Are you sure?
-        </v-card-title>
+        <v-card-title class="text-h5"> Are you sure? </v-card-title>
 
         <v-card-text>
-          <p>
-            If you are sure to delete, click Yes.
-          </p>
+          <p>If you are sure to delete, click Yes.</p>
         </v-card-text>
 
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn
-            text
-            @click="deleteTestConfirmDialog = false"
-          >
-            No
-          </v-btn>
+          <v-btn text @click="deleteTestConfirmDialog = false"> No </v-btn>
 
           <v-btn
             color="green darken-1"
@@ -1054,62 +1121,63 @@
       </v-card>
     </v-dialog>
     <!--End delete exam test confirm dialog-->
-
   </v-container>
 </template>
 
 <script>
-import {ValidationObserver, ValidationProvider} from "vee-validate";
+import { ValidationObserver, ValidationProvider } from "vee-validate";
 import TopicSelector from "@/components/form/topic-selector";
 import CreateTestForm from "@/components/test-maker/create-test-form";
-
 
 export default {
   layout: "test-maker-layout",
   name: "test-maker",
   head() {
     return {
-      title: 'New Exam',
+      title: "New Exam",
       script: [
-        {src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`, defer: true}
+        {
+          src: `${process.env.API_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`,
+          defer: true,
+        },
       ],
-    }
+    };
   },
   components: {
     CreateTestForm,
     ValidationObserver,
     ValidationProvider,
-    TopicSelector
+    TopicSelector,
   },
   data() {
     return {
       test_step: 1,
-      exam_id: '',
-      exam_code: '',
+      exam_id: "",
+      exam_code: "",
       form: {
-        section: '',
-        base: '',
-        lesson: '',
-        topics: '',
-        type: '',
-        level: '2',
+        section: "",
+        base: "",
+        lesson: "",
+        topics: "",
+        type: "",
+        level: "2",
         holding_time: false,
-        state: '',
-        area: '',
-        school: '',
+        state: "",
+        area: "",
+        school: "",
         duration: 3,
         // start_date: parseInt(this.$moment().format('x') / 1000),
-        title: '',
+        title: "",
         negative_point: false,
-        file_original: ''
+        file_original: "",
       },
       filter: {
-        section: '',
-        base: '',
-        lesson: '',
-        topic: '',
+        section: "",
+        base: "",
+        lesson: "",
+        topic: "",
         page: 1,
-        perpage: 40
+        perpage: 40,
       },
       // teaching_time: '',
       // teaching_time_seconds: 0,
@@ -1133,40 +1201,40 @@ export default {
       test_type_list: [],
       test_level_list: [
         {
-          id: '1',
-          title: 'Simple'
+          id: "1",
+          title: "Simple",
         },
         {
-          id: '2',
-          title: 'Medium'
+          id: "2",
+          title: "Medium",
         },
         {
-          id: '3',
-          title: 'Hard'
+          id: "3",
+          title: "Hard",
         },
       ],
       video_analysis_options: [
         {
           value: 0,
-          title: 'All',
+          title: "All",
         },
         {
           value: 1,
-          title: 'Have',
+          title: "Have",
         },
         {
           value: -1,
-          title: 'Do not have',
+          title: "Do not have",
         },
       ],
       state_list: [],
       area_list: [],
       school_list: [],
       holding_level_list: [
-        {id: 1, title: "School"},
-        {id: 2, title: "District"},
-        {id: 3, title: "State"},
-        {id: 4, title: "Country"},
+        { id: 1, title: "School" },
+        { id: 2, title: "District" },
+        { id: 3, title: "State" },
+        { id: 4, title: "Country" },
       ],
       submit_loading: false,
       publish_loading: false,
@@ -1174,7 +1242,7 @@ export default {
       test_loading: false,
       all_tests_loaded: false,
       tests: [],
-      test_share_link: '',
+      test_share_link: "",
       printPreviewDialog: false,
       confirmDeleteDialog: false,
       deleteLoading: false,
@@ -1182,56 +1250,49 @@ export default {
       topicTitleArr: [],
 
       testListSwitch: true,
-      lastCreatedTest: '',
-
+      lastCreatedTest: "",
 
       //Delete exam test section
       deleteTestConfirmDialog: false,
-      delete_exam_test_id: '',
+      delete_exam_test_id: "",
       delete_exam_test_loading: false,
       //End Delete exam test section
 
-
       file_original: null,
-      file_original_path: ''
-    }
-
+      file_original_path: "",
+    };
   },
   mounted() {
     this.getCurrentExamInfo();
-    this.getTypeList('section');
-    this.getTypeList('exam_type');
-    this.getTypeList('state');
+    this.getTypeList("section");
+    this.getTypeList("exam_type");
+    this.getTypeList("state");
 
     this.renderMathJax();
 
     this.getExamTests();
 
-    if (this.exam_id)
-      this.getExamCurrentTests();
-
+    if (this.exam_id) this.getExamCurrentTests();
 
     //Check active tab from route and enable it
-    if (this.$route.query && this.$route.query.active == 'test_list') {
+    if (this.$route.query && this.$route.query.active == "test_list") {
       this.test_step = 2;
       this.testListSwitch = true;
-    } else if (this.$route.query && this.$route.query.active == 'add_test') {
+    } else if (this.$route.query && this.$route.query.active == "add_test") {
       this.test_step = 2;
       this.testListSwitch = false;
     } else {
       this.test_step = 1;
       this.testListSwitch = true;
     }
-
-
   },
 
   watch: {
     "$route.query"(val) {
-      if (val && val.active === 'test_list') {
+      if (val && val.active === "test_list") {
         this.test_step = 2;
         this.testListSwitch = true;
-      } else if (this.$route.query && this.$route.query.active == 'add_test') {
+      } else if (this.$route.query && this.$route.query.active == "add_test") {
         this.test_step = 2;
         this.testListSwitch = false;
       } else {
@@ -1255,21 +1316,19 @@ export default {
     //   this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
     // },
 
-
     "form.section"(val) {
       if (val) {
-        this.getTypeList('base', val);
-        this.filter.section = val;//Init second level filter
+        this.getTypeList("base", val);
+        this.filter.section = val; //Init second level filter
         this.$refs["create-form"].form.section = val;
 
-        if (this.form.area)
-          this.getTypeList('school');
+        if (this.form.area) this.getTypeList("school");
       }
     },
 
     "filter.section"(val) {
       if (val) {
-        this.getTypeList('base', val, 'filter');
+        this.getTypeList("base", val, "filter");
       }
       this.all_tests_loaded = true;
       this.filter_grade_list = [];
@@ -1277,36 +1336,34 @@ export default {
       this.filter.page = 1;
       this.test_list = [];
 
-      this.filter.base = '';
-      this.filter.lesson = '';
+      this.filter.base = "";
+      this.filter.lesson = "";
     },
 
     "form.base"(val) {
-      this.getTypeList('lesson', val);
-      this.filter.base = val;//Init second level filter
+      this.getTypeList("lesson", val);
+      this.filter.base = val; //Init second level filter
       this.$refs["create-form"].form.base = val;
-
 
       this.generateTitle();
     },
 
     "filter.base"(val) {
       if (val) {
-        this.getTypeList('lesson', val, 'filter');
+        this.getTypeList("lesson", val, "filter");
       }
       this.all_tests_loaded = true;
 
       this.filter_lesson_list = [];
 
-      this.filter.lesson = '';
+      this.filter.lesson = "";
       this.filter.page = 1;
       this.test_list = [];
-
     },
 
     "form.lesson"(val) {
       if (val) {
-        this.getTypeList('topic', val);
+        this.getTypeList("topic", val);
         this.$refs["topic-selector"].lesson_selected = true;
       } else {
         this.form.topic = [];
@@ -1314,16 +1371,15 @@ export default {
         this.$refs["topic-selector"].lesson_selected = false;
       }
 
-      this.filter.lesson = val;//Init second level filter
+      this.filter.lesson = val; //Init second level filter
       this.$refs["create-form"].form.lesson = val;
 
       this.generateTitle();
     },
 
-
     "filter.lesson"(val) {
       if (val) {
-        this.getTypeList('topic', val, 'filter');
+        this.getTypeList("topic", val, "filter");
       }
       this.all_tests_loaded = false;
 
@@ -1333,13 +1389,11 @@ export default {
     },
 
     "form.state"(val) {
-      this.getTypeList('area', val);
+      this.getTypeList("area", val);
     },
     "form.area"(val) {
-      if (this.form.section)
-        this.getTypeList('school');
+      if (this.form.section) this.getTypeList("school");
     },
-
 
     "filter.topic"(val) {
       this.filter.page = 1;
@@ -1359,78 +1413,75 @@ export default {
       this.getExamTests();
     },
     lastCreatedTest(val) {
-      if (val && !this.tests.find(x => x == val)) {
+      if (val && !this.tests.find((x) => x == val)) {
         this.tests.push(val);
         this.submitTest();
       }
-    }
+    },
   },
   methods: {
-    getTypeList(type, parent = '', trigger = '') {
+    getTypeList(type, parent = "", trigger = "") {
       var params = {
-        type: type
-      }
-      if (type === 'base')
-        params.section_id = parent;
-      if (type === 'lesson') {
+        type: type,
+      };
+      if (type === "base") params.section_id = parent;
+      if (type === "lesson") {
         params.base_id = parent;
       }
-      if (type === 'topic') {
+      if (type === "topic") {
         params.lesson_id = parent;
       }
-      if (type === 'area') {
+      if (type === "area") {
         params.state_id = parent;
       }
 
-      if (type === 'school') {
+      if (type === "school") {
         params.section_id = this.form.section;
         params.area_id = this.form.area;
       }
 
-
-      this.$axios.$get('/api/v1/types/list', {
-        params
-      }).then(res => {
-        var data = {};
-        if (type === 'section') {
-          if (trigger === 'filter') {
-            this.filter_level_list = res.data;
-          } else {
-            this.level_list = res.data;
-            this.filter_level_list = res.data;
+      this.$axios
+        .$get("/api/v1/types/list", {
+          params,
+        })
+        .then((res) => {
+          var data = {};
+          if (type === "section") {
+            if (trigger === "filter") {
+              this.filter_level_list = res.data;
+            } else {
+              this.level_list = res.data;
+              this.filter_level_list = res.data;
+            }
+          } else if (type === "base") {
+            if (trigger === "filter") {
+              this.filter_grade_list = res.data;
+            } else {
+              this.grade_list = res.data;
+              this.filter_grade_list = res.data;
+            }
+          } else if (type === "lesson") {
+            if (trigger === "filter") {
+              this.filter_lesson_list = res.data;
+            } else {
+              this.lesson_list = res.data;
+              this.filter_lesson_list = res.data;
+            }
+          } else if (type === "topic") {
+            this.topic_list = res.data;
+          } else if (type === "exam_type") {
+            this.test_type_list = res.data;
+          } else if (type === "state") {
+            this.state_list = res.data;
+          } else if (type === "area") {
+            this.area_list = res.data;
+          } else if (type === "school") {
+            this.school_list = res.data;
           }
-        } else if (type === 'base') {
-          if (trigger === 'filter') {
-            this.filter_grade_list = res.data;
-          } else {
-            this.grade_list = res.data;
-            this.filter_grade_list = res.data;
-          }
-
-        } else if (type === 'lesson') {
-          if (trigger === 'filter') {
-            this.filter_lesson_list = res.data;
-          } else {
-            this.lesson_list = res.data;
-            this.filter_lesson_list = res.data;
-          }
-
-        } else if (type === 'topic') {
-          this.topic_list = res.data;
-        } else if (type === 'exam_type') {
-          this.test_type_list = res.data;
-        } else if (type === 'state') {
-          this.state_list = res.data;
-        } else if (type === 'area') {
-          this.area_list = res.data;
-        } else if (type === 'school') {
-          this.school_list = res.data;
-        }
-
-
-      }).catch(err => {
-        this.$toast.error(err);
-      })
+        })
+        .catch((err) => {
+          this.$toast.error(err);
+        });
     },
 
     selectTopic(event) {
@@ -1439,15 +1490,16 @@ export default {
         numbers[i] = parseInt(event[i]);
       }
       this.form.topics = numbers;
-      if (this.form.topics.length)
-        this.getTopicTitleList();
+      if (this.form.topics.length) this.getTopicTitleList();
     },
 
     getTopicTitleList() {
       this.topicTitleArr = [];
-      var title = '';
+      var title = "";
       for (var index in this.form.topics) {
-        title = this.topic_list.find(x => x.id == this.form.topics[index]).title;
+        title = this.topic_list.find(
+          (x) => x.id == this.form.topics[index]
+        ).title;
         this.topicTitleArr.push(title);
       }
     },
@@ -1458,69 +1510,69 @@ export default {
       //Arrange to form data
       let formData = new FormData();
       for (let key in this.form) {
-        if (key != 'topics')
-          formData.append(key, this.form[key]);
+        if (key != "topics") formData.append(key, this.form[key]);
       }
 
       if (this.form.topics.length)
         for (let key in this.form.topics)
-          formData.append('topics[]', this.form.topics[key]);
+          formData.append("topics[]", this.form.topics[key]);
 
       //End arrange to form data
 
-      this.$axios.$post('/api/v1/exams',
-        this.urlencodeFormData(formData),
-        {
+      this.$axios
+        .$post("/api/v1/exams", this.urlencodeFormData(formData), {
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          }
-        }
-      ).then(response => {
-        this.$toast.success("Created successfully");
-        this.exam_id = response.data.id;
-        this.exam_code = response.data.code;
-        // this.test_share_link = `gamatrain.com/online-test/${response.data.code}`
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        })
+        .then((response) => {
+          this.$toast.success("Created successfully");
+          this.exam_id = response.data.id;
+          this.exam_code = response.data.code;
+          // this.test_share_link = `gamatrain.com/online-test/${response.data.code}`
 
-        this.$store.commit('user/setCurrentExamId', this.exam_id);
-        this.$store.commit('user/setCurrentExamCode', this.exam_code);
-        this.$refs["create-form"].getCurrentExamInfo();//Load original file
-        this.test_step = 2;
-      }).catch(error => {
-        this.$toast.error(error.response.data.message);
-      }).finally(() => {
-        this.submit_loading = false;
-      })
+          this.$store.commit("user/setCurrentExamId", this.exam_id);
+          this.$store.commit("user/setCurrentExamCode", this.exam_code);
+          this.$refs["create-form"].getCurrentExamInfo(); //Load original file
+          this.test_step = 2;
+        })
+        .catch((error) => {
+          this.$toast.error(error.response.data.message);
+        })
+        .finally(() => {
+          this.submit_loading = false;
+        });
     },
 
     generateTitle() {
-      var lesson_title = ''
+      var lesson_title = "";
       if (this.form.lesson && this.lesson_list.length > 0) {
-        lesson_title = this.lesson_list
-          .find(x => x.id === this.form.lesson).title;
+        lesson_title = this.lesson_list.find(
+          (x) => x.id === this.form.lesson
+        ).title;
       }
 
-
-      var base_title = ''
+      var base_title = "";
       if (this.form.base && this.grade_list.length > 0)
-        base_title = this.grade_list
-          .find(x => x.id === this.form.base).title;
+        base_title = this.grade_list.find((x) => x.id === this.form.base).title;
 
-      this.form.title = `${lesson_title} Test ${base_title} Grade`
+      this.form.title = `${lesson_title} Test ${base_title} Grade`;
     },
 
     getExamTests() {
       this.test_loading = true;
-      this.$axios.$get('/api/v1/examTests', {
-        params: {
-          lesson: this.filter.lesson,
-          topic: this.filter.topic,
-          myTests: this.filter.myTests,
-          testsHasVideo: this.filter.testsHasVideo,
-          page: this.filter.page,
-          perpage: this.filter.perpage
-        }
-      })
-        .then(response => {
+      this.$axios
+        .$get("/api/v1/examTests", {
+          params: {
+            lesson: this.filter.lesson,
+            topic: this.filter.topic,
+            myTests: this.filter.myTests,
+            testsHasVideo: this.filter.testsHasVideo,
+            page: this.filter.page,
+            perpage: this.filter.perpage,
+          },
+        })
+        .then((response) => {
           this.test_list.push(...response.data.list);
 
           if (this.test_list.length) {
@@ -1531,38 +1583,47 @@ export default {
 
           this.$refs["create-form"].examTestListLenght = this.tests.length;
 
-
-          if (response.data.list.length === 0)//For terminate auto load request
+          if (response.data.list.length === 0)
+            //For terminate auto load request
             this.all_tests_loaded = true;
-          else
-            this.all_tests_loaded = false;
-        }).catch(err => {
-        console.log(err);
-      }).finally(() => {
-        this.test_loading = false;
-      })
+          else this.all_tests_loaded = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.test_loading = false;
+        });
     },
 
     renderMathJax() {
       if (window.MathJax) {
         window.MathJax.Hub.Config({
           tex2jax: {
-            inlineMath: [['$', '$'], ["\(", "\)"]],
-            displayMath: [['$$', '$$'], ["\[", "\]"]],
+            inlineMath: [
+              ["$", "$"],
+              ["\(", "\)"],
+            ],
+            displayMath: [
+              ["$$", "$$"],
+              ["\[", "\]"],
+            ],
             processEscapes: true,
-            processEnvironments: true
+            processEnvironments: true,
           },
           // Center justify equations in code and markdown cells. Elsewhere
           // we use CSS to left justify single line equations in code cells.
-          displayAlign: 'center',
+          displayAlign: "center",
           "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: {automatic: true}
-          }
+            styles: { ".MathJax_Display": { margin: 0 } },
+            linebreaks: { automatic: true },
+          },
         });
-        MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
-
-
+        MathJax.Hub.Queue([
+          "Typeset",
+          window.MathJax.Hub,
+          this.$refs.mathJaxEl,
+        ]);
       }
     },
 
@@ -1578,7 +1639,10 @@ export default {
         this.timer = null;
       }
 
-      if (scrollPosition > (contentHeight - 1000) && this.all_tests_loaded === false)
+      if (
+        scrollPosition > contentHeight - 1000 &&
+        this.all_tests_loaded === false
+      )
         this.timer = setTimeout(() => {
           this.test_loading = true;
           this.filter.page++;
@@ -1587,7 +1651,7 @@ export default {
     },
 
     applyTest(item, type) {
-      if (this.tests.find(x => x == item.id) && type === 'remove') {
+      if (this.tests.find((x) => x == item.id) && type === "remove") {
         this.tests.splice(this.tests.indexOf(item.id), 1);
 
         //Remove from preview
@@ -1596,19 +1660,17 @@ export default {
         this.submitTest();
       }
 
-      if (!this.tests.find(x => x == item.id) && type === 'add') {
+      if (!this.tests.find((x) => x == item.id) && type === "add") {
         this.tests.push(item.id);
 
         //Add to preview list
         // this.$store.commit('user/addPreviewTestList', item)
-
 
         // if (this.$store.getters["user/getPreviewTestListLength"]) {
         //   this.$nextTick(function () {
         //     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         //   });
         // }
-
 
         this.submitTest();
       }
@@ -1621,30 +1683,35 @@ export default {
       }
 
       if (this.tests.length) {
-        this.$axios.$put(`/api/v1/exams/tests/${this.exam_id}`
-          , this.urlencodeFormData(formData),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+        this.$axios
+          .$put(
+            `/api/v1/exams/tests/${this.exam_id}`,
+            this.urlencodeFormData(formData),
+            {
+              headers: {
+                "Content-Type":
+                  "application/x-www-form-urlencoded; charset=UTF-8",
+              },
             }
-          }
-        )
-          .then(response => {
+          )
+          .then((response) => {
             this.getExamCurrentTests();
-          }).catch(err => {
-          console.log(err);
-        })
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
 
     getExamCurrentTests() {
       this.test_loading = true;
-      this.$axios.$get('/api/v1/examTests', {
-        params: {
-          exam_id: this.exam_id
-        }
-      })
-        .then(response => {
+      this.$axios
+        .$get("/api/v1/examTests", {
+          params: {
+            exam_id: this.exam_id,
+          },
+        })
+        .then((response) => {
           this.previewTestList = response.data.list;
           this.$refs["create-form"].examTestListLenght = this.tests.length;
 
@@ -1653,14 +1720,12 @@ export default {
               MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
             });
           }
-
-        }).catch(err => {
-        console.log(err);
-      }).finally(() => {
-
-      })
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {});
     },
-
 
     /**
      * @brief publish test
@@ -1668,20 +1733,20 @@ export default {
     publishTest() {
       this.publish_loading = true;
       var examId = this.exam_id;
-      this.$axios.$put(`/api/v1/exams/publish/${examId}`)
-        .then(response => {
-          if (response.data.message === 'done') {
-            this.test_share_link = `${process.env.BASE_URI}/exam/${examId}`
+      this.$axios
+        .$put(`/api/v1/exams/publish/${examId}`)
+        .then((response) => {
+          if (response.data.message === "done") {
+            this.test_share_link = `${process.env.BASE_URI}/exam/${examId}`;
 
+            this.exam_id = "";
 
-            this.exam_id = '';
-
-            this.exam_code = '';
-            this.$store.commit('user/setCurrentExamId', this.exam_id);
-            this.$store.commit('user/setCurrentExamCode', this.exam_code);
+            this.exam_code = "";
+            this.$store.commit("user/setCurrentExamId", this.exam_id);
+            this.$store.commit("user/setCurrentExamCode", this.exam_code);
 
             this.previewTestList = [];
-            this.$store.commit('user/setCurrentExamId', '');
+            this.$store.commit("user/setCurrentExamId", "");
             this.tests = [];
             //Reset form
             this.form.section = "";
@@ -1692,29 +1757,30 @@ export default {
             this.form.type = "";
             this.form.duration = 3;
             this.form.title = "";
-            this.form.file_original = '';
+            this.form.file_original = "";
 
             //End reset form
 
-
             this.test_step = 4;
-            this.$store.commit('user/setCurrentExamId', '');
+            this.$store.commit("user/setCurrentExamId", "");
           }
-        }).catch(err => {
-        console.log(err);
-      }).finally(() => {
-        this.publish_loading = false;
-      })
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.publish_loading = false;
+        });
     },
-
 
     getCurrentExamInfo() {
       if (this.$store.state.user.examId) {
         this.exam_id = this.$store.state.user.examId;
         this.exam_code = this.$store.state.user.examCode;
         this.test_step = 2;
-        this.$axios.$get(`/api/v1/exams/info/${this.exam_id}`)
-          .then(response => {
+        this.$axios
+          .$get(`/api/v1/exams/info/${this.exam_id}`)
+          .then((response) => {
             this.tests = response.data.tests.length ? response.data.tests : [];
 
             this.form.section = response.data.section;
@@ -1722,33 +1788,33 @@ export default {
             this.form.lesson = response.data.lesson;
             this.file_original_path = response.data.file_original;
             console.log(response);
-          }).catch(err => {
-          console.log(err);
-        })
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
 
-
     //Convert form data from multipart to urlencode
     urlencodeFormData(fd) {
-      var s = '';
+      var s = "";
 
       for (var pair of fd.entries()) {
-        if (typeof pair[1] == 'string') {
-          s += (s ? '&' : '') + this.encode(pair[0]) + '=' + this.encode(pair[1]);
+        if (typeof pair[1] == "string") {
+          s +=
+            (s ? "&" : "") + this.encode(pair[0]) + "=" + this.encode(pair[1]);
         }
       }
       return s;
     },
     encode(s) {
-      return encodeURIComponent(s).replace(/%20/g, '+');
+      return encodeURIComponent(s).replace(/%20/g, "+");
     },
     //End convert form data from multipart to urlencode
 
-
     copyUrl() {
       navigator.clipboard.writeText(this.test_share_link);
-      this.$toast.success('Copied');
+      this.$toast.success("Copied");
     },
 
     previewDragEnd() {
@@ -1756,10 +1822,9 @@ export default {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
       });
 
-
       var new_list = [];
       for (var index in this.previewTestList) {
-        new_list.push(this.previewTestList[index].id)
+        new_list.push(this.previewTestList[index].id);
       }
       this.tests = new_list;
       this.submitTest();
@@ -1767,22 +1832,22 @@ export default {
 
     //Return title of level for show in preview list
     calcLevel(level) {
-      if (level)
-        return this.test_level_list.find(x => x.id === level).title;
+      if (level) return this.test_level_list.find((x) => x.id === level).title;
     },
 
     deleteOnlineExam() {
       this.deleteLoading = true;
-      this.$axios.$delete(`/api/v1/exams/${this.exam_id}`)
-        .then(response => {
-          this.exam_id = '';
-          this.exam_code = '';
-          this.$store.commit('user/setCurrentExamId', this.exam_id);
-          this.$store.commit('user/setCurrentExamCode', this.exam_code);
+      this.$axios
+        .$delete(`/api/v1/exams/${this.exam_id}`)
+        .then((response) => {
+          this.exam_id = "";
+          this.exam_code = "";
+          this.$store.commit("user/setCurrentExamId", this.exam_id);
+          this.$store.commit("user/setCurrentExamCode", this.exam_code);
 
           this.previewTestList = [];
-          this.$refs["create-form"].file_original_path = '';
-          this.$store.commit('user/setCurrentExamId', '');
+          this.$refs["create-form"].file_original_path = "";
+          this.$store.commit("user/setCurrentExamId", "");
           // this.$store.commit('user/setPreviewTestList', []);
           this.tests = [];
 
@@ -1799,16 +1864,15 @@ export default {
 
           this.test_step = 1;
           this.$toast.success("Deleted successfully");
-
-        }).catch(err => {
-        this.$toast.error("An error occurred");
-      }).finally(() => {
-        this.deleteLoading = false;
-        this.confirmDeleteDialog = false;
-      })
-      ;
+        })
+        .catch((err) => {
+          this.$toast.error("An error occurred");
+        })
+        .finally(() => {
+          this.deleteLoading = false;
+          this.confirmDeleteDialog = false;
+        });
     },
-
 
     //Delete exam test
     openTestDeleteConfirmDialog(item_id) {
@@ -1817,47 +1881,43 @@ export default {
     },
     async deleteExamTest() {
       this.delete_exam_test_loading = true;
-      await this.$axios.$delete(`/api/v1/examTests/${this.delete_exam_test_id}`,
-      ).then(response => {
-        this.$toast.success("Deleted successfully");
-        this.filter.page = 1;
-        this.test_list = [];
-        this.getExamTests();
-      })
-        .catch(err => {
+      await this.$axios
+        .$delete(`/api/v1/examTests/${this.delete_exam_test_id}`)
+        .then((response) => {
+          this.$toast.success("Deleted successfully");
+          this.filter.page = 1;
+          this.test_list = [];
+          this.getExamTests();
+        })
+        .catch((err) => {
           console.log(err);
-        }).finally(() => {
+        })
+        .finally(() => {
           this.delete_exam_test_loading = false;
           this.delete_exam_test_id = null;
           this.deleteTestConfirmDialog = false;
-        })
+        });
     },
     //End delete exam test
 
-
     uploadFile(file_name) {
       let formData = new FormData();
-      formData.append('file', this.file_original);
-      this.$axios.$post('/api/v1/upload',
-        formData,
-        {
+      formData.append("file", this.file_original);
+      this.$axios
+        .$post("/api/v1/upload", formData, {
           headers: {
-            'accept': '*/*',
-            'Content-Type': 'multipart/form-data'
-          }
-        }
-      ).then(response => {
-        this.form.file_original = response.data[0].file.name;
-      }).catch(err => {
-
-      })
+            accept: "*/*",
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          this.form.file_original = response.data[0].file.name;
+        })
+        .catch((err) => {});
       // }
     },
-
-  }
-}
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

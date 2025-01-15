@@ -194,6 +194,7 @@
               class="mr-1 mb-1"
               v-if="$route.query.school_type && filterLoadedStatus.school_type"
               v-for="(item, index) in $route.query.school_type"
+              :key="index"
               @click:close="closeFilter('school_type', item)"
             >
               {{ findTitle("school_type", item) }}
@@ -205,6 +206,7 @@
               class="mr-1 mb-1"
               v-if="$route.query.religion && filterLoadedStatus.religion"
               v-for="(item, index) in $route.query.religion"
+              :key="index"
               @click:close="closeFilter('religion', item)"
             >
               {{ findTitle("religion", item) }}
@@ -218,6 +220,7 @@
                 $route.query.boarding_type && filterLoadedStatus.boarding_type
               "
               v-for="(item, index) in boardingTypeArray"
+              :key="index"
               @click:close="closeFilter('boarding_type', item)"
             >
               {{ findTitle("boarding_type", item) }}
@@ -229,6 +232,7 @@
               class="mr-1 mb-1"
               v-if="$route.query.coed_status && filterLoadedStatus.coed_status"
               v-for="(item, index) in coedStatusArray"
+              :key="index"
               @click:close="closeFilter('coed_status', item)"
             >
               {{ findTitle("coed_status", item) }}

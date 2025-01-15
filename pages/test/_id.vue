@@ -63,7 +63,10 @@
                           <template slot="label">
                             <div class="answer">
                               <span>2)&nbsp;</span>
-                              <span ref="mathJaxEl" v-html="contentData.answer_b"></span>
+                              <span
+                                ref="mathJaxEl"
+                                v-html="contentData.answer_b"
+                              ></span>
                               <img
                                 v-show="contentData.b_file"
                                 :src="contentData.b_file"
@@ -84,7 +87,10 @@
                           <template slot="label">
                             <div class="answer">
                               <span>3)&nbsp;</span>
-                              <span ref="mathJaxEl" v-html="contentData.answer_c"></span>
+                              <span
+                                ref="mathJaxEl"
+                                v-html="contentData.answer_c"
+                              ></span>
                               <img
                                 v-show="contentData.c_file"
                                 class="answer-img"
@@ -105,7 +111,10 @@
                           <template slot="label">
                             <div class="answer">
                               <span>4)&nbsp;</span>
-                              <span ref="mathJaxEl" v-html="contentData.answer_d" />
+                              <span
+                                ref="mathJaxEl"
+                                v-html="contentData.answer_d"
+                              />
 
                               <img
                                 v-show="contentData.d_file"
@@ -119,7 +128,10 @@
 
                       <!--Answer section-->
                       <v-expansion-panels
-                        v-if="contentData.answer_full || contentData.answer_full_file"
+                        v-if="
+                          contentData.answer_full ||
+                          contentData.answer_full_file
+                        "
                         class="mt-4"
                         v-model="fullAnswer"
                       >
@@ -130,7 +142,10 @@
                             >Show answer
                           </v-expansion-panel-header>
                           <v-expansion-panel-content class="light-green">
-                            <div v-html="contentData.answer_full" ref="mathJaxEl" />
+                            <div
+                              v-html="contentData.answer_full"
+                              ref="mathJaxEl"
+                            />
                             <br />
                             <img
                               v-show="contentData.answer_full_file"
@@ -226,7 +241,7 @@ export default {
       // title: this.$refs["test-question"].innerText
       script: [
         {
-          src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`,
+          src: `${process.env.API_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`,
           defer: true,
         },
       ],
@@ -274,7 +289,8 @@ export default {
     detail: {
       poster: "poster1.jpg",
       linkPoster: "",
-      title: "A collection of 120 test questions for lessons 6 to 9 on (3) 12th",
+      title:
+        "A collection of 120 test questions for lessons 6 to 9 on (3) 12th",
       rate: 5,
       previewImage: "test1.png",
       labels: [
@@ -373,7 +389,11 @@ export default {
             linebreaks: { automatic: true },
           },
         });
-        MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
+        MathJax.Hub.Queue([
+          "Typeset",
+          window.MathJax.Hub,
+          this.$refs.mathJaxEl,
+        ]);
       }
     },
     showAnswer() {

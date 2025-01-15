@@ -999,7 +999,9 @@ export default {
   head() {
     return {
       script: [
-        { src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML` },
+        {
+          src: `${process.env.API_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`,
+        },
       ],
       title: this.contentData.title,
     };

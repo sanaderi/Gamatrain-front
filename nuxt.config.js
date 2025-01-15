@@ -16,7 +16,7 @@ export default {
       {
         name: "viewport",
         content:
-          "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;",
+          "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
       },
       {
         hid: "description",
@@ -44,14 +44,12 @@ export default {
       },
     ],
     link: [
-      { rel: "stylesheet", href: "/assets/css/fontawesome.min.css" },
       {
         rel: "icon",
         type: "image/x-icon",
         href: "/favicon-dark.ico",
       },
       { rel: "stylesheet", href: "/assets/css/all.min.css" },
-      // {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"},
     ],
     script: [
       {
@@ -122,7 +120,7 @@ export default {
   ],
 
   axios: {
-    proxy: false,
+    proxy: true,
     baseUrl: process.env.API_BASE_URL,
     headers: {},
   },
@@ -138,11 +136,6 @@ export default {
       target: process.env.API_BASE_URL,
       pathRewrite: { "^/uploads": "/uploads" },
       secure: false,
-      changeOrigin: true,
-    },
-    "/test_api/": {
-      target: "https://trade.smart-ledger.ir",
-      pathRewrite: { "^/test_api/": "/api/" },
       changeOrigin: true,
     },
   },
@@ -244,8 +237,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    analyze: true,
-
     transpile: [
       "vee-validate",
       "vue-chartjs",
