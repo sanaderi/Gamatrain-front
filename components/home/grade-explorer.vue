@@ -214,7 +214,7 @@
                   <v-col cols="6" md="6">
                     <h4 class="section-title gama-text-h5">Last questions</h4>
                     <div v-if="questionLoading">
-                      <v-row class="latest-card" v-for="i in 3">
+                      <v-row class="latest-card" v-for="i in 3" :key="i">
                         <v-col cols="12">
                           <v-skeleton-loader
                             type="list-item-avatar"
@@ -274,7 +274,7 @@
                       Last Uploaded File
                     </h4>
                     <div v-if="paperLoading">
-                      <v-row class="latest-card" v-for="i in 3">
+                      <v-row class="latest-card" v-for="i in 3" :key="i">
                         <v-col cols="12">
                           <v-skeleton-loader
                             type="list-item-avatar"

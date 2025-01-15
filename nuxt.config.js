@@ -16,7 +16,7 @@ export default {
       {
         name: "viewport",
         content:
-          "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;",
+          "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
       },
       {
         hid: "description",
@@ -44,14 +44,12 @@ export default {
       },
     ],
     link: [
-      { rel: "stylesheet", href: "/assets/css/fontawesome.min.css" },
       {
         rel: "icon",
         type: "image/x-icon",
         href: "/favicon-dark.ico",
       },
       { rel: "stylesheet", href: "/assets/css/all.min.css" },
-      // {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"},
     ],
     script: [
       {
@@ -68,7 +66,11 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["@/assets/scss/app.scss", "@/assets/css/gama6/styles.css"],
+  css: [
+    "@/assets/scss/app.scss",
+    "@mdi/font/css/materialdesignicons.min.css",
+    "@/assets/css/gama6/styles.css",
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -235,8 +237,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    analyze: true,
-
     transpile: [
       "vee-validate",
       "vue-chartjs",

@@ -227,7 +227,7 @@
         <span class="gama-text-button"> Opps! no data found </span>
       </div>
       <div v-else>
-        <v-row class="blog-item" v-for="i in 3">
+        <v-row class="blog-item" v-for="i in 3" :key="i">
           <v-col cols="12">
             <div class="d-none d-sm-flex">
               <div>

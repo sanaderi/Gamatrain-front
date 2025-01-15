@@ -216,6 +216,7 @@
                 <div class="pl-8">
                   <v-checkbox
                     v-for="(item, index) in filter.schoolTypeList"
+                    :key="index"
                     v-model="filterForm.school_type"
                     :label="item.title"
                     :value="item.id"
@@ -227,6 +228,7 @@
                 <div class="pl-8">
                   <v-checkbox
                     v-for="(item, index) in filter.religionList"
+                    :key="index"
                     v-model="filterForm.religion"
                     :label="item.title"
                     :value="item.id"
@@ -250,6 +252,7 @@
                 <div class="pl-8">
                   <v-checkbox
                     v-for="(item, index) in filter.coedStatusList"
+                    :key="index"
                     v-model="filterForm.coed_status"
                     :label="item.title"
                     :value="item.id"
@@ -386,33 +389,42 @@
                         >
                           {{ findTitle("city", $route.query.city) }}
                         </v-chip>
-                        <v-chip
-                          small
-                          close
-                          outlined
-                          class="mb-1"
+                        <div
                           v-if="
                             $route.query.school_type &&
                             filterLoadedStatus.school_type
                           "
-                          v-for="(item, index) in $route.query.school_type"
-                          @click:close="closeFilter('school_type', item)"
                         >
-                          {{ findTitle("school_type", item) }}
-                        </v-chip>
-                        <v-chip
-                          small
-                          close
-                          outlined
-                          class="mb-1 mr-1"
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1"
+                            v-for="(item, index) in $route.query.school_type"
+                            :key="index"
+                            @click:close="closeFilter('school_type', item)"
+                          >
+                            {{ findTitle("school_type", item) }}
+                          </v-chip>
+                        </div>
+
+                        <div
                           v-if="
                             $route.query.religion && filterLoadedStatus.religion
                           "
-                          v-for="(item, index) in $route.query.religion"
-                          @click:close="closeFilter('religion', item)"
                         >
-                          {{ findTitle("religion", item) }}
-                        </v-chip>
+                          <v-chip
+                            small
+                            close
+                            outlined
+                            class="mb-1 mr-1"
+                            v-for="(item, index) in $route.query.religion"
+                            :key="index"
+                            @click:close="closeFilter('religion', item)"
+                          >
+                            {{ findTitle("religion", item) }}
+                          </v-chip>
+                        </div>
                         <v-chip
                           small
                           close
@@ -423,6 +435,7 @@
                             filterLoadedStatus.boarding_type
                           "
                           v-for="(item, index) in boardingTypeArray"
+                          :key="index"
                           @click:close="closeFilter('boarding_type', item)"
                         >
                           {{ findTitle("boarding_type", item) }}
@@ -437,6 +450,7 @@
                             filterLoadedStatus.coed_status
                           "
                           v-for="(item, index) in coedStatusArray"
+                          :key="index"
                           @click:close="closeFilter('coed_status', item)"
                         >
                           {{ findTitle("coed_status", item) }}
@@ -509,6 +523,7 @@
                         <div class="pl-8">
                           <v-checkbox
                             v-for="(item, index) in filter.schoolTypeList"
+                            :key="index"
                             v-model="filterForm.school_type"
                             :value="item.id"
                           >
@@ -527,6 +542,7 @@
                         <div class="pl-8">
                           <v-checkbox
                             v-for="(item, index) in filter.religionList"
+                            :key="index"
                             v-model="filterForm.religion"
                             :value="item.id"
                           >
@@ -564,6 +580,7 @@
                         <div class="pl-8">
                           <v-checkbox
                             v-for="(item, index) in filter.coedStatusList"
+                            :key="index"
                             v-model="filterForm.coed_status"
                             :value="item.id"
                           >

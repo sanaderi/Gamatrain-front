@@ -1,1015 +1,965 @@
 <template>
-    <div id="slider-container">
-        <v-col cols="12" sm="12" md="12" class="pt-0 px-0 pt-sm-0">
-            <v-carousel id="main-slider" v-model="carousel_model" cycle  delimiter-icon="mdi-square" interval="5000"
-                hide-delimiter-background :show-arrows="false">
+  <div id="slider-container">
+    <v-col cols="12" sm="12" md="12" class="pt-0 px-0 pt-sm-0">
+      <v-carousel
+        id="main-slider"
+        v-model="carousel_model"
+        cycle
+        delimiter-icon="mdi-square"
+        interval="5000"
+        hide-delimiter-background
+        :show-arrows="false"
+      >
+        <v-carousel-item v-for="(slide, i) in slides" :key="i">
+          <v-sheet class="section1" :id="slide.id">
+            <v-container class="pt-0 pt-sm-6 pt-md-6 pt-lg-8">
+              <v-card flat class="px-4 px-sm-8 px-md-12">
+                <v-row class="white--text">
+                  <v-col col="12">
+                    <div class="slide-title" v-html="slide.title" />
+                    <div
+                      class="slide-describe gama-text-body1 mt-6 d-none d-md-block"
+                      v-html="slide.text"
+                    ></div>
+                    <v-btn
+                      rounded
+                      :to="slide.link"
+                      class="d-none d-md-inline-flex"
+                      id="read-about-btn"
+                      x-large
+                      >Learn more</v-btn
+                    >
 
-                <v-carousel-item v-for="(slide, i) in slides" :key="i">
-                    <v-sheet class="section1" :id="slide.id">
-                        <v-container class="pt-0 pt-sm-6 pt-md-6 pt-lg-8  ">
-                            <v-card flat class="px-4 px-sm-8 px-md-12">
-                                <v-row class="white--text ">
-                                    <v-col col="12">
-                                        <div class="slide-title " v-html="slide.title" />
-                                        <div class="slide-describe gama-text-body1 mt-6 d-none d-md-block"
-                                            v-html="slide.text">
-                                        </div>
-                                        <v-btn rounded :to="slide.link" class="d-none d-md-inline-flex" id="read-about-btn"
-                                            x-large>Learn more</v-btn>
-
-                                        <v-btn :to="slide.link" text id="slide-register-btn" class="d-md-none">
-                                            Learn more
-                                            <v-icon color="#FFB300">
-                                                mdi-arrow-right-bold
-                                            </v-icon>
-                                        </v-btn>
-                                    </v-col>
-                                </v-row>
-                            </v-card>
-
-                        </v-container>
-                    </v-sheet>
-                    <v-sheet class="section2">
-                    </v-sheet>
-
-                </v-carousel-item>
-                <v-card id="main-search" class="d-none d-md-block">
-                    <v-card-text>
-                        <v-row class="text-center">
-                            <v-col cols="7" id="main-search-keyword">
-                                <v-text-field ref="keywordInput" v-model="searchKey" class="rounded-ts"
-                                    label="Ex: Paper Summer Session" dense hide-details filled>
-                                    <template slot="append">
-                                        <v-icon v-if="searchResultsSection" @click="closeSearch()">
-                                            mdi-close-circle
-                                        </v-icon>
-                                    </template>
-                                </v-text-field>
-                            </v-col>
-                            <v-col cols="4" class="pl-0 " id="keysearch-cate">
-                                <v-autocomplete hide-details dense v-model="searchCate" label="Select category"
-                                    :items="['Paper', 'Multimedia', 'Q&A', 'Exam', 'Tutorial']" filled></v-autocomplete>
-                            </v-col>
-                            <v-col cols="1" class="pl-0">
-                                <v-btn color="#FFB300" class="white--text">
-                                    <v-icon>
-                                        mdi-magnify
-                                    </v-icon>
-                                </v-btn>
-                            </v-col>
-                        </v-row>
-
-
-                    </v-card-text>
-
-                </v-card>
-
-
-            </v-carousel>
-
-        </v-col>
-        <div id="search-result-container" v-if="searchResultsSection">
-            <div id="search-result" ref="searchResult" @scroll="checkSearchScroll">
-                <div id="result-stat">
-                    <span class="gama-text-overline">
-                        Search result
-                    </span>
-                    <span class="gama-text-button">
-                        {{ searchCount }}
-                    </span>
-                </div>
-                <div v-if="searchCount > 0">
-                    <v-row class="list-item" v-for="(item, index) in searchResults" :key="index">
-                        <v-col cols="1" class="pr-1">
-                            <nuxt-link :to="`/${calcPath(item.type)}/${item.id}`">
-                                <div v-if="item.type == 'gama_tests'" class="avatar paper-avatar">
-                                    <span class="icon icon-paper"></span>
-                                </div>
-                                <div v-else-if="item.type == 'gama_learnfiles'" class="avatar multimedia-avatar">
-                                    <span class="icon icon-multimedia"></span>
-                                </div>
-                                <div v-else-if="item.type == 'gama_azmoons'" class="avatar exam-avatar">
-                                    <span class="icon icon-exam"></span>
-                                </div>
-                                <div v-else-if="item.type == 'gama_questions'" class="avatar qa-avatar">
-                                    <span class="icon icon-q-a"></span>
-                                </div>
-                                <div v-else-if="item.type == 'gama_dars'" class="avatar tutorial-avatar">
-                                    <span class="icon icon-tutorial"></span>
-                                </div>
-                                <div v-else-if="item.type == 'gama_teachers'" class="avatar teacher-avatar">
-                                    <span class="icon icon-teacher"></span>
-                                </div>
-                                <div v-else-if="item.type == 'gama_schools'" class="avatar school-avatar">
-                                    <span class="icon icon-school"></span>
-                                </div>
-                                <div v-else-if="item.type == 'gama_live'" class="avatar live-avatar">
-                                    <span class="icon icon-live"></span>
-                                </div>
-                                <div v-else-if="item.type == 'gama_students'" class="avatar student-avatar">
-                                    <span class="icon icon-live"></span>
-                                </div>
-                            </nuxt-link>
-
-                        </v-col>
-                        <v-col cols="11">
-                            <div class="gama-text-button">
-                                <nuxt-link :to="`/${calcPath(item.type)}/${item.id}`">{{ item.title }}</nuxt-link>
-                            </div>
-                            <div class="chip-container">
-                                <div class="chip" v-if="item.lesson_title">
-                                    <nuxt-link
-                                        :to="`/search?type=test&section=${item.section}&base=${item.base}&lesson=${item.lesson}`">{{
-                                            item.lesson_title }}</nuxt-link>
-                                </div>
-                                <div class="chip" v-if="item.base_title">
-                                    <nuxt-link :to="`/search?type=test&section=${item.section}&base=${item.base}`">{{
-                                        item.base_title }}</nuxt-link>
-                                </div>
-                                <div class="chip" v-if="item.section_title">
-                                    <nuxt-link :to="`/search?type=test&section=${item.section}`">{{ item.section_title
-                                    }}</nuxt-link>
-                                </div>
-                            </div>
-
-                        </v-col>
-
-                    </v-row>
-                    <v-row v-if="allDataLoaded == false" class="list-item">
-                        <v-col cols="12">
-                            <v-skeleton-loader type="list-item-avatar"></v-skeleton-loader>
-                        </v-col>
-                    </v-row>
-                </div>
-                <div v-else-if="searchCount == 0 && searchLoading == false" class="text-center">
-                    <span class="gama-text-button">
-                        Opps! no data found
-                    </span>
-                </div>
-                <div v-else>
-                    <v-row class="list-item" v-for="i in 3">
-                        <v-col cols="12">
-                            <v-skeleton-loader type="list-item-avatar"></v-skeleton-loader>
-                        </v-col>
-                    </v-row>
-                </div>
-
-
-            </div>
+                    <v-btn
+                      :to="slide.link"
+                      text
+                      id="slide-register-btn"
+                      class="d-md-none"
+                    >
+                      Learn more
+                      <v-icon color="#FFB300"> mdi-arrow-right-bold </v-icon>
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-card>
+            </v-container>
+          </v-sheet>
+          <v-sheet class="section2"> </v-sheet>
+        </v-carousel-item>
+        <v-card id="main-search" class="d-none d-md-block">
+          <v-card-text>
+            <v-row class="text-center">
+              <v-col cols="7" id="main-search-keyword">
+                <v-text-field
+                  ref="keywordInput"
+                  v-model="searchKey"
+                  class="rounded-ts"
+                  label="Ex: Paper Summer Session"
+                  dense
+                  hide-details
+                  filled
+                >
+                  <template slot="append">
+                    <v-icon v-if="searchResultsSection" @click="closeSearch()">
+                      mdi-close-circle
+                    </v-icon>
+                  </template>
+                </v-text-field>
+              </v-col>
+              <v-col cols="4" class="pl-0" id="keysearch-cate">
+                <v-autocomplete
+                  hide-details
+                  dense
+                  v-model="searchCate"
+                  label="Select category"
+                  :items="['Paper', 'Multimedia', 'Q&A', 'Exam', 'Tutorial']"
+                  filled
+                ></v-autocomplete>
+              </v-col>
+              <v-col cols="1" class="pl-0">
+                <v-btn color="#FFB300" class="white--text">
+                  <v-icon> mdi-magnify </v-icon>
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-carousel>
+    </v-col>
+    <div id="search-result-container" v-if="searchResultsSection">
+      <div id="search-result" ref="searchResult" @scroll="checkSearchScroll">
+        <div id="result-stat">
+          <span class="gama-text-overline"> Search result </span>
+          <span class="gama-text-button">
+            {{ searchCount }}
+          </span>
         </div>
+        <div v-if="searchCount > 0">
+          <v-row
+            class="list-item"
+            v-for="(item, index) in searchResults"
+            :key="index"
+          >
+            <v-col cols="1" class="pr-1">
+              <nuxt-link :to="`/${calcPath(item.type)}/${item.id}`">
+                <div
+                  v-if="item.type == 'gama_tests'"
+                  class="avatar paper-avatar"
+                >
+                  <span class="icon icon-paper"></span>
+                </div>
+                <div
+                  v-else-if="item.type == 'gama_learnfiles'"
+                  class="avatar multimedia-avatar"
+                >
+                  <span class="icon icon-multimedia"></span>
+                </div>
+                <div
+                  v-else-if="item.type == 'gama_azmoons'"
+                  class="avatar exam-avatar"
+                >
+                  <span class="icon icon-exam"></span>
+                </div>
+                <div
+                  v-else-if="item.type == 'gama_questions'"
+                  class="avatar qa-avatar"
+                >
+                  <span class="icon icon-q-a"></span>
+                </div>
+                <div
+                  v-else-if="item.type == 'gama_dars'"
+                  class="avatar tutorial-avatar"
+                >
+                  <span class="icon icon-tutorial"></span>
+                </div>
+                <div
+                  v-else-if="item.type == 'gama_teachers'"
+                  class="avatar teacher-avatar"
+                >
+                  <span class="icon icon-teacher"></span>
+                </div>
+                <div
+                  v-else-if="item.type == 'gama_schools'"
+                  class="avatar school-avatar"
+                >
+                  <span class="icon icon-school"></span>
+                </div>
+                <div
+                  v-else-if="item.type == 'gama_live'"
+                  class="avatar live-avatar"
+                >
+                  <span class="icon icon-live"></span>
+                </div>
+                <div
+                  v-else-if="item.type == 'gama_students'"
+                  class="avatar student-avatar"
+                >
+                  <span class="icon icon-live"></span>
+                </div>
+              </nuxt-link>
+            </v-col>
+            <v-col cols="11">
+              <div class="gama-text-button">
+                <nuxt-link :to="`/${calcPath(item.type)}/${item.id}`">{{
+                  item.title
+                }}</nuxt-link>
+              </div>
+              <div class="chip-container">
+                <div class="chip" v-if="item.lesson_title">
+                  <nuxt-link
+                    :to="`/search?type=test&section=${item.section}&base=${item.base}&lesson=${item.lesson}`"
+                    >{{ item.lesson_title }}</nuxt-link
+                  >
+                </div>
+                <div class="chip" v-if="item.base_title">
+                  <nuxt-link
+                    :to="`/search?type=test&section=${item.section}&base=${item.base}`"
+                    >{{ item.base_title }}</nuxt-link
+                  >
+                </div>
+                <div class="chip" v-if="item.section_title">
+                  <nuxt-link
+                    :to="`/search?type=test&section=${item.section}`"
+                    >{{ item.section_title }}</nuxt-link
+                  >
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+          <v-row v-if="allDataLoaded == false" class="list-item">
+            <v-col cols="12">
+              <v-skeleton-loader type="list-item-avatar"></v-skeleton-loader>
+            </v-col>
+          </v-row>
+        </div>
+        <div
+          v-else-if="searchCount == 0 && searchLoading == false"
+          class="text-center"
+        >
+          <span class="gama-text-button"> Opps! no data found </span>
+        </div>
+        <div v-else>
+          <v-row class="list-item" v-for="i in 3" :key="i">
+            <v-col cols="12">
+              <v-skeleton-loader type="list-item-avatar"></v-skeleton-loader>
+            </v-col>
+          </v-row>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'main-slider',
-    data() {
-        return {
-            carousel_model: 0,
-            colors: [
-                '#24292F',
-                '#0092A9'
-            ],
+  name: "main-slider",
+  data() {
+    return {
+      carousel_model: 0,
+      colors: ["#24292F", "#0092A9"],
 
-            slides: [
-                {
-                    title: '<span class="gama-text-h1">AI</span> <span class="gama-text-h4">&nbspSystem <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education</span>',
-                    img: 'ai-robot.png',
-                    text: "Discover the future of education with our AI-powered learning platform,<br> revolutionizing the way you acquire knowledge and skills.",
-                    id: 'ai-slide',
-                    link: '/smart-learning'
-                },
-                {
-                    title: '<span class="gama-text-h1">School finder</span>',
-                    img: 'school-finder.png',
-                    text: "Discover the future of education with our AI-powered learning platform,<br> revolutionizing the way you acquire knowledge and skills.",
-                    id: 'school-finder-slide',
-                    link: '/school'
-                },
-                {
-                    title: '<span class="gama-text-h1 font-weight-bold">Question<span class="d-sm-none"><br>&nbsp&nbsp</span> & Answer</span>',
-                    text: "Q&A made easy. Connect with classmates and<br> teachers for quick answers to your questions.",
-                    img: 'a-q.png',
-                    id: 'aq-slide',
-                    link: '/search?type=question'
+      slides: [
+        {
+          title:
+            '<span class="gama-text-h1">AI</span> <span class="gama-text-h4">&nbspSystem <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education</span>',
+          img: "ai-robot.png",
+          text: "Discover the future of education with our AI-powered learning platform,<br> revolutionizing the way you acquire knowledge and skills.",
+          id: "ai-slide",
+          link: "/smart-learning",
+        },
+        {
+          title: '<span class="gama-text-h1">School finder</span>',
+          img: "school-finder.png",
+          text: "Discover the future of education with our AI-powered learning platform,<br> revolutionizing the way you acquire knowledge and skills.",
+          id: "school-finder-slide",
+          link: "/school",
+        },
+        {
+          title:
+            '<span class="gama-text-h1 font-weight-bold">Question<span class="d-sm-none"><br>&nbsp&nbsp</span> & Answer</span>',
+          text: "Q&A made easy. Connect with classmates and<br> teachers for quick answers to your questions.",
+          img: "a-q.png",
+          id: "aq-slide",
+          link: "/search?type=question",
+        },
+      ],
 
-                }
-            ],
-
-            //Search section
-            searchResults: [],
-            searchCount: '...',
-            searchKey: '',
-            searchCate: '',
-            searchLoading: true,
-            pageNum: 1,
-            timer: 0,
-            searchResultsSection: false,
-            allDataLoaded: false
-            //End search section
-        }
+      //Search section
+      searchResults: [],
+      searchCount: "...",
+      searchKey: "",
+      searchCate: "",
+      searchLoading: true,
+      pageNum: 1,
+      timer: 0,
+      searchResultsSection: false,
+      allDataLoaded: false,
+      //End search section
+    };
+  },
+  watch: {
+    searchKey(val) {
+      if (val.trim() === "") {
+        this.searchResultsSection = false;
+      } else {
+        this.searchResultsSection = true;
+      }
+      this.pageNum = 1;
+      this.searchCount = "...";
+      this.allDataLoaded = false;
+      this.searchResults = [];
+      this.search();
     },
-    watch: {
-        searchKey(val) {
-            if (val.trim() === '') {
-                this.searchResultsSection = false;
-            }
-            else {
-                this.searchResultsSection = true;
-            }
-            this.pageNum = 1;
-            this.searchCount = '...';
-            this.allDataLoaded = false;
-            this.searchResults = [];
-            this.search();
-        }
+  },
+  methods: {
+    openAuthDialog(val) {
+      this.$router.push({ query: { auth_form: val } });
     },
-    methods: {
-        openAuthDialog(val) {
-            this.$router.push({ query: { auth_form: val } });
-        },
-        checkSearchScroll() {
-            const scrollableDiv = this.$refs.searchResult;
-            if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false) {
-                this.pageNum++;
-                this.search();
-            }
+    checkSearchScroll() {
+      const scrollableDiv = this.$refs.searchResult;
+      if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false) {
+        this.pageNum++;
+        this.search();
+      }
+    },
+    isScrollAtBottom(element) {
+      return element.scrollHeight - element.scrollTop == element.clientHeight;
+    },
+    search() {
+      this.searchLoading = true;
+      if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
 
-        },
-        isScrollAtBottom(element) {
-            return (
-                element.scrollHeight - element.scrollTop == element.clientHeight
-            );
-        },
-        search() {
-            this.searchLoading = true;
-            if (this.timer) {
-                clearTimeout(this.timer);
-                this.timer = null;
-            }
+      this.timer = setTimeout(() => {
+        if (this.searchKey && this.allDataLoaded == false)
+          this.$axios
+            .$get("/api/v1/search/text", {
+              params: {
+                query: this.searchKey,
+                page: this.pageNum,
+              },
+            })
+            .then((response) => {
+              this.searchCount = response.data.num;
+              this.searchResults.push(...response.data.list);
 
-            this.timer = setTimeout(() => {
-                if (this.searchKey && this.allDataLoaded == false)
-                    this.$axios.$get('/api/v1/search/text', {
-                        params: {
-                            query: this.searchKey,
-                            page: this.pageNum
-                        }
-                    })
-                        .then(response => {
-                            this.searchCount = response.data.num;
-                            this.searchResults.push(...response.data.list);
-                            
-                            if (response.data.list.length < 20)//20 is lenght of item per page
-                                this.allDataLoaded = true;
-                        }).catch(err => {
-                            console.log(err);
-                        }).finally(() => {
-                            this.searchLoading = false;
-                        })
-            }, 800);
-        },
-        closeSearch() {
-            this.searchResultsSection = false;
-            this.searchKey = '';
-            this.$refs.keywordInput.blur();
-        },
-        calcPath(type) {
-            if (type == 'gama_tests')
-                return 'paper';
-            else if (type == 'gama_learnfiles')
-                return 'multimedia';
-            else if (type == 'gama_azmoons')
-                return 'exams';
-            else if (type == 'gama_questions')
-                return 'qa';
-            else if (type == 'gama_dars')
-                return 'tutorial';
-            else if (type == 'gama_teachers')
-                return 'teacher';
-            else if (type == 'gama_schools')
-                return 'school';
-            else if (type == 'gama_live')
-                return 'live';
-            else if (type == 'gama_students')
-                return 'student';
-
-        }
-    }
-}
+              if (response.data.list.length < 20)
+                //20 is lenght of item per page
+                this.allDataLoaded = true;
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+            .finally(() => {
+              this.searchLoading = false;
+            });
+      }, 800);
+    },
+    closeSearch() {
+      this.searchResultsSection = false;
+      this.searchKey = "";
+      this.$refs.keywordInput.blur();
+    },
+    calcPath(type) {
+      if (type == "gama_tests") return "paper";
+      else if (type == "gama_learnfiles") return "multimedia";
+      else if (type == "gama_azmoons") return "exams";
+      else if (type == "gama_questions") return "qa";
+      else if (type == "gama_dars") return "tutorial";
+      else if (type == "gama_teachers") return "teacher";
+      else if (type == "gama_schools") return "school";
+      else if (type == "gama_live") return "live";
+      else if (type == "gama_students") return "student";
+    },
+  },
+};
 </script>
-
 
 <style>
 #main-slider {
-    height: 25rem !important;
+  height: 25rem !important;
 }
 
 #search-result-container {
-    display: none;
+  display: none;
 }
 
 #main-slider .section1 {
-    height: 35%;
+  height: 35%;
 
-    .container {
-        width: 100%;
+  .container {
+    width: 100%;
 
-        .slide-title {
-            margin-top: 3rem;
-        }
-
-        .slide-img {
-            width: 12rem;
-            float: right;
-
-        }
-
-
-        .gama-text-h1 {
-            color: #FFF;
-
-        }
-
-        .gama-text-h4 {
-            color: #FFF;
-        }
-
-
-
-
-
-
-        #slide-register-btn {
-            text-transform: none;
-            color: #A5A6A7;
-            font-size: 1.4rem;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 2.4rem;
-
-            .v-icon {
-                display: inline-flex !important;
-                color: #FFB300 !important;
-                font-size: 2.4rem;
-                padding-left: 0.8rem;
-                margin-top: 0.4rem;
-            }
-        }
+    .slide-title {
+      margin-top: 3rem;
     }
+
+    .slide-img {
+      width: 12rem;
+      float: right;
+    }
+
+    .gama-text-h1 {
+      color: #fff;
+    }
+
+    .gama-text-h4 {
+      color: #fff;
+    }
+
+    #slide-register-btn {
+      text-transform: none;
+      color: #a5a6a7;
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 2.4rem;
+
+      .v-icon {
+        display: inline-flex !important;
+        color: #ffb300 !important;
+        font-size: 2.4rem;
+        padding-left: 0.8rem;
+        margin-top: 0.4rem;
+      }
+    }
+  }
 }
 
 #main-slider .section2 {
-    height: 80%;
+  height: 80%;
 }
 
-
-
-
-
 #main-slider #school-finder-slide {
-    padding-top: 6rem;
-    background: linear-gradient(83deg, #465568 0.59%, #86AFD7 100%);
-    background-repeat: no-repeat;
-    height: 21.5rem;
+  padding-top: 6rem;
+  background: linear-gradient(83deg, #465568 0.59%, #86afd7 100%);
+  background-repeat: no-repeat;
+  height: 21.5rem;
 }
 
 #main-slider #school-finder-slide .v-card {
-    height: 21.5rem;
-    background-color: transparent;
-    background-image: url('/images/school-finder.png');
-    background-position: right 2.4rem;
-    background-size: 15rem 18.1rem;
-    background-repeat: no-repeat;
+  height: 21.5rem;
+  background-color: transparent;
+  background-image: url("/images/school-finder.png");
+  background-position: right 2.4rem;
+  background-size: 15rem 18.1rem;
+  background-repeat: no-repeat;
 }
 
-
 #main-slider #ai-slide {
-    padding-top: 6rem;
-    background: #24292F !important;
-    background-repeat: no-repeat;
-    background-size: 90%, 10%;
-    height: 21.5rem;
+  padding-top: 6rem;
+  background: #24292f !important;
+  background-repeat: no-repeat;
+  background-size: 90%, 10%;
+  height: 21.5rem;
 }
 
 #main-slider #ai-slide .v-card {
-    height: 21.5rem;
-    background-color: transparent;
-    background-image: url('/images/ai-robot.png');
-    background-position: right 2.4rem;
-    background-size: 15rem 18.1rem;
-    background-repeat: no-repeat;
+  height: 21.5rem;
+  background-color: transparent;
+  background-image: url("/images/ai-robot.png");
+  background-position: right 2.4rem;
+  background-size: 15rem 18.1rem;
+  background-repeat: no-repeat;
 }
 
 #main-slider #aq-slide {
-    padding-top: 6rem;
-    height: 21.5rem;
-    background: linear-gradient(45deg, #0092A9 0%, #2BDDFF 100%);
-    background-repeat: no-repeat;
+  padding-top: 6rem;
+  height: 21.5rem;
+  background: linear-gradient(45deg, #0092a9 0%, #2bddff 100%);
+  background-repeat: no-repeat;
 }
 
 #main-slider #aq-slide .v-card {
-    height: 21.5rem;
-    background-size: 15.4rem 13.36rem;
-    background-color: transparent;
-    background-image: url('/images/a-q.png');
-    background-repeat: no-repeat;
-    background-position: 95% top;
+  height: 21.5rem;
+  background-size: 15.4rem 13.36rem;
+  background-color: transparent;
+  background-image: url("/images/a-q.png");
+  background-repeat: no-repeat;
+  background-position: 95% top;
 }
 
 #main-slider .section2 {
-    height: 10%;
+  height: 10%;
 }
 
 #main-slider .v-carousel__controls {
-    position: absolute;
-    top: 18.8rem;
+  position: absolute;
+  top: 18.8rem;
 }
 
-
 #main-slider .v-carousel__controls .v-btn--icon {
-    background-color: #ebece9;
-    height: 0.1rem;
-    width: 2.90rem;
-    margin-right: 0.05rem !important;
-    margin-left: 0.05rem !important;
-    border-radius: 0.4rem;
-
+  background-color: #ebece9;
+  height: 0.1rem;
+  width: 2.9rem;
+  margin-right: 0.05rem !important;
+  margin-left: 0.05rem !important;
+  border-radius: 0.4rem;
 }
 
 #main-slider .v-carousel__controls .v-btn--icon.v-btn--active {
-    background-color: #FFB300;
-    /* Colour for active one */
+  background-color: #ffb300;
+  /* Colour for active one */
 }
 
 #main-slider .v-carousel__controls .v-btn--icon:hover {
-    background-color: #FFB300;
-    /* You might also want to customise the hover effect */
+  background-color: #ffb300;
+  /* You might also want to customise the hover effect */
 }
 
 #main-slider .v-btn__content .v-icon {
-    display: none;
+  display: none;
 }
 
-
-
-
 @media (min-width: 600px) {
-    #main-slider {
-        height: 30.8rem !important;
-    }
+  #main-slider {
+    height: 30.8rem !important;
+  }
 
-    #main-slider .section1 {
-        height: 51%;
+  #main-slider .section1 {
+    height: 51%;
 
-        .container {
-            width: 100%;
+    .container {
+      width: 100%;
 
-            .slide-img {
-                width: 17rem;
-                float: right;
+      .slide-img {
+        width: 17rem;
+        float: right;
+      }
 
-            }
+      #slide-register-btn {
+        margin-top: 3rem;
+        text-transform: none;
+        color: #a5a6a7;
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 2.4rem;
 
-            #slide-register-btn {
-                margin-top: 3rem;
-                text-transform: none;
-                color: #A5A6A7;
-                font-size: 1.6rem;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 2.4rem;
-
-                .v-icon {
-                    display: inline-flex !important;
-                    color: #FFB300 !important;
-                    font-size: 4.8rem !important;
-                    margin-top: 0.4rem;
-                    padding-left: 0.8rem;
-                }
-            }
+        .v-icon {
+          display: inline-flex !important;
+          color: #ffb300 !important;
+          font-size: 4.8rem !important;
+          margin-top: 0.4rem;
+          padding-left: 0.8rem;
         }
+      }
     }
+  }
 
+  #main-slider #school-finder-slide {
+    height: 27rem;
+  }
 
+  #main-slider #school-finder-slide .v-card {
+    height: 34rem;
+    background-position: 98% top;
+    background-size: 17.7rem 22.11rem;
+  }
 
-    #main-slider #school-finder-slide {
-        height: 27rem;
-    }
+  #main-slider #ai-slide {
+    height: 27rem;
+  }
 
-    #main-slider #school-finder-slide .v-card {
-        height: 34rem;
-        background-position: 98% top;
-        background-size: 17.7rem 22.11rem;
-    }
+  #main-slider #ai-slide .v-card {
+    height: 34rem;
+    background-position: 98% top;
+    background-size: 17.7rem 22.11rem;
+  }
 
-    #main-slider #ai-slide {
-        height: 27rem;
-    }
+  #main-slider #aq-slide {
+    height: 27rem;
+  }
 
-    #main-slider #ai-slide .v-card {
-        height: 34rem;
-        background-position: 98% top;
-        background-size: 17.7rem 22.11rem;
-    }
+  #main-slider #aq-slide .v-card {
+    height: 34rem;
+    background-size: 18.4rem 16.36rem;
+  }
 
-    #main-slider #aq-slide {
-        height: 27rem;
-    }
+  #main-slider .v-carousel__controls {
+    position: absolute;
+    top: 24.2rem;
+  }
 
-    #main-slider #aq-slide .v-card {
-        height: 34rem;
-        background-size: 18.4rem 16.36rem;
-    }
-
-    #main-slider .v-carousel__controls {
-        position: absolute;
-        top: 24.2rem;
-    }
-
-    #main-slider .v-carousel__controls .v-btn--icon {
-        /* Background color of non-active ones */
-        height: 0.2rem;
-        /* Height you want */
-        width: 6.40rem;
-        /* Width you want */
-
-    }
-
+  #main-slider .v-carousel__controls .v-btn--icon {
+    /* Background color of non-active ones */
+    height: 0.2rem;
+    /* Height you want */
+    width: 6.4rem;
+    /* Width you want */
+  }
 }
 
 @media (min-width: 960px) {
+  #slider-container {
+    position: relative;
+    height: 50rem !important;
+  }
 
-    #slider-container {
-        position: relative;
-        height: 50rem !important;
+  #main-slider {
+    height: 50rem !important;
+  }
+
+  #main-slider .section1 {
+    .container {
+      width: 100%;
     }
+  }
 
-    #main-slider {
-        height: 50rem !important;
-    }
+  #main-slider #main-search {
+    position: absolute;
+    bottom: 8rem;
+    width: 78rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 8.2rem;
+    border-radius: 9rem;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(7.5px);
+  }
 
-    #main-slider .section1 {
-         .container{
-            width: 100%;
+  #main-slider #main-search textarea {
+    color: #24292f !important;
+  }
 
-         }
-    }
+  #main-slider #main-search #keysearch-cate .v-input {
+    background: #fff;
+    border-radius: 0.4rem;
+    height: 5.2rem !important;
+  }
 
-    #main-slider #main-search {
-        position: absolute;
-        bottom: 8rem;
-        width: 78rem;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        height: 8.2rem;
-        border-radius: 9rem;
-        background: rgba(0, 0, 0, 0.40);
-        backdrop-filter: blur(7.5px);
-    }
+  #main-slider #main-search #main-search-keyword .v-input .v-icon {
+    color: rgba(36, 41, 47, 0.3);
+    font-size: 2.4rem !important;
+  }
 
-    #main-slider #main-search textarea {
-        color: #24292F !important
-    }
+  #slider-container #search-result-container {
+    display: block;
+    position: absolute;
+    top: 41.8rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 4;
+    width: 74rem;
+    min-height: 39.7rem;
+    height: 39.7rem;
+    overflow: hidden;
+    border-radius: 2rem;
+    background: #fff;
+    box-shadow: 0px 9px 46px 8px rgba(0, 0, 0, 0.12),
+      0px 24px 38px 3px rgba(0, 0, 0, 0.14),
+      0px 11px 15px -7px rgba(0, 0, 0, 0.2);
+  }
 
+  #slider-container #search-result-container #search-result {
+    max-height: 39.7rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: relative;
+    height: 100%;
 
+    #result-stat {
+      padding: 1.6rem;
+      text-align: right;
+      position: sticky;
+      background: #fff;
+      top: 0;
 
-    #main-slider #main-search #keysearch-cate .v-input {
-        background: #fff;
-        border-radius: 0.4rem;
-        height: 5.2rem !important;
+      .gama-text-button {
+        color: #57b947;
+        text-align: right;
+      }
 
-    }
-
-    #main-slider #main-search #main-search-keyword .v-input .v-icon {
+      .gama-text-overline {
         color: rgba(36, 41, 47, 0.3);
-        font-size: 2.4rem !important;
+        margin-right: 0.22rem;
+      }
     }
 
+    .list-item {
+      height: 11.9rem;
+      padding: 1.6rem;
 
-
-    #slider-container #search-result-container {
-        display: block;
-        position: absolute;
-        top: 41.8rem;
-        left: 0;
-        right: 0;
-        margin: auto;
-        z-index: 4;
-        width: 74rem;
-        min-height: 39.7rem;
-        height: 39.7rem;
+      .gama-text-button {
+        color: rgba(36, 41, 47, 0.8);
+        margin-bottom: 1.7rem;
+        white-space: nowrap;
+        width: inherit;
         overflow: hidden;
-        border-radius: 2rem;
-        background: #fff;
-        box-shadow: 0px 9px 46px 8px rgba(0, 0, 0, 0.12), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 11px 15px -7px rgba(0, 0, 0, 0.20);
+        text-overflow: ellipsis;
+      }
+
+      .avatar {
+        width: 4.8rem;
+        height: 4.8rem;
+        border-radius: 2.6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .icon {
+          font-size: 3.2rem;
+          color: #ffffff;
+        }
+      }
+
+      .paper-avatar {
+        background: #01c8c8;
+      }
+
+      .multimedia-avatar {
+        background: #8800b8;
+      }
+
+      .exam-avatar {
+        background: #7b61ff;
+      }
+
+      .qa-avatar {
+        background: #ff50a6;
+      }
+
+      .tutorial-avatar {
+        background: #2a91ff;
+      }
+
+      .student-avatar {
+        background: #ff9400;
+      }
+
+      .teacher-avatar {
+        background: #1cb423;
+      }
+
+      .school-avatar {
+        background: #a15801;
+      }
+
+      .live-avatar {
+        background: #ff0000;
+      }
+
+      .chip-container {
+        display: flex;
+
+        .chip {
+          height: 3.5rem;
+          padding: 0.8rem 1.6rem 0.8rem 1.6rem;
+          width: max-content;
+          border-radius: 2rem;
+          background: rgba(36, 41, 47, 0.05);
+          margin-right: 0.8rem;
+
+          color: rgba(36, 41, 47, 0.8);
+          font-family: Inter;
+          font-size: 1.6rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          max-width: 18.4rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .v-skeleton-loader__list-item-avatar {
+        background: transparent;
+      }
     }
 
-    #slider-container #search-result-container #search-result {
-        max-height: 39.7rem;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        position: relative;
-        height:100%;
+    .list-item:nth-child(even) {
+      background: rgba(36, 41, 47, 0.05);
+    }
+  }
 
-        #result-stat {
-            padding: 1.6rem;
-            text-align: right;
-            position: sticky;
-            background: #fff;
-            top: 0;
+  #main-slider {
+    #main-search {
+      .v-text-field > .v-input__control > .v-input__slot:before {
+        border-style: none !important;
+      }
 
-            .gama-text-button {
-                color: #57B947;
-                text-align: right;
-            }
+      .v-text-field > .v-input__control > .v-input__slot:after {
+        border-style: none !important;
+      }
 
-            .gama-text-overline {
-                color: rgba(36, 41, 47, 0.30);
-                margin-right: 0.22rem;
-            }
+      .v-input--dense .v-select__slot > input {
+        align-self: center;
+        margin-top: 1.2rem;
+      }
+
+      .v-text-field--filled:not(.v-text-field--single-line) input {
+        align-self: center;
+        margin-top: 1.2rem;
+      }
+    }
+  }
+
+  #main-slider #main-search #keysearch-cate .v-label {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.8rem;
+  }
+
+  #main-slider #main-search #keysearch-cate .v-label.v-label--active {
+    color: rgba(0, 0, 0, 0.6) !important;
+  }
+
+  #main-slider #main-search .mdi-menu-down::before {
+    color: #000 !important;
+  }
+
+  #main-slider #main-search #main-search-keyword input {
+    caret-color: black;
+  }
+
+  #main-slider #main-search #main-search-keyword {
+    .v-input {
+      border-color: #fff;
+      color: transparent !important;
+
+      .v-input__control {
+        border-color: transparent;
+
+        .v-input__slot {
+          background-color: #fff !important;
+
+          border: transparent;
+          border-radius: 3rem 0.4rem 0.4rem 3rem;
+
+          .v-label {
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 1.4rem;
+            font-style: normal;
+            font-weight: 300;
+            line-height: 1.8rem;
+          }
+
+          .v-label.v-label--active {
+            color: rgba(0, 0, 0, 0.6) !important;
+          }
         }
 
-        .list-item {
-            height: 11.9rem;
-            padding: 1.6rem;
-
-            .gama-text-button {
-                color: rgba(36, 41, 47, 0.80);
-                margin-bottom: 1.7rem;
-                white-space: nowrap;
-                width: inherit;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-
-
-            .avatar {
-                width: 4.8rem;
-                height: 4.8rem;
-                border-radius: 2.6rem;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                .icon {
-                    font-size: 3.2rem;
-                    color: #FFFFFF
-                }
-            }
-
-            .paper-avatar {
-                background: #01C8C8;
-            }
-
-            .multimedia-avatar {
-                background: #8800B8;
-            }
-
-            .exam-avatar {
-                background: #7B61FF;
-
-            }
-
-            .qa-avatar {
-                background: #FF50A6;
-
-            }
-
-            .tutorial-avatar {
-                background: #2A91FF;
-
-            }
-
-            .student-avatar {
-                background: #FF9400;
-            }
-
-            .teacher-avatar {
-                background: #1CB423;
-
-            }
-
-            .school-avatar {
-                background: #A15801;
-
-            }
-
-            .live-avatar {
-                background: #FF0000;
-
-            }
-
-
-            .chip-container {
-                display: flex;
-
-                .chip {
-                    height: 3.5rem;
-                    padding: 0.8rem 1.6rem 0.8rem 1.6rem;
-                    width: max-content;
-                    border-radius: 2rem;
-                    background: rgba(36, 41, 47, 0.05);
-                    margin-right: 0.8rem;
-
-                    color: rgba(36, 41, 47, 0.80);
-                    font-family: Inter;
-                    font-size: 1.6rem;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: normal;
-                    max-width: 18.4rem;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-            }
-
-
-            .v-skeleton-loader__list-item-avatar {
-                background: transparent;
-            }
-
+        .v-input__slot::before {
+          border: transparent;
         }
+      }
+    }
+  }
 
-        .list-item:nth-child(even) {
-            background: rgba(36, 41, 47, 0.05);
-        }
+  #main-slider #main-search .v-btn {
+    border-radius: 0.4rem 3rem 3rem 0.4rem;
+    height: 5.2rem !important;
+    width: 5rem !important;
+    min-width: 4rem;
 
+    .v-btn__content .v-icon {
+      display: block;
+    }
+  }
 
+  #main-slider .section1 {
+    height: 95%;
 
+    .gama-text-h1 {
+      color: #fff;
     }
 
+    .slide-title {
+      margin-top: 2rem !important;
 
-    #main-slider {
-        #main-search {
-            .v-text-field>.v-input__control>.v-input__slot:before {
-                border-style: none !important;
-            }
-
-
-            .v-text-field>.v-input__control>.v-input__slot:after {
-                border-style: none !important;
-            }
-
-
-            .v-input--dense .v-select__slot>input {
-                align-self: center;
-                margin-top: 1.2rem;
-            }
-
-            .v-text-field--filled:not(.v-text-field--single-line) input {
-                align-self: center;
-                margin-top: 1.2rem;
-            }
-        }
+      .gama-text-h4 {
+        font-size: 4.4rem !important;
+        font-weight: 700 !important;
+      }
     }
 
+    .slide-describe {
+      margin-top: 2rem;
+      color: #fff;
+    }
 
+    .slide-img {
+      width: 33rem;
+      float: right;
+    }
 
-    #main-slider #main-search #keysearch-cate .v-label {
-        color: rgba(0, 0, 0, 0.60);
-        font-size: 1.4rem;
+    #read-about-btn {
+      background: #ffb600;
+      max-width: 16rem;
+      margin-top: 2.4rem;
+
+      .v-btn__content {
+        color: #24292f !important;
+        font-size: 1.6rem;
         font-style: normal;
-        font-weight: 300;
-        line-height: 1.8rem;
-
+        font-weight: 700;
+        line-height: 2rem;
+        letter-spacing: 0.0143rem;
+        text-transform: uppercase;
+      }
     }
-
-    #main-slider #main-search #keysearch-cate .v-label.v-label--active {
-        color: rgba(0, 0, 0, 0.60) !important;
-
-    }
-
-
-    #main-slider #main-search .mdi-menu-down::before {
-        color: #000 !important;
-    }
-
-    #main-slider #main-search #main-search-keyword input {
-        caret-color: black;
-    }
-
-    #main-slider #main-search #main-search-keyword {
-        .v-input {
-            border-color: #fff;
-            color: transparent !important;
-
-
-
-
-            .v-input__control {
-                border-color: transparent;
-
-
-                .v-input__slot {
-                    background-color: #fff !important;
-
-                    border: transparent;
-                    border-radius: 3rem 0.4rem 0.4rem 3rem;
-
-                    .v-label {
-                        color: rgba(0, 0, 0, 0.60);
-                        font-size: 1.4rem;
-                        font-style: normal;
-                        font-weight: 300;
-                        line-height: 1.8rem;
-
-                    }
-
-                    .v-label.v-label--active {
-                        color: rgba(0, 0, 0, 0.60) !important;
-
-                    }
-
-
-                }
-
-                .v-input__slot::before {
-                    border: transparent;
-                }
-
-
-
-
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-    }
-
-
-
-    #main-slider #main-search .v-btn {
-        border-radius: 0.4rem 3rem 3rem 0.4rem;
-        height: 5.2rem !important;
-        width: 5rem !important;
-        min-width: 4rem;
-
-        .v-btn__content .v-icon {
-            display: block;
-        }
-    }
-
-
-    #main-slider .section1 {
-        height: 95%;
-
-        .gama-text-h1 {
-            color: #FFF;
-
-        }
-
-        .slide-title {
-            margin-top: 2rem !important;
-
-
-            .gama-text-h4 {
-                font-size: 4.4rem !important;
-                font-weight: 700 !important;
-                ;
-            }
-
-
-        }
-
-        .slide-describe {
-            margin-top: 2rem;
-            color: #FFF;
-        }
-
-        .slide-img {
-            width: 33rem;
-            float: right;
-
-        }
-
-        #read-about-btn {
-            background: #FFB600;
-            max-width: 16rem;
-            margin-top: 2.4rem;
-
-            .v-btn__content {
-                color: #24292F !important;
-                font-size: 1.6rem;
-                font-style: normal;
-                font-weight: 700;
-                line-height: 2rem;
-                letter-spacing: 0.0143rem;
-                text-transform: uppercase;
-            }
-
-        }
-    }
-
-
-     #main-slider #school-finder-slide {
-        padding-top: 6rem;
-        background: linear-gradient(83deg, #465568 0.59%, #86AFD7 100%);
-        background-repeat: no-repeat;
-        height: 44rem;
-    }
-
-    #main-slider #school-finder-slide .v-card {
-        height: 42rem;
-        background-color: transparent;
-        background-repeat: no-repeat;
-        background-position: right bottom;
-        background-size: 32.4rem 40.5rem;
-        z-index: 1;
-    }
-
-    #main-slider #ai-slide {
-        padding-top: 6rem;
-        background: #24292F !important;
-        background-repeat: no-repeat;
-        background-size: 90%, 10%;
-        height: 44rem;
-    }
-
-    #main-slider #ai-slide .v-card {
-        height: 42rem;
-        background-color: transparent;
-        background-image: url('/images/ai-robot.png');
-        background-repeat: no-repeat;
-        background-position: right bottom;
-        background-size: 32.4rem 40.5rem;
-        z-index: 1;
-    }
-
-    #main-slider #aq-slide {
-        padding-top: 6rem;
-        background: linear-gradient(45deg, #0092A9 0%, #2BDDFF 100%);
-        background-repeat: no-repeat;
-        height: 44rem;
-    }
-
-    #main-slider #aq-slide .v-card {
-        height: 42rem;
-        background-color: transparent;
-        background-image: url('/images/a-q.png');
-        background-repeat: no-repeat;
-        background-position: right top;
-        background-size: 32.4rem 30.36rem;
-    }
-
-    #main-slider .section2 {
-        height: 10%;
-    }
-
-
-
-
-    #main-slider .v-carousel__controls {
-        position: absolute;
-        top: 41.18rem;
-        /* height: 5rem !important; */
-    }
-
-    #main-slider .v-carousel__controls .v-btn--icon {
-        background-color: #ebece9;
-        /* Background color of non-active ones */
-        height: 0.42rem;
-        /* Height you want */
-        width: 10.3rem;
-        margin-right: 0.1rem !important;
-        margin-left: 0.1rem !important;
-        /* Width you want */
-        border-radius: 0.4rem;
-        /* Remove default border radius */
-    }
-
-    #main-slider .v-carousel__controls .v-btn--icon.v-btn--active {
-        background-color: #FFB300;
-        /* Colour for active one */
-    }
-
-    #main-slider .v-carousel__controls .v-btn--icon:hover {
-        background-color: #FFB300;
-        /* You might also want to customise the hover effect */
-    }
-
-    #main-slider .v-btn__content .v-icon {
-        display: none;
-    }
+  }
+
+  #main-slider #school-finder-slide {
+    padding-top: 6rem;
+    background: linear-gradient(83deg, #465568 0.59%, #86afd7 100%);
+    background-repeat: no-repeat;
+    height: 44rem;
+  }
+
+  #main-slider #school-finder-slide .v-card {
+    height: 42rem;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 32.4rem 40.5rem;
+    z-index: 1;
+  }
+
+  #main-slider #ai-slide {
+    padding-top: 6rem;
+    background: #24292f !important;
+    background-repeat: no-repeat;
+    background-size: 90%, 10%;
+    height: 44rem;
+  }
+
+  #main-slider #ai-slide .v-card {
+    height: 42rem;
+    background-color: transparent;
+    background-image: url("/images/ai-robot.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 32.4rem 40.5rem;
+    z-index: 1;
+  }
+
+  #main-slider #aq-slide {
+    padding-top: 6rem;
+    background: linear-gradient(45deg, #0092a9 0%, #2bddff 100%);
+    background-repeat: no-repeat;
+    height: 44rem;
+  }
+
+  #main-slider #aq-slide .v-card {
+    height: 42rem;
+    background-color: transparent;
+    background-image: url("/images/a-q.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: 32.4rem 30.36rem;
+  }
+
+  #main-slider .section2 {
+    height: 10%;
+  }
+
+  #main-slider .v-carousel__controls {
+    position: absolute;
+    top: 41.18rem;
+    /* height: 5rem !important; */
+  }
+
+  #main-slider .v-carousel__controls .v-btn--icon {
+    background-color: #ebece9;
+    /* Background color of non-active ones */
+    height: 0.42rem;
+    /* Height you want */
+    width: 10.3rem;
+    margin-right: 0.1rem !important;
+    margin-left: 0.1rem !important;
+    /* Width you want */
+    border-radius: 0.4rem;
+    /* Remove default border radius */
+  }
+
+  #main-slider .v-carousel__controls .v-btn--icon.v-btn--active {
+    background-color: #ffb300;
+    /* Colour for active one */
+  }
+
+  #main-slider .v-carousel__controls .v-btn--icon:hover {
+    background-color: #ffb300;
+    /* You might also want to customise the hover effect */
+  }
+
+  #main-slider .v-btn__content .v-icon {
+    display: none;
+  }
 }
 
-@media (min-width: 1264px){
-    #main-slider .section1 {
-         .container{
-            width: 78%;
-
-         }
+@media (min-width: 1264px) {
+  #main-slider .section1 {
+    .container {
+      width: 78%;
     }
+  }
 }
 </style>
