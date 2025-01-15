@@ -1,11 +1,7 @@
 <template>
   <div>
     <!--Mobile filter-->
-    <v-row
-      justify="center"
-      class="d-block d-md-none"
-      v-if="$vuetify.breakpoint.smAndDown"
-    >
+    <v-row justify="center" class="d-block d-md-none">
       <v-dialog
         v-model="dialog"
         fullscreen
@@ -353,6 +349,22 @@ export default {
           this.paperTypeList?.data
         );
     }
+
+    if (this.$refs.side_filter) {
+      this.$refs.side_filter.setFilter("board", this.boardList?.data);
+      if (this.$route.query.section)
+        this.$refs.side_filter.setFilter("grade", this.gradeList?.data);
+      if (this.$route.query.base)
+        this.$refs.side_filter.setFilter("subject", this.subjectList?.data);
+      if (this.$route.query.lesson)
+        this.$refs.side_filter.setFilter("topic", this.topicList?.data);
+      if (this.$route.query.type == "test")
+        this.$refs.side_filter.setFilter(
+          "paper_type",
+          this.paperTypeList?.data
+        );
+    }
+
     if (!this.$route.query.type) {
       const query = { type: "test" };
       this.page_title = "Papers";
@@ -575,21 +587,24 @@ export default {
       }
     },
     openDialog() {
-      if (this.$refs.side_filter) {
-        this.$refs.side_filter.setFilter("board", this.boardList?.data);
-        if (this.$route.query.section)
-          this.$refs.side_filter.setFilter("grade", this.gradeList?.data);
-        if (this.$route.query.base)
-          this.$refs.side_filter.setFilter("subject", this.subjectList?.data);
-        if (this.$route.query.lesson)
-          this.$refs.side_filter.setFilter("topic", this.topicList?.data);
-        if (this.$route.query.type == "test")
-          this.$refs.side_filter.setFilter(
-            "paper_type",
-            this.paperTypeList?.data
-          );
-      }
       this.dialog = true;
+      setTimeout(() => {
+        if (this.$refs.side_filter) {
+          this.$refs.side_filter.setFilter("board", this.boardList?.data);
+          if (this.$route.query.section)
+            this.$refs.side_filter.setFilter("grade", this.gradeList?.data);
+          if (this.$route.query.base)
+            this.$refs.side_filter.setFilter("subject", this.subjectList?.data);
+          if (this.$route.query.lesson)
+            this.$refs.side_filter.setFilter("topic", this.topicList?.data);
+          if (this.$route.query.type == "test")
+            this.$refs.side_filter.setFilter(
+              "paper_type",
+              this.paperTypeList?.data
+            );
+        }
+        console.log("run");
+      }, 100);
     },
     scroll() {
       //For infinite loading
