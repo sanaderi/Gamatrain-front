@@ -68,11 +68,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    "@/assets/scss/app.scss",
-    "@mdi/font/css/materialdesignicons.min.css",
-    "@/assets/css/gama6/styles.css",
-  ],
+  css: ["@/assets/scss/app.scss", "@/assets/css/gama6/styles.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [

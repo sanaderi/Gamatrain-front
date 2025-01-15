@@ -37,7 +37,8 @@
                 {{ tutorialInfo.up_date.split(" ")[0] }}
               </div>
               <div class="visit mb-3">
-                <i class="fa-solid fa-eye mr-2"></i>Viewed: {{ tutorialInfo.views }}
+                <i class="fa-solid fa-eye mr-2"></i>Viewed:
+                {{ tutorialInfo.views }}
               </div>
               <div class="error-report pointer" @click="openCrashReportDialog">
                 <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
@@ -47,7 +48,9 @@
           <v-col md="9" cols="12" class="lessons-title">
             <div class="d-flex flex-column text-center lesson-content">
               <p class="lesson-title gama-text-h5 mb-4">{{ lesson.title }}</p>
-              <p class="lesson-subtitle gama-text-h6">{{ lesson.topic_title }}</p>
+              <p class="lesson-subtitle gama-text-h6">
+                {{ lesson.topic_title }}
+              </p>
             </div>
           </v-col>
         </v-row>
@@ -61,7 +64,9 @@
           <v-col cols="12">
             <div class="d-flex flex-column text-center lesson-content">
               <p class="lesson-title gama-text-h5 mb-4">{{ lesson.title }}</p>
-              <p class="lesson-subtitle gama-text-6">{{ lesson.topic_title }}</p>
+              <p class="lesson-subtitle gama-text-6">
+                {{ lesson.topic_title }}
+              </p>
             </div>
           </v-col>
           <v-col cols="12" class="lesson-details">
@@ -75,8 +80,12 @@
                 <i class="fa-solid fa-eye mr-2"></i>{{ tutorialInfo.views }}
               </v-col>
               <v-col cols="4" class="error-report">
-                <div class="error-report pointer" @click="openCrashReportDialog">
-                  <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash report
+                <div
+                  class="error-report pointer"
+                  @click="openCrashReportDialog"
+                >
+                  <i class="fa-solid fa-circle-exclamation mr-2"></i>Crash
+                  report
                 </div>
               </v-col>
             </v-row>
@@ -232,7 +241,7 @@ export default {
     TutorialMenu,
   },
 
-  async asyncData({ params, $axios,redirect }) {
+  async asyncData({ params, $axios, redirect }) {
     try {
       // This could also be an action dispatch
       const tutorialData = await $axios.$get(`/api/v1/tutorials/${params.id}`);
@@ -260,7 +269,11 @@ export default {
 
   head() {
     return {
-      script: [{ src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML` }],
+      script: [
+        {
+          src: `${process.env.API_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`,
+        },
+      ],
       title: this.tutorialInfo.title,
     };
   },
@@ -364,12 +377,15 @@ export default {
       this.events.push({
         id: this.nonce++,
         text: this.input,
-        time: time.replace(/:\d{2}\sGMT-\d{4}\s\((.*)\)/, (match, contents, offset) => {
-          return ` ${contents
-            .split(" ")
-            .map((v) => v.charAt(0))
-            .join("")}`;
-        }),
+        time: time.replace(
+          /:\d{2}\sGMT-\d{4}\s\((.*)\)/,
+          (match, contents, offset) => {
+            return ` ${contents
+              .split(" ")
+              .map((v) => v.charAt(0))
+              .join("")}`;
+          }
+        ),
       });
 
       this.input = null;
@@ -401,7 +417,11 @@ export default {
             imageFont: null,
           },
         });
-        window.MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
+        window.MathJax.Hub.Queue([
+          "Typeset",
+          window.MathJax.Hub,
+          this.$refs.mathJaxEl,
+        ]);
       }
     },
     handleScroll() {

@@ -4,24 +4,35 @@
       <v-card-text>
         <v-row class="text-center">
           <v-col cols="4">
-            <p>Remaining time:
+            <p>
+              Remaining time:
               <v-chip label color="teal" dark>
                 {{ this.hhmmss(examStats.remainTime) }}
               </v-chip>
             </p>
           </v-col>
           <v-col cols="4">
-            <a :href="examStats.nextNotAnswer ? `#item-${examStats.nextNotAnswer}` : ''"
-               @click="updateNextNotAnswer()"
-            >Unanswered questions:
+            <a
+              :href="
+                examStats.nextNotAnswer
+                  ? `#item-${examStats.nextNotAnswer}`
+                  : ''
+              "
+              @click="updateNextNotAnswer()"
+              >Unanswered questions:
               <v-chip label color="teal" dark>
-                {{ contentData.tests.length - Object.keys(examStats.answerData).length }}
+                {{
+                  contentData.tests.length -
+                  Object.keys(examStats.answerData).length
+                }}
               </v-chip>
             </a>
           </v-col>
           <v-col cols="4">
-            <a :href="examStats.nextPin ? `#item-${examStats.nextPin}` : '#'"
-               @click="updateNextPin()">Pined question:
+            <a
+              :href="examStats.nextPin ? `#item-${examStats.nextPin}` : '#'"
+              @click="updateNextPin()"
+              >Pined question:
               <v-chip label color="teal" dark>
                 {{ examStats.pinQuestionsArr.length }}
               </v-chip>
@@ -31,38 +42,38 @@
       </v-card-text>
     </v-card>
 
-
     <v-card class="test-list mb-4">
       <v-card-title class="text-h4 font-weight-bold py-6">
         {{ contentData.exam.title }}
       </v-card-title>
       <v-card-text>
-        <v-divider class="mb-4"/>
+        <v-divider class="mb-4" />
         <v-row>
           <v-col
             :id="`item-${item.id}`"
             class="bookmark-target"
-            cols="12" v-show="contentData.tests.length>0"
-            v-for="(item,key) in contentData.tests" :key="item.id"
+            cols="12"
+            v-show="contentData.tests.length > 0"
+            v-for="(item, key) in contentData.tests"
+            :key="item.id"
           >
             <div id="test-question">
               <div class="d-flex">
                 <div>{{ key + 1 }})&nbsp;</div>
-                <div
-                  ref="mathJaxEl"
-                  v-html="`${item.question}`"/>
+                <div ref="mathJaxEl" v-html="`${item.question}`" />
               </div>
-              <img :src="item.q_file"/>
+              <img :src="item.q_file" />
             </div>
 
-            <v-radio-group @change="updateNotAnswerData(item.id)" v-model="examStats.answerData[item.id]">
+            <v-radio-group
+              @change="updateNotAnswerData(item.id)"
+              v-model="examStats.answerData[item.id]"
+            >
               <v-radio value="1">
                 <template slot="label">
                   <div class="answer">
                     <span>1)</span>
-                    <span
-                      ref="mathJaxEl"
-                      v-html="item.answer_a"></span>
+                    <span ref="mathJaxEl" v-html="item.answer_a"></span>
                   </div>
                 </template>
               </v-radio>
@@ -70,19 +81,15 @@
                 <template slot="label">
                   <div class="answer">
                     <span>2)</span>
-                    <span
-                      ref="mathJaxEl"
-                      v-html="item.answer_b"></span>
+                    <span ref="mathJaxEl" v-html="item.answer_b"></span>
                   </div>
                 </template>
               </v-radio>
               <v-radio value="3">
                 <template slot="label">
-                  <div class="answer ">
+                  <div class="answer">
                     <span>3)</span>
-                    <span
-                      ref="mathJaxEl"
-                      v-html="item.answer_c"></span>
+                    <span ref="mathJaxEl" v-html="item.answer_c"></span>
                   </div>
                 </template>
               </v-radio>
@@ -90,9 +97,7 @@
                 <template slot="label">
                   <div class="answer">
                     <span>4)</span>
-                    <span
-                      ref="mathJaxEl"
-                      v-html="item.answer_d"/>
+                    <span ref="mathJaxEl" v-html="item.answer_d" />
                   </div>
                 </template>
               </v-radio>
@@ -100,31 +105,43 @@
             <v-row>
               <v-col cols="6">
                 <v-btn icon fab x-small @click="eraseTest(item.id)">
-                  <v-icon>
-                    mdi-eraser
-                  </v-icon>
+                  <v-icon> mdi-eraser </v-icon>
                 </v-btn>
-                <v-btn icon fab :color="examStats.pinQuestionsArr.find(x=>x===item.id) ? 'teal' : ''"
-                       x-small @click="pinQuestion(item.id)">
-                  <v-icon>
-                    mdi-pin
-                  </v-icon>
+                <v-btn
+                  icon
+                  fab
+                  :color="
+                    examStats.pinQuestionsArr.find((x) => x === item.id)
+                      ? 'teal'
+                      : ''
+                  "
+                  x-small
+                  @click="pinQuestion(item.id)"
+                >
+                  <v-icon> mdi-pin </v-icon>
                 </v-btn>
               </v-col>
             </v-row>
-            <v-divider class="mt-3"/>
+            <v-divider class="mt-3" />
           </v-col>
-          <v-col v-show="!contentData.exam.tests.length" cols="12" class="text-center">
-            <p>
-              Oops! no data found
-            </p>
+          <v-col
+            v-show="!contentData.exam.tests.length"
+            cols="12"
+            class="text-center"
+          >
+            <p>Oops! no data found</p>
           </v-col>
         </v-row>
         <v-row class="mb-16">
           <v-col cols="12" md="6" class="pb-0">
-            <v-btn @click="endExam()"
-                   :loading="submit_loading"
-                   lg color="teal" class="white--text" block>
+            <v-btn
+              @click="endExam()"
+              :loading="submit_loading"
+              lg
+              color="teal"
+              class="white--text"
+              block
+            >
               Send answers
             </v-btn>
           </v-col>
@@ -144,16 +161,18 @@ export default {
   name: "exam-start",
   head() {
     return {
-      title: 'Start online exam',
+      title: "Start online exam",
       script: [
-        {src: `/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`}
+        {
+          src: `${process.env.API_BASE_URL}/assets/packages/MathJax/MathJax.js?config=TeX-MML-AM_CHTML`,
+        },
       ],
-    }
+    };
   },
-  async asyncData({params, redirect, $axios}) {
+  async asyncData({ params, redirect, $axios }) {
     try {
       // This could also be an action dispatch
-      const content = await $axios.$get(`/api/v1/exams/start/${params.id}`)
+      const content = await $axios.$get(`/api/v1/exams/start/${params.id}`);
       var contentData = [];
 
       //Check data exist
@@ -161,7 +180,7 @@ export default {
         contentData = content.data;
       }
 
-      return {contentData};
+      return { contentData };
     } catch (error) {
       if (error.response.status == 400)
         if (error.response.data)
@@ -176,35 +195,38 @@ export default {
 
       allExamStats: [],
       examStats: {
-        id: '',
+        id: "",
         remainTime: 0,
         pinQuestionsArr: [],
         notAnsweredArr: [],
         answerData: {},
-        nextPin: '',
-        nextNotAnswer: '',
-      }
-    }
+        nextPin: "",
+        nextNotAnswer: "",
+      },
+    };
   },
   mounted() {
-    if (localStorage.getItem('allExamStats'))
-      this.allExamStats = JSON.parse(localStorage.getItem('allExamStats'));
+    if (localStorage.getItem("allExamStats"))
+      this.allExamStats = JSON.parse(localStorage.getItem("allExamStats"));
     this.examStats.id = this.contentData.exam.id;
 
-    var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
+    var index = this.allExamStats.findIndex((x) => x.id == this.examStats.id);
     if (index !== -1) {
       this.examStats.remainTime = this.allExamStats[index].remainTime;
       this.examStats.answerData = this.allExamStats[index].answerData;
       this.examStats.nextNotAnswer = this.allExamStats[index].nextNotAnswer;
-      if (this.allExamStats[index].notAnsweredArr.length == 0
-        || this.allExamStats[index].notAnsweredArr == undefined)
+      if (
+        this.allExamStats[index].notAnsweredArr.length == 0 ||
+        this.allExamStats[index].notAnsweredArr == undefined
+      )
         this.initNotAnswered();
       else
         this.examStats.notAnsweredArr = this.allExamStats[index].notAnsweredArr;
 
       this.examStats.pinQuestionsArr =
         this.allExamStats[index].pinQuestionsArr != undefined
-          ? this.allExamStats[index].pinQuestionsArr : [];
+          ? this.allExamStats[index].pinQuestionsArr
+          : [];
     } else {
       this.examStats.remainTime = this.contentData.exam.azmoon_time * 60;
       this.initNotAnswered();
@@ -212,22 +234,20 @@ export default {
 
     this.countDownTimer();
     this.renderMathJax();
-
   },
   watch: {
     "examStats.answerData"(val) {
       this.updateLocalStorage();
-    }
+    },
   },
   methods: {
     updateLocalStorage() {
-      var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
-      if (index === -1)
-        this.allExamStats.push(this.examStats);
+      var index = this.allExamStats.findIndex((x) => x.id == this.examStats.id);
+      if (index === -1) this.allExamStats.push(this.examStats);
       else {
         this.allExamStats[index] = this.examStats;
       }
-      localStorage.setItem('allExamStats', JSON.stringify(this.allExamStats));
+      localStorage.setItem("allExamStats", JSON.stringify(this.allExamStats));
     },
 
     initNotAnswered() {
@@ -240,73 +260,88 @@ export default {
       if (window.MathJax) {
         window.MathJax.Hub.Config({
           tex2jax: {
-            inlineMath: [['$', '$'], ["\(", "\)"]],
-            displayMath: [['$$', '$$'], ["\[", "\]"]],
+            inlineMath: [
+              ["$", "$"],
+              ["\(", "\)"],
+            ],
+            displayMath: [
+              ["$$", "$$"],
+              ["\[", "\]"],
+            ],
             processEscapes: true,
-            processEnvironments: true
+            processEnvironments: true,
           },
           // Center justify equations in code and markdown cells. Elsewhere
           // we use CSS to left justify single line equations in code cells.
-          displayAlign: 'center',
+          displayAlign: "center",
           "HTML-CSS": {
-            styles: {'.MathJax_Display': {"margin": 0}},
-            linebreaks: {automatic: true}
-          }
+            styles: { ".MathJax_Display": { margin: 0 } },
+            linebreaks: { automatic: true },
+          },
         });
-        MathJax.Hub.Queue(["Typeset", window.MathJax.Hub, this.$refs.mathJaxEl]);
+        MathJax.Hub.Queue([
+          "Typeset",
+          window.MathJax.Hub,
+          this.$refs.mathJaxEl,
+        ]);
       }
     },
 
     endExam() {
       this.submit_loading = true;
 
-
       //Delete from local storage
-      var index = this.allExamStats.findIndex(x => x.id == this.examStats.id);
+      var index = this.allExamStats.findIndex((x) => x.id == this.examStats.id);
       if (index !== -1) {
         this.$delete(this.allExamStats, index);
-        localStorage.setItem('allExamStats', JSON.stringify(this.allExamStats));
+        localStorage.setItem("allExamStats", JSON.stringify(this.allExamStats));
       }
       //End delete from local storage
 
-      const querystring = require('querystring');
-      this.$axios.$post(`/api/v1/exams/end/${this.contentData.exam.id}`,
-        querystring.stringify({
-          startID: this.contentData.startID,
-          answers: JSON.stringify(this.examStats.answerData)
-        })
-        , {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+      const querystring = require("querystring");
+      this.$axios
+        .$post(
+          `/api/v1/exams/end/${this.contentData.exam.id}`,
+          querystring.stringify({
+            startID: this.contentData.startID,
+            answers: JSON.stringify(this.examStats.answerData),
+          }),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
           }
-        }
-      )
-        .then(response => {
+        )
+        .then((response) => {
           this.$router.push(`/exam/result/${response.data.id}`);
-        }).catch(error => {
-        if (error.response.status == 400)
-          if (error.response.data)
-            this.$router.push({path: `/exam/result/${error.response.data.data.id}`});
-      }).finally(() => {
-        this.submit_loading = false;
-      })
+        })
+        .catch((error) => {
+          if (error.response.status == 400)
+            if (error.response.data)
+              this.$router.push({
+                path: `/exam/result/${error.response.data.data.id}`,
+              });
+        })
+        .finally(() => {
+          this.submit_loading = false;
+        });
     },
-
 
     //Convert form data from multipart to urlencode
     urlencodeFormData(fd) {
-      var s = '';
+      var s = "";
 
       for (var pair of fd.entries()) {
-        if (typeof pair[1] == 'string') {
-          s += (s ? '&' : '') + this.encode(pair[0]) + '=' + this.encode(pair[1]);
+        if (typeof pair[1] == "string") {
+          s +=
+            (s ? "&" : "") + this.encode(pair[0]) + "=" + this.encode(pair[1]);
         }
       }
       return s;
     },
 
     encode(s) {
-      return encodeURIComponent(s).replace(/%20/g, '+');
+      return encodeURIComponent(s).replace(/%20/g, "+");
     },
 
     countDownTimer() {
@@ -316,7 +351,7 @@ export default {
           // this.$store.commit('user/setExamParticipationData',this.examStats)
           this.countDownTimer();
           this.updateLocalStorage();
-        }, 1000)
+        }, 1000);
       } else {
         this.endExam();
       }
@@ -326,12 +361,11 @@ export default {
     hhmmss(secs) {
       var minutes = Math.floor(secs / 60);
       secs = secs % 60;
-      var hours = Math.floor(minutes / 60)
+      var hours = Math.floor(minutes / 60);
       minutes = minutes % 60;
       if (hours)
         return `${this.pad(hours)}:${this.pad(minutes)}:${this.pad(secs)}`;
-      else
-        return `${this.pad(minutes)}:${this.pad(secs)}`;
+      else return `${this.pad(minutes)}:${this.pad(secs)}`;
     },
 
     pad(num) {
@@ -340,40 +374,43 @@ export default {
     //End convert seconds to readable HH:ii:ss format
 
     pinQuestion(question_id) {
-      var index = this.examStats.pinQuestionsArr.findIndex(val => val == question_id);
-      if (index === -1){
+      var index = this.examStats.pinQuestionsArr.findIndex(
+        (val) => val == question_id
+      );
+      if (index === -1) {
         this.examStats.pinQuestionsArr.push(question_id);
         //Init next pin for first time
         if (this.examStats.pinQuestionsArr.length === 1)
           this.examStats.nextPin = question_id;
-      }
-      else{
-        this.examStats.pinQuestionsArr.splice(index,1);
+      } else {
+        this.examStats.pinQuestionsArr.splice(index, 1);
       }
 
       this.updateLocalStorage();
-
-
     },
 
     updateNextPin() {
       if (this.examStats.pinQuestionsArr.length) {
-        var index = this.examStats.pinQuestionsArr.findIndex(x => x === this.examStats.nextPin);
-        if ((index + 1) === this.examStats.pinQuestionsArr.length)
+        var index = this.examStats.pinQuestionsArr.findIndex(
+          (x) => x === this.examStats.nextPin
+        );
+        if (index + 1 === this.examStats.pinQuestionsArr.length)
           this.examStats.nextPin = this.examStats.pinQuestionsArr[0];
-        else
-          this.examStats.nextPin = this.examStats.pinQuestionsArr[index + 1];
+        else this.examStats.nextPin = this.examStats.pinQuestionsArr[index + 1];
       }
       this.updateLocalStorage();
     },
 
     updateNextNotAnswer() {
       if (this.examStats.notAnsweredArr.length) {
-        var index = this.examStats.notAnsweredArr.findIndex(x => x === this.examStats.nextNotAnswer);
-        if ((index + 1) === this.examStats.notAnsweredArr.length)
+        var index = this.examStats.notAnsweredArr.findIndex(
+          (x) => x === this.examStats.nextNotAnswer
+        );
+        if (index + 1 === this.examStats.notAnsweredArr.length)
           this.examStats.nextNotAnswer = this.examStats.notAnsweredArr[0];
         else
-          this.examStats.nextNotAnswer = this.examStats.notAnsweredArr[index + 1];
+          this.examStats.nextNotAnswer =
+            this.examStats.notAnsweredArr[index + 1];
       }
       this.updateLocalStorage();
     },
@@ -385,13 +422,11 @@ export default {
     },
     //
     updateNotAnswerData(item_id) {
-      var index = this.examStats.notAnsweredArr.findIndex(x => x == item_id);
-      if (index !== -1)
-        this.examStats.notAnsweredArr.splice(index, 1);
-    }
-  }
-
-}
+      var index = this.examStats.notAnsweredArr.findIndex((x) => x == item_id);
+      if (index !== -1) this.examStats.notAnsweredArr.splice(index, 1);
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -400,7 +435,7 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 5
+  z-index: 5;
 }
 
 .bookmark-target {
