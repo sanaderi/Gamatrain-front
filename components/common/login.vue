@@ -129,7 +129,8 @@ export default {
         //Initialize google login
         setTimeout(() => {
           window.google.accounts.id.initialize({
-            client_id: process.env.GOOGLE_CLIENT_Id,
+            client_id:
+              "231452968451-rd7maq3v4c8ce6d1e36uk3qacep20lp8.apps.googleusercontent.com",
             callback: this.handleCredentialResponse,
             auto_select: true,
           });
