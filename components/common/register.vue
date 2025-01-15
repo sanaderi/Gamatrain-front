@@ -1,25 +1,26 @@
 <template>
-  <v-dialog
-    v-model="register_dialog"
-    max-width="300px"
-    style="z-index: 20001"
-  >
+  <v-dialog v-model="register_dialog" max-width="300px" style="z-index: 20001">
     <v-card>
       <v-card-title>
         <span class="text-h5">Register</span>
       </v-card-title>
       <v-card-text>
         <v-row>
-
           <v-col cols="12" class="text-center">
-            <v-divider class="my-2"/>
+            <v-divider class="my-2" />
 
             <div v-show="google_register_loading">
-              <v-progress-circular color="teal" class="mr-2" size="20" width="2" indeterminate>
+              <v-progress-circular
+                color="teal"
+                class="mr-2"
+                size="20"
+                width="2"
+                indeterminate
+              >
               </v-progress-circular>
               <span style="font-size: 1.2rem"> Loading google sign in</span>
             </div>
-            <div v-show="!google_register_loading" ref="googleRegisterBtn"/>
+            <div v-show="!google_register_loading" ref="googleRegisterBtn" />
           </v-col>
           <v-col cols="12">
             <div v-show="identity_holder">
@@ -27,7 +28,11 @@
                 <form @submit.prevent="requestRegister()">
                   <v-row>
                     <v-col cols="12">
-                      <validation-provider v-slot="{ errors }" name="request_identity" rules="required">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="request_identity"
+                        rules="required"
+                      >
                         <v-text-field
                           dense
                           label="Email"
@@ -37,27 +42,34 @@
                         />
                       </validation-provider>
                       <p class="text-h6">
-                        A agree <span class="blue--text">terms and conditions</span>
+                        A agree
+                        <span class="blue--text">terms and conditions</span>
                       </p>
                     </v-col>
 
                     <v-col cols="12">
-                      <v-divider class="mb-3"/>
-                      <p class="text-h6 text-center pointer" @click="switchToLogin">
+                      <v-divider class="mb-3" />
+                      <p
+                        class="text-h6 text-center pointer"
+                        @click="switchToLogin"
+                      >
                         Already registered? login now
                       </p>
 
-                      <v-divider class="mt-3"/>
+                      <v-divider class="mt-3" />
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="6" lg="6">
-                      <v-btn outlined @click="cancelRegister()">
-                        Cancel
-                      </v-btn>
+                      <v-btn outlined @click="cancelRegister()"> Cancel </v-btn>
                     </v-col>
                     <v-col cols="6" lg="6">
-                      <v-btn color="primary" type="submit" :loading="register_loading" :disabled="invalid">
+                      <v-btn
+                        color="primary"
+                        type="submit"
+                        :loading="register_loading"
+                        :disabled="invalid"
+                      >
                         Register
                       </v-btn>
                     </v-col>
@@ -68,7 +80,9 @@
             <div v-show="otp_holder">
               <!--Otp holder-->
               <v-col cols="12">
-                <p class="text-h6">Please enter code received your email address?</p>
+                <p class="text-h6">
+                  Please enter code received your email address?
+                </p>
                 <v-otp-input
                   v-model="otp"
                   :disabled="otp_loading"
@@ -78,15 +92,23 @@
               </v-col>
 
               <v-col cols="12">
-                <v-divider class="mb-3"/>
-                <p class="text-h6 text-center pointer" @click="recheckEnteredIdentity">
+                <v-divider class="mb-3" />
+                <p
+                  class="text-h6 text-center pointer"
+                  @click="recheckEnteredIdentity"
+                >
                   Your email is incorrect? recheck it.
                 </p>
 
-                <v-divider class="my-3 text-center "/>
-                <v-btn plain class="text-none  pointer" @click="sendOtpCodeAgain()" :disabled="sendOtpBtnStatus">
+                <v-divider class="my-3 text-center" />
+                <v-btn
+                  plain
+                  class="text-none pointer"
+                  @click="sendOtpCodeAgain()"
+                  :disabled="sendOtpBtnStatus"
+                >
                   Send code again
-                  <span v-show="countDown" class="ml-3 ">{{ countDown }}</span>
+                  <span v-show="countDown" class="ml-3">{{ countDown }}</span>
                 </v-btn>
               </v-col>
               <!--End otp holder-->
@@ -95,11 +117,18 @@
               <!--Otp holder-->
               <v-col cols="12">
                 <p class="text-h6">Please enter password</p>
-                <validation-observer ref="final_reg_observer" v-slot="{ invalid }">
+                <validation-observer
+                  ref="final_reg_observer"
+                  v-slot="{ invalid }"
+                >
                   <form @submit.prevent="finalRegister()">
                     <v-row>
                       <v-col cols="12">
-                        <validation-provider v-slot="{ errors }" name="password" rules="required|min:8">
+                        <validation-provider
+                          v-slot="{ errors }"
+                          name="password"
+                          rules="required|min:8"
+                        >
                           <v-text-field
                             label="Password"
                             v-model="password"
@@ -116,15 +145,19 @@
                       </v-col>
                       <!--     Confirm Password       -->
                       <v-col cols="12">
-                        <validation-provider name="confirmPassword" v-slot="{errors}"
-                                             rules="required|min:8|confirmed:password">
+                        <validation-provider
+                          name="confirmPassword"
+                          v-slot="{ errors }"
+                          rules="required|min:8|confirmed:password"
+                        >
                           <v-text-field
                             v-model="confirmPassword"
                             type="password"
                             :error-messages="errors"
                             label="Confirm password"
                             dense
-                            outlined>
+                            outlined
+                          >
                           </v-text-field>
                         </validation-provider>
                       </v-col>
@@ -137,7 +170,12 @@
                         </v-btn>
                       </v-col>
                       <v-col cols="6" lg="6">
-                        <v-btn color="primary" type="submit" :loading="register_loading" :disabled="invalid">
+                        <v-btn
+                          color="primary"
+                          type="submit"
+                          :loading="register_loading"
+                          :disabled="invalid"
+                        >
                           Register
                         </v-btn>
                       </v-col>
@@ -156,55 +194,52 @@
 </template>
 
 <script>
-import {ValidationProvider, ValidationObserver} from "vee-validate";
+import { ValidationProvider, ValidationObserver } from "vee-validate";
 
 export default {
   name: "register",
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
   },
   data() {
     return {
       register_dialog: false,
       google_register_loading: true,
       show1: false,
-      password: '',
-      confirmPassword: '',
+      password: "",
+      confirmPassword: "",
       register_loading: false,
 
-      otp: '',
-      identity: '',
+      otp: "",
+      identity: "",
       otp_loading: false,
       countDown: 60,
       sendOtpBtnStatus: true,
 
-
       identity_holder: true,
       otp_holder: false,
       select_pass_holder: false,
-
-    }
+    };
   },
   watch: {
     register_dialog(val) {
-      if (val === true){
+      if (val === true) {
         //Initialize google login
         setTimeout(() => {
           window.google.accounts.id.initialize({
-            client_id: process.env.GOOGLE_CLIENT_Id,
+            client_id:
+              "231452968451-rd7maq3v4c8ce6d1e36uk3qacep20lp8.apps.googleusercontent.com",
             callback: this.handleCredentialResponse,
-            auto_select: true
-          })
+            auto_select: true,
+          });
 
-          window.google.accounts.id.renderButton(
-            this.$refs.googleRegisterBtn, {
-              text: 'Login',
-              size: 'large',
-              width: '252',
-              theme: 'outline' // option : filled_black | outline | filled_blue
-            }
-          );
+          window.google.accounts.id.renderButton(this.$refs.googleRegisterBtn, {
+            text: "Login",
+            size: "large",
+            width: "252",
+            theme: "outline", // option : filled_black | outline | filled_blue
+          });
 
           this.google_register_loading = false;
         }, 4000);
@@ -212,47 +247,48 @@ export default {
     },
     countDown(val) {
       //When user wait 10 second
-      if (val === 0)
-        this.sendOtpBtnStatus = false;
+      if (val === 0) this.sendOtpBtnStatus = false;
 
       //When user request new otp code
-      if (val === 60)
-        this.countDownTimer()
-
-    }
+      if (val === 60) this.countDownTimer();
+    },
   },
   methods: {
     //Handle google login callback
     async handleCredentialResponse(response) {
-      const querystring = require('querystring');
+      const querystring = require("querystring");
 
-      await this.$axios.post('/api/v1/users/googleAuth',
-        querystring.stringify({
-          id_token: response.credential,
-        })).then(response => {
-        this.$auth.setUserToken(response.data.data.jwtToken);
-        this.$auth.setUser(response.data.data.info);
-        this.register_dialog = false;
-        this.$toast.success("Logged in successfully");
+      await this.$axios
+        .post(
+          "/api/v1/users/googleAuth",
+          querystring.stringify({
+            id_token: response.credential,
+          })
+        )
+        .then((response) => {
+          this.$auth.setUserToken(response.data.data.jwtToken);
+          this.$auth.setUser(response.data.data.info);
+          this.register_dialog = false;
+          this.$toast.success("Logged in successfully");
 
-
-        this.$router.push({
-          path: "/user"
+          this.$router.push({
+            path: "/user",
+          });
+        })
+        .catch(({ response }) => {
+          if (response.status == 401) {
+            this.$toast.error(this.$t(`LOGIN_WRONG_DATA`));
+          } else if (response.status == 500 || response.status == 504) {
+            this.$toast.error(this.$t(`REQUEST_FAILED`));
+          }
         });
-      }).catch(({response}) => {
-        if (response.status == 401) {
-          this.$toast.error(this.$t(`LOGIN_WRONG_DATA`));
-        } else if (response.status == 500 || response.status == 504) {
-          this.$toast.error(this.$t(`REQUEST_FAILED`));
-        }
-      });
     },
     switchToLogin() {
-      this.$emit("update:switchToLogin", 'login')
+      this.$emit("update:switchToLogin", "login");
     },
     recheckEnteredIdentity() {
-      this.otp_holder=false;
-      this.identity_holder=true;
+      this.otp_holder = false;
+      this.identity_holder = true;
     },
     cancelRegister() {
       this.register_dialog = false;
@@ -262,93 +298,119 @@ export default {
     },
     requestRegister() {
       this.register_loading = true;
-      const querystring = require('querystring');
+      const querystring = require("querystring");
 
-      this.$axios.$post("/api/v1/users/register",
-        querystring.stringify({
-          type: 'request',
-          identity: this.identity
-        })).then(response => {
-        this.$toast.success("Otp code sent");
-        this.identity_holder = false;
-        this.otp_holder = true;
-        this.countDownTimer();
-      }).catch(err => {
-        // if (err.response.status == 400)
+      this.$axios
+        .$post(
+          "/api/v1/users/register",
+          querystring.stringify({
+            type: "request",
+            identity: this.identity,
+          })
+        )
+        .then((response) => {
+          this.$toast.success("Otp code sent");
+          this.identity_holder = false;
+          this.otp_holder = true;
+          this.countDownTimer();
+        })
+        .catch((err) => {
+          // if (err.response.status == 400)
           this.$toast.error(err.response.data.message);
-      }).finally(() => {
-        this.register_loading = false;
-      })
+        })
+        .finally(() => {
+          this.register_loading = false;
+        });
     },
-    onFinish() {//Finish enter otp code
-      const querystring = require('querystring');
+    onFinish() {
+      //Finish enter otp code
+      const querystring = require("querystring");
 
-      this.$axios.$post("/api/v1/users/register",
-        querystring.stringify({
-          type: 'confirm',
-          identity: this.identity,
-          code: this.otp
-        })).then(response => {
-        this.otp_holder = false;
-        this.select_pass_holder = true;
-      }).catch(err => {
-        if (err.response.status == 400)
-          this.$toast.error(err.response.data.message);
-      }).finally(() => {
-        this.register_loading = false;
-      })
+      this.$axios
+        .$post(
+          "/api/v1/users/register",
+          querystring.stringify({
+            type: "confirm",
+            identity: this.identity,
+            code: this.otp,
+          })
+        )
+        .then((response) => {
+          this.otp_holder = false;
+          this.select_pass_holder = true;
+        })
+        .catch((err) => {
+          if (err.response.status == 400)
+            this.$toast.error(err.response.data.message);
+        })
+        .finally(() => {
+          this.register_loading = false;
+        });
     },
-    sendOtpCodeAgain() {//Send otp code again
-      const querystring = require('querystring');
+    sendOtpCodeAgain() {
+      //Send otp code again
+      const querystring = require("querystring");
 
-      this.$axios.$post("/api/v1/users/register",
-        querystring.stringify({
-          type: 'resend_code',
-          identity: this.identity
-        })).then(response => {
-        this.countDown = 60;
-        this.sendOtpBtnStatus = true;
-        this.$toast.success("Otp code sent again");
-      }).catch(err => {
-        if (err.response.status == 400)
-          this.$toast.error(err.response.data.message);
-      }).finally(() => {
-        this.register_loading = false;
-      })
+      this.$axios
+        .$post(
+          "/api/v1/users/register",
+          querystring.stringify({
+            type: "resend_code",
+            identity: this.identity,
+          })
+        )
+        .then((response) => {
+          this.countDown = 60;
+          this.sendOtpBtnStatus = true;
+          this.$toast.success("Otp code sent again");
+        })
+        .catch((err) => {
+          if (err.response.status == 400)
+            this.$toast.error(err.response.data.message);
+        })
+        .finally(() => {
+          this.register_loading = false;
+        });
     },
     countDownTimer() {
       if (this.countDown > 0) {
         setTimeout(() => {
-          this.countDown -= 1
-          this.countDownTimer()
-        }, 1000)
+          this.countDown -= 1;
+          this.countDownTimer();
+        }, 1000);
       }
     },
-    finalRegister() {//Final refister (level 3: receive password from user)
+    finalRegister() {
+      //Final refister (level 3: receive password from user)
       this.register_loading = true;
-      const querystring = require('querystring');
+      const querystring = require("querystring");
 
-      this.$axios.$post("/api/v1/users/register",
-        querystring.stringify({
-          type: 'register',
-          identity: this.identity,
-          pass: this.password
-        })).then(response => {
-        this.$toast.success("Registered successfully");
-        this.register_dialog = false;
-        this.identity_holder = true;
-        this.otp_holder = false;
-        this.select_pass_holder = false;
-      }).catch(err => {
-        if (err.response.status == 400)
-          this.$toast.error(err.response.data.message);
-      }).finally(() => {
-        this.register_loading = false;
-      })
+      this.$axios
+        .$post(
+          "/api/v1/users/register",
+          querystring.stringify({
+            type: "register",
+            identity: this.identity,
+            pass: this.password,
+          })
+        )
+        .then((response) => {
+          this.$toast.success("Registered successfully");
+          this.register_dialog = false;
+          this.identity_holder = true;
+          this.otp_holder = false;
+          this.select_pass_holder = false;
+        })
+        .catch((err) => {
+          if (err.response.status == 400)
+            this.$toast.error(err.response.data.message);
+        })
+        .finally(() => {
+          this.register_loading = false;
+        });
     },
-
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
