@@ -39,7 +39,7 @@ export default {
       {
         class: "test",
         color: "#01579b",
-        text: "Paper",
+        text: "Past Papers",
         icon: "icon-paper",
         link: "/search?type=test",
       },
@@ -53,14 +53,14 @@ export default {
       {
         class: "faq",
         color: "#bf360c",
-        text: "Q & A",
+        text: "Forum",
         icon: "icon-q-a",
         link: "/search?type=question",
       },
       {
         class: "exam",
         color: "#5600e8",
-        text: "Exam",
+        text: "QuizHub",
         icon: "icon-exam",
         link: "/search?type=azmoon",
       },
@@ -134,7 +134,6 @@ export default {
 @media (min-width: 600px) {
   #main-category-container {
     width: 55rem;
-
 
     .category-itm-content {
       margin-left: 1.5rem;
