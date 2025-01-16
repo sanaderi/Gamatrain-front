@@ -57,7 +57,7 @@
                       class="label"
                     >
                       <span class="stat-icon icon-paper"></span>
-                      Paper
+                      Past Papers
 
                       <v-icon class="stat-arrow" size="20" color="#D0D7DE"
                         >mdi-chevron-right</v-icon
@@ -84,7 +84,7 @@
                       class="label"
                     >
                       <span class="stat-icon icon-exam"></span>
-                      Exam
+                      QuizHub
                       <v-icon class="stat-arrow" size="20" color="#D0D7DE"
                         >mdi-chevron-right</v-icon
                       >
@@ -97,7 +97,7 @@
                       class="label"
                     >
                       <span class="stat-icon icon-q-a"></span>
-                      Q & A
+                      Forum
                       <v-icon class="stat-arrow" size="20" color="#D0D7DE"
                         >mdi-chevron-right</v-icon
                       >
@@ -117,7 +117,7 @@
                           class="label"
                         >
                           <span class="stat-icon icon-paper"></span>
-                          Paper
+                          Past Papers
                         </nuxt-link>
                         <div class="date-holder">{{ showDate() }}</div>
                       </v-col>
@@ -163,7 +163,7 @@
                           class="label"
                         >
                           <span class="stat-icon icon-exam"></span>
-                          Exam
+                          QuizHub
                         </nuxt-link>
                         <div class="date-holder pb-0">{{ showDate() }}</div>
                       </v-col>
@@ -187,7 +187,7 @@
                           class="label"
                         >
                           <span class="stat-icon icon-q-a"></span>
-                          Q & A
+                          Forum
                         </nuxt-link>
                         <div class="date-holder">{{ showDate() }}</div>
                       </v-col>
