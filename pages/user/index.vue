@@ -20,16 +20,16 @@
                       <v-col md="2" class="d-none d-md-block"></v-col>
                       <v-col cols="12" md="8">
                         <v-row>
-                          <v-col
-                            :cols="user_type === '5' ? 3 : 4"
-                            :class="user_type === '5' ? 'd-md-flex' : 'd-none'"
+                          <!-- <v-col
+                            :cols="user_type == '5' ? 3 : 4"
+                            :class="user_type == '5' ? 'd-md-flex' : 'd-none'"
                           >
-                            <v-btn color="#DFF4EE" fab x-large>
+                            <div color="#DFF4EE" fab x-large>
                               <i
                                 class="fa-solid fa-dollar"
                                 style="color: teal"
                               ></i>
-                            </v-btn>
+                            </div>
                             <div class="pa-3">
                               <p class="text-h6">Income</p>
                               <p class="text-h6 text-md-h5">
@@ -43,7 +43,7 @@
                                 </strong>
                               </p>
                             </div>
-                          </v-col>
+                          </v-col> -->
                           <v-col
                             :cols="user_type === '5' ? 3 : 4"
                             class="d-md-flex"

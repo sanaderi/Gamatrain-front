@@ -22,26 +22,27 @@
             <div v-show="!google_login_loading" ref="googleLoginBtn" />
           </v-col>
           <v-col cols="12">
-            <validation-observer ref="observer" v-slot="{ invalid }">
-              <form @submit.prevent="submit">
-                <v-row>
-                  <v-col cols="12">
-                    <validation-provider
-                      v-slot="{ errors }"
-                      name="Email"
-                      rules="required"
-                    >
-                      <v-text-field
-                        v-model="identity"
-                        dense
-                        label="Email"
-                        :error-messages="errors"
-                        required
-                        outlined
-                      />
-                    </validation-provider>
-                  </v-col>
-                  <v-col cols="12">
+            <div v-show="identity_holder">
+              <validation-observer ref="observer" v-slot="{ invalid }">
+                <form @submit.prevent="submit">
+                  <v-row>
+                    <v-col cols="12">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="Email"
+                        rules="required"
+                      >
+                        <v-text-field
+                          v-model="identity"
+                          dense
+                          label="Email"
+                          :error-messages="errors"
+                          required
+                          outlined
+                        />
+                      </validation-provider>
+                    </v-col>
+                    <!-- <v-col cols="12">
                     <validation-provider
                       v-slot="{ errors }"
                       name="Password"
@@ -63,36 +64,78 @@
                     <p @click="switchToPassRecover" class="pointer">
                       Forget password
                     </p>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-divider class="mb-3" />
-                    <p
-                      class="text-h6 text-center pointer"
-                      @click="switchToRegister"
-                    >
-                      Not registered? register now
-                    </p>
-                    <v-divider class="mt-3" />
-                  </v-col>
-                  <v-col cols="6">
-                    <v-btn outlined block @click="login_dialog = !login_dialog">
-                      Cancel
-                    </v-btn>
-                  </v-col>
-                  <v-col cols="6">
-                    <v-btn
-                      color="primary"
-                      type="submit"
-                      :disabled="invalid"
-                      block
-                      :loading="login_loading"
-                    >
-                      Login
-                    </v-btn>
-                  </v-col>
-                </v-row>
-              </form>
-            </validation-observer>
+                  </v-col> -->
+                    <v-col cols="12">
+                      <v-divider class="mb-3" />
+                      <p
+                        class="text-h6 text-center pointer"
+                        @click="switchToRegister"
+                      >
+                        Not registered? register now
+                      </p>
+                      <v-divider class="mt-3" />
+                    </v-col>
+                    <v-col cols="6">
+                      <v-btn
+                        outlined
+                        block
+                        @click="login_dialog = !login_dialog"
+                      >
+                        Cancel
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="6">
+                      <v-btn
+                        color="primary"
+                        type="submit"
+                        :disabled="invalid"
+                        block
+                        :loading="login_loading"
+                      >
+                        Login
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </form>
+              </validation-observer>
+            </div>
+
+            <div v-show="otp_holder">
+              <!--Otp holder-->
+              <v-col cols="12">
+                <p class="text-h6">
+                  Please enter code received your email address?
+                </p>
+                <v-otp-input
+                  v-model="otp"
+                  :disabled="otp_loading"
+                  length="5"
+                  @finish="onFinish"
+                ></v-otp-input>
+              </v-col>
+
+              <v-col cols="12">
+                <v-divider class="mb-3" />
+                <p
+                  class="text-h6 text-center pointer"
+                  @click="recheckEnteredIdentity"
+                >
+                  Your email is incorrect? recheck it.
+                </p>
+
+                <v-divider class="my-3 text-center" />
+                <v-btn
+                  plain
+                  class="text-none pointer"
+                  @click="sendOtpCodeAgain()"
+                  :disabled="sendOtpBtnStatus"
+                >
+                  Send code again
+                  <span v-show="countDown" class="ml-3">{{ countDown }}</span>
+                </v-btn>
+              </v-col>
+              <!--End otp holder-->
+            </div>
           </v-col>
         </v-row>
       </v-card-text>
@@ -114,7 +157,15 @@ export default {
       identity: "",
       password: "",
 
+      otp: "",
+      identity: "",
+      otp_loading: false,
+      countDown: 60,
+      sendOtpBtnStatus: true,
+
       google_login_loading: true,
+      identity_holder: true,
+      otp_holder: false,
     };
   },
   components: {
@@ -124,7 +175,6 @@ export default {
   mounted() {},
   watch: {
     login_dialog(val) {
-      console.log("Client id" + process.env.GOOGLE_CLIENT_Id);
       if (val === true) {
         //Initialize google login
         setTimeout(() => {
@@ -192,7 +242,7 @@ export default {
           "/api/v1/users/login",
           querystring.stringify({
             identity: this.identity,
-            pass: this.password,
+            // pass: this.password,
           }),
           {
             responseType: "text",
@@ -201,10 +251,37 @@ export default {
             },
           }
         )
+        .then(() => {
+          this.$toast.success("Otp code sent");
+          this.identity_holder = false;
+          this.otp_holder = true;
+        })
+        .catch((err) => {
+          if (err.response.status == 400)
+            this.$toast.error(err.response.data.message);
+        })
+        .finally(() => {
+          this.login_loading = false;
+        });
+    },
+    onFinish() {
+      //Finish enter otp code
+      const querystring = require("querystring");
+
+      this.$axios
+        .$post(
+          "/api/v1/users/login",
+          querystring.stringify({
+            type: "confirm",
+            identity: this.identity,
+            code: this.otp,
+          })
+        )
         .then((response) => {
+          this.otp_holder = false;
           this.$auth.setUserToken(response.data.jwtToken);
           this.$auth.setUser(response.data.info);
-          this.login_dialog = false;
+
           this.$toast.success("Logged in successfully");
 
           if (this.$route.path == "/")
@@ -217,8 +294,12 @@ export default {
             this.$toast.error(err.response.data.message);
         })
         .finally(() => {
-          this.login_loading = false;
+          this.register_loading = false;
         });
+    },
+    recheckEnteredIdentity() {
+      this.otp_holder = false;
+      this.identity_holder = true;
     },
   },
 };
