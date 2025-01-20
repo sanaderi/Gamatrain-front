@@ -10,7 +10,7 @@
     }
   ],
   "functions": {
-    "serverMiddleware/data-to-xml.js": {
+    "*": {
       "maxDuration": 300
     }
   },
