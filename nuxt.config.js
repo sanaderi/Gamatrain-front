@@ -262,5 +262,7 @@ export default {
     port: 3002,
   },
 
-  serverMiddleware: ["serverMiddleware/data-to-xml.js"],
+  serverMiddleware: [
+    { path: "/sitemap", handler: "~/serverMiddleware/data-to-xml.js" },
+  ],
 };
