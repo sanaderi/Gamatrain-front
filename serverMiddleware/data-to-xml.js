@@ -62,7 +62,9 @@ async function fetchDataFromServer(contentType) {
   }
 
   // Fetch data for all pages
-  while (true) {
+  let iterationCount = 0; // Counter to track iterations
+
+  while (iterationCount < 8) {
     let finalUrl = `${apiUrl}&page=${currentPage}&perpage=${itemsPerPage}`;
     if (contentType == "blog")
       finalUrl = `${apiUrl}?page=${currentPage}&perpage=${itemsPerPage}`;
@@ -72,14 +74,15 @@ async function fetchDataFromServer(contentType) {
     allData = [...allData, ...data];
 
     // Break the loop if no more data available
-    if (data.length < itemsPerPage) {
-      // if (currentPage > 1000) {
-      break;
-    }
+    // if (data.length < itemsPerPage) {
+    //   // if (currentPage > 1000) {
+    //   break;
+    // }
 
     delay(1000);
 
     currentPage++;
+    iterationCount++; // Increment the iteration counter
   }
 
   return allData;
