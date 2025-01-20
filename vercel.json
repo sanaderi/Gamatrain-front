@@ -9,6 +9,11 @@
       }
     }
   ],
+  "functions": {
+    "serverMiddleware/data-to-xml.js": {
+      "maxDuration": 300
+    }
+  },
   "rewrites": [
     {
       "source": "/api/v1/:path*",
