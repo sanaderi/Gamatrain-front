@@ -14,6 +14,10 @@
     {
       "source": "/uploads/:path*",
       "destination": "https://core.gamatrain.com/uploads/:path*"
+    },
+    {
+      "source": "/sitemap(.*)",
+      "destination": "/serverMiddleware/data-to-xml.js"
     }
   ]
 }
