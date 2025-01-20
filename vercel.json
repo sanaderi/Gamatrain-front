@@ -3,9 +3,17 @@
   "builds": [
     {
       "src": "nuxt.config.js",
-      "use": "@nuxtjs/vercel-builder"
+      "use": "@nuxtjs/vercel-builder",
+      "config": {
+        "includeFiles": ["serverMiddleware/data-to-xml.js"]
+      }
     }
   ],
+  "functions": {
+    "*": {
+      "maxDuration": 300
+    }
+  },
   "rewrites": [
     {
       "source": "/api/v1/:path*",
