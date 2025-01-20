@@ -4,7 +4,9 @@
     {
       "src": "nuxt.config.js",
       "use": "@nuxtjs/vercel-builder",
-      "includeFiles": ["serverMiddleware/data-to-xml.js"]
+      "config": {
+        "includeFiles": ["serverMiddleware/data-to-xml.js"]
+      }
     }
   ],
   "rewrites": [
@@ -15,10 +17,6 @@
     {
       "source": "/uploads/:path*",
       "destination": "https://core.gamatrain.com/uploads/:path*"
-    },
-    {
-      "source": "/sitemap(.*)",
-      "destination": "/serverMiddleware/data-to-xml.js"
     }
   ]
 }
