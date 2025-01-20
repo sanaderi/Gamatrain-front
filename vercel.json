@@ -1,11 +1,17 @@
 {
   "version": 2,
+
   "builds": [
     {
       "src": "nuxt.config.js",
       "use": "@nuxtjs/vercel-builder",
       "config": {
-        "includeFiles": ["serverMiddleware/data-to-xml.js"]
+        "includeFiles": ["serverMiddleware/data-to-xml.js"],
+        "functions": {
+          "serverMiddleware/data-to-xml.js": {
+            "maxDuration": 300
+          }
+        }
       }
     }
   ],
@@ -18,10 +24,5 @@
       "source": "/uploads/:path*",
       "destination": "https://core.gamatrain.com/uploads/:path*"
     }
-  ],
-  "functions": {
-    "serverMiddleware/data-to-xml.js": {
-      "maxDuration": 300
-    }
-  }
+  ]
 }
