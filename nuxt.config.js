@@ -262,5 +262,5 @@ export default {
     port: 3002,
   },
 
-  serverMiddleware: ["~/serverMiddleware/data-to-xml.js"],
+  serverMiddleware: ["serverMiddleware/data-to-xml.js"],
 };
