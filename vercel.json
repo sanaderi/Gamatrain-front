@@ -18,5 +18,10 @@
       "source": "/uploads/:path*",
       "destination": "https://core.gamatrain.com/uploads/:path*"
     }
-  ]
+  ],
+  "functions": {
+    "serverMiddleware/data-to-xml.js": {
+      "maxDuration": 300
+    }
+  }
 }
