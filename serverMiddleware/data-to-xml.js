@@ -31,7 +31,7 @@ export default async (req, res, next) => {
 
 async function fetchDataFromServer(contentType) {
   // Fetch paginated data from the third-party server
-  const itemsPerPage = 80; // Adjust as per your pagination logic
+  const itemsPerPage = 50; // Adjust as per your pagination logic
   let currentPage = 1;
   let allData = [];
   let apiUrl;
