@@ -42,29 +42,29 @@
                         />
                       </validation-provider>
                     </v-col>
-                    <!-- <v-col cols="12">
-                    <validation-provider
-                      v-slot="{ errors }"
-                      name="Password"
-                      rules="required"
-                    >
-                      <v-text-field
-                        label="Password"
-                        v-model="password"
-                        outlined
-                        :error-messages="errors"
-                        dense
-                        type="password"
-                        :type="show1 ? 'text' : 'password'"
-                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                        @click:append="show1 = !show1"
-                        required
-                      />
-                    </validation-provider>
-                    <p @click="switchToPassRecover" class="pointer">
-                      Forget password
-                    </p>
-                  </v-col> -->
+                    <v-col cols="12">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="Password"
+                        rules="required"
+                      >
+                        <v-text-field
+                          label="Password"
+                          v-model="password"
+                          outlined
+                          :error-messages="errors"
+                          dense
+                          type="password"
+                          :type="passVisible ? 'text' : 'password'"
+                          :append-icon="passVisible ? 'mdi-eye' : 'mdi-eye-off'"
+                          @click:append="passVisible = !passVisible"
+                          required
+                        />
+                      </validation-provider>
+                      <p @click="switchToPassRecover" class="pointer">
+                        Forget password
+                      </p>
+                    </v-col>
                     <v-col cols="12">
                       <v-divider class="mb-3" />
                       <p
@@ -152,7 +152,7 @@ export default {
   data() {
     return {
       login_dialog: false,
-      show1: false,
+      passVisible: false,
       login_loading: false,
       identity: "",
       password: "",
@@ -242,7 +242,8 @@ export default {
           "/api/v1/users/login",
           querystring.stringify({
             identity: this.identity,
-            // pass: this.password,
+            pass: this.password,
+            type: "request",
           }),
           {
             responseType: "text",
@@ -251,10 +252,22 @@ export default {
             },
           }
         )
-        .then(() => {
-          this.$toast.success("Otp code sent");
-          this.identity_holder = false;
-          this.otp_holder = true;
+        .then((response) => {
+          if (response.data.type && response.data.type == "loginByOTP") {
+            this.$toast.success("Otp code sent");
+            this.identity_holder = false;
+            this.otp_holder = true;
+          } else {
+            this.$auth.setUserToken(response.data.jwtToken);
+            this.$auth.setUser(response.data.info);
+
+            this.$toast.success("Logged in successfully");
+
+            if (this.$route.path == "/")
+              this.$router.push({
+                path: "/user",
+              });
+          }
         })
         .catch((err) => {
           if (err.response.status == 400)
@@ -274,7 +287,9 @@ export default {
           querystring.stringify({
             type: "confirm",
             identity: this.identity,
+            pass: this.password,
             code: this.otp,
+            type: "confirm",
           })
         )
         .then((response) => {
