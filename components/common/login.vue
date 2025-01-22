@@ -262,6 +262,7 @@ export default {
             this.$auth.setUser(response.data.info);
 
             this.$toast.success("Logged in successfully");
+            this.login_dialog = false;
 
             if (this.$route.path == "/")
               this.$router.push({
@@ -293,7 +294,9 @@ export default {
           })
         )
         .then((response) => {
+          this.login_dialog = false;
           this.otp_holder = false;
+          this.identity_holder = true;
           this.$auth.setUserToken(response.data.jwtToken);
           this.$auth.setUser(response.data.info);
 
