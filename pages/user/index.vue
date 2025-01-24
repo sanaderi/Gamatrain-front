@@ -260,7 +260,7 @@ import TeachingRequest from "@/components/dashboard/teaching-request";
 export default {
   layout: "dashboard_layout",
   name: "dashboard",
-  middleware: ["user_type", "basic_info"],
+  // middleware: ["user_type", "basic_info"],
   components: {
     TeachingRequest,
     GeneralInfoDashboard,

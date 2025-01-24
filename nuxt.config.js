@@ -1,6 +1,6 @@
-import colors from "vuetify/es5/util/colors";
+import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
-export default {
+export default defineNuxtConfig({
   // Global page headers: https://go.nuxtjs.dev/config-head
 
   head: {
@@ -67,7 +67,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    "@/assets/scss/app.scss",
+    // "@/assets/scss/app.scss",
     "@mdi/font/css/materialdesignicons.min.css",
     "@/assets/css/gama6/styles.css",
   ],
@@ -81,7 +81,7 @@ export default {
     { src: "plugins/img-cropper", ssr: false },
     { src: "plugins/vuedraggable", ssr: false },
     // { src: 'plugins/aframe.js', ssr: false, mode: 'client' },
-    { src: "plugins/gtag.js", mode: "client" },
+    // { src: "plugins/gtag.js", mode: "client" },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -93,7 +93,7 @@ export default {
     // "@nuxt/typescript-build",
     "nuxt-leaflet",
     // https://go.nuxtjs.dev/vuetify
-    ["@nuxtjs/vuetify"],
+    "@nuxtjs/vuetify",
     "@nuxtjs/dotenv",
     "@nuxtjs/moment",
     "@nuxtjs/pwa",
@@ -113,17 +113,19 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    "@nuxtjs/axios",
-    "@nuxtjs/toast",
-    "@nuxtjs/auth-next",
-    "@nuxtjs/markdownit",
+    (_options, nuxt) => {
+      nuxt.hooks.hook("vite:extendConfig", (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }));
+      });
+    },
   ],
 
-  axios: {
-    proxy: true,
-    baseUrl: process.env.API_BASE_URL,
-    headers: {},
-  },
+  // axios: {
+  //   proxy: true,
+  //   baseUrl: process.env.API_BASE_URL,
+  //   headers: {},
+  // },
 
   proxy: {
     "/api/v1/": {
@@ -202,48 +204,57 @@ export default {
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
-  vuetify: {
-    defaultAssets: false,
-    customVariables: ["~/assets/variables.scss"],
-    theme: {
-      light: true,
-      themes: {
-        light: {
-          background: "#FFFFFF",
-          surface: "#FFFFFF",
-          primary: "#FFB300",
-          secondary: "#03DAC6",
-          error: "#B00020",
-          info: "#2196F3",
-          success: "#4CAF50",
-          warning: "#FB8C00",
-        },
-        dark: {
-          background: colors.indigo.base,
-          surface: "#FFFFFF",
-          primary: "#FFB300",
-          secondary: "#03DAC6",
-          error: "#B00020",
-          info: colors.teal.lighten1,
-          success: "#4CAF50",
-          warning: "#FB8C00",
-        },
-      },
-    },
-    icons: {
-      iconfont: "mdi",
-    },
-  },
+  // vuetify: {
+  //   defaultAssets: false,
+  //   customVariables: ["~/assets/variables.scss"],
+  //   theme: {
+  //     light: true,
+  //     themes: {
+  //       light: {
+  //         background: "#FFFFFF",
+  //         surface: "#FFFFFF",
+  //         primary: "#FFB300",
+  //         secondary: "#03DAC6",
+  //         error: "#B00020",
+  //         info: "#2196F3",
+  //         success: "#4CAF50",
+  //         warning: "#FB8C00",
+  //       },
+  //       dark: {
+  //         background: colors.indigo.base,
+  //         surface: "#FFFFFF",
+  //         primary: "#FFB300",
+  //         secondary: "#03DAC6",
+  //         error: "#B00020",
+  //         info: colors.teal.lighten1,
+  //         success: "#4CAF50",
+  //         warning: "#FB8C00",
+  //       },
+  //     },
+  //   },
+  //   icons: {
+  //     iconfont: "mdi",
+  //   },
+  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [
+      "vuetify",
       "vee-validate",
       "vue-chartjs",
       "ofetch",
       "node-fetch-native",
       "defu",
     ],
+  },
+
+  vite: {
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
   },
 
   pwa: {
@@ -263,4 +274,5 @@ export default {
   },
 
   serverMiddleware: ["~/serverMiddleware/data-to-xml.js"],
-};
+  compatibilityDate: "2025-01-25",
+});
