@@ -64,7 +64,7 @@ async function fetchDataFromServer(contentType) {
   // Fetch data for all pages
   let iterationCount = 0; // Counter to track iterations
 
-  while (iterationCount < 9) {
+  while (iterationCount < 10) {
     let finalUrl = `${apiUrl}&page=${currentPage}&perpage=${itemsPerPage}`;
     if (contentType == "blog")
       finalUrl = `${apiUrl}?page=${currentPage}&perpage=${itemsPerPage}`;

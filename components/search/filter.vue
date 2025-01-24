@@ -13,7 +13,7 @@
           close
           label
           outlined
-          @click:close="section_val = 0"
+          @click:close="board_val = 0"
         >
           <span>
             {{ applied_filter.select_section_title }}
@@ -95,7 +95,7 @@
           <v-expansion-panel-content color="#f5f5f5">
             <v-row>
               <v-col cols="12" class="content-box">
-                <v-radio-group v-model="section_val" class="mt-0 pr-0" column>
+                <v-radio-group v-model="board_val" class="mt-0 pr-0" column>
                   <v-radio label="All" color="red" :value="0"> </v-radio>
                   <v-radio
                     v-for="item in filter.section_list"
@@ -412,7 +412,7 @@ export default {
       scrollInvoked: 0,
 
       section_loading: false,
-      section_val: this.$route.query.section ? this.$route.query.section : 0,
+      board_val: this.$route.query.section ? this.$route.query.section : 0,
 
       base_val: this.$route.query.base ? this.$route.query.base : 0,
       lesson_val: this.$route.query.lesson ? this.$route.query.lesson : 0,
@@ -492,7 +492,6 @@ export default {
     };
   },
   created() {
-    console.log("created");
     if (this.$route.query.type === "tutor")
       this.getFilterList({ type: "state" }, "state");
 
@@ -511,7 +510,7 @@ export default {
       )
         this.getFileType();
     },
-    section_val(val) {
+    board_val(val) {
       //Reset base filter
       this.base_val = 0;
       this.lesson_val = 0;
@@ -541,16 +540,17 @@ export default {
           section_id: val,
         };
         this.getFilterList(params, "base");
+        this.getFileType();
       } else {
         this.applied_filter.select_section_title = "";
         this.loadtime = false;
       }
     },
     base_val(val) {
-      this.changeBaseVal();
+      if (val == 0) this.changeBaseVal();
     },
     lesson_val(val) {
-      this.changeLessonVal();
+      if (val == 0) this.changeLessonVal();
     },
     test_level_val(val) {
       if (val > 0) {
@@ -625,7 +625,7 @@ export default {
 
               this.applied_filter.select_section_title =
                 this.filter.section_list.find(
-                  (x) => x.id === this.section_val
+                  (x) => x.id === this.board_val
                 ).title;
 
               //Set breadcrumbs info
@@ -845,8 +845,8 @@ export default {
       if (this.loadtime) return;
 
       const query = { type: this.$route.query.type };
-      if (this.section_val !== 0) {
-        query.section = this.section_val;
+      if (this.board_val !== 0) {
+        query.section = this.board_val;
       }
       if (this.base_val !== 0) {
         query.base = this.base_val;
@@ -898,10 +898,10 @@ export default {
         disabled: false,
         href: `/search?type=${active_tab}`,
       };
-      if (active_tab === "test") breadcrumb_item.text = "Sample test";
+      if (active_tab === "test") breadcrumb_item.text = "Past Papers";
       else if (active_tab === "learnfiles") breadcrumb_item.text = "Multimedia";
-      else if (active_tab === "question") breadcrumb_item.text = "Q & A";
-      else if (active_tab === "azmoon") breadcrumb_item.text = "Exam";
+      else if (active_tab === "question") breadcrumb_item.text = "Forum";
+      else if (active_tab === "azmoon") breadcrumb_item.text = "QuizHub";
       else if (active_tab === "dars") breadcrumb_item.text = "Tutorial";
       else if (active_tab === "tutor") breadcrumb_item.text = "Tutor";
 
@@ -912,7 +912,7 @@ export default {
         this.breadcrumbs.push({
           text: this.applied_filter.select_section_title,
           disabled: false,
-          href: `/search?type=${active_tab}&section=${this.section_val}`,
+          href: `/search?type=${active_tab}&section=${this.board_val}`,
         });
       }
 
@@ -921,7 +921,7 @@ export default {
         this.breadcrumbs.push({
           text: this.applied_filter.select_base_title,
           disabled: false,
-          href: `/search?type=${active_tab}&section=${this.section_val}&base=${this.base_val}`,
+          href: `/search?type=${active_tab}&section=${this.board_val}&base=${this.base_val}`,
         });
       }
 
@@ -930,12 +930,12 @@ export default {
         this.breadcrumbs.push({
           text: this.applied_filter.select_lesson_title,
           disabled: false,
-          href: `/search?type=${active_tab}&section=${this.section_val}&base=${this.base_val}&lesson=${this.lesson_val}`,
+          href: `/search?type=${active_tab}&section=${this.board_val}&base=${this.base_val}&lesson=${this.lesson_val}`,
         });
       }
 
       //Emit to parent
-
+      this.$emit("setPageTitle", this.applied_filter.select_section_title);
       this.$emit("update:setBreadCrumbs", this.breadcrumbs);
     },
     setFilter(type, list) {
@@ -952,6 +952,7 @@ export default {
         .$get("/api/v1/types/list", {
           params: {
             type: this.$route.query.type == "test" ? "test_type" : "file_type",
+            section_id: this.$route.query.type == "test" ? this.board_val : "",
           },
         })
         .then((res) => {
@@ -962,7 +963,7 @@ export default {
             this.applied_filter.select_file_type_title =
               this.filter.file_type_list.find(
                 (x) => x.id === this.file_type_val
-              ).title;
+              )?.title;
           }
         })
         .catch((err) => {
