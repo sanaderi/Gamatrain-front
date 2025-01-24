@@ -31,6 +31,7 @@
               ref="side_filter"
               class="mx-3"
               :setBreadCrumbs.sync="breadcrumbs"
+              @setPageTitle="setPageTitle()"
             />
           </v-card-text>
           <v-card-actions
@@ -77,6 +78,7 @@
                 <search-filter
                   ref="side_filter"
                   :setBreadCrumbs.sync="breadcrumbs"
+                  @setPageTitle="setPageTitle"
                 />
               </v-card-text>
             </v-card>
@@ -431,8 +433,8 @@ export default {
       this.all_files_loaded = false;
 
       //Fire when click on tag in content card, set section value on side filter
-      if (val > 0) this.$refs.side_filter.section_val = val;
-      else this.$refs.side_filter.section_val = 0;
+      if (val > 0) this.$refs.side_filter.board_val = val;
+      else this.$refs.side_filter.board_val = 0;
       //End fire when click on tag in content card, set section value on side filter
 
       this.$refs.side_filter.setBreadcrumbInfo();
@@ -544,6 +546,9 @@ export default {
     },
   },
   methods: {
+    setPageTitle(e) {
+      // this.page_title = e;
+    },
     // Get content list
     async getContentList() {
       if (!this.all_files_loaded) {
@@ -603,7 +608,6 @@ export default {
               this.paperTypeList?.data
             );
         }
-        console.log("run");
       }, 100);
     },
     scroll() {
