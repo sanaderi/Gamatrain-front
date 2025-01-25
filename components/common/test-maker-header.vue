@@ -31,7 +31,7 @@
 
                   <div class="profile-info">
                     <nuxt-link :to="'/user'" class="profile-name"
-                      >{{ $auth.user.first_name }} {{ $auth.user.last_name }}
+                      >{{ $auth.user?.first_name }} {{ $auth.user.last_name }}
                     </nuxt-link>
 
                     <div

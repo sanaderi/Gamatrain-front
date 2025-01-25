@@ -22,10 +22,10 @@
         <v-col cols="12">
           <h2 class="gama-text-h4">GamaTrain</h2>
           <p class="gama-text-body1">
-            Welcome to GamaTrain, the EdTech startup revolutionizing education. Our
-            platform offers innovative services like sample exams, online tests, tutoring,
-            and more, enhancing the learning experience for teachers and students. Join us
-            to shape the future of education!
+            Welcome to GamaTrain, the EdTech startup revolutionizing education.
+            Our platform offers innovative services like sample exams, online
+            tests, tutoring, and more, enhancing the learning experience for
+            teachers and students. Join us to shape the future of education!
           </p>
         </v-col>
       </v-row>
@@ -49,11 +49,11 @@
         <v-col cols="12">
           <h2 class="gama-text-h4">Our Vision</h2>
           <p class="gama-text-body1">
-            At GamaTrain, our vision is to revolutionize the world of education by
-            providing innovative solutions that empower both students and teachers. As we
-            move toward the future, we are committed to offering new services that
-            leverage the latest technology and trends. Some of the exciting new services
-            we are working on include:
+            At GamaTrain, our vision is to revolutionize the world of education
+            by providing innovative solutions that empower both students and
+            teachers. As we move toward the future, we are committed to offering
+            new services that leverage the latest technology and trends. Some of
+            the exciting new services we are working on include:
           </p>
         </v-col>
         <v-col cols="12" class="d-none d-md-block">
@@ -89,11 +89,12 @@
               <div class="vision-step">
                 <h3 class="gama-text-h5">Customized Learning Paths Using AI</h3>
                 <p class="gama-text-body2">
-                  We understand that every student has their own unique learning style and
-                  preferences. That's why we're working on integrating AI into our
-                  platform to offer personalized learning paths that adapt to each
-                  student's needs. With customized learning paths, students can learn at
-                  their own pace and in a way that works best for them.
+                  We understand that every student has their own unique learning
+                  style and preferences. That's why we're working on integrating
+                  AI into our platform to offer personalized learning paths that
+                  adapt to each student's needs. With customized learning paths,
+                  students can learn at their own pace and in a way that works
+                  best for them.
                 </p>
               </div>
             </v-slide-x-transition>
@@ -103,12 +104,13 @@
               <div class="vision-step">
                 <h3 class="gama-text-h5">Moving Towards Green Economy</h3>
                 <p class="gama-text-body2">
-                  We recognize the importance of environmental sustainability and the role
-                  education plays in creating a better future. We are committed to
-                  promoting a green economy by offering courses that educate students
-                  about sustainability, eco-friendly practices, and environmental
-                  stewardship. By doing so, we hope to inspire a generation of students
-                  who are passionate about creating a better world.
+                  We recognize the importance of environmental sustainability
+                  and the role education plays in creating a better future. We
+                  are committed to promoting a green economy by offering courses
+                  that educate students about sustainability, eco-friendly
+                  practices, and environmental stewardship. By doing so, we hope
+                  to inspire a generation of students who are passionate about
+                  creating a better world.
                 </p>
               </div>
             </v-slide-x-transition>
@@ -116,15 +118,18 @@
           <v-col cols="12" md="4">
             <v-slide-x-transition v-if="enableStep3Txt">
               <div class="vision-step">
-                <h3 class="gama-text-h5">Decentralized Content Quality Moderation</h3>
+                <h3 class="gama-text-h5">
+                  Decentralized Content Quality Moderation
+                </h3>
                 <p class="gama-text-body2">
-                  We believe that quality education is paramount, and that's why we are
-                  developing a decentralized content quality moderation system. This
-                  system will allow our users to participate in moderating the quality of
-                  the content on our platform, ensuring that it remains accurate,
-                  relevant, and up-to-date. By decentralizing content quality moderation,
-                  we can provide a more transparent and collaborative platform that
-                  empowers our users.
+                  We believe that quality education is paramount, and that's why
+                  we are developing a decentralized content quality moderation
+                  system. This system will allow our users to participate in
+                  moderating the quality of the content on our platform,
+                  ensuring that it remains accurate, relevant, and up-to-date.
+                  By decentralizing content quality moderation, we can provide a
+                  more transparent and collaborative platform that empowers our
+                  users.
                 </p>
               </div>
             </v-slide-x-transition>
@@ -163,11 +168,12 @@
               <div>
                 <h3 class="gama-text-h5">Customized Learning Paths Using AI</h3>
                 <p class="gama-text-body2">
-                  We understand that every student has their own unique learning style and
-                  preferences. That's why we're working on integrating AI into our
-                  platform to offer personalized learning paths that adapt to each
-                  student's needs. With customized learning paths, students can learn at
-                  their own pace and in a way that works best for them.
+                  We understand that every student has their own unique learning
+                  style and preferences. That's why we're working on integrating
+                  AI into our platform to offer personalized learning paths that
+                  adapt to each student's needs. With customized learning paths,
+                  students can learn at their own pace and in a way that works
+                  best for them.
                 </p>
               </div>
             </v-slide-x-transition>
@@ -177,12 +183,13 @@
               <div>
                 <h3 class="gama-text-h5">Moving Towards Green Economy</h3>
                 <p class="gama-text-body2">
-                  We recognize the importance of environmental sustainability and the role
-                  education plays in creating a better future. We are committed to
-                  promoting a green economy by offering courses that educate students
-                  about sustainability, eco-friendly practices, and environmental
-                  stewardship. By doing so, we hope to inspire a generation of students
-                  who are passionate about creating a better world.
+                  We recognize the importance of environmental sustainability
+                  and the role education plays in creating a better future. We
+                  are committed to promoting a green economy by offering courses
+                  that educate students about sustainability, eco-friendly
+                  practices, and environmental stewardship. By doing so, we hope
+                  to inspire a generation of students who are passionate about
+                  creating a better world.
                 </p>
               </div>
             </v-slide-x-transition>
@@ -190,15 +197,18 @@
           <v-col cols="12" md="4" class="step-holder">
             <v-slide-x-transition v-if="enableStep3Txt">
               <div>
-                <h3 class="gama-text-h5">Decentralized Content Quality Moderation</h3>
+                <h3 class="gama-text-h5">
+                  Decentralized Content Quality Moderation
+                </h3>
                 <p class="gama-text-body2">
-                  We believe that quality education is paramount, and that's why we are
-                  developing a decentralized content quality moderation system. This
-                  system will allow our users to participate in moderating the quality of
-                  the content on our platform, ensuring that it remains accurate,
-                  relevant, and up-to-date. By decentralizing content quality moderation,
-                  we can provide a more transparent and collaborative platform that
-                  empowers our users.
+                  We believe that quality education is paramount, and that's why
+                  we are developing a decentralized content quality moderation
+                  system. This system will allow our users to participate in
+                  moderating the quality of the content on our platform,
+                  ensuring that it remains accurate, relevant, and up-to-date.
+                  By decentralizing content quality moderation, we can provide a
+                  more transparent and collaborative platform that empowers our
+                  users.
                 </p>
               </div>
             </v-slide-x-transition>
@@ -213,7 +223,11 @@
 
         <v-card flat>
           <v-tabs-items v-model="activeCommitment">
-            <v-tab-item v-for="(item, index) in commitmentList" :key="index" :value="'tab-' + index">
+            <v-tab-item
+              v-for="(item, index) in commitmentList"
+              :key="index"
+              :value="'tab-' + index"
+            >
               <v-card flat id="commitment-card">
                 <v-card-text>
                   <v-icon>mdi-{{ item.icon }}</v-icon>
@@ -232,7 +246,11 @@
             centered
             icons-and-text
           >
-            <v-tab :href="`#tab-${index}`" v-for="(item, index) in commitmentList" :key="index">
+            <v-tab
+              :href="`#tab-${index}`"
+              v-for="(item, index) in commitmentList"
+              :key="index"
+            >
               <v-icon>mdi-{{ item.icon }}</v-icon>
             </v-tab>
           </v-tabs>
@@ -245,7 +263,13 @@
         <v-col cols="12">
           <h2 class="gama-text-h4">Our Services</h2>
         </v-col>
-        <v-col cols="12" sm="6" md="4" v-for="(item, index) in serviceList" :key="index">
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          v-for="(item, index) in serviceList"
+          :key="index"
+        >
           <nuxt-link :to="`${item.link}`" class="gama-text-h6">
             <span :class="`service-icon ${item.icon}`"></span>
             {{ item.title }}
@@ -254,10 +278,10 @@
 
         <v-col cols="12">
           <p class="gama-text-body1">
-            Welcome to GamaTrain, the EdTech startup revolutionizing education. Our
-            platform offers innovative services like sample exams, online tests, tutoring,
-            and more, enhancing the learning experience for teachers and students. Join us
-            to shape the future of education!
+            Welcome to GamaTrain, the EdTech startup revolutionizing education.
+            Our platform offers innovative services like sample exams, online
+            tests, tutoring, and more, enhancing the learning experience for
+            teachers and students. Join us to shape the future of education!
           </p>
 
           <v-btn to="/services">All services</v-btn>
@@ -270,9 +294,10 @@
         <v-col cols="12">
           <h2 class="gama-text-h4">Our Team</h2>
           <p class="gama-text-body1">
-            We are proud of our team's dedication and expertise, and we are confident that
-            their contributions will be instrumental in helping GamaTrain achieve its
-            vision of becoming a leading EdTech company in the global market.
+            We are proud of our team's dedication and expertise, and we are
+            confident that their contributions will be instrumental in helping
+            GamaTrain achieve its vision of becoming a leading EdTech company in
+            the global market.
           </p>
 
           <v-sheet class="mx-auto">
@@ -313,9 +338,9 @@
         <v-col cols="12">
           <h2 class="gama-text-h4">Join Us</h2>
           <p class="gama-text-body1">
-            Join Us and become part of the GamaTrain community! We're always looking for
-            talented individuals who are passionate about EdTech and want to make a
-            positive impact in the world of education.
+            Join Us and become part of the GamaTrain community! We're always
+            looking for talented individuals who are passionate about EdTech and
+            want to make a positive impact in the world of education.
           </p>
         </v-col>
       </v-row>
@@ -340,8 +365,8 @@
 
 <script>
 import { randomInt } from "crypto";
-import mapAnimation from "../static/images/about-us-header.json"; // Adjust the path
-import stepAnimation from "../static/images/about-vision-step.json"; // Adjust the path
+import mapAnimation from "../public/images/about-us-header.json"; // Adjust the path
+import stepAnimation from "../public/images/about-vision-step.json"; // Adjust the path
 import LottieAnimation from "~/components/common/lottie-animation.vue";
 
 export default {
@@ -349,18 +374,21 @@ export default {
   head() {
     return {
       titleTemplate: "%s",
-      title: "About GamaTrain | Meet the Team Dedicated to Transforming K12 Education",
+      title:
+        "About GamaTrain | Meet the Team Dedicated to Transforming K12 Education",
 
       meta: [
         {
           hid: "apple-mobile-web-app-title",
           name: "apple-mobile-web-app-title",
-          content: "About GamaTrain | Meet the Team Dedicated to Transforming K12 Education",
+          content:
+            "About GamaTrain | Meet the Team Dedicated to Transforming K12 Education",
         },
         {
           hid: "og:title",
           name: "og:title",
-          content: "About GamaTrain | Meet the Team Dedicated to Transforming K12 Education",
+          content:
+            "About GamaTrain | Meet the Team Dedicated to Transforming K12 Education",
         },
         {
           hid: "og:site_name",
@@ -428,32 +456,28 @@ export default {
           fullName: "Ali Poorbazargan",
           avatar: "ali-poorbazargan.png",
           role: "CTO",
-          bio:
-            "With over 7 years of experience in full-stack web development, Ali has been the technical leader of Gama.ir and has been instrumental in designing and developing all aspects of the software, from infrastructure to the final products and user experiences. His expertise and leadership skills help the company stay ahead of the curve in the ever-evolving EdTech industry.",
+          bio: "With over 7 years of experience in full-stack web development, Ali has been the technical leader of Gama.ir and has been instrumental in designing and developing all aspects of the software, from infrastructure to the final products and user experiences. His expertise and leadership skills help the company stay ahead of the curve in the ever-evolving EdTech industry.",
         },
         {
           id: 4,
           fullName: "Ramin Naderi",
           avatar: "ramin-naderi.png",
           role: "Co-founder & CEO",
-          bio:
-            "As the co-founder and CEO of Gama.ir, Ramin brings a wealth of experience in software development, team management, problem-solving, and business management to GamaTrain. His deep understanding of the EdTech industry and the market has been instrumental in identifying opportunities for expansion and driving the company's success over the past ten years.",
+          bio: "As the co-founder and CEO of Gama.ir, Ramin brings a wealth of experience in software development, team management, problem-solving, and business management to GamaTrain. His deep understanding of the EdTech industry and the market has been instrumental in identifying opportunities for expansion and driving the company's success over the past ten years.",
         },
         {
           id: 5,
           fullName: "Mehdi Zare",
           avatar: "mehdi-zare.png",
           role: "Marketing Manager",
-          bio:
-            "Marketing Manager: With over seven years of expertise in marketing research, marketing strategy, content strategy, and business development, Mehdi is an experienced marketing manager who has previously worked for well-known Iranian startups and brands. His contributions enable GAMATrain to understand the market dynamics, identify growth opportunities, and develop effective marketing campaigns to improve user experience. He is committed to helping the company grow and achieve long-term success.",
+          bio: "Marketing Manager: With over seven years of expertise in marketing research, marketing strategy, content strategy, and business development, Mehdi is an experienced marketing manager who has previously worked for well-known Iranian startups and brands. His contributions enable GAMATrain to understand the market dynamics, identify growth opportunities, and develop effective marketing campaigns to improve user experience. He is committed to helping the company grow and achieve long-term success.",
         },
         {
           id: 6,
           fullName: "Sadeq Naderi",
           avatar: "sadeq-naderi.png",
           role: "FrontEnd Developer",
-          bio:
-            "Frontend Developer dedicated to crafting immersive and user-centric web applications. His expertise lies in harnessing a diverse array of frontend technologies, allowing him to consistently deliver polished, intuitive, and captivating user experiences that resonate with audiences. Always in pursuit of excellence, he strives to search for and implement the best strategies or techniques that elevate the quality of web applications. His commitment to continuous improvement drives him to explore innovative solutions that enhance user engagement and satisfaction.",
+          bio: "Frontend Developer dedicated to crafting immersive and user-centric web applications. His expertise lies in harnessing a diverse array of frontend technologies, allowing him to consistently deliver polished, intuitive, and captivating user experiences that resonate with audiences. Always in pursuit of excellence, he strives to search for and implement the best strategies or techniques that elevate the quality of web applications. His commitment to continuous improvement drives him to explore innovative solutions that enhance user engagement and satisfaction.",
         },
         {
           id: 7,
@@ -549,7 +573,9 @@ export default {
         if (!this.$refs.stepProgressBar.classList.contains("animateStep1")) {
           this.$refs.stepProgressBar.classList.add("animateStep1");
         }
-        if (!this.$refs.mobileStepProgressBar.classList.contains("animateStep1")) {
+        if (
+          !this.$refs.mobileStepProgressBar.classList.contains("animateStep1")
+        ) {
           this.$refs.mobileStepProgressBar.classList.add("animateStep1");
         }
       } else {
@@ -557,7 +583,9 @@ export default {
           this.$refs.stepProgressBar.classList.add("animateStep2");
         }
 
-        if (!this.$refs.mobileStepProgressBar.classList.contains("animateStep2")) {
+        if (
+          !this.$refs.mobileStepProgressBar.classList.contains("animateStep2")
+        ) {
           this.$refs.mobileStepProgressBar.classList.add("animateStep2");
         }
       }
@@ -570,7 +598,10 @@ export default {
         threshold: 0.5, // Trigger when 50% of the element is visible
       };
 
-      const observer = new IntersectionObserver(this.handleIntersection, options);
+      const observer = new IntersectionObserver(
+        this.handleIntersection,
+        options
+      );
 
       if (window.innerWidth > 960) observer.observe(this.$refs.stepProgressBar);
       else observer.observe(this.$refs.mobileStepProgressBar);

@@ -13,27 +13,26 @@
         </v-col>
         <v-col md="5" lg="3">
           <!--  Start:  Search and logo in header  -->
-          <search-box class="ml-lg-4 mt-4"/>
+          <search-box class="ml-lg-4 mt-4" />
           <v-spacer></v-spacer>
           <!--  End:  Search and logo in header  -->
         </v-col>
         <v-col md="3" lg="7">
-          <v-spacer/>
-          <div class="float-md-right  pt-5">
+          <v-spacer />
+          <div class="float-md-right pt-5">
             <div class="d-flex align-center" v-if="$auth.loggedIn">
-
-              <v-menu
-                transition="slide-x-transition"
-                offset-y
-                min-width="150"
-              >
+              <v-menu transition="slide-x-transition" offset-y min-width="150">
                 <template v-slot:activator="{ on, attrs }">
                   <div v-bind="attrs" v-on="on">
-                    <v-avatar size="32"
-                    >
-                      <v-img :src="$loadAvatar.currentUser($auth)" alt="user avatar"/>
+                    <v-avatar size="32">
+                      <v-img
+                        :src="$loadAvatar.currentUser($auth)"
+                        alt="user avatar"
+                      />
                     </v-avatar>
-                    <span class="pointer pa-2">{{ $auth.user.first_name }}</span>
+                    <span class="pointer pa-2">{{
+                      $auth.user?.first_name
+                    }}</span>
                   </div>
                 </template>
                 <v-list>
@@ -49,28 +48,20 @@
                       {{ item.title }}
                     </v-list-item-title>
                   </v-list-item>
-                  <v-list-item
-                    class="pointer"
-                    @click="$auth.logout()"
-                  >
-
+                  <v-list-item class="pointer" @click="$auth.logout()">
                     <v-list-item-title class="user_menu_title">
-                      <v-icon small>
-                        mdi-logout
-                      </v-icon>
+                      <v-icon small> mdi-logout </v-icon>
                       Logout
                     </v-list-item-title>
                   </v-list-item>
                 </v-list>
               </v-menu>
 
-
               <!--Desktop version-->
-              <notification-component ref="notification-component"
+              <notification-component
+                ref="notification-component"
                 class="d-none d-md-block"
               />
-
-
             </div>
             <div class="d-flex align-center" v-else>
               <v-btn plain @click="openLoginDialog">
@@ -85,28 +76,29 @@
             </div>
           </div>
         </v-col>
-
       </v-row>
     </v-container>
 
     <div>
       <!--Login component-->
-      <login ref="login_modal" :switchToRegister.sync="currentOpenDialog"
-             :switchToPassRecover.sync="currentOpenDialog"
+      <login
+        ref="login_modal"
+        :switchToRegister.sync="currentOpenDialog"
+        :switchToPassRecover.sync="currentOpenDialog"
       />
       <!--End login component-->
 
       <!--Register component-->
-      <register ref="register_modal" :switchToLogin.sync="currentOpenDialog"/>
+      <register ref="register_modal" :switchToLogin.sync="currentOpenDialog" />
       <!--End register component-->
 
       <!--Recover password component-->
-      <pass-recover ref="pass_recover_modal" :switchToLogin.sync="currentOpenDialog"
-                    :switchToRegister.sync="currentOpenDialog"
+      <pass-recover
+        ref="pass_recover_modal"
+        :switchToLogin.sync="currentOpenDialog"
+        :switchToRegister.sync="currentOpenDialog"
       />
       <!--End recover password component-->
-
-
     </div>
   </div>
 </template>
@@ -125,36 +117,35 @@ export default {
       logo: "mainlogo-gamatrain.png",
       avatar: "dexter-morse.png",
       items: [
-        {title: "Dashboard", icon: "mdi-view-dashboard"},
-        {title: "Photos", icon: "mdi-image"},
-        {title: "About", icon: "mdi-help-box"},
+        { title: "Dashboard", icon: "mdi-view-dashboard" },
+        { title: "Photos", icon: "mdi-image" },
+        { title: "About", icon: "mdi-help-box" },
       ],
 
       user_profile_items: [
         {
-          title: 'Dashboard',
-          icon: 'mdi-view-dashboard',
-          link: '/user'
+          title: "Dashboard",
+          icon: "mdi-view-dashboard",
+          link: "/user",
         },
         {
-          title: 'Messages',
-          icon: 'mdi-email-outline',
-          link: '/user/ticket'
+          title: "Messages",
+          icon: "mdi-email-outline",
+          link: "/user/ticket",
         },
         {
-          title: 'Edit Profile',
-          icon: 'mdi-account-outline',
-          link: '/user/profile'
+          title: "Edit Profile",
+          icon: "mdi-account-outline",
+          link: "/user/profile",
         },
         {
-          title: 'Change Password',
-          icon: 'mdi-key',
-          link: '/user/edit-pass'
+          title: "Change Password",
+          icon: "mdi-key",
+          link: "/user/edit-pass",
         },
-
       ],
       right: null,
-      currentOpenDialog: '',
+      currentOpenDialog: "",
     };
   },
   components: {
@@ -162,19 +153,19 @@ export default {
     PassRecover,
     SearchBox,
     Register,
-    Login
+    Login,
   },
   watch: {
     currentOpenDialog(val) {
-      if (val === 'login') {
+      if (val === "login") {
         this.$refs.register_modal.register_dialog = false;
         this.$refs.pass_recover_modal.pass_recover_dialog = false;
         this.$refs.login_modal.login_dialog = true;
-      } else if (val === 'register') {
+      } else if (val === "register") {
         this.$refs.login_modal.login_dialog = false;
         this.$refs.pass_recover_modal.pass_recover_dialog = false;
         this.$refs.register_modal.register_dialog = true;
-      } else if (val === 'pass_recover') {
+      } else if (val === "pass_recover") {
         this.$refs.login_modal.login_dialog = false;
         this.$refs.register_modal.register_dialog = false;
         this.$refs.pass_recover_modal.pass_recover_dialog = true;
@@ -183,29 +174,26 @@ export default {
         this.$refs.login_modal.register_dialog = false;
         this.$refs.pass_recover_modal.pass_recover_dialog = false;
       }
-
     },
 
     //Handle auth form from all of section
     "$route.query.auth_form"(val) {
-      if (val === 'login') {
+      if (val === "login") {
         this.$refs.login_modal.login_dialog = true;
-        this.$router.push({query: {}});
-      } else if (val == 'register') {
+        this.$router.push({ query: {} });
+      } else if (val == "register") {
         this.$refs.register_modal.register_dialog = true;
-        this.$router.push({query: {}});
+        this.$router.push({ query: {} });
       }
-
-    }
+    },
   },
   mounted() {
-    if (window.innerWidth>960 && this.$auth.loggedIn){
+    if (window.innerWidth > 960 && this.$auth.loggedIn) {
       this.$refs["notification-component"].getNotifications();
     }
-    if (this.$route.query.access === 'denied') {
+    if (this.$route.query.access === "denied") {
       this.$refs.login_modal.login_dialog = true;
     }
-
   },
   methods: {
     openLoginDialog() {
@@ -215,7 +203,6 @@ export default {
       this.$refs.register_modal.register_dialog = true;
     },
   },
-
 };
 </script>
 <style>
@@ -223,5 +210,4 @@ export default {
   font-size: 1.2rem !important;
   padding: 1rem !important;
 }
-
 </style>

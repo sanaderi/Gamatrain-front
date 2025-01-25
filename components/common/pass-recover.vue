@@ -28,55 +28,55 @@
           </v-col>
           <v-col cols="12">
             <div v-show="identity_holder">
-              <validation-observer ref="observer" v-slot="{ invalid }">
-                <form @submit.prevent="requestPassRecover()">
-                  <v-row>
-                    <v-col cols="12">
-                      <validation-provider
+              <!-- <validation-observer ref="observer" v-slot="{ invalid }"> -->
+              <form @submit.prevent="requestPassRecover()">
+                <v-row>
+                  <v-col cols="12">
+                    <!-- <validation-provider
                         v-slot="{ errors }"
                         name="request_identity"
                         rules="required"
-                      >
-                        <v-text-field
-                          dense
-                          label="Email"
-                          :error-messages="errors"
-                          v-model="identity"
-                          outlined
-                        />
-                      </validation-provider>
-                    </v-col>
+                      > -->
+                    <v-text-field
+                      dense
+                      label="Email"
+                      :error-messages="errors"
+                      v-model="identity"
+                      outlined
+                    />
+                    <!-- </validation-provider> -->
+                  </v-col>
 
-                    <v-col cols="12">
-                      <v-divider class="mb-3" />
-                      <p class="text-h6 text-center pointer">
-                        <span @click="switchToLogin">Login</span>
-                        |
-                        <span @click="switchToRegister">Register</span>
-                      </p>
+                  <v-col cols="12">
+                    <v-divider class="mb-3" />
+                    <p class="text-h6 text-center pointer">
+                      <span @click="switchToLogin">Login</span>
+                      |
+                      <span @click="switchToRegister">Register</span>
+                    </p>
 
-                      <v-divider class="mt-3" />
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="6" lg="6">
-                      <v-btn outlined @click="cancelPassRecover()">
-                        Cancel
-                      </v-btn>
-                    </v-col>
-                    <v-col cols="6" lg="6">
-                      <v-btn
-                        color="primary"
-                        type="submit"
-                        :loading="pass_recover_loading"
-                        :disabled="invalid"
-                      >
-                        Recover
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </form>
-              </validation-observer>
+                    <v-divider class="mt-3" />
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="6" lg="6">
+                    <v-btn outlined @click="cancelPassRecover()">
+                      Cancel
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="6" lg="6">
+                    <v-btn
+                      color="primary"
+                      type="submit"
+                      :loading="pass_recover_loading"
+                      :disabled="invalid"
+                    >
+                      Recover
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </form>
+              <!-- </validation-observer> -->
             </div>
             <div v-show="otp_holder">
               <!--Otp holder-->
@@ -109,71 +109,71 @@
               <!--Otp holder-->
               <v-col cols="12">
                 <p class="text-h6">Please enter password</p>
-                <validation-observer
+                <!-- <validation-observer
                   ref="final_reg_observer"
                   v-slot="{ invalid }"
-                >
-                  <form @submit.prevent="passRecover()">
-                    <v-row>
-                      <v-col cols="12">
-                        <validation-provider
+                > -->
+                <form @submit.prevent="passRecover()">
+                  <v-row>
+                    <v-col cols="12">
+                      <!-- <validation-provider
                           v-slot="{ errors }"
                           name="password"
                           rules="required|min:4"
-                        >
-                          <v-text-field
-                            label="Password"
-                            v-model="password"
-                            outlined
-                            :error-messages="errors"
-                            dense
-                            type="password"
-                            :type="show1 ? 'text' : 'password'"
-                            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                            @click:append="show1 = !show1"
-                            required
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <!--     Confirm Password       -->
-                      <v-col cols="12">
-                        <validation-provider
+                        > -->
+                      <v-text-field
+                        label="Password"
+                        v-model="password"
+                        outlined
+                        :error-messages="errors"
+                        dense
+                        type="password"
+                        :type="show1 ? 'text' : 'password'"
+                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                        @click:append="show1 = !show1"
+                        required
+                      />
+                      <!-- </validation-provider> -->
+                    </v-col>
+                    <!--     Confirm Password       -->
+                    <v-col cols="12">
+                      <!-- <validation-provider
                           name="confirmPassword"
                           v-slot="{ errors }"
                           rules="required|min:4|confirmed:password"
-                        >
-                          <v-text-field
-                            v-model="confirmPassword"
-                            type="password"
-                            :error-messages="errors"
-                            label="Confirm password"
-                            dense
-                            outlined
-                          >
-                          </v-text-field>
-                        </validation-provider>
-                      </v-col>
-                    </v-row>
+                        > -->
+                      <v-text-field
+                        v-model="confirmPassword"
+                        type="password"
+                        :error-messages="errors"
+                        label="Confirm password"
+                        dense
+                        outlined
+                      >
+                      </v-text-field>
+                      <!-- </validation-provider> -->
+                    </v-col>
+                  </v-row>
 
-                    <v-row>
-                      <v-col cols="6" lg="6">
-                        <v-btn outlined @click="cancelPassRecover()">
-                          Cancel
-                        </v-btn>
-                      </v-col>
-                      <v-col cols="6" lg="6">
-                        <v-btn
-                          color="primary"
-                          type="submit"
-                          :loading="pass_recover_loading"
-                          :disabled="invalid"
-                        >
-                          Reset
-                        </v-btn>
-                      </v-col>
-                    </v-row>
-                  </form>
-                </validation-observer>
+                  <v-row>
+                    <v-col cols="6" lg="6">
+                      <v-btn outlined @click="cancelPassRecover()">
+                        Cancel
+                      </v-btn>
+                    </v-col>
+                    <v-col cols="6" lg="6">
+                      <v-btn
+                        color="primary"
+                        type="submit"
+                        :loading="pass_recover_loading"
+                        :disabled="invalid"
+                      >
+                        Reset
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </form>
+                <!-- </validation-observer> -->
               </v-col>
 
               <!--End otp holder-->
@@ -186,14 +186,14 @@
 </template>
 
 <script>
-import { ValidationProvider, ValidationObserver } from "vee-validate";
+// import { ValidationProvider, ValidationObserver } from "vee-validate";
 
 export default {
   name: "pass-recover",
-  components: {
-    ValidationObserver,
-    ValidationProvider,
-  },
+  // components: {
+  //   ValidationObserver,
+  //   ValidationProvider,
+  // },
   data() {
     return {
       pass_recover_dialog: false,

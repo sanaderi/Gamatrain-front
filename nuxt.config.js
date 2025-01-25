@@ -74,8 +74,7 @@ export default defineNuxtConfig({
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: "plugins/vee-validate.js", ssr: true },
-    { src: "plugins/axios.js" },
+    // { src: "plugins/vee-validate.js", ssr: true },
     { src: "plugins/helper.js" },
     { src: "plugins/vue-emoji-picker", ssr: false },
     { src: "plugins/img-cropper", ssr: false },
@@ -97,6 +96,7 @@ export default defineNuxtConfig({
     "@nuxtjs/dotenv",
     "@nuxtjs/moment",
     "@nuxtjs/pwa",
+    "@nuxtjs/toast",
 
     // '@nuxtjs/onesignal',
   ],
@@ -113,6 +113,7 @@ export default defineNuxtConfig({
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    "@vee-validate/nuxt",
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
         // @ts-expect-error
@@ -146,47 +147,47 @@ export default defineNuxtConfig({
     middleware: ["auth", "redirect"],
   },
 
-  auth: {
-    strategies: {
-      // google: {
-      //   clientId: process.env.GOOGLE_CLIENT_Id,
-      //   redirectUri: process.env.GOOGLE_REDIRECT_URI,
-      //   codeChallengeMethod: '',
-      //   responseType: 'code',
-      //   grantType: 'google',
-      //   endpoints: {
-      //     token: '/api/google_login',
-      //     userInfo: '/api/user'
-      //   },
-      //   user: {
-      //     property: 'user',
-      //     autoFetch: false
-      //   }
-      // },
-      local: {
-        token: {
-          property: "jwtToken",
-          global: true,
-        },
-        user: {
-          property: "data",
-          autoFetch: true,
-        },
-        endpoints: {
-          login: { url: "/api/v1/users/login", method: "post" },
-          // refresh: {url: '/api/v1/users/refresh_token', method: 'post'},
-          user: { url: "/api/v1/users/info", method: "get" },
-          logout: { url: "/api/v1/users/logout", method: "get" },
-        },
-      },
-    },
-    redirect: {
-      login: "/?access=denied",
-      logout: "/",
-      callback: false,
-      home: "/",
-    },
-  },
+  // auth: {
+  //   strategies: {
+  //     // google: {
+  //     //   clientId: process.env.GOOGLE_CLIENT_Id,
+  //     //   redirectUri: process.env.GOOGLE_REDIRECT_URI,
+  //     //   codeChallengeMethod: '',
+  //     //   responseType: 'code',
+  //     //   grantType: 'google',
+  //     //   endpoints: {
+  //     //     token: '/api/google_login',
+  //     //     userInfo: '/api/user'
+  //     //   },
+  //     //   user: {
+  //     //     property: 'user',
+  //     //     autoFetch: false
+  //     //   }
+  //     // },
+  //     local: {
+  //       token: {
+  //         property: "jwtToken",
+  //         global: true,
+  //       },
+  //       user: {
+  //         property: "data",
+  //         autoFetch: true,
+  //       },
+  //       endpoints: {
+  //         login: { url: "/api/v1/users/login", method: "post" },
+  //         // refresh: {url: '/api/v1/users/refresh_token', method: 'post'},
+  //         user: { url: "/api/v1/users/info", method: "get" },
+  //         logout: { url: "/api/v1/users/logout", method: "get" },
+  //       },
+  //     },
+  //   },
+  //   redirect: {
+  //     login: "/?access=denied",
+  //     logout: "/",
+  //     callback: false,
+  //     home: "/",
+  //   },
+  // },
 
   toast: {
     position: "top-center",
@@ -241,7 +242,7 @@ export default defineNuxtConfig({
   build: {
     transpile: [
       "vuetify",
-      "vee-validate",
+      // "vee-validate",
       "vue-chartjs",
       "ofetch",
       "node-fetch-native",

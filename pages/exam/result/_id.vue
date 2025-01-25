@@ -43,7 +43,7 @@
                   <tbody>
                     <tr>
                       <td>
-                        {{ contentData.user.first_name }}
+                        {{ contentData.user?.first_name }}
                         {{ contentData.user.last_name }}
                       </td>
                       <td class="text-center">

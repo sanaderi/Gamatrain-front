@@ -60,8 +60,8 @@
                       >
                         {{ userName }}
                       </div>
-                      <v-avatar size="32" v-if="$auth.user.avatar">
-                        <v-img :src="$auth.user.avatar" alt="user avatar" />
+                      <v-avatar size="32" v-if="$auth?.user?.avatar">
+                        <v-img :src="$auth?.user?.avatar" alt="user avatar" />
                       </v-avatar>
                       <v-icon v-else :color="menuSetting.linkColor">
                         mdi-account
@@ -154,10 +154,10 @@
                 <v-icon v-text="'mdi-account-outline'"></v-icon>
               </v-list-item-icon>
               <v-list-item-title>
-                <span v-if="$auth.user.first_name">{{
-                  $auth.user.first_name
+                <span v-if="$auth.user?.first_name">{{
+                  $auth.user?.first_name
                 }}</span>
-                <span v-else-if="$auth.user.last_name">{{
+                <span v-else-if="$auth.user?.last_name">{{
                   $auth.user.last_name
                 }}</span>
                 <span v-else>No name</span>
@@ -537,8 +537,8 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <div v-bind="attrs" v-on="on">
-              <v-avatar v-if="$auth.user.avatar" class="ml-2">
-                <v-img :src="$auth.user.avatar" alt="user avatar" />
+              <v-avatar v-if="$auth?.user?.avatar" class="ml-2">
+                <v-img :src="$auth?.user?.avatar" alt="user avatar" />
               </v-avatar>
               <v-icon v-else class="ml-2" :color="menuSetting.linkColor">
                 mdi-account
@@ -591,8 +591,11 @@
             </v-btn>
           </v-toolbar>
           <v-list three-line>
-            <template v-for="(item, index) in notificationItems">
-              <v-list-item :key="index">
+            <template>
+              <v-list-item
+                v-for="(item, index) in notificationItems"
+                :key="index"
+              >
                 <v-list-item-icon>
                   <v-icon :icon="item.icon"></v-icon>
                 </v-list-item-icon>
@@ -1061,8 +1064,8 @@ export default {
   },
   computed: {
     userName() {
-      if (this.$auth.user.first_name) return this.$auth.user.first_name;
-      else if (this.$auth.user.last_name) return this.$auth.user.last_name;
+      if (this.$auth?.user?.first_name) return this.$auth.user?.first_name;
+      else if (this.$auth?.user?.last_name) return this.$auth.user?.last_name;
       else return "No name";
     },
   },

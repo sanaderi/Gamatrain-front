@@ -117,71 +117,63 @@
               <!--Otp holder-->
               <v-col cols="12">
                 <p class="text-h6">Please enter password</p>
-                <validation-observer
-                  ref="final_reg_observer"
-                  v-slot="{ invalid }"
-                >
-                  <form @submit.prevent="finalRegister()">
-                    <v-row>
-                      <v-col cols="12">
-                        <validation-provider
-                          v-slot="{ errors }"
-                          name="password"
-                          rules="required|min:8"
-                        >
-                          <v-text-field
-                            label="Password"
-                            v-model="password"
-                            outlined
-                            :error-messages="errors"
-                            dense
-                            type="password"
-                            :type="show1 ? 'text' : 'password'"
-                            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                            @click:append="show1 = !show1"
-                            required
-                          />
-                        </validation-provider>
-                      </v-col>
-                      <!--     Confirm Password       -->
-                      <v-col cols="12">
-                        <validation-provider
-                          name="confirmPassword"
-                          v-slot="{ errors }"
-                          rules="required|min:8|confirmed:password"
-                        >
-                          <v-text-field
-                            v-model="confirmPassword"
-                            type="password"
-                            :error-messages="errors"
-                            label="Confirm password"
-                            dense
-                            outlined
-                          >
-                          </v-text-field>
-                        </validation-provider>
-                      </v-col>
-                    </v-row>
+                <!-- <validation-observer -->
+                ref="final_reg_observer" v-slot="{ invalid }" >
+                <form @submit.prevent="finalRegister()">
+                  <v-row>
+                    <v-col cols="12">
+                      <!-- <validation-provider -->
+                      <!-- v-slot="{ errors }" name="password" rules="required|min:8"
+                      > -->
+                      <v-text-field
+                        label="Password"
+                        v-model="password"
+                        outlined
+                        :error-messages="errors"
+                        dense
+                        type="password"
+                        :type="show1 ? 'text' : 'password'"
+                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                        @click:append="show1 = !show1"
+                        required
+                      />
+                      <!-- </validation-provider> -->
+                    </v-col>
+                    <!--     Confirm Password       -->
+                    <v-col cols="12">
+                      <!-- <validation-provider -->
+                      <!-- name="confirmPassword" v-slot="{ errors }"
+                      rules="required|min:8|confirmed:password" > -->
+                      <v-text-field
+                        v-model="confirmPassword"
+                        type="password"
+                        :error-messages="errors"
+                        label="Confirm password"
+                        dense
+                        outlined
+                      >
+                      </v-text-field>
+                      <!-- </validation-provider> -->
+                    </v-col>
+                  </v-row>
 
-                    <v-row>
-                      <v-col cols="6" lg="6">
-                        <v-btn outlined @click="cancelRegister()">
-                          Cancel
-                        </v-btn>
-                      </v-col>
-                      <v-col cols="6" lg="6">
-                        <v-btn
-                          color="primary"
-                          type="submit"
-                          :loading="register_loading"
-                          :disabled="invalid"
-                        >
-                          Register
-                        </v-btn>
-                      </v-col>
-                    </v-row>
-                  </form>
-                </validation-observer>
+                  <v-row>
+                    <v-col cols="6" lg="6">
+                      <v-btn outlined @click="cancelRegister()"> Cancel </v-btn>
+                    </v-col>
+                    <v-col cols="6" lg="6">
+                      <v-btn
+                        color="primary"
+                        type="submit"
+                        :loading="register_loading"
+                        :disabled="invalid"
+                      >
+                        Register
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </form>
+                <!-- </validation-observer> -->
               </v-col>
 
               <!--End otp holder-->
@@ -194,14 +186,14 @@
 </template>
 
 <script>
-import { ValidationProvider, ValidationObserver } from "vee-validate";
+// import { ValidationProvider, ValidationObserver } from "vee-validate";
 
 export default {
   name: "register",
-  components: {
-    ValidationObserver,
-    ValidationProvider,
-  },
+  // components: {
+  //   ValidationObserver,
+  //   ValidationProvider,
+  // },
   data() {
     return {
       register_dialog: false,

@@ -23,81 +23,74 @@
           </v-col>
           <v-col cols="12">
             <div v-show="identity_holder">
-              <validation-observer ref="observer" v-slot="{ invalid }">
-                <form @submit.prevent="submit">
-                  <v-row>
-                    <v-col cols="12">
-                      <validation-provider
-                        v-slot="{ errors }"
-                        name="Email"
-                        rules="required"
-                      >
-                        <v-text-field
-                          v-model="identity"
-                          dense
-                          label="Email"
-                          :error-messages="errors"
-                          required
-                          outlined
-                        />
-                      </validation-provider>
-                    </v-col>
-                    <v-col cols="12">
-                      <validation-provider
-                        v-slot="{ errors }"
-                        name="Password"
-                        rules="required"
-                      >
-                        <v-text-field
-                          label="Password"
-                          v-model="password"
-                          outlined
-                          :error-messages="errors"
-                          dense
-                          type="password"
-                          :type="passVisible ? 'text' : 'password'"
-                          :append-icon="passVisible ? 'mdi-eye' : 'mdi-eye-off'"
-                          @click:append="passVisible = !passVisible"
-                          required
-                        />
-                      </validation-provider>
-                      <p @click="switchToPassRecover" class="pointer">
-                        Forget password
-                      </p>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-divider class="mb-3" />
-                      <p
-                        class="text-h6 text-center pointer"
-                        @click="switchToRegister"
-                      >
-                        Not registered? register now
-                      </p>
-                      <v-divider class="mt-3" />
-                    </v-col>
-                    <v-col cols="6">
-                      <v-btn
+              <!-- <validation-observer ref="observer" v-slot="{ invalid }"> -->
+              <form @submit.prevent="submit">
+                <v-row>
+                  <v-col cols="12">
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Email"
+                      rules="required"
+                    >
+                      <v-text-field
+                        v-model="identity"
+                        dense
+                        label="Email"
+                        :error-messages="errors"
+                        required
                         outlined
-                        block
-                        @click="login_dialog = !login_dialog"
-                      >
-                        Cancel
-                      </v-btn>
-                    </v-col>
-                    <v-col cols="6">
-                      <v-btn
-                        color="primary"
-                        type="submit"
-                        :disabled="invalid"
-                        block
-                        :loading="login_loading"
-                      >
-                        Login
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </form>
-              </validation-observer>
+                      />
+                    </validation-provider>
+                  </v-col>
+                  <v-col cols="12">
+                    <!-- <validation-provider -->
+                    <!-- v-slot="{ errors }" name="Password" rules="required" > -->
+                    <v-text-field
+                      label="Password"
+                      v-model="password"
+                      outlined
+                      :error-messages="errors"
+                      dense
+                      type="password"
+                      :type="passVisible ? 'text' : 'password'"
+                      :append-icon="passVisible ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="passVisible = !passVisible"
+                      required
+                    />
+                    <!-- </validation-provider> -->
+                    <p @click="switchToPassRecover" class="pointer">
+                      Forget password
+                    </p>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-divider class="mb-3" />
+                    <p
+                      class="text-h6 text-center pointer"
+                      @click="switchToRegister"
+                    >
+                      Not registered? register now
+                    </p>
+                    <v-divider class="mt-3" />
+                  </v-col>
+                  <v-col cols="6">
+                    <v-btn outlined block @click="login_dialog = !login_dialog">
+                      Cancel
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-btn
+                      color="primary"
+                      type="submit"
+                      :disabled="invalid"
+                      block
+                      :loading="login_loading"
+                    >
+                      Login
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </form>
+              <!-- </validation-observer> -->
             </div>
 
             <div v-show="otp_holder">
@@ -144,8 +137,7 @@
 </template>
 
 <script>
-import { ValidationProvider, ValidationObserver } from "vee-validate";
-import querystring from "querystring";
+// import { ValidationProvider, ValidationObserver } from "vee-validate";
 
 export default {
   name: "login",
@@ -168,10 +160,10 @@ export default {
       otp_holder: false,
     };
   },
-  components: {
-    ValidationProvider,
-    ValidationObserver,
-  },
+  // components: {
+  //   ValidationProvider,
+  //   ValidationObserver,
+  // },
   mounted() {},
   watch: {
     login_dialog(val) {
