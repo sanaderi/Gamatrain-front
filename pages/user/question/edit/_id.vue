@@ -4,24 +4,26 @@
       <v-row>
         <v-col cols="12" class="pl-5">
           <span class="icon icong-test text-h3 teal--text"></span>
-          <span class="text-h4 teal--text">
-            Q & A edit
-          </span>
+          <span class="text-h4 teal--text"> Q & A edit </span>
         </v-col>
       </v-row>
       <v-card class="mt-3">
         <v-card-text class="px-0 px-sm-8 px-md-4">
           <v-card-text>
             <v-card flat class="mt-3">
-              <validation-observer ref="observer" v-slot="{invalid}">
+              <validation-observer ref="observer" v-slot="{ invalid }">
                 <form @submit.prevent="updateContent">
                   <v-row>
                     <v-col cols="12" md="3">
-                      <validation-provider v-slot="{errors}" name="level" rules="required">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="level"
+                        rules="required"
+                      >
                         <v-autocomplete
                           dense
                           v-model="form.section"
-                          @change="changeOption('section',$event)"
+                          @change="changeOption('section', $event)"
                           :items="section_list"
                           :error-messages="errors"
                           item-text="title"
@@ -32,14 +34,18 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="3">
-                      <validation-provider v-slot="{errors}" name="grade" rules="required">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="grade"
+                        rules="required"
+                      >
                         <v-autocomplete
                           dense
                           v-model="form.base"
                           :items="grade_list"
                           item-value="id"
                           item-text="title"
-                          @change="changeOption('base',$event)"
+                          @change="changeOption('base', $event)"
                           :error-messages="errors"
                           label="Grade"
                           outlined
@@ -58,10 +64,14 @@
                     <!--                      </validation-provider>-->
                     <!--                    </v-col>-->
                     <v-col cols="12" md="3">
-                      <validation-provider v-slot="{errors}" name="lesson" rules="required">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="lesson"
+                        rules="required"
+                      >
                         <v-autocomplete
                           dense
-                          @change="changeOption('lesson',$event)"
+                          @change="changeOption('lesson', $event)"
                           :items="lesson_list"
                           item-value="id"
                           item-text="title"
@@ -83,7 +93,10 @@
                         outlined
                       >
                         <template v-slot:item="data">
-                          <span :class="data.item.season ? 'topic_season' : ''" class="py-2">
+                          <span
+                            :class="data.item.season ? 'topic_season' : ''"
+                            class="py-2"
+                          >
                             {{ data.item.title }}
                           </span>
                         </template>
@@ -91,8 +104,11 @@
                     </v-col>
 
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}"
-                                           name="title" rules="required|min:20">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="title"
+                        rules="required|min:20"
+                      >
                         <v-text-field
                           dense
                           v-model="form.title"
@@ -104,8 +120,11 @@
                     </v-col>
 
                     <v-col cols="12" md="12">
-                      <validation-provider v-slot="{errors}"
-                                           name="question" rules="required|min:70">
+                      <validation-provider
+                        v-slot="{ errors }"
+                        name="question"
+                        rules="required|min:70"
+                      >
                         <v-textarea
                           dense
                           v-model="form.question"
@@ -119,17 +138,19 @@
                       </validation-provider>
                     </v-col>
                     <v-col cols="12" md="3">
-                      <validation-provider v-slot="{validate,errors}"
-                                           rules="mimes:image/png,image/jpg,image/jpeg,image/gif,video/mp4,video/flv,application/zip,application/rar"
-                                           ref="file_provider"
-                                           name="file">
+                      <validation-provider
+                        v-slot="{ validate, errors }"
+                        rules="mimes:image/png,image/jpg,image/jpeg,image/gif,video/mp4,video/flv,application/zip,application/rar"
+                        ref="file_provider"
+                        name="file"
+                      >
                         <v-file-input
                           dense
                           v-model="file"
                           :error-messages="errors"
                           label="Attach file"
                           accept=".png,.jpg,jpeg,.gif,.zip,.rar,.mp4,.flv"
-                          @change="uploadFile('file',$event),validate"
+                          @change="uploadFile('file', $event), validate"
                           :prepend-icon="null"
                           color="red"
                           prepend-inner-icon="mdi-file"
@@ -137,32 +158,41 @@
                           outlined
                         >
                           <template slot="append-outer">
-                            <v-btn small icon
-                                   :href="questionData.files.url"
-                                   target="_blank"
-                                   v-show="questionData.files.exist">
-                              <v-icon>
-                                mdi-download
-                              </v-icon>
+                            <v-btn
+                              small
+                              icon
+                              :href="questionData.files.url"
+                              target="_blank"
+                              v-show="questionData.files.exist"
+                            >
+                              <v-icon> mdi-download </v-icon>
                             </v-btn>
                           </template>
                         </v-file-input>
                       </validation-provider>
                     </v-col>
-
-
                   </v-row>
                   <v-row>
                     <v-col cols="12" md="6" class="pb-0">
-                      <v-btn type="submit"
-                             :loading="loading.form"
-                             :disabled="invalid"
-                             lg color="success" block>
+                      <v-btn
+                        type="submit"
+                        :loading="loading.form"
+                        :disabled="invalid"
+                        lg
+                        color="success"
+                        block
+                      >
                         Update
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
-                      <v-btn lg outlined color="error" to="/user/question" block>
+                      <v-btn
+                        lg
+                        outlined
+                        color="error"
+                        to="/user/question"
+                        block
+                      >
                         Discard
                       </v-btn>
                     </v-col>
@@ -178,22 +208,22 @@
 </template>
 
 <script>
-
-import {ValidationObserver, ValidationProvider} from "vee-validate";
+import { ValidationObserver, ValidationProvider } from "vee-validate";
 
 export default {
-  layout: 'dashboard_layout',
+  layout: "dashboard_layout",
   name: "edit-question",
   data() {
     return {
       form: {
-        section: '',
-        base: '',
-        lesson: '',
-        topics: '',
-        title: '',
-        question: '',
-        file: ''
+        id: this.$route.params.id,
+        section: "",
+        base: "",
+        lesson: "",
+        topics: "",
+        title: "",
+        question: "",
+        file: "",
       },
       file: null,
       section_list: [],
@@ -207,17 +237,17 @@ export default {
         base: false,
         lesson: false,
         topic: false,
-        file: false,//Upload file
-        form: false,//Submit multimedia form
-      }
-    }
+        file: false, //Upload file
+        form: false, //Submit multimedia form
+      },
+    };
   },
   head() {
     return {
-      title: 'Q & A edit form'
-    }
+      title: "Q & A edit form",
+    };
   },
-  async asyncData({params, $axios}) {
+  async asyncData({ params, $axios }) {
     // This could also be an action dispatch
     const content = await $axios.$get(`/api/v1/questions/${params.id}`);
     var questionData = [];
@@ -227,60 +257,63 @@ export default {
       questionData = content.data;
     }
 
-    return {questionData};
+    return { questionData };
   },
   components: {
     ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
   },
   mounted() {
-    this.getTypeList('section');
+    this.getTypeList("section");
     this.initData();
   },
   methods: {
-    getTypeList(type, parent = '') {
+    getTypeList(type, parent = "") {
       var params = {
-        type: type
-      }
+        type: type,
+      };
 
-      if (type === 'section') {
+      if (type === "section") {
         this.loading.section = true;
       }
-      if (type === 'base') {
+      if (type === "base") {
         params.section_id = parent;
         this.loading.base = true;
       }
-      if (type === 'lesson') {
+      if (type === "lesson") {
         params.base_id = parent;
         this.loading.lesson = true;
       }
-      if (type === 'topic') {
+      if (type === "topic") {
         params.lesson_id = parent;
         this.loading.topic = true;
       }
 
-
-      this.$axios.$get('/api/v1/types/list', {
-        params
-      }).then(res => {
-        var data = {};
-        if (type === 'section') {
-          this.section_list = res.data;
-        } else if (type === 'base') {
-          this.grade_list = res.data;
-        } else if (type === 'lesson') {
-          this.lesson_list = res.data;
-        } else if (type === 'topic') {
-          this.topic_list = res.data;
-        }
-      }).catch(err => {
-        this.$toast.error(err);
-      }).finally(() => {
-        this.loading.section = false;
-        this.loading.base = false;
-        this.loading.lesson = false;
-        this.loading.topic = false;
-      });
+      this.$axios
+        .$get("/api/v1/types/list", {
+          params,
+        })
+        .then((res) => {
+          var data = {};
+          if (type === "section") {
+            this.section_list = res.data;
+          } else if (type === "base") {
+            this.grade_list = res.data;
+          } else if (type === "lesson") {
+            this.lesson_list = res.data;
+          } else if (type === "topic") {
+            this.topic_list = res.data;
+          }
+        })
+        .catch((err) => {
+          this.$toast.error(err);
+        })
+        .finally(() => {
+          this.loading.section = false;
+          this.loading.base = false;
+          this.loading.lesson = false;
+          this.loading.topic = false;
+        });
     },
 
     updateContent() {
@@ -291,85 +324,89 @@ export default {
         formData.append(key, this.form[key]);
       }
 
-
-      this.$axios.$put(`/api/v1/questions/${this.$route.params.id}`,
-        this.urlencodeFormData(formData),
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+      this.$axios
+        .$put(
+          `/api/v1/questions/${this.$route.params.id}`,
+          this.urlencodeFormData(formData),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
           }
-        }).then(response => {
-        if (response.data.id == 0 && response.data.repeated)
-          this.$toast.info("The question is duplicated");
-        else {
-          this.$toast.success("Update successfully");
-          this.$router.push({
-            path: "/user/question"
-          })
-        }
-      }).catch(err => {
-        if (err.response.status == 403)
-          this.$router.push({query: {auth_form: 'login'}});
-        else if (err.response.status == 400)
-          this.$toast.error(err.response.data.message);
-      }).finally(() => {
-        this.loading.form = false;
-      });
+        )
+        .then((response) => {
+          if (response.data.id == 0 && response.data.repeated)
+            this.$toast.info("The question is duplicated");
+          else {
+            this.$toast.success("Update successfully");
+            this.$router.push({
+              path: "/user/question",
+            });
+          }
+        })
+        .catch((err) => {
+          if (err.response.status == 403)
+            this.$router.push({ query: { auth_form: "login" } });
+          else if (err.response.status == 400)
+            this.$toast.error(err.response.data.message);
+        })
+        .finally(() => {
+          this.loading.form = false;
+        });
     },
-
 
     //Convert form data from multipart to urlencode
     urlencodeFormData(fd) {
-      var s = '';
+      var s = "";
 
       for (var pair of fd.entries()) {
-        if (typeof pair[1] == 'string') {
-          s += (s ? '&' : '') + this.encode(pair[0]) + '=' + this.encode(pair[1]);
+        if (typeof pair[1] == "string") {
+          s +=
+            (s ? "&" : "") + this.encode(pair[0]) + "=" + this.encode(pair[1]);
         }
       }
       return s;
     },
     encode(s) {
-      return encodeURIComponent(s).replace(/%20/g, '+');
+      return encodeURIComponent(s).replace(/%20/g, "+");
     },
     //End convert form data from multipart to urlencode
-
 
     selectTopic(event) {
       this.form.topics = event;
     },
 
     async uploadFile(file_name, value) {
-      if (!value)
-        return;
+      if (!value) return;
 
-      const {valid} = await this.$refs.file_provider.validate(value);
-
+      const { valid } = await this.$refs.file_provider.validate(value);
 
       if (valid) {
         this.loading.file = true;
-        if (!value)//Check empty request
+        if (!value)
+          //Check empty request
           return;
         this.loading.form = true;
         let formData = new FormData();
-        formData.append('file', value);
+        formData.append("file", value);
 
-        this.$axios.$post('/api/v1/upload',
-          formData,
-          {
+        this.$axios
+          .$post("/api/v1/upload", formData, {
             headers: {
-              'accept': '*/*',
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-        ).then(response => {
-          this.form.file = response.data[0].file.name;
-        }).catch(err => {
-          this.$toast.error("An error occurred");
-        }).finally(() => {
-          this.loading.file = false;
-          this.loading.form = false;
-        })
+              accept: "*/*",
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            this.form.file = response.data[0].file.name;
+          })
+          .catch((err) => {
+            this.$toast.error("An error occurred");
+          })
+          .finally(() => {
+            this.loading.file = false;
+            this.loading.form = false;
+          });
       }
 
       console.log("Pass4");
@@ -377,29 +414,27 @@ export default {
       // }
     },
 
-
     initData() {
       this.form.section = this.questionData.section;
-      if (this.form.section) {//Load grad list
-        this.form.grade = '';
-        this.form.lesson = '';
-        this.form.topics = '';
+      if (this.form.section) {
+        //Load grad list
+        this.form.grade = "";
+        this.form.lesson = "";
+        this.form.topics = "";
         this.grade_list = [];
         this.lesson_list = [];
         this.topic_list = [];
 
-        this.getTypeList('base', this.form.section);
-
+        this.getTypeList("base", this.form.section);
       }
       this.form.base = this.questionData.base;
-      if (this.form.base) {//Load lesson list
-        this.form.lesson = '';
-        if (this.form.base)
-          this.getTypeList('lesson', this.form.base);
+      if (this.form.base) {
+        //Load lesson list
+        this.form.lesson = "";
+        if (this.form.base) this.getTypeList("lesson", this.form.base);
       }
       this.form.lesson = this.questionData.lesson;
-      if (this.form.lesson)
-        this.getTypeList('topic', this.form.lesson);
+      if (this.form.lesson) this.getTypeList("topic", this.form.lesson);
       else {
         this.form.topic = [];
         this.topic_list = [];
@@ -407,56 +442,46 @@ export default {
 
       this.form.topics = this.questionData.topic;
 
-
       this.form.title = this.questionData.title;
       this.form.question = this.questionData.question;
-
     },
 
-
-
-
     changeOption(optionName, optionVal) {
-      if (optionName == 'section') {
-        this.form.grade = '';
-        this.form.lesson = '';
+      if (optionName == "section") {
+        this.form.grade = "";
+        this.form.lesson = "";
         this.form.topics = [];
         this.grade_list = [];
         this.lesson_list = [];
         this.topic_list = [];
 
-        this.getTypeList('base', optionVal);
-
-
-      } else if (optionName == 'base') {
-        this.form.lesson = '';
-        if (optionVal)
-          this.getTypeList('lesson', optionVal);
-      } else if (optionName == 'lesson') {
-        if (optionVal)
-          this.getTypeList('topic', optionVal);
+        this.getTypeList("base", optionVal);
+      } else if (optionName == "base") {
+        this.form.lesson = "";
+        if (optionVal) this.getTypeList("lesson", optionVal);
+      } else if (optionName == "lesson") {
+        if (optionVal) this.getTypeList("topic", optionVal);
         else {
           this.form.topic = [];
           this.topic_list = [];
         }
       }
     },
-  }
-
-}
+  },
+};
 </script>
 
 <style>
 .submission-notice {
   line-height: 2rem;
-  background-color: #FFEFE5 !important;
+  background-color: #ffefe5 !important;
 }
 
 .submission-notice .v-alert__icon.v-icon {
   color: white !important;
   padding: 2rem;
   border-radius: 0.5rem;
-  background-color: #FF6600;
+  background-color: #ff6600;
 }
 
 .notice_item {
@@ -474,7 +499,7 @@ export default {
 .notice_item li:before {
   font-family: "Font Awesome 5 Free";
   font-size: 2rem;
-  color: #FFC700FF;
+  color: #ffc700ff;
   content: "\f0a4";
   font-weight: 900;
 }
