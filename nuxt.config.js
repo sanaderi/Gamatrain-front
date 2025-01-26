@@ -122,24 +122,12 @@ export default defineNuxtConfig({
     },
   ],
 
-  // axios: {
-  //   proxy: true,
-  //   baseUrl: process.env.API_BASE_URL,
-  //   headers: {},
-  // },
-
-  proxy: {
-    "/api/v1/": {
-      target: process.env.API_BASE_URL,
-      pathRewrite: { "^/api/v1/": "/api/v1/" },
-      secure: false,
-      changeOrigin: true,
+  routeRules: {
+    "/api/v1/**": {
+      proxy: "https://core.gamatrain.com/api/v1/**",
     },
-    "/uploads/": {
-      target: process.env.API_BASE_URL,
-      pathRewrite: { "^/uploads": "/uploads" },
-      secure: false,
-      changeOrigin: true,
+    "/uploads/**": {
+      proxy: "https://core.gamatrain.com/uploads/**",
     },
   },
 

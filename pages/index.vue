@@ -1,10 +1,10 @@
 <template>
   <v-container fluid class="px-0 py-0 mt-md-0">
-    <main-slider />
+    <home-main-slider />
 
-    <grade-explorer :stats="stats" />
+    <home-grade-explorer :stats="stats" />
 
-    <level-guid-banner :slide-arr="slideArr" />
+    <home-level-guid-banner :slide-arr="slideArr" />
 
     <!--Ai learn banner-->
     <v-container>
@@ -17,8 +17,8 @@
               Discover Your Full Potential with AI-based Education
             </p>
             <v-btn
-              :large="$vuetify.breakpoint.mdAndUp"
-              :small="$vuetify.breakpoint.xs"
+              :large="mdAndUp"
+              :small="xs"
               to="/smart-learning"
               rounded
               class="primary gama-btn"
@@ -89,13 +89,17 @@
             provided you with access to school information. Just filter and
             GamaTrain will find it for you.
           </p>
-          <!-- <v-btn
-                     :large="$vuetify.breakpoint.mdAndUp"
-                     :small="$vuetify.breakpoint.xs"
-                     rounded class="primary gama-btn" to="/school-service">Learn more</v-btn> -->
           <v-btn
-            :large="$vuetify.breakpoint.mdAndUp"
-            :small="$vuetify.breakpoint.xs"
+            :large="mdAndUp"
+            :small="xs"
+            rounded
+            class="primary gama-btn"
+            to="/school-service"
+            >Learn more</v-btn
+          >
+          <v-btn
+            :large="mdAndUp"
+            :small="xs"
             rounded
             class="primary gama-btn"
             to="/school"
@@ -107,11 +111,11 @@
     <!--End school service banner-->
 
     <!-- Stats container -->
-    <stats-banner />
+    <home-stats-banner />
     <!-- End stats container -->
 
     <!-- Blog container -->
-    <blog-container />
+    <home-blog-container />
     <!-- End blog container -->
 
     <!--Earn money banner-->
@@ -126,8 +130,8 @@
           <v-col cols="12" sm="12" md="12" class="text-center">
             <v-btn
               rounded
-              :large="$vuetify.breakpoint.mdAndUp"
-              :small="$vuetify.breakpoint.xs"
+              :large="mdAndUp"
+              :small="xs"
               to="/earn-money"
               class="primary gama-btn"
               >Earn money</v-btn
@@ -139,112 +143,100 @@
     <!--End earn money banner-->
   </v-container>
 </template>
+<script setup>
+// Data
+const test_schools = ref("");
+const less = ref(true);
+const showLess = ref(true);
 
-<script>
-import MainSlider from "~/components/home/main-slider.vue";
-import GradeExplorer from "~/components/home/grade-explorer.vue";
-import LevelGuidBanner from "~/components/home/level-guid-banner.vue";
-import BlogContainer from "~/components/home/blog-container.vue";
-import StatsBanner from "~/components/home/stats-banner.vue";
-
-export default {
-  auth: false,
-  head() {
-    return {
-      titleTemplate: "%s",
-      title:
-        "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
-      meta: [
-        {
-          hid: "description",
-          name: "description",
-          content:
-            "Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences.",
-        },
-        {
-          hid: "apple-mobile-web-app-title",
-          name: "apple-mobile-web-app-title",
-          content:
-            "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
-        },
-        {
-          hid: "og:title",
-          name: "og:title",
-          content:
-            "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
-        },
-        {
-          hid: "og:site_name",
-          name: "og:site_name",
-          content: "GamaTrain",
-        },
-      ],
-    };
+const items = ref([
+  {
+    src: "banner_home_2.jpg",
   },
-  components: {
-    MainSlider,
-    GradeExplorer,
-    LevelGuidBanner,
-    BlogContainer,
-    StatsBanner,
+  {
+    src: "banner_home_2.jpg",
   },
+]);
 
-  data() {
-    return {
-      test_schools: "",
-      less: true,
-      showLess: true,
-
-      items: [
-        {
-          src: "banner_home_2.jpg",
-        },
-        {
-          src: "banner_home_2.jpg",
-        },
-      ],
-      slideArr: [
-        {
-          img: "guid-banner1.svg",
-          caption: "Sign Up",
-          describe: "Register and Create Your Content Creator Profile",
-        },
-        {
-          img: "guid-banner2.png",
-          caption: "Upload Your Content",
-          describe: "Share Your Lesson Plans, Study Guides, and More.",
-        },
-        {
-          img: "guid-banner3.svg",
-          caption: "Reach Students",
-          describe: "Gain Exposure through Our Platform and Network.",
-        },
-        {
-          img: "guid-banner4.svg",
-          caption: "Earn Big",
-          describe: "Reap the Rewards as Students Purchase Your Content.",
-        },
-      ],
-    };
+const slideArr = ref([
+  {
+    img: "guid-banner1.svg",
+    caption: "Sign Up",
+    describe: "Register and Create Your Content Creator Profile",
   },
-  computed: {
-    slideColor() {
-      if (this.colors && this.carousel_model) {
-        return this.colors[this.carousel_model];
-      }
-      return "#24292F"; // or some default value if colors or carousel_model is not available
-    },
+  {
+    img: "guid-banner2.png",
+    caption: "Upload Your Content",
+    describe: "Share Your Lesson Plans, Study Guides, and More.",
   },
-
-  //Load data
-  async asyncData({ params, $axios }) {
-    // This could also be an action dispatch
-    const response = await $axios.$get("/api/v1/home/stats");
-    var stats = response.data;
-
-    return { stats };
+  {
+    img: "guid-banner3.svg",
+    caption: "Reach Students",
+    describe: "Gain Exposure through Our Platform and Network.",
   },
+  {
+    img: "guid-banner4.svg",
+    caption: "Earn Big",
+    describe: "Reap the Rewards as Students Purchase Your Content.",
+  },
+]);
+
+const slideColor = computed(() => {
+  if (colors.value && carousel_model.value) {
+    return colors.value[carousel_model.value];
+  }
+  return "#24292F"; // Default color if colors or carousel_model are not available
+});
+
+// Async Data (similar to asyncData)
+const stats = ref(null);
+
+const fetchStats = async () => {
+  try {
+    const response = await $fetch("/api/v1/home/stats");
+
+    stats.value = response?.data;
+    console.log(stats.value);
+  } catch (error) {
+    console.error("Failed to fetch stats:", error);
+  }
 };
+await fetchStats();
+
+// Lifecycle Hook (onMounted)
+
+// head() {
+//   return {
+//     titleTemplate: "%s",
+//     title:
+//       "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
+//     meta: [
+//       {
+//         hid: "description",
+//         name: "description",
+//         content:
+//           "Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences.",
+//       },
+//       {
+//         hid: "apple-mobile-web-app-title",
+//         name: "apple-mobile-web-app-title",
+//         content:
+//           "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
+//       },
+//       {
+//         hid: "og:title",
+//         name: "og:title",
+//         content:
+//           "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
+//       },
+//       {
+//         hid: "og:site_name",
+//         name: "og:site_name",
+//         content: "GamaTrain",
+//       },
+//     ],
+//   };
+// },
 </script>
 
 <style>

@@ -261,7 +261,7 @@
                                 class="subdate-container gama-text-overline"
                               >
                                 <v-icon size="12">mdi-calendar</v-icon>
-                                {{ $moment(item.subdate).format("MMM DD") }}
+                                <!-- {{ $moment(item.subdate).format("MMM DD") }} -->
                               </v-col>
                             </v-row>
                           </v-card-subtitle>
@@ -321,7 +321,7 @@
                                 class="subdate-container gama-text-overline"
                               >
                                 <v-icon size="12">mdi-calendar</v-icon>
-                                {{ $moment(item.subdate).format("MMM DD") }}
+                                <!-- {{ $moment(item.subdate).format("MMM DD") }} -->
                               </v-col>
                             </v-row>
                           </v-card-subtitle>
@@ -804,17 +804,19 @@ export default {
   },
   methods: {
     showDate() {
-      if (
-        this.$moment(this.stats[7].last_update).format("MMM,DD YYYY") !==
-        "Invalid date"
-      )
-        return this.$moment(this.stats[7].last_update).format("MMM,DD YYYY");
+      // if (
+      //   this.$moment(this.stats[7].last_update).format("MMM,DD YYYY") !==
+      //   "Invalid date"
+      // )
+      return "need to review";
+      // return this.$moment(this.stats[7].last_update).format("MMM,DD YYYY");
     },
     shouldDisplayButton(index) {
       // Determine whether to display the button based on screen size and specific indexes
-      if (this.$vuetify.breakpoint.xs) return ![0, 1, 14, 15].includes(index);
-      else if (this.$vuetify.breakpoint.sm) return ![0, 15].includes(index);
-      else return true;
+      // if (xs) return ![0, 1, 14, 15].includes(index);
+      // else if (sm) return ![0, 15].includes(index);
+      // else
+      return true;
     },
     handleBtnClick(index) {
       this.stopInterval(); // Clear the interval using the interval ID
@@ -977,62 +979,62 @@ export default {
     },
 
     async getQuestions() {
-      await this.$axios
-        .$get("/api/v1/home/questions")
-        .then((res) => {
-          this.questions = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          this.questionLoading = false;
-        });
+      this.questionLoading = true;
+      try {
+        const response = await fetch("/api/v1/home/questions");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        this.questions = data.data;
+      } catch (err) {
+        console.log(err);
+      } finally {
+        this.questionLoading = false;
+      }
     },
 
     async getPapers() {
-      await this.$axios
-        .$get("/api/v1/home/tests")
-        .then((res) => {
-          this.papers = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          this.paperLoading = false;
-        });
+      try {
+        const response = await fetch("/api/v1/home/tests");
+        if (!response.ok)
+          throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        this.papers = data.data;
+      } catch {
+        console.log(err);
+      } finally {
+        this.paperLoading = false;
+      }
     },
 
     truncateGradeTitle(title, index) {
       var cutLength = 3;
-      if (this.$vuetify.breakpoint.xs) cutLength = 3;
-      else if (this.$vuetify.breakpoint.sm) cutLength = 3;
-      else if (this.$vuetify.breakpoint.md) cutLength = 3;
-      else cutLength = 9;
-      if (index == 7) cutLength = cutLength + 2;
-      return title.length > cutLength
-        ? title.slice(0, cutLength) + "..."
-        : title;
+      return cutLength;
+      // if (xs) cutLength = 3;
+      // else if (sm) cutLength = 3;
+      // else if (md) cutLength = 3;
+      // else cutLength = 9;
+      // if (index == 7) cutLength = cutLength + 2;
+      // return title.length > cutLength
+      //   ? title.slice(0, cutLength) + "..."
+      //   : title;
     },
     getFullName(firstName, lastName) {
       return `${firstName} ${lastName}`;
     },
     gradeHandlerTitle(title) {
-      if (
-        this.$vuetify.breakpoint.xs ||
-        this.$vuetify.breakpoint.sm ||
-        this.$vuetify.breakpoint.md
-      )
-        return title.replace(" Grade", "");
-      else return title;
+      // if (xs || sm || md) return title.replace(" Grade", "");
+      //   else
+      return title;
     },
   },
   computed: {
     gradeSizes() {
-      if (this.$vuetify.breakpoint.xs) return this.gradeSizesXs;
-      else if (this.$vuetify.breakpoint.sm) return this.gradeSizesSm;
-      else return this.gradeSizesMd;
+      // if (xs) return this.gradeSizesXs;
+      // else if (sm) return this.gradeSizesSm;
+      // else
+      return this.gradeSizesMd;
     },
   },
 

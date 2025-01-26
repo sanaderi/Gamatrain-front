@@ -74,19 +74,19 @@
                       :key="i"
                       :to="item.link"
                     >
-                      <v-list-item-icon class="mr-0 nt">
-                        <v-icon small>
+                      <template v-slot:prepend>
+                        <v-icon small class="mr-0 nt">
                           {{ item.icon }}
                         </v-icon>
-                      </v-list-item-icon>
+                      </template>
                       <v-list-item-title>
                         {{ item.title }}
                       </v-list-item-title>
                     </v-list-item>
                     <v-list-item class="pointer" @click="$auth.logout()">
-                      <v-list-item-icon class="mr-0">
-                        <v-icon small> mdi-logout </v-icon>
-                      </v-list-item-icon>
+                      <template v-slot:prepend>
+                        <v-icon small class="mr-0"> mdi-logout </v-icon>
+                      </template>
                       <v-list-item-title> Logout </v-list-item-title>
                     </v-list-item>
                   </v-list>
@@ -150,9 +150,7 @@
           <!--Profile info-->
           <v-list-group v-if="$auth.loggedIn" active-class="menu_group_active">
             <template v-slot:activator>
-              <v-list-item-icon>
-                <v-icon v-text="'mdi-account-outline'"></v-icon>
-              </v-list-item-icon>
+              <v-icon v-text="'mdi-account-outline'"></v-icon>
               <v-list-item-title>
                 <span v-if="$auth.user?.first_name">{{
                   $auth.user?.first_name
@@ -170,16 +168,16 @@
               :key="i"
               link
             >
-              <v-list-item-icon>
-                <v-icon v-text="item.icon"></v-icon>
-              </v-list-item-icon>
+              <template v-slot:prepend>
+                <v-icon :icon="item.icon"></v-icon>
+              </template>
               <v-list-item-title v-text="item.title"></v-list-item-title>
             </v-list-item>
 
             <v-list-item class="pl-7" @click="$auth.logout()">
-              <v-list-item-icon>
-                <v-icon v-text="'mdi-exit-to-app'"></v-icon>
-              </v-list-item-icon>
+              <template v-slot:prepend>
+                <v-icon :icon="'mdi-exit-to-app'"></v-icon>
+              </template>
               <v-list-item-title v-text="'Logout'"></v-list-item-title>
             </v-list-item>
           </v-list-group>
@@ -187,19 +185,19 @@
             v-if="$auth.loggedIn"
             @click="notificationListDialog = true"
           >
-            <v-list-item-icon>
+            <template v-slot:prepend>
               <v-badge overlap content="3">
-                <v-icon v-text="'mdi-bell-outline'"></v-icon>
+                <v-icon :icon="'mdi-bell-outline'"></v-icon>
               </v-badge>
-            </v-list-item-icon>
+            </template>
             <v-list-item-content>
               <v-list-item-title> Notification </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item @click="openLoginDialog" v-if="!$auth.loggedIn">
-            <v-list-item-icon>
-              <v-icon v-text="'mdi-account-outline'"></v-icon>
-            </v-list-item-icon>
+            <template v-slot:prepend>
+              <v-icon :icon="'mdi-account-outline'"></v-icon>
+            </template>
             <v-list-item-content>
               <v-list-item-title>
                 <span class="primary--text">Sign in</span>
@@ -217,9 +215,9 @@
               v-if="!item.subMenuList"
               :to="item.link"
             >
-              <v-list-item-icon>
-                <v-icon v-text="item.icon" :color="item.icon_color"></v-icon>
-              </v-list-item-icon>
+              <template v-slot:prepend>
+                <v-icon :icon="item.icon" :color="item.icon_color"></v-icon>
+              </template>
               <v-list-item-title v-text="item.title" class="menu-title" />
             </v-list-item>
 
@@ -551,19 +549,22 @@
               :key="i"
               :to="item.link"
             >
-              <v-list-item-icon class="mr-0 nt">
-                <v-icon small>
-                  {{ item.icon }}
-                </v-icon>
-              </v-list-item-icon>
+              <template v-slot:prepend>
+                <v-icon
+                  class="mr-0 nt"
+                  :icon="item.icon"
+                  :size="small"
+                ></v-icon>
+              </template>
+
               <v-list-item-title>
                 {{ item.title }}
               </v-list-item-title>
             </v-list-item>
             <v-list-item class="pointer" @click="$auth.logout()">
-              <v-list-item-icon class="mr-0">
-                <v-icon small> mdi-logout </v-icon>
-              </v-list-item-icon>
+              <template v-slot:prepend>
+                <v-icon small class="mr-0"> mdi-logout </v-icon>
+              </template>
               <v-list-item-title> Logout </v-list-item-title>
             </v-list-item>
           </v-list>
@@ -596,11 +597,11 @@
                 v-for="(item, index) in notificationItems"
                 :key="index"
               >
-                <v-list-item-icon>
+                <template v-slot:prepend>
                   <v-icon :icon="item.icon"></v-icon>
-                </v-list-item-icon>
+                </template>
 
-                <v-list-item-content>
+                <v-list-item>
                   <div class="date">{{ item.date }}</div>
                   <v-list-item-title
                     class="title"
@@ -610,7 +611,7 @@
                     class="describe"
                     v-html="item.describe"
                   ></v-list-item-subtitle>
-                </v-list-item-content>
+                </v-list-item>
               </v-list-item>
             </template>
           </v-list>

@@ -8,7 +8,9 @@
           </v-col>
           <v-col cols="6" class="text-right">
             <div class="d-none d-md-inline">
-              <v-btn rounded outlined large to="/blog" class="gama-btn">Go to blog</v-btn>
+              <v-btn rounded outlined large to="/blog" class="gama-btn"
+                >Go to blog</v-btn
+              >
             </div>
             <v-btn rounded to="/blog" text class="d-inline d-md-none seeAllBtn">
               See all
@@ -16,26 +18,24 @@
             </v-btn>
           </v-col>
           <v-col cols="12" class="px-md-0">
-            <v-slide-group
-              v-model="model"
-              class="slider py-sm-4"
-              :show-arrows="$vuetify.breakpoint.lgAndUp"
-            >
+            <v-slide-group class="slider py-sm-4" :show-arrows="lgAndUp">
               <div class="d-flex" v-if="isLoading">
-                <v-slide-item v-for="i in 10" :key="i">
+                <v-slide-group-item v-for="i in 10" :key="i">
                   <v-skeleton-loader
                     class="mx-auto slide-loading"
                     type="card"
                   ></v-skeleton-loader>
-                </v-slide-item>
+                </v-slide-group-item>
               </div>
 
-              <v-slide-item v-else v-for="(item, n) in slideItmes" :key="n">
-                <v-card
-                  flat
-                  :to="`/blog/${item.id}/${$slugGenerator.convert(item.title)}`"
-                >
+              <v-slide-group-item
+                v-else
+                v-for="(item, n) in slideItems"
+                :key="n"
+              >
+                <v-card flat :to="`/blog/${item.id}`">
                   <v-card
+                    flat
                     @mouseover="toggleHover('enter', n)"
                     @mouseleave="toggleHover('leave', n)"
                     class="ma-1"
@@ -46,19 +46,18 @@
                         {{ item.title }}
                       </span>
                       <div v-else class="text-center">
-                        <v-btn text size="small" color="primary"> read more </v-btn>
+                        <v-btn text size="small" color="primary">
+                          read more
+                        </v-btn>
                       </div>
                     </v-card-title>
                   </v-card>
                   <div class="gama-text-subtitle2">
                     <span v-html="truncateBody(item.body)"></span>
-                    <nuxt-link
-                      :to="`/blog/${item.id}/${$slugGenerator.convert(item.title)}`"
-                      >Read more</nuxt-link
-                    >
+                    <nuxt-link :to="`/blog/${item.id}`">Read more</nuxt-link>
                   </div>
                 </v-card>
-              </v-slide-item>
+              </v-slide-group-item>
             </v-slide-group>
           </v-col>
         </v-row>
@@ -67,50 +66,47 @@
   </v-container>
 </template>
 
-<script>
-export default {
-  name: "home-blog-container",
-  data() {
-    return {
-      model: null,
-      isHovered: [],
-      slideItmes: [],
-      isLoading: true,
-      isDragging: false,
-      startX: 0,
-      currentX: 0,
-    };
-  },
-  mounted() {
-    this.loadBlog();
-  },
-  methods: {
-    toggleHover(action, n) {
-      if (action == "enter") this.isHovered[n] = true;
-      if (action == "leave") this.isHovered[n] = false;
-    },
-    loadBlog() {
-      this.isLoading = true;
-      this.$axios
-        .$get("/api/v1/home/news")
-        .then((response) => {
-          this.slideItmes = response.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          this.isLoading = false;
-        });
-    },
-    truncateBody(text) {
-      var cutLength = 40;
-      if (this.$vuetify.breakpoint.sm) cutLength = 42;
-      else if (this.$vuetify.breakpoint.xs) cutLength = 38;
-      return text.length > cutLength ? text.slice(0, cutLength) + "..." : text;
-    },
-  },
+<script setup>
+import { useDisplay } from "vuetify";
+
+// Using Vuetify's breakpoint system
+const { lgAndUp, sm, xs } = useDisplay();
+
+// Reactive properties
+const model = ref(null);
+const isHovered = ref([]);
+const slideItems = ref([]);
+const isLoading = ref(true);
+const isDragging = ref(false);
+const startX = ref(0);
+const currentX = ref(0);
+
+// Methods
+const toggleHover = (action, n) => {
+  if (action === "enter") isHovered.value[n] = true;
+  if (action === "leave") isHovered.value[n] = false;
 };
+
+const loadBlog = async () => {
+  isLoading.value = true;
+  try {
+    const response = await $fetch("/api/v1/home/news"); // Use Nuxt's $fetch
+    slideItems.value = response.data;
+  } catch (err) {
+    console.error(err);
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+const truncateBody = (text) => {
+  let cutLength = 40;
+  if (sm.value) cutLength = 42;
+  else if (xs.value) cutLength = 38;
+  return text.length > cutLength ? text.slice(0, cutLength) + "..." : text;
+};
+
+loadBlog();
 </script>
 
 <style>
