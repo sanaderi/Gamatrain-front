@@ -1,91 +1,140 @@
 import axios from "axios";
+import { parse } from "url";
 
 export default async (req, res, next) => {
   const { url } = req;
 
-  // Check if the request is for sitemap
-  if (url.startsWith("/sitemap")) {
-    // Example: Set content type to XML
+  // Check if the request is for a specific content type's sitemap index
+  const contentTypes = [
+    "paper",
+    "qa",
+    "multimedia",
+    "exam",
+    "tutorial",
+    "blog",
+  ];
+
+  const contentTypeMatch = contentTypes.find((type) =>
+    url.startsWith(`/sitemap/${type}-index`)
+  );
+  if (contentTypeMatch) {
+    // Generate sitemap index for the matched content type
     res.setHeader("Content-Type", "application/xml");
 
-    // Extract the content type from the URL
-    const contentType = url.substring(url.lastIndexOf("/") + 1);
-
-    var xmlData = "";
-    if (contentType != "sitemap") {
-      // Fetch data based on content type
-      const data = await fetchDataFromServer(contentType);
-
-      // Convert data to XML format
-      xmlData = convertDataToXML(data, contentType);
-    } else {
-      xmlData = generateDefaultSitemap();
-    }
-
-    // Send XML response
+    const xmlData = await generateSitemapIndex(contentTypeMatch); // Pass content type to generate specific index
     res.end(xmlData);
+  } else if (url.startsWith("/sitemap")) {
+    // Your existing logic for individual sitemaps
+    const { pathname, query } = parse(url, true);
+    const contentType = pathname.split("/")[2]; // e.g., "paper" from "/sitemap/paper"
+
+    if (contentTypes.includes(contentType)) {
+      res.setHeader("Content-Type", "application/xml");
+      const page = parseInt(query.page, 10) || 1; // Use query param for page number
+      let xmlData = await fetchPaginatedData(contentType, page); // Fetch and generate the correct sitemap
+      xmlData = convertDataToXML(xmlData, contentType);
+      res.end(xmlData);
+    } else {
+      next();
+    }
   } else {
     next();
   }
 };
 
-async function fetchDataFromServer(contentType) {
-  // Fetch paginated data from the third-party server
-  const itemsPerPage = 50; // Adjust as per your pagination logic
-  let currentPage = 1;
-  let allData = [];
+// Generate the sitemap index for the given content type
+async function generateSitemapIndex(contentType) {
+  const totalPages = await getTotalPages(contentType); // Fetch total pages for content type
+  let indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+
+  // Loop through each page for the content type
+  for (let page = 1; page <= totalPages; page++) {
+    const sitemapUrl = `https://gamatrain.com/sitemap/${contentType}?page=${page}`;
+    indexXml += `<sitemap>
+        <loc>${sitemapUrl}</loc>
+        <lastmod>${new Date().toISOString()}</lastmod>
+    </sitemap>`;
+  }
+
+  indexXml += "\n</sitemapindex>";
+  return indexXml;
+}
+
+// Fetch the total number of pages for the given content type using `num` from API response
+async function getTotalPages(contentType) {
+  const itemsPerPage = 50; // Adjust based on your pagination logic
+  let apiUrl;
+
+  // Define the API URL for each content type
+  switch (contentType) {
+    case "paper":
+      apiUrl = "https://core.gamatrain.com/api/v1/search?type=test";
+      break;
+    case "qa":
+      apiUrl = "https://core.gamatrain.com/api/v1/search?type=question";
+      break;
+    case "multimedia":
+      apiUrl = "https://core.gamatrain.com/api/v1/search?type=learnfiles";
+      break;
+    case "exam":
+      apiUrl = "https://core.gamatrain.com/api/v1/search?type=azmoon";
+      break;
+    case "tutorial":
+      apiUrl = "https://core.gamatrain.com/api/v1/search?type=dars";
+      break;
+    case "blog":
+      apiUrl = "https://core.gamatrain.com/api/v1/blogs/search";
+      break;
+    default:
+      return 0; // Return 0 if the content type is unknown
+  }
+
+  // Fetch the first page to get the total count (`num`)
+  const response = await axios.get(`${apiUrl}&page=1&perpage=${itemsPerPage}`);
+  const totalItems = parseInt(response.data.data.num); // Get total count from the API response
+
+  // Calculate total pages (rounding up)
+  return Math.ceil(totalItems / itemsPerPage);
+}
+
+async function fetchPaginatedData(contentType, page) {
+  const itemsPerPage = 50; // Define items per page
   let apiUrl;
 
   // Determine the API URL based on the content type
   switch (contentType) {
     case "paper":
-      apiUrl = "https://core.gamatrain.com/api/v1/search?type=test"; // Adjust API URL for papers
+      apiUrl = "https://core.gamatrain.com/api/v1/search?type=test";
       break;
     case "qa":
-      apiUrl = "https://core.gamatrain.com/api/v1/search?type=question"; // Adjust API URL for qa
+      apiUrl = "https://core.gamatrain.com/api/v1/search?type=question";
       break;
     case "multimedia":
-      apiUrl = "https://core.gamatrain.com/api/v1/search?type=learnfiles"; // Adjust API URL for multimedia
+      apiUrl = "https://core.gamatrain.com/api/v1/search?type=learnfiles";
       break;
     case "exam":
-      apiUrl = "https://core.gamatrain.com/api/v1/search?type=azmoon"; // Adjust API URL for exam
+      apiUrl = "https://core.gamatrain.com/api/v1/search?type=azmoon";
       break;
     case "tutorial":
-      apiUrl = "https://core.gamatrain.com/api/v1/search?type=dars"; // Adjust API URL for tutorial
+      apiUrl = "https://core.gamatrain.com/api/v1/search?type=dars";
       break;
     case "blog":
-      apiUrl = "https://core.gamatrain.com/api/v1/blogs/search"; // Adjust API URL for blog
+      apiUrl = "https://core.gamatrain.com/api/v1/blogs/search";
       break;
     default:
-      // Return empty array for unknown content type
+      // Return an empty array for unknown content types
       return [];
   }
 
-  // Fetch data for all pages
-  let iterationCount = 0; // Counter to track iterations
+  // Fetch data for the specified page
+  const finalUrl = `${apiUrl}&page=${page}&perpage=${itemsPerPage}`;
 
-  while (iterationCount < 10) {
-    let finalUrl = `${apiUrl}&page=${currentPage}&perpage=${itemsPerPage}`;
-    if (contentType == "blog")
-      finalUrl = `${apiUrl}?page=${currentPage}&perpage=${itemsPerPage}`;
-    const response = await axios.get(finalUrl);
-    const data = response.data.data.list;
-    // Add fetched data to the array
-    allData = [...allData, ...data];
-
-    // Break the loop if no more data available
-    // if (data.length < itemsPerPage) {
-    //   // if (currentPage > 1000) {
-    //   break;
-    // }
-
-    delay(1000);
-
-    currentPage++;
-    iterationCount++; // Increment the iteration counter
+  if (contentType === "blog") {
+    finalUrl = `${apiUrl}?page=${page}&perpage=${itemsPerPage}`;
   }
 
-  return allData;
+  const response = await axios.get(finalUrl);
+  return response.data.data.list || [];
 }
 
 function convertDataToXML(data, contentType) {
@@ -93,12 +142,13 @@ function convertDataToXML(data, contentType) {
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
   data.forEach((item) => {
     title = item.title_url;
-    if (contentType == "blog")
+    if (contentType === "blog") {
       title = item.title
         .trim()
         .replace(/ (?!$)/g, "-")
         .replace(/\//g, "-")
         .toLowerCase();
+    }
     xml += `<url>
             <loc>https://gamatrain.com/${contentType}/${item.id}/${title}</loc>
             <lastmod>${formatDate(item.up_date)}</lastmod>
@@ -135,10 +185,6 @@ function generateDefaultSitemap() {
   });
   xml += "\n</urlset>";
   return xml;
-}
-
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function formatDate(dateString) {
