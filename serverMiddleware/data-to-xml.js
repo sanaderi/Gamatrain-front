@@ -63,36 +63,35 @@ async function generateSitemapIndex(contentType) {
 // Fetch the total number of pages for the given content type using `num` from API response
 async function getTotalPages(contentType) {
   const itemsPerPage = 50; // Adjust based on your pagination logic
+  let baseUrl = "https://core.gamatrain.com/api/v1/";
   let apiUrl;
 
   // Define the API URL for each content type
   switch (contentType) {
     case "paper":
-      apiUrl = "https://core.gamatrain.com/api/v1/search?type=test";
+      apiUrl = `${baseUrl}search?type=test&page=1&perpage=${itemsPerPage}`;
       break;
     case "qa":
-      apiUrl = "https://core.gamatrain.com/api/v1/search?type=question";
+      apiUrl = `${baseUrl}search?type=question&page=1&perpage=${itemsPerPage}`;
       break;
     case "multimedia":
-      apiUrl = "https://core.gamatrain.com/api/v1/search?type=learnfiles";
+      apiUrl = `${baseUrl}search?type=learnfiles&page=1&perpage=${itemsPerPage}`;
       break;
     case "exam":
-      apiUrl = "https://core.gamatrain.com/api/v1/search?type=azmoon";
+      apiUrl = `${baseUrl}search?type=azmoon&page=1&perpage=${itemsPerPage}`;
       break;
     case "tutorial":
-      apiUrl = "https://core.gamatrain.com/api/v1/search?type=dars";
+      apiUrl = `${baseUrl}search?type=dars&page=1&perpage=${itemsPerPage}`;
       break;
     case "blog":
-      apiUrl = "https://core.gamatrain.com/api/v1/blogs/search";
+      apiUrl = `${baseUrl}blogs/search?page=1&perpage=${itemsPerPage}`;
       break;
     default:
       return 0; // Return 0 if the content type is unknown
   }
 
-  // Fetch the first page to get the total count (`num`)
-  const response = await axios.get(`${apiUrl}&page=1&perpage=${itemsPerPage}`);
+  const response = await axios.get(apiUrl);
   const totalItems = parseInt(response.data.data.num); // Get total count from the API response
-
   // Calculate total pages (rounding up)
   return Math.ceil(totalItems / itemsPerPage);
 }
