@@ -139,7 +139,7 @@
             <div class="text-center">
               <div class="gtext-t6 primary-gray-400">Update:</div>
               <div class="gtext-t6 primary-gray-500">
-                {{ $moment(contentData.up_date).format("YYYY/MM/DD") }}
+                {{ $dayjs(contentData.up_date).format("YYYY/MM/DD") }}
               </div>
             </div>
           </v-col>
@@ -811,9 +811,7 @@
                             Update:
                             <span class="primary-gray-600">
                               {{
-                                $moment(contentData.up_date).format(
-                                  "YYYY/MM/DD"
-                                )
+                                $dayjs(contentData.up_date).format("YYYY/MM/DD")
                               }}
                             </span>
                           </div>
@@ -891,9 +889,7 @@
                             Update:
                             <span class="primary-gray-600">
                               {{
-                                $moment(contentData.up_date).format(
-                                  "YYYY/MM/DD"
-                                )
+                                $dayjs(contentData.up_date).format("YYYY/MM/DD")
                               }}
                             </span>
                           </div>
@@ -1470,7 +1466,7 @@ export default {
       this.loading.submitComment = true;
       const querystring = require("querystring");
 
-      this.$axios
+      this.$fetch
         .post(
           `/api/v1/schools/${this.$route.params.id}/comments`,
           querystring.stringify(this.commentForm)
@@ -1487,7 +1483,7 @@ export default {
         });
     },
     loadComments() {
-      this.$axios
+      this.$fetch
         .get(`/api/v1/schools/${this.$route.params.id}/comments`)
         .then((response) => {
           this.commentList = response.data.data.list;

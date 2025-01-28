@@ -47,7 +47,7 @@ export default {
   methods: {
     async searchLocation(search) {
       this.loading = true;
-      let searchLocation = await this.$axios.get(
+      let searchLocation = await this.$fetch.get(
         "https://nominatim.openstreetmap.org/search.php",
         {
           params: {

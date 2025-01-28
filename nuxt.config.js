@@ -113,6 +113,7 @@ export default defineNuxtConfig({
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    "dayjs-nuxt",
     "@vee-validate/nuxt",
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
@@ -262,6 +263,10 @@ export default defineNuxtConfig({
     port: 3002,
   },
 
-  serverMiddleware: ["~/serverMiddleware/data-to-xml.js"],
+  devServer: {
+    port: 3002,
+  },
+
+  serverMiddleware: ["~/server/middleware/sitemap.js"],
   compatibilityDate: "2025-01-25",
 });

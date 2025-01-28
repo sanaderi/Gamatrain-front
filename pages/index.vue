@@ -196,7 +196,6 @@ const fetchStats = async () => {
     const response = await $fetch("/api/v1/home/stats");
 
     stats.value = response?.data;
-    console.log(stats.value);
   } catch (error) {
     console.error("Failed to fetch stats:", error);
   }

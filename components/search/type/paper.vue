@@ -1,6 +1,11 @@
 <template>
   <div class="content-items">
-    <v-card rounded class="mb-1 content-item" v-for="item in items" :key="item.value">
+    <v-card
+      rounded
+      class="mb-1 content-item"
+      v-for="item in items"
+      :key="item.value"
+    >
       <v-card-text class="pb-0">
         <div class="d-flex">
           <div class="py-4 img-holder">
@@ -12,7 +17,11 @@
                 class="item-image"
               >
                 <template v-slot:placeholder>
-                  <v-row class="fill-height ma-0" align="center" justify="center">
+                  <v-row
+                    class="fill-height ma-0"
+                    align="center"
+                    justify="center"
+                  >
                     <v-progress-circular
                       indeterminate
                       color="grey lighten-5"
@@ -38,17 +47,15 @@
                 <div
                   class="item-content-title gama-text-button d-flex justify-space-between"
                 >
-                  <nuxt-link
-                    :to="`/paper/${item.id}/${item.title_url}`"
-                    
-                  >
+                  <nuxt-link :to="`/paper/${item.id}/${item.title_url}`">
                     {{ item.title }}
                   </nuxt-link>
                 </div>
-                  <nuxt-link class="item-content-subtitle gama-text-caption my-2 d-none d-sm-block"
-                    :to="`/paper/${item.id}/${item.title_url}`"
-                    v-html="item.description"
-                  ></nuxt-link>
+                <nuxt-link
+                  class="item-content-subtitle gama-text-caption my-2 d-none d-sm-block"
+                  :to="`/paper/${item.id}/${item.title_url}`"
+                  v-html="item.description"
+                ></nuxt-link>
                 <div class="mt-3">
                   <v-chip
                     class="mr-1 mb-1"
@@ -77,7 +84,9 @@
                 </div>
               </v-card-text>
               <!--Item card footer-->
-              <v-card-actions class="item-content-footer pb-2 d-none d-sm-block">
+              <v-card-actions
+                class="item-content-footer pb-2 d-none d-sm-block"
+              >
                 <v-row>
                   <v-col cols="10" sm="10" md="10" lg="11" class="px-0">
                     <div class="d-flex pt-3 pt-md-0">
@@ -87,7 +96,9 @@
                         <v-avatar size="2em">
                           <img :src="item.avatar" alt="Avatar" />
                         </v-avatar>
-                        <span class="mx-2">{{ item.first_name }} {{ item.last_name }}</span>
+                        <span class="mx-2"
+                          >{{ item.first_name }} {{ item.last_name }}</span
+                        >
                       </div>
 
                       <div
@@ -119,7 +130,7 @@
                         <span class="mx-2">
                           <span class="d-none d-lg-inline"> Last update: </span>
                           <span class="date_string d-inline-block">
-                            {{ $moment(item.up_date).fromNow() }}
+                            {{ $dayjs(item.up_date).fromNow() }}
                           </span>
                         </span>
                       </div>
@@ -129,13 +140,19 @@
                     <div
                       class="text-right align-right float-right d-flex align-content-center"
                     >
-                      <nuxt-link icon :to="`/paper/${item.id}/${item.title_url}`">
+                      <nuxt-link
+                        icon
+                        :to="`/paper/${item.id}/${item.title_url}`"
+                      >
                         <span
                           v-show="item.q_file_word"
                           class="fa-solid fa-file-word fa-2xl blue--text"
                         ></span>
                       </nuxt-link>
-                      <nuxt-link icon :to="`/paper/${item.id}/${item.title_url}`">
+                      <nuxt-link
+                        icon
+                        :to="`/paper/${item.id}/${item.title_url}`"
+                      >
                         <span
                           v-show="item.q_file"
                           class="fa-solid fa-file-pdf fa-2xl red--text pl-1"
@@ -154,14 +171,20 @@
         <v-row>
           <v-col cols="10" class="py-0">
             <div class="d-flex pt-3">
-              <div class="item-content-user gama-text-overline d-flex align-center">
+              <div
+                class="item-content-user gama-text-overline d-flex align-center"
+              >
                 <v-avatar size="1.28em">
                   <img :src="item.avatar" alt="Avatar" />
                 </v-avatar>
-                <span class="mx-2">{{ item.first_name }} {{ item.last_name }}</span>
+                <span class="mx-2"
+                  >{{ item.first_name }} {{ item.last_name }}</span
+                >
               </div>
 
-              <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
+              <div
+                class="item-content-last-update gama-text-overline d-flex align-center mx-auto"
+              >
                 <i class="fa-solid fa-sticky-note"></i>
                 <span class="mx-2">
                   <span class="d-none d-sm-inline"> Paper type: </span>
@@ -170,7 +193,9 @@
                   </span>
                 </span>
               </div>
-              <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
+              <div
+                class="item-content-last-update gama-text-overline d-flex align-center mx-auto"
+              >
                 <i class="fa-solid fa-eye"></i>
                 <span class="mx-2">
                   <span class="d-none d-sm-inline"> Views: </span>
@@ -179,12 +204,14 @@
                   </span>
                 </span>
               </div>
-              <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
+              <div
+                class="item-content-last-update gama-text-overline d-flex align-center mx-auto"
+              >
                 <i class="fa-solid fa-calendar-days"></i>
                 <span class="mx-2">
                   <span class="d-none d-sm-inline"> Last update: </span>
                   <span class="date_string d-inline-block">
-                    {{ $moment(item.up_date).fromNow() }}
+                    {{ $dayjs(item.up_date).fromNow() }}
                   </span>
                 </span>
               </div>

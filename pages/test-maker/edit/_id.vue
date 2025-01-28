@@ -1158,7 +1158,7 @@ export default {
         area: "",
         school: "",
         duration: 3,
-        // start_date: parseInt(this.$moment().format('x') / 1000),
+        // start_date: parseInt(this.$dayjs().format('x') / 1000),
         title: "",
         negative_point: false,
         file_original: "",
@@ -1280,7 +1280,7 @@ export default {
 
     // "teaching_date"(val) {//Convert date to secounds
     //   this.form.start_date = this.teaching_time_seconds;
-    //   this.teaching_date_time = (this.$moment(val).format('x') / 1000);
+    //   this.teaching_date_time = (this.$dayjs(val).format('x') / 1000);
     //   this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
     // },
     // "teaching_time"(val) {//Convert hour and minute to seconds
@@ -1397,7 +1397,7 @@ export default {
     //Load exam info for edit
     getCurrentExamInfo() {
       this.exam_id = this.$route.params.id;
-      this.$axios
+      this.$fetch
         .$get(`/api/v1/exams/info/${this.$route.params.id}`)
         .then((response) => {
           console.log(response);
@@ -1443,7 +1443,7 @@ export default {
         params.area_id = this.form.area;
       }
 
-      this.$axios
+      this.$fetch
         .$get("/api/v1/types/list", {
           params,
         })
@@ -1522,7 +1522,7 @@ export default {
 
       //End arrange to form data
 
-      this.$axios
+      this.$fetch
         .$put(
           `/api/v1/exams/${this.$route.params.id}`,
           this.urlencodeFormData(formData),
@@ -1561,7 +1561,7 @@ export default {
 
     getExamTests() {
       this.test_loading = true;
-      this.$axios
+      this.$fetch
         .$get("/api/v1/examTests", {
           params: {
             lesson: this.filter.lesson,
@@ -1596,7 +1596,7 @@ export default {
     },
     getExamCurrentTests() {
       this.test_loading = true;
-      this.$axios
+      this.$fetch
         .$get("/api/v1/examTests", {
           params: {
             exam_id: this.$route.params.id,
@@ -1691,7 +1691,7 @@ export default {
       }
 
       if (this.tests.length) {
-        this.$axios
+        this.$fetch
           .$put(
             `/api/v1/exams/tests/${this.$route.params.id}`,
             this.urlencodeFormData(formData),
@@ -1716,7 +1716,7 @@ export default {
      */
     publishTest() {
       this.publish_loading = true;
-      this.$axios
+      this.$fetch
         .$put(`/api/v1/exams/publish/${this.$route.params.id}`)
         .then((response) => {
           if (response.data.message === "done") {
@@ -1773,7 +1773,7 @@ export default {
 
     deleteOnlineExam() {
       this.deleteLoading = true;
-      this.$axios
+      this.$fetch
         .$delete(`/api/v1/exams/${this.exam_id}`)
         .then((response) => {
           this.$toast.success("Deleted successfully");
@@ -1797,7 +1797,7 @@ export default {
     },
     async deleteExamTest() {
       this.delete_exam_test_loading = true;
-      await this.$axios
+      await this.$fetch
         .$delete(`/api/v1/examTests/${this.delete_exam_test_id}`)
         .then((response) => {
           this.$toast.success("Deleted successfully");
@@ -1820,7 +1820,7 @@ export default {
     uploadFile(file_name) {
       let formData = new FormData();
       formData.append("file", this.file_original);
-      this.$axios
+      this.$fetch
         .$post("/api/v1/upload", formData, {
           headers: {
             accept: "*/*",

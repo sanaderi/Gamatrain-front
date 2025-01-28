@@ -290,7 +290,7 @@ export default {
       var apiUrl = "/api/v1/students/dashboard";
       if (this.user_type == "5") apiUrl = "/api/v1/teachers/dashboard";
 
-      this.$axios
+      this.$fetch
         .$get(apiUrl)
         .then((response) => {
           this.user_info = response.data;

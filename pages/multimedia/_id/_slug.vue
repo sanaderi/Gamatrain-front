@@ -254,7 +254,7 @@
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <i class="fa-solid fa-calendar-alt mr-1 icon"></i>
-                    Last update: {{ $moment(contentData.up_date).fromNow() }}
+                    Last update: {{ $dayjs(contentData.up_date).fromNow() }}
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <div @click="openCrashReportDialog" class="pointer">
@@ -872,7 +872,7 @@ export default {
       let apiUrl = "";
       apiUrl = `/api/v1/files/download/${this.$route.params.id}`;
 
-      this.$axios
+      this.$fetch
         .$get(apiUrl)
         .then((response) => {
           var FileSaver = require("file-saver");
@@ -932,7 +932,7 @@ export default {
 
       //End arrange to form data
 
-      this.$axios
+      this.$fetch
         .$put(
           `/api/v1/files/${this.$route.params.id}`,
           this.urlencodeFormData(formData),

@@ -1,16 +1,15 @@
 <template>
   <div>
-
-    <LocationSearch label="Location"
-                    class="mapSearch"
-                    @locationSelected="goToSearchLocation"
-                    :solo="true"/>
+    <LocationSearch
+      label="Location"
+      class="mapSearch"
+      @locationSelected="goToSearchLocation"
+      :solo="true"
+    />
 
     <div id="map-wrap">
       <client-only>
-        <l-map ref="map"
-               :zoom="map.zoom"
-               :center="map.center">
+        <l-map ref="map" :zoom="map.zoom" :center="map.center">
           <l-tile-layer :url="map.url"></l-tile-layer>
           <l-marker :lat-lng="map.markerLocation"></l-marker>
         </l-map>
@@ -20,46 +19,68 @@
 </template>
 
 <script>
-
 import LocationSearch from "@/components/Form/LocationSearch";
 
 export default {
-  name      : "LeafletMap",
-  components: {LocationSearch},
+  name: "LeafletMap",
+  components: { LocationSearch },
   data() {
     return {
       map: {
-        url           : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        zoom          : 8,
-        center        : [55.9464418, 8.1277591],
+        url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        zoom: 8,
+        center: [55.9464418, 8.1277591],
         markerLocation: [55.9464418, 8.1277591],
-        object        : null,
+        object: null,
       },
     };
   },
   methods: {
     async selectLocation() {
-      let nameSearchResult = await this.$axios.post('/api/reverse_location', {
+      let nameSearchResult = await this.$fetch.post("/api/reverse_location", {
         lat: this.map.markerLocation[0],
-        lng: this.map.markerLocation[1]
+        lng: this.map.markerLocation[1],
       });
 
       if (nameSearchResult.status == 200) {
         let locationName =
-              (nameSearchResult.data.country ? (nameSearchResult.data.country + ',') : '') + // country
-              (nameSearchResult.data.state ? (nameSearchResult.data.state + ',') : '') + // state
-              (nameSearchResult.data.province ? (nameSearchResult.data.province + ',') : '') + // province
-              (nameSearchResult.data.region ? (nameSearchResult.data.region + ',') : '') + // region
-              (nameSearchResult.data.subdistrict ? (nameSearchResult.data.subdistrict + ',') : '') + // subdistrict
-              (nameSearchResult.data.county ? (nameSearchResult.data.county + ',') : '') + // county
-              (nameSearchResult.data.city ? (nameSearchResult.data.city + ',') : '') + // city
-              (nameSearchResult.data.suburb ? (nameSearchResult.data.suburb + ',') : '') + // suburb
-              (nameSearchResult.data.town ? (nameSearchResult.data.town + ',') : '') + // town
-              (nameSearchResult.data.road ? (nameSearchResult.data.road + ',') : '') + // road
-              (nameSearchResult.data.district ? (nameSearchResult.data.district + ',') : '') + // district
-              (nameSearchResult.data.village ? (nameSearchResult.data.village + ',') : '') + // village
-              (nameSearchResult.data.postcode ? nameSearchResult.data.postcode : ''); // postcode
-        locationName     = locationName[locationName.length - 1] === ',' ? locationName.substr(0, locationName.length - 1) : locationName;
+          (nameSearchResult.data.country
+            ? nameSearchResult.data.country + ","
+            : "") + // country
+          (nameSearchResult.data.state
+            ? nameSearchResult.data.state + ","
+            : "") + // state
+          (nameSearchResult.data.province
+            ? nameSearchResult.data.province + ","
+            : "") + // province
+          (nameSearchResult.data.region
+            ? nameSearchResult.data.region + ","
+            : "") + // region
+          (nameSearchResult.data.subdistrict
+            ? nameSearchResult.data.subdistrict + ","
+            : "") + // subdistrict
+          (nameSearchResult.data.county
+            ? nameSearchResult.data.county + ","
+            : "") + // county
+          (nameSearchResult.data.city ? nameSearchResult.data.city + "," : "") + // city
+          (nameSearchResult.data.suburb
+            ? nameSearchResult.data.suburb + ","
+            : "") + // suburb
+          (nameSearchResult.data.town ? nameSearchResult.data.town + "," : "") + // town
+          (nameSearchResult.data.road ? nameSearchResult.data.road + "," : "") + // road
+          (nameSearchResult.data.district
+            ? nameSearchResult.data.district + ","
+            : "") + // district
+          (nameSearchResult.data.village
+            ? nameSearchResult.data.village + ","
+            : "") + // village
+          (nameSearchResult.data.postcode
+            ? nameSearchResult.data.postcode
+            : ""); // postcode
+        locationName =
+          locationName[locationName.length - 1] === ","
+            ? locationName.substr(0, locationName.length - 1)
+            : locationName;
 
         let state = () => {
           if (nameSearchResult.data.state) {
@@ -68,23 +89,23 @@ export default {
           if (nameSearchResult.data.province) {
             return nameSearchResult.data.province;
           }
-          return '';
+          return "";
         };
 
         // return data
-        this.$emit('locationSelected', {
-          lat         : this.map.markerLocation[0],
-          lng         : this.map.markerLocation[1],
+        this.$emit("locationSelected", {
+          lat: this.map.markerLocation[0],
+          lng: this.map.markerLocation[1],
           locationName: locationName,
           country_code: nameSearchResult.data.country_code,
-          country     : nameSearchResult.data.country,
-          state       : state(),
-          city        : nameSearchResult.data.city
+          country: nameSearchResult.data.country,
+          state: state(),
+          city: nameSearchResult.data.city,
         });
       }
     },
     goToSearchLocation(event) {
-      this.map.center         = [event[0], event[1]];
+      this.map.center = [event[0], event[1]];
       this.map.markerLocation = [event[0], event[1]];
       this.refreshMap();
     },
@@ -92,13 +113,13 @@ export default {
       setTimeout(() => {
         window.dispatchEvent(new Event("resize"));
       }, 100);
-    }
+    },
   },
   mounted() {
     this.$nextTick(() => {
       this.map.object = this.$refs.map.mapObject;
-      this.map.object.on('drag', (e) => {
-        let center              = this.map.object.getCenter();
+      this.map.object.on("drag", (e) => {
+        let center = this.map.object.getCenter();
         this.map.markerLocation = [center.lat, center.lng];
       });
       setTimeout(() => {
@@ -106,7 +127,7 @@ export default {
       }, 100);
     });
   },
-}
+};
 </script>
 
 <style scoped>
@@ -122,5 +143,4 @@ export default {
   width: 320px !important;
   max-width: 320px;
 }
-
 </style>

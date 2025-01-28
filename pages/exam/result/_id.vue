@@ -602,7 +602,7 @@ export default {
     //Download file
     startDownload() {
       this.download_loading = true;
-      this.$axios
+      this.$fetch
         .$get(`/api/v1/exams/download/${this.contentData.exam.id}`)
         .then((response) => {
           var FileSaver = require("file-saver");

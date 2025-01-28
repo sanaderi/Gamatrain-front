@@ -1,6 +1,11 @@
 <template>
   <div class="content-items">
-    <v-card rounded class="mb-1 content-item" v-for="(item, key) in items" :key="item.id">
+    <v-card
+      rounded
+      class="mb-1 content-item"
+      v-for="(item, key) in items"
+      :key="item.id"
+    >
       <v-card-text class="pb-0">
         <div class="d-flex">
           <div class="py-4 img-holder">
@@ -18,7 +23,9 @@
                 class="book-no-img mx-auto fill-height align-center justify-center"
               >
                 <v-card-text class="px-0">
-                  <p class="font-weight-bold mb-3 mt-5">{{ item.lesson_title }}</p>
+                  <p class="font-weight-bold mb-3 mt-5">
+                    {{ item.lesson_title }}
+                  </p>
                   <a href="https://gamatrain.com">Gamatrain.com</a>
                 </v-card-text>
               </v-card>
@@ -74,7 +81,9 @@
                 </div>
               </v-card-text>
               <!--Item card footer-->
-              <v-card-actions class="item-content-footer pb-2 d-none d-sm-block">
+              <v-card-actions
+                class="item-content-footer pb-2 d-none d-sm-block"
+              >
                 <v-row>
                   <v-col cols="8" class="px-0">
                     <div class="d-flex pt-3 pt-md-0">
@@ -85,7 +94,9 @@
                       <!--                          </v-avatar>-->
                       <!--                          <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>-->
                       <!--                        </div>-->
-                      <div class="item-content-last-update gama-text-overline d-flex ml-3">
+                      <div
+                        class="item-content-last-update gama-text-overline d-flex ml-3"
+                      >
                         <i class="fa-solid fa-eye fa-xl"></i>
                         <span class="mx-2">
                           <span class="d-none d-sm-inline"> Views: </span>
@@ -94,12 +105,14 @@
                           </span>
                         </span>
                       </div>
-                      <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
+                      <div
+                        class="item-content-last-update gama-text-overline d-flex align-center mx-auto"
+                      >
                         <i class="fa-solid fa-calendar-days fa-xl"></i>
                         <span class="mx-2">
                           <span class="d-none d-lg-inline"> Last update: </span>
                           <span class="date_string d-inline-block">
-                            {{ $moment(item.up_date).fromNow() }}
+                            {{ $dayjs(item.up_date).fromNow() }}
                           </span>
                         </span>
                       </div>
@@ -109,13 +122,19 @@
                     <div
                       class="text-right align-right float-right d-flex align-content-center"
                     >
-                      <nuxt-link icon :to="`/tutorial/${item.id}/${item.title_url}`">
+                      <nuxt-link
+                        icon
+                        :to="`/tutorial/${item.id}/${item.title_url}`"
+                      >
                         <span
                           v-show="item.q_file_word"
                           class="fa-solid fa-file-word fa-2xl blue--text"
                         ></span>
                       </nuxt-link>
-                      <nuxt-link icon :to="`/tutorial/${item.id}/${item.title_url}`">
+                      <nuxt-link
+                        icon
+                        :to="`/tutorial/${item.id}/${item.title_url}`"
+                      >
                         <span
                           v-show="item.q_file"
                           class="fa-solid fa-file-pdf fa-2xl red--text pl-1"
@@ -141,7 +160,9 @@
               <!--                  </v-avatar>-->
               <!--                  <p class="mx-2">{{ item.first_name }} {{ item.last_name }}</p>-->
               <!--                </div>-->
-              <div class="item-content-last-update gama-text-overline d-flex mx-auto">
+              <div
+                class="item-content-last-update gama-text-overline d-flex mx-auto"
+              >
                 <i class="fa-solid fa-eye"></i>
                 <span class="mx-2">
                   <span class="d-none d-sm-inline"> Views: </span>
@@ -150,12 +171,14 @@
                   </span>
                 </span>
               </div>
-              <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
+              <div
+                class="item-content-last-update gama-text-overline d-flex align-center mx-auto"
+              >
                 <i class="fa-solid fa-calendar-days"></i>
                 <span class="mx-2">
                   <span class="d-none d-sm-inline"> Last update: </span>
                   <span class="date_string d-inline-block">
-                    {{ $moment(item.up_date).fromNow() }}
+                    {{ $dayjs(item.up_date).fromNow() }}
                   </span>
                 </span>
               </div>

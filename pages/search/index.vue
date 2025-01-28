@@ -572,7 +572,7 @@ export default {
           params.state = this.$route.query.state;
           params.city = this.$route.query.city;
         }
-        await this.$axios
+        await this.$fetch
           .$get("/api/v1/search", {
             params: params,
           })

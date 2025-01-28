@@ -194,7 +194,7 @@ export default {
     async handleCredentialResponse(response) {
       const querystring = require("querystring");
 
-      await this.$axios
+      await this.$fetch
         .post(
           "/api/v1/users/googleAuth",
           querystring.stringify({
@@ -229,7 +229,7 @@ export default {
     async submit() {
       this.login_loading = true;
       const querystring = require("querystring");
-      await this.$axios
+      await this.$fetch
         .$post(
           "/api/v1/users/login",
           querystring.stringify({
@@ -274,7 +274,7 @@ export default {
       //Finish enter otp code
       const querystring = require("querystring");
 
-      this.$axios
+      this.$fetch
         .$post(
           "/api/v1/users/login",
           querystring.stringify({

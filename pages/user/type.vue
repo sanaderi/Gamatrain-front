@@ -43,7 +43,7 @@ export default {
   methods: {
     async setUserType() {
       const querystring = require("querystring");
-      this.$axios
+      this.$fetch
         .$post(
           "/api/v1/users/group",
           querystring.stringify({

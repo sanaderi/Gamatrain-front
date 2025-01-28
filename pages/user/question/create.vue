@@ -288,7 +288,7 @@ export default {
         this.loading.topic = true;
       }
 
-      this.$axios
+      this.$fetch
         .$get("/api/v1/types/list", {
           params,
         })
@@ -332,7 +332,7 @@ export default {
         formData.append(key, this.form[key]);
       }
 
-      this.$axios
+      this.$fetch
         .$post("/api/v1/questions", this.urlencodeFormData(formData), {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -393,7 +393,7 @@ export default {
         let formData = new FormData();
         formData.append("file", value);
 
-        this.$axios
+        this.$fetch
           .$post("/api/v1/upload", formData, {
             headers: {
               accept: "*/*",

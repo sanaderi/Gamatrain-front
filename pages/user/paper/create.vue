@@ -562,7 +562,7 @@ export default {
         params.area_id = this.form.area;
       }
 
-      this.$axios
+      this.$fetch
         .$get("/api/v1/types/list", {
           params,
         })
@@ -601,7 +601,7 @@ export default {
     },
 
     async getExtraFileType() {
-      await this.$axios
+      await this.$fetch
         .$get("/api/v1/types/list", {
           params: {
             type: "test_extra_file",
@@ -631,7 +631,7 @@ export default {
 
       //End arrange to form data
 
-      this.$axios
+      this.$fetch
         .$post("/api/v1/tests", this.urlencodeFormData(formData), {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -709,7 +709,7 @@ export default {
         // this.file_extra_loading = true;
       }
 
-      this.$axios
+      this.$fetch
         .$post("/api/v1/upload", formData, {
           headers: {
             accept: "*/*",

@@ -294,7 +294,7 @@ export default {
 
       this.timer = setTimeout(() => {
         if (this.searchKey && this.allDataLoaded == false)
-          this.$axios
+          this.$fetch
             .$get("/api/v1/search/text", {
               params: {
                 query: this.searchKey,

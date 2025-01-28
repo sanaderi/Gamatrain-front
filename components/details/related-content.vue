@@ -132,7 +132,7 @@
                           class="subdate-container gama-text-overline"
                         >
                           <v-icon size="12">mdi-calendar</v-icon>
-                          {{ $moment(item.subdate).format("MMM DD") }}
+                          {{ $dayjs(item.subdate).format("MMM DD") }}
                         </v-col>
                       </v-row>
                     </v-card-subtitle>
@@ -190,7 +190,7 @@
                           class="subdate-container gama-text-overline"
                         >
                           <v-icon size="12">mdi-calendar</v-icon>
-                          {{ $moment(item.subdate).format("MMM DD") }}
+                          {{ $dayjs(item.subdate).format("MMM DD") }}
                         </v-col>
                       </v-row>
                     </v-card-subtitle>
@@ -254,7 +254,7 @@ export default {
         test_type: this.test_type,
       };
 
-      await this.$axios
+      await this.$fetch
         .$get("/api/v1/search", {
           params: params,
         })

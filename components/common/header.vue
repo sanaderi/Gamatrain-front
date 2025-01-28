@@ -845,7 +845,7 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   async fetch() {
-    await this.$axios
+    await this.$fetch
       .$get("/api/v1/admin/values")
       .then((response) => {
         if (response.data.mostVisitedTags.enable == "true")
@@ -916,7 +916,7 @@ export default {
 
       this.timer = setTimeout(() => {
         if (this.searchKey && this.allDataLoaded == false)
-          this.$axios
+          this.$fetch
             .$get("/api/v1/search/text", {
               params: {
                 query: this.searchKey,

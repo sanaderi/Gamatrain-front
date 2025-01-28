@@ -105,7 +105,7 @@ export default {
       this.update_loading = true;
       const querystring = require("querystring");
 
-      this.$axios
+      this.$fetch
         .$post("/api/v1/users/info", querystring.stringify(this.info))
         .then((response) => {
           var updatedData = {

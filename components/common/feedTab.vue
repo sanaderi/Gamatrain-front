@@ -4,22 +4,14 @@
     <section class="feed-box d-none d-md-flex">
       <v-container>
         <v-row>
-          <v-col
-            cols="12"
-            md="4"
-            sm="4"
-          >
+          <v-col cols="12" md="4" sm="4">
             <footer-feed-box :feed="latestList.multimedia"></footer-feed-box>
           </v-col>
-          <v-col
-            cols="12"
-            md="4"
-            sm="4"
-          >
+          <v-col cols="12" md="4" sm="4">
             <footer-feed-box :feed="latestList.question"></footer-feed-box>
           </v-col>
-          <v-col cols="12" md="4" sm="4" >
-<!--            <latest-news/>-->
+          <v-col cols="12" md="4" sm="4">
+            <!--            <latest-news/>-->
             <footer-feed-box :feed="latestList.paper"></footer-feed-box>
           </v-col>
         </v-row>
@@ -27,21 +19,23 @@
     </section>
     <!--  End: Feed box  -->
 
-
     <div class="d-md-none d-flex flex-column feed-tab">
       <v-tabs v-model="tabs" centered>
         <v-tabs-slider color="green"></v-tabs-slider>
 
-        <v-tab v-for="(item, index) in items" :key="index"
-               class="feed-tab-title">
+        <v-tab
+          v-for="(item, index) in items"
+          :key="index"
+          class="feed-tab-title"
+        >
           <span
             :class="
-            'd-flex align-center me-2 icon icong-' +
-            item.icon +
-            ' icon' +
-            item.class
-          "
-           ></span>
+              'd-flex align-center me-2 icon icong-' +
+              item.icon +
+              ' icon' +
+              item.class
+            "
+          ></span>
           {{ item.title }}
         </v-tab>
       </v-tabs>
@@ -53,7 +47,7 @@
           <footer-feed-box :feed="latestList.question"></footer-feed-box>
         </v-tab-item>
         <v-tab-item>
-<!--          <latest-news/>-->
+          <!--          <latest-news/>-->
           <footer-feed-box :feed="latestList.paper"></footer-feed-box>
         </v-tab-item>
       </v-tabs-items>
@@ -66,10 +60,10 @@ import LatestNews from "@/components/common/latest-news";
 import question from "~/pages/user/question/index.vue";
 
 export default {
-  name: 'feedTab',
+  name: "feedTab",
   components: {
     LatestNews,
-    FooterFeedBox
+    FooterFeedBox,
   },
   data() {
     return {
@@ -79,19 +73,19 @@ export default {
           icon: "learnfiles",
           class: "learning",
           title: "Latest Multimedia",
-          link:'/search?type=learnfiles',
+          link: "/search?type=learnfiles",
         },
         {
           icon: "qa",
           class: "question",
           title: "Latest Q&A",
-          link:'/search?type=question',
+          link: "/search?type=question",
         },
         {
           icon: "test",
           class: "test",
           title: "Latest Papers",
-          link:"/"
+          link: "/",
         },
       ],
 
@@ -100,66 +94,63 @@ export default {
           class: "learning",
           header: "Latest Multimedia",
           icon: "learnfiles",
-          main_link:"multimedia",
+          main_link: "multimedia",
           contentItemList: [],
-          more_link:'/search?type=learnfiles',
-          add_link:'/user/multimedia/create',
-          add_link_color:'#27ae60',
-          add_link_title:'Add a multimedia'
+          more_link: "/search?type=learnfiles",
+          add_link: "/user/multimedia/create",
+          add_link_color: "#27ae60",
+          add_link_title: "Add a multimedia",
         },
         paper: {
           class: "test",
           header: "Latest Papers",
           icon: "test",
-          main_link:"papers",
+          main_link: "papers",
           contentItemList: [],
-          more_link:'/search?type=test',
-          add_link:'/user/paper/create',
-          add_link_color:'#01579b',
-          add_link_title:'Add a paper'
+          more_link: "/search?type=test",
+          add_link: "/user/paper/create",
+          add_link_color: "#01579b",
+          add_link_title: "Add a paper",
         },
         question: {
           class: "question",
           header: "Latest Q&A",
           icon: "qa",
-          main_link:"qa",
+          main_link: "qa",
           contentItemList: [],
-          more_link:'/search?type=question',
-          add_link:'/user/question/create',
-          add_link_color:'#bf360c',
-          add_link_title:'Add a question'
+          more_link: "/search?type=question",
+          add_link: "/user/question/create",
+          add_link_color: "#bf360c",
+          add_link_title: "Add a question",
         },
-
-      }
-
-
+      },
     };
   },
   mounted() {
-    this.loadLatestList('multimedia');
-    this.loadLatestList('question');
-    this.loadLatestList('paper');
+    this.loadLatestList("multimedia");
+    this.loadLatestList("question");
+    this.loadLatestList("paper");
   },
   methods: {
     loadLatestList(type) {
-      var api = '/api/v1/home/files';
-      if (type == 'question')
-        api = '/api/v1/home/questions';
-      else if(type=='paper')
-        api = '/api/v1/home/tests';
+      var api = "/api/v1/home/files";
+      if (type == "question") api = "/api/v1/home/questions";
+      else if (type == "paper") api = "/api/v1/home/tests";
 
-      this.$axios.$get(api)
-        .then(response => {
-          if (type == 'multimedia')
+      this.$fetch
+        .$get(api)
+        .then((response) => {
+          if (type == "multimedia")
             this.latestList.multimedia.contentItemList = response.data;
-          else if (type == 'paper')
+          else if (type == "paper")
             this.latestList.paper.contentItemList = response.data;
-          else if (type == 'question')
+          else if (type == "question")
             this.latestList.question.contentItemList = response.data;
-        }).catch(err=>{
+        })
+        .catch((err) => {
           console.log(err);
-      })
-    }
-  }
+        });
+    },
+  },
 };
 </script>

@@ -217,10 +217,10 @@
               <div class="date-holder">
                 <div>
                   <div class="gama-text-button d-block">
-                    {{ $moment(item.subdate).format("DD") }}
+                    {{ $dayjs(item.subdate).format("DD") }}
                   </div>
                   <div class="gama-text-overline d-block">
-                    {{ $moment(item.subdate).format("MMM") }}
+                    {{ $dayjs(item.subdate).format("MMM") }}
                   </div>
                 </div>
               </div>
@@ -232,7 +232,7 @@
               <div class="year-holder" v-if="item.yearDisplay">
                 <div v-if="index != 0" class="top-sign"></div>
                 <div class="gama-text-overline">
-                  {{ $moment(item.subdate).format("YYYY") }}
+                  {{ $dayjs(item.subdate).format("YYYY") }}
                 </div>
                 <div class="bottom-sign"></div>
               </div>
@@ -445,7 +445,7 @@ export default {
   },
   methods: {
     getCate() {
-      this.$axios
+      this.$fetch
         .$get("/api/v1/types/list", {
           params: {
             type: "blog_cat",
@@ -462,7 +462,7 @@ export default {
       var params = {
         featured: 1,
       };
-      this.$axios
+      this.$fetch
         .$get("/api/v1/blogs/search", { params })
         .then((response) => {
           this.featuredItems = response.data.list;
@@ -507,7 +507,7 @@ export default {
       }
       params.page = this.pageNum;
       params.perpage = this.pageSize;
-      this.$axios
+      this.$fetch
         .$get("/api/v1/blogs/search", { params })
         .then((response) => {
           var data = response.data.list;
@@ -519,7 +519,7 @@ export default {
 
           //Arrange data for show year
           for (var i = 0; i < data.length; i++) {
-            var year = this.$moment(data[i].subdate).format("YYYY");
+            var year = this.$dayjs(data[i].subdate).format("YYYY");
             if (this.printedYearArr.includes(year)) data[i].yearDisplay = false;
             else {
               data[i].yearDisplay = true;

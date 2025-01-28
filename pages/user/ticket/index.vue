@@ -77,7 +77,7 @@
                 <p class="d-md-none mt-2">
                   <span>
                     <i class="fa fa-calendar-alt" />
-                    {{ $moment(message.up_date).format("MMM,DD YYYY") }}
+                    {{ $dayjs(message.up_date).format("MMM,DD YYYY") }}
                   </span>
                 </p>
               </v-col>
@@ -86,10 +86,10 @@
                 <p class="mb-2">
                   <span class="d-none d-md-inline">
                     <i class="fa fa-calendar-alt ml-2" />
-                    {{ $moment(message.up_date).format("MMM,DD YYYY") }}
+                    {{ $dayjs(message.up_date).format("MMM,DD YYYY") }}
                   </span>
                   <span class="d-none d-md-inline ml-2 font-weight-regular">
-                    {{ $moment(message.up_date).format("h:mm A") }}
+                    {{ $dayjs(message.up_date).format("h:mm A") }}
                   </span>
                 </p>
                 <v-chip
@@ -244,7 +244,7 @@ export default {
     getMsgList() {
       if (!this.all_tickets_loaded) {
         this.page_loading = true;
-        this.$axios
+        this.$fetch
           .$get("/api/v1/tickets", {
             params: {
               perpage: 15,
@@ -327,7 +327,7 @@ export default {
     },
     async deleteItem() {
       this.delete_loading = true;
-      await this.$axios
+      await this.$fetch
         .$delete(`/api/v1/tickets/${this.delete_ticket_id}`)
         .then((response) => {
           this.delete_ticket_id = null;

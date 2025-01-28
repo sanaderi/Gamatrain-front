@@ -119,7 +119,6 @@ export default {
       school_list: {},
       region: "",
       timer: 0,
-
     };
   },
   watch: {
@@ -145,7 +144,7 @@ export default {
     },
     getList() {
       this.table_loading = true;
-      this.$axios
+      this.$fetch
         .$get("/test_api/school_list", {
           params: {
             page: this.page,

@@ -919,7 +919,7 @@ export default {
   },
   methods: {
     getFilterList(params, type) {
-      this.$axios
+      this.$fetch
         .$get("/api/v1/types/list", {
           params,
         })

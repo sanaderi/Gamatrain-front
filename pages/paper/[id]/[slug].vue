@@ -213,7 +213,7 @@
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <i class="fa-solid fa-calendar-alt mr-1 icon"></i>
-                    Last update: {{ $moment(contentData.up_date).fromNow() }}
+                    Last update: {{ $dayjs(contentData.up_date).fromNow() }}
                   </v-col>
                   <v-col cols="12" class="pb-0">
                     <div @click="openCrashReportDialog" class="pointer">
@@ -714,172 +714,6 @@ export default {
       ],
     },
     model: null,
-    sampleTestList: [
-      {
-        type: "azmoon",
-        img: "test2.png",
-        description:
-          "The series of tests of the twelfth history book Lessons 1 to 12",
-        pages: "222",
-        owner: "Gama management team",
-        ownerImg: "gamaadmin.png",
-      },
-      {
-        type: "azmoon",
-        img: "test2.png",
-        description:
-          "The series of tests of the twelfth history book Lessons 1 to 12",
-        pages: "222",
-        owner: "Gama management team",
-        ownerImg: "gamaadmin.png",
-      },
-      {
-        type: "azmoon",
-        img: "test2.png",
-        description:
-          "The series of tests of the twelfth history book Lessons 1 to 12",
-        pages: "222",
-        owner: "Gama management team",
-        ownerImg: "gamaadmin.png",
-      },
-      {
-        type: "",
-        img: "test2.png",
-        description:
-          "The series of tests of the twelfth history book Lessons 1 to 12",
-        pages: "222",
-        owner: "Mehran Zangeneh",
-        ownerImg: "teacher2.png",
-      },
-      {
-        type: "",
-        img: "test2.png",
-        description:
-          "The series of tests of the twelfth history book Lessons 1 to 12",
-        pages: "222",
-        owner: "Gama management team",
-        ownerImg: "gamaadmin.png",
-      },
-      {
-        type: "",
-        img: "test2.png",
-        description:
-          "The series of tests of the twelfth history book Lessons 1 to 12",
-        pages: "222",
-        owner: "Gama management team",
-        ownerImg: "gamaadmin.png",
-      },
-      {
-        type: "",
-        img: "test2.png",
-        description:
-          "The series of tests of the twelfth history book Lessons 1 to 12",
-        pages: "222",
-        owner: "Gama management team",
-        ownerImg: "gamaadmin.png",
-      },
-      {
-        type: "",
-        img: "test2.png",
-        description:
-          "The series of tests of the twelfth history book Lessons 1 to 12",
-        pages: "222",
-        owner: "Gama management team",
-        ownerImg: "gamaadmin.png",
-      },
-    ],
-    relatedList: [
-      {
-        class: "learning",
-        header: "Related educational content",
-        icon: "learnfiles",
-        description: " File های پاورپوینت، ویدئو، صوتی، متنی و ...",
-        contentItemList: [
-          {
-            title:
-              "Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature",
-            link: "",
-          },
-          {
-            title:
-              "Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)",
-            link: "",
-          },
-          {
-            title:
-              "Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation",
-            link: "",
-          },
-        ],
-      },
-      {
-        class: "question",
-        header: "Related Q&As",
-        icon: "qa",
-        description: "Ask questions or answer other people's questions...",
-        contentItemList: [
-          {
-            title:
-              "Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature",
-            link: "",
-          },
-          {
-            title:
-              "Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)",
-            link: "",
-          },
-          {
-            title:
-              "Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation",
-            link: "",
-          },
-        ],
-      },
-      {
-        class: "blog",
-        header: "Related textbooks",
-        icon: "blog",
-        contentItemList: [
-          {
-            title:
-              "Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature",
-            link: "",
-          },
-          {
-            title:
-              "Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)",
-            link: "",
-          },
-          {
-            title:
-              "Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation",
-            link: "",
-          },
-        ],
-      },
-      {
-        class: "azmoon",
-        header: "Related online tests",
-        icon: "azmoon",
-        contentItemList: [
-          {
-            title:
-              "Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature",
-            link: "",
-          },
-          {
-            title:
-              "Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)",
-            link: "",
-          },
-          {
-            title:
-              "Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation",
-            link: "",
-          },
-        ],
-      },
-    ],
 
     copy_btn: "Copy",
     download_loading: false,
@@ -935,7 +769,7 @@ export default {
         apiUrl = `/api/v1/tests/download/${this.$route.params.id}/pdf`;
       if (type === "a_file")
         apiUrl = `/api/v1/tests/download/${this.$route.params.id}/answer`;
-      this.$axios
+      this.$fetch
         .$get(apiUrl)
         .then((response) => {
           var FileSaver = require("file-saver");
@@ -1002,7 +836,7 @@ export default {
 
       //End arrange to form data
 
-      this.$axios
+      this.$fetch
         .$put(
           `/api/v1/tests/${this.$route.params.id}`,
           this.urlencodeFormData(formData),

@@ -18,7 +18,7 @@
                   </h2>
 
                   <!-- <v-chip class="primary">
-              
+
              </v-chip> -->
 
                   <v-chip
@@ -30,11 +30,11 @@
                   </v-chip>
 
                   <!-- <v-chip class="primary">
-              
+
              </v-chip>
 
              <v-chip class="primary">
-              
+
              </v-chip> -->
                 </div>
                 <div class="item-img" v-if="!$parent.isExpanded">
@@ -66,7 +66,7 @@
                   <div class="gtext-t6 primary-gray-300">
                     Update:
                     <span class="primary-gray-600">{{
-                      $moment(item.up_date).format("YYYY-MM-DD")
+                      $dayjs(item.up_date).format("YYYY-MM-DD")
                     }}</span>
                   </div>
                 </div>
@@ -117,9 +117,9 @@ export default {
   name: "school-data-list",
   props: {
     schoolList: [],
-    schoolLoading:true,
+    schoolLoading: true,
     resultCount: 0,
-    allDataLoaded:false
+    allDataLoaded: false,
   },
   data() {
     return {};

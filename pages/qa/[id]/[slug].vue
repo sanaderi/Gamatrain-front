@@ -310,7 +310,7 @@
                                           mdi-calendar-month
                                         </v-icon>
                                         {{
-                                          $moment(contentData.subdate).fromNow()
+                                          $dayjs(contentData.subdate).fromNow()
                                         }}
                                       </v-btn>
                                       <v-btn text class="simple-btn">
@@ -318,7 +318,7 @@
                                           mdi-clock-time-five-outline
                                         </v-icon>
                                         {{
-                                          $moment(contentData.subdate).format(
+                                          $dayjs(contentData.subdate).format(
                                             "HH:mm"
                                           )
                                         }}
@@ -694,16 +694,14 @@
                                         <v-icon class="mr-1">
                                           mdi-calendar-month
                                         </v-icon>
-                                        {{ $moment(answer.subdate).fromNow() }}
+                                        {{ $dayjs(answer.subdate).fromNow() }}
                                       </v-btn>
                                       <v-btn text class="simple-btn">
                                         <v-icon class="mr-1">
                                           mdi-clock-time-five-outline
                                         </v-icon>
                                         {{
-                                          $moment(answer.subdate).format(
-                                            "HH:mm"
-                                          )
+                                          $dayjs(answer.subdate).format("HH:mm")
                                         }}
                                       </v-btn>
                                     </div>
@@ -1116,7 +1114,7 @@ export default {
       const querystring = require("querystring");
       this.answer_form.id = this.$route.params.id;
 
-      this.$axios
+      this.$fetch
         .$post(
           "/api/v1/questionReplies",
           querystring.stringify(this.answer_form),
@@ -1144,7 +1142,7 @@ export default {
       this.loading.edit_reply_form = true;
       const querystring = require("querystring");
 
-      this.$axios
+      this.$fetch
         .$put(
           `/api/v1/questionReplies/${this.edit_reply_id}`,
           querystring.stringify(this.edit_answer_form),
@@ -1169,7 +1167,7 @@ export default {
     },
     reInit() {
       //When form submit (answer, vote and etc)
-      this.$axios
+      this.$fetch
         .$get(`/api/v1/questionReplies`, {
           params: {
             question: this.$route.params.id,
@@ -1195,7 +1193,7 @@ export default {
 
     async deleteReply() {
       this.loading.delete_reply_form = true;
-      await this.$axios
+      await this.$fetch
         .$delete(`/api/v1/questionReplies/${this.delete_reply_id}`)
         .then((response) => {
           this.delete_reply_id = null;
@@ -1220,7 +1218,7 @@ export default {
         if (content_type == "reply")
           api = `/api/v1/questionReplies/score/${id}/${type}`;
 
-        await this.$axios
+        await this.$fetch
           .$post(api)
           .then((response) => {
             if (response.status == 1) {
@@ -1241,7 +1239,7 @@ export default {
     },
 
     selectCorrectAnswer(id) {
-      this.$axios
+      this.$fetch
         .$post(`/api/v1/questionReplies/select/${id}`)
         .then((response) => {
           this.$toast.success("Select successfully");
@@ -1302,7 +1300,7 @@ export default {
     //End crash report
 
     getSimilarQuestions() {
-      this.$axios
+      this.$fetch
         .$get(`/api/v1/questions/related/${this.$route.params.id}`)
         .then((response) => {
           this.similarQuestions = response.data.list;

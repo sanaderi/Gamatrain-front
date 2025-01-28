@@ -604,7 +604,7 @@ export default {
       this.scrollInvoked++;
     },
     getFilterList(params, type) {
-      this.$axios
+      this.$fetch
         .$get("/api/v1/types/list", {
           params,
         })
@@ -948,7 +948,7 @@ export default {
 
     //Get file type
     getFileType() {
-      this.$axios
+      this.$fetch
         .$get("/api/v1/types/list", {
           params: {
             type: this.$route.query.type == "test" ? "test_type" : "file_type",

@@ -15,26 +15,31 @@
               {{ contentData.cat_title }}
             </v-chip>
 
-            <img id="blog-img" :src="contentData.pic" :alt="contentData.title" />
+            <img
+              id="blog-img"
+              :src="contentData.pic"
+              :alt="contentData.title"
+            />
             <figcaption id="general-data-footer">
-                <div id="autor-holder">
-                  <img :src="contentData.avatar" />
-                  <span class="gama-text-overline"
-                    >{{ contentData.first_name }} {{ contentData.last_name }}</span
-                  >
-                </div>
-                <div id="date-holder">
-                  <v-icon @click="share()" class="pr-6"> mdi-share-variant </v-icon>
-                  <v-icon> mdi-calendar-blank-outline </v-icon>
-                  <span class="gama-text-overline">
-                    {{ $moment(contentData.subdate).format("YYYY-MM-DD") }}
-                  </span>
-                </div>
+              <div id="autor-holder">
+                <img :src="contentData.avatar" />
+                <span class="gama-text-overline"
+                  >{{ contentData.first_name }}
+                  {{ contentData.last_name }}</span
+                >
+              </div>
+              <div id="date-holder">
+                <v-icon @click="share()" class="pr-6">
+                  mdi-share-variant
+                </v-icon>
+                <v-icon> mdi-calendar-blank-outline </v-icon>
+                <span class="gama-text-overline">
+                  {{ $dayjs(contentData.subdate).format("YYYY-MM-DD") }}
+                </span>
+              </div>
             </figcaption>
           </div>
         </div>
-        
-        
       </v-col>
     </v-row>
     <v-row>
@@ -152,7 +157,7 @@ export default {
   }
 
   #general-data-footer {
-    padding: 0.8rem .2rem 2.9rem .2rem;
+    padding: 0.8rem 0.2rem 2.9rem 0.2rem;
     width: 100%;
     height: 4.4rem;
     margin-bottom: 3.4rem;
@@ -391,7 +396,7 @@ export default {
     #blog-describe {
       margin-bottom: 6.4rem;
       width: 98%;
-      display:block;
+      display: block;
       margin: auto auto 6.8rem auto;
 
       > h2 {

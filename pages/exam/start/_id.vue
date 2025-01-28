@@ -299,7 +299,7 @@ export default {
       //End delete from local storage
 
       const querystring = require("querystring");
-      this.$axios
+      this.$fetch
         .$post(
           `/api/v1/exams/end/${this.contentData.exam.id}`,
           querystring.stringify({

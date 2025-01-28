@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     updateUsername() {
-      this.$axios
+      this.$fetch
         .$put("/api/v1/users/username", { username: this.username })
         .then((response) => {
           this.userData.username = this.username;

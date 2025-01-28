@@ -1166,7 +1166,7 @@ export default {
         area: "",
         school: "",
         duration: 3,
-        // start_date: parseInt(this.$moment().format('x') / 1000),
+        // start_date: parseInt(this.$dayjs().format('x') / 1000),
         title: "",
         negative_point: false,
         file_original: "",
@@ -1303,7 +1303,7 @@ export default {
 
     // "teaching_date"(val) {//Convert date to seconds
     //   this.form.start_date = this.teaching_time_seconds;
-    //   this.teaching_date_time = (this.$moment(val).format('x') / 1000);
+    //   this.teaching_date_time = (this.$dayjs(val).format('x') / 1000);
     //   this.form.start_date = parseInt(this.teaching_date_time + this.teaching_time_seconds);
     // },
     // "teaching_time"(val) {//Convert hour and minute to seconds
@@ -1440,7 +1440,7 @@ export default {
         params.area_id = this.form.area;
       }
 
-      this.$axios
+      this.$fetch
         .$get("/api/v1/types/list", {
           params,
         })
@@ -1519,7 +1519,7 @@ export default {
 
       //End arrange to form data
 
-      this.$axios
+      this.$fetch
         .$post("/api/v1/exams", this.urlencodeFormData(formData), {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -1561,7 +1561,7 @@ export default {
 
     getExamTests() {
       this.test_loading = true;
-      this.$axios
+      this.$fetch
         .$get("/api/v1/examTests", {
           params: {
             lesson: this.filter.lesson,
@@ -1683,7 +1683,7 @@ export default {
       }
 
       if (this.tests.length) {
-        this.$axios
+        this.$fetch
           .$put(
             `/api/v1/exams/tests/${this.exam_id}`,
             this.urlencodeFormData(formData),
@@ -1705,7 +1705,7 @@ export default {
 
     getExamCurrentTests() {
       this.test_loading = true;
-      this.$axios
+      this.$fetch
         .$get("/api/v1/examTests", {
           params: {
             exam_id: this.exam_id,
@@ -1733,7 +1733,7 @@ export default {
     publishTest() {
       this.publish_loading = true;
       var examId = this.exam_id;
-      this.$axios
+      this.$fetch
         .$put(`/api/v1/exams/publish/${examId}`)
         .then((response) => {
           if (response.data.message === "done") {
@@ -1778,7 +1778,7 @@ export default {
         this.exam_id = this.$store.state.user.examId;
         this.exam_code = this.$store.state.user.examCode;
         this.test_step = 2;
-        this.$axios
+        this.$fetch
           .$get(`/api/v1/exams/info/${this.exam_id}`)
           .then((response) => {
             this.tests = response.data.tests.length ? response.data.tests : [];
@@ -1837,7 +1837,7 @@ export default {
 
     deleteOnlineExam() {
       this.deleteLoading = true;
-      this.$axios
+      this.$fetch
         .$delete(`/api/v1/exams/${this.exam_id}`)
         .then((response) => {
           this.exam_id = "";
@@ -1881,7 +1881,7 @@ export default {
     },
     async deleteExamTest() {
       this.delete_exam_test_loading = true;
-      await this.$axios
+      await this.$fetch
         .$delete(`/api/v1/examTests/${this.delete_exam_test_id}`)
         .then((response) => {
           this.$toast.success("Deleted successfully");
@@ -1903,7 +1903,7 @@ export default {
     uploadFile(file_name) {
       let formData = new FormData();
       formData.append("file", this.file_original);
-      this.$axios
+      this.$fetch
         .$post("/api/v1/upload", formData, {
           headers: {
             accept: "*/*",

@@ -617,7 +617,7 @@ export default {
         params.area_id = this.form.area;
       }
 
-      this.$axios
+      this.$fetch
         .$get("/api/v1/types/list", {
           params,
         })
@@ -646,7 +646,7 @@ export default {
         });
     },
     async getExtraFileType() {
-      await this.$axios
+      await this.$fetch
         .$get("/api/v1/types/list", {
           params: {
             type: "test_extra_file",
@@ -676,7 +676,7 @@ export default {
 
       //End arrange to form data
 
-      this.$axios
+      this.$fetch
         .$put(
           `/api/v1/tests/${this.$route.params.id}`,
           this.urlencodeFormData(formData),
@@ -759,7 +759,7 @@ export default {
         // this.file_extra_loading = true;
       }
 
-      this.$axios
+      this.$fetch
         .$post("/api/v1/upload", formData, {
           headers: {
             accept: "*/*",
@@ -852,7 +852,7 @@ export default {
           apiUrl = `/api/v1/tests/download/${this.$route.params.id}/answer`;
         if (type === "extra")
           apiUrl = `/api/v1/tests/download/${this.$route.params.id}/extra/${extra_id}`;
-        this.$axios
+        this.$fetch
           .$get(apiUrl)
           .then((response) => {
             var FileSaver = require("file-saver");

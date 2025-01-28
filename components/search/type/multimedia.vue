@@ -1,6 +1,11 @@
 <template>
   <div class="content-items">
-    <v-card rounded class="mb-1 content-item" v-for="(item, key) in items" :key="item.id">
+    <v-card
+      rounded
+      class="mb-1 content-item"
+      v-for="(item, key) in items"
+      :key="item.id"
+    >
       <v-card-text class="pb-0">
         <div class="d-flex">
           <div class="py-4 img-holder">
@@ -18,7 +23,9 @@
                 class="book-no-img mx-auto fill-height align-center justify-center"
               >
                 <v-card-text class="pa-0">
-                  <p class="font-weight-bold mb-3 mt-5">{{ item.lesson_title }}</p>
+                  <p class="font-weight-bold mb-3 mt-5">
+                    {{ item.lesson_title }}
+                  </p>
                   <a href="https://gamatrain.com">Gamatrain.com</a>
                 </v-card-text>
               </v-card>
@@ -71,7 +78,9 @@
                 </div>
               </v-card-text>
               <!--Item card footer-->
-              <v-card-actions class="item-content-footer pb-2 d-none d-sm-block">
+              <v-card-actions
+                class="item-content-footer pb-2 d-none d-sm-block"
+              >
                 <v-row>
                   <v-col cols="9" class="px-0">
                     <div class="d-flex pt-3 pt-md-0">
@@ -81,7 +90,9 @@
                         <v-avatar size="2em">
                           <img :src="item.avatar" alt="Avatar" />
                         </v-avatar>
-                        <span class="mx-2">{{ item.first_name }} {{ item.last_name }}</span>
+                        <span class="mx-2"
+                          >{{ item.first_name }} {{ item.last_name }}</span
+                        >
                       </div>
 
                       <div
@@ -113,7 +124,7 @@
                         <span class="mx-2">
                           <span class="d-none d-lg-inline"> Last update: </span>
                           <span class="date_string d-inline-block">
-                            {{ $moment(item.up_date).fromNow() }}
+                            {{ $dayjs(item.up_date).fromNow() }}
                           </span>
                         </span>
                       </div>
@@ -123,13 +134,19 @@
                     <div
                       class="text-right align-right float-right d-flex align-content-center"
                     >
-                      <nuxt-link icon :to="`/multimedia/${item.id}/${item.title_url}`">
+                      <nuxt-link
+                        icon
+                        :to="`/multimedia/${item.id}/${item.title_url}`"
+                      >
                         <span
                           v-show="item.q_file_word"
                           class="fa-solid fa-file-word fa-2xl blue--text"
                         ></span>
                       </nuxt-link>
-                      <nuxt-link icon :to="`/multimedia/${item.id}/${item.title_url}`">
+                      <nuxt-link
+                        icon
+                        :to="`/multimedia/${item.id}/${item.title_url}`"
+                      >
                         <span
                           v-show="item.q_file"
                           class="fa-solid fa-file-pdf fa-2xl red--text pl-1"
@@ -144,18 +161,24 @@
           </div>
         </div>
       </v-card-text>
-      <v-card-actions class="item-content-footer  pt-0 d-block d-sm-none">
+      <v-card-actions class="item-content-footer pt-0 d-block d-sm-none">
         <v-row>
           <v-col cols="10" class="py-0">
             <div class="d-flex pt-2">
-              <div class="item-content-user gama-text-overline d-flex align-center">
+              <div
+                class="item-content-user gama-text-overline d-flex align-center"
+              >
                 <v-avatar size="1.28em">
                   <img :src="item.avatar" alt="Avatar" />
                 </v-avatar>
-                <span class="mx-2">{{ item.first_name }} {{ item.last_name }}</span>
+                <span class="mx-2"
+                  >{{ item.first_name }} {{ item.last_name }}</span
+                >
               </div>
 
-              <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
+              <div
+                class="item-content-last-update gama-text-overline d-flex align-center mx-auto"
+              >
                 <i class="fa-solid fa-eye"></i>
                 <span class="mx-2">
                   <span class="d-none d-sm-inline"> Views: </span>
@@ -164,12 +187,14 @@
                   </span>
                 </span>
               </div>
-              <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
+              <div
+                class="item-content-last-update gama-text-overline d-flex align-center mx-auto"
+              >
                 <i class="fa-solid fa-calendar-days"></i>
                 <span class="mx-2">
                   <span class="d-none d-sm-inline"> Last update: </span>
                   <span class="date_string d-inline-block">
-                    {{ $moment(item.up_date).fromNow() }}
+                    {{ $dayjs(item.up_date).fromNow() }}
                   </span>
                 </span>
               </div>

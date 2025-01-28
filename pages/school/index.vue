@@ -675,7 +675,7 @@ export default {
     async getSchoolList() {
       this.schoolLoading = true;
       if (this.allDataLoaded == false)
-        this.$axios
+        this.$fetch
           .$get("/api/v1/schools/search", {
             params: {
               page: this.pageNum,
@@ -897,7 +897,7 @@ export default {
       this.isExpanded = true;
     },
     grabLocation(type, title) {
-      this.$axios
+      this.$fetch
         .$get("https://nominatim.openstreetmap.org/search", {
           params: {
             q: title,
