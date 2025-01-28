@@ -126,9 +126,9 @@ async function fetchPaginatedData(contentType, page) {
   }
 
   // Fetch data for the specified page
-  const finalUrl = `${apiUrl}&page=${page}&perpage=${itemsPerPage}`;
+  let finalUrl = `${apiUrl}&page=${page}&perpage=${itemsPerPage}`;
 
-  if (contentType === "blog") {
+  if (contentType == "blog") {
     finalUrl = `${apiUrl}?page=${page}&perpage=${itemsPerPage}`;
   }
 
