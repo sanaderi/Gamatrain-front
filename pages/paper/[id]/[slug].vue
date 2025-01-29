@@ -1,14 +1,14 @@
 <template>
   <div class="test-details-content">
     <!-- Start : Category -->
-    <category />
+    <common-category />
     <!-- End:Category -->
 
     <!--  Start: breadcrumb  -->
     <section>
       <v-container class="py-0">
         <div class="mt-0 py-0 header-path">
-          <breadcrumb :breads="breads" />
+          <widgets-breadcrumb :breads="breads" />
         </div>
       </v-container>
     </section>
@@ -21,7 +21,7 @@
           <v-row>
             <v-col cols="12" lg="3">
               <!--Show gallery of preview and book first page-->
-              <preview-gallery ref="preview_gallery" />
+              <details-preview-gallery ref="preview_gallery" />
               <!--Show gallery of preview and book first page-->
             </v-col>
             <v-col cols="12" md="8" lg="6">
@@ -580,7 +580,7 @@
     </v-container>
 
     <!-- Start : Past Papers -->
-    <related-content
+    <details-related-content
       class="mt-8"
       :board="contentData.section"
       :grade="contentData.base"
@@ -594,7 +594,7 @@
       <!-- <v-container class="pa-4 pa-md-12 pt-10">
         <v-row>
           <v-col cols="12" md="6">
-            <latest-training-content />
+            <details-latest-training-content />
           </v-col>
 
           <v-col
@@ -602,270 +602,236 @@
             md="6"
             class="related-ask-test py-0 d-flex flex-column justify-space-between"
           >
-            <related-qa />
+            <details-related-qa />
 
-            <related-online-exam />
+            <details-related-online-exam />
           </v-col>
         </v-row>
       </v-container> -->
     </section>
     <!-- End: Feed -->
 
-    <crash-report ref="crash_report" />
+    <common-crash-report ref="crash_report" />
   </div>
 </template>
-<script>
-import Breadcrumb from "../../../components/widgets/breadcrumb";
-import LastViews from "@/components/common/last-views";
-import RelatedCardBox from "@/components/paper/related-card-box.vue";
-import Category from "@/components/common/category";
-import PreviewGallery from "@/components/details/preview-gallery";
-import RelatedContent from "@/components/details/related-content";
-import LatestTrainingContent from "@/components/details/latest-training-content";
-import RelatedQa from "@/components/details/related-qa";
-import RelatedOnlineExam from "@/components/details/related-online-exam";
-import CrashReport from "~/components/common/crash-report.vue";
+<script setup>
+const route = useRoute();
+const router = useRouter();
+const { data: contentData, error } = await useAsyncData(async () => {
+  console.log("start fetching");
+  try {
+    const response = await $fetch(`/api/v1/tests/${route.params.id}`);
+    return response.data;
+  } catch (e) {
+    if (e?.status === 404) {
+      router.push("/search?type=test");
+    }
+    throw e;
+  }
+});
 
-export default {
-  name: "paper-details",
-  auth: false,
-  components: {
-    CrashReport,
-    RelatedOnlineExam,
-    RelatedQa,
-    LatestTrainingContent,
-    RelatedContent,
-    PreviewGallery,
-    Category,
-    Breadcrumb,
-    LastViews,
-    RelatedCardBox,
+useHead({
+  title: contentData.value.title,
+});
+
+//Init gallery image
+if (contentData.value) {
+  preview_gallery.value.images.push(contentData.value.thumb_pic);
+  preview_gallery.value.images.images.push(contentData.value.lesson_pic);
+  preview_gallery.value.images.carouselVal = 0;
+
+  //Update help link data
+  preview_gallery.value.images.help_link_data = {
+    state: contentData.value.state,
+    section: contentData.value.section,
+    base: contentData.value.base,
+    course: contentData.value.course,
+    lesson: contentData.value.lesson,
+  };
+}
+
+initBreadCrumb();
+const preview_gallery = ref(null);
+const sell_btn = ref(true);
+const rating = ref(4.5);
+const breads = ref([
+  {
+    text: "Paper",
+    disabled: false,
+    href: "/search?type=test",
   },
-  head() {
-    return {
-      title: this.contentData.title,
-    };
-  },
-  async asyncData({ params, $axios, redirect }) {
-    // This could also be an action dispatch
-    try {
-      const content = await $axios.$get(`/api/v1/tests/${params.id}`);
-      return { contentData: content.data };
-    } catch (e) {
-      if (e.response && e.response.status === 404) {
-        redirect("/search?type=test");
+]);
+const editMode = ref({
+  title: false,
+  describe: false,
+  title_loading: false,
+  describe_loading: false,
+});
+const detail = ref({
+  poster: "poster1.jpg",
+  linkPoster: "",
+  title: "A collection of 120 test questions for lessons 6 to 9 on (3) 12th",
+  rate: 5,
+  previewImage: "test1.png",
+  labels: [
+    "History (3)",
+    "Twelfth",
+    "Second Secondary",
+    "Literature",
+    "Kermanshah",
+    "District 2",
+    "Shohadai Parvin",
+    "Farvardin",
+    "2019",
+  ],
+});
+const model = ref(null);
+
+const copy_btn = ref("Copy");
+const download_loading = ref(false);
+
+const initBreadCrumb = () => {
+  this.breads.push(
+    {
+      text: contentData.value.section_title,
+      disabled: false,
+      href: `/search?type=test&section=${contentData.value.section}`,
+    },
+    {
+      text: contentData.value.base_title,
+      disabled: false,
+      href: `/search?type=test&section=${contentData.value.section}&base=${contentData.value.base}`,
+    },
+    {
+      text: contentData.value.lesson_title,
+      disabled: false,
+      href: `/search?type=test&section=${contentData.value.section}&base=${contentData.value.base}&lesson=${contentData.value.lesson}`,
+    }
+  );
+};
+const openAuthDialog = (val) => {
+  router.push({ query: { auth_form: val } });
+};
+
+//Social section
+const copyUrl = () => {
+  navigator.clipboard.writeText(window.location.href);
+  copy_btn.value = "Copied";
+};
+const shareSocial = (social_name) => {
+  if (social_name == "whatsapp")
+    window.open(`https://api.whatsapp.com/send?text=${window.location.href}`);
+  else if (social_name == "telegram")
+    window.open(
+      `https://telegram.me/share/url?url=${window.location.href}&text=${contentData.value.title}`
+    );
+};
+
+//Download file
+const startDownload = (type) => {
+  //if (this.$auth.loggedIn) {
+  download_loading.value = true;
+  let apiUrl = "";
+  if (type === "q_word")
+    apiUrl = `/api/v1/tests/download/${route.params.id}/word`;
+  if (type === "q_pdf")
+    apiUrl = `/api/v1/tests/download/${route.params.id}/pdf`;
+  if (type === "a_file")
+    apiUrl = `/api/v1/tests/download/${route.params.id}/answer`;
+  $fetch
+    .$get(apiUrl)
+    .then((response) => {
+      var FileSaver = require("file-saver");
+      FileSaver.saveAs(response.data.url, response.data.name);
+    })
+    .catch((err) => {
+      if (err.response.status == 400) {
+        if (
+          err.response.data.status == 0 &&
+          err.response.data.error == "creditNotEnough"
+        ) {
+          this.$toast.info("No enough credit");
+        }
+      } else if (err.response.status == 403) {
+        openAuthDialog("login");
+        // this.$router.push({ query: { auth_form: "login" } });
       }
+      console.log(err);
+    })
+    .finally(() => {
+      download_loading.value = false;
+    });
+  // } else {
+  //   this.openAuthDialog("login");
+  // }
+};
+//End download file
+
+const openCrashReportDialog = () => {
+  crash_report.value.dialog = true;
+  crash_report.value.form.type = "test";
+};
+const isFree = () => {
+  if (
+    contentData.value.files.answer.price > 0 &&
+    contentData.value.files.pdf.price > 0 &&
+    contentData.value.files.word.price > 0
+  )
+    return false;
+  else return true;
+};
+//Convert form data from multipart to urlencode
+const urlencodeFormData = (fd) => {
+  var s = "";
+
+  for (var pair of fd.entries()) {
+    if (typeof pair[1] == "string") {
+      s += (s ? "&" : "") + encode(pair[0]) + "=" + encode(pair[1]);
     }
-  },
-  mounted() {
-    //Init gallery image
-    if (this.contentData) {
-      this.$refs.preview_gallery.images.push(this.contentData.thumb_pic);
-      this.$refs.preview_gallery.images.push(this.contentData.lesson_pic);
-      this.$refs.preview_gallery.carouselVal = 0;
+  }
+  return s;
+};
+const encode = (s) => {
+  return encodeURIComponent(s).replace(/%20/g, "+");
+};
 
-      //Update help link data
-      this.$refs.preview_gallery.help_link_data = {
-        state: this.contentData.state,
-        section: this.contentData.section,
-        base: this.contentData.base,
-        course: this.contentData.course,
-        lesson: this.contentData.lesson,
-      };
-    }
+const updateDetails = () => {
+  //Arrange to form data
+  editMode.value.title_loading = true;
+  let formData = new FormData();
+  formData.append("title", contentData.value.title);
+  formData.append("description", contentData.value.description);
 
-    this.initBreadCrumb();
-  },
+  //End arrange to form data
 
-  data: () => ({
-    sell_btn: true,
-    rating: 4.5,
-    contentData: [],
-    breads: [
+  $fetch
+    .$put(
+      `/api/v1/tests/${this.$route.params.id}`,
+      urlencodeFormData(formData),
       {
-        text: "Paper",
-        disabled: false,
-        href: "/search?type=test",
-      },
-    ],
-    editMode: {
-      title: false,
-      describe: false,
-      title_loading: false,
-      describe_loading: false,
-    },
-    detail: {
-      poster: "poster1.jpg",
-      linkPoster: "",
-      title:
-        "A collection of 120 test questions for lessons 6 to 9 on (3) 12th",
-      rate: 5,
-      previewImage: "test1.png",
-      labels: [
-        "History (3)",
-        "Twelfth",
-        "Second Secondary",
-        "Literature",
-        "Kermanshah",
-        "District 2",
-        "Shohadai Parvin",
-        "Farvardin",
-        "2019",
-      ],
-    },
-    model: null,
-
-    copy_btn: "Copy",
-    download_loading: false,
-  }),
-  methods: {
-    initBreadCrumb() {
-      this.breads.push(
-        {
-          text: this.contentData.section_title,
-          disabled: false,
-          href: `/search?type=test&section=${this.contentData.section}`,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        {
-          text: this.contentData.base_title,
-          disabled: false,
-          href: `/search?type=test&section=${this.contentData.section}&base=${this.contentData.base}`,
-        },
-        {
-          text: this.contentData.lesson_title,
-          disabled: false,
-          href: `/search?type=test&section=${this.contentData.section}&base=${this.contentData.base}&lesson=${this.contentData.lesson}`,
-        }
-      );
-    },
-    openAuthDialog(val) {
-      this.$router.push({ query: { auth_form: val } });
-    },
-
-    //Social section
-    copyUrl() {
-      navigator.clipboard.writeText(window.location.href);
-      this.copy_btn = "Copied";
-    },
-    shareSocial(social_name) {
-      if (social_name == "whatsapp")
-        window.open(
-          `https://api.whatsapp.com/send?text=${window.location.href}`
-        );
-      else if (social_name == "telegram")
-        window.open(
-          `https://telegram.me/share/url?url=${window.location.href}&text=${this.contentData.title}`
-        );
-    },
-    //Download file
-
-    startDownload(type) {
-      //if (this.$auth.loggedIn) {
-      this.download_loading = true;
-      let apiUrl = "";
-      if (type === "q_word")
-        apiUrl = `/api/v1/tests/download/${this.$route.params.id}/word`;
-      if (type === "q_pdf")
-        apiUrl = `/api/v1/tests/download/${this.$route.params.id}/pdf`;
-      if (type === "a_file")
-        apiUrl = `/api/v1/tests/download/${this.$route.params.id}/answer`;
-      this.$fetch
-        .$get(apiUrl)
-        .then((response) => {
-          var FileSaver = require("file-saver");
-          FileSaver.saveAs(response.data.url, response.data.name);
-        })
-        .catch((err) => {
-          if (err.response.status == 400) {
-            if (
-              err.response.data.status == 0 &&
-              err.response.data.error == "creditNotEnough"
-            ) {
-              this.$toast.info("No enough credit");
-            }
-          } else if (err.response.status == 403) {
-            this.openAuthDialog("login");
-            // this.$router.push({ query: { auth_form: "login" } });
-          }
-          console.log(err);
-        })
-        .finally(() => {
-          this.download_loading = false;
-        });
-      // } else {
-      //   this.openAuthDialog("login");
-      // }
-    },
-    //End download file
-
-    openCrashReportDialog() {
-      this.$refs.crash_report.dialog = true;
-      this.$refs.crash_report.form.type = "test";
-    },
-    isFree() {
-      if (
-        this.contentData.files.answer.price > 0 &&
-        this.contentData.files.pdf.price > 0 &&
-        this.contentData.files.word.price > 0
-      )
-        return false;
-      else return true;
-    },
-    //Convert form data from multipart to urlencode
-    urlencodeFormData(fd) {
-      var s = "";
-
-      for (var pair of fd.entries()) {
-        if (typeof pair[1] == "string") {
-          s +=
-            (s ? "&" : "") + this.encode(pair[0]) + "=" + this.encode(pair[1]);
-        }
       }
-      return s;
-    },
-    encode(s) {
-      return encodeURIComponent(s).replace(/%20/g, "+");
-    },
-
-    updateDetails() {
-      //Arrange to form data
-      this.editMode.title_loading = true;
-      let formData = new FormData();
-      formData.append("title", this.contentData.title);
-      formData.append("description", this.contentData.description);
-
-      //End arrange to form data
-
-      this.$fetch
-        .$put(
-          `/api/v1/tests/${this.$route.params.id}`,
-          this.urlencodeFormData(formData),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        )
-        .then((response) => {
-          if (response.data.id == 0 && response.data.repeated)
-            this.$toast.info("The paper is duplicated");
-          else {
-            this.$toast.success("Updated successfully");
-          }
-        })
-        .catch((err) => {
-          if (err.response.status == 403)
-            this.$router.push({ query: { auth_form: "login" } });
-          else if (err.response.status == 400)
-            this.$toast.error(err.response.data.message);
-        })
-        .finally(() => {
-          this.editMode.title = false;
-          this.editMode.describe = false;
-          this.editMode.title_loading = false;
-        });
-    },
-  },
+    )
+    .then((response) => {
+      if (response.data.id == 0 && response.data.repeated)
+        $toast.info("The paper is duplicated");
+      else {
+        $toast.success("Updated successfully");
+      }
+    })
+    .catch((err) => {
+      if (err.response.status == 403)
+        router.push({ query: { auth_form: "login" } });
+      else if (err.response.status == 400)
+        $toast.error(err.response.data.message);
+    })
+    .finally(() => {
+      editMode.title = false;
+      editMode.describe = false;
+      editMode.title_loading = false;
+    });
 };
 </script>
 

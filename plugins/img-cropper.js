@@ -1,5 +1,16 @@
-import Vue from 'vue'
-import { StencilPreview,Cropper,DraggableElement,DraggableArea,ResizeEvent }
-  from 'vue-advanced-cropper';
+// import { defineNuxtPlugin } from "#app";
+// import {
+//   Cropper,
+//   StencilPreview,
+//   DraggableArea,
+//   DraggableElement,
+//   ResizeEvent,
+// } from "vue-advanced-cropper";
 
-Vue.use(Cropper,StencilPreview,DraggableArea,DraggableElement,ResizeEvent);
+// export default defineNuxtPlugin((nuxtApp) => {
+//   nuxtApp.vueApp.component("Cropper", Cropper);
+//   nuxtApp.vueApp.component("StencilPreview", StencilPreview);
+//   nuxtApp.vueApp.component("DraggableArea", DraggableArea);
+//   nuxtApp.vueApp.component("DraggableElement", DraggableElement);
+//   nuxtApp.vueApp.component("ResizeEvent", ResizeEvent);
+// });

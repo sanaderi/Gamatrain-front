@@ -48,8 +48,8 @@
                   offset-y
                   min-width="150"
                 >
-                  <template v-slot:activator="{ on, attrs }">
-                    <div v-bind="attrs" v-on="on" class="d-flex">
+                  <template v-slot:activator="{ props }">
+                    <div v-bind="props" class="d-flex">
                       <div
                         class="gama-text-subtitle1"
                         :id="
@@ -190,20 +190,16 @@
                 <v-icon :icon="'mdi-bell-outline'"></v-icon>
               </v-badge>
             </template>
-            <v-list-item-content>
-              <v-list-item-title> Notification </v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title> Notification </v-list-item-title>
           </v-list-item>
           <v-list-item @click="openLoginDialog" v-if="!$auth.loggedIn">
             <template v-slot:prepend>
               <v-icon :icon="'mdi-account-outline'"></v-icon>
             </template>
-            <v-list-item-content>
-              <v-list-item-title>
-                <span class="primary--text">Sign in</span>
-                / Sign up
-              </v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title>
+              <span class="primary--text">Sign in</span>
+              / Sign up
+            </v-list-item-title>
           </v-list-item>
           <!--End Profile info-->
 
@@ -240,14 +236,9 @@
                 active-class="menu_active"
                 v-for="(subMenuItem, side) in item.subMenuList"
                 :to="subMenuItem.link"
+                :title="subMenuItem.title"
                 :key="side.title"
-              >
-                <v-list-item-content class="py-2">
-                  <v-list-item-title
-                    v-text="subMenuItem.title"
-                  ></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
+              />
             </v-list-group>
           </div>
         </v-list>
@@ -283,10 +274,9 @@
 
         <div class="text-center">
           <v-bottom-sheet v-model="mobileSearchSheet">
-            <template v-slot:activator="{ on, attrs }">
+            <template v-slot:activator="{ props }">
               <v-icon
-                v-bind="attrs"
-                v-on="on"
+                v-bind="props"
                 :color="menuSetting.linkColor"
                 class="pa-23"
               >
@@ -311,7 +301,7 @@
                 class="pt-4"
                 show-arrows
               >
-                <v-slide-item
+                <v-slide-group-item
                   v-for="(item, n) in searchFilterItems"
                   class="slide-item"
                   :class="mobileSearchFilter == item.key ? 'active-item' : ''"
@@ -325,7 +315,7 @@
                     </div>
                     <div class="gama-text-caption">{{ item.title }}</div>
                   </div>
-                </v-slide-item>
+                </v-slide-group-item>
               </v-slide-group>
               <v-card flat>
                 <v-card flat>
@@ -533,8 +523,8 @@
           offset-y
           min-width="150"
         >
-          <template v-slot:activator="{ on, attrs }">
-            <div v-bind="attrs" v-on="on">
+          <template v-slot:activator="{ props }">
+            <div v-bind="props">
               <v-avatar v-if="$auth?.user?.avatar" class="ml-2">
                 <v-img :src="$auth?.user?.avatar" alt="user avatar" />
               </v-avatar>
