@@ -1,4 +1,5 @@
 
+@use "variables" as *;;
 
 body {
   overflow-y: scroll;
@@ -6,7 +7,7 @@ body {
 
   .v-application {
     @media (min-width: 1904px) {
-      
+
 
       .video-carousel {
         width: 700px;
@@ -28,7 +29,7 @@ body {
     }
 
     @media screen and (max-width: 1600px) {
-     
+
 
       .feed {
         .last-files {
@@ -49,7 +50,7 @@ body {
     }
 
     @media (max-width: 1380px) {
-     
+
 
       .feed {
         .last-files {
@@ -478,7 +479,7 @@ body {
 
       //main header
       .main-header {
-       
+
 
         .header-search {
           &.desktop-search {
@@ -657,7 +658,7 @@ body {
 
         .sample-item-content {
           .item-content-footer {
-            
+
 
             img {
               width: 25px;
@@ -953,7 +954,7 @@ body {
     }
 
     // @media screen and (max-width: 480px) {
-      
+
 
     //   .stat-value {
     //     font-size: 2.4rem !important;
@@ -980,7 +981,7 @@ body {
     //     padding: 1rem !important;
     //   }
 
-      
+
 
 
     //   .mobile-res-search {
@@ -994,7 +995,7 @@ body {
     //     height: 4rem;
     //   }
 
-      
+
 
     //   .search-field {
     //     font-size: 1rem;
