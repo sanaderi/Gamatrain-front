@@ -24,6 +24,5 @@
       "source": "/uploads/:path*",
       "destination": "https://core.gamatrain.com/uploads/:path*"
     }
-  ],
-  "packageManager": "yarn"
+  ]
 }
