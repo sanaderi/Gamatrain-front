@@ -5,8 +5,8 @@
     class="notification-box"
     min-width="150"
   >
-    <template v-slot:activator="{ on, attrs }">
-      <div v-bind="attrs" v-on="on" class="notice-btn align-center mr-3 ml-5">
+    <template v-slot:activator="{ props }">
+      <div v-bind="props" class="notice-btn align-center mr-3 ml-5">
         <v-chip
           x-small
           v-show="notifications.length"
@@ -25,11 +25,9 @@
       <v-list-item>
         <v-row class="fill-height">
           <v-col cols="auto" class="align-self-center">
-            <v-list-item-content>
-              <v-list-item-title class="text-h5">
-                Notifications
-              </v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title class="text-h5">
+              Notifications
+            </v-list-item-title>
           </v-col>
           <v-col cols="auto" class="align-self-center ml-auto">
             <v-btn
@@ -55,26 +53,24 @@
           :key="item.id"
           @click="openNotification(item.id)"
         >
-          <v-list-item-icon class="mr-2 mt-1">
-            <v-icon color="rgb(255, 193, 7)" large class="mt-4">
-              mdi-email
-            </v-icon>
-          </v-list-item-icon>
+          <template v-slot:prepend>
+            <div class="mr-2 mt-1">
+              <v-icon color="rgb(255, 193, 7)" large class="mt-4">
+                mdi-email
+              </v-icon>
+            </div>
+          </template>
 
-          <v-list-item-content class="pt-2">
-            <v-list-item-title class="font-weight-bold">{{
-              item.title
-            }}</v-list-item-title>
-            <v-list-item-subtitle>
-              <div v-html="item.body" class="font-size-14 mb-1 black--text" />
-              <div class="font-size-10">{{ item.subdate }}</div>
-            </v-list-item-subtitle>
-          </v-list-item-content>
+          <v-list-item-title class="font-weight-bold">{{
+            item.title
+          }}</v-list-item-title>
+          <v-list-item-subtitle>
+            <div v-html="item.body" class="font-size-14 mb-1 black--text" />
+            <div class="font-size-10">{{ item.subdate }}</div>
+          </v-list-item-subtitle>
         </v-list-item>
         <v-list-item v-show="!notifications.length">
-          <v-list-item-content class="mt-5 mx-auto">
-            There are no new notifications
-          </v-list-item-content>
+          <div class="mt-5 mx-auto">There are no new notifications</div>
         </v-list-item>
       </v-list>
     </v-card>

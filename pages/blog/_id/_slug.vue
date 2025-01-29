@@ -15,29 +15,31 @@
               {{ contentData.cat_title }}
             </v-chip>
 
-            <img
-              id="blog-img"
-              :src="contentData.pic"
-              :alt="contentData.title"
-            />
-            <figcaption id="general-data-footer">
-              <div id="autor-holder">
-                <img :src="contentData.avatar" />
-                <span class="gama-text-overline"
-                  >{{ contentData.first_name }}
-                  {{ contentData.last_name }}</span
-                >
-              </div>
-              <div id="date-holder">
-                <v-icon @click="share()" class="pr-6">
-                  mdi-share-variant
-                </v-icon>
-                <v-icon> mdi-calendar-blank-outline </v-icon>
-                <span class="gama-text-overline">
-                  {{ $dayjs(contentData.subdate).format("YYYY-MM-DD") }}
-                </span>
-              </div>
-            </figcaption>
+            <figure>
+              <img
+                id="blog-img"
+                :src="contentData.pic"
+                :alt="contentData.title"
+              />
+              <figcaption id="general-data-footer">
+                <div id="autor-holder">
+                  <img :src="contentData.avatar" />
+                  <span class="gama-text-overline"
+                    >{{ contentData.first_name }}
+                    {{ contentData.last_name }}</span
+                  >
+                </div>
+                <div id="date-holder">
+                  <v-icon @click="share()" class="pr-6">
+                    mdi-share-variant
+                  </v-icon>
+                  <v-icon> mdi-calendar-blank-outline </v-icon>
+                  <span class="gama-text-overline">
+                    {{ $dayjs(contentData.subdate).format("YYYY-MM-DD") }}
+                  </span>
+                </div>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </v-col>

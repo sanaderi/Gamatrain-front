@@ -19,8 +19,10 @@
                 @mousemove="handleMouseMove"
                 @mousedown="handleMouseDown(index)"
                 @mouseup="handleMouseUp(index)"
-                :ref="`handler${index}`"
+                :ref="(el) => (buttonRefs.value[index] = el)"
               >
+                <!-- :ref="`handler${index}`" -->
+
                 <v-btn
                   @click="handleBtnClick(index)"
                   class="my-0 white--text grade-btn"
@@ -343,17 +345,15 @@
 
 <script setup>
 import { useDisplay } from "vuetify";
+const { xs, md, sm, name } = useDisplay();
 
 const dayjs = useDayjs();
-const { xs, md, sm, name } = useDisplay();
 const props = defineProps({
   stats: {
     type: Array,
     default: () => [],
   },
 });
-
-console.log("display:" + xs);
 
 const statsSlideVal = ref(6);
 const gradeColors = ref([
@@ -375,7 +375,7 @@ const gradeColors = ref([
   "#FC4F4E",
 ]);
 
-const gradeSizesXs = ref([
+const gradeSizesXs = [
   {
     width: 32,
     height: 32,
@@ -457,7 +457,7 @@ const gradeSizesXs = ref([
     height: 18,
     fontSize: 8,
   },
-]);
+];
 const gradeSizesSm = [
   {
     width: 35,
@@ -846,19 +846,23 @@ const handleBtnClick = (index) => {
 };
 
 const handleMouseDown = (index) => {
-  isMouseDown = true;
-  startIndex = index;
+  isMouseDown.value = true;
+  startIndex.value = index;
+
   // event.preventDefault();
   // stopInterval(); // Clear the interval using the interval ID
 };
 const handleMouseUp = (event) => {
-  isMouseDown = false;
-  startIndex = -1;
-  currentIndex = -1;
+  isMouseDown.value = false;
+  startIndex.value = -1;
+  currentIndex.value = -1;
 };
+
+const buttonRefs = ref([]); // To hold an array of refs
+
 const handleMouseMove = (event) => {
-  if (isMouseDown) {
-    stopInterval();
+  if (isMouseDown.value) {
+    // stopInterval();
     event.preventDefault();
 
     // Get the touch coordinates
@@ -867,8 +871,11 @@ const handleMouseMove = (event) => {
 
     // Loop through the buttons and check if the touch is over a button
     for (let index = 0; index < props.stats.length; index++) {
-      const buttonRef = $refs[`handler${index}`][0];
+      const buttonRef = buttonRefs.value[index];
+
+      // const buttonRef = $refs[`handler${index}`][0];
       const rect = buttonRef.getBoundingClientRect();
+      console.log(rect);
 
       if (
         touchX >= rect.left &&
@@ -979,7 +986,6 @@ const getQuestions = async () => {
   try {
     const response = await $fetch("/api/v1/home/questions");
     questions.value = response?.data;
-    console.log(questions.value);
   } catch (error) {
     console.log(error);
   } finally {
@@ -1016,9 +1022,13 @@ const gradeHandlerTitle = (title) => {
 };
 
 const gradeSizes = computed(() => {
-  if (xs) return gradeSizesXs.value;
-  else if (sm) return gradeSizesSm.value;
-  else return gradeSizesMd.value;
+  switch (name.value) {
+    case "xs":
+      return gradeSizesXs;
+    case "sm":
+      return gradeSizesSm;
+  }
+  return gradeSizesMd;
 });
 
 //handleAutoCycle();

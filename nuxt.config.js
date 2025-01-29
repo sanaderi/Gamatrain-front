@@ -3,71 +3,80 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 export default defineNuxtConfig({
   // Global page headers: https://go.nuxtjs.dev/config-head
 
-  head: {
-    titleTemplate: "%s | Gamatrain",
-    title:
-      "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
-    htmlAttrs: {
-      lang: "en",
+  runtimeConfig: {
+    // The private keys which are only available server-side
+    apiSecret: "123",
+    // Keys within public are also exposed client-side
+    public: {
+      apiBase: "https://gamatrain.com",
+      googleClientId:
+        "231452968451-rd7maq3v4c8ce6d1e36uk3qacep20lp8.apps.googleusercontent.com",
     },
-    meta: [
-      { charset: "utf-8" },
-      { "http-equiv": "Content-Type" },
-      {
-        name: "viewport",
-        content:
-          "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
-      },
-      {
-        hid: "description",
-        name: "description",
-        content:
-          "Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences.",
-      },
-      { name: "format-detection", content: "telephone=no" },
-      {
-        hid: "apple-mobile-web-app-title",
-        name: "apple-mobile-web-app-title",
-        content:
-          "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
-      },
-      {
-        hid: "og:title",
-        name: "og:title",
-        content:
-          "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
-      },
-      {
-        hid: "og:site_name",
-        name: "og:site_name",
-        content: "GamaTrain",
-      },
-    ],
-    link: [
-      {
-        rel: "icon",
-        type: "image/x-icon",
-        href: "/favicon-dark.ico",
-      },
-      { rel: "stylesheet", href: "/assets/css/all.min.css" },
-    ],
-    script: [
-      {
-        src: "https://accounts.google.com/gsi/client",
-        defer: true,
-        async: true,
-      },
-      // {src: './assets/js/jquery.js', body: true},
-    ],
   },
-
-  generate: {
-    routes: ["/"],
+  app: {
+    head: {
+      titleTemplate: "%s | Gamatrain",
+      title:
+        "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
+      htmlAttrs: {
+        lang: "en",
+      },
+      meta: [
+        { charset: "utf-8" },
+        { "http-equiv": "Content-Type" },
+        {
+          name: "viewport",
+          content:
+            "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+        },
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "Discover GamaTrain, an innovative K12 learning platform transforming education with AI-powered instruction, a vibrant community, and personalized learning experiences.",
+        },
+        { name: "format-detection", content: "telephone=no" },
+        {
+          hid: "apple-mobile-web-app-title",
+          name: "apple-mobile-web-app-title",
+          content:
+            "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content:
+            "GamaTrain: Smart K12 Learning with AI, Community, and Personalized Education",
+        },
+        {
+          hid: "og:site_name",
+          name: "og:site_name",
+          content: "GamaTrain",
+        },
+      ],
+      link: [
+        {
+          rel: "icon",
+          type: "image/x-icon",
+          href: "/favicon-dark.ico",
+        },
+        { rel: "stylesheet", href: "/assets/css/all.min.css" },
+      ],
+      script: [
+        {
+          src: "https://accounts.google.com/gsi/client",
+          defer: true,
+          async: true,
+        },
+        // {src: './assets/js/jquery.js', body: true},
+      ],
+    },
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    // "@/assets/scss/app.scss",
+    "vuetify/lib/styles/main.css",
+    "@/assets/scss/app.scss",
     "@mdi/font/css/materialdesignicons.min.css",
     "@/assets/css/gama6/styles.css",
   ],
@@ -76,11 +85,9 @@ export default defineNuxtConfig({
   plugins: [
     // { src: "plugins/vee-validate.js", ssr: true },
     { src: "plugins/helper.js" },
-    { src: "plugins/vue-emoji-picker", ssr: false },
-    { src: "plugins/img-cropper", ssr: false },
+    // { src: "plugins/vue-emoji-picker", ssr: false },
+    // { src: "plugins/img-cropper", ssr: false },
     { src: "plugins/vuedraggable", ssr: false },
-    // { src: 'plugins/aframe.js', ssr: false, mode: 'client' },
-    // { src: "plugins/gtag.js", mode: "client" },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -114,6 +121,7 @@ export default defineNuxtConfig({
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     "dayjs-nuxt",
+    "nuxt-gtag",
     "@vee-validate/nuxt",
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
@@ -122,6 +130,9 @@ export default defineNuxtConfig({
       });
     },
   ],
+  gtag: {
+    id: "G-VLSLZJR0WK",
+  },
 
   routeRules: {
     "/api/v1/**": {
@@ -132,9 +143,9 @@ export default defineNuxtConfig({
     },
   },
 
-  router: {
-    middleware: ["auth", "redirect"],
-  },
+  // router: {
+  //   middleware: ["auth", "redirect"],
+  // },
 
   // auth: {
   //   strategies: {
@@ -233,8 +244,6 @@ export default defineNuxtConfig({
       "vuetify",
       // "vee-validate",
       "vue-chartjs",
-      "ofetch",
-      "node-fetch-native",
       "defu",
     ],
   },
