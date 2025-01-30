@@ -1,48 +1,55 @@
-# Commit Messages
-The style of a commit message should be in the following format:
+# Contributing to GamaEdtech
 
-`<type>: <subject>`
+Thank you for contributing to GamaEdtech! We appreciate your efforts to improve the project. Please follow the guidelines below to ensure a smooth contribution process.
 
-## type
-The type should be one of the following keys:
+## Table of Contents
+1. [Commit Message Conventions](#commit-message-conventions)
+2. [Branch Naming Conventions](#branch-naming-conventions)
 
- **_feature_**
+## Commit Message Conventions
 
-When you develop a new feature, you should use this key to describe the commit. Typically, this type of commit involves a significant amount of code spread across various layers, such as Domain, DataSource, and others.
+We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for our commit messages. Following this format helps us to generate changelogs and automate versioning.
 
-**_refactor_**
+### Format:
 
-When you change the structure of a code without altering its observable behavior, you should use this type to describe the commit.
+- **type**: The type of change you are committing (e.g., feat, fix, docs, chore, style, refactor, test).
+- **scope**: Optional. A scope or component affected (e.g., api, ui, config).
+- **subject**: A short description of the change, written in the imperative mood (e.g., "Add new feature").
 
-**_behavior_**
+### Examples:
+- `feat(auth): add JWT authentication`
+- `fix(ui): resolve button alignment issue`
+- `docs(readme): update project setup instructions`
 
-When you have previously developed a feature and now change its observable behavior by adding or removing something that impacts the end-user experience, you should use this type to describe the commit.
-
-**_fix_**
-
-When you fix a bug, correct a typo, or perform similar tasks, you should use this type to describe the commit.
-
-**_doc_**
-
-When you add documentation for a piece of code or update files like README and similar ones, you should use this type to describe the commit.
-
-**_style_**
-
-When you change the style of the code, such as removing extra whitespace between methods, you should use this type to describe the commit.
-
-**_chore_**
-
-For other minor changes, such as adding a new dependency and updating the .csproj file, you should use this type to describe the commit.
+### Types:
+- **feat**: A new feature or enhancement
+- **fix**: A bug fix
+- **docs**: Documentation changes
+- **chore**: Routine tasks like refactoring, dependency updates, etc.
+- **style**: Code style changes (e.g., formatting, missing semicolons)
+- **refactor**: Code changes that neither fix a bug nor add a feature but improve readability or performance
+- **test**: Adding or fixing tests
 
 
 
-## subject
+## Branch Naming Conventions
 
-In the subject section, you should describe the task you performed in a short sentence.
-This sentence should meet the following conditions:
+Branches should be named in a way that clearly indicates the purpose of the branch.
 
-- Start with a lowercase letter.
-- Be in the present tense.
-- Be in the imperative form.
+### Format:
 
-If this commit is made in response to an issue, the relevant issue should be mentioned at the end of the sentence in parentheses.
+- **type**: The type of the branch (e.g., feat, fix, docs, chore).
+- **issue-or-task-id**: The ID of the issue or task being worked on (optional but helpful if you are using an issue tracker).
+- **short-description**: A short description of what the branch is working on.
+
+### Examples:
+- `feat/123-add-login-page`
+- `fix/456-correct-header-alignment`
+- `docs/789-update-readme`
+- `chore/101-cleanup-unused-files`
+
+### Branch Type Key:
+- **feat**: New features or functionality
+- **fix**: Bug fixes
+- **docs**: Documentation updates
+- **chore**: Other tasks such as refactoring, configuration, or testing
