@@ -91,8 +91,7 @@
       <!-- Main Content -->
       <main class="content">
         <div v-if="activeTab === 'order'">
-          <h1>Dashboard</h1>
-          <p>Welcome to the admin panel.</p>
+          <AdminTable />
         </div>
         <div v-if="activeTab === 'My Stock'">
           <h1>My Stock</h1>
@@ -108,8 +107,10 @@
 </template>
 
 <script>
+import AdminTable from "~/components/AdminTable.vue";
 export default {
   name: "AdminPanel",
+  components: { AdminTable },
   data() {
     return {
       activeTab: "order",
@@ -129,8 +130,11 @@ export default {
 .admin-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  max-height: 100vh !important;
   background: #1d2939;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 .admin-container h2 {
   margin: 12px 28px;
@@ -140,13 +144,13 @@ export default {
   font-weight: 500;
 }
 .sidebar {
-  width: 250px;
+  width: 304px;
   background: #1d2939;
   color: white;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 93vh;
 }
 
 .sidebar h3 {
@@ -196,7 +200,7 @@ export default {
   display: flex;
   /* justify-content: center; */
   align-items: center;
-  margin-top: 70%;
+  margin-top: auto;
 }
 .profile {
   width: 40px;
