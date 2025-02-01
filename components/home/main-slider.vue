@@ -53,18 +53,14 @@
                 <v-text-field
                   ref="keywordInput"
                   v-model="searchKey"
-                  class="rounded-ts"
+                  rounded="s-pill"
                   label="Ex: Paper Summer Session"
                   dense
+                  :append-inner-icon="searchKey ? 'mdi-close-circle' : ''"
+                  @click:append-inner="closeSearch()"
                   hide-details
-                  filled
-                >
-                  <template slot="append">
-                    <v-icon v-if="searchResultsSection" @click="closeSearch()">
-                      mdi-close-circle
-                    </v-icon>
-                  </template>
-                </v-text-field>
+                  variant="solo"
+                />
               </v-col>
               <v-col cols="4" class="pl-0" id="keysearch-cate">
                 <v-autocomplete
@@ -73,12 +69,12 @@
                   v-model="searchCate"
                   label="Select category"
                   :items="['Paper', 'Multimedia', 'Q&A', 'Exam', 'Tutorial']"
-                  filled
+                  variant="solo"
                 ></v-autocomplete>
               </v-col>
               <v-col cols="1" class="pl-0">
                 <v-btn color="#FFB300" class="white--text">
-                  <v-icon> mdi-magnify </v-icon>
+                  <v-icon color="#ffffff" size="20"> mdi-magnify </v-icon>
                 </v-btn>
               </v-col>
             </v-row>
@@ -221,7 +217,7 @@ export default {
       slides: [
         {
           title:
-            '<span class="gama-text-h1">AI</span> <span class="gama-text-h4">&nbspSystem <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education</span>',
+            '<span class="gama-text-h1">AI</span> <span class="gama-text-h4 text-white">&nbspSystem <span class="d-sm-none"><br>&nbsp&nbsp</span>in Education</span>',
           img: "ai-robot.png",
           text: "Discover the future of education with our AI-powered learning platform,<br> revolutionizing the way you acquire knowledge and skills.",
           id: "ai-slide",
@@ -294,13 +290,13 @@ export default {
 
       this.timer = setTimeout(() => {
         if (this.searchKey && this.allDataLoaded == false)
-          this.$fetch
-            .$get("/api/v1/search/text", {
-              params: {
-                query: this.searchKey,
-                page: this.pageNum,
-              },
-            })
+          $fetch("/api/v1/search/text", {
+            method: "GET",
+            params: {
+              query: this.searchKey,
+              page: this.pageNum,
+            },
+          })
             .then((response) => {
               this.searchCount = response.data.num;
               this.searchResults.push(...response.data.list);
