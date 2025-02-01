@@ -5,10 +5,15 @@
         <v-row>
           <v-col cols="12" sm="6" md="6" class="text-center text-sm-left">
             <nuxt-link to="/">
-              <img id="logo" alt="gamatrain" src="/images/gamatrain-logo-black.svg" />
+              <img
+                id="logo"
+                alt="gamatrain"
+                src="/images/gamatrain-logo-black.svg"
+              />
             </nuxt-link>
             <div id="short-describe" class="gama-text-body2">
-              Our mission is to provide all training services to anyone and anywhere.
+              Our mission is to provide all training services to anyone and
+              anywhere.
             </div>
             <div class="mt-4">
               <nuxt-link to="/" class="v-btn">
@@ -49,10 +54,10 @@
                 :key="i"
                 style="border-bottom: 0.5px solid #424a53"
               >
-                <v-expansion-panel-header class="link-title gama-text-button">{{
+                <v-expansion-panel-title class="link-title gama-text-button">{{
                   item.mainTitle
-                }}</v-expansion-panel-header>
-                <v-expansion-panel-content class="pt-4">
+                }}</v-expansion-panel-title>
+                <v-expansion-panel-text class="pt-4">
                   <nuxt-link
                     v-for="link in item.subMenu"
                     :key="link.link"
@@ -61,7 +66,7 @@
                   >
                     {{ link.title }}
                   </nuxt-link>
-                </v-expansion-panel-content>
+                </v-expansion-panel-text>
               </v-expansion-panel>
             </v-expansion-panels>
           </v-col>

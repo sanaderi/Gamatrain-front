@@ -135,6 +135,7 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    "/search": { prerender: true }, // Ensures it's treated as a static page
     "/api/v1/**": {
       proxy: "https://core.gamatrain.com/api/v1/**",
     },
@@ -205,38 +206,6 @@ export default defineNuxtConfig({
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
-  // vuetify: {
-  //   defaultAssets: false,
-  //   customVariables: ["~/assets/variables.scss"],
-  //   theme: {
-  //     light: true,
-  //     themes: {
-  //       light: {
-  //         background: "#FFFFFF",
-  //         surface: "#FFFFFF",
-  //         primary: "#FFB300",
-  //         secondary: "#03DAC6",
-  //         error: "#B00020",
-  //         info: "#2196F3",
-  //         success: "#4CAF50",
-  //         warning: "#FB8C00",
-  //       },
-  //       dark: {
-  //         background: colors.indigo.base,
-  //         surface: "#FFFFFF",
-  //         primary: "#FFB300",
-  //         secondary: "#03DAC6",
-  //         error: "#B00020",
-  //         info: colors.teal.lighten1,
-  //         success: "#4CAF50",
-  //         warning: "#FB8C00",
-  //       },
-  //     },
-  //   },
-  //   icons: {
-  //     iconfont: "mdi",
-  //   },
-  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -265,6 +234,10 @@ export default defineNuxtConfig({
       lang: "en",
       useWebmanifestExtension: false,
     },
+  },
+
+  nitro: {
+    prerender: { routes: ["/search"] },
   },
 
   server: {

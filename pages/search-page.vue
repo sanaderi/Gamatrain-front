@@ -95,7 +95,7 @@
             </v-breadcrumbs>
 
             <!-- Search tabs -->
-            <Tabs
+            <common-tabs
               style="position: sticky; top: 0; z-index: 5"
               ref="content_tabs"
             />
@@ -108,21 +108,30 @@
               Oops! no data found
             </div>
             <div v-else>
-              <Paper v-if="$route.query.type === 'test'" :items="items" />
-              <Multimedia
+              <search-type-paper
+                v-if="$route.query.type === 'test'"
+                :items="items"
+              />
+              <search-type-multimedia
                 v-else-if="$route.query.type === 'learnfiles'"
                 :items="items"
               />
-              <QuestionAnswer
+              <search-type-q-a
                 v-else-if="$route.query.type === 'question'"
                 :items="items"
               />
-              <Exam v-else-if="$route.query.type === 'azmoon'" :items="items" />
-              <Tutorial
+              <search-type-exam
+                v-else-if="$route.query.type === 'azmoon'"
+                :items="items"
+              />
+              <search-type-tutorial
                 v-else-if="$route.query.type === 'dars'"
                 :items="items"
               />
-              <Tutor v-else-if="$route.query.type === 'tutor'" :items="items" />
+              <search-type-tutor
+                v-else-if="$route.query.type === 'tutor'"
+                :items="items"
+              />
             </div>
             <v-row v-show="page_loading">
               <v-col cols="12" class="text-center">
@@ -143,36 +152,11 @@
 </template>
 
 <script>
-import Tabs from "@/components/common/tabs.vue";
-import searchFilter from "@/components/search/filter";
-import FilterModal from "@/components/common/filter-modal";
-import Exam from "@/components/search/type/exam.vue";
-import QuestionAnswer from "~/components/search/type/q-a.vue";
-import Multimedia from "~/components/search/type/multimedia.vue";
-import Paper from "~/components/search/type/paper.vue";
-import Tutorial from "@/components/search/type/tutorial.vue";
-import Tutor from "~/components/search/type/tutor.vue";
-import searchBox from "@/components/common/search-box";
-
 export default {
-  auth: false,
   name: "searchPage",
   layout: "search_layout",
 
-  components: {
-    Tutor,
-    FilterModal,
-    Tabs,
-    searchFilter,
-    Exam,
-    QuestionAnswer,
-    Multimedia,
-    Paper,
-    Tutorial,
-    searchBox,
-  },
-
-  async asyncData({ query, $axios }) {
+  async asyncData({ query }) {
     var page_title = "";
     var page_describe = "";
     var params = {
@@ -188,7 +172,7 @@ export default {
     let paperTypeList = {};
     let topicList = {};
     let multimediaTypeTitle = "";
-    boardList = await $axios.$get(`/api/v1/types/list`, { params });
+    boardList = await $fetch(`/api/v1/types/list`, { params });
     if (query.section) {
       const boardIndex = boardList.data.findIndex(
         (x) => x.id === query.section
@@ -198,7 +182,7 @@ export default {
       //Also list base list for filter
       params.type = "base";
       params.section_id = query.section;
-      gradeList = await $axios.$get(`/api/v1/types/list`, { params });
+      gradeList = await $fetch(`/api/v1/types/list`, { params });
     }
 
     if (query.base) {
@@ -208,7 +192,7 @@ export default {
       //Also list subject list for filter
       params.type = "lesson";
       params.base_id = query.base;
-      subjectList = await $axios.$get(`/api/v1/types/list`, { params });
+      subjectList = await $fetch(`/api/v1/types/list`, { params });
     }
 
     if (query.lesson) {
@@ -220,12 +204,12 @@ export default {
       //Also list topic list for filter
       params.type = "topic";
       params.lesson_id = query.lesson;
-      topicList = await $axios.$get(`/api/v1/types/list`, { params });
+      topicList = await $fetch(`/api/v1/types/list`, { params });
     }
 
     if (query.type == "test") {
       params.type = "test_type";
-      paperTypeList = await $axios.$get(`/api/v1/types/list`, { params });
+      paperTypeList = await $fetch(`/api/v1/types/list`, { params });
 
       if (query.test_type) {
         const paperTypeIndex = paperTypeList.data.findIndex(
@@ -237,7 +221,7 @@ export default {
 
     if (query.type === "learnfiles" && query.file_type) {
       params.type = "file_type";
-      const multimediaTypeList = await $axios.$get(`/api/v1/types/list`, {
+      const multimediaTypeList = await $fetch(`/api/v1/types/list`, {
         params,
       });
       const multimediaTypeIndex = multimediaTypeList.data.findIndex(
@@ -572,10 +556,9 @@ export default {
           params.state = this.$route.query.state;
           params.city = this.$route.query.city;
         }
-        await this.$fetch
-          .$get("/api/v1/search", {
-            params: params,
-          })
+        await $fetch("/api/v1/search", {
+          params: params,
+        })
           .then((response) => {
             this.items.push(...response.data.list);
             this.result_count = response.data.num;

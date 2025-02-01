@@ -1,8 +1,7 @@
 <template>
   <div class="content-items">
     <v-card
-      rounded
-      class="mb-1 content-item"
+      class="mb-1 content-item rounded"
       v-for="(item, key) in items"
       :key="item.id"
     >
@@ -53,8 +52,8 @@
                 <div class="mt-3">
                   <v-chip
                     class="mr-1 mb-1"
-                    :x-small="$vuetify.breakpoint.xs"
-                    :small="!$vuetify.breakpoint.xs"
+                    :x-small="display.xs"
+                    :small="!display.xs"
                     :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}&lesson=${item.lesson}`"
                   >
                     {{ item.lesson_title }}
@@ -62,14 +61,14 @@
                   <v-chip
                     :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}`"
                     class="mr-1 mb-1"
-                    :x-small="$vuetify.breakpoint.xs"
-                    :small="!$vuetify.breakpoint.xs"
+                    :x-small="display.xs"
+                    :small="!display.xs"
                   >
                     {{ item.base_title }}
                   </v-chip>
                   <v-chip
-                    :x-small="$vuetify.breakpoint.xs"
-                    :small="!$vuetify.breakpoint.xs"
+                    :x-small="display.xs"
+                    :small="!display.xs"
                     class="mr-1 mb-1"
                     :to="`/search?type=${$route.query.type}&section=${item.section}`"
                   >
@@ -222,23 +221,15 @@
   </div>
 </template>
 
-<script>
-import TrainingContentCarousel from "~/components/search/training-content-carousel.vue";
+<script setup>
+import { useDisplay } from "vuetify/lib/framework.mjs";
 
-export default {
-  name: "multimedia-list",
-  components: { TrainingContentCarousel },
-  props: ["items"],
-  data() {
-    return {};
-  },
-  mounted() {},
-  methods: {
-    imgErrorHandler(item, key) {
-      this.items[key].lesson_pic = "";
-    },
-  },
+const display = useDisplay();
+const props = defineProps({
+  items: Array,
+});
+
+const imgErrorHandler = (key) => {
+  props.items[key].lesson_pic = "";
 };
 </script>
-
-<style scoped></style>

@@ -1,10 +1,9 @@
 <template>
   <div class="content-items">
     <v-card
-      rounded
-      class="mb-1 content-item"
-      v-for="item in items"
-      :key="item.value"
+      class="mb-1 content-item rounded"
+      v-for="(item, index) in items"
+      :key="index"
     >
       <v-card-text class="pb-0">
         <div class="d-flex">
@@ -12,29 +11,22 @@
             <div class="item-img">
               <v-img
                 v-if="item.lesson_pic"
+                @error="imgErrorHandler(item, key)"
                 :src="item.lesson_pic"
                 :alt="item.lesson_title"
                 class="item-image"
               >
-                <template v-slot:placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <v-progress-circular
-                      indeterminate
-                      color="grey lighten-5"
-                    ></v-progress-circular>
-                  </v-row>
-                </template>
               </v-img>
               <v-card
                 v-else
-                class="book-no-img mx-autofill-height align-center justify-center"
+                class="book-no-img mx-auto fill-height align-center justify-center"
               >
-                <p class="font-weight-bold mb-2">{{ item.lesson_title }}</p>
-                <a href="https://gamatrain.com">Gamatrain.com</a>
+                <v-card-text class="pa-0">
+                  <p class="font-weight-bold mb-3 mt-5">
+                    {{ item.lesson_title }}
+                  </p>
+                  <a href="https://gamatrain.com">Gamatrain.com</a>
+                </v-card-text>
               </v-card>
             </div>
           </div>
@@ -59,8 +51,8 @@
                 <div class="mt-3">
                   <v-chip
                     class="mr-1 mb-1"
-                    :x-small="$vuetify.breakpoint.xs"
-                    :small="!$vuetify.breakpoint.xs"
+                    :x-small="display.xs"
+                    :small="!display.xs"
                     :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}&lesson=${item.lesson}`"
                   >
                     {{ item.lesson_title }}
@@ -68,14 +60,14 @@
                   <v-chip
                     :to="`/search?type=${$route.query.type}&section=${item.section}&base=${item.base}`"
                     class="mr-1 mb-1"
-                    :x-small="$vuetify.breakpoint.xs"
-                    :small="!$vuetify.breakpoint.xs"
+                    :x-small="display.xs"
+                    :small="!display.xs"
                   >
                     {{ item.base_title }}
                   </v-chip>
                   <v-chip
-                    :x-small="$vuetify.breakpoint.xs"
-                    :small="!$vuetify.breakpoint.xs"
+                    :x-small="display.xs"
+                    :small="!display.xs"
                     class="mr-1 mb-1"
                     :to="`/search?type=${$route.query.type}&section=${item.section}`"
                   >
@@ -239,15 +231,16 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "paper-list",
-  props: ["items"],
-  data() {
-    return {};
-  },
-  mounted() {},
-  methods: {},
+<script setup>
+import { useDisplay } from "vuetify/lib/framework.mjs";
+
+const display = useDisplay();
+const props = defineProps({
+  items: Array,
+});
+
+const imgErrorHandler = (key) => {
+  props.items[key].lesson_pic = "";
 };
 </script>
 

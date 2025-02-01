@@ -86,13 +86,13 @@
 
       <v-expansion-panels flat v-model="panel">
         <v-expansion-panel>
-          <v-expansion-panel-header
+          <v-expansion-panel-title
             color="#f5f5f5"
             class="px-0 font-size-16 font-weight-bold"
           >
             Board
-          </v-expansion-panel-header>
-          <v-expansion-panel-content color="#f5f5f5">
+          </v-expansion-panel-title>
+          <v-expansion-panel-text color="#f5f5f5">
             <v-row>
               <v-col cols="12" class="content-box">
                 <v-radio-group v-model="board_val" class="mt-0 pr-0" column>
@@ -108,17 +108,17 @@
                 </v-radio-group>
               </v-col>
             </v-row>
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
 
         <!--Grade filter-->
         <v-expansion-panel :disabled="!filter.base_list.length">
-          <v-expansion-panel-header
+          <v-expansion-panel-title
             color="#f5f5f5"
             class="px-0 font-weight-bold font-size-16"
-            >Grade</v-expansion-panel-header
+            >Grade</v-expansion-panel-title
           >
-          <v-expansion-panel-content color="#f5f5f5">
+          <v-expansion-panel-text color="#f5f5f5">
             <v-row align="center" justify="center">
               <v-col cols="12" class="content-box">
                 <v-radio-group
@@ -139,17 +139,17 @@
                 </v-radio-group>
               </v-col>
             </v-row>
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
 
         <!--Lesson filter-->
         <v-expansion-panel :disabled="!filter.lesson_list.length">
-          <v-expansion-panel-header
+          <v-expansion-panel-title
             color="#f5f5f5"
             class="px-0 font-weight-bold font-size-16"
-            >Subject</v-expansion-panel-header
+            >Subject</v-expansion-panel-title
           >
-          <v-expansion-panel-content color="#f5f5f5">
+          <v-expansion-panel-text color="#f5f5f5">
             <v-row align="center" justify="center">
               <v-col cols="12" class="content-box">
                 <v-radio-group
@@ -170,17 +170,17 @@
                 </v-radio-group>
               </v-col>
             </v-row>
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
 
         <!--Topic filter-->
         <v-expansion-panel :disabled="!filter.topic_list.length">
-          <v-expansion-panel-header
+          <v-expansion-panel-title
             color="#f5f5f5"
             class="px-0 font-weight-bold font-size-16"
-            >Topic</v-expansion-panel-header
+            >Topic</v-expansion-panel-title
           >
-          <v-expansion-panel-content color="#f5f5f5">
+          <v-expansion-panel-text color="#f5f5f5">
             <v-row align="center" justify="center">
               <v-col cols="12" class="content-box">
                 <v-radio-group
@@ -201,19 +201,19 @@
                 </v-radio-group>
               </v-col>
             </v-row>
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
 
         <!--File type filter-->
         <v-expansion-panel v-show="filter.file_type_list.length > 0">
-          <v-expansion-panel-header
+          <v-expansion-panel-title
             color="#f5f5f5"
             class="px-0 font-size-16 font-weight-bold"
           >
             {{ $route.query.type === "test" ? "Paper" : "Multimedia" }}
-            Type</v-expansion-panel-header
+            Type</v-expansion-panel-title
           >
-          <v-expansion-panel-content color="#f5f5f5">
+          <v-expansion-panel-text color="#f5f5f5">
             <v-row align="center" justify="center">
               <v-col cols="12" class="content-box">
                 <v-radio-group
@@ -234,17 +234,17 @@
                 </v-radio-group>
               </v-col>
             </v-row>
-          </v-expansion-panel-content>
+          </v-expansion-panel-text>
         </v-expansion-panel>
 
         <!--Test level filter-->
         <!--      <v-expansion-panel v-show="filter.test_level_list.length>0 && $route.query.type==='test'">-->
-        <!--        <v-expansion-panel-header-->
+        <!--        <v-expansion-panel-title-->
         <!--          color="#f5f5f5"-->
         <!--          class="font-weight-bold font-size-16">-->
         <!--          Difficulty level-->
-        <!--        </v-expansion-panel-header>-->
-        <!--        <v-expansion-panel-content-->
+        <!--        </v-expansion-panel-title>-->
+        <!--        <v-expansion-panel-text-->
         <!--          color="#f5f5f5"-->
         <!--        >-->
         <!--          <v-row-->
@@ -275,17 +275,17 @@
         <!--            </v-col>-->
 
         <!--          </v-row>-->
-        <!--        </v-expansion-panel-content>-->
+        <!--        </v-expansion-panel-text>-->
         <!--      </v-expansion-panel>-->
 
         <!--Test feature-->
         <!--      <v-expansion-panel  v-show="$route.query.type==='test'">-->
-        <!--        <v-expansion-panel-header-->
+        <!--        <v-expansion-panel-title-->
         <!--          color="#f5f5f5"-->
         <!--          class="font-weight-bold font-size-16">-->
         <!--          Test features-->
-        <!--        </v-expansion-panel-header>-->
-        <!--        <v-expansion-panel-content color="#f5f5f5">-->
+        <!--        </v-expansion-panel-title>-->
+        <!--        <v-expansion-panel-text color="#f5f5f5">-->
         <!--          <v-row-->
         <!--            align="center"-->
         <!--            justify="center"-->
@@ -302,17 +302,17 @@
         <!--            </v-col>-->
 
         <!--          </v-row>-->
-        <!--        </v-expansion-panel-content>-->
+        <!--        </v-expansion-panel-text>-->
         <!--      </v-expansion-panel>-->
 
         <!--State-->
         <!--      <v-expansion-panel v-show="$route.query.type==='tutor'">-->
-        <!--        <v-expansion-panel-header-->
+        <!--        <v-expansion-panel-title-->
         <!--          color="#f5f5f5"-->
         <!--          class="font-weight-bold font-size-16">-->
         <!--          State-->
-        <!--        </v-expansion-panel-header>-->
-        <!--        <v-expansion-panel-content-->
+        <!--        </v-expansion-panel-title>-->
+        <!--        <v-expansion-panel-text-->
         <!--          color="#f5f5f5"-->
         <!--        >-->
         <!--          <v-row-->
@@ -344,17 +344,17 @@
         <!--            </v-col>-->
 
         <!--          </v-row>-->
-        <!--        </v-expansion-panel-content>-->
+        <!--        </v-expansion-panel-text>-->
         <!--      </v-expansion-panel>-->
 
         <!--City-->
         <!--      <v-expansion-panel v-show="filter.city_list.length>0 && $route.query.type==='tutor'">-->
-        <!--        <v-expansion-panel-header-->
+        <!--        <v-expansion-panel-title-->
         <!--          color="#f5f5f5"-->
         <!--          class="font-size-16 font-weight-bold">-->
         <!--          City-->
-        <!--        </v-expansion-panel-header>-->
-        <!--        <v-expansion-panel-content-->
+        <!--        </v-expansion-panel-title>-->
+        <!--        <v-expansion-panel-text-->
         <!--          color="#f5f5f5"-->
         <!--        >-->
         <!--          <v-row-->
@@ -385,7 +385,7 @@
         <!--            </v-col>-->
 
         <!--          </v-row>-->
-        <!--        </v-expansion-panel-content>-->
+        <!--        </v-expansion-panel-text>-->
         <!--      </v-expansion-panel>-->
       </v-expansion-panels>
     </div>
@@ -604,10 +604,9 @@ export default {
       this.scrollInvoked++;
     },
     getFilterList(params, type) {
-      this.$fetch
-        .$get("/api/v1/types/list", {
-          params,
-        })
+      $fetch("/api/v1/types/list", {
+        params,
+      })
         .then((res) => {
           var data = {};
           if (type === "section") {
@@ -948,13 +947,12 @@ export default {
 
     //Get file type
     getFileType() {
-      this.$fetch
-        .$get("/api/v1/types/list", {
-          params: {
-            type: this.$route.query.type == "test" ? "test_type" : "file_type",
-            section_id: this.$route.query.type == "test" ? this.board_val : "",
-          },
-        })
+      $fetch("/api/v1/types/list", {
+        params: {
+          type: this.$route.query.type == "test" ? "test_type" : "file_type",
+          section_id: this.$route.query.type == "test" ? this.board_val : "",
+        },
+      })
         .then((res) => {
           this.filter.file_type_list = res.data;
 
@@ -1001,16 +999,16 @@ export default {
 
 <style>
 @media screen and (max-width: 600px) {
-  .content-search .v-expansion-panel-header,
-  .v-expansion-panel-content {
+  .content-search .v-expansion-panel-title,
+  .v-expansion-panel-text {
     background: #fff !important;
   }
 }
 
-.content-search .v-expansion-panel-content__wrap {
+.content-search .v-expansion-panel-text__wrap {
   padding: 0 0 0 0.6rem !important;
 }
-.content-search .v-expansion-panel-content__wrap .content-box {
+.content-search .v-expansion-panel-text__wrap .content-box {
   max-height: 20rem;
   overflow-y: auto;
   margin: 0;

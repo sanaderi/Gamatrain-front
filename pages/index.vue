@@ -46,22 +46,29 @@
           <v-col cols="12" sm="6">
             <v-card class="fill-height float-sm-right" to="/search?type=test">
               <v-card-title class="gama-text-h6">
-                <v-icon class="icon mr-2">mdi-cloud-download</v-icon>
-                Educational Content
+                <v-icon size="large" class="text-primary icon mr-2"
+                  >mdi-cloud-download</v-icon
+                >
+                <span class="text-white">Educational Content</span>
               </v-card-title>
               <v-card-text class="gama-text-body2">
-                Empower Your Studies. Download Worksheets and Educational
-                Materials.
+                <span class="text-white"
+                  >Empower Your Studies. Download Worksheets and Educational
+                  Materials.</span
+                >
               </v-card-text>
             </v-card>
           </v-col>
           <v-col cols="12" sm="6">
             <v-card class="fill-height float-sm-left" to="/search?type=azmoon">
               <v-card-title class="gama-text-h6">
-                <span class="icon icon-exam"></span>
-                &nbsp;Exam
+                <v-icon
+                  size="large"
+                  class="text-primary icon icon-exam"
+                ></v-icon>
+                <span class="text-white">&nbsp; Exam</span>
               </v-card-title>
-              <v-card-text class="gama-text-body2">
+              <v-card-text class="gama-text-body2 text-white">
                 You can test yourself with online tests and increase your
                 preparation.
               </v-card-text>

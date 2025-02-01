@@ -222,8 +222,8 @@
         <h2 class="gama-text-h4">Our Commitment</h2>
 
         <v-card flat>
-          <v-tabs-items v-model="activeCommitment">
-            <v-tab-item
+          <v-tabs v-model="activeCommitment">
+            <v-tab
               v-for="(item, index) in commitmentList"
               :key="index"
               :value="'tab-' + index"
@@ -237,8 +237,8 @@
                   <p class="gama-text-subtitle2">{{ item.describe }}</p>
                 </v-card-text>
               </v-card>
-            </v-tab-item>
-          </v-tabs-items>
+            </v-tab>
+          </v-tabs>
 
           <v-tabs
             v-model="activeCommitment"
@@ -364,7 +364,6 @@
 </template>
 
 <script>
-import { randomInt } from "crypto";
 import mapAnimation from "../public/images/about-us-header.json"; // Adjust the path
 import stepAnimation from "../public/images/about-vision-step.json"; // Adjust the path
 import LottieAnimation from "~/components/common/lottie-animation.vue";
