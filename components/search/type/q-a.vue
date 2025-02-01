@@ -188,87 +188,12 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "q-a-list",
-  props: ["items"],
-  data() {
-    return {
-      bookCarousel: {
-        carouselName: "List",
-        carouselImg: "carouselBook.png",
-      },
-
-      books: [
-        {
-          img: "poster1.jpg",
-          title: "Maths",
-          season: "14",
-          price: "3405",
-        },
-        {
-          img: "book2.png",
-          title: "History",
-          season: "14",
-          price: "3405",
-        },
-        {
-          img: "book3.png",
-          title: "Art",
-          season: "14",
-          price: "3405",
-        },
-        {
-          img: "book4.png",
-          title: "Geography",
-          season: "14",
-          price: "3405",
-        },
-        {
-          img: "poster1.jpg",
-          title: "Maths",
-          season: "14",
-          price: "3405",
-        },
-        {
-          img: "book2.png",
-          title: "Maths",
-          season: "14",
-          price: "3405",
-        },
-        {
-          img: "poster1.jpg",
-          title: "Maths",
-          season: "14",
-          price: "3405",
-        },
-        {
-          img: "book2.png",
-          title: "History",
-          season: "14",
-          price: "3405",
-        },
-        {
-          img: "book3.png",
-          title: "Art",
-          season: "14",
-          price: "3405",
-        },
-        {
-          img: "book4.png",
-          title: "Geography",
-          season: "14",
-          price: "3405",
-        },
-      ],
-    };
-  },
-  mounted() {},
-  methods: {
-    imgErrorHandler(item, key) {
-      this.items[key].lesson_pic = "";
-    },
-  },
+<script setup>
+defineProps({
+  items: Array,
+});
+const imgErrorHandler = (item, key) => {
+  this.items[key].lesson_pic = "";
 };
 </script>
 

@@ -136,12 +136,12 @@
                         v-model="fullAnswer"
                       >
                         <v-expansion-panel class="light-green">
-                          <v-expansion-panel-header
+                          <v-expansion-panel-title
                             @click="showAnswer()"
                             class="text-h5 font-weight-bold"
                             >Show answer
-                          </v-expansion-panel-header>
-                          <v-expansion-panel-content class="light-green">
+                          </v-expansion-panel-title>
+                          <v-expansion-panel-text class="light-green">
                             <div
                               v-html="contentData.answer_full"
                               ref="mathJaxEl"
@@ -152,7 +152,7 @@
                               class="answer-img"
                               :src="contentData.answer_full_file"
                             />
-                          </v-expansion-panel-content>
+                          </v-expansion-panel-text>
                         </v-expansion-panel>
                       </v-expansion-panels>
                       <!--End answer section-->

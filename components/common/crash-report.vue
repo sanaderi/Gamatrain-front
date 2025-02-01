@@ -111,12 +111,13 @@ export default {
         formData.append(key, this.form[key]);
       }
 
-      this.$fetch
-        .$post("/api/v1/reports", this.urlencodeFormData(formData), {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        })
+      $fetch("/api/v1/reports", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: this.urlencodeFormData(formData), // Move formData inside options
+      })
         .then((response) => {
           this.$toast.success("Report sent successfully");
         })

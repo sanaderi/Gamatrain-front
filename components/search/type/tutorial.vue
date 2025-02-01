@@ -190,24 +190,11 @@
   </div>
 </template>
 
-<script>
-import TabsContentFooter from "~/components/common/tabs-content-footer.vue";
-
-export default {
-  name: "tutorial-list",
-  components: { TabsContentFooter },
-  props: ["items"],
-  data() {
-    return {};
-  },
-  mounted() {},
-  watch: {},
-  methods: {
-    imgErrorHandler(item, key) {
-      this.items[key].lesson_pic = "";
-    },
-  },
+<script setup>
+defineProps({
+  items: Array,
+});
+const imgErrorHandler = (item, key) => {
+  this.items[key].lesson_pic = "";
 };
 </script>
-
-<style scoped></style>

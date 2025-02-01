@@ -6,7 +6,7 @@
       "src": "nuxt.config.js",
       "use": "@nuxtjs/vercel-builder",
       "config": {
-        "includeFiles": ["serverMiddleware/data-to-xml.js"],
+        "includeFiles": ["server/middleware/sitemap.js"],
         "functions": {
           "serverMiddleware/data-to-xml.js": {
             "maxDuration": 300
