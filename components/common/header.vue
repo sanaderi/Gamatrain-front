@@ -41,7 +41,7 @@
               </div>
             </v-col>
             <v-col cols="4" md="3" lg="3" xl="3" class="text-right mt-md-1">
-              <div class="d-flex text-right" v-if="$auth.loggedIn">
+              <div class="d-flex text-right" v-if="$auth.loggedIn()">
                 <v-spacer />
                 <v-menu
                   transition="slide-x-transition"
@@ -61,7 +61,7 @@
                         {{ userName }}
                       </div>
                       <v-avatar size="32" v-if="$auth?.user?.avatar">
-                        <v-img :src="$auth?.user?.avatar" alt="user avatar" />
+                        <v-img :src="$auth.user?.avatar" alt="user avatar" />
                       </v-avatar>
                       <v-icon v-else :color="menuSetting.linkColor">
                         mdi-account
@@ -104,7 +104,7 @@
                   rounded
                   class="primary text-transform-none black--text"
                   large
-                  @click="openLoginDialog"
+                  @click="openLoginDialog()"
                 >
                   Sign in
                 </v-btn>
@@ -116,26 +116,26 @@
 
       <div>
         <!--Login component-->
-        <login
-          ref="login_modal"
+        <common-login
+          v-model="login_modal"
           :switchToRegister.sync="currentOpenDialog"
           :switchToPassRecover.sync="currentOpenDialog"
         />
         <!--End login component-->
 
         <!--Register component-->
-        <register
+        <!-- <common-register
           ref="register_modal"
           :switchToLogin.sync="currentOpenDialog"
-        />
+        /> -->
         <!--End register component-->
 
         <!--Recover password component-->
-        <pass-recover
+        <!-- <common-pass-recover
           ref="pass_recover_modal"
           :switchToLogin.sync="currentOpenDialog"
           :switchToRegister.sync="currentOpenDialog"
-        />
+        /> -->
         <!--End recover password component-->
       </div>
       <!--End desktop menu-->
@@ -150,7 +150,7 @@
           <!--Profile info-->
           <v-list-group v-if="$auth.loggedIn" active-class="menu_group_active">
             <template v-slot:activator>
-              <v-icon v-text="'mdi-account-outline'"></v-icon>
+              <v-icon icon="mdi-account-outline" />
               <v-list-item-title>
                 <span v-if="$auth.user?.first_name">{{
                   $auth.user?.first_name
@@ -192,7 +192,7 @@
             </template>
             <v-list-item-title> Notification </v-list-item-title>
           </v-list-item>
-          <v-list-item @click="openLoginDialog" v-if="!$auth.loggedIn">
+          <v-list-item @click="openLoginDialog()" v-if="!$auth.loggedIn">
             <template v-slot:prepend>
               <v-icon :icon="'mdi-account-outline'"></v-icon>
             </template>
@@ -507,7 +507,7 @@
           rounded
           id="mobile-signin-btn"
           class="primary gama-btn"
-          @click="openLoginDialog"
+          @click="openLoginDialog()"
         >
           Sign in
         </v-btn>
@@ -610,457 +610,440 @@
     </v-dialog>
   </div>
 </template>
-<script>
-import Login from "@/components/common/login";
-import Register from "@/components/common/register";
-import SearchBox from "@/components/common/search-box";
-import PassRecover from "@/components/common/pass-recover";
-import NotificationComponent from "~/components/common/notification-component.vue";
-
-export default {
-  name: "header-component",
-  components: {
-    NotificationComponent,
-    Login,
-    Register,
-    PassRecover,
-    SearchBox,
+<script setup>
+const sidebar = ref(false);
+const dialog = ref(false);
+const logo = ref("mainlogo-gamatrain.png");
+const avatar = ref("dexter-morse.png");
+const menuItems = [
+  {
+    title: "About us",
+    link: "/about-us",
+    icon: "mdi-account-multiple",
+    icon_color: "",
   },
-  data() {
-    return {
-      sidebar: false,
-      dialog: false,
-      logo: "mainlogo-gamatrain.png",
-      avatar: "dexter-morse.png",
-      menuItems: [
-        {
-          title: "About us",
-          link: "/about-us",
-          icon: "mdi-account-multiple",
-          icon_color: "",
-        },
-        {
-          title: "Services",
-          link: "/services",
-          icon: "mdi-view-module",
-          icon_color: "",
-        },
-        {
-          title: "Faq",
-          link: "/faq",
-          icon: "mdi-information",
-          icon_color: "",
-        },
-        // {
-        //   title: "Offers",
-        //   link: "/offers",
-        //   icon: "mdi-wallet-giftcard",
-        //   icon_color: 'primary'
-        // },
-      ],
-      selectedItem: 1,
-      socialList: [
-        { link: "telegram", icon: "fa-telegram" },
-        { link: "twitter", icon: "fa-twitter" },
-        { link: "instagram", icon: "fa-instagram" },
-        { link: "Youtube", icon: "fa-youtube" },
-      ],
-      hotTopics: {},
+  {
+    title: "Services",
+    link: "/services",
+    icon: "mdi-view-module",
+    icon_color: "",
+  },
+  {
+    title: "Faq",
+    link: "/faq",
+    icon: "mdi-information",
+    icon_color: "",
+  },
+  // {
+  //   title: "Offers",
+  //   link: "/offers",
+  //   icon: "mdi-wallet-giftcard",
+  //   icon_color: 'primary'
+  // },
+];
+const selectedItem = 1;
+const socialList = [
+  { link: "telegram", icon: "fa-telegram" },
+  { link: "twitter", icon: "fa-twitter" },
+  { link: "instagram", icon: "fa-instagram" },
+  { link: "Youtube", icon: "fa-youtube" },
+];
 
-      menuLink: [
-        {
-          title: "Home",
-          link: "/",
-          icon: "",
-        },
-        {
-          title: "About us",
-          link: "/about-us",
-          icon: "",
-        },
-        {
-          title: "Services",
-          link: "/services",
-          icon: "",
-        },
-        {
-          title: "FAQ",
-          link: "/faq",
-          icon: "",
-        },
-        // {
-        //   title: 'Offers',
-        //   link: '/offers',
-        //   icon: 'mdi-wallet-giftcard'
-        // },
-      ],
-      currentOpenDialog: "",
-      mobileSearchSheet: false,
-      mobileSearchSheetConfig: {
-        isDragging: false,
-        startDragY: 0,
-        sheetHeight: 70,
-      },
-      searchFilterItems: [
-        {
-          title: "Past Papers",
-          key: "paper",
-        },
-        {
-          title: "Multimedia",
-          key: "multimedia",
-        },
-        {
-          title: "QuizHub",
-          key: "exam",
-        },
-        {
-          title: "Forum",
-          key: "q-a",
-        },
-        {
-          title: "Tutorial",
-          key: "tutorial",
-        },
-        {
-          title: "Teacher",
-          key: "teacher",
-        },
-        {
-          title: "Student",
-          key: "student",
-        },
-      ],
-      mobileSearchFilter: "exam",
-      keyword: "",
+const menuLink = [
+  {
+    title: "Home",
+    link: "/",
+    icon: "",
+  },
+  {
+    title: "About us",
+    link: "/about-us",
+    icon: "",
+  },
+  {
+    title: "Services",
+    link: "/services",
+    icon: "",
+  },
+  {
+    title: "FAQ",
+    link: "/faq",
+    icon: "",
+  },
+  // {
+  //   title: 'Offers',
+  //   link: '/offers',
+  //   icon: 'mdi-wallet-giftcard'
+  // },
+];
+const currentOpenDialog = ref("");
+const mobileSearchSheet = ref(false);
+const mobileSearchSheetConfig = ref({
+  isDragging: false,
+  startDragY: 0,
+  sheetHeight: 70,
+});
+const searchFilterItems = [
+  {
+    title: "Past Papers",
+    key: "paper",
+  },
+  {
+    title: "Multimedia",
+    key: "multimedia",
+  },
+  {
+    title: "QuizHub",
+    key: "exam",
+  },
+  {
+    title: "Forum",
+    key: "q-a",
+  },
+  {
+    title: "Tutorial",
+    key: "tutorial",
+  },
+  {
+    title: "Teacher",
+    key: "teacher",
+  },
+  {
+    title: "Student",
+    key: "student",
+  },
+];
+const mobileSearchFilter = "exam";
+const keyword = "";
 
-      user_profile_items: [
-        {
-          title: "Dashboard",
-          icon: "mdi-view-dashboard",
-          link: "/user",
-        },
-        {
-          title: "Messages",
-          icon: "mdi-email-outline",
-          link: "/user/ticket",
-        },
-        {
-          title: "Edit Profile",
-          icon: "mdi-account-outline",
-          link: "/user/profile",
-        },
-        {
-          title: "Change Password",
-          icon: "mdi-key",
-          link: "/user/edit-pass",
-        },
-      ],
-      notificationListDialog: false,
-      notificationItems: [
-        {
-          icon: "mdi-table-furniture",
-          date: "Today, 11:48 am",
-          title: "Sample Question uploded",
-          describe:
-            "Satisfied course question sample has been uploaded for your level of education.",
-        },
-        {
-          icon: "mdi-map-marker-check",
-          date: "Today, 11:48 am",
-          title: "Sample Question uploded",
-          describe:
-            "Satisfied course question sample has been uploaded for your level of education.",
-        },
-      ],
+const user_profile_items = [
+  {
+    title: "Dashboard",
+    icon: "mdi-view-dashboard",
+    link: "/user",
+  },
+  {
+    title: "Messages",
+    icon: "mdi-email-outline",
+    link: "/user/ticket",
+  },
+  {
+    title: "Edit Profile",
+    icon: "mdi-account-outline",
+    link: "/user/profile",
+  },
+  {
+    title: "Change Password",
+    icon: "mdi-key",
+    link: "/user/edit-pass",
+  },
+];
+const notificationListDialog = ref(false);
+const notificationItems = [
+  {
+    icon: "mdi-table-furniture",
+    date: "Today, 11:48 am",
+    title: "Sample Question uploded",
+    describe:
+      "Satisfied course question sample has been uploaded for your level of education.",
+  },
+  {
+    icon: "mdi-map-marker-check",
+    date: "Today, 11:48 am",
+    title: "Sample Question uploded",
+    describe:
+      "Satisfied course question sample has been uploaded for your level of education.",
+  },
+];
 
-      menuSetting: {
+const menuSetting = ref({
+  logo: "gamatrain-logo-black.svg",
+  bgColor: "#fff",
+  fixedStatus: false,
+  linkColor: "#424A53",
+  class: "",
+});
+
+//Search section
+const searchResults = ref([]);
+const searchCount = ref("...");
+const searchKey = ref("");
+const searchCate = ref("");
+const searchLoading = ref(true);
+const pageNum = ref(1);
+const timer = ref(0);
+const searchResultsSection = ref(false);
+const allDataLoaded = ref(false);
+//End search section
+
+const route = useRoute();
+const router = useRouter();
+
+onMounted(() => {
+  // if (window.innerWidth <= 960 && this.$auth.loggedIn) {
+  //   this.$refs["notification-section"].getNotifications();
+  // }
+
+  if (
+    route.name == "index" ||
+    route.name == "smart-learning" ||
+    route.name == "services" ||
+    route.name == "school-service" ||
+    route.name == "faq" ||
+    route.name == "terms" ||
+    route.name == "about-us" ||
+    route.name == "earn-money"
+  ) {
+    if (window.scrollY > 60) {
+      menuSetting.value = {
+        logo: "gamatrain-logo-black.svg",
+        bgColor: "#fff",
+        fixedStatus: true,
+        linkColor: "#424A53",
+        class: "",
+      };
+    } else {
+      menuSetting.value = {
+        logo: "gamatrain-logo.svg",
+        bgColor: "#000",
+        fixedStatus: true,
+        linkColor: "#fff",
+        class: "transparentMenu",
+      };
+    }
+  }
+  window.addEventListener("scroll", handleScroll.value);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll.value);
+});
+const login_modal = ref(null);
+const openLoginDialog = () => {
+  login_modal.value = true;
+};
+const openRegisterDialog = () => {
+  register_modal.value.register_dialog = true;
+};
+
+const handleScroll = () => {
+  if (
+    route.name == "index" ||
+    route.name == "smart-learning" ||
+    route.name == "services" ||
+    route.name == "school-service" ||
+    route.name == "faq" ||
+    route.name == "terms" ||
+    route.name == "about-us" ||
+    route.name == "earn-money"
+  )
+    if (window.scrollY > 60) {
+      menuSetting = {
+        logo: "gamatrain-logo-black.svg",
+        bgColor: "#fff",
+        fixedStatus: true,
+        linkColor: "#424A53",
+        class: "",
+      };
+    } else {
+      menuSetting = {
+        logo: "gamatrain-logo.svg",
+        bgColor: "#000",
+        fixedStatus: true,
+        linkColor: "#fff",
+        class: "transparentMenu",
+      };
+    }
+};
+const setActiveFilter = (val) => {
+  mobileSearchFilter = val;
+};
+
+//Search section
+const checkSearchScroll = () => {
+  const scrollableDiv = this.$refs.mobileSearchResult;
+  if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false) {
+    pageNum.value++;
+    search();
+  }
+};
+const isScrollAtBottom = (element) => {
+  return element.scrollHeight - element.scrollTop <= element.clientHeight;
+};
+const search = () => {
+  searchLoading = true;
+  if (timer) {
+    clearTimeout(timer.value);
+    timer = null;
+  }
+
+  timer = setTimeout(() => {
+    if (this.searchKey && this.allDataLoaded == false)
+      $fetch("/api/v1/search/text", {
+        params: {
+          query: this.searchKey,
+          page: this.pageNum,
+        },
+      })
+        .then((response) => {
+          searchCount.value = response.data.num;
+          searchResults.push(...response.data.list);
+
+          if (response.data.list.length === 0) this.allDataLoaded = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.searchLoading = false;
+        });
+  }, 800);
+};
+const closeSearch = () => {
+  searchResultsSection.value = false;
+  searchKey.value = "";
+  mobileKeywordInput.value.blur();
+};
+const calcPath = (type) => {
+  if (type == "gama_tests") return "paper";
+  else if (type == "gama_learnfiles") return "multimedia";
+  else if (type == "gama_azmoons") return "exams";
+  else if (type == "gama_questions") return "qa";
+  else if (type == "gama_dars") return "tutorial";
+  else if (type == "gama_teachers") return "teacher";
+  else if (type == "gama_schools") return "school";
+  else if (type == "gama_live") return "live";
+  else if (type == "gama_students") return "student";
+  else "/";
+};
+
+const startDrag = (e) => {
+  mobileSearchSheetConfig.value.isDragging = true;
+  mobileSearchSheetConfig.value.startDragY = e.touches[0].clientY;
+};
+const handleDrag = () => {
+  if (mobileSearchSheetConfig.value.isDragging) {
+    e.preventDefault();
+
+    const currentY = e.touches[0].clientY;
+    const dragDistance = mobileSearchSheetConfig.value.startDragY - currentY;
+    const viewportHeight = window.innerHeight;
+
+    const currentHeight = mobileSearchSheetConfig.value.sheetHeight;
+    const newHeightVH = currentHeight + (dragDistance / viewportHeight) * 100;
+
+    // Limit the newHeightVH to reasonable values
+    const newHeight = Math.min(Math.max(newHeightVH, 10), 100); // 10vh to 100vh
+
+    mobileSearchSheetConfig.value.sheetHeight = newHeight;
+    mobileSearchSheetConfig.value.startDragY = currentY;
+  }
+};
+const endDrag = (e) => {
+  mobileSearchSheetConfig.value.isDragging = false;
+  if (mobileSearchSheetConfig.value.sheetHeight < 30)
+    mobileSearchSheet.value = false;
+};
+//End search section
+watch(
+  () => currentOpenDialog.value,
+  (val) => {
+    if (val === "login") {
+      register_modal.value.register_dialog = false;
+      pass_recover_modal.value.pass_recover_dialog = false;
+      login_modal.value.login_dialog = true;
+    } else if (val === "register") {
+      login_modal.value.login_dialog = false;
+      pass_recover_modal.value.pass_recover_dialog = false;
+      register_modal.value.register_dialog = true;
+    } else if (val === "pass_recover") {
+      login_modal.value.login_dialog = false;
+      register_modal.value.register_dialog = false;
+      pass_recover_modal.value.pass_recover_dialog = true;
+    } else {
+      login_modal.value.login_dialog = false;
+      login_modal.value.register_dialog = false;
+      pass_recover_modal.value.pass_recover_dialog = false;
+    }
+  }
+);
+
+//Handle auth form from all of section
+watch(
+  () => route.query.auth_form,
+  (val) => {
+    if (val === "login") {
+      login_modal.value.login_dialog = true;
+      router.push({ query: {} });
+    } else if (val == "register") {
+      register_modal.value.register_dialog = true;
+      router.push({ query: {} });
+    }
+  }
+);
+
+watch(
+  () => route.name,
+  (val) => {
+    mobileSearchSheet.value = false;
+
+    if (
+      val == "index" ||
+      val == "smart-learning" ||
+      val == "services" ||
+      val == "school-service" ||
+      val == "faq" ||
+      val == "terms" ||
+      val == "about-us" ||
+      val == "earn-money"
+    ) {
+      menuSetting.value = {
+        logo: "gamatrain-logo.svg",
+        bgColor: "#000",
+        fixedStatus: true,
+        linkColor: "#fff",
+        class: "transparentMenu",
+      };
+    } else {
+      menuSetting.value = {
         logo: "gamatrain-logo-black.svg",
         bgColor: "#fff",
         fixedStatus: false,
         linkColor: "#424A53",
         class: "",
-      },
-
-      //Search section
-      searchResults: [],
-      searchCount: "...",
-      searchKey: "",
-      searchCate: "",
-      searchLoading: true,
-      pageNum: 1,
-      timer: 0,
-      searchResultsSection: false,
-      allDataLoaded: false,
-      //End search section
-    };
-  },
-
-  mounted() {
-    // if (window.innerWidth <= 960 && this.$auth.loggedIn) {
-    //   this.$refs["notification-section"].getNotifications();
-    // }
-
-    if (
-      this.$route.name == "index" ||
-      this.$route.name == "smart-learning" ||
-      this.$route.name == "services" ||
-      this.$route.name == "school-service" ||
-      this.$route.name == "faq" ||
-      this.$route.name == "terms" ||
-      this.$route.name == "about-us" ||
-      this.$route.name == "earn-money"
-    ) {
-      if (window.scrollY > 60) {
-        this.menuSetting = {
-          logo: "gamatrain-logo-black.svg",
-          bgColor: "#fff",
-          fixedStatus: true,
-          linkColor: "#424A53",
-          class: "",
-        };
-      } else {
-        this.menuSetting = {
-          logo: "gamatrain-logo.svg",
-          bgColor: "#000",
-          fixedStatus: true,
-          linkColor: "#fff",
-          class: "transparentMenu",
-        };
-      }
+      };
     }
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
-  async fetch() {
-    await this.$fetch
-      .$get("/api/v1/admin/values")
-      .then((response) => {
-        if (response.data.mostVisitedTags.enable == "true")
-          this.hotTopics = response.data.mostVisitedTags.tags;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  },
-  methods: {
-    openLoginDialog() {
-      this.$refs.login_modal.login_dialog = true;
-    },
-    openRegisterDialog() {
-      this.$refs.register_modal.register_dialog = true;
-    },
+  }
+);
 
-    handleScroll() {
-      if (
-        this.$route.name == "index" ||
-        this.$route.name == "smart-learning" ||
-        this.$route.name == "services" ||
-        this.$route.name == "school-service" ||
-        this.$route.name == "faq" ||
-        this.$route.name == "terms" ||
-        this.$route.name == "about-us" ||
-        this.$route.name == "earn-money"
-      )
-        if (window.scrollY > 60) {
-          this.menuSetting = {
-            logo: "gamatrain-logo-black.svg",
-            bgColor: "#fff",
-            fixedStatus: true,
-            linkColor: "#424A53",
-            class: "",
-          };
-        } else {
-          this.menuSetting = {
-            logo: "gamatrain-logo.svg",
-            bgColor: "#000",
-            fixedStatus: true,
-            linkColor: "#fff",
-            class: "transparentMenu",
-          };
-        }
-    },
-    setActiveFilter(val) {
-      this.mobileSearchFilter = val;
-    },
+watch(
+  () => searchKey.value,
+  (val) => {
+    if (val.trim() === "") {
+      searchResultsSection.value = false;
+    } else {
+      searchResultsSection.value = true;
+    }
+    pageNum.value = 1;
+    searchCount.value = "...";
+    allDataLoaded.value = false;
+    searchResults.value = [];
+    search();
+  }
+);
 
-    //Search section
-    checkSearchScroll() {
-      const scrollableDiv = this.$refs.mobileSearchResult;
-      if (this.isScrollAtBottom(scrollableDiv) && this.allDataLoaded == false) {
-        this.pageNum++;
-        this.search();
-      }
-    },
-    isScrollAtBottom(element) {
-      return element.scrollHeight - element.scrollTop <= element.clientHeight;
-    },
-    search() {
-      this.searchLoading = true;
-      if (this.timer) {
-        clearTimeout(this.timer);
-        this.timer = null;
-      }
+watch(
+  () => mobileSearchSheet.value,
+  (val) => {
+    if (val == true) mobileSearchSheetConfig.value.sheetHeight = 70;
+  }
+);
 
-      this.timer = setTimeout(() => {
-        if (this.searchKey && this.allDataLoaded == false)
-          this.$fetch
-            .$get("/api/v1/search/text", {
-              params: {
-                query: this.searchKey,
-                page: this.pageNum,
-              },
-            })
-            .then((response) => {
-              this.searchCount = response.data.num;
-              this.searchResults.push(...response.data.list);
-
-              if (response.data.list.length === 0) this.allDataLoaded = true;
-            })
-            .catch((err) => {
-              console.log(err);
-            })
-            .finally(() => {
-              this.searchLoading = false;
-            });
-      }, 800);
-    },
-    closeSearch() {
-      this.searchResultsSection = false;
-      this.searchKey = "";
-      this.$refs.mobileKeywordInput.blur();
-    },
-    calcPath(type) {
-      if (type == "gama_tests") return "paper";
-      else if (type == "gama_learnfiles") return "multimedia";
-      else if (type == "gama_azmoons") return "exams";
-      else if (type == "gama_questions") return "qa";
-      else if (type == "gama_dars") return "tutorial";
-      else if (type == "gama_teachers") return "teacher";
-      else if (type == "gama_schools") return "school";
-      else if (type == "gama_live") return "live";
-      else if (type == "gama_students") return "student";
-    },
-
-    startDrag(e) {
-      this.mobileSearchSheetConfig.isDragging = true;
-      this.mobileSearchSheetConfig.startDragY = e.touches[0].clientY;
-    },
-    handleDrag(e) {
-      if (this.mobileSearchSheetConfig.isDragging) {
-        e.preventDefault();
-
-        const currentY = e.touches[0].clientY;
-        const dragDistance = this.mobileSearchSheetConfig.startDragY - currentY;
-        const viewportHeight = window.innerHeight;
-
-        const currentHeight = this.mobileSearchSheetConfig.sheetHeight;
-        const newHeightVH =
-          currentHeight + (dragDistance / viewportHeight) * 100;
-
-        // Limit the newHeightVH to reasonable values
-        const newHeight = Math.min(Math.max(newHeightVH, 10), 100); // 10vh to 100vh
-
-        this.mobileSearchSheetConfig.sheetHeight = newHeight;
-        this.mobileSearchSheetConfig.startDragY = currentY;
-      }
-    },
-    endDrag(e) {
-      this.mobileSearchSheetConfig.isDragging = false;
-      if (this.mobileSearchSheetConfig.sheetHeight < 30)
-        this.mobileSearchSheet = false;
-    },
-    //End search section
-  },
-  watch: {
-    currentOpenDialog(val) {
-      if (val === "login") {
-        this.$refs.register_modal.register_dialog = false;
-        this.$refs.pass_recover_modal.pass_recover_dialog = false;
-        this.$refs.login_modal.login_dialog = true;
-      } else if (val === "register") {
-        this.$refs.login_modal.login_dialog = false;
-        this.$refs.pass_recover_modal.pass_recover_dialog = false;
-        this.$refs.register_modal.register_dialog = true;
-      } else if (val === "pass_recover") {
-        this.$refs.login_modal.login_dialog = false;
-        this.$refs.register_modal.register_dialog = false;
-        this.$refs.pass_recover_modal.pass_recover_dialog = true;
-      } else {
-        this.$refs.login_modal.login_dialog = false;
-        this.$refs.login_modal.register_dialog = false;
-        this.$refs.pass_recover_modal.pass_recover_dialog = false;
-      }
-    },
-
-    //Handle auth form from all of section
-    "$route.query.auth_form"(val) {
-      if (val === "login") {
-        this.$refs.login_modal.login_dialog = true;
-        this.$router.push({ query: {} });
-      } else if (val == "register") {
-        this.$refs.register_modal.register_dialog = true;
-        this.$router.push({ query: {} });
-      }
-    },
-
-    "$route.name"(val) {
-      this.mobileSearchSheet = false;
-
-      if (
-        val == "index" ||
-        val == "smart-learning" ||
-        val == "services" ||
-        val == "school-service" ||
-        val == "faq" ||
-        val == "terms" ||
-        val == "about-us" ||
-        val == "earn-money"
-      ) {
-        this.menuSetting = {
-          logo: "gamatrain-logo.svg",
-          bgColor: "#000",
-          fixedStatus: true,
-          linkColor: "#fff",
-          class: "transparentMenu",
-        };
-      } else {
-        this.menuSetting = {
-          logo: "gamatrain-logo-black.svg",
-          bgColor: "#fff",
-          fixedStatus: false,
-          linkColor: "#424A53",
-          class: "",
-        };
-      }
-    },
-
-    searchKey(val) {
-      if (val.trim() === "") {
-        this.searchResultsSection = false;
-      } else {
-        this.searchResultsSection = true;
-      }
-      this.pageNum = 1;
-      this.searchCount = "...";
-      this.allDataLoaded = false;
-      this.searchResults = [];
-      this.search();
-    },
-    mobileSearchSheet(val) {
-      if (val == true) this.mobileSearchSheetConfig.sheetHeight = 70;
-    },
-  },
-  computed: {
-    userName() {
-      if (this.$auth?.user?.first_name) return this.$auth.user?.first_name;
-      else if (this.$auth?.user?.last_name) return this.$auth.user?.last_name;
-      else return "No name";
-    },
-  },
-};
+const userName = computed(() => {
+  if ($auth.user?.first_name) return $auth.user?.first_name;
+  else if ($auth.user?.last_name) return $auth.user?.last_name;
+  else return "No name";
+});
 </script>
 
 <style>

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="login_dialog" max-width="300px" style="z-index: 20001">
+  <v-dialog v-model="model" max-width="300px">
     <v-card>
       <v-card-title>
         <span class="text-h5">Login</span>
@@ -27,20 +27,19 @@
               <form @submit.prevent="submit">
                 <v-row>
                   <v-col cols="12">
-                    <validation-provider
+                    <!-- <validation-provider
                       v-slot="{ errors }"
                       name="Email"
                       rules="required"
-                    >
-                      <v-text-field
-                        v-model="identity"
-                        dense
-                        label="Email"
-                        :error-messages="errors"
-                        required
-                        outlined
-                      />
-                    </validation-provider>
+                    > -->
+                    <v-text-field
+                      v-model="identity"
+                      dense
+                      label="Email"
+                      required
+                      outlined
+                    />
+                    <!-- </validation-provider> -->
                   </v-col>
                   <v-col cols="12">
                     <!-- <validation-provider -->
@@ -49,7 +48,6 @@
                       label="Password"
                       v-model="password"
                       outlined
-                      :error-messages="errors"
                       dense
                       type="password"
                       :type="passVisible ? 'text' : 'password'"
@@ -73,7 +71,7 @@
                     <v-divider class="mt-3" />
                   </v-col>
                   <v-col cols="6">
-                    <v-btn outlined block @click="login_dialog = !login_dialog">
+                    <v-btn outlined block @click="model = !model">
                       Cancel
                     </v-btn>
                   </v-col>
@@ -136,182 +134,171 @@
   </v-dialog>
 </template>
 
-<script>
-// import { ValidationProvider, ValidationObserver } from "vee-validate";
+<script setup>
+const model = defineModel(false);
+const passVisible = ref(false);
+const login_loading = ref(false);
+const identity = ref("");
+const password = ref("");
 
-export default {
-  name: "login",
-  data() {
-    return {
-      login_dialog: false,
-      passVisible: false,
-      login_loading: false,
-      identity: "",
-      password: "",
+const otp = ref("");
+const otp_loading = ref(false);
+const countDown = ref(60);
+const sendOtpBtnStatus = ref(true);
 
-      otp: "",
-      identity: "",
-      otp_loading: false,
-      countDown: 60,
-      sendOtpBtnStatus: true,
+const google_login_loading = ref(true);
+const identity_holder = ref(true);
+const otp_holder = ref(false);
+watch(
+  () => model,
+  (val) => {
+    alert("aa");
+    if (val === true) {
+      //Initialize google login
+      setTimeout(() => {
+        window.google.accounts.id.initialize({
+          client_id:
+            "231452968451-rd7maq3v4c8ce6d1e36uk3qacep20lp8.apps.googleusercontent.com",
+          callback: this.handleCredentialResponse,
+          auto_select: true,
+        });
+        window.google.accounts.id.renderButton(this.$refs.googleLoginBtn, {
+          text: "Login",
+          size: "large",
+          width: "252",
+          theme: "outline", // option : filled_black | outline | filled_blue
+        });
+        this.google_login_loading = false;
+      }, 4000);
+    }
+  }
+);
 
-      google_login_loading: true,
-      identity_holder: true,
-      otp_holder: false,
-    };
-  },
-  // components: {
-  //   ValidationProvider,
-  //   ValidationObserver,
-  // },
-  mounted() {},
-  watch: {
-    login_dialog(val) {
-      if (val === true) {
-        //Initialize google login
-        setTimeout(() => {
-          window.google.accounts.id.initialize({
-            client_id:
-              "231452968451-rd7maq3v4c8ce6d1e36uk3qacep20lp8.apps.googleusercontent.com",
-            callback: this.handleCredentialResponse,
-            auto_select: true,
-          });
+//Handle google login callback
+const handleCredentialResponse = async (response) => {
+  const querystring = require("querystring");
 
-          window.google.accounts.id.renderButton(this.$refs.googleLoginBtn, {
-            text: "Login",
-            size: "large",
-            width: "252",
-            theme: "outline", // option : filled_black | outline | filled_blue
-          });
+  await $fetch
+    .post(
+      "/api/v1/users/googleAuth",
+      querystring.stringify({
+        id_token: response.credential,
+      })
+    )
+    .then((response) => {
+      this.$auth.setUserToken(response.data.data.jwtToken);
+      this.$auth.setUser(response.data.data.info);
+      this.model = false;
+      this.$toast.success("Logged in successfully");
 
-          this.google_login_loading = false;
-        }, 4000);
+      this.$router.push({
+        path: "/user",
+      });
+    })
+    .catch(({ response }) => {
+      if (response.status == 401) {
+        this.$toast.error(this.$t(`LOGIN_WRONG_DATA`));
+      } else if (response.status == 500 || response.status == 504) {
+        this.$toast.error(this.$t(`REQUEST_FAILED`));
       }
-    },
-  },
-  methods: {
-    //Handle google login callback
-    async handleCredentialResponse(response) {
-      const querystring = require("querystring");
+    });
+};
+const openDialog = () => {
+  alert("step1");
+  this.model = true;
+  alert("step2");
+};
 
-      await this.$fetch
-        .post(
-          "/api/v1/users/googleAuth",
-          querystring.stringify({
-            id_token: response.credential,
-          })
-        )
-        .then((response) => {
-          this.$auth.setUserToken(response.data.data.jwtToken);
-          this.$auth.setUser(response.data.data.info);
-          this.login_dialog = false;
-          this.$toast.success("Logged in successfully");
+const switchToRegister = () => {
+  this.$emit("update:switchToRegister", "register");
+};
+const switchToPassRecover = () => {
+  this.$emit("update:switchToPassRecover", "pass_recover");
+};
+const submit = async () => {
+  this.login_loading = true;
+  const querystring = require("querystring");
+  await this.$fetch
+    .$post(
+      "/api/v1/users/login",
+      querystring.stringify({
+        identity: this.identity,
+        pass: this.password,
+        type: "request",
+      }),
+      {
+        responseType: "text",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    )
+    .then((response) => {
+      if (response.data.type && response.data.type == "loginByOTP") {
+        this.$toast.success("Otp code sent");
+        this.identity_holder = false;
+        this.otp_holder = true;
+      } else {
+        $auth.setUserToken(response.data.jwtToken);
+        $auth.setUser(response.data.info);
 
+        $toast.success("Logged in successfully");
+        model = false;
+
+        if (this.$route.path == "/")
           this.$router.push({
             path: "/user",
           });
-        })
-        .catch(({ response }) => {
-          if (response.status == 401) {
-            this.$toast.error(this.$t(`LOGIN_WRONG_DATA`));
-          } else if (response.status == 500 || response.status == 504) {
-            this.$toast.error(this.$t(`REQUEST_FAILED`));
-          }
-        });
-    },
+      }
+    })
+    .catch((err) => {
+      if (err.response.status == 400)
+        this.$toast.error(err.response.data.message);
+    })
+    .finally(() => {
+      this.login_loading = false;
+    });
+};
+const onFinish = () => {
+  //Finish enter otp code
+  const querystring = require("querystring");
 
-    switchToRegister() {
-      this.$emit("update:switchToRegister", "register");
-    },
-    switchToPassRecover() {
-      this.$emit("update:switchToPassRecover", "pass_recover");
-    },
-    async submit() {
-      this.login_loading = true;
-      const querystring = require("querystring");
-      await this.$fetch
-        .$post(
-          "/api/v1/users/login",
-          querystring.stringify({
-            identity: this.identity,
-            pass: this.password,
-            type: "request",
-          }),
-          {
-            responseType: "text",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        )
-        .then((response) => {
-          if (response.data.type && response.data.type == "loginByOTP") {
-            this.$toast.success("Otp code sent");
-            this.identity_holder = false;
-            this.otp_holder = true;
-          } else {
-            this.$auth.setUserToken(response.data.jwtToken);
-            this.$auth.setUser(response.data.info);
-
-            this.$toast.success("Logged in successfully");
-            this.login_dialog = false;
-
-            if (this.$route.path == "/")
-              this.$router.push({
-                path: "/user",
-              });
-          }
-        })
-        .catch((err) => {
-          if (err.response.status == 400)
-            this.$toast.error(err.response.data.message);
-        })
-        .finally(() => {
-          this.login_loading = false;
-        });
-    },
-    onFinish() {
-      //Finish enter otp code
-      const querystring = require("querystring");
-
-      this.$fetch
-        .$post(
-          "/api/v1/users/login",
-          querystring.stringify({
-            type: "confirm",
-            identity: this.identity,
-            pass: this.password,
-            code: this.otp,
-            type: "confirm",
-          })
-        )
-        .then((response) => {
-          this.login_dialog = false;
-          this.otp_holder = false;
-          this.identity_holder = true;
-          this.$auth.setUserToken(response.data.jwtToken);
-          this.$auth.setUser(response.data.info);
-
-          this.$toast.success("Logged in successfully");
-
-          if (this.$route.path == "/")
-            this.$router.push({
-              path: "/user",
-            });
-        })
-        .catch((err) => {
-          if (err.response.status == 400)
-            this.$toast.error(err.response.data.message);
-        })
-        .finally(() => {
-          this.register_loading = false;
-        });
-    },
-    recheckEnteredIdentity() {
+  this.$fetch
+    .$post(
+      "/api/v1/users/login",
+      querystring.stringify({
+        type: "confirm",
+        identity: this.identity,
+        pass: this.password,
+        code: this.otp,
+        type: "confirm",
+      })
+    )
+    .then((response) => {
+      this.model = false;
       this.otp_holder = false;
       this.identity_holder = true;
-    },
-  },
+      this.$auth.setUserToken(response.data.jwtToken);
+      this.$auth.setUser(response.data.info);
+
+      this.$toast.success("Logged in successfully");
+
+      if (this.$route.path == "/")
+        this.$router.push({
+          path: "/user",
+        });
+    })
+    .catch((err) => {
+      if (err.response.status == 400)
+        this.$toast.error(err.response.data.message);
+    })
+    .finally(() => {
+      this.register_loading = false;
+    });
+};
+const recheckEnteredIdentity = () => {
+  otp_holder.value = false;
+  identity_holder.value = true;
 };
 </script>
 

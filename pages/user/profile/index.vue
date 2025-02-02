@@ -341,7 +341,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import LocationField from "@/components/Form/LocationField";
-import "vue-advanced-cropper/dist/style.css";
+// import "vue-advanced-cropper/dist/style.css";
 
 export default {
   name: "edit-profile",
