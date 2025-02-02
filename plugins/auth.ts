@@ -9,7 +9,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       localStorage.setItem("user", JSON.stringify(user));
     },
      getUser() {
-      if (!user.value) {
+      if (!user.value && process.client) {
         const storedUser = localStorage.getItem("user");
         user.value = storedUser ? JSON.parse(storedUser) : null;
       }
@@ -26,7 +26,9 @@ export default defineNuxtPlugin((nuxtApp) => {
       localStorage.removeItem("token");
     },
     loggedIn() {
-      const token = localStorage.getItem("token");
+      let token = false;
+      if(process.client)
+         token = localStorage.getItem("token");
       return !!token; // Returns true if a token exists, false otherwise
     },
     get user() {

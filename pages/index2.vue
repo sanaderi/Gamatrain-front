@@ -1,14 +1,15 @@
 <template>
   <div class="home-page-content">
-
     <v-divider></v-divider>
     <!--     Start:mobile header-->
-    <search-box class="d-block d-md-none mx-3 my-2"/>
+    <search-box class="d-block d-md-none mx-3 my-2" />
     <!--     End: mobile header-->
     <section>
-      <v-carousel hide-delimiters
-                  :show-arrows="false"
-                  class="index-banner d-none d-md-block">
+      <v-carousel
+        hide-delimiters
+        :show-arrows="false"
+        class="index-banner d-none d-md-block"
+      >
         <v-carousel-item
           v-for="(item, index) in items"
           cover
@@ -21,13 +22,13 @@
       </v-carousel>
     </section>
 
-    <Category/>
+    <Category />
 
     <!--  Start: search grade  -->
-    <section class="d-none d-sm-block search-sec mb-4 ">
+    <section class="d-none d-sm-block search-sec mb-4">
       <v-card flat color="rgba(0,0,0,0.2)" rounded>
         <v-card-text class="mt-0">
-          <search/>
+          <search />
         </v-card-text>
       </v-card>
     </section>
@@ -47,7 +48,9 @@
           >
             <desktop-stats-card-component
               @lessonExpand="lessonExpandCard"
-              :stat="stat" :itm_index="index"/>
+              :stat="stat"
+              :itm_index="index"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -68,7 +71,9 @@
           >
             <mobile-stats-card-component
               @lessonExpand="lessonExpandCard"
-              :stat="stat" :itm_index="index"/>
+              :stat="stat"
+              :itm_index="index"
+            />
           </v-col>
         </v-row>
         <v-row v-else class="justify-space-between mx-0 grade-list">
@@ -82,7 +87,9 @@
           >
             <mobile-stats-card-component
               @lessonExpand="lessonExpandCard"
-              :stat="stat" :itm_index="index"/>
+              :stat="stat"
+              :itm_index="index"
+            />
           </v-col>
         </v-row>
         <button
@@ -101,14 +108,12 @@
     </section>
     <!--  End: Grade list mobile  -->
 
-
     <!-- Start: Feedtabs respons -->
-    <FeedTab/>
+    <FeedTab />
     <!-- End: Feedtabs respons -->
 
-
     <!--  Start: Main stats  -->
-    <Slider class="d-none d-md-block"/>
+    <Slider class="d-none d-md-block" />
     <!--  End: Main stats  -->
 
     <!--  Start: Last views  -->
@@ -118,13 +123,13 @@
       </v-container>
     </section> -->
     <!--  End: Last views   -->
-    <Scroll/>
+    <Scroll />
   </div>
 </template>
 
 <script>
-import GardeCard from "./index/garde-card";
-import Search from "./index/search";
+// import GardeCard from "./index/garde-card";
+// import Search from "./index/search";
 import LastViews from "../components/common/last-views";
 import Category from "~/components/common/category.vue";
 import FeedTab from "../components/common/feedTab.vue";
@@ -136,45 +141,44 @@ import MobileStatsCardComponent from "~/components/home/MobileStatsCardComponent
 
 export default {
   auth: false,
-  name: 'home_page',
+  name: "home_page",
   head() {
     return {
       titleTemplate: "Gamatrain | %s",
-      title: 'Learning together, earning together, building a brighter future',
+      title: "Learning together, earning together, building a brighter future",
       meta: [
         {
           hid: `description`,
-          name: 'description',
-          content: 'Big training platform'
-        }
-      ]
-    }
+          name: "description",
+          content: "Big training platform",
+        },
+      ],
+    };
   },
   components: {
     MobileStatsCardComponent,
     DesktopStatsCardComponent,
     SearchBox,
     LastViews,
-    Search,
-    GardeCard,
+    // Search,
+    // GardeCard,
     Category,
     FeedTab,
     Slider,
     Scroll,
   },
   data: () => ({
-    test_schools: '',
+    test_schools: "",
     less: true,
     showLess: true,
-
 
     items: [
       {
         src: "banner_home_2.jpg",
       },
       {
-        src: "banner_home_2.jpg"
-      }
+        src: "banner_home_2.jpg",
+      },
     ],
     value1: null,
     value2: null,
@@ -183,9 +187,9 @@ export default {
   }),
 
   //Load data
-  async asyncData({params, $axios}) {
+  async asyncData({ params, $axios }) {
     // This could also be an action dispatch
-    const response = await $axios.$get('/api/v1/home/stats');
+    const response = await $axios.$get("/api/v1/home/stats");
     var stats = [];
 
     //Check data
@@ -196,28 +200,25 @@ export default {
       }
     }
 
-    return {stats};
+    return { stats };
   },
 
-  mounted() {
-  },
+  mounted() {},
   watch: {},
   methods: {
-   
     lessonExpandCard: function (index) {
       if (this.stats[index].showMore == true)
         this.stats[index].showMore = false;
-      else
-        this.stats[index].showMore = true;
-
-    }
-  }
+      else this.stats[index].showMore = true;
+    },
+  },
 };
 </script>
 
 <style>
 /*Home page banner control background*/
-.index-banner .v-window__prev, .v-window__next {
+.index-banner .v-window__prev,
+.v-window__next {
   background: none !important;
 }
 </style>

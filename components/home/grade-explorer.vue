@@ -796,9 +796,21 @@ const gradeSizesXl = [
     fontSize: 8,
   },
 ];
-const questions = [];
+
+const gradeSizes = computed(() => {
+  const breakpoints = {
+    xs: gradeSizesXs,
+    sm: gradeSizesSm,
+    md: gradeSizesMd,
+    lg: gradeSizesMd,
+    xl: gradeSizesMd,
+  };
+
+  return breakpoints[name.value];
+});
+const questions = ref([]);
 const questionLoading = ref(true);
-const papers = [];
+const papers = ref([]);
 const paperLoading = ref(true);
 const intervalId = ref(null);
 
@@ -875,7 +887,6 @@ const handleMouseMove = (event) => {
 
       // const buttonRef = $refs[`handler${index}`][0];
       const rect = buttonRef.getBoundingClientRect();
-      console.log(rect);
 
       if (
         touchX >= rect.left &&
@@ -985,7 +996,7 @@ const getQuestions = async () => {
   questionLoading.value = true;
   try {
     const response = await $fetch("/api/v1/home/questions");
-    questions.value = response?.data;
+    questions.value = response.data;
   } catch (error) {
     console.log(error);
   } finally {
@@ -1020,16 +1031,6 @@ const gradeHandlerTitle = (title) => {
   if (xs || sm || md) return title.replace(" Grade", "");
   else return title;
 };
-
-const gradeSizes = computed(() => {
-  switch (name.value) {
-    case "xs":
-      return gradeSizesXs;
-    case "sm":
-      return gradeSizesSm;
-  }
-  return gradeSizesMd;
-});
 
 //handleAutoCycle();
 

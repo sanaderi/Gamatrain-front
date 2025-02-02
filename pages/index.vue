@@ -17,7 +17,7 @@
               Discover Your Full Potential with AI-based Education
             </p>
             <v-btn
-              :large="mdAndUp"
+              :large="display.mdAndUp"
               :small="xs"
               to="/smart-learning"
               rounded
@@ -97,7 +97,7 @@
             GamaTrain will find it for you.
           </p>
           <v-btn
-            :large="mdAndUp"
+            :large="display.mdAndUp"
             :small="xs"
             rounded
             class="primary gama-btn"
@@ -105,7 +105,7 @@
             >Learn more</v-btn
           >
           <v-btn
-            :large="mdAndUp"
+            :large="display.mdAndUp"
             :small="xs"
             rounded
             class="primary gama-btn"
@@ -137,7 +137,7 @@
           <v-col cols="12" sm="12" md="12" class="text-center">
             <v-btn
               rounded
-              :large="mdAndUp"
+              :large="display.mdAndUp"
               :small="xs"
               to="/earn-money"
               class="primary gama-btn"
@@ -151,6 +151,9 @@
   </v-container>
 </template>
 <script setup>
+import { useDisplay } from "vuetify/lib/framework.mjs";
+
+const display = useDisplay();
 // Data
 const test_schools = ref("");
 const less = ref(true);

@@ -358,7 +358,7 @@
                   </v-btn>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <pie-chart :chart-data="chartData" />
+                  <!-- <pie-chart :chart-data="chartData" /> -->
                 </v-col>
               </v-row>
             </v-col>
