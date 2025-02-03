@@ -139,9 +139,9 @@
                       :items="test_type_list"
                       item-value="id"
                       item-text="title"
-                      v-model="form.type"
+                      v-model="form.exam_type"
                       :error-messages="errors"
-                      label="Test type"
+                      label="Exam type"
                       outlined
                     />
                   </validation-provider>
@@ -1754,7 +1754,7 @@ export default {
             this.lesson_list = [];
             this.topic_list = [];
 
-            this.form.type = "";
+            this.form.exam_type = "";
             this.form.duration = 3;
             this.form.title = "";
             this.form.file_original = "";
@@ -1857,7 +1857,7 @@ export default {
           this.lesson_list = [];
           this.topic_list = [];
 
-          this.form.type = "";
+          this.form.exam_type = "";
           this.form.duration = 3;
           this.form.title = "";
           //End reset form
