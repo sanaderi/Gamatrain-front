@@ -13,61 +13,61 @@
 </template>
 
 <script>
-import { Pie } from 'vue-chartjs/legacy'
+import { Pie } from "vue-chartjs/legacy";
 
 import {
   Chart as ChartJS,
   Title,
   Tooltip,
   ArcElement,
-  CategoryScale
-} from 'chart.js'
+  CategoryScale,
+} from "chart.js";
 
-ChartJS.register(Title, Tooltip, ArcElement, CategoryScale)
+ChartJS.register(Title, Tooltip, ArcElement, CategoryScale);
 
 export default {
-  name: 'PieChart',
+  name: "PieChart",
   components: {
-    Pie
+    Pie,
   },
   props: {
     chartId: {
       type: String,
-      default: 'pie-chart'
+      default: "pie-chart",
     },
     datasetIdKey: {
       type: String,
-      default: 'label'
+      default: "label",
     },
     width: {
       type: Number,
-      default: 220
+      default: 220,
     },
     height: {
       type: Number,
-      default: 220
+      default: 220,
     },
     cssClasses: {
-      default: '',
-      type: String
+      default: "",
+      type: String,
     },
     styles: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     plugins: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
-    chartData:{}
+    chartData: {},
   },
   data() {
     return {
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false
-      }
-    }
-  }
-}
+        maintainAspectRatio: false,
+      },
+    };
+  },
+};
 </script>
