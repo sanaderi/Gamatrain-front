@@ -139,9 +139,9 @@
                       :items="test_type_list"
                       item-value="id"
                       item-text="title"
-                      v-model="form.type"
+                      v-model="form.exam_type"
                       :error-messages="errors"
-                      label="Test type"
+                      label="Exam type"
                       outlined
                     />
                   </validation-provider>
@@ -259,7 +259,7 @@
                   />
                 </v-col>
 
-                <v-col cols="12" md="12">
+                <v-col cols="12" md="8">
                   <validation-provider
                     v-slot="{ errors }"
                     name="title"
@@ -274,7 +274,14 @@
                     />
                   </validation-provider>
                 </v-col>
-
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    dense
+                    label="Past Paper Id"
+                    v-model="form.paperID"
+                    outlined
+                  />
+                </v-col>
                 <!--                <v-col cols="12" md="4">-->
                 <!--                  <v-checkbox-->
                 <!--                    dense-->
@@ -352,7 +359,7 @@
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
-                      <v-btn lg outlined color="error" to="/user" block>
+                      <v-btn lg outlined color="error" to="/user/exam" block>
                         Discard
                       </v-btn>
                     </v-col>
@@ -694,7 +701,7 @@
                   </v-btn>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-btn lg outlined color="error" to="/user" block>
+                  <v-btn lg outlined color="error" to="/user/exam" block>
                     Discard
                   </v-btn>
                 </v-col>
@@ -857,7 +864,7 @@
                     </v-btn>
                   </v-col>
                   <v-col cols="12" md="6">
-                    <v-btn lg outlined color="error" to="/user" block>
+                    <v-btn lg outlined color="error" to="/user/exam" block>
                       Discard
                     </v-btn>
                   </v-col>
@@ -935,6 +942,7 @@
         fullscreen
         hide-overlay
         transition="dialog-bottom-transition"
+        style="z-index: 1000 !important"
       >
         <v-card class="test-list">
           <v-toolbar dark color="teal">
@@ -1170,6 +1178,7 @@ export default {
         title: "",
         negative_point: false,
         file_original: "",
+        paperID: "",
       },
       filter: {
         section: "",
@@ -1754,7 +1763,7 @@ export default {
             this.lesson_list = [];
             this.topic_list = [];
 
-            this.form.type = "";
+            this.form.exam_type = "";
             this.form.duration = 3;
             this.form.title = "";
             this.form.file_original = "";
@@ -1857,7 +1866,7 @@ export default {
           this.lesson_list = [];
           this.topic_list = [];
 
-          this.form.type = "";
+          this.form.exam_type = "";
           this.form.duration = 3;
           this.form.title = "";
           //End reset form

@@ -260,7 +260,7 @@
                   />
                 </v-col>
 
-                <v-col cols="12" md="12">
+                <v-col cols="12" md="8">
                   <validation-provider
                     v-slot="{ errors }"
                     name="title"
@@ -274,6 +274,14 @@
                       outlined
                     />
                   </validation-provider>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    dense
+                    label="Past Paper Id"
+                    v-model="form.paperID"
+                    outlined
+                  />
                 </v-col>
 
                 <!--                <v-col cols="12" md="4">-->
@@ -353,7 +361,7 @@
                       </v-btn>
                     </v-col>
                     <v-col cols="12" md="6">
-                      <v-btn lg outlined color="error" to="/user" block>
+                      <v-btn lg outlined color="error" to="/user/exam" block>
                         Discard
                       </v-btn>
                     </v-col>
@@ -693,7 +701,7 @@
                   </v-btn>
                 </v-col>
                 <v-col cols="12" md="6">
-                  <v-btn lg outlined color="error" to="/user" block>
+                  <v-btn lg outlined color="error" to="/user/exam" block>
                     Discard
                   </v-btn>
                 </v-col>
@@ -852,7 +860,7 @@
                     </v-btn>
                   </v-col>
                   <v-col cols="12" md="6">
-                    <v-btn lg outlined color="error" to="/user" block>
+                    <v-btn lg outlined color="error" to="/user/exam" block>
                       Discard
                     </v-btn>
                   </v-col>
@@ -1160,6 +1168,7 @@ export default {
         duration: 3,
         // start_date: parseInt(this.$moment().format('x') / 1000),
         title: "",
+        paperID: "",
         negative_point: false,
         file_original: "",
       },
@@ -1235,7 +1244,7 @@ export default {
       test_loading: false,
       all_tests_loaded: false,
       tests: [],
-      test_share_link: `${process.env.BASE_URI}/exam/${this.$route.params.id}`,
+      test_share_link: `https://gamatrain.com/exam/${this.$route.params.id}`,
       printPreviewDialog: false,
       confirmDeleteDialog: false,
       deleteLoading: false,
@@ -1403,7 +1412,7 @@ export default {
           console.log(response);
           this.tests = response.data.tests.length ? response.data.tests : [];
           this.exam_code = response.data.code;
-          this.test_share_link = `${process.env.BASE_URI}/exam/${this.$route.params.id}`;
+          this.test_share_link = `https://gamatrain.com/exam/${this.$route.params.id}`;
           this.form.section = response.data.section;
           this.form.base = response.data.base;
           this.form.lesson = response.data.lesson;
@@ -1412,6 +1421,7 @@ export default {
           this.form.topics = response.data.topics;
 
           this.form.exam_type = response.data.azmoon_type;
+          this.form.paperID = response.data.paperID;
           this.form.duration = response.data.azmoon_time;
           this.form.file_original = response.data.file_original;
           setTimeout(() => {
