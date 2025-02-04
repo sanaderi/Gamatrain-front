@@ -354,7 +354,7 @@
                           @click:close="closeFilter('tuition_fee')"
                         >
                           Tuition fee above: ${{
-                            $route.query.tuition_fee | numberFormat
+                            numberFormat($route.query.tuition_fee)
                           }}
                         </v-chip>
                         <v-chip
@@ -605,7 +605,7 @@
                             thumb-label="always"
                           >
                             <template #thumb-label="{ value }">
-                              ${{ value | numberFormat }}
+                              ${{ $numberFormat(value) }}
                             </template>
                           </v-slider>
                         </div>
