@@ -16,7 +16,11 @@
             >
               <v-tooltip right>
                 <template v-slot:activator="{ on, attrs }">
-                  <span v-bind="attrs" v-on="on" :class="' icon icong-' + item.icon" />
+                  <span
+                    v-bind="attrs"
+                    v-on="on"
+                    :class="' icon icong-' + item.icon"
+                  />
                 </template>
                 <span>{{ item.text }}</span>
               </v-tooltip>
@@ -35,7 +39,11 @@
             >
               <v-tooltip right>
                 <template v-slot:activator="{ on, attrs }">
-                  <span v-bind="attrs" v-on="on" :class="' icon icong-' + item.icon" />
+                  <span
+                    v-bind="attrs"
+                    v-on="on"
+                    :class="' icon icong-' + item.icon"
+                  />
                 </template>
                 <span>{{ item.text }}</span>
               </v-tooltip>
@@ -55,8 +63,12 @@
                   <img :src="image" class="carousel-img" />
                 </v-carousel-item>
               </v-carousel>
-              <div class="thumbnails" v-if="images.length > 1">
-                <v-slide-group center-active class="pa-4" active-class="success">
+              <div class="thumbnails" v-show="images.length > 1">
+                <v-slide-group
+                  center-active
+                  class="pa-4"
+                  active-class="success"
+                >
                   <v-slide-item
                     class="mx-2 thumbnail_itm"
                     v-for="(image, index) in images"
@@ -93,8 +105,6 @@ export default {
         lesson: "",
       },
 
-      active_img: 1,
-
       items: [
         {
           class: "exam",
@@ -102,7 +112,12 @@ export default {
           icon: "azmoon",
           link: "/search?type=azmoon",
         },
-        { class: "test", text: "Related paper", icon: "test", link: "/search?type=test" },
+        {
+          class: "test",
+          text: "Related paper",
+          icon: "test",
+          link: "/search?type=test",
+        },
         {
           class: "content",
           text: "Related multimedia",
@@ -216,7 +231,7 @@ export default {
   }
 }
 
-@media (min-width:1264px){
+@media (min-width: 1264px) {
   #details-gallery-portrate {
     #product-carousel {
       width: 29rem;
@@ -233,92 +248,74 @@ export default {
   }
 }
 
-@media (min-width:1310px){
+@media (min-width: 1310px) {
   #details-gallery-portrate {
     #product-carousel {
       height: 25.4rem !important;
-
     }
   }
 }
 
-@media (min-width:1368px){
+@media (min-width: 1368px) {
   #details-gallery-portrate {
     #product-carousel {
       height: 26.5rem !important;
-
     }
   }
 }
 
-
-@media (min-width:1428px){
+@media (min-width: 1428px) {
   #details-gallery-portrate {
     #product-carousel {
       height: 28rem !important;
-
     }
   }
 }
 
-
-@media (min-width:1488px){
+@media (min-width: 1488px) {
   #details-gallery-portrate {
     #product-carousel {
       height: 29.2rem !important;
-
     }
   }
 }
 
-
-
-
-@media (min-width:1546px){
+@media (min-width: 1546px) {
   #details-gallery-portrate {
     #product-carousel {
       height: 30.2rem !important;
-
     }
   }
 }
 
-
-@media (min-width:1606px){
+@media (min-width: 1606px) {
   #details-gallery-portrate {
     #product-carousel {
       height: 31.2rem !important;
-
     }
   }
 }
 
-
-
-@media (min-width:1666px){
+@media (min-width: 1666px) {
   #details-gallery-portrate {
     #product-carousel {
       height: 32.2rem !important;
-
     }
   }
 }
 
-
-@media (min-width:1714px){
+@media (min-width: 1714px) {
   #details-gallery-portrate {
     #product-carousel {
       height: 33.2rem !important;
-
     }
   }
 }
 
-@media (min-width:1714px){
+@media (min-width: 1714px) {
   #details-gallery-portrate {
     #product-carousel {
       height: 34.4rem !important;
-
     }
   }
 }

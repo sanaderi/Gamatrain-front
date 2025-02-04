@@ -1,14 +1,14 @@
 <template>
   <div class="test-details-content">
     <!-- Start : Category -->
-    <category/>
+    <category />
     <!-- End:Category -->
 
     <!--  Start: breadcrumb  -->
     <section>
       <v-container class="py-0">
-        <div class=" mt-0 py-0 header-path">
-          <breadcrumb :breads="breads"/>
+        <div class="mt-0 py-0 header-path">
+          <breadcrumb :breads="breads" />
         </div>
       </v-container>
     </section>
@@ -17,14 +17,9 @@
     <!--  Start: detail  -->
     <section>
       <v-container class="py-0">
-        <div class="detail mt-md-8">
+        <div class="detail mt-8">
           <v-row>
-            <v-col cols="12" md="3">
-              <!--Show gallery of preview and book first page-->
-              <preview-gallery ref="preview_gallery"/>
-              <!--Show gallery of preview and book first page-->
-            </v-col>
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="6" class="px-8 px-lg=0">
               <!--  Description   -->
               <div class="d-flex mb-4">
                 <div class="w-100">
@@ -40,8 +35,9 @@
                       Topics:
                     </p>
                     <ul>
-                      <li v-for="(item,index) in contentData.topics"
-                          :key="index"
+                      <li
+                        v-for="(item, index) in contentData.topics"
+                        :key="index"
                       >
                         {{ item.title }}
                       </li>
@@ -55,29 +51,32 @@
                     </p>
                     <!--End question number-->
 
-
                     <!--Difficulty level-->
                     <p class="mt-1 gama-text-body2">
-                      <i class="fa-solid fa-temperature-three-quarters ml-1 icon"></i>
+                      <i
+                        class="fa-solid fa-temperature-three-quarters ml-1 icon"
+                      ></i>
                       Difficulty level: {{ contentData.level }}
                     </p>
                     <!--End difficulty level-->
 
-
                     <!--Start date-->
                     <p class="mt-1 gama-text-body2">
                       <i class="fa-solid fa-circle-play"></i>
-                      Start: {{ contentData.start_date ? contentData.start_date : '-' }}
+                      Start:
+                      {{
+                        contentData.start_date ? contentData.start_date : "-"
+                      }}
                     </p>
                     <!--End start date-->
 
                     <!--End date-->
                     <p class="mt-1 gama-text-body2">
                       <i class="fa-solid fa-circle-stop"></i>
-                      End: {{ contentData.end_date ? contentData.end_date : '-' }}
+                      End:
+                      {{ contentData.end_date ? contentData.end_date : "-" }}
                     </p>
                     <!--End end date-->
-
 
                     <!--Duration-->
                     <p class="mt-1 gama-text-body2">
@@ -85,53 +84,61 @@
                       Duration: {{ contentData.azmoon_time }} minutes
                     </p>
                     <!--End duration-->
-
-
                   </div>
 
                   <div class="label-holder">
-                    <v-chip link
-                            v-show="contentData.section_title"
-                            class="mr-1"
-                            :to="`/search?type=azmoon&section=${contentData.section}`">
-                        {{ contentData.section_title }}
+                    <v-chip
+                      link
+                      v-show="contentData.section_title"
+                      class="mr-1"
+                      :to="`/search?type=azmoon&section=${contentData.section}`"
+                    >
+                      {{ contentData.section_title }}
                     </v-chip>
-                    <v-chip link
-                            v-show="contentData.base_title"
-                            :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}`"
-                            class="mr-1">
-                        {{ contentData.base_title }}
+                    <v-chip
+                      link
+                      v-show="contentData.base_title"
+                      :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}`"
+                      class="mr-1"
+                    >
+                      {{ contentData.base_title }}
                     </v-chip>
-                    <v-chip link
-                            v-show="contentData.lesson_title"
-                            :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`"
-                            class="ma-1">
-                        {{ contentData.lesson_title }}
+                    <v-chip
+                      link
+                      v-show="contentData.lesson_title"
+                      :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`"
+                      class="ma-1"
+                    >
+                      {{ contentData.lesson_title }}
                     </v-chip>
                     <!-- <v-chip class="ma-1"
                             v-show="contentData.edu_month_title">
                       {{ contentData.edu_month_title }}
                     </v-chip> -->
-
-
                   </div>
                 </div>
               </div>
               <!--   Download Btn and Description  -->
               <div v-if="!isFree" class="text-center download-sec">
-                <div class="d-none d-md-block mb-4 ">
+                <div class="d-none d-md-block mb-4">
                   <p v-if="!$auth.loggedIn" class="gama-text-body2">
                     <span class="mdi mdi-bell icon"></span>
-                    <span @click="openAuthDialog('login')" class="login">Login</span>
+                    <span @click="openAuthDialog('login')" class="login"
+                      >Login</span
+                    >
                     <span @click="openAuthDialog('register')" class="register">
-                    (register)
+                      (register)
                     </span>
                     to download and charge your wallet.
                   </p>
                   <span v-else class="gama-text-body2">
                     Your wallet charge is ${{ $auth.user.credit }}
                   </span>
-                  <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)
+                  <nuxt-link
+                    class="blue--text"
+                    v-if="$auth.loggedIn"
+                    to="/user/charge-wallet"
+                    >(Top Up Wallet)
                   </nuxt-link>
                 </div>
                 <!-- <div class="font-weight-bold answer gama-text-body2">
@@ -144,9 +151,15 @@
                 <span >It is forbidden to republish the contents in cyber space.</span>
               </div> -->
             </v-col>
+
+            <v-col cols="12" md="3" order-md="first">
+              <!--Show gallery of preview and book first page-->
+              <preview-gallery ref="preview_gallery" />
+              <!--Show gallery of preview and book first page-->
+            </v-col>
             <v-col md="3">
               <v-card flat class="content_main_info">
-                <v-row class=" align-center">
+                <v-row class="align-center">
                   <v-col cols="3">
                     <v-img
                       :src="contentData.avatar"
@@ -163,7 +176,7 @@
                     </p>
                   </v-col>
                 </v-row>
-                <v-divider class="my-2"/>
+                <v-divider class="my-2" />
                 <v-row>
                   <v-col cols="12" class="pb-0">
                     <i class="fa-solid fa-folder mr-1 icon"></i>
@@ -191,29 +204,21 @@
                       max-width="600"
                     >
                       <template v-slot:activator="{ on, attrs }">
-                        <span
-                          v-bind="attrs"
-                          v-on="on"
-                        >
+                        <span v-bind="attrs" v-on="on">
                           <i class="fa-solid fa-share-alt mr-1 icon"></i>
                           Share
                         </span>
                       </template>
                       <template v-slot:default="dialog">
                         <v-card>
-                          <v-toolbar
-                            color="default"
-                          >
-                            Share
-                          </v-toolbar>
+                          <v-toolbar color="default"> Share </v-toolbar>
                           <v-card-text class="mt-5">
-                            <p class="mb-3">
-                              Share this content:
-                            </p>
+                            <p class="mb-3">Share this content:</p>
                             <v-row>
                               <v-col cols="12">
                                 <v-btn outlined block @click="copyUrl">
-                                  <i class="fa-solid fa-copy mr-1 icon"></i>&nbsp;
+                                  <i class="fa-solid fa-copy mr-1 icon"></i
+                                  >&nbsp;
                                   {{ copy_btn }}
                                 </v-btn>
                               </v-col>
@@ -221,27 +226,32 @@
                                 <v-btn
                                   @click="shareSocial('whatsapp')"
                                   target="_blank"
-                                  block color="#25d366" class="white--text">
+                                  block
+                                  color="#25d366"
+                                  class="white--text"
+                                >
                                   <i class="fab fa-whatsapp mr-1 icon"></i>
                                   WhatsApp
                                 </v-btn>
                               </v-col>
                               <v-col cols="6">
-                                <v-btn block color="#00acee" class="white--text"
-                                       @click="shareSocial('telegram')"
+                                <v-btn
+                                  block
+                                  color="#00acee"
+                                  class="white--text"
+                                  @click="shareSocial('telegram')"
                                 >
-                                  <i class="fab fa-telegram-plane mr-1 icon"></i>
+                                  <i
+                                    class="fab fa-telegram-plane mr-1 icon"
+                                  ></i>
                                   Telegram
                                 </v-btn>
                               </v-col>
                             </v-row>
-
                           </v-card-text>
                           <v-card-actions class="justify-end">
-                            <v-btn
-                              text
-                              @click="dialog.value = false"
-                            >close
+                            <v-btn text @click="dialog.value = false"
+                              >close
                             </v-btn>
                           </v-card-actions>
                         </v-card>
@@ -260,43 +270,62 @@
                     hover
                   />
                 </div>
-                <v-divider class="d-none d-md-block"/>
+                <v-divider class="d-none d-md-block" />
 
                 <v-row class="mt-1 d-none d-md-block">
-                  <v-col v-for="(item,key) in contentData.price"
-                         :key="key"
-                         cols="12" class="pb-0">
+                  <v-col
+                    v-for="(item, key) in contentData.price"
+                    :key="key"
+                    cols="12"
+                    class="pb-0"
+                  >
                     <!--For not authenticated user-->
-                    <v-btn v-show="!$auth.loggedIn"
-                           @click="openAuthDialog('login')"
-                           v-if="key==='participation'" block color="success">
-                      Start Exam{{ item.price > 0 ? ' | $' + item.price : '' }}
+                    <v-btn
+                      v-show="!$auth.loggedIn"
+                      @click="openAuthDialog('login')"
+                      v-if="key === 'participation'"
+                      block
+                      color="success"
+                    >
+                      Start Exam{{ item.price > 0 ? " | $" + item.price : "" }}
                     </v-btn>
 
                     <!--For authenticated user-->
-                    <v-btn v-show="$auth.loggedIn" :to="`/exam/start/${contentData.id}`"
-                           v-if="key==='participation'"
-                           block color="success">
-                      <span v-if="contentData.examUserData.status==1">
+                    <v-btn
+                      v-show="$auth.loggedIn"
+                      :to="`/exam/start/${contentData.id}`"
+                      v-if="key === 'participation'"
+                      block
+                      color="success"
+                    >
+                      <span v-if="contentData.examUserData.status == 1">
                         Show result
                       </span>
                       <span v-else>
-                        Start Exam{{ item.price > 0 ? ' | $' + item.price : '' }}
+                        Start Exam{{
+                          item.price > 0 ? " | $" + item.price : ""
+                        }}
                       </span>
                     </v-btn>
 
-                    <v-btn v-else-if="key==='word'" block color="primary">
-                      Download WORD{{ item.price > 0 ? ' | $' + item.price : '' }}
+                    <v-btn v-else-if="key === 'word'" block color="primary">
+                      Download WORD{{
+                        item.price > 0 ? " | $" + item.price : ""
+                      }}
                     </v-btn>
                     <v-btn
                       @click="startDownload()"
                       :loading="download_loading"
-                      v-else-if="key==='pdf'" block color="error">
-                      Download PDF{{ item.price > 0 ? ' | $' + item.price : '' }}
+                      v-else-if="key === 'pdf'"
+                      block
+                      color="error"
+                    >
+                      Download PDF{{
+                        item.price > 0 ? " | $" + item.price : ""
+                      }}
                     </v-btn>
                   </v-col>
                 </v-row>
-
               </v-card>
               <!-- <v-row>
                 <v-col cols="12" class="text-center">
@@ -307,70 +336,83 @@
               </v-row> -->
             </v-col>
           </v-row>
-
-
         </div>
       </v-container>
     </section>
-
 
     <!--Mobile order section-->
     <v-card class="order-btn-holder d-block d-md-none">
       <v-card-text class="pb-0">
         <v-row class="px-10 text-center">
-          <v-col v-for="(item,key) in contentData.price"
-                 :key="key"
-                 cols="12" class="pb-1 pt-0">
-            <v-btn v-show="!$auth.loggedIn"
-                   @click="openAuthDialog('login')"
-                   v-if="key==='participation'"
-                   block color="success">
-              Start Exam{{ item.price > 0 ? ' | $' + item.price : '' }}
+          <v-col
+            v-for="(item, key) in contentData.price"
+            :key="key"
+            cols="12"
+            class="pb-1 pt-0"
+          >
+            <v-btn
+              v-show="!$auth.loggedIn"
+              @click="openAuthDialog('login')"
+              v-if="key === 'participation'"
+              block
+              color="success"
+            >
+              Start Exam{{ item.price > 0 ? " | $" + item.price : "" }}
             </v-btn>
-            <v-btn v-show="$auth.loggedIn"
-                   :to="`/exam/start/${contentData.id}`" v-if="key==='participation'" block
-                   color="success">
-              <span v-if="contentData.examUserData.status==1">
-                 Show result
+            <v-btn
+              v-show="$auth.loggedIn"
+              :to="`/exam/start/${contentData.id}`"
+              v-if="key === 'participation'"
+              block
+              color="success"
+            >
+              <span v-if="contentData.examUserData.status == 1">
+                Show result
               </span>
               <span v-else>
-                 Start Exam{{ item.price > 0 ? ' | $' + item.price : '' }}
+                Start Exam{{ item.price > 0 ? " | $" + item.price : "" }}
               </span>
             </v-btn>
-            <v-btn v-else-if="key==='word'" block color="primary">
-              Download WORD{{ item.price > 0 ? ' | $' + item.price : '' }}
+            <v-btn v-else-if="key === 'word'" block color="primary">
+              Download WORD{{ item.price > 0 ? " | $" + item.price : "" }}
             </v-btn>
-            <v-btn v-else-if="key==='pdf'" block color="error">
-              Download PDF{{ item.price > 0 ? ' | $' + item.price : '' }}
+            <v-btn v-else-if="key === 'pdf'" block color="error">
+              Download PDF{{ item.price > 0 ? " | $" + item.price : "" }}
             </v-btn>
           </v-col>
 
-          <v-col  cols="12">
+          <v-col cols="12">
             <div v-if="!isFree" class="mb-4">
               <p v-if="!$auth.loggedIn">
                 <span class="mdi mdi-bell icon"></span>
-                <span @click="openAuthDialog('login')" class="login blue--text">Login</span>
-                <span @click="openAuthDialog('register')" class="register blue--text">
-                    (register)
-                    </span>
+                <span @click="openAuthDialog('login')" class="login blue--text"
+                  >Login</span
+                >
+                <span
+                  @click="openAuthDialog('register')"
+                  class="register blue--text"
+                >
+                  (register)
+                </span>
                 <span>to download and charge.</span>
               </p>
               <span v-else>
                 Your wallet charge is ${{ $auth.user.credit }}
-                <nuxt-link class="blue--text" v-if="$auth.loggedIn" to="/user/charge-wallet">(Top Up Wallet)</nuxt-link>
+                <nuxt-link
+                  class="blue--text"
+                  v-if="$auth.loggedIn"
+                  to="/user/charge-wallet"
+                  >(Top Up Wallet)</nuxt-link
+                >
               </span>
             </div>
           </v-col>
         </v-row>
-
-
       </v-card-text>
     </v-card>
     <!--End mobile order section-->
 
-
     <!--  End: detail  -->
-
 
     <v-container>
       <v-row>
@@ -426,7 +468,6 @@
           <!--  End: Course Card  -->
         </v-col>
 
-
         <v-col cols="12" md="6">
           <!--  Start:  Azmoon test album card   -->
           <!--          <section>-->
@@ -476,7 +517,6 @@
       </v-row>
     </v-container>
 
-
     <!-- Start : Sample Test -->
     <!--    <related-content/>-->
     <!-- End : Sample test -->
@@ -499,14 +539,13 @@
     </section>
     <!-- End: Feed -->
 
-
-    <crash-report ref="crash_report"/>
+    <crash-report ref="crash_report" />
   </div>
 </template>
 <script>
 import Breadcrumb from "../../../components/widgets/breadcrumb";
 import LastViews from "@/components/common/last-views";
-import RelatedCardBox from "./components/related-card-box"
+import RelatedCardBox from "./components/related-card-box";
 import Category from "@/components/common/category";
 import PreviewGallery from "@/components/details/preview-gallery";
 import RelatedContent from "@/components/details/related-content";
@@ -528,14 +567,14 @@ export default {
     Category,
     Breadcrumb,
     LastViews,
-    RelatedCardBox
+    RelatedCardBox,
   },
   head() {
     return {
-      title: this.contentData.title
-    }
+      title: this.contentData.title,
+    };
   },
-  async asyncData({params, $axios}) {
+  async asyncData({ params, $axios }) {
     // This could also be an action dispatch
     const content = await $axios.$get(`/api/v1/exams/${params.id}`);
     var contentData = [];
@@ -545,7 +584,7 @@ export default {
       contentData = content.data;
     }
 
-    return {contentData};
+    return { contentData };
   },
   mounted() {
     //Init gallery image
@@ -560,8 +599,8 @@ export default {
         section: this.contentData.section,
         base: this.contentData.base,
         course: this.contentData.course,
-        lesson: this.contentData.lesson
-      }
+        lesson: this.contentData.lesson,
+      };
     }
 
     this.initBreadCrumb();
@@ -573,169 +612,199 @@ export default {
     contentData: [],
     breads: [
       {
-        text: 'Online exam',
+        text: "Online exam",
         disabled: false,
-        href: '/search?type=azmoon',
-      }
+        href: "/search?type=azmoon",
+      },
     ],
     detail: {
-      poster: 'poster1.jpg',
-      linkPoster: '',
-      title: 'A collection of 120 test questions for lessons 6 to 9 on (3) 12th',
+      poster: "poster1.jpg",
+      linkPoster: "",
+      title:
+        "A collection of 120 test questions for lessons 6 to 9 on (3) 12th",
       rate: 5,
-      previewImage: 'test1.png',
-      labels: ['History (3)', 'Twelfth', 'Second Secondary', 'Literature', 'Kermanshah', 'District 2', 'Shohadai Parvin', 'Farvardin', '2019',
-      ]
+      previewImage: "test1.png",
+      labels: [
+        "History (3)",
+        "Twelfth",
+        "Second Secondary",
+        "Literature",
+        "Kermanshah",
+        "District 2",
+        "Shohadai Parvin",
+        "Farvardin",
+        "2019",
+      ],
     },
     model: null,
     sampleTestList: [
       {
-        type: 'azmoon',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
+        type: "azmoon",
+        img: "test2.png",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
+        pages: "222",
+        owner: "Gama management team",
+        ownerImg: "gamaadmin.png",
       },
       {
-        type: 'azmoon',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
+        type: "azmoon",
+        img: "test2.png",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
+        pages: "222",
+        owner: "Gama management team",
+        ownerImg: "gamaadmin.png",
       },
       {
-        type: 'azmoon',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
+        type: "azmoon",
+        img: "test2.png",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
+        pages: "222",
+        owner: "Gama management team",
+        ownerImg: "gamaadmin.png",
       },
       {
-        type: '',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Mehran Zangeneh',
-        ownerImg: 'teacher2.png',
+        type: "",
+        img: "test2.png",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
+        pages: "222",
+        owner: "Mehran Zangeneh",
+        ownerImg: "teacher2.png",
       },
       {
-        type: '',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
+        type: "",
+        img: "test2.png",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
+        pages: "222",
+        owner: "Gama management team",
+        ownerImg: "gamaadmin.png",
       },
       {
-        type: '',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
+        type: "",
+        img: "test2.png",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
+        pages: "222",
+        owner: "Gama management team",
+        ownerImg: "gamaadmin.png",
       },
       {
-        type: '',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
+        type: "",
+        img: "test2.png",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
+        pages: "222",
+        owner: "Gama management team",
+        ownerImg: "gamaadmin.png",
       },
       {
-        type: '',
-        img: 'test2.png',
-        description: 'The series of tests of the twelfth history book Lessons 1 to 12',
-        pages: '222',
-        owner: 'Gama management team',
-        ownerImg: 'gamaadmin.png',
+        type: "",
+        img: "test2.png",
+        description:
+          "The series of tests of the twelfth history book Lessons 1 to 12",
+        pages: "222",
+        owner: "Gama management team",
+        ownerImg: "gamaadmin.png",
       },
     ],
     relatedList: [
       {
-        class: 'learning',
-        header: 'Related educational content',
-        icon: 'learnfiles',
-        description: ' File های پاورپوینت، ویدئو، صوتی، متنی و ...',
+        class: "learning",
+        header: "Related educational content",
+        icon: "learnfiles",
+        description: " File های پاورپوینت، ویدئو، صوتی، متنی و ...",
         contentItemList: [
           {
-            title: 'Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature',
-            link: ''
+            title:
+              "Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature",
+            link: "",
           },
           {
-            title: 'Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
-            link: ''
+            title:
+              "Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)",
+            link: "",
           },
           {
-            title: 'Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation',
-            link: ''
+            title:
+              "Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation",
+            link: "",
           },
         ],
       },
       {
-        class: 'question',
-        header: 'Related Q&As',
-        icon: 'qa',
+        class: "question",
+        header: "Related Q&As",
+        icon: "qa",
         description: "Ask questions or answer other people's questions...",
         contentItemList: [
           {
-            title: 'Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature',
-            link: ''
+            title:
+              "Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature",
+            link: "",
           },
           {
-            title: 'Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
-            link: ''
+            title:
+              "Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)",
+            link: "",
           },
           {
-            title: 'Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation',
-            link: ''
-          },
-        ],
-      },
-      {
-        class: 'blog',
-        header: 'Related textbooks',
-        icon: 'blog',
-        contentItemList: [
-          {
-            title: 'Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature',
-            link: ''
-          },
-          {
-            title: 'Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
-            link: ''
-          },
-          {
-            title: 'Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation',
-            link: ''
+            title:
+              "Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation",
+            link: "",
           },
         ],
       },
       {
-        class: 'azmoon',
-        header: 'Related online tests',
-        icon: 'azmoon',
+        class: "blog",
+        header: "Related textbooks",
+        icon: "blog",
         contentItemList: [
           {
-            title: 'Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature',
-            link: ''
+            title:
+              "Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature",
+            link: "",
           },
           {
-            title: 'Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)',
-            link: ''
+            title:
+              "Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)",
+            link: "",
           },
           {
-            title: 'Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation',
-            link: ''
+            title:
+              "Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation",
+            link: "",
+          },
+        ],
+      },
+      {
+        class: "azmoon",
+        header: "Related online tests",
+        icon: "azmoon",
+        contentItemList: [
+          {
+            title:
+              "Online teaching, page 53 to 58 of Arabic (3) twelfth human | Lesson 4: The order of nature",
+            link: "",
+          },
+          {
+            title:
+              "Pamphlet and Papers descriptive and test lesson 7 philosophy twelfth Reason in philosophy (1)",
+            link: "",
+          },
+          {
+            title:
+              "Online teaching Arabic page 1 to 8 (3) 12th human | Lesson 1: Translation",
+            link: "",
           },
         ],
       },
     ],
 
-    copy_btn: 'Copy',
+    copy_btn: "Copy",
     download_loading: false,
   }),
   methods: {
@@ -755,47 +824,54 @@ export default {
           text: this.contentData.lesson_title,
           disabled: false,
           href: `/search?type=azmoon&section=${this.contentData.section}&base=${this.contentData.base}&lesson=${this.contentData.lesson}`,
-        },
+        }
       );
     },
     openAuthDialog(val) {
-      this.$router.push({query: {auth_form: val}});
+      this.$router.push({ query: { auth_form: val } });
     },
-
 
     //Social section
     copyUrl() {
       navigator.clipboard.writeText(window.location.href);
-      this.copy_btn = 'Copied';
-
+      this.copy_btn = "Copied";
     },
     shareSocial(social_name) {
-      if (social_name == 'whatsapp')
-        window.open(`https://api.whatsapp.com/send?text=${window.location.href}`);
-      else if (social_name == 'telegram')
-        window.open(`https://telegram.me/share/url?url=${window.location.href}&text=${this.contentData.title}`);
-
+      if (social_name == "whatsapp")
+        window.open(
+          `https://api.whatsapp.com/send?text=${window.location.href}`
+        );
+      else if (social_name == "telegram")
+        window.open(
+          `https://telegram.me/share/url?url=${window.location.href}&text=${this.contentData.title}`
+        );
     },
 
     //Download file
     startDownload() {
       this.download_loading = true;
-      this.$axios.$get(`/api/v1/exams/download/${this.$route.params.id}`)
-        .then(response => {
-          var FileSaver = require('file-saver');
+      this.$axios
+        .$get(`/api/v1/exams/download/${this.$route.params.id}`)
+        .then((response) => {
+          var FileSaver = require("file-saver");
           FileSaver.saveAs(response.data.url, response.data.name);
-        }).catch(err => {
-        if (err.response.status == 400) {
-          if (err.response.data.status == 0 && err.response.data.error == "creditNotEnough") {
-            this.$toast.info("No enough credit");
+        })
+        .catch((err) => {
+          if (err.response.status == 400) {
+            if (
+              err.response.data.status == 0 &&
+              err.response.data.error == "creditNotEnough"
+            ) {
+              this.$toast.info("No enough credit");
+            }
+          } else if (err.response.status == 403) {
+            this.$router.push({ query: { auth_form: "login" } });
           }
-        } else if (err.response.status == 403) {
-          this.$router.push({query: {auth_form: 'login'}});
-        }
-        console.log(err);
-      }).finally(() => {
-        this.download_loading = false;
-      })
+          console.log(err);
+        })
+        .finally(() => {
+          this.download_loading = false;
+        });
     },
     //End download file
 
@@ -811,21 +887,20 @@ export default {
         return false;
       else return true;
     },
-  }
-}
+  },
+};
 </script>
 
 <style>
 .content_main_info {
   padding: 27px;
-  background: #F5F5F5 !important;
+  background: #f5f5f5 !important;
   border-radius: 6px;
 }
 
 .content_main_info .creator_title {
   font-size: 18px;
 }
-
 
 .order-btn-holder {
   /*position: -webkit-sticky!important;*/

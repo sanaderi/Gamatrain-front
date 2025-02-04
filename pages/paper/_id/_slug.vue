@@ -17,14 +17,9 @@
     <!--  Start: detail  -->
     <section>
       <v-container class="py-0">
-        <div class="detail mt-md-8">
+        <div class="detail mt-6 mt-md-8">
           <v-row>
-            <v-col cols="12" lg="3">
-              <!--Show gallery of preview and book first page-->
-              <preview-gallery ref="preview_gallery" />
-              <!--Show gallery of preview and book first page-->
-            </v-col>
-            <v-col cols="12" md="8" lg="6">
+            <v-col cols="12" md="8" lg="6" class="px-8 px-lg=0">
               <!--  Description   -->
               <div class="d-flex mb-4">
                 <div class="w-100">
@@ -178,7 +173,13 @@
                 </p>
               </div> -->
             </v-col>
-            <v-col md="4" lg="3">
+            <v-col cols="12" sm="5" lg="3" order-lg="first">
+              <!--Show gallery of preview and book first page-->
+              <preview-gallery ref="preview_gallery" />
+              <!--Show gallery of preview and book first page-->
+            </v-col>
+
+            <v-col sm="7" md="4" lg="3">
               <v-card flat class="content_main_info">
                 <v-row class="align-center">
                   <v-col cols="3">
@@ -660,9 +661,12 @@ export default {
   mounted() {
     //Init gallery image
     if (this.contentData) {
-      this.$refs.preview_gallery.images.push(this.contentData.thumb_pic);
+      if (this.contentData.thumb_pic)
+        this.$refs.preview_gallery.images.push(this.contentData.thumb_pic);
       this.$refs.preview_gallery.images.push(this.contentData.lesson_pic);
-      this.$refs.preview_gallery.carouselVal = 0;
+      this.$refs.preview_gallery.carouselVal = this.contentData.thumb_pic
+        ? 0
+        : 1;
 
       //Update help link data
       this.$refs.preview_gallery.help_link_data = {
