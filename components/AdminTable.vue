@@ -15,12 +15,12 @@
           </v-btn>
         </v-bottom-navigation>
         <button
-          class="px-4 py-2 white--text bg-primary-success-500 rounded-pill mx-4"
-          @click="addNewProvince"
+          class="px-2 py-2 white--text bg-primary-success-500 rounded-pill mx-2"
+          @click="addNewItem"
         >
-          + New Province
+          + New {{ value }}
         </button>
-        <div class="d-flex align-center mx-8">
+        <div class="d-flex align-center mx-5">
           <v-text-field
             v-model="searchQuery"
             class="border"
@@ -166,8 +166,8 @@ export default {
     closeMenu() {
       this.activeMenu = null;
     },
-    addNewProvince() {
-      console.log("Adding a new province...");
+    addNewItem() {
+      console.log(`Adding a new ${this.value}...`);
     },
     toggleAll() {
       if (this.selectAll) {
@@ -186,8 +186,21 @@ export default {
         this.currentPage++;
       }
     },
+    async fetchAreas() {
+      await this.$axios.$get("/api/v1/admin/locations/countries");
+      this.items = response.data.map((state) => ({
+        title: state.name,
+        date: new Date().toISOString().split("T")[0],
+      }));
+    },
   },
+
   watch: {
+    value(newValue) {
+      if (newValue === "Area") {
+        this.fetchAreas();
+      }
+    },
     rowsPerPage() {
       this.currentPage = 1;
     },
