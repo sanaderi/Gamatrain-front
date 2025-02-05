@@ -373,6 +373,25 @@
                         }}
                       </v-btn>
                     </div>
+                    <v-btn
+                      v-if="contentData.exams"
+                      :to="`/exam/${contentData?.exams[0].id}`"
+                      block
+                      color="#5600e8"
+                      class="mb-2 white--text"
+                    >
+                      Begin Quiz
+                    </v-btn>
+                    <v-btn
+                      v-else
+                      :to="`/test-maker/create?board=${contentData.section}&grade=${contentData.base}&subject=${contentData.lesson}&paperId=${contentData.id}`"
+                      block
+                      outlined
+                      color="primary"
+                      class="mb-2 white--text"
+                    >
+                      Create Quiz
+                    </v-btn>
                   </v-col>
                 </v-row>
               </v-card>
