@@ -61,7 +61,7 @@
                       :error-messages="errors"
                       item-text="title"
                       item-value="id"
-                      label="Curriculum"
+                      label="Board"
                       outlined
                     />
                   </validation-provider>
@@ -270,6 +270,7 @@
                       v-model="form.title"
                       :error-messages="errors"
                       label="Title"
+                      hint="Ex: 9700/11 Biology Jun 2020 Online Test | Cambridge As & A Level MSCQ"
                       outlined
                     />
                   </validation-provider>
@@ -409,7 +410,7 @@
                 item-text="title"
                 clearable
                 item-value="id"
-                label="Curriculum"
+                label="Board"
                 outlined
               />
             </v-col>
@@ -1163,9 +1164,9 @@ export default {
       exam_id: "",
       exam_code: "",
       form: {
-        section: "",
-        base: "",
-        lesson: "",
+        section: this.$route.query.board ? this.$route.query.board : "",
+        base: this.$route.query.grade ? this.$route.query.grade : "",
+        lesson: this.$route.query.subject ? this.$route.query.subject : "",
         topics: "",
         type: "",
         level: "2",
@@ -1178,7 +1179,7 @@ export default {
         title: "",
         negative_point: false,
         file_original: "",
-        paperID: "",
+        paperID: this.$route.query.paperId ? this.$route.query.paperId : "",
       },
       filter: {
         section: "",
@@ -1274,6 +1275,12 @@ export default {
   mounted() {
     this.getCurrentExamInfo();
     this.getTypeList("section");
+    if (this.form.base) this.getTypeList("base", this.form.section);
+    if (this.form.lesson) {
+      this.getTypeList("lesson", this.form.base);
+      this.getTypeList("topic", this.form.lesson);
+    }
+
     this.getTypeList("exam_type");
     this.getTypeList("state");
 
@@ -1487,6 +1494,8 @@ export default {
           } else if (type === "school") {
             this.school_list = res.data;
           }
+
+          this.generateTitle();
         })
         .catch((err) => {
           this.$toast.error(err);
@@ -1558,12 +1567,14 @@ export default {
       if (this.form.lesson && this.lesson_list.length > 0) {
         lesson_title = this.lesson_list.find(
           (x) => x.id === this.form.lesson
-        ).title;
+        )?.title;
       }
 
       var base_title = "";
       if (this.form.base && this.grade_list.length > 0)
-        base_title = this.grade_list.find((x) => x.id === this.form.base).title;
+        base_title = this.grade_list.find(
+          (x) => x.id === this.form.base
+        )?.title;
 
       this.form.title = `${lesson_title} Test ${base_title} Grade`;
     },

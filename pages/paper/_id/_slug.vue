@@ -105,31 +105,44 @@
                   </div>
 
                   <div class="label-holder">
-                    <v-chip link class="mr-1">
+                    <v-chip
+                      link
+                      class="mr-1"
+                      :small="$vuetify.breakpoint.mdAndDown"
+                    >
                       <nuxt-link
                         :to="`/search?type=test&section=${contentData.section}`"
                       >
                         {{ contentData.section_title }}
                       </nuxt-link>
                     </v-chip>
-                    <v-chip link class="mr-1">
+                    <v-chip
+                      link
+                      class="mr-1"
+                      :small="$vuetify.breakpoint.mdAndDown"
+                    >
                       <nuxt-link
                         :to="`/search?type=test&section=${contentData.section}&base=${contentData.base}`"
                       >
                         {{ contentData.base_title }}
                       </nuxt-link>
                     </v-chip>
-                    <v-chip link class="ma-1">
+                    <v-chip
+                      link
+                      class="ma-1"
+                      :small="$vuetify.breakpoint.mdAndDown"
+                    >
                       <nuxt-link
                         :to="`/search?type=test&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`"
                       >
                         {{ contentData.lesson_title }}
                       </nuxt-link>
                     </v-chip>
-                    <v-chip class="ma-1">
+                    <v-chip class="ma-1" :small="$vuetify.breakpoint.mdAndDown">
                       {{ contentData.edu_month_title }}
                     </v-chip>
                     <v-chip
+                      :small="$vuetify.breakpoint.mdAndDown"
                       :to="`/search?type=test&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}&edu_year=${contentData.edu_year}`"
                       class="ma-1"
                     >
@@ -360,6 +373,25 @@
                         }}
                       </v-btn>
                     </div>
+                    <v-btn
+                      v-if="contentData.exams"
+                      :to="`/exam/${contentData?.exams[0].id}`"
+                      block
+                      color="#5600e8"
+                      class="mb-2 white--text"
+                    >
+                      Begin Quiz
+                    </v-btn>
+                    <v-btn
+                      v-else
+                      :to="`/test-maker/create?board=${contentData.section}&grade=${contentData.base}&subject=${contentData.lesson}&paperId=${contentData.id}`"
+                      block
+                      outlined
+                      color="primary"
+                      class="mb-2 white--text"
+                    >
+                      Create Quiz
+                    </v-btn>
                   </v-col>
                 </v-row>
               </v-card>

@@ -159,21 +159,33 @@
                   </div>
 
                   <div class="label-holder">
-                    <v-chip link class="mr-1">
+                    <v-chip
+                      :small="$vuetify.breakpoint.mdAndDown"
+                      link
+                      class="mr-1"
+                    >
                       <nuxt-link
                         :to="`/search?type=learnfiles&section=${contentData.section}`"
                       >
                         {{ contentData.section_title }}
                       </nuxt-link>
                     </v-chip>
-                    <v-chip link class="mr-1">
+                    <v-chip
+                      :small="$vuetify.breakpoint.mdAndDown"
+                      link
+                      class="mr-1"
+                    >
                       <nuxt-link
                         :to="`/search?type=learnfiles&section=${contentData.section}&base=${contentData.base}`"
                       >
                         {{ contentData.base_title }}
                       </nuxt-link>
                     </v-chip>
-                    <v-chip link class="ma-1">
+                    <v-chip
+                      :small="$vuetify.breakpoint.mdAndDown"
+                      link
+                      class="ma-1"
+                    >
                       <nuxt-link
                         :to="`/search?type=learnfiles&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`"
                       >

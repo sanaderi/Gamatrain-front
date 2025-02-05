@@ -88,6 +88,7 @@
 
                   <div class="label-holder">
                     <v-chip
+                      :small="$vuetify.breakpoint.mdAndDown"
                       link
                       v-show="contentData.section_title"
                       class="mr-1"
@@ -96,6 +97,7 @@
                       {{ contentData.section_title }}
                     </v-chip>
                     <v-chip
+                      :small="$vuetify.breakpoint.mdAndDown"
                       link
                       v-show="contentData.base_title"
                       :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}`"
@@ -104,6 +106,7 @@
                       {{ contentData.base_title }}
                     </v-chip>
                     <v-chip
+                      :small="$vuetify.breakpoint.mdAndDown"
                       link
                       v-show="contentData.lesson_title"
                       :to="`/search?type=azmoon&section=${contentData.section}&base=${contentData.base}&lesson=${contentData.lesson}`"
