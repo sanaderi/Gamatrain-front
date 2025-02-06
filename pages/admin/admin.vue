@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import AdminTable from "~/components/AdminTable.vue";
+import AdminTable from "~/pages/admin/AdminTable.vue";
 export default {
   name: "AdminPanel",
   components: { AdminTable },
