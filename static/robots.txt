@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin
+Allow: /
+
+Sitemap: https://gamatrain.com/sitemap/paper-index
+Sitemap: https://gamatrain.com/sitemap/qa-index
+Sitemap: https://gamatrain.com/sitemap/multimedia-index
+Sitemap: https://gamatrain.com/sitemap/tutorial-index
+Sitemap: https://gamatrain.com/sitemap/blog-index

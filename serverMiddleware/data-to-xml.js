@@ -26,12 +26,14 @@ export default async (req, res, next) => {
   } else if (url.startsWith("/sitemap")) {
     // Your existing logic for individual sitemaps
     const { pathname, query } = parse(url, true);
-    const contentType = pathname.split("/")[2]; // e.g., "paper" from "/sitemap/paper"
+    const contentIdentity = pathname.split("/")[2]; // e.g., "paper" from "/sitemap/paper"
+    const contentType = contentIdentity.split("-")[0];
 
     if (contentTypes.includes(contentType)) {
+      const pageNum = contentIdentity.split("-")[1];
       res.setHeader("Content-Type", "application/xml");
-      const page = parseInt(query.page, 10) || 1; // Use query param for page number
-      let xmlData = await fetchPaginatedData(contentType, page); // Fetch and generate the correct sitemap
+      // const page = parseInt(query.page, 10) || 1; // Use query param for page number
+      let xmlData = await fetchPaginatedData(contentType, pageNum); // Fetch and generate the correct sitemap
       xmlData = convertDataToXML(xmlData, contentType);
       res.end(xmlData);
     } else {
@@ -49,7 +51,7 @@ async function generateSitemapIndex(contentType) {
 
   // Loop through each page for the content type
   for (let page = 1; page <= totalPages; page++) {
-    const sitemapUrl = `https://gamatrain.com/sitemap/${contentType}?page=${page}`;
+    const sitemapUrl = `https://gamatrain.com/sitemap/${contentType}-${page}`;
     indexXml += `<sitemap>
         <loc>${sitemapUrl}</loc>
         <lastmod>${new Date().toISOString()}</lastmod>
