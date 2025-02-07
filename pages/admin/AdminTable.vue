@@ -16,7 +16,7 @@
         </v-bottom-navigation>
         <button
           class="px-2 py-2 white--text bg-primary-success-500 rounded-pill mx-2"
-          @click="addNewItem"
+          @click="isModalOpen = true"
         >
           + New {{ value }}
         </button>
@@ -30,7 +30,12 @@
             placeholder="Search anything...."
             prepend-inner-icon="mdi-magnify"
           />
-          <button class="px-4 py-2 del rounded-pill">🗑 Deleted items</button>
+          <button
+            class="px-4 py-2 del rounded-pill"
+            @click="deleteSelectedItems"
+          >
+            🗑 Delete Selected
+          </button>
         </div>
       </div>
     </div>
@@ -73,6 +78,7 @@
               </button>
               <button
                 class="block w-full px-4 py-2 text-left text-red-500 hover:bg-gray-100"
+                @click="deleteItem(index)"
               >
                 🗑 Delete
               </button>
@@ -89,12 +95,12 @@
     >
       <div class="flex space-x-2">
         <div class="flex space-x-2">
-          <select class="px-4 py-2 bg-gray-200 rounded-lg del">
+          <button
+            class="px-4 py-2 bg-gray-200 rounded-lg del"
+            @click="deleteSelectedItems"
+          >
             Delete All
-            <option>Delete All</option>
-            <option>20 Row</option>
-            <option>50 Row</option>
-          </select>
+          </button>
           <button class="px-4 py-2 active-btn rounded-pill">Save</button>
         </div>
       </div>
@@ -124,11 +130,18 @@
         </option>
       </select>
     </div>
+    <addItemModalVue
+      :isOpen.sync="isModalOpen"
+      :itemType="value"
+      @add="addNewItem"
+    />
   </div>
 </template>
 
 <script>
+import addItemModalVue from "./addItemModal.vue";
 export default {
+  components: { addItemModalVue },
   data() {
     return {
       value: "Province",
@@ -142,6 +155,7 @@ export default {
       selectAll: false,
       rowsPerPage: 10,
       currentPage: 1,
+      isModalOpen: false,
     };
   },
   computed: {
@@ -159,6 +173,10 @@ export default {
     },
   },
   methods: {
+    addNewItem(newItem) {
+      this.items.unshift(newItem);
+      this.isModalOpen = false; // اضافه کردن به بالای لیست
+    },
     toggleMenu(index, event) {
       event.stopPropagation();
       this.activeMenu = this.activeMenu === index ? null : index;
@@ -186,8 +204,23 @@ export default {
         this.currentPage++;
       }
     },
+    deleteItem(index) {
+      const itemToDelete = this.paginatedItems[index];
+      this.items = this.items.filter((item) => item !== itemToDelete);
+      this.closeMenu();
+    },
+    deleteSelectedItems() {
+      if (this.selectedItems.length === 0) return;
+      this.items = this.items.filter(
+        (item) => !this.selectedItems.includes(item)
+      );
+      this.selectedItems = [];
+      this.selectAll = false;
+    },
     async fetchAreas() {
-      await this.$axios.$get("/api/v1/admin/locations/countries");
+      const response = await this.$axios.$get(
+        "/api/v1/admin/locations/countries"
+      );
       this.items = response.data.map((state) => ({
         title: state.name,
         date: new Date().toISOString().split("T")[0],
