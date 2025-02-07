@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isOpen" max-width="600px">
+  <v-dialog v-model="isOpen" max-width="600px" >
     <v-card class="box">
       <div class="d-flex flex-column align-center justify-center">
         <div class="c">
@@ -15,8 +15,9 @@
           <v-text-field v-model="newItem.date" outlined dense />
         </v-card-text>
         <v-card-actions>
-          <v-btn text @click="closeModal">Cancel</v-btn>
-          <v-btn color="primary" @click="addItem">Add</v-btn>
+          <v-btn color="primary w-100 rounded-pill black--text" @click="addItem"
+            >Add</v-btn
+          >
         </v-card-actions>
       </div>
     </v-card>
@@ -52,9 +53,12 @@ export default {
 <style scoped>
 .box {
   max-width: 600px;
-  height: 550px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
   /* background-color: #f2f4f7; */
 }
+
 .c {
   background-color: #f2f4f7;
   width: 100px;
@@ -64,5 +68,13 @@ export default {
 .textBox {
   height: 334px;
   background-color: #f2f4f7;
+  width: 100%;
+  margin: 0;
+}
+.textBox span {
+  font-size: 16px;
+  color: #101828;
+  font-weight: 500;
+  margin: 10px 0;
 }
 </style>
