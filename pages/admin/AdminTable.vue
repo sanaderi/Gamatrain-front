@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import addItemModalVue from "./addItemModal.vue";
+import addItemModalVue from "./modals/addItemModal.vue";
 export default {
   components: { addItemModalVue },
   data() {
