@@ -121,19 +121,19 @@ export default {
 
   axios: {
     proxy: true,
-    baseUrl:  "https://gamatrain.com",
+    baseUrl: process.env.API_BASE_URL,
     headers: {},
   },
 
   proxy: {
     "/api/v1/": {
-      target: "https://gamatrain.com", 
+      target: process.env.API_BASE_URL,
       pathRewrite: { "^/api/v1/": "/api/v1/" },
       secure: false,
       changeOrigin: true,
     },
     "/uploads/": {
-      target: process.env.API_BASE_URL, // Ensure the environment variable is set correctly
+      target: process.env.API_BASE_URL,
       pathRewrite: { "^/uploads": "/uploads" },
       secure: false,
       changeOrigin: true,
@@ -258,7 +258,7 @@ export default {
   },
 
   server: {
-    // host: "0.0.0.0",
+    host: "0.0.0.0",
     port: 3002,
   },
 

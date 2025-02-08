@@ -3,14 +3,14 @@
     <v-card class="boxs">
       <div class="d-flex flex-column align-center justify-center">
         <div class="c">
-          <img src="../../../assets/images/border_color.png" alt="" />
+          <img src="~assets/images/add_circle.png" alt="" />
         </div>
-        <v-card-title class="text-h5">edit {{ itemType }}</v-card-title>
+        <v-card-title class="text-h5">Add {{ itemType }}</v-card-title>
       </div>
       <div class="textBox">
         <v-card-text>
           <span>Title</span>
-          <v-text-field v-model="newItem.title" outlined dense />
+          <v-text-field v-model="newItem.title"  outlined dense />
           <span>code</span>
           <v-text-field v-model="newItem.date" outlined dense />
         </v-card-text>

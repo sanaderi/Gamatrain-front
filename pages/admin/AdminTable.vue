@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import addItemModalVue from "./modals/addItemModal.vue";
+import addItemModalVue from "@/components/modals/addItemModal.vue";
 export default {
   components: { addItemModalVue },
   data() {
@@ -175,7 +175,7 @@ export default {
   methods: {
     addNewItem(newItem) {
       this.items.unshift(newItem);
-      this.isModalOpen = false; // اضافه کردن به بالای لیست
+      this.isModalOpen = false; 
     },
     toggleMenu(index, event) {
       event.stopPropagation();
