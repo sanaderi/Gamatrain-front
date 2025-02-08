@@ -27,17 +27,22 @@ export default async (req, res, next) => {
     // Your existing logic for individual sitemaps
     const { pathname, query } = parse(url, true);
     const contentIdentity = pathname.split("/")[2]; // e.g., "paper" from "/sitemap/paper"
-    const contentType = contentIdentity.split("-")[0];
 
-    if (contentTypes.includes(contentType)) {
-      const pageNum = contentIdentity.split("-")[1];
-      res.setHeader("Content-Type", "application/xml");
-      // const page = parseInt(query.page, 10) || 1; // Use query param for page number
-      let xmlData = await fetchPaginatedData(contentType, pageNum); // Fetch and generate the correct sitemap
-      xmlData = convertDataToXML(xmlData, contentType);
+    if (!contentIdentity) {
+      const xmlData = generateDefaultSitemap();
       res.end(xmlData);
     } else {
-      next();
+      const contentType = contentIdentity.split("-")[0];
+      if (contentTypes.includes(contentType)) {
+        const pageNum = contentIdentity.split("-")[1];
+        res.setHeader("Content-Type", "application/xml");
+        // const page = parseInt(query.page, 10) || 1; // Use query param for page number
+        let xmlData = await fetchPaginatedData(contentType, pageNum); // Fetch and generate the correct sitemap
+        xmlData = convertDataToXML(xmlData, contentType);
+        res.end(xmlData);
+      } else {
+        next();
+      }
     }
   } else {
     next();
@@ -46,7 +51,8 @@ export default async (req, res, next) => {
 
 // Generate the sitemap index for the given content type
 async function generateSitemapIndex(contentType) {
-  const totalPages = await getTotalPages(contentType); // Fetch total pages for content type
+  let totalPages = await getTotalPages(contentType); // Fetch total pages for content type
+  if (totalPages > 160) totalPages = 160;
   let indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
   // Loop through each page for the content type
@@ -184,6 +190,7 @@ function generateDefaultSitemap() {
           <priority>0.5</priority>
       </url>`;
   });
+
   xml += "\n</urlset>";
   return xml;
 }
