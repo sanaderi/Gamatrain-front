@@ -46,7 +46,7 @@
               class="mr-3"
               id="logo"
               alt="gamatrain"
-              :src="require('@/assets/images/dashboard-icon/Group237483.svg')"
+              :src="require('@/assets/images/dashboard-icon/Group 237483.svg')"
             />
 
             Analysis
