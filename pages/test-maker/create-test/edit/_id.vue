@@ -139,9 +139,9 @@
                 width="72 "
                 height="72"
                 class="pointer image-input"
-                v-if="form.q_file"
+                v-if="form.q_file_base64"
                 @click="selectFile('q_file')"
-                :src="form.q_file"
+                :src="form.q_file_base64"
               />
               <v-btn
                 v-else
@@ -186,11 +186,7 @@
                   />
                 </v-col>
               </v-row>
-              <validation-provider
-                v-slot="{ errors }"
-                name="true_answer"
-                rules="required"
-              >
+              <validation-provider name="true_answer" rules="required">
                 <v-radio-group
                   v-model="form.true_answer"
                   id="test-image-options"
@@ -224,9 +220,9 @@
                           width="72 "
                           height="72"
                           class="pointer image-input"
-                          v-if="form.a_file"
+                          v-if="form.a_file_base64"
                           @click="selectFile('a_file')"
-                          :src="form.a_file"
+                          :src="form.a_file_base64"
                         />
                         <v-btn
                           v-else
@@ -238,7 +234,7 @@
                         </v-btn>
 
                         <v-btn
-                          v-show="form.a_file"
+                          v-show="form.a_file_base64"
                           @click="deleteFile('a_file')"
                           icon
                           class="img-clear-btn"
@@ -277,9 +273,9 @@
                           width="72 "
                           height="72"
                           class="pointer image-input"
-                          v-if="form.b_file"
+                          v-if="form.b_file_base64"
                           @click="selectFile('b_file')"
-                          :src="form.b_file"
+                          :src="form.b_file_base64"
                         />
                         <v-btn
                           v-else
@@ -291,7 +287,7 @@
                         </v-btn>
 
                         <v-btn
-                          v-show="form.b_file"
+                          v-show="form.b_file_base64"
                           @click="deleteFile('b_file')"
                           icon
                           class="img-clear-btn"
@@ -328,9 +324,9 @@
                           width="72 "
                           height="72"
                           class="pointer image-input"
-                          v-if="form.c_file"
+                          v-if="form.c_file_base64"
                           @click="selectFile('c_file')"
-                          :src="form.c_file"
+                          :src="form.c_file_base64"
                         />
                         <v-btn
                           v-else
@@ -342,7 +338,7 @@
                         </v-btn>
 
                         <v-btn
-                          v-show="form.c_file"
+                          v-show="form.c_file_base64"
                           @click="deleteFile('c_file')"
                           icon
                           class="img-clear-btn"
@@ -379,9 +375,9 @@
                           width="72 "
                           height="72"
                           class="pointer image-input"
-                          v-if="form.d_file"
+                          v-if="form.d_file_base64"
                           @click="selectFile('d_file')"
-                          :src="form.d_file"
+                          :src="form.d_file_base64"
                         />
                         <v-btn
                           v-else
@@ -393,7 +389,7 @@
                         </v-btn>
 
                         <v-btn
-                          v-show="form.d_file"
+                          v-show="form.d_file_base64"
                           @click="deleteFile('d_file')"
                           icon
                           class="img-clear-btn"
@@ -432,9 +428,9 @@
                 width="72 "
                 height="72"
                 class="pointer image-input"
-                v-if="form.answer_full_file"
+                v-if="form.answer_full_file_base64"
                 @click="selectFile('answer_full_file')"
-                :src="form.answer_full_file"
+                :src="form.answer_full_file_base64"
               />
               <v-btn
                 v-else
@@ -492,11 +488,12 @@
         accept="image/png,image/webp,image/jpeg,image/jpg"
         v-model="form_hidden_data.q_file"
         ref="question-input"
+        @change="uploadFile('q_file')"
       />
-      <!-- @change="uploadFile('q_file')" -->
 
       <v-file-input
         class="d-none"
+        @change="uploadFile('answer_full_file')"
         accept="image/png,image/webp,image/jpeg,image/jpg"
         v-model="form_hidden_data.answer_full_file"
         ref="answer-full-input"
@@ -505,24 +502,28 @@
         class="d-none"
         accept="image/png,image/webp,image/jpeg,image/jpg"
         v-model="form_hidden_data.a_file"
+        @change="uploadFile('a_file')"
         ref="a-input"
       />
       <v-file-input
         class="d-none"
         accept="image/png,image/webp,image/jpeg,image/jpg"
         v-model="form_hidden_data.b_file"
+        @change="uploadFile('b_file')"
         ref="b-input"
       />
       <v-file-input
         class="d-none"
         accept="image/png,image/webp,image/jpeg,image/jpg"
         v-model="form_hidden_data.c_file"
+        @change="uploadFile('c_file')"
         ref="c-input"
       />
       <v-file-input
         class="d-none"
         accept="image/png,image/webp,image/jpeg,image/jpg"
         v-model="form_hidden_data.d_file"
+        @change="uploadFile('d_file')"
         ref="d-input"
       />
     </div>
@@ -873,47 +874,47 @@ export default {
         this.target_file = "d_file_base64";
       }
     },
-    // uploadFile(file_name) {
-    //   var file = "";
-    //   if (file_name === "q_file") {
-    //     file = this.form_hidden_data.q_file;
-    //     this.current_crop_file = "q_file";
-    //   } else if (file_name === "answer_full_file") {
-    //     file = this.form_hidden_data.answer_full_file;
-    //     this.current_crop_file = "answer_full_file";
-    //   } else if (file_name === "a_file") {
-    //     file = this.form_hidden_data.a_file;
-    //     this.current_crop_file = "a_file";
-    //   } else if (file_name === "b_file") {
-    //     file = this.form_hidden_data.b_file;
-    //     this.current_crop_file = "b_file";
-    //   } else if (file_name === "c_file") {
-    //     file = this.form_hidden_data.c_file;
-    //     this.current_crop_file = "c_file";
-    //   } else if (file_name === "d_file") {
-    //     file = this.form_hidden_data.d_file;
-    //     this.current_crop_file = "d_file";
-    //   }
+    uploadFile(file_name) {
+      var file = "";
+      if (file_name === "q_file") {
+        file = this.form_hidden_data.q_file;
+        this.current_crop_file = "q_file";
+      } else if (file_name === "answer_full_file") {
+        file = this.form_hidden_data.answer_full_file;
+        this.current_crop_file = "answer_full_file";
+      } else if (file_name === "a_file") {
+        file = this.form_hidden_data.a_file;
+        this.current_crop_file = "a_file";
+      } else if (file_name === "b_file") {
+        file = this.form_hidden_data.b_file;
+        this.current_crop_file = "b_file";
+      } else if (file_name === "c_file") {
+        file = this.form_hidden_data.c_file;
+        this.current_crop_file = "c_file";
+      } else if (file_name === "d_file") {
+        file = this.form_hidden_data.d_file;
+        this.current_crop_file = "d_file";
+      }
 
-    //   if (file) {
-    //     if (file_name === "q_file")
-    //       this.form.q_file_base64 = URL.createObjectURL(file);
-    //     else if (file_name === "answer_full_file")
-    //       this.form.answer_full_file_base64 = URL.createObjectURL(file);
-    //     else if (file_name === "a_file")
-    //       this.form.a_file_base64 = URL.createObjectURL(file);
-    //     else if (file_name === "b_file")
-    //       this.form.b_file_base64 = URL.createObjectURL(file);
-    //     else if (file_name === "c_file")
-    //       this.form.c_file_base64 = URL.createObjectURL(file);
-    //     else if (file_name === "d_file")
-    //       this.form.d_file_base64 = URL.createObjectURL(file);
+      if (file) {
+        if (file_name === "q_file")
+          this.form.q_file_base64 = URL.createObjectURL(file);
+        else if (file_name === "answer_full_file")
+          this.form.answer_full_file_base64 = URL.createObjectURL(file);
+        else if (file_name === "a_file")
+          this.form.a_file_base64 = URL.createObjectURL(file);
+        else if (file_name === "b_file")
+          this.form.b_file_base64 = URL.createObjectURL(file);
+        else if (file_name === "c_file")
+          this.form.c_file_base64 = URL.createObjectURL(file);
+        else if (file_name === "d_file")
+          this.form.d_file_base64 = URL.createObjectURL(file);
 
-    //     this.crop_file_url = URL.createObjectURL(file);
-    //   }
+        this.crop_file_url = URL.createObjectURL(file);
+      }
 
-    //   if (this.crop_file_url) this.cropper_dialog = true;
-    // },
+      if (this.crop_file_url) this.cropper_dialog = true;
+    },
     cropFile({ coordinates, canvas, image }) {
       if (this.current_crop_file === "q_file")
         this.form.q_file_base64 = canvas.toDataURL();
@@ -931,26 +932,32 @@ export default {
     deleteFile(file_name) {
       if (file_name === "q_file") {
         this.form.q_file_base64 = "";
+        this.form.q_file = null;
         this.$refs["question-input"].$refs.input.value = null;
         this.current_crop_file = "";
       } else if (file_name === "answer_full_file") {
         this.form.answer_full_file_base64 = "";
+        this.form.answer_full_file = null;
         this.$refs["answer-full-input"].$refs.input.value = null;
         this.current_crop_file = "";
       } else if (file_name === "a_file") {
         this.form.a_file_base64 = "";
+        this.form.a_file = null;
         this.$refs["a-input"].$refs.input.value = null;
         this.current_crop_file = "";
       } else if (file_name === "b_file") {
         this.form.b_file_base64 = "";
+        this.form.b_file = null;
         this.$refs["b-input"].$refs.input.value = null;
         this.current_crop_file = "";
       } else if (file_name === "c_file") {
         this.form.c_file_base64 = "";
+        this.form.c_file = "";
         this.$refs["c-input"].$refs.input.value = null;
         this.current_crop_file = "";
       } else if (file_name === "d_file") {
         this.form.d_file_base64 = "";
+        this.form.d_file = "";
         this.$refs["d-input"].$refs.input.value = null;
         this.current_crop_file = "";
       }
@@ -991,6 +998,7 @@ export default {
           this.form.type = response.data.type;
           this.form.question = response.data.question;
           this.form.q_file = response.data.q_file;
+          this.form.q_file_base64 = response.data.q_file;
           this.form.testImgAnswers = response.data.testImgAnswers;
 
           if (this.form.testImgAnswers == true) {
@@ -1004,11 +1012,16 @@ export default {
           this.form.answer_c = response.data.answer_c;
           this.form.answer_d = response.data.answer_d;
           this.form.a_file = response.data.a_file;
+          this.form.a_file_base64 = response.data.a_file;
           this.form.b_file = response.data.b_file;
+          this.form.b_file_base64 = response.data.b_file;
           this.form.c_file = response.data.c_file;
+          this.form.c_file_base64 = response.data.c_file;
           this.form.d_file = response.data.d_file;
+          this.form.d_file_base64 = response.data.d_file;
           this.form.answer_full = response.data.answer_full;
           this.form.answer_full_file = response.data.answer_full_file;
+          this.form.answer_full_file_base64 = response.data.answer_full_file;
         })
         .catch((err) => {
           console.log(err);

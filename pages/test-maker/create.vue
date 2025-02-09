@@ -270,6 +270,7 @@
                       v-model="form.title"
                       :error-messages="errors"
                       label="Title"
+                      persistent-hint
                       hint="Ex: 9700/11 Biology Jun 2020 Online Test | Cambridge As & A Level MSCQ"
                       outlined
                     />
