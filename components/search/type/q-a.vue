@@ -1,6 +1,11 @@
 <template>
   <div class="content-items">
-    <v-card rounded class="mb-1 content-item" v-for="(item, key) in items" :key="item.id">
+    <v-card
+      rounded
+      class="mb-1 content-item"
+      v-for="(item, key) in items"
+      :key="item.id"
+    >
       <v-card-text class="pb-0">
         <div class="d-flex">
           <div class="py-4 img-holder">
@@ -18,7 +23,9 @@
                 class="book-no-img mx-auto fill-height align-center justify-center"
               >
                 <v-card-text class="px-0">
-                  <p class="font-weight-bold mb-3 mt-1">{{ item.lesson_title }}</p>
+                  <p class="font-weight-bold mb-3 mt-1">
+                    {{ item.lesson_title }}
+                  </p>
                   <a href="https://gamatrain.com">Gamatrain.com</a>
                 </v-card-text>
               </v-card>
@@ -71,18 +78,15 @@
                 </div>
               </v-card-text>
               <!--Item card footer-->
-              <v-card-actions class="item-content-footer pb-2 d-none d-sm-block">
+              <v-card-actions
+                class="item-content-footer pb-2 d-none d-sm-block"
+              >
                 <v-row>
                   <v-col cols="12" class="px-0">
                     <div class="d-flex pt-3 pt-md-0">
-                      <div class="item-content-user gama-text-overline d-flex align-center">
-                        <v-avatar size="2em">
-                          <img :src="item.avatar" alt="Avatar" />
-                        </v-avatar>
-                        <span class="mx-2">{{ item.first_name }} {{ item.last_name }}</span>
-                      </div>
-
-                      <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
+                      <div
+                        class="item-content-last-update gama-text-overline d-flex align-center mr-auto"
+                      >
                         <i class="fa-solid fa-reply fa-xl"></i>
                         <span class="mx-2">
                           <span class="d-none d-sm-inline"> Reply: </span>
@@ -91,7 +95,9 @@
                           </span>
                         </span>
                       </div>
-                      <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
+                      <div
+                        class="item-content-last-update gama-text-overline d-flex align-center mr-auto"
+                      >
                         <i class="fa-solid fa-calendar-days fa-xl"></i>
                         <span class="mx-2">
                           <span class="d-none d-lg-inline"> Last update: </span>
@@ -131,22 +137,20 @@
         <v-row>
           <v-col cols="12" class="py-0">
             <div class="d-flex pt-2">
-              <div class="item-content-user gama-text-overline d-flex align-center">
-                <v-avatar size="1.28em">
-                  <img :src="item.avatar" alt="Avatar" />
-                </v-avatar>
-                <span class="mx-2">{{ item.first_name }} {{ item.last_name }}</span>
-              </div>
-              <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
+              <div
+                class="item-content-last-update gama-text-overline d-flex align-center mr-auto ml-1"
+              >
                 <i class="fa-solid fa-reply"></i>
-                <span class="mx-2">
+                <span>
                   <span class="d-none d-lg-inline"> Reply: </span>
-                  <span class="date_string d-inline-block">
+                  <span class="date_string d-inline-block ml-1">
                     {{ item.reply_num }}
                   </span>
                 </span>
               </div>
-              <div class="item-content-last-update gama-text-overline d-flex align-center mx-auto">
+              <div
+                class="item-content-last-update gama-text-overline d-flex align-center mr-auto"
+              >
                 <i class="fa-solid fa-calendar-days"></i>
                 <span class="mx-2">
                   <span class="d-none d-lg-inline"> Last update: </span>

@@ -42,7 +42,7 @@
                   <span
                     v-bind="attrs"
                     v-on="on"
-                    :class="' icon icong-' + item.icon"
+                    :class="`icon icon-${item.icon}`"
                   />
                 </template>
                 <span>{{ item.text }}</span>
@@ -109,31 +109,31 @@ export default {
         {
           class: "exam",
           text: "Related exam",
-          icon: "azmoon",
+          icon: "exam",
           link: "/search?type=azmoon",
         },
         {
-          class: "test",
+          class: "paper",
           text: "Related paper",
-          icon: "test",
+          icon: "paper",
           link: "/search?type=test",
         },
         {
           class: "content",
           text: "Related multimedia",
-          icon: "learnfiles",
+          icon: "multimedia",
           link: "/search?type=learnfiles",
         },
         {
           class: "faq",
           text: "Related Q & A",
-          icon: "qa",
+          icon: "q-a",
           link: "/search?type=question",
         },
         {
           class: "textbook ",
           text: "Related tutorial",
-          icon: "blog",
+          icon: "tutorial",
           link: "/search?type=dars",
         },
         // { class: "school", text: "School", icon: "school" ,link:"/search?type=school" },

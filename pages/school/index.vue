@@ -676,9 +676,11 @@ export default {
       this.schoolLoading = true;
       if (this.allDataLoaded == false)
         this.$axios
-          .$get("/api/v1/schools/search", {
+          .$get("/api/v2/schools", {
             params: {
               page: this.pageNum,
+              "PagingDto.PageFilter.Size": 20,
+              "PagingDto.PageFilter.ReturnTotalRecordsCount": true,
               name: this.$route.query.keyword,
               section: this.$route.query.stage,
               tuition_fee: this.$route.query.tuition_fee,
@@ -703,7 +705,7 @@ export default {
             },
           })
           .then((response) => {
-            this.resultCount = response.data.num;
+            this.resultCount = response.data.totalRecordsCount;
             this.$refs.schoolFilter.resultCount = this.resultCount;
 
             this.loadingData = false;

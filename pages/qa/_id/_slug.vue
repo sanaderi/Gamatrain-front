@@ -1033,7 +1033,7 @@ export default {
     contentData: [],
     breads: [
       {
-        text: "Q & A",
+        text: "Forum",
         disabled: false,
         href: "/search?type=question",
       },
