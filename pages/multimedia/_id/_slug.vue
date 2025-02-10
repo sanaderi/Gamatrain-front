@@ -6,11 +6,9 @@
 
     <!--  Start: breadcrumb  -->
     <section>
-      <v-row class="mt-0 py-0 header-path">
-        <v-col cols="12">
-          <breadcrumb :breads="breads" />
-        </v-col>
-      </v-row>
+      <v-container class="py-0">
+        <breadcrumb :breads="breads" />
+      </v-container>
     </section>
     <!--  End: breadcrumb  -->
 

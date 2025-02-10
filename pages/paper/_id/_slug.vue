@@ -374,7 +374,9 @@
                       </v-btn>
                     </div>
                     <v-btn
-                      v-if="contentData.exams"
+                      v-if="
+                        contentData.exams && contentData.exams[0].status != 7
+                      "
                       :to="`/exam/${contentData?.exams[0].id}`"
                       block
                       color="#5600e8"
@@ -719,7 +721,7 @@ export default {
     contentData: [],
     breads: [
       {
-        text: "Paper",
+        text: "Past Papers",
         disabled: false,
         href: "/search?type=test",
       },

@@ -615,7 +615,7 @@ export default {
     contentData: [],
     breads: [
       {
-        text: "Online exam",
+        text: "QuizHub",
         disabled: false,
         href: "/search?type=azmoon",
       },
