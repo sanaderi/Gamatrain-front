@@ -132,6 +132,12 @@ export default {
       secure: false,
       changeOrigin: true,
     },
+    "/api/v2/": {
+      target: process.env.API2_BASE_URL,
+      pathRewrite: { "^/api/v2/": "/api/v1/" },
+      secure: false,
+      changeOrigin: true,
+    },
     "/uploads/": {
       target: process.env.API_BASE_URL,
       pathRewrite: { "^/uploads": "/uploads" },
